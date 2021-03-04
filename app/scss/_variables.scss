@@ -1,0 +1,24 @@
+// Font Family
+$font-pr: Harmattan, arial, helvetica, sans-serif;
+
+// Fort Size
+$font-sm: 1.180rem;
+$font-med: 1.625rem;
+$font-b: 4.125rem;
+
+// Colors
+$darkRed: #9D272D;
+$darkBlue: #173047;
+$white: #DDDDDD;
+
+// Animations
+@keyframes hanging {
+    0% {
+        bottom: 0;
+    }
+
+    100% {
+        bottom: .225rem;
+    }
+}
+
