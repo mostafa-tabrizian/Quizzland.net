@@ -2,8 +2,6 @@ const log = (code) => {
     console.log(code)
 }
 
-
-
 const categoriesBtn = document.querySelector('.header__categories__button')
 categoriesBtn.addEventListener('click', appearCategories)
 function appearCategories() {

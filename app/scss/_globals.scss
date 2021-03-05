@@ -1,14 +1,5 @@
 @import 'variables';
 
-html {
-    font-size: 100%;
-    box-sizing: border-box;
-}
-
-*, *::before, *::after {
-    box-sizing: inherit;
-}
-
 // remove the X icon in search bar
 //clears the ‘X’ from Internet Explorer
 input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
@@ -19,13 +10,96 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.tx {
+    &-al-r {
+        text-align: right;
+    }
+
+    &-al-c {
+        text-align: center;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+    font-family: $font-pr;
+    font-size: $font-med;
+}
+
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.space {
+    &-sm {
+        height: 2rem;
+    }
+
+    &-med {
+        height: 5rem;
+    }
+
+    &-l{
+        height: 8rem;
+    }
+}
+
+h1 {
+    font-size: $font-xl;
+    padding-bottom: 1.25rem;
+    padding: 0; margin: 0;
+
+}
+
+h2 {
+    font-size: $font-med;
+    letter-spacing: .1rem;
+    padding: 0 0 1rem 0; margin: 0;
+}
+
+p {
+    font-size: $font-sm;
+    letter-spacing: .1rem;
+}
+
 a, a:visited, a:hover {
     text-decoration: none;
-    color: $white;
+    color: inherit;
+
+    &:hover {
+        color: $red;
+    }
+}
+
+ul {
+    padding: 0;
 }
 
 li {
     list-style: none;
+}
+
+button, .btn {
+    background: $white;
+    border: 0;
+    border-radius: 5px;
+    padding: 0 2rem;
+    font: {
+        size: 1.125rem;
+        // family: $main-font;
+    }
 }
 
 input {
@@ -45,17 +119,10 @@ input {
         }
         &:hover::after{
             width: 100%;
-            }
+        }
     }
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    line-height: 1.3;
-    font-family: $font-pr;
-    font-size: $font-med;
-}
 
 .flex {
     display: flex;
@@ -71,14 +138,6 @@ body {
     &-ai-c {
         align-items: center;
     }
-}
-
-.tx-al-r {
-    text-align: right;
-}
-
-.tx-al-c {
-    text-align: center;
 }
 
 .shadow {

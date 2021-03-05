@@ -2,37 +2,26 @@
 @import 'mixins';
 @import 'globals';
 @import 'header';
+@import 'footer';
 
-body {
-    background-image: url('..\\..\\images\\bg-redClouds.png');
+.bg {
+    z-index: -1;
+    background-image: url("\\images\\hero-bg.jpg");
     background-repeat: no-repeat;
-    background-size:cover;
-    background-position: center 0;
-}
-
-.wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-h1 {
-    font: {
-        size: 2.5rem;
-        weight: normal;
-    }
-}
-
-p {
-    font: {
-        size: 1.225rem;
-    }
-    letter-spacing: .1rem;
+    background-position: center;
+    background-size: cover;
+    height: 43.75rem;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: black 0 5px 50px;
 }
 
 .hero{
     text-align: right;
-    color: #FFFFFF;
-    margin: 8rem 3rem;
+    color: $white;
+    margin: 8rem 4rem;
     & h1 {
         margin-bottom: 0; 
     }
@@ -43,14 +32,63 @@ p {
     font: {
         // family: $main-font
     }
-    & button {
-        background: #FFFFFF;
-        border: 0;
-        border-radius: 5px;
-        padding: 0 2rem;
-        font: {
-            size: 1.125rem;
-            // family: $main-font;
+}
+
+.scroll {
+    margin: auto 50%;
+    user-select: none;
+}
+
+.category {
+    flex-wrap: wrap;
+
+    img {
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.5) 0 0 35px;
+        margin: 1.4375rem;
+        margin-bottom: 0;
+        bottom: 0;
+
+        &:hover {
+            transition: all .2s ease-in-out;
+            box-shadow: transparentize($darkRed, .5) 0 0 55px;
+            position: relative;
+            bottom: .2rem
+        }
+    }
+
+    p {
+        margin-top: 0;
+    }
+}
+
+.sort {
+    padding-top: 4rem;
+
+    & div {
+        & > ul {
+            padding: 0 3rem;
+            margin: 0;
+
+            & > a {
+                display: flex;
+                justify-content: flex-end;
+                
+                &:not(:last-child) {
+                    padding-bottom: .5rem;
+                }
+
+                & > li {
+                    display: inline-flex;
+
+                    & > img {
+                    border-radius: 50px;
+                    width: 1.5rem;
+                    height: 1.5rem; 
+                    margin-left: .5rem;
+                    }
+                }
+            }
         }
     }
 }
