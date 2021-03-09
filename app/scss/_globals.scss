@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'animations';
 
 // remove the X icon in search bar
 //clears the ‘X’ from Internet Explorer
@@ -80,6 +81,20 @@ a, a:visited, a:hover {
 
     &:hover {
         color: $red;
+    }
+}
+
+details {
+    & > summary {
+        outline: none;
+    }
+
+    & > summary::-webkit-details-marker {
+        display: none;
+    }
+
+    &[open] summary ~ * {
+        animation: categoryMenu .5s ease-in-out;
     }
 }
 

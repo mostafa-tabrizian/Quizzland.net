@@ -25,6 +25,24 @@
   }
 }
 
+@-webkit-keyframes categoryMenu {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes categoryMenu {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 input[type=search]::-ms-clear {
   display: none;
   width: 0;
@@ -114,6 +132,19 @@ a, a:visited, a:hover {
 
 a:hover, a:visited:hover, a:hover:hover {
   color: #AF3036;
+}
+
+details > summary {
+  outline: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] summary ~ * {
+  -webkit-animation: categoryMenu .5s ease-in-out;
+          animation: categoryMenu .5s ease-in-out;
 }
 
 ul {
@@ -242,6 +273,60 @@ input {
   margin-bottom: .25rem;
 }
 
+.header__menu__m {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #04090d;
+  height: 100vh;
+  width: 100vw;
+  font-size: 2.625rem;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+.header__menu__m > ul {
+  color: #DDDDDD;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -70%);
+          transform: translate(-50%, -70%);
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.header__menu__m > ul > li:not(:last-child) {
+  padding-bottom: 2rem;
+}
+
+.header__menu__m > ul > details {
+  padding-bottom: 1.5rem;
+}
+
+.header__menu__m > ul > details > ul {
+  font-size: 1.925rem;
+  padding-top: 2rem;
+}
+
+.header__menu__m > ul > details > ul > a > li {
+  padding-bottom: 1.3rem;
+}
+
+.header__menu__m__close-btn {
+  position: fixed;
+  top: 3%;
+  right: 5%;
+}
+
+.header__menu__close {
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  visibility: hidden;
+  opacity: 0;
+}
+
 .header__submit {
   width: 2.375rem;
   height: 2.375rem;
@@ -298,6 +383,7 @@ input {
 }
 
 .header__categories {
+  color: #DDDDDD;
   position: absolute;
   right: 4rem;
   top: 7rem;
@@ -347,6 +433,15 @@ footer > div, .footer > div {
   padding-top: 3rem;
   -webkit-columns: 2;
           columns: 2;
+}
+
+@keyframes categoryMenu {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .bg {

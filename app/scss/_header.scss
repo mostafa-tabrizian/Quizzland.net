@@ -26,7 +26,57 @@
             }
         }
 
+        &__m {
+            position: fixed;
+            top: 0; left: 0;
+            background: darken($darkBlue, 15%);
+            height: 100vh;
+            width: 100vw;
+            font-size: $font-xl;
+            transition: all .3s ease;
 
+            & > ul {
+                color: $white;
+                display: block;
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -70%);
+                transition: all 1s ease;
+
+                & > li {
+                    &:not(:last-child) {
+                        padding-bottom: 2rem;
+                    }
+                }
+
+                & > details {
+                    padding-bottom: 1.5rem;
+
+                    & > ul{
+    
+                        font-size: $font-l + .3rem;
+                        padding-top: 2rem;
+    
+                        & > a > li{
+                            padding-bottom: 1.3rem;
+                        }
+                    }
+                }
+            }
+
+            &__close-btn {
+                position: fixed;
+                top: 3%;
+                right: 5%;
+
+            }
+        }
+
+        &__close {
+            transition: all .3s ease;
+            visibility: hidden;
+            opacity: 0;
+        }
     }
 
     &__submit {
@@ -81,6 +131,7 @@
     }
 
     &__categories {
+        color: $white;
         position: absolute;
         right: 4rem;
         top: 7rem;
@@ -104,5 +155,4 @@
         top: 6rem;
         pointer-events: visibleFill;
     }
-
 }
