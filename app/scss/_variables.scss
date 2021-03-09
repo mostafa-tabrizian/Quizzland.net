@@ -13,6 +13,10 @@ $darkRed: #690D11;
 $darkBlue: #173047;
 $white: #DDDDDD;
 
+// Gradient Colors
+$red-grad: linear-gradient(-45deg, #4D1420, #9D272D);
+$redBlue-grad: linear-gradient(-45deg, #9D272D, #1d1041);
+
 // Animations
 @keyframes hanging {
     0% {

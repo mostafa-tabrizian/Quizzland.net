@@ -14,7 +14,6 @@
     }
 
     &__menu {
-
         > span {
             display: block;
             width: 1.625rem;
@@ -27,9 +26,10 @@
         }
 
         &__m {
+            z-index: 5;
             position: fixed;
             top: 0; left: 0;
-            background: darken($darkBlue, 15%);
+            background: $redBlue-grad;
             height: 100vh;
             width: 100vw;
             font-size: $font-xl;
@@ -82,7 +82,7 @@
     &__submit {
         width: 2.375rem;
         height: 2.375rem;
-        background: linear-gradient(0deg, $darkRed, darken($darkRed, 15%));
+        background: $red-grad;
         border-radius: 20px;
         position: relative;
         top: .35rem;
@@ -121,7 +121,6 @@
         position: absolute;
         top: 7rem;
         right: 5rem;
-        // z-index: -1;
         transition: all .3s ease;
     }
     

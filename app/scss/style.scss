@@ -33,12 +33,18 @@
     font: {
         // family: $main-font
     }
+
+    &__btn {
+        margin-right: 50%;
+        transform: translate(50%);
+    }
 }
 
-.scroll {
-    margin: auto 50%;
-    user-select: none;
-}
+// .scroll {
+//     margin: auto 50%;
+//     margin-top: -1rem;
+//     user-select: none;
+// }
 
 .category {
     flex-wrap: wrap;

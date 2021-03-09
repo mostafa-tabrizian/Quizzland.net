@@ -24,11 +24,11 @@ function appearCategories() {
     const close = categoriesStyle.opacity == 0
 
     if (close) {
-        categories.classList.add('.header__categories__open')
+        categories.classList.add('header__categories__open')
         arw.classList.add('arw__open')
         
     } else {
-        categories.classList.remove('.header__categories__open')
+        categories.classList.remove('header__categories__open')
         arw.classList.remove('arw__open')
     }
 }

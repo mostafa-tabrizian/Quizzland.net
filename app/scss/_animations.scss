@@ -2,3 +2,11 @@
     0%    {opacity: 0;}
     100%  {opacity: 1;}
   }
+
+@keyframes boxShadowDancing {
+  0%   {box-shadow: 0 2px 30px #430404;}
+  20%  {box-shadow: 2px 0px 30px #430404;}
+  40%  {box-shadow: 0 -2px 30px #430404;}
+  80%  {box-shadow: -2px 0 30px #430404;}
+  100% {box-shadow: 0 2px 30px #430404;}
+}

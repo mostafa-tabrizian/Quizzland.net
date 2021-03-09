@@ -43,6 +43,52 @@
   }
 }
 
+@-webkit-keyframes boxShadowDancing {
+  0% {
+    -webkit-box-shadow: 0 2px 30px #430404;
+            box-shadow: 0 2px 30px #430404;
+  }
+  20% {
+    -webkit-box-shadow: 2px 0px 30px #430404;
+            box-shadow: 2px 0px 30px #430404;
+  }
+  40% {
+    -webkit-box-shadow: 0 -2px 30px #430404;
+            box-shadow: 0 -2px 30px #430404;
+  }
+  80% {
+    -webkit-box-shadow: -2px 0 30px #430404;
+            box-shadow: -2px 0 30px #430404;
+  }
+  100% {
+    -webkit-box-shadow: 0 2px 30px #430404;
+            box-shadow: 0 2px 30px #430404;
+  }
+}
+
+@keyframes boxShadowDancing {
+  0% {
+    -webkit-box-shadow: 0 2px 30px #430404;
+            box-shadow: 0 2px 30px #430404;
+  }
+  20% {
+    -webkit-box-shadow: 2px 0px 30px #430404;
+            box-shadow: 2px 0px 30px #430404;
+  }
+  40% {
+    -webkit-box-shadow: 0 -2px 30px #430404;
+            box-shadow: 0 -2px 30px #430404;
+  }
+  80% {
+    -webkit-box-shadow: -2px 0 30px #430404;
+            box-shadow: -2px 0 30px #430404;
+  }
+  100% {
+    -webkit-box-shadow: 0 2px 30px #430404;
+            box-shadow: 0 2px 30px #430404;
+  }
+}
+
 input[type=search]::-ms-clear {
   display: none;
   width: 0;
@@ -66,6 +112,7 @@ html {
   font-size: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *, *::before, *::after {
@@ -160,7 +207,27 @@ button, .btn {
   border: 0;
   border-radius: 5px;
   padding: 0 2rem;
-  font-size: 1.125rem;
+  outline: none;
+  font-family: Harmattan, arial, helvetica, sans-serif;
+  font-size: 1.18rem;
+  -webkit-transition: all .1s ease-in-out;
+  transition: all .1s ease-in-out;
+  cursor: pointer;
+}
+
+button__grad, .btn__grad {
+  background-image: linear-gradient(-45deg, #4D1420, #9D272D);
+  border: 0;
+  border-radius: 33px;
+  padding: .7rem 2.24375rem;
+  color: #DDDDDD;
+  -webkit-box-shadow: 0 3px 25px #430404;
+          box-shadow: 0 3px 25px #430404;
+}
+
+button:hover, .btn:hover {
+  -webkit-animation: boxShadowDancing 1s infinite;
+          animation: boxShadowDancing 1s infinite;
 }
 
 input {
@@ -274,10 +341,11 @@ input {
 }
 
 .header__menu__m {
+  z-index: 5;
   position: fixed;
   top: 0;
   left: 0;
-  background: #04090d;
+  background: linear-gradient(-45deg, #9D272D, #1d1041);
   height: 100vh;
   width: 100vw;
   font-size: 2.625rem;
@@ -330,8 +398,7 @@ input {
 .header__submit {
   width: 2.375rem;
   height: 2.375rem;
-  background: -webkit-gradient(linear, left bottom, left top, from(#690D11), to(#250506));
-  background: linear-gradient(0deg, #690D11, #250506);
+  background: linear-gradient(-45deg, #4D1420, #9D272D);
   border-radius: 20px;
   position: relative;
   top: .35rem;
@@ -444,6 +511,29 @@ footer > div, .footer > div {
   }
 }
 
+@keyframes boxShadowDancing {
+  0% {
+    -webkit-box-shadow: 0 2px 30px #430404;
+            box-shadow: 0 2px 30px #430404;
+  }
+  20% {
+    -webkit-box-shadow: 2px 0px 30px #430404;
+            box-shadow: 2px 0px 30px #430404;
+  }
+  40% {
+    -webkit-box-shadow: 0 -2px 30px #430404;
+            box-shadow: 0 -2px 30px #430404;
+  }
+  80% {
+    -webkit-box-shadow: -2px 0 30px #430404;
+            box-shadow: -2px 0 30px #430404;
+  }
+  100% {
+    -webkit-box-shadow: 0 2px 30px #430404;
+            box-shadow: 0 2px 30px #430404;
+  }
+}
+
 .bg {
   z-index: -1;
   background-image: url("\\images\\hero-bg.jpg");
@@ -474,12 +564,10 @@ footer > div, .footer > div {
   margin-top: 0;
 }
 
-.scroll {
-  margin: auto 50%;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+.hero__btn {
+  margin-right: 50%;
+  -webkit-transform: translate(50%);
+          transform: translate(50%);
 }
 
 .category {
