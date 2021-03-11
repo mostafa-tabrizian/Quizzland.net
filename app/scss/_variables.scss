@@ -8,14 +8,18 @@ $font-l: 1.625rem;
 $font-xl: 2.625rem;
 
 // Colors
-$red: #AF3036;
+$red: #af282f;
 $darkRed: #690D11;
 $darkBlue: #173047;
-$white: #DDDDDD;
+$white: #f0f0f0;
+$black: #161616;
+$gray: #707070;
 
 // Gradient Colors
 $red-grad: linear-gradient(-45deg, #4D1420, #9D272D);
+$red-bt-grad: linear-gradient(0, #4D1420, #9D272D);
 $redBlue-grad: linear-gradient(-45deg, #9D272D, #1d1041);
+
 
 // Animations
 @keyframes hanging {

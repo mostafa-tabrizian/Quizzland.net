@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app/scss/style.css">
+    <link rel="stylesheet" href="/app/scss/style.css">
     <title>Quiz Land</title>
 </head>
 
@@ -15,13 +15,10 @@
         </a>
 
         <!-- Search -->
-        <a href="#" class="flex">
-            <!-- <img class="header__submit" src="./images/srch-btn.png" alt=""> -->
-            <div class="header__submit tx-al-c">
-                <img src="https://img.icons8.com/pastel-glyph/128/ffffff/search--v3.png"/>
-            </div>
-            <input class='header__search btn tx-al-r' type="search" placeholder="جستجو در این بخش">
-        </a>
+        <div class="flex flex-ai-c">
+            <img class='header__submit fade flex tx-al-c' src="https://img.icons8.com/pastel-glyph/128/ffffff/search--v3.png"/>
+            <input class='header__search tx-al-r' type="search" placeholder="...جستجو">
+        </div>
 
         <!-- Menu -->
         <a href="#" class="header__menu hide-for-desktop">
@@ -30,8 +27,8 @@
             <span></span>
         </a>
 
-        <div class="header__menu__m header__menu__close tx-al-c">
-            <img src="./images/close-btn.svg" alt="" class="header__menu__m__close-btn">
+        <div class="header__menu__m fade tx-al-c">
+            <img src="/images/close-btn.svg" alt="" class="header__menu__m__close-btn">
 
             <ul>
                 <details>
@@ -88,7 +85,7 @@
 
     <div class="category flex flex-jc-c flex-ai-c flex-jc-sb hover-hug-me">
 
-        <a href="">
+        <a href="./templates/category/فیلم-و-سریال.html">
                 <img src="/images/catefory-movies.jpg" alt="">
                 <p class='tx-al-c'>فیلم و سریال</p>
         </a>
@@ -112,7 +109,7 @@
 
     <div class="wrapper">
 
-        <div class="sort flex flex-jc-sb">
+        <div class="sort sort-for-mobile flex flex-jc-sb">
 
             <div class="sec1">
                 <h2 class="tx-al-c">بخش ؟</h2>
@@ -154,35 +151,31 @@
     </div>
 </body>
 
-<footer class="wrapper tx-al-c">
-    <div class="footer__background"></div>
+<footer class="footer-for-mobile tx-al-c">
 
     <div>
-        <button class='btn__grad' type="submit">ثبت نام</button>
-        <input type="text">
-        <p class="tx-al-r"> تو خبرنامه مون عضو شو تا هر وقت یه کویز باحال دیگه‌ای منتشر کردیم بتونی اولین نفری باشی که انجامش میده</p>
+        <p class="tx-al-c"> تو خبرنامه مون عضو شو تا هر وقت یه کویز باحال دیگه‌ای منتشر کردیم بتونی اولین نفری باشی که انجامش میده</p>
+        <button class='btn__grad-blue' type="submit">ثبت نام</button>
+        <input class="input" type="email" placeholder='                   ... ایمیل'>
     </div>
 
     <div>
-        <ul>
-            <li>ارتباط و دیگر اطلاعات</li>
-            <li>ارتباط و دیگر اطلاعات</li>
-            <li>ارتباط و دیگر اطلاعات</li>
-            <li>ارتباط و دیگر اطلاعات</li>
-        </ul>
-
         <ul>
             <li><a href=""></a>نوار پایینی</li>
             <li><a href=""></a>نوار پایینی</li>
             <li><a href=""></a>نوار پایینی</li>
             <li><a href=""></a>نوار پایینی</li>
         </ul>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
     </div>
 
-    <p>copy right and other things</p>
-
-
-<script src="./app/js/script.js"></script>
+<script src="/app/js/script.js"></script>
 </footer>
+
 
 </html>

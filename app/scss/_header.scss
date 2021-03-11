@@ -4,12 +4,13 @@
     font-size: $font-sm;
     font-family: $font-pr;
     padding: 1.375rem;
+    height: 7.0625rem;
 
     &__logo {
         flex: 2;
 
         img {
-            width: 4.8125rem;
+            width: 3.5rem;
         }
     }
 
@@ -68,30 +69,23 @@
                 position: fixed;
                 top: 3%;
                 right: 5%;
-
+                cursor: pointer;
             }
-        }
-
-        &__close {
-            transition: all .3s ease;
-            visibility: hidden;
-            opacity: 0;
         }
     }
 
     &__submit {
-        width: 2.375rem;
-        height: 2.375rem;
+        width: 1.53125rem;
+        height: 1.53125rem;
+        padding: .1rem;
         background: $red-grad;
         border-radius: 20px;
         position: relative;
-        top: .35rem;
-        left: 2.8rem;        
+        z-index: 2;
+        left: 5rem;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
 
-        img {
-            width: 1.75rem;
-            margin-top: .1875rem;
-        }
     }
 
     &__search {
@@ -100,9 +94,11 @@
         font-family: $font-pr;
         font-size: $font-sm;
         border-radius: 50px;
-        height: 3rem;
-        padding: 1.25rem;
-        width: 80%;
+        height: 2.125rem;
+        padding-right: 1.3125rem;
+        width: 70%;
+        position: relative;
+        left: 15%;
 
     }
 
@@ -113,6 +109,10 @@
         a {
             color: $white;
             padding: .6250rem;
+
+            &:hover {
+                color: $white;
+            }
         }
     }
 
@@ -140,6 +140,7 @@
         opacity: 0;
         pointer-events: none;
         transition: all .3s ease;
+        z-index: 999;
 
             a {
 
@@ -153,5 +154,25 @@
         opacity: 1;
         top: 6rem;
         pointer-events: visibleFill;
+    }
+
+    &__colorChange {
+        .header {
+            &__menu {
+                > span {
+                    background-color: $darkRed;
+                }
+            }
+
+            &__links {
+                a {
+                    color: $darkRed;
+                }
+            }
+        }
+    }
+
+    &__background {
+        background: $red-bt-grad;
     }
 }
