@@ -1,5 +1,12 @@
 // Font Family
-$font-pr: Harmattan, arial, helvetica, sans-serif;
+@font-face {
+    font-family: "myHarmattan";
+    src: url(/app/fonts/Harmattan-Regular.ttf)
+}
+
+$font-pr: Harmattan, myHarmattan, sans-serif, serif;
+
+
 
 // Fort Size
 $font-sm: 1.180rem;
@@ -18,6 +25,7 @@ $gray: #707070;
 // Gradient Colors
 $red-grad: linear-gradient(-45deg, #4D1420, #9D272D);
 $red-bt-grad: linear-gradient(0, #4D1420, #9D272D);
+$red-tb-grad: linear-gradient(180deg, #4D1420, #9D272D);
 $redBlue-grad: linear-gradient(-45deg, #9D272D, #1d1041);
 
 

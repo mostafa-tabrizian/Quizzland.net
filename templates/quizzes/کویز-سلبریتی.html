@@ -8,7 +8,7 @@
     <title>Quiz Land</title>
 </head>
 
-<header class="header">
+<header class="header header__background">
     <nav class="flex flex-ai-c flex-jc-sb">
 
         <!-- Search -->
@@ -67,91 +67,66 @@
 </header>
 
 <body>
-    <div class="bg"></div>
-    <div class="wrapper">
+    
+    <div class="tools wrapper-med flex flex-ai-c">
+        <!-- search -->
+        <img class="tools__submit header__submit fade" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADAklEQVRIid2UTWxUVRiGn+/cW9rp0CYiC6WgQGo702GmMeOCuGGMMSSmLmQBG5PGEsICSJMaWfATunKjKxKiQ22hVRZKjGGpiTqJGBLDNMC0MP2RmIEWWJhYKm1u773nY6FDDCnTi3aj7+rknPc9T96cfAf+L5KVDPlstq7ud+85RJt82zCz/2ZxbtUgpzs6U25ojyh0Ac2A/hUYVSV/a8OzZ/oLhSAKxCy3OdiW7nNCW1TwFPum8eZjPRMlR02wRZUzIhzbdPe3i/lk8vl/1GSwLd2HcFSEXarulBL0CryG8PPecukgwKlUam1DYM4BL9WHi9vfmZ6+H7nJ6Y7OFMIHanlbrFghGBP0VZSB0JiPq74D4+N/PAgXd4sy55nYh0/VZKg9fU7BM649ooG5DpyqTJRO9INdLjyQSGeNcslVs6V78urMik36czlXoQs1Q9aXQwrlWgCAfeVSUZFx39iuWk0eQTbeu9cCNDctNBYRyYF8XQtQlUDRqCYjQZzQjQHh9duXPEG/MGLOrwQAQHVBRRprWdzqYilYc8etWzIbk8lNPTfGTkYCACK6WTGjtTyPmuy/WZwTGEXdtwAGktveyKdSL9QKj2QycUVygv4QCQKAyidGeX8kk4mbUDa7Ps/UCvue9olSWVtOXIwMqWxYdxZl1l/Sz5rq7PDeyfGrTwoOJTp3Akct0rub82FkSH+hEPhOsAslMR843w+0b8s8Hshns42ftqePqdoLgh52HFOpBYAnfJCft7Y2e27sI5Ru4BrIZRVdNFZeVNHXEWbE0ou1s+qYIsJ3WO5bK4f3TV+7HQlS1XBbZ4tvbJdRTapKDHRWjBQq5dKP1RkabE9/g8rSn7dphwSa6/ll7FZkSBQNtWW+sqLOQri4J+7ERoBXHgct+9U/jcSY9wy8HHcbzhpvvhu4rK58e7K1tX7VIO+Wr/wq4uxAZbutbxoOxRwHEjFp2LpqkCoocO0OIO2onQD5aaZl/VT1/F+/yd/1ZSq15oFvtsYnE1Mrzc5/Uw8B9V07yxwQ5TwAAAAASUVORK5CYII="/>
+        <input class='header__search tools__search input' type="search" placeholder="جستجو در این بخش">
+        <!-- sort -->
+        <a href="#" class="sortType flex flex-ai-c">
+            <h5 class="input tx-al-r"> مرتب سازی بر اساس</h5>
+            <div>جدیدترین</div>
+        </a>
+    </div>
 
-        <div class="hero">
-            <h1>اینجا کویزلنده</h1>
-            <p>😎 جایی که میتونی خودت رو به عنوان به فن واقعی خودترو به دوستات ثابت کنی <br/> پس اگر آماده‌ای میدان نبردت رو انتخاب کن و وارد شو</p>
-            <button onclick="window.location.href='#category'" class='btn__grad hero__btn'>بزن بریم</button>
+    <div class="quizzes flex wrapper-med flex-ai-c flex-jc-c">
+        <div class="quizzes__item">
+            <img src="/images/TRASH-Hughjackman.jpg" alt="">
+            <h5>فیلم های <br/>Hugh Jackman</h5>
         </div>
-
-        <div class="space-med"></div>
-
-        <!-- <img src="/images/mouse.png" alt="" class="scroll"> -->
-
-        <div class="space-l" id="category"></div>
-
-        <h2 class="tx-al-c">دسته‌ی دلخوات رو انتخاب کن</h2>
-
-    </div>
-
-    <div class="category flex flex-jc-c flex-ai-c flex-jc-sb">
-
-        <a href="./templates/category/فیلم-و-سریال.html">
-                <img src="/images/catefory-movies.jpg" alt="">
-                <p class='tx-al-c'>فیلم و سریال</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-celebrity.jpg" alt="">
-            <p class='tx-al-c'>سلبریتی</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-games.jpg" alt="">
-            <p class='tx-al-c'>گیمینگ</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-physiology.jpg" alt="">
-            <p class='tx-al-c'>روانشناسی</p>
-        </a>
-
-    </div>
-
-    <div class="wrapper">
-
-        <div class="sort sort-for-mobile flex flex-jc-sb">
-
-            <div class="sec1">
-                <h2 class="tx-al-c">بخش ؟</h2>
-                <ul>
-                    <a href=""><li> کویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                    <a href=""><li>  کویز اخ جوننن <img src="/images/TRASH2.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH2.jpg" alt=""></li></a>
-                    <a href=""><li> کوکویز اخ جونننیز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                </ul>
-            </div>
-
-            <div class="sec2">
-                <h2 class="tx-al-c">برترین های این ماه</h2>
-                <ul>
-                    <a href=""><li> کویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویکویکویز <img src="/images/TRASH2.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                </ul>
-            </div>
-
-            <div class="sec3">
-                <h2 class="tx-al-c">جدید ترین ها</h2>
-                <ul>
-                    <a href=""><li> کویز <img src="/images/TRASH2.jpg" alt=""></li></a>
-                    <a href=""><li> کوکویکوییز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویکویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                </ul>
-            </div>
-
+        <div class="quizzes__item">
+            <img src="/images/TRASH-jennifer.jpg" alt="">
+            <h5>درباره ی<br/>Jennifer Lawrence</h5>
         </div>
+        <div class="quizzes__item">
+            <img src="/images/TRASH-ed.jpg" alt="">
+            <h5>موسیقی های<br/>Ed Shereen</h5>
+        </div>
+        <div class="quizzes__item">
+            <img src="/images/TRASH-selena.jpg" alt="">
+            <h5>حدس آهنگ های<br/>Selena Gomez</h5>
+        </div>
+        <div class="quizzes__item">
+            <img src="/images/TRASH-rock.jpg" alt="">
+            <h5>فیلم های<br/>The Rock</h5>
+        </div>
+        <div class="quizzes__item">
+            <img src="/images/TRASH-selena2.jpg" alt="">
+            <h5>زندگی<br/>Selena Gomez</h5>
+        </div>
+        <div class="quizzes__item">
+            <img src="/images/TRASH-theweekend.jpg" alt="">
+            <h5>متن های<br/>The Weekend</h5>
+        </div>
+        <div class="quizzes__item">
+            <img src="/images/TRASH-taylor.jpg" alt="">
+            <h5>اهنگ های<br/>Taylor swift</h5>
+        </div>
+    </div>
 
-        <div class="space-l"></div>
+    <div class="space-sm"></div>
+
+    <div class="page-travel flex flex-ai-c flex-jc-c">
+        <!-- <img src="/images/PageArw-Before.svg" alt=""> -->
+        <div class="page">1</div>
+        <div class="page">2</div>
+        <div class="page">3</div>
+        <div class="page">....</div>
+        <div class="page">10</div>
+        <!-- <img src="/images/PageArw-After.svg" alt=""> -->
 
     </div>
+
 </body>
 
 <footer class="footer-for-mobile tx-al-c">

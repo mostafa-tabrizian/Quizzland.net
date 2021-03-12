@@ -2,6 +2,22 @@ const log = (code) => {
     console.log(code)
 }
 
+// open and close the category list when click on category in the list
+const header__categories__button = document.querySelector('.header__categories__button')
+header__categories__button.addEventListener('click', () => {
+    const header__categories = document.querySelector('.header__categories')
+    const arw = document.querySelector('.arw')
+    
+    if (header__categories.classList.contains('header__categories__open')) {
+        header__categories.classList.remove('header__categories__open')
+        arw.classList.remove('arw__open')
+    }
+    else {
+        header__categories.classList.add('header__categories__open')
+        arw.classList.add('arw__open')
+    }
+})
+
 // close the category list or hide the submit btn when click on anywhere of page
 const body = document.querySelector('body')
 body.addEventListener('click', () => {
@@ -9,24 +25,6 @@ body.addEventListener('click', () => {
     const arw = document.querySelector('.arw')
     
     if (getComputedStyle(categories).opacity == 1) {
-        categories.classList.remove('header__categories__open')
-        arw.classList.remove('arw__open')
-    }
-})
-
-// open and close the category list when click on category in the list
-const categoriesBtn = document.querySelector('.header__categories__button')
-categoriesBtn.addEventListener('click', () => {
-    const categories = document.querySelector('.header__categories')
-    const arw = document.querySelector('.arw')
-    const categoriesStyle = getComputedStyle(categories)
-    const close = categoriesStyle.opacity == 0
-    
-    if (close) {
-        categories.classList.add('header__categories__open')
-        arw.classList.add('arw__open')
-        
-    } else {
         categories.classList.remove('header__categories__open')
         arw.classList.remove('arw__open')
     }

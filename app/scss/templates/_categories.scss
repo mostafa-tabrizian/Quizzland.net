@@ -8,23 +8,23 @@
 }
 
 .tools {
-    height: 6.5rem;
-    margin: auto 3rem;
     direction: rtl;
+    display: flex;
+    flex-wrap: wrap;
+    justify-self: flex-end;
+    margin-right: 1rem;
     
-    & > div {
-        width: 26rem;
-        padding-right: 1.9rem;
-        
-        &:not(:last-child) {
-            margin-bottom: .5rem;
-        }
-    }
 
     &__submit {
-        left: 0;
-        right: 13.2rem;
-        top: .5rem;
+        right: 14.7rem;
+        top: -.2rem;
+    }
+
+    &__search {
+        transform: translate(1.875rem);
+        width: 17rem;
+        margin-bottom: .5rem;
+
     }
 }
 

@@ -10,25 +10,24 @@
 </head>
 
 <header class="header header__background">
-
     <nav class="flex flex-ai-c flex-jc-sb">
-        <a href="#" class="header__logo">
-            <img src="/images/logo.png" alt="QuizLand">
-        </a>
 
         <!-- Search -->
         <div class="flex flex-ai-c">
-            <img class='header__submit fade flex tx-al-c' src="https://img.icons8.com/pastel-glyph/128/ffffff/search--v3.png"/>
-            <input class='header__search tx-al-r' type="search" placeholder="جستجو در این بخش">
+            <a class="header__logo flex flex-jc-sb hide-for-desktop" href="#" class="">
+                <img src="/images/logo.png" alt="QuizLand">
+            </a>
+            <img class='header__submit fade flex tx-al-c' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADAklEQVRIid2UTWxUVRiGn+/cW9rp0CYiC6WgQGo702GmMeOCuGGMMSSmLmQBG5PGEsICSJMaWfATunKjKxKiQ22hVRZKjGGpiTqJGBLDNMC0MP2RmIEWWJhYKm1u773nY6FDDCnTi3aj7+rknPc9T96cfAf+L5KVDPlstq7ud+85RJt82zCz/2ZxbtUgpzs6U25ojyh0Ac2A/hUYVSV/a8OzZ/oLhSAKxCy3OdiW7nNCW1TwFPum8eZjPRMlR02wRZUzIhzbdPe3i/lk8vl/1GSwLd2HcFSEXarulBL0CryG8PPecukgwKlUam1DYM4BL9WHi9vfmZ6+H7nJ6Y7OFMIHanlbrFghGBP0VZSB0JiPq74D4+N/PAgXd4sy55nYh0/VZKg9fU7BM649ooG5DpyqTJRO9INdLjyQSGeNcslVs6V78urMik36czlXoQs1Q9aXQwrlWgCAfeVSUZFx39iuWk0eQTbeu9cCNDctNBYRyYF8XQtQlUDRqCYjQZzQjQHh9duXPEG/MGLOrwQAQHVBRRprWdzqYilYc8etWzIbk8lNPTfGTkYCACK6WTGjtTyPmuy/WZwTGEXdtwAGktveyKdSL9QKj2QycUVygv4QCQKAyidGeX8kk4mbUDa7Ps/UCvue9olSWVtOXIwMqWxYdxZl1l/Sz5rq7PDeyfGrTwoOJTp3Akct0rub82FkSH+hEPhOsAslMR843w+0b8s8Hshns42ftqePqdoLgh52HFOpBYAnfJCft7Y2e27sI5Ru4BrIZRVdNFZeVNHXEWbE0ou1s+qYIsJ3WO5bK4f3TV+7HQlS1XBbZ4tvbJdRTapKDHRWjBQq5dKP1RkabE9/g8rSn7dphwSa6/ll7FZkSBQNtWW+sqLOQri4J+7ERoBXHgct+9U/jcSY9wy8HHcbzhpvvhu4rK58e7K1tX7VIO+Wr/wq4uxAZbutbxoOxRwHEjFp2LpqkCoocO0OIO2onQD5aaZl/VT1/F+/yd/1ZSq15oFvtsYnE1Mrzc5/Uw8B9V07yxwQ5TwAAAAASUVORK5CYII="/>
+            <input class='header__search tx-al-r' type="search" placeholder="...جستجو">
         </div>
 
         <!-- Menu -->
+        
         <a href="#" class="header__menu hide-for-desktop">
             <span></span>
             <span></span>
             <span></span>
         </a>
-
         <div class="header__menu__m fade tx-al-c">
             <img src="/images/close-btn.svg" alt="" class="header__menu__m__close-btn">
 
@@ -48,13 +47,16 @@
         </div>
 
         <!-- Links -->
-        <div class="header__links hide-for-mobile hover">
+        <div class="header__links hide-for-mobile hover flex flex-ai-c">
             <a href="#">تماس با ما</a>
             <a href="#">درباه‌ي ما</a>
             <a href="#" class="header__categories__button">کتگوری‌ها</a>
+            <a class="flex flex-jc-sb" href="#" class="header__logo">
+                <img src="/images/logo.png" alt="QuizLand">
+            </a>
         </div>
 
-        <img class="arw" src="/images/arw.png">
+        <img class="arw" src="images/arw.png">
         <ul class="header__categories tx-al-c">
             <a href=""><li>فیلم و سریال</li></a>
             <a href=""><li>گیمینگ</li></a>
@@ -63,18 +65,15 @@
         </ul>
 
     </nav>
-
 </header>
+
 <div class="space-sm"></div>
 <body >
  
-    <div class="tools">
+    <div class="tools wrapper-med flex flex-ai-c">
         <!-- search -->
-        <div>
-            <img class="tools__submit header__submit fade tx-al-c" src="https://img.icons8.com/pastel-glyph/128/ffffff/search--v3.png"/>
-            <input class='header__search tools__search input tx-al-r' type="search" placeholder="جستجو در این بخش">
-        </div>
-
+        <img class="tools__submit header__submit fade" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADAklEQVRIid2UTWxUVRiGn+/cW9rp0CYiC6WgQGo702GmMeOCuGGMMSSmLmQBG5PGEsICSJMaWfATunKjKxKiQ22hVRZKjGGpiTqJGBLDNMC0MP2RmIEWWJhYKm1u773nY6FDDCnTi3aj7+rknPc9T96cfAf+L5KVDPlstq7ud+85RJt82zCz/2ZxbtUgpzs6U25ojyh0Ac2A/hUYVSV/a8OzZ/oLhSAKxCy3OdiW7nNCW1TwFPum8eZjPRMlR02wRZUzIhzbdPe3i/lk8vl/1GSwLd2HcFSEXarulBL0CryG8PPecukgwKlUam1DYM4BL9WHi9vfmZ6+H7nJ6Y7OFMIHanlbrFghGBP0VZSB0JiPq74D4+N/PAgXd4sy55nYh0/VZKg9fU7BM649ooG5DpyqTJRO9INdLjyQSGeNcslVs6V78urMik36czlXoQs1Q9aXQwrlWgCAfeVSUZFx39iuWk0eQTbeu9cCNDctNBYRyYF8XQtQlUDRqCYjQZzQjQHh9duXPEG/MGLOrwQAQHVBRRprWdzqYilYc8etWzIbk8lNPTfGTkYCACK6WTGjtTyPmuy/WZwTGEXdtwAGktveyKdSL9QKj2QycUVygv4QCQKAyidGeX8kk4mbUDa7Ps/UCvue9olSWVtOXIwMqWxYdxZl1l/Sz5rq7PDeyfGrTwoOJTp3Akct0rub82FkSH+hEPhOsAslMR843w+0b8s8Hshns42ftqePqdoLgh52HFOpBYAnfJCft7Y2e27sI5Ru4BrIZRVdNFZeVNHXEWbE0ou1s+qYIsJ3WO5bK4f3TV+7HQlS1XBbZ4tvbJdRTapKDHRWjBQq5dKP1RkabE9/g8rSn7dphwSa6/ll7FZkSBQNtWW+sqLOQri4J+7ERoBXHgct+9U/jcSY9wy8HHcbzhpvvhu4rK58e7K1tX7VIO+Wr/wq4uxAZbutbxoOxRwHEjFp2LpqkCoocO0OIO2onQD5aaZl/VT1/F+/yd/1ZSq15oFvtsYnE1Mrzc5/Uw8B9V07yxwQ5TwAAAAASUVORK5CYII="/>
+        <input class='header__search tools__search input' type="search" placeholder="جستجو در این بخش">
         <!-- sort -->
         <a href="#" class="sortType flex flex-ai-c">
             <h5 class="input tx-al-r"> مرتب سازی بر اساس</h5>
@@ -83,60 +82,78 @@
     </div>
 
     <div class="categories flex flex-jc-c wrapper">
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH4.jpeg" alt="">
-            <div class="categories__item__detail">
-                Malifiecnt
+        <a href="/templates/quizzes/کویز-سلبریتی.html">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH4.jpeg" alt="">
+                <div class="categories__item__detail">
+                    Malifiecnt
+                </div>
             </div>
-        </div>
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
-            <div class="categories__item__detail">
-                IT
+        </a>
+        <a href="">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
+                <div class="categories__item__detail">
+                    IT
+                </div>
             </div>
-        </div>
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH6.png" alt="">
-            <div class="categories__item__detail">
-                Blade Runner
+        </a>
+        <a href="">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH6.png" alt="">
+                <div class="categories__item__detail">
+                    Blade Runner
+                </div>
             </div>
-        </div>
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH4.jpeg" alt="">
-            <div class="categories__item__detail">
-                Malifiecnt
+        </a>
+        <a href="/templates/quizzes/کویز-سلبریتی.html">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH4.jpeg" alt="">
+                <div class="categories__item__detail">
+                    Malifiecnt
+                </div>
             </div>
-        </div>
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
-            <div class="categories__item__detail">
-                IT
+        </a>
+        <a href="">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
+                <div class="categories__item__detail">
+                    IT
+                </div>
             </div>
-        </div>
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH6.png" alt="">
-            <div class="categories__item__detail">
-                Blade Runner
+        </a>
+        <a href="">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH6.png" alt="">
+                <div class="categories__item__detail">
+                    Blade Runner
+                </div>
             </div>
-        </div>
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH4.jpeg" alt="">
-            <div class="categories__item__detail">
-                Malifiecnt
+        </a>
+        <a href="/templates/quizzes/کویز-سلبریتی.html">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH4.jpeg" alt="">
+                <div class="categories__item__detail">
+                    Malifiecnt
+                </div>
             </div>
-        </div>
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
-            <div class="categories__item__detail">
-                IT
+        </a>
+        <a href="">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
+                <div class="categories__item__detail">
+                    IT
+                </div>
             </div>
-        </div>
-        <div class="categories__item">
-            <img class='categories__item__img' src="/images/TRASH6.png" alt="">
-            <div class="categories__item__detail">
-                Blade Runner
+        </a>
+        <a href="">
+            <div class="categories__item">
+                <img class='categories__item__img' src="/images/TRASH6.png" alt="">
+                <div class="categories__item__detail">
+                    Blade Runner
+                </div>
             </div>
-        </div>
+        </a>
         
     </div>
 

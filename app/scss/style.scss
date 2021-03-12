@@ -5,6 +5,7 @@
 @import 'footer';
 @import 'animations';
 @import './templates/categories';
+@import './templates/quizzes';
 
 .bg {
     z-index: -1;
@@ -50,18 +51,17 @@
 .category {
     flex-wrap: wrap;
 
+
     img {
         border-radius: 20px;
         box-shadow: rgba(0, 0, 0, 0.5) 0 0 35px;
         margin: 1.4375rem;
         margin-bottom: 0;
-        bottom: 0;
+        transition: all .3s ease-in-out;
 
         &:hover {
-            transition: all .2s ease-in-out;
             box-shadow: transparentize($darkRed, .5) 0 0 55px;
-            position: relative;
-            bottom: .2rem
+            transform: translateY(-.625rem);
         }
     }
 

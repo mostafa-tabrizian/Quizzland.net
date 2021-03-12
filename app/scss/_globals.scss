@@ -37,10 +37,25 @@ body {
     line-height: 1.3;
     font-family: $font-pr;
     font-size: $font-med;
+
+}
+
+.body {
+    &__background__taylor {
+        background: url('/images/TRASH-taylor.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        backdrop-filter: blur(10px) brightness(70%);
+    }
 }
 
 .wrapper {
     max-width: 62.5rem;
+    margin: 0 auto;
+}
+
+.wrapper-med {
+    max-width: 82.5rem;
     margin: 0 auto;
 }
 

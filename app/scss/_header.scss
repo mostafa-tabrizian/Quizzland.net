@@ -3,18 +3,17 @@
 .header {
     font-size: $font-sm;
     font-family: $font-pr;
-    padding: 1.375rem;
-    height: 7.0625rem;
+    margin-bottom: 2rem;
 
     &__logo {
-        flex: 2;
-
+        margin: 1rem;
         img {
-            width: 3.5rem;
+            width: 100%;
         }
     }
 
     &__menu {
+        margin: 2rem;
         > span {
             display: block;
             width: 1.625rem;
@@ -75,35 +74,27 @@
     }
 
     &__submit {
-        width: 1.53125rem;
-        height: 1.53125rem;
-        padding: .1rem;
-        background: $red-grad;
-        border-radius: 20px;
         position: relative;
         z-index: 2;
-        left: 5rem;
+        left: 2rem;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
 
     }
 
     &__search {
-        flex: 1 1 1;
+        // flex: 1 1 1;
         border: 2px solid $darkRed;
         font-family: $font-pr;
         font-size: $font-sm;
         border-radius: 50px;
         height: 2.125rem;
         padding-right: 1.3125rem;
-        width: 70%;
-        position: relative;
-        left: 15%;
+        width: 50%;
 
     }
 
     &__links {
-        flex: 1 1 1;
         padding: 1.25rem;
 
         a {
@@ -120,19 +111,19 @@
         opacity: 0;
         position: absolute;
         top: 7rem;
-        right: 5rem;
+        right: 6.5rem;
         transition: all .3s ease;
     }
     
     .arw__open {
         opacity: 1;
-        top: 6rem;
+        top: 4.5rem;
     }
 
     &__categories {
         color: $white;
         position: absolute;
-        right: 4rem;
+        right: 5rem;
         top: 7rem;
         background: $darkBlue;
         border-radius: 20px;
@@ -152,7 +143,7 @@
 
     &__categories__open {
         opacity: 1;
-        top: 6rem;
+        top: 4.5rem;
         pointer-events: visibleFill;
     }
 
