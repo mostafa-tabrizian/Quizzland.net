@@ -1125,10 +1125,85 @@ footer > div, .footer > div {
           box-shadow: 0 0 5px #690D11;
 }
 
-.quiz__questions [type="radio"]:checked + label {
+.quiz__questions__4option [type="radio"]:checked + label {
   background: linear-gradient(-45deg, #4D1420, #9D272D);
   color: #f0f0f0;
   padding: .8rem;
+}
+
+.quiz__questions__lowHigh {
+  margin-top: 2.5625rem;
+}
+
+.quiz__questions__lowHigh input {
+  display: none;
+}
+
+.quiz__questions__lowHigh label {
+  border: 1px solid #707070;
+  border-radius: 100px;
+  margin-right: .4325rem;
+  margin-left: .4325rem;
+}
+
+.quiz__questions__lowHigh label:nth-child(3), .quiz__questions__lowHigh label:nth-child(19) {
+  padding-right: 2.1875rem;
+}
+
+.quiz__questions__lowHigh label:nth-child(5), .quiz__questions__lowHigh label:nth-child(17) {
+  padding-right: 2.4875rem;
+  padding-top: .25rem;
+}
+
+.quiz__questions__lowHigh label:nth-child(7), .quiz__questions__lowHigh label:nth-child(15) {
+  padding-right: 2.7875rem;
+  padding-top: .5rem;
+}
+
+.quiz__questions__lowHigh label:nth-child(9), .quiz__questions__lowHigh label:nth-child(13) {
+  padding-right: 3rem;
+  padding-top: .75rem;
+}
+
+.quiz__questions__lowHigh label:nth-child(11) {
+  padding-right: 3.3rem;
+  padding-top: 1rem;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-9"]:checked + label {
+  background: #C80000;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-8"]:checked + label {
+  background: #C85D00;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-7"]:checked + label {
+  background: #FFA200;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-6"]:checked + label {
+  background: #FFCC00;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-5"]:checked + label {
+  background: #EEFF00;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-4"]:checked + label {
+  background: #C9EF00;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-3"]:checked + label {
+  background: #90EF00;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-2"]:checked + label {
+  background: #00D648;
+}
+
+.quiz__questions__lowHigh [id="lowHigh-1"]:checked + label {
+  background: #00B83E;
 }
 
 .bg {

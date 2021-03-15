@@ -88,11 +88,76 @@
                     box-shadow: 0 0 5px $darkRed;
                 }
             }
+            
+            [type="radio"]:checked + label {
+                background: $red-grad;
+                color: $white;
+                padding: .8rem;
+            }
         }
-        [type="radio"]:checked + label {
-            background: $red-grad;
-            color: $white;
-            padding: .8rem;
+
+        &__lowHigh {
+            margin-top: 2.5625rem;
+
+            input {
+                display: none;
+            }
+
+            label {
+                border: 1px solid $gray;
+                border-radius: 100px;
+                margin-right: .4325rem;
+                margin-left: .4325rem;
+
+                &:nth-child(3), &:nth-child(19) {
+                    padding-right: 2.1875rem;
+                }
+                &:nth-child(5), &:nth-child(17) {
+                    padding-right: 2.4875rem;
+                    padding-top: .25rem;
+                }
+                &:nth-child(7), &:nth-child(15) {
+                    padding-right: 2.7875rem;
+                    padding-top: .5rem;
+                }
+                &:nth-child(9), &:nth-child(13) {
+                    padding-right: 3rem;
+                    padding-top: .75rem;
+                }
+                &:nth-child(11) {
+                    padding-right: 3.3rem;
+                    padding-top: 1rem;
+                }
+            }
+
+            [id="lowHigh-9"]:checked + label {
+                background: #C80000;
+            }
+            [id="lowHigh-8"]:checked + label {
+                background: #C85D00;
+            }
+            [id="lowHigh-7"]:checked + label {
+                background: #FFA200;
+            }
+            [id="lowHigh-6"]:checked + label {
+                background: #FFCC00;
+            }
+            [id="lowHigh-5"]:checked + label {
+                background: #EEFF00;
+            }
+            [id="lowHigh-4"]:checked + label {
+                background: #C9EF00;
+            }
+            [id="lowHigh-3"]:checked + label {
+                background: #90EF00;
+            }
+            [id="lowHigh-2"]:checked + label {
+                background: #00D648;
+            }
+            [id="lowHigh-1"]:checked + label {
+                background: #00B83E;
+            }
+            
         }
     }
 }
