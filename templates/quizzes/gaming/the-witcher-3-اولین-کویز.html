@@ -8,7 +8,7 @@
     <title>Quiz Land</title>
 </head>
 
-<header class="header">
+<header class="header header__background">
     <nav class="flex flex-ai-c flex-jc-sb">
 
         <!-- Search -->
@@ -67,90 +67,37 @@
 </header>
 
 <body>
-    <div class="bg"></div>
-    <div class="wrapper">
-
-        <div class="hero">
-            <h1>اینجا کویزلنده</h1>
-            <p>😎 جایی که میتونی خودت رو به عنوان به فن واقعی خودترو به دوستات ثابت کنی <br/> پس اگر آماده‌ای میدان نبردت رو انتخاب کن و وارد شو</p>
-            <button onclick="window.location.href='#category'" class='btn__grad hero__btn'>بزن بریم</button>
-        </div>
-
-        <div class="space-med"></div>
-
-        <!-- <img src="/images/mouse.png" alt="" class="scroll"> -->
-
-        <div class="space-l" id="category"></div>
-
-        <h2 class="tx-al-c">دسته‌ی دلخوات رو انتخاب کن</h2>
-
+    <div class="quiz__head tx-al-c">
+        <h1>The Witcher 3</h1>
+        <h3>نام شخصیت ها</h3>
+        <h5>سوال: ۱۸</h5>
     </div>
 
-    <div class="category flex flex-jc-c flex-ai-c flex-jc-sb">
+    <img class='quiz__background' src="/images/quizzes-background/witcher3.jpg" alt="">
 
-        <a href="/templates/category/فیلم-و-سریال.html">
-                <img src="/images/catefory-movies.jpg" alt="">
-                <p class='tx-al-c'>فیلم و سریال</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-celebrity.jpg" alt="">
-            <p class='tx-al-c'>سلبریتی</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-games.jpg" alt="">
-            <p class='tx-al-c'>گیمینگ</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-physiology.jpg" alt="">
-            <p class='tx-al-c'>روانشناسی</p>
-        </a>
-
-    </div>
-
-    <div class="wrapper">
-
-        <div class="sort sort-for-mobile flex flex-jc-sb">
-
-            <div class="sec1">
-                <h2 class="tx-al-c">بخش ؟</h2>
-                <ul>
-                    <a href=""><li> کویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                    <a href=""><li>  کویز اخ جوننن <img src="/images/TRASH2.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH2.jpg" alt=""></li></a>
-                    <a href=""><li> کوکویز اخ جونننیز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                </ul>
-            </div>
-
-            <div class="sec2">
-                <h2 class="tx-al-c">برترین های این ماه</h2>
-                <ul>
-                    <a href=""><li> کویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویکویکویز <img src="/images/TRASH2.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                </ul>
-            </div>
-
-            <div class="sec3">
-                <h2 class="tx-al-c">جدید ترین ها</h2>
-                <ul>
-                    <a href=""><li> کویز <img src="/images/TRASH2.jpg" alt=""></li></a>
-                    <a href=""><li> کوکویکوییز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                    <a href=""><li> کویکویز <img src="/images/TRASH1.jpg" alt=""></li></a>
-                    <a href=""><li> کویز <img src="/images/TRASH3.jpg" alt=""></li></a>
-                </ul>
-            </div>
-
+    <div class="quiz__questions tx-al-c">
+        <h5 class='quiz__questions__number'>1</h5>
+        <p class='quiz__questions__question'>شخصیت اصلی بازی چه نام دارد</p>
+        <div class="flex flex-jc-c">
+            <form class='quiz__questions__4option' action="">
+                <input type="radio" name="answer" id="1">
+                <label for="1">girald</label>
+                <input type="radio" name="answer" id="2">
+                <label for="2">steve</label>
+                <input type="radio" name="answer" id="3">
+                <label for="3">jack</label>
+                <input type="radio" name="answer" id="4">
+                <label for="4">taylor</label>
+            </form>
         </div>
 
-        <div class="space-l"></div>
-
+        <h5 class='quiz__questions__number'>2</h5>
+        <p class='quiz__questions__question'>چه امتیازی به گیم پلی میدی</p>
+        <div class='flex flex-jc-c'>
+            <form class="quiz__questions__lowHigh" action="">
+                
+            </form>
+        </div>
     </div>
 </body>
 

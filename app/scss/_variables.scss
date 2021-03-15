@@ -3,8 +3,18 @@
     font-family: "myHarmattan";
     src: url(/app/fonts/Harmattan-Regular.ttf)
 }
+@font-face {
+    font-family: "myChanga";
+    src: url(/app/fonts/Changa-ExtraLight.ttf);
+}
+@font-face {
+    font-family: "vermin-vibes-2-soft";
+    src: url(/app/fonts/Vermin-Vibes-2-Soft.ttf);
+}
 
-$font-pr: Harmattan, myHarmattan, sans-serif, serif;
+$font-pr: harmattan, myHarmattan, sans-serif, serif;
+$font-sec: myChanga, sans-serif, serif;
+$number: vermin-vibes-2-soft, myChanga, sans-serif;
 
 
 
