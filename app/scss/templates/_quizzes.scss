@@ -55,6 +55,14 @@
         width: 100%;
     }
 
+    &__leftCounter {
+        width: 0;
+        height: .3rem;
+        background: $red;
+        position: sticky;
+        top: 0;
+    }
+
     &__questions {
 
         &__number {
@@ -129,34 +137,38 @@
                     padding-top: 1rem;
                 }
             }
+            
+            :checked + label {
+                background: $red;
+            }
 
-            [id="lowHigh-9"]:checked + label {
-                background: #C80000;
-            }
-            [id="lowHigh-8"]:checked + label {
-                background: #C85D00;
-            }
-            [id="lowHigh-7"]:checked + label {
-                background: #FFA200;
-            }
-            [id="lowHigh-6"]:checked + label {
-                background: #FFCC00;
-            }
-            [id="lowHigh-5"]:checked + label {
-                background: #EEFF00;
-            }
-            [id="lowHigh-4"]:checked + label {
-                background: #C9EF00;
-            }
-            [id="lowHigh-3"]:checked + label {
-                background: #90EF00;
-            }
-            [id="lowHigh-2"]:checked + label {
-                background: #00D648;
-            }
-            [id="lowHigh-1"]:checked + label {
-                background: #00B83E;
-            }
+            // [id="lowHigh-9"]:checked + label {
+            //     background: #C80000;
+            // }
+            // [id="lowHigh-8"]:checked + label {
+            //     background: #C85D00;
+            // }
+            // [id="lowHigh-7"]:checked + label {
+            //     background: #FFA200;
+            // }
+            // [id="lowHigh-6"]:checked + label {
+            //     background: #FFCC00;
+            // }
+            // [id="lowHigh-5"]:checked + label {
+            //     background: #EEFF00;
+            // }
+            // [id="lowHigh-4"]:checked + label {
+            //     background: #C9EF00;
+            // }
+            // [id="lowHigh-3"]:checked + label {
+            //     background: #90EF00;
+            // }
+            // [id="lowHigh-2"]:checked + label {
+            //     background: #00D648;
+            // }
+            // [id="lowHigh-1"]:checked + label {
+            //     background: #00B83E;
+            // }
             
         }
     }

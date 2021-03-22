@@ -203,7 +203,7 @@ body {
 }
 
 h1 {
-  font-size: 2.625rem;
+  font-size: 2rem;
   padding-bottom: 1.25rem;
   padding: 0;
   margin: 0;
@@ -499,7 +499,7 @@ input {
   background: linear-gradient(-45deg, #9D272D, #1d1041);
   height: 100vh;
   width: 100vw;
-  font-size: 2.625rem;
+  font-size: 2rem;
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
 }
@@ -769,7 +769,7 @@ footer > div, .footer > div {
   background: linear-gradient(-45deg, #9D272D, #1d1041);
   height: 100vh;
   width: 100vw;
-  font-size: 2.625rem;
+  font-size: 2rem;
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
 }
@@ -1095,6 +1095,15 @@ footer > div, .footer > div {
   width: 100%;
 }
 
+.quiz__leftCounter {
+  width: 0;
+  height: .3rem;
+  background: #af282f;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
 .quiz__questions__number {
   font-family: vermin-vibes-2-soft, myChanga, sans-serif;
   font-size: 2.325rem;
@@ -1170,40 +1179,105 @@ footer > div, .footer > div {
   padding-top: 1rem;
 }
 
-.quiz__questions__lowHigh [id="lowHigh-9"]:checked + label {
-  background: #C80000;
+.quiz__questions__lowHigh :checked + label {
+  background: #af282f;
 }
 
-.quiz__questions__lowHigh [id="lowHigh-8"]:checked + label {
-  background: #C85D00;
+@font-face {
+  font-family: "myHarmattan";
+  src: url(/app/fonts/Harmattan-Regular.ttf);
 }
 
-.quiz__questions__lowHigh [id="lowHigh-7"]:checked + label {
-  background: #FFA200;
+@font-face {
+  font-family: "myChanga";
+  src: url(/app/fonts/Changa-ExtraLight.ttf);
 }
 
-.quiz__questions__lowHigh [id="lowHigh-6"]:checked + label {
-  background: #FFCC00;
+@font-face {
+  font-family: "vermin-vibes-2-soft";
+  src: url(/app/fonts/Vermin-Vibes-2-Soft.ttf);
 }
 
-.quiz__questions__lowHigh [id="lowHigh-5"]:checked + label {
-  background: #EEFF00;
+@keyframes hanging {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: .225rem;
+  }
 }
 
-.quiz__questions__lowHigh [id="lowHigh-4"]:checked + label {
-  background: #C9EF00;
+.result {
+  font-family: myChanga, sans-serif, serif;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-.quiz__questions__lowHigh [id="lowHigh-3"]:checked + label {
-  background: #90EF00;
+.result__title > h3 {
+  font-size: 1.18rem;
+  font-weight: 300;
+  margin-bottom: 0;
 }
 
-.quiz__questions__lowHigh [id="lowHigh-2"]:checked + label {
-  background: #00D648;
+.result__description > h1 {
+  font-size: 2rem;
 }
 
-.quiz__questions__lowHigh [id="lowHigh-1"]:checked + label {
-  background: #00B83E;
+.result__description > h1::before {
+  content: '';
+  width: 5.18rem;
+  height: 0.487rem;
+  background: #363636;
+  margin-right: 1rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-right: 1rem;
+}
+
+.result__description > h1::after {
+  content: '';
+  width: 5.18rem;
+  height: 0.487rem;
+  background: #363636;
+  margin-right: 1rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-left: 1rem;
+}
+
+.result__share h5 {
+  margin-bottom: 1rem;
+}
+
+.result__share > div {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.result__share__button {
+  background: black;
+  color: white;
+  width: 10rem;
+  margin: auto;
+  padding: .875rem 1rem .875rem 1rem;
+  border-radius: 25px;
+  margin-bottom: 1rem;
+}
+
+.result__score {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.result__detail {
+  text-align: right;
+}
+
+.result__detail > h5 {
+  margin-bottom: .7rem;
+  margin-top: 0;
 }
 
 .bg {

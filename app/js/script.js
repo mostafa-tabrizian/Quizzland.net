@@ -1,3 +1,4 @@
+
 const log = (code) => {
     console.log(code)
 }
@@ -55,14 +56,18 @@ header__search.addEventListener('blur', () => {
 })
 
 // show the submit srch category btn when active
-const tools__search = document.querySelector('.tools__search')
-const tools__submit = document.querySelector('.tools__submit')
-tools__search.addEventListener('click', () => {
-    tools__submit.classList.remove('fade')
-})
-tools__search.addEventListener('blur', () => {
-    tools__submit.classList.add('fade')
-})
+try {
+    const tools__search = document.querySelector('.tools__search')
+    const tools__submit = document.querySelector('.tools__submit')
+    tools__search.addEventListener('click', () => {
+        tools__submit.classList.remove('fade')
+    })
+    tools__search.addEventListener('blur', () => {
+        tools__submit.classList.add('fade')
+    })
+} catch {
+    log('Tools Not Found!')
+}
 
 // show the detail of the category
 const categories__item = document.querySelectorAll('.categories__item')
@@ -80,3 +85,5 @@ categories__item.forEach(item =>
         categories__item__img.classList.remove('categories__item__detail__show')
     })
 )
+
+log('Script Working.')
