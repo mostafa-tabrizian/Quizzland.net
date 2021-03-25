@@ -1,4 +1,3 @@
-
 const log = (code) => {
     console.log(code)
 }
@@ -42,7 +41,6 @@ btnMenu.addEventListener('click', () => {
 
 btnMenuClose.addEventListener('click', () => {
     menu.classList.add('fade')
-
 })
 
 // show the submit srch btn when active
@@ -85,5 +83,38 @@ categories__item.forEach(item =>
         categories__item__img.classList.remove('categories__item__detail__show')
     })
 )
+
+// GSAP
+try {
+    gsap.registerPlugin(ScrollTrigger)
+
+    // hide the ad when reach the footer
+    gsap.to('.ad__r', {
+        scrollTrigger: {
+            trigger: 'footer',
+            markers: false,
+            start: '5% 100%',
+            scrub: .1,
+        },
+        x: '200%',
+        opacity: '0',
+    })
+
+    // Counting left
+    const height = document.body.clientHeight;
+    const heightFooter = (document.querySelector('footer').offsetTop) - 780;
+    log(heightFooter)
+
+    gsap.to('.quiz__leftCounter', {
+        scrollTrigger: {
+            trigger: '.quiz__questions',
+            markers: false,
+            start: 'top top',
+            end: heightFooter,
+            scrub: 1,
+        },
+        width: '100%',
+    })
+} catch (e) {log('no gsap')}
 
 log('Script Working.')

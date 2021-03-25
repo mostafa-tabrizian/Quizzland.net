@@ -52,7 +52,8 @@
         margin-bottom:  1.93757rem;
 
         & > img {
-            width: 12.5rem;
+            max-width: 12.5rem;
+            object-fit: cover;
             height: 18.75rem;
             border: 2px solid lighten($gray, 10%);
             border-radius: 40px;

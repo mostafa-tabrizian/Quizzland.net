@@ -70,8 +70,8 @@
     <div class="result__title flex flex-jc-c">
        <h3>The Witcher3 :نتیجه‌ کویز</h3>
     </div>
-    <div class="result__description flex flex-jc-c">
-        <h1>! شما یک ویتچریه واقعی هستید</h1>
+    <div class="result__subtitle flex flex-jc-c flex-ai-c">
+        <h1 class="result__subtitle__txt"></h1>
     </div>
     <div class="result wrapper flex flex-ai-c flex-jc-sb">
         <div class="result__share tx-al-c">
@@ -80,11 +80,11 @@
             <div><a href="/index.html">بازگشت</a></div>
         </div>
 
-        <div class="result__score">😎 85%</div>
+        <div class="result__score"></div>
 
         <div class="result__detail">
-            <h5>تعداد پاسخ های درست:‌۱۵</h5>
-            <h5>تعداد پاسخ های غلط: ۳</h5>
+            <h5>تعداد پاسخ های درست:‌ <span class="result__detail__correctTime"> 0 </span></h5>
+            <h5>تعداد پاسخ های غلط: <span class="result__detail__wrongTime"> 0 </span></h5>
         </div>
     </div>
 
@@ -114,6 +114,7 @@
     </div>
  
 <script src="/app/js/script.js"></script>
+<script src="/app/js/quiz.js"></script>
 
 </footer>
 
