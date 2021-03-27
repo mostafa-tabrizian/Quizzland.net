@@ -20,4 +20,37 @@ footer, .footer {
         align-items: center;
         display: block;
     }
+
+    a {
+        color: white;
+
+        &:hover {
+            color: white !important;
+            opacity: .5;
+        }
+    }
+
+    &__navbar {
+        direction: rtl;
+        > li {
+            &:not(:last-child) {
+                padding-left: 2rem;
+            }
+        }
+    }
+
+    &__detail {
+        font-size: .9rem;
+        margin-bottom: 0;
+
+        > li {
+            &:not(:last-child) {
+                padding-left: 1rem;
+            }
+
+            > a {
+                opacity: .8;
+            }
+        }
+    }
 }

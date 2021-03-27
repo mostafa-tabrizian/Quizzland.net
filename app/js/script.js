@@ -57,12 +57,42 @@ header__search.addEventListener('blur', () => {
 try {
     const tools__search = document.querySelector('.tools__search')
     const tools__submit = document.querySelector('.tools__submit')
+    const tools__sortType = document.querySelector('.tools__sortType')
+    const tools__sortType__current = document.querySelector('.tools__sortType__current')
+    const tools__sortType__options = document.querySelector('.tools__sortType__options')
+    const sort__newest = document.querySelector('#newest')
+    const sort__oldest = document.querySelector('#oldest')
+    const sort__bestest = document.querySelector('#bestest')
+    const sort__alphabet = document.querySelector('#alphabet')
+
     tools__search.addEventListener('click', () => {
         tools__submit.classList.remove('fade')
     })
     tools__search.addEventListener('blur', () => {
         tools__submit.classList.add('fade')
     })
+
+    tools__sortType.addEventListener('click', () => {
+        if (tools__sortType__options.classList.contains('fade')) {
+            tools__sortType__options.classList.remove('fade')
+        } else {
+            tools__sortType__options.classList.add('fade')
+        }
+    })
+
+    sort__newest.addEventListener('click', () => {
+        tools__sortType__current.innerHTML = 'جدیدترین ها'
+    })
+    sort__oldest.addEventListener('click', () => {
+        tools__sortType__current.innerHTML = 'قدیمی‌ترین ها'
+    })
+    sort__bestest.addEventListener('click', () => {
+        tools__sortType__current.innerHTML = 'بهترین‌ ها'
+    })
+    sort__alphabet.addEventListener('click', () => {
+        tools__sortType__current.innerHTML = 'الفبا'
+    })
+
 } catch {
     log('Tools Not Found!')
 }
@@ -83,6 +113,8 @@ categories__item.forEach(item =>
         categories__item__img.classList.remove('categories__item__detail__show')
     })
 )
+
+
 
 // GSAP
 try {
