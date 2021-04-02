@@ -13,9 +13,19 @@
 }
 
 .hero{
-    text-align: right;
-    color: $white;
-    margin: 8rem 4rem;
+
+    &-inner {
+        padding: 1.5rem;
+        text-align: center;
+        // color: $white;
+        margin: 8rem 2rem;
+
+        > button {
+            margin-left: 50%;
+            transform: translate(-50%)
+        }
+    }
+
     & h1 {
         margin-bottom: 0; 
     }
@@ -25,11 +35,6 @@
     }
     font: {
         // family: $main-font
-    }
-
-    &__btn {
-        margin-right: 50%;
-        transform: translate(50%);
     }
 }
 

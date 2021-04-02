@@ -81,14 +81,17 @@
     }
 
     &__search {
-        // flex: 1 1 1;
-        border: 2px solid $darkRed;
+        border: 1px solid $darkRed;
         font-family: $font-pr;
         font-size: $font-sm;
         border-radius: 50px;
         height: 2.125rem;
         padding-right: 1.3125rem;
         width: 50%;
+
+        &::placeholder {
+            color: black
+        }
 
     }
 
@@ -163,5 +166,11 @@
 
     &__background {
         background: $red-bt-grad;
+        
+        .header__search {
+            &::placeholder {
+                color: white
+            }
+        }
     }
 }

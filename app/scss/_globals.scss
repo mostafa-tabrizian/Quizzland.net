@@ -97,6 +97,7 @@ p {
 
 a, a:visited, a:hover {
     text-decoration: none;
+    color: unset;
 
     &:hover {
         color: $red;
@@ -143,12 +144,13 @@ button, .btn {
         border-radius: 33px;
         padding: .4rem 1.54375rem;
         color: $white;
-        box-shadow: 0 3px 25px #430404;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.295);
+        // box-shadow: 0 3px 25px #430404;
 
-        &:hover {
-            color: white !important;
-            animation: boxShadowDancing 1s infinite;
-        }
+        // &:hover {
+        //     color: white !important;
+        //     animation: boxShadowDancing 1s infinite;
+        // }
     }
 
     &__grad-green {
@@ -160,10 +162,10 @@ button, .btn {
         box-shadow: 0 0 7px black;
     }
 
-    &:hover {
-        color: white !important;
-        animation: boxShadowDancing 1s infinite;
-    }
+    // &:hover {
+    //     color: white !important;
+    //     animation: boxShadowDancing 1s infinite;
+    // }
 }
 
 input {
@@ -274,6 +276,7 @@ input {
 
 // Responsive
 .wrapper {
+    position: relative;
     @include breakpoints-down(medium) {
         max-width: 38.75rem;
         margin: auto auto;
@@ -318,4 +321,13 @@ input {
             height: 33rem;
         }
     }
+}
+
+.gls {
+    background: rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    border: solid 2px transparent;
+    backdrop-filter: blur(9px);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(80, 52, 52, 0.336);
 }

@@ -91,6 +91,33 @@ try {
     })
     sort__alphabet.addEventListener('click', () => {
         tools__sortType__current.innerHTML = 'الفبا'
+
+        const quizzes__item = document.querySelectorAll('.quizzes__item')
+
+        let quizzes__item__sort = []
+
+        for (let i = 0; i < quizzes__item.length; i++) {
+            quizzes__item__sort.push(quizzes__item[i])
+        }
+        
+        quizzes__item__sort.sort((a, b) => { 
+            a = a.id.toLowerCase();
+            b = b.id.toLowerCase();
+            if (a > b) { 
+                return 1; 
+            } else if (a < b) {
+                return -1;
+            } else {
+                return 0;
+            }
+        })
+
+        for (let i = 0; i < quizzes__item.length; i++) {
+            quizzes__item__sort[i].style.order = i
+        }
+
+
+
     })
 
 } catch {
@@ -148,5 +175,10 @@ try {
         width: '100%',
     })
 } catch (e) {log('no gsap')}
+
+tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 2.5 }})
+// tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
+// tl.from('header', {y: '-100%'}, '-=1')
+
 
 log('Script Working.')
