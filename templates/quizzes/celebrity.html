@@ -68,65 +68,66 @@
 
 <body>
     
-    <div class="tools wrapper-med flex flex-ai-c">
-        <!-- search -->
-        <img class="tools__submit header__submit" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADAklEQVRIid2UTWxUVRiGn+/cW9rp0CYiC6WgQGo702GmMeOCuGGMMSSmLmQBG5PGEsICSJMaWfATunKjKxKiQ22hVRZKjGGpiTqJGBLDNMC0MP2RmIEWWJhYKm1u773nY6FDDCnTi3aj7+rknPc9T96cfAf+L5KVDPlstq7ud+85RJt82zCz/2ZxbtUgpzs6U25ojyh0Ac2A/hUYVSV/a8OzZ/oLhSAKxCy3OdiW7nNCW1TwFPum8eZjPRMlR02wRZUzIhzbdPe3i/lk8vl/1GSwLd2HcFSEXarulBL0CryG8PPecukgwKlUam1DYM4BL9WHi9vfmZ6+H7nJ6Y7OFMIHanlbrFghGBP0VZSB0JiPq74D4+N/PAgXd4sy55nYh0/VZKg9fU7BM649ooG5DpyqTJRO9INdLjyQSGeNcslVs6V78urMik36czlXoQs1Q9aXQwrlWgCAfeVSUZFx39iuWk0eQTbeu9cCNDctNBYRyYF8XQtQlUDRqCYjQZzQjQHh9duXPEG/MGLOrwQAQHVBRRprWdzqYilYc8etWzIbk8lNPTfGTkYCACK6WTGjtTyPmuy/WZwTGEXdtwAGktveyKdSL9QKj2QycUVygv4QCQKAyidGeX8kk4mbUDa7Ps/UCvue9olSWVtOXIwMqWxYdxZl1l/Sz5rq7PDeyfGrTwoOJTp3Akct0rub82FkSH+hEPhOsAslMR843w+0b8s8Hshns42ftqePqdoLgh52HFOpBYAnfJCft7Y2e27sI5Ru4BrIZRVdNFZeVNHXEWbE0ou1s+qYIsJ3WO5bK4f3TV+7HQlS1XBbZ4tvbJdRTapKDHRWjBQq5dKP1RkabE9/g8rSn7dphwSa6/ll7FZkSBQNtWW+sqLOQri4J+7ERoBXHgct+9U/jcSY9wy8HHcbzhpvvhu4rK58e7K1tX7VIO+Wr/wq4uxAZbutbxoOxRwHEjFp2LpqkCoocO0OIO2onQD5aaZl/VT1/F+/yd/1ZSq15oFvtsYnE1Mrzc5/Uw8B9V07yxwQ5TwAAAAASUVORK5CYII="/>
-        <input class='header__search tools__search input' type="search" placeholder="جستجو در این بخش">
-        <!-- sort -->
-        <a href="#" class="tools__sortType flex flex-ai-c">
-            <h5 class="input tx-al-r"> مرتب سازی بر اساس</h5>
-            <div class="tools__sortType__current">جدیدترین</div>
-            <div class="tools__sortType__options fade">
-                <ul>
-                    <li id="newest">جدیدترین ها</li>
-                    <li id="oldest">قدیمی‌ترین ها</li>
-                    <li id="bestest">بهترین‌ ها</li>
-                    <li id="alphabet">الفبا</li>
-                </ul>
-            </div>
-        </a>
-    </div>
-
-    <div class="quizzes flex wrapper-med flex-ai-c flex-jc-c">
-        <div class="quizzes__item" id="Hugh-Jackman">
-            <a href="/templates/quizzes/gaming/the-witcher-3-اولین-کویز.html"><img src="/images/TRASH-Hughjackman.jpg" alt=""></a>
-            <h5>فیلم های <br/>Hugh Jackman</h5>
+    <div class="wrapper">
+        <div class="tools flex flex-ai-c">
+            <!-- search -->
+            <img class="tools__submit header__submit" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADAklEQVRIid2UTWxUVRiGn+/cW9rp0CYiC6WgQGo702GmMeOCuGGMMSSmLmQBG5PGEsICSJMaWfATunKjKxKiQ22hVRZKjGGpiTqJGBLDNMC0MP2RmIEWWJhYKm1u773nY6FDDCnTi3aj7+rknPc9T96cfAf+L5KVDPlstq7ud+85RJt82zCz/2ZxbtUgpzs6U25ojyh0Ac2A/hUYVSV/a8OzZ/oLhSAKxCy3OdiW7nNCW1TwFPum8eZjPRMlR02wRZUzIhzbdPe3i/lk8vl/1GSwLd2HcFSEXarulBL0CryG8PPecukgwKlUam1DYM4BL9WHi9vfmZ6+H7nJ6Y7OFMIHanlbrFghGBP0VZSB0JiPq74D4+N/PAgXd4sy55nYh0/VZKg9fU7BM649ooG5DpyqTJRO9INdLjyQSGeNcslVs6V78urMik36czlXoQs1Q9aXQwrlWgCAfeVSUZFx39iuWk0eQTbeu9cCNDctNBYRyYF8XQtQlUDRqCYjQZzQjQHh9duXPEG/MGLOrwQAQHVBRRprWdzqYilYc8etWzIbk8lNPTfGTkYCACK6WTGjtTyPmuy/WZwTGEXdtwAGktveyKdSL9QKj2QycUVygv4QCQKAyidGeX8kk4mbUDa7Ps/UCvue9olSWVtOXIwMqWxYdxZl1l/Sz5rq7PDeyfGrTwoOJTp3Akct0rub82FkSH+hEPhOsAslMR843w+0b8s8Hshns42ftqePqdoLgh52HFOpBYAnfJCft7Y2e27sI5Ru4BrIZRVdNFZeVNHXEWbE0ou1s+qYIsJ3WO5bK4f3TV+7HQlS1XBbZ4tvbJdRTapKDHRWjBQq5dKP1RkabE9/g8rSn7dphwSa6/ll7FZkSBQNtWW+sqLOQri4J+7ERoBXHgct+9U/jcSY9wy8HHcbzhpvvhu4rK58e7K1tX7VIO+Wr/wq4uxAZbutbxoOxRwHEjFp2LpqkCoocO0OIO2onQD5aaZl/VT1/F+/yd/1ZSq15oFvtsYnE1Mrzc5/Uw8B9V07yxwQ5TwAAAAASUVORK5CYII="/>
+            <input class='header__search tools__search input' type="search" placeholder="جستجو در این بخش">
+            <!-- sort -->
+            <a href="#" class="tools__sortType flex flex-ai-c">
+                <h5 class="input tx-al-r"> مرتب سازی بر اساس</h5>
+                <div class="tools__sortType__current">جدیدترین</div>
+                <div class="tools__sortType__options fade">
+                    <ul>
+                        <li id="newest">جدیدترین ها</li>
+                        <li id="oldest">قدیمی‌ترین ها</li>
+                        <li id="bestest">بهترین‌ ها</li>
+                        <li id="alphabet">الفبا</li>
+                    </ul>
+                </div>
+            </a>
         </div>
-        <div class="quizzes__item" id="Jeniffer-Lawrence">
-            <a href=""><img src="/images/TRASH-jennifer.jpg" alt=""></a>
-            <h5>درباره ی<br/>Jennifer Lawrence</h5>
-        </div>
-        <div class="quizzes__item" id="Ed-Shereen">
-            <a href=""><img src="/images/TRASH-ed.jpg" alt=""></a>
-            <h5>موسیقی های<br/>Ed Shereen</h5>
-        </div>
-        <div class="quizzes__item" id="Selena-Gomez">
-            <a href=""><img src="/images/TRASH-selena.jpg" alt=""></a>
-            <h5>حدس آهنگ های<br/>Selena Gomez</h5>
-        </div>
-        <div class="quizzes__item" id="The-Rock">
-            <a href=""><img src="/images/TRASH-rock.jpg" alt=""></a>
-            <h5>فیلم های<br/>The Rock</h5>
-        </div>
-        <div class="quizzes__item" id="Selena-Gomez">
-            <a href=""><img src="/images/TRASH-selena2.jpg" alt=""></a>
-            <h5>زندگی<br/>Selena Gomez</h5>
-        </div>
-        <div class="quizzes__item" id="The-Weekend">
-            <a href=""><img src="/images/TRASH-theweekend.jpg" alt=""></a>
-            <h5>متن های<br/>The Weekend</h5>
-        </div>
-        <div class="quizzes__item" id="Taylor-swift">
-            <a href=""><img src="/images/TRASH-taylor.jpg" alt=""></a>
-            <h5>اهنگ های<br/>Taylor swift</h5>
-        </div>
-        <div class="quizzes__item" id="Ed-Shereen">
-            <a href=""><img src="/images/TRASH-ed.jpg" alt=""></a>
-            <h5>موسیقی های<br/>Ed Shereen</h5>
-        </div>
-        
-    </div>
     
+        <div class="quizzes flex wrapper flex-ai-c flex-jc-c">
+            <div class="quizzes__item" id="Hugh-Jackman">
+                <a href="/templates/quizzes/gaming/the-witcher-3-اولین-کویز.html"><img src="/images/TRASH-Hughjackman.jpg" alt=""></a>
+                <h5>فیلم های <br/>Hugh Jackman</h5>
+            </div>
+            <div class="quizzes__item" id="Jeniffer-Lawrence">
+                <a href=""><img src="/images/TRASH-jennifer.jpg" alt=""></a>
+                <h5>درباره ی<br/>Jennifer Lawrence</h5>
+            </div>
+            <div class="quizzes__item" id="Ed-Shereen">
+                <a href=""><img src="/images/TRASH-ed.jpg" alt=""></a>
+                <h5>موسیقی های<br/>Ed Shereen</h5>
+            </div>
+            <div class="quizzes__item" id="Selena-Gomez">
+                <a href=""><img src="/images/TRASH-selena.jpg" alt=""></a>
+                <h5>حدس آهنگ های<br/>Selena Gomez</h5>
+            </div>
+            <div class="quizzes__item" id="The-Rock">
+                <a href=""><img src="/images/TRASH-rock.jpg" alt=""></a>
+                <h5>فیلم های<br/>The Rock</h5>
+            </div>
+            <div class="quizzes__item" id="Selena-Gomez">
+                <a href=""><img src="/images/TRASH-selena2.jpg" alt=""></a>
+                <h5>زندگی<br/>Selena Gomez</h5>
+            </div>
+            <div class="quizzes__item" id="The-Weekend">
+                <a href=""><img src="/images/TRASH-theweekend.jpg" alt=""></a>
+                <h5>متن های<br/>The Weekend</h5>
+            </div>
+            <div class="quizzes__item" id="Taylor-swift">
+                <a href=""><img src="/images/TRASH-taylor.jpg" alt=""></a>
+                <h5>اهنگ های<br/>Taylor swift</h5>
+            </div>
+            <div class="quizzes__item" id="Ed-Shereen">
+                <a href=""><img src="/images/TRASH-ed.jpg" alt=""></a>
+                <h5>موسیقی های<br/>Ed Shereen</h5>
+            </div>
+            
+        </div>
+    </div>
 
     <div class="space-sm"></div>
 

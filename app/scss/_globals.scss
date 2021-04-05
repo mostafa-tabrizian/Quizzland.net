@@ -203,9 +203,42 @@ input {
     }
 }
 
+.loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: $red-grad;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    &:after {
+        animation: changeContent .8s linear infinite;
+        content: "⠋";
+        font-size: 5rem;
+      }
+      
+      @keyframes changeContent {
+        10% { content: "⠙"; }
+        20% { content: "⠹"; }
+        30% { content: "⠸"; }
+        40% { content: "⠼"; }
+        50% { content: "⠴"; }
+        60% { content: "⠦"; }
+        70% { content: "⠧"; }
+        80% { content: "⠇"; }
+        90% { content: "⠏"; }
+      }
+}
+
 .fade {
     visibility: hidden;
     opacity: 0;
+    transition: all .53s ease-in-out;
 }
 
 .flex {
@@ -260,6 +293,55 @@ input {
 
     }
 }
+
+// .tools {
+//     direction: rtl;
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-self: flex-end;
+//     margin-right: 1rem;
+
+//     &__submit {
+//         right: 14.7rem;
+//         top: -.2rem;
+//     }
+
+//     &__search {
+//         transform: translate(1.875rem);
+//         width: 17rem;
+//         margin-bottom: .5rem;
+
+//     }
+
+//     &__sortType {
+//         position: relative;
+//         transition: all .3s ease;
+    
+//         > div {
+//             background: $red;
+//             font-size: $font-sm;
+//             color: $white;
+//             transform: translate(104%);
+//             padding: .11rem .5rem;
+//             border-radius: 20px;
+//         }
+    
+//         &__current {
+//             min-width: 6.15rem;
+//             text-align: center;
+//         }
+    
+//         &__options {
+//             position: absolute;
+//             left: -2rem;
+//             top: 2.3rem;
+//             box-shadow: 0 0 5px black;
+//             transition: all .3s ease;
+//             line-height: 1.5rem;
+//             z-index: 2;
+//         }
+//     }
+// }
 
 // Visibility
 .hide-for-mobile {

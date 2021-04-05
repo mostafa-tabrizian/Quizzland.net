@@ -2,11 +2,38 @@ const log = (code) => {
     console.log(code)
 }
 
-// open and close the category list when click on category in the list
+const body = document.querySelector('body')
+const loadingScreen = document.querySelector('.loadingScreen')
 const header__categories__button = document.querySelector('.header__categories__button')
+const header__categories = document.querySelector('.header__categories')
+const arw = document.querySelector('.arw')
+const categories = document.querySelector('.header__categories')
+const btnMenu = document.querySelector('.header__menu')
+const btnMenuClose = document.querySelector('.header__menu__m__close-btn')
+const menu = document.querySelector('.header__menu__m')
+const header__search = document.querySelector('.header__search')
+const header__submit = document.querySelector('.header__submit')
+const tools__search = document.querySelector('.tools__search')
+const tools__submit = document.querySelector('.tools__submit')
+const tools__sortType = document.querySelector('.tools__sortType')
+const tools__sortType__current = document.querySelector('.tools__sortType__current')
+const tools__sortType__options = document.querySelector('.tools__sortType__options')
+const sort__newest = document.querySelector('#newest')
+const sort__oldest = document.querySelector('#oldest')
+const sort__bestest = document.querySelector('#bestest')
+const sort__alphabet = document.querySelector('#alphabet')
+const quizzes__item = document.querySelectorAll('.quizzes__item')
+const categories__item = document.querySelectorAll('.categories__item')
+const heightFooter = (document.querySelector('footer').offsetTop) - 780;
+
+// Loading screen
+window.onload = (event) => {
+    loadingScreen.classList.add('fade')
+};
+
+
+// open and close the category list when click on category in the list
 header__categories__button.addEventListener('click', () => {
-    const header__categories = document.querySelector('.header__categories')
-    const arw = document.querySelector('.arw')
     
     if (header__categories.classList.contains('header__categories__open')) {
         header__categories.classList.remove('header__categories__open')
@@ -19,10 +46,7 @@ header__categories__button.addEventListener('click', () => {
 })
 
 // close the category list or hide the submit btn when click on anywhere of page
-const body = document.querySelector('body')
 body.addEventListener('click', () => {
-    const categories = document.querySelector('.header__categories')
-    const arw = document.querySelector('.arw')
     
     if (getComputedStyle(categories).opacity == 1) {
         categories.classList.remove('header__categories__open')
@@ -31,9 +55,6 @@ body.addEventListener('click', () => {
 })
 
 // open the menu
-const btnMenu = document.querySelector('.header__menu')
-const btnMenuClose = document.querySelector('.header__menu__m__close-btn')
-const menu = document.querySelector('.header__menu__m')
 
 btnMenu.addEventListener('click', () => {
     menu.classList.remove('fade')
@@ -44,8 +65,6 @@ btnMenuClose.addEventListener('click', () => {
 })
 
 // show the submit srch btn when active
-const header__search = document.querySelector('.header__search')
-const header__submit = document.querySelector('.header__submit')
 header__search.addEventListener('click', () => {
     header__submit.classList.remove('fade')
 })
@@ -55,15 +74,6 @@ header__search.addEventListener('blur', () => {
 
 // show the submit srch category btn when active
 try {
-    const tools__search = document.querySelector('.tools__search')
-    const tools__submit = document.querySelector('.tools__submit')
-    const tools__sortType = document.querySelector('.tools__sortType')
-    const tools__sortType__current = document.querySelector('.tools__sortType__current')
-    const tools__sortType__options = document.querySelector('.tools__sortType__options')
-    const sort__newest = document.querySelector('#newest')
-    const sort__oldest = document.querySelector('#oldest')
-    const sort__bestest = document.querySelector('#bestest')
-    const sort__alphabet = document.querySelector('#alphabet')
 
     tools__search.addEventListener('click', () => {
         tools__submit.classList.remove('fade')
@@ -92,7 +102,6 @@ try {
     sort__alphabet.addEventListener('click', () => {
         tools__sortType__current.innerHTML = 'الفبا'
 
-        const quizzes__item = document.querySelectorAll('.quizzes__item')
 
         let quizzes__item__sort = []
 
@@ -125,7 +134,6 @@ try {
 }
 
 // show the detail of the category
-const categories__item = document.querySelectorAll('.categories__item')
 
 categories__item.forEach(item => 
     item.addEventListener('mouseover', () => {
@@ -160,8 +168,6 @@ try {
     })
 
     // Counting left
-    const height = document.body.clientHeight;
-    const heightFooter = (document.querySelector('footer').offsetTop) - 780;
     log(heightFooter)
 
     gsap.to('.quiz__leftCounter', {
@@ -177,8 +183,8 @@ try {
 } catch (e) {log('no gsap')}
 
 tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 2.5 }})
-// tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
-// tl.from('header', {y: '-100%'}, '-=1')
+tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
+tl.from('header', {y: '-100%'}, '-=1')
 
 
 log('Script Working.')

@@ -5,9 +5,14 @@
     &__item {
         width: 12.5rem;
         height: 16.2135rem;
-        margin-right: 1.9375rem;
+        margin-left: 0.96875rem;
+        margin-right: 0.96875rem;
         margin-bottom:  1.93757rem;
 
+        @include breakpoints-down(medium) {
+            width: 10rem;
+            height: 14.75rem;
+        }
 
         & a > img {
             width: 100%;
@@ -29,7 +34,6 @@
 }
 
 .quiz {
-
     &__head {
         font-family: $font-sec;
 
