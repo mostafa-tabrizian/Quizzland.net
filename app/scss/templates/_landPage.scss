@@ -66,17 +66,55 @@
     }
 }
 
+.sec1, .sec2, .sec3 {
+    background: rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    border: solid 2px transparent;
+    backdrop-filter: blur(2px);
+    background-clip: padding-box;
+    box-shadow: 2px 5px 40px rgba(88, 14, 14, 0.452);
+    margin-bottom: 4rem;
+}
+
 .sort {
     padding-top: 4rem;
 
-    & div {
+    &__more {
+        padding-top: 1rem;
+        font-size: $font-sm;
+        opacity: .7;
+        margin-right: 1.7rem;
 
-        & > ul {
-            padding-left: 3rem;
-            padding-right: 3rem;
-            margin: 0;
+        &:hover {
+            opacity: 1;
+        }
+    }
 
-            & > a {
+    h2 {
+
+        &::before, &::after {
+            content: '_____';
+            display: inline-block;
+            color: $darkRed;
+            padding: 1rem;
+            font-family: Courier, monospace;
+        }
+    }
+
+    div {
+        padding-top: 1.25rem;
+        padding-bottom: 2.7rem;
+
+        > ul {
+            // padding-left: 3rem;
+            // padding-right: 3rem;
+            // margin: 0;
+
+            &:not(:last-child) {
+                // border-right: 1px solid black;
+            }
+
+            > a {
                 display: flex;
                 justify-content: flex-end;
                 
@@ -84,15 +122,24 @@
                     padding-bottom: .5rem;
                 }
 
-                & > li {
+                > li {
                     display: inline-flex;
-
-                    & > img {
-                    border-radius: 50px;
-                    width: 1.5rem;
-                    height: 1.5rem; 
-                    margin-left: .5rem;
+                    
+                    &::after {
+                        content: ' ';
+                        display: block;
+                        width: 20px;
+                        background: url('/images/dots.png') no-repeat center center;
+                        background-size: 10px;
+                        margin-left: .5rem;
                     }
+
+                    // > img {
+                    // border-radius: 30%;
+                    // width: 2.5rem;
+                    // height: 2.5rem; 
+                    // margin-left: .5rem;
+                    // }
                 }
             }
         }

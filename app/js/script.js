@@ -182,9 +182,9 @@ try {
     })
 } catch (e) {log('no gsap')}
 
-tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 2.5 }})
+tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 1 }})
 tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
-tl.from('header', {y: '-100%'}, '-=1')
+tl.from('header', {y: '-100%'}, '-=.7')
 
 
 log('Script Working.')

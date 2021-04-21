@@ -85,7 +85,7 @@ h1 {
 }
 
 h2 {
-    font-size: $font-med;
+    font-size: $font-l;
     letter-spacing: .1rem;
     padding: 0 0 1rem 0; margin: 0;
 }
@@ -124,14 +124,13 @@ ul {
 
 li {
     list-style: none;
+    font-size: $font-med;
 }
 
 button, .btn {
-    background: $white;
     border: 0;
     border-radius: 5px;
     padding: 0 1rem;
-    color: white;
     outline: none;
     font-family: $font-pr;
     font-size: $font-sm;
@@ -143,7 +142,7 @@ button, .btn {
         border: 0;
         border-radius: 33px;
         padding: .4rem 1.54375rem;
-        color: $white;
+        color: $white !important;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.295);
         // box-shadow: 0 3px 25px #430404;
 
@@ -259,6 +258,11 @@ input {
     &-ai-c {
         align-items: center;
     }
+}
+
+.center {
+    margin-left: 50%;
+    transform: translate(-50%)
 }
 
 .shadow {
