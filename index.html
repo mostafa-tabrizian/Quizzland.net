@@ -1,204 +1,0 @@
-<!DOCTYPE html>
-<html lang="Fa">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app/scss/style.css">
-    <title>Quiz Land</title>
-</head>
-
-<header class="header">
-    <nav class="flex flex-ai-c flex-jc-sb">
-
-        <!-- Search -->
-        <div class="flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb hide-for-desktop" href="#" class="">
-                <img src="/images/logo.png" alt="QuizLand">
-            </a>
-            <img class='header__submit fade flex flex-ai-c' src="/images/srch-black.svg" alt>
-            <input class='header__search gls tx-al-r' type="search" placeholder="...جستجو">
-        </div>
-
-        <!-- Menu -->
-        
-        <a href="#" class="header__menu hide-for-desktop">
-            <span></span>
-            <span></span>
-            <span></span>
-        </a>
-        <div class="header__menu__m fade tx-al-c">
-            <img src="/images/close-btn.svg" alt="" class="header__menu__m__close-btn">
-
-            <ul>
-                <details>
-                    <summary>کتگوری ها</summary>
-                    <ul>
-                        <a href=""><li>فیلم و سریال</li></a>
-                        <a href=""><li>گیمینگ</li></a>
-                        <a href=""><li>سلبریتی</li></a>
-                        <a href=""><li>روانشناسی</li></a>
-                    </ul>
-                </details>
-                <li><a href="#">تماس با ما</a></li>
-                <li><a href="#">درباه‌ي ما</a></li>
-            </ul>
-        </div>
-
-        <!-- Links -->
-        <div class="header__links hide-for-mobile hover flex flex-ai-c">
-            <a href="#">تماس با ما</a>
-            <a href="#">درباه‌ي ما</a>
-            <a href="#" class="header__categories__button">کتگوری‌ها</a>
-            <a class="flex flex-jc-sb" href="#" class="header__logo">
-                <img src="/images/logo.png" alt="QuizLand">
-            </a>
-        </div>
-
-        <img class="arw" src="images/arw.png">
-        <ul class="header__categories tx-al-c">
-            <a href=""><li>فیلم و سریال</li></a>
-            <a href=""><li>گیمینگ</li></a>
-            <a href=""><li>سلبریتی</li></a>
-            <a href=""><li>روانشناسی</li></a>
-        </ul>
-
-    </nav>
-
-    <div class="loadingScreen"></div>
-</header>
-
-<body>
-    <div class="landingPage">
-        <div class="bg"></div>
-
-        <div class="wrapper">
-
-            <div class="hero felx felx-jc-c flex-ai-c">
-                <div class="hero-inner gls">
-                    <h1>اینجا کویزلنده</h1>
-                    <p>😎 جایی که میتونی خودت رو به عنوان به فن واقعی خودترو به دوستات ثابت کنی <br/> پس اگر آماده‌ای میدان نبردت رو انتخاب کن و وارد شو</p>
-                    <button onclick="window.location.href='#category'" class=' flex btn__grad hero__btn'>بزن بریم</button>
-                </div>
-            </div>
-
-            <div class="space-med"></div>
-
-            <!-- <img src="/images/mouse.png" alt="" class="scroll"> -->
-
-            <div class="space-l" id="category"></div>
-
-        </div>
-    </div>
-
-    <h2 class="tx-al-c">دسته‌ی دلخوات رو انتخاب کن</h2>
-
-    <div class="category flex flex-jc-c flex-ai-c flex-jc-sb">
-
-        <a href="/templates/category/movie&series.html">
-                <img src="/images/catefory-movies.jpg" alt="">
-                <p class='tx-al-c'>فیلم و سریال</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-celebrity.jpg" alt="">
-            <p class='tx-al-c'>سلبریتی</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-games.jpg" alt="">
-            <p class='tx-al-c'>گیمینگ</p>
-        </a>
-
-        <a href="">
-            <img src="/images/category-physiology.jpg" alt="">
-            <p class='tx-al-c'>روانشناسی</p>
-        </a>
-
-    </div>
-
-    <div class="wrapper">
-
-        <div class="sort sort-for-mobile">
-
-            <div class="sec1">
-                <h2 class="tx-al-c">جدیدترین ‌ها</h2>
-                <ul class='center'>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li>  کویز اخ جوننن </li></a>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li> کوکویز اخ جونننیز </li></a>
-                    <a href=""><li> کویز </li></a>
-                    <a class="sort__more" href=""> ..بیشتر</a>
-                </ul>
-            </div>
-
-            <div class="sec2">
-                <h2 class="tx-al-c">پر بازدیدترین های این ماه</h2>
-                <ul class='center'>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li>  کویز اخ جوننن </li></a>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li> کوکویز اخ جونننیز </li></a>
-                    <a href=""><li> کویز </li></a>
-                    <a class="sort__more" href=""> ..بیشتر</a>
-                </ul>
-            </div>
-
-            <div class="sec3">
-                <h2 class="tx-al-c">پر بازدیدترین های کل</h2>
-                <ul class='center'>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li>  کویز اخ جوننن </li></a>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li> کوکویز اخ جونننیز </li></a>
-                    <a href=""><li> کویز </li></a>
-                    <a class="sort__more" href=""> ..بیشتر</a>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="space-l"></div>
-    </div>
-
-    <!-- <div class="cookies">
-        <h5>با توجه به کوکی ها و قوانین سایت شما باید آنها را قبول و تایید کنید.</h5>
-        <div class="cookies__submit flex flex-jc-c flex-ai-c">
-            <a href="" class="cookies__submit__refuse">قبول نمی‌کنم</a>
-            <a href="" class="cookies__submit__accept btn__grad">کوکی و قوانین را قبول میکنم</a>
-        </div>
-    </div> -->
-</body>
-
-<footer class="footer-for-mobile tx-al-c">
-
-    <div>
-        <p class="tx-al-c"> تو خبرنامه مون عضو شو تا هر وقت یه کویز باحال دیگه‌ای منتشر کردیم بتونی اولین نفری باشی که انجامش میده</p>
-        <button class='btn__grad-green gls' type="submit">ثبت نام</button>
-        <input class="input" type="email" placeholder='                   ... ایمیل'>
-    </div>
-
-    <div>
-        <ul class="footer__navbar flex flex-jc-c flex-ai-c">
-            <li><a href=""><img class="flex flex-ai-c" src="/images/logo.png" alt=""></a></li>
-            <li><a href="">کتگوری ها</a></li>
-            <li><a href="">درباره‌ی ما</a></li>
-            <li><a href="">تماس با ما</a></li>
-        </ul>
-        <ul class="footer__detail flex flex-jc-c flex-ai-c">
-            <li><a href="">تبلیغات</a></li>
-            <li><a href="">حریم خصوصی</a></li>
-            <li><a href="">شرایط خدمات</a></li>
-            <li><a href="">راهنما</a></li>
-            <li><a href="">حمایت</a></li>
-        </ul>
-    </div>
-
-<script src="/app/js/ScrollTrigger.min.js"></script>
-<script src="/app/js/gsap.min.js"></script>
-<script src="/app/js/script.js"></script>
-</footer>
-
-
-</html>

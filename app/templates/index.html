@@ -1,0 +1,105 @@
+{% extends './layout.html' %}
+{% block content %}
+<body>
+    <div class="landingPage">
+        <div class="bg"></div>
+
+        <div class="wrapper">
+
+            <div class="hero felx felx-jc-c flex-ai-c">
+                <div class="hero-inner gls">
+                    <h1>اینجا کویزلنده</h1>
+                    <p>😎 جایی که میتونی خودت رو به عنوان به فن واقعی خودترو به دوستات ثابت کنی <br/> پس اگر آماده‌ای میدان نبردت رو انتخاب کن و وارد شو</p>
+                    <button onclick="window.location.href='#category'" class=' flex btn__grad hero__btn'>بزن بریم</button>
+                </div>
+            </div>
+
+            <div class="space-med"></div>
+
+            <!-- <img src="static/img/mouse.png" alt="" class="scroll"> -->
+
+            <div class="space-l" id="category"></div>
+
+        </div>
+    </div>
+
+    <h2 class="tx-al-c">دسته‌ی دلخوات رو انتخاب کن</h2>
+
+    <div class="category flex flex-jc-c flex-ai-c flex-jc-sb">
+
+        <a href="/templates/category/movie&series.html">
+                <img src="static/img/catefory-movies.jpg" alt="">
+                <p class='tx-al-c'>فیلم و سریال</p>
+        </a>
+
+        <a href="">
+            <img src="static/img/category-celebrity.jpg" alt="">
+            <p class='tx-al-c'>سلبریتی</p>
+        </a>
+
+        <a href="">
+            <img src="static/img/category-games.jpg" alt="">
+            <p class='tx-al-c'>گیمینگ</p>
+        </a>
+
+        <a href="">
+            <img src="static/img/category-physiology.jpg" alt="">
+            <p class='tx-al-c'>روانشناسی</p>
+        </a>
+
+    </div>
+
+    <div class="wrapper">
+
+        <div class="sort sort-for-mobile">
+
+            <div class="sec1">
+                <h2 class="tx-al-c">جدیدترین ‌ها</h2>
+                <ul class='center'>
+                    <a href=""><li> کویز </li></a>
+                    <a href=""><li>  کویز اخ جوننن </li></a>
+                    <a href=""><li> کویز </li></a>
+                    <a href=""><li> کوکویز اخ جونننیز </li></a>
+                    <a href=""><li> کویز </li></a>
+                    <a class="sort__more" href=""> ..بیشتر</a>
+                </ul>
+            </div>
+
+            <div class="sec2">
+                <h2 class="tx-al-c">پر بازدیدترین های این ماه</h2>
+                <ul class='center'>
+                    <a href=""><li> کویز </li></a>
+                    <a href=""><li>  کویز اخ جوننن </li></a>
+                    <a href=""><li> کویز </li></a>
+                    <a href=""><li> کوکویز اخ جونننیز </li></a>
+                    <a href=""><li> کویز </li></a>
+                    <a class="sort__more" href=""> ..بیشتر</a>
+                </ul>
+            </div>
+
+            <div class="sec3">
+                <h2 class="tx-al-c">پر بازدیدترین های کل</h2>
+                <ul class='center'>
+                    <a href=""><li> کویز </li></a>
+                    <a href=""><li>  کویز اخ جوننن </li></a>
+                    <a href=""><li> کویز </li></a>
+                    <a href=""><li> کوکویز اخ جونننیز </li></a>
+                    <a href=""><li> کویز </li></a>
+                    <a class="sort__more" href=""> ..بیشتر</a>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="space-l"></div>
+    </div>
+
+    <!-- <div class="cookies">
+        <h5>با توجه به کوکی ها و قوانین سایت شما باید آنها را قبول و تایید کنید.</h5>
+        <div class="cookies__submit flex flex-jc-c flex-ai-c">
+            <a href="" class="cookies__submit__refuse">قبول نمی‌کنم</a>
+            <a href="" class="cookies__submit__accept btn__grad">کوکی و قوانین را قبول میکنم</a>
+        </div>
+    </div> -->
+</body>
+{% endblock content %}

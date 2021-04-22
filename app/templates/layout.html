@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="Fa">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}"></link>
+    <title>Quiz Land</title>
+</head>
+
+<header class="header">
+    <nav class="flex flex-ai-c flex-jc-sb">
+
+        <!-- Search -->
+        <div class="flex flex-ai-c">
+            <a class="header__logo flex flex-jc-sb hide-for-desktop" href="#" class="">
+                <img src="static/img/logo.png" alt="QuizLand">
+            </a>
+            <img class='header__submit fade flex flex-ai-c' src="static/img/srch-black.svg" alt>
+            <input class='header__search gls tx-al-r' type="search" placeholder="...جستجو">
+        </div>
+
+        <!-- Menu -->
+        
+        <a href="#" class="header__menu hide-for-desktop">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+        <div class="header__menu__m fade tx-al-c">
+            <img src="static/img/close-btn.svg" alt="" class="header__menu__m__close-btn">
+
+            <ul>
+                <details>
+                    <summary>کتگوری ها</summary>
+                    <ul>
+                        <a href=""><li>فیلم و سریال</li></a>
+                        <a href=""><li>گیمینگ</li></a>
+                        <a href=""><li>سلبریتی</li></a>
+                        <a href=""><li>روانشناسی</li></a>
+                    </ul>
+                </details>
+                <li><a href="#">تماس با ما</a></li>
+                <li><a href="#">درباه‌ي ما</a></li>
+            </ul>
+        </div>
+
+        <!-- Links -->
+        <div class="header__links hide-for-mobile hover flex flex-ai-c">
+            <a href="#">تماس با ما</a>
+            <a href="#">درباه‌ي ما</a>
+            <a href="#" class="header__categories__button">کتگوری‌ها</a>
+            <a class="flex flex-jc-sb" href="#" class="header__logo">
+                <img src="static/img/logo.png" alt="QuizLand">
+            </a>
+        </div>
+
+        <img class="arw" src="static/img/arw.png">
+        <ul class="header__categories tx-al-c">
+            <a href=""><li>فیلم و سریال</li></a>
+            <a href=""><li>گیمینگ</li></a>
+            <a href=""><li>سلبریتی</li></a>
+            <a href=""><li>روانشناسی</li></a>
+        </ul>
+
+    </nav>
+
+    <div class="loadingScreen"></div>
+</header>
+
+
+{% block content %} {% endblock %}
+
+
+<footer class="footer-for-mobile tx-al-c">
+
+    <div>
+        <p class="tx-al-c"> تو خبرنامه مون عضو شو تا هر وقت یه کویز باحال دیگه‌ای منتشر کردیم بتونی اولین نفری باشی که انجامش میده</p>
+        <button class='btn__grad-green gls' type="submit">ثبت نام</button>
+        <input class="input" type="email" placeholder='                   ... ایمیل'>
+    </div>
+
+    <div>
+        <ul class="footer__navbar flex flex-jc-c flex-ai-c">
+            <li><a href=""><img class="flex flex-ai-c" src="static/img/logo.png" alt=""></a></li>
+            <li><a href="">کتگوری ها</a></li>
+            <li><a href="">درباره‌ی ما</a></li>
+            <li><a href="">تماس با ما</a></li>
+        </ul>
+        <ul class="footer__detail flex flex-jc-c flex-ai-c">
+            <li><a href="">تبلیغات</a></li>
+            <li><a href="">حریم خصوصی</a></li>
+            <li><a href="">شرایط خدمات</a></li>
+            <li><a href="">راهنما</a></li>
+            <li><a href="">حمایت</a></li>
+        </ul>
+    </div>
+
+    <script src="{{ url_for('static', filename = 'js/ScrollTrigger.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/gsap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
+</footer>
+
+
+</html>
