@@ -1,0 +1,1 @@
+DATABASE_URL = 'postgresql://postgres:$Postgresql19931506@localhost/Quizland'

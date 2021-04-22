@@ -1,15 +1,15 @@
 // Font Family
 @font-face {
     font-family: "myHarmattan";
-    src: url(/app/fonts/Harmattan-Regular.ttf)
+    src: url('/static/font/Harmattan-Regular.ttf')
 }
 @font-face {
     font-family: "myChanga";
-    src: url(/app/fonts/Changa-ExtraLight.ttf);
+    src: url('/static/font/Changa-ExtraLight.ttf');
 }
 @font-face {
     font-family: "vermin-vibes-2-soft";
-    src: url(/app/fonts/Vermin-Vibes-2-Soft.ttf);
+    src: url('/static/font/Vermin-Vibes-2-Soft.ttf');
 }
 
 $font-pr: harmattan, myHarmattan, sans-serif, serif;

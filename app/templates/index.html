@@ -1,5 +1,6 @@
 {% extends './layout.html' %}
 {% block content %}
+
 <body>
     <div class="landingPage">
         <div class="bg"></div>
@@ -56,16 +57,16 @@
             <div class="sec1">
                 <h2 class="tx-al-c">جدیدترین ‌ها</h2>
                 <ul class='center'>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li>  کویز اخ جوننن </li></a>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li> کوکویز اخ جونننیز </li></a>
-                    <a href=""><li> کویز </li></a>
+
+                    {% for quiz in sortNewest %}
+                        <a href="{{ quiz.link }}"><li> {{ quiz.title }} </li></a>
+                    {% endfor %}
+
                     <a class="sort__more" href=""> ..بیشتر</a>
                 </ul>
             </div>
 
-            <div class="sec2">
+            <!-- <div class="sec2">
                 <h2 class="tx-al-c">پر بازدیدترین های این ماه</h2>
                 <ul class='center'>
                     <a href=""><li> کویز </li></a>
@@ -75,16 +76,16 @@
                     <a href=""><li> کویز </li></a>
                     <a class="sort__more" href=""> ..بیشتر</a>
                 </ul>
-            </div>
+            </div> -->
 
             <div class="sec3">
-                <h2 class="tx-al-c">پر بازدیدترین های کل</h2>
+                <h2 class="tx-al-c">پر بازدیدترین ها</h2>
                 <ul class='center'>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li>  کویز اخ جوننن </li></a>
-                    <a href=""><li> کویز </li></a>
-                    <a href=""><li> کوکویز اخ جونننیز </li></a>
-                    <a href=""><li> کویز </li></a>
+
+                    {% for quiz in sortMostViews %}
+                        <a href="{{ quiz.link }}"><li> {{ quiz.title }} </li></a>
+                    {% endfor %}
+
                     <a class="sort__more" href=""> ..بیشتر</a>
                 </ul>
             </div>
@@ -102,4 +103,5 @@
         </div>
     </div> -->
 </body>
+
 {% endblock content %}

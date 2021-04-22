@@ -1,70 +1,5 @@
-<!DOCTYPE html>
-<html lang="Fa">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app/scss/style.css">
-    <title>Quiz Land</title>
-</head>
-
-<header class="header header__background">
-    <nav class="flex flex-ai-c flex-jc-sb">
-
-        <!-- Search -->
-        <div class="flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb hide-for-desktop" href="#" class="">
-                <img src="/images/logo.png" alt="QuizLand">
-            </a>
-            <img class='header__submit fade flex tx-al-c' src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADAklEQVRIid2UTWxUVRiGn+/cW9rp0CYiC6WgQGo702GmMeOCuGGMMSSmLmQBG5PGEsICSJMaWfATunKjKxKiQ22hVRZKjGGpiTqJGBLDNMC0MP2RmIEWWJhYKm1u773nY6FDDCnTi3aj7+rknPc9T96cfAf+L5KVDPlstq7ud+85RJt82zCz/2ZxbtUgpzs6U25ojyh0Ac2A/hUYVSV/a8OzZ/oLhSAKxCy3OdiW7nNCW1TwFPum8eZjPRMlR02wRZUzIhzbdPe3i/lk8vl/1GSwLd2HcFSEXarulBL0CryG8PPecukgwKlUam1DYM4BL9WHi9vfmZ6+H7nJ6Y7OFMIHanlbrFghGBP0VZSB0JiPq74D4+N/PAgXd4sy55nYh0/VZKg9fU7BM649ooG5DpyqTJRO9INdLjyQSGeNcslVs6V78urMik36czlXoQs1Q9aXQwrlWgCAfeVSUZFx39iuWk0eQTbeu9cCNDctNBYRyYF8XQtQlUDRqCYjQZzQjQHh9duXPEG/MGLOrwQAQHVBRRprWdzqYilYc8etWzIbk8lNPTfGTkYCACK6WTGjtTyPmuy/WZwTGEXdtwAGktveyKdSL9QKj2QycUVygv4QCQKAyidGeX8kk4mbUDa7Ps/UCvue9olSWVtOXIwMqWxYdxZl1l/Sz5rq7PDeyfGrTwoOJTp3Akct0rub82FkSH+hEPhOsAslMR843w+0b8s8Hshns42ftqePqdoLgh52HFOpBYAnfJCft7Y2e27sI5Ru4BrIZRVdNFZeVNHXEWbE0ou1s+qYIsJ3WO5bK4f3TV+7HQlS1XBbZ4tvbJdRTapKDHRWjBQq5dKP1RkabE9/g8rSn7dphwSa6/ll7FZkSBQNtWW+sqLOQri4J+7ERoBXHgct+9U/jcSY9wy8HHcbzhpvvhu4rK58e7K1tX7VIO+Wr/wq4uxAZbutbxoOxRwHEjFp2LpqkCoocO0OIO2onQD5aaZl/VT1/F+/yd/1ZSq15oFvtsYnE1Mrzc5/Uw8B9V07yxwQ5TwAAAAASUVORK5CYII="/>
-            <input class='header__search gls tx-al-r' type="search" placeholder="...جستجو">
-        </div>
-
-        <!-- Menu -->
-        
-        <a href="#" class="header__menu hide-for-desktop">
-            <span></span>
-            <span></span>
-            <span></span>
-        </a>
-        <div class="header__menu__m fade tx-al-c">
-            <img src="/images/close-btn.svg" alt="" class="header__menu__m__close-btn">
-
-            <ul>
-                <details>
-                    <summary>کتگوری ها</summary>
-                    <ul>
-                        <a href=""><li>فیلم و سریال</li></a>
-                        <a href=""><li>گیمینگ</li></a>
-                        <a href=""><li>سلبریتی</li></a>
-                        <a href=""><li>روانشناسی</li></a>
-                    </ul>
-                </details>
-                <li><a href="#">تماس با ما</a></li>
-                <li><a href="#">درباه‌ي ما</a></li>
-            </ul>
-        </div>
-
-        <!-- Links -->
-        <div class="header__links hide-for-mobile hover flex flex-ai-c">
-            <a href="#">تماس با ما</a>
-            <a href="#">درباه‌ي ما</a>
-            <a href="#" class="header__categories__button">کتگوری‌ها</a>
-            <a class="flex flex-jc-sb" href="#" class="header__logo">
-                <img src="/images/logo.png" alt="QuizLand">
-            </a>
-        </div>
-
-        <img class="arw" src="/images/arw.png">
-        <ul class="header__categories tx-al-c">
-            <a href=""><li>فیلم و سریال</li></a>
-            <a href=""><li>گیمینگ</li></a>
-            <a href=""><li>سلبریتی</li></a>
-            <a href=""><li>روانشناسی</li></a>
-        </ul>
-
-    </nav>
-</header>
+{% extends './layout.html' %}
+{% block content %}
 
 <body>
     
@@ -168,8 +103,4 @@
         </ul>
     </div>
 
-<script src="/app/js/script.js"></script>
-</footer>
-
-
-</html>
+{% endblock content %}

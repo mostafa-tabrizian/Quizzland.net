@@ -1,17 +1,17 @@
 @charset "UTF-8";
 @font-face {
   font-family: "myHarmattan";
-  src: url(/app/fonts/Harmattan-Regular.ttf);
+  src: url("/static/font/Harmattan-Regular.ttf");
 }
 
 @font-face {
   font-family: "myChanga";
-  src: url(/app/fonts/Changa-ExtraLight.ttf);
+  src: url("/static/font/Changa-ExtraLight.ttf");
 }
 
 @font-face {
   font-family: "vermin-vibes-2-soft";
-  src: url(/app/fonts/Vermin-Vibes-2-Soft.ttf);
+  src: url("/static/font/Vermin-Vibes-2-Soft.ttf");
 }
 
 @-webkit-keyframes hanging {
@@ -81,7 +81,7 @@ body {
 }
 
 .body__background__taylor {
-  background: url("/images/TRASH-taylor.jpg");
+  background: url("static/img/TRASH-taylor.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   -webkit-backdrop-filter: blur(10px) brightness(70%);

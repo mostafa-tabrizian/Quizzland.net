@@ -1,71 +1,5 @@
-<!DOCTYPE html>
-<html lang="Fa">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app/scss/style.css">
-    <title>Quiz Land</title>
-</head>
-
-<header class="header header__background">
-    <nav class="flex flex-ai-c flex-jc-sb">
-
-        <!-- Search -->
-        <div class="flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb hide-for-desktop" href="#" class="">
-                <img src="/images/logo.png" alt="QuizLand">
-            </a>
-            <img class='header__submit fade flex tx-al-c' src="/images/srch-white.svg" alt>
-            <input class='header__search gls tx-al-r' type="search" placeholder="...جستجو">
-        </div>
-
-        <!-- Menu -->
-        
-        <a href="#" class="header__menu hide-for-desktop">
-            <span></span>
-            <span></span>
-            <span></span>
-        </a>
-        <div class="header__menu__m fade tx-al-c">
-            <img src="/images/close-btn.svg" alt="" class="header__menu__m__close-btn">
-
-            <ul>
-                <details>
-                    <summary>کتگوری ها</summary>
-                    <ul>
-                        <a href=""><li>فیلم و سریال</li></a>
-                        <a href=""><li>گیمینگ</li></a>
-                        <a href=""><li>سلبریتی</li></a>
-                        <a href=""><li>روانشناسی</li></a>
-                    </ul>
-                </details>
-                <li><a href="#">تماس با ما</a></li>
-                <li><a href="#">درباه‌ي ما</a></li>
-            </ul>
-        </div>
-
-        <!-- Links -->
-        <div class="header__links hide-for-mobile hover flex flex-ai-c">
-            <a href="#">تماس با ما</a>
-            <a href="#">درباه‌ي ما</a>
-            <a href="#" class="header__categories__button">کتگوری‌ها</a>
-            <a class="flex flex-jc-sb" href="#" class="header__logo">
-                <img src="/images/logo.png" alt="QuizLand">
-            </a>
-        </div>
-
-        <img class="arw" src="images/arw.png">
-        <ul class="header__categories tx-al-c">
-            <a href=""><li>فیلم و سریال</li></a>
-            <a href=""><li>گیمینگ</li></a>
-            <a href=""><li>سلبریتی</li></a>
-            <a href=""><li>روانشناسی</li></a>
-        </ul>
-
-    </nav>
-</header>
+{% extends './layout.html' %}
+{% block content %}
 
 <div class="space-sm"></div>
 <body >
@@ -92,7 +26,7 @@
     <div class="categories flex flex-jc-c wrapper">
         <a href="/templates/quizzes/celebrity.html">
             <div class="categories__item">
-                <img class='categories__item__img' src="/images/TRASH4.jpeg" alt="">
+                <img class='categories__item__img' src="/static/img/TRASH4.jpeg" alt="">
                 <div class="categories__item__detail">
                     Malifiecnt
                 </div>
@@ -100,7 +34,7 @@
         </a>
         <a href="">
             <div class="categories__item">
-                <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
+                <img class='categories__item__img' src="/static/img/TRASH5.jpg" alt="">
                 <div class="categories__item__detail">
                     IT
                 </div>
@@ -108,18 +42,18 @@
         </a>
         <a href="">
             <div class="categories__item">
-                <img class='categories__item__img' src="/images/TRASH6.png" alt="">
+                <img class='categories__item__img' src="/static/img/TRASH6.png" alt="">
                 <div class="categories__item__detail">
                     Blade Runner
                 </div>
             </div>
         </a>
         <div class="ad categories__item">
-            <img src="/images/ad.jpg" alt="">
+            <img src="/static/img/ad.jpg" alt="">
         </div>
         <a href="">
             <div class="categories__item">
-                <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
+                <img class='categories__item__img' src="/static/img/TRASH5.jpg" alt="">
                 <div class="categories__item__detail">
                     IT
                 </div>
@@ -127,7 +61,7 @@
         </a>
         <a href="">
             <div class="categories__item">
-                <img class='categories__item__img' src="/images/TRASH6.png" alt="">
+                <img class='categories__item__img' src="/static/img/TRASH6.png" alt="">
                 <div class="categories__item__detail">
                     Blade Runner
                 </div>
@@ -135,7 +69,7 @@
         </a>
         <a href="/templates/quizzes/celebrities/کویز-سلبریتی.html">
             <div class="categories__item">
-                <img class='categories__item__img' src="/images/TRASH4.jpeg" alt="">
+                <img class='categories__item__img' src="/static/img/TRASH4.jpeg" alt="">
                 <div class="categories__item__detail">
                     Malifiecnt
                 </div>
@@ -143,7 +77,7 @@
         </a>
         <a href="">
             <div class="categories__item">
-                <img class='categories__item__img' src="/images/TRASH5.jpg" alt="">
+                <img class='categories__item__img' src="/static/img/TRASH5.jpg" alt="">
                 <div class="categories__item__detail">
                     IT
                 </div>
@@ -151,7 +85,7 @@
         </a>
         <a href="">
             <div class="categories__item">
-                <img class='categories__item__img' src="/images/TRASH6.png" alt="">
+                <img class='categories__item__img' src="/static/img/TRASH6.png" alt="">
                 <div class="categories__item__detail">
                     Blade Runner
                 </div>
@@ -163,43 +97,16 @@
     <div class="space-sm"></div>
 
     <div class="page-travel flex flex-ai-c flex-jc-c">
-        <!-- <img src="/images/PageArw-Before.svg" alt=""> -->
+        <!-- <img src="/static/img/PageArw-Before.svg" alt=""> -->
         <div class="page">1</div>
         <div class="page">2</div>
         <div class="page">3</div>
         <div class="page">....</div>
         <div class="page">10</div>
-        <!-- <img src="/images/PageArw-After.svg" alt=""> -->
+        <!-- <img src="/static/img/PageArw-After.svg" alt=""> -->
 
     </div>
 
 </body>
 
-<footer class="footer-for-mobile tx-al-c">
-
-    <div>
-        <p class="tx-al-c"> تو خبرنامه مون عضو شو تا هر وقت یه کویز باحال دیگه‌ای منتشر کردیم بتونی اولین نفری باشی که انجامش میده</p>
-        <button class='btn__grad-green' type="submit">ثبت نام</button>
-        <input class="input" type="email" placeholder='                   ... ایمیل'>
-    </div>
-
-    <div>
-        <ul class="footer__navbar flex flex-jc-c flex-ai-c">
-            <li><a href=""><img class="flex flex-ai-c" src="/images/logo.png" alt=""></a></li>
-            <li><a href="">کتگوری ها</a></li>
-            <li><a href="">درباره‌ی ما</a></li>
-            <li><a href="">تماس با ما</a></li>
-        </ul>
-        <ul class="footer__detail flex flex-jc-c flex-ai-c">
-            <li><a href="">تبلیغات</a></li>
-            <li><a href="">حریم خصوصی</a></li>
-            <li><a href="">شرایط خدمات</a></li>
-            <li><a href="">راهنما</a></li>
-            <li><a href="">حمایت</a></li>
-        </ul>
-    </div>
-
-<script src="/app/js/script.js"></script>
-</footer>
-
-</html>
+{% endblock content %}
