@@ -6,11 +6,13 @@ Base = declarative_base()
 class Quizzes(Base):
     __tablename__ = 'Quizzes'
     id = Column(Integer, primary_key=True)
-    title = Column(String)
-    link = Column(String)
-    view = Column(Integer)
+    title_eng = Column(String)
+    title_far = Column(String)
+    img = Column(String)
+    href = Column(String)
+    views = Column(Integer)
     publish = Column(Date)
     time = Column(Integer)
     
     def __repr__(self):
-        return f"<id: {self.id}| title: {self.title}| link: {self.link}| view: {self.view}| publish: {self.publish}>"
+        return f"<id: {self.id}| title: {self.title}| link: {self.href}| view: {self.views}| publish: {self.publish}>"

@@ -1,6 +1,7 @@
 .quizzes {
     margin-top: 2rem;
     flex-wrap: wrap;
+    justify-content: flex-end;
 
     &__item {
         width: 12.5rem;

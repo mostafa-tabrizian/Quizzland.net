@@ -18,4 +18,4 @@ def Quiz(category, title):
 
 @app.route('/category/<category>')
 def Category(category):
-    return render_template(f'/category/{category}.html')
+    return render_template(f'/category/{category}.html', quizzes_sortByDate = quizzes_sortByDate())

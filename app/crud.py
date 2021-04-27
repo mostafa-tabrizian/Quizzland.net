@@ -11,7 +11,6 @@ s = session()
 def recreate_db():
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
-    return 'recreated the database'
 
 # recreate_db()
 
@@ -51,12 +50,14 @@ def up_session():
     finally:
         s.close()
 
-up_session()
+# up_session()
 
 data = Quizzes(
-    title = 'selena boobs is mother fucker hot',
-    link = 'quiz/gaming/the-witcher-3-اولین-کویز',
-    view = 1,
+    title_far = 'چشم های',
+    title_eng = 'taylor swift',
+    img = '/static/img/TRASH-taylor.jpg',
+    href = 'quiz/gaming/the-witcher-3-اولین-کویز',
+    views = 0,
     publish = datetime.datetime.now(),
     time = time.time()
 )

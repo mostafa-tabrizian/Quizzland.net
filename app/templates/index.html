@@ -59,7 +59,7 @@
                 <ul class='center'>
 
                     {% for quiz in sortNewest %}
-                        <a href="{{ quiz.link }}"><li> {{ quiz.title }} </li></a>
+                        <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
                     {% endfor %}
 
                     <a class="sort__more" href=""> ..بیشتر</a>
@@ -83,7 +83,7 @@
                 <ul class='center'>
 
                     {% for quiz in sortMostViews %}
-                        <a href="{{ quiz.link }}"><li> {{ quiz.title }} </li></a>
+                        <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
                     {% endfor %}
 
                     <a class="sort__more" href=""> ..بیشتر</a>
