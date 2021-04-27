@@ -1137,10 +1137,27 @@ footer__detail > li > a, .footer__detail > li > a {
   margin-bottom: 0;
 }
 
+.quiz__questions__container {
+  margin: 0 27rem;
+  padding: 0.1rem;
+  padding-bottom: 2rem;
+  color: black;
+  border-radius: 24px;
+  -webkit-box-shadow: 0 0 10px black;
+          box-shadow: 0 0 10px black;
+  margin-top: 5rem;
+}
+
 .quiz__questions__question {
   font-family: myChanga, sans-serif, serif;
   font-weight: 600;
   font-size: 1.18rem;
+  background: #690d11;
+  height: 4rem;
+  color: white;
+  padding: 19px;
+  margin: -2px;
+  border-radius: 17px 17px 0 0;
 }
 
 .quiz__questions__4option input {
@@ -1149,10 +1166,10 @@ footer__detail > li > a, .footer__detail > li > a {
 
 .quiz__questions__4option label {
   display: block;
-  width: 35rem;
-  border: 1px solid #707070;
+  width: 21rem;
+  border: 2px solid #adadad;
   border-radius: 25px;
-  padding: .8rem;
+  padding: 0.6rem;
 }
 
 .quiz__questions__4option label:hover {
@@ -1160,10 +1177,51 @@ footer__detail > li > a, .footer__detail > li > a {
           box-shadow: 0 0 5px #690D11;
 }
 
+.quiz__questions__4option label::before {
+  content: '';
+  height: 1px;
+  font-family: vermin-vibes-2-soft, myChanga, sans-serif;
+  width: 20px;
+  border-radius: 50%;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 1rem;
+  color: #af282f;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.quiz__questions__4option label:nth-child(2)::before {
+  content: '1';
+}
+
+.quiz__questions__4option label:nth-child(4)::before {
+  content: '2';
+}
+
+.quiz__questions__4option label:nth-child(6)::before {
+  content: '3';
+}
+
+.quiz__questions__4option label:nth-child(8)::before {
+  content: '4';
+}
+
 .quiz__questions__4option [type="radio"]:checked + label {
   background: linear-gradient(-45deg, #4D1420, #9D272D);
   color: #f0f0f0;
   padding: .8rem;
+}
+
+.quiz__questions__4option [type="radio"]:checked + label::before {
+  color: white;
+}
+
+.quiz__questions .lowHighContainer {
+  margin: 0 15rem !important;
+  margin-top: 5rem !important;
 }
 
 .quiz__questions__lowHigh {
