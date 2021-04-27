@@ -62,3 +62,5 @@ else if (scoreData > 20){
 else if (scoreData >= 0){
     result__score.innerHTML = (`😭 ${scoreData}%`)
     result__subtitle__txt.innerHTML = ('😅 عیبی نداره کسی نمیفهمه، میتونی دوباره کویز رو بدی ')}
+
+log('quiz.js working')

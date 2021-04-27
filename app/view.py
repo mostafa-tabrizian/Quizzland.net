@@ -7,6 +7,10 @@ app = Flask(__name__)
 def Main():
     return render_template('index.html', sortNewest = sortNewest(), sortMostViews = sortMostViews())
 
+@app.route('/<str>')
+def string(str):
+    return render_template(f'{str}.html')
+
 @app.route('/quiz/<category>/<title>')
 def Quiz(category, title):
     addView(title)
