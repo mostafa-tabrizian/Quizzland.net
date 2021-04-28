@@ -21,15 +21,28 @@ try {
             if (document.querySelector('#witcher2-q3-3').checked){correct += 1} else {wrong += 1}
             if (document.querySelector('#witcher2-q4-4').checked){correct += 1} else {wrong += 1}
         } catch(e) {}
-        // 3
-        try {
-            if (document.querySelector('#witcher3-q1-1').checked){correct += 1} else {wrong += 1}
-            if (document.querySelector('#witcher3-q2-2').checked){correct += 1} else {wrong += 1}
-            if (document.querySelector('#witcher3-q3-3').checked){correct += 1} else {wrong += 1}
-            if (document.querySelector('#witcher3-q4-4').checked){correct += 1} else {wrong += 1}
-        } catch(e) {}
 
-        const score = (correct / (correct + wrong)) * 100
+        // Celebrities
+        // Taylor Swift
+        try {
+            if (document.querySelector('#ts1-q1-1').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q2-2').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q3-3').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q4-2').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q5-3').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q6-1').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q7-3').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q8-3').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q9-2').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q10-2').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q11-1').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q12-2').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q13-2').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q14-3').checked){correct += 1} else {wrong += 1}
+            if (document.querySelector('#ts1-q15-4').checked){correct += 1} else {wrong += 1}
+        }  catch(e) {}
+
+        const score = ((correct / (correct + wrong)) * 100).toFixed(0)
         localStorage.setItem('correctData', correct)
         localStorage.setItem('wrongData', wrong)
         localStorage.setItem('scoreData', score)
@@ -44,8 +57,12 @@ const result__subtitle__txt = document.querySelector('.result__subtitle__txt')
 const result__detail__correctTime = document.querySelector('.result__detail__correctTime')
 const result__detail__wrongTime = document.querySelector('.result__detail__wrongTime')
 
-result__detail__correctTime.innerHTML = correctData
-result__detail__wrongTime.innerHTML = wrongData
+try {
+    result__detail__correctTime.innerHTML = correctData
+    result__detail__wrongTime.innerHTML = wrongData
+} catch (e) {
+    log('no result page')
+} 
 
 if (scoreData > 80){
     result__score.innerHTML = (`😎 ${scoreData}%`)

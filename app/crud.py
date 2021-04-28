@@ -53,13 +53,25 @@ def up_session():
 # up_session()
 
 data = Quizzes(
-    title_far = 'چشم های',
-    title_eng = 'taylor swift',
-    img = '/static/img/TRASH-taylor.jpg',
-    href = 'quiz/gaming/the-witcher-3-اولین-کویز',
+    title_far = 'کامل ترین کویز تیلور سویفت',
+    title_eng = 'ُTaylor Swift',
+    href = '/quiz/celebrities/taylor-swift/کامل-ترین-کویز-تیلور-سویفت',
+    # href = '/quiz/celebrities/taylor-swift/',
+    # href = '/quiz/celebrities/taylor-swift/',
+    # href = '/quiz/celebrities/taylor-swift/',
     views = 0,
     publish = datetime.datetime.now(),
     time = time.time()
 )
+
+# data = Categories(
+#     title_far = 'تیلور سویفت',
+#     title_eng = 'Taylor Swift',
+#     img = 'TRASH-taylor.jpg',
+#     href = '/category/celebrities/taylor-swift',
+#     views = 0,
+#     publish = datetime.datetime.now(),
+#     time = time.time()
+# )
 
 # add_session(data)

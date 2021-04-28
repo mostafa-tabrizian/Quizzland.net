@@ -1,0 +1,16 @@
+{% extends './layout.html' %}
+{% block content %}
+
+<div class="categoryList wrapper-sm">
+    <ul>
+        {%  for quiz in quizzes_FilterByTitle %}
+        <li>
+            <a href="{{quiz.href}}">
+                {{ quiz.title_far }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

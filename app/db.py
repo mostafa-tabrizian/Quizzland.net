@@ -9,10 +9,19 @@ def sortMostViews():
     mostViews = s.query(Quizzes).order_by(Quizzes.views.desc()).limit(5)
     return mostViews
 
-def addView(title):
-    data = s.query(Quizzes).filter(Quizzes.title.ilike(title)).first()
+def addViewToQuizzes(title):
+    data = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
     data.views += 1
     add_session(data)
+
+def addViewToCategories(title):
+    data = s.query(Categories).filter(Categories.title_eng.ilike(f'%{title}%')).first()
+    data.views += 1
+    add_session(data)
+
+def categories():
+    categories = s.query(Categories).all()
+    return categories
 
 def quizzes_sortByDate():
     quizzesByDate = s.query(Quizzes).order_by(Quizzes.publish.desc()).all()
@@ -21,6 +30,9 @@ def quizzes_sortByDate():
 def quizzes_sortByViews():
     return
 
+def quizzes_FilterByTitle(Title):
+    quizzesFilterByTitle = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{Title}%')).all()
+    return quizzesFilterByTitle
 
 
 

@@ -11,11 +11,26 @@ def Main():
 def string(str):
     return render_template(f'{str}.html')
 
-@app.route('/quiz/<category>/<title>')
-def Quiz(category, title):
-    addView(title)
-    return render_template(f'/quizzes/{category}/{title}.html')
-
 @app.route('/category/<category>')
 def Category(category):
-    return render_template(f'/category/{category}.html', quizzes_sortByDate = quizzes_sortByDate())
+    return render_template(f'/category/category.html', categories = categories())
+
+@app.route('/category/<category>/<innerCategory>')
+def innerCategory(category, innerCategory):
+    rawTitle = innerCategory.split('-')
+    fullTitle = rawTitle[0] + ' ' + rawTitle[1]
+    addViewToCategories(fullTitle)
+    return render_template(f'/category/inner-category-list.html', quizzes_FilterByTitle = quizzes_FilterByTitle(fullTitle))
+
+@app.route('/quiz/<category>/<sub_category>/<title>')
+def Quiz(category, sub_category, title):
+    # addView(title)
+    return render_template(f'/quizzes-files/{category}/{sub_category}/{title}.html')
+
+@app.route('/result/<title>')
+def result(title):
+    title = title.split('-')
+    fullTitle = ''
+    for title in title:
+        fullTitle = fullTitle + ' ' + title
+    return render_template(f'/result.html', fullTitle = fullTitle)

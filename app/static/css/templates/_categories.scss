@@ -117,3 +117,19 @@
         }
     }
 }
+
+.categoryList{
+    text-align: right;
+    line-height: 2.2rem;
+
+    > ul {
+
+        > li {
+            &::after {
+                content: '◾';
+                position: relative;
+                top: 0.2rem;
+            }
+        }
+    }
+}

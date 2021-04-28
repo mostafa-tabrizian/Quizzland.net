@@ -8,6 +8,20 @@ class Quizzes(Base):
     id = Column(Integer, primary_key=True)
     title_eng = Column(String)
     title_far = Column(String)
+    href = Column(String)
+    views = Column(Integer)
+    publish = Column(Date)
+    time = Column(Integer)
+    
+    def __repr__(self):
+        return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| link: {self.href}| view: {self.views}| publish: {self.publish}>"
+
+Base2 = declarative_base()
+class Categories(Base2):
+    __tablename__ = 'Categories'
+    id = Column(Integer, primary_key=True)
+    title_eng = Column(String)
+    title_far = Column(String)
     img = Column(String)
     href = Column(String)
     views = Column(Integer)
@@ -15,4 +29,5 @@ class Quizzes(Base):
     time = Column(Integer)
     
     def __repr__(self):
-        return f"<id: {self.id}| title: {self.title}| link: {self.href}| view: {self.views}| publish: {self.publish}>"
+        return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| link: {self.href}| view: {self.views}| publish: {self.publish}>"
+

@@ -50,11 +50,17 @@ body {
 .wrapper {
     max-width: 62.5rem;
     margin: 0 auto;
-}
 
-.wrapper-med {
-    max-width: 82.5rem;
-    margin: 0 auto;
+    &-sm {
+        max-width:30rem;
+        margin: 0 auto;
+    }
+
+    &-med {
+        max-width: 82.5rem;
+        margin: 0 auto;
+
+    }
 }
 
 .space {
