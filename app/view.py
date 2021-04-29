@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def Main():
-    return render_template('index.html', sortNewest = sortNewest(), sortMostViews = sortMostViews())
+    return render_template('index.html', sortNewest = sortNewest(), sortMostViews = sortMostViews(), header__noBg = 'header__noBg')
 
 @app.route('/<str>')
 def string(str):
@@ -14,6 +14,10 @@ def string(str):
 @app.route('/category/<category>')
 def Category(category):
     return render_template(f'/category/category.html', categories = categories())
+
+@app.route('/next')
+def next():
+    
 
 @app.route('/category/<category>/<innerCategory>')
 def innerCategory(category, innerCategory):

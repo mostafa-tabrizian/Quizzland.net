@@ -487,6 +487,12 @@ input {
   font-size: 1.18rem;
   font-family: harmattan, myHarmattan, sans-serif, serif;
   margin-bottom: 2rem;
+  background: -webkit-gradient(linear, left top, left bottom, from(0), color-stop(#4D1420), to(#9D272D));
+  background: linear-gradient(0, #4D1420, #9D272D);
+}
+
+.header__noBg {
+  background: inherit !important;
 }
 
 .header__logo {

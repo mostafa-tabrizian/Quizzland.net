@@ -3,6 +3,7 @@ const log = (code) => {
 }
 
 const body = document.querySelector('body')
+const hero = document.querySelector('.hero')
 const loadingScreen = document.querySelector('.loadingScreen')
 const header__categories__button = document.querySelector('.header__categories__button')
 const header__categories = document.querySelector('.header__categories')
@@ -30,7 +31,6 @@ const heightFooter = (document.querySelector('footer').offsetTop) - 780;
 window.onload = (event) => {
     loadingScreen.classList.add('fade')
 };
-
 
 // open and close the category list when click on category in the list
 header__categories__button.addEventListener('click', () => {
@@ -182,9 +182,9 @@ try {
     })
 } catch (e) {log('no gsap')}
 
+// hero animation
 tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 1 }})
 tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
-tl.from('header', {y: '-100%'}, '-=.7')
-
+// tl.from('header', {y: '-100%'}, '-=.7')
 
 log('Script Working.')

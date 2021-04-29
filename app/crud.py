@@ -12,7 +12,6 @@ def recreate_db():
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
-# recreate_db()
 
 
 def add_session(data):
@@ -36,12 +35,13 @@ def del_session():
     finally:
         s.close()
 
-# del_session()
 
 def up_session():
     try:
-        sessionToUpdate = s.query(Quizzes).filter(Quizzes.id == 2).first()
-        sessionToUpdate.view = 7
+        # sessionToUpdate = s.query(Quizzes).filter(Quizzes.id == 2).first()
+        sessionToUpdate = s.query(Categories).filter(Categories.id == 5).first()
+        # sessionToUpdate.view = 7
+        sessionToUpdate.img = 'TRASH-jennifer.jpg'
         s.add(sessionToUpdate)
         s.commit()
     except Exception:
@@ -50,28 +50,30 @@ def up_session():
     finally:
         s.close()
 
-# up_session()
-
-data = Quizzes(
-    title_far = 'کامل ترین کویز تیلور سویفت',
-    title_eng = 'ُTaylor Swift',
-    href = '/quiz/celebrities/taylor-swift/کامل-ترین-کویز-تیلور-سویفت',
-    # href = '/quiz/celebrities/taylor-swift/',
-    # href = '/quiz/celebrities/taylor-swift/',
-    # href = '/quiz/celebrities/taylor-swift/',
-    views = 0,
-    publish = datetime.datetime.now(),
-    time = time.time()
-)
-
-# data = Categories(
-#     title_far = 'تیلور سویفت',
-#     title_eng = 'Taylor Swift',
-#     img = 'TRASH-taylor.jpg',
-#     href = '/category/celebrities/taylor-swift',
+# data = Quizzes(
+#     title_far = 'کامل ترین کویز تیلور سویفت',
+#     title_eng = 'ُTaylor Swift',
+#     href = '/quiz/celebrities/taylor-swift/کامل-ترین-کویز-تیلور-سویفت',
+#     # href = '/quiz/celebrities/taylor-swift/',
+#     # href = '/quiz/celebrities/taylor-swift/',
+#     # href = '/quiz/celebrities/taylor-swift/',
 #     views = 0,
 #     publish = datetime.datetime.now(),
 #     time = time.time()
 # )
 
+data = Categories(
+    title_far = 'جنیفر لارنس',
+    title_eng = 'Jenifer Lawrance',
+    img = 'TRASH-theweekend.jpg',
+    href = '/category/celebrities/jenifer-lawrance',
+    views = 0,
+    publish = datetime.datetime.now(),
+    time = time.time()
+)
+
+
+# recreate_db()
+# del_session()
+# up_session()
 # add_session(data)

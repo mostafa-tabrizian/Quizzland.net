@@ -20,7 +20,7 @@ def addViewToCategories(title):
     add_session(data)
 
 def categories():
-    categories = s.query(Categories).all()
+    categories = s.query(Categories).all()[0:2]
     return categories
 
 def quizzes_sortByDate():
