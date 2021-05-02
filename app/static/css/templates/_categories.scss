@@ -104,17 +104,28 @@
     }
 }
 
-.page-travel {
-    & > div {
-        padding: .2rem .7rem;
-        border: 1px solid $darkRed;
-        border-radius: 20px;
-        margin-bottom: 1rem;
-        background: $white;
+.pageTravel {
+    padding: .2rem .7rem;
+    margin-bottom: 1rem;
 
-        &:not(:last-child) {
-            margin-right: 1rem;
+
+    &__pages {
+        // padding: 0 1.125rem;
+
+        > a , span {
+            &:not(:last-child) {
+                margin-right: 1.125rem;
+            }
         }
+
+        &__curr {
+            color: $red;
+        }
+    }
+
+    &__arwLast {
+        transform: rotate(180deg);
+        margin-right: 1.125rem;
     }
 }
 

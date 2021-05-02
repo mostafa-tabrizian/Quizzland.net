@@ -26,6 +26,14 @@ const sort__alphabet = document.querySelector('#alphabet')
 const quizzes__item = document.querySelectorAll('.quizzes__item')
 const categories__item = document.querySelectorAll('.categories__item')
 const heightFooter = (document.querySelector('footer').offsetTop) - 780;
+const pageTravel__arwNext = document.querySelector('.pageTravel__arwNext')
+const pageTravel__arwLast = document.querySelector('.pageTravel__arwLast')
+const pageTravel__pages__curr = document.querySelector('.pageTravel__pages__curr')
+const pageTravel__pages__next = document.querySelector('.pageTravel__pages__next')
+const pageTravel__pages__nextTwo = document.querySelector('.pageTravel__pages__nextTwo')
+const pageTravel__pages__last = document.querySelector('.pageTravel__pages__last')
+const lastPageDOM = document.querySelector('.lastPage')
+const lastPageNumberDOM = document.querySelector('.lastPage > a')
 
 // Loading screen
 window.onload = (event) => {
@@ -149,6 +157,55 @@ categories__item.forEach(item =>
     })
 )
 
+// Page travel
+try {
+    const fullUrl = window.location.href
+    const splitUrl = fullUrl.split('/')
+    log(splitUrl)
+    const currPageNumber = parseInt(splitUrl[5])
+    const lastPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber - 1)
+    const nextPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 1)
+    const nextTwoPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 2)
+
+    pageTravel__pages__last.innerHTML = currPageNumber - 1
+    pageTravel__arwLast.href = lastPage
+    pageTravel__pages__last.href = lastPage
+
+    pageTravel__pages__curr.innerHTML = currPageNumber
+
+    pageTravel__pages__next.innerHTML = currPageNumber + 1
+    pageTravel__pages__next.href = nextPage
+
+    pageTravel__pages__nextTwo.innerHTML = currPageNumber + 2
+    pageTravel__pages__nextTwo.href = nextTwoPage
+    
+    pageTravel__arwNext.href = nextPage
+    
+    if (currPageNumber == 0) {
+        pageTravel__arwLast.classList.add('noVis')
+        pageTravel__pages__last.classList.add('noVis')
+    }
+
+    
+    if (currPageNumber + 1 == lastPageNumberDOM.innerHTML) {
+        pageTravel__pages__nextTwo.classList.add('noVis')
+        lastPageDOM.classList.add('noVis')
+    }
+    
+    if (currPageNumber + 2 == lastPageNumberDOM.innerHTML) {
+        lastPageDOM.classList.add('noVis')
+    }
+
+    if (currPageNumber == lastPageNumberDOM.innerHTML) {
+        pageTravel__arwNext.classList.add('noVis')
+        pageTravel__pages__next.classList.add('noVis')
+        pageTravel__pages__nextTwo.classList.add('noVis')
+        lastPageDOM.classList.add('noVis')
+    }
+    
+} catch {
+    log('No page travel')
+}
 
 
 // GSAP

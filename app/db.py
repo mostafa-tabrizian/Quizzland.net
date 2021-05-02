@@ -1,6 +1,5 @@
 from crud import *
 import datetime, time
-
 def sortNewest():
     newest = s.query(Quizzes).limit(5)
     return newest
@@ -19,9 +18,15 @@ def addViewToCategories(title):
     data.views += 1
     add_session(data)
 
-def categories():
-    categories = s.query(Categories).all()[0:2]
+def categories(fr, to):
+    categories = s.query(Categories).all()[fr:to]
     return categories
+
+def lastPage():
+    categories = s.query(Categories).all()
+    elementInEachPage = 2
+    lastPage = str(round((len(categories)) / elementInEachPage))
+    return lastPage
 
 def quizzes_sortByDate():
     quizzesByDate = s.query(Quizzes).order_by(Quizzes.publish.desc()).all()
@@ -33,7 +38,6 @@ def quizzes_sortByViews():
 def quizzes_FilterByTitle(Title):
     quizzesFilterByTitle = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{Title}%')).all()
     return quizzesFilterByTitle
-
 
 
 # def sortMostViewsForThisMonth():

@@ -246,6 +246,10 @@ input {
     transition: all .53s ease-in-out;
 }
 
+.noVis {
+    visibility: hidden;
+}
+
 .flex {
     display: flex;
 

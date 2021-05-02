@@ -11,14 +11,17 @@ def Main():
 def string(str):
     return render_template(f'{str}.html')
 
-@app.route('/category/<category>')
-def Category(category):
-    return render_template(f'/category/category.html', categories = categories())
+@app.route('/category/<category>/<int:page>')
+def Category(category, page):
+    howManyElementToShow = 2
+    fr = page * howManyElementToShow
+    to = (page * howManyElementToShow) + howManyElementToShow
+    return render_template(f'/category/category.html', categories = categories(fr, to), lastPage = lastPage())
 
-@app.route('/next')
-def next():
+# @app.route('/next')
+# def next():
+#     fr += 3
     
-
 @app.route('/category/<category>/<innerCategory>')
 def innerCategory(category, innerCategory):
     rawTitle = innerCategory.split('-')

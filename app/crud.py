@@ -72,8 +72,9 @@ data = Categories(
     time = time.time()
 )
 
-
+#--------------------
 # recreate_db()
 # del_session()
 # up_session()
 # add_session(data)
+#--------------------
