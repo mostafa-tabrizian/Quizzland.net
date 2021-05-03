@@ -188,6 +188,11 @@ input {
     font-size: $font-sm;
     color: $black;
     margin: 0;
+    direction: rtl;
+
+    &__userName {
+        width: 9rem
+    }
 }
 
 .hover {

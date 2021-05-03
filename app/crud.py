@@ -8,10 +8,17 @@ engine = create_engine(DATABASE_URL)
 session = sessionmaker(bind=engine)
 s = session()
 
-def recreate_db():
-    # Base1 = quizzes, Base2 = categories
+def recreate_quizzes():
+    Base1.metadata.drop_all(engine)
+    Base1.metadata.create_all(engine)
+
+def recreate_categories():
     Base2.metadata.drop_all(engine)
     Base2.metadata.create_all(engine)
+
+def recreate_newsletterUrl():
+    Base3.metadata.drop_all(engine)
+    Base3.metadata.create_all(engine)
 
 
 
@@ -62,19 +69,21 @@ def up_session():
 #     time = time.time()
 # )
 
-data = Categories(
-    title_far = 'ذ ویتچر',
-    title_eng = 'The Witcher',
-    img = 'TRASH-theWitcher.jpg',
-    href = '/category/gamings/the-witcher', # celebrities, gamings, movie&series, physiologies
-    category = 'celebrities', # celebrities, gamings, movie&series, physiologies
-    views = 0,
-    publish = datetime.datetime.now(),
-    time = time.time()
-)
+# data = Categories(
+#     title_far = 'ذ ویتچر',
+#     title_eng = 'The Witcher',
+#     img = 'TRASH-theWitcher.jpg',
+#     href = '/category/gamings/the-witcher', # celebrities, gamings, movie&series, physiologies
+#     category = 'celebrities', # celebrities, gamings, movie&series, physiologies
+#     views = 0,
+#     publish = datetime.datetime.now(),
+#     time = time.time()
+# )
 
 #--------------------
-# recreate_db()
+# recreate_quizzes()
+# recreate_categories()
+# recreate_newsletterUrl()
 # del_session()
 # up_session()
 # add_session(data)

@@ -37,3 +37,25 @@ def result(title):
     for title in title:
         fullTitle = fullTitle + ' ' + title
     return render_template(f'/result.html', fullTitle = fullTitle)
+
+@app.route('/newsletter', methods=['GET', 'POST'])
+def newsletter():
+    userEmail = request.form['userEmail']
+    userName = request.form['userName']
+    if request.method == 'POST':
+        data = NewsletterUser(
+            userName = userName,
+            email =  userEmail
+        )
+        srchInDb = s.query(NewsletterUser).filter(NewsletterUser.email.ilike(userEmail)).all()
+
+        if len(srchInDb) == 0:
+            add_session(data)
+            return render_template('/success.html')
+        else:
+            return render_template('/no-success.html')
+
+
+
+
+
