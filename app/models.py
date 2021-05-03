@@ -23,11 +23,12 @@ class Categories(Base2):
     title_eng = Column(String)
     title_far = Column(String)
     img = Column(String)
+    category = Column(String)
     href = Column(String)
     views = Column(Integer)
     publish = Column(Date)
     time = Column(Integer)
     
     def __repr__(self):
-        return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| link: {self.href}| view: {self.views}| publish: {self.publish}>"
+        return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| category: {self.category} | link: {self.href}| view: {self.views}| publish: {self.publish}>"
 

@@ -9,8 +9,9 @@ session = sessionmaker(bind=engine)
 s = session()
 
 def recreate_db():
-    Base.metadata.drop_all(engine)
-    Base.metadata.create_all(engine)
+    # Base1 = quizzes, Base2 = categories
+    Base2.metadata.drop_all(engine)
+    Base2.metadata.create_all(engine)
 
 
 
@@ -39,9 +40,10 @@ def del_session():
 def up_session():
     try:
         # sessionToUpdate = s.query(Quizzes).filter(Quizzes.id == 2).first()
-        sessionToUpdate = s.query(Categories).filter(Categories.id == 5).first()
+        sessionToUpdate = s.query(Categories).filter(Categories.id == 6).first()
         # sessionToUpdate.view = 7
-        sessionToUpdate.img = 'TRASH-jennifer.jpg'
+        # sessionToUpdate.img = 'TRASH-jennifer.jpg'
+        sessionToUpdate.category = 'gamings'
         s.add(sessionToUpdate)
         s.commit()
     except Exception:
@@ -55,18 +57,17 @@ def up_session():
 #     title_eng = 'ُTaylor Swift',
 #     href = '/quiz/celebrities/taylor-swift/کامل-ترین-کویز-تیلور-سویفت',
 #     # href = '/quiz/celebrities/taylor-swift/',
-#     # href = '/quiz/celebrities/taylor-swift/',
-#     # href = '/quiz/celebrities/taylor-swift/',
 #     views = 0,
 #     publish = datetime.datetime.now(),
 #     time = time.time()
 # )
 
 data = Categories(
-    title_far = 'جنیفر لارنس',
-    title_eng = 'Jenifer Lawrance',
-    img = 'TRASH-theweekend.jpg',
-    href = '/category/celebrities/jenifer-lawrance',
+    title_far = 'ذ ویتچر',
+    title_eng = 'The Witcher',
+    img = 'TRASH-theWitcher.jpg',
+    href = '/category/gamings/the-witcher', # celebrities, gamings, movie&series, physiologies
+    category = 'celebrities', # celebrities, gamings, movie&series, physiologies
     views = 0,
     publish = datetime.datetime.now(),
     time = time.time()

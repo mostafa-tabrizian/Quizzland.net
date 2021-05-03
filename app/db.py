@@ -18,12 +18,12 @@ def addViewToCategories(title):
     data.views += 1
     add_session(data)
 
-def categories(fr, to):
-    categories = s.query(Categories).all()[fr:to]
+def categories(category, fr, to):
+    categories = s.query(Categories).filter(Categories.category == category).all()[fr:to]
     return categories
 
-def lastPage():
-    categories = s.query(Categories).all()
+def lastPage(category):
+    categories = s.query(Categories).filter(Categories.category == category).all()
     elementInEachPage = 2
     lastPage = str(round((len(categories)) / elementInEachPage))
     return lastPage

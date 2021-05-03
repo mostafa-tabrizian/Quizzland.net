@@ -16,11 +16,7 @@ def Category(category, page):
     howManyElementToShow = 2
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template(f'/category/category.html', categories = categories(fr, to), lastPage = lastPage())
-
-# @app.route('/next')
-# def next():
-#     fr += 3
+    return render_template(f'/category/category.html', categories = categories(category, fr, to), lastPage = lastPage(category))
     
 @app.route('/category/<category>/<innerCategory>')
 def innerCategory(category, innerCategory):
