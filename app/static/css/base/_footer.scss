@@ -26,32 +26,39 @@ footer, .footer {
 
         &:hover {
             color: white !important;
-            opacity: .5;
         }
     }
 
     &__navbar {
         direction: rtl;
+        margin-bottom: 0;
+        
         > li {
             font-size: $font-sm;
             
             &:not(:last-child) {
                 padding-left: 2rem;
             }
+
+            &:hover {
+                opacity: .5;
+            }
         }
     }
 
     &__detail {
-        font-size: $font-sm - .1rem;
         margin-bottom: 0;
-
+        
         > li {
+            font-size: $font-sm - .3rem;
+            opacity: .5;
+
             &:not(:last-child) {
-                padding-left: 1rem;
+                padding-right: 1rem;
             }
 
-            > a {
-                opacity: .8;
+            &:hover {
+                opacity: 1;
             }
         }
     }

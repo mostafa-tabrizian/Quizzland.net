@@ -1,0 +1,20 @@
+.contact {
+    text-align: center;
+    height: 30rem;
+
+    > h4 {
+        margin-top: 0;
+    }
+
+    &__socialMedia {
+
+        > li {
+            color: $red;
+            font-weight: 600;
+
+            &:not(:last-child) {
+                padding-right: 1.125rem;
+            }
+        }
+    }
+}

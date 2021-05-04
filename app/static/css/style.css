@@ -137,7 +137,7 @@ h2 {
 
 p {
   font-size: 1.18rem;
-  letter-spacing: .1rem;
+  letter-spacing: .07rem;
 }
 
 a, a:visited, a:hover {
@@ -725,11 +725,11 @@ footer a, .footer a {
 
 footer a:hover, .footer a:hover {
   color: white !important;
-  opacity: .5;
 }
 
 footer__navbar, .footer__navbar {
   direction: rtl;
+  margin-bottom: 0;
 }
 
 footer__navbar > li, .footer__navbar > li {
@@ -740,17 +740,25 @@ footer__navbar > li:not(:last-child), .footer__navbar > li:not(:last-child) {
   padding-left: 2rem;
 }
 
+footer__navbar > li:hover, .footer__navbar > li:hover {
+  opacity: .5;
+}
+
 footer__detail, .footer__detail {
-  font-size: 1.08rem;
   margin-bottom: 0;
 }
 
-footer__detail > li:not(:last-child), .footer__detail > li:not(:last-child) {
-  padding-left: 1rem;
+footer__detail > li, .footer__detail > li {
+  font-size: 0.88rem;
+  opacity: .5;
 }
 
-footer__detail > li > a, .footer__detail > li > a {
-  opacity: .8;
+footer__detail > li:not(:last-child), .footer__detail > li:not(:last-child) {
+  padding-right: 1rem;
+}
+
+footer__detail > li:hover, .footer__detail > li:hover {
+  opacity: 1;
 }
 
 @-webkit-keyframes categoryMenu {
@@ -1394,5 +1402,27 @@ footer__detail > li > a, .footer__detail > li > a {
   margin-left: 50%;
   -webkit-transform: translate(-30%);
           transform: translate(-30%);
+}
+
+.about {
+  text-align: center;
+}
+
+.contact {
+  text-align: center;
+  height: 30rem;
+}
+
+.contact > h4 {
+  margin-top: 0;
+}
+
+.contact__socialMedia > li {
+  color: #af282f;
+  font-weight: 600;
+}
+
+.contact__socialMedia > li:not(:last-child) {
+  padding-right: 1.125rem;
 }
 /*# sourceMappingURL=style.css.map */
