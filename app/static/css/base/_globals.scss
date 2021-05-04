@@ -99,6 +99,8 @@ h2 {
 p {
     font-size: $font-sm;
     letter-spacing: .07rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 a, a:visited, a:hover {
@@ -189,10 +191,6 @@ input {
     color: $black;
     margin: 0;
     direction: rtl;
-
-    &__userName {
-        width: 9rem
-    }
 }
 
 .hover {

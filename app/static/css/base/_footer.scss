@@ -29,6 +29,31 @@ footer, .footer {
         }
     }
 
+    @include breakpoints-down(medium) {
+                
+        &__userName {
+            width: 17rem
+
+        }
+        form {
+            display: grid;
+            margin: 0 auto !important;
+
+            input {
+                margin: 0 auto !important;
+                width: 60% !important;
+            }
+
+            button {
+                order: 3;
+                width: 60%;
+                margin: 0 auto;
+                margin-top: 0.425rem;
+            }
+        }
+
+    }
+    
     &__navbar {
         direction: rtl;
         margin-bottom: 0;

@@ -138,6 +138,8 @@ h2 {
 p {
   font-size: 1.18rem;
   letter-spacing: .07rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 a, a:visited, a:hover {
@@ -219,10 +221,6 @@ input {
   color: #161616;
   margin: 0;
   direction: rtl;
-}
-
-.input__userName {
-  width: 9rem;
 }
 
 .hover {
@@ -725,6 +723,29 @@ footer a, .footer a {
 
 footer a:hover, .footer a:hover {
   color: white !important;
+}
+
+@media (max-width: 49.9375em) {
+  footer__userName, .footer__userName {
+    width: 17rem;
+  }
+  footer form, .footer form {
+    display: -ms-grid;
+    display: grid;
+    margin: 0 auto !important;
+  }
+  footer form input, .footer form input {
+    margin: 0 auto !important;
+    width: 60% !important;
+  }
+  footer form button, .footer form button {
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 0.425rem;
+  }
 }
 
 footer__navbar, .footer__navbar {
