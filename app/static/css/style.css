@@ -149,6 +149,7 @@ a, a:visited, a:hover {
 
 a:hover, a:visited:hover, a:hover:hover {
   color: #af282f;
+  cursor: pointer;
 }
 
 details > summary {
@@ -780,6 +781,23 @@ footer__detail > li:not(:last-child), .footer__detail > li:not(:last-child) {
 
 footer__detail > li:hover, .footer__detail > li:hover {
   opacity: 1;
+}
+
+footer__copyRight, .footer__copyRight {
+  font-size: .9rem;
+  opacity: .25;
+}
+
+footer__copyRight > h5, .footer__copyRight > h5 {
+  margin: 0 !important;
+}
+
+footer__copyRight > h5 > a, .footer__copyRight > h5 > a {
+  opacity: .8;
+}
+
+footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
+  opacity: 1 !important;
 }
 
 @-webkit-keyframes categoryMenu {

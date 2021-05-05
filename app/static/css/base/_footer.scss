@@ -87,4 +87,21 @@ footer, .footer {
             }
         }
     }
+
+    &__copyRight {
+        font-size: .9rem;
+        opacity: .25;
+        > h5 {
+            margin: 0 !important;
+            
+            > a{
+                opacity: .8;
+
+                &:hover {
+                    opacity: 1 !important;
+                }
+            }
+        }
+        
+    }
 }

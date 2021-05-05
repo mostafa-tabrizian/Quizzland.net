@@ -47,9 +47,9 @@
 
         <!-- Links -->
         <div class="header__links hide-for-mobile hover flex flex-ai-c">
-            <a href="#">تماس با ما</a>
-            <a href="#">درباه‌ي ما</a>
-            <a href="/#category" class="header__categories__button">کتگوری‌ها</a>
+            <a href="/contact">تماس با ما</a>
+            <a href="/about">درباه‌ي ما</a>
+            <a class="header__categories__button">کتگوری‌ها</a>
             <a class="flex flex-jc-sb" href="/" class="header__logo">
                 <img src="/static/img/logo.png" alt="QuizLand">
             </a>
@@ -57,10 +57,10 @@
 
         <img class="arw" src="/static/img/arw.png">
         <ul class="header__categories tx-al-c">
-            <a href=""><li>فیلم و سریال</li></a>
-            <a href=""><li>گیمینگ</li></a>
-            <a href=""><li>سلبریتی</li></a>
-            <a href=""><li>روانشناسی</li></a>
+            <a href="/category/movie&series/0"><li>فیلم و سریال</li></a>
+            <a href="/category/gamings/0"><li>گیمینگ</li></a>
+            <a href="/category/celebrities/0"><li>سلبریتی</li></a>
+            <a href="/category/physiologies/0"><li>روانشناسی</li></a>
         </ul>
 
     </nav>
@@ -78,7 +78,7 @@
         <p class="tx-al-c"> تو خبرنامه مون عضو شو تا هر وقت یه کویز باحال دیگه‌ای منتشر کردیم بتونی اولین نفری باشی که انجامش میده</p>
         <button class='btn__grad-green gls' type="submit" method="POST">ثبت نام</button>
         <input class="input" name="userEmail" type="email" placeholder='  ایمیل ...' required>
-        <input class="input input__userName" name="userName"  type="text" placeholder='  نام ...' required>
+        <input class="input input__userName" name="userName"  type="text" placeholder='  نام ...' minlength="3" maxlength = "15" required>
     </form>
 
     <div>
@@ -95,6 +95,13 @@
             <li><a href="">راهنما</a></li>
             <li><a href="">حمایت</a></li>
         </ul>
+    </div>
+    <div class="footer__copyRight">
+        <h5>
+            1400-2021 © تمام حقوق به کویزلند تعلق دارد
+            <br/>
+            <a href="#">Mt-Code</a> : ساخته شده توسط 
+        </h5>
     </div>
 
     <script src="{{ url_for('static', filename = 'js/ScrollTrigger.min.js') }}"></script>
