@@ -12,8 +12,8 @@ const categories = document.querySelector('.header__categories')
 const btnMenu = document.querySelector('.header__menu')
 const btnMenuClose = document.querySelector('.header__menu__m__close-btn')
 const menu = document.querySelector('.header__menu__m')
-const header__search = document.querySelector('.header__search')
-const header__submit = document.querySelector('.header__submit')
+const header__searchInput = document.querySelector('.header__searchInput')
+const header__searchSubmit = document.querySelector('.header__searchSubmit')
 const tools__search = document.querySelector('.tools__search')
 const tools__submit = document.querySelector('.tools__submit')
 const tools__sortType = document.querySelector('.tools__sortType')
@@ -73,11 +73,11 @@ btnMenuClose.addEventListener('click', () => {
 })
 
 // show the submit srch btn when active
-header__search.addEventListener('click', () => {
-    header__submit.classList.remove('fade')
+header__searchInput.addEventListener('click', () => {
+    header__searchSubmit.classList.remove('fade')
 })
-header__search.addEventListener('blur', () => {
-    header__submit.classList.add('fade')
+header__searchInput.addEventListener('blur', () => {
+    header__searchSubmit.classList.add('fade')
 })
 
 // show the submit srch category btn when active

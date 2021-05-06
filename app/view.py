@@ -36,7 +36,7 @@ def result(title):
     fullTitle = ''
     for title in title:
         fullTitle = fullTitle + ' ' + title
-    return render_template(f'/result.html', fullTitle = fullTitle)
+    return render_template('/result.html', fullTitle = fullTitle)
 
 @app.route('/newsletter', methods=['GET', 'POST'])
 def newsletter():
@@ -63,7 +63,23 @@ def about():
 def contact():
     return render_template('/contact.html')
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    userSearchInput = request.form['userSearchInput']
+    if request.method == 'POST':
+        userSearchInputInCategoriesDb_far = s.query(Categories).filter(Categories.title_far.ilike(f'%{userSearchInput}%')).all()
+        userSearchInputInCategoriesDb_eng = s.query(Categories).filter(Categories.title_eng.ilike(f'%{userSearchInput}%')).all()
+        userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).all()
+        userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{userSearchInput}%')).all()
 
+        return render_template('searchResult.html', 
+                userSearchInputInCategoriesDb_far = userSearchInputInCategoriesDb_far,
+                userSearchInputInCategoriesDb_eng = userSearchInputInCategoriesDb_eng,
+                userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
+                userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
+                )
 
+    else:
+        return render_template('notFound.html')
 
 

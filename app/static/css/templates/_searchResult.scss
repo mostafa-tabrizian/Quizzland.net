@@ -1,0 +1,60 @@
+.searchResult {
+    text-align: center;
+    min-height: 100vh;
+    
+    &__category {
+        margin-top: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        float: right;
+        width: 50%;
+
+        > h4 {
+            width: 100%;
+            margin: -1rem 0 2rem 0;
+        }
+    
+        &__item {
+            width: 12.5rem;
+            height: 16.2135rem;
+            margin-left: 0.96875rem;
+            margin-right: 0.96875rem;
+            margin-bottom:  1.93757rem;
+    
+            @include breakpoints-down(medium) {
+                width: 10rem;
+                height: 14.75rem;
+            }
+    
+            & a > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border: 3px solid $gray;
+                border-radius: 40px;
+                filter:brightness(40%);
+            }
+    
+            & > h5 {
+                text-align: center;
+                transform: translateY(-210px);
+                color: $white;
+                font-size: $font-l;
+    
+            }
+        }
+    }
+
+    &__quizzes {
+        float: left;
+        width: 50%;
+        
+        &__item {
+            &::after {
+                content: '◾';
+                position: relative;
+                top: 0.2rem;
+            }
+        }
+    }
+}

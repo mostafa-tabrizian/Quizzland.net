@@ -46,11 +46,11 @@ def del_session():
 
 def up_session():
     try:
-        # sessionToUpdate = s.query(Quizzes).filter(Quizzes.id == 2).first()
-        sessionToUpdate = s.query(Categories).filter(Categories.id == 6).first()
+        sessionToUpdate = s.query(Quizzes).filter(Quizzes.id == 1).first()
+        # sessionToUpdate = s.query(Categories).filter(Categories.id == 6).first()
         # sessionToUpdate.view = 7
         # sessionToUpdate.img = 'TRASH-jennifer.jpg'
-        sessionToUpdate.category = 'gamings'
+        sessionToUpdate.title_eng = 'Taylor Swift'
         s.add(sessionToUpdate)
         s.commit()
     except Exception:

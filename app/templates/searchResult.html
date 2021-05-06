@@ -1,0 +1,47 @@
+{% extends './layout.html' %}
+{% block content %}
+
+<div class="searchResult">
+    <h5>نتایج جستجو</h5>
+
+    <div class="searchResult__category flex">
+        <h4>کتگوری‌ها</h4>
+        {% for category in userSearchInputInCategoriesDb_eng %}
+        <div class="searchResult__category__item">
+            <a href="{{category.href}}">
+                <img src="/static/img/{{ category.img }}" alt="">
+            </a>
+            <h5> {{ category.title_eng }} </h5>
+        </div>
+        {% endfor %}
+    
+        {% for category in userSearchInputInCategoriesDb_far %}
+        <div class="searchResult__category__item">
+            <a href="{{category.href}}">
+                <img src="/static/img/{{ category.img }}" alt="">
+            </a>
+            <h5> {{ category.title_eng }} </h5>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="searchResult__quizzes">
+        <h3>کویز‌ها</h3>
+        {% for quiz in userSearchInputInQuizzesDb_eng %}
+            <a class="searchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
+        {% endfor %}
+        {% for quiz in userSearchInputInQuizzesDb_far %}
+            <a class="searchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
+        {% endfor %}
+
+        <div class="space-sm"></div>
+    
+        <div> 
+            <a href="">
+               ... دیدن همه
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

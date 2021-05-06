@@ -76,14 +76,14 @@
         }
     }
 
-    &__submit {
+    &__searchSubmit {
         transform: translate(2.2rem);
         z-index: 2;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
     }
 
-    &__search {
+    &__searchInput {
         border: 1px solid $darkRed;
         font-family: $font-pr;
         font-size: $font-sm;

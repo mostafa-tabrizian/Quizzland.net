@@ -575,7 +575,7 @@ input {
   cursor: pointer;
 }
 
-.header__submit {
+.header__searchSubmit {
   -webkit-transform: translate(2.2rem);
           transform: translate(2.2rem);
   z-index: 2;
@@ -584,7 +584,7 @@ input {
   cursor: pointer;
 }
 
-.header__search {
+.header__searchInput {
   border: 1px solid #690D11;
   font-family: harmattan, myHarmattan, sans-serif, serif;
   font-size: 1.18rem;
@@ -594,19 +594,19 @@ input {
   width: 50%;
 }
 
-.header__search::-webkit-input-placeholder {
+.header__searchInput::-webkit-input-placeholder {
   color: black;
 }
 
-.header__search:-ms-input-placeholder {
+.header__searchInput:-ms-input-placeholder {
   color: black;
 }
 
-.header__search::-ms-input-placeholder {
+.header__searchInput::-ms-input-placeholder {
   color: black;
 }
 
-.header__search::placeholder {
+.header__searchInput::placeholder {
   color: black;
 }
 
@@ -1463,5 +1463,71 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .contact__socialMedia > li:not(:last-child) {
   padding-right: 1.125rem;
+}
+
+.searchResult {
+  text-align: center;
+  min-height: 100vh;
+}
+
+.searchResult__category {
+  margin-top: 2rem;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  float: right;
+  width: 50%;
+}
+
+.searchResult__category > h4 {
+  width: 100%;
+  margin: -1rem 0 2rem 0;
+}
+
+.searchResult__category__item {
+  width: 12.5rem;
+  height: 16.2135rem;
+  margin-left: 0.96875rem;
+  margin-right: 0.96875rem;
+  margin-bottom: 1.93757rem;
+}
+
+@media (max-width: 49.9375em) {
+  .searchResult__category__item {
+    width: 10rem;
+    height: 14.75rem;
+  }
+}
+
+.searchResult__category__item a > img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 3px solid #707070;
+  border-radius: 40px;
+  -webkit-filter: brightness(40%);
+          filter: brightness(40%);
+}
+
+.searchResult__category__item > h5 {
+  text-align: center;
+  -webkit-transform: translateY(-210px);
+          transform: translateY(-210px);
+  color: #f0f0f0;
+  font-size: 1.6rem;
+}
+
+.searchResult__quizzes {
+  float: left;
+  width: 50%;
+}
+
+.searchResult__quizzes__item::after {
+  content: '◾';
+  position: relative;
+  top: 0.2rem;
 }
 /*# sourceMappingURL=style.css.map */

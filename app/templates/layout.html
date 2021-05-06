@@ -16,8 +16,10 @@
             <a class="header__logo flex flex-jc-sb hide-for-desktop" href="#" class="">
                 <img src="/static/img/logo.png" alt="QuizLand">
             </a>
-            <img class='header__submit fade flex flex-ai-c' src="/static/img/srch-black.svg" alt>
-            <input class='header__search gls tx-al-r' type="search" placeholder="...جستجو">
+            <form class="header__search flex" action="/search" method="post">
+                <input class='header__searchSubmit fade flex flex-ai-c' type="image" src="/static/img/srch-black.svg" alt="">
+                <input class='header__searchInput gls tx-al-r' type="search" name='userSearchInput' placeholder="...جستجو">
+            </form>
         </div>
 
         <!-- Menu -->
