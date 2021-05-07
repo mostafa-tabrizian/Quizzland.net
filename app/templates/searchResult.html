@@ -3,9 +3,10 @@
 
 <div class="searchResult">
     <h5>نتایج جستجو</h5>
-
+    
     <div class="searchResult__category flex">
-        <h4>کتگوری‌ها</h4>
+        <h3>کتگوری‌ها</h3>
+        <h4 class="searchResult__category__item__notFound"></h4>
         {% for category in userSearchInputInCategoriesDb_eng %}
         <div class="searchResult__category__item">
             <a href="{{category.href}}">
@@ -27,6 +28,7 @@
     
     <div class="searchResult__quizzes">
         <h3>کویز‌ها</h3>
+        <h4 class="searchResult__quizzes__item__notFound"></h4>
         {% for quiz in userSearchInputInQuizzesDb_eng %}
             <a class="searchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
         {% endfor %}

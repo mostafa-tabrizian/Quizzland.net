@@ -34,6 +34,10 @@ const pageTravel__pages__nextTwo = document.querySelector('.pageTravel__pages__n
 const pageTravel__pages__last = document.querySelector('.pageTravel__pages__last')
 const lastPageDOM = document.querySelector('.lastPage')
 const lastPageNumberDOM = document.querySelector('.lastPage > a')
+const searchResult__category__item = document.querySelector('.searchResult__category__item')
+const searchResult__category__item__notFound = document.querySelector('.searchResult__category__item__notFound')
+const searchResult__quizzes__item__notFound = document.querySelector('.searchResult__quizzes__item__notFound')
+
 
 // Loading screen
 window.onload = (event) => {
@@ -207,6 +211,20 @@ try {
     log('No page travel')
 }
 
+try {
+    searchResult__category__item.addEventListener('click', () => {return})
+} catch (e) {
+    searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد'
+    searchResult__category__item__notFound.classList.add('space-sm')
+
+}
+
+try {
+    searchResult__quizzes__item__notFound.addEventListener('click', () => {return})
+} catch (e) {
+    searchResult__quizzes__item__notFound.innerHTML = 'کویزی پیدا نشد'
+    searchResult__quizzes__item__notFound.classList.add('space-sm')
+}
 
 // GSAP
 try {

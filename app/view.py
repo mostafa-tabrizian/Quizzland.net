@@ -9,7 +9,7 @@ def Main():
 
 @app.route('/<str>')
 def string(str):
-    return render_template(f'{str}.html')
+    return render_template('notFound.html')
 
 @app.route('/category/<category>/<int:page>')
 def Category(category, page):
@@ -78,8 +78,5 @@ def search():
                 userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
                 userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
                 )
-
     else:
         return render_template('notFound.html')
-
-
