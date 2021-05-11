@@ -1,6 +1,6 @@
 .bg {
     z-index: -1;
-    background-image: url("\\static\\img\\hero-bg.jpg");
+    background-image: url("/static/img/hero-bg.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -18,7 +18,7 @@
         padding: 1.5rem;
         text-align: center;
         // color: $white;
-        margin: 8rem 2rem;
+        margin: 8rem 0;
 
         > button {
             margin-left: 50%;
@@ -33,21 +33,11 @@
         line-height: 2.5rem;
         margin-top: 0; 
     }
-    font: {
-        // family: $main-font
-    }
 }
-
-// .scroll {
-//     margin: auto 50%;
-//     margin-top: -1rem;
-//     user-select: none;
-// }
 
 .category {
     flex-wrap: wrap;
-
-
+    
     img {
         border-radius: 20px;
         box-shadow: rgba(0, 0, 0, 0.5) 0 0 35px;
@@ -66,18 +56,17 @@
     }
 }
 
-.sec1, .sec2, .sec3 {
-    background: rgba(255, 255, 255, .2);
-    border-radius: 40px;
-    border: solid 2px transparent;
-    backdrop-filter: blur(2px);
-    background-clip: padding-box;
-    box-shadow: 2px 5px 40px rgba(88, 14, 14, 0.452);
-    margin-bottom: 4rem;
+@include breakpoints-down(medium) {
+    .category {
+        img {
+            width: 9rem;
+        }
+    }
 }
 
 .sort {
-    padding-top: 4rem;
+    max-width: 52.5rem;
+    margin: 0 auto;
 
     &__more {
         padding-top: 1rem;
@@ -91,6 +80,7 @@
     }
 
     h2 {
+        font-size: $font-sm;
 
         &::before, &::after {
             content: '_____';
@@ -106,13 +96,6 @@
         padding-bottom: 2.7rem;
 
         > ul {
-            // padding-left: 3rem;
-            // padding-right: 3rem;
-            // margin: 0;
-
-            &:not(:last-child) {
-                // border-right: 1px solid black;
-            }
 
             > a {
                 display: flex;
@@ -123,28 +106,35 @@
                 }
 
                 > li {
-                    display: inline-flex;
-                    
-                    &::after {
-                        content: ' ';
-                        display: block;
-                        width: 20px;
-                        background: url('/images/dots.png') no-repeat center center;
-                        background-size: 10px;
-                        margin-left: .5rem;
-                    }
-
-                    // > img {
-                    // border-radius: 30%;
-                    // width: 2.5rem;
-                    // height: 2.5rem; 
-                    // margin-left: .5rem;
-                    // }
+                    display: flex;
+                    font-size: $font-sm;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    justify-content: flex-end;
                 }
             }
         }
     }
+
+    &__sec1, &__sec2 {
+        background: rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        border: solid 2px transparent;
+        backdrop-filter: blur(2px);
+        background-clip: padding-box;
+        box-shadow: 2px 5px 40px rgba(88, 14, 14, 0.452);
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
 }
+
+@include breakpoints-down(medium) {
+    .sort {
+        max-width: 38.75rem;
+        margin: auto 2rem ;
+    }
+}
+
 
 // .cookies {
 //     position: fixed;

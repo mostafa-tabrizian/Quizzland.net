@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="searchResult">
-    <h5>نتایج جستجو</h5>
+    <h5>{{ userSearchInput }} &nbsp : &nbsp نتایج جستجو</h5>
     
     <div class="searchResult__category flex">
         <h3>کتگوری‌ها</h3>
@@ -38,8 +38,8 @@
 
         <div class="space-sm"></div>
     
-        <div> 
-            <a href="">
+        <div class="searchResult__quizzes__seeMore"> 
+            <a href="/search/{{userSearchInput}}">
                ... دیدن همه
             </a>
         </div>

@@ -68,8 +68,8 @@
         margin-bottom:  1.93757rem;
 
         @include breakpoints-down(medium) {
-            width: 10rem;
-            height: 14.75rem;
+            max-width: 8rem;
+            height: 10.75rem;
         }
 
         & > img {
@@ -79,10 +79,11 @@
             border: 2px solid lighten($gray, 10%);
             border-radius: 40px;
             transition: all .15s ease-in-out;
-            
-            @include breakpoints-down(medium) {
-                max-width: 10rem;
-                height: 15.75rem;
+        }
+
+        @include breakpoints-down(medium) {
+            > h5 {
+                font-size: $font-med
             }
         }
 
@@ -132,6 +133,11 @@
 .categoryList{
     text-align: right;
     line-height: 2.2rem;
+
+    @include breakpoints-down(medium) {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
 
     > ul {
 

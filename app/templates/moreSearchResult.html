@@ -1,0 +1,17 @@
+{% extends './layout.html' %}
+{% block content %}
+
+<div class="moreSearchResult">
+    <h5>{{ userSearchInput }} &nbsp : &nbsp نتایج جستجو</h5>
+    <div class="moreSearchResult__quizzes">
+        <h3>کویز‌ها</h3>
+        <h4 class="moreSearchResult__quizzes__item__notFound"></h4>
+        {% for quiz in userSearchInputInQuizzesDb_eng %}
+            <a class="moreSearchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
+        {% endfor %}
+        {% for quiz in userSearchInputInQuizzesDb_far %}
+            <a class="moreSearchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

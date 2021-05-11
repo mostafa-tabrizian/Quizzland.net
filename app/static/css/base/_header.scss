@@ -32,39 +32,36 @@
             z-index: 5;
             position: fixed;
             top: 0; left: 0;
-            background: $redBlue-grad;
+            background-image: url("/static/img/hero-bg.jpg");
             height: 100vh;
             width: 100vw;
-            font-size: $font-xl;
             transition: all .3s ease;
 
-            & > ul {
-                color: $white;
+            > ul {
+                color: $black;
                 display: block;
                 position: absolute;
                 top: 50%; left: 50%;
                 transform: translate(-50%, -70%);
                 transition: all 1s ease;
 
-                & > li {
+                > li {
+                    padding-bottom: 1.3rem;
+                    font-size: $font-l;
+
                     &:not(:last-child) {
                         padding-bottom: 2rem;
                     }
-                }
+                     
+                    & > details > ul {
+                        padding-top: 1.125rem;
 
-                & > details {
-                    padding-bottom: 1.5rem;
-
-                    & > ul{
-    
-                        font-size: $font-l + .3rem;
-                        padding-top: 2rem;
-    
-                        & > a > li{
-                            padding-bottom: 1.3rem;
+                        > li {
+                            padding-top: 1.125rem;
                         }
                     }
                 }
+
             }
 
             &__close-btn {

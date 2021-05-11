@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}"></link>
+    <link rel="shortcut icon" href="/static/img/logo.png" type="image/x-icon">
     <title>Quiz Land</title>
 </head>
 
@@ -13,7 +14,7 @@
 
         <!-- Search -->
         <div class="flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb hide-for-desktop" href="#" class="">
+            <a class="header__logo flex flex-jc-sb hide-for-desktop" href="/" class="">
                 <img src="/static/img/logo.png" alt="QuizLand">
             </a>
             <form class="header__search flex" action="/search" method="post">
@@ -33,16 +34,18 @@
             <img src="/static/img/close-btn.svg" alt="" class="header__menu__m__close-btn">
 
             <ul>
-                <details>
-                    <summary>کتگوری ها</summary>
-                    <ul>
-                        <a href=""><li>فیلم و سریال</li></a>
-                        <a href=""><li>گیمینگ</li></a>
-                        <a href=""><li>سلبریتی</li></a>
-                        <a href=""><li>روانشناسی</li></a>
-                    </ul>
-                </details>
-                <li><a href="#">تماس با ما</a></li>
+                <li>
+                    <details>
+                        <summary>کتگوری ها</summary>
+                        <ul>
+                            <li><a href="/category/movie&series/0">فیلم و سریال</a></li>
+                            <li><a href="/category/gamings/0">گیمینگ</a></li>
+                            <li><a href="/category/celebrities/0">سلبریتی</a></li>
+                            <li><a href="/category/physiologies/0">روانشناسی</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li><a href="/contact">تماس با ما</a></li>
                 <li><a href="/about">درباه‌ي ما</a></li>
             </ul>
         </div>
@@ -59,10 +62,10 @@
 
         <img class="arw" src="/static/img/arw.png">
         <ul class="header__categories tx-al-c">
-            <a href="/category/movie&series/0"><li>فیلم و سریال</li></a>
-            <a href="/category/gamings/0"><li>گیمینگ</li></a>
-            <a href="/category/celebrities/0"><li>سلبریتی</li></a>
-            <a href="/category/physiologies/0"><li>روانشناسی</li></a>
+            <li><a href="/category/movie&series/0">فیلم و سریال</a></li>
+            <li><a href="/category/gamings/0">گیمینگ</a></li>
+            <li><a href="/category/celebrities/0">سلبریتی</a></li>
+            <li><a href="/category/physiologies/0">روانشناسی</a></li>
         </ul>
 
     </nav>

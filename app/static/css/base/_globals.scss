@@ -63,6 +63,14 @@ body {
     }
 }
 
+.wrapper {
+    position: relative;
+    @include breakpoints-down(medium) {
+        max-width: 38.75rem;
+        margin: auto 2rem;
+    }
+}
+
 .space {
     &-sm {
         padding-top: 2rem;
@@ -292,12 +300,13 @@ input {
 
 .ad {
     position: relative;
-    opacity: 1;
+    opacity: 0;
 
     &__r {
         position: sticky;
         top: 15%;
         margin-left: calc(100% - (1.9275rem + 15.06rem));
+        visibility: hidden;
 
         > div {
             position: absolute;
@@ -375,13 +384,6 @@ input {
 }
 
 // Responsive
-.wrapper {
-    position: relative;
-    @include breakpoints-down(medium) {
-        max-width: 38.75rem;
-        margin: auto auto;
-    }
-}
 
 .sort-for-mobile {
     @include breakpoints-down(medium) {

@@ -73,10 +73,27 @@ def search():
         userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{userSearchInput}%')).all()
 
         return render_template('searchResult.html', 
-                userSearchInputInCategoriesDb_far = userSearchInputInCategoriesDb_far,
-                userSearchInputInCategoriesDb_eng = userSearchInputInCategoriesDb_eng,
-                userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
-                userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
-                )
+            userSearchInput = userSearchInput,
+            userSearchInputInCategoriesDb_far = userSearchInputInCategoriesDb_far,
+            userSearchInputInCategoriesDb_eng = userSearchInputInCategoriesDb_eng,
+            userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
+            userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
+            )
     else:
         return render_template('notFound.html')
+
+@app.route('/search/<searchMoreOfThis>')
+def moreResult(searchMoreOfThis):
+    userSearchInput = searchMoreOfThis
+    userSearchInputInCategoriesDb_far = s.query(Categories).filter(Categories.title_far.ilike(f'%{userSearchInput}%')).all()
+    userSearchInputInCategoriesDb_eng = s.query(Categories).filter(Categories.title_eng.ilike(f'%{userSearchInput}%')).all()
+    userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).all()
+    userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{userSearchInput}%')).all()
+
+    return render_template('moreSearchResult.html', 
+        userSearchInput = userSearchInput,
+        userSearchInputInCategoriesDb_far = userSearchInputInCategoriesDb_far,
+        userSearchInputInCategoriesDb_eng = userSearchInputInCategoriesDb_eng,
+        userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
+        userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
+        )

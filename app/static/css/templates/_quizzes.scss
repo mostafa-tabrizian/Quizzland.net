@@ -11,8 +11,8 @@
         margin-bottom:  1.93757rem;
 
         @include breakpoints-down(medium) {
-            width: 10rem;
-            height: 14.75rem;
+            width: 8rem;
+            height: 10.75rem;
         }
 
         & a > img {
@@ -26,9 +26,14 @@
 
         & > h5 {
             text-align: center;
-            transform: translateY(-210px);
+            transform: translateY(-13.125rem);
             color: $white;
             font-size: $font-l;
+
+            @include breakpoints-down(medium) {
+                transform: translateY(-8.75rem);
+                font-size: $font-sm
+            }
 
         }
     }
@@ -59,8 +64,14 @@
         height: 28rem;
         background-repeat: no-repeat;
         background-size: cover;
-        width: 70%;
+        background-position: center;
+        width: 80%;
         margin: auto;
+
+        @include breakpoints-down(medium) {
+            height: 15rem;
+            width: 100%;
+        }
     }
 
     &__leftCounter {
@@ -78,8 +89,13 @@
         margin-bottom: 0;
     }
 
+    &__questions {
+        margin-left: 50%;
+        transform: translate(-50%);
+    }
+
     &__container {
-        margin: 0 27rem;
+        width: 27rem;
         padding: 0.1rem;
         padding-bottom: 2rem;
         color: black;
