@@ -1,47 +1,3 @@
-const log = (code) => {
-    console.log(code)
-}
-
-const body = document.querySelector('body')
-const hero = document.querySelector('.hero')
-const loadingScreen = document.querySelector('.loadingScreen')
-const header__categories__button = document.querySelector('.header__categories__button')
-const header__categories = document.querySelector('.header__categories')
-const arw = document.querySelector('.arw')
-const categories = document.querySelector('.header__categories')
-const btnMenu = document.querySelector('.header__menu')
-const btnMenuClose = document.querySelector('.header__menu__m__close-btn')
-const menu = document.querySelector('.header__menu__m')
-const header__searchInput = document.querySelector('.header__searchInput')
-const header__searchSubmit = document.querySelector('.header__searchSubmit')
-const tools__search = document.querySelector('.tools__search')
-const tools__submit = document.querySelector('.tools__submit')
-const tools__sortType = document.querySelector('.tools__sortType')
-const tools__sortType__current = document.querySelector('.tools__sortType__current')
-const tools__sortType__options = document.querySelector('.tools__sortType__options')
-const sort__newest = document.querySelector('#newest')
-const sort__oldest = document.querySelector('#oldest')
-const sort__bestest = document.querySelector('#bestest')
-const sort__alphabet = document.querySelector('#alphabet')
-const quizzes__item = document.querySelectorAll('.quizzes__item')
-const categories__item = document.querySelectorAll('.categories__item')
-const heightFooter = (document.querySelector('footer').offsetTop) - 780;
-const pageTravel__arwNext = document.querySelector('.pageTravel__arwNext')
-const pageTravel__arwLast = document.querySelector('.pageTravel__arwLast')
-const pageTravel__pages__curr = document.querySelector('.pageTravel__pages__curr')
-const pageTravel__pages__next = document.querySelector('.pageTravel__pages__next')
-const pageTravel__pages__nextTwo = document.querySelector('.pageTravel__pages__nextTwo')
-const pageTravel__pages__last = document.querySelector('.pageTravel__pages__last')
-const lastPageDOM = document.querySelector('.lastPage')
-const lastPageNumberDOM = document.querySelector('.lastPage > a')
-const searchResult__category__item = document.querySelector('.searchResult__category__item')
-const searchResult__category__item__notFound = document.querySelector('.searchResult__category__item__notFound')
-const searchResult__quizzes = document.querySelector('.searchResult__quizzes')
-const searchResult__quizzes__item__notFound = document.querySelector('.searchResult__quizzes__item__notFound')
-const searchResult__quizzes__seeMore = document.querySelector('.searchResult__quizzes__seeMore')
-const quiz__nextQuestion = document.querySelector('.quiz__nextQuestion')
-const quiz__container = document.querySelectorAll('.quiz__container')
-
 // Loading screen
 window.onload = (event) => {
     loadingScreen.classList.add('fade')
@@ -243,62 +199,36 @@ try {
 } catch (e) { log('no search result') }
 
 try {
+    currentQuestion = 0
+    numberOfQuestions = quiz__container.length
+
     quiz__nextQuestion.addEventListener('click', () => {
+        currentQuestion++
         quiz__nextQuestion.style.pointerEvents = 'none';
-        log('nextQuestion')
-        for (i = 0; i < quiz__container.length; i++) {
-            log(quiz__container[i])
+
+        for (i = 0; i < numberOfQuestions; i++) {
             lastQuestionPosition = parseInt(getComputedStyle(quiz__container[i]).left) - 1076.05
-            log(lastQuestionPosition)
             quiz__container[i].style.left = `${lastQuestionPosition}px`
         }
+
         setTimeout(() => {
             quiz__nextQuestion.style.pointerEvents = 'visible';
-        }, 2000)
+        }, 1500)
+
+        let FinalTitleOfQuiz = ''
+
+        if (currentQuestion == numberOfQuestions) {
+            calculateResult()
+            const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
+            const splittedTitleOfQuiz = titleOfQuiz.split(' ')
+            log(splittedTitleOfQuiz)
+            const lengthOfTitle = splittedTitleOfQuiz.length
+            for (i = 0; i < lengthOfTitle; i++) {
+                log(splittedTitleOfQuiz[i])
+                FinalTitleOfQuiz = FinalTitleOfQuiz + '-' + splittedTitleOfQuiz[i]
+            }
+
+            window.location.replace(`/result/${FinalTitleOfQuiz}`);
+        }
     })
 } catch (e) { log('no nextQuestion btn')}
-
-
-
-
-
-
-
-
-// GSAP
-try {
-    gsap.registerPlugin(ScrollTrigger)
-
-    // hide the ad when reach the footer
-    gsap.to('.ad__r', {
-        scrollTrigger: {
-            trigger: 'footer',
-            markers: false,
-            start: '5% 100%',
-            scrub: .1,
-        },
-        x: '200%',
-        opacity: '0',
-    })
-
-    // Counting left
-    log(heightFooter)
-
-    gsap.to('.quiz__leftCounter', {
-        scrollTrigger: {
-            trigger: '.quiz__questions',
-            markers: false,
-            start: 'top top',
-            end: heightFooter,
-            scrub: 1,
-        },
-        width: '100%',
-    })
-} catch (e) {log('no gsap')}
-
-// hero animation
-tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 1 }})
-tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
-// tl.from('header', {y: '-100%'}, '-=.7')
-
-log('Script Working.')
