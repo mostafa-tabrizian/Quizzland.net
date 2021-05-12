@@ -202,8 +202,16 @@ try {
     currentQuestion = 0
     numberOfQuestions = quiz__container.length
 
+    quiz__questionCounter__totalAnswered.innerHTML = currentQuestion + 1
+    quiz__questionCounter__totalQuestions.innerHTML = numberOfQuestions
+
     quiz__nextQuestion.addEventListener('click', () => {
         currentQuestion++
+
+        if (currentQuestion != numberOfQuestions) {
+            quiz__questionCounter__totalAnswered.innerHTML = currentQuestion + 1
+        }
+
         quiz__nextQuestion.style.pointerEvents = 'none';
 
         for (i = 0; i < numberOfQuestions; i++) {

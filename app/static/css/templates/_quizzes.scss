@@ -108,7 +108,11 @@
         margin-right: 22rem;
         margin-left: 22rem;
         position: relative;
-        left: -15rem; //-67rem each step
+        left: -16rem; //-67rem each step
+
+        @include breakpoints-down(medium) {
+            left: -19.8rem;
+        }
     }
 
     &__question {
@@ -136,6 +140,24 @@
         position: absolute;
         right: 30%;
         top: 50%;
+        z-index: 1;
+
+        @include breakpoints-down(medium) {
+            right: 15%;
+            top: 90%;
+        }
+        
+        @include breakpoints-down(large) {
+            right: 15%;
+            top: 90%;
+        }
+    }
+
+    &__questionCounter {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translate(-50%);
     }
 
     &__4option {
