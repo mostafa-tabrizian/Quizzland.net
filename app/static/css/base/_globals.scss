@@ -35,6 +35,8 @@ body {
     font-family: $font-pr;
     font-size: $font-med;
     position: relative;
+    max-width: 100%;
+    overflow-x: hidden;
 
 }
 

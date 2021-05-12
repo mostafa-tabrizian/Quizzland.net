@@ -39,6 +39,8 @@ const searchResult__category__item__notFound = document.querySelector('.searchRe
 const searchResult__quizzes = document.querySelector('.searchResult__quizzes')
 const searchResult__quizzes__item__notFound = document.querySelector('.searchResult__quizzes__item__notFound')
 const searchResult__quizzes__seeMore = document.querySelector('.searchResult__quizzes__seeMore')
+const quiz__nextQuestion = document.querySelector('.quiz__nextQuestion')
+const quiz__container = document.querySelectorAll('.quiz__container')
 
 // Loading screen
 window.onload = (event) => {
@@ -213,19 +215,23 @@ try {
 }
 
 try {
-    searchResult__category__item.addEventListener('click', () => {return})
-} catch (e) {
-    searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد'
-    searchResult__category__item__notFound.classList.add('space-sm')
+    searchResult__category__item.addEventListener('click', () => {
+        try {
+            searchResult__category__item.addEventListener('click', () => {return})
+        } catch (e) {
+            searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد'
+            searchResult__category__item__notFound.classList.add('space-sm')
+        }
+        
+        try {
+            searchResult__quizzes__item__notFound.addEventListener('click', () => {return})
+        } catch (e) {
+            searchResult__quizzes__item__notFound.innerHTML = 'کویزی پیدا نشد'
+            searchResult__quizzes__item__notFound.classList.add('space-sm')
+        }
+    })
+} catch (e) { log('no searchResult ')}
 
-}
-
-try {
-    searchResult__quizzes__item__notFound.addEventListener('click', () => {return})
-} catch (e) {
-    searchResult__quizzes__item__notFound.innerHTML = 'کویزی پیدا نشد'
-    searchResult__quizzes__item__notFound.classList.add('space-sm')
-}
 
 try {
     const countSearchResult = searchResult__quizzes.childElementCount
@@ -236,7 +242,21 @@ try {
         }
 } catch (e) { log('no search result') }
 
-
+try {
+    quiz__nextQuestion.addEventListener('click', () => {
+        quiz__nextQuestion.style.pointerEvents = 'none';
+        log('nextQuestion')
+        for (i = 0; i < quiz__container.length; i++) {
+            log(quiz__container[i])
+            lastQuestionPosition = parseInt(getComputedStyle(quiz__container[i]).left) - 1076.05
+            log(lastQuestionPosition)
+            quiz__container[i].style.left = `${lastQuestionPosition}px`
+        }
+        setTimeout(() => {
+            quiz__nextQuestion.style.pointerEvents = 'visible';
+        }, 2000)
+    })
+} catch (e) { log('no nextQuestion btn')}
 
 
 

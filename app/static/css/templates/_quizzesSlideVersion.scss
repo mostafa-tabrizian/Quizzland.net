@@ -1,0 +1,280 @@
+.quizzes {
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    &__item {
+        width: 12.5rem;
+        height: 16.2135rem;
+        margin-left: 0.96875rem;
+        margin-right: 0.96875rem;
+        margin-bottom:  1.93757rem;
+
+        @include breakpoints-down(medium) {
+            width: 8rem;
+            height: 10.75rem;
+        }
+
+        & a > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 3px solid $gray;
+            border-radius: 40px;
+            filter:brightness(40%);
+        }
+
+        & > h5 {
+            text-align: center;
+            transform: translateY(-13.125rem);
+            color: $white;
+            font-size: $font-l;
+
+            @include breakpoints-down(medium) {
+                transform: translateY(-8.75rem);
+                font-size: $font-sm
+            }
+
+        }
+    }
+}
+
+.quiz {
+
+    &__head {
+        font-family: $font-sec;
+
+        h1, h2, h3, h4, h5, p {
+            margin: 0;
+            line-height: 2rem;
+        }
+
+        h3 {
+            font-size: $font-med - .1rem;
+            font-weight: 600;
+        }
+        h5{
+            font-size: $font-sm - .2rem;
+            font-weight: 300;
+        }
+    }
+
+    &__background {
+        margin-top: 2rem;
+        height: 28rem;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 80%;
+        margin: auto;
+
+        @include breakpoints-down(medium) {
+            height: 15rem;
+            width: 100%;
+        }
+    }
+
+    &__leftCounter {
+        width: 0;
+        height: .3rem;
+        background: $red;
+        position: sticky;
+        top: 0;
+    }
+
+    &__number {
+        font-family: $number;
+        font-size: $font-l + .7rem;
+        font-weight: 100;
+        margin-bottom: 0;
+    }
+
+    &__questions {
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    &__container {
+        max-width: 30rem;
+        margin: auto 2rem;
+        padding: 0.1rem;
+        padding-bottom: 2rem;
+        color: black;
+        border-radius: 24px;
+        box-shadow: 0 0 10px black;
+        transition: all 1s;
+        margin-top: 5rem;
+        margin-right: 22rem;
+        margin-left: 22rem;
+        position: relative;
+        left: -15rem; //-67rem each step
+    }
+
+    &__question {
+        font-family: $font-sec;
+        font-weight: 600;
+        font-size: $font-sm;
+        background: #690d11;
+        min-height: 4rem;
+        color: white;
+        padding: 19px;
+        margin: -2px;
+        border-radius: 17px 17px 0 0;
+    }
+
+    &__hider {
+        display: flex;
+        width: 34rem;
+        height: 37rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    &__nextQuestion {
+        cursor: pointer;
+        position: absolute;
+        right: 30%;
+        top: 50%;
+    }
+
+    &__4option {
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        input {
+            opacity: 0;
+        }
+
+        label {
+            display: block;
+            width: 21rem;
+            border: 2px solid #adadad;
+            border-radius: 25px;
+            padding: 0.6rem;
+
+            &:hover {
+                // background: $red-grad;
+                // filter: brightness(150%);
+                box-shadow: 0 0 5px $darkRed;
+            }
+
+            &::before {
+                content: '';
+                height: 1px;
+                font-family: $number;
+                width: 20px;
+                border-radius: 50%;
+                margin: 0;
+                display: flex;
+                padding-left: 1rem;
+                color: $red;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            &:nth-child(2) {
+                &::before {
+                    content: '1';
+                }
+            }
+            &:nth-child(4) {
+                &::before {
+                    content: '2'
+                }
+            }
+            &:nth-child(6) {
+                &::before {
+                    content: '3'
+                }
+            }
+            &:nth-child(8) {
+                &::before {
+                    content: '4'
+                }
+            }
+        }
+        
+        [type="radio"]:checked + label {
+            background: $red-grad;
+            color: $white;
+            padding: .8rem;
+            &::before {
+                color: white;
+            }
+        }
+    }
+
+    .lowHighContainer {
+        margin: 0 15rem !important;
+        margin-top: 5rem !important;
+    }
+    
+    &__lowHigh {
+        margin-top: 2.5625rem;
+
+        input {
+            display: none;
+        }
+
+        label {
+            border: 1px solid $gray;
+            border-radius: 100px;
+            margin-right: .4325rem;
+            margin-left: .4325rem;
+
+            &:nth-child(3), &:nth-child(19) {
+                padding-right: 2.1875rem;
+            }
+            &:nth-child(5), &:nth-child(17) {
+                padding-right: 2.4875rem;
+                padding-top: .25rem;
+            }
+            &:nth-child(7), &:nth-child(15) {
+                padding-right: 2.7875rem;
+                padding-top: .5rem;
+            }
+            &:nth-child(9), &:nth-child(13) {
+                padding-right: 3rem;
+                padding-top: .75rem;
+            }
+            &:nth-child(11) {
+                padding-right: 3.3rem;
+                padding-top: 1rem;
+            }
+        }
+        
+        :checked + label {
+            background: $red;
+        }
+
+        // [id="lowHigh-9"]:checked + label {
+        //     background: #C80000;
+        // }
+        // [id="lowHigh-8"]:checked + label {
+        //     background: #C85D00;
+        // }
+        // [id="lowHigh-7"]:checked + label {
+        //     background: #FFA200;
+        // }
+        // [id="lowHigh-6"]:checked + label {
+        //     background: #FFCC00;
+        // }
+        // [id="lowHigh-5"]:checked + label {
+        //     background: #EEFF00;
+        // }
+        // [id="lowHigh-4"]:checked + label {
+        //     background: #C9EF00;
+        // }
+        // [id="lowHigh-3"]:checked + label {
+        //     background: #90EF00;
+        // }
+        // [id="lowHigh-2"]:checked + label {
+        //     background: #00D648;
+        // }
+        // [id="lowHigh-1"]:checked + label {
+        //     background: #00B83E;
+        // }
+        
+    }
+}
