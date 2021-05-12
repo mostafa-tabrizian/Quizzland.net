@@ -90,12 +90,13 @@
     }
 
     &__questions {
-        margin-left: 50%;
-        transform: translate(-50%);
+        display: grid;
+        justify-content: center;
     }
 
     &__container {
-        width: 27rem;
+        max-width: 27rem;
+        margin: auto 2rem;
         padding: 0.1rem;
         padding-bottom: 2rem;
         color: black;

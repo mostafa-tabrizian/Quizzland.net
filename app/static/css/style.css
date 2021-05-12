@@ -1268,13 +1268,16 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 .quiz__questions {
-  margin-left: 50%;
-  -webkit-transform: translate(-50%);
-          transform: translate(-50%);
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .quiz__container {
-  width: 27rem;
+  max-width: 27rem;
+  margin: auto 2rem;
   padding: 0.1rem;
   padding-bottom: 2rem;
   color: black;
