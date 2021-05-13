@@ -1,48 +1,9 @@
 // Grab the answers
-// const quizFinished = document.querySelector('.showResult')
 
 let correct = 0
 let wrong = 0
 
-// const quiz__nextQuestion = document.querySelector('.quiz__nextQuestion')
-
 const calculateResult = () => {
-
-    // Witcher
-    // 1
-    try {
-        if (document.querySelector('#witcher1-q1-1').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#witcher1-q2-2').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#witcher1-q3-3').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#witcher1-q4-4').checked){correct += 1} else {wrong += 1}
-    }  catch(e) {}
-    // 2
-    try {
-        if (document.querySelector('#witcher2-q1-1').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#witcher2-q2-2').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#witcher2-q3-3').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#witcher2-q4-4').checked){correct += 1} else {wrong += 1}
-    } catch(e) {}
-
-    // Celebrities
-    // Taylor Swift
-    try {
-        if (document.querySelector('#ts1-q1-1').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q2-2').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q3-3').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q4-2').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q5-3').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q6-1').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q7-3').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q8-3').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q9-2').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q10-2').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q11-1').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q12-2').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q13-2').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q14-3').checked){correct += 1} else {wrong += 1}
-        if (document.querySelector('#ts1-q15-4').checked){correct += 1} else {wrong += 1}
-    }  catch(e) {}
 
     const titleOfQuiz = document.querySelector('quiz__head h3')
     const score = ((correct / (correct + wrong)) * 100).toFixed(0)

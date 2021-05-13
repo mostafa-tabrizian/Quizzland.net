@@ -20,6 +20,10 @@ def recreate_newsletterUrl():
     Base3.metadata.drop_all(engine)
     Base3.metadata.create_all(engine)
 
+def recreate_quizQuestions():
+    Base4.metadata.drop_all(engine)
+    Base4.metadata.create_all(engine)
+
 
 
 def add_session(data):
@@ -80,10 +84,26 @@ def up_session():
 #     time = time.time()
 # )
 
+data = quizQuestions(
+    title_eng = 'most complete taylor swift quiz',
+    title_far = 'کامل-ترین-کویز-تیلور-سویفت',
+    type = '4option', # 4option / lowHigh
+    question = 'اسم وسط تیلور',
+    correctOption = 'الیسون',
+    secondOption = 'جنیفر',
+    thirdOption = 'تنیس',
+    forthOption = 'امبرلا',
+    category = 'celebrities', # celebrities, gamings, movie&series, physiologies
+    innerCategory = 'Taylor Swift',
+    publish = datetime.datetime.now(),
+    time = time.time()
+)
+
 #--------------------
 # recreate_quizzes()
 # recreate_categories()
 # recreate_newsletterUrl()
+# recreate_quizQuestions()
 # del_session()
 # up_session()
 # add_session(data)

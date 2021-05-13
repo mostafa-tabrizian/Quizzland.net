@@ -199,8 +199,8 @@ try {
 } catch (e) { log('no search result') }
 
 try {
-    currentQuestion = 0
-    numberOfQuestions = quiz__container.length
+    let currentQuestion = 0
+    const numberOfQuestions = quiz__container.length
 
     quiz__questionCounter__totalAnswered.innerHTML = currentQuestion + 1
     quiz__questionCounter__totalQuestions.innerHTML = numberOfQuestions
@@ -239,4 +239,20 @@ try {
             window.location.replace(`/result/${FinalTitleOfQuiz}`);
         }
     })
+
+    for (i = 0; i < input.length; i++) {
+        input[i].addEventListener('click', () => {
+            log('clicked')
+            log(i)
+            log(input[2])
+
+            if (input[i][tag] == 'correct') {
+                log('correct')
+            } else {
+                log('wrong')
+            }
+
+        })
+    }
+
 } catch (e) { log('no nextQuestion btn')}

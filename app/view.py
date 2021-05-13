@@ -28,7 +28,7 @@ def innerCategory(category, innerCategory):
 @app.route('/quiz/<category>/<sub_category>/<title>')
 def Quiz(category, sub_category, title):
     # addView(title)
-    return render_template(f'/quizzes-files/{category}/{sub_category}/{title}.html')
+    return render_template('/quizzes-files/NEWQUIZFILE.html', quiz_Question = quiz_Question(title))
 
 @app.route('/result/<title>')
 def result(title):

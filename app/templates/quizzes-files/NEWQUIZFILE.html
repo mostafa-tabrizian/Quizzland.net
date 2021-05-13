@@ -1,0 +1,49 @@
+{% extends './layout.html' %}
+{% block content %}
+
+<body>
+    <div class="quiz__head tx-al-c">
+        <h1>Taylor Swift</h1>
+        <h3>کامل ترین کویز تیلور سویفت</h3>
+        <h5>سوال: 15</h5>
+    </div>
+
+    <div class='quiz__background' style="background-image: url('/static/img/quizzes-background/ts.jpg')"></div>
+
+    <!-- <div class="quiz__leftCounter"></div> -->
+
+    <div class="ad__r">
+        <div>
+            <img src="/static/img/ad.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="quiz__questions tx-al-c">
+
+        <div class="quiz__nextQuestion"><img src="/static/img/arw2.svg" alt=""></div>
+        <div class="quiz__questionCounter flex flex-jc-c flex-ai-c">
+            <div class="quiz__questionCounter__totalAnswered">?</div>
+            <div class="quiz__questionCounter__divider">&nbsp/&nbsp</div>
+            <div class="quiz__questionCounter__totalQuestions">?</div>
+        </div>
+
+        <div class="quiz__hider">
+            {% for questionDetail in quiz_Question %}
+            <div class="quiz__container">
+                <p class='quiz__question'>{{ questionDetail.question }}</p>
+                <div class="flex flex-jc-c">
+                    <form class='quiz__4option' action="">
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-1" tag='correct'><label for="{{ questionDetail.id }}-1"> {{ questionDetail.correctOption }} </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-2"><label for="{{ questionDetail.id }}-2"> {{ questionDetail.secondOption }} </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-3"><label for="{{ questionDetail.id }}-3"> {{ questionDetail.thirdOption }} </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-4"><label for="{{ questionDetail.id }}-4"> {{ questionDetail.forthOption }} </label>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</body>
+
+{% endblock content %}

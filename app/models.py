@@ -41,3 +41,23 @@ class NewsletterUser(Base3):
 
     def __repr__(self):
         return f"<id: {self.id} | name: {self.userName} | email: {self.email}"
+
+Base4 = declarative_base()
+class quizQuestions(Base4):
+    __tablename__ = 'Quiz_Questions'
+    id = Column(Integer, primary_key=True)
+    title_eng = Column(String)
+    title_far = Column(String)
+    type = Column(String)
+    question = Column(String)
+    correctOption = Column(String)
+    secondOption = Column(String)
+    thirdOption = Column(String)
+    forthOption = Column(String)
+    category = Column(String)
+    innerCategory = Column(String)
+    publish = Column(Date)
+    time = Column(Integer)
+
+    def __repr__(self):
+        return f"id: {self.id} | title_far: {self.title_eng} | type: {self.type} | category: {self.category} | innerCategory: {self.innerCategory} | publish: {self.publish}"
