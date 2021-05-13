@@ -95,17 +95,12 @@ try {
         for (let i = 0; i < quizzes__item.length; i++) {
             quizzes__item__sort[i].style.order = i
         }
-
-
-
     })
-
 } catch {
     log('Tools Not Found!')
 }
 
-// show the detail of the category
-
+// Show the detail of the category
 categories__item.forEach(item => 
     item.addEventListener('mouseover', () => {
         const categories__item__img = item.querySelector('.categories__item__img')
@@ -170,34 +165,24 @@ try {
     log('No page travel')
 }
 
+// searchResult page
 try {
-    searchResult__category__item.addEventListener('click', () => {
-        try {
-            searchResult__category__item.addEventListener('click', () => {return})
-        } catch (e) {
-            searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد'
-            searchResult__category__item__notFound.classList.add('space-sm')
-        }
-        
-        try {
-            searchResult__quizzes__item__notFound.addEventListener('click', () => {return})
-        } catch (e) {
-            searchResult__quizzes__item__notFound.innerHTML = 'کویزی پیدا نشد'
-            searchResult__quizzes__item__notFound.classList.add('space-sm')
-        }
-    })
-} catch (e) { log('no searchResult ')}
+    try {
+        searchResult__category__item.addEventListener('click', () => {return})
+    } catch (e) {
+        searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد'
+        searchResult__category__item__notFound.classList.add('space-sm')
+    }
 
-
-try {
     const countSearchResult = searchResult__quizzes.childElementCount
     if (countSearchResult == 4) { // empty
         searchResult__quizzes__seeMore.innerHTML = 'هیچ کویزی پیدا نشد'
     } else if (countSearchResult <= 11) {
-        // searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
+        searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
         }
-} catch (e) { log('no search result') }
+} catch (e) { log('no search result page') }
 
+// quiz questions
 try {
     let currentQuestion = 0
     const numberOfQuestions = quiz__container.length
