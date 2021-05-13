@@ -8,6 +8,10 @@ engine = create_engine(DATABASE_URL)
 session = sessionmaker(bind=engine)
 s = session()
 
+def recreate_documents():
+    Base0.metadata.drop_all(engine)
+    Base0.metadata.create_all(engine)
+
 def recreate_quizzes():
     Base1.metadata.drop_all(engine)
     Base1.metadata.create_all(engine)
@@ -63,9 +67,16 @@ def up_session():
     finally:
         s.close()
 
+data = Documents(
+    title = 'title',
+    note = 'note'
+)
+
 # data = Quizzes(
 #     title_far = 'کامل ترین کویز تیلور سویفت',
 #     title_eng = 'ُTaylor Swift',
+#     numberOfQuestions = 15,
+#     img = 'ts.jpg',
 #     href = '/quiz/celebrities/taylor-swift/کامل-ترین-کویز-تیلور-سویفت',
 #     # href = '/quiz/celebrities/taylor-swift/',
 #     views = 0,
@@ -77,29 +88,30 @@ def up_session():
 #     title_far = 'ذ ویتچر',
 #     title_eng = 'The Witcher',
 #     img = 'TRASH-theWitcher.jpg',
-#     href = '/category/gamings/the-witcher', # celebrities, gamings, movie&series, physiologies
-#     category = 'celebrities', # celebrities, gamings, movie&series, physiologies
+#     href = '/category/gamings/the-witcher', # celebrities, gaming, movie&series, physiologies
+#     category = 'celebrities', # celebrities, gaming, movie&series, physiologies
 #     views = 0,
 #     publish = datetime.datetime.now(),
 #     time = time.time()
 # )
 
-data = quizQuestions(
-    title_eng = 'most complete taylor swift quiz',
-    title_far = 'کامل-ترین-کویز-تیلور-سویفت',
-    type = '4option', # 4option / lowHigh
-    question = 'اسم وسط تیلور',
-    correctOption = 'الیسون',
-    secondOption = 'جنیفر',
-    thirdOption = 'تنیس',
-    forthOption = 'امبرلا',
-    category = 'celebrities', # celebrities, gamings, movie&series, physiologies
-    innerCategory = 'Taylor Swift',
-    publish = datetime.datetime.now(),
-    time = time.time()
-)
+# data = quizQuestions(
+#     title_eng = 'most complete taylor swift quiz',
+#     title_far = 'کامل-ترین-کویز-تیلور-سویفت',
+#     type = 'oneCorrect', # 4option / oneCorrect / lowHigh
+#     question = 'اسم وسط تیلور',
+#     option_1 = 'جنیفر',
+#     option_2 = 'الیسون',
+#     option_3 = 'تنیس',
+#     option_4 = 'امبرلا',
+#     answer = 3,
+#     category = 'celebrities', # celebrities, gaming, movie&series, physiologies
+#     innerCategory = 'Taylor Swift',
+#     publish = datetime.datetime.now(),
+# )
 
 #--------------------
+# recreate_documents()
 # recreate_quizzes()
 # recreate_categories()
 # recreate_newsletterUrl()

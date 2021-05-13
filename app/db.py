@@ -15,7 +15,7 @@ def addViewToQuizzes(title):
     add_session(data)
 
 def addViewToCategories(title):
-    data = s.query(Categories).filter(Categories.title_eng.ilike(f'%{title}%')).first()
+    data = s.query(Categories).filter(Categories.title_eng.ilike(f'{title}')).first()
     data.views += 1
     add_session(data)
 
@@ -53,3 +53,11 @@ def quizzes_FilterByTitle(Title):
 def quiz_Question(title):
     quiz_Question = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(title)).all()
     return quiz_Question
+
+def quizDetail(title):
+    quiz_Detail = s.query(Quizzes).filter(Quizzes.title_far.ilike(title)).first()
+    return quiz_Detail
+
+
+def fanNameOfQuiz(name):
+    fan_Name_Of_Quiz = s.query()

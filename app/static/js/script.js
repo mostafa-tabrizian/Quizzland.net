@@ -119,7 +119,6 @@ categories__item.forEach(item =>
 try {
     const fullUrl = window.location.href
     const splitUrl = fullUrl.split('/')
-    log(splitUrl)
     const currPageNumber = parseInt(splitUrl[5])
     const lastPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber - 1)
     const nextPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 1)
@@ -199,25 +198,24 @@ try {
 
         quiz__nextQuestion.style.pointerEvents = 'none';
 
-        for (i = 0; i < numberOfQuestions; i++) {
-            lastQuestionPosition = parseInt(getComputedStyle(quiz__container[i]).left) - 1076.05
-            quiz__container[i].style.left = `${lastQuestionPosition}px`
-        }
-
+        quiz__container.forEach(each => {
+            log(each)
+            lastQuestionPosition = parseInt(getComputedStyle(each).left) - 1076.05
+            each.style.left = `${lastQuestionPosition}px`
+        })
+        
         setTimeout(() => {
             quiz__nextQuestion.style.pointerEvents = 'visible';
         }, 1500)
 
         let FinalTitleOfQuiz = ''
 
-        if (currentQuestion == numberOfQuestions) {
+        if (currentQuestion >= numberOfQuestions) {
             calculateResult()
             const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
             const splittedTitleOfQuiz = titleOfQuiz.split(' ')
-            log(splittedTitleOfQuiz)
             const lengthOfTitle = splittedTitleOfQuiz.length
             for (i = 0; i < lengthOfTitle; i++) {
-                log(splittedTitleOfQuiz[i])
                 FinalTitleOfQuiz = FinalTitleOfQuiz + '-' + splittedTitleOfQuiz[i]
             }
 
@@ -225,19 +223,5 @@ try {
         }
     })
 
-    for (i = 0; i < input.length; i++) {
-        input[i].addEventListener('click', () => {
-            log('clicked')
-            log(i)
-            log(input[2])
-
-            if (input[i][tag] == 'correct') {
-                log('correct')
-            } else {
-                log('wrong')
-            }
-
-        })
-    }
 
 } catch (e) { log('no nextQuestion btn')}

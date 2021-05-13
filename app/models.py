@@ -1,13 +1,24 @@
 from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.ext.declarative import declarative_base
 
+Base0 = declarative_base()
+class Documents(Base0):
+    __tablename__ = 'Documents'
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    note = Column(String)
+    
+    def __repr__(self):
+        return f"title: {self.ititled}| note: {self.note}"
 
-Base = declarative_base()
-class Quizzes(Base):
+Base1 = declarative_base()
+class Quizzes(Base1):
     __tablename__ = 'Quizzes'
     id = Column(Integer, primary_key=True)
     title_eng = Column(String)
     title_far = Column(String)
+    numberOfQuestions = Column(Integer)
+    img = Column(String)
     href = Column(String)
     views = Column(Integer)
     publish = Column(Date)
@@ -50,14 +61,14 @@ class quizQuestions(Base4):
     title_far = Column(String)
     type = Column(String)
     question = Column(String)
-    correctOption = Column(String)
-    secondOption = Column(String)
-    thirdOption = Column(String)
-    forthOption = Column(String)
+    option_1 = Column(String)
+    option_2 = Column(String)
+    option_3 = Column(String)
+    option_4 = Column(String)
+    answer = Column(String)
     category = Column(String)
     innerCategory = Column(String)
     publish = Column(Date)
-    time = Column(Integer)
 
     def __repr__(self):
         return f"id: {self.id} | title_far: {self.title_eng} | type: {self.type} | category: {self.category} | innerCategory: {self.innerCategory} | publish: {self.publish}"

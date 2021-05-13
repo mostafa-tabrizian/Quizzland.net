@@ -58,8 +58,12 @@ def innerCategory(category, innerCategory):
 
 @app.route('/quiz/<category>/<sub_category>/<title>')
 def Quiz(category, sub_category, title):
-    # addView(title)
-    return render_template('/quizzes-files/NEWQUIZFILE.html', quiz_Question = quiz_Question(title))
+    title = title.split('-')
+    fullTitle = ''
+    for title in title:
+        fullTitle = fullTitle + ' ' + title
+    addViewToQuizzes(fullTitle.strip())
+    return render_template('/quiz.html', quizDetail = quizDetail(fullTitle.strip()), quiz_Question = quiz_Question(fullTitle.strip()))
 
 @app.route('/result/<title>')
 def result(title):
@@ -67,7 +71,7 @@ def result(title):
     fullTitle = ''
     for title in title:
         fullTitle = fullTitle + ' ' + title
-    return render_template('/result.html', fullTitle = fullTitle)
+    return render_template('/result.html', fullTitle = fullTitle, )
 
 
 @app.route('/about')
