@@ -8,6 +8,7 @@ body {
     margin-top: 2rem;
     flex-wrap: wrap;
     justify-content: flex-end;
+    min-height: 60vh;
 
     &__item {
         width: 12.5rem;

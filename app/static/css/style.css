@@ -1171,6 +1171,7 @@ body {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  min-height: 60vh;
 }
 
 .quizzes__item {
