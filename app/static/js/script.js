@@ -188,6 +188,7 @@ try {
 
     quiz__questionCounter__totalAnswered.innerHTML = currentQuestion + 1
     quiz__questionCounter__totalQuestions.innerHTML = numberOfQuestions
+    quiz__numberOfQuestions.innerHTML = `سوال&nbsp:&nbsp&nbsp${numberOfQuestions}`
 
     quiz__nextQuestion.addEventListener('click', () => {
         currentQuestion++

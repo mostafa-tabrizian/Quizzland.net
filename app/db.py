@@ -55,9 +55,11 @@ def quiz_Question(title):
     return quiz_Question
 
 def quizDetail(title):
-    quiz_Detail = s.query(Quizzes).filter(Quizzes.title_far.ilike(title)).first()
+    quiz_Detail = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
     return quiz_Detail
 
 
-def fanNameOfQuiz(name):
-    fan_Name_Of_Quiz = s.query()
+def fanNameOfQuiz(title):
+    quiz_Detail = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
+    fanName = quiz_Detail.fan_name
+    return fanName

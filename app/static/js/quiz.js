@@ -32,7 +32,7 @@ try {
     
     if (scoreDATA > 80){
         result__score.innerHTML = (`😎 ${scoreDATA}%`)
-        result__subtitle__txt.innerHTML = ('! شما یک ویتچریه واقعی هستید')}
+        result__subtitle__txt.innerHTML = (`! شما یک ${ fanName } واقعی هستید`)}
     else if (scoreDATA > 60){
         result__score.innerHTML = (`😀 ${scoreDATA}%`)
         result__subtitle__txt.innerHTML = ('شما 70% از بقیه‌ی فن ها جلوترید')}

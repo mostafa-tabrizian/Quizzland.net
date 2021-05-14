@@ -72,17 +72,15 @@ data = Documents(
     note = 'note'
 )
 
-# data = Quizzes(
-#     title_far = 'کامل ترین کویز تیلور سویفت',
-#     title_eng = 'ُTaylor Swift',
-#     numberOfQuestions = 15,
-#     img = 'ts.jpg',
-#     href = '/quiz/celebrities/taylor-swift/کامل-ترین-کویز-تیلور-سویفت',
-#     # href = '/quiz/celebrities/taylor-swift/',
-#     views = 0,
-#     publish = datetime.datetime.now(),
-#     time = time.time()
-# )
+data = Quizzes(
+    title_far = 'بازی ذ ویتچر',
+    title_eng = 'The Witcher',
+    img = 'TRASH1.jpg',
+    href = '/quiz/gaming/the-witcher/بازی-ذ-ویتچر',
+    fan_name = '',
+    views = 0,
+    publish = datetime.datetime.now(),
+)
 
 # data = Categories(
 #     title_far = 'ذ ویتچر',

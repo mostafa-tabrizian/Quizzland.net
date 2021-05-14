@@ -17,12 +17,11 @@ class Quizzes(Base1):
     id = Column(Integer, primary_key=True)
     title_eng = Column(String)
     title_far = Column(String)
-    numberOfQuestions = Column(Integer)
     img = Column(String)
     href = Column(String)
+    fan_name = Column(String)
     views = Column(Integer)
     publish = Column(Date)
-    time = Column(Integer)
     
     def __repr__(self):
         return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| link: {self.href}| view: {self.views}| publish: {self.publish}>"

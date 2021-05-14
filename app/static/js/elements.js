@@ -45,6 +45,7 @@ const searchResult__quizzes__item__notFound = document.querySelector('.searchRes
 const searchResult__quizzes__seeMore = document.querySelector('.searchResult__quizzes__seeMore')
 
 const quiz__nextQuestion = document.querySelector('.quiz__nextQuestion')
+const quiz__numberOfQuestions = document.querySelector('.quiz__head h5')
 const quiz__container = document.querySelectorAll('.quiz__container')
 const quiz__questionCounter__totalAnswered = document.querySelector('.quiz__questionCounter__totalAnswered')
 const quiz__questionCounter__totalQuestions = document.querySelector('.quiz__questionCounter__totalQuestions')

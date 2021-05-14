@@ -63,11 +63,8 @@ def Quiz(category, sub_category, title):
 
 @app.route('/result/<title>')
 def result(title):
-    title = title.split('-')
-    fullTitle = ''
-    for title in title:
-        fullTitle = fullTitle + ' ' + title
-    return render_template('/result.html', fullTitle = fullTitle, )
+    fullTitle = titleConverterFromUrlToNormalOne(title)
+    return render_template('/result.html', fullTitle = fullTitle, fanName = fanNameOfQuiz(fullTitle))
 
 
 @app.route('/about')
