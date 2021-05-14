@@ -133,6 +133,7 @@
 .categoryList{
     text-align: right;
     line-height: 2.2rem;
+    min-height: 60vh;
 
     @include breakpoints-down(medium) {
         margin-left: 2rem;

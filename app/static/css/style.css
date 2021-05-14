@@ -1142,6 +1142,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 .categoryList {
   text-align: right;
   line-height: 2.2rem;
+  min-height: 60vh;
 }
 
 @media (max-width: 49.9375em) {
