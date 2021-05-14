@@ -120,20 +120,20 @@ try {
     const fullUrl = window.location.href
     const splitUrl = fullUrl.split('/')
     const currPageNumber = parseInt(splitUrl[5])
-    const lastPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber - 1)
+    const lastPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber - 1) 
     const nextPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 1)
     const nextTwoPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 2)
 
-    pageTravel__pages__last.innerHTML = currPageNumber - 1
+    pageTravel__pages__last.innerHTML = currPageNumber
     pageTravel__arwLast.href = lastPage
     pageTravel__pages__last.href = lastPage
 
-    pageTravel__pages__curr.innerHTML = currPageNumber
+    pageTravel__pages__curr.innerHTML = currPageNumber + 1
 
-    pageTravel__pages__next.innerHTML = currPageNumber + 1
+    pageTravel__pages__next.innerHTML = currPageNumber + 2
     pageTravel__pages__next.href = nextPage
 
-    pageTravel__pages__nextTwo.innerHTML = currPageNumber + 2
+    pageTravel__pages__nextTwo.innerHTML = currPageNumber + 3
     pageTravel__pages__nextTwo.href = nextTwoPage
     
     pageTravel__arwNext.href = nextPage
@@ -145,8 +145,8 @@ try {
 
     
     if (currPageNumber + 1 == lastPageNumberDOM.innerHTML) {
-        pageTravel__pages__nextTwo.classList.add('noVis')
         lastPageDOM.classList.add('noVis')
+        pageTravel__pages__nextTwo.classList.add('noVis')
     }
     
     if (currPageNumber + 2 == lastPageNumberDOM.innerHTML) {
@@ -200,7 +200,6 @@ try {
         quiz__nextQuestion.style.pointerEvents = 'none';
 
         quiz__container.forEach(each => {
-            log(each)
             lastQuestionPosition = parseInt(getComputedStyle(each).left) - 1076.05
             each.style.left = `${lastQuestionPosition}px`
         })

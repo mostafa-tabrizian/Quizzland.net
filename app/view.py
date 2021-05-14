@@ -44,10 +44,10 @@ def moreResult(searchMoreOfThis):
 
 @app.route('/category/<category>/<int:page>')
 def Category(category, page):
-    howManyElementToShow = 2
+    howManyElementToShow = 3
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template(f'/category/category.html', categories = categories(category, fr, to), lastPage = lastPage(category))
+    return render_template(f'/category/category.html', categories = categories(category, fr, to), lastPage = lastPage(category, howManyElementToShow))
     
 @app.route('/category/<category>/<innerCategory>')
 def innerCategory(category, innerCategory):

@@ -23,10 +23,10 @@ def categories(category, fr, to):
     categories = s.query(Categories).filter(Categories.category == category).all()[fr:to]
     return categories
 
-def lastPage(category):
+def lastPage(category, howManyElementToShow):
     categories = s.query(Categories).filter(Categories.category == category).all()
-    elementInEachPage = 2
-    lastPage = str(round((len(categories)) / elementInEachPage))
+    
+    lastPage = str(round((len(categories)) / howManyElementToShow) - 1)
     return lastPage
 
 def quizzes_sortByDate():

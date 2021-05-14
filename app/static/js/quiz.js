@@ -1,11 +1,17 @@
 // Grab the answers
 
 // add value to correct question
+encodedNumbers = {
+    1: 'b25l',
+    2: 'dHdv',
+    3: 'dGhyZWU=',
+    4: 'Zm91cg=='
+}
 quiz__container__eachOne.forEach(each => {
-    log(each)
-    const answerIsOption = each.getAttribute('data') - 1
-    each[answerIsOption].value = 'Y29ycmVjdA=='
-    log(each[answerIsOption])
+    const answerData = each.getAttribute('data')
+    each[answerData - 1].value = 'Y29ycmVjdA=='
+    encodedAnswer = (encodedNumbers[answerData])
+    each.setAttribute('data', encodedAnswer)
 })
 
 let correct = 0
