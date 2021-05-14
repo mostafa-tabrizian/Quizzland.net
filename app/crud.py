@@ -72,15 +72,15 @@ data = Documents(
     note = 'note'
 )
 
-data = Quizzes(
-    title_far = 'بازی ذ ویتچر',
-    title_eng = 'The Witcher',
-    img = 'TRASH1.jpg',
-    href = '/quiz/gaming/the-witcher/بازی-ذ-ویتچر',
-    fan_name = '',
-    views = 0,
-    publish = datetime.datetime.now(),
-)
+# data = Quizzes(
+#     title_far = 'بازی ذ ویتچر',
+#     title_eng = 'The Witcher',
+#     img = 'TRASH1.jpg',
+#     href = '/quiz/gaming/the-witcher/بازی-ذ-ویتچر',
+#     fan_name = '',
+#     views = 0,
+#     publish = datetime.datetime.now(),
+# )
 
 # data = Categories(
 #     title_far = 'ذ ویتچر',
@@ -90,7 +90,6 @@ data = Quizzes(
 #     category = 'celebrities', # celebrities, gaming, movie&series, physiologies
 #     views = 0,
 #     publish = datetime.datetime.now(),
-#     time = time.time()
 # )
 
 # data = quizQuestions(

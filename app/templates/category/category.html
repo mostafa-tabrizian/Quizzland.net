@@ -5,7 +5,7 @@
     {% for category in categories %}
         <div class="quizzes__item">
             <a href="{{category.href}}"><img src="/static/img/{{category.img}}" alt=""></a>
-            <h5>{{category.title_eng}}</h5>
+            <h5><a href="{{category.href}}">{{category.title_eng}}</a></h5>
         </div>
     {% endfor %}
 </div>

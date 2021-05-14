@@ -1208,6 +1208,10 @@ body {
   font-size: 1.6rem;
 }
 
+.quizzes__item > h5 > a:hover {
+  color: inherit;
+}
+
 @media (max-width: 49.9375em) {
   .quizzes__item > h5 {
     -webkit-transform: translateY(-8.75rem);

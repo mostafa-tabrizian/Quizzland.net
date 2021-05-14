@@ -37,7 +37,6 @@ class Categories(Base2):
     href = Column(String)
     views = Column(Integer)
     publish = Column(Date)
-    time = Column(Integer)
     
     def __repr__(self):
         return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| category: {self.category} | link: {self.href}| view: {self.views}| publish: {self.publish}>"

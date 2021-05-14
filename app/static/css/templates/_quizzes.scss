@@ -36,6 +36,10 @@ body {
             transform: translateY(-13.125rem);
             color: $white;
             font-size: $font-l;
+            
+            & > a:hover {
+                color: inherit;
+            }
 
             @include breakpoints-down(medium) {
                 transform: translateY(-8.75rem);
