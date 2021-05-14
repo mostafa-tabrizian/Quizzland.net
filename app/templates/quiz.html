@@ -1,16 +1,12 @@
 {% extends './layout.html' %}
 {% block content %}
 
-<body>
+<body style="background-image: url('/static/img/quizzes-background/{{ quizDetail.img }}');">
     <div class="quiz__head tx-al-c">
         <h1>{{ quizDetail.title_eng }}</h1>
         <h3>{{ quizDetail.title_far }}</h3>
         <h5>سوال: {{ quizDetail.numberOfQuestions }}</h5>
     </div>
-
-    <div class='quiz__background' style="background-image: url('/static/img/quizzes-background/{{ quizDetail.img }}')"></div>
-
-    <!-- <div class="quiz__leftCounter"></div> -->
 
     <div class="ad__r">
         <div>

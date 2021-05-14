@@ -1,3 +1,9 @@
+body {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
 .quizzes {
     margin-top: 2rem;
     flex-wrap: wrap;
@@ -47,52 +53,31 @@
         h1, h2, h3, h4, h5, p {
             margin: 0;
             line-height: 2rem;
+            color: $white;
+            font-weight: 100;
         }
 
         h3 {
             font-size: $font-med - .1rem;
-            font-weight: 600;
         }
         h5{
             font-size: $font-sm - .2rem;
-            font-weight: 300;
         }
-    }
-
-    &__background {
-        margin-top: 2rem;
-        height: 28rem;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        width: 80%;
-        margin: auto;
-
-        @include breakpoints-down(medium) {
-            height: 15rem;
-            width: 100%;
-        }
-    }
-
-    &__leftCounter {
-        width: 0;
-        height: .3rem;
-        background: $red;
-        position: sticky;
-        top: 0;
-    }
-
-    &__number {
-        font-family: $number;
-        font-size: $font-l + .7rem;
-        font-weight: 100;
-        margin-bottom: 0;
     }
 
     &__questions {
         display: flex;
         justify-content: center;
         position: relative;
+
+        &::after {
+            content: "";
+            position: fixed;
+            top: 0; bottom: 0; left: 0; right: 0; 
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            z-index: -1;
+        }
     }
 
     &__container {
@@ -100,15 +85,17 @@
         margin: auto 2rem;
         padding: 0.1rem;
         padding-bottom: 2rem;
-        color: black;
+        color: white;
         border-radius: 24px;
-        box-shadow: 0 0 10px black;
+        box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
         transition: all 1s;
         margin-top: 5rem;
         margin-right: 22rem;
         margin-left: 22rem;
         position: relative;
         left: -16rem; //-67rem each step
+        backdrop-filter: blur(40px);
+        background: rgba(0, 0, 0, 0.123);
 
         @include breakpoints-down(medium) {
             left: -19.8rem;
@@ -158,6 +145,7 @@
         bottom: 1.5rem;
         left: 50%;
         transform: translate(-50%);
+        color: $white;
     }
 
     &__4option {
@@ -169,6 +157,7 @@
         }
 
         label {
+            color: $white;
             display: block;
             width: 21rem;
             border: 2px solid #adadad;
@@ -176,8 +165,6 @@
             padding: 0.6rem;
 
             &:hover {
-                // background: $red-grad;
-                // filter: brightness(150%);
                 box-shadow: 0 0 5px $darkRed;
             }
 
@@ -190,7 +177,7 @@
                 margin: 0;
                 display: flex;
                 padding-left: 1rem;
-                color: $red;
+                color: $white;
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
             }

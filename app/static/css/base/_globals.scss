@@ -40,15 +40,6 @@ body {
 
 }
 
-.body {
-    &__background__taylor {
-        background: url('static/img/TRASH-taylor.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        backdrop-filter: blur(10px) brightness(70%);
-    }
-}
-
 .wrapper {
     max-width: 62.5rem;
     margin: 0 auto;
