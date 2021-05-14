@@ -15,7 +15,7 @@ def addViewToQuizzes(title):
     add_session(data)
 
 def addViewToCategories(title):
-    data = s.query(Categories).filter(Categories.title_eng.ilike(f'{title}')).first()
+    data = s.query(Categories).filter(Categories.title_eng.ilike(f'%{title}%')).first()
     data.views += 1
     add_session(data)
 

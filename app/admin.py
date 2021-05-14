@@ -7,7 +7,7 @@ from flask_admin.contrib.fileadmin import FileAdmin
 admin = Admin(
     app,
     index_view=AdminIndexView(
-        url='/admin-$Quizland19931506'
+        url='/admin/$Quizland19931506'
     )
 )
 

@@ -51,18 +51,14 @@ def Category(category, page):
     
 @app.route('/category/<category>/<innerCategory>')
 def innerCategory(category, innerCategory):
-    rawTitle = innerCategory.split('-')
-    fullTitle = rawTitle[0] + ' ' + rawTitle[1]
+    fullTitle = titleConverterFromUrlToNormalOne(innerCategory)
     addViewToCategories(fullTitle)
     return render_template(f'/category/inner-category-list.html', quizzes_FilterByTitle = quizzes_FilterByTitle(fullTitle))
 
 @app.route('/quiz/<category>/<sub_category>/<title>')
 def Quiz(category, sub_category, title):
-    title = title.split('-')
-    fullTitle = ''
-    for title in title:
-        fullTitle = fullTitle + ' ' + title
-    addViewToQuizzes(fullTitle.strip())
+    fullTitle = titleConverterFromUrlToNormalOne(title)
+    addViewToQuizzes(fullTitle)
     return render_template('/quiz.html', quizDetail = quizDetail(fullTitle.strip()), quiz_Question = quiz_Question(fullTitle.strip()))
 
 @app.route('/result/<title>')
@@ -110,3 +106,10 @@ def forbidden(e):
 @app.errorhandler(500)
 def internalServerError(e):
     return render_template('500.html'), 500
+
+def titleConverterFromUrlToNormalOne(title):
+    splittedTitle = title.split('-')
+    fullTitle = ''
+    for word in splittedTitle:
+        fullTitle = fullTitle + ' ' + word
+    return fullTitle.strip()
