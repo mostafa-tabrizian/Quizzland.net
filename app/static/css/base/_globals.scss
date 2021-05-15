@@ -220,6 +220,13 @@ input {
     }
 }
 
+.backBtn {
+    position: relative;
+    bottom: 3rem;
+    margin-left: 25%;
+    transform: translate(-50%);
+}
+
 .loadingScreen {
     position: fixed;
     top: 0;

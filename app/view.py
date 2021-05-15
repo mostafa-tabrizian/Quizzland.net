@@ -98,6 +98,10 @@ def support():
 def privacyPolicy():
     return render_template('/privacy-policy.html')
 
+@app.route('/adverts')
+def adverts():
+    return render_template('/adverts.html')
+
 @app.route('/newsletter', methods=['GET', 'POST'])
 def newsletter():
     userEmail = request.form['userEmail']
