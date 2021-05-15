@@ -2,12 +2,30 @@ from crud import *
 import datetime, time
 
 def sortNewest():
-    newest = s.query(Quizzes).limit(5)
+    newest = s.query(Quizzes).order_by(Quizzes.publish.desc()).limit(5)
     return newest
+
+def newestQuizForNewestPage(fr, to):
+    newest = s.query(Quizzes).order_by(Quizzes.publish.desc()).all()[fr:to]
+    return newest
+
+def lastPageOfNewest(howManyElementToShow):
+    newest = s.query(Quizzes).order_by(Quizzes.publish.desc()).all()
+    lastPageOfNewest = str(round((len(newest)) / howManyElementToShow) - 1)
+    return lastPageOfNewest
 
 def sortMostViews():
     mostViews = s.query(Quizzes).order_by(Quizzes.views.desc()).limit(5)
     return mostViews
+
+def mostViewsQuizForMostViewsPage(fr, to):
+    mostViews = s.query(Quizzes).order_by(Quizzes.views.desc()).all()[fr:to]
+    return mostViews
+
+def lastPageOfMostViews(howManyElementToShow):
+    mostViews = s.query(Quizzes).order_by(Quizzes.views.desc()).all()
+    lastPageOfMostViews = str(round((len(mostViews)) / howManyElementToShow) - 1)
+    return lastPageOfMostViews
 
 def addViewToQuizzes(title):
     data = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
@@ -23,9 +41,8 @@ def categories(category, fr, to):
     categories = s.query(Categories).filter(Categories.category == category).all()[fr:to]
     return categories
 
-def lastPage(category, howManyElementToShow):
+def lastPageOfCategory(category, howManyElementToShow):
     categories = s.query(Categories).filter(Categories.category == category).all()
-    
     lastPage = str(round((len(categories)) / howManyElementToShow) - 1)
     return lastPage
 

@@ -74,27 +74,27 @@ try {
         tools__sortType__current.innerHTML = 'الفبا'
 
 
-        let quizzes__item__sort = []
+        // let quizzes__item__sort = []
 
-        for (let i = 0; i < quizzes__item.length; i++) {
-            quizzes__item__sort.push(quizzes__item[i])
-        }
+        // for (let i = 0; i < quizzes__item.length; i++) {
+        //     quizzes__item__sort.push(quizzes__item[i])
+        // }
         
-        quizzes__item__sort.sort((a, b) => { 
-            a = a.id.toLowerCase();
-            b = b.id.toLowerCase();
-            if (a > b) { 
-                return 1; 
-            } else if (a < b) {
-                return -1;
-            } else {
-                return 0;
-            }
-        })
+        // quizzes__item__sort.sort((a, b) => { 
+        //     a = a.id.toLowerCase();
+        //     b = b.id.toLowerCase();
+        //     if (a > b) { 
+        //         return 1; 
+        //     } else if (a < b) {
+        //         return -1;
+        //     } else {
+        //         return 0;
+        //     }
+        // })
 
-        for (let i = 0; i < quizzes__item.length; i++) {
-            quizzes__item__sort[i].style.order = i
-        }
+        // for (let i = 0; i < quizzes__item.length; i++) {
+        //     quizzes__item__sort[i].style.order = i
+        // }
     })
 } catch {
     log('Tools Not Found!')
@@ -119,10 +119,21 @@ categories__item.forEach(item =>
 try {
     const fullUrl = window.location.href
     const splitUrl = fullUrl.split('/')
-    const currPageNumber = parseInt(splitUrl[5])
-    const lastPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber - 1) 
-    const nextPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 1)
-    const nextTwoPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 2)
+    
+    if (!(isNaN(parseInt(splitUrl[5])))) {
+
+        currPageNumber = parseInt(splitUrl[5])
+        lastPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber - 1) 
+        nextPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 1)
+        nextTwoPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 2)
+        
+    } else if  (!(isNaN(parseInt(splitUrl[4])))) {
+        currPageNumber = parseInt(splitUrl[4])
+        lastPage = '/' + splitUrl[3] + '/' + (currPageNumber - 1) 
+        nextPage = '/' + splitUrl[3] + '/' + (currPageNumber + 1)
+        nextTwoPage = '/' + splitUrl[3] + '/' + (currPageNumber + 2)
+
+    }
 
     pageTravel__pages__last.innerHTML = currPageNumber
     pageTravel__arwLast.href = lastPage
@@ -160,7 +171,7 @@ try {
         lastPageDOM.classList.add('noVis')
     }
     
-} catch {
+} catch (e) {
     log('No page travel')
 }
 

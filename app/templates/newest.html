@@ -1,0 +1,34 @@
+{% extends './layout.html' %}
+{% block content %}
+
+<div class="newest-mostViews">
+    <h5>جدیدترین کوئیز ها</h5>
+
+    {% for quiz in newest %}
+        <a class="newest-mostViews__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
+    {% endfor %}
+</div>
+
+<div class="pageTravel flex flex-jc-c flex-ai-c">
+    <a class="pageTravel__arwLast" href="">
+        <!-- &lt-- -->
+        <img class="flex flex-jc-c flex-ai-c" src="/static/img/travelPage-arw.png" alt="">
+    </a>
+    <div class="pageTravel__pages flex flex-jc-c flex-ai-c">
+        <a class="pageTravel__pages__last" href=""></a>
+        <span class="pageTravel__pages__curr"></span>
+        <a class="pageTravel__pages__next" href=""></a>
+        <a class="pageTravel__pages__nextTwo" href=""></a>
+        <div class="lastPage">
+            <span>.....</span>
+            <a>
+                {{ lastPage }}
+            </a>
+        </div>
+    </div>
+    <a class="pageTravel__arwNext" href="">
+        <img class="flex flex-jc-c flex-ai-c" src="/static/img/travelPage-arw.png" alt="">
+    </a>
+</div>
+
+{% endblock content %}

@@ -27,7 +27,7 @@ def search():
         return render_template('404.html')
 
 @app.route('/search/<searchMoreOfThis>')
-def moreResult(searchMoreOfThis):
+def moreSearchResult(searchMoreOfThis):
     userSearchInput = searchMoreOfThis
     userSearchInputInCategoriesDb_far = s.query(Categories).filter(Categories.title_far.ilike(f'%{userSearchInput}%')).all()
     userSearchInputInCategoriesDb_eng = s.query(Categories).filter(Categories.title_eng.ilike(f'%{userSearchInput}%')).all()
@@ -42,12 +42,27 @@ def moreResult(searchMoreOfThis):
         userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
     )
 
+@app.route('/newest/<int:page>')
+def newestQuiz(page):
+    howManyElementToShow = 2
+    fr = page * howManyElementToShow
+    to = (page * howManyElementToShow) + howManyElementToShow
+    return render_template('/newest.html', newest = newestQuizForNewestPage(fr, to), lastPage = lastPageOfNewest(howManyElementToShow))
+
+@app.route('/mostViews/<int:page>')
+def mostViewsQuiz(page):
+    howManyElementToShow = 2
+    fr = page * howManyElementToShow
+    to = (page * howManyElementToShow) + howManyElementToShow
+    return render_template('/mostViews.html', mostViews = mostViewsQuizForMostViewsPage(fr, to), lastPage = lastPageOfMostViews(howManyElementToShow))
+
+
 @app.route('/category/<category>/<int:page>')
 def Category(category, page):
     howManyElementToShow = 3
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template(f'/category/category.html', categories = categories(category, fr, to), lastPage = lastPage(category, howManyElementToShow))
+    return render_template(f'/category/category.html', categories = categories(category, fr, to), lastPage = lastPageOfCategory(category, howManyElementToShow))
     
 @app.route('/category/<category>/<innerCategory>')
 def innerCategory(category, innerCategory):
@@ -92,16 +107,21 @@ def newsletter():
         else:
             return render_template('/no-success.html')
 
+@app.route('/notFound')
+def pageNotFount():
+    return render_template('404.html')
+
 @app.errorhandler(404)
-def pageNotFound(e):
+def pageNotFound():
     return render_template('404.html'), 404
 
+
 @app.errorhandler(403)
-def forbidden(e):
+def forbidden():
     return render_template('403.html'), 403
     
 @app.errorhandler(500)
-def internalServerError(e):
+def internalServerError():
     return render_template('500.html'), 500
 
 def titleConverterFromUrlToNormalOne(title):
