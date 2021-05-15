@@ -127,10 +127,9 @@ body {
         position: relative;
     }
 
-    &__nextQuestion {
+    &__questionChanger {
         cursor: pointer;
         position: absolute;
-        right: 30%;
         top: 50%;
         z-index: 1;
 
@@ -143,6 +142,19 @@ body {
             right: 15%;
             top: 90%;
         }
+
+        &__last {
+            left: 30%;
+            transform: rotate(180deg);
+        }
+
+        &__next {
+            right: 30%;
+        }
+
+        & > img {
+            margin: auto;
+        } 
     }
 
     &__questionCounter {

@@ -210,51 +210,86 @@ try {
 
 // quiz questions
 try {
-    let currentQuestion = 0
+
+    let currentQuestion = 1
+    quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
     const numberOfQuestions = quiz__container.length
-
-    quiz__questionCounter__totalAnswered.innerHTML = currentQuestion + 1
-    quiz__questionCounter__totalQuestions.innerHTML = numberOfQuestions
     quiz__numberOfQuestions.innerHTML = `سوال&nbsp:&nbsp&nbsp${numberOfQuestions}`
+    quiz__questionCounter__totalQuestions.innerHTML = numberOfQuestions
 
-    quiz__nextQuestion.addEventListener('click', () => {
-        currentQuestion++
-
-        if (currentQuestion != numberOfQuestions) {
-            quiz__questionCounter__totalAnswered.innerHTML = currentQuestion + 1
-        }
-
-        quiz__nextQuestion.style.pointerEvents = 'none';
-
-        quiz__container.forEach(each => {
-            lastQuestionPosition = parseInt(getComputedStyle(each).left) - 1076.05
-            each.style.left = `${lastQuestionPosition}px`
-        })
-        
+    const pauseTheFunctionOfChangingQuestions = () => {
+        quiz__questionChanger__next.style.pointerEvents = 'none';
+        quiz__questionChanger__last.style.pointerEvents = 'none';
         setTimeout(() => {
-            quiz__nextQuestion.style.pointerEvents = 'visible';
+            quiz__questionChanger__next.style.pointerEvents = 'visible';
+            quiz__questionChanger__last.style.pointerEvents = 'visible';
         }, 1500)
+    }
 
+    const checkIfEndedTheQuizAndShowResultPage = () => {
         let FinalTitleOfQuiz = ''
-
-        if (currentQuestion >= numberOfQuestions) {
+        if (currentQuestion - 1 == numberOfQuestions) {
             calculateResult()
             const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
-            
             const splittedTitleOfQuiz = titleOfQuiz.split(' ')
-            const lengthOfTitle = splittedTitleOfQuiz.length
-            for (i = 0; i < lengthOfTitle; i++) {
-                FinalTitleOfQuiz = FinalTitleOfQuiz + '-' + splittedTitleOfQuiz[i]
-            }
-
+            splittedTitleOfQuiz.forEach(each => {
+                FinalTitleOfQuiz += `-${each}`
+            })
             const fullUrl = window.location.href
             const splitUrl = fullUrl.split('/')
             localStorage.setItem('returnUrl', `/category/${splitUrl[4]}/${splitUrl[5]}`)
-            window.location.replace(`/result/${FinalTitleOfQuiz}`);
-            
+            window.location.replace(`/result/${FinalTitleOfQuiz}`); 
         }
+    }
+    
+    const plusOneToAnsweredQuestionsIfItsNotTheLast = () => {
+        if (currentQuestion - 1 != numberOfQuestions) {
+            currentQuestion = currentQuestion + 1
+            quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
+        }
+    }
+
+    const minusOneToAnsweredQuestionsIfItsNotTheFirst = () => {
+        if (currentQuestion != 1) {
+            currentQuestion = currentQuestion - 1
+            quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
+        }
+    }
+    
+
+    quiz__questionChanger__next.addEventListener('click', () => {
+        plusOneToAnsweredQuestionsIfItsNotTheLast()
+
+        quiz__container.forEach(each => {
+            currQuestionPosition = parseInt(getComputedStyle(each).left)
+            currQuestionPosition = currQuestionPosition - 1076.05
+            each.style.left = `${currQuestionPosition}px`
+        })
+
+        pauseTheFunctionOfChangingQuestions()
+        checkIfEndedTheQuizAndShowResultPage()
     })
-} catch (e) { log('no nextQuestion btn')}
+
+
+    
+    quiz__questionChanger__last.addEventListener('click', () => {
+        if (currQuestionPosition > -500) {
+            return "there is no last question"
+        }
+
+        minusOneToAnsweredQuestionsIfItsNotTheFirst()
+
+        quiz__container.forEach(each => {
+            currQuestionPosition = parseInt(getComputedStyle(each).left)
+            currQuestionPosition = currQuestionPosition + 1076.05
+            each.style.left = `${currQuestionPosition}px`
+        })
+
+        pauseTheFunctionOfChangingQuestions()
+        checkIfEndedTheQuizAndShowResultPage()
+    })
+
+} catch (e) { log('no nextQuestion btn'), log(e)}
 
 //----------------------------------------------------------
 

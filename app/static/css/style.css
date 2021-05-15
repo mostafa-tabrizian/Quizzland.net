@@ -1314,26 +1314,39 @@ body {
   position: relative;
 }
 
-.quiz__nextQuestion {
+.quiz__questionChanger {
   cursor: pointer;
   position: absolute;
-  right: 30%;
   top: 50%;
   z-index: 1;
 }
 
 @media (max-width: 49.9375em) {
-  .quiz__nextQuestion {
+  .quiz__questionChanger {
     right: 15%;
     top: 90%;
   }
 }
 
 @media (max-width: 87.4375em) {
-  .quiz__nextQuestion {
+  .quiz__questionChanger {
     right: 15%;
     top: 90%;
   }
+}
+
+.quiz__questionChanger__last {
+  left: 30%;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.quiz__questionChanger__next {
+  right: 30%;
+}
+
+.quiz__questionChanger > img {
+  margin: auto;
 }
 
 .quiz__questionCounter {
