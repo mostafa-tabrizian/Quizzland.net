@@ -94,6 +94,10 @@ def contact():
 def support():
     return render_template('/support.html')
 
+@app.route('/privacy-policy')
+def privacyPolicy():
+    return render_template('/privacy-policy.html')
+
 @app.route('/newsletter', methods=['GET', 'POST'])
 def newsletter():
     userEmail = request.form['userEmail']
