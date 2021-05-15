@@ -1,5 +1,4 @@
 from crud import *
-import datetime, time
 
 def sortNewest():
     newest = s.query(Quizzes).order_by(Quizzes.publish.desc()).limit(5)
@@ -56,16 +55,6 @@ def quizzes_sortByViews():
 def quizzes_FilterByTitle(Title):
     quizzesFilterByTitle = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{Title}%')).all()
     return quizzesFilterByTitle
-
-# def sortMostViewsForThisMonth():
-#     mostViews = s.query(Quizzes).filter(
-#         and_(
-#             # most view
-#             Quizzes.publish.between( datetime.datetime.now() - (datetime.datetime.now() - ) )
-#         )
-#     ).order_by(Quizzes.view.desc()).limit(2)
-
-#     return
 
 def quiz_Question(title):
     quiz_Question = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(title)).all()

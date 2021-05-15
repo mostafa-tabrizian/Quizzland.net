@@ -44,14 +44,14 @@ def moreSearchResult(searchMoreOfThis):
 
 @app.route('/newest/<int:page>')
 def newestQuiz(page):
-    howManyElementToShow = 2
+    howManyElementToShow = 5
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template('/newest.html', newest = newestQuizForNewestPage(fr, to), lastPage = lastPageOfNewest(howManyElementToShow))
 
 @app.route('/mostViews/<int:page>')
 def mostViewsQuiz(page):
-    howManyElementToShow = 2
+    howManyElementToShow = 5
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template('/mostViews.html', mostViews = mostViewsQuizForMostViewsPage(fr, to), lastPage = lastPageOfMostViews(howManyElementToShow))
@@ -59,7 +59,7 @@ def mostViewsQuiz(page):
 
 @app.route('/category/<category>/<int:page>')
 def Category(category, page):
-    howManyElementToShow = 3
+    howManyElementToShow = 8
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template(f'/category/category.html', categories = categories(category, fr, to), lastPage = lastPageOfCategory(category, howManyElementToShow))

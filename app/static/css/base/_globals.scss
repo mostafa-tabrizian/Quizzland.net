@@ -37,7 +37,6 @@ body {
     position: relative;
     max-width: 100%;
     overflow-x: hidden;
-
 }
 
 .wrapper {
@@ -95,6 +94,10 @@ h2 {
     font-size: $font-l;
     letter-spacing: .1rem;
     padding: 0 0 1rem 0; margin: 0;
+}
+
+h3 {
+    letter-spacing: .1rem;
 }
 
 p {

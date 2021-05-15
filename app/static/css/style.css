@@ -140,6 +140,10 @@ h2 {
   margin: 0;
 }
 
+h3 {
+  letter-spacing: .1rem;
+}
+
 p {
   font-size: 1.18rem;
   letter-spacing: .07rem;
@@ -1553,19 +1557,20 @@ body {
 }
 
 .succuss {
-  height: 10rem;
+  min-height: 44vh;
   margin-left: 50%;
   -webkit-transform: translate(-30%);
           transform: translate(-30%);
 }
 
 .about {
+  min-height: 44vh;
   text-align: center;
 }
 
 .contact {
   text-align: center;
-  height: 30rem;
+  min-height: 44vh;
 }
 
 .contact > h4 {
@@ -1583,7 +1588,7 @@ body {
 
 .searchResult {
   text-align: center;
-  min-height: 100vh;
+  min-height: 60vh;
 }
 
 .searchResult__category {

@@ -50,7 +50,7 @@ try {
         result__subtitle__txt.innerHTML = ('نیاز به بیشتر شناختش داری')}
     else if (scoreDATA >= 0){
         result__score.innerHTML = (`😭 ${scoreDATA}%`)
-        result__subtitle__txt.innerHTML = ('😅 عیبی نداره کسی نمیفهمه، میتونی دوباره کویز رو بدی ')}
+        result__subtitle__txt.innerHTML = ('😅 عیبی نداره کسی نمیفهمه، میتونی دوباره کوئیز رو بدی ')}
 
 } catch (e) {
     log('no result page')

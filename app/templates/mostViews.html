@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="newest-mostViews">
-    <h5>پر بازدیدترین کوئیز ها</h5>
+    <h3>پر بازدیدترین کوئیز ها</h3>
 
     {% for quiz in mostViews %}
         <a class="newest-mostViews__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>

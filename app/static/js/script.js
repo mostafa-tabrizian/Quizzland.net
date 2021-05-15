@@ -120,19 +120,17 @@ try {
     const fullUrl = window.location.href
     const splitUrl = fullUrl.split('/')
     
-    if (!(isNaN(parseInt(splitUrl[5])))) {
-
+    if (!(isNaN(parseInt(splitUrl[5])))) { //category
         currPageNumber = parseInt(splitUrl[5])
         lastPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber - 1) 
         nextPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 1)
         nextTwoPage = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + (currPageNumber + 2)
         
-    } else if  (!(isNaN(parseInt(splitUrl[4])))) {
+    } else if  (!(isNaN(parseInt(splitUrl[4])))) { //sortPages
         currPageNumber = parseInt(splitUrl[4])
         lastPage = '/' + splitUrl[3] + '/' + (currPageNumber - 1) 
         nextPage = '/' + splitUrl[3] + '/' + (currPageNumber + 1)
         nextTwoPage = '/' + splitUrl[3] + '/' + (currPageNumber + 2)
-
     }
 
     pageTravel__pages__last.innerHTML = currPageNumber
@@ -186,7 +184,7 @@ try {
 
     const countSearchResult = searchResult__quizzes.childElementCount
     if (countSearchResult == 4) { // empty
-        searchResult__quizzes__seeMore.innerHTML = 'هیچ کویزی پیدا نشد'
+        searchResult__quizzes__seeMore.innerHTML = 'هیچ کوئیزی پیدا نشد'
     } else if (countSearchResult <= 11) {
         searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
         }
