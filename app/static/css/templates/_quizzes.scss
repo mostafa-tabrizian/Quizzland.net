@@ -168,9 +168,12 @@ body {
             border: 2px solid #adadad;
             border-radius: 25px;
             padding: 0.6rem;
+            cursor: pointer;
 
             &:hover {
-                box-shadow: 0 0 5px $darkRed;
+                // box-shadow: 0 5px 15px $darkRed;
+            border: 2px solid $darkRed;
+
             }
 
             &::before {

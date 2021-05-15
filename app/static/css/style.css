@@ -1361,11 +1361,11 @@ body {
   border: 2px solid #adadad;
   border-radius: 25px;
   padding: 0.6rem;
+  cursor: pointer;
 }
 
 .quiz__4option label:hover {
-  -webkit-box-shadow: 0 0 5px #690D11;
-          box-shadow: 0 0 5px #690D11;
+  border: 2px solid #690D11;
 }
 
 .quiz__4option label::before {
