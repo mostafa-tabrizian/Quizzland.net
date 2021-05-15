@@ -215,6 +215,10 @@ button__grad-green, .btn__grad-green {
           box-shadow: 0 0 7px black;
 }
 
+bold {
+  font-weight: 600;
+}
+
 input {
   outline: none;
 }
@@ -1597,6 +1601,14 @@ body {
 
 .contact__socialMedia > li:not(:last-child) {
   padding-right: 1.125rem;
+}
+
+.support {
+  min-height: 44vh;
+  margin-left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  text-align: center;
 }
 
 .searchResult {

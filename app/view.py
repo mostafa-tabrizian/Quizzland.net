@@ -90,6 +90,10 @@ def about():
 def contact():
     return render_template('/contact.html')
 
+@app.route('/support')
+def support():
+    return render_template('/support.html')
+
 @app.route('/newsletter', methods=['GET', 'POST'])
 def newsletter():
     userEmail = request.form['userEmail']
