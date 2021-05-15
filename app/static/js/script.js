@@ -1,7 +1,11 @@
+//----------------------------------------------------------
+
 // Loading screen
 window.onload = (event) => {
     loadingScreen.classList.add('fade')
 };
+
+//----------------------------------------------------------
 
 // open and close the category list when click on category in the list
 header__categories__button.addEventListener('click', () => {
@@ -16,6 +20,8 @@ header__categories__button.addEventListener('click', () => {
     }
 })
 
+//----------------------------------------------------------
+
 // close the category list or hide the submit btn when click on anywhere of page
 body.addEventListener('click', () => {
     
@@ -24,6 +30,8 @@ body.addEventListener('click', () => {
         arw.classList.remove('arw__open')
     }
 })
+
+//----------------------------------------------------------
 
 // open the menu
 
@@ -42,6 +50,8 @@ header__searchInput.addEventListener('click', () => {
 header__searchInput.addEventListener('blur', () => {
     header__searchSubmit.classList.add('fade')
 })
+
+//----------------------------------------------------------
 
 // show the submit srch category btn when active
 try {
@@ -100,6 +110,8 @@ try {
     log('Tools Not Found!')
 }
 
+//----------------------------------------------------------
+
 // Show the detail of the category
 categories__item.forEach(item => 
     item.addEventListener('mouseover', () => {
@@ -114,6 +126,8 @@ categories__item.forEach(item =>
         categories__item__img.classList.remove('categories__item__detail__show')
     })
 )
+
+//----------------------------------------------------------
 
 // Page travel
 try {
@@ -173,6 +187,8 @@ try {
     log('No page travel')
 }
 
+//----------------------------------------------------------
+
 // searchResult page
 try {
     try {
@@ -189,6 +205,8 @@ try {
         searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
         }
 } catch (e) { log('no search result page') }
+
+//----------------------------------------------------------
 
 // quiz questions
 try {
@@ -222,15 +240,27 @@ try {
         if (currentQuestion >= numberOfQuestions) {
             calculateResult()
             const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
+            
             const splittedTitleOfQuiz = titleOfQuiz.split(' ')
             const lengthOfTitle = splittedTitleOfQuiz.length
             for (i = 0; i < lengthOfTitle; i++) {
                 FinalTitleOfQuiz = FinalTitleOfQuiz + '-' + splittedTitleOfQuiz[i]
             }
 
+            const fullUrl = window.location.href
+            const splitUrl = fullUrl.split('/')
+            localStorage.setItem('returnUrl', `/category/${splitUrl[4]}/${splitUrl[5]}`)
             window.location.replace(`/result/${FinalTitleOfQuiz}`);
+            
         }
     })
-
-
 } catch (e) { log('no nextQuestion btn')}
+
+//----------------------------------------------------------
+
+try {
+    const returnUrlData = localStorage.getItem('returnUrl')
+    result__return.href = returnUrlData
+} catch {
+    log('no result page')
+}

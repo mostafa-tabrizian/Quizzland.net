@@ -56,7 +56,7 @@ const result__score = document.querySelector('.result__score')
 const result__subtitle__txt = document.querySelector('.result__subtitle__txt')
 const result__detail__correctTime = document.querySelector('.result__detail__correctTime')
 const result__detail__wrongTime = document.querySelector('.result__detail__wrongTime')
-
+const result__return = document.querySelector('.result__return')
 
 const log = (code) => {
     console.log(code)
