@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import Column, Integer, String, Date, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from datetime import datetime
+import datetime
 
 documentBase = declarative_base()
 class Documents(documentBase):
@@ -18,11 +18,11 @@ class Quizzes(quizzesBase):
     id = Column(Integer, primary_key=True)
     title_eng = Column(String)
     title_far = Column(String)
-    img = Column(String)
+    background = Column(String)
     href = Column(String)
     fan_name = Column(String)
     views = Column(Integer)
-    publish = Column(Date)
+    publish = Column(DateTime, default=datetime.datetime.now)
 
     def __repr__(self):
         return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| link: {self.href}| view: {self.views}| publish: {self.publish}>"
@@ -37,7 +37,7 @@ class Categories(categoriesBase):
     category = Column(String)
     href = Column(String)
     views = Column(Integer)
-    publish = Column(Date)
+    publish = Column(DateTime, default=datetime.datetime.now)
     
     def __repr__(self):
         return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| category: {self.category} | link: {self.href}| view: {self.views}| publish: {self.publish}>"
@@ -64,6 +64,7 @@ class NewsletterUser(newsletterBase):
     id = Column(Integer, primary_key=True)
     userName = Column(String)
     email = Column(String)
+    added_on = Column(DateTime, default=datetime.datetime.now)
 
     def __repr__(self):
         return f"<id: {self.id} | name: {self.userName} | email: {self.email}"

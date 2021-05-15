@@ -75,11 +75,12 @@ def up_session():
 # data = Quizzes(
 #     title_far = 'بازی ذ ویتچر',
 #     title_eng = 'The Witcher',
-#     img = 'TRASH1.jpg',
+#     background = 'TRASH1.jpg',
 #     href = '/quiz/gaming/the-witcher/بازی-ذ-ویتچر',
 #     fan_name = '',
 #     views = 0,
 #     publish = datetime.datetime.now(),
+#     unixTime = Column(Integer)
 # )
 
 # data = Categories(
@@ -90,6 +91,7 @@ def up_session():
 #     category = 'celebrities', # celebrities, gaming, movie&series, physiologies
 #     views = 0,
 #     publish = datetime.datetime.now(),
+#     unixTime = Column(Integer),
 # )
 
 # data = quizQuestions(

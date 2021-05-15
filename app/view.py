@@ -107,9 +107,9 @@ def newsletter():
         else:
             return render_template('/no-success.html')
 
-@app.route('/notFound')
-def pageNotFount():
-    return render_template('404.html')
+# @app.route('/notFound')
+# def pageNotFount():
+#     return render_template('404.html')
 
 @app.errorhandler(404)
 def pageNotFound():
