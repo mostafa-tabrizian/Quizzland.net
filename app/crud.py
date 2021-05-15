@@ -9,24 +9,24 @@ session = sessionmaker(bind=engine)
 s = session()
 
 def recreate_documents():
-    Base0.metadata.drop_all(engine)
-    Base0.metadata.create_all(engine)
+    documentBase.metadata.drop_all(engine)
+    documentBase.metadata.create_all(engine)
 
 def recreate_quizzes():
-    Base1.metadata.drop_all(engine)
-    Base1.metadata.create_all(engine)
+    quizzesBase.metadata.drop_all(engine)
+    quizzesBase.metadata.create_all(engine)
 
 def recreate_categories():
-    Base2.metadata.drop_all(engine)
-    Base2.metadata.create_all(engine)
+    categoriesBase.metadata.drop_all(engine)
+    categoriesBase.metadata.create_all(engine)
 
 def recreate_newsletterUrl():
-    Base3.metadata.drop_all(engine)
-    Base3.metadata.create_all(engine)
+    newsletterBase.metadata.drop_all(engine)
+    newsletterBase.metadata.create_all(engine)
 
 def recreate_quizQuestions():
-    Base4.metadata.drop_all(engine)
-    Base4.metadata.create_all(engine)
+    quizQuestionsBase.metadata.drop_all(engine)
+    quizQuestionsBase.metadata.create_all(engine)
 
 
 
@@ -67,10 +67,10 @@ def up_session():
     finally:
         s.close()
 
-data = Documents(
-    title = 'title',
-    note = 'note'
-)
+# data = Documents(
+#     title = 'title',
+#     note = 'note'
+# )
 
 # data = Quizzes(
 #     title_far = 'بازی ذ ویتچر',
@@ -104,8 +104,8 @@ data = Documents(
 #     answer = 3,
 #     category = 'celebrities', # celebrities, gaming, movie&series, physiologies
 #     innerCategory = 'Taylor Swift',
-#     publish = datetime.datetime.now(),
 # )
+
 
 #--------------------
 # recreate_documents()
