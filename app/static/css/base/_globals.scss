@@ -246,6 +246,10 @@ input {
     bottom: 3rem;
     margin-left: 25%;
     transform: translate(-50%);
+
+    @include breakpoints-down(medium) {
+        margin-left: 7%;
+    }
 }
 
 .loadingScreen {

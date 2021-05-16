@@ -291,6 +291,12 @@ input {
           transform: translate(-50%);
 }
 
+@media (max-width: 49.9375em) {
+  .backBtn {
+    margin-left: 7%;
+  }
+}
+
 .loadingScreen {
   position: fixed;
   top: 0;
@@ -1741,6 +1747,7 @@ body {
 
 .basicPage {
   min-height: 44vh;
+  width: 85%;
   margin-left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
