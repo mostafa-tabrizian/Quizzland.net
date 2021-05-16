@@ -818,6 +818,10 @@ footer .newsletter textarea, .footer .newsletter textarea {
   display: none;
 }
 
+footer .newsletter > input, .footer .newsletter > input {
+  margin-left: 0.3rem;
+}
+
 footer .newsletter__categoryOptions, .footer .newsletter__categoryOptions {
   position: absolute;
   bottom: -2rem;
@@ -886,7 +890,7 @@ footer__navbar, .footer__navbar {
 }
 
 footer__navbar > li, .footer__navbar > li {
-  font-size: 1.18rem;
+  font-size: 0.98rem;
 }
 
 footer__navbar > li:not(:last-child), .footer__navbar > li:not(:last-child) {
@@ -898,7 +902,7 @@ footer__navbar > li:hover, .footer__navbar > li:hover {
 }
 
 footer__detail, .footer__detail {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 footer__detail > li, .footer__detail > li {
