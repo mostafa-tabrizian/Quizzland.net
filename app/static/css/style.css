@@ -1328,12 +1328,20 @@ body {
 
 .quizzes {
   margin-top: 2rem;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   min-height: 60vh;
+}
+
+@media (max-width: 49.9375em) {
+  .quizzes {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .quizzes__item {
@@ -1346,8 +1354,11 @@ body {
 
 @media (max-width: 49.9375em) {
   .quizzes__item {
-    width: 8rem;
-    height: 10.75rem;
+    width: 10rem;
+    height: 12.75rem;
+    margin-left: 0.66875rem;
+    margin-right: 0.66875rem;
+    margin-bottom: 1.23757rem;
   }
 }
 

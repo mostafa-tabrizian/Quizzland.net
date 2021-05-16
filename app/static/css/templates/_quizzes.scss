@@ -6,9 +6,13 @@ body {
 
 .quizzes {
     margin-top: 2rem;
-    flex-wrap: wrap;
     justify-content: flex-end;
+    flex-wrap: wrap;
     min-height: 60vh;
+
+    @include breakpoints-down(medium) {
+        justify-content: center;
+    }
 
     &__item {
         width: 12.5rem;
@@ -18,8 +22,11 @@ body {
         margin-bottom:  1.93757rem;
 
         @include breakpoints-down(medium) {
-            width: 8rem;
-            height: 10.75rem;
+            width: 10rem;
+            height: 12.75rem;
+            margin-left: 0.66875rem;
+            margin-right: 0.66875rem;
+            margin-bottom: 1.23757rem;
         }
 
         & a > img {
