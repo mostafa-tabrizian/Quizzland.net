@@ -52,7 +52,7 @@ def newestQuiz(page):
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template('/newest.html',
                             newest = newestQuizForNewestPage(fr, to),
-                            lastPage = lastPageOfNewest(howManyElementToShow))
+                            lastPage = lastPage(howManyElementToShow, 'newest'))
 
 @app.route('/mostViews/<int:page>')
 def mostViewsQuiz(page):
@@ -61,8 +61,7 @@ def mostViewsQuiz(page):
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template('/mostViews.html',
                             mostViews = mostViewsQuizForMostViewsPage(fr, to),
-                            lastPage = lastPageOfMostViews(howManyElementToShow))
-
+                            lastPage = lastPage(howManyElementToShow, 'mostViews'))
 
 @app.route('/category/<category>/<int:page>')
 def Category(category, page):
@@ -71,7 +70,7 @@ def Category(category, page):
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template(f'/category/category.html',
                             categories = categories(category, fr, to),
-                            lastPage = lastPageOfCategory(category, howManyElementToShow))
+                            lastPage = lastPage(howManyElementToShow, category))
     
 @app.route('/category/<category>/<innerCategory>')
 def innerCategory(category, innerCategory):
