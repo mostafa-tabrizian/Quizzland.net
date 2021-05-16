@@ -47,7 +47,10 @@
             z-index: 5;
             position: fixed;
             top: 0; left: 0;
-            background-image: url("/static/img/hero-bg.jpg");
+            background: url("/static/img/hero-bg.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             height: 100vh;
             width: 100vw;
             transition: all .3s ease;
@@ -64,6 +67,12 @@
                     padding-bottom: 1.3rem;
                     font-size: $font-l;
 
+                    & > a {
+                        &:hover {
+                            color: inherit;
+                        }
+                    }
+
                     &:not(:last-child) {
                         padding-bottom: 2rem;
                     }
@@ -73,6 +82,12 @@
 
                         > li {
                             padding-top: 1.125rem;
+
+                            & > a {
+                                &:hover {
+                                    color: inherit;
+                                }
+                            }
                         }
                     }
                 }
