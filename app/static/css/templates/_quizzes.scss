@@ -111,12 +111,13 @@ body {
         font-family: $font-sec;
         font-weight: 600;
         font-size: $font-sm;
-        background: #690d11;
         min-height: 4rem;
         color: white;
         padding: 19px;
         margin: -2px;
-        border-radius: 17px 17px 0 0;
+        border-radius: 23px 25px 0 0;
+        background: #00000065;
+        backdrop-filter: blur(165px);
     }
 
     &__hider {
@@ -183,9 +184,7 @@ body {
             cursor: pointer;
 
             &:hover {
-                // box-shadow: 0 5px 15px $darkRed;
-            border: 2px solid $darkRed;
-
+                background: #00000017;
             }
 
             &::before {
@@ -225,9 +224,8 @@ body {
         }
         
         [type="radio"]:checked + label {
-            background: $red-grad;
-            color: $white;
-            padding: .8rem;
+            background: #0000005e;
+            backdrop-filter: blur(93px);
             &::before {
                 color: white;
             }

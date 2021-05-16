@@ -631,10 +631,13 @@ input {
 }
 
 .header__searchInput {
-  border: 1px solid #690D11;
+  border: 1px solid #8080808f;
   font-family: harmattan, myHarmattan, sans-serif, serif;
   font-size: 1.18rem;
-  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.178);
+  -webkit-backdrop-filter: blur(165px);
+          backdrop-filter: blur(165px);
+  border-radius: 15px;
   height: 2.125rem;
   padding-right: 1.3125rem;
   width: 50%;
@@ -1427,12 +1430,14 @@ body {
   font-family: myChanga, sans-serif, serif;
   font-weight: 600;
   font-size: 1.18rem;
-  background: #690d11;
   min-height: 4rem;
   color: white;
   padding: 19px;
   margin: -2px;
-  border-radius: 17px 17px 0 0;
+  border-radius: 23px 25px 0 0;
+  background: #00000065;
+  -webkit-backdrop-filter: blur(165px);
+          backdrop-filter: blur(165px);
 }
 
 .quiz__hider {
@@ -1509,7 +1514,7 @@ body {
 }
 
 .quiz__4option label:hover {
-  border: 2px solid #690D11;
+  background: #00000017;
 }
 
 .quiz__4option label::before {
@@ -1545,9 +1550,9 @@ body {
 }
 
 .quiz__4option [type="radio"]:checked + label {
-  background: linear-gradient(-45deg, #4D1420, #9D272D);
-  color: #f0f0f0;
-  padding: .8rem;
+  background: #0000005e;
+  -webkit-backdrop-filter: blur(93px);
+          backdrop-filter: blur(93px);
 }
 
 .quiz__4option [type="radio"]:checked + label::before {

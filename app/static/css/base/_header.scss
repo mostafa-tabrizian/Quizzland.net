@@ -96,10 +96,12 @@
     }
 
     &__searchInput {
-        border: 1px solid $darkRed;
+        border: 1px solid #8080808f;
         font-family: $font-pr;
         font-size: $font-sm;
-        border-radius: 50px;
+        background: rgba(0, 0, 0, 0.178);
+        backdrop-filter: blur(165px);
+        border-radius: 15px;
         height: 2.125rem;
         padding-right: 1.3125rem;
         width: 50%;
