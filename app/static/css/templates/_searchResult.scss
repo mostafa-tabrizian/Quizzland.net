@@ -2,6 +2,10 @@
     text-align: center;
     min-height: 60vh;
     
+    @include breakpoints-down(medium) {
+        min-height: 120vh;
+    }
+
     &__category {
         flex-wrap: wrap;
         justify-content: center;
@@ -11,10 +15,10 @@
         @include breakpoints-down(medium) {
             width: 100%;
         }
-        
+
         > h4 {
             width: 100%;
-            margin: -1rem 0 2rem 0;
+            margin: 0 0 2rem 0;
         }
     
         &__item {
@@ -27,6 +31,10 @@
             @include breakpoints-down(medium) {
                 width: 10rem;
                 height: 14.75rem;
+            }
+
+            &__notFound {
+                margin: 0 !important;
             }
     
             & a > img {
@@ -61,6 +69,11 @@
             width: 65%;
             display: block;
             margin-bottom: 1rem;
+
+            @include breakpoints-down(medium) {
+                text-align: center;
+                width: 100%;
+            }
 
             &::after {
                 content: '◾';

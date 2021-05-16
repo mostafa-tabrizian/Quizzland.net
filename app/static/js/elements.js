@@ -47,6 +47,7 @@ const lastPageNumberDOM = document.querySelector('.lastPage > a')
 const searchResult__category__item = document.querySelector('.searchResult__category__item')
 const searchResult__category__item__notFound = document.querySelector('.searchResult__category__item__notFound')
 const searchResult__quizzes = document.querySelector('.searchResult__quizzes')
+const searchResult__quizzes__item = document.querySelector('.searchResult__quizzes__item')
 const searchResult__quizzes__item__notFound = document.querySelector('.searchResult__quizzes__item__notFound')
 const searchResult__quizzes__seeMore = document.querySelector('.searchResult__quizzes__seeMore')
 

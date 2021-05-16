@@ -220,18 +220,18 @@ try {
 try {
     try {
         searchResult__category__item.addEventListener('click', () => {return})
-    } catch (e) {
-        searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد'
-        searchResult__category__item__notFound.classList.add('space-sm')
+    } catch {
+        searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'
     }
 
     const countSearchResult = searchResult__quizzes.childElementCount
     if (countSearchResult == 4) { // empty
-        searchResult__quizzes__seeMore.innerHTML = 'هیچ کوئیزی پیدا نشد'
+        searchResult__quizzes__item__notFound.innerHTML = 'هیچ کوئیزی پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'
+        searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis')
     } else if (countSearchResult <= 11) {
         searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
         }
-} catch (e) { log('no search result page') }
+} catch {log('no search result page')}
 
 //----------------------------------------------------------
 

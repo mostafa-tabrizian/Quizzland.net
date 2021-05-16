@@ -1719,6 +1719,12 @@ body {
   min-height: 60vh;
 }
 
+@media (max-width: 49.9375em) {
+  .searchResult {
+    min-height: 120vh;
+  }
+}
+
 .searchResult__category {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
@@ -1737,7 +1743,7 @@ body {
 
 .searchResult__category > h4 {
   width: 100%;
-  margin: -1rem 0 2rem 0;
+  margin: 0 0 2rem 0;
 }
 
 .searchResult__category__item {
@@ -1753,6 +1759,10 @@ body {
     width: 10rem;
     height: 14.75rem;
   }
+}
+
+.searchResult__category__item__notFound {
+  margin: 0 !important;
 }
 
 .searchResult__category__item a > img {
@@ -1790,6 +1800,13 @@ body {
   width: 65%;
   display: block;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 49.9375em) {
+  .searchResult__quizzes__item {
+    text-align: center;
+    width: 100%;
+  }
 }
 
 .searchResult__quizzes__item::after {
