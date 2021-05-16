@@ -14,6 +14,11 @@ const menu = document.querySelector('.header__menu__m')
 const header__searchInput = document.querySelector('.header__searchInput')
 const header__searchSubmit = document.querySelector('.header__searchSubmit')
 
+const newsletter__chooseCategory = document.querySelector('.newsletter__chooseCategory')
+const newsletter__categoryOptions = document.querySelector('.newsletter__categoryOptions')
+const newsletter__categoryOptions__input = document.querySelectorAll('.newsletter__categoryOptions input')
+const newsletter__categoryOptions__selectedByUser = document.querySelector('.newsletter__categoryOptions__selectedByUser')
+
 const tools__search = document.querySelector('.tools__search')
 const tools__submit = document.querySelector('.tools__submit')
 const tools__sortType = document.querySelector('.tools__sortType')
@@ -35,6 +40,7 @@ const pageTravel__pages__curr = document.querySelector('.pageTravel__pages__curr
 const pageTravel__pages__next = document.querySelector('.pageTravel__pages__next')
 const pageTravel__pages__nextTwo = document.querySelector('.pageTravel__pages__nextTwo')
 const pageTravel__pages__last = document.querySelector('.pageTravel__pages__last')
+
 const lastPageDOM = document.querySelector('.lastPage')
 const lastPageNumberDOM = document.querySelector('.lastPage > a')
 

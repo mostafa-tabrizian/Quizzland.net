@@ -28,13 +28,30 @@ footer, .footer {
         }
     }
 
-    @include breakpoints-down(medium) {
-                
-        &__userName {
-            width: 17rem
+    .newsletter {
+        display: inline-flex;
+        position: relative;
 
+        & textarea {
+            display: none;
         }
-        form {
+
+        &__categoryOptions {
+            position: absolute;
+            bottom: -2rem;
+            margin-left: 50%;
+            transform: translate(-50%);
+
+            & > label:nth-child(3) {
+                width: 6rem;
+            }
+
+            & > input {
+                margin-right:1.125rem;
+            }
+        }
+
+        @include breakpoints-down(medium) {
             display: grid;
             margin: 0 auto !important;
 
@@ -43,14 +60,32 @@ footer, .footer {
                 width: 60% !important;
             }
 
-            button {
+            &__categoryOptions {
+                bottom: -4rem;
+            }
+
+            &__submit {
                 order: 3;
                 width: 60%;
                 margin: 0 auto;
                 margin-top: 0.425rem;
             }
-        }
 
+            &__chooseCategory {
+                order: -1;
+                width: 60%;
+                margin: 0 auto;
+                margin-top: 0.425rem;
+            }
+        }
+    }
+
+    @include breakpoints-down(medium) {
+                
+        &__userName {
+            width: 17rem
+
+        }
     }
     
     &__navbar {

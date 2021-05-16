@@ -78,19 +78,38 @@
 
 
 <footer class="footer-for-mobile tx-al-c">
-    <form action="/newsletter" method="post">
-        <p class="tx-al-c"> اگه هیجان داری کوئیز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا ایمیلت رو وارد کنی که سریعتر از هر کسی خبردار بشی </p>
-        <button class='btn__grad-green gls' type="submit" method="POST">ثبت نام</button>
+    <p class="tx-al-c"> اگه هیجان داری کوئیز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا ایمیلت رو وارد کنی که سریعتر از هر کسی خبردار بشی </p>
+    <p class="tx-al-c"> کتگوری مورد علاقه‌ات رو انتخاب کن تا اگه چیز باحالی اومد خبرت کنیم </p>
+    <form class="newsletter" action="/newsletter" method="post">
+        <button class='newsletter__submit btn__grad-green gls' type="submit" method="POST">ثبت نام</button>
         <input class="input" name="userEmail" type="email" placeholder='  ایمیل ...' required>
         <input class="input input__userName" name="userName"  type="text" placeholder='  نام ...' minlength="3" maxlength = "15" required>
+        <textarea class="newsletter__categoryOptions__selectedByUser" name='chosenCategory'></textarea>
+        <div class="newsletter__categoryOptions flex flex-ai-c">
+            
+            <label for="physiologies">روانشناسی</label>
+            <input type="checkbox" name="physiologies" id="physiologies">
+    
+            <label for="movieSeries">فیلم و سریال</label>
+            <input type="checkbox" name="movieSeries " id="movieSeries ">
+    
+            <label for="gaming">گیمینگ</label>
+            <input type="checkbox" name="gaming " id="gaming ">
+    
+            <label for="celebrities">سلبریتی</label>
+            <input type="checkbox" name="celebrities " id="celebrities ">
+    
+        </div>
     </form>
+
+    <div class="space-sm"></div>
 
     <div>
         <ul class="footer__navbar flex flex-jc-c flex-ai-c">
             <li><a href="/"><img class="flex flex-ai-c" src="/static/img/logo.png" alt=""></a></li>
             <li><a href="/#category">کتگوری ها</a></li>
             <li><a href="/about">درباره‌ی ما</a></li>
-            <li><a href="">تماس با ما</a></li>
+            <li><a href="/contact">تماس با ما</a></li>
         </ul>
         <ul class="footer__detail flex flex-jc-c flex-ai-c">
             <li><a href="/adverts">تبلیغات</a></li>

@@ -106,10 +106,13 @@ def adverts():
 def newsletter():
     userEmail = request.form['userEmail']
     userName = request.form['userName']
+    userCategoriesFavorite = request.form['chosenCategory']
+
     if request.method == 'POST':
         data = NewsletterUser(
             userName = userName,
-            email =  userEmail
+            email =  userEmail,
+            favorite_Category = userCategoriesFavorite,
         )
         srchInDb = s.query(NewsletterUser).filter(NewsletterUser.email.ilike(userEmail)).all()
 

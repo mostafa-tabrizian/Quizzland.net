@@ -64,6 +64,7 @@ class NewsletterUser(newsletterBase):
     id = Column(Integer, primary_key=True)
     userName = Column(String)
     email = Column(String)
+    favorite_Category = Column(String)
     added_on = Column(DateTime, default=datetime.datetime.now)
 
     def __repr__(self):

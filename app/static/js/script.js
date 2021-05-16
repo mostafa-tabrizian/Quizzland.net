@@ -111,6 +111,33 @@ try {
 }
 
 //----------------------------------------------------------
+try {
+    let chosenCategory = []
+    
+    newsletter__categoryOptions__input.forEach(each => {
+
+        
+        each.addEventListener('click', () => {
+
+            inputOfTheCategory = each.checked
+            if (inputOfTheCategory == true) {
+                log(each.id)
+                chosenCategory.push(each.id)
+            } else {
+                indexOfChosenToRemove = chosenCategory.indexOf(each.id)
+                chosenCategory.splice(indexOfChosenToRemove, 1)
+            }
+
+            newsletter__categoryOptions__selectedByUser.innerHTML = chosenCategory
+
+        })
+    })
+
+} catch {
+    log('no newsletter')
+}
+
+//----------------------------------------------------------
 
 // Show the detail of the category
 categories__item.forEach(item => 
@@ -289,7 +316,7 @@ try {
         checkIfEndedTheQuizAndShowResultPage()
     })
 
-} catch (e) { log('no nextQuestion btn'), log(e)}
+} catch (e) { log('no nextQuestion btn')}
 
 //----------------------------------------------------------
 
