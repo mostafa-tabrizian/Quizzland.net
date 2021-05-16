@@ -1729,6 +1729,12 @@ body {
   width: 50%;
 }
 
+@media (max-width: 49.9375em) {
+  .searchResult__category {
+    width: 100%;
+  }
+}
+
 .searchResult__category > h4 {
   width: 100%;
   margin: -1rem 0 2rem 0;
@@ -1771,6 +1777,19 @@ body {
 .searchResult__quizzes {
   float: left;
   width: 50%;
+}
+
+@media (max-width: 49.9375em) {
+  .searchResult__quizzes {
+    width: 100%;
+  }
+}
+
+.searchResult__quizzes__item {
+  text-align: right;
+  width: 65%;
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .searchResult__quizzes__item::after {
