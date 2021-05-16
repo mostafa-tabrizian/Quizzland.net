@@ -9,7 +9,7 @@
     <title>Quiz Land</title>
 </head>
 
-<header class="header {{header__noBg}}">
+<header class="header">
     <nav class="flex flex-ai-c flex-jc-sb">
 
         <!-- Search -->
@@ -17,7 +17,7 @@
             <a class="header__logo flex flex-jc-sb hide-for-desktop" href="/" class="">
                 <img src="/static/img/logo.png" alt="QuizLand">
             </a>
-            <form class="header__search flex" action="/search" method="post">
+            <form class="header__search {{colorOfHeader}} flex" action="/search" method="post">
                 <input class='header__searchSubmit fade flex flex-ai-c' type="image" src="/static/img/srch-black.svg" alt="">
                 <input class='header__searchInput gls tx-al-r' type="search" name='userSearchInput' placeholder="...جستجو">
             </form>
@@ -51,7 +51,7 @@
         </div>
 
         <!-- Links -->
-        <div class="header__links hide-for-mobile hover flex flex-ai-c">
+        <div class="header__links {{colorOfHeader}} hide-for-mobile hover flex flex-ai-c">
             <a href="/contact">تماس با ما</a>
             <a href="/about">درباه‌ی ما</a>
             <a class="header__categories__button">کتگوری‌ها</a>

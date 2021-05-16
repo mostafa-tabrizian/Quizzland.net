@@ -209,7 +209,7 @@ input {
 
         &::after{
             content: '';
-            border-bottom: 2px solid $white;
+            border-bottom: 2px solid $black;
             width: 0%;
             display: block;
             transition: width 0.3s ease;   
@@ -292,6 +292,28 @@ input {
 .center {
     margin-left: 50%;
     transform: translate(-50%)
+}
+
+.beforeAfterDecor {
+    &::before {
+        content: '';
+        width: 5.18rem;
+        height: 0.487rem;
+        background: #363636;
+        margin-right: 1rem;
+        display: inline-flex;
+        margin-right: 1rem;
+    }
+
+    &::after {
+        content: '';
+        width: 5.18rem;
+        height: 0.487rem;
+        background: #363636;
+        margin-right: 1rem;
+        display: inline-flex;
+        margin-left: 1rem;
+    }
 }
 
 .shadow {

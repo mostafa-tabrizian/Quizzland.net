@@ -5,7 +5,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def Main():
-    return render_template('index.html', sortNewest = sortNewest(), sortMostViews = sortMostViews(), header__noBg = 'header__noBg')
+    return render_template('index.html',
+                            sortNewest = sortNewest(),
+                            sortMostViews = sortMostViews(),
+                            colorOfHeader = 'header__white')
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -47,14 +50,18 @@ def newestQuiz(page):
     howManyElementToShow = 5
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template('/newest.html', newest = newestQuizForNewestPage(fr, to), lastPage = lastPageOfNewest(howManyElementToShow))
+    return render_template('/newest.html',
+                            newest = newestQuizForNewestPage(fr, to),
+                            lastPage = lastPageOfNewest(howManyElementToShow))
 
 @app.route('/mostViews/<int:page>')
 def mostViewsQuiz(page):
     howManyElementToShow = 5
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template('/mostViews.html', mostViews = mostViewsQuizForMostViewsPage(fr, to), lastPage = lastPageOfMostViews(howManyElementToShow))
+    return render_template('/mostViews.html',
+                            mostViews = mostViewsQuizForMostViewsPage(fr, to),
+                            lastPage = lastPageOfMostViews(howManyElementToShow))
 
 
 @app.route('/category/<category>/<int:page>')
@@ -62,24 +69,32 @@ def Category(category, page):
     howManyElementToShow = 8
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template(f'/category/category.html', categories = categories(category, fr, to), lastPage = lastPageOfCategory(category, howManyElementToShow))
+    return render_template(f'/category/category.html',
+                            categories = categories(category, fr, to),
+                            lastPage = lastPageOfCategory(category, howManyElementToShow))
     
 @app.route('/category/<category>/<innerCategory>')
 def innerCategory(category, innerCategory):
     fullTitle = titleConverterFromUrlToNormalOne(innerCategory)
     addViewToCategories(fullTitle)
-    return render_template(f'/category/inner-category-list.html', quizzes_FilterByTitle = quizzes_FilterByTitle(fullTitle))
+    return render_template(f'/category/inner-category-list.html',
+                             quizzes_FilterByTitle = quizzes_FilterByTitle(fullTitle))
 
 @app.route('/quiz/<category>/<sub_category>/<title>')
 def Quiz(category, sub_category, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
-    return render_template('/quiz.html', quizDetail = quizDetail(fullTitle.strip()), quiz_Question = quiz_Question(fullTitle.strip()))
+    return render_template('/quiz.html',
+                            quizDetail = quizDetail(fullTitle.strip()),
+                            quiz_Question = quiz_Question(fullTitle.strip()),
+                            colorOfHeader = 'header__white')
 
 @app.route('/result/<title>')
 def result(title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
-    return render_template('/result.html', fullTitle = fullTitle, fanName = fanNameOfQuiz(fullTitle))
+    return render_template('/result.html',
+                            fullTitle = fullTitle,
+                            fanName = fanNameOfQuiz(fullTitle))
 
 
 @app.route('/about')

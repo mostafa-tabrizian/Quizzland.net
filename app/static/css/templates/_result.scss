@@ -17,26 +17,6 @@
 
     &__subtitle {
         font-size: $font-xl;
-
-        &::before {
-            content: '';
-            width: 5.18rem;
-            height: 0.487rem;
-            background: #363636;
-            margin-right: 1rem;
-            display: inline-flex;
-            margin-right: 1rem;
-        }
-
-        &::after {
-            content: '';
-            width: 5.18rem;
-            height: 0.487rem;
-            background: #363636;
-            margin-right: 1rem;
-            display: inline-flex;
-            margin-left: 1rem;
-        }
     }
 
     &__share {

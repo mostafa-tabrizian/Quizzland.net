@@ -1,2 +1,0 @@
-columns of sql:
-id, title, img, link, publish date, views
