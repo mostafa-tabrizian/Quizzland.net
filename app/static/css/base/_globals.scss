@@ -8,6 +8,15 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 
+body::-webkit-scrollbar {
+    width: 10px;
+  }
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.452) ;
+    border-radius: 25px;
+}
+
 html {
     font-size: 100%;
     box-sizing: border-box;
