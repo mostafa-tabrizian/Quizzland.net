@@ -75,14 +75,26 @@ body {
 .space {
     &-sm {
         padding-top: 2rem;
+
+        @include breakpoints-down(medium) {
+            padding-top: 1rem;
+        }
     }
 
     &-med {
         padding-top: 5rem;
+
+        @include breakpoints-down(medium) {
+            padding-top: 2.5rem;
+        }
     }
 
     &-l{
         padding-top: 8rem;
+
+        @include breakpoints-down(medium) {
+            padding-top: 4rem;
+        }
     }
 }
 

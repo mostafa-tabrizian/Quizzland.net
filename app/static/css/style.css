@@ -121,12 +121,30 @@ body {
   padding-top: 2rem;
 }
 
+@media (max-width: 49.9375em) {
+  .space-sm {
+    padding-top: 1rem;
+  }
+}
+
 .space-med {
   padding-top: 5rem;
 }
 
+@media (max-width: 49.9375em) {
+  .space-med {
+    padding-top: 2.5rem;
+  }
+}
+
 .space-l {
   padding-top: 8rem;
+}
+
+@media (max-width: 49.9375em) {
+  .space-l {
+    padding-top: 4rem;
+  }
 }
 
 .divider {
@@ -575,7 +593,7 @@ input {
   display: block;
   width: 1.625rem;
   height: 0.125rem;
-  background-color: #f0f0f0;
+  background-color: #161616;
 }
 
 .header__menu > span:not(:last-child) {
@@ -718,33 +736,8 @@ input {
   pointer-events: visibleFill;
 }
 
-.header__colorChange .header__menu > span {
-  background-color: #690D11;
-}
-
-.header__colorChange .header__links a {
-  color: #690D11;
-}
-
-.header__background {
-  background: -webkit-gradient(linear, left top, left bottom, from(0), color-stop(#4D1420), to(#9D272D));
-  background: linear-gradient(0, #4D1420, #9D272D);
-}
-
-.header__background .header__search::-webkit-input-placeholder {
-  color: black;
-}
-
-.header__background .header__search:-ms-input-placeholder {
-  color: black;
-}
-
-.header__background .header__search::-ms-input-placeholder {
-  color: black;
-}
-
-.header__background .header__search::placeholder {
-  color: black;
+.header__white span {
+  background-color: #f0f0f0 !important;
 }
 
 .header__white a {
