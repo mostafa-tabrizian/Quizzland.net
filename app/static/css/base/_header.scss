@@ -125,27 +125,39 @@
             color: black
         }
 
+        &:focus {
+            box-shadow: -2px 2px 5px black;
+        }
     }
 
-    .arw {
-        opacity: 0;
-        position: absolute;
-        top: 7rem;
-        right: 6.5rem;
-        transition: all .3s ease;
-    }
+    // .arw {
+    //     opacity: 0;
+    //     position: absolute;
+    //     top: 7rem;
+    //     right: 6.5rem;
+    //     width: 1.12rem;
+    //     height: 1.12rem;
+    //     border-left: 14px solid transparent;
+    //     border-right: 14px solid transparent;
+    //     border-radius: -14px;
+    //     border-bottom: 18px solid #0000008c;
+    // }
     
-    .arw__open {
-        opacity: 1;
-        top: 4.5rem;
-    }
+    // .arw__open {
+    //     opacity: 1;
+    //     top: 4.5rem;
+    // }
 
     &__categories {
         color: $white;
         position: absolute;
         right: 5rem;
         top: 7rem;
-        background: $darkBlue;
+        border: 1px solid transparent;
+        background: rgba(0, 0, 0, 0.178);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 2px 2px 5px black;
         border-radius: 20px;
         padding: 1.875rem 1.625rem;
         opacity: 0;

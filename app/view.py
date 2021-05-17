@@ -99,7 +99,6 @@ def result(title):
                             fullTitle = fullTitle,
                             fanName = fanNameOfQuiz(fullTitle))
 
-
 @app.route('/about')
 def about():
     return render_template('/about.html')

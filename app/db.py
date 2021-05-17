@@ -38,28 +38,26 @@ def finalPage(howManyElementToShow, whichSortWantToKnowTheFinalPage):
         str(finalPage)
         return finalPage
 
+def addView(whichShouldAddViewToIt):
+    whichShouldAddViewToIt.views += 1
+
 def addViewToQuizzes(title):
     data = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
-    data.views += 1
+    addView(data)
     add_session(data)
 
 def addViewToCategories(title):
     data = s.query(Categories).filter(Categories.title_eng.ilike(f'%{title}%')).first()
-    data.views += 1
+    addView(data)
     add_session(data)
 
 def categories(category, fr, to):
     categories = s.query(Categories).filter(Categories.category == category).all()[fr:to]
     return categories
 
-
-
 def quizzes_sortByDate():
     quizzesByDate = s.query(Quizzes).order_by(Quizzes.publish.desc()).all()
     return quizzesByDate
-
-def quizzes_sortByViews():
-    return
 
 def quizzes_FilterByTitle(Title):
     quizzesFilterByTitle = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{Title}%')).all()
@@ -72,7 +70,6 @@ def quiz_Question(title):
 def quizDetail(title):
     quiz_Detail = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
     return quiz_Detail
-
 
 def fanNameOfQuiz(title):
     quiz_Detail = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()

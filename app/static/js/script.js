@@ -9,25 +9,19 @@ window.onload = (event) => {
 
 // open and close the category list when click on category in the list
 header__categories__button.addEventListener('click', () => {
-    
     if (header__categories.classList.contains('header__categories__open')) {
         header__categories.classList.remove('header__categories__open')
-        arw.classList.remove('arw__open')
+        // arw.classList.remove('arw__open')
     }
     else {
         header__categories.classList.add('header__categories__open')
-        arw.classList.add('arw__open')
+        // arw.classList.add('arw__open')
     }
 })
-
-//----------------------------------------------------------
-
-// close the category list or hide the submit btn when click on anywhere of page
 body.addEventListener('click', () => {
-    
     if (getComputedStyle(categories).opacity == 1) {
         categories.classList.remove('header__categories__open')
-        arw.classList.remove('arw__open')
+        // arw.classList.remove('arw__open')
     }
 })
 
@@ -38,12 +32,13 @@ body.addEventListener('click', () => {
 btnMenu.addEventListener('click', () => {
     menu.classList.remove('fade')
 })
-
 btnMenuClose.addEventListener('click', () => {
     menu.classList.add('fade')
 })
 
-// show the submit srch btn when active
+//----------------------------------------------------------
+
+// show the submit search btn when active
 header__searchInput.addEventListener('click', () => {
     header__searchSubmit.classList.remove('fade')
 })
@@ -53,7 +48,7 @@ header__searchInput.addEventListener('blur', () => {
 
 //----------------------------------------------------------
 
-// show the submit srch category btn when active
+// show the submit search category btn when active
 try {
 
     tools__search.addEventListener('click', () => {
@@ -115,13 +110,9 @@ try {
     let chosenCategory = []
     
     newsletter__categoryOptions__input.forEach(each => {
-
-        
         each.addEventListener('click', () => {
-
             inputOfTheCategory = each.checked
-            if (inputOfTheCategory == true) {
-                log(each.id)
+            if (inputOfTheCategory == true) { //checked
                 chosenCategory.push(each.id)
             } else {
                 indexOfChosenToRemove = chosenCategory.indexOf(each.id)
@@ -129,10 +120,8 @@ try {
             }
 
             newsletter__categoryOptions__selectedByUser.innerHTML = chosenCategory
-
         })
     })
-
 } catch {
     log('no newsletter')
 }
@@ -140,19 +129,19 @@ try {
 //----------------------------------------------------------
 
 // Show the detail of the category
-categories__item.forEach(item => 
-    item.addEventListener('mouseover', () => {
-        const categories__item__img = item.querySelector('.categories__item__img')
-        categories__item__img.classList.add('categories__item__detail__show')
-    })
-)
+// categories__item.forEach(item => 
+//     item.addEventListener('mouseover', () => {
+//         const categories__item__img = item.querySelector('.categories__item__img')
+//         categories__item__img.classList.add('categories__item__detail__show')
+//     })
+// )
     
-categories__item.forEach(item =>
-    item.addEventListener('mouseout', () => {
-        const categories__item__img = item.querySelector('.categories__item__img')
-        categories__item__img.classList.remove('categories__item__detail__show')
-    })
-)
+// categories__item.forEach(item =>
+//     item.addEventListener('mouseout', () => {
+//         const categories__item__img = item.querySelector('.categories__item__img')
+//         categories__item__img.classList.remove('categories__item__detail__show')
+//     })
+// )
 
 //----------------------------------------------------------
 
@@ -221,7 +210,6 @@ try {
     if (currPageNumber + 3 == finalPageNumberDOM.innerHTML) {
         finalPageDOM.classList.add('noVis')
     }
-
 } catch (e) {
     log('No page travel')
 }
@@ -237,12 +225,14 @@ try {
     }
 
     const countSearchResult = searchResult__quizzes.childElementCount
+
     if (countSearchResult == 4) { // empty
         searchResult__quizzes__item__notFound.innerHTML = 'هیچ کوئیزی پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'
-        searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis')
-    } else if (countSearchResult <= 11) {
+    }
+
+    if (countSearchResult == 4 || countSearchResult <= 11) {
         searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
-        }
+    }
 } catch {log('no search result page')}
 
 //----------------------------------------------------------
@@ -250,11 +240,12 @@ try {
 // quiz questions
 try {
     let currentQuestion = 1
-    quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
     const numberOfQuestions = quiz__container.length
+
     quiz__numberOfQuestions.innerHTML = `سوال&nbsp:&nbsp&nbsp${numberOfQuestions}`
     quiz__questionCounter__totalQuestions.innerHTML = numberOfQuestions
-
+    quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
+    
     const pauseTheFunctionOfChangingQuestions = () => {
         quiz__questionChanger__next.style.pointerEvents = 'none';
         quiz__questionChanger__last.style.pointerEvents = 'none';
@@ -263,38 +254,39 @@ try {
             quiz__questionChanger__last.style.pointerEvents = 'visible';
         }, 1500)
     }
-    const checkIfEndedTheQuizAndShowResultPage = () => {
+    const titleOfTheQuiz = () => {
+        const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
+        const splittedTitleOfQuiz = titleOfQuiz.split(' ')
+        splittedTitleOfQuiz.forEach(each => {
+            FinalTitleOfQuiz += `-${each}`
+        })
+        return FinalTitleOfQuiz
+    }
+    const checkIfTheQuizEndedAndShowResultPage = () => {
         let FinalTitleOfQuiz = ''
         if (currentQuestion - 1 == numberOfQuestions) {
             calculateResult()
-            const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
-            const splittedTitleOfQuiz = titleOfQuiz.split(' ')
-            splittedTitleOfQuiz.forEach(each => {
-                FinalTitleOfQuiz += `-${each}`
-            })
+            FinalTitleOfQuiz = titleOfTheQuiz()
             window.location.replace(`/result/${FinalTitleOfQuiz}`); 
         }
     }
     const plusOneToAnsweredQuestionsIfItsNotTheLast = () => {
-        if (currentQuestion - 1 != numberOfQuestions) {
-            currentQuestion = currentQuestion + 1
+        if (currentQuestion != numberOfQuestions + 1) {
+            currentQuestion += 1
             quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
         }
     }
-    const changeToNextQuestion = () => {
+
+    const next = -1076.05
+    const last = +1076.05
+    const goToAnotherQuestion = (changeToWhat) => {
         quiz__container.forEach(each => {
             currQuestionPosition = parseInt(getComputedStyle(each).left)
-            currQuestionPosition = currQuestionPosition - 1076.05
+            currQuestionPosition = currQuestionPosition + changeToWhat
             each.style.left = `${currQuestionPosition}px`
         })
     }
-    const changeToLastQuestion = () => {
-        quiz__container.forEach(each => {
-            currQuestionPosition = parseInt(getComputedStyle(each).left)
-            currQuestionPosition = currQuestionPosition + 1076.05
-            each.style.left = `${currQuestionPosition}px`
-        })
-    }
+
     const minusOneToAnsweredQuestionsIfItsNotTheFirst = () => {
         if (currentQuestion != 1) {
             currentQuestion = currentQuestion - 1
@@ -305,28 +297,27 @@ try {
     quiz__options.forEach(each => {
         each.addEventListener('click', () => {
             plusOneToAnsweredQuestionsIfItsNotTheLast()
-            changeToNextQuestion()
+            goToAnotherQuestion(next)
             pauseTheFunctionOfChangingQuestions()
-            checkIfEndedTheQuizAndShowResultPage()
+            checkIfTheQuizEndedAndShowResultPage()
         })
     })
 
     quiz__questionChanger__next.addEventListener('click', () => {
         plusOneToAnsweredQuestionsIfItsNotTheLast()
-        changeToNextQuestion()
+        goToAnotherQuestion(next)
         pauseTheFunctionOfChangingQuestions()
-        checkIfEndedTheQuizAndShowResultPage()
+        checkIfTheQuizEndedAndShowResultPage()
     })
 
     quiz__questionChanger__last.addEventListener('click', () => {
         if (currQuestionPosition > -500) {
             return "there is no last question"
         }
-
         minusOneToAnsweredQuestionsIfItsNotTheFirst()
-        changeToLastQuestion()
+        goToAnotherQuestion(last)
         pauseTheFunctionOfChangingQuestions()
-        checkIfEndedTheQuizAndShowResultPage()
+        checkIfTheQuizEndedAndShowResultPage()
     }) 
 } catch (e) { log('no nextQuestion btn')}
 
