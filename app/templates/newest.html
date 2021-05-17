@@ -4,7 +4,7 @@
 <div class="newest-mostViews">
     <h3>جدیدترین کوئیز ها</h3>
 
-    {% for quiz in newest %}
+    {% for quiz in grabLimitedQuizzesForNewestPage %}
         <a class="newest-mostViews__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
     {% endfor %}
 </div>

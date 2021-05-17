@@ -267,6 +267,7 @@ try {
             quiz__questionChanger__last.style.pointerEvents = 'visible';
         }, 1500)
     }
+    let FinalTitleOfQuiz = ''
     const titleOfTheQuiz = () => {
         const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
         const splittedTitleOfQuiz = titleOfQuiz.split(' ')

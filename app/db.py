@@ -1,65 +1,128 @@
 from crud import *
+from sqlalchemy import and_
 
-def grabThisCategory(category):
+# ------------------Category
+def grabNewestCategories(category):
     category = s.query(Categories).filter(Categories.category == category)
     return category
 
-def  grabQuizzesByPublish():
-    quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.publish.desc())
+def grabBestestCategory(category):
+    category = s.query(Categories).filter(Categories.category == category)\
+        .order_by(Categories.views.desc())
+    return category
+
+def grabAlphabetCategory(category):
+    category = s.query(Categories).filter(Categories.category == category)\
+                                  .order_by(Categories.title_eng.asc())
+    return category
+
+def grabCategories(category, fr, to, sortType):
+    if sortType == 'newest':
+        categories = grabNewestCategories(category).all()[fr:to]
+    elif sortType == 'bestest':
+        categories = grabBestestCategory(category).all()[fr:to]
+    elif sortType == 'alphabet':
+        categories = grabAlphabetCategory(category).all()[fr:to]
+    return categories
+
+def grabAllCategoriesByPublish():
+    categoryGrabbedByPublish = s.query(Categories).order_by(Categories.publish.desc())
+    return categoryGrabbedByPublish
+
+def grabAllCategoriesByViews():
+    quizzesGrabbedByPublish = s.query(Categories).order_by(Categories.views.desc())
     return quizzesGrabbedByPublish
 
-def grabFirstQuizzesByFarsiTitle(title):
+# ------------------Quizzes
+
+def grabNewestQuizzes(title):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{title}%'))
+    return grabbedQuiz
+    
+def grabBestestQuizzes(title):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{title}%'))\
+                              .order_by(Quizzes.views.desc())
+    return grabbedQuiz
+
+def grabAlphabetQuizzes(title):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{title}%'))\
+                              .order_by(Quizzes.title_eng.asc())
+    return grabbedQuiz
+    
+def grabQuizzes(innerCategory, fr, to, sortType):
+    if sortType == 'newest':
+        grabbedQuizzes = grabNewestQuizzes(innerCategory).all()[fr:to]
+    elif sortType == 'bestest':
+        grabbedQuizzes = grabBestestQuizzes(innerCategory).all()[fr:to]
+    elif sortType == 'alphabet':
+        grabbedQuizzes = grabAlphabetQuizzes(innerCategory).all()[fr:to]
+    return grabbedQuizzes
+
+def grabFirstQuizByFarsiTitle(title):
     quizzesGrabbedByFarsiTitle = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
     return quizzesGrabbedByFarsiTitle
 
-def grabQuizzesByViews():
-    quizzesGrabbedByViews = s.query(Quizzes).order_by(Quizzes.views.desc())
-    return quizzesGrabbedByViews
-
-def grabQuizzesByInnerCategory(innerCategory):
-    quizzesGrabbedByInnerCategory = s.query(Quizzes).filter(Quizzes.title_eng == innerCategory)
-    return quizzesGrabbedByInnerCategory
-
-def grabCategoryByEnglishTitle(title):
-    categoryGrabbedByEnglishTitle = s.query(Categories).filter(Categories.title_eng.ilike(f'%{title}%'))
-    return categoryGrabbedByEnglishTitle
-
-def grabQuizzesByEnglishTitle(title):
-    quizzesGrabbedByEnglishTitle = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{title}%'))
-    return quizzesGrabbedByEnglishTitle
-
-def grabQuizQuestionByItsQuestion(quiestion):
-    questionGrabbed = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(quiestion))
+def grabQuizQuestion(quiestion):
+    questionGrabbed = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(quiestion)).all()
     return questionGrabbed
 
-def sortNewest():
-    newest = grabQuizzesByPublish().limit(5)
-    return newest
+def grabAllQuizzesByPublish():
+    quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.publish.desc())
+    return quizzesGrabbedByPublish
 
-def newestQuizForNewestPage(fr, to):
-    newest = grabQuizzesByPublish().all()[fr:to]
-    return newest
+def grabLimitedQuizzesByPublish():
+    limitedQuizzesGrabbedByPublish = grabAllQuizzesByPublish().limit(5)
+    return limitedQuizzesGrabbedByPublish
 
-def sortMostViews():
-    mostViews = grabQuizzesByViews().limit(5)
-    return mostViews
+def grabLimitedQuizzesForNewestPage(fr, to):
+    limitedQuizzesForNewestPage = grabAllQuizzesByPublish().all()[fr:to]
+    return limitedQuizzesForNewestPage
 
-def mostViewsQuizForMostViewsPage(fr, to):
-    mostViews = grabQuizzesByViews().all()[fr:to]
-    return mostViews
+def grabAllQuizzesByViews():
+    quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.views.desc())
+    return quizzesGrabbedByPublish
+
+def grabLimitedQuizzesByViews():
+    limitedQuizzesGrabbedByViews = grabAllQuizzesByViews().limit(5)
+    return limitedQuizzesGrabbedByViews
+
+def grabLimitedQuizzesForMostViewsPage(fr, to):
+    limitedQuizzesForNewestPage = grabAllQuizzesByViews().all()[fr:to]
+    return limitedQuizzesForNewestPage
+
+def fanNameOfQuiz(title):
+    quiz_Detail = grabFirstQuizByFarsiTitle(title)
+    fanName = quiz_Detail.fan_name
+    return fanName
+
+# ------------------Others
+
+def addView(whichShouldAddViewToIt):
+    whichShouldAddViewToIt.views += 1
+
+def addViewToCategories(title):
+    data = s.query(Categories).filter(Categories.title_eng.ilike(f'%{title}%')).first()
+    addView(data)
+    add_session(data)
+
+def addViewToQuizzes(title):
+    data = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
+    addView(data)
+    add_session(data)
+
 
 def finalPage(howManyElementToShow, whichSortWantToKnowTheFinalPage):
     if whichSortWantToKnowTheFinalPage == 'newest':
-        sort = grabQuizzesByPublish().all()
+        sort = grabAllQuizzesByPublish().all()
     elif whichSortWantToKnowTheFinalPage == 'mostViews':
-        sort = grabQuizzesByViews().all()
+        sort = grabAllQuizzesByViews().all()
     else:
         try:
             category = whichSortWantToKnowTheFinalPage
-            sort = grabThisCategory(category).all()
+            sort = grabNewestCategories(category).all()
         except:
-            innerCategory = whichSortWantToKnowTheFinalPage
-            sort = grabQuizzesByInnerCategory(innerCategory).all()
+            quizzes = whichSortWantToKnowTheFinalPage
+            sort = grabNewestQuizzes(quizzes).all()
 
     finalPage = round((len(sort)) / howManyElementToShow)
 
@@ -69,41 +132,3 @@ def finalPage(howManyElementToShow, whichSortWantToKnowTheFinalPage):
     else:
         str(finalPage)
         return finalPage
-
-def addView(whichShouldAddViewToIt):
-    whichShouldAddViewToIt.views += 1
-
-def addViewToQuizzes(title):
-    data = grabFirstQuizzesByFarsiTitle(title)
-    addView(data)
-    add_session(data)
-
-def addViewToCategories(title):
-    data = grabCategoryByEnglishTitle(title).first()
-    addView(data)
-    add_session(data)
-
-def categories(category, fr, to):
-    categories = grabThisCategory(category).all()[fr:to]
-    return categories
-
-def quizDetail(title):
-    quiz_Detail = grabFirstQuizzesByFarsiTitle(title)
-    return quiz_Detail
-
-def quizzes_sortByDate():
-    quizzesByDate = grabQuizzesByPublish().all()
-    return quizzesByDate
-
-def quizzes_FilterByTitle(title):
-    quizzesFilterByTitle = grabQuizzesByEnglishTitle(title).all()
-    return quizzesFilterByTitle
-
-def quiz_Question(question):
-    quiz_Question = grabQuizQuestionByItsQuestion(question).all()
-    return quiz_Question
-
-def fanNameOfQuiz(title):
-    quiz_Detail = grabFirstQuizzesByFarsiTitle(title)
-    fanName = quiz_Detail.fan_name
-    return fanName
