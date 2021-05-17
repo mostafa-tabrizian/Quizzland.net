@@ -215,7 +215,7 @@ try {
         finalPageDOM.classList.add('noVis')
     }
 
-    if (currPageNumber + 2 == parseInt(finalPageNumberDOM.innerHTML)) {
+    if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
         finalPageDOM.classList.add('noVis')
         pageTravel__pages__nextTwo.classList.add('noVis')
     }
