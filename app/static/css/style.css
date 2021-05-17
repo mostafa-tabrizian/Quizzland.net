@@ -1784,13 +1784,6 @@ body {
   }
 }
 
-.succuss {
-  min-height: 44vh;
-  margin-left: 50%;
-  -webkit-transform: translate(-30%);
-          transform: translate(-30%);
-}
-
 .about {
   min-height: 44vh;
   text-align: center;
