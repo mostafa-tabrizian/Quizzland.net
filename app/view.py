@@ -65,7 +65,7 @@ def mostViewsQuiz(page):
 
 @app.route('/category/<category>/<int:page>')
 def Category(category, page):
-    howManyElementToShow = 8
+    howManyElementToShow = 3
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template(f'/category/category.html',

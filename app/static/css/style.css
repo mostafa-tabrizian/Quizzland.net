@@ -689,7 +689,7 @@ input {
           box-shadow: -2px 2px 5px black;
 }
 
-.header__categories__inner {
+.header__categories {
   color: #f0f0f0;
   position: absolute;
   right: 5rem;
@@ -710,13 +710,13 @@ input {
   z-index: 999;
 }
 
-.header__categories__inner__open {
+.header__categories__open {
   opacity: 1;
   top: 4.5rem;
   pointer-events: visibleFill;
 }
 
-.header__categories__inner a:not(:last-child) {
+.header__categories a:not(:last-child) {
   margin-bottom: 1.25rem;
 }
 
