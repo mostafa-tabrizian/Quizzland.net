@@ -5,28 +5,24 @@ body {
 }
 
 .quizzes {
-    margin-top: 2rem;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    min-height: 60vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 12.6rem);
+    grid-template-rows: repeat(auto-fill, 14.4rem);
+    gap: 2.5rem;
+    justify-content: center;
 
     @include breakpoints-down(medium) {
-        justify-content: center;
+        grid-template-columns: repeat(auto-fill, 11rem);
+        gap: .7rem;
     }
 
     &__item {
         width: 12.5rem;
         height: 16.2135rem;
-        margin-left: 0.96875rem;
-        margin-right: 0.96875rem;
-        margin-bottom:  1.93757rem;
 
         @include breakpoints-down(medium) {
             width: 10rem;
             height: 12.75rem;
-            margin-left: 0.66875rem;
-            margin-right: 0.66875rem;
-            margin-bottom: 1.23757rem;
         }
 
         & a > img {

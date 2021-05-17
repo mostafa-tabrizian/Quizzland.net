@@ -494,6 +494,10 @@ input {
      object-fit: cover;
 }
 
+.pageTravel {
+  margin-top: 2rem;
+}
+
 @media (max-width: 49.9375em) {
   .hide-for-mobile {
     display: none;
@@ -1326,38 +1330,35 @@ body {
 }
 
 .quizzes {
-  margin-top: 2rem;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  min-height: 60vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (12.6rem)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 12.6rem);
+  -ms-grid-rows: (14.4rem)[auto-fill];
+      grid-template-rows: repeat(auto-fill, 14.4rem);
+  gap: 2.5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 @media (max-width: 49.9375em) {
   .quizzes {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-grid-columns: (11rem)[auto-fill];
+        grid-template-columns: repeat(auto-fill, 11rem);
+    gap: .7rem;
   }
 }
 
 .quizzes__item {
   width: 12.5rem;
   height: 16.2135rem;
-  margin-left: 0.96875rem;
-  margin-right: 0.96875rem;
-  margin-bottom: 1.93757rem;
 }
 
 @media (max-width: 49.9375em) {
   .quizzes__item {
     width: 10rem;
     height: 12.75rem;
-    margin-left: 0.66875rem;
-    margin-right: 0.66875rem;
-    margin-bottom: 1.23757rem;
   }
 }
 
