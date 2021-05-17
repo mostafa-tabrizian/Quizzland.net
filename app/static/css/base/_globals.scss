@@ -8,15 +8,6 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 
-body::-webkit-scrollbar {
-    width: 10px;
-  }
-
-body::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.452) ;
-    border-radius: 25px;
-}
-
 html {
     font-size: 100%;
     box-sizing: border-box;
@@ -46,7 +37,18 @@ body {
     position: relative;
     max-width: 100%;
     overflow-x: hidden;
+    overflow-y: overlay;
+    
+    &::-webkit-scrollbar {
+        width: 10px;
+      }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.452) ;
+        border-radius: 25px;
+    }
 }
+
 
 .wrapper {
     max-width: 62.5rem;
@@ -94,6 +96,14 @@ body {
 
         @include breakpoints-down(medium) {
             padding-top: 4rem;
+        }
+    }
+
+    &-xl{
+        padding-top: 12rem;
+
+        @include breakpoints-down(medium) {
+            padding-top: 6rem;
         }
     }
 }

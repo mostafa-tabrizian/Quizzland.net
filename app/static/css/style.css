@@ -51,15 +51,6 @@ input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
 
-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.452);
-  border-radius: 25px;
-}
-
 html {
   font-size: 100%;
   -webkit-box-sizing: border-box;
@@ -89,6 +80,16 @@ body {
   position: relative;
   max-width: 100%;
   overflow-x: hidden;
+  overflow-y: overlay;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.452);
+  border-radius: 25px;
 }
 
 .wrapper {
@@ -144,6 +145,16 @@ body {
 @media (max-width: 49.9375em) {
   .space-l {
     padding-top: 4rem;
+  }
+}
+
+.space-xl {
+  padding-top: 12rem;
+}
+
+@media (max-width: 49.9375em) {
+  .space-xl {
+    padding-top: 6rem;
   }
 }
 
@@ -750,6 +761,8 @@ input {
 }
 
 footer, .footer {
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
   color: #f0f0f0;
   -webkit-box-shadow: black 0 -5px 50px;
           box-shadow: black 0 -5px 50px;
@@ -788,14 +801,27 @@ footer a:hover, .footer a:hover {
 }
 
 footer .newsletter, .footer .newsletter {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  position: relative;
+  z-index: 4;
+  position: fixed;
+  padding: 4rem;
+  width: 50rem;
+  top: 25%;
+  left: 25%;
+  background: rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  color: #161616;
+  border: transparent;
+  border-radius: 15px;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 @media (max-width: 49.9375em) {
   footer .newsletter, .footer .newsletter {
+    padding: 1rem;
+    width: 25rem;
+    left: 5%;
     display: -ms-grid;
     display: grid;
     -webkit-box-pack: center;
@@ -808,21 +834,96 @@ footer .newsletter textarea, .footer .newsletter textarea {
   display: none;
 }
 
+footer .newsletter > p, .footer .newsletter > p {
+  font-weight: 600;
+}
+
 footer .newsletter > input, .footer .newsletter > input {
   margin-left: 0.3rem;
+  background: rgba(0, 0, 0, 0.601);
+  border: transparent;
+  border-radius: 7px;
+  color: white;
+}
+
+footer .newsletter > input::-webkit-input-placeholder, .footer .newsletter > input::-webkit-input-placeholder {
+  color: white;
+}
+
+footer .newsletter > input:-ms-input-placeholder, .footer .newsletter > input:-ms-input-placeholder {
+  color: white;
+}
+
+footer .newsletter > input::-ms-input-placeholder, .footer .newsletter > input::-ms-input-placeholder {
+  color: white;
+}
+
+footer .newsletter > input::placeholder, .footer .newsletter > input::placeholder {
+  color: white;
+}
+
+@media (max-width: 49.9375em) {
+  footer .newsletter > input, .footer .newsletter > input {
+    width: 22rem;
+  }
+  footer .newsletter > input:not(:last-child), .footer .newsletter > input:not(:last-child) {
+    margin-bottom: .325rem;
+  }
+}
+
+footer .newsletter__blurBackground__show, .footer .newsletter__blurBackground__show {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.65);
+  -webkit-backdrop-filter: blur(25px);
+          backdrop-filter: blur(25px);
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+footer .newsletter__closeBtn, .footer .newsletter__closeBtn {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 49.9375em) {
+  footer .newsletter__closeBtn, .footer .newsletter__closeBtn {
+    right: .5rem;
+    top: .5rem;
+  }
+}
+
+footer .newsletter__submit, .footer .newsletter__submit {
+  color: white;
+  background: #690D11;
+  border-radius: 7px;
 }
 
 footer .newsletter__categoryOptions, .footer .newsletter__categoryOptions {
-  position: absolute;
-  bottom: -2rem;
-  margin-left: 50%;
+  position: relative;
+  left: 70%;
+  margin-top: 1.125rem;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
 }
 
 @media (max-width: 49.9375em) {
-  footer .newsletter__categoryOptions__categoryOptions, .footer .newsletter__categoryOptions__categoryOptions {
-    bottom: -4rem;
+  footer .newsletter__categoryOptions, .footer .newsletter__categoryOptions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    bottom: 0;
+    left: 55%;
+    margin-bottom: 1.125rem;
   }
 }
 

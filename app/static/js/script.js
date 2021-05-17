@@ -103,6 +103,22 @@ try {
 }
 
 //----------------------------------------------------------
+
+// newsletter pop up
+newsletter__show.addEventListener('click', () => {
+    newsletter.classList.remove('fade')
+    body.style.overflowY = 'hidden'
+    newsletter__blurBackground.classList.add('newsletter__blurBackground__show')
+})
+newsletter__closeBtn.addEventListener('click', () => {
+    newsletter.classList.add('fade')
+    body.style.overflowY = 'overlay'
+    newsletter__blurBackground.classList.remove('newsletter__blurBackground__show')
+})
+
+//----------------------------------------------------------
+
+// submit the newsletter of user
 try {
     let chosenCategory = []
     

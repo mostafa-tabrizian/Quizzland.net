@@ -79,31 +79,34 @@
 
 
 <footer class="footer-for-mobile tx-al-c">
-    <p class="tx-al-c"> اگه هیجان داری کوئیز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا ایمیلت رو وارد کنی که سریعتر از هر کسی خبردار بشی </p>
-    <p class="tx-al-c"> کتگوری مورد علاقه‌ات رو انتخاب کن تا اگه چیز باحالی اومد خبرت کنیم </p>
-    <form class="newsletter" action="/newsletter" method="post">
-        <button class='newsletter__submit btn__grad-green gls' type="submit" method="POST">ثبت نام</button>
-        <input class="input" name="userEmail" type="email" placeholder='  ایمیل ...' required>
-        <input class="input input__userName" name="userName"  type="text" placeholder='  نام ...' minlength="3" maxlength = "15" required>
-        <textarea class="newsletter__categoryOptions__selectedByUser" name='chosenCategory'></textarea>
-        <div class="newsletter__categoryOptions flex flex-ai-c">
-            
-            <label for="physiologies">روانشناسی</label>
-            <input type="checkbox" name="physiologies" id="physiologies">
-    
-            <label for="movieSeries">فیلم و سریال</label>
-            <input type="checkbox" name="movieSeries " id="movieSeries ">
-    
-            <label for="gaming">گیمینگ</label>
-            <input type="checkbox" name="gaming " id="gaming ">
-    
-            <label for="celebrities">سلبریتی</label>
-            <input type="checkbox" name="celebrities " id="celebrities ">
-    
-        </div>
-    </form>
+    <p class="tx-al-c"> اگه هیجان داری کوئیز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا تو 8 ثانیه اطلاعاتت رو وارد کنی که سریعتر از هر کسی خبردار بشی </p>
+    <button class="newsletter__show" type="button">ثبت نام در خبرنامه</button>
 
-    <div class="space-sm"></div>
+    <div class="newsletter__blurBackground">
+        <form class="newsletter fade" action="/newsletter" method="post">
+            <img src="/static/img/close-btn.svg" alt="" class="newsletter__closeBtn">
+            <p class="tx-al-c">ایمیلت رو وارد کن و کتگوری مورد علاقه‌ات رو انتخاب کن</p>
+            <button class='newsletter__submit' type="submit" method="POST">ثبت نام</button>
+            <input class="input" name="userEmail" type="email" placeholder='  ایمیل ...' required>
+            <input class="input input__userName" name="userName"  type="text" placeholder='  نام ...' minlength="3" maxlength = "15" required>
+            <textarea class="newsletter__categoryOptions__selectedByUser" name='chosenCategory'></textarea>
+            <div class="newsletter__categoryOptions flex flex-ai-c">
+                
+                <label for="physiologies">روانشناسی</label>
+                <input type="checkbox" name="physiologies" id="physiologies">
+        
+                <label for="movieSeries">فیلم و سریال</label>
+                <input type="checkbox" name="movieSeries " id="movieSeries ">
+        
+                <label for="gaming">گیمینگ</label>
+                <input type="checkbox" name="gaming " id="gaming ">
+        
+                <label for="celebrities">سلبریتی</label>
+                <input type="checkbox" name="celebrities " id="celebrities ">
+        
+            </div>
+        </form>
+    </div>
 
     <div>
         <ul class="footer__navbar flex flex-jc-c flex-ai-c">
