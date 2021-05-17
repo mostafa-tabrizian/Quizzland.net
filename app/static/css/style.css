@@ -498,6 +498,10 @@ input {
   margin-top: 2rem;
 }
 
+.pageTravel .finalPage {
+  padding-right: 1.125rem;
+}
+
 @media (max-width: 49.9375em) {
   .hide-for-mobile {
     display: none;

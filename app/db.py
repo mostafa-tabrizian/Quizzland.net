@@ -16,17 +16,27 @@ def mostViewsQuizForMostViewsPage(fr, to):
     mostViews = s.query(Quizzes).order_by(Quizzes.views.desc()).all()[fr:to]
     return mostViews
 
-def lastPage(howManyElementToShow, whichSortWantToKnowTheLastPage):
-    if whichSortWantToKnowTheLastPage == 'newest':
+def finalPage(howManyElementToShow, whichSortWantToKnowTheFinalPage):
+    if whichSortWantToKnowTheFinalPage == 'newest':
         sort = s.query(Quizzes).order_by(Quizzes.publish.desc()).all()
-    elif whichSortWantToKnowTheLastPage == 'mostViews':
+    elif whichSortWantToKnowTheFinalPage == 'mostViews':
         sort = s.query(Quizzes).order_by(Quizzes.views.desc()).all()
     else:
-        category = whichSortWantToKnowTheLastPage
-        sort = s.query(Categories).filter(Categories.category == category).all()
+        try:
+            category = whichSortWantToKnowTheFinalPage
+            sort = s.query(Categories).filter(Categories.category == category).all()
+        except:
+            innerCategory = whichSortWantToKnowTheFinalPage
+            sort = s.query(Quizzes).filter(Quizzes.title_eng == innerCategory).all()
 
-    lastPage = str(round((len(sort)) / howManyElementToShow) - 1)
-    return lastPage
+    finalPage = round((len(sort)) / howManyElementToShow) - 1
+
+    if finalPage < 0:
+        finalPage = '0'
+        return finalPage
+    else:
+        str(finalPage)
+        return finalPage
 
 def addViewToQuizzes(title):
     data = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()

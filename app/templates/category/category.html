@@ -4,8 +4,8 @@
 <div class="quizzes wrapper flex flex-js-c flex-ai-c">
     {% for category in categories %}
         <div class="quizzes__item">
-            <a href="{{category.href}}"><img src="/static/img/{{category.img}}" alt=""></a>
-            <h5><a href="{{category.href}}">{{category.title_eng}}</a></h5>
+            <a href="{{category.href}}/0"><img src="/static/img/{{category.img}}" alt=""></a>
+            <h5><a href="{{category.href}}/0">{{category.title_eng}}</a></h5>
         </div>
     {% endfor %}
 </div>
@@ -20,10 +20,10 @@
         <span class="pageTravel__pages__curr"></span>
         <a class="pageTravel__pages__next" href=""></a>
         <a class="pageTravel__pages__nextTwo" href=""></a>
-        <div class="lastPage">
-            <span>.....</span>
+        <div class="finalPage">
+            <span>. . .</span>
             <a>
-                {{ lastPage }}
+                {{ finalPage }}
             </a>
         </div>
     </div>

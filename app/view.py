@@ -52,7 +52,7 @@ def newestQuiz(page):
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template('/newest.html',
                             newest = newestQuizForNewestPage(fr, to),
-                            lastPage = lastPage(howManyElementToShow, 'newest'))
+                            finalPage = finalPage(howManyElementToShow, 'newest'))
 
 @app.route('/mostViews/<int:page>')
 def mostViewsQuiz(page):
@@ -61,7 +61,7 @@ def mostViewsQuiz(page):
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template('/mostViews.html',
                             mostViews = mostViewsQuizForMostViewsPage(fr, to),
-                            lastPage = lastPage(howManyElementToShow, 'mostViews'))
+                            finalPage = finalPage(howManyElementToShow, 'mostViews'))
 
 @app.route('/category/<category>/<int:page>')
 def Category(category, page):
@@ -70,14 +70,18 @@ def Category(category, page):
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template(f'/category/category.html',
                             categories = categories(category, fr, to),
-                            lastPage = lastPage(howManyElementToShow, category))
+                            finalPage = finalPage(howManyElementToShow, category) + 1)
     
-@app.route('/category/<category>/<innerCategory>')
-def innerCategory(category, innerCategory):
-    fullTitle = titleConverterFromUrlToNormalOne(innerCategory)
-    addViewToCategories(fullTitle)
+@app.route('/category/<category>/<innerCategory>/<int:page>')
+def innerCategory(category, innerCategory, page):
+    howManyElementToShow = 10
+    fr = page * howManyElementToShow
+    to = (page * howManyElementToShow) + howManyElementToShow
+    fullTitleOfInnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
+    addViewToCategories(fullTitleOfInnerCategory)
     return render_template(f'/category/inner-category-list.html',
-                             quizzes_FilterByTitle = quizzes_FilterByTitle(fullTitle))
+                             quizzes_FilterByTitle = quizzes_FilterByTitle(fullTitleOfInnerCategory),
+                             finalPage = finalPage(howManyElementToShow, fullTitleOfInnerCategory))
 
 @app.route('/quiz/<category>/<sub_category>/<title>')
 def Quiz(category, sub_category, title):
