@@ -1,14 +1,9 @@
 const body = document.querySelector('body')
-const hero = document.querySelector('.hero')
-
 const loadingScreen = document.querySelector('.loadingScreen')
-
-const header__categories__button = document.querySelector('.header__categories__button')
-const header__categories = document.querySelector('.header__categories')
-// const arw = document.querySelector('.arw')
-const categories = document.querySelector('.header__categories')
 const backBtn = document.querySelector('.backBtn')
 
+const header__categories = document.querySelector('.header__categories')
+const header__categories__inner = document.querySelector('.header__categories__inner')
 const header__menu = document.querySelector('.header__menu')
 const header__menu__openBtn = document.querySelector('.header__menu__openBtn')
 const header__menu__closeBtn = document.querySelector('.header__menu__closeBtn')
@@ -25,16 +20,17 @@ const newsletter__categoryOptions = document.querySelector('.newsletter__categor
 const newsletter__categoryOptions__input = document.querySelectorAll('.newsletter__categoryOptions input')
 const newsletter__categoryOptions__selectedByUser = document.querySelector('.newsletter__categoryOptions__selectedByUser')
 
+const sort__newest = document.querySelector('#newest')
+const sort__oldest = document.querySelector('#oldest')
+const sort__bestest = document.querySelector('#bestest')
+const sort__alphabet = document.querySelector('#alphabet')
+
 const tools__search = document.querySelector('.tools__search')
 const tools__submit = document.querySelector('.tools__submit')
 const tools__sortType = document.querySelector('.tools__sortType')
 const tools__sortType__current = document.querySelector('.tools__sortType__current')
 const tools__sortType__options = document.querySelector('.tools__sortType__options')
 
-const sort__newest = document.querySelector('#newest')
-const sort__oldest = document.querySelector('#oldest')
-const sort__bestest = document.querySelector('#bestest')
-const sort__alphabet = document.querySelector('#alphabet')
 
 const quizzes__item = document.querySelectorAll('.quizzes__item')
 const categories__item = document.querySelectorAll('.categories__item')
@@ -64,8 +60,8 @@ const quiz__container = document.querySelectorAll('.quiz__container')
 const quiz__questionCounter__totalAnswered = document.querySelector('.quiz__questionCounter__totalAnswered')
 const quiz__questionCounter__totalQuestions = document.querySelector('.quiz__questionCounter__totalQuestions')
 const quiz__options = document.querySelectorAll('input[name=answer]')
-
 const quiz__container__eachOne = document.querySelectorAll(".quiz__container div form")
+
 const result__score = document.querySelector('.result__score')
 const result__subtitle__txt = document.querySelector('.result__subtitle__txt')
 const result__detail__correctTime = document.querySelector('.result__detail__correctTime')

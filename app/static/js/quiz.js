@@ -1,12 +1,10 @@
-// Grab the answers
-
-// add value to correct question
 encodedNumbers = {
     1: 'b25l',
     2: 'dHdv',
     3: 'dGhyZWU=',
     4: 'Zm91cg=='
 }
+
 quiz__container__eachOne.forEach(each => {
     const answerData = each.getAttribute('data')
     each[answerData - 1].value = 'Y29ycmVjdA=='
@@ -28,9 +26,9 @@ const calculateResult = () => {
     localStorage.setItem('score', score)
 }
 
-const scoreDATA = localStorage.getItem('score')
 const correctAnswerCounterDATA = localStorage.getItem('correctAnswerCounter')
 const wrongAnswerCounterDATA = localStorage.getItem('wrongAnswerCounter')
+const scoreDATA = localStorage.getItem('score')
 
 try {
     result__detail__correctTime.innerHTML = correctAnswerCounterDATA
@@ -51,8 +49,7 @@ try {
     else if (scoreDATA >= 0){
         result__score.innerHTML = (`😭 ${scoreDATA}%`)
         result__subtitle__txt.innerHTML = ('😅 عیبی نداره کسی نمیفهمه، میتونی دوباره کوئیز رو بدی ')}
-
-} catch (e) {
+} catch () {
     log('no result page')
 } 
 

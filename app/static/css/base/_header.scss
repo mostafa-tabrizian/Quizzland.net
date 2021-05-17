@@ -135,25 +135,7 @@
         }
     }
 
-    // .arw {
-    //     opacity: 0;
-    //     position: absolute;
-    //     top: 7rem;
-    //     right: 6.5rem;
-    //     width: 1.12rem;
-    //     height: 1.12rem;
-    //     border-left: 14px solid transparent;
-    //     border-right: 14px solid transparent;
-    //     border-radius: -14px;
-    //     border-bottom: 18px solid #0000008c;
-    // }
-    
-    // .arw__open {
-    //     opacity: 1;
-    //     top: 4.5rem;
-    // }
-
-    &__categories {
+    &__categories__inner {
         color: $white;
         position: absolute;
         right: 5rem;

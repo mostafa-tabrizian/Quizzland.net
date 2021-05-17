@@ -1,31 +1,30 @@
 //----------------------------------------------------------
 
 // Loading screen
-window.onload = (event) => {
+window.onload = () => {
     loadingScreen.classList.add('fade')
-};
+}
 
 //----------------------------------------------------------
 
 // open and close the category list when click on category in the list
-header__categories__button.addEventListener('click', () => {
-    if (header__categories.classList.contains('header__categories__open')) {
-        header__categories.classList.remove('header__categories__open')
+header__categories.addEventListener('click', () => {
+    if (header__categories__inner.classList.contains('header__categories__inner__open')) {
+        header__categories__inner.classList.remove('header__categories__inner__open')
     }
     else {
-        header__categories.classList.add('header__categories__open')
+        header__categories__inner.classList.add('header__categories__inner__open')
     }
 })
 body.addEventListener('click', () => {
-    if (getComputedStyle(categories).opacity == 1) {
-        categories.classList.remove('header__categories__open')
+    if (getComputedStyle(header__categories__inner).opacity == 1) {
+        header__categories__inner.classList.remove('header__categories__inner__open')
     }
 })
 
 //----------------------------------------------------------
 
 // open the menu
-
 header__menu__openBtn.addEventListener('click', () => {
     header__menu.classList.remove('slideMenu-hide')
 })
@@ -47,7 +46,6 @@ header__searchInput.addEventListener('blur', () => {
 
 // show the submit search category btn when active
 try {
-
     tools__search.addEventListener('click', () => {
         tools__submit.classList.remove('fade')
     })
@@ -121,7 +119,6 @@ newsletter__closeBtn.addEventListener('click', () => {
 // submit the newsletter of user
 try {
     let chosenCategory = []
-    
     newsletter__categoryOptions__input.forEach(each => {
         each.addEventListener('click', () => {
             inputOfTheCategory = each.checked
