@@ -237,7 +237,6 @@ try {
 
 // quiz questions
 try {
-
     let currentQuestion = 1
     quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
     const numberOfQuestions = quiz__container.length
@@ -252,7 +251,6 @@ try {
             quiz__questionChanger__last.style.pointerEvents = 'visible';
         }, 1500)
     }
-
     const checkIfEndedTheQuizAndShowResultPage = () => {
         let FinalTitleOfQuiz = ''
         if (currentQuestion - 1 == numberOfQuestions) {
@@ -268,54 +266,59 @@ try {
             window.location.replace(`/result/${FinalTitleOfQuiz}`); 
         }
     }
-    
     const plusOneToAnsweredQuestionsIfItsNotTheLast = () => {
         if (currentQuestion - 1 != numberOfQuestions) {
             currentQuestion = currentQuestion + 1
             quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
         }
     }
-
+    const changeToNextQuestion = () => {
+        quiz__container.forEach(each => {
+            currQuestionPosition = parseInt(getComputedStyle(each).left)
+            currQuestionPosition = currQuestionPosition - 1076.05
+            each.style.left = `${currQuestionPosition}px`
+        })
+    }
+    const changeToLastQuestion = () => {
+        quiz__container.forEach(each => {
+            currQuestionPosition = parseInt(getComputedStyle(each).left)
+            currQuestionPosition = currQuestionPosition + 1076.05
+            each.style.left = `${currQuestionPosition}px`
+        })
+    }
     const minusOneToAnsweredQuestionsIfItsNotTheFirst = () => {
         if (currentQuestion != 1) {
             currentQuestion = currentQuestion - 1
             quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
         }
     }
-    
+
+    quiz__options.forEach(each => {
+        each.addEventListener('click', () => {
+            plusOneToAnsweredQuestionsIfItsNotTheLast()
+            changeToNextQuestion()
+            pauseTheFunctionOfChangingQuestions()
+            checkIfEndedTheQuizAndShowResultPage()
+        })
+    })
 
     quiz__questionChanger__next.addEventListener('click', () => {
         plusOneToAnsweredQuestionsIfItsNotTheLast()
-
-        quiz__container.forEach(each => {
-            currQuestionPosition = parseInt(getComputedStyle(each).left)
-            currQuestionPosition = currQuestionPosition - 1076.05
-            each.style.left = `${currQuestionPosition}px`
-        })
-
+        changeToNextQuestion()
         pauseTheFunctionOfChangingQuestions()
         checkIfEndedTheQuizAndShowResultPage()
     })
 
-
-    
     quiz__questionChanger__last.addEventListener('click', () => {
         if (currQuestionPosition > -500) {
             return "there is no last question"
         }
 
         minusOneToAnsweredQuestionsIfItsNotTheFirst()
-
-        quiz__container.forEach(each => {
-            currQuestionPosition = parseInt(getComputedStyle(each).left)
-            currQuestionPosition = currQuestionPosition + 1076.05
-            each.style.left = `${currQuestionPosition}px`
-        })
-
+        changeToLastQuestion()
         pauseTheFunctionOfChangingQuestions()
         checkIfEndedTheQuizAndShowResultPage()
-    })
-
+    }) 
 } catch (e) { log('no nextQuestion btn')}
 
 //----------------------------------------------------------

@@ -57,7 +57,7 @@ const quiz__numberOfQuestions = document.querySelector('.quiz__head h5')
 const quiz__container = document.querySelectorAll('.quiz__container')
 const quiz__questionCounter__totalAnswered = document.querySelector('.quiz__questionCounter__totalAnswered')
 const quiz__questionCounter__totalQuestions = document.querySelector('.quiz__questionCounter__totalQuestions')
-const input = document.querySelectorAll('input[name=answer]')
+const quiz__options = document.querySelectorAll('input[name=answer]')
 
 const quiz__container__eachOne = document.querySelectorAll(".quiz__container div form")
 const result__score = document.querySelector('.result__score')
