@@ -341,17 +341,6 @@ input {
     }
 }
 
-.shadow {
-    transition: box-shadow .2s ease-in-out;
-    outline: none;
-    cursor: pointer;
-    border-radius: 20px;
-
-    &:hover {
-        box-shadow: 0 0 7px #323232;
-    }
-}
-
 .ad {
     position: relative;
     opacity: 0;
@@ -432,60 +421,7 @@ input {
 //     }
 // }
 
-// Visibility
-.hide-for-mobile {
-    @include breakpoints-down(medium) {
-        display: none;
-    }
-}
-
-.hide-for-desktop {
-    @include breakpoints-up(large) {
-        display: none;
-    }
-}
-
-// Responsive
-
-.sort-for-mobile {
-    @include breakpoints-down(medium) {
-        flex-wrap: wrap;
-    
-        & div {
-            width: 100vw;
-
-            & > h2 {
-                height: 3.125rem;
-                background-image: $red-grad;
-                color: white;
-                display: flex;
-                justify-content: center;
-                align-items: flex-end;
-                margin-bottom: 1.4375rem;
-            }
-
-            & > ul {
-                padding-left: 3rem;
-                padding-right: 3rem;
-                padding-top: .5rem;
-                padding-bottom: 3rem;
-
-                & > a {
-                    margin-right: 50%;
-                    transform: translate(30%);
-                }
-            }
-        }
-    }
-}
-
-.footer-for-mobile {
-    @include breakpoints-down(medium) {
-        .footer__background {
-            height: 33rem;
-        }
-    }
-}
+// stylish
 
 .gls {
     background: rgba(255, 255, 255, .2);
@@ -494,4 +430,29 @@ input {
     backdrop-filter: blur(9px);
     background-clip: padding-box;
     box-shadow: 10px 10px 10px rgba(80, 52, 52, 0.336);
+}
+
+.shadow {
+    transition: box-shadow .2s ease-in-out;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+
+    &:hover {
+        box-shadow: 0 0 7px #323232;
+    }
+}
+
+
+// Visibility
+.hideForMobile {
+    @include breakpoints-down(medium) {
+        display: none;
+    }
+}
+
+.hideForDesktop {
+    @include breakpoints-up(large) {
+        display: none;
+    }
 }

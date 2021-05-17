@@ -70,7 +70,7 @@ def Category(category, page):
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template(f'/category/category.html',
                             categories = categories(category, fr, to),
-                            finalPage = finalPage(howManyElementToShow, category) + 1)
+                            finalPage = finalPage(howManyElementToShow, category))
     
 @app.route('/category/<category>/<innerCategory>/<int:page>')
 def innerCategory(category, innerCategory, page):

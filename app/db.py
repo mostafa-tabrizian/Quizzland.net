@@ -31,8 +31,8 @@ def finalPage(howManyElementToShow, whichSortWantToKnowTheFinalPage):
 
     finalPage = round((len(sort)) / howManyElementToShow) - 1
 
-    if finalPage < 0:
-        finalPage = '0'
+    if finalPage <= 0:
+        finalPage = '1'
         return finalPage
     else:
         str(finalPage)

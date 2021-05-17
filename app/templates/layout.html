@@ -14,7 +14,7 @@
 
         <!-- Search -->
         <div class="flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb hide-for-desktop" href="/" class="">
+            <a class="header__logo flex flex-jc-sb hideForDesktop" href="/" class="">
                 <img src="/static/img/logo.png" alt="QuizLand">
             </a>
             <form class="header__search {{colorOfHeader}} flex" action="/search" method="post">
@@ -24,34 +24,34 @@
         </div>
 
         <!-- Menu -->
-        
-        <a href="#" class="header__menu {{colorOfHeader}} hide-for-desktop">
+        <button type="button" class="header__menu__openBtn {{colorOfHeader}} hideForDesktop">
             <span></span>
             <span></span>
             <span></span>
-        </a>
-        <div class="header__menu__m fade tx-al-c">
-            <img src="/static/img/close-btn.svg" alt="" class="header__menu__m__close-btn">
-
-            <ul>
-                <li>
-                    <details>
-                        <summary>کتگوری ها</summary>
-                        <ul>
-                            <li><a href="/category/movieSeries/0">فیلم و سریال</a></li>
-                            <li><a href="/category/gaming/0">گیمینگ</a></li>
-                            <li><a href="/category/celebrities/0">سلبریتی</a></li>
-                            <li><a href="/category/physiologies/0">روانشناسی</a></li>
-                        </ul>
-                    </details>
-                </li>
-                <li><a href="/contact">تماس با ما</a></li>
-                <li><a href="/about">درباه‌ی ما</a></li>
-            </ul>
+        </button>
+        <div class="header__menu slideMenu-hide hide-for-desktop">
+            <img src="/static/img/close-btn.svg" alt="" class="header__menu__closeBtn">
+            <div class="header__menu__inner">
+                <div class="header__menu__inner__category">
+                    <h5><a href="/#category">کتگوری ها</a></h5>
+                    <ul>
+                        <li><a href="/category/movieSeries/0">فیلم و سریال</a></li>
+                        <li><a href="/category/celebrities/0">سلبریتی</a></li>
+                        <li><a href="/category/gaming/0">گیمینگ</a></li>
+                        <li><a href="/category/physiologies/0">روانشناسی</a></li>
+                    </ul>
+                </div>
+                <div class="header__menu__inner__nav">
+                    <ul>
+                        <li><a href="/about">درباه‌ی ما</a></li>
+                        <li><a href="/contact">تماس با ما</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <!-- Links -->
-        <div class="header__links {{colorOfHeader}} hide-for-mobile hover flex flex-ai-c">
+        <div class="header__links {{colorOfHeader}} hideForMobile hover flex flex-ai-c">
             <a href="/contact">تماس با ما</a>
             <a href="/about">درباه‌ی ما</a>
             <a class="header__categories__button">کتگوری‌ها</a>
@@ -61,7 +61,7 @@
         </div>
 
         <!-- <img class="arw" src="/static/img/arw.png"> -->
-        
+
         <ul class="header__categories tx-al-c">
             <li><a href="/category/movieSeries/0">فیلم و سریال</a></li>
             <li><a href="/category/gaming/0">گیمینگ</a></li>

@@ -7,6 +7,10 @@ footer, .footer {
     background-position: center;
     background-size: cover;
 
+    .footer__background {
+        height: 33rem;
+    }
+
     width: 100%;
     position: absolute;
     bottom: 1; left: 0;

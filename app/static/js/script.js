@@ -11,17 +11,14 @@ window.onload = (event) => {
 header__categories__button.addEventListener('click', () => {
     if (header__categories.classList.contains('header__categories__open')) {
         header__categories.classList.remove('header__categories__open')
-        // arw.classList.remove('arw__open')
     }
     else {
         header__categories.classList.add('header__categories__open')
-        // arw.classList.add('arw__open')
     }
 })
 body.addEventListener('click', () => {
     if (getComputedStyle(categories).opacity == 1) {
         categories.classList.remove('header__categories__open')
-        // arw.classList.remove('arw__open')
     }
 })
 
@@ -29,11 +26,11 @@ body.addEventListener('click', () => {
 
 // open the menu
 
-btnMenu.addEventListener('click', () => {
-    menu.classList.remove('fade')
+header__menu__openBtn.addEventListener('click', () => {
+    header__menu.classList.remove('slideMenu-hide')
 })
-btnMenuClose.addEventListener('click', () => {
-    menu.classList.add('fade')
+header__menu__closeBtn.addEventListener('click', () => {
+    header__menu.classList.add('slideMenu-hide')
 })
 
 //----------------------------------------------------------

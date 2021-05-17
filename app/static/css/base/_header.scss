@@ -1,3 +1,5 @@
+
+
 .header {
     font-size: $font-sm;
     font-family: $font-pr;
@@ -30,77 +32,80 @@
         }
     }
 
+    .slideMenu-hide {
+        top: -13rem !important;
+    }
+
     &__menu {
-        margin: 2rem;
-        > span {
-            display: block;
-            width: 1.625rem;
-            height: 0.125rem;
-            background-color: $black;
+        z-index: 3;
+        position: fixed;
+        top: 0; left: 0;
+        background: rgba(0, 0, 0, 0.3);
+        box-shadow: 0 7px 20px black;
+        backdrop-filter: blur(20px);
+        border: 2px solid transparent;
+        height: 13rem;
+        width: 100%;
+        border-radius: 0 0 55px 55px;
+        transition: all .3s ease-in-out;
 
-            &:not(:last-child) {
-                margin-bottom: .25rem;
-            }
-        }
+        &__openBtn {
+            background: inherit;
 
-        &__m {
-            z-index: 5;
-            position: fixed;
-            top: 0; left: 0;
-            background: url("/static/img/hero-bg.jpg");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            height: 100vh;
-            width: 100vw;
-            transition: all .3s ease;
-
-            > ul {
-                color: $black;
+            > span {
                 display: block;
-                position: absolute;
-                top: 50%; left: 50%;
-                transform: translate(-50%, -70%);
-                transition: all 1s ease;
-
-                > li {
-                    padding-bottom: 1.3rem;
-                    font-size: $font-l;
-
-                    & > a {
-                        &:hover {
-                            color: inherit;
-                        }
-                    }
-
-                    &:not(:last-child) {
-                        padding-bottom: 2rem;
-                    }
-                     
-                    & > details > ul {
-                        padding-top: 1.125rem;
-
-                        > li {
-                            padding-top: 1.125rem;
-
-                            & > a {
-                                &:hover {
-                                    color: inherit;
-                                }
-                            }
-                        }
-                    }
+                width: 1.625rem;
+                height: 0.18rem;
+                background-color: $black;
+    
+                &:not(:last-child) {
+                    margin-bottom: .25rem;
                 }
-
-            }
-
-            &__close-btn {
-                position: fixed;
-                top: 3%;
-                right: 5%;
-                cursor: pointer;
             }
         }
+
+        &__inner {
+            color: $white;
+            font-size: .9rem;
+
+            ul > li {
+                margin-bottom: .2rem;
+
+                & > a:hover {
+                    color: inherit !important;
+                }
+            }
+
+            &__category {
+                float: left;
+                margin-left: 6rem;
+
+                & > h5 {
+                    margin-bottom: 0;
+                    font-size: 1.2em !important;
+
+                }
+            }
+
+            &__nav {
+                float: right;
+                margin-right: 6rem;
+                margin-top: .7rem;
+            }
+        }
+
+        &__openBtn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        &__closeBtn {
+            position: fixed;
+            top: 0.425rem;
+            right: 0.7rem;
+        }
+
     }
 
     &__searchSubmit {
@@ -165,18 +170,18 @@
         transition: all .3s ease;
         z-index: 999;
 
-            a {
-
-                &:not(:last-child){
-                    margin-bottom: 1.25rem
-                }
-            }
+        &__open {
+            opacity: 1;
+            top: 4.5rem;
+            pointer-events: visibleFill;
         }
 
-    &__categories__open {
-        opacity: 1;
-        top: 4.5rem;
-        pointer-events: visibleFill;
+        a {
+
+            &:not(:last-child){
+                margin-bottom: 1.25rem
+            }
+        }
     }
 
     &__white {

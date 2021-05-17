@@ -5,14 +5,13 @@ const loadingScreen = document.querySelector('.loadingScreen')
 
 const header__categories__button = document.querySelector('.header__categories__button')
 const header__categories = document.querySelector('.header__categories')
-const arw = document.querySelector('.arw')
+// const arw = document.querySelector('.arw')
 const categories = document.querySelector('.header__categories')
-const btnMenu = document.querySelector('.header__menu')
-const btnMenuClose = document.querySelector('.header__menu__m__close-btn')
-const menu = document.querySelector('.header__menu__m')
 const backBtn = document.querySelector('.backBtn')
 
-
+const header__menu = document.querySelector('.header__menu')
+const header__menu__openBtn = document.querySelector('.header__menu__openBtn')
+const header__menu__closeBtn = document.querySelector('.header__menu__closeBtn')
 const header__searchInput = document.querySelector('.header__searchInput')
 const header__searchSubmit = document.querySelector('.header__searchSubmit')
 
