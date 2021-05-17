@@ -260,9 +260,6 @@ try {
             splittedTitleOfQuiz.forEach(each => {
                 FinalTitleOfQuiz += `-${each}`
             })
-            const fullUrl = window.location.href
-            const splitUrl = fullUrl.split('/')
-            localStorage.setItem('returnUrl', `/category/${splitUrl[4]}/${splitUrl[5]}`)
             window.location.replace(`/result/${FinalTitleOfQuiz}`); 
         }
     }
@@ -324,8 +321,11 @@ try {
 //----------------------------------------------------------
 
 try {
-    const returnUrlData = localStorage.getItem('returnUrl')
-    result__return.href = returnUrlData
+    backBtn.addEventListener('click', () => {
+        log('back')
+        event.preventDefault();
+        history.go(-1)
+    })
 } catch {
-    log('no result page')
+    log('no backBtn')
 }

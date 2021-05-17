@@ -10,6 +10,8 @@ const categories = document.querySelector('.header__categories')
 const btnMenu = document.querySelector('.header__menu')
 const btnMenuClose = document.querySelector('.header__menu__m__close-btn')
 const menu = document.querySelector('.header__menu__m')
+const backBtn = document.querySelector('.backBtn')
+
 
 const header__searchInput = document.querySelector('.header__searchInput')
 const header__searchSubmit = document.querySelector('.header__searchSubmit')
@@ -64,7 +66,6 @@ const result__score = document.querySelector('.result__score')
 const result__subtitle__txt = document.querySelector('.result__subtitle__txt')
 const result__detail__correctTime = document.querySelector('.result__detail__correctTime')
 const result__detail__wrongTime = document.querySelector('.result__detail__wrongTime')
-const result__return = document.querySelector('.result__return')
 
 const log = (code) => {
     console.log(code)
