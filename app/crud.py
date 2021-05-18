@@ -28,6 +28,9 @@ def recreate_quizQuestions():
     quizQuestionsBase.metadata.drop_all(engine)
     quizQuestionsBase.metadata.create_all(engine)
 
+def recreate_4OptionQuestions():
+    fourOptionQuizQuestionsBase.metadata.drop_all(engine)
+    fourOptionQuizQuestionsBase.metadata.create_all(engine)
 
 
 def add_session(data):
@@ -115,6 +118,7 @@ def up_session():
 # recreate_categories()
 # recreate_newsletterUrl()
 # recreate_quizQuestions()
+# recreate_4OptionQuestions()
 # del_session()
 # up_session()
 # add_session(data)
