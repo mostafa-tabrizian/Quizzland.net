@@ -1834,6 +1834,14 @@ body {
   }
 }
 
+.resultQuiz4Option {
+  padding: 0;
+}
+
+.resultQuiz4Option__title > h5 {
+  margin-top: 0;
+}
+
 .about {
   min-height: 44vh;
   text-align: center;

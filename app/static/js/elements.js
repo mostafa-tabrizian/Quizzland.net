@@ -62,6 +62,7 @@ const searchResult__quizzes__item = document.querySelector('.searchResult__quizz
 const searchResult__quizzes__item__notFound = document.querySelector('.searchResult__quizzes__item__notFound')
 const searchResult__quizzes__seeMore = document.querySelector('.searchResult__quizzes__seeMore')
 
+const quiz__questions = document.querySelector('.quiz__questions')
 const quiz__questionChanger__next = document.querySelector('.quiz__questionChanger__next')
 const quiz__questionChanger__last = document.querySelector('.quiz__questionChanger__last')
 const quiz__numberOfQuestions = document.querySelector('.quiz__head h5')

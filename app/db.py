@@ -63,7 +63,8 @@ def grabFirstQuizByFarsiTitle(title):
     return quizzesGrabbedByFarsiTitle
 
 def grabQuizQuestion(quiestion):
-    questionGrabbed = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(quiestion)).all()
+    questionGrabbed = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(quiestion)).all()\
+        + s.query(fourOptionQuizQuestions).filter(fourOptionQuizQuestions.title_far.ilike(quiestion)).all()
     return questionGrabbed
 
 def grabAllQuizzesByPublish():

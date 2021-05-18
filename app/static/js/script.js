@@ -326,9 +326,14 @@ try {
     const checkIfTheQuizEndedAndShowResultPage = () => {
         let FinalTitleOfQuiz = ''
         if (currentQuestion - 1 == numberOfQuestions) {
-            calculateResult()
             FinalTitleOfQuiz = titleOfTheQuiz()
-            window.location.replace(`/result/${FinalTitleOfQuiz}`); 
+            const typeOfQuiz = quiz__questions.getAttribute('tag')
+            localStorage.setItem('typeOfQuiz', typeOfQuiz)
+            if (typeOfQuiz == 'quiz') {
+                calculateResult(FinalTitleOfQuiz)
+            } else if (typeOfQuiz == '4Option') {
+                calculateResult_4Option(FinalTitleOfQuiz)
+            }
         }
     }
     const plusOneToAnsweredQuestionsIfItsNotTheLast = () => {

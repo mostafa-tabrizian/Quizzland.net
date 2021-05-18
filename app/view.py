@@ -105,12 +105,27 @@ def Quiz(category, sub_category, title):
                             quiz_Question = grabQuizQuestion(fullTitle),
                             colorOfHeader = 'header__white')
 
+@app.route('/quiz_2/<category>/<sub_category>/<title>')
+def Quiz4Option(category, sub_category, title):
+    fullTitle = titleConverterFromUrlToNormalOne(title)
+    addViewToQuizzes(fullTitle)
+    return render_template('/quiz_4Option.html',
+                            quizDetail = grabFirstQuizByFarsiTitle(fullTitle),
+                            quiz_Question = grabQuizQuestion(fullTitle),
+                            colorOfHeader = 'header__white')
+
 @app.route('/result/<title>')
 def result(title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     return render_template('/result.html',
                             fullTitle = fullTitle,
                             fanName = fanNameOfQuiz(fullTitle))
+
+@app.route('/result_2/<title>')
+def result4Option(title):
+    fullTitle = titleConverterFromUrlToNormalOne(title)
+    return render_template('/result_4Option.html',
+                            fullTitle = fullTitle)
 
 @app.route('/about')
 def about():

@@ -64,5 +64,21 @@
             box-ordinal-group: 2;
         }
     }
+}
 
+.resultQuiz4Option {
+    padding: 0;
+
+    &__title {
+        & > h5 {
+            margin-top: 0;
+        }
+    }
+
+    &__txt {
+        
+    }
+
+    &__result {
+    }
 }
