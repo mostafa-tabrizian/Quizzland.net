@@ -373,6 +373,7 @@ try {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.remove('quiz__autoQuestionChangerSwitch__innerBtn__switched')
         } else {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.add('quiz__autoQuestionChangerSwitch__innerBtn__switched')
+            quiz__container.style.transitionDelay = '.5s';
         }
     })
 

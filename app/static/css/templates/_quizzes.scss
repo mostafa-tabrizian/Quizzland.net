@@ -54,7 +54,6 @@ body {
 }
 
 .quiz {
-
     &__head {
         font-family: $font-sec;
 
@@ -96,7 +95,7 @@ body {
         color: white;
         border-radius: 24px;
         box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
-        transition: all 1s;
+        transition: left 1.3s;
         margin-top: 5rem;
         margin-right: 22rem;
         margin-left: 22rem;
@@ -126,7 +125,7 @@ body {
     &__autoQuestionChangerSwitch{
 
         position: relative;
-        top: 4rem;
+        top: 1rem;
         left: 0.7rem;
         z-index: 3;
 
@@ -166,16 +165,17 @@ body {
 
     &__hider {
         display: flex;
-        width: 34rem;
+        width: 35rem;
         height: 37rem;
         overflow: hidden;
         position: relative;
+        bottom: 3.5rem;
     }
 
     &__questionChanger {
         cursor: pointer;
         position: absolute;
-        top: 50%;
+        top: 38%;
         z-index: 1;
 
         @include breakpoints-down(medium) {
@@ -204,7 +204,7 @@ body {
 
     &__questionCounter {
         position: absolute;
-        bottom: 1.5rem;
+        bottom: 6rem;
         left: 50%;
         transform: translate(-50%);
         color: $white;
@@ -317,39 +317,6 @@ body {
         
         :checked + label {
             background: $red;
-        }
-
-        // [id="lowHigh-9"]:checked + label {
-        //     background: #C80000;
-        // }
-        // [id="lowHigh-8"]:checked + label {
-        //     background: #C85D00;
-        // }
-        // [id="lowHigh-7"]:checked + label {
-        //     background: #FFA200;
-        // }
-        // [id="lowHigh-6"]:checked + label {
-        //     background: #FFCC00;
-        // }
-        // [id="lowHigh-5"]:checked + label {
-        //     background: #EEFF00;
-        // }
-        // [id="lowHigh-4"]:checked + label {
-        //     background: #C9EF00;
-        // }
-        // [id="lowHigh-3"]:checked + label {
-        //     background: #90EF00;
-        // }
-        // [id="lowHigh-2"]:checked + label {
-        //     background: #00D648;
-        // }
-        // [id="lowHigh-1"]:checked + label {
-        //     background: #00B83E;
-        // }
-        
+        }   
     }
 }
-
-// .showResult {
-
-// }

@@ -1517,8 +1517,8 @@ body {
   border-radius: 24px;
   -webkit-box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
           box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-  -webkit-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: left 1.3s;
+  transition: left 1.3s;
   margin-top: 5rem;
   margin-right: 22rem;
   margin-left: 22rem;
@@ -1551,7 +1551,7 @@ body {
 
 .quiz__autoQuestionChangerSwitch {
   position: relative;
-  top: 4rem;
+  top: 1rem;
   left: 0.7rem;
   z-index: 3;
 }
@@ -1596,16 +1596,17 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 34rem;
+  width: 35rem;
   height: 37rem;
   overflow: hidden;
   position: relative;
+  bottom: 3.5rem;
 }
 
 .quiz__questionChanger {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 38%;
   z-index: 1;
 }
 
@@ -1639,7 +1640,7 @@ body {
 
 .quiz__questionCounter {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 6rem;
   left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
