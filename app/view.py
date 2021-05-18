@@ -45,23 +45,29 @@ def moreSearchResult(searchMoreOfThis):
         userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
     )
 
-@app.route('/newest/<int:page>')
-def newestQuiz(page):
-    howManyElementToShow = 5
-    fr = page * howManyElementToShow
-    to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template('/newest.html',
-                            grabLimitedQuizzesForNewestPage = grabLimitedQuizzesForNewestPage(fr, to),
-                            finalPage = finalPage(howManyElementToShow, 'newest'))
-
-@app.route('/mostViews/<int:page>')
-def mostViewsQuiz(page):
-    howManyElementToShow = 5
-    fr = page * howManyElementToShow
-    to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template('/mostViews.html',
-                            grabLimitedQuizzesForMostViewsPage = grabLimitedQuizzesForMostViewsPage(fr, to),
-                            finalPage = finalPage(howManyElementToShow, 'mostViews'))
+@app.route('/newest/<int:page>/<numberOfResult>')
+def newestQuiz(page, numberOfResult):
+    if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
+        howManyElementToShow = int(numberOfResult)
+        fr = page * howManyElementToShow
+        to = (page * howManyElementToShow) + howManyElementToShow
+        return render_template('/newest.html',
+                                grabLimitedQuizzesForNewestPage = grabLimitedQuizzesForNewestPage(fr, to),
+                                finalPage = finalPage(howManyElementToShow, 'newest'))
+    else:
+        return render_template('404.html')
+        
+@app.route('/mostViews/<int:page>/<numberOfResult>')
+def mostViewsQuiz(page, numberOfResult):
+    if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
+        howManyElementToShow = int(numberOfResult)
+        fr = page * howManyElementToShow
+        to = (page * howManyElementToShow) + howManyElementToShow
+        return render_template('/mostViews.html',
+                                grabLimitedQuizzesForMostViewsPage = grabLimitedQuizzesForMostViewsPage(fr, to),
+                                finalPage = finalPage(howManyElementToShow, 'mostViews'))
+    else:
+        return render_template('404.html')
 
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
 def Category(category, page, sortType, numberOfResult):

@@ -1,3 +1,9 @@
+const splitUrl = () => {
+    const fullUrl = window.location.href
+    const splitUrl = fullUrl.split('/')
+    return splitUrl
+}
+
 //----------------------------------------------------------
 
 // Loading screen
@@ -49,6 +55,8 @@ header__searchInput.addEventListener('blur', () => {
 
 // tools
 try {
+    const currentUrl = splitUrl()
+    
     const fadeIn = (element) => {
         element.classList.remove('fade-out')
         element.classList.add('fade-in')
@@ -57,7 +65,7 @@ try {
         element.classList.add('fade-out')
         element.classList.remove('fade-in')
     }
-
+    
     tools__sort__btn.addEventListener('click', () => {
         if(tools__sort__options__container.classList.contains('fade-out')) {
             fadeIn(tools__sort__options__container)
@@ -65,7 +73,7 @@ try {
             fadeOut(tools__sort__options__container)
         }
     })
-
+    
     tools__numberOfResult__btn.addEventListener('click', () => {
         if (tools__numberOfResult__options__container.classList.contains('fade-out')) {
             fadeIn(tools__numberOfResult__options__container)
@@ -73,7 +81,7 @@ try {
             fadeOut(tools__numberOfResult__options__container)
         }
     })
-
+    
     body.addEventListener('click', () => {
         if (getComputedStyle(tools__sort__options__container).opacity == 1) {
             fadeOut(tools__sort__options__container)
@@ -83,6 +91,17 @@ try {
         }
     })
     
+    const setTheCurrentSortToTools = (currentUrl) => {
+        if (!(isNaN(parseInt(currentUrl[5])))) { //category
+            tools__sort__current.innerHTML = tools__optionsDefine[currentUrl[6]]
+            tools__numberOfResult__current.innerHTML = currentUrl[7]
+    
+        } else if  (!(isNaN(parseInt(currentUrl[6])))) { //innerCategory
+            tools__sort__current.innerHTML = tools__optionsDefine[currentUrl[7]]
+            tools__numberOfResult__current.innerHTML = currentUrl[8]
+        }
+    }
+
     const tools__optionsDefine = {
         'newest': 'جدیدترین',
         'bestest': 'بهترین',
@@ -91,39 +110,44 @@ try {
         'بهترین': 'bestest',
         'الفبا': 'alphabet'
     }
-
-    const urlMaker = () => {
-        const fullUrl = window.location.href
-        const splitUrl = fullUrl.split('/')
-        return splitUrl
-    }
-
-    currentUrl = urlMaker()
-    tools__sort__current.innerHTML = tools__optionsDefine[currentUrl[6]]
-    tools__numberOfResult__current.innerHTML = currentUrl[7]
-
+    
     tools__sort__options.forEach(each => {
         each.addEventListener('click', () => {
             tools__sort__current.innerHTML = each.innerHTML
         })
     })
-
     tools__numberOfResult__options.forEach(each => {
         each.addEventListener('click', () => {
             tools__numberOfResult__current.innerHTML = each.innerHTML
         })
     })
 
-    tools__submit.addEventListener('click', () => {
-        const currentUrl = urlMaker()
-        const currentNumberResult = tools__numberOfResult__current.innerHTML
-        const currentSort = tools__sort__current.innerHTML
-        window.location.replace(`/category/${currentUrl[4]}/0/${tools__optionsDefine[currentSort]}/${currentNumberResult}`); 
+    const whichPageItIsForMakingTheUrl = (currentUrl) => {
+        if (!(isNaN(parseInt(currentUrl[5])))) { //category
+            const category = currentUrl[4]
+            const currentSort = tools__sort__current.innerHTML
+            const currentNumberResult = tools__numberOfResult__current.innerHTML
+            const whichPageItIs = `/category/${category}/0/${tools__optionsDefine[currentSort]}/${currentNumberResult}`
+            return whichPageItIs
+        
+        } else if  (!(isNaN(parseInt(currentUrl[6])))) { //innerCategory
+            const category = currentUrl[4]
+            const innerCategory = currentUrl[5]
+            const currentSort = tools__optionsDefine[tools__sort__current.innerHTML]
+            const currentNumberResult = tools__numberOfResult__current.innerHTML
+            const whichPageItIs = `/category/${category}/${innerCategory}/0/${currentSort}/${currentNumberResult}`
+            return whichPageItIs
+        }
+    }
 
+    setTheCurrentSortToTools(currentUrl)
+
+    tools__submit.addEventListener('click', () => {
+        whichPageItIs = whichPageItIsForMakingTheUrl(currentUrl)
+        window.location.replace(whichPageItIs); 
     })
-} catch {
-    log('Tools Not Found!')
-}
+    
+} catch (e) {log(`Tools Not Found! ${e}`)}
 
 //----------------------------------------------------------
 
@@ -160,9 +184,7 @@ try {
             newsletter__categoryOptions__selectedByUser.innerHTML = chosenCategory
         })
     })
-} catch {
-    log('no newsletter')
-}
+} catch {log('no newsletter')}
 
 //----------------------------------------------------------
 
@@ -185,8 +207,7 @@ try {
 
 // Page travel
 try {
-    const fullUrl = window.location.href
-    const splitUrl = fullUrl.split('/')
+    splitUrl = splitUrl()
 
     const urlMakerForPageTravel = (currPageNumber, baseUrlPart1, baseUrlPart2) => {
         lastPage = baseUrlPart1 + (currPageNumber - 2) + baseUrlPart2
@@ -197,8 +218,8 @@ try {
     
     if  (!(isNaN(parseInt(splitUrl[4])))) { //sortPages
         baseUrlPart1 = '/' + splitUrl[3] + '/'
-        baseUrlPart2 = '/' + splitUrl[5] + '/' + splitUrl[6]
-        currPageNumber = parseInt(splitUrl[6]) + 1
+        baseUrlPart2 = '/' + splitUrl[5]
+        currPageNumber = parseInt(splitUrl[4]) + 1
         urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
 
     } else if (!(isNaN(parseInt(splitUrl[5])))) { //category
@@ -250,9 +271,7 @@ try {
     if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
         finalPageDOM.classList.add('noVis')
     }
-} catch (e) {
-    log('No page travel')
-}
+} catch {log('No page travel')}
 
 //----------------------------------------------------------
 
@@ -360,16 +379,13 @@ try {
         pauseTheFunctionOfChangingQuestions()
         checkIfTheQuizEndedAndShowResultPage()
     }) 
-} catch (e) { log('no nextQuestion btn')}
+} catch {log('no nextQuestion btn')}
 
 //----------------------------------------------------------
 
 try {
     backBtn.addEventListener('click', () => {
-        log('back')
         event.preventDefault();
         history.go(-1)
     })
-} catch {
-    log('no backBtn')
-}
+} catch {log('no backBtn')}
