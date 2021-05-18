@@ -6,11 +6,13 @@
         <h1>{{ quizDetail.title_eng }}</h1>
         <h3>{{ quizDetail.title_far }}</h3>
         <h5>سوال: ?</h5>
-    </div>
+        <div class="quiz__autoQuestionChangerSwitch flex flex-jc-c flex-ai-c">
+            <h5>تغییر خودکار</h5>
+            <div class="quiz__autoQuestionChangerSwitch__btn">
+                <div class="quiz__autoQuestionChangerSwitch__innerBtn"></div>
 
-    <div class="ad__r">
-        <div>
-            <img src="/static/img/ad.jpg" alt="">
+            </div>
+
         </div>
     </div>
 
@@ -18,9 +20,8 @@
 
         <img class="quiz__questionChanger quiz__questionChanger__next" src="/static/img/arw2.svg" alt="">
         <img class="quiz__questionChanger quiz__questionChanger__last" src="/static/img/arw2.svg" alt="">
-        
-        <div class="quiz__hider">
 
+        <div class="quiz__hider">
             {% for questionDetail in quiz_Question %}
 
             <div class="quiz__container">
@@ -35,8 +36,7 @@
                 </div>
             </div>
 
-            {% endfor %}
-            
+            {% endfor %} 
         </div>
 
         <div class="quiz__questionCounter flex flex-jc-c flex-ai-c">
@@ -44,7 +44,6 @@
             <div class="quiz__questionCounter__divider">&nbsp/&nbsp</div>
             <div class="quiz__questionCounter__totalQuestions">?</div>
         </div>
-
     </div>
 </body>
 

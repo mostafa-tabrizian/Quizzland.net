@@ -1549,6 +1549,49 @@ body {
           backdrop-filter: blur(165px);
 }
 
+.quiz__autoQuestionChangerSwitch {
+  position: relative;
+  top: 4rem;
+  left: 0.7rem;
+  z-index: 3;
+}
+
+.quiz__autoQuestionChangerSwitch > h5 {
+  font-size: .77rem;
+}
+
+.quiz__autoQuestionChangerSwitch__btn {
+  width: 2rem;
+  height: 1rem;
+  border: 1px solid white;
+  background: white;
+  border-radius: 25px;
+  margin-left: .7rem;
+  -webkit-box-shadow: inset 0 0 5px black, 0 0 5px black;
+          box-shadow: inset 0 0 5px black, 0 0 5px black;
+}
+
+.quiz__autoQuestionChangerSwitch__innerBtn {
+  width: 0.9rem;
+  height: 0.9rem;
+  background: green;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 0.006rem;
+  left: 1rem;
+  -webkit-box-shadow: inset 0 0 4px black;
+          box-shadow: inset 0 0 4px black;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.quiz__autoQuestionChangerSwitch__innerBtn__switched {
+  background: red;
+  left: 0;
+}
+
 .quiz__hider {
   display: -webkit-box;
   display: -ms-flexbox;

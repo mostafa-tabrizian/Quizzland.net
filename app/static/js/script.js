@@ -146,7 +146,7 @@ try {
         whichPageItIs = whichPageItIsForMakingTheUrl(currentUrl)
         window.location.replace(whichPageItIs); 
     })
-    
+
 } catch (e) {log(`Tools Not Found! ${e}`)}
 
 //----------------------------------------------------------
@@ -313,6 +313,7 @@ try {
             quiz__questionChanger__last.style.pointerEvents = 'visible';
         }, 1500)
     }
+
     let FinalTitleOfQuiz = ''
     const titleOfTheQuiz = () => {
         const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
@@ -357,10 +358,22 @@ try {
     quiz__options.forEach(each => {
         each.addEventListener('click', () => {
             plusOneToAnsweredQuestionsIfItsNotTheLast()
-            goToAnotherQuestion(next)
+            const switchBtn = quiz__autoQuestionChangerSwitch__innerBtn
+            if (!(switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched'))) {
+                goToAnotherQuestion(next)
+            }
             pauseTheFunctionOfChangingQuestions()
             checkIfTheQuizEndedAndShowResultPage()
         })
+    })
+
+    quiz__autoQuestionChangerSwitch__btn.addEventListener('click', () => {
+        const switchBtn = quiz__autoQuestionChangerSwitch__innerBtn
+        if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
+            quiz__autoQuestionChangerSwitch__innerBtn.classList.remove('quiz__autoQuestionChangerSwitch__innerBtn__switched')
+        } else {
+            quiz__autoQuestionChangerSwitch__innerBtn.classList.add('quiz__autoQuestionChangerSwitch__innerBtn__switched')
+        }
     })
 
     quiz__questionChanger__next.addEventListener('click', () => {
