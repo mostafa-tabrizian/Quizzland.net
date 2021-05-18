@@ -78,14 +78,17 @@ def Category(category, page, sortType, numberOfResult):
     
 @app.route('/category/<category>/<innerCategory>/<int:page>/<sortType>/<numberOfResult>')
 def innerCategory(category, innerCategory, page, sortType, numberOfResult):
-    howManyElementToShow = int(numberOfResult)
-    fr = page * howManyElementToShow
-    to = (page * howManyElementToShow) + howManyElementToShow
-    fullTitleOfInnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
-    addViewToCategories(fullTitleOfInnerCategory)
-    return render_template(f'/category/inner-category-list.html',
-                             quizzes = grabQuizzes(fullTitleOfInnerCategory, fr, to, sortType, numberOfResult),
-                             finalPage = finalPage(howManyElementToShow, fullTitleOfInnerCategory))
+    if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
+        howManyElementToShow = int(numberOfResult)
+        fr = page * howManyElementToShow
+        to = (page * howManyElementToShow) + howManyElementToShow
+        fullTitleOfInnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
+        addViewToCategories(fullTitleOfInnerCategory)
+        return render_template(f'/category/inner-category-list.html',
+                                quizzes = grabQuizzes(fullTitleOfInnerCategory, fr, to, sortType),
+                                finalPage = finalPage(howManyElementToShow, fullTitleOfInnerCategory))
+    else:
+        return render_template('404.html')
 
 @app.route('/quiz/<category>/<sub_category>/<title>')
 def Quiz(category, sub_category, title):

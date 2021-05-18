@@ -196,9 +196,10 @@ try {
     }
     
     if  (!(isNaN(parseInt(splitUrl[4])))) { //sortPages
-        baseUrl = '/' + splitUrl[3] + '/'
-        currPageNumber = parseInt(splitUrl[4])
-        urlMakerForPageTravel(currPageNumber, baseUrl)
+        baseUrlPart1 = '/' + splitUrl[3] + '/'
+        baseUrlPart2 = '/' + splitUrl[5] + '/' + splitUrl[6]
+        currPageNumber = parseInt(splitUrl[6]) + 1
+        urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
 
     } else if (!(isNaN(parseInt(splitUrl[5])))) { //category
         baseUrlPart1 = '/' + splitUrl[3] + '/' + splitUrl[4] + '/'
@@ -207,10 +208,10 @@ try {
         urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
 
     } else if  (!(isNaN(parseInt(splitUrl[6])))) { //innerCategory
-        baseUrl = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + splitUrl[5] + '/'
-        currPageNumber = parseInt(splitUrl[6])
+        baseUrlPart1 = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + splitUrl[5] + '/'
+        baseUrlPart2 = '/' + splitUrl[7] + '/' + splitUrl[8]
+        currPageNumber = parseInt(splitUrl[6]) + 1
         urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
-
     }
 
     pageTravel__pages__last.innerHTML = currPageNumber - 1
@@ -251,7 +252,6 @@ try {
     }
 } catch (e) {
     log('No page travel')
-    log(e)
 }
 
 //----------------------------------------------------------
