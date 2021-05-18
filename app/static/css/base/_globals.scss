@@ -295,9 +295,16 @@ input {
 }
 
 .fade {
-    visibility: hidden;
-    opacity: 0;
-    transition: all .53s ease-in-out;
+    &-out {
+        visibility: hidden;
+        opacity: 0;
+        transition: all .53s ease-in-out;
+    }
+    &-in {
+        visibility: visible;
+        opacity: 1;
+        transition: all .53s ease-in-out;  
+    }
 }
 
 .noVis {
@@ -381,55 +388,6 @@ input {
         padding-right: 1.125rem;
     }
 }
-
-// .tools {
-//     direction: rtl;
-//     display: flex;
-//     flex-wrap: wrap;
-//     justify-self: flex-end;
-//     margin-right: 1rem;
-
-//     &__submit {
-//         right: 14.7rem;
-//         top: -.2rem;
-//     }
-
-//     &__search {
-//         transform: translate(1.875rem);
-//         width: 17rem;
-//         margin-bottom: .5rem;
-
-//     }
-
-//     &__sortType {
-//         position: relative;
-//         transition: all .3s ease;
-    
-//         > div {
-//             background: $red;
-//             font-size: $font-sm;
-//             color: $white;
-//             transform: translate(104%);
-//             padding: .11rem .5rem;
-//             border-radius: 20px;
-//         }
-    
-//         &__current {
-//             min-width: 6.15rem;
-//             text-align: center;
-//         }
-    
-//         &__options {
-//             position: absolute;
-//             left: -2rem;
-//             top: 2.3rem;
-//             box-shadow: 0 0 5px black;
-//             transition: all .3s ease;
-//             line-height: 1.5rem;
-//             z-index: 2;
-//         }
-//     }
-// }
 
 // stylish
 

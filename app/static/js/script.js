@@ -2,7 +2,8 @@
 
 // Loading screen
 window.onload = (event) => {
-    loadingScreen.classList.add('fade')
+    loadingScreen.classList.add('fade-out')
+    loadingScreen.classList.remove('fade-in')
 };
 
 //----------------------------------------------------------
@@ -37,66 +38,88 @@ header__menu__closeBtn.addEventListener('click', () => {
 
 // show the submit search btn when active
 header__searchInput.addEventListener('click', () => {
-    header__searchSubmit.classList.remove('fade')
+    header__searchSubmit.classList.remove('fade-out')
+    header__searchSubmit.classList.add('fade-in')
 })
 header__searchInput.addEventListener('blur', () => {
-    header__searchSubmit.classList.add('fade')
+    header__searchSubmit.classList.add('fade-out')
+    header__searchSubmit.classList.remove('fade-in')
 })
 
 //----------------------------------------------------------
 
-// show the submit search category btn when active
+// tools
 try {
+    const fadeIn = (element) => {
+        element.classList.remove('fade-out')
+        element.classList.add('fade-in')
+    }
+    const fadeOut = (element) => {
+        element.classList.add('fade-out')
+        element.classList.remove('fade-in')
+    }
 
-    tools__search.addEventListener('click', () => {
-        tools__submit.classList.remove('fade')
-    })
-    tools__search.addEventListener('blur', () => {
-        tools__submit.classList.add('fade')
-    })
-
-    tools__sortType.addEventListener('click', () => {
-        if (tools__sortType__options.classList.contains('fade')) {
-            tools__sortType__options.classList.remove('fade')
+    tools__sort__btn.addEventListener('click', () => {
+        if(tools__sort__options__container.classList.contains('fade-out')) {
+            fadeIn(tools__sort__options__container)
         } else {
-            tools__sortType__options.classList.add('fade')
+            fadeOut(tools__sort__options__container)
         }
     })
 
-    sort__newest.addEventListener('click', () => {
-        tools__sortType__current.innerHTML = 'جدیدترین ها'
+    tools__numberOfResult__btn.addEventListener('click', () => {
+        if (tools__numberOfResult__options__container.classList.contains('fade-out')) {
+            fadeIn(tools__numberOfResult__options__container)
+        } else {
+            fadeOut(tools__numberOfResult__options__container)
+        }
     })
-    sort__oldest.addEventListener('click', () => {
-        tools__sortType__current.innerHTML = 'قدیمی‌ترین ها'
+
+    body.addEventListener('click', () => {
+        if (getComputedStyle(tools__sort__options__container).opacity == 1) {
+            fadeOut(tools__sort__options__container)
+        } 
+        if(getComputedStyle(tools__numberOfResult__options__container).opacity == 1) {
+            fadeOut(tools__numberOfResult__options__container)
+        }
     })
-    sort__bestest.addEventListener('click', () => {
-        tools__sortType__current.innerHTML = 'بهترین‌ ها'
+    
+    const urlMaker = () => {
+        const fullUrl = window.location.href
+        const splitUrl = fullUrl.split('/')
+        return splitUrl
+    }
+
+    tools__optionsDefine = {
+        'newest': 'جدیدترین',
+        'bestest': 'بهترین',
+        'alphabet': 'الفبا'
+    }
+    currentUrl = urlMaker()
+    tools__sort__current.innerHTML = tools__optionsDefine[currentUrl[6]]
+    tools__numberOfResult__current.innerHTML = currentUrl[7]
+
+    tools__sort__options.forEach(each => {
+        each.addEventListener('click', () => {
+            tools__sort__current.innerHTML = each.innerHTML
+        })
     })
-    sort__alphabet.addEventListener('click', () => {
-        tools__sortType__current.innerHTML = 'الفبا'
+    tools__numberOfResult__options.forEach(each => {
+        each.addEventListener('click', () => {
+            tools__numberOfResult__current.innerHTML = each.innerHTML
+        })
+    })
+    tools__optionsDefine = {
+        'جدیدترین': 'newest',
+        'بهترین': 'bestest',
+        'الفبا': 'alphabet'
+    }
+    tools__submit.addEventListener('click', () => {
+        const currentUrl = urlMaker()
+        const currentNumberResult = tools__numberOfResult__current.innerHTML
+        const currentSort = tools__sort__current.innerHTML
+        window.location.replace(`/category/${currentUrl[4]}/0/${tools__optionsDefine[currentSort]}/${currentNumberResult}`); 
 
-
-        // let quizzes__item__sort = []
-
-        // for (let i = 0; i < quizzes__item.length; i++) {
-        //     quizzes__item__sort.push(quizzes__item[i])
-        // }
-        
-        // quizzes__item__sort.sort((a, b) => { 
-        //     a = a.id.toLowerCase();
-        //     b = b.id.toLowerCase();
-        //     if (a > b) { 
-        //         return 1; 
-        //     } else if (a < b) {
-        //         return -1;
-        //     } else {
-        //         return 0;
-        //     }
-        // })
-
-        // for (let i = 0; i < quizzes__item.length; i++) {
-        //     quizzes__item__sort[i].style.order = i
-        // }
     })
 } catch {
     log('Tools Not Found!')
@@ -106,12 +129,14 @@ try {
 
 // newsletter pop up
 newsletter__show.addEventListener('click', () => {
-    newsletter.classList.remove('fade')
+    newsletter.classList.remove('fade-out')
+    newsletter.classList.add('fade-in')
     body.style.overflowY = 'hidden'
     newsletter__blurBackground.classList.add('newsletter__blurBackground__show')
 })
 newsletter__closeBtn.addEventListener('click', () => {
-    newsletter.classList.add('fade')
+    newsletter.classList.add('fade-out')
+    newsletter.classList.remove('fade-in')
     body.style.overflowY = 'overlay'
     newsletter__blurBackground.classList.remove('newsletter__blurBackground__show')
 })

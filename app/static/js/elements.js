@@ -25,11 +25,16 @@ const newsletter__categoryOptions = document.querySelector('.newsletter__categor
 const newsletter__categoryOptions__input = document.querySelectorAll('.newsletter__categoryOptions input')
 const newsletter__categoryOptions__selectedByUser = document.querySelector('.newsletter__categoryOptions__selectedByUser')
 
-const tools__search = document.querySelector('.tools__search')
+
+const tools__sort__btn = document.querySelector('.tools__sort__btn')
+const tools__sort__options = document.querySelectorAll('.tools__sort__options > button')
+const tools__sort__options__container = document.querySelector('.tools__sort__options__container')
+const tools__sort__current = document.querySelector('.tools__sort__current')
+const tools__numberOfResult__btn = document.querySelector('.tools__numberOfResult__btn')
+const tools__numberOfResult__options = document.querySelectorAll('.tools__numberOfResult__options > button')
+const tools__numberOfResult__options__container = document.querySelector('.tools__numberOfResult__options__container')
+const tools__numberOfResult__current = document.querySelector('.tools__numberOfResult__current')
 const tools__submit = document.querySelector('.tools__submit')
-const tools__sortType = document.querySelector('.tools__sortType')
-const tools__sortType__current = document.querySelector('.tools__sortType__current')
-const tools__sortType__options = document.querySelector('.tools__sortType__options')
 
 const sort__newest = document.querySelector('#newest')
 const sort__oldest = document.querySelector('#oldest')

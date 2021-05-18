@@ -63,24 +63,24 @@ def mostViewsQuiz(page):
                             grabLimitedQuizzesForMostViewsPage = grabLimitedQuizzesForMostViewsPage(fr, to),
                             finalPage = finalPage(howManyElementToShow, 'mostViews'))
 
-@app.route('/category/<category>/<int:page>/<sortType>')
-def Category(category, page, sortType):
-    howManyElementToShow = 8
+@app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
+def Category(category, page, sortType, numberOfResult):
+    howManyElementToShow = int(numberOfResult)
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
     return render_template(f'/category/category.html',
                             categories = grabCategories(category, fr, to, sortType),
                             finalPage = finalPage(howManyElementToShow, category))
     
-@app.route('/category/<category>/<innerCategory>/<int:page>/<sortType>')
-def innerCategory(category, innerCategory, page, sortType):
-    howManyElementToShow = 10
+@app.route('/category/<category>/<innerCategory>/<int:page>/<sortType>/<numberOfResult>')
+def innerCategory(category, innerCategory, page, sortType, numberOfResult):
+    howManyElementToShow = int(numberOfResult)
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
     fullTitleOfInnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
     addViewToCategories(fullTitleOfInnerCategory)
     return render_template(f'/category/inner-category-list.html',
-                             quizzes = grabQuizzes(fullTitleOfInnerCategory, fr, to, sortType),
+                             quizzes = grabQuizzes(fullTitleOfInnerCategory, fr, to, sortType, numberOfResult),
                              finalPage = finalPage(howManyElementToShow, fullTitleOfInnerCategory))
 
 @app.route('/quiz/<category>/<sub_category>/<title>')
