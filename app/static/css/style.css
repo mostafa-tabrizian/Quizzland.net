@@ -1331,7 +1331,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .tools__sort__btn {
   padding: .4rem;
-  background: rgba(0, 0, 0, 0.253);
+  background: #d2d2d2;
   border: transparent;
   border-radius: 7px;
 }
@@ -1344,9 +1344,13 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   margin-top: .5rem;
 }
 
+.tools__sort__options > button {
+  background: #d2d2d2;
+}
+
 .tools__numberOfResult__btn {
   padding: .4rem;
-  background: rgba(0, 0, 0, 0.253);
+  background: #d2d2d2;
   border: transparent;
   border-radius: 7px;
   font-size: 1.18rem;
@@ -1358,6 +1362,10 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .tools__numberOfResult__options {
   margin-top: .5rem;
+}
+
+.tools__numberOfResult__options > button {
+  background: #d2d2d2;
 }
 
 .tools__submit {

@@ -26,7 +26,6 @@ body.addEventListener('click', () => {
 //----------------------------------------------------------
 
 // open the menu
-
 header__menu__openBtn.addEventListener('click', () => {
     header__menu.classList.remove('slideMenu-hide')
 })
@@ -84,17 +83,21 @@ try {
         }
     })
     
+    const tools__optionsDefine = {
+        'newest': 'جدیدترین',
+        'bestest': 'بهترین',
+        'alphabet': 'الفبا',
+        'جدیدترین': 'newest',
+        'بهترین': 'bestest',
+        'الفبا': 'alphabet'
+    }
+
     const urlMaker = () => {
         const fullUrl = window.location.href
         const splitUrl = fullUrl.split('/')
         return splitUrl
     }
 
-    tools__optionsDefine = {
-        'newest': 'جدیدترین',
-        'bestest': 'بهترین',
-        'alphabet': 'الفبا'
-    }
     currentUrl = urlMaker()
     tools__sort__current.innerHTML = tools__optionsDefine[currentUrl[6]]
     tools__numberOfResult__current.innerHTML = currentUrl[7]
@@ -104,16 +107,13 @@ try {
             tools__sort__current.innerHTML = each.innerHTML
         })
     })
+
     tools__numberOfResult__options.forEach(each => {
         each.addEventListener('click', () => {
             tools__numberOfResult__current.innerHTML = each.innerHTML
         })
     })
-    tools__optionsDefine = {
-        'جدیدترین': 'newest',
-        'بهترین': 'bestest',
-        'الفبا': 'alphabet'
-    }
+
     tools__submit.addEventListener('click', () => {
         const currentUrl = urlMaker()
         const currentNumberResult = tools__numberOfResult__current.innerHTML
@@ -188,11 +188,11 @@ try {
     const fullUrl = window.location.href
     const splitUrl = fullUrl.split('/')
 
-    const urlMakerForPageTravel = (currPageNumber, baseUrl) => {
-        lastPage = baseUrl + (currPageNumber - 1) 
-        nextPage = baseUrl + (currPageNumber + 1)
-        nextTwoPage = baseUrl + (currPageNumber + 2)
-        finalPage = baseUrl + (parseInt(finalPageNumberDOM.innerHTML.trim()) - 1)
+    const urlMakerForPageTravel = (currPageNumber, baseUrlPart1, baseUrlPart2) => {
+        lastPage = baseUrlPart1 + (currPageNumber - 2) + baseUrlPart2
+        nextPage = baseUrlPart1 + (currPageNumber) + baseUrlPart2
+        nextTwoPage = baseUrlPart1 + (currPageNumber + 1) + baseUrlPart2
+        finalPage = baseUrlPart1 + (parseInt(finalPageNumberDOM.innerHTML.trim()) - 1)  + baseUrlPart2
     }
     
     if  (!(isNaN(parseInt(splitUrl[4])))) { //sortPages
@@ -201,55 +201,57 @@ try {
         urlMakerForPageTravel(currPageNumber, baseUrl)
 
     } else if (!(isNaN(parseInt(splitUrl[5])))) { //category
-        baseUrl = '/' + splitUrl[3] + '/' + splitUrl[4] + '/'
-        currPageNumber = parseInt(splitUrl[5])
-        urlMakerForPageTravel(currPageNumber, baseUrl)
+        baseUrlPart1 = '/' + splitUrl[3] + '/' + splitUrl[4] + '/'
+        baseUrlPart2 = '/' + splitUrl[6] + '/' + splitUrl[7]
+        currPageNumber = parseInt(splitUrl[5]) + 1
+        urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
 
     } else if  (!(isNaN(parseInt(splitUrl[6])))) { //innerCategory
         baseUrl = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + splitUrl[5] + '/'
         currPageNumber = parseInt(splitUrl[6])
-        urlMakerForPageTravel(currPageNumber, baseUrl)
+        urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
 
     }
 
-    pageTravel__pages__last.innerHTML = currPageNumber
+    pageTravel__pages__last.innerHTML = currPageNumber - 1
     pageTravel__arwLast.href = lastPage
     pageTravel__pages__last.href = lastPage
 
-    pageTravel__pages__curr.innerHTML = currPageNumber + 1
+    pageTravel__pages__curr.innerHTML = currPageNumber
 
-    pageTravel__pages__next.innerHTML = currPageNumber + 2
+    pageTravel__pages__next.innerHTML = currPageNumber + 1
     pageTravel__pages__next.href = nextPage
 
-    pageTravel__pages__nextTwo.innerHTML = currPageNumber + 3
+    pageTravel__pages__nextTwo.innerHTML = currPageNumber + 2
     pageTravel__pages__nextTwo.href = nextTwoPage
     
     pageTravel__arwNext.href = nextPage
 
     finalPageNumberDOM.href = finalPage
     
-    if (currPageNumber == 0) {
+    if (currPageNumber == 1) {
         pageTravel__arwLast.classList.add('noVis')
         pageTravel__pages__last.classList.add('noVis')
     }
 
-    if (currPageNumber + 1 == finalPageNumberDOM.innerHTML) {
+    if (currPageNumber == finalPageNumberDOM.innerHTML) {
         pageTravel__arwNext.classList.add('noVis')
         pageTravel__pages__next.classList.add('noVis')
         pageTravel__pages__nextTwo.classList.add('noVis')
         finalPageDOM.classList.add('noVis')
     }
 
-    if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
+    if (currPageNumber + 1 == finalPageNumberDOM.innerHTML) {
         finalPageDOM.classList.add('noVis')
         pageTravel__pages__nextTwo.classList.add('noVis')
     }
     
-    if (currPageNumber + 3 == finalPageNumberDOM.innerHTML) {
+    if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
         finalPageDOM.classList.add('noVis')
     }
 } catch (e) {
     log('No page travel')
+    log(e)
 }
 
 //----------------------------------------------------------

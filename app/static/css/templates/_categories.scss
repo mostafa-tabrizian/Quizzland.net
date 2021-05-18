@@ -81,7 +81,7 @@
 
         &__btn {
             padding: .4rem;
-            background:rgba(0, 0, 0, 0.253);
+            background: rgb(210, 210, 210);
             border: transparent;
             border-radius: 7px;
 
@@ -92,13 +92,17 @@
 
         &__options {
             margin-top: .5rem;
+            
+            & > button {
+                background: rgb(210, 210, 210);
+            }
         }
     }
 
     &__numberOfResult {
         &__btn {
             padding: .4rem;
-            background:rgba(0, 0, 0, 0.253);
+            background: rgb(210, 210, 210);
             border: transparent;
             border-radius: 7px;
             font-size: $font-sm;
@@ -109,6 +113,10 @@
         }
         &__options {
             margin-top: .5rem;
+
+            & > button {
+                background: rgb(210, 210, 210);
+            }
         }
     }
 
