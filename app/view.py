@@ -65,12 +65,16 @@ def mostViewsQuiz(page):
 
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
 def Category(category, page, sortType, numberOfResult):
-    howManyElementToShow = int(numberOfResult)
-    fr = page * howManyElementToShow
-    to = (page * howManyElementToShow) + howManyElementToShow
-    return render_template(f'/category/category.html',
-                            categories = grabCategories(category, fr, to, sortType),
-                            finalPage = finalPage(howManyElementToShow, category))
+    if int(numberOfResult) != 8 or int(numberOfResult) != 16 or int(numberOfResult) != 24 or int(numberOfResult) != 32:
+        return render_template('404.html')
+    else:
+        howManyElementToShow = int(numberOfResult)
+        fr = page * howManyElementToShow
+        to = (page * howManyElementToShow) + howManyElementToShow
+        return render_template(f'/category/category.html',
+                                categories = grabCategories(category, fr, to, sortType),
+                                finalPage = finalPage(howManyElementToShow, category))
+
     
 @app.route('/category/<category>/<innerCategory>/<int:page>/<sortType>/<numberOfResult>')
 def innerCategory(category, innerCategory, page, sortType, numberOfResult):
