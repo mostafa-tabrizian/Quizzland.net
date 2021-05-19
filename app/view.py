@@ -122,11 +122,13 @@ def result(title):
                             fullTitle = fullTitle,
                             fanName = fanNameOfQuiz(fullTitle))
 
-@app.route('/result_2/<title>')
-def result4Option(title):
+@app.route('/result_2/<title>/<int:score>')
+def result4Option(title, score):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     return render_template('/result_4Option.html',
-                            fullTitle = fullTitle)
+                            fullTitle = fullTitle,
+                            DbOfQuiz = grabFirstQuizByFarsiTitle(fullTitle),
+                            score = abs(int(score)))
 
 @app.route('/about')
 def about():

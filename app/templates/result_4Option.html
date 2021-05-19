@@ -7,10 +7,82 @@
        <h5>نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h5>
     </div>
     <div class="resultQuiz4Option space-sm center tx-al-c">
-        <h1>شما یک دیوانه هستید</h1>
-        <p class="resultQuiz4Option__txt space-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
-        </p>
+        <h1>
+            {% if DbOfQuiz.result_UpTo_1 != None and DbOfQuiz.result_UpTo_1.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_1.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+                
+            {% elif DbOfQuiz.result_UpTo_2 != None and DbOfQuiz.result_UpTo_2.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_2.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>    
+                 
+            {% elif DbOfQuiz.result_UpTo_3 != None and DbOfQuiz.result_UpTo_3.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_3.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+
+            {% elif DbOfQuiz.result_UpTo_4 != None and DbOfQuiz.result_UpTo_4.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_4.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+                
+            {% elif DbOfQuiz.result_UpTo_5 != None and DbOfQuiz.result_UpTo_5.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_5.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+
+            {% elif DbOfQuiz.result_UpTo_6 != None and DbOfQuiz.result_UpTo_6.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_6.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+
+            {% elif DbOfQuiz.result_UpTo_7 != None and DbOfQuiz.result_UpTo_7.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_7.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+                
+            {% elif DbOfQuiz.result_UpTo_8 != None and DbOfQuiz.result_UpTo_8.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_8.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+
+            {% elif DbOfQuiz.result_UpTo_9 != None and DbOfQuiz.result_UpTo_9.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_9.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+
+            {% elif DbOfQuiz.result_UpTo_10 != None and DbOfQuiz.result_UpTo_10.split('=')[0]|int >= score %}
+                {% set sliceDb = DbOfQuiz.result_UpTo_10.split('=') %}
+                {{ sliceDb[1] }}
+                <p class="resultQuiz4Option__txt space-sm">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa ullam minima minus perferendis error blanditiis molestias cupiditate expedita corrupti!
+                </p>
+
+            {% else %}
+                خطا در محاسبه نتیجه‌
+                لطفا با پشتیبانی تماس بگیرید
+            {% endif %}
+        </h1>
     </div>
     <div class="result__share space-sm tx-al-c">
         <h5>برای دوستات هم بفرست </br> ببین اونام شبیه‌تن</h5>

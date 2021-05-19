@@ -48,31 +48,6 @@ try {
         } catch (e) {
             log('no result page')
         } 
-    } else if (typeOfQuiz == '4Option') {
-        encodedNumbers = {
-            1: 'b25l',
-            2: 'dHdv',
-            3: 'dGhyZWU=',
-            4: 'Zm91cg==',
-            'b25l': 1,
-            'dHdv': 2,
-            'dGhyZWU=': 3,
-            'Zm91cg==': 4,
-        }
-    
-        quiz__container__eachOne.forEach(each => {
-            const eachOption = each.querySelectorAll('input')
-            eachOption.forEach(each => {
-                const howMuchPointIsThisQuestion = each.getAttribute('data')
-                const howMuchPointIsThisQuestion_encoded = encodedNumbers[howMuchPointIsThisQuestion]
-                each.setAttribute('data', howMuchPointIsThisQuestion_encoded)
-            })
-        })
-    
-        try {
-            const scoreDATA = localStorage.getItem('score')
-            result__score.innerHTML = scoreDATA
-        } catch {}
     }
 } catch (e) {log('no quiz.js', e)}
 
@@ -93,13 +68,11 @@ const calculateResult_4Option = (FinalTitleOfQuiz) => {
     let score = 0
     const correctAnswerCounter = document.querySelectorAll(".quiz__container div form input:checked")
     correctAnswerCounter.forEach(each => {
-        pointOfThisAnswer = encodedNumbers[each.getAttribute('data')]
+        pointOfThisAnswer = parseInt(each.getAttribute('data'))
+        log(pointOfThisAnswer)
         score += pointOfThisAnswer
     })
-
-    localStorage.setItem('score', score)
-
-    window.location.replace(`/result_2/${FinalTitleOfQuiz}`); 
+    window.location.replace(`/result_2/${FinalTitleOfQuiz}/${score}`); 
 }
 
 log('quiz.js working')
