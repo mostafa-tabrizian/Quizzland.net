@@ -13,11 +13,18 @@ admin = Admin(
 
 app.secret_key = '$Postgresql19931506'
 
-admin.add_view(ModelView(Quizzes, session()))
 admin.add_view(ModelView(Categories, session()))
+
+admin.add_view(ModelView(Quizzes, session()))
 admin.add_view(ModelView(quizQuestions, session()))
+
+admin.add_view(ModelView(Quizzes4Option, session()))
 admin.add_view(ModelView(fourOptionQuizQuestions, session()))
+
 path = op.join(op.dirname(__file__), 'static')
+
 admin.add_view(ModelView(NewsletterUser, session()))
+
 admin.add_view(FileAdmin(path, '/static/', name='Static Files'))
+
 admin.add_view(ModelView(Documents, session()))

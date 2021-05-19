@@ -35,7 +35,15 @@
     {% for category in categories %}
         <div class="quizzes__item">
             <a href="{{category.href}}/0/newest/8"><img src="/static/img/{{category.img}}" alt=""></a>
-            <h5><a href="{{category.href}}/0/newest/8">{{category.title_eng}}</a></h5>
+            <h5><a href="{{category.href}}/0/newest/8">
+
+                {% if category.category == 'physiologies' %}
+                    {{ category.title_far }}
+                {% else %}
+                    {{ category.title_eng }}
+                {% endif %}
+
+            </a></h5>
         </div>
     {% endfor %}
 </div>

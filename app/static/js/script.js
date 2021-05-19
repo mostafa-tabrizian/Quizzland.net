@@ -298,8 +298,10 @@ try {
 
 // quiz questions
 try {
-    let currentQuestion = 1
+    const typeOfQuiz = quiz__questions.getAttribute('tag')
+    localStorage.setItem('typeOfQuiz', typeOfQuiz)
     const numberOfQuestions = quiz__container.length
+    let currentQuestion = 1
 
     quiz__numberOfQuestions.innerHTML = `سوال&nbsp:&nbsp&nbsp${numberOfQuestions}`
     quiz__questionCounter__totalQuestions.innerHTML = numberOfQuestions
@@ -327,8 +329,6 @@ try {
         let FinalTitleOfQuiz = ''
         if (currentQuestion - 1 == numberOfQuestions) {
             FinalTitleOfQuiz = titleOfTheQuiz()
-            const typeOfQuiz = quiz__questions.getAttribute('tag')
-            localStorage.setItem('typeOfQuiz', typeOfQuiz)
             if (typeOfQuiz == 'quiz') {
                 calculateResult(FinalTitleOfQuiz)
             } else if (typeOfQuiz == '4Option') {

@@ -170,6 +170,7 @@ body {
         overflow: hidden;
         position: relative;
         bottom: 3.5rem;
+        z-index: 1;
     }
 
     &__questionChanger {
@@ -204,10 +205,24 @@ body {
 
     &__questionCounter {
         position: absolute;
-        bottom: 6rem;
-        left: 50%;
+        top: 3rem;
+        left: 63.5%;
+        display: block;
         transform: translate(-50%);
         color: $white;
+
+        &__divider {
+            position: relative;
+            bottom: 0.7rem;
+            left: 0.29rem;
+            transform: rotate(16.3deg) scaleY(2.9);
+        }
+
+        &__totalQuestions {
+            position: relative;
+            bottom: 1.7rem;
+            left: 0.8rem;
+        }
     }
 
     &__4option {

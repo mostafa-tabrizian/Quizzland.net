@@ -75,6 +75,7 @@ def Category(category, page, sortType, numberOfResult):
         howManyElementToShow = int(numberOfResult)
         fr = page * howManyElementToShow
         to = (page * howManyElementToShow) + howManyElementToShow
+        
         return render_template(f'/category/category.html',
                                 categories = grabCategories(category, fr, to, sortType),
                                 finalPage = finalPage(howManyElementToShow, category))
@@ -88,16 +89,16 @@ def innerCategory(category, innerCategory, page, sortType, numberOfResult):
         howManyElementToShow = int(numberOfResult)
         fr = page * howManyElementToShow
         to = (page * howManyElementToShow) + howManyElementToShow
-        fullTitleOfInnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
-        addViewToCategories(fullTitleOfInnerCategory)
+        fullTitle = titleConverterFromUrlToNormalOne(innerCategory)
+        addViewToCategories(fullTitle)
         return render_template(f'/category/inner-category-list.html',
-                                quizzes = grabQuizzes(fullTitleOfInnerCategory, fr, to, sortType),
-                                finalPage = finalPage(howManyElementToShow, fullTitleOfInnerCategory))
+                                quizzes = grabQuizzes(category, fullTitle, fr, to, sortType),
+                                finalPage = finalPage(howManyElementToShow, fullTitle))
     else:
         return render_template('404.html')
 
-@app.route('/quiz/<category>/<sub_category>/<title>')
-def Quiz(category, sub_category, title):
+@app.route('/quiz/<category>/<innerCategory>/<title>')
+def Quiz(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     return render_template('/quiz.html',
@@ -105,8 +106,8 @@ def Quiz(category, sub_category, title):
                             quiz_Question = grabQuizQuestion(fullTitle),
                             colorOfHeader = 'header__white')
 
-@app.route('/quiz_2/<category>/<sub_category>/<title>')
-def Quiz4Option(category, sub_category, title):
+@app.route('/quiz_2/<category>/<innerCategory>/<title>')
+def Quiz4Option(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     return render_template('/quiz_4Option.html',

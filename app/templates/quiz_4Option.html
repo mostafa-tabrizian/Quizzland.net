@@ -28,10 +28,68 @@
                 <p class='quiz__question'>{{ questionDetail.question }}</p>
                 <div class="flex flex-jc-c">
                     <form class='quiz__4option' action="">
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-1" data = {{questionDetail.point_1}}><label for="{{ questionDetail.id }}-1"> {{ questionDetail.option_1 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-2" data = {{questionDetail.point_2}}><label for="{{ questionDetail.id }}-2"> {{ questionDetail.option_2 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-3" data = {{questionDetail.point_3}}><label for="{{ questionDetail.id }}-3"> {{ questionDetail.option_3 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-4" data = {{questionDetail.point_4}}><label for="{{ questionDetail.id }}-4"> {{ questionDetail.option_4 }} </label>
+
+                        {% if questionDetail.op_pt_1 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-1" data = "{{ questionDetail.op_pt_1.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-1"> 
+                                {{ questionDetail.op_pt_1.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_2 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-2" data = "{{ questionDetail.op_pt_2.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-2"> 
+                                {{ questionDetail.op_pt_2.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_3 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-3" data = "{{ questionDetail.op_pt_3.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-3"> 
+                                {{ questionDetail.op_pt_3.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_4 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-4" data = "{{ questionDetail.op_pt_4.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-4"> 
+                                {{ questionDetail.op_pt_4.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_5 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-5" data = "{{ questionDetail.op_pt_5.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-5"> 
+                                {{ questionDetail.op_pt_5.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_6 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-6" data = "{{ questionDetail.op_pt_6.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-6"> 
+                                {{ questionDetail.op_pt_6.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_7 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-7" data = "{{ questionDetail.op_pt_7.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-7"> 
+                                {{ questionDetail.op_pt_7.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_8 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-8" data = "{{ questionDetail.op_pt_8.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-8"> 
+                                {{ questionDetail.op_pt_8.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_9 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-9" data = "{{ questionDetail.op_pt_9.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-9"> 
+                                {{ questionDetail.op_pt_9.split('-')[0] }}
+                            </label>
+                        {% endif %}
+                        {% if questionDetail.op_pt_10 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-10" data = "{{ questionDetail.op_pt_10.split('-')[1] }}">
+                            <label for="{{ questionDetail.id }}-10"> 
+                                {{ questionDetail.op_pt_10.split('-')[0] }}
+                            </label>
+                        {% endif %}
+
                     </form>
                 </div>
             </div>

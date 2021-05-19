@@ -32,6 +32,9 @@ def recreate_4OptionQuestions():
     fourOptionQuizQuestionsBase.metadata.drop_all(engine)
     fourOptionQuizQuestionsBase.metadata.create_all(engine)
 
+def recreate_quizzes4Option():
+    quizzes4OptionBase.metadata.drop_all(engine)
+    quizzes4OptionBase.metadata.create_all(engine)
 
 def add_session(data):
     try:
@@ -118,6 +121,7 @@ def up_session():
 # recreate_categories()
 # recreate_newsletterUrl()
 # recreate_quizQuestions()
+# recreate_quizzes4Option()
 # recreate_4OptionQuestions()
 # del_session()
 # up_session()
