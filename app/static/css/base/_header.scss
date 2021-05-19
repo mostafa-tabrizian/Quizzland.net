@@ -22,7 +22,7 @@
     }
 
     .slideMenu-hide {
-        top: -13rem !important;
+        top: -14rem !important;
     }
 
     &__menu {
@@ -33,7 +33,7 @@
         box-shadow: 0 7px 20px black;
         backdrop-filter: blur(20px);
         border: 2px solid transparent;
-        height: 13rem;
+        height: 14rem;
         width: 100%;
         border-radius: 0 0 55px 55px;
         transition: all .3s ease-in-out;
@@ -69,6 +69,7 @@
         &__inner {
             color: white;
             font-size: $font-sm - .28;
+            z-index: 2;
 
             ul > li {
                 margin-bottom: .2rem;
@@ -81,12 +82,18 @@
             &__category {
                 float: left;
                 margin-left: 6rem;
+                margin-bottom: 0.5rem;
 
                 & > h5 {
                     margin-bottom: 0;
                     font-size: 1.2em !important;
 
                 }
+            }
+
+            &__quizzes {
+                text-align: left;
+                margin-bottom: 0.5rem;
             }
 
             &__nav {
@@ -124,10 +131,9 @@
         }
     }
 
-    &__categories {
+    .subHeader {
         color: $white;
         position: absolute;
-        right: 5rem;
         top: 7rem;
         border: 1px solid transparent;
         background: rgba(0, 0, 0, 0.178);
@@ -152,6 +158,14 @@
                 margin-bottom: 1.25rem
             }
         }
+    }
+
+    &__categories {
+        right: 5rem;
+    }
+
+    &__quizzes {
+        right: 12rem;
     }
 
     &__white {

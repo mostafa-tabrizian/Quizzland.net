@@ -15,17 +15,28 @@ window.onload = (event) => {
 //----------------------------------------------------------
 
 // open and close the category list when click on category in the list
-header__categories__button.addEventListener('click', () => {
-    if (header__categories.classList.contains('header__categories__open')) {
-        header__categories.classList.remove('header__categories__open')
+header__categories__btn.addEventListener('click', () => {
+    if (header__categories.classList.contains('subHeader__open')) {
+        header__categories.classList.remove('subHeader__open')
     }
     else {
-        header__categories.classList.add('header__categories__open')
+        header__categories.classList.add('subHeader__open')
+    }
+})
+header__quizzes__btn.addEventListener('click', () => {
+    if (header__quizzes.classList.contains('subHeader__open')) {
+        header__quizzes.classList.remove('subHeader__open')
+    }
+    else {
+        header__quizzes.classList.add('subHeader__open')
     }
 })
 body.addEventListener('click', () => {
-    if (getComputedStyle(categories).opacity == 1) {
-        categories.classList.remove('header__categories__open')
+    if (getComputedStyle(header__categories).opacity == 1) {
+        header__categories.classList.remove('subHeader__open')
+    }
+    if (getComputedStyle(header__quizzes).opacity == 1) {
+        header__quizzes.classList.remove('subHeader__open')
     }
 })
 

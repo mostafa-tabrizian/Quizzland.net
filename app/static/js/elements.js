@@ -2,13 +2,13 @@ const body = document.querySelector('body')
 const hero = document.querySelector('.hero')
 
 const loadingScreen = document.querySelector('.loadingScreen')
-
-const header__categories__button = document.querySelector('.header__categories__button')
-const header__categories = document.querySelector('.header__categories')
-// const arw = document.querySelector('.arw')
-const categories = document.querySelector('.header__categories')
 const backBtn = document.querySelector('.backBtn')
 
+
+const header__categories__btn = document.querySelector('.header__categories__btn')
+const header__categories = document.querySelector('.header__categories')
+const header__quizzes__btn = document.querySelector('.header__quizzes__btn')
+const header__quizzes = document.querySelector('.header__quizzes')
 const header__menu = document.querySelector('.header__menu')
 const header__menu__openBtn = document.querySelector('.header__menu__openBtn')
 const header__menu__closeBtn = document.querySelector('.header__menu__closeBtn')
