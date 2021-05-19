@@ -15,7 +15,6 @@ footer, .footer {
 
     width: 100%;
     position: absolute;
-    bottom: 1; left: 0;
     padding-top: 3rem;
     padding-bottom: 3rem;
 
@@ -35,7 +34,7 @@ footer, .footer {
     }
     
     .newsletter {
-        z-index: 4;
+        z-index: 6;
         position: fixed;
         padding: 4rem;
         width: 50rem;
@@ -91,7 +90,7 @@ footer, .footer {
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 3;
+            z-index: 5;
             background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(25px);
             transition: all .3s ease-in-out;
@@ -161,7 +160,6 @@ footer, .footer {
                 order: 3;
                 width: 100%;
                 margin: .425rem auto;
-
             }
 
             &__chooseCategory {
@@ -179,6 +177,7 @@ footer, .footer {
         
         > li {
             font-size: $font-sm - .20;
+            transition: all .2s ease-in-out;
             
             &:not(:last-child) {
                 padding-left: 2rem;
@@ -196,6 +195,7 @@ footer, .footer {
         > li {
             font-size: $font-sm - .3rem;
             opacity: .5;
+            transition: all .2s ease-in-out;
 
             &:not(:last-child) {
                 padding-right: 1rem;
@@ -211,16 +211,16 @@ footer, .footer {
         font-size: .9rem;
         opacity: .25;
         > h5 {
-            margin: 0 !important;
+            margin: 0;
             
             > a{
                 opacity: .8;
+                transition: all .2s ease-in-out;
 
                 &:hover {
-                    opacity: 1 !important;
+                    opacity: 1;
                 }
             }
-        }
-        
+        } 
     }
 }

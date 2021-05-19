@@ -38,15 +38,4 @@ $red-bt-grad: linear-gradient(0, #4D1420, #9D272D);
 $red-tb-grad: linear-gradient(180deg, #4D1420, #9D272D);
 $redBlue-grad: linear-gradient(-45deg, #9D272D, #1d1041);
 
-
 // Animations
-@keyframes hanging {
-    0% {
-        bottom: 0;
-    }
-
-    100% {
-        bottom: .225rem;
-    }
-}
-

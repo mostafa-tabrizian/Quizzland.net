@@ -14,24 +14,6 @@
   src: url("/static/font/Vermin-Vibes-2-Soft.ttf");
 }
 
-@-webkit-keyframes hanging {
-  0% {
-    bottom: 0;
-  }
-  100% {
-    bottom: .225rem;
-  }
-}
-
-@keyframes hanging {
-  0% {
-    bottom: 0;
-  }
-  100% {
-    bottom: .225rem;
-  }
-}
-
 input[type=search]::-ms-clear {
   display: none;
   width: 0;
@@ -95,6 +77,14 @@ body::-webkit-scrollbar-thumb {
 .wrapper {
   max-width: 62.5rem;
   margin: 0 auto;
+  position: relative;
+}
+
+@media (max-width: 49.9375em) {
+  .wrapper {
+    max-width: 38.75rem;
+    margin: auto 2rem;
+  }
 }
 
 .wrapper-sm {
@@ -105,17 +95,6 @@ body::-webkit-scrollbar-thumb {
 .wrapper-med {
   max-width: 82.5rem;
   margin: 0 auto;
-}
-
-.wrapper {
-  position: relative;
-}
-
-@media (max-width: 49.9375em) {
-  .wrapper {
-    max-width: 38.75rem;
-    margin: auto 2rem;
-  }
 }
 
 .space-sm {
@@ -156,12 +135,6 @@ body::-webkit-scrollbar-thumb {
   .space-xl {
     padding-top: 6rem;
   }
-}
-
-.divider {
-  border-bottom: 2px solid rgba(128, 128, 128, 0.411);
-  width: 100%;
-  margin-top: 1rem;
 }
 
 h1 {
@@ -549,13 +522,14 @@ input {
   margin-bottom: 2rem;
 }
 
-.header__logo {
-  padding: .6250rem;
-  margin-left: 1.125rem;
+@media (max-width: 49.9375em) {
+  .header {
+    padding: 1rem;
+  }
 }
 
-.header__logo img {
-  width: 100%;
+.header__logo {
+  padding: .6250rem;
 }
 
 .header__links {
@@ -565,13 +539,6 @@ input {
 .header__links a {
   color: #161616;
   padding: .6250rem;
-}
-
-.header__links a:hover {
-  color: #161616;
-}
-
-.header__links a:not(:last-child) {
   margin-left: 1.125rem;
 }
 
@@ -580,7 +547,7 @@ input {
 }
 
 .header__menu {
-  z-index: 3;
+  z-index: 1;
   position: fixed;
   top: 0;
   left: 0;
@@ -599,6 +566,15 @@ input {
 
 .header__menu__openBtn {
   background: inherit;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+@media (max-width: 49.9375em) {
+  .header__menu__openBtn {
+    top: 2rem;
+  }
 }
 
 .header__menu__openBtn > span {
@@ -612,9 +588,15 @@ input {
   margin-bottom: .25rem;
 }
 
+.header__menu__closeBtn {
+  position: fixed;
+  top: 0.425rem;
+  right: 0.7rem;
+}
+
 .header__menu__inner {
-  color: #f0f0f0;
-  font-size: .9rem;
+  color: white;
+  font-size: 0.9rem;
 }
 
 .header__menu__inner ul > li {
@@ -641,22 +623,9 @@ input {
   margin-top: .7rem;
 }
 
-.header__menu__openBtn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
-.header__menu__closeBtn {
-  position: fixed;
-  top: 0.425rem;
-  right: 0.7rem;
-}
-
 .header__searchSubmit {
   -webkit-transform: translate(2.2rem);
           transform: translate(2.2rem);
-  z-index: 2;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -672,7 +641,11 @@ input {
   border-radius: 15px;
   height: 2.125rem;
   padding-right: 1.3125rem;
-  width: 50%;
+  width: 75%;
+  -webkit-transition: -webkit-box-shadow 0.3s ease-in-out;
+  transition: -webkit-box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
 }
 
 .header__searchInput::-webkit-input-placeholder {
@@ -714,7 +687,7 @@ input {
   pointer-events: none;
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
-  z-index: 999;
+  z-index: 5;
 }
 
 .header__categories__open {
@@ -780,8 +753,6 @@ footer, .footer {
   background-size: cover;
   width: 100%;
   position: absolute;
-  bottom: 1;
-  left: 0;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
@@ -808,7 +779,7 @@ footer a:hover, .footer a:hover {
 }
 
 footer .newsletter, .footer .newsletter {
-  z-index: 4;
+  z-index: 6;
   position: fixed;
   padding: 4rem;
   width: 50rem;
@@ -885,7 +856,7 @@ footer .newsletter__blurBackground__show, .footer .newsletter__blurBackground__s
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 3;
+  z-index: 5;
   background: rgba(0, 0, 0, 0.65);
   -webkit-backdrop-filter: blur(25px);
           backdrop-filter: blur(25px);
@@ -989,6 +960,8 @@ footer__navbar, .footer__navbar {
 
 footer__navbar > li, .footer__navbar > li {
   font-size: 0.98rem;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 footer__navbar > li:not(:last-child), .footer__navbar > li:not(:last-child) {
@@ -1006,6 +979,8 @@ footer__detail, .footer__detail {
 footer__detail > li, .footer__detail > li {
   font-size: 0.88rem;
   opacity: .5;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 footer__detail > li:not(:last-child), .footer__detail > li:not(:last-child) {
@@ -1022,79 +997,17 @@ footer__copyRight, .footer__copyRight {
 }
 
 footer__copyRight > h5, .footer__copyRight > h5 {
-  margin: 0 !important;
+  margin: 0;
 }
 
 footer__copyRight > h5 > a, .footer__copyRight > h5 > a {
   opacity: .8;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
-  opacity: 1 !important;
-}
-
-@-webkit-keyframes categoryMenu {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes categoryMenu {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes boxShadowDancing {
-  0% {
-    -webkit-box-shadow: 0 2px 30px #430404;
-            box-shadow: 0 2px 30px #430404;
-  }
-  20% {
-    -webkit-box-shadow: 2px 0px 30px #430404;
-            box-shadow: 2px 0px 30px #430404;
-  }
-  40% {
-    -webkit-box-shadow: 0 -2px 30px #430404;
-            box-shadow: 0 -2px 30px #430404;
-  }
-  80% {
-    -webkit-box-shadow: -2px 0 30px #430404;
-            box-shadow: -2px 0 30px #430404;
-  }
-  100% {
-    -webkit-box-shadow: 0 2px 30px #430404;
-            box-shadow: 0 2px 30px #430404;
-  }
-}
-
-@keyframes boxShadowDancing {
-  0% {
-    -webkit-box-shadow: 0 2px 30px #430404;
-            box-shadow: 0 2px 30px #430404;
-  }
-  20% {
-    -webkit-box-shadow: 2px 0px 30px #430404;
-            box-shadow: 2px 0px 30px #430404;
-  }
-  40% {
-    -webkit-box-shadow: 0 -2px 30px #430404;
-            box-shadow: 0 -2px 30px #430404;
-  }
-  80% {
-    -webkit-box-shadow: -2px 0 30px #430404;
-            box-shadow: -2px 0 30px #430404;
-  }
-  100% {
-    -webkit-box-shadow: 0 2px 30px #430404;
-            box-shadow: 0 2px 30px #430404;
-  }
+  opacity: 1;
 }
 
 .bg {

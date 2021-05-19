@@ -1,4 +1,3 @@
-// remove the X icon in search bar
 //clears the ‘X’ from Internet Explorer
 input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
 input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
@@ -49,10 +48,15 @@ body {
     }
 }
 
-
 .wrapper {
     max-width: 62.5rem;
     margin: 0 auto;
+    position: relative;
+
+    @include breakpoints-down(medium) {
+        max-width: 38.75rem;
+        margin: auto 2rem;
+    }
 
     &-sm {
         max-width:30rem;
@@ -62,15 +66,6 @@ body {
     &-med {
         max-width: 82.5rem;
         margin: 0 auto;
-
-    }
-}
-
-.wrapper {
-    position: relative;
-    @include breakpoints-down(medium) {
-        max-width: 38.75rem;
-        margin: auto 2rem;
     }
 }
 
@@ -108,17 +103,10 @@ body {
     }
 }
 
-.divider {
-    border-bottom: 2px solid rgba(128, 128, 128, 0.411);
-    width: 100%;
-    margin-top: 1rem;
-}
-
 h1 {
     font-size: $font-xl;
     padding-bottom: 1.25rem;
     padding: 0; margin: 0;
-
 }
 
 h2 {
@@ -188,12 +176,6 @@ button, .btn {
         padding: .4rem 1.54375rem;
         color: $white !important;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.295);
-        // box-shadow: 0 3px 25px #430404;
-
-        // &:hover {
-        //     color: white !important;
-        //     animation: boxShadowDancing 1s infinite;
-        // }
     }
 
     &__grad-green {
@@ -204,11 +186,6 @@ button, .btn {
         color: $white;
         box-shadow: 0 0 7px black;
     }
-
-    // &:hover {
-    //     color: white !important;
-    //     animation: boxShadowDancing 1s infinite;
-    // }
 }
 
 bold {
@@ -237,7 +214,6 @@ input {
     display: flex;
 
     a, li {
-
         &::after{
             content: '';
             border-bottom: 2px solid $black;
@@ -377,7 +353,6 @@ input {
                 object-fit: cover;
             }
         }
-
     }
 }
 
