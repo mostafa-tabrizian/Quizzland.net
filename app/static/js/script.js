@@ -4,6 +4,15 @@ const splitUrl = () => {
     return splitUrl
 }
 
+const fadeIn = (element) => {
+    element.classList.remove('fade-out')
+    element.classList.add('fade-in')
+}
+const fadeOut = (element) => {
+    element.classList.add('fade-out')
+    element.classList.remove('fade-in')
+}
+
 //----------------------------------------------------------
 
 // Loading screen
@@ -54,12 +63,10 @@ header__menu__closeBtn.addEventListener('click', () => {
 // show the submit search btn when focus
 
 header__searchInput.addEventListener('click', () => {
-    header__searchSubmit.classList.remove('fade-out')
-    header__searchSubmit.classList.add('fade-in')
+    fadeIn(header__searchSubmit)
 })
 header__searchInput.addEventListener('blur', () => {
-    header__searchSubmit.classList.add('fade-out')
-    header__searchSubmit.classList.remove('fade-in')
+    fadeOut(header__searchSubmit)
 })
 
 //----------------------------------------------------------
@@ -88,13 +95,11 @@ sort__controller__btn.forEach(sortControllerBtn => {
 
         const sortElement = findTheSortByBtnName[sortControllerBtn.innerHTML]
         if (sortElement.classList.contains('fade-out')) {
-            lastElementThatWereShown.classList.remove('fade-in')
-            lastElementThatWereShown.classList.add('fade-out')
+            fadeOut(lastElementThatWereShown)
             lastBtnThatClicked.classList.remove('sort__controller__selected')
             sortControllerBtn.classList.add('sort__controller__selected')
             setTimeout(() => {
-                sortElement.classList.remove('fade-out')
-                sortElement.classList.add('fade-in')
+                fadeIn(sortElement)
             }, 500)
             lastElementThatWereShown = sortElement
             lastBtnThatClicked = sortControllerBtn
@@ -112,15 +117,6 @@ sort__controller__btn.forEach(sortControllerBtn => {
 
 try {
     const currentUrl = splitUrl()
-    
-    const fadeIn = (element) => {
-        element.classList.remove('fade-out')
-        element.classList.add('fade-in')
-    }
-    const fadeOut = (element) => {
-        element.classList.add('fade-out')
-        element.classList.remove('fade-in')
-    }
     
     tools__sort__btn.addEventListener('click', () => {
         if(tools__sort__options__container.classList.contains('fade-out')) {
@@ -209,14 +205,12 @@ try {
 
 // newsletter pop up
 newsletter__show.addEventListener('click', () => {
-    newsletter.classList.remove('fade-out')
-    newsletter.classList.add('fade-in')
+    fadeIn(newsletter)
     body.style.overflowY = 'hidden'
     newsletter__blurBackground.classList.add('newsletter__blurBackground__show')
 })
 newsletter__closeBtn.addEventListener('click', () => {
-    newsletter.classList.add('fade-out')
-    newsletter.classList.remove('fade-in')
+    fadeOut(newsletter)
     body.style.overflowY = 'overlay'
     newsletter__blurBackground.classList.remove('newsletter__blurBackground__show')
 })
