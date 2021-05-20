@@ -36,6 +36,13 @@ const tools__numberOfResult__options__container = document.querySelector('.tools
 const tools__numberOfResult__current = document.querySelector('.tools__numberOfResult__current')
 const tools__submit = document.querySelector('.tools__submit')
 
+const sort__controller = document.querySelector('.sort__controller')
+const sort__controller__selected = document.querySelector('.sort__controller__selected')
+const sort__controller__btn = document.querySelectorAll('.sort__controller__btn')
+const sort__celebrities = document.querySelector('.sort__celebrities')
+const sort__movieAndSeries = document.querySelector('.sort__movieAndSeries')
+const sort__gaming = document.querySelector('.sort__gaming')
+const sort__physiologies = document.querySelector('.sort__physiologies')
 const sort__newest = document.querySelector('#newest')
 const sort__oldest = document.querySelector('#oldest')
 const sort__bestest = document.querySelector('#bestest')

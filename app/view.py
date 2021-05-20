@@ -15,8 +15,8 @@ def Main():
                             NewestGamingQuizSection = newestQuizzesByCategory__limited('Gaming'),
                             BestestGamingQuizSection = bestestQuizzesByCategory__limited('Gaming'),
                             
-                            # NewestPhysiologiesQuizSection = newestQuizzes4OptionByCategory__limited('Physiologies'),
-                            # BestestPhysiologiesQuizSection = bestestQuizzes4Option__limited('Physiologies'),
+                            NewestPhysiologiesQuizSection = newestQuizzes4OptionByCategory__limited('Physiologies'),
+                            BestestPhysiologiesQuizSection = bestestQuizzes4OptionByCategory__limited('Physiologies'),
                             
                             colorOfHeader = 'header__white')
 

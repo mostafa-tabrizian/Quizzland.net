@@ -100,6 +100,12 @@ def newestQuizzes4OptionByCategory__limited(Category):
                                          .limit(15)
     return grabbedQuiz
 
+def bestestQuizzes4OptionByCategory__limited(Category):
+    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{Category}%'))\
+                                         .order_by(Quizzes4Option.views.desc())\
+                                         .limit(5)
+    return grabbedQuiz
+
 def bestestQuizzes4OptionByInnerCategory(innerCategory):
     grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{innerCategory}%'))\
                                          .order_by(Quizzes4Option.views.desc())
@@ -109,7 +115,6 @@ def alphabetQuizzes4OptionByInnerCategory(innerCategory):
     grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{innerCategory}%'))\
                                          .order_by(Quizzes4Option.title_far.asc())
     return grabbedQuiz
-
 
 def firstQuizByFarsiTitle(title):
     quizzesGrabbedByFarsiTitle = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()

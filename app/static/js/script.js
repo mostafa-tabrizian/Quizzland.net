@@ -51,8 +51,8 @@ header__menu__closeBtn.addEventListener('click', () => {
 })
 
 //----------------------------------------------------------
-
 // show the submit search btn when focus
+
 header__searchInput.addEventListener('click', () => {
     header__searchSubmit.classList.remove('fade-out')
     header__searchSubmit.classList.add('fade-in')
@@ -63,8 +63,53 @@ header__searchInput.addEventListener('blur', () => {
 })
 
 //----------------------------------------------------------
+// sort changer
+findTheSortByBtnName = {
+    'گیمینگ': sort__gaming,
+    'روانشناسی': sort__physiologies,
+    'فیلم و سریال': sort__movieAndSeries,
+    'سلبریتی': sort__celebrities,
+}
 
+let lastBtnThatClicked = sort__controller__btn[3]
+let lastElementThatWereShown = sort__celebrities
+
+const disableTheSortController = () => {
+    sort__controller.classList.add('pointerOff')
+}
+
+const freeTheSortController = () => {
+    sort__controller.classList.remove('pointerOff')
+}
+
+sort__controller__btn.forEach(sortControllerBtn => {
+    sortControllerBtn.addEventListener('click', () => {
+        disableTheSortController()
+
+        const sortElement = findTheSortByBtnName[sortControllerBtn.innerHTML]
+        if (sortElement.classList.contains('fade-out')) {
+            lastElementThatWereShown.classList.remove('fade-in')
+            lastElementThatWereShown.classList.add('fade-out')
+            lastBtnThatClicked.classList.remove('sort__controller__selected')
+            sortControllerBtn.classList.add('sort__controller__selected')
+            setTimeout(() => {
+                sortElement.classList.remove('fade-out')
+                sortElement.classList.add('fade-in')
+            }, 500)
+            lastElementThatWereShown = sortElement
+            lastBtnThatClicked = sortControllerBtn
+        }
+        setTimeout(() => {
+            freeTheSortController()
+        }, 600)
+
+    })
+})
+
+
+//----------------------------------------------------------
 // tools
+
 try {
     const currentUrl = splitUrl()
     
@@ -322,11 +367,11 @@ try {
     quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
     
     const pauseTheFunctionOfChangingQuestions = () => {
-        quiz__questionChanger__next.style.pointerEvents = 'none';
-        quiz__questionChanger__last.style.pointerEvents = 'none';
+        quiz__questionChanger__next.classList.add('pointerOff')
+        quiz__questionChanger__last.classList.add('pointerOff')
         setTimeout(() => {
-            quiz__questionChanger__next.style.pointerEvents = 'visible';
-            quiz__questionChanger__last.style.pointerEvents = 'visible';
+            quiz__questionChanger__next.classList.remove('pointerOff')
+            quiz__questionChanger__last.classList.remove('pointerOff')
         }, 1500)
     }
 

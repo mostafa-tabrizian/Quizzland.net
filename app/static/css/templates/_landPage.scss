@@ -71,20 +71,6 @@
 .sort {
     max-width: 62.5rem;
     height: 55rem;
-
-    &__celebrities {
-
-    }
-
-    &__movieAndSeries {
-
-    }
-
-    &__gaming {
-
-    }
-
-    &__
     
     h2 {
         font-size: $font-sm;
@@ -119,15 +105,21 @@
         justify-content: center;
         position: relative;
         top: 7rem;
+        
+        &__btn {
+            box-shadow: inset 0 0 10px #a2a2a2;
 
-        > ul {
-            > button {
-                &:not(:last-child) {
-                    margin-right: 1.125rem;
-                }
+            &:not(:last-child) {
+                margin-right: 1.125rem;
             }
         }
-        
+
+        &__selected {
+            background: linear-gradient(-45deg, #4D1420, #9D272D);
+            color: white;
+            box-shadow: 0 0 7px black;
+        }
+
         > h5 {
             position: absolute;
             bottom: -1.8rem;
@@ -136,6 +128,7 @@
             pointer-events: none;
         }
     }
+
 
     &__style {
         text-align: right;
