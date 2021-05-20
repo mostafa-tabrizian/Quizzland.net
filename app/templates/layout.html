@@ -94,7 +94,7 @@
         <form class="newsletter fade-out" action="/newsletter" method="post">
             <img src="/static/img/close-btn.svg" alt="" class="newsletter__closeBtn">
             <p class="tx-al-c">ایمیلت رو وارد کن و کتگوری مورد علاقه‌ات رو انتخاب کن</p>
-            <button class='newsletter__submit' type="submit" method="POST">ثبت نام</button>
+            <button class='newsletter__submit' type="button" method="POST">ثبت نام</button>
             <input class="input" name="userEmail" type="email" placeholder='  ایمیل ...' required>
             <input class="input input__userName" name="userName"  type="text" placeholder='  نام ...' minlength="3" maxlength = "15" required>
             <textarea class="newsletter__categoryOptions__selectedByUser" name='chosenCategory'></textarea>
@@ -113,6 +113,7 @@
                 <input type="checkbox" name="celebrities " id="celebrities ">
         
             </div>
+            <h5 class="newsletter__message noVis">لطفا حداقل یکی از کتگوری ها را انتخاب کنید</h5>
         </form>
     </div>
 

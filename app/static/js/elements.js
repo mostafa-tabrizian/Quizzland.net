@@ -24,6 +24,8 @@ const newsletter__chooseCategory = document.querySelector('.newsletter__chooseCa
 const newsletter__categoryOptions = document.querySelector('.newsletter__categoryOptions')
 const newsletter__categoryOptions__input = document.querySelectorAll('.newsletter__categoryOptions input')
 const newsletter__categoryOptions__selectedByUser = document.querySelector('.newsletter__categoryOptions__selectedByUser')
+const newsletter__message = document.querySelector('.newsletter__message')
+const newsletter__submit = document.querySelector('.newsletter__submit')
 
 const toolsOfCategory = document.querySelector('toolsOfCategory')
 const tools__sort__btn = document.querySelector('.tools__sort__btn')

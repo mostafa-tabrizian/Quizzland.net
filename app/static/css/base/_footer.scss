@@ -151,6 +151,14 @@ footer, .footer {
             }
         }
 
+        &__message {
+            margin: 0;
+            color: $red;
+            font-size: 1rem;
+            margin-top: .5rem;
+        }
+
+
         @include breakpoints-down(medium) {
             &__userName {
                 width: 17rem

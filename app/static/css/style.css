@@ -951,6 +951,13 @@ footer .newsletter__categoryOptions > input, .footer .newsletter__categoryOption
   }
 }
 
+footer .newsletter__message, .footer .newsletter__message {
+  margin: 0;
+  color: #af282f;
+  font-size: 1rem;
+  margin-top: .5rem;
+}
+
 @media (max-width: 49.9375em) {
   footer .newsletter__userName, .footer .newsletter__userName {
     width: 17rem;

@@ -220,12 +220,21 @@ newsletter__closeBtn.addEventListener('click', () => {
     body.style.overflowY = 'overlay'
     newsletter__blurBackground.classList.remove('newsletter__blurBackground__show')
 })
+newsletter__submit.addEventListener('click', () => {
+    const numberOfCheckedOption = newsletter__categoryOptions__selectedByUser.innerHTML.split(',').length
+    log(numberOfCheckedOption)
+    if (numberOfCheckedOption == 1) {
+        newsletter__message.classList.remove('noVis')
+    } else {
+        newsletter__submit.setAttribute('type', 'submit')
+    }
+})
 
 //----------------------------------------------------------
 
 // submit the newsletter of user
 try {
-    let chosenCategory = []
+    let chosenCategory = [,]
     
     newsletter__categoryOptions__input.forEach(each => {
         each.addEventListener('click', () => {
