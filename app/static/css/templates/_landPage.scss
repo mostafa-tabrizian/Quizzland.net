@@ -13,25 +13,22 @@
 }
 
 .hero{
+    a:hover {
+            color: inherit;
+    }
+
+    h1 {
+        margin-bottom: 0; 
+    }
+    p {
+        line-height: 2.5rem;
+        margin-top: 0; 
+    }
 
     &-inner {
         padding: 1.5rem;
         text-align: center;
-        // color: $white;
         margin: 8rem 0;
-
-        > button {
-            margin-left: 50%;
-            transform: translate(-50%)
-        }
-    }
-
-    & h1 {
-        margin-bottom: 0; 
-    }
-    & p {
-        line-height: 2.5rem;
-        margin-top: 0; 
     }
 }
 
