@@ -53,7 +53,14 @@
     text-align: right;
     line-height: 2.2rem;
     min-height: 60vh;
-
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 1rem 2rem 1rem 2rem;
+    color: white;
+    box-shadow: 0 0 20px #000000c9;;
+    transform: translateY(-2rem);
+    
     @include breakpoints-down(medium) {
         margin-left: 2rem;
         margin-right: 2rem;
@@ -81,9 +88,12 @@
 
         &__btn {
             padding: .4rem;
-            background: rgb(210, 210, 210);
             border: transparent;
             border-radius: 7px;
+            color: white;
+            box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
+            backdrop-filter: blur(40px);
+            background: rgba(0, 0, 0, 0.54);
 
             & > span {
                 padding-right: .7rem;
@@ -94,7 +104,10 @@
             margin-top: .5rem;
             
             & > button {
-                background: rgb(210, 210, 210);
+                color: white;
+                box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
+                backdrop-filter: blur(40px);
+                background: rgba(0, 0, 0, 0.54);
             }
         }
     }
@@ -102,10 +115,13 @@
     &__numberOfResult {
         &__btn {
             padding: .4rem;
-            background: rgb(210, 210, 210);
             border: transparent;
             border-radius: 7px;
             font-size: $font-sm;
+            color: white;
+            box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
+            backdrop-filter: blur(40px);
+            background: rgba(0, 0, 0, 0.54);
 
             & > span {
                 padding-right: .7rem;
@@ -115,7 +131,10 @@
             margin-top: .5rem;
 
             & > button {
-                background: rgb(210, 210, 210);
+                color: white;
+                box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
+                backdrop-filter: blur(40px);
+                background: rgba(0, 0, 0, 0.54);
             }
         }
     }
@@ -133,12 +152,10 @@
 
 .pageTravel {
     padding: .2rem .7rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 
 
     &__pages {
-        // padding: 0 1.125rem;
-
         > a , span {
             &:not(:last-child) {
                 margin-right: 1.125rem;
@@ -151,7 +168,13 @@
     }
 
     &__arwLast {
-        transform: rotate(180deg);
+        transform: rotate(-90deg);
         margin-right: 1.125rem;
+    }
+
+    &__arwNext {
+        transform: rotate(90deg);
+        margin-right: 1.125rem;
+        margin-left: 1rem;
     }
 }

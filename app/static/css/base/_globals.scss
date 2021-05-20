@@ -361,7 +361,13 @@ input {
 }
 
 .pageTravel {
-    margin-top: 2rem;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    width: 19rem;
+    margin: 2rem auto;
+    background: rgba(0, 0, 0, 0.374);
+    color: white;
+    box-shadow: 0 0 20px #000000c9;;
 
     .finalPage {
         padding-right: 1.125rem;

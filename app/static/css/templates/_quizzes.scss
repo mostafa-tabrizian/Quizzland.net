@@ -102,7 +102,7 @@ body {
         position: relative;
         left: -16rem; //-67rem each step
         backdrop-filter: blur(40px);
-        background: rgba(0, 0, 0, 0.174);
+        background: rgba(0, 0, 0, 0.54);
 
         @include breakpoints-down(medium) {
             left: -19.8rem;

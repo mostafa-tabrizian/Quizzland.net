@@ -1,68 +1,70 @@
 {% extends './layout.html' %}
 {% block content %}
 
-<div class="tools wrapper-med flex flex-ai-c">
-    <div class="tools__sort">
-        <div class="tools__sort__btn btn tx-al-c">ترتیب بر اساس: 
-            <span class="tools__sort__current">جدیدترین</span>
+<body style="background-image: url('/static/img/Bg-innerCategory/{{ innerCategory }}.jpg');">
+    <div class="tools wrapper-med flex flex-ai-c">
+        <div class="tools__sort">
+            <div class="tools__sort__btn btn tx-al-c">ترتیب بر اساس: 
+                <span class="tools__sort__current">جدیدترین</span>
+            </div>
+            <div class="tools__sort__options__container fade-out">
+                <ul class="tools__sort__options">
+                    <button type="button">جدیدترین</button type="button">
+                    <button type="button">بهترین</button type="button">
+                    <button type="button">الفبا</button type="button">
+                </ul>
+            </div>
         </div>
-        <div class="tools__sort__options__container fade-out">
-            <ul class="tools__sort__options">
-                <button type="button">جدیدترین</button type="button">
-                <button type="button">بهترین</button type="button">
-                <button type="button">الفبا</button type="button">
-            </ul>
+        <div class="tools__numberOfResult">
+            <div class="tools__numberOfResult__btn btn tx-al-c">تعداد نمایش: 
+                <span class="tools__numberOfResult__current">8</span>
+            </div>
+            <div class="tools__numberOfResult__options__container fade-out">
+                <ul class="tools__numberOfResult__options">
+                    <button type="button">8</button type="button">
+                    <button type="button">16</button type="button">
+                    <button type="button">24</button type="button">
+                    <button type="button">32</button type="button">
+                </ul>
+            </div>
+        </div>
+        <div class="tools__submit">
+            <img src="/static/img/pageArw-Before.svg" alt="">
         </div>
     </div>
-    <div class="tools__numberOfResult">
-        <div class="tools__numberOfResult__btn btn tx-al-c">تعداد نمایش: 
-            <span class="tools__numberOfResult__current">8</span>
-        </div>
-        <div class="tools__numberOfResult__options__container fade-out">
-            <ul class="tools__numberOfResult__options">
-                <button type="button">8</button type="button">
-                <button type="button">16</button type="button">
-                <button type="button">24</button type="button">
-                <button type="button">32</button type="button">
-            </ul>
-        </div>
-    </div>
-    <div class="tools__submit">
-        <img src="/static/img/pageArw-Before.svg" alt="">
-    </div>
-</div>
 
-<div class="categoryList wrapper-sm">
-    <ul>
-        {%  for quiz in quizzes %}
-        <li>
-            <a href="{{quiz.href}}">
-                {{ quiz.title_far }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-
-<div class="pageTravel flex flex-jc-c flex-ai-c">
-    <a class="pageTravel__arwLast" href="">
-        <img class="flex flex-jc-c flex-ai-c" src="/static/img/travelPage-arw.png" alt="">
-    </a>
-    <div class="pageTravel__pages flex flex-jc-c flex-ai-c">
-        <a class="pageTravel__pages__last" href=""></a>
-        <span class="pageTravel__pages__curr"></span>
-        <a class="pageTravel__pages__next" href=""></a>
-        <a class="pageTravel__pages__nextTwo" href=""></a>
-        <div class="finalPage">
-            <span>.....</span>
-            <a href="#">
-                {{ finalPage }}
-            </a>
-        </div>
+    <div class="categoryList wrapper-sm">
+        <ul>
+            {%  for quiz in quizzes %}
+            <li>
+                <a href="{{quiz.href}}">
+                    {{ quiz.title_far }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-    <a class="pageTravel__arwNext" href="">
-        <img class="flex flex-jc-c flex-ai-c" src="/static/img/travelPage-arw.png" alt="">
-    </a>
-</div>
+
+    <div class="pageTravel flex flex-jc-c flex-ai-c">
+        <a class="pageTravel__arwLast" href="">
+            <img class="flex flex-jc-c flex-ai-c" src="/static/img/arw-travelPage.svg" alt="">
+        </a>
+        <div class="pageTravel__pages flex flex-jc-c flex-ai-c">
+            <a class="pageTravel__pages__last" href=""></a>
+            <span class="pageTravel__pages__curr"></span>
+            <a class="pageTravel__pages__next" href=""></a>
+            <a class="pageTravel__pages__nextTwo" href=""></a>
+            <div class="finalPage">
+                <span>.....</span>
+                <a href="#">
+                    {{ finalPage }}
+                </a>
+            </div>
+        </div>
+        <a class="pageTravel__arwNext" href="">
+            <img class="flex flex-jc-c flex-ai-c" src="/static/img/arw-travelPage.svg" alt="">
+        </a>
+    </div> 
+</body>
 
 {% endblock %}

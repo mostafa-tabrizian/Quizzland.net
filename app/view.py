@@ -103,7 +103,9 @@ def innerCategory(category, innerCategory, page, sortType, numberOfResult):
         addViewToCategories(fullTitle)
         return render_template(f'/category/inner-category-list.html',
                                 quizzes = quizzes(category, fullTitle, fr, to, sortType),
-                                finalPage = finalPage(howManyElementToShow, fullTitle))
+                                finalPage = finalPage(howManyElementToShow, fullTitle),
+                                innerCategory = innerCategory,
+                                colorOfHeader = 'header__white')
     else:
         return render_template('404.html')
 
