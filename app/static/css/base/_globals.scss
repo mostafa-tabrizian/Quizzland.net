@@ -71,34 +71,34 @@ body {
 
 .space {
     &-sm {
-        padding-top: 2rem;
+        margin-top: 2rem;
 
         @include breakpoints-down(medium) {
-            padding-top: 1rem;
+            margin-top: 1rem;
         }
     }
 
     &-med {
-        padding-top: 5rem;
+        margin-top: 5rem;
 
         @include breakpoints-down(medium) {
-            padding-top: 2.5rem;
+            margin-top: 2.5rem;
         }
     }
 
     &-l{
-        padding-top: 8rem;
+        margin-top: 8rem;
 
         @include breakpoints-down(medium) {
-            padding-top: 4rem;
+            margin-top: 4rem;
         }
     }
 
     &-xl{
-        padding-top: 12rem;
+        margin-top: 12rem;
 
         @include breakpoints-down(medium) {
-            padding-top: 6rem;
+            margin-top: 6rem;
         }
     }
 }

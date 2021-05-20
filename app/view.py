@@ -6,8 +6,18 @@ app = Flask(__name__)
 @app.route('/')
 def Main():
     return render_template('index.html',
-                            grabLimitedQuizzesBtPublish = grabLimitedQuizzesByPublish(),
-                            grabLimitedQuizzesByViews = grabLimitedQuizzesByViews(),
+                            NewestCelebrityQuizSection = newestQuizzesByCategory__limited('celebrities'),
+                            BestestCelebrityQuizSection = bestestQuizzesByCategory__limited('celebrities'),
+                            
+                            NewestMovieSeriesQuizSection = newestQuizzesByCategory__limited('movieSeries'),
+                            BestestMovieSeriesQuizSection = bestestQuizzesByCategory__limited('movieSeries'),
+                            
+                            NewestGamingQuizSection = newestQuizzesByCategory__limited('Gaming'),
+                            BestestGamingQuizSection = bestestQuizzesByCategory__limited('Gaming'),
+                            
+                            # NewestPhysiologiesQuizSection = newestQuizzes4OptionByCategory__limited('Physiologies'),
+                            # BestestPhysiologiesQuizSection = bestestQuizzes4Option__limited('Physiologies'),
+                            
                             colorOfHeader = 'header__white')
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -17,14 +27,14 @@ def search():
         userSearchInputInCategoriesDb_far = s.query(Categories).filter(Categories.title_far.ilike(f'%{userSearchInput}%')).all()
         userSearchInputInCategoriesDb_eng = s.query(Categories).filter(Categories.title_eng.ilike(f'%{userSearchInput}%')).all()
         userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).all()
-        userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{userSearchInput}%')).all()
+        userSearchInputInQuizzes4OptionDb_far = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{userSearchInput}%')).all()
 
         return render_template('searchResult.html', 
             userSearchInput = userSearchInput,
             userSearchInputInCategoriesDb_far = userSearchInputInCategoriesDb_far,
             userSearchInputInCategoriesDb_eng = userSearchInputInCategoriesDb_eng,
             userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
-            userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
+            userSearchInputInQuizzes4OptionDb_far = userSearchInputInQuizzes4OptionDb_far
             )
     else:
         return render_template('404.html')
@@ -52,7 +62,7 @@ def newestQuiz(page, numberOfResult):
         fr = page * howManyElementToShow
         to = (page * howManyElementToShow) + howManyElementToShow
         return render_template('/newest.html',
-                                grabLimitedQuizzesForNewestPage = grabLimitedQuizzesForNewestPage(fr, to),
+                                QuizzesForMostViewsPage__paged = quizzesForMostViews__paged(fr, to),
                                 finalPage = finalPage(howManyElementToShow, 'newest'))
     else:
         return render_template('404.html')
@@ -64,7 +74,7 @@ def mostViewsQuiz(page, numberOfResult):
         fr = page * howManyElementToShow
         to = (page * howManyElementToShow) + howManyElementToShow
         return render_template('/mostViews.html',
-                                grabLimitedQuizzesForMostViewsPage = grabLimitedQuizzesForMostViewsPage(fr, to),
+                                QuizzesForMostViewsPage__paged = quizzesForMostViews__paged(fr, to),
                                 finalPage = finalPage(howManyElementToShow, 'mostViews'))
     else:
         return render_template('404.html')
@@ -77,7 +87,7 @@ def Category(category, page, sortType, numberOfResult):
         to = (page * howManyElementToShow) + howManyElementToShow
         
         return render_template(f'/category/category.html',
-                                categories = grabCategories(category, fr, to, sortType),
+                                categories = categories(category, fr, to, sortType),
                                 finalPage = finalPage(howManyElementToShow, category))
     else:
         return render_template('404.html')
@@ -92,7 +102,7 @@ def innerCategory(category, innerCategory, page, sortType, numberOfResult):
         fullTitle = titleConverterFromUrlToNormalOne(innerCategory)
         addViewToCategories(fullTitle)
         return render_template(f'/category/inner-category-list.html',
-                                quizzes = grabQuizzes(category, fullTitle, fr, to, sortType),
+                                quizzes = quizzes(category, fullTitle, fr, to, sortType),
                                 finalPage = finalPage(howManyElementToShow, fullTitle))
     else:
         return render_template('404.html')
@@ -102,8 +112,8 @@ def Quiz(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     return render_template('/quiz.html',
-                            quizDetail = grabFirstQuizByFarsiTitle(fullTitle),
-                            quiz_Question = grabQuizQuestion(fullTitle),
+                            quizDetail = firstQuizByFarsiTitle(fullTitle),
+                            quiz_Question = quizQuestion(fullTitle),
                             colorOfHeader = 'header__white')
 
 @app.route('/quiz_2/<category>/<innerCategory>/<title>')
@@ -111,8 +121,8 @@ def Quiz4Option(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     return render_template('/quiz_4Option.html',
-                            quizDetail = grabFirstQuizByFarsiTitle(fullTitle),
-                            quiz_Question = grabQuizQuestion(fullTitle),
+                            quizDetail = firstQuizByFarsiTitle(fullTitle),
+                            quiz_Question = quizQuestion(fullTitle),
                             colorOfHeader = 'header__white')
 
 @app.route('/result/<title>')
@@ -127,7 +137,7 @@ def result4Option(title, score):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     return render_template('/result_4Option.html',
                             fullTitle = fullTitle,
-                            DbOfQuiz = grabFirstQuizByFarsiTitle(fullTitle),
+                            DbOfQuiz = firstQuizByFarsiTitle(fullTitle),
                             score = abs(int(score)))
 
 @app.route('/about')

@@ -52,7 +52,7 @@ header__menu__closeBtn.addEventListener('click', () => {
 
 //----------------------------------------------------------
 
-// show the submit search btn when active
+// show the submit search btn when focus
 header__searchInput.addEventListener('click', () => {
     header__searchSubmit.classList.remove('fade-out')
     header__searchSubmit.classList.add('fade-in')
@@ -295,14 +295,17 @@ try {
     }
 
     const countSearchResult = searchResult__quizzes.childElementCount
+    log(countSearchResult)
 
-    if (countSearchResult == 4) { // empty
+    if (countSearchResult == 3) { // empty
         searchResult__quizzes__item__notFound.innerHTML = 'هیچ کوئیزی پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'
-    }
-
-    if (countSearchResult == 4 || countSearchResult <= 11) {
         searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
     }
+
+    if (countSearchResult == 3 || countSearchResult <= 11) {
+        searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
+    }
+
 } catch {log('no search result page')}
 
 //----------------------------------------------------------

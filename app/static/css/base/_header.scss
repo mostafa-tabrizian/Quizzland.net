@@ -121,6 +121,7 @@
         padding-right: 1.3125rem;
         width: 75%;
         transition: box-shadow 0.3s ease-in-out;
+        z-index: 1;
 
         &::placeholder {
             color: black
@@ -156,11 +157,15 @@
             &:not(:last-child){
                 margin-bottom: 1.25rem
             }
+            &:hover {
+                color: rgba(163, 163, 163, 0.692) !important;
+            }
         }
     }
 
     &__categories {
         right: 5rem;
+        z-index: 3;
     }
 
     &__quizzes {
@@ -177,10 +182,6 @@
             
             &::after{
                 border-bottom: 2px solid $white !important;
-            }
-
-            &:hover {
-                color: $white !important;
             }
         }
 

@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <h2 class="tx-al-c space-xl">دسته‌ی دلخوات رو انتخاب کن</h2>
+    <h2 class="category__title tx-al-c">دسته‌ی دلخوات رو انتخاب کن</h2>
 
     <div class="category flex flex-jc-c flex-ai-c flex-jc-sb" id="category">
 
@@ -41,33 +41,150 @@
 
     </div>
 
-    <div class="sort wrapper">
+    <div class="sort__controller">
+        <ul>
+            <button type="button">گیمینگ</button>
+            <button type="button">روانشناسی</button>
+            <button type="button">فیلم و سریال</button>
+            <button type="button">سلبریتی</button>
+        </ul>
+        <h5>برای تغییر کلیک کنید</h5>
+    </div>
 
-            <div class="sort__sec1">
-                <h2 class="tx-al-c">جدیدترین ‌ها</h2>
-                <ul class='center'>
-
-                    {% for quiz in grabLimitedQuizzesBtPublish %}
-                        <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+    <div class="sort wrapper space-l">
+    
+        <div class="sort__celebrities">
+            <div class="sort__right">
+                <h2 class="tx-al-c">جدیدترین کویز ‌های سلبریتی</h2>
+                <ul class="sort__style">
+                    {% for quiz in NewestCelebrityQuizSection %}
+                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
                     {% endfor %}
-
-                    <a class="sort__more" href="/newest/0/8"> ..بیشتر</a>
                 </ul>
+                <a class="sort__more" href="/newest/0/8"> ..بیشتر</a>
             </div>
 
-            <div class="sort__sec2">
-                <h2 class="tx-al-c">پر بازدیدترین ها</h2>
-                <ul class='center'>
-
-                    {% for quiz in grabLimitedQuizzesByViews %}
-                        <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
-                    {% endfor %}
-
+            <div class="sort__left">
+                <div class="sort__left-1">
+                    <h2 class="tx-al-c">محبوب ترین سلبریتی کویز های ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestCelebrityQuizSection %}
+                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                        {% endfor %}
+                    </ul>
                     <a class="sort__more" href="/mostViews/0/8"> ..بیشتر</a>
+                </div>
+                <div class="sort__left-2">
+                    <h2 class="tx-al-c">محبوب ترین سلبریتی کویز</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestCelebrityQuizSection %}
+                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/mostViews/0/8"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sort__movieAndSeries">
+            <div class="sort__right">
+                <h2 class="tx-al-c">جدیدترین کویز ‌های فیلم و سریال</h2>
+                <ul class="sort__style">
+                    {% for quiz in NewestMovieSeriesQuizSection %}
+                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
+                    {% endfor %}
                 </ul>
+                <a class="sort__more" href="/newest/0/8"> ..بیشتر</a>
             </div>
 
-        <div class="space-l"></div>
+            <div class="sort__left">
+                <div class="sort__left-1">
+                    <h2 class="tx-al-c">محبوب ترین فیلم و سریال کویز های ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestMovieSeriesQuizSection %}
+                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/mostViews/0/8"> ..بیشتر</a>
+                </div>
+                <div class="sort__left-2">
+                    <h2 class="tx-al-c">محبوب ترین فیلم و سریال کویز</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestMovieSeriesQuizSection %}
+                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/mostViews/0/8"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sort__gaming">
+            <div class="sort__right">
+                <h2 class="tx-al-c">جدیدترین کویز ‌های گیمینگ</h2>
+                <ul class="sort__style">
+                    {% for quiz in NewestGamingQuizSection %}
+                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
+                    {% endfor %}
+                </ul>
+                <a class="sort__more" href="/newest/0/8"> ..بیشتر</a>
+            </div>
+
+            <div class="sort__left">
+                <div class="sort__left-1">
+                    <h2 class="tx-al-c">محبوب ترین گیمینگ کویز های ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestGamingQuizSection %}
+                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/mostViews/0/8"> ..بیشتر</a>
+                </div>
+                <div class="sort__left-2">
+                    <h2 class="tx-al-c">محبوب ترین گیمینگ کویز</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestGamingQuizSection %}
+                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/mostViews/0/8"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sort__physiologies">
+            <div class="sort__right">
+                <h2 class="tx-al-c">جدیدترین کویز ‌های روانشناسی</h2>
+                <ul class="sort__style">
+                    {% for quiz in NewestPhysiologiesQuizSection %}
+                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
+                    {% endfor %}
+                </ul>
+                <a class="sort__more" href="/newest/0/8"> ..بیشتر</a>
+            </div>
+
+            <div class="sort__left">
+                <div class="sort__left-1">
+                    <h2 class="tx-al-c">محبوب ترین روانشناسی کویز های ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestPhysiologiesQuizSection %}
+                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/mostViews/0/8"> ..بیشتر</a>
+                </div>
+                <div class="sort__left-2">
+                    <h2 class="tx-al-c">محبوب ترین روانشناسی کویز</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestPhysiologiesQuizSection %}
+                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/mostViews/0/8"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- <div class="cookies">

@@ -2,92 +2,118 @@ from crud import *
 from sqlalchemy import and_
 
 # ------------------Category
-def grabNewestCategories(category):
+def categories(category, fr, to, sortType):
+    if sortType == 'newest':
+        categories = newestCategories(category).all()[fr:to]
+    elif sortType == 'bestest':
+        categories = bestestCategory(category).all()[fr:to]
+    elif sortType == 'alphabet':
+        categories = alphabetCategory(category).all()[fr:to]
+    return categories
+
+def newestCategories(category):
     category = s.query(Categories).filter(Categories.category == category)\
                                   .order_by(Categories.publish.desc())
     return category
 
-def grabBestestCategory(category):
+def bestestCategory(category):
     category = s.query(Categories).filter(Categories.category == category)\
         .order_by(Categories.views.desc())
     return category
 
-def grabAlphabetCategory(category):
+def alphabetCategory(category):
     category = s.query(Categories).filter(Categories.category == category)\
                                   .order_by(Categories.title_eng.asc())
     return category
 
-def grabCategories(category, fr, to, sortType):
-    if sortType == 'newest':
-        categories = grabNewestCategories(category).all()[fr:to]
-    elif sortType == 'bestest':
-        categories = grabBestestCategory(category).all()[fr:to]
-    elif sortType == 'alphabet':
-        categories = grabAlphabetCategory(category).all()[fr:to]
-    return categories
 
-def grabAllCategoriesByPublish():
+def categoriesByPublish():
     categoryGrabbedByPublish = s.query(Categories).order_by(Categories.publish.desc())
     return categoryGrabbedByPublish
 
-def grabAllCategoriesByViews():
+def categoriesByViews():
     quizzesGrabbedByPublish = s.query(Categories).order_by(Categories.views.desc())
     return quizzesGrabbedByPublish
 
 # ------------------Quizzes
-
-def grabNewestQuizzes(title):
-    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{title}%'))\
-                                  .order_by(Quizzes.publish.desc())
-    return grabbedQuiz
-    
-def grabNewestQuizzes4Option(title):
-    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{title}%'))
-    return grabbedQuiz
-    
-def grabBestestQuizzes(title):
-    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{title}%'))\
-                                  .order_by(Quizzes.views.desc())
-    return grabbedQuiz
-
-def grabBestestQuizzes4Option(title):
-    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{title}%'))\
-                                         .order_by(Quizzes4Option.views.desc())
-    return grabbedQuiz
-
-def grabAlphabetQuizzes(title):
-    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{title}%'))\
-                                  .order_by(Quizzes.innerCategory.asc())
-    return grabbedQuiz
-
-def grabAlphabetQuizzes4Option(title):
-    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{title}%'))\
-                                         .order_by(Quizzes4Option.title_far.asc())
-    return grabbedQuiz
-
-def grabQuizzes(category, innerCategory, fr, to, sortType):
+def quizzes(category, innerCategory, fr, to, sortType):
     if category == 'physiologies':
         if sortType == 'newest':
-            grabbedQuizzes = grabNewestQuizzes4Option(innerCategory).all()[fr:to]
+            grabbedQuizzes = newestQuizzes4OptionByInnerCategory(innerCategory).all()[fr:to]
         elif sortType == 'bestest':
-            grabbedQuizzes = grabBestestQuizzes4Option(innerCategory).all()[fr:to]
+            grabbedQuizzes = bestestQuizzes4OptionByInnerCategory(innerCategory).all()[fr:to]
         elif sortType == 'alphabet':
-            grabbedQuizzes = grabAlphabetQuizzes4Option(innerCategory).all()[fr:to]
+            grabbedQuizzes = alphabetQuizzes4OptionByInnerCategory(innerCategory).all()[fr:to]
     else:
         if sortType == 'newest':
-            grabbedQuizzes = grabNewestQuizzes(innerCategory).all()[fr:to]
+            grabbedQuizzes = newestQuizzesByInnerCategory(innerCategory).all()[fr:to]
         elif sortType == 'bestest':
-            grabbedQuizzes = grabBestestQuizzes(innerCategory).all()[fr:to]
+            grabbedQuizzes = bestestQuizzesByInnerCategory(innerCategory).all()[fr:to]
         elif sortType == 'alphabet':
-            grabbedQuizzes = grabAlphabetQuizzes(innerCategory).all()[fr:to]
+            grabbedQuizzes = alphabetQuizzesByInnerCategory(innerCategory).all()[fr:to]
 
     return grabbedQuizzes
 
-def grabFirstQuizByFarsiTitle(title):
+def newestQuizzesByInnerCategory(innerCategory):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{innerCategory}%'))\
+                                  .order_by(Quizzes.publish.desc())
+    return grabbedQuiz
+
+def newestQuizzesByCategory(Category):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{Category}%'))\
+                                  .order_by(Quizzes.publish.desc())
+    return grabbedQuiz
+
+def newestQuizzesByCategory__limited(Category):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{Category}%'))\
+                                  .order_by(Quizzes.publish.desc())\
+                                  .limit(15)
+    return grabbedQuiz
+
+def bestestQuizzesByCategory(category):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{category}%'))\
+                                  .order_by(Quizzes.views.desc())
+    return grabbedQuiz
+
+def bestestQuizzesByCategory__limited(category):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{category}%'))\
+                                  .order_by(Quizzes.views.desc())\
+                                  .limit(5)
+    return grabbedQuiz
+
+def bestestQuizzesByInnerCategory(innerCategory):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{innerCategory}%'))\
+                                  .order_by(Quizzes.views.desc())
+    return grabbedQuiz
+
+def alphabetQuizzesByInnerCategory(innerCategory):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{innerCategory}%'))\
+                                  .order_by(Quizzes.innerCategory.asc())
+    return grabbedQuiz
+
+def newestQuizzes4OptionByInnerCategory(innerCategory):
+    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{innerCategory}%'))
+    return grabbedQuiz
+
+def newestQuizzes4OptionByCategory__limited(Category):
+    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{Category}%'))\
+                                         .limit(15)
+    return grabbedQuiz
+
+def bestestQuizzes4OptionByInnerCategory(innerCategory):
+    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{innerCategory}%'))\
+                                         .order_by(Quizzes4Option.views.desc())
+    return grabbedQuiz
+
+def alphabetQuizzes4OptionByInnerCategory(innerCategory):
+    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{innerCategory}%'))\
+                                         .order_by(Quizzes4Option.title_far.asc())
+    return grabbedQuiz
+
+
+def firstQuizByFarsiTitle(title):
     quizzesGrabbedByFarsiTitle = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%')).first()
     quizzes4OptionGrabbedByFarsiTitle = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{title}%')).first()
-
-
 
     if checkIfNotNoneTypeOrNone(quizzesGrabbedByFarsiTitle):
         data = quizzesGrabbedByFarsiTitle
@@ -95,37 +121,33 @@ def grabFirstQuizByFarsiTitle(title):
         data = quizzes4OptionGrabbedByFarsiTitle
     return data
 
-def grabQuizQuestion(titleFar):
+def quizQuestion(titleFar):
     questionGrabbed = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(titleFar)).all()\
         + s.query(fourOptionQuizQuestions).filter(fourOptionQuizQuestions.title_far.ilike(titleFar)).all()
     return questionGrabbed
 
-def grabAllQuizzesByPublish():
+def allQuizzesByPublish():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.publish.desc())
     return quizzesGrabbedByPublish
 
-def grabLimitedQuizzesByPublish():
-    limitedQuizzesGrabbedByPublish = grabAllQuizzesByPublish().limit(5)
-    return limitedQuizzesGrabbedByPublish
+def QuizzesForNewest__paged(fr, to):
+    QuizzesForNewest__paged = allQuizzesByPublish().all()[fr:to]
+    return QuizzesForNewest__paged
 
-def grabLimitedQuizzesForNewestPage(fr, to):
-    limitedQuizzesForNewestPage = grabAllQuizzesByPublish().all()[fr:to]
-    return limitedQuizzesForNewestPage
-
-def grabAllQuizzesByViews():
+def QuizzesByViews():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.views.desc())
     return quizzesGrabbedByPublish
 
-def grabLimitedQuizzesByViews():
-    limitedQuizzesGrabbedByViews = grabAllQuizzesByViews().limit(5)
+def quizzesByViews__limited():
+    limitedQuizzesGrabbedByViews = QuizzesByViews().limit(5)
     return limitedQuizzesGrabbedByViews
 
-def grabLimitedQuizzesForMostViewsPage(fr, to):
-    limitedQuizzesForNewestPage = grabAllQuizzesByViews().all()[fr:to]
-    return limitedQuizzesForNewestPage
+def quizzesForMostViews__paged(fr, to):
+    QuizzesForNewest__paged = QuizzesByViews().all()[fr:to]
+    return QuizzesForNewest__paged
 
 def fanNameOfQuiz(title):
-    quiz_Detail = grabFirstQuizByFarsiTitle(title)
+    quiz_Detail = firstQuizByFarsiTitle(title)
     fanName = quiz_Detail.fan_name
     return fanName
 
@@ -157,16 +179,16 @@ def checkIfNotNoneTypeOrNone(data):
 
 def finalPage(howManyElementToShow, whichSortWantToKnowTheFinalPage):
     if whichSortWantToKnowTheFinalPage == 'newest':
-        sort = grabAllQuizzesByPublish().all()
+        sort = allQuizzesByPublish().all()
     elif whichSortWantToKnowTheFinalPage == 'mostViews':
-        sort = grabAllQuizzesByViews().all()
+        sort = QuizzesByViews().all()
     else:
         try:
             category = whichSortWantToKnowTheFinalPage
-            sort = grabNewestCategories(category).all()
+            sort = newestCategories(category).all()
         except:
             quizzes = whichSortWantToKnowTheFinalPage
-            sort = grabNewestQuizzes(quizzes).all()
+            sort = newestQuizzes_paged(quizzes).all()
 
     finalPage = round((len(sort)) / howManyElementToShow)
 
