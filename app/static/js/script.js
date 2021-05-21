@@ -76,10 +76,11 @@ findTheSortByBtnName = {
     'روانشناسی': sort__physiologies,
     'فیلم و سریال': sort__movieAndSeries,
     'سلبریتی': sort__celebrities,
+    'همه': sort__all,
 }
 
-let lastBtnThatClicked = sort__controller__btn[3]
-let lastElementThatWereShown = sort__celebrities
+let lastBtnThatClicked = sort__controller__btn[4]
+let lastElementThatWereShown = sort__all
 
 const disableTheSortController = () => {
     sort__controller.classList.add('pointerOff')
@@ -216,7 +217,6 @@ newsletter__closeBtn.addEventListener('click', () => {
 })
 newsletter__submit.addEventListener('click', () => {
     const numberOfCheckedOption = newsletter__categoryOptions__selectedByUser.innerHTML.split(',').length
-    log(numberOfCheckedOption)
     if (numberOfCheckedOption == 1) {
         newsletter__message.classList.remove('noVis')
     } else {
@@ -309,9 +309,6 @@ try {
     pageTravel__arwNext.href = nextPage
 
     finalPageNumberDOM.href = finalPage
-
-    log(currPageNumber)
-    log(finalPageNumberDOM.innerHTML)
     
     if (currPageNumber == 1) {
         pageTravel__arwLast.classList.add('noVis')
@@ -346,7 +343,6 @@ try {
     }
 
     const countSearchResult = searchResult__quizzes.childElementCount
-    log(countSearchResult)
 
     if (countSearchResult == 3) { // empty
         searchResult__quizzes__item__notFound.innerHTML = 'هیچ کوئیزی پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'

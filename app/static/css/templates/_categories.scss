@@ -77,6 +77,10 @@
     direction: rtl;
     margin-bottom: 2rem;
 
+    @include breakpoints-down(medium) {
+        margin-right: 2rem;
+    }
+
     &__sort {
         margin-left: .7rem;
 

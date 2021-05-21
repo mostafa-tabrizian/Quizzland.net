@@ -57,6 +57,22 @@ def quizzes(category, innerCategory, fr, to, sortType):
 
     return grabbedQuizzes
 
+def bestestQuizzes__paged(fr, to):
+    grabbedQuiz = s.query(Quizzes).order_by(Quizzes.views.desc()).all()[fr:to]
+    return grabbedQuiz
+
+def bestestQuizzes__limited():
+    grabbedQuiz = s.query(Quizzes).order_by(Quizzes.views.desc()).limit(5)
+    return grabbedQuiz
+
+def newestQuizzes__paged(fr, to):
+    grabbedQuiz = s.query(Quizzes).order_by(Quizzes.publish.desc()).all()[fr:to]
+    return grabbedQuiz
+
+def newestQuizzes__limited():
+    grabbedQuiz = s.query(Quizzes).order_by(Quizzes.publish.desc()).limit(15)
+    return grabbedQuiz
+
 def newestQuizzesByCategory__paged(Category, fr, to):
     if Category == 'physiologies':
         grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{Category}%'))\

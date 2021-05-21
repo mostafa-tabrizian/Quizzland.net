@@ -592,7 +592,7 @@ input {
 }
 
 .header__menu {
-  z-index: 1;
+  z-index: 3;
   position: fixed;
   top: 0;
   left: 0;
@@ -1369,6 +1369,12 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 .tools {
   direction: rtl;
   margin-bottom: 2rem;
+}
+
+@media (max-width: 49.9375em) {
+  .tools {
+    margin-right: 2rem;
+  }
 }
 
 .tools__sort {

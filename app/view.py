@@ -7,12 +7,15 @@ categoryInFar = {
     'gaming': 'گیمینگ',
     'celebrities': 'سلبریتی',
     'movieSeries': 'فیلم و سریال',
-    'physiologies': 'روانشناسی'
+    'physiologies': 'روانشناسی',
 }
 
 @app.route('/')
 def Main():
     return render_template('index.html',
+        newestQuizzes__limited = newestQuizzes__limited(),
+        bestestQuizzes__limited = bestestQuizzes__limited(),
+
         NewestCelebrityQuizSection = newestQuizzesByCategory__limited('celebrities'),
         BestestCelebrityQuizSection = bestestQuizzesByCategory__limited('celebrities'),
         
@@ -24,7 +27,7 @@ def Main():
         
         NewestPhysiologiesQuizSection = newestQuizzes4OptionByCategory__limited('Physiologies'),
         BestestPhysiologiesQuizSection = bestestQuizzes4OptionByCategory__limited('Physiologies'),
-        
+
         colorOfHeader = 'header__white')
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -67,30 +70,47 @@ def moreSearchResult(searchMoreOfThis):
         userSearchInputInQuizzes4OptionDb_eng = userSearchInputInQuizzes4OptionDb_eng
     )
 
-@app.route('/newest/<category>/<int:page>')
-def newestQuiz(category, page):
+@app.route('/<sortOfQuiz>/<int:page>')
+def sortAll(sortOfQuiz, page):
     howManyElementToShow = 12
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
+
+    if (sortOfQuiz == 'bestest'):
+        sort = bestestQuizzes__paged(fr, to)
+        title = "بهترین کوئيز ها"
+    elif (sortOfQuiz == 'newest'):
+        sort = newestQuizzes__paged(fr, to)
+        title = "جدیدترین کوئیز ها"
+
     return render_template('/sort.html',
-                            sortQuizzesByCategoy = newestQuizzesByCategory__paged(category, fr, to),
-                            title = 'جدیدترین کوئیز های',
-                            category = categoryInFar[category],
+                            sort = sort,
+                            title = title,
                             finalPage = finalPage(howManyElementToShow, 'quizzes'))
-        
-@app.route('/bestest/<category>/<int:page>')
-def bestestQuiz(category, page):
+
+@app.route('/<sortOfQuiz>/<category>/<int:page>')
+def sortCategories(category, page, sortOfQuiz):
     howManyElementToShow = 12
     fr = page * howManyElementToShow
     to = (page * howManyElementToShow) + howManyElementToShow
+
+    if sortOfQuiz == 'newest':
+        sort = newestQuizzesByCategory__paged(category, fr, to)
+        title = "جدیدترین کوئیز های"
+
+    elif sortOfQuiz == 'bestest':
+        sort = bestestQuizzesByCategory__paged(category, fr, to)
+        title = "پر بازدیدترین کوئیز های"
+
     return render_template('/sort.html',
-                            sortQuizzesByCategoy = bestestQuizzesByCategory__paged(category, fr, to),
-                            title = 'پر بازدیدترین کوئیز های',
+                            sort = sort,
+                            title = title,
                             category = categoryInFar[category],
                             finalPage = finalPage(howManyElementToShow, 'quizzes'))
 
+
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
-def Category(category, page, sortType, numberOfResult):
+def category(category, page, sortType, numberOfResult):
     if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
         howManyElementToShow = int(numberOfResult)
         fr = page * howManyElementToShow
@@ -191,6 +211,11 @@ def newsletter():
             return render_template('/success.html')
         else:
             return render_template('/no-success.html')
+
+@app.route('/404')
+def pageNotFound():
+    return render_template('errorHandler.html',
+    message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404
 
 @app.errorhandler(404)
 def pageNotFound(e):
