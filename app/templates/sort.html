@@ -1,10 +1,10 @@
 {% extends './layout.html' %}
 {% block content %}
 
-<div class="newest-mostViews">
-    <h3>پر بازدیدترین کوئیز ها</h3>
+<div class="basicPage center">
+    <h3>{{title}} {{ category }}</h3>
 
-    {% for quiz in grabLimitedQuizzesForMostViewsPage %}
+    {% for quiz in sortQuizzesByCategoy %}
         <a class="newest-mostViews__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
     {% endfor %}
 </div>

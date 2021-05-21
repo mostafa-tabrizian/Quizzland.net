@@ -26,6 +26,9 @@ def alphabetCategory(category):
                                   .order_by(Categories.title_eng.asc())
     return category
 
+def allCategories():
+    allCategories = s.query(Categories).all()
+    return allCategories
 
 def categoriesByPublish():
     categoryGrabbedByPublish = s.query(Categories).order_by(Categories.publish.desc())
@@ -54,14 +57,13 @@ def quizzes(category, innerCategory, fr, to, sortType):
 
     return grabbedQuizzes
 
-def newestQuizzesByInnerCategory(innerCategory):
-    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{innerCategory}%'))\
-                                  .order_by(Quizzes.publish.desc())
-    return grabbedQuiz
-
-def newestQuizzesByCategory(Category):
-    grabbedQuiz = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{Category}%'))\
-                                  .order_by(Quizzes.publish.desc())
+def newestQuizzesByCategory__paged(Category, fr, to):
+    if Category == 'physiologies':
+        grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{Category}%'))\
+                                .order_by(Quizzes4Option.publish.desc()).all()[fr:to]
+    else:
+        grabbedQuiz = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{Category}%'))\
+                                    .order_by(Quizzes.publish.desc()).all()[fr:to]
     return grabbedQuiz
 
 def newestQuizzesByCategory__limited(Category):
@@ -70,9 +72,15 @@ def newestQuizzesByCategory__limited(Category):
                                   .limit(15)
     return grabbedQuiz
 
-def bestestQuizzesByCategory(category):
+def newestQuizzesByInnerCategory(innerCategory):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{innerCategory}%'))\
+                                  .order_by(Quizzes.publish.desc())
+    return grabbedQuiz
+
+
+def bestestQuizzesByCategory__paged(category, fr, to):
     grabbedQuiz = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{category}%'))\
-                                  .order_by(Quizzes.views.desc())
+                                  .order_by(Quizzes.views.desc())[fr:to]
     return grabbedQuiz
 
 def bestestQuizzesByCategory__limited(category):
@@ -131,6 +139,10 @@ def quizQuestion(titleFar):
         + s.query(fourOptionQuizQuestions).filter(fourOptionQuizQuestions.title_far.ilike(titleFar)).all()
     return questionGrabbed
 
+def allQuizzes():
+    allQuizzes =  s.query(Quizzes).all()
+    return allQuizzes
+
 def allQuizzesByPublish():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.publish.desc())
     return quizzesGrabbedByPublish
@@ -182,18 +194,11 @@ def addViewToQuizzes(title):
 def checkIfNotNoneTypeOrNone(data):
     return data != 'NoneType' and data is not None
 
-def finalPage(howManyElementToShow, whichSortWantToKnowTheFinalPage):
-    if whichSortWantToKnowTheFinalPage == 'newest':
-        sort = allQuizzesByPublish().all()
-    elif whichSortWantToKnowTheFinalPage == 'mostViews':
-        sort = QuizzesByViews().all()
-    else:
-        try:
-            category = whichSortWantToKnowTheFinalPage
-            sort = newestCategories(category).all()
-        except:
-            quizzes = whichSortWantToKnowTheFinalPage
-            sort = newestQuizzes_paged(quizzes).all()
+def finalPage(howManyElementToShow, whichTypeWantToKnowTheFinalPage):
+    if whichTypeWantToKnowTheFinalPage == 'quizzes':
+        sort = allQuizzes()
+    else: # categories
+        sort = allCategories()
 
     finalPage = round((len(sort)) / howManyElementToShow)
 

@@ -3,6 +3,13 @@ from db import *
 
 app = Flask(__name__)
 
+categoryInFar = {
+    'gaming': 'گیمینگ',
+    'celebrities': 'سلبریتی',
+    'movieSeries': 'فیلم و سریال',
+    'physiologies': 'روانشناسی'
+}
+
 @app.route('/')
 def Main():
     return render_template('index.html',
@@ -60,29 +67,27 @@ def moreSearchResult(searchMoreOfThis):
         userSearchInputInQuizzes4OptionDb_eng = userSearchInputInQuizzes4OptionDb_eng
     )
 
-@app.route('/newest/<int:page>/<numberOfResult>')
-def newestQuiz(page, numberOfResult):
-    if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
-        howManyElementToShow = int(numberOfResult)
-        fr = page * howManyElementToShow
-        to = (page * howManyElementToShow) + howManyElementToShow
-        return render_template('/newest.html',
-                                QuizzesForMostViewsPage__paged = quizzesForMostViews__paged(fr, to),
-                                finalPage = finalPage(howManyElementToShow, 'newest'))
-    else:
-        return render_template('404.html')
+@app.route('/newest/<category>/<int:page>')
+def newestQuiz(category, page):
+    howManyElementToShow = 12
+    fr = page * howManyElementToShow
+    to = (page * howManyElementToShow) + howManyElementToShow
+    return render_template('/sort.html',
+                            sortQuizzesByCategoy = newestQuizzesByCategory__paged(category, fr, to),
+                            title = 'جدیدترین کوئیز های',
+                            category = categoryInFar[category],
+                            finalPage = finalPage(howManyElementToShow, 'quizzes'))
         
-@app.route('/mostViews/<int:page>/<numberOfResult>')
-def mostViewsQuiz(page, numberOfResult):
-    if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
-        howManyElementToShow = int(numberOfResult)
-        fr = page * howManyElementToShow
-        to = (page * howManyElementToShow) + howManyElementToShow
-        return render_template('/mostViews.html',
-                                QuizzesForMostViewsPage__paged = quizzesForMostViews__paged(fr, to),
-                                finalPage = finalPage(howManyElementToShow, 'mostViews'))
-    else:
-        return render_template('404.html')
+@app.route('/bestest/<category>/<int:page>')
+def bestestQuiz(category, page):
+    howManyElementToShow = 12
+    fr = page * howManyElementToShow
+    to = (page * howManyElementToShow) + howManyElementToShow
+    return render_template('/sort.html',
+                            sortQuizzesByCategoy = bestestQuizzesByCategory__paged(category, fr, to),
+                            title = 'پر بازدیدترین کوئیز های',
+                            category = categoryInFar[category],
+                            finalPage = finalPage(howManyElementToShow, 'quizzes'))
 
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
 def Category(category, page, sortType, numberOfResult):
