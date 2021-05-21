@@ -62,8 +62,6 @@ class Categories(categoriesBase):
     title_far = Column(String)
     views = Column(Integer)
     href = Column(String)
-    img = Column(String)
-    background = Column(String)
     publish = Column(DateTime, default=datetime.datetime.now)
     
     def __repr__(self):

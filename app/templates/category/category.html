@@ -1,6 +1,14 @@
 {% extends './layout.html' %}
 {% block content %}
 
+<adverts class="adverts adverts__left hideForMobile" style="margin-top: 5.5rem;">
+    this is a left advert which is fucking annoying
+</adverts>
+
+<adverts class="adverts adverts__right hideForMobile" style="margin-top: 5.5rem;">
+    this is a right advert which is fucking annoying
+</adverts>
+
 <body>
     <div class="tools wrapper-med flex flex-ai-c">
         <div class="tools__sort">
@@ -36,7 +44,8 @@
     <div class="quizzes wrapper flex flex-js-c flex-ai-c">
         {% for category in categories %}
             <div class="quizzes__item">
-                <a href="{{category.href}}/0/newest/8"><img src="/static/img/{{category.img}}" alt=""></a>
+                {% set img = (category.title_eng).split(' ') %}
+                <a href="{{category.href}}/0/newest/8"><img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt=""></a>
                 <h5><a href="{{category.href}}/0/newest/8">
     
                     {% if category.category == 'physiologies' %}
