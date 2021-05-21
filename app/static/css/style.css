@@ -584,6 +584,7 @@ input {
   color: #161616;
   padding: .6250rem;
   margin-left: 1.125rem;
+  text-shadow: 0 0 5px white;
 }
 
 .header .slideMenu-hide {
@@ -769,6 +770,7 @@ input {
 
 .header__white a {
   color: #f0f0f0 !important;
+  text-shadow: 0 0 5px black;
 }
 
 .header__white a::after {
@@ -1843,6 +1845,7 @@ body {
 
 .result__share h5 {
   margin-bottom: 1rem;
+  text-shadow: 0 0 5px white;
 }
 
 .result__share > div {
@@ -1851,10 +1854,8 @@ body {
 }
 
 .result__share__button {
-  background: black;
-  color: white;
-  width: 10rem;
   margin: auto;
+  width: 10rem;
   padding: .875rem 1rem .875rem 1rem;
   border-radius: 25px;
   margin-bottom: 1rem;
@@ -1890,12 +1891,27 @@ body {
   }
 }
 
-.resultQuiz4Option {
-  padding: 0;
+.resultQuiz4Option div {
+  width: 35rem;
 }
 
-.resultQuiz4Option__title > h5 {
+.resultQuiz4Option__bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.resultQuiz4Option img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform: translate(-25.7%, -26%);
+          transform: translate(-25.7%, -26%);
+  z-index: -1;
+}
+
+.resultQuiz4Option__title > h3 {
   margin-top: 0;
+  text-shadow: 0 0 5px white;
 }
 
 .contact__socialMedia > li {

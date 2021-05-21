@@ -22,6 +22,7 @@
     &__share {
         h5 {
             margin-bottom: 1rem;
+            text-shadow: 0 0 5px white;
         }
 
         > div {
@@ -30,10 +31,8 @@
         }
 
         &__button {
-            background: black;
-            color: white;
-            width: 10rem;
             margin: auto;
+            width: 10rem;
             padding: .875rem 1rem .875rem 1rem;
             border-radius: 25px;
             margin-bottom: 1rem;
@@ -67,18 +66,27 @@
 }
 
 .resultQuiz4Option {
-    padding: 0;
+    div {
+        width: 35rem;
+    }
+
+    &__bg {
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-25.7%, -26%);
+        z-index: -1;
+    }
 
     &__title {
-        & > h5 {
+        & > h3 {
             margin-top: 0;
+            text-shadow: 0 0 5px white;
         }
-    }
-
-    &__txt {
-        
-    }
-
-    &__result {
     }
 }
