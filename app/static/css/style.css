@@ -475,15 +475,8 @@ input {
 }
 
 .pageTravel {
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border-radius: 15px;
   width: 19rem;
   margin: 2rem auto;
-  background: rgba(0, 0, 0, 0.374);
-  color: white;
-  -webkit-box-shadow: 0 0 20px #000000c9;
-          box-shadow: 0 0 20px #000000c9;
 }
 
 .pageTravel .finalPage {
@@ -499,6 +492,19 @@ input {
   background-clip: padding-box;
   -webkit-box-shadow: 10px 10px 10px rgba(80, 52, 52, 0.336);
           box-shadow: 10px 10px 10px rgba(80, 52, 52, 0.336);
+}
+
+.darkGls {
+  padding: .4rem;
+  color: white;
+  border-radius: 7px;
+  -webkit-box-shadow: 2px 2px 8px #0000005e, 0 0 15px #3f3f3f5e;
+          box-shadow: 2px 2px 8px #0000005e, 0 0 15px #3f3f3f5e;
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.54);
+  border: solid 2px transparent;
+  background-clip: padding-box;
 }
 
 .shadow {
@@ -1314,14 +1320,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   text-align: right;
   line-height: 2.2rem;
   min-height: 60vh;
-  background: rgba(0, 0, 0, 0.3);
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
-  border-radius: 15px;
   padding: 1rem 2rem 1rem 2rem;
-  color: white;
-  -webkit-box-shadow: 0 0 20px #000000c9;
-          box-shadow: 0 0 20px #000000c9;
   -webkit-transform: translateY(-2rem);
           transform: translateY(-2rem);
 }
@@ -1349,69 +1348,38 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   margin-left: .7rem;
 }
 
-.tools__sort__btn {
-  padding: .4rem;
-  border: transparent;
-  border-radius: 7px;
-  color: white;
-  -webkit-box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-          box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-  -webkit-backdrop-filter: blur(40px);
-          backdrop-filter: blur(40px);
-  background: rgba(0, 0, 0, 0.54);
-}
-
-.tools__sort__btn > span {
-  padding-right: .7rem;
-}
-
 .tools__sort__options {
   margin-top: .5rem;
 }
 
-.tools__sort__options > button {
-  color: white;
-  -webkit-box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-          box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-  -webkit-backdrop-filter: blur(40px);
-          backdrop-filter: blur(40px);
-  background: rgba(0, 0, 0, 0.54);
+.tools__sort__options button {
+  padding: 0rem 0.4rem 0rem 0.4rem;
 }
 
 .tools__numberOfResult__btn {
-  padding: .4rem;
-  border: transparent;
-  border-radius: 7px;
   font-size: 1.18rem;
-  color: white;
-  -webkit-box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-          box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-  -webkit-backdrop-filter: blur(40px);
-          backdrop-filter: blur(40px);
-  background: rgba(0, 0, 0, 0.54);
-}
-
-.tools__numberOfResult__btn > span {
-  padding-right: .7rem;
 }
 
 .tools__numberOfResult__options {
   margin-top: .5rem;
 }
 
-.tools__numberOfResult__options > button {
-  color: white;
-  -webkit-box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-          box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-  -webkit-backdrop-filter: blur(40px);
-          backdrop-filter: blur(40px);
-  background: rgba(0, 0, 0, 0.54);
+.tools__numberOfResult__options button {
+  padding: 0rem 0.2rem 0rem 0.2rem;
 }
 
 .tools__submit {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
   position: relative;
-  bottom: 1.5rem;
-  right: .5rem;
+  bottom: 2rem;
+  right: 0.6rem;
+}
+
+.tools__submit img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .tools__submit:hover {
@@ -1428,7 +1396,11 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 .pageTravel__pages__curr {
-  color: #af282f;
+  text-decoration: underline;
+  -webkit-text-decoration-color: #af282f;
+          text-decoration-color: #af282f;
+  -webkit-text-decoration-style: solid;
+          text-decoration-style: solid;
 }
 
 .pageTravel__arwLast {
@@ -1560,10 +1532,7 @@ body {
   margin: auto 2rem;
   padding: 0.1rem;
   padding-bottom: 2rem;
-  color: white;
   border-radius: 24px;
-  -webkit-box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
-          box-shadow: 0 0 10px black, 0 0 15px #3f3f3f;
   -webkit-transition: left 1.3s;
   transition: left 1.3s;
   margin-top: 5rem;
@@ -1571,9 +1540,6 @@ body {
   margin-left: 22rem;
   position: relative;
   left: -16rem;
-  -webkit-backdrop-filter: blur(40px);
-          backdrop-filter: blur(40px);
-  background: rgba(0, 0, 0, 0.54);
 }
 
 @media (max-width: 49.9375em) {

@@ -4,36 +4,36 @@
 <body style="background-image: url('/static/img/Bg-innerCategory/{{ innerCategory }}.jpg');">
     <div class="tools wrapper-med flex flex-ai-c">
         <div class="tools__sort">
-            <div class="tools__sort__btn btn tx-al-c">ترتیب بر اساس: 
+            <div class="tools__sort__btn darkGls btn tx-al-c">ترتیب بر اساس: 
                 <span class="tools__sort__current">جدیدترین</span>
             </div>
             <div class="tools__sort__options__container fade-out">
                 <ul class="tools__sort__options">
-                    <button type="button">جدیدترین</button type="button">
-                    <button type="button">بهترین</button type="button">
-                    <button type="button">الفبا</button type="button">
+                    <button class="darkGls"  type="button">جدیدترین</button>
+                    <button class="darkGls"  type="button">بهترین</button>
+                    <button class="darkGls"  type="button">الفبا</button>
                 </ul>
             </div>
         </div>
         <div class="tools__numberOfResult">
-            <div class="tools__numberOfResult__btn btn tx-al-c">تعداد نمایش: 
+            <div class="tools__numberOfResult__btn darkGls btn tx-al-c">تعداد نمایش: 
                 <span class="tools__numberOfResult__current">8</span>
             </div>
             <div class="tools__numberOfResult__options__container fade-out">
                 <ul class="tools__numberOfResult__options">
-                    <button type="button">8</button type="button">
-                    <button type="button">16</button type="button">
-                    <button type="button">24</button type="button">
-                    <button type="button">32</button type="button">
+                    <button class="darkGls" type="button">8</button>
+                    <button class="darkGls" type="button">16</button >
+                    <button class="darkGls" type="button">24</button >
+                    <button class="darkGls" type="button">32</button >
                 </ul>
             </div>
         </div>
-        <div class="tools__submit">
-            <img src="/static/img/pageArw-Before.svg" alt="">
+        <div class="tools__submit darkGls">
+            <img src="/static/img/arw-submit.svg" alt="">
         </div>
     </div>
 
-    <div class="categoryList wrapper-sm">
+    <div class="categoryList darkGls wrapper-sm">
         <ul>
             {%  for quiz in quizzes %}
             <li>
@@ -45,7 +45,7 @@
         </ul>
     </div>
 
-    <div class="pageTravel flex flex-jc-c flex-ai-c">
+    <div class="pageTravel darkGls flex flex-jc-c flex-ai-c">
         <a class="pageTravel__arwLast" href="">
             <img class="flex flex-jc-c flex-ai-c" src="/static/img/arw-travelPage.svg" alt="">
         </a>

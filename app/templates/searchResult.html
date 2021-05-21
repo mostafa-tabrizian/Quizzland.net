@@ -10,7 +10,7 @@
         <h4 class="searchResult__category__item__notFound"></h4>
         {% for category in userSearchInputInCategoriesDb_eng %}
         <div class="searchResult__category__item">
-            <a href="{{category.href}}">
+            <a href="{{category.href}}/0/newest/8">
                 <img src="/static/img/{{ category.img }}" alt="">
             </a>
             <h5> {{ category.title_eng }} </h5>
@@ -19,7 +19,7 @@
     
         {% for category in userSearchInputInCategoriesDb_far %}
         <div class="searchResult__category__item">
-            <a href="{{category.href}}">
+            <a href="{{category.href}}/0/newest/8">
                 <img src="/static/img/{{ category.img }}" alt="">
             </a>
             <h5> {{ category.title_eng }} </h5>
@@ -35,7 +35,16 @@
         {% for quiz in userSearchInputInQuizzesDb_far %}
             <a class="searchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
         {% endfor %}
+
+        {% for quiz in userSearchInputInQuizzesDb_eng %}
+            <a class="searchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
+        {% endfor %}
+
         {% for quiz in userSearchInputInQuizzes4OptionDb_far %}
+            <a class="searchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
+        {% endfor %}
+
+        {% for quiz in userSearchInputInQuizzes4OptionDb_eng %}
             <a class="searchResult__quizzes__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
         {% endfor %}
     

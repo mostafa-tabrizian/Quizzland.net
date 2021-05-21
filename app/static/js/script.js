@@ -116,7 +116,7 @@ sort__controller__btn.forEach(sortControllerBtn => {
 // tools
 
 try {
-    const currentUrl = splitUrl()
+    currentUrl = splitUrl()
     
     tools__sort__btn.addEventListener('click', () => {
         if(tools__sort__options__container.classList.contains('fade-out')) {
@@ -266,7 +266,7 @@ try {
 
 // Page travel
 try {
-    splitUrl = splitUrl()
+    currentUrl = splitUrl()
 
     const urlMakerForPageTravel = (currPageNumber, baseUrlPart1, baseUrlPart2) => {
         lastPage = baseUrlPart1 + (currPageNumber - 2) + baseUrlPart2
@@ -275,22 +275,22 @@ try {
         finalPage = baseUrlPart1 + (parseInt(finalPageNumberDOM.innerHTML.trim()) - 1)  + baseUrlPart2
     }
     
-    if  (!(isNaN(parseInt(splitUrl[4])))) { //sortPages
-        baseUrlPart1 = '/' + splitUrl[3] + '/'
-        baseUrlPart2 = '/' + splitUrl[5]
-        currPageNumber = parseInt(splitUrl[4]) + 1
+    if  (!(isNaN(parseInt(currentUrl[4])))) { //sortPages
+        baseUrlPart1 = '/' + currentUrl[3] + '/'
+        baseUrlPart2 = '/' + currentUrl[5]
+        currPageNumber = parseInt(currentUrl[4]) + 1
         urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
 
-    } else if (!(isNaN(parseInt(splitUrl[5])))) { //category
-        baseUrlPart1 = '/' + splitUrl[3] + '/' + splitUrl[4] + '/'
-        baseUrlPart2 = '/' + splitUrl[6] + '/' + splitUrl[7]
-        currPageNumber = parseInt(splitUrl[5]) + 1
+    } else if (!(isNaN(parseInt(currentUrl[5])))) { //category
+        baseUrlPart1 = '/' + currentUrl[3] + '/' + currentUrl[4] + '/'
+        baseUrlPart2 = '/' + currentUrl[6] + '/' + currentUrl[7]
+        currPageNumber = parseInt(currentUrl[5]) + 1
         urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
 
-    } else if  (!(isNaN(parseInt(splitUrl[6])))) { //innerCategory
-        baseUrlPart1 = '/' + splitUrl[3] + '/' + splitUrl[4] + '/' + splitUrl[5] + '/'
-        baseUrlPart2 = '/' + splitUrl[7] + '/' + splitUrl[8]
-        currPageNumber = parseInt(splitUrl[6]) + 1
+    } else if  (!(isNaN(parseInt(currentUrl[6])))) { //innerCategory
+        baseUrlPart1 = '/' + currentUrl[3] + '/' + currentUrl[4] + '/' + currentUrl[5] + '/'
+        baseUrlPart2 = '/' + currentUrl[7] + '/' + currentUrl[8]
+        currPageNumber = parseInt(currentUrl[6]) + 1
         urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
     }
 
@@ -309,6 +309,9 @@ try {
     pageTravel__arwNext.href = nextPage
 
     finalPageNumberDOM.href = finalPage
+
+    log(currPageNumber)
+    log(finalPageNumberDOM.innerHTML)
     
     if (currPageNumber == 1) {
         pageTravel__arwLast.classList.add('noVis')
@@ -330,7 +333,7 @@ try {
     if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
         finalPageDOM.classList.add('noVis')
     }
-} catch {log('No page travel')}
+} catch (e) {log(e)}
 
 //----------------------------------------------------------
 

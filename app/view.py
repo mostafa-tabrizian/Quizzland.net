@@ -27,14 +27,18 @@ def search():
         userSearchInputInCategoriesDb_far = s.query(Categories).filter(Categories.title_far.ilike(f'%{userSearchInput}%')).all()
         userSearchInputInCategoriesDb_eng = s.query(Categories).filter(Categories.title_eng.ilike(f'%{userSearchInput}%')).all()
         userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).all()
+        userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{userSearchInput}%')).all()
         userSearchInputInQuizzes4OptionDb_far = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{userSearchInput}%')).all()
+        userSearchInputInQuizzes4OptionDb_eng = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{userSearchInput}%')).all()
 
         return render_template('searchResult.html', 
             userSearchInput = userSearchInput,
             userSearchInputInCategoriesDb_far = userSearchInputInCategoriesDb_far,
             userSearchInputInCategoriesDb_eng = userSearchInputInCategoriesDb_eng,
             userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
-            userSearchInputInQuizzes4OptionDb_far = userSearchInputInQuizzes4OptionDb_far
+            userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng,
+            userSearchInputInQuizzes4OptionDb_far = userSearchInputInQuizzes4OptionDb_far,
+            userSearchInputInQuizzes4OptionDb_eng = userSearchInputInQuizzes4OptionDb_eng
             )
     else:
         return render_template('404.html')
@@ -45,7 +49,7 @@ def moreSearchResult(searchMoreOfThis):
     userSearchInputInCategoriesDb_far = s.query(Categories).filter(Categories.title_far.ilike(f'%{userSearchInput}%')).all()
     userSearchInputInCategoriesDb_eng = s.query(Categories).filter(Categories.title_eng.ilike(f'%{userSearchInput}%')).all()
     userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).all()
-    userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.title_eng.ilike(f'%{userSearchInput}%')).all()
+    userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{userSearchInput}%')).all()
 
     return render_template('moreSearchResult.html', 
         userSearchInput = userSearchInput,

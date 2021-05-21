@@ -53,14 +53,9 @@
     text-align: right;
     line-height: 2.2rem;
     min-height: 60vh;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(15px);
-    border-radius: 15px;
     padding: 1rem 2rem 1rem 2rem;
-    color: white;
-    box-shadow: 0 0 20px #000000c9;;
     transform: translateY(-2rem);
-    
+
     @include breakpoints-down(medium) {
         margin-left: 2rem;
         margin-right: 2rem;
@@ -86,64 +81,39 @@
     &__sort {
         margin-left: .7rem;
 
-        &__btn {
-            padding: .4rem;
-            border: transparent;
-            border-radius: 7px;
-            color: white;
-            box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
-            backdrop-filter: blur(40px);
-            background: rgba(0, 0, 0, 0.54);
-
-            & > span {
-                padding-right: .7rem;
-            }
-        }
-
         &__options {
             margin-top: .5rem;
-            
-            & > button {
-                color: white;
-                box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
-                backdrop-filter: blur(40px);
-                background: rgba(0, 0, 0, 0.54);
+
+            button {
+                padding: 0rem 0.4rem 0rem 0.4rem;
             }
         }
     }
 
     &__numberOfResult {
         &__btn {
-            padding: .4rem;
-            border: transparent;
-            border-radius: 7px;
             font-size: $font-sm;
-            color: white;
-            box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
-            backdrop-filter: blur(40px);
-            background: rgba(0, 0, 0, 0.54);
 
-            & > span {
-                padding-right: .7rem;
-            }
         }
         &__options {
             margin-top: .5rem;
 
-            & > button {
-                color: white;
-                box-shadow: 0 0 10px black, 0 0 15px rgb(63, 63, 63);
-                backdrop-filter: blur(40px);
-                background: rgba(0, 0, 0, 0.54);
+            button {
+                padding: 0rem 0.2rem 0rem 0.2rem;
             }
         }
     }
 
     &__submit {
+        transform: rotate(-90deg);
         position: relative;
-        bottom: 1.5rem;
-        right: .5rem;
-        
+        bottom: 2rem;
+        right: 0.6rem;
+
+        img {
+            display: flex;
+        }
+
         &:hover {
             cursor: pointer;
         }
@@ -154,7 +124,6 @@
     padding: .2rem .7rem;
     margin-bottom: 2rem;
 
-
     &__pages {
         > a , span {
             &:not(:last-child) {
@@ -163,7 +132,9 @@
         }
 
         &__curr {
-            color: $red;
+            text-decoration: underline;
+            text-decoration-color: $red;
+            text-decoration-style: solid;
         }
     }
 

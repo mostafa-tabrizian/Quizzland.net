@@ -361,13 +361,8 @@ input {
 }
 
 .pageTravel {
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
     width: 19rem;
     margin: 2rem auto;
-    background: rgba(0, 0, 0, 0.374);
-    color: white;
-    box-shadow: 0 0 20px #000000c9;;
 
     .finalPage {
         padding-right: 1.125rem;
@@ -383,6 +378,17 @@ input {
     backdrop-filter: blur(9px);
     background-clip: padding-box;
     box-shadow: 10px 10px 10px rgba(80, 52, 52, 0.336);
+}
+
+.darkGls {
+    padding: .4rem;
+    color: white;
+    border-radius: 7px;
+    box-shadow: 2px 2px 8px #0000005e, 0 0 15px #3f3f3f5e;
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.54);
+    border: solid 2px transparent;
+    background-clip: padding-box;
 }
 
 .shadow {
