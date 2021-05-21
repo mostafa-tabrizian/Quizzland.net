@@ -1,9 +1,12 @@
 .searchResult {
-    text-align: center;
     min-height: 60vh;
     
     @include breakpoints-down(medium) {
         min-height: 120vh;
+    }
+
+    > h4 {
+        text-align: center;
     }
 
     &__category {
@@ -43,7 +46,7 @@
                 object-fit: cover;
                 border: 3px solid $gray;
                 border-radius: 40px;
-                filter:brightness(40%);
+                filter: brightness(40%);
             }
     
             & > h5 {
@@ -51,13 +54,13 @@
                 transform: translateY(-210px);
                 color: $white;
                 font-size: $font-l;
-    
             }
         }
     }
 
     &__quizzes {
         float: left;
+        text-align: center;
         width: 50%;
 
         @include breakpoints-down(medium) {

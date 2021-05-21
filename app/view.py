@@ -45,18 +45,19 @@ def search():
 
 @app.route('/search/<searchMoreOfThis>')
 def moreSearchResult(searchMoreOfThis):
+
     userSearchInput = searchMoreOfThis
-    userSearchInputInCategoriesDb_far = s.query(Categories).filter(Categories.title_far.ilike(f'%{userSearchInput}%')).all()
-    userSearchInputInCategoriesDb_eng = s.query(Categories).filter(Categories.title_eng.ilike(f'%{userSearchInput}%')).all()
-    userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).all()
-    userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{userSearchInput}%')).all()
+    userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).limit(20)
+    userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{userSearchInput}%')).limit(20)
+    userSearchInputInQuizzes4OptionDb_far = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{userSearchInput}%')).limit(20)
+    userSearchInputInQuizzes4OptionDb_eng = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{userSearchInput}%')).limit(20)
 
     return render_template('moreSearchResult.html', 
         userSearchInput = userSearchInput,
-        userSearchInputInCategoriesDb_far = userSearchInputInCategoriesDb_far,
-        userSearchInputInCategoriesDb_eng = userSearchInputInCategoriesDb_eng,
         userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
-        userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng
+        userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng,
+        userSearchInputInQuizzes4OptionDb_far = userSearchInputInQuizzes4OptionDb_far,
+        userSearchInputInQuizzes4OptionDb_eng = userSearchInputInQuizzes4OptionDb_eng
     )
 
 @app.route('/newest/<int:page>/<numberOfResult>')

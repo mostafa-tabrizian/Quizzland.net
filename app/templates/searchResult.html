@@ -10,8 +10,9 @@
         <h4 class="searchResult__category__item__notFound"></h4>
         {% for category in userSearchInputInCategoriesDb_eng %}
         <div class="searchResult__category__item">
+            {% set img = (category.title_eng).split(' ') %}
             <a href="{{category.href}}/0/newest/8">
-                <img src="/static/img/{{ category.img }}" alt="">
+                <img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt="">
             </a>
             <h5> {{ category.title_eng }} </h5>
         </div>
@@ -20,7 +21,7 @@
         {% for category in userSearchInputInCategoriesDb_far %}
         <div class="searchResult__category__item">
             <a href="{{category.href}}/0/newest/8">
-                <img src="/static/img/{{ category.img }}" alt="">
+                <img src="/static/img/{{ category.img }}.jpg" alt="">
             </a>
             <h5> {{ category.title_eng }} </h5>
         </div>

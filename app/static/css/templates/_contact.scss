@@ -1,13 +1,5 @@
 .contact {
-    text-align: center;
-    min-height: 44vh;
-
-    > h4 {
-        margin-top: 0;
-    }
-
     &__socialMedia {
-
         > li {
             color: $red;
             font-weight: 600;
