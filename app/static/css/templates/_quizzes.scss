@@ -2,6 +2,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .quizzes {
@@ -122,8 +123,8 @@ body {
 
         position: relative;
         top: 1rem;
-        left: 0.7rem;
         z-index: 2;
+        cursor: pointer;
 
         & > h5 {
             font-size: .77rem;
@@ -162,37 +163,37 @@ body {
     &__hider {
         display: flex;
         width: 35rem;
-        height: 37rem;
+        min-height: 37rem;
         overflow: hidden;
         position: relative;
         bottom: 3.5rem;
         z-index: 1;
+
     }
 
     &__questionChanger {
         cursor: pointer;
         position: absolute;
-        top: 38%;
-        z-index: 1;
-
-        @include breakpoints-down(medium) {
-            right: 15%;
-            top: 90%;
-        }
-        
-        @include breakpoints-down(large) {
-            right: 15%;
-            top: 90%;
-        }
+        right: 42rem;
+        top: -1.2rem;
+        z-index: 2;
 
         &__last {
-            left: 30%;
+            left: 40rem;
             transform: rotate(90deg);
+
+            @include breakpoints-down(medium) {
+                left: 7rem;
+            }
         }
 
         &__next {
-            right: 30%;
+            right: 40rem;
             transform: rotate(-90deg);
+
+            @include breakpoints-down(medium) {
+                right: 7rem;
+            }
         }
 
         & > img {
@@ -225,6 +226,7 @@ body {
     &__4option {
         padding-left: 1rem;
         padding-right: 1rem;
+        width: 23rem;
 
         input {
             opacity: 0;

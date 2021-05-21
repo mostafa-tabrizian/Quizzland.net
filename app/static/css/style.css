@@ -1447,6 +1447,7 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .quizzes {
@@ -1592,8 +1593,8 @@ body {
 .quiz__autoQuestionChangerSwitch {
   position: relative;
   top: 1rem;
-  left: 0.7rem;
   z-index: 2;
+  cursor: pointer;
 }
 
 .quiz__autoQuestionChangerSwitch > h5 {
@@ -1637,7 +1638,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   width: 35rem;
-  height: 37rem;
+  min-height: 37rem;
   overflow: hidden;
   position: relative;
   bottom: 3.5rem;
@@ -1647,34 +1648,33 @@ body {
 .quiz__questionChanger {
   cursor: pointer;
   position: absolute;
-  top: 38%;
-  z-index: 1;
-}
-
-@media (max-width: 49.9375em) {
-  .quiz__questionChanger {
-    right: 15%;
-    top: 90%;
-  }
-}
-
-@media (max-width: 87.4375em) {
-  .quiz__questionChanger {
-    right: 15%;
-    top: 90%;
-  }
+  right: 42rem;
+  top: -1.2rem;
+  z-index: 2;
 }
 
 .quiz__questionChanger__last {
-  left: 30%;
+  left: 40rem;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }
 
+@media (max-width: 49.9375em) {
+  .quiz__questionChanger__last {
+    left: 7rem;
+  }
+}
+
 .quiz__questionChanger__next {
-  right: 30%;
+  right: 40rem;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
+}
+
+@media (max-width: 49.9375em) {
+  .quiz__questionChanger__next {
+    right: 7rem;
+  }
 }
 
 .quiz__questionChanger > img {
@@ -1708,6 +1708,7 @@ body {
 .quiz__4option {
   padding-left: 1rem;
   padding-right: 1rem;
+  width: 23rem;
 }
 
 .quiz__4option input {
