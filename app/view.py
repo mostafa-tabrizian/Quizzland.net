@@ -13,19 +13,19 @@ categoryInFar = {
 @app.route('/')
 def Main():
     return render_template('index.html',
-                            NewestCelebrityQuizSection = newestQuizzesByCategory__limited('celebrities'),
-                            BestestCelebrityQuizSection = bestestQuizzesByCategory__limited('celebrities'),
-                            
-                            NewestMovieSeriesQuizSection = newestQuizzesByCategory__limited('movieSeries'),
-                            BestestMovieSeriesQuizSection = bestestQuizzesByCategory__limited('movieSeries'),
-                            
-                            NewestGamingQuizSection = newestQuizzesByCategory__limited('Gaming'),
-                            BestestGamingQuizSection = bestestQuizzesByCategory__limited('Gaming'),
-                            
-                            NewestPhysiologiesQuizSection = newestQuizzes4OptionByCategory__limited('Physiologies'),
-                            BestestPhysiologiesQuizSection = bestestQuizzes4OptionByCategory__limited('Physiologies'),
-                            
-                            colorOfHeader = 'header__white')
+        NewestCelebrityQuizSection = newestQuizzesByCategory__limited('celebrities'),
+        BestestCelebrityQuizSection = bestestQuizzesByCategory__limited('celebrities'),
+        
+        NewestMovieSeriesQuizSection = newestQuizzesByCategory__limited('movieSeries'),
+        BestestMovieSeriesQuizSection = bestestQuizzesByCategory__limited('movieSeries'),
+        
+        NewestGamingQuizSection = newestQuizzesByCategory__limited('Gaming'),
+        BestestGamingQuizSection = bestestQuizzesByCategory__limited('Gaming'),
+        
+        NewestPhysiologiesQuizSection = newestQuizzes4OptionByCategory__limited('Physiologies'),
+        BestestPhysiologiesQuizSection = bestestQuizzes4OptionByCategory__limited('Physiologies'),
+        
+        colorOfHeader = 'header__white')
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -194,15 +194,18 @@ def newsletter():
 
 @app.errorhandler(404)
 def pageNotFound(e):
-    return render_template('404.html'), 404
+    return render_template('errorHandler.html',
+    message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404
 
 @app.errorhandler(403)
 def forbidden(e):
-    return render_template('403.html'), 403
+    return render_template('errorHandler.html',
+    message = "❌ دسترسی شما به این صفحه مجاز نیست ❌"), 403
     
 @app.errorhandler(500)
 def internalServerError(e):
-    return render_template('500.html'), 500
+    return render_template('errorHandler.html',
+    message = "🙄 سرور های سایت احتمالا داغ کرده لطفا یکم دیگه امتحان کنید"), 500
 
 def titleConverterFromUrlToNormalOne(title):
     splittedTitle = title.split('-')
