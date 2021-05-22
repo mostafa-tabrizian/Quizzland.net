@@ -1,0 +1,27 @@
+{
+  "name": "quizland",
+  "version": "1.0.0",
+  "description": "Quiz website",
+  "main": "index.js",
+  "dependencies": {
+    "audit": "^0.0.6",
+    "minify": "^7.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mostafa-Code19/QuizLand.git"
+  },
+  "keywords": [
+    "quiz"
+  ],
+  "author": "mostafa tabrizian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mostafa-Code19/QuizLand/issues"
+  },
+  "homepage": "https://github.com/Mostafa-Code19/QuizLand#readme"
+}
