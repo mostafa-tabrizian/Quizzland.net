@@ -62,9 +62,12 @@
         }
 
         &__closeBtn {
+            background: url('/static/img/close-btn.svg') center center no-repeat;
+            width: 1.75rem;
+            height: 1.75rem;
             position: fixed;
-            top: 0.425rem;
-            right: 0.7rem;
+            top: 1rem;
+            right: 1.5rem;
         }
 
         &__inner {
@@ -109,6 +112,7 @@
         transform: translate(2.2rem);
         transition: all 0.2s ease-in-out;
         cursor: pointer;
+        z-index: 2;
     }
 
     &__searchInput {

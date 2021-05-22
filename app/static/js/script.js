@@ -275,11 +275,15 @@ try {
         finalPage = baseUrlPart1 + (parseInt(finalPageNumberDOM.innerHTML.trim()) - 1)  + baseUrlPart2
     }
     
-    if  (!(isNaN(parseInt(currentUrl[4])))) { //sortPages
+    if  (!(isNaN(parseInt(currentUrl[4])))) { //sortPages-all
         baseUrlPart1 = '/' + currentUrl[3] + '/'
-        baseUrlPart2 = '/' + currentUrl[5]
         currPageNumber = parseInt(currentUrl[4]) + 1
-        urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
+        urlMakerForPageTravel(currPageNumber, baseUrlPart1, '')
+
+    } else if (!(isNaN(parseInt(currentUrl[5]))) && !(currentUrl[6])) { //sortPages-categories
+        baseUrlPart1 = '/' + currentUrl[3] + '/' + currentUrl[4] + '/'
+        currPageNumber = parseInt(currentUrl[5]) + 1
+        urlMakerForPageTravel(currPageNumber, baseUrlPart1, '')
 
     } else if (!(isNaN(parseInt(currentUrl[5])))) { //category
         baseUrlPart1 = '/' + currentUrl[3] + '/' + currentUrl[4] + '/'

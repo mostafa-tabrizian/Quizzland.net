@@ -386,6 +386,19 @@ input {
     width: 19rem;
     margin: 2rem auto;
 
+    &__arwLast {
+        width: 1.25rem;
+        height: 1.25rem;
+        background: url('/static/img/arw-travelPage.svg') no-repeat;
+    }
+
+    &__arwNext {
+        width: 1.25rem;
+        height: 1.25rem;
+        background: url('/static/img/arw-travelPage.svg') no-repeat;
+        transform: rotate(180deg);
+    }
+
     .finalPage {
         padding-right: 1.125rem;
     }

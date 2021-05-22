@@ -14,20 +14,21 @@
         <h1>{{ quizDetail.title_eng }}</h1>
         <h3>{{ quizDetail.title_far }}</h3>
         <h5>سوال: ?</h5>
-        <div class="quiz__autoQuestionChangerSwitch flex flex-jc-c flex-ai-c">
+
+        <div class="quiz__autoQuestionChangerSwitch center flex flex-jc-c flex-ai-c">
             <h5>تغییر خودکار</h5>
             <div class="quiz__autoQuestionChangerSwitch__btn">
                 <div class="quiz__autoQuestionChangerSwitch__innerBtn"></div>
-
             </div>
-
+        </div>
+        
+        <div class="quiz__questionChanger__container center">
+            <button class="quiz__questionChanger quiz__questionChanger__next"></button>
+            <button class="quiz__questionChanger quiz__questionChanger__last"></button>
         </div>
     </div>
 
     <div class="quiz__questions tx-al-c" tag="4Option">
-
-        <img class="quiz__questionChanger quiz__questionChanger__next" src="/static/img/arw.svg" alt="">
-        <img class="quiz__questionChanger quiz__questionChanger__last" src="/static/img/arw.svg" alt="">
 
         <div class="quiz__hider">
             {% for questionDetail in quiz_Question %}

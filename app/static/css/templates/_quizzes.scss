@@ -125,6 +125,7 @@ body {
         top: 1rem;
         z-index: 2;
         cursor: pointer;
+        width: 23rem;
 
         & > h5 {
             font-size: .77rem;
@@ -160,45 +161,33 @@ body {
         }
     }
 
-    &__hider {
-        display: flex;
-        width: 35rem;
-        min-height: 37rem;
-        overflow: hidden;
-        position: relative;
-        bottom: 3.5rem;
-        z-index: 1;
-
-    }
-
     &__questionChanger {
         cursor: pointer;
         position: absolute;
-        right: 42rem;
-        top: -1.2rem;
-        z-index: 2;
+        top: -1rem;
+
+        &__container {
+            position: relative;
+            width: 23rem;
+            height: 2rem;
+            z-index: 2;
+
+            button {
+                background: url('/static/img/arw.svg') no-repeat center center;
+                height: 2rem;
+                width: 2rem;
+            }
+        }
 
         &__last {
-            left: 40rem;
+            left: 5rem;
             transform: rotate(90deg);
-
-            @include breakpoints-down(medium) {
-                left: 7rem;
-            }
         }
 
         &__next {
-            right: 40rem;
+            right: 5rem;
             transform: rotate(-90deg);
-
-            @include breakpoints-down(medium) {
-                right: 7rem;
-            }
         }
-
-        & > img {
-            margin: auto;
-        } 
     }
 
     &__questionCounter {
@@ -221,6 +210,16 @@ body {
             bottom: 1.7rem;
             left: 0.8rem;
         }
+    }
+
+    &__hider {
+        display: flex;
+        width: 35rem;
+        min-height: 37rem;
+        overflow: hidden;
+        position: relative;
+        bottom: 3.5rem;
+        z-index: 1;   
     }
 
     &__4option {
