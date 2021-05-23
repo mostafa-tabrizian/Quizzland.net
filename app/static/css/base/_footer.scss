@@ -134,24 +134,29 @@ footer, .footer {
             & > label {
                 display: flex;
                 justify-content: flex-end;
-
+                display: flex;
+                align-items: center;
+                
                 &:nth-child(3) {
                     width: 5.5rem;
                 }
-            }
 
-            & > input {
-                margin-right:1.125rem;
+                & > input {
+                    margin-left: 1.125rem;
+                    margin-right: .2rem;
 
-                @include breakpoints-down(medium) {
-                    width: .7rem !important;
-                    margin-left: .6rem;
-                    
-                    &:not(:last-child) {
-                        margin-right:1.125rem;
+    
+                    @include breakpoints-down(medium) {
+                        width: .7rem !important;
+                        margin-left: .6rem;
+                        
+                        &:not(:last-child) {
+                            margin-right:1.125rem;
+                        }
                     }
                 }
             }
+
         }
 
         &__message {

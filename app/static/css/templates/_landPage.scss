@@ -2,7 +2,7 @@
     z-index: -1;
     background-image: url("/static/img/hero-bg.jpg");
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center bottom;
     background-size: cover;
     height: 43.75rem;
     width: 100%;
@@ -40,6 +40,8 @@
     }
     
     img {
+        width: 14.6875rem;
+        height: 14.6875rem;
         border-radius: 20px;
         box-shadow: rgba(0, 0, 0, 0.5) 0 0 35px;
         margin: 1.4375rem;

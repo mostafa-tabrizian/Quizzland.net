@@ -994,22 +994,27 @@ footer .newsletter__categoryOptions > label, .footer .newsletter__categoryOption
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 footer .newsletter__categoryOptions > label:nth-child(3), .footer .newsletter__categoryOptions > label:nth-child(3) {
   width: 5.5rem;
 }
 
-footer .newsletter__categoryOptions > input, .footer .newsletter__categoryOptions > input {
-  margin-right: 1.125rem;
+footer .newsletter__categoryOptions > label > input, .footer .newsletter__categoryOptions > label > input {
+  margin-left: 1.125rem;
+  margin-right: .2rem;
 }
 
 @media (max-width: 49.9375em) {
-  footer .newsletter__categoryOptions > input, .footer .newsletter__categoryOptions > input {
+  footer .newsletter__categoryOptions > label > input, .footer .newsletter__categoryOptions > label > input {
     width: .7rem !important;
     margin-left: .6rem;
   }
-  footer .newsletter__categoryOptions > input:not(:last-child), .footer .newsletter__categoryOptions > input:not(:last-child) {
+  footer .newsletter__categoryOptions > label > input:not(:last-child), .footer .newsletter__categoryOptions > label > input:not(:last-child) {
     margin-right: 1.125rem;
   }
 }
@@ -1103,7 +1108,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   z-index: -1;
   background-image: url("/static/img/hero-bg.jpg");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center bottom;
   background-size: cover;
   height: 43.75rem;
   width: 100%;
@@ -1143,6 +1148,8 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 .category img {
+  width: 14.6875rem;
+  height: 14.6875rem;
   border-radius: 20px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0 35px;
           box-shadow: rgba(0, 0, 0, 0.5) 0 0 35px;
