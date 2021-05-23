@@ -1,7 +1,7 @@
 {% extends './layout.html' %}
 {% block content %}
 
-    <h3 class="resultQuiz4Option__title flex flex-jc-c">نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h3>
+    <h3 class="resultQuiz4Option__title flex flex-jc-c">نتیجه‌ تست&nbsp:&nbsp{{ fullTitle }}</h3>
     <div class="resultQuiz4Option space-sm center tx-al-c">
             {% if DbOfQuiz.result_UpTo_1 != None and DbOfQuiz.result_UpTo_1.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_1.split('=') %}
@@ -144,7 +144,7 @@
         <div class="result__share tx-al-c">
             <h5>دوستات رو به چالش بکش </br> ببین میتونن امتیازت رو بشکنن</h5>
             <button class='resultQuiz4Option__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
-            <h6 class="result__share__message noVis">نتیجه و لینک کوئیز کپی شد</h6>
+            <h6 class="result__share__message noVis">نتیجه و لینک تست کپی شد</h6>
         </div>
     </div>
 
