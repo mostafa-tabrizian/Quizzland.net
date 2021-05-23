@@ -77,10 +77,10 @@ def sortAll(sortOfQuiz, page):
     to = (page * howManyElementToShow) + howManyElementToShow
 
     if (sortOfQuiz == 'bestest'):
-        sort = QuizzesByViews().all()[fr:to]
+        sort = quizzesByViews().all()[fr:to]
         title = "بهترین کوئيز ها"
     elif (sortOfQuiz == 'newest'):
-        sort = QuizzesByPublish().all()[fr:to]
+        sort = quizzesByPublish().all()[fr:to]
         title = "جدیدترین کوئیز ها"
 
     return render_template('/sort.html',
