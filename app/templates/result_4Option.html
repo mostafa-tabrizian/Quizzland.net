@@ -1,15 +1,13 @@
 {% extends './layout.html' %}
 {% block content %}
 
-    <div class="resultQuiz4Option__title flex flex-jc-c">
-       <h3>نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h3>
-    </div>
+    <h3 class="resultQuiz4Option__title flex flex-jc-c">نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h3>
     <div class="resultQuiz4Option space-sm center tx-al-c">
             {% if DbOfQuiz.result_UpTo_1 != None and DbOfQuiz.result_UpTo_1.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_1.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -22,7 +20,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_2.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -35,7 +33,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_3.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -48,7 +46,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_4.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -61,7 +59,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_5.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -74,7 +72,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_6.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -87,7 +85,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_7.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -100,7 +98,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_8.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -113,7 +111,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_9.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -126,7 +124,7 @@
                 {% set sliceDb = DbOfQuiz.result_UpTo_10.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
                     <div class="darkGls center">
-                        <h1>
+                        <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
@@ -141,10 +139,16 @@
             {% endif %}
         </h1>
     </div>
-    <div class="result__share space-sm tx-al-c">
-        <h5>برای دوستات هم بفرست </br> ببین اونام شبیه‌تن</h5>
-        <div class="result__share__button darkGls"><a href="">🙋🏻‍♂️ اشتراک گذاری</a></div>
+    
+    <div class="result wrapper flex-ai-c flex-jc-c">
+        <div class="result__share tx-al-c">
+            <h5>دوستات رو به چالش بکش </br> ببین میتونن امتیازت رو بشکنن</h5>
+            <button class='resultQuiz4Option__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
+            <h6 class="result__share__message noVis">نتیجه و لینک کوئیز کپی شد</h6>
+        </div>
     </div>
+
+    <div class="result__clipboard"></div>
 
     <button type="button" class="backBtn">بازگشت</button>
 

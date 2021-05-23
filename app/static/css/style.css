@@ -1867,22 +1867,28 @@ body {
   font-size: 2rem;
 }
 
+.result__clipboard {
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
+}
+
 .result__share h5 {
   margin-bottom: 1rem;
   text-shadow: 0 0 5px white;
 }
 
-.result__share > div {
+.result__share__btn {
   font-size: 0.98rem;
   font-weight: 600;
 }
 
-.result__share__button {
-  margin: auto;
-  width: 10rem;
-  padding: .875rem 1rem .875rem 1rem;
-  border-radius: 25px;
-  margin-bottom: 1rem;
+.result__share__message {
+  color: green;
+  font-family: harmattan, myHarmattan, sans-serif, serif;
+  margin: 0;
+  margin-top: 1.25rem;
+  text-shadow: 0 0 5px white;
 }
 
 .result__score {
@@ -1933,7 +1939,7 @@ body {
   z-index: -1;
 }
 
-.resultQuiz4Option__title > h3 {
+.resultQuiz4Option__header {
   margin-top: 0;
   text-shadow: 0 0 5px white;
 }

@@ -2,29 +2,35 @@
 {% block content %}
 
 <body>
-    <div class="result__title flex flex-jc-c">
-       <h3>نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h3>
-    </div>
-    <div class="result__subtitle beforeAfterDecor flex flex-jc-c flex-ai-c">
-        <h1 class="result__subtitle__txt"></h1>
-    </div>
-    <div class="result wrapper flex-ai-c flex-jc-sb">
-        <div class="result__share tx-al-c">
-            <h5>دوستات رو به چالش بکش </br> ببین میتونن امتیازت رو بشکنن</h5>
-            <div class="result__share__button"><a href="">🙋🏻‍♂️ اشتراک گذاری</a></div>
+    <div class="result__container">
+        <div class="result__title flex flex-jc-c">
+           <h3>نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h3>
         </div>
-        
-        <div class="result__score"></div>
-        
-        <div class="result__detail">
-            <h5>تعداد پاسخ های درست:‌ <span class="result__detail__correctTime"> 0 </span></h5>
-            <h5>تعداد پاسخ های غلط: <span class="result__detail__wrongTime"> 0 </span></h5>
+        <div class="result__subtitle beforeAfterDecor flex flex-jc-c flex-ai-c">
+            <h1 class="result__subtitle__txt"></h1>
+        </div>
+        <div class="result wrapper flex-ai-c flex-jc-sb">
+            <div class="result__share tx-al-c">
+                <h5>دوستات رو به چالش بکش </br> ببین میتونن امتیازت رو بشکنن</h5>
+                <button class='result__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
+                <h6 class="result__share__message noVis">نتیجه و لینک کوئیز کپی شد</h6>
+            </div>
+            
+            <div class="result__score"></div>
+            
+            <div class="result__detail">
+                <h5>تعداد پاسخ های درست:‌ <span class="result__detail__correctTime"> 0 </span></h5>
+                <h5>تعداد پاسخ های غلط: <span class="result__detail__wrongTime"> 0 </span></h5>
+            </div>
         </div>
     </div>
+
+    <div class="result__clipboard"></div>
 
     <button type="button" class="backBtn space-l">بازگشت</button>
     
 </body>
+
 <script> const fanName = '{{ fanName }}' </script>
  
 {% endblock content %}

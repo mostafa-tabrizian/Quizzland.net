@@ -72,6 +72,7 @@ const searchResult__quizzes__item = document.querySelector('.searchResult__quizz
 const searchResult__quizzes__item__notFound = document.querySelector('.searchResult__quizzes__item__notFound')
 const searchResult__quizzes__seeMore = document.querySelector('.searchResult__quizzes__seeMore')
 
+const quiz__container__eachOne = document.querySelectorAll(".quiz__container div form")
 const quiz__questions = document.querySelector('.quiz__questions')
 const quiz__questionChanger__next = document.querySelector('.quiz__questionChanger__next')
 const quiz__questionChanger__last = document.querySelector('.quiz__questionChanger__last')
@@ -83,14 +84,22 @@ const quiz__questionCounter__totalAnswered = document.querySelector('.quiz__ques
 const quiz__questionCounter__totalQuestions = document.querySelector('.quiz__questionCounter__totalQuestions')
 const quiz__options = document.querySelectorAll('input[name=answer]')
 
-const quiz__container__eachOne = document.querySelectorAll(".quiz__container div form")
-const result__score = document.querySelector('.result__score')
+const result__container = document.querySelector('.result__container')
+const result__title = document.querySelector('.result__title h3')
 const result__subtitle__txt = document.querySelector('.result__subtitle__txt')
+const result__score = document.querySelector('.result__score')
+const result__share__btn = document.querySelector('.result__share__btn')
+const result__share__message= document.querySelector('.result__share__message')
 const result__detail__correctTime = document.querySelector('.result__detail__correctTime')
 const result__detail__wrongTime = document.querySelector('.result__detail__wrongTime')
+const result__clipboard = document.querySelector('.result__clipboard')
+
+const resultQuiz4Option__title = document.querySelector('.resultQuiz4Option__title')
+const resultQuiz4Option__resultTitle = document.querySelector('.resultQuiz4Option__resultTitle')
+const resultQuiz4Option__share__btn = document.querySelector('.resultQuiz4Option__share__btn')
 
 const log = (code) => {
     console.log(code)
 }
 
-log('elements.js working')
+log('elements.js working____________________________________________________')

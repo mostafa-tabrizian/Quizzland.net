@@ -200,7 +200,7 @@ try {
         window.location.replace(whichPageItIs); 
     })
 
-} catch (e) {log(`Tools Not Found! ${e}`)}
+} catch (e) {log(`Tools Not Found!`)}
 
 //----------------------------------------------------------
 
@@ -334,7 +334,7 @@ try {
     if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
         finalPageDOM.classList.add('noVis')
     }
-} catch (e) {log(e)}
+} catch (e) {log('no page travel', e)}
 
 //----------------------------------------------------------
 
@@ -473,3 +473,43 @@ try {
         history.go(-1)
     })
 } catch {log('no backBtn')}
+
+//----------------------------------------------------------
+
+try {
+    result__share__btn.addEventListener('click', () => {
+        quizUrl = localStorage.getItem('quizUrl')
+        const quizTitle = result__title.innerHTML.slice(25,)
+        const quizScore = result__score.innerHTML.split(' ')
+
+        const messageShare =  // `من تو کوئیز ( فلانی ) انقدر درصد درست زدم ایموجی. تو چقدر میتونی بزنی ؟ <br/> ${quizUrl}`
+            `من تو کوئیز (${quizTitle}) ${quizScore[1]} درصد درست زدم ${quizScore[0]}. تو چقدر میتونی بزنی ؟
+            <br/> -----------------------------------------
+            <br/> ${quizUrl}`
+        
+        result__clipboard.innerHTML = messageShare
+        new ClipboardJS('.result__share__btn');
+
+        result__share__message.classList.remove('noVis')
+    })
+} catch {log('no result share')}
+
+try {
+    resultQuiz4Option__share__btn.addEventListener('click', () => {
+        quizUrl = localStorage.getItem('quizUrl')
+        const quizTitle = resultQuiz4Option__title.innerHTML.slice(25,)
+        const quizResult = resultQuiz4Option__resultTitle.innerHTML
+
+        const messageShare =  // `من تو کوئیز ( فلانی ) انقدر درصد درست زدم ایموجی. تو چقدر میتونی بزنی ؟ <br/> ${quizUrl}`
+            `😃 من تو تست ${quizTitle} ( ${quizResult} ) در اومدم. ببینیم تو چی در میای
+            <br/> -----------------------------------------
+            <br/> ${quizUrl}`
+        
+        result__clipboard.innerHTML = messageShare
+        new ClipboardJS('.resultQuiz4Option__share__btn');
+
+        result__share__message.classList.remove('noVis')
+    })
+} catch {log('no result4Option share')}
+
+log('script working___________________________________________')
