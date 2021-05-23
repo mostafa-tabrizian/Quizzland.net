@@ -35,7 +35,7 @@ def search():
     userSearchInput = request.form['userSearchInput']
     if request.method == 'POST':
         userSearchInputInCategoriesDb_far = categoriesByTitleFar(f'%{userSearchInput}%').all()
-        userSearchInputInCategoriesDb_eng = categoriesByTitle(f'%{userSearchInput}%').all()
+        userSearchInputInCategoriesDb_eng = categoriesByTitleEng(f'%{userSearchInput}%').all()
         userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').all()
         userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').all()
         userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').all()
