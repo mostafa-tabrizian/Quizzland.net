@@ -693,12 +693,15 @@ input {
 }
 
 .header__searchSubmit {
+  background: url("/static/img/srch-black.svg") no-repeat center center;
   -webkit-transform: translate(2.2rem);
           transform: translate(2.2rem);
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   z-index: 2;
+  width: 1.5rem;
+  border: 0;
 }
 
 .header__searchInput {
@@ -817,6 +820,10 @@ input {
 
 .header__white .header__searchInput::placeholder {
   color: white;
+}
+
+.header__white .header__searchSubmit {
+  background: url("/static/img/srch-white.svg") no-repeat center center !important;
 }
 
 footer, .footer {
