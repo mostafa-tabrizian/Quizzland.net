@@ -34,12 +34,12 @@ def Main():
 def search():
     userSearchInput = request.form['userSearchInput']
     if request.method == 'POST':
-        userSearchInputInCategoriesDb_far = categoriesByTitleFar(f'%{userSearchInput}%').all()
-        userSearchInputInCategoriesDb_eng = categoriesByTitleEng(f'%{userSearchInput}%').all()
-        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').all()
-        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').all()
-        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').all()
-        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').all()
+        userSearchInputInCategoriesDb_far = categoriesByTitleFar(f'%{userSearchInput}%').limit(3)
+        userSearchInputInCategoriesDb_eng = categoriesByTitleEng(f'%{userSearchInput}%').limit(3)
+        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').limit(8)
+        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8)
+        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(8)
+        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8)
 
         return render_template('searchResult.html', 
             userSearchInput = userSearchInput,
