@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "audit": "^0.0.6",
+    "markupsafe": "0.0.1",
     "minify": "^7.0.2"
   },
   "devDependencies": {},
