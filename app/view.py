@@ -13,20 +13,20 @@ categoryInFar = {
 @app.route('/')
 def Main():
     return render_template('index.html',
-        newestQuizzes__limited = newestQuizzes__limited(),
-        bestestQuizzes__limited = bestestQuizzes__limited(),
+        newestQuizzes__limited = quizzesByPublish().limit(15),
+        bestestQuizzes__limited = quizzesByViews().limit(5),
 
-        NewestCelebrityQuizSection = newestQuizzesByCategory__limited('celebrities'),
-        BestestCelebrityQuizSection = bestestQuizzesByCategory__limited('celebrities'),
+        NewestCelebrityQuizSection = quizzesByPublishWithCategory('celebrities').limit(15),
+        BestestCelebrityQuizSection = quizzesByViewsWithCategory('celebrities').limit(5),
         
-        NewestMovieSeriesQuizSection = newestQuizzesByCategory__limited('movieSeries'),
-        BestestMovieSeriesQuizSection = bestestQuizzesByCategory__limited('movieSeries'),
+        NewestMovieSeriesQuizSection = quizzesByPublishWithCategory('movieSeries').limit(15),
+        BestestMovieSeriesQuizSection = quizzesByViewsWithCategory('movieSeries').limit(5),
         
-        NewestGamingQuizSection = newestQuizzesByCategory__limited('Gaming'),
-        BestestGamingQuizSection = bestestQuizzesByCategory__limited('Gaming'),
+        NewestGamingQuizSection = quizzesByPublishWithCategory('Gaming').limit(15),
+        BestestGamingQuizSection = quizzesByViewsWithCategory('Gaming').limit(5),
         
-        NewestPhysiologiesQuizSection = newestQuizzes4OptionByCategory__limited('Physiologies'),
-        BestestPhysiologiesQuizSection = bestestQuizzes4OptionByCategory__limited('Physiologies'),
+        NewestPhysiologiesQuizSection = quizzes4OptionByPublishWithCategory('Physiologies').limit(15),
+        BestestPhysiologiesQuizSection = quizzes4OptionByViewsWithCategory('Physiologies').limit(5),
 
         colorOfHeader = 'header__white')
 
@@ -34,12 +34,12 @@ def Main():
 def search():
     userSearchInput = request.form['userSearchInput']
     if request.method == 'POST':
-        userSearchInputInCategoriesDb_far = s.query(Categories).filter(Categories.title_far.ilike(f'%{userSearchInput}%')).all()
-        userSearchInputInCategoriesDb_eng = s.query(Categories).filter(Categories.title_eng.ilike(f'%{userSearchInput}%')).all()
-        userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).all()
-        userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{userSearchInput}%')).all()
-        userSearchInputInQuizzes4OptionDb_far = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{userSearchInput}%')).all()
-        userSearchInputInQuizzes4OptionDb_eng = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{userSearchInput}%')).all()
+        userSearchInputInCategoriesDb_far = categoriesByTitleFar(f'%{userSearchInput}%').all()
+        userSearchInputInCategoriesDb_eng = categoriesByTitle(f'%{userSearchInput}%').all()
+        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').all()
+        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').all()
+        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').all()
+        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').all()
 
         return render_template('searchResult.html', 
             userSearchInput = userSearchInput,
@@ -57,10 +57,10 @@ def search():
 def moreSearchResult(searchMoreOfThis):
 
     userSearchInput = searchMoreOfThis
-    userSearchInputInQuizzesDb_far = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{userSearchInput}%')).limit(20)
-    userSearchInputInQuizzesDb_eng = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{userSearchInput}%')).limit(20)
-    userSearchInputInQuizzes4OptionDb_far = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{userSearchInput}%')).limit(20)
-    userSearchInputInQuizzes4OptionDb_eng = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{userSearchInput}%')).limit(20)
+    userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').limit(20)
+    userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(20)
+    userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(20)
+    userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(20)
 
     return render_template('moreSearchResult.html', 
         userSearchInput = userSearchInput,
@@ -77,10 +77,10 @@ def sortAll(sortOfQuiz, page):
     to = (page * howManyElementToShow) + howManyElementToShow
 
     if (sortOfQuiz == 'bestest'):
-        sort = bestestQuizzes__paged(fr, to)
+        sort = QuizzesByViews().all()[fr:to]
         title = "بهترین کوئيز ها"
     elif (sortOfQuiz == 'newest'):
-        sort = newestQuizzes__paged(fr, to)
+        sort = QuizzesByPublish().all()[fr:to]
         title = "جدیدترین کوئیز ها"
 
     return render_template('/sort.html',
@@ -95,11 +95,11 @@ def sortCategories(category, page, sortOfQuiz):
     to = (page * howManyElementToShow) + howManyElementToShow
 
     if sortOfQuiz == 'newest':
-        sort = newestQuizzesByCategory__paged(category, fr, to)
+        sort = sortBothQuizzesByPublishWithCategories(category).all()[fr:to]
         title = "جدیدترین کوئیز های"
 
     elif sortOfQuiz == 'bestest':
-        sort = bestestQuizzesByCategory__paged(category, fr, to)
+        sort = quizzesByViewsWithCategory(category)[fr:to]
         title = "پر بازدیدترین کوئیز های"
 
     return render_template('/sort.html',
@@ -145,7 +145,7 @@ def Quiz(category, innerCategory, title):
     addViewToQuizzes(fullTitle)
     return render_template('/quiz.html',
                             quizDetail = firstQuizByFarsiTitle(fullTitle),
-                            quiz_Question = quizQuestion(fullTitle),
+                            quiz_Question = quizQuestion(category, fullTitle),
                             colorOfHeader = 'header__white')
 
 @app.route('/quiz_2/<category>/<innerCategory>/<title>')
@@ -154,7 +154,7 @@ def Quiz4Option(category, innerCategory, title):
     addViewToQuizzes(fullTitle)
     return render_template('/quiz_4Option.html',
                             quizDetail = firstQuizByFarsiTitle(fullTitle),
-                            quiz_Question = quizQuestion(fullTitle),
+                            quiz_Question = quizQuestion(category, fullTitle),
                             colorOfHeader = 'header__white')
 
 @app.route('/result/<title>')
