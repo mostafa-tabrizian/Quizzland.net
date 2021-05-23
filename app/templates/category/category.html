@@ -43,8 +43,13 @@
         {% for category in categories %}
             <div class="quizzes__item">
                 {% set img = (category.title_eng).split(' ') %}
-                <a href="{{category.href}}/0/newest/8"><img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt=""></a>
-                <h5><a href="{{category.href}}/0/newest/8">
+
+                <a href="{{category.href}}/0/newest/8">
+                    <img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt="{{ category.title_eng }} |‌ کوئیز های {{ category.title_far }}" loading='lazy'>
+                </a>
+
+                <h5>
+                    <a href="{{category.href}}/0/newest/8">
     
                     {% if category.category == 'physiologies' %}
                         {{ category.title_far }}
@@ -52,16 +57,14 @@
                         {{ category.title_eng }}
                     {% endif %}
     
-                </a></h5>
+                    </a>
+                </h5>
             </div>
         {% endfor %}
     </div>
     
     <div class="pageTravel darkGls flex flex-jc-c flex-ai-c">
-        <a class="pageTravel__arwLast" href="">
-            <!-- &lt-- -->
-            <img class="flex flex-jc-c flex-ai-c" src="/static/img/arw-travelPage.svg" alt="">
-        </a>
+        <a class="pageTravel__arwLast" href=""></a>
         <div class="pageTravel__pages flex flex-jc-c flex-ai-c">
             <a class="pageTravel__pages__last" href=""></a>
             <span class="pageTravel__pages__curr"></span>
@@ -74,9 +77,7 @@
                 </a>
             </div>
         </div>
-        <a class="pageTravel__arwNext" href="">
-            <img class="flex flex-jc-c flex-ai-c" src="/static/img/arw-travelPage.svg" alt="">
-        </a>
+        <a class="pageTravel__arwNext" href=""></a>
     </div>
 </body>
 
