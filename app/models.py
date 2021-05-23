@@ -12,6 +12,19 @@ class Documents(documentBase):
     def __repr__(self):
         return f"title: {self.ititled}| note: {self.note}"
 
+categoriesBase = declarative_base()
+class Categories(categoriesBase):
+    __tablename__ = 'Categories'
+    id = Column(Integer, primary_key=True)
+    category = Column(String)
+    title_eng = Column(String)
+    title_far = Column(String)
+    views = Column(Integer)
+    publish = Column(DateTime, default=datetime.datetime.now)
+    
+    def __repr__(self):
+        return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| category: {self.category} | link: {self.href}| view: {self.views}| publish: {self.publish}>"
+
 quizzesBase = declarative_base()
 class Quizzes(quizzesBase):
     __tablename__ = 'Quizzes'
@@ -53,19 +66,6 @@ class Quizzes4Option(quizzes4OptionBase):
     def __repr__(self):
         return f"<id: {self.id}| title: {self.title_far}| category: {self.category} | innerCategory: {self.innerCategory} | link: {self.href}>"
 
-categoriesBase = declarative_base()
-class Categories(categoriesBase):
-    __tablename__ = 'Categories'
-    id = Column(Integer, primary_key=True)
-    category = Column(String)
-    title_eng = Column(String)
-    title_far = Column(String)
-    views = Column(Integer)
-    href = Column(String)
-    publish = Column(DateTime, default=datetime.datetime.now)
-    
-    def __repr__(self):
-        return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| category: {self.category} | link: {self.href}| view: {self.views}| publish: {self.publish}>"
 
 quizQuestionsBase = declarative_base()
 class quizQuestions(quizQuestionsBase):

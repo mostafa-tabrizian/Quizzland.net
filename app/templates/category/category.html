@@ -44,12 +44,12 @@
             <div class="quizzes__item">
                 {% set img = (category.title_eng).split(' ') %}
 
-                <a href="{{category.href}}/0/newest/8">
+                <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
                     <img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt="{{ category.title_eng }} |‌ کوئیز های {{ category.title_far }}" loading='lazy'>
                 </a>
 
                 <h5>
-                    <a href="{{category.href}}/0/newest/8">
+                    <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
     
                     {% if category.category == 'physiologies' %}
                         {{ category.title_far }}

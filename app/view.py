@@ -108,7 +108,6 @@ def sortCategories(category, page, sortOfQuiz):
                             category = categoryInFar[category],
                             finalPage = finalPage(howManyElementToShow, 'quizzes'))
 
-
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
 def category(category, page, sortType, numberOfResult):
     if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
@@ -121,8 +120,7 @@ def category(category, page, sortType, numberOfResult):
                                 finalPage = finalPage(howManyElementToShow, category))
     else:
         return render_template('404.html')
-
-    
+ 
 @app.route('/category/<category>/<innerCategory>/<int:page>/<sortType>/<numberOfResult>')
 def innerCategory(category, innerCategory, page, sortType, numberOfResult):
     if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
