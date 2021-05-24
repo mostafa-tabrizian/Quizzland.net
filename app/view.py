@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, request, render_template
 from db import *
+from blocks import *
 
 app = Flask(__name__)
 
@@ -49,7 +50,7 @@ def search():
             userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng,
             userSearchInputInQuizzes4OptionDb_far = userSearchInputInQuizzes4OptionDb_far,
             userSearchInputInQuizzes4OptionDb_eng = userSearchInputInQuizzes4OptionDb_eng
-            )
+        )
     else:
         return render_template('404.html')
 
@@ -84,9 +85,9 @@ def sortAll(sortOfQuiz, page):
         title = "جدیدترین کوئیز ها"
 
     return render_template('/sort.html',
-                            sort = sort,
-                            title = title,
-                            finalPage = finalPage(howManyElementToShow, 'quizzes'))
+        sort = sort,
+        title = title,
+        finalPage = finalPage(howManyElementToShow, 'quizzes'))
 
 @app.route('/<sortOfQuiz>/<category>/<int:page>')
 def sortCategories(category, page, sortOfQuiz):
@@ -103,10 +104,10 @@ def sortCategories(category, page, sortOfQuiz):
         title = "پر بازدیدترین کوئیز های"
 
     return render_template('/sort.html',
-                            sort = sort,
-                            title = title,
-                            category = categoryInFar[category],
-                            finalPage = finalPage(howManyElementToShow, 'quizzes'))
+        sort = sort,
+        title = title,
+        category = categoryInFar[category],
+        finalPage = finalPage(howManyElementToShow, 'quizzes'))
 
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
 def category(category, page, sortType, numberOfResult):
@@ -116,8 +117,9 @@ def category(category, page, sortType, numberOfResult):
         to = (page * howManyElementToShow) + howManyElementToShow
         
         return render_template(f'/category/category.html',
-                                categories = categories(category, fr, to, sortType),
-                                finalPage = finalPage(howManyElementToShow, category))
+            tools = tools,
+            categories = categories(category, fr, to, sortType),
+            finalPage = finalPage(howManyElementToShow, category))
     else:
         return render_template('404.html')
  
@@ -130,10 +132,11 @@ def innerCategory(category, innerCategory, page, sortType, numberOfResult):
         fullTitle = titleConverterFromUrlToNormalOne(innerCategory)
         addViewToCategories(fullTitle)
         return render_template(f'/category/inner-category-list.html',
-                                quizzes = quizzes(category, fullTitle, fr, to, sortType),
-                                finalPage = finalPage(howManyElementToShow, fullTitle),
-                                innerCategory = innerCategory,
-                                colorOfHeader = 'header__white')
+            tools = tools,
+            quizzes = quizzes(category, fullTitle, fr, to, sortType),
+            finalPage = finalPage(howManyElementToShow, fullTitle),
+            innerCategory = innerCategory,
+            colorOfHeader = 'header__white')
     else:
         return render_template('404.html')
 
@@ -142,33 +145,33 @@ def Quiz(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     return render_template('/quiz.html',
-                            quizDetail = firstQuizByFarsiTitle(fullTitle),
-                            quiz_Question = quizQuestion(category, fullTitle),
-                            colorOfHeader = 'header__white')
+        quizDetail = firstQuizByFarsiTitle(fullTitle),
+        quiz_Question = quizQuestion(category, fullTitle),
+        colorOfHeader = 'header__white')
 
 @app.route('/quiz_2/<category>/<innerCategory>/<title>')
 def Quiz4Option(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     return render_template('/quiz_4Option.html',
-                            quizDetail = firstQuizByFarsiTitle(fullTitle),
-                            quiz_Question = quizQuestion(category, fullTitle),
-                            colorOfHeader = 'header__white')
+        quizDetail = firstQuizByFarsiTitle(fullTitle),
+        quiz_Question = quizQuestion(category, fullTitle),
+        colorOfHeader = 'header__white')
 
 @app.route('/result/<title>')
 def result(title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     return render_template('/result.html',
-                            fullTitle = fullTitle,
-                            fanName = fanNameOfQuiz(fullTitle))
+        fullTitle = fullTitle,
+        fanName = fanNameOfQuiz(fullTitle))
 
 @app.route('/result_2/<title>/<int:score>')
 def result4Option(title, score):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     return render_template('/result_4Option.html',
-                            fullTitle = fullTitle,
-                            DbOfQuiz = firstQuizByFarsiTitle(fullTitle),
-                            score = abs(int(score)))
+        fullTitle = fullTitle,
+        DbOfQuiz = firstQuizByFarsiTitle(fullTitle),
+        score = abs(int(score)))
 
 @app.route('/about')
 def about():
