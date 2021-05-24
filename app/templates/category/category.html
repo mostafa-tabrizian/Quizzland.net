@@ -37,22 +37,7 @@
         {% endfor %}
     </div>
     
-    <div class="pageTravel darkGls flex flex-jc-c flex-ai-c">
-        <a class="pageTravel__arwLast" href=""></a>
-        <div class="pageTravel__pages flex flex-jc-c flex-ai-c">
-            <a class="pageTravel__pages__last" href=""></a>
-            <span class="pageTravel__pages__curr"></span>
-            <a class="pageTravel__pages__next" href=""></a>
-            <a class="pageTravel__pages__nextTwo" href=""></a>
-            <div class="finalPage">
-                <span>. . .</span>
-                <a>
-                    {{ finalPage }}
-                </a>
-            </div>
-        </div>
-        <a class="pageTravel__arwNext" href=""></a>
-    </div>
+    {{ pageTravel | safe }}
 </body>
 
 {% endblock %}

@@ -119,7 +119,9 @@ def category(category, page, sortType, numberOfResult):
         return render_template(f'/category/category.html',
             tools = tools,
             categories = categories(category, fr, to, sortType),
-            finalPage = finalPage(howManyElementToShow, category))
+            pageTravel = pageTravel(finalPage(howManyElementToShow, category))
+        )
+
     else:
         return render_template('404.html')
  
@@ -129,14 +131,15 @@ def innerCategory(category, innerCategory, page, sortType, numberOfResult):
         howManyElementToShow = int(numberOfResult)
         fr = page * howManyElementToShow
         to = (page * howManyElementToShow) + howManyElementToShow
-        fullTitle = titleConverterFromUrlToNormalOne(innerCategory)
-        addViewToCategories(fullTitle)
+        InnerCat = titleConverterFromUrlToNormalOne(innerCategory)
+        addViewToCategories(InnerCat)
         return render_template(f'/category/inner-category-list.html',
+            colorOfHeader = 'header__white',
             tools = tools,
-            quizzes = quizzes(category, fullTitle, fr, to, sortType),
-            finalPage = finalPage(howManyElementToShow, fullTitle),
             innerCategory = innerCategory,
-            colorOfHeader = 'header__white')
+            quizzes = quizzes(category, InnerCat, fr, to, sortType),
+            pageTravel = pageTravel(finalPage(howManyElementToShow, InnerCat)),
+        )
     else:
         return render_template('404.html')
 
