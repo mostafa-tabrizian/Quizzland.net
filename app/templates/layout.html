@@ -21,7 +21,7 @@
             </a>
             <form class="header__search {{colorOfHeader}} flex" action="/search" method="post">
                 <input class='header__searchSubmit fade-out flex flex-ai-c' type="submit" value="">
-                <input class='header__searchInput tx-al-r' type="search" name='userSearchInput' placeholder="...جستجو">
+                <input class='header__searchInput tx-al-r' type="search" name='userSearchInput' placeholder="...جستجو" pattern=".{3,}" required title="عبارت حداقل باید ۳ حرف باشد">
             </form>
         </div>
 
