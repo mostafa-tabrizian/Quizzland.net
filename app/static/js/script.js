@@ -364,7 +364,11 @@ try {
 // quiz questions
 try {
     const typeOfQuiz = quiz__questions.getAttribute('tag')
-    localStorage.setItem('typeOfQuiz', typeOfQuiz)
+    try {
+        localStorage.setItem('typeOfQuiz', typeOfQuiz)
+    } catch {
+        alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
+    }
     const numberOfQuestions = quiz__container.length
     let currentQuestion = 1
 
@@ -479,6 +483,7 @@ try {
 try {
     result__share__btn.addEventListener('click', () => {
         quizUrl = localStorage.getItem('quizUrl')
+        
         const quizTitle = result__title.innerHTML.slice(25,)
         const quizScore = result__score.innerHTML.split(' ')
 
@@ -497,6 +502,7 @@ try {
 try {
     resultQuiz4Option__share__btn.addEventListener('click', () => {
         quizUrl = localStorage.getItem('quizUrl')
+
         const quizTitle = resultQuiz4Option__title.innerHTML.slice(25,)
         const quizResult = resultQuiz4Option__resultTitle.innerHTML
 

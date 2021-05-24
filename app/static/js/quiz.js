@@ -2,6 +2,7 @@
 
 // add value to correct question
 
+
 const typeOfQuiz = localStorage.getItem('typeOfQuiz')
 
 try {
@@ -25,7 +26,7 @@ try {
         const scoreDATA = localStorage.getItem('score')
         const correctAnswerCounterDATA = localStorage.getItem('correctAnswerCounter')
         const wrongAnswerCounterDATA = localStorage.getItem('wrongAnswerCounter')
-    
+
         try {
             result__detail__correctTime.innerHTML = correctAnswerCounterDATA
             result__detail__wrongTime.innerHTML = wrongAnswerCounterDATA
@@ -58,18 +59,25 @@ const calculateResult = (FinalTitleOfQuiz) => {
     const questionCounter = quiz__container.length
     const wrongAnswerCounter = questionCounter - correctAnswerCounter
     const score = ((correctAnswerCounter / (correctAnswerCounter + wrongAnswerCounter)) * 100).toFixed(0)
-
-    localStorage.setItem('quizUrl', quizUrl)
-    localStorage.setItem('correctAnswerCounter', correctAnswerCounter)
-    localStorage.setItem('wrongAnswerCounter', wrongAnswerCounter)
-    localStorage.setItem('score', score)
+    try {
+        localStorage.setItem('quizUrl', quizUrl)
+        localStorage.setItem('correctAnswerCounter', correctAnswerCounter)
+        localStorage.setItem('wrongAnswerCounter', wrongAnswerCounter)
+        localStorage.setItem('score', score)
+    } catch {
+        alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
+    }
 
     window.location.replace(`/result/${FinalTitleOfQuiz}`); 
 }
 
 const calculateResult_4Option = (FinalTitleOfQuiz) => {
     let quizUrl = decodeURIComponent(window.location.href)
-    localStorage.setItem('quizUrl', quizUrl)
+    try {
+        localStorage.setItem('quizUrl', quizUrl)
+    } catch {
+        alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
+    }
 
     let score = 0
     const correctAnswerCounter = document.querySelectorAll(".quiz__container div form input:checked")
