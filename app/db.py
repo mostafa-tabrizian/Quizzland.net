@@ -1,5 +1,5 @@
 from crud import *
-from sqlalchemy import and_
+from funcs import *
 
 # ------------------Category
 def allCategories():
@@ -151,22 +151,7 @@ def quizQuestion(category, titleFar):
         questions = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(titleFar)).all()
     return questions
 
-def fanNameOfQuiz(title):
-    quiz_Detail = firstQuizByFarsiTitle(title)
-    fanName = quiz_Detail.fan_name
-    return fanName
-
-# ------------------Others
-
-def addView(whichShouldAddViewToIt):
-    whichShouldAddViewToIt.views += 1
-
-def addViewToCategories(title):
-    data = categoriesByTitleEng(title).first()
-    
-    addView(data)
-    add_session(data)
-
+#----------------------------------------------------------------
 def addViewToQuizzes(title):
     quizToAddView = quizzesWithTitle(title).first()
     quiz4OptionToAddView = quizzes4OptionWithTitle(title).first()
@@ -179,8 +164,6 @@ def addViewToQuizzes(title):
     addView(data)
     add_session(data)
 
-def checkIfNotNoneTypeOrNone(data):
-    return data != 'NoneType' and data is not None
 
 def finalPage(howManyElementToShow, whichTypeWantToKnowTheFinalPage):
     if whichTypeWantToKnowTheFinalPage == 'quizzes':
@@ -196,3 +179,17 @@ def finalPage(howManyElementToShow, whichTypeWantToKnowTheFinalPage):
     else:
         str(finalPage)
         return finalPage
+
+def fanNameOfQuiz(title):
+    quiz_Detail = firstQuizByFarsiTitle(title)
+    fanName = quiz_Detail.fan_name
+    return fanName
+
+def addViewToCategories(title):
+    data = categoriesByTitleEng(title).first()
+    addView(data)
+    add_session(data)
+
+
+def checkIfNotNoneTypeOrNone(data):
+    return data != 'NoneType' and data is not None
