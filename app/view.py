@@ -14,8 +14,8 @@ categoryInFar = {
 @app.route('/')
 def Main():
     return render_template('index.html',
-        newestQuizzes__limited = quizzesByPublish().limit(15),
-        bestestQuizzes__limited = quizzesByViews().limit(5),
+        newestQuizzes = quizzesByPublish().limit(15),
+        bestestQuizzes = quizzesByViews().limit(5),
 
         NewestCelebrityQuizSection = quizzesByPublishWithCategory('celebrities').limit(15),
         BestestCelebrityQuizSection = quizzesByViewsWithCategory('celebrities').limit(5),
@@ -85,9 +85,10 @@ def sortAll(sortOfQuiz, page):
         title = "جدیدترین کوئیز ها"
 
     return render_template('/sort.html',
+        pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
         sort = sort,
         title = title,
-        finalPage = finalPage(howManyElementToShow, 'quizzes'))
+    )
 
 @app.route('/<sortOfQuiz>/<category>/<int:page>')
 def sortCategories(category, page, sortOfQuiz):

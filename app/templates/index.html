@@ -60,7 +60,7 @@
             <div class="sort__right">
                 <h2 class="tx-al-c">جدیدترین کوئیز ها </h2>
                 <ul class="sort__style">
-                    {% for quiz in newestQuizzes__limited %}
+                    {% for quiz in newestQuizzes %}
                     <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
                     {% endfor %}
                 </ul>
@@ -71,7 +71,7 @@
                 <div class="sort__left-1">
                     <h2 class="tx-al-c">محبوب ترین کوئیز ها</h2>
                     <ul class="sort__style">
-                        {% for quiz in bestestQuizzes__limited %}
+                        {% for quiz in bestestQuizzes %}
                             <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
                         {% endfor %}
                     </ul>
@@ -80,11 +80,11 @@
                 <div class="sort__left-2">
                     <h2 class="tx-al-c">محبوب ترین کوئیز ها</h2>
                     <ul class="sort__style">
-                        {% for quiz in bestestQuizzes__limited %}
+                        {% for quiz in bestestQuizzes %}
                             <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/bestest/all/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/bestest/0"> ..بیشتر</a>
                 </div>
             </div>
         </div>
