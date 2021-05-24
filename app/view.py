@@ -1,15 +1,9 @@
 from flask import Flask, redirect, url_for, request, render_template
 from db import *
 from blocks import *
+from funcs import *
 
 app = Flask(__name__)
-
-categoryInFar = {
-    'gaming': 'گیمینگ',
-    'celebrities': 'سلبریتی',
-    'movieSeries': 'فیلم و سریال',
-    'physiologies': 'روانشناسی',
-}
 
 @app.route('/')
 def Main():
@@ -17,16 +11,16 @@ def Main():
         newestQuizzes = quizzesByPublish().limit(15),
         bestestQuizzes = quizzesByViews().limit(5),
 
-        NewestCelebrityQuizSection = quizzesByPublishWithCategory('celebrities').limit(15),
+        NewestCelebrityQuizSection =  quizzesByPublishWithCategory('celebrities').limit(15),
         BestestCelebrityQuizSection = quizzesByViewsWithCategory('celebrities').limit(5),
         
-        NewestMovieSeriesQuizSection = quizzesByPublishWithCategory('movieSeries').limit(15),
+        NewestMovieSeriesQuizSection =  quizzesByPublishWithCategory('movieSeries').limit(15),
         BestestMovieSeriesQuizSection = quizzesByViewsWithCategory('movieSeries').limit(5),
         
-        NewestGamingQuizSection = quizzesByPublishWithCategory('Gaming').limit(15),
+        NewestGamingQuizSection =  quizzesByPublishWithCategory('Gaming').limit(15),
         BestestGamingQuizSection = quizzesByViewsWithCategory('Gaming').limit(5),
         
-        NewestPhysiologiesQuizSection = quizzes4OptionByPublishWithCategory('Physiologies').limit(15),
+        NewestPhysiologiesQuizSection =  quizzes4OptionByPublishWithCategory('Physiologies').limit(15),
         BestestPhysiologiesQuizSection = quizzes4OptionByViewsWithCategory('Physiologies').limit(5),
 
         colorOfHeader = 'header__white')
@@ -35,53 +29,38 @@ def Main():
 def search():
     userSearchInput = request.form['userSearchInput']
     if request.method == 'POST':
-        userSearchInputInCategoriesDb_far = categoriesByTitleFar(f'%{userSearchInput}%').limit(2)
-        userSearchInputInCategoriesDb_eng = categoriesByTitleEng(f'%{userSearchInput}%').limit(2)
-        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').limit(8)
-        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8)
-        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(8)
-        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8)
-
         return render_template('searchResult.html', 
             userSearchInput = userSearchInput,
-            userSearchInputInCategoriesDb_far = userSearchInputInCategoriesDb_far,
-            userSearchInputInCategoriesDb_eng = userSearchInputInCategoriesDb_eng,
-            userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
-            userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng,
-            userSearchInputInQuizzes4OptionDb_far = userSearchInputInQuizzes4OptionDb_far,
-            userSearchInputInQuizzes4OptionDb_eng = userSearchInputInQuizzes4OptionDb_eng
+            userSearchInputInCategoriesDb_far =      categoriesByTitleFar(f'%{userSearchInput}%').limit(2),
+            userSearchInputInCategoriesDb_eng =      categoriesByTitleEng(f'%{userSearchInput}%').limit(2),
+            userSearchInputInQuizzesDb_far =         quizzesWithTitle(f'%{userSearchInput}%').limit(8),
+            userSearchInputInQuizzesDb_eng =         quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
+            userSearchInputInQuizzes4OptionDb_far =  quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(8),
+            userSearchInputInQuizzes4OptionDb_eng =  quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8)
         )
     else:
         return render_template('404.html')
 
 @app.route('/search/<searchMoreOfThis>')
 def moreSearchResult(searchMoreOfThis):
-
-    userSearchInput = searchMoreOfThis
-    userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').limit(20)
-    userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(20)
-    userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(20)
-    userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(20)
-
     return render_template('moreSearchResult.html', 
-        userSearchInput = userSearchInput,
-        userSearchInputInQuizzesDb_far = userSearchInputInQuizzesDb_far,
-        userSearchInputInQuizzesDb_eng = userSearchInputInQuizzesDb_eng,
-        userSearchInputInQuizzes4OptionDb_far = userSearchInputInQuizzes4OptionDb_far,
-        userSearchInputInQuizzes4OptionDb_eng = userSearchInputInQuizzes4OptionDb_eng
+        userSearchInput = searchMoreOfThis,
+        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').limit(20),
+        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(20),
+        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(20),
+        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(20)
     )
 
 @app.route('/<sortOfQuiz>/<int:page>')
 def sortAll(sortOfQuiz, page):
     howManyElementToShow = 12
-    fr = page * howManyElementToShow
-    to = (page * howManyElementToShow) + howManyElementToShow
+    fTPage = frToPage(page, howManyElementToShow)
 
     if (sortOfQuiz == 'bestest'):
-        sort = quizzesByViews().all()[fr:to]
+        sort = quizzesByViews().all()[fTPage[0]:fTPage[1]]
         title = "بهترین کوئيز ها"
     elif (sortOfQuiz == 'newest'):
-        sort = quizzesByPublish().all()[fr:to]
+        sort = quizzesByPublish().all()[fTPage[0]:fTPage[1]]
         title = "جدیدترین کوئیز ها"
 
     return render_template('/sort.html',
@@ -93,15 +72,14 @@ def sortAll(sortOfQuiz, page):
 @app.route('/<sortOfQuiz>/<category>/<int:page>')
 def sortCategories(category, page, sortOfQuiz):
     howManyElementToShow = 12
-    fr = page * howManyElementToShow
-    to = (page * howManyElementToShow) + howManyElementToShow
+    fTPage = frToPage(page, howManyElementToShow)
 
     if sortOfQuiz == 'newest':
-        sort = sortBothQuizzesByPublishWithCategories(category).all()[fr:to]
+        sort = sortBothQuizzesByPublishWithCategories(category).all()[fTPage[0]:fTPage[1]]
         title = "جدیدترین کوئیز های"
 
     elif sortOfQuiz == 'bestest':
-        sort = quizzesByViewsWithCategory(category)[fr:to]
+        sort = quizzesByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
         title = "پر بازدیدترین کوئیز های"
 
     return render_template('/sort.html',
@@ -114,31 +92,30 @@ def sortCategories(category, page, sortOfQuiz):
 def category(category, page, sortType, numberOfResult):
     if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
         howManyElementToShow = int(numberOfResult)
-        fr = page * howManyElementToShow
-        to = (page * howManyElementToShow) + howManyElementToShow
-        
+        fTPage = frToPage(page, howManyElementToShow)
+
         return render_template(f'/category/category.html',
             tools = tools,
-            categories = categories(category, fr, to, sortType),
+            categories = categories(category, fTPage[0], fTPage[1], sortType),
             pageTravel = pageTravel(finalPage(howManyElementToShow, category))
         )
 
     else:
         return render_template('404.html')
- 
+
 @app.route('/category/<category>/<innerCategory>/<int:page>/<sortType>/<numberOfResult>')
 def innerCategory(category, innerCategory, page, sortType, numberOfResult):
     if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
         howManyElementToShow = int(numberOfResult)
-        fr = page * howManyElementToShow
-        to = (page * howManyElementToShow) + howManyElementToShow
+        fTPage = frToPage(page, howManyElementToShow)
         InnerCat = titleConverterFromUrlToNormalOne(innerCategory)
         addViewToCategories(InnerCat)
+
         return render_template(f'/category/inner-category-list.html',
             colorOfHeader = 'header__white',
             tools = tools,
             innerCategory = innerCategory,
-            quizzes = quizzes(category, InnerCat, fr, to, sortType),
+            quizzes = quizzes(category, InnerCat, fTPage[0], fTPage[1], sortType),
             pageTravel = pageTravel(finalPage(howManyElementToShow, InnerCat)),
         )
     else:
@@ -260,10 +237,3 @@ def internalServerError(e):
     return render_template('errorHandler.html',
     backBtn = backBtn,
     message = "🙄 سرور های سایت احتمالا داغ کرده لطفا یکم دیگه امتحان کنید"), 500
-
-def titleConverterFromUrlToNormalOne(title):
-    splittedTitle = title.split('-')
-    fullTitle = ''
-    for word in splittedTitle:
-        fullTitle = fullTitle + ' ' + word
-    return fullTitle.strip()
