@@ -1989,18 +1989,22 @@ body {
 
 @media (max-width: 49.9375em) {
   .result {
-    display: box;
+    display: block;
+    margin-left: 50%;
+    -webkit-transform: translate(-50%);
+            transform: translate(-50%);
+    width: 20rem;
   }
 }
 
 .result__title > h3 {
   font-size: 1.18rem;
   font-weight: 300;
-  margin-bottom: 0;
 }
 
 .result__subtitle {
-  font-size: 2rem;
+  font-size: 1.6rem;
+  text-align: center;
 }
 
 .result__clipboard {
@@ -2030,16 +2034,31 @@ body {
 .result__score {
   font-size: 2rem;
   font-weight: 600;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
 }
 
 @media (max-width: 49.9375em) {
   .result__score {
-    box-ordinal-group: 1;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 1.125rem;
   }
 }
 
 .result__detail {
   text-align: right;
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
+}
+
+@media (max-width: 49.9375em) {
+  .result__detail {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
 }
 
 .result__detail > h5 {
@@ -2049,12 +2068,6 @@ body {
 
 .result__detail__wrongTime {
   margin-right: 1rem;
-}
-
-@media (max-width: 49.9375em) {
-  .result__detail {
-    box-ordinal-group: 2;
-  }
 }
 
 .resultQuiz4Option div {

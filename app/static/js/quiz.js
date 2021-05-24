@@ -32,19 +32,19 @@ try {
             
             if (scoreDATA > 80){
                 result__score.innerHTML = (`😎 ${scoreDATA}%`)
-                result__subtitle__txt.innerHTML = (`! شما یک ${ fanName } واقعی هستید`)}
+                result__subtitle.innerHTML = (`! شما یک ${ fanName } واقعی هستید`)}
             else if (scoreDATA > 60){
                 result__score.innerHTML = (`😀 ${scoreDATA}%`)
-                result__subtitle__txt.innerHTML = ('شما 70% از بقیه‌ی فن ها جلوترید')}
+                result__subtitle.innerHTML = ('شما 70% از بقیه‌ی فن ها جلوترید')}
             else if (scoreDATA > 40){
                 result__score.innerHTML = (`🙂 ${scoreDATA}%`)
-                result__subtitle__txt.innerHTML = ('بد نیست ولی میتونست بهتر هم باشه')}
+                result__subtitle.innerHTML = ('بد نیست ولی میتونست بهتر هم باشه')}
             else if (scoreDATA > 20){
                 result__score.innerHTML = (`🙄 ${scoreDATA}%`)
-                result__subtitle__txt.innerHTML = ('نیاز به بیشتر شناختش داری')}
+                result__subtitle.innerHTML = ('نیاز به بیشتر شناختش داری')}
             else if (scoreDATA >= 0){
                 result__score.innerHTML = (`😭 ${scoreDATA}%`)
-                result__subtitle__txt.innerHTML = ('😅 عیبی نداره کسی نمیفهمه، میتونی دوباره کوئیز رو بدی ')}
+                result__subtitle.innerHTML = ('😅 عیبی نداره کسی نمیفهمه، میتونی دوباره کوئیز رو بدی ')}
     
         } catch (e) {
             log('no result page')

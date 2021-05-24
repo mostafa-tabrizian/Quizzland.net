@@ -86,7 +86,7 @@ const quiz__options = document.querySelectorAll('input[name=answer]')
 
 const result__container = document.querySelector('.result__container')
 const result__title = document.querySelector('.result__title h3')
-const result__subtitle__txt = document.querySelector('.result__subtitle__txt')
+const result__subtitle = document.querySelector('.result__subtitle')
 const result__score = document.querySelector('.result__score')
 const result__share__btn = document.querySelector('.result__share__btn')
 const result__share__message= document.querySelector('.result__share__message')

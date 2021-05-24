@@ -5,18 +5,21 @@
     padding-right: 2rem;
 
     @include breakpoints-down(medium){
-        display: box;
+        display: block;
+        margin-left: 50%;
+        transform: translate(-50%);
+        width: 20rem;
     }
 
 
     &__title > h3 {
         font-size: $font-sm;
         font-weight: 300;
-        margin-bottom: 0;
     }
 
     &__subtitle {
-        font-size: $font-xl;
+        font-size: $font-l;
+        text-align: center;
     }
 
     &__clipboard {
@@ -48,14 +51,24 @@
     &__score {
         font-size: $font-xl;
         font-weight: 600;
+        order: 2;
 
         @include breakpoints-down(medium){
-            box-ordinal-group: 1;
+            text-align: center;
+            margin-top: 3rem;
+            margin-bottom: 1.125rem;
         }
     }
 
     &__detail {
         text-align: right;
+        order: 3;
+        
+        @include breakpoints-down(medium) {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
         > h5 {
             margin-bottom: .7rem;
             margin-top: 0;
@@ -63,10 +76,6 @@
 
         &__wrongTime {
             margin-right: 1rem;
-        }
-
-        @include breakpoints-down(medium){
-            box-ordinal-group: 2;
         }
     }
 }
