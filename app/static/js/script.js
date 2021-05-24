@@ -519,3 +519,10 @@ try {
 } catch {log('no result4Option share')}
 
 log('script working___________________________________________')
+
+// -----------------------------GSAP
+// hero animation
+tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 1 }})
+tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
+
+log('gsap Working._________________________________________')
