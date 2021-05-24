@@ -74,10 +74,10 @@
 
 .tools {
     direction: rtl;
-    margin-bottom: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 0;
 
     @include breakpoints-down(medium) {
-        margin: 0;
         margin-right: 2rem;
     }
 
