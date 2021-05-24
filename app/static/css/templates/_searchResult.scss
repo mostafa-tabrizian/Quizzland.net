@@ -1,23 +1,15 @@
 .searchResult {
-    min-height: 60vh;
-    
-    @include breakpoints-down(medium) {
-        min-height: 120vh;
-    }
+    display: grid;
+    grid-template-columns: auto auto;
+    direction: rtl;
 
-    > h4 {
-        text-align: center;
+    @include breakpoints-down(medium) {
+        grid-template-columns: auto;
     }
 
     &__category {
         flex-wrap: wrap;
         justify-content: center;
-        float: right;
-        width: 50%;
-
-        @include breakpoints-down(medium) {
-            width: 100%;
-        }
 
         > h4 {
             width: 100%;
@@ -64,13 +56,9 @@
     }
 
     &__quizzes {
-        float: left;
         text-align: center;
-        width: 50%;
 
         @include breakpoints-down(medium) {
-            width: 100%;
-
             h3 {
                 text-align: center;
             }
@@ -78,16 +66,15 @@
         
         &__item {
             text-align: right;
-            width: 65%;
             display: block;
             margin-bottom: 1rem;
+            transform: translate(-25%);
 
             @include breakpoints-down(medium) {
-                text-align: center;
-                width: 100%;
+                transform: translate(-15%)
             }
 
-            &::after {
+            &::before {
                 content: '◾';
                 position: relative;
                 top: 0.2rem;

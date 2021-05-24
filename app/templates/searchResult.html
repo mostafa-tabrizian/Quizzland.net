@@ -1,11 +1,11 @@
 {% extends './layout.html' %}
 {% block content %}
 
-<div class="searchResult">
-    <h4 class="beforeAfterDecor">{{ userSearchInput }} &nbsp : &nbsp نتایج جستجو</h4>
-    
-    <div class="searchResult__category flex">
+<h4 class="beforeAfterDecor">{{ userSearchInput }} &nbsp : &nbsp نتایج جستجو</h4>
 
+<div class="searchResult">
+
+    <div class="searchResult__category flex">
         <h3>کتگوری‌ها</h3>
         <h4 class="searchResult__category__item__notFound"></h4>
         {% for category in userSearchInputInCategoriesDb_eng %}
@@ -27,11 +27,9 @@
             <h5> {{ category.title_eng }} </h5>
         </div>
         {% endfor %}
-        
     </div>
     
     <div class="searchResult__quizzes">
-        
         <h3>کوئیز‌ها</h3>
         <h4 class="searchResult__quizzes__item__notFound"></h4>
         {% for quiz in userSearchInputInQuizzesDb_far %}
@@ -52,10 +50,11 @@
     
         <div class="searchResult__quizzes__seeMore"> 
             <a href="/search/{{userSearchInput}}">
-               ... دیدن همه
+                ... دیدن همه
             </a>
         </div>
     </div>
+    
 </div>
 
 {% endblock content %}

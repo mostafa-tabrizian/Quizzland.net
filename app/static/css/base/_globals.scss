@@ -331,6 +331,8 @@ input {
 }
 
 .beforeAfterDecor {
+    text-align: center;
+    
     &::before {
         content: '';
         width: 3.18rem;
