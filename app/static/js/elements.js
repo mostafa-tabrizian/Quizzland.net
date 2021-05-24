@@ -1,9 +1,6 @@
 const body = document.querySelector('body')
-const hero = document.querySelector('.hero')
-
 const loadingScreen = document.querySelector('.loadingScreen')
 const backBtn = document.querySelector('.backBtn')
-
 
 const header__categories__btn = document.querySelector('.header__categories__btn')
 const header__categories = document.querySelector('.header__categories')
@@ -20,14 +17,12 @@ const newsletter__blurBackground__show = document.querySelector('.newsletter__bl
 const newsletter = document.querySelector('.newsletter')
 const newsletter__blurBackground = document.querySelector('.newsletter__blurBackground')
 const newsletter__closeBtn = document.querySelector('.newsletter__closeBtn')
-const newsletter__chooseCategory = document.querySelector('.newsletter__chooseCategory')
 const newsletter__categoryOptions = document.querySelector('.newsletter__categoryOptions')
 const newsletter__categoryOptions__input = document.querySelectorAll('.newsletter__categoryOptions input')
 const newsletter__categoryOptions__selectedByUser = document.querySelector('.newsletter__categoryOptions__selectedByUser')
 const newsletter__message = document.querySelector('.newsletter__message')
 const newsletter__submit = document.querySelector('.newsletter__submit')
 
-const toolsOfCategory = document.querySelector('toolsOfCategory')
 const tools__sort__btn = document.querySelector('.tools__sort__btn')
 const tools__sort__options = document.querySelectorAll('.tools__sort__options > button')
 const tools__sort__options__container = document.querySelector('.tools__sort__options__container')
@@ -46,14 +41,9 @@ const sort__celebrities = document.querySelector('.sort__celebrities')
 const sort__movieAndSeries = document.querySelector('.sort__movieAndSeries')
 const sort__gaming = document.querySelector('.sort__gaming')
 const sort__physiologies = document.querySelector('.sort__physiologies')
-const sort__newest = document.querySelector('#newest')
-const sort__oldest = document.querySelector('#oldest')
-const sort__bestest = document.querySelector('#bestest')
-const sort__alphabet = document.querySelector('#alphabet')
 
 const quizzes__item = document.querySelectorAll('.quizzes__item')
 const categories__item = document.querySelectorAll('.categories__item')
-const heightFooter = (document.querySelector('footer').offsetTop) - 780;
 
 const pageTravel__arwNext = document.querySelector('.pageTravel__arwNext')
 const pageTravel__arwLast = document.querySelector('.pageTravel__arwLast')
@@ -84,7 +74,6 @@ const quiz__questionCounter__totalAnswered = document.querySelector('.quiz__ques
 const quiz__questionCounter__totalQuestions = document.querySelector('.quiz__questionCounter__totalQuestions')
 const quiz__options = document.querySelectorAll('input[name=answer]')
 
-const result__container = document.querySelector('.result__container')
 const result__title = document.querySelector('.result__title h3')
 const result__subtitle = document.querySelector('.result__subtitle')
 const result__score = document.querySelector('.result__score')
