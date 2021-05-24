@@ -82,7 +82,7 @@ body::-webkit-scrollbar-thumb {
 
 @media (max-width: 49.9375em) {
   .wrapper {
-    max-width: 38.75rem;
+    max-width: 45.75rem;
     margin: 1.125rem 2rem;
   }
 }
@@ -674,12 +674,13 @@ input {
 
 .header__links {
   padding: 1.25rem;
+  padding-left: 0;
 }
 
 .header__links a {
+  width: 5rem;
   color: #161616;
-  padding: .6250rem;
-  margin-left: 1.125rem;
+  margin-left: 2rem;
   text-shadow: 0 0 5px white;
 }
 

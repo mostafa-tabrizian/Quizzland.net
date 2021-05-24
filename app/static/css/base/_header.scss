@@ -13,11 +13,12 @@
 
     &__links {
         padding: 1.25rem;
-
+        padding-left: 0;
+        
         a {
+            width: 5rem;
             color: $black;
-            padding: .6250rem;
-            margin-left: 1.125rem;
+            margin-left: 2rem;
             text-shadow: 0 0 5px white;
         }
     }
