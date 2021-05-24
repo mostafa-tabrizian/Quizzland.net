@@ -444,8 +444,8 @@ input {
 
 .beforeAfterDecor::before {
   content: '';
-  width: 5.18rem;
-  height: 0.487rem;
+  width: 3.18rem;
+  height: 0.187rem;
   background: #363636;
   margin-right: 1rem;
   display: -webkit-inline-box;
@@ -456,8 +456,8 @@ input {
 
 .beforeAfterDecor::after {
   content: '';
-  width: 5.18rem;
-  height: 0.487rem;
+  width: 3.18rem;
+  height: 0.187rem;
   background: #363636;
   margin-right: 1rem;
   display: -webkit-inline-box;
@@ -2095,6 +2095,13 @@ body {
   margin: 0 0 2rem 0;
 }
 
+@media (max-width: 49.9375em) {
+  .searchResult__category > h4 {
+    text-align: center;
+    margin-bottom: 1.125rem;
+  }
+}
+
 .searchResult__category__item {
   width: 12.5rem;
   height: 16.2135rem;
@@ -2142,6 +2149,9 @@ body {
 @media (max-width: 49.9375em) {
   .searchResult__quizzes {
     width: 100%;
+  }
+  .searchResult__quizzes h3 {
+    text-align: center;
   }
 }
 
