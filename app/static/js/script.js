@@ -437,7 +437,7 @@ try {
         })
     })
 
-    quiz__autoQuestionChangerSwitch__btn.addEventListener('click', () => {
+    quiz__autoQuestionChangerSwitch.addEventListener('click', () => {
         const switchBtn = quiz__autoQuestionChangerSwitch__innerBtn
         if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.remove('quiz__autoQuestionChangerSwitch__innerBtn__switched')

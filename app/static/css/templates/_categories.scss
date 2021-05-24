@@ -57,9 +57,7 @@
     transform: translateY(-2rem);
 
     @include breakpoints-down(medium) {
-        margin-left: 2rem;
-        margin-right: 2rem;
-        margin-top: 1.125rem;
+        margin: auto;
     }
 
     > ul {
