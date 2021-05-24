@@ -76,6 +76,10 @@
             color: white;
             font-size: $font-sm - .28;
             z-index: 2;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            justify-content: center;
+            grid-gap: 3rem;
 
             ul > li {
                 margin-bottom: .2rem;
@@ -85,27 +89,13 @@
                 }
             }
 
-            &__category {
-                float: left;
-                margin-left: 6rem;
-                margin-bottom: 0.5rem;
-
-                & > h5 {
-                    margin-bottom: 0;
-                    font-size: 1.2em !important;
-
-                }
-            }
-
             &__quizzes {
                 text-align: left;
                 margin-bottom: 0.5rem;
             }
 
-            &__nav {
-                float: right;
-                margin-right: 6rem;
-                margin-top: .7rem;
+            &__other {
+                margin-top: 2.5rem;
             }
         }
     }

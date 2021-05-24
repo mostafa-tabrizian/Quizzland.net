@@ -742,6 +742,14 @@ input {
   color: white;
   font-size: 0.9rem;
   z-index: 2;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto auto;
+      grid-template-columns: auto auto auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  grid-gap: 3rem;
 }
 
 .header__menu__inner ul > li {
@@ -752,26 +760,13 @@ input {
   color: inherit !important;
 }
 
-.header__menu__inner__category {
-  float: left;
-  margin-left: 6rem;
-  margin-bottom: 0.5rem;
-}
-
-.header__menu__inner__category > h5 {
-  margin-bottom: 0;
-  font-size: 1.2em !important;
-}
-
 .header__menu__inner__quizzes {
   text-align: left;
   margin-bottom: 0.5rem;
 }
 
-.header__menu__inner__nav {
-  float: right;
-  margin-right: 6rem;
-  margin-top: .7rem;
+.header__menu__inner__other {
+  margin-top: 2.5rem;
 }
 
 .header__searchSubmit {
