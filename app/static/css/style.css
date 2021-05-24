@@ -2074,6 +2074,12 @@ body {
   width: 35rem;
 }
 
+@media (max-width: 49.9375em) {
+  .resultQuiz4Option div {
+    width: 23rem;
+  }
+}
+
 .resultQuiz4Option__bg {
   background-size: cover;
   background-repeat: no-repeat;
@@ -2088,9 +2094,13 @@ body {
   z-index: -1;
 }
 
-.resultQuiz4Option__header {
+.resultQuiz4Option__title {
   margin-top: 0;
   text-shadow: 0 0 5px white;
+}
+
+.resultQuiz4Option__txt {
+  padding: 0 1rem;
 }
 
 .searchResult {

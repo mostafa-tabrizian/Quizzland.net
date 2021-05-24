@@ -83,6 +83,10 @@
 .resultQuiz4Option {
     div {
         width: 35rem;
+
+        @include breakpoints-down(medium) {
+            width: 23rem;
+        }
     }
 
     &__bg {
@@ -98,8 +102,12 @@
         z-index: -1;
     }
 
-    &__header {
+    &__title {
         margin-top: 0;
         text-shadow: 0 0 5px white;
+    }
+
+    &__txt {
+        padding: 0 1rem;
     }
 }
