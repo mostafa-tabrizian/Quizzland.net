@@ -1308,7 +1308,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   padding-left: .6rem;
 }
 
-.sort__all {
+.sort > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1321,7 +1321,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 @media (max-width: 49.9375em) {
-  .sort__all {
+  .sort > div {
     display: block;
   }
 }
