@@ -196,17 +196,12 @@ body {
     }
 
     &__questionCounter {
-        position: absolute;
-        top: 3rem;
-        left: 63.5%;
+        position: relative;
+        top: -3.4rem;
+        left: -9rem;
         display: block;
         transform: translate(-50%);
         color: $white;
-
-        @include breakpoints-down(medium) {
-            top: -3.6rem;
-            left: 81.6%;
-        }
 
         &__divider {
             position: relative;
