@@ -660,12 +660,7 @@ input {
   font-size: 1.18rem;
   font-family: harmattan, myHarmattan, sans-serif, serif;
   margin-bottom: 2rem;
-}
-
-@media (max-width: 49.9375em) {
-  .header {
-    padding: 1rem;
-  }
+  padding: 1rem;
 }
 
 .header__logo {
@@ -675,13 +670,17 @@ input {
 .header__links {
   padding: 1.25rem;
   padding-left: 0;
+  margin-right: 1.1rem;
+  direction: rtl;
 }
 
 .header__links a {
-  width: 5rem;
   color: #161616;
-  margin-left: 2rem;
   text-shadow: 0 0 5px white;
+}
+
+.header__links a:not(:last-child) {
+  margin-left: 2rem;
 }
 
 .header .slideMenu-hide {

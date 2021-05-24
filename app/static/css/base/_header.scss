@@ -2,10 +2,7 @@
     font-size: $font-sm;
     font-family: $font-pr;
     margin-bottom: 2rem;
-
-    @include breakpoints-down(medium) {
-        padding: 1rem;
-    }
+    padding: 1rem;
 
     &__logo {
         padding: .6250rem;
@@ -14,12 +11,16 @@
     &__links {
         padding: 1.25rem;
         padding-left: 0;
+        margin-right: 1.1rem;
+        direction: rtl;
         
         a {
-            width: 5rem;
             color: $black;
-            margin-left: 2rem;
             text-shadow: 0 0 5px white;
+
+            &:not(:last-child) {
+                margin-left: 2rem;
+            }
         }
     }
 
