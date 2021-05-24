@@ -151,15 +151,31 @@ h2 {
   margin: 0;
 }
 
+@media (max-width: 49.9375em) {
+  h2 {
+    text-align: right;
+  }
+}
+
 h3 {
   letter-spacing: .1rem;
+}
+
+@media (max-width: 49.9375em) {
+  h3 {
+    text-align: right;
+  }
 }
 
 p {
   font-size: 1.18rem;
   letter-spacing: .07rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+}
+
+@media (max-width: 49.9375em) {
+  p {
+    text-align: right;
+  }
 }
 
 a, a:visited, a:hover {
@@ -277,7 +293,7 @@ input {
 
 @media (max-width: 49.9375em) {
   .backBtn {
-    margin-left: 7%;
+    margin-left: 15%;
   }
 }
 
@@ -1379,6 +1395,35 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   opacity: 1;
 }
 
+.newest-mostViews {
+  text-align: center;
+  min-height: 60vh;
+}
+
+.newest-mostViews__item {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin: auto;
+  max-width: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 1.125rem;
+}
+
+@media (max-width: 49.9375em) {
+  .newest-mostViews__item {
+    max-width: 90%;
+  }
+}
+
+.newest-mostViews__item::after {
+  content: '◾';
+  position: relative;
+  top: 0.2rem;
+}
+
 .categories {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -2015,21 +2060,6 @@ body {
   text-shadow: 0 0 5px white;
 }
 
-.contact__socialMedia > li {
-  color: #af282f;
-  font-weight: 600;
-}
-
-.contact__socialMedia > li:not(:last-child) {
-  padding-right: 1.125rem;
-}
-
-.basicPage {
-  min-height: 44vh;
-  width: 85%;
-  text-align: center;
-}
-
 .searchResult {
   min-height: 60vh;
 }
@@ -2135,26 +2165,24 @@ body {
   top: 0.2rem;
 }
 
-.newest-mostViews {
+.basicPage {
+  min-height: 44vh;
+  width: 85%;
   text-align: center;
-  min-height: 60vh;
 }
 
-.newest-mostViews__item {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  margin: auto;
-  max-width: 30%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 1.125rem;
+@media (max-width: 49.9375em) {
+  .basicPage {
+    min-height: 60vh;
+  }
 }
 
-.newest-mostViews__item::after {
-  content: '◾';
-  position: relative;
-  top: 0.2rem;
+.contact__socialMedia > li {
+  color: #af282f;
+  font-weight: 600;
+}
+
+.contact__socialMedia > li:not(:last-child) {
+  padding-right: 1.125rem;
 }
 /*# sourceMappingURL=style.css.map */

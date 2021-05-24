@@ -9,6 +9,10 @@
         display: flex;
         padding-top: 1.125rem;
 
+        @include breakpoints-down(medium) {
+            max-width: 90%;
+        }
+
         &::after {
             content: '◾';
             position: relative;

@@ -2,4 +2,8 @@
     min-height: 44vh;
     width: 85%;
     text-align: center;
+
+    @include breakpoints-down(medium) {
+        min-height: 60vh;
+    }
 }

@@ -113,17 +113,27 @@ h2 {
     font-size: $font-l;
     letter-spacing: .1rem;
     padding: 0 0 1rem 0; margin: 0;
+
+    @include breakpoints-down(medium) {
+        text-align: right;
+    }
 }
 
 h3 {
     letter-spacing: .1rem;
+
+    @include breakpoints-down(medium) {
+        text-align: right;
+    }
 }
 
 p {
     font-size: $font-sm;
     letter-spacing: .07rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
+
+    @include breakpoints-down(medium) {
+        text-align: right;
+    }
 }
 
 a, a:visited, a:hover {
@@ -234,7 +244,7 @@ input {
     transform: translate(-50%);
 
     @include breakpoints-down(medium) {
-        margin-left: 7%;
+        margin-left: 15%;
     }
 }
 
