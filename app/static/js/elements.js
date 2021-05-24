@@ -2,6 +2,9 @@ const body = document.querySelector('body')
 const loadingScreen = document.querySelector('.loadingScreen')
 const backBtn = document.querySelector('.backBtn')
 
+const nightMode = document.querySelector('.nightMode')
+const nightMode__container = document.querySelector('.nightMode__container')
+
 const header__categories__btn = document.querySelector('.header__categories__btn')
 const header__categories = document.querySelector('.header__categories')
 const header__quizzes__btn = document.querySelector('.header__quizzes__btn')
