@@ -148,25 +148,29 @@ def Quiz(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     return render_template('/quiz.html',
+        colorOfHeader = 'header__white',
         quizDetail = firstQuizByFarsiTitle(fullTitle),
         quiz_Question = quizQuestion(category, fullTitle),
-        colorOfHeader = 'header__white')
+    )
 
 @app.route('/quiz_2/<category>/<innerCategory>/<title>')
 def Quiz4Option(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     return render_template('/quiz_4Option.html',
+        colorOfHeader = 'header__white',
         quizDetail = firstQuizByFarsiTitle(fullTitle),
         quiz_Question = quizQuestion(category, fullTitle),
-        colorOfHeader = 'header__white')
+    )
 
 @app.route('/result/<title>')
 def result(title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     return render_template('/result.html',
         fullTitle = fullTitle,
-        fanName = fanNameOfQuiz(fullTitle))
+        backBtn = backBtn,
+        fanName = fanNameOfQuiz(fullTitle)
+    )
 
 @app.route('/result_2/<title>/<int:score>')
 def result4Option(title, score):
@@ -174,27 +178,39 @@ def result4Option(title, score):
     return render_template('/result_4Option.html',
         fullTitle = fullTitle,
         DbOfQuiz = firstQuizByFarsiTitle(fullTitle),
-        score = abs(int(score)))
+        backBtn = backBtn,
+        score = abs(int(score))
+    )
 
 @app.route('/about')
 def about():
-    return render_template('/about.html')
+    return render_template('/about.html',
+        backBtn = backBtn
+    )
 
 @app.route('/contact')
 def contact():
-    return render_template('/contact.html')
+    return render_template('/contact.html',
+        backBtn = backBtn
+    )
 
 @app.route('/support')
 def support():
-    return render_template('/support.html')
+    return render_template('/support.html',
+        backBtn = backBtn
+    )
 
 @app.route('/privacy-policy')
 def privacyPolicy():
-    return render_template('/privacy-policy.html')
+    return render_template('/privacy-policy.html',
+        backBtn = backBtn
+    )
 
 @app.route('/adverts')
 def adverts():
-    return render_template('/adverts.html')
+    return render_template('/adverts.html',
+        backBtn = backBtn,
+    )
 
 @app.route('/newsletter', methods=['GET', 'POST'])
 def newsletter():
@@ -212,28 +228,36 @@ def newsletter():
 
         if len(srchInDb) == 0:
             add_session(data)
-            return render_template('/success.html')
+            return render_template('/success.html',
+                backBtn = backBtn,
+            )
         else:
-            return render_template('/no-success.html')
+            return render_template('/no-success.html',
+                backBtn = backBtn,
+            )
 
 @app.route('/404')
 def pageNotFound():
     return render_template('errorHandler.html',
-    message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404
+    backBtn = backBtn,
+    message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404,
 
 @app.errorhandler(404)
 def pageNotFound(e):
     return render_template('errorHandler.html',
+    backBtn = backBtn,
     message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404
 
 @app.errorhandler(403)
 def forbidden(e):
     return render_template('errorHandler.html',
+    backBtn = backBtn,
     message = "❌ دسترسی شما به این صفحه مجاز نیست ❌"), 403
     
 @app.errorhandler(500)
 def internalServerError(e):
     return render_template('errorHandler.html',
+    backBtn = backBtn,
     message = "🙄 سرور های سایت احتمالا داغ کرده لطفا یکم دیگه امتحان کنید"), 500
 
 def titleConverterFromUrlToNormalOne(title):

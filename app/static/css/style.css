@@ -1997,6 +1997,10 @@ body {
   }
 }
 
+.result__container {
+  min-height: 44vh;
+}
+
 .result__title > h3 {
   font-size: 1.18rem;
   font-weight: 300;
@@ -2092,6 +2096,10 @@ body {
   -webkit-transform: translate(-25.7%, -26%);
           transform: translate(-25.7%, -26%);
   z-index: -1;
+}
+
+.resultQuiz4Option__container {
+  min-height: 58vh;
 }
 
 .resultQuiz4Option__title {

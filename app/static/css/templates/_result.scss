@@ -11,6 +11,10 @@
         width: 20rem;
     }
 
+    &__container {
+        min-height: 44vh;
+    }
+
 
     &__title > h3 {
         font-size: $font-sm;
@@ -100,6 +104,10 @@
         left: 0;
         transform: translate(-25.7%, -26%);
         z-index: -1;
+    }
+
+    &__container {
+        min-height: 58vh;
     }
 
     &__title {

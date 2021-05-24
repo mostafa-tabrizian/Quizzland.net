@@ -46,4 +46,6 @@ def pageTravel (finalPage):
                     </div>\
                     <a class='pageTravel__arwNext' href=''></a>\
                 </div>\
-            "  
+            "
+
+backBtn = "<button type='button' class='backBtn'>بازگشت</button>"

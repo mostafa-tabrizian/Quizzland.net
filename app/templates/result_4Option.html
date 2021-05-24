@@ -1,6 +1,8 @@
 {% extends './layout.html' %}
 {% block content %}
 
+<div class="resultQuiz4Option__container">
+
     <h3 class="resultQuiz4Option__title flex flex-jc-c">نتیجه‌ تست&nbsp:&nbsp{{ fullTitle }}</h3>
     <div class="resultQuiz4Option space-sm center tx-al-c">
             {% if DbOfQuiz.result_UpTo_1 != None and DbOfQuiz.result_UpTo_1.split('=')[0]|int >= score %}
@@ -28,7 +30,7 @@
                         </p>
                     </div>
                 </body>
-                                 
+                                    
             {% elif DbOfQuiz.result_UpTo_3 != None and DbOfQuiz.result_UpTo_3.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_3.split('=') %}
                 <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
@@ -148,9 +150,11 @@
         </div>
     </div>
 
+</div>
+
     <div class="result__clipboard"></div>
 
-    <button type="button" class="backBtn">بازگشت</button>
+    {{ backBtn | safe }}
 
 </body>
  
