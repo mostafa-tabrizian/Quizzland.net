@@ -37,7 +37,7 @@
                             {{ sliceDb[1] }}
                         </h1>
                         <p class="resultQuiz4Option__txt space-sm">
-                            {{sliceDb[2]}}
+                            {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
                 </body>
@@ -127,9 +127,9 @@
                         <h1 class="resultQuiz4Option__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt space-sm">
-                            {{sliceDb[2]}}
-                        </p>
+                        <pre class="resultQuiz4Option__txt space-sm">
+                            {{ sliceDb[2] }}
+                        </pre>
                     </div>
                 </body>
 
