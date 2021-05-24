@@ -1494,6 +1494,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   .categoryList {
     margin-left: 2rem;
     margin-right: 2rem;
+    margin-top: 1.125rem;
   }
 }
 
@@ -1510,6 +1511,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 @media (max-width: 49.9375em) {
   .tools {
+    margin: 0;
     margin-right: 2rem;
   }
 }

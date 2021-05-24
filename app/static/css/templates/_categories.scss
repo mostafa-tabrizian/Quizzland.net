@@ -59,6 +59,7 @@
     @include breakpoints-down(medium) {
         margin-left: 2rem;
         margin-right: 2rem;
+        margin-top: 1.125rem;
     }
 
     > ul {
@@ -78,6 +79,7 @@
     margin-bottom: 2rem;
 
     @include breakpoints-down(medium) {
+        margin: 0;
         margin-right: 2rem;
     }
 
