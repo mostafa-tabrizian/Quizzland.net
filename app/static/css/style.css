@@ -197,19 +197,6 @@ a:hover, a:visited:hover, a:hover:hover {
   cursor: pointer;
 }
 
-details > summary {
-  outline: none;
-}
-
-details > summary::-webkit-details-marker {
-  display: none;
-}
-
-details[open] summary ~ * {
-  -webkit-animation: categoryMenu .5s ease-in-out;
-          animation: categoryMenu .5s ease-in-out;
-}
-
 ul {
   padding: 0;
 }
@@ -241,16 +228,6 @@ button__grad, .btn__grad {
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.295);
 }
 
-button__grad-green, .btn__grad-green {
-  background-image: linear-gradient(-45deg, #066106, #02af02);
-  border: 0;
-  border-radius: 33px;
-  padding: 0 1.54375rem;
-  color: #f0f0f0;
-  -webkit-box-shadow: 0 0 7px black;
-          box-shadow: 0 0 7px black;
-}
-
 bold {
   font-weight: 600;
 }
@@ -273,13 +250,13 @@ input {
   direction: rtl;
 }
 
-.hover {
+.hoverAnimation {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.hover a::after, .hover li::after {
+.hoverAnimation a::after, .hoverAnimation li::after {
   content: '';
   border-bottom: 2px solid #161616;
   width: 0%;
@@ -288,7 +265,7 @@ input {
   transition: width 0.3s ease;
 }
 
-.hover a:hover::after, .hover li:hover::after {
+.hoverAnimation a:hover::after, .hoverAnimation li:hover::after {
   width: 100%;
 }
 
@@ -643,21 +620,6 @@ input {
   background-clip: padding-box;
 }
 
-.shadow {
-  -webkit-transition: -webkit-box-shadow .2s ease-in-out;
-  transition: -webkit-box-shadow .2s ease-in-out;
-  transition: box-shadow .2s ease-in-out;
-  transition: box-shadow .2s ease-in-out, -webkit-box-shadow .2s ease-in-out;
-  outline: none;
-  cursor: pointer;
-  border-radius: 20px;
-}
-
-.shadow:hover {
-  -webkit-box-shadow: 0 0 7px #323232;
-          box-shadow: 0 0 7px #323232;
-}
-
 .nightMode {
   background: url("/static/img/nightMode.png") no-repeat center center;
   -webkit-transform: translate(-0.5rem, -0.3rem);
@@ -858,7 +820,6 @@ input {
   border-radius: 20px;
   padding: 1.875rem 1.625rem;
   opacity: 0;
-  pointer-events: none;
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
   z-index: 5;
@@ -1395,7 +1356,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   bottom: -1.8rem;
   font-size: 0.88rem;
   opacity: 0.5;
-  pointer-events: none;
 }
 
 .sort__style {

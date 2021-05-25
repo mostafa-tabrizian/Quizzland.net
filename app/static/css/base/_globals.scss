@@ -124,7 +124,8 @@ h1 {
 h2 {
     font-size: $font-l;
     letter-spacing: .1rem;
-    padding: 0 0 1rem 0; margin: 0;
+    padding: 0 0 1rem 0;
+    margin: 0;
 
     @include breakpoints-down(medium) {
         text-align: right;
@@ -157,20 +158,6 @@ a, a:visited, a:hover {
     }
 }
 
-details {
-    & > summary {
-        outline: none;
-    }
-
-    & > summary::-webkit-details-marker {
-        display: none;
-    }
-
-    &[open] summary ~ * {
-        animation: categoryMenu .5s ease-in-out;
-    }
-}
-
 ul {
     padding: 0;
 }
@@ -198,15 +185,6 @@ button, .btn {
         color: $white !important;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.295);
     }
-
-    &__grad-green {
-        background-image: linear-gradient(-45deg, rgb(6, 97, 6), rgb(2, 175, 2));
-        border: 0;
-        border-radius: 33px;
-        padding: 0 1.54375rem;
-        color: $white;
-        box-shadow: 0 0 7px black;
-    }
 }
 
 bold {
@@ -231,7 +209,7 @@ input {
     direction: rtl;
 }
 
-.hover {
+.hoverAnimation {
     display: flex;
 
     a, li {
@@ -493,17 +471,6 @@ input {
     background: rgba(0, 0, 0, 0.54);
     border: solid 1px transparent;
     background-clip: padding-box;
-}
-
-.shadow {
-    transition: box-shadow .2s ease-in-out;
-    outline: none;
-    cursor: pointer;
-    border-radius: 20px;
-
-    &:hover {
-        box-shadow: 0 0 7px #323232;
-    }
 }
 
 .nightMode {
