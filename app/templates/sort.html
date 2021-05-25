@@ -5,7 +5,9 @@
     <h3>{{title}} {{ category }}</h3>
 
     {% for quiz in sort %}
-        <a class="newest-mostViews__item flex flex-jc-fe" href="{{quiz.href}}">{{ quiz.title_far }}</a>
+        {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+        {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+        <a class="newest-mostViews__item flex flex-jc-fe" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">{{ quiz.title_far }}</a>
     {% endfor %}
 </div>
 
