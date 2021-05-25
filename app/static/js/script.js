@@ -518,20 +518,30 @@ try {
     })
 } catch {log('no result4Option share')}
 
+// --------------------------------------------------------------------
 const lightThemeCss = document.createElement('link')
 lightThemeCss.setAttribute('rel', 'stylesheet')
 lightThemeCss.setAttribute('type', 'text/css')
 lightThemeCss.setAttribute('href', "/static/css/lightTheme.css")
+
+userFavoriteMode = localStorage.getItem('mode')
+if (userFavoriteMode == 'nightMode') {
+    document.head.appendChild(lightThemeCss)
+    nightMode.classList.remove('nightMode-Off')
+    nightMode.style.backgroundImage = 'url(/static/img/lightMode.png)'
+}
 
 nightMode.addEventListener('click', () => {
     if (nightMode.classList.contains('nightMode-Off')) {
         document.head.appendChild(lightThemeCss)
         nightMode.classList.remove('nightMode-Off')
         nightMode.style.backgroundImage = 'url(/static/img/lightMode.png)'
+        localStorage.setItem('mode', 'nightMode')
     } else {
         document.head.removeChild(lightThemeCss)
         nightMode.classList.add('nightMode-Off')
         nightMode.style.backgroundImage = 'url(/static/img/nightMode.png)'
+        localStorage.setItem('mode', 'lightMode')
     }
 })
 

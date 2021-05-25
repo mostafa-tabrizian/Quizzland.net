@@ -11,6 +11,22 @@
   color: white;
 }
 
+.header__searchInput::-webkit-input-placeholder {
+  color: white;
+}
+
+.header__searchInput:-ms-input-placeholder {
+  color: white;
+}
+
+.header__searchInput::-ms-input-placeholder {
+  color: white;
+}
+
+.header__searchInput::placeholder {
+  color: white;
+}
+
 .header__searchSubmit {
   background: url("/static/img/srch-white.svg") no-repeat center center;
 }
@@ -87,8 +103,9 @@
 }
 
 .tools__submit {
-  background-image: linear-gradient(-45deg, #6e6e6e, #d8d8d8);
-  color: black !important;
+  -webkit-box-shadow: 0 0 5px red !important;
+          box-shadow: 0 0 5px red !important;
+  background: rgba(202, 202, 202, 0.54) url("/static/img/arw-submit-black.png") no-repeat center center !important;
 }
 
 .quizzes__item a > img {
@@ -99,5 +116,10 @@
 .backBtn {
   background-image: linear-gradient(-45deg, #6e6e6e, #d8d8d8);
   color: black !important;
+}
+
+.searchResult__category__item a > img {
+  -webkit-box-shadow: 0 0 15px #828282;
+          box-shadow: 0 0 15px #828282;
 }
 /*# sourceMappingURL=lightTheme.css.map */

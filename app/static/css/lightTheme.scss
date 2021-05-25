@@ -11,6 +11,10 @@
 
     &__searchInput {
         color: white;
+
+        &::placeholder {
+            color: white;
+        }
     }
 
     &__searchSubmit {
@@ -100,8 +104,8 @@
     }
 
     &__submit {
-        background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
-        color: black !important;
+        box-shadow: 0 0 5px red !important;
+        background: rgba(202, 202, 202, 0.54) url('/static/img/arw-submit-black.png') no-repeat center center !important;
     }
 }
 
@@ -116,4 +120,14 @@
 .backBtn {
     background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
     color: black !important;
+}
+
+.searchResult {
+    &__category {
+        &__item {
+            a > img {
+                    box-shadow: 0 0 15px #828282;
+            }
+        }
+    }
 }
