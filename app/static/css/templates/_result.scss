@@ -23,7 +23,6 @@
 
     &__subtitle {
         font-size: $font-l;
-        text-align: center;
     }
 
     &__clipboard {
@@ -65,7 +64,6 @@
     }
 
     &__detail {
-        text-align: right;
         order: 3;
         
         @include breakpoints-down(medium) {
@@ -118,6 +116,5 @@
     &__txt {
         padding: 0 1rem;
         direction: rtl;
-        text-align: right;
     }
 }

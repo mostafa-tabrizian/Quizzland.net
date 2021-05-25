@@ -47,7 +47,6 @@
             }
     
             & > h5 {
-                text-align: center;
                 transform: translateY(-210px);
                 color: $white;
                 font-size: $font-l;
@@ -56,8 +55,6 @@
     }
 
     &__quizzes {
-        text-align: center;
-
         @include breakpoints-down(medium) {
             h3 {
                 text-align: center;
@@ -65,7 +62,6 @@
         }
         
         &__item {
-            text-align: right;
             display: block;
             margin-bottom: 1rem;
             transform: translate(-25%);
