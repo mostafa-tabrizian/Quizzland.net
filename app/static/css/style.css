@@ -199,6 +199,7 @@ a:hover, a:visited:hover, a:hover:hover {
 
 ul {
   padding: 0;
+  direction: rtl;
 }
 
 li {

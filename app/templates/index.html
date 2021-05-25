@@ -61,7 +61,11 @@
                 <h2 class="tx-al-c">جدیدترین کوئیز ها </h2>
                 <ul class="sort__style tx-al-r">
                     {% for quiz in newestQuizzes %}
-                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
+                        {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                        {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                        <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                            {{ quiz.title_far }}
+                        </a></li>
                     {% endfor %}
                 </ul>
                 <a class="sort__more" href="/newest/0"> ..بیشتر</a>
@@ -72,7 +76,11 @@
                     <h2 class="tx-al-c">محبوب ترین کوئیز ها</h2>
                     <ul class="sort__style">
                         {% for quiz in bestestQuizzes %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/0"> ..بیشتر</a>
@@ -81,7 +89,11 @@
                     <h2 class="tx-al-c">محبوب ترین کوئیز ها</h2>
                     <ul class="sort__style">
                         {% for quiz in bestestQuizzes %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/0"> ..بیشتر</a>
@@ -94,7 +106,11 @@
                 <h2 class="tx-al-c">جدیدترین کوئیز ‌های سلبریتی</h2>
                 <ul class="sort__style">
                     {% for quiz in NewestCelebrityQuizSection %}
-                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
+                        {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                        {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                        <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                            {{ quiz.title_far }}
+                        </a></li>
                     {% endfor %}
                 </ul>
                 <a class="sort__more" href="/newest/celebrities/0"> ..بیشتر</a>
@@ -105,7 +121,11 @@
                     <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز های ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestCelebrityQuizSection %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/celebrities/0"> ..بیشتر</a>
@@ -114,7 +134,11 @@
                     <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestCelebrityQuizSection %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/celebrities/0"> ..بیشتر</a>
@@ -127,7 +151,11 @@
                 <h2 class="tx-al-c">جدیدترین کوئیز ‌های فیلم و سریال</h2>
                 <ul class="sort__style">
                     {% for quiz in NewestMovieSeriesQuizSection %}
-                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
+                        {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                        {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                        <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                            {{ quiz.title_far }}
+                        </a></li>
                     {% endfor %}
                 </ul>
                 <a class="sort__more" href="/newest/movieSeries/0"> ..بیشتر</a>
@@ -138,7 +166,11 @@
                     <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز های ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestMovieSeriesQuizSection %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/movieSeries/0"> ..بیشتر</a>
@@ -147,7 +179,11 @@
                     <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestMovieSeriesQuizSection %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/movieSeries/0"> ..بیشتر</a>
@@ -160,7 +196,11 @@
                 <h2 class="tx-al-c">جدیدترین کوئیز ‌های گیمینگ</h2>
                 <ul class="sort__style">
                     {% for quiz in NewestGamingQuizSection %}
-                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
+                        {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                        {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                        <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                            {{ quiz.title_far }}
+                        </a></li>
                     {% endfor %}
                 </ul>
                 <a class="sort__more" href="/newest/gaming/0"> ..بیشتر</a>
@@ -171,7 +211,11 @@
                     <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز های ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestGamingQuizSection %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/gaming/0"> ..بیشتر</a>
@@ -180,7 +224,11 @@
                     <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestGamingQuizSection %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/gaming/0"> ..بیشتر</a>
@@ -193,7 +241,11 @@
                 <h2 class="tx-al-c">جدیدترین کوئیز ‌های روانشناسی</h2>
                 <ul class="sort__style">
                     {% for quiz in NewestPhysiologiesQuizSection %}
-                    <li><a href="{{ quiz.href }}"> {{ quiz.title_far }} </a></li>
+                        {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                        {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                        <li><a href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
+                            {{ quiz.title_far }}
+                        </a></li>
                     {% endfor %}
                 </ul>
                 <a class="sort__more" href="/newest/physiologies/0"> ..بیشتر</a>
@@ -204,7 +256,11 @@
                     <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز های ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestPhysiologiesQuizSection %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_eng }}&nbsp&nbsp{{ quiz.title_far }} </li></a>
+                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/physiologies/0"> ..بیشتر</a>
@@ -213,7 +269,12 @@
                     <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestPhysiologiesQuizSection %}
-                            <a href="{{ quiz.href }}"><li> {{ quiz.title_far }} </li></a>
+
+                        {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                        {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                            <li><a href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
+                                {{ quiz.title_far }}
+                            </a></li>
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/physiologies/0"> ..بیشتر</a>
