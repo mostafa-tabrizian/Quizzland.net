@@ -1800,6 +1800,12 @@ body {
   color: #f0f0f0;
 }
 
+@media (max-width: 49.9375em) {
+  .quiz__questionCounter {
+    left: -6rem;
+  }
+}
+
 .quiz__questionCounter__divider {
   position: relative;
   bottom: 0.7rem;

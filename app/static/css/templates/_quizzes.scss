@@ -200,6 +200,10 @@ body {
         transform: translate(-50%);
         color: $white;
 
+        @include breakpoints-down(medium) {
+            left: -6rem;
+        }
+
         &__divider {
             position: relative;
             bottom: 0.7rem;
