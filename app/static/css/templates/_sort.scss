@@ -1,9 +1,7 @@
 .newest-mostViews {
     &__item {
-        justify-content: flex-end;
         margin: auto;
         max-width: 22rem;
-        display: flex;
         padding-top: 1.125rem;
 
         @include breakpoints-down(medium) {

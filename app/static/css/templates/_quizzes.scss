@@ -10,7 +10,6 @@ body {
     grid-template-columns: repeat(auto-fill, 12.6rem);
     grid-template-rows: repeat(auto-fill, 14.4rem);
     gap: 2.5rem;
-    justify-content: center;
     margin-top: 0;
 
     @include breakpoints-down(medium) {

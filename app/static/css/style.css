@@ -446,6 +446,17 @@ input {
           align-items: center;
 }
 
+.grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+.grid-jc-c {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .center {
   margin-left: 50%;
   -webkit-transform: translate(-50%);
@@ -763,13 +774,8 @@ input {
   color: white;
   font-size: 0.9rem;
   z-index: 2;
-  display: -ms-grid;
-  display: grid;
   -ms-grid-columns: auto auto auto;
       grid-template-columns: auto auto auto;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   grid-gap: 3rem;
 }
 
@@ -1291,12 +1297,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .sort {
   height: 36rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   position: relative;
 }
 
@@ -1347,12 +1347,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .sort__controller {
   direction: rtl;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   position: relative;
   top: 7rem;
   -webkit-transform: translate(-1rem);
@@ -1478,14 +1472,8 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 .newest-mostViews__item {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
   margin: auto;
   max-width: 22rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   padding-top: 1.125rem;
 }
 
@@ -1620,9 +1608,6 @@ body {
   -ms-grid-rows: (14.4rem)[auto-fill];
       grid-template-rows: repeat(auto-fill, 14.4rem);
   gap: 2.5rem;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   margin-top: 0;
 }
 
@@ -1985,9 +1970,6 @@ body {
 
 .result {
   font-family: myChanga, sans-serif, serif;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -2133,9 +2115,6 @@ body {
 .searchResult__category {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 
 .searchResult__category > h4 {

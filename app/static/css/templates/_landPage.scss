@@ -76,8 +76,6 @@
 
 .sort {
     height: 36rem;
-    display: flex;
-    justify-content: center;
     position: relative;
 
     @include breakpoints-down(medium) {
@@ -118,8 +116,6 @@
 
     &__controller {
         direction: rtl;
-        display: flex;
-        justify-content: center;
         position: relative;
         top: 7rem;
         transform: translate(-1rem);
