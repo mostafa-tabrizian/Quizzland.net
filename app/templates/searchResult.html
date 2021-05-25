@@ -11,7 +11,7 @@
         {% for category in userSearchInputInCategoriesDb_eng %}
         <div class="searchResult__category__item">
             {% set img = (category.title_eng).split(' ') %}
-            <a href="{{category.href}}/0/newest/8">
+            <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
                 <img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt="{{ category.title_eng }} | کوئیز های {{ category.title_far }}">
             </a>
             <h5 class="tx-al-c"> {{ category.title_eng }} </h5>
@@ -21,7 +21,7 @@
         {% for category in userSearchInputInCategoriesDb_far %}
         <div class="searchResult__category__item">
             {% set img = (category.title_eng).split(' ') %}
-            <a href="{{category.href}}/0/newest/8">
+            <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
                 <img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt="{{ category.title_eng }} | کوئیز های {{ category.title_far }}">
             </a>
             <h5> {{ category.title_eng }} </h5>
