@@ -184,6 +184,12 @@ def privacyPolicy():
         backBtn = backBtn
     )
 
+@app.route('/guide')
+def guide():
+    return render_template('/guide.html',
+        backBtn = backBtn
+    )
+
 @app.route('/adverts')
 def adverts():
     return render_template('/adverts.html',

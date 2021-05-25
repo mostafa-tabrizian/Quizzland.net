@@ -179,7 +179,6 @@ h3 {
 
 p {
   font-size: 1.18rem;
-  letter-spacing: .07rem;
 }
 
 @media (max-width: 49.9375em) {
@@ -2202,6 +2201,14 @@ body {
   .basicPage {
     min-height: 60vh;
   }
+}
+
+.basicPage h4 {
+  direction: rtl;
+}
+
+.basicPage h4::before {
+  content: '_';
 }
 
 .contact__socialMedia > li {

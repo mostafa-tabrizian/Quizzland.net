@@ -6,4 +6,12 @@
     @include breakpoints-down(medium) {
         min-height: 60vh;
     }
+
+    h4 {
+        direction: rtl;
+
+        &::before {
+            content: '_';
+        }
+    }
 }
