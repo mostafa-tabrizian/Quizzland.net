@@ -7,6 +7,10 @@
   color: white;
 }
 
+.header__menu__openBtn span {
+  background: white;
+}
+
 .header__searchInput {
   color: white;
 }

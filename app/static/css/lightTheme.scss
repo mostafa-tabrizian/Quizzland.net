@@ -9,6 +9,14 @@
         }
     }
 
+    &__menu {
+        &__openBtn {
+            span {
+                background: white;
+            }
+        }
+    }
+
     &__searchInput {
         color: white;
 
