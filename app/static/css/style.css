@@ -622,19 +622,31 @@ input {
 
 .nightMode {
   background: url("/static/img/nightMode.png") no-repeat center center;
-  -webkit-transform: translate(-0.5rem, -0.3rem);
-          transform: translate(-0.5rem, -0.3rem);
+  -webkit-transform: translate(0.54rem, -0.33rem);
+          transform: translate(0.54rem, -0.33rem);
   height: 27px;
+  z-index: 3;
+}
+
+@media (max-width: 49.9375em) {
+  .nightMode {
+    -webkit-transform: translate(-0.46rem, -0.33rem);
+            transform: translate(-0.46rem, -0.33rem);
+  }
 }
 
 .nightMode__container {
   background: rgba(0, 0, 0, 0.493);
-  position: fixed;
   width: 27px;
   height: 27px;
-  top: .5rem;
-  left: .5rem;
   padding: .3rem;
+}
+
+@media (max-width: 49.9375em) {
+  .nightMode__container {
+    position: relative;
+    top: 2rem;
+  }
 }
 
 @media (max-width: 49.9375em) {
@@ -1204,8 +1216,8 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 @media (max-width: 49.9375em) {
   .hero p {
-    text-align: justify;
-    direction: rtl;
+    margin-right: 1rem;
+    margin-left: 1rem;
   }
 }
 

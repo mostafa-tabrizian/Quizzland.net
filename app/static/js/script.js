@@ -531,18 +531,24 @@ if (userFavoriteMode == 'nightMode') {
     nightMode.style.backgroundImage = 'url(/static/img/lightMode.png)'
 }
 
-nightMode.addEventListener('click', () => {
-    if (nightMode.classList.contains('nightMode-Off')) {
+const nightModeFunction = (element) => {
+    if (element.classList.contains('nightMode-Off')) {
         document.head.appendChild(lightThemeCss)
-        nightMode.classList.remove('nightMode-Off')
-        nightMode.style.backgroundImage = 'url(/static/img/lightMode.png)'
+        element.classList.remove('nightMode-Off')
+        element.style.backgroundImage = 'url(/static/img/lightMode.png)'
         localStorage.setItem('mode', 'nightMode')
     } else {
         document.head.removeChild(lightThemeCss)
-        nightMode.classList.add('nightMode-Off')
-        nightMode.style.backgroundImage = 'url(/static/img/nightMode.png)'
+        element.classList.add('nightMode-Off')
+        element.style.backgroundImage = 'url(/static/img/nightMode.png)'
         localStorage.setItem('mode', 'lightMode')
     }
+}
+nightMode.addEventListener('click', () => {
+    nightModeFunction(nightMode)
+})
+nightMode_m.addEventListener('click', () => {
+    nightModeFunction(nightMode_m)
 })
 
 

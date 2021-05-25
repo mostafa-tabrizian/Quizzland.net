@@ -475,17 +475,24 @@ input {
 
 .nightMode {
     background: url('/static/img/nightMode.png') no-repeat center center;
-    transform: translate(-0.5rem, -0.3rem);
+    transform: translate(0.54rem, -0.33rem);
     height: 27px;
+    z-index: 3;
+
+    @include breakpoints-down(medium) {
+        transform: translate(-0.46rem, -0.33rem);
+    }
 
     &__container {
         background: rgba(0, 0, 0, 0.493);
-        position: fixed;
         width: 27px;
         height: 27px;
-        top: .5rem;
-        left: .5rem;
         padding: .3rem;
+
+        @include breakpoints-down(medium) {
+            position: relative;
+            top: 2rem;
+        }
     }
 }
 
