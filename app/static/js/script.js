@@ -415,10 +415,11 @@ try {
     const next = -1076.05
     const last = +1076.05
     const goToAnotherQuestion = (changeToWhat) => {
+        
         quiz__container.forEach(each => {
-            currQuestionPosition = parseInt(getComputedStyle(each).left)
+            currQuestionPosition = parseInt(getComputedStyle(each).transform.split(', ')[4])
             currQuestionPosition = currQuestionPosition + changeToWhat
-            each.style.left = `${currQuestionPosition}px`
+            each.style.transform = `translate(${currQuestionPosition}px)`
         })
     }
 
@@ -459,6 +460,7 @@ try {
     })
 
     quiz__questionChanger__last.addEventListener('click', () => {
+        let currQuestionPosition = parseInt(getComputedStyle(quiz__container[0]).transform.split(', ')[4])
         if (currQuestionPosition > -500) {
             return "there is no last question"
         }

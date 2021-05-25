@@ -94,15 +94,15 @@ body {
         padding: 0.1rem;
         padding-bottom: 2rem;
         border-radius: 24px;
-        transition: left 1.3s;
+        transition: all 1.3s;
         margin-top: 5rem;
         margin-right: 22rem;
         margin-left: 22rem;
         position: relative;
-        left: -16rem; //-67rem each step
+        transform: translate(-16rem); //-67rem each step
 
         @include breakpoints-down(medium) {
-            left: -19.8rem;
+            transform: translate(-19.8rem); //-67rem each step
         }
     }
 
@@ -221,7 +221,7 @@ body {
 
     &__hider {
         display: flex;
-        width: 34   rem;
+        width: 34rem;
         min-height: 37rem;
         overflow: hidden;
         position: relative;
