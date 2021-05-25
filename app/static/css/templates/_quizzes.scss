@@ -7,7 +7,7 @@ body {
 
 .quizzes {
     grid-template-columns: repeat(auto-fill, 12.6rem);
-    grid-template-rows: repeat(auto-fill, 14.4rem);
+    grid-template-rows: repeat(auto, 14.4rem);
     gap: 1.5rem;
     margin-top: 0;
 
