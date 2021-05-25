@@ -631,8 +631,8 @@ input {
 
 @media (max-width: 49.9375em) {
   .nightMode {
-    -webkit-transform: translate(-0.46rem, -0.33rem);
-            transform: translate(-0.46rem, -0.33rem);
+    -webkit-transform: translate(0.49rem, -0.33rem);
+            transform: translate(0.49rem, -0.33rem);
   }
 }
 
@@ -1825,12 +1825,18 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 35rem;
+  width: 34   rem;
   min-height: 37rem;
   overflow: hidden;
   position: relative;
   bottom: 3.5rem;
   z-index: 1;
+}
+
+@media (max-width: 49.9375em) {
+  .quiz__hider {
+    width: 27rem;
+  }
 }
 
 .quiz__4option {

@@ -481,7 +481,7 @@ input {
     z-index: 3;
 
     @include breakpoints-down(medium) {
-        transform: translate(-0.46rem, -0.33rem);
+        transform: translate(0.49rem, -0.33rem);
     }
 
     &__container {
