@@ -21,7 +21,9 @@
         <ul>
             {%  for quiz in quizzes %}
                 <li>
-                    <a href="{{quiz.href}}">
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 999)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 999)) | safe %}
+                    <a href="/quiz/{{quiz.Category}}/{{innerCategory}}/{{title}}">
                         {{ quiz.title_far }}
                     </a>
                 </li>

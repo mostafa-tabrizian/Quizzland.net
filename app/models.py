@@ -33,7 +33,6 @@ class Quizzes(quizzesBase):
     Category = Column(String)
     innerCategory = Column(String)
     views = Column(Integer)
-    href = Column(String)
     fan_name = Column(String)
     background = Column(String)
     publish = Column(DateTime, default=datetime.datetime.now)
