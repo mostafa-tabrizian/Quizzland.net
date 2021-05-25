@@ -1573,13 +1573,11 @@ body {
 }
 
 .quizzes {
-  display: -ms-grid;
-  display: grid;
   -ms-grid-columns: (12.6rem)[auto-fill];
       grid-template-columns: repeat(auto-fill, 12.6rem);
   -ms-grid-rows: (14.4rem)[auto-fill];
       grid-template-rows: repeat(auto-fill, 14.4rem);
-  gap: 2.5rem;
+  gap: 1.5rem;
   margin-top: 0;
 }
 
@@ -1610,8 +1608,8 @@ body {
      object-fit: cover;
   border: 3px solid #707070;
   border-radius: 40px;
-  -webkit-filter: brightness(40%);
-          filter: brightness(40%);
+  -webkit-filter: brightness(50%);
+          filter: brightness(50%);
 }
 
 .quizzes__item > h5 {

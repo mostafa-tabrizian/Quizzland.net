@@ -67,8 +67,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .quizzes__item a > img {
-  -webkit-filter: brightness(50%) !important;
-          filter: brightness(50%) !important;
+  -webkit-filter: brightness(70%) !important;
+          filter: brightness(70%) !important;
 }
 
 .sort div .sort__right {
