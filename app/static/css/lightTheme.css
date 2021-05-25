@@ -31,6 +31,10 @@
   background: url("/static/img/srch-white.svg") no-repeat center center;
 }
 
+body::-webkit-scrollbar-thumb {
+  background-color: #ffffff44;
+}
+
 .hero-inner {
   padding: 1.5rem;
   color: white;
