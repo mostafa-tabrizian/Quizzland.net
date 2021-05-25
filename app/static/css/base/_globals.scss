@@ -55,25 +55,27 @@ body {
 }
 
 .wrapper {
-    max-width: 62.5rem;
-    margin: 1.125rem auto;
-    position: relative;
-
-    @include breakpoints-down(medium) {
-        max-width: 45.75rem;
-        margin: 1.125rem 2rem;
-    }
-
     &-sm {
         max-width:30rem;
         margin: 1.125rem auto;
-
+        
         @include breakpoints-down(medium) {
             max-width: 21rem;
         }
     }
 
     &-med {
+        max-width: 62.5rem;
+        margin: 1.125rem auto;
+        position: relative;
+    
+        @include breakpoints-down(medium) {
+            max-width: 45.75rem;
+            margin: 1.125rem 2rem;
+        }
+    }
+
+    &-l {
         max-width: 82.5rem;
         margin: 1.125rem auto;
     }

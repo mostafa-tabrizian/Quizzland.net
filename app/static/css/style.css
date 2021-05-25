@@ -78,19 +78,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 25px;
 }
 
-.wrapper {
-  max-width: 62.5rem;
-  margin: 1.125rem auto;
-  position: relative;
-}
-
-@media (max-width: 49.9375em) {
-  .wrapper {
-    max-width: 45.75rem;
-    margin: 1.125rem 2rem;
-  }
-}
-
 .wrapper-sm {
   max-width: 30rem;
   margin: 1.125rem auto;
@@ -103,6 +90,19 @@ body::-webkit-scrollbar-thumb {
 }
 
 .wrapper-med {
+  max-width: 62.5rem;
+  margin: 1.125rem auto;
+  position: relative;
+}
+
+@media (max-width: 49.9375em) {
+  .wrapper-med {
+    max-width: 45.75rem;
+    margin: 1.125rem 2rem;
+  }
+}
+
+.wrapper-l {
   max-width: 82.5rem;
   margin: 1.125rem auto;
 }
