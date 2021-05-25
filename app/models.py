@@ -30,7 +30,7 @@ class Quizzes(quizzesBase):
     __tablename__ = 'Quizzes'
     id = Column(Integer, primary_key=True)
     title_far = Column(String)
-    Category = Column(String)
+    category = Column(String)
     innerCategory = Column(String)
     views = Column(Integer)
     fan_name = Column(String)

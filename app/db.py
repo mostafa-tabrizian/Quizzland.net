@@ -100,12 +100,12 @@ def quizzes4OptionByAlphabetWithInnerCategory(innerCategory):
     return grabbedQuiz
 
 def quizzesByPublishWithCategory(category):
-    quizzes = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{category}%'))\
+    quizzes = s.query(Quizzes).filter(Quizzes.category.ilike(f'%{category}%'))\
                                   .order_by(Quizzes.publish.desc())
     return quizzes
 
 def quizzesByViewsWithCategory(category):
-    grabbedQuiz = s.query(Quizzes).filter(Quizzes.Category.ilike(f'%{category}%'))\
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.category.ilike(f'%{category}%'))\
                                   .order_by(Quizzes.views.desc())
     return grabbedQuiz
 

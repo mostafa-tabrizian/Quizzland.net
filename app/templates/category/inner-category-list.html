@@ -23,9 +23,15 @@
                 <li>
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 999)) | safe %}
                     {% set title = (quiz.title_far | replace(" ", "-", 999)) | safe %}
-                    <a href="/quiz/{{quiz.Category}}/{{innerCategory}}/{{title}}">
+                    {% if quiz.category == 'physiologies' %}
+                    <a href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
                         {{ quiz.title_far }}
                     </a>
+                    {% else %}
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
