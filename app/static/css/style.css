@@ -387,6 +387,7 @@ input {
 
 .noVis {
   visibility: hidden;
+  display: none;
 }
 
 .pointerOff {
@@ -2087,6 +2088,7 @@ body {
   -ms-grid-columns: auto auto;
       grid-template-columns: auto auto;
   direction: rtl;
+  min-height: 30rem;
 }
 
 @media (max-width: 49.9375em) {
@@ -2101,13 +2103,16 @@ body {
       flex-wrap: wrap;
 }
 
-.searchResult__category > h4 {
+.searchResult__category h3 {
+  margin: 1.55rem auto;
+}
+
+.searchResult__category h4 {
   width: 100%;
-  margin: 0 0 2rem 0;
 }
 
 @media (max-width: 49.9375em) {
-  .searchResult__category > h4 {
+  .searchResult__category h4 {
     text-align: center;
     margin-bottom: 1.125rem;
   }
@@ -2126,10 +2131,6 @@ body {
     width: 10rem;
     height: 14.75rem;
   }
-}
-
-.searchResult__category__item__notFound {
-  margin: 0 !important;
 }
 
 .searchResult__category__item a > img {

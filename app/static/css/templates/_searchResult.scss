@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: auto auto;
     direction: rtl;
+    min-height: 30rem;
 
     @include breakpoints-down(medium) {
         grid-template-columns: auto;
@@ -10,9 +11,12 @@
     &__category {
         flex-wrap: wrap;
 
-        > h4 {
+        h3 {
+            margin: 1.55rem auto;
+        }
+
+        h4 {
             width: 100%;
-            margin: 0 0 2rem 0;
 
             @include breakpoints-down(medium) {
                 text-align: center;
@@ -30,10 +34,6 @@
             @include breakpoints-down(medium) {
                 width: 10rem;
                 height: 14.75rem;
-            }
-
-            &__notFound {
-                margin: 0 !important;
             }
     
             & a > img {
