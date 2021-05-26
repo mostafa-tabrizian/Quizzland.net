@@ -7,6 +7,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def Main():
+    restarterOfMonthlyViews()
+    
     return render_template('index.html',
         newestQuizzes = quizzesByPublish().limit(15),
         bestestQuizzes = quizzesByViews().limit(5),

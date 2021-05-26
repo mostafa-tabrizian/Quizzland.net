@@ -78,43 +78,6 @@ def up_session():
 #     note = 'note'
 # )
 
-# data = Quizzes(
-#     title_far = 'بازی ذ ویتچر',
-#     title_eng = 'The Witcher',
-#     background = 'TRASH1.jpg',
-#     href = '/quiz/gaming/the-witcher/بازی-ذ-ویتچر',
-#     fan_name = '',
-#     views = 0,
-#     publish = datetime.datetime.now(),
-#     unixTime = Column(Integer)
-# )
-
-# data = Categories(
-#     title_far = 'ذ ویتچر',
-#     title_eng = 'The Witcher',
-#     img = 'TRASH-theWitcher.jpg',
-#     href = '/category/gamings/the-witcher', # celebrities, gaming, movie&series, physiologies
-#     category = 'celebrities', # celebrities, gaming, movie&series, physiologies
-#     views = 0,
-#     publish = datetime.datetime.now(),
-#     unixTime = Column(Integer),
-# )
-
-# data = quizQuestions(
-#     title_eng = 'most complete taylor swift quiz',
-#     title_far = 'کامل-ترین-کویز-تیلور-سویفت',
-#     type = 'oneCorrect', # 4option / oneCorrect / lowHigh
-#     question = 'اسم وسط تیلور',
-#     option_1 = 'جنیفر',
-#     option_2 = 'الیسون',
-#     option_3 = 'تنیس',
-#     option_4 = 'امبرلا',
-#     answer = 3,
-#     category = 'celebrities', # celebrities, gaming, movie&series, physiologies
-#     innerCategory = 'Taylor Swift',
-# )
-
-
 #--------------------
 # recreate_documents()
 # recreate_quizzes()

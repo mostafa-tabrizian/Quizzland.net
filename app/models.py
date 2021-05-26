@@ -19,6 +19,7 @@ class Categories(categoriesBase):
     category = Column(String)
     title_eng = Column(String)
     title_far = Column(String)
+    monthly_views = Column(Integer)
     views = Column(Integer)
     publish = Column(DateTime, default=datetime.datetime.now)
     
@@ -32,6 +33,7 @@ class Quizzes(quizzesBase):
     title_far = Column(String)
     category = Column(String)
     innerCategory = Column(String)
+    # monthly_views = Column(Integer)
     views = Column(Integer)
     fan_name = Column(String)
     background = Column(String)
@@ -45,6 +47,7 @@ class Quizzes4Option(quizzes4OptionBase):
     __tablename__ = 'Quizzes4Option'
     id = Column(Integer, primary_key=True)
     title_far = Column(String)
+    monthly_views = Column(Integer)
     views = Column(Integer)
     category = Column(String)
     innerCategory = Column(String)
@@ -58,12 +61,11 @@ class Quizzes4Option(quizzes4OptionBase):
     result_UpTo_8 = Column(String)
     result_UpTo_9 = Column(String)
     result_UpTo_10 = Column(String)
-    href = Column(String)
     background = Column(String)
     publish = Column(DateTime, default=datetime.datetime.now)
 
     def __repr__(self):
-        return f"<id: {self.id}| title: {self.title_far}| category: {self.category} | innerCategory: {self.innerCategory} | link: {self.href}>"
+        return f"<id: {self.id}| title: {self.title_far}| category: {self.category} | innerCategory: {self.innerCategory}>"
 
 
 quizQuestionsBase = declarative_base()
