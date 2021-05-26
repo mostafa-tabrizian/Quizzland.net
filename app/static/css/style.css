@@ -1475,7 +1475,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   }
 }
 
-.categoryList > ul > li::after {
+.categoryList > ul > li::before {
   content: '◾';
   position: relative;
   top: 0.2rem;
