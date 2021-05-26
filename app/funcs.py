@@ -1,5 +1,6 @@
 import time
 from crud import *
+from csv import writer
 
 categoryInFar = {
     'gaming': 'گیمینگ',
@@ -21,6 +22,41 @@ def frToPage(page, howManyElementToShow):
     to = (page * howManyElementToShow) + howManyElementToShow
     return [fr, to]
 
+def saveMonthlyViewsInExcel():
+    filename = './monthlyViewsData.csv'
+    quizzes =  s.query(Quizzes).all()
+    quizzes4Option =  s.query(Quizzes4Option).all()
+    categories =    s.query(Categories).all()
+    
+    with open(filename, 'a', encoding='utf8') as f_object:
+
+        for category in categories:
+            data = [category.title_far, category.title_eng, category.category,\
+                    ' ', category.views, category.monthly_views, category.publish]
+            writer_object = writer(f_object)
+            writer_object.writerow(data)
+
+        writer_object = writer(f_object)
+        writer_object.writerow(['||||||||', '||||||||', '||||||||', '||||||||', '||||||||'])
+
+        for quiz in quizzes:
+            data = [quiz.title_far, ' ', quiz.category, quiz.innerCategory,\
+                    quiz.views, quiz.publish]  # category.monthly_views   
+            writer_object = writer(f_object)
+            writer_object.writerow(data)
+
+        for quiz in quizzes4Option:
+            data = [quiz.title_far, ' ', quiz.category, quiz.innerCategory,\
+                    quiz.views, category.monthly_views, quiz.publish]
+            writer_object = writer(f_object)
+            writer_object.writerow(data)
+
+        writer_object = writer(f_object)
+        writer_object.writerow(['----------', '----------', '----------', '----------', '----------'])
+        f_object.close()
+
+    print('Exceling done')
+    return
 
 def addView(whichShouldAddViewToIt):
     whichShouldAddViewToIt.views += 1
@@ -60,6 +96,7 @@ def restarterOfMonthlyViews():
 
     if now >= endAt:
         startNewMonth()
+        saveMonthlyViewsInExcel()
         startTheMonthlyViewsFromZero()
 
     else:

@@ -33,14 +33,14 @@ class Quizzes(quizzesBase):
     title_far = Column(String)
     category = Column(String)
     innerCategory = Column(String)
-    # monthly_views = Column(Integer)
+    monthly_views = Column(Integer)
     views = Column(Integer)
     fan_name = Column(String)
     background = Column(String)
     publish = Column(DateTime, default=datetime.datetime.now)
 
     def __repr__(self):
-        return f"<id: {self.id}| Category: {self.Category} | + innerCategory: {self.innerCategory}| link: {self.href}>"
+        return f'{self.title_far, self.category, self.innerCategory, self.views, self.publish}'
 
 quizzes4OptionBase = declarative_base()
 class Quizzes4Option(quizzes4OptionBase):
