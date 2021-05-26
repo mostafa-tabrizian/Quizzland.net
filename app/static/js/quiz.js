@@ -5,7 +5,7 @@
 
 const typeOfQuiz = localStorage.getItem('typeOfQuiz')
 
-try {
+if (quiz__container__eachOne) {
     if (typeOfQuiz == 'quiz') {
         encodedNumbers = {
             1: 'b25l',
@@ -27,7 +27,7 @@ try {
         const correctAnswerCounterDATA = localStorage.getItem('correctAnswerCounter')
         const wrongAnswerCounterDATA = localStorage.getItem('wrongAnswerCounter')
 
-        try {
+        if (result__detail__correctTime) {
             result__detail__correctTime.innerHTML = correctAnswerCounterDATA
             result__detail__wrongTime.innerHTML = wrongAnswerCounterDATA
             
@@ -46,12 +46,9 @@ try {
             else if (scoreDATA >= 0){
                 result__score.innerHTML = (`😭 ${scoreDATA}%`)
                 result__subtitle.innerHTML = ('😅 عیبی نداره کسی نمیفهمه، میتونی دوباره کوئیز رو بدی ')}
-    
-        } catch (e) {
-            log('no result page')
-        } 
+        } else { log('no result page') } 
     }
-} catch (e) {log('no quiz.js', e)}
+} else { log('no quiz.js') }
 
 const calculateResult = (FinalTitleOfQuiz) => {
     let quizUrl = decodeURIComponent(window.location.href)

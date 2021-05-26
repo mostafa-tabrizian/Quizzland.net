@@ -116,7 +116,7 @@ sort__controller__btn.forEach(sortControllerBtn => {
 //----------------------------------------------------------
 // tools
 
-try {
+if (tools__sort__btn) {
     currentUrl = splitUrl()
     
     tools__sort__btn.addEventListener('click', () => {
@@ -154,7 +154,7 @@ try {
             tools__numberOfResult__current.innerHTML = currentUrl[8]
         }
     }
-
+    
     const tools__optionsDefine = {
         'newest': 'جدیدترین',
         'bestest': 'بهترین',
@@ -174,7 +174,7 @@ try {
             tools__numberOfResult__current.innerHTML = each.innerHTML
         })
     })
-
+    
     const whichPageItIsForMakingTheUrl = (currentUrl) => {
         if (!(isNaN(parseInt(currentUrl[5])))) { //category
             const category = currentUrl[4]
@@ -192,15 +192,14 @@ try {
             return whichPageItIs
         }
     }
-
+    
     setTheCurrentSortToTools(currentUrl)
-
+    
     tools__submit.addEventListener('click', () => {
         whichPageItIs = whichPageItIsForMakingTheUrl(currentUrl)
         window.location.replace(whichPageItIs); 
     })
-
-} catch (e) {log(`Tools Not Found!`)}
+} else {log('no tools')}
 
 //----------------------------------------------------------
 
@@ -227,23 +226,21 @@ newsletter__submit.addEventListener('click', () => {
 //----------------------------------------------------------
 
 // submit the newsletter of user
-try {
-    let chosenCategory = [,]
-    
-    newsletter__categoryOptions__input.forEach(each => {
-        each.addEventListener('click', () => {
-            inputOfTheCategory = each.checked
-            if (inputOfTheCategory == true) { //checked
-                chosenCategory.push(each.id)
-            } else {
-                indexOfChosenToRemove = chosenCategory.indexOf(each.id)
-                chosenCategory.splice(indexOfChosenToRemove, 1)
-            }
+let chosenCategory = [,]
 
-            newsletter__categoryOptions__selectedByUser.innerHTML = chosenCategory
-        })
+newsletter__categoryOptions__input.forEach(each => {
+    each.addEventListener('click', () => {
+        inputOfTheCategory = each.checked
+        if (inputOfTheCategory == true) { //checked
+            chosenCategory.push(each.id)
+        } else {
+            indexOfChosenToRemove = chosenCategory.indexOf(each.id)
+            chosenCategory.splice(indexOfChosenToRemove, 1)
+        }
+
+        newsletter__categoryOptions__selectedByUser.innerHTML = chosenCategory
     })
-} catch {log('no newsletter')}
+})
 
 //----------------------------------------------------------
 
@@ -265,7 +262,8 @@ try {
 //----------------------------------------------------------
 
 // Page travel
-try {
+if (pageTravel__arwNext) {
+
     currentUrl = splitUrl()
 
     const urlMakerForPageTravel = (currPageNumber, baseUrlPart1, baseUrlPart2) => {
@@ -334,15 +332,13 @@ try {
     if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
         finalPageDOM.classList.add('noVis')
     }
-} catch (e) {log('no page travel', e)}
+} else { log ('no page travel')}
 
 //----------------------------------------------------------
 
 // searchResult page
-try {
-    try {
-        searchResult__category__item.addEventListener('click', () => {return})
-    } catch {
+if (searchResult__category__item || searchResult__category__item__notFound) {
+    if (!(searchResult__category__item)) {
         searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'
     }
 
@@ -356,13 +352,13 @@ try {
     if (countSearchResult == 3 || countSearchResult <= 11) {
         searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
     }
-
-} catch {log('no search result page')}
+} else {log('no search result page')}
 
 //----------------------------------------------------------
 
 // quiz questions
-try {
+if (quiz__questions) {
+
     const typeOfQuiz = quiz__questions.getAttribute('tag')
     try {
         localStorage.setItem('typeOfQuiz', typeOfQuiz)
@@ -469,20 +465,20 @@ try {
         pauseTheFunctionOfChangingQuestions()
         checkIfTheQuizEndedAndShowResultPage()
     }) 
-} catch {log('no nextQuestion btn')}
+} else {log('no nextQuestion btn')}
 
 //----------------------------------------------------------
 
-try {
+if (backBtn) {
     backBtn.addEventListener('click', () => {
         event.preventDefault();
         history.go(-1)
     })
-} catch {log('no backBtn')}
+} else {log('no backBtn')}
 
 //----------------------------------------------------------
 
-try {
+if (result__share__btn) {
     result__share__btn.addEventListener('click', () => {
         quizUrl = localStorage.getItem('quizUrl')
         
@@ -499,9 +495,9 @@ try {
 
         result__share__message.classList.remove('noVis')
     })
-} catch {log('no result share')}
+} else {log('no result share')}
 
-try {
+if (resultQuiz4Option__share__btn) {
     resultQuiz4Option__share__btn.addEventListener('click', () => {
         quizUrl = localStorage.getItem('quizUrl')
 
@@ -518,7 +514,7 @@ try {
 
         result__share__message.classList.remove('noVis')
     })
-} catch {log('no result4Option share')}
+} else {log('no result4Option share')}
 
 // --------------------------------------------------------------------
 
