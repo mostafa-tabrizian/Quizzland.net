@@ -51,6 +51,10 @@ def quizzesByViews():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.views.desc())
     return quizzesGrabbedByPublish
 
+def quizzesByMonthlyViews():
+    quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.monthly_views.desc())
+    return quizzesGrabbedByPublish
+
 def quizzes(category, innerCategory, fr, to, sortType):
     if category == 'physiologies':
         if sortType == 'newest':
@@ -109,6 +113,13 @@ def quizzesByViewsWithCategory(category):
                                   .order_by(Quizzes.views.desc())
     return grabbedQuiz
 
+def quizzesByMonthlyViewsWithCategory(category):
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.category.ilike(f'%{category}%'))\
+                                  .order_by(Quizzes.monthly_views.desc())
+    return grabbedQuiz
+
+
+
 def quizzes4OptionByPublishWithCategory(category):
     quizzes = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{category}%'))\
                                      .order_by(Quizzes4Option.publish.desc())
@@ -117,6 +128,11 @@ def quizzes4OptionByPublishWithCategory(category):
 def quizzes4OptionByViewsWithCategory(category):
     grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{category}%'))\
                                          .order_by(Quizzes4Option.views.desc())
+    return grabbedQuiz
+
+def quizzes4OptionByMonthlyViewsWithCategory(category):
+    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{category}%'))\
+                                         .order_by(Quizzes4Option.monthly_views.desc())
     return grabbedQuiz
 
 def sortBothQuizzesByPublishWithCategories(category):

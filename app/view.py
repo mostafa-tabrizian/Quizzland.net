@@ -12,18 +12,23 @@ def Main():
     return render_template('index.html',
         newestQuizzes = quizzesByPublish().limit(15),
         bestestQuizzes = quizzesByViews().limit(5),
+        bestestQuizzesForThisMonth = quizzesByMonthlyViews().limit(5),
 
         NewestCelebrityQuizSection =  quizzesByPublishWithCategory('celebrities').limit(15),
         BestestCelebrityQuizSection = quizzesByViewsWithCategory('celebrities').limit(5),
-        
+        MonthlyBestestCelebrityQuizSection = quizzesByMonthlyViewsWithCategory('celebrities').limit(5),
+
         NewestMovieSeriesQuizSection =  quizzesByPublishWithCategory('movieSeries').limit(15),
         BestestMovieSeriesQuizSection = quizzesByViewsWithCategory('movieSeries').limit(5),
+        MonthlyBestestMovieSeriesQuizSection = quizzesByMonthlyViewsWithCategory('movieSeries').limit(5),
         
         NewestGamingQuizSection =  quizzesByPublishWithCategory('Gaming').limit(15),
         BestestGamingQuizSection = quizzesByViewsWithCategory('Gaming').limit(5),
+        MonthlyBestestGamingQuizSection = quizzesByMonthlyViewsWithCategory('Gaming').limit(5),
         
         NewestPhysiologiesQuizSection =  quizzes4OptionByPublishWithCategory('Physiologies').limit(15),
         BestestPhysiologiesQuizSection = quizzes4OptionByViewsWithCategory('Physiologies').limit(5),
+        MonthlyBestestPhysiologiesQuizSection = quizzes4OptionByMonthlyViewsWithCategory('Physiologies').limit(5),
 
         colorOfHeader = 'header__white')
 
