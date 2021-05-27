@@ -22,8 +22,6 @@
 
 .tools {
     direction: rtl;
-    margin-right: 2rem;
-    margin-bottom: 0;
 
     @include breakpoints-down(medium) {
         margin-right: 2rem;

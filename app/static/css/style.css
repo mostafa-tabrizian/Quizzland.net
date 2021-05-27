@@ -1518,8 +1518,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .tools {
   direction: rtl;
-  margin-right: 2rem;
-  margin-bottom: 0;
 }
 
 @media (max-width: 49.9375em) {

@@ -1,5 +1,5 @@
 
-tools = "   <div class='tools wrapper-med flex flex-ai-c'>\
+tools = "   <div class='tools wrapper-sm flex flex-ai-c'>\
                 <div class='tools__sort'>\
                     <div class='tools__sort__btn btn darkGls'>ترتیب بر اساس: \
                         <span class='tools__sort__current'>جدیدترین</span>\
