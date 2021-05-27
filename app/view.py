@@ -63,12 +63,15 @@ def sortAll(sortOfQuiz, page):
     howManyElementToShow = 14
     fTPage = frToPage(page, howManyElementToShow)
 
-    if (sortOfQuiz == 'bestest'):
-        sort = quizzesByViews().all()[fTPage[0]:fTPage[1]]
-        title = "بهترین کوئيز ها"
-    elif (sortOfQuiz == 'newest'):
+    if (sortOfQuiz == 'newest'):
         sort = quizzesByPublish().all()[fTPage[0]:fTPage[1]]
         title = "جدیدترین کوئیز ها"
+    elif (sortOfQuiz == 'bestest'):
+        sort = quizzesByViews().all()[fTPage[0]:fTPage[1]]
+        title = "پربازدیدترین کوئيز ها"
+    elif sortOfQuiz == 'monthlyBestest':
+        sort = quizzesByMonthlyViews()[fTPage[0]:fTPage[1]]
+        title = "پر بازدیدترین کوئیز های این ماه"
 
     return render_template('/sortMore.html',
         pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
