@@ -1,26 +1,27 @@
 {% extends './layout.html' %}
 {% block content %}
 
-<div class="basicPage center" style="height: 40rem;">    
-    <div>
-        <h3>{{ userSearchInput }} &nbsp : &nbsp کوئیز های بیشتر با عبارت</h3>
-        
+<div class="basicTwoColumn center tx-al-c">    
+    <h3>{{ userSearchInput }} &nbsp : &nbsp کوئیز های بیشتر با عبارت</h3>
+    
+    <div class="basicTwoColumn__container">
         {% for quiz in userSearchInputInQuizzesDb_far %}
-            <a href="{{quiz.href}}">{{ quiz.title_far }}</a>
+            <a class="basicTwoColumn__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
         {% endfor %}
 
         {% for quiz in userSearchInputInQuizzesDb_eng %}
-            <a href="{{quiz.href}}">{{ quiz.title_far }}</a>
+            <a class="basicTwoColumn__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
         {% endfor %}
 
         {% for quiz in userSearchInputInQuizzes4OptionDb_far %}
-            <a href="{{quiz.href}}">{{ quiz.title_far }}</a>
+            <a class="basicTwoColumn__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
         {% endfor %}
 
         {% for quiz in userSearchInputInQuizzes4OptionDb_eng %}
-            <a href="{{quiz.href}}">{{ quiz.title_far }}</a>
+            <a class="basicTwoColumn__item" href="{{quiz.href}}">{{ quiz.title_far }}</a>
         {% endfor %}
     </div>
+
 </div>
 
 <button type="button" class="backBtn">بازگشت</button>

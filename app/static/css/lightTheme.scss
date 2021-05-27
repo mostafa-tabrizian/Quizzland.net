@@ -170,3 +170,11 @@ body {
         }
     }
 }
+
+.basicTwoColumn {
+    &__item {
+        &::after {
+            content: '◽'
+        }
+    }
+}

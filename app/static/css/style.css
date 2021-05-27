@@ -1450,53 +1450,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   opacity: 1;
 }
 
-@media (max-width: 49.9375em) {
-  .sortMore {
-    margin: 0;
-    -webkit-transform: inherit;
-            transform: inherit;
-  }
-}
-
-.sortMore__container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-wrap: wrap-reverse;
-      flex-wrap: wrap-reverse;
-  height: 20rem;
-}
-
-@media (max-width: 49.9375em) {
-  .sortMore__container {
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    height: inherit;
-  }
-}
-
-.sortMore__item {
-  padding-top: 1.125rem;
-  padding-left: 1.125rem;
-}
-
-@media (max-width: 49.9375em) {
-  .sortMore__item {
-    margin-right: 3rem;
-  }
-}
-
-.sortMore__item::after {
-  content: '◾';
-  position: relative;
-  top: 0.2rem;
-  margin-left: .5rem;
-}
-
 .categoryList {
   line-height: 2.2rem;
   min-height: 60vh;
@@ -2211,6 +2164,19 @@ body {
   margin-left: 1rem;
 }
 
+.searchResult__quizzes__seeMore {
+  text-align: center;
+  -webkit-transform: translate(-7rem);
+          transform: translate(-7rem);
+  margin-top: 2rem;
+}
+
+@media (max-width: 49.9375em) {
+  .searchResult__quizzes__seeMore {
+    margin-bottom: 2rem;
+  }
+}
+
 .basicPage {
   min-height: 44vh;
   width: 85%;
@@ -2229,6 +2195,53 @@ body {
 
 .basicPage h4::before {
   content: '_';
+}
+
+@media (max-width: 49.9375em) {
+  .basicTwoColumn {
+    margin: 0;
+    -webkit-transform: inherit;
+            transform: inherit;
+  }
+}
+
+.basicTwoColumn__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap-reverse;
+      flex-wrap: wrap-reverse;
+  height: 20rem;
+}
+
+@media (max-width: 49.9375em) {
+  .basicTwoColumn__container {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    height: inherit;
+  }
+}
+
+.basicTwoColumn__item {
+  padding-top: 1.125rem;
+  padding-left: 1.125rem;
+}
+
+@media (max-width: 49.9375em) {
+  .basicTwoColumn__item {
+    margin-right: 3rem;
+  }
+}
+
+.basicTwoColumn__item::after {
+  content: '◾';
+  position: relative;
+  top: 0.2rem;
+  margin-left: .5rem;
 }
 
 .contact__socialMedia > li {

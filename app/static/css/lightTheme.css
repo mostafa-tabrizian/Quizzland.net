@@ -142,4 +142,8 @@ body::-webkit-scrollbar-thumb {
 .searchResult__quizzes__item::before {
   content: '◽';
 }
+
+.basicTwoColumn__item::after {
+  content: '◽';
+}
 /*# sourceMappingURL=lightTheme.css.map */

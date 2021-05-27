@@ -55,11 +55,12 @@ def search():
 
 @app.route('/search/<searchMoreOfThis>')
 def moreSearchResult(searchMoreOfThis):
-    return render_template('moreSearchResult.html', 
-        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{searchMoreOfThis}%').limit(20),
-        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(20),
-        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{searchMoreOfThis}%').limit(20),
-        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(20),
+    return render_template('moreSearchResult.html',
+        userSearchInput = searchMoreOfThis,
+        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{searchMoreOfThis}%').limit(14),
+        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(14),
+        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{searchMoreOfThis}%').limit(14),
+        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(14),
         headTitle = f'QuizLand | {searchMoreOfThis} جستجو عبارت',
     )
 

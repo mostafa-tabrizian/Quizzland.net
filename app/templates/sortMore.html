@@ -1,15 +1,15 @@
 {% extends './layout.html' %}
 {% block content %}
 
-<div class="sortMore center tx-al-c">
+<div class="basicTwoColumn center tx-al-c">
     <h3 class="tx-al-c">{{title}} {{ category }}</h3>
 
 
-    <div class="sortMore__container">
+    <div class="basicTwoColumn__container">
         {% for quiz in sort %}
             {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
             {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-            <a class="sortMore__item flex flex-jc-fe" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">{{ quiz.title_far }}</a>
+            <a class="basicTwoColumn__item flex flex-jc-fe" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">{{ quiz.title_far }}</a>
         {% endfor %}
     </div>
 

@@ -76,5 +76,15 @@
                 margin-left: 1rem;
             }
         }
+
+        &__seeMore {
+            text-align: center;
+            transform: translate(-7rem);
+            margin-top: 2rem;
+
+            @include breakpoints-down(medium) {
+                margin-bottom: 2rem;
+            }
+        }
     }
 }
