@@ -206,6 +206,7 @@ footer, .footer {
 
     &__detail {
         margin: 0;
+        margin-right: 2rem;
         
         > li {
             font-size: $font-sm - .3rem;
@@ -213,7 +214,7 @@ footer, .footer {
             transition: all .2s ease-in-out;
 
             &:not(:last-child) {
-                padding-right: 1rem;
+                padding-left: 1rem;
             }
 
             &:hover {
