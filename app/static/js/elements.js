@@ -2,6 +2,7 @@ const body = document.querySelector('body')
 const loadingScreen = document.querySelector('.loadingScreen')
 const backBtn = document.querySelector('.backBtn')
 
+const nightMode__link = document.querySelector('.nightMode__link')
 const nightMode = document.querySelector('.nightMode')
 const nightMode__container = document.querySelector('.nightMode__container')
 const nightMode_m = document.querySelector('.nightMode_m')

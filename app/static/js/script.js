@@ -539,7 +539,9 @@ const nightMode_turnOn = (element) => {
 }
 
 userFavoriteMode = localStorage.getItem('NVXWIZI=')
-if (userFavoriteMode == 'nightMode') {
+if (userFavoriteMode == 'lightMode') {
+    nightMode_turnOff(nightMode)
+} else {
     nightMode_turnOn(nightMode)
 }
 
