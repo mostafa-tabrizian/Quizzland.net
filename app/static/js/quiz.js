@@ -3,7 +3,7 @@
 // add value to correct question
 
 
-const typeOfQuiz = localStorage.getItem('typeOfQuiz')
+const typeOfQuiz = localStorage.getItem('OR4XAZKPMZIXK2L2')
 
 if (quiz__container__eachOne) {
     if (typeOfQuiz == 'quiz') {
@@ -23,9 +23,9 @@ if (quiz__container__eachOne) {
         let correct = 0
         let wrong = 0
     
-        const scoreDATA = localStorage.getItem('score')
-        const correctAnswerCounterDATA = localStorage.getItem('correctAnswerCounter')
-        const wrongAnswerCounterDATA = localStorage.getItem('wrongAnswerCounter')
+        const scoreDATA = localStorage.getItem('ONRW64TF')
+        const correctAnswerCounterDATA = localStorage.getItem('MNXXE4TFMN2EC3TTO5SXEQ3POVXHIZLS')
+        const wrongAnswerCounterDATA = localStorage.getItem('O5ZG63THIFXHG53FOJBW65LOORSXE===')
 
         if (result__detail__correctTime) {
             result__detail__correctTime.innerHTML = correctAnswerCounterDATA
@@ -57,10 +57,10 @@ const calculateResult = (FinalTitleOfQuiz) => {
     const wrongAnswerCounter = questionCounter - correctAnswerCounter
     const score = ((correctAnswerCounter / (correctAnswerCounter + wrongAnswerCounter)) * 100).toFixed(0)
     try {
-        localStorage.setItem('quizUrl', quizUrl)
-        localStorage.setItem('correctAnswerCounter', correctAnswerCounter)
-        localStorage.setItem('wrongAnswerCounter', wrongAnswerCounter)
-        localStorage.setItem('score', score)
+        localStorage.setItem('OF2WS6SVOJWA====', quizUrl)
+        localStorage.setItem('MNXXE4TFMN2EC3TTO5SXEQ3POVXHIZLS', correctAnswerCounter)
+        localStorage.setItem('O5ZG63THIFXHG53FOJBW65LOORSXE===', wrongAnswerCounter)
+        localStorage.setItem('ONRW64TF', score)
     } catch {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }
@@ -71,7 +71,7 @@ const calculateResult = (FinalTitleOfQuiz) => {
 const calculateResult_4Option = (FinalTitleOfQuiz) => {
     let quizUrl = decodeURIComponent(window.location.href)
     try {
-        localStorage.setItem('quizUrl', quizUrl)
+        localStorage.setItem('OF2WS6SVOJWA====', quizUrl)
     } catch {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }

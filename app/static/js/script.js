@@ -361,7 +361,7 @@ if (quiz__questions) {
 
     const typeOfQuiz = quiz__questions.getAttribute('tag')
     try {
-        localStorage.setItem('typeOfQuiz', typeOfQuiz)
+        localStorage.setItem('OR4XAZKPMZIXK2L2', typeOfQuiz)
     } catch {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }
@@ -480,7 +480,7 @@ if (backBtn) {
 
 if (result__share__btn) {
     result__share__btn.addEventListener('click', () => {
-        quizUrl = localStorage.getItem('quizUrl')
+        quizUrl = localStorage.getItem('OF2WS6SVOJWA====')
         
         const quizTitle = result__title.innerHTML.slice(25,)
         const quizScore = result__score.innerHTML.split(' ')
@@ -499,7 +499,7 @@ if (result__share__btn) {
 
 if (resultQuiz4Option__share__btn) {
     resultQuiz4Option__share__btn.addEventListener('click', () => {
-        quizUrl = localStorage.getItem('quizUrl')
+        quizUrl = localStorage.getItem('OF2WS6SVOJWA====')
 
         const quizTitle = resultQuiz4Option__title.innerHTML.slice(25,)
         const quizResult = resultQuiz4Option__resultTitle.innerHTML
@@ -528,17 +528,17 @@ const nightMode_turnOff = (element) => {
     document.head.removeChild(lightThemeCss)
     element.classList.add('nightMode-Off')
     element.style.backgroundImage = 'url(/static/img/nightMode.png)'
-    localStorage.setItem('mode', 'lightMode')
+    localStorage.setItem('NVXWIZI=', 'lightMode')
 }
 
 const nightMode_turnOn = (element) => {
     document.head.appendChild(lightThemeCss)
     element.classList.remove('nightMode-Off')
     element.style.backgroundImage = 'url(/static/img/lightMode.png)'
-    localStorage.setItem('mode', 'nightMode')
+    localStorage.setItem('NVXWIZI=', 'nightMode')
 }
 
-userFavoriteMode = localStorage.getItem('mode')
+userFavoriteMode = localStorage.getItem('NVXWIZI=')
 if (userFavoriteMode == 'nightMode') {
     nightMode_turnOn(nightMode)
 }
