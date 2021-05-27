@@ -61,6 +61,10 @@ footer, .footer {
 
         & > p {
             font-weight: 600;
+
+            @include breakpoints-down(medium) {
+                margin-top: 3rem;
+            }
         }
 
         & > input {
@@ -118,16 +122,11 @@ footer, .footer {
         }
 
         &__categoryOptions {
-            position: relative;
-            left: 70%;
             margin-top: 1.125rem;
-            transform: translate(-50%);
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
 
             @include breakpoints-down(medium) {
-                display: flex;
-                flex-wrap: wrap;
-                bottom: 0;
-                left: 55%;
                 margin-bottom: 1.125rem;
             }
 

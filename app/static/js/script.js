@@ -72,10 +72,10 @@ header__searchInput.addEventListener('blur', () => {
 //----------------------------------------------------------
 // sort changer
 findTheSortByBtnName = {
-    'گیمینگ': sort__gaming,
-    'روانشناسی': sort__physiologies,
-    'فیلم و سریال': sort__movieAndSeries,
-    'سلبریتی': sort__celebrities,
+    'گیمینگ 🎮': sort__gaming,
+    'روانشناسی 🧠': sort__physiologies,
+    'فیلم و سریال 🎬': sort__movieAndSeries,
+    'سلبریتی ✨': sort__celebrities,
     'همه': sort__all,
 }
 
