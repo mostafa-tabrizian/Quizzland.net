@@ -60,7 +60,7 @@ def moreSearchResult(searchMoreOfThis):
 
 @app.route('/<sortOfQuiz>/<int:page>')
 def sortAll(sortOfQuiz, page):
-    howManyElementToShow = 12
+    howManyElementToShow = 14
     fTPage = frToPage(page, howManyElementToShow)
 
     if (sortOfQuiz == 'bestest'):
@@ -70,7 +70,7 @@ def sortAll(sortOfQuiz, page):
         sort = quizzesByPublish().all()[fTPage[0]:fTPage[1]]
         title = "جدیدترین کوئیز ها"
 
-    return render_template('/sort.html',
+    return render_template('/sortMore.html',
         pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
         sort = sort,
         title = title,
@@ -78,7 +78,7 @@ def sortAll(sortOfQuiz, page):
 
 @app.route('/<sortOfQuiz>/<category>/<int:page>')
 def sortCategories(category, page, sortOfQuiz):
-    howManyElementToShow = 12
+    howManyElementToShow = 14
     fTPage = frToPage(page, howManyElementToShow)
 
     if sortOfQuiz == 'newest':
@@ -89,11 +89,12 @@ def sortCategories(category, page, sortOfQuiz):
         sort = quizzesByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
         title = "پر بازدیدترین کوئیز های"
 
-    return render_template('/sort.html',
+    return render_template('/sortMore.html',
         sort = sort,
         title = title,
         category = categoryInFar[category],
-        finalPage = finalPage(howManyElementToShow, 'quizzes'))
+        pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
+    )
 
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
 def category(category, page, sortType, numberOfResult):

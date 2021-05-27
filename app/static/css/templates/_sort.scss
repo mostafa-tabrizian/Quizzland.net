@@ -1,17 +1,36 @@
-.newest-mostViews {
-    &__item {
-        margin: auto;
-        max-width: 22rem;
-        padding-top: 1.125rem;
+.sortMore {
+
+    @include breakpoints-down(medium) {
+        margin: 0;
+        transform: inherit;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap-reverse;
+        height: 20rem;
 
         @include breakpoints-down(medium) {
-            max-width: 90%;
+            flex-wrap: nowrap;
+            height: inherit;
+        }
+    }
+
+    &__item {
+        padding-top: 1.125rem;
+        padding-left: 1.125rem;
+
+        @include breakpoints-down(medium) {
+            margin-right: 3rem;
         }
 
         &::after {
             content: '◾';
             position: relative;
             top: 0.2rem;
+            margin-left: .5rem;
         }
+
     }
 }

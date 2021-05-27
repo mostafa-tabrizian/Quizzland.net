@@ -223,7 +223,7 @@
                 <div class="sort__left-2">
                     <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز</h2>
                     <ul class="sort__style">
-                        {% for quiz in MonthlyBestestPhysiologiesQuizSection %}
+                        {% for quiz in MonthlyBestestGamingQuizSection %}
                             {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                             {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
                             <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
