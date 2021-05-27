@@ -30,7 +30,9 @@ def Main():
         BestestPhysiologiesQuizSection = quizzes4OptionByViewsWithCategory('Physiologies').limit(5),
         MonthlyBestestPhysiologiesQuizSection = quizzes4OptionByMonthlyViewsWithCategory('Physiologies').limit(5),
 
-        colorOfHeader = 'header__white')
+        colorOfHeader = 'header__white',
+        headTitle = 'QuizLand | کوئیزلند بزرگترین وب‌سایت کوئيز'
+    )
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -43,19 +45,22 @@ def search():
             userSearchInputInQuizzesDb_far =         quizzesWithTitle(f'%{userSearchInput}%').limit(8),
             userSearchInputInQuizzesDb_eng =         quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
             userSearchInputInQuizzes4OptionDb_far =  quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(8),
-            userSearchInputInQuizzes4OptionDb_eng =  quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8)
+            userSearchInputInQuizzes4OptionDb_eng =  quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
+            headTitle = f'QuizLand | {userSearchInput} جستجو عبارت ',
         )
     else:
-        return render_template('404.html')
+        return render_template('404.html', 
+            headTitle = 'QuizLand | صفحه مورد نظر پیدا نشد'
+        )
 
 @app.route('/search/<searchMoreOfThis>')
 def moreSearchResult(searchMoreOfThis):
     return render_template('moreSearchResult.html', 
-        userSearchInput = searchMoreOfThis,
-        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{userSearchInput}%').limit(20),
-        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(20),
-        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(20),
-        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(20)
+        userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{searchMoreOfThis}%').limit(20),
+        userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(20),
+        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{searchMoreOfThis}%').limit(20),
+        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(20),
+        headTitle = f'QuizLand | {searchMoreOfThis} جستجو عبارت',
     )
 
 @app.route('/<sortOfQuiz>/<int:page>')
@@ -77,6 +82,7 @@ def sortAll(sortOfQuiz, page):
         pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
         sort = sort,
         title = title,
+        headTitle = f'QuizLand | {title}',
     )
 
 @app.route('/<sortOfQuiz>/<category>/<int:page>')
@@ -97,6 +103,7 @@ def sortCategories(category, page, sortOfQuiz):
         title = title,
         category = categoryInFar[category],
         pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
+        headTitle = f'QuizLand | {category} {title} ',
     )
 
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
@@ -108,7 +115,8 @@ def category(category, page, sortType, numberOfResult):
         return render_template(f'/category/category.html',
             tools = tools,
             categories = categories(category, fTPage[0], fTPage[1], sortType),
-            pageTravel = pageTravel(finalPage(howManyElementToShow, category))
+            pageTravel = pageTravel(finalPage(howManyElementToShow, category)),
+            headTitle = f'QuizLand | {category} ',  
         )
 
     else:
@@ -128,6 +136,7 @@ def innerCategory(category, innerCategory, page, sortType, numberOfResult):
             innerCategory = innerCategory,
             quizzes = quizzes(category, InnerCat, fTPage[0], fTPage[1], sortType),
             pageTravel = pageTravel(finalPage(howManyElementToShow, InnerCat)),
+            headTitle = f'QuizLand | {innerCategory} ',
         )
     else:
         return render_template('404.html')
@@ -140,6 +149,7 @@ def Quiz(category, innerCategory, title):
         colorOfHeader = 'header__white',
         quizDetail = firstQuizByFarsiTitle(fullTitle),
         quiz_Question = quizQuestion(category, fullTitle),
+        headTitle = f'QuizLand | {title} ',  
     )
 
 @app.route('/quiz_2/<category>/<innerCategory>/<title>')
@@ -150,6 +160,7 @@ def Quiz4Option(category, innerCategory, title):
         colorOfHeader = 'header__white',
         quizDetail = firstQuizByFarsiTitle(fullTitle),
         quiz_Question = quizQuestion(category, fullTitle),
+        headTitle = f'QuizLand | {title}',
     )
 
 @app.route('/result/<title>')
@@ -158,7 +169,8 @@ def result(title):
     return render_template('/result.html',
         fullTitle = fullTitle,
         backBtn = backBtn,
-        fanName = fanNameOfQuiz(fullTitle)
+        fanName = fanNameOfQuiz(fullTitle),
+        headTitle = f'QuizLand | نتیجه کوئیز ',  
     )
 
 @app.route('/result_2/<title>/<int:score>')
@@ -168,43 +180,51 @@ def result4Option(title, score):
         fullTitle = fullTitle,
         DbOfQuiz = firstQuizByFarsiTitle(fullTitle),
         backBtn = backBtn,
-        score = abs(int(score))
+        score = abs(int(score)),
+        headTitle = f'QuizLand | نتیجه تست ',  
+
     )
 
 @app.route('/about')
 def about():
     return render_template('/about.html',
-        backBtn = backBtn
+        backBtn = backBtn,
+        headTitle = f'QuizLand | درباره ',  
     )
 
 @app.route('/contact')
 def contact():
     return render_template('/contact.html',
-        backBtn = backBtn
+        backBtn = backBtn,
+        headTitle = f'QuizLand | تماس با ما ',  
     )
 
 @app.route('/support')
 def support():
     return render_template('/support.html',
-        backBtn = backBtn
+        backBtn = backBtn,
+        headTitle = f'QuizLand | حمایت ',  
     )
 
 @app.route('/privacy-policy')
 def privacyPolicy():
     return render_template('/privacy-policy.html',
-        backBtn = backBtn
+        backBtn = backBtn,
+        headTitle = f'QuizLand | حریم خصوصی ',  
     )
 
 @app.route('/guide')
 def guide():
     return render_template('/guide.html',
-        backBtn = backBtn
+        backBtn = backBtn,
+        headTitle = f'QuizLand | راهنما ',  
     )
 
 @app.route('/adverts')
 def adverts():
     return render_template('/adverts.html',
         backBtn = backBtn,
+        headTitle = f'QuizLand | تبلیغات ',  
     )
 
 @app.route('/newsletter', methods=['GET', 'POST'])
@@ -235,22 +255,26 @@ def newsletter():
 def pageNotFound():
     return render_template('errorHandler.html',
     backBtn = backBtn,
-    message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404,
+    headTitle = f'QuizLand | صفحه مورد نظر پیدا نشد ',  
+    message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404
 
 @app.errorhandler(404)
 def pageNotFound(e):
     return render_template('errorHandler.html',
     backBtn = backBtn,
+    headTitle = f'QuizLand | صفحه مورد نظر پیدا نشد ', 
     message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404
 
 @app.errorhandler(403)
 def forbidden(e):
     return render_template('errorHandler.html',
+    headTitle = f'QuizLand | دسترسی شما به این صفحه مجاز نیست ', 
     backBtn = backBtn,
     message = "❌ دسترسی شما به این صفحه مجاز نیست ❌"), 403
     
 @app.errorhandler(500)
 def internalServerError(e):
     return render_template('errorHandler.html',
+    headTitle = f'QuizLand | مشکلی رخ داده است ', 
     backBtn = backBtn,
     message = "🙄 سرور های سایت احتمالا داغ کرده لطفا یکم دیگه امتحان کنید"), 500
