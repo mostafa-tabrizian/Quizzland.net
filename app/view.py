@@ -103,7 +103,7 @@ def sortCategories(category, page, sortOfQuiz):
         title = title,
         category = categoryInFar[category],
         pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
-        headTitle = f'QuizLand | {category} {title} ',
+        headTitle = f'QuizLand | {title} {categoryInFar[category]} ',
     )
 
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
@@ -116,7 +116,7 @@ def category(category, page, sortType, numberOfResult):
             tools = tools,
             categories = categories(category, fTPage[0], fTPage[1], sortType),
             pageTravel = pageTravel(finalPage(howManyElementToShow, category)),
-            headTitle = f'QuizLand | {category} ',  
+            headTitle = f'QuizLand | کوئیز های {categoryInFar[category]} ',  
         )
 
     else:
