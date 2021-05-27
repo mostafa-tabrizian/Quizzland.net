@@ -161,4 +161,12 @@ body {
             }
         }
     }
+
+    &__quizzes {
+        &__item {
+            &::before {
+                content: '◽'
+            }
+        }
+    }
 }

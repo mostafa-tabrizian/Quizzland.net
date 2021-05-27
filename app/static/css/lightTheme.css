@@ -138,4 +138,8 @@ body::-webkit-scrollbar-thumb {
   -webkit-box-shadow: 0 0 15px #828282;
           box-shadow: 0 0 15px #828282;
 }
+
+.searchResult__quizzes__item::before {
+  content: '◽';
+}
 /*# sourceMappingURL=lightTheme.css.map */

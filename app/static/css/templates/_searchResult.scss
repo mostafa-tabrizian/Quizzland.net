@@ -63,7 +63,7 @@
         &__item {
             display: block;
             margin-bottom: 1rem;
-            transform: translate(-25%);
+            transform: translate(-30%);
 
             @include breakpoints-down(medium) {
                 transform: translate(-15%)
@@ -73,6 +73,7 @@
                 content: '◾';
                 position: relative;
                 top: 0.2rem;
+                margin-left: 1rem;
             }
         }
     }
