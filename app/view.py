@@ -244,10 +244,12 @@ def newsletter():
         if len(srchInDb) == 0:
             add_session(data)
             return render_template('/success.html',
+                headTitle = f'QuizLand | ایمیل ثبت شد ',  
                 backBtn = backBtn,
             )
         else:
             return render_template('/no-success.html',
+                headTitle = f'QuizLand | خطا در ثبت ایمیل ',  
                 backBtn = backBtn,
             )
 
