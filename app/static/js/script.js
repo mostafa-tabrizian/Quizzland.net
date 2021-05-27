@@ -518,31 +518,32 @@ if (resultQuiz4Option__share__btn) {
 
 
 // --------------------------------------------------------------------
+
+const lightThemeCss = document.createElement('link')
+lightThemeCss.setAttribute('rel', 'stylesheet')
+lightThemeCss.setAttribute('type', 'text/css')
+lightThemeCss.setAttribute('href', "/static/css/lightTheme.css")
+
+const nightMode_turnOff = (element) => {
+    document.head.removeChild(lightThemeCss)
+    element.classList.add('nightMode-Off')
+    element.style.backgroundImage = 'url(/static/img/nightMode.png)'
+    localStorage.setItem('mode', 'lightMode')
+}
+
+const nightMode_turnOn = (element) => {
+    document.head.appendChild(lightThemeCss)
+    element.classList.remove('nightMode-Off')
+    element.style.backgroundImage = 'url(/static/img/lightMode.png)'
+    localStorage.setItem('mode', 'nightMode')
+}
+
+userFavoriteMode = localStorage.getItem('mode')
+if (userFavoriteMode == 'nightMode') {
+    nightMode_turnOn(nightMode)
+}
+
 if (nightMode) {
-    const lightThemeCss = document.createElement('link')
-    lightThemeCss.setAttribute('rel', 'stylesheet')
-    lightThemeCss.setAttribute('type', 'text/css')
-    lightThemeCss.setAttribute('href', "/static/css/lightTheme.css")
-    
-    const nightMode_turnOff = (element) => {
-        document.head.removeChild(lightThemeCss)
-        element.classList.add('nightMode-Off')
-        element.style.backgroundImage = 'url(/static/img/nightMode.png)'
-        localStorage.setItem('mode', 'lightMode')
-    }
-    
-    const nightMode_turnOn = (element) => {
-        document.head.appendChild(lightThemeCss)
-        element.classList.remove('nightMode-Off')
-        element.style.backgroundImage = 'url(/static/img/lightMode.png)'
-        localStorage.setItem('mode', 'nightMode')
-    }
-    
-    userFavoriteMode = localStorage.getItem('mode')
-    if (userFavoriteMode == 'nightMode') {
-        nightMode_turnOn(nightMode)
-    }
-    
     const nightModeFunction = (element) => {
         if (element.classList.contains('nightMode-Off')) {
             nightMode_turnOn(element)
@@ -556,20 +557,22 @@ if (nightMode) {
     nightMode_m.addEventListener('click', () => {
         nightModeFunction(nightMode_m)
     })
-} else {log('no nightMode')}
+} else {log ('no nightMode')}
 
 // --------------------------------------------------------------------
 
-if (nightMode_turnOff) {
+if (nightMode) {
     checkTheUrlSoWeCheckIfShouldRemoveTheNightMode = splitUrl()
-
+    
     if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode.length == 9 || // innerCategory
         checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'quiz')
         {
             nightMode__container.classList.add('noVis')
-            nightMode_turnOff() 
-    }
-} else {log('no nightMode')}
+            nightMode__container_m.classList.add('noVis')
+            document.head.removeChild(lightThemeCss)
+            nightMode.classList.add('nightMode-Off')
+        }       
+} else {log ('no nightMode')}
 
 // --------------------------------------------------------------------
 
