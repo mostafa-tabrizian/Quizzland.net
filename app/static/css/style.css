@@ -674,6 +674,10 @@ input {
   padding: .6250rem;
 }
 
+.header__logo img {
+  width: 100px;
+}
+
 .header__links {
   padding: 1.25rem;
   padding-left: 0;
@@ -823,7 +827,7 @@ input {
 
 .header .subHeader {
   position: absolute;
-  top: 7rem;
+  top: 8rem;
   border: 1px solid transparent;
   background: rgba(0, 0, 0, 0.178);
   -webkit-backdrop-filter: blur(10px);
@@ -854,12 +858,12 @@ input {
 }
 
 .header__categories {
-  right: 5rem;
+  right: 11rem;
   z-index: 3;
 }
 
 .header__quizzes {
-  right: 12rem;
+  right: 18rem;
 }
 
 .header__white span {
