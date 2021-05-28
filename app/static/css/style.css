@@ -1148,7 +1148,7 @@ footer__navbar > li, .footer__navbar > li {
 }
 
 footer__navbar > li:not(:last-child), .footer__navbar > li:not(:last-child) {
-  padding-left: 2rem;
+  padding-left: 1.7rem;
 }
 
 footer__navbar > li:hover, .footer__navbar > li:hover {
@@ -1157,7 +1157,6 @@ footer__navbar > li:hover, .footer__navbar > li:hover {
 
 footer__detail, .footer__detail {
   margin: 0;
-  margin-right: 2rem;
 }
 
 footer__detail > li, .footer__detail > li {
