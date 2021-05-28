@@ -438,13 +438,13 @@ input {
     &__arwLast {
         width: 1.25rem;
         height: 1.25rem;
-        background: url('/static/img/arw-travelPage.svg') no-repeat;
+        background: url('/static/img/base/arw-travelPage.svg') no-repeat;
     }
 
     &__arwNext {
         width: 1.25rem;
         height: 1.25rem;
-        background: url('/static/img/arw-travelPage.svg') no-repeat;
+        background: url('/static/img/base/arw-travelPage.svg') no-repeat;
         transform: rotate(180deg);
     }
 
@@ -476,7 +476,7 @@ input {
 }
 
 .nightMode {
-    background: url('/static/img/nightMode.png') no-repeat center center;
+    background: url('/static/img/base/nightMode.png') no-repeat center center;
     transform: translate(0.54rem, -0.33rem);
     height: 27px;
     z-index: 3;
