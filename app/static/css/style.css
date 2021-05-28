@@ -672,10 +672,11 @@ input {
 
 .header__logo {
   padding: .6250rem;
+  margin-left: .5rem !important;
 }
 
 .header__logo img {
-  width: 100px;
+  width: 155px;
 }
 
 .header__links {
