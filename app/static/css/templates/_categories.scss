@@ -1,7 +1,5 @@
 .categoryList{
     line-height: 2.2rem;
-    min-height: 60vh;
-    padding: 1rem 2rem 1rem 2rem;
     transform: translateY(-2rem);
 
     @include breakpoints-down(medium) {
@@ -9,6 +7,9 @@
     }
 
     > ul {
+        padding: 1.1rem;
+        margin-bottom: 0;
+        min-height: 22rem;
 
         > li {
             &::before {
@@ -72,6 +73,7 @@
 .pageTravel {
     padding: .2rem .7rem;
     margin-bottom: 2rem;
+    margin-top: 0;
 
     &__pages {
         > a , span {

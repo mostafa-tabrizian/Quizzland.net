@@ -1451,8 +1451,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .categoryList {
   line-height: 2.2rem;
-  min-height: 60vh;
-  padding: 1rem 2rem 1rem 2rem;
   -webkit-transform: translateY(-2rem);
           transform: translateY(-2rem);
 }
@@ -1461,6 +1459,12 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   .categoryList {
     margin: auto;
   }
+}
+
+.categoryList > ul {
+  padding: 1.1rem;
+  margin-bottom: 0;
+  min-height: 22rem;
 }
 
 .categoryList > ul > li::before {
@@ -1524,6 +1528,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 .pageTravel {
   padding: .2rem .7rem;
   margin-bottom: 2rem;
+  margin-top: 0;
 }
 
 .pageTravel__pages > a:not(:last-child), .pageTravel__pages span:not(:last-child) {
