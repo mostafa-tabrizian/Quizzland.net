@@ -527,14 +527,14 @@ lightThemeCss.setAttribute('href', "/static/css/lightTheme.css")
 const nightMode_turnOff = (element) => {
     document.head.removeChild(lightThemeCss)
     element.classList.add('nightMode-Off')
-    element.style.backgroundImage = 'url(/static/img/nightMode.png)'
+    element.style.backgroundImage = 'url(/static/img/base/nightMode.png)'
     localStorage.setItem('NVXWIZI=', 'lightMode')
 }
 
 const nightMode_turnOn = (element) => {
     document.head.appendChild(lightThemeCss)
     element.classList.remove('nightMode-Off')
-    element.style.backgroundImage = 'url(/static/img/lightMode.png)'
+    element.style.backgroundImage = 'url(/static/img/base/lightMode.png)'
     localStorage.setItem('NVXWIZI=', 'nightMode')
 }
 
