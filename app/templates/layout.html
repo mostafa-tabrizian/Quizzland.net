@@ -8,10 +8,10 @@
     <link rel="preload" href="/static/font/Harmattan-Regular.ttf" as="font">
     <link rel="preload" href="/static/font/Changa-ExtraLight.ttf" as="font">
     <link rel="preload" href="/static/font/Vermin-Vibes-2-Soft.ttf" as="font">
-    <link rel="icon" href="/static/img/favicon.jpg" type="image/jpg" sizes="32x32">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}"></link>
+    <link rel="icon" href="/static/img/base/favicon.jpg" type="image/jpg" sizes="32x32">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}"></>
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/minified.css') }}"></link> -->
-    <link rel="shortcut icon" href="/static/img/base/logo2.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/static/img/base/logo.png" type="image/x-icon">
     <title>{{ headTitle }}</title>
 </head>
 
@@ -21,7 +21,7 @@
         <!-- Search -->
         <div class="flex flex-ai-c">
             <a class="header__logo flex flex-jc-sb hideForDesktop" href="/" class="">
-                <img src="/static/img/base/logo2.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
+                <img src="/static/img/base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
             </a>
             <form class="header__search {{colorOfHeader}} flex" action="/search" method="post">
                 <input class='header__searchSubmit fade-out flex flex-ai-c' type="submit" value="">
@@ -32,7 +32,7 @@
         <!-- Links -->
         <div class="header__links {{colorOfHeader}} hideForMobile hoverAnimation flex flex-ai-c">
             <a class="header__logo flex flex-jc-sb" href="/" class="header__logo">
-                <img src="/static/img/base/logo2.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
+                <img src="/static/img/base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
             </a>
             <a class="header__categories__btn">کتگوری‌ ها</a>
             <a class="header__quizzes__btn">کویز ها</a>
@@ -40,7 +40,7 @@
             <a href="/contact">تماس با ما</a>
             <!--Night Mode-->
             <div class="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
-                <button class="nightMode nightMode-Off" type="button"></button>
+                <button class="nightMode" type="button"></button>
             </div>
         </div>
 
@@ -89,8 +89,8 @@
                         <li><a href="/about">درباه‌ی ما</a></li>
                         <li><a href="/contact">تماس با ما</a></li>
                         <!--Night Mode-->
-                        <div class="nightMode__container nightMode__container_m darkGls" title="تبدیل به حالت شب و بالعکس">
-                            <button class="nightMode nightMode_m nightMode-Off" type="button"></button>
+                        <div class="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
+                            <button class="nightMode" type="button"></button>
                         </div>
                     </ul>
                 </div>

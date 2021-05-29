@@ -524,41 +524,48 @@ lightThemeCss.setAttribute('rel', 'stylesheet')
 lightThemeCss.setAttribute('type', 'text/css')
 lightThemeCss.setAttribute('href', "/static/css/lightTheme.css")
 
-const nightMode_turnOff = (element) => {
-    document.head.removeChild(lightThemeCss)
-    element.classList.add('nightMode-Off')
-    element.style.backgroundImage = 'url(/static/img/base/nightMode.png)'
-    localStorage.setItem('NVXWIZI=', 'lightMode')
+const nightMode_turnOff = () => {
+    try {
+        document.head.removeChild(lightThemeCss)
+    } catch {log("it's default on lightMode no need removing")}
+    nightMode.forEach (each => {
+        each.classList.add('nightMode-Off')
+        each.style.backgroundImage = 'url(/static/img/base/nightMode.png)'
+        localStorage.setItem('NVXWIZI=', 'lightMode')
+    })
 }
 
-const nightMode_turnOn = (element) => {
+const nightMode_turnOn = () => {
     document.head.appendChild(lightThemeCss)
-    element.classList.remove('nightMode-Off')
-    element.style.backgroundImage = 'url(/static/img/base/lightMode.png)'
-    localStorage.setItem('NVXWIZI=', 'nightMode')
+    nightMode.forEach (each => {
+        each.classList.remove('nightMode-Off')
+        each.style.backgroundImage = 'url(/static/img/base/lightMode.png)'
+        localStorage.setItem('NVXWIZI=', 'nightMode')
+    })
 }
 
 userFavoriteMode = localStorage.getItem('NVXWIZI=')
 if (userFavoriteMode == 'lightMode') {
-    nightMode_turnOff(nightMode)
+    nightMode_turnOff()
 } else {
-    nightMode_turnOn(nightMode)
+    nightMode_turnOn()
 }
 
 if (nightMode) {
-    const nightModeFunction = (element) => {
-        if (element.classList.contains('nightMode-Off')) {
-            nightMode_turnOn(element)
+    const nightModeFunction = () => {
+        if (nightMode[0].classList.contains('nightMode-Off')) {
+            nightMode_turnOn()
         } else {
-            nightMode_turnOff(element)
+            nightMode_turnOff()
         }
     }
-    nightMode.addEventListener('click', () => {
-        nightModeFunction(nightMode)
+
+    nightMode.forEach(each => {
+        each.addEventListener('click', () => {
+            nightModeFunction()
+        })
     })
-    nightMode_m.addEventListener('click', () => {
-        nightModeFunction(nightMode_m)
-    })
+
 } else {log ('no nightMode')}
 
 // --------------------------------------------------------------------
