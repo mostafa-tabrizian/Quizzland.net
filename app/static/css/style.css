@@ -847,7 +847,7 @@ input {
 
 .header .subHeader__open {
   opacity: 1;
-  top: 4.5rem;
+  top: 5.5rem;
   pointer-events: visibleFill;
 }
 
@@ -860,12 +860,12 @@ input {
 }
 
 .header__categories {
-  right: 11rem;
+  right: 14rem;
   z-index: 3;
 }
 
 .header__quizzes {
-  right: 18rem;
+  right: 21rem;
 }
 
 .header__white span {
