@@ -47,12 +47,24 @@ def quizzesByPublish():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.publish.desc())
     return quizzesGrabbedByPublish
 
+def quizzes4OptionByPublish():
+    quizzesGrabbedByPublish = s.query(Quizzes4Option).order_by(Quizzes4Option.publish.desc())
+    return quizzesGrabbedByPublish
+
 def quizzesByViews():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.views.desc())
     return quizzesGrabbedByPublish
 
+def quizzes4OptionByViews():
+    quizzesGrabbedByPublish = s.query(Quizzes4Option).order_by(Quizzes4Option.views.desc())
+    return quizzesGrabbedByPublish
+
 def quizzesByMonthlyViews():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.monthly_views.desc())
+    return quizzesGrabbedByPublish
+
+def quizzes4OptionByMonthlyViews():
+    quizzesGrabbedByPublish = s.query(Quizzes4Option).order_by(Quizzes4Option.monthly_views.desc())
     return quizzesGrabbedByPublish
 
 def quizzes(category, innerCategory, fr, to, sortType):

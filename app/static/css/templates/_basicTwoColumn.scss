@@ -15,6 +15,10 @@
             flex-wrap: nowrap;
             height: inherit;
         }
+
+        &:not(:last-child) {
+            margin-right: 5rem;
+        }
     }
 
     &__item {

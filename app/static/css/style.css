@@ -2232,6 +2232,10 @@ body {
   }
 }
 
+.basicTwoColumn__container:not(:last-child) {
+  margin-right: 5rem;
+}
+
 .basicTwoColumn__item {
   padding-top: 1.125rem;
   padding-left: 1.125rem;
