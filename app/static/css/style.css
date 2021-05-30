@@ -1784,7 +1784,7 @@ body {
 }
 
 .quiz__questionChanger__container button {
-  background: url("/static/img/arw.svg") no-repeat center center;
+  background: url("/static/img/base/arw.svg") no-repeat center center;
   height: 2rem;
   width: 2rem;
 }

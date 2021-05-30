@@ -15,15 +15,15 @@ def Main():
         bestestQuizzesForThisMonth = quizzesByMonthlyViews().limit(5),
 
         NewestCelebrityQuizSection =  quizzesByPublishWithCategory('celebrities').limit(15),
-        BestestCelebrityQuizSection = quizzesByViewsWithCategory('celebrities').limit(5),
+        BestestCelebrityQuizSection = quizzesBothByViewsWithCategory('celebrities').limit(5),
         MonthlyBestestCelebrityQuizSection = quizzesByMonthlyViewsWithCategory('celebrities').limit(5),
 
         NewestMovieSeriesQuizSection =  quizzesByPublishWithCategory('movieSeries').limit(15),
-        BestestMovieSeriesQuizSection = quizzesByViewsWithCategory('movieSeries').limit(5),
+        BestestMovieSeriesQuizSection = quizzesBothByViewsWithCategory('movieSeries').limit(5),
         MonthlyBestestMovieSeriesQuizSection = quizzesByMonthlyViewsWithCategory('movieSeries').limit(5),
         
         NewestGamingQuizSection =  quizzesByPublishWithCategory('Gaming').limit(15),
-        BestestGamingQuizSection = quizzesByViewsWithCategory('Gaming').limit(5),
+        BestestGamingQuizSection = quizzesBothByViewsWithCategory('Gaming').limit(5),
         MonthlyBestestGamingQuizSection = quizzesByMonthlyViewsWithCategory('Gaming').limit(5),
         
         NewestPhysiologiesQuizSection =  quizzesPointyByPublishWithCategory('Physiologies').limit(15),
@@ -100,7 +100,7 @@ def sortCategories(category, page, sortOfQuiz):
         title = "جدیدترین کوئیز های"
 
     elif sortOfQuiz == 'bestest':
-        sort = quizzesByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
+        sort = quizzesBothByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
         title = "پر بازدیدترین کوئیز های"
 
     return render_template('/sortMore.html',
