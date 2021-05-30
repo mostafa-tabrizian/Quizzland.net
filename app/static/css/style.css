@@ -374,15 +374,15 @@ input {
 .fade-out {
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: all .53s ease-in-out;
-  transition: all .53s ease-in-out;
+  -webkit-transition: all .53s ease-in-out !important;
+  transition: all .53s ease-in-out !important;
 }
 
 .fade-in {
   visibility: visible;
   opacity: 1;
-  -webkit-transition: all .53s ease-in-out;
-  transition: all .53s ease-in-out;
+  -webkit-transition: all .53s ease-in-out !important;
+  transition: all .53s ease-in-out !important;
 }
 
 .noVis {
@@ -784,6 +784,7 @@ input {
   cursor: pointer;
   z-index: 2;
   width: 1.5rem;
+  height: 2rem;
   border: 0;
 }
 
@@ -826,6 +827,21 @@ input {
           box-shadow: -2px 2px 5px black;
 }
 
+.header__searchInput__m {
+  -webkit-transform: translate(0.5rem, 0);
+          transform: translate(0.5rem, 0);
+  position: absolute;
+  top: 1.4rem;
+  right: 5.1rem;
+  width: 14rem;
+}
+
+.header__searchShow {
+  position: absolute;
+  top: 1.4rem;
+  right: 7.1rem;
+}
+
 .header .subHeader {
   position: absolute;
   top: 8rem;
@@ -859,12 +875,12 @@ input {
 }
 
 .header__categories {
-  right: 14rem;
+  right: 12rem;
   z-index: 3;
 }
 
 .header__quizzes {
-  right: 21rem;
+  right: 19rem;
 }
 
 .header__white span {

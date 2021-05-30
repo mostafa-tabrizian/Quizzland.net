@@ -274,12 +274,12 @@ input {
     &-out {
         visibility: hidden;
         opacity: 0;
-        transition: all .53s ease-in-out;
+        transition: all .53s ease-in-out !important;
     }
     &-in {
         visibility: visible;
         opacity: 1;
-        transition: all .53s ease-in-out;  
+        transition: all .53s ease-in-out !important;  
     }
 }
 

@@ -5,7 +5,6 @@
     padding: 1rem;
 
     &__logo {
-
         img {
             width: 155px;
 
@@ -110,6 +109,7 @@
         cursor: pointer;
         z-index: 2;
         width: 1.5rem;
+        height: 2rem;
         border: 0;
     }
 
@@ -133,6 +133,20 @@
         &:focus {
             box-shadow: -2px 2px 5px black;
         }
+
+        &__m {
+            transform: translate(.5rem, 0);
+            position: absolute;
+            top: 1.4rem;
+            right: 5.1rem;
+            width: 14rem;
+        }
+    }
+
+    &__searchShow {
+        position: absolute;
+        top: 1.4rem;
+        right: 7.1rem;
     }
 
     .subHeader {
@@ -166,12 +180,12 @@
     }
 
     &__categories {
-        right: 14rem;
+        right: 12rem;
         z-index: 3;
     }
 
     &__quizzes {
-        right: 21rem;
+        right: 19rem;
     }
 
     &__white {

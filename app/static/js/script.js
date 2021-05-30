@@ -70,6 +70,18 @@ header__searchInput.addEventListener('blur', () => {
 })
 
 //----------------------------------------------------------
+// show searchBar for mobile
+header__searchShow.addEventListener('click', () => {
+    if (header__searchInput__m.classList.contains('fade-out')) {
+        fadeIn(header__searchInput__m)
+        header__searchInput__m.style.transform = 'translate(.5rem, 2.5rem)';
+    } else {
+        header__searchInput__m.style.transform = 'translate(.5rem, 0)';
+        fadeOut(header__searchInput__m)
+    }
+})
+
+//----------------------------------------------------------
 // sort changer
 findTheSortByBtnName = {
     'گیمینگ 🎮': sort__gaming,
