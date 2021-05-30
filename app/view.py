@@ -26,9 +26,9 @@ def Main():
         BestestGamingQuizSection = quizzesByViewsWithCategory('Gaming').limit(5),
         MonthlyBestestGamingQuizSection = quizzesByMonthlyViewsWithCategory('Gaming').limit(5),
         
-        NewestPhysiologiesQuizSection =  quizzes4OptionByPublishWithCategory('Physiologies').limit(15),
-        BestestPhysiologiesQuizSection = quizzes4OptionByViewsWithCategory('Physiologies').limit(5),
-        MonthlyBestestPhysiologiesQuizSection = quizzes4OptionByMonthlyViewsWithCategory('Physiologies').limit(5),
+        NewestPhysiologiesQuizSection =  quizzesPointyByPublishWithCategory('Physiologies').limit(15),
+        BestestPhysiologiesQuizSection = quizzesPointyByViewsWithCategory('Physiologies').limit(5),
+        MonthlyBestestPhysiologiesQuizSection = quizzesPointyByMonthlyViewsWithCategory('Physiologies').limit(5),
 
         colorOfHeader = 'header__white',
         headTitle = 'QuizLand | کوئیزلند بزرگترین وب‌سایت کوئيز'
@@ -44,8 +44,8 @@ def search():
             userSearchInputInCategoriesDb_eng =      categoriesByTitleEng(f'%{userSearchInput}%').limit(2),
             userSearchInputInQuizzesDb_far =         quizzesWithTitle(f'%{userSearchInput}%').limit(8),
             userSearchInputInQuizzesDb_eng =         quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
-            userSearchInputInQuizzes4OptionDb_far =  quizzes4OptionWithTitle(f'%{userSearchInput}%').limit(8),
-            userSearchInputInQuizzes4OptionDb_eng =  quizzes4OptionByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
+            userSearchInputInQuizzesPointyDb_far =  quizzesPointyWithTitle(f'%{userSearchInput}%').limit(8),
+            userSearchInputInQuizzesPointyDb_eng =  quizzesPointyByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
             headTitle = f'QuizLand | {userSearchInput} جستجو عبارت ',
         )
     else:
@@ -59,8 +59,8 @@ def moreSearchResult(searchMoreOfThis):
         userSearchInput = searchMoreOfThis,
         userSearchInputInQuizzesDb_far = quizzesWithTitle(f'%{searchMoreOfThis}%').limit(14),
         userSearchInputInQuizzesDb_eng = quizzesByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(14),
-        userSearchInputInQuizzes4OptionDb_far = quizzes4OptionWithTitle(f'%{searchMoreOfThis}%').limit(14),
-        userSearchInputInQuizzes4OptionDb_eng = quizzes4OptionByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(14),
+        userSearchInputInQuizzesPointyDb_far = quizzesPointyWithTitle(f'%{searchMoreOfThis}%').limit(14),
+        userSearchInputInQuizzesPointyDb_eng = quizzesPointyByPublishWithInnerCategory(f'%{searchMoreOfThis}%').limit(14),
         headTitle = f'QuizLand | {searchMoreOfThis} جستجو عبارت',
     )
 
@@ -71,21 +71,21 @@ def sortAll(sortOfQuiz, page):
 
     if (sortOfQuiz == 'newest'):
         sort = quizzesByPublish().all()[fTPage[0]:fTPage[1]]
-        sort4Option = quizzes4OptionByPublish().all()[fTPage[0]:fTPage[1]]
+        sortPointy = quizzesPointyByPublish().all()[fTPage[0]:fTPage[1]]
         title = "جدیدترین کوئیز ها"
     elif (sortOfQuiz == 'bestest'):
         sort = quizzesByViews().all()[fTPage[0]:fTPage[1]]
-        sort4Option = quizzes4OptionByViews().all()[fTPage[0]:fTPage[1]]
+        sortPointy = quizzesPointyByViews().all()[fTPage[0]:fTPage[1]]
         title = "پربازدیدترین کوئيز ها"
     elif sortOfQuiz == 'monthlyBestest':
         sort = quizzesByMonthlyViews()[fTPage[0]:fTPage[1]]
-        sort4Option = quizzes4OptionByMonthlyViews().all()[fTPage[0]:fTPage[1]]
+        sortPointy = quizzesPointyByMonthlyViews().all()[fTPage[0]:fTPage[1]]
         title = "پر بازدیدترین کوئیز های این ماه"
 
     return render_template('/sortMore.html',
         pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
         sort = sort,
-        sort4Option = sort4Option,
+        sortPointy = sortPointy,
         title = title,
         headTitle = f'QuizLand | {title}',
     )
@@ -158,10 +158,10 @@ def Quiz(category, innerCategory, title):
     )
 
 @app.route('/quiz_2/<category>/<innerCategory>/<title>')
-def Quiz4Option(category, innerCategory, title):
+def QuizPointy(category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
-    return render_template('/quiz_4Option.html',
+    return render_template('/quiz_Pointy.html',
         colorOfHeader = 'header__white',
         quizDetail = firstQuizByFarsiTitle(fullTitle),
         quiz_Question = quizQuestion(category, fullTitle),
@@ -179,9 +179,9 @@ def result(title):
     )
 
 @app.route('/result_2/<title>/<int:score>')
-def result4Option(title, score):
+def resultPointy(title, score):
     fullTitle = titleConverterFromUrlToNormalOne(title)
-    return render_template('/result_4Option.html',
+    return render_template('/result_pointy.html',
         fullTitle = fullTitle,
         DbOfQuiz = firstQuizByFarsiTitle(fullTitle),
         backBtn = backBtn,

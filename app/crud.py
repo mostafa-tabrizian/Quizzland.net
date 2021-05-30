@@ -15,6 +15,10 @@ def recreate_quizzes():
     quizzesBase.metadata.drop_all(engine)
     quizzesBase.metadata.create_all(engine)
 
+def recreate_quizzesPointy():
+    quizzesPointyBase.metadata.drop_all(engine)
+    quizzesPointyBase.metadata.create_all(engine)
+
 def recreate_categories():
     categoriesBase.metadata.drop_all(engine)
     categoriesBase.metadata.create_all(engine)
@@ -27,13 +31,10 @@ def recreate_quizQuestions():
     quizQuestionsBase.metadata.drop_all(engine)
     quizQuestionsBase.metadata.create_all(engine)
 
-def recreate_4OptionQuestions():
-    fourOptionQuizQuestionsBase.metadata.drop_all(engine)
-    fourOptionQuizQuestionsBase.metadata.create_all(engine)
+def recreate_quizPointyQuestions():
+    quizPointyQuestionsBase.metadata.drop_all(engine)
+    quizPointyQuestionsBase.metadata.create_all(engine)
 
-def recreate_quizzes4Option():
-    quizzes4OptionBase.metadata.drop_all(engine)
-    quizzes4OptionBase.metadata.create_all(engine)
 
 def add_session(data):
     try:
@@ -80,11 +81,11 @@ def up_session():
 #--------------------
 # recreate_documents()
 # recreate_quizzes()
+# recreate_quizzesPointy()
 # recreate_categories()
-# recreate_newsletterUrl()
 # recreate_quizQuestions()
-# recreate_quizzes4Option()
-# recreate_4OptionQuestions()
+# recreate_quizPointyQuestions()
+# recreate_newsletterUrl()
 # del_session()
 # up_session()
 # add_session(data)

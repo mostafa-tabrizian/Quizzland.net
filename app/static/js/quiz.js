@@ -68,7 +68,7 @@ const calculateResult = (FinalTitleOfQuiz) => {
     window.location.replace(`/result/${FinalTitleOfQuiz}`); 
 }
 
-const calculateResult_4Option = (FinalTitleOfQuiz) => {
+const calculateResult_pointy = (FinalTitleOfQuiz) => {
     let quizUrl = decodeURIComponent(window.location.href)
     try {
         localStorage.setItem('OF2WS6SVOJWA====', quizUrl)

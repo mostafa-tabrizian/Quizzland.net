@@ -87,9 +87,9 @@ const result__detail__correctTime = document.querySelector('.result__detail__cor
 const result__detail__wrongTime = document.querySelector('.result__detail__wrongTime')
 const result__clipboard = document.querySelector('.result__clipboard')
 
-const resultQuiz4Option__title = document.querySelector('.resultQuiz4Option__title')
-const resultQuiz4Option__resultTitle = document.querySelector('.resultQuiz4Option__resultTitle')
-const resultQuiz4Option__share__btn = document.querySelector('.resultQuiz4Option__share__btn')
+const resultQuizPointy__title = document.querySelector('.resultQuizPointy__title')
+const resultQuizPointy__resultTitle = document.querySelector('.resultQuizPointy__resultTitle')
+const resultQuizPointy__share__btn = document.querySelector('.resultQuizPointy__share__btn')
 
 const log = (code) => {
     console.log(code)

@@ -1,18 +1,18 @@
 {% extends './layout.html' %}
 {% block content %}
 
-<div class="resultQuiz4Option__container">
+<div class="resultQuizPointy__container">
 
-    <h3 class="resultQuiz4Option__title flex flex-jc-c">نتیجه‌ تست&nbsp:&nbsp{{ fullTitle }}</h3>
-    <div class="resultQuiz4Option space-sm center tx-al-c">
+    <h3 class="resultQuizPointy__title flex flex-jc-c">نتیجه‌ تست&nbsp:&nbsp{{ fullTitle }}</h3>
+    <div class="resultQuizPointy space-sm center tx-al-c">
             {% if DbOfQuiz.result_UpTo_1 != None and DbOfQuiz.result_UpTo_1.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_1.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -20,12 +20,12 @@
                 
             {% elif DbOfQuiz.result_UpTo_2 != None and DbOfQuiz.result_UpTo_2.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_2.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -33,12 +33,12 @@
                                     
             {% elif DbOfQuiz.result_UpTo_3 != None and DbOfQuiz.result_UpTo_3.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_3.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -46,12 +46,12 @@
 
             {% elif DbOfQuiz.result_UpTo_4 != None and DbOfQuiz.result_UpTo_4.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_4.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -59,12 +59,12 @@
                 
             {% elif DbOfQuiz.result_UpTo_5 != None and DbOfQuiz.result_UpTo_5.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_5.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -72,12 +72,12 @@
 
             {% elif DbOfQuiz.result_UpTo_6 != None and DbOfQuiz.result_UpTo_6.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_6.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -85,12 +85,12 @@
 
             {% elif DbOfQuiz.result_UpTo_7 != None and DbOfQuiz.result_UpTo_7.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_7.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -98,12 +98,12 @@
                 
             {% elif DbOfQuiz.result_UpTo_8 != None and DbOfQuiz.result_UpTo_8.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_8.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -111,12 +111,12 @@
 
             {% elif DbOfQuiz.result_UpTo_9 != None and DbOfQuiz.result_UpTo_9.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_9.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <p class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ (sliceDb[2] | replace("XX", "<br/><br/>", 999)) | safe }}
                         </p>
                     </div>
@@ -124,12 +124,12 @@
 
             {% elif DbOfQuiz.result_UpTo_10 != None and DbOfQuiz.result_UpTo_10.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_10.split('=') %}
-                <body class="resultQuiz4Option__bg" style="background-image:url('/static/img/Bg-4OptionResult/{{ sliceDb[3] }}.jpg')">
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
                     <div class="darkGls center">
-                        <h1 class="resultQuiz4Option__resultTitle">
+                        <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
-                        <pre class="resultQuiz4Option__txt tx-al-r space-sm">
+                        <pre class="resultQuizPointy__txt tx-al-r space-sm">
                             {{ sliceDb[2] }}
                         </pre>
                     </div>
@@ -145,7 +145,7 @@
     <div class="result wrapper-med flex-ai-c flex-jc-c">
         <div class="result__share tx-al-c">
             <h5>برای دوست و اشناهات بفرست </br> ببین شبیه تو در میان یا نه</h5>
-            <button class='resultQuiz4Option__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
+            <button class='resultQuizPointy__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
             <h6 class="result__share__message noVis">نتیجه و لینک تست کپی شد</h6>
         </div>
     </div>

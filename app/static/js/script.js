@@ -396,8 +396,8 @@ if (quiz__questions) {
             FinalTitleOfQuiz = titleOfTheQuiz()
             if (typeOfQuiz == 'quiz') {
                 calculateResult(FinalTitleOfQuiz)
-            } else if (typeOfQuiz == '4Option') {
-                calculateResult_4Option(FinalTitleOfQuiz)
+            } else if (typeOfQuiz == 'pointy') {
+                calculateResult_pointy(FinalTitleOfQuiz)
             }
         }
     }
@@ -497,12 +497,12 @@ if (result__share__btn) {
     })
 } else {log('no result share')}
 
-if (resultQuiz4Option__share__btn) {
-    resultQuiz4Option__share__btn.addEventListener('click', () => {
+if (resultQuizPointy__share__btn) {
+    resultQuizPointy__share__btn.addEventListener('click', () => {
         quizUrl = localStorage.getItem('OF2WS6SVOJWA====')
 
-        const quizTitle = resultQuiz4Option__title.innerHTML.slice(25,)
-        const quizResult = resultQuiz4Option__resultTitle.innerHTML
+        const quizTitle = resultQuizPointy__title.innerHTML.slice(25,)
+        const quizResult = resultQuizPointy__resultTitle.innerHTML
 
         const messageShare =  // `من تو کوئیز ( فلانی ) انقدر درصد درست زدم ایموجی. تو چقدر میتونی بزنی ؟ <br/> ${quizUrl}`
             `😃 من تو تست ${quizTitle} ( ${quizResult} ) در اومدم. ببینیم تو چی در میای
@@ -510,11 +510,11 @@ if (resultQuiz4Option__share__btn) {
             <br/> ${quizUrl}`
         
         result__clipboard.innerHTML = messageShare
-        new ClipboardJS('.resultQuiz4Option__share__btn');
+        new ClipboardJS('.resultQuizPointy__share__btn');
 
         result__share__message.classList.remove('noVis')
     })
-} else {log('no result4Option share')}
+} else {log('no resultPointy share')}
 
 
 // --------------------------------------------------------------------

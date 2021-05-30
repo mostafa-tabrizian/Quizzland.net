@@ -9,9 +9,6 @@ class Documents(documentBase):
     title = Column(String)
     note = Column(String)
     
-    def __repr__(self):
-        return f"title: {self.ititled}| note: {self.note}"
-
 categoriesBase = declarative_base()
 class Categories(categoriesBase):
     __tablename__ = 'Categories'
@@ -23,9 +20,6 @@ class Categories(categoriesBase):
     views = Column(Integer)
     publish = Column(DateTime, default=datetime.datetime.now)
     
-    def __repr__(self):
-        return f"<id: {self.id}| title: {self.title_eng + ' ' + self.title_far}| category: {self.category} | link: {self.href}| view: {self.views}| publish: {self.publish}>"
-
 quizzesBase = declarative_base()
 class Quizzes(quizzesBase):
     __tablename__ = 'Quizzes'
@@ -39,12 +33,9 @@ class Quizzes(quizzesBase):
     background = Column(String)
     publish = Column(DateTime, default=datetime.datetime.now)
 
-    def __repr__(self):
-        return f'{self.title_far, self.category, self.innerCategory, self.views, self.publish}'
-
-quizzes4OptionBase = declarative_base()
-class Quizzes4Option(quizzes4OptionBase):
-    __tablename__ = 'Quizzes4Option'
+quizzesPointyBase = declarative_base()
+class QuizzesPointy(quizzesPointyBase):
+    __tablename__ = 'Pointy Quizzes'
     id = Column(Integer, primary_key=True)
     title_far = Column(String)
     monthly_views = Column(Integer)
@@ -64,10 +55,6 @@ class Quizzes4Option(quizzes4OptionBase):
     background = Column(String)
     publish = Column(DateTime, default=datetime.datetime.now)
 
-    def __repr__(self):
-        return f"<id: {self.id}| title: {self.title_far}| category: {self.category} | innerCategory: {self.innerCategory}>"
-
-
 quizQuestionsBase = declarative_base()
 class quizQuestions(quizQuestionsBase):
     __tablename__ = 'Quiz_Questions'
@@ -82,9 +69,9 @@ class quizQuestions(quizQuestionsBase):
     answer = Column(String)
     category = Column(String)
 
-fourOptionQuizQuestionsBase = declarative_base()
-class fourOptionQuizQuestions(fourOptionQuizQuestionsBase):
-    __tablename__ = 'Four_Option_Questions'
+quizPointyQuestionsBase = declarative_base()
+class quizPointyQuestions(quizPointyQuestionsBase):
+    __tablename__ = 'Pointy_Quiz_Questions'
     id = Column(Integer, primary_key=True)
     title_far = Column(String)
     question = Column(String)
@@ -109,10 +96,3 @@ class NewsletterUser(newsletterBase):
     email = Column(String)
     favorite_Category = Column(String)
     added_on = Column(DateTime, default=datetime.datetime.now)
-
-    def __repr__(self):
-        return f"<id: {self.id} | name: {self.userName} | email: {self.email}"
-
-
-    def __repr__(self):
-        return f"id: {self.id} | title_far: {self.title_eng} | type: {self.type} | category: {self.category} | innerCategory: {self.innerCategory} | publish: {self.publish}"

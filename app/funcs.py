@@ -25,7 +25,7 @@ def frToPage(page, howManyElementToShow):
 def saveMonthlyViewsInExcel():
     filename = './monthlyViewsData.csv'
     quizzes =  s.query(Quizzes).all()
-    quizzes4Option =  s.query(Quizzes4Option).all()
+    quizzesPointy =  s.query(QuizzesPointy).all()
     categories =    s.query(Categories).all()
     
     with open(filename, 'a', encoding='utf8') as f_object:
@@ -45,7 +45,7 @@ def saveMonthlyViewsInExcel():
             writer_object = writer(f_object)
             writer_object.writerow(data)
 
-        for quiz in quizzes4Option:
+        for quiz in quizzesPointy:
             data = [quiz.title_far, ' ', quiz.category, quiz.innerCategory,\
                     quiz.views, category.monthly_views, quiz.publish]
             writer_object = writer(f_object)
@@ -80,7 +80,7 @@ def restarterOfMonthlyViews():
     def startTheMonthlyViewsFromZero():
         categories =  s.query(Categories).all()
         quizzes =  s.query(Quizzes).all()
-        quizzes4Option =  s.query(Quizzes4Option).all()
+        quizzesPointy =  s.query(QuizzesPointy).all()
 
         for eachCategory in categories:
             eachCategory.monthly_views = 0
@@ -88,7 +88,7 @@ def restarterOfMonthlyViews():
         for eachQuiz in quizzes:
             eachQuiz.monthly_views = 0
             add_session(eachQuiz)
-        for eachQuiz in quizzes4Option:
+        for eachQuiz in quizzesPointy:
             eachQuiz.monthly_views = 0
             add_session(eachQuiz)
 

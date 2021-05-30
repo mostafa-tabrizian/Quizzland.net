@@ -16,10 +16,10 @@ app.secret_key = '$Postgresql19931506'
 admin.add_view(ModelView(Categories, session()))
 
 admin.add_view(ModelView(Quizzes, session()))
-admin.add_view(ModelView(quizQuestions, session()))
+admin.add_view(ModelView(QuizzesPointy, session()))
 
-admin.add_view(ModelView(Quizzes4Option, session()))
-admin.add_view(ModelView(fourOptionQuizQuestions, session()))
+admin.add_view(ModelView(quizQuestions, session()))
+admin.add_view(ModelView(quizPointyQuestions, session()))
 
 path = op.join(op.dirname(__file__), 'static')
 

@@ -47,34 +47,34 @@ def quizzesByPublish():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.publish.desc())
     return quizzesGrabbedByPublish
 
-def quizzes4OptionByPublish():
-    quizzesGrabbedByPublish = s.query(Quizzes4Option).order_by(Quizzes4Option.publish.desc())
+def quizzesPointyByPublish():
+    quizzesGrabbedByPublish = s.query(QuizzesPointy).order_by(QuizzesPointy.publish.desc())
     return quizzesGrabbedByPublish
 
 def quizzesByViews():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.views.desc())
     return quizzesGrabbedByPublish
 
-def quizzes4OptionByViews():
-    quizzesGrabbedByPublish = s.query(Quizzes4Option).order_by(Quizzes4Option.views.desc())
+def quizzesPointyByViews():
+    quizzesGrabbedByPublish = s.query(QuizzesPointy).order_by(QuizzesPointy.views.desc())
     return quizzesGrabbedByPublish
 
 def quizzesByMonthlyViews():
     quizzesGrabbedByPublish = s.query(Quizzes).order_by(Quizzes.monthly_views.desc())
     return quizzesGrabbedByPublish
 
-def quizzes4OptionByMonthlyViews():
-    quizzesGrabbedByPublish = s.query(Quizzes4Option).order_by(Quizzes4Option.monthly_views.desc())
+def quizzesPointyByMonthlyViews():
+    quizzesGrabbedByPublish = s.query(QuizzesPointy).order_by(QuizzesPointy.monthly_views.desc())
     return quizzesGrabbedByPublish
 
 def quizzes(category, innerCategory, fr, to, sortType):
     if category == 'physiologies':
         if sortType == 'newest':
-            grabbedQuizzes = quizzes4OptionByPublishWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesPointyByPublishWithInnerCategory(innerCategory).all()[fr:to]
         elif sortType == 'bestest':
-            grabbedQuizzes = quizzes4OptionByViewsWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesPointyByViewsWithInnerCategory(innerCategory).all()[fr:to]
         elif sortType == 'alphabet':
-            grabbedQuizzes = quizzes4OptionByAlphabetWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesPointyByAlphabetWithInnerCategory(innerCategory).all()[fr:to]
     else:
         if sortType == 'newest':
             grabbedQuizzes = quizzesByPublishWithInnerCategory(innerCategory).all()[fr:to]
@@ -100,19 +100,19 @@ def quizzesByAlphabetWithInnerCategory(innerCategory):
                                   .order_by(Quizzes.innerCategory.asc())
     return grabbedQuiz
 
-def quizzes4OptionByPublishWithInnerCategory(innerCategory):
-    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{innerCategory}%'))\
-                                         .order_by(Quizzes4Option.publish.desc())
+def quizzesPointyByPublishWithInnerCategory(innerCategory):
+    grabbedQuiz = s.query(QuizzesPointy).filter(QuizzesPointy.innerCategory.ilike(f'%{innerCategory}%'))\
+                                         .order_by(QuizzesPointy.publish.desc())
     return grabbedQuiz
 
-def quizzes4OptionByViewsWithInnerCategory(innerCategory):
-    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{innerCategory}%'))\
-                                         .order_by(Quizzes4Option.views.desc())
+def quizzesPointyByViewsWithInnerCategory(innerCategory):
+    grabbedQuiz = s.query(QuizzesPointy).filter(QuizzesPointy.innerCategory.ilike(f'%{innerCategory}%'))\
+                                         .order_by(QuizzesPointy.views.desc())
     return grabbedQuiz
 
-def quizzes4OptionByAlphabetWithInnerCategory(innerCategory):
-    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.innerCategory.ilike(f'%{innerCategory}%'))\
-                                         .order_by(Quizzes4Option.title_far.asc())
+def quizzesPointyByAlphabetWithInnerCategory(innerCategory):
+    grabbedQuiz = s.query(QuizzesPointy).filter(QuizzesPointy.innerCategory.ilike(f'%{innerCategory}%'))\
+                                         .order_by(QuizzesPointy.title_far.asc())
     return grabbedQuiz
 
 def quizzesByPublishWithCategory(category):
@@ -132,24 +132,24 @@ def quizzesByMonthlyViewsWithCategory(category):
 
 
 
-def quizzes4OptionByPublishWithCategory(category):
-    quizzes = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{category}%'))\
-                                     .order_by(Quizzes4Option.publish.desc())
+def quizzesPointyByPublishWithCategory(category):
+    quizzes = s.query(QuizzesPointy).filter(QuizzesPointy.category.ilike(f'%{category}%'))\
+                                     .order_by(QuizzesPointy.publish.desc())
     return quizzes
 
-def quizzes4OptionByViewsWithCategory(category):
-    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{category}%'))\
-                                         .order_by(Quizzes4Option.views.desc())
+def quizzesPointyByViewsWithCategory(category):
+    grabbedQuiz = s.query(QuizzesPointy).filter(QuizzesPointy.category.ilike(f'%{category}%'))\
+                                         .order_by(QuizzesPointy.views.desc())
     return grabbedQuiz
 
-def quizzes4OptionByMonthlyViewsWithCategory(category):
-    grabbedQuiz = s.query(Quizzes4Option).filter(Quizzes4Option.category.ilike(f'%{category}%'))\
-                                         .order_by(Quizzes4Option.monthly_views.desc())
+def quizzesPointyByMonthlyViewsWithCategory(category):
+    grabbedQuiz = s.query(QuizzesPointy).filter(QuizzesPointy.category.ilike(f'%{category}%'))\
+                                         .order_by(QuizzesPointy.monthly_views.desc())
     return grabbedQuiz
 
 def sortBothQuizzesByPublishWithCategories(category):
     if category == 'physiologies':
-        quizzes = quizzes4OptionByPublishWithCategory(category)
+        quizzes = quizzesPointyByPublishWithCategory(category)
     else:
         quizzes = quizzesByPublishWithCategory(category)
     return quizzes
@@ -158,23 +158,23 @@ def quizzesWithTitle(title):
     quizzes = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%'))
     return quizzes
 
-def quizzes4OptionWithTitle(title):
-    quizzes4Option = s.query(Quizzes4Option).filter(Quizzes4Option.title_far.ilike(f'%{title}%'))
-    return quizzes4Option
+def quizzesPointyWithTitle(title):
+    quizzesPointy = s.query(QuizzesPointy).filter(QuizzesPointy.title_far.ilike(f'%{title}%'))
+    return quizzesPointy
 
 def firstQuizByFarsiTitle(title):
     quizzes = quizzesWithTitle(title).first()
-    quizzes4Option = quizzes4OptionWithTitle(title).first()
+    quizzesPointy = quizzesPointyWithTitle(title).first()
 
     if checkIfNotNoneTypeOrNone(quizzes):
         data = quizzes
-    elif checkIfNotNoneTypeOrNone(quizzes4Option):
-        data = quizzes4Option
+    elif checkIfNotNoneTypeOrNone(quizzesPointy):
+        data = quizzesPointy
     return data
 
 def quizQuestion(category, titleFar):
     if category == 'physiologies':
-        questions = s.query(fourOptionQuizQuestions).filter(fourOptionQuizQuestions.title_far.ilike(titleFar)).all()
+        questions = s.query(quizPointyQuestions).filter(quizPointyQuestions.title_far.ilike(titleFar)).all()
     else:
         questions = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(titleFar)).all()
     return questions
@@ -182,7 +182,7 @@ def quizQuestion(category, titleFar):
 #----------------------------------------------------------------
 def addViewToQuizzes(title):
     quizToAddView = quizzesWithTitle(title).first()
-    quiz4OptionToAddView = quizzes4OptionWithTitle(title).first()
+    quiz4OptionToAddView = quizzesPointyWithTitle(title).first()
 
     if checkIfNotNoneTypeOrNone(quizToAddView):
         data = quizToAddView

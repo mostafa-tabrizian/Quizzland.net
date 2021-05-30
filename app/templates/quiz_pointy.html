@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="quiz__questions tx-al-c" tag="4Option">
+    <div class="quiz__questions tx-al-c" tag="pointy">
 
         <div class="quiz__hider">
             {% for questionDetail in quiz_Question %}
@@ -38,7 +38,7 @@
             <div class="quiz__container darkGls">
                 <p class='quiz__question'>{{ questionDetail.question }}</p>
                 <div class="flex flex-jc-c">
-                    <form class='quiz__4option' action="">
+                    <form class='quiz__options' action="">
 
                         {% if questionDetail.op_pt_1 != None %}
                             <input type="radio" name="answer" id="{{ questionDetail.id }}-1" data = "{{ questionDetail.op_pt_1.split('-')[1] }}">
