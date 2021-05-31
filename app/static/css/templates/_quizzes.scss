@@ -236,6 +236,7 @@ body {
         position: relative;
         bottom: 3.5rem;
         z-index: 1;
+        transition: bottom .35s cubic-bezier(0, 0.79, 0.88, 0.56);
 
         @include breakpoints-down(medium) {
             width: 27rem;
@@ -306,6 +307,11 @@ body {
             &::before {
                 color: white;
             }
+        }
+
+        &__scaleUp {
+            position: relative;
+            bottom: 4rem;
         }
     }
 

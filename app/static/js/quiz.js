@@ -119,6 +119,7 @@ if (quiz__questions) {
     const goToAnotherQuestion = (changeToWhat) => {
             checkIfTheQuizEndedAndShowResultPage()
             plusOneToAnsweredQuestionsIfItsNotTheLast()
+            shouldLetTheUserChooseAnotherOption('let')
 
             quiz__container.forEach(each => {
                 currQuestionPosition = parseInt(getComputedStyle(each).transform.split(', ')[4])
@@ -131,10 +132,12 @@ if (quiz__questions) {
         setTimeout(() => {
             goToAnotherQuestion(changeToWhat)
         }, 3000);
+        
     }
 
     const shouldLetTheUserChooseAnotherOption = (toDo) => {
         // toDo = let or doNot
+        log('do not let the user choose another option');
         if (toDo == 'doNot') {
             quiz__questions.classList.add('pointerOff')
         } else {
@@ -172,8 +175,17 @@ if (quiz__questions) {
         }
     }
 
+    const scaleAnimationAfterChoosingAnswer = () => {
+        quiz__hider.classList.add('quiz__options__scaleUp')
+
+        setTimeout(() => {
+            quiz__hider.classList.remove('quiz__options__scaleUp')
+        }, 200)
+    }
+
     quiz__options.forEach(each => {
         each.addEventListener('click', () => {
+            scaleAnimationAfterChoosingAnswer()
             const switchBtn = quiz__autoQuestionChangerSwitch__innerBtn
             pauseTheFunctionOfChangingQuestions()
             if (typeOfQuiz == 'quiz') {
@@ -182,9 +194,6 @@ if (quiz__questions) {
             }
             if (!(switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched'))) {
                 goToAnotherQuestionWithDelay(next)
-                if(typeOfQuiz == 'quiz') {
-                    shouldLetTheUserChooseAnotherOption('let')
-                }
             }
         })
     })

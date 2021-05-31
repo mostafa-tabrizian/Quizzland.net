@@ -1853,6 +1853,8 @@ body {
   position: relative;
   bottom: 3.5rem;
   z-index: 1;
+  -webkit-transition: bottom 0.35s cubic-bezier(0, 0.79, 0.88, 0.56);
+  transition: bottom 0.35s cubic-bezier(0, 0.79, 0.88, 0.56);
 }
 
 @media (max-width: 49.9375em) {
@@ -1925,6 +1927,11 @@ body {
 
 .quiz__options [type="radio"]:checked + label::before {
   color: white;
+}
+
+.quiz__options__scaleUp {
+  position: relative;
+  bottom: 4rem;
 }
 
 .quiz__correctAnswer {

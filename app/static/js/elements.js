@@ -68,6 +68,7 @@ const searchResult__quizzes__item = document.querySelector('.searchResult__quizz
 const searchResult__quizzes__item__notFound = document.querySelector('.searchResult__quizzes__item__notFound')
 const searchResult__quizzes__seeMore = document.querySelector('.searchResult__quizzes__seeMore')
 
+const quiz__hider = document.querySelector('.quiz__hider')
 const quiz__container__eachOne = document.querySelectorAll(".quiz__container div form")
 const quiz__questions = document.querySelector('.quiz__questions')
 const quiz__questionChanger__next = document.querySelector('.quiz__questionChanger__next')
