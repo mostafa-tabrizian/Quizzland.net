@@ -35,7 +35,13 @@
             {% for questionDetail in quiz_Question %}
 
             <div class="quiz__container darkGls">
-                <p class='quiz__question'>{{ questionDetail.question }}</p>
+                {% set imgOrText = questionDetail.question.split('.') %}
+                {% if imgOrText[-1] == 'jpg' %}
+                    <img class="quiz__imgQuestion" src="/static/img/monoImgQuiz/{{ questionDetail.question }}" loading='lazy'>
+                {% else %}
+                    <p class='quiz__question'> {{ questionDetail.question }} </p>
+                {% endif %}
+
                 <div class="flex flex-jc-c">
                     <form class='quiz__options' data='{{ questionDetail.answer }}' action="">
                         <input type="radio" name="answer" id="{{ questionDetail.id }}-1" value = 'd3Jvbmc='><label id="{{ questionDetail.id }}-1" for="{{ questionDetail.id }}-1"> {{ questionDetail.option_1 }} </label>

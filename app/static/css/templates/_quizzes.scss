@@ -122,6 +122,11 @@ body {
         }
     }
 
+    &__imgQuestion {
+        width: 23rem;
+        border-radius: 1.2rem;
+    }
+
     &__autoQuestionChangerSwitch{
         position: relative;
         top: 1rem;

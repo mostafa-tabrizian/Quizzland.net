@@ -15,6 +15,18 @@
     {{ tools | safe }}
     
     <div class="quizzes wrapper-med grid grid-jc-c">
+        <div class="quizzes__item">
+            <a href="/category/celebrities/Mix-Celebrity/0/newest/8">
+                <img src="/static/img/Thn-Category/mix-celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
+            </a>
+
+            <h5 class="tx-al-c">
+                <a href="/category/celebrities/Mix-Celebrity/0/newest/8">
+                    میکس سلبریتی ها
+                </a>
+            </h5>
+        </div>
+
         {% for category in categories %}
             <div class="quizzes__item">
                 {% set img = (category.title_eng).split(' ') %}

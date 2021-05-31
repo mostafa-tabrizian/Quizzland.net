@@ -9,9 +9,18 @@ encodedNumbers = {
     'Zm91cg==': 4,
 }
 
+if (quiz__questions) {
+    let typeOfQuiz = quiz__questions.getAttribute('tag')
+    localStorage.setItem('typeOfQuiz', typeOfQuiz)
+}
 
-const typeOfQuiz = quiz__questions.getAttribute('tag')
+const whatIsTypeOfQuiz = () => {
+    const typeOfQuiz = localStorage.getItem('typeOfQuiz')
+    return typeOfQuiz
+}
+
 if (quiz__container__eachOne) {
+    typeOfQuiz = whatIsTypeOfQuiz()
     if (typeOfQuiz == 'quiz') {
         quiz__container__eachOne.forEach(each => {
             const answerData = each.getAttribute('data')
@@ -54,6 +63,7 @@ if (quiz__container__eachOne) {
 
 // quiz questions
 if (quiz__questions) {
+    typeOfQuiz = whatIsTypeOfQuiz()
 
     const numberOfQuestions = quiz__container.length
     let currentQuestion = 1
@@ -63,7 +73,6 @@ if (quiz__questions) {
     quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
     
     const pauseTheFunctionOfChangingQuestions = () => {
-        log(typeOfQuiz)
         quiz__questionChanger__next.classList.add('pointerOff')
         if (typeOfQuiz == 'pointy') {
             quiz__questionChanger__last.classList.add('pointerOff')
@@ -88,7 +97,7 @@ if (quiz__questions) {
     
     const checkIfTheQuizEndedAndShowResultPage = () => {
         let FinalTitleOfQuiz = ''
-        if (currentQuestion - 1 == numberOfQuestions) {
+        if (currentQuestion == numberOfQuestions) {
             FinalTitleOfQuiz = titleOfTheQuiz()
             if (typeOfQuiz == 'quiz') {
                 calculateResult(FinalTitleOfQuiz)
@@ -108,7 +117,9 @@ if (quiz__questions) {
     const next = -1076.05
     const last = +1076.05
     const goToAnotherQuestion = (changeToWhat) => {
+            checkIfTheQuizEndedAndShowResultPage()
             plusOneToAnsweredQuestionsIfItsNotTheLast()
+
             quiz__container.forEach(each => {
                 currQuestionPosition = parseInt(getComputedStyle(each).transform.split(', ')[4])
                 currQuestionPosition = currQuestionPosition + changeToWhat
@@ -164,7 +175,6 @@ if (quiz__questions) {
     quiz__options.forEach(each => {
         each.addEventListener('click', () => {
             const switchBtn = quiz__autoQuestionChangerSwitch__innerBtn
-            checkIfTheQuizEndedAndShowResultPage()
             pauseTheFunctionOfChangingQuestions()
             if (typeOfQuiz == 'quiz') {
                 shouldLetTheUserChooseAnotherOption('doNot')
@@ -211,15 +221,17 @@ if (quiz__questions) {
         }
     }
 
-    quiz__questionChanger__last.addEventListener('click', () => {
-        let currQuestionPosition = parseInt(getComputedStyle(quiz__container[0]).transform.split(', ')[4])
-        if (currQuestionPosition > -500) {
-            return "there is no last question"
-        }
-        minusOneToAnsweredQuestionsIfItsNotTheFirst()
-        goToAnotherQuestion(last)
-        pauseTheFunctionOfChangingQuestions()
-    }) 
+    if (quiz__questionChanger__last) {
+        quiz__questionChanger__last.addEventListener('click', () => {
+            let currQuestionPosition = parseInt(getComputedStyle(quiz__container[0]).transform.split(', ')[4])
+            if (currQuestionPosition > -500) {
+                return "there is no last question"
+            }
+            minusOneToAnsweredQuestionsIfItsNotTheFirst()
+            goToAnotherQuestion(last)
+            pauseTheFunctionOfChangingQuestions()
+        }) 
+    }
 
 } else {log('no nextQuestion btn')}
 
@@ -259,7 +271,6 @@ const calculateResult_pointy = (FinalTitleOfQuiz) => {
     const correctAnswerCounter = document.querySelectorAll(".quiz__container div form input:checked")
     correctAnswerCounter.forEach(each => {
         pointOfThisAnswer = parseInt(each.getAttribute('data'))
-        log(pointOfThisAnswer)
         score += pointOfThisAnswer
     })
     window.location.replace(`/result_2/${FinalTitleOfQuiz}/${score}`); 
