@@ -403,7 +403,7 @@ if (resultQuizPointy__share__btn) {
         const quizTitle = resultQuizPointy__title.innerHTML.slice(25,)
         const quizResult = resultQuizPointy__resultTitle.innerHTML
 
-        const messageShare =  // `من تو کوئیز ( فلانی ) انقدر درصد درست زدم ایموجی. تو چقدر میتونی بزنی ؟ <br/> ${quizUrl}`
+        const messageShare =
             `😃 من تو تست ${quizTitle} ( ${quizResult} ) در اومدم. ببینیم تو چی در میای
             <br/> -----------------------------------------
             <br/> ${quizUrl}`

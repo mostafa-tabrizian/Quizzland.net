@@ -1589,7 +1589,7 @@ body {
       grid-template-columns: repeat(auto-fill, 12.6rem);
   -ms-grid-rows: (14.4rem)[auto];
       grid-template-rows: repeat(auto, 14.4rem);
-  gap: 1.5rem;
+  gap: 2rem;
   margin-top: 0;
 }
 
