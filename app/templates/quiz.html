@@ -25,8 +25,7 @@
         </div>
 
         <div class="quiz__questionChanger__container center">
-            <button class="quiz__questionChanger quiz__questionChanger__next"></button>
-            <button class="quiz__questionChanger quiz__questionChanger__last"></button>
+            <button class="quiz__questionChanger quiz__questionChanger__next fade-out"></button>
         </div>
     </div>
 
@@ -39,10 +38,10 @@
                 <p class='quiz__question'>{{ questionDetail.question }}</p>
                 <div class="flex flex-jc-c">
                     <form class='quiz__options' data='{{ questionDetail.answer }}' action="">
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-1" value = 'd3Jvbmc='><label for="{{ questionDetail.id }}-1"> {{ questionDetail.option_1 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-2" value = 'dW5jb3JyZWN0'><label for="{{ questionDetail.id }}-2"> {{ questionDetail.option_2 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-3" value = 'bm9vaw=='><label for="{{ questionDetail.id }}-3"> {{ questionDetail.option_3 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-4" value = 'YmFkb25l'><label for="{{ questionDetail.id }}-4"> {{ questionDetail.option_4 }} </label>
+                        <input type="radio" name="answer" id="{{ questionDetail.id }}-1" value = 'd3Jvbmc='><label id="{{ questionDetail.id }}-1" for="{{ questionDetail.id }}-1"> {{ questionDetail.option_1 }} </label>
+                        <input type="radio" name="answer" id="{{ questionDetail.id }}-2" value = 'dW5jb3JyZWN0'><label id="{{ questionDetail.id }}-2" for="{{ questionDetail.id }}-2"> {{ questionDetail.option_2 }} </label>
+                        <input type="radio" name="answer" id="{{ questionDetail.id }}-3" value = 'bm9vaw=='><label id="{{ questionDetail.id }}-3" for="{{ questionDetail.id }}-3"> {{ questionDetail.option_3 }} </label>
+                        <input type="radio" name="answer" id="{{ questionDetail.id }}-4" value = 'YmFkb25l'><label id="{{ questionDetail.id }}-4" for="{{ questionDetail.id }}-4"> {{ questionDetail.option_4 }} </label>
                     </form>
                 </div>
             </div>

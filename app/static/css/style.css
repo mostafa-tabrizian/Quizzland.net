@@ -1915,6 +1915,14 @@ body {
   color: white;
 }
 
+.quiz__correctAnswer {
+  border: 2px solid green !important;
+}
+
+.quiz__wrongAnswer {
+  border: 2px solid red !important;
+}
+
 .quiz .lowHighContainer {
   margin: 0 15rem !important;
   margin-top: 5rem !important;
