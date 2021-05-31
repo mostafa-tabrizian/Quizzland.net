@@ -190,12 +190,12 @@ def resultPointy(title, score):
 
     )
 
-@app.route('/about')
-def about():
-    return render_template('/about.html',
-        backBtn = backBtn,
-        headTitle = f'QuizLand | درباره ',  
-    )
+# @app.route('/about')
+# def about():
+#     return render_template('/about.html',
+#         backBtn = backBtn,
+#         headTitle = f'QuizLand | درباره ',  
+#     )
 
 @app.route('/contact')
 def contact():
