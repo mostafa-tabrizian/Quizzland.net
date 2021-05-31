@@ -13,19 +13,35 @@
     </div> -->
     
     {{ tools | safe }}
-    
-    <div class="quizzes wrapper-med grid grid-jc-c">
-        <div class="quizzes__item">
-            <a href="/category/celebrities/Mix-Celebrity/0/newest/8">
-                <img src="/static/img/Thn-Category/mix-celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
-            </a>
 
-            <h5 class="tx-al-c">
+    <div class="quizzes wrapper-med grid grid-jc-c">
+
+        {% if category == 'celebrities' %}
+            <div class="quizzes__item">
                 <a href="/category/celebrities/Mix-Celebrity/0/newest/8">
-                    میکس سلبریتی ها
+                    <img src="/static/img/Thn-Category/mix-celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
                 </a>
-            </h5>
-        </div>
+
+                <h5 class="tx-al-c">
+                    <a href="/category/celebrities/Mix-Celebrity/0/newest/8">
+                        میکس سلبریتی ها
+                    </a>
+                </h5>
+            </div>
+
+        {% elif category == 'movieSeries' %}
+            <div class="quizzes__item">
+                <a href="/category/movieSeries/Mix-movieSeries/0/newest/8">
+                    <img src="/static/img/Thn-Category/mix-movieSeries.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
+                </a>
+
+                <h5 class="tx-al-c">
+                    <a href="/category/movieSeries/Mix-movieSeries/0/newest/8">
+                        میکس فیلم و سریال ها
+                    </a>
+                </h5>
+            </div>
+        {% endif %}
 
         {% for category in categories %}
             <div class="quizzes__item">

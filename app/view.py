@@ -119,6 +119,7 @@ def category(category, page, sortType, numberOfResult):
 
         return render_template(f'/category/category.html',
             tools = tools,
+            category = category,
             categories = categories(category, fTPage[0], fTPage[1], sortType),
             pageTravel = pageTravel(finalPage(howManyElementToShow, category)),
             headTitle = f'QuizLand | کوئیز های {categoryInFar[category]} ',  
