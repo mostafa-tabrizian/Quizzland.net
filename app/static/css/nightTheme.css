@@ -40,6 +40,18 @@
   background: url("/static/img/base/srch-white.svg") no-repeat center center;
 }
 
+.header__categories {
+  background: rgba(255, 255, 255, 0.18) !important;
+  -webkit-box-shadow: 2px 2px 15px black !important;
+          box-shadow: 2px 2px 15px black !important;
+}
+
+.header__quizzes {
+  background: rgba(255, 255, 255, 0.18) !important;
+  -webkit-box-shadow: 2px 2px 15px black !important;
+          box-shadow: 2px 2px 15px black !important;
+}
+
 body::-webkit-scrollbar-thumb {
   background-color: #ffffff44;
 }
@@ -151,4 +163,4 @@ body::-webkit-scrollbar-thumb {
 .basicTwoColumn__item::after {
   content: '◽';
 }
-/*# sourceMappingURL=lightTheme.css.map */
+/*# sourceMappingURL=nightTheme.css.map */

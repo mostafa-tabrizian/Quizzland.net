@@ -180,12 +180,14 @@
     }
 
     &__categories {
+        background: rgba(0, 0, 0, 0.18) !important;
         line-height: 2rem;
         right: 12rem;
         z-index: 3;
     }
 
     &__quizzes {
+        background: rgba(0, 0, 0, 0.18) !important;
         line-height: 2rem;
         right: 19rem;
     }

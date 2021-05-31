@@ -32,6 +32,16 @@
     &__searchSubmit {
         background: url('/static/img/base/srch-white.svg') no-repeat center center;
     }
+
+    &__categories {
+        background: rgba(255, 255, 255, 0.18) !important;
+        box-shadow: 2px 2px 15px black !important;
+    }
+
+    &__quizzes {
+        background: rgba(255, 255, 255, 0.18) !important;
+        box-shadow: 2px 2px 15px black !important;
+    }
 }
 
 body {

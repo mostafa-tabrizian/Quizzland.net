@@ -418,14 +418,14 @@ if (resultQuizPointy__share__btn) {
 
 // --------------------------------------------------------------------
 
-const lightThemeCss = document.createElement('link')
-lightThemeCss.setAttribute('rel', 'stylesheet')
-lightThemeCss.setAttribute('type', 'text/css')
-lightThemeCss.setAttribute('href', "/static/css/lightTheme.css")
+const nightThemeCss = document.createElement('link')
+nightThemeCss.setAttribute('rel', 'stylesheet')
+nightThemeCss.setAttribute('type', 'text/css')
+nightThemeCss.setAttribute('href', "/static/css/nightTheme.css")
 
 const nightMode_turnOff = () => {
     try {
-        document.head.removeChild(lightThemeCss)
+        document.head.removeChild(nightThemeCss)
     } catch {log("it's default on lightMode no need removing")}
     nightMode.forEach (each => {
         each.classList.add('nightMode-Off')
@@ -435,7 +435,7 @@ const nightMode_turnOff = () => {
 }
 
 const nightMode_turnOn = () => {
-    document.head.appendChild(lightThemeCss)
+    document.head.appendChild(nightThemeCss)
     nightMode.forEach (each => {
         each.classList.remove('nightMode-Off')
         each.style.backgroundImage = 'url(/static/img/base/lightMode.png)'
@@ -476,7 +476,7 @@ if (nightMode) {
         checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'quiz')
         {
             nightMode__container.classList.add('noVis')
-            document.head.removeChild(lightThemeCss)
+            document.head.removeChild(nightThemeCss)
             nightMode.forEach(each => {
                 each.classList.add('nightMode-Off')
             })
