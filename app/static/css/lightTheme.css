@@ -12,6 +12,10 @@
   background: white;
 }
 
+.header__menu__inner {
+  color: white !important;
+}
+
 .header__searchInput {
   color: white;
 }

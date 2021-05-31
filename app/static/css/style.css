@@ -750,7 +750,7 @@ input {
 }
 
 .header__menu__inner {
-  color: white;
+  color: black;
   font-size: 0.9rem;
   z-index: 2;
   -ms-grid-columns: auto auto auto;
