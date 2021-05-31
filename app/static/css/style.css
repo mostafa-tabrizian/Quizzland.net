@@ -2173,11 +2173,15 @@ body {
           filter: brightness(40%);
 }
 
-.searchResult__category__item > h5 {
+.searchResult__category__item h5 {
   -webkit-transform: translateY(-210px);
           transform: translateY(-210px);
   color: #f0f0f0;
   font-size: 1.6rem;
+}
+
+.searchResult__category__item h5 a:hover {
+  color: inherit;
 }
 
 @media (max-width: 49.9375em) {
