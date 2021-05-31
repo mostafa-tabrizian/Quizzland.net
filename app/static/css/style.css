@@ -1731,6 +1731,11 @@ body {
   border-radius: 1.2rem;
 }
 
+.quiz__imgQuestion__inputs {
+  width: 15rem;
+  border-radius: 2rem;
+}
+
 .quiz__autoQuestionChangerSwitch {
   position: relative;
   top: 1rem;

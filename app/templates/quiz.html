@@ -37,19 +37,32 @@
             <div class="quiz__container darkGls">
                 {% set imgOrText = questionDetail.question.split('.') %}
                 {% if imgOrText[-1] == 'jpg' %}
-                    <img class="quiz__imgQuestion" src="/static/img/monoImgQuiz/{{ questionDetail.question }}" loading='lazy'>
+                    <img class="quiz__imgQuestion" src="/static/img/ImgQuizzes/{{ questionDetail.question }}" loading='lazy'>
                 {% else %}
                     <p class='quiz__question'> {{ questionDetail.question }} </p>
                 {% endif %}
-
-                <div class="flex flex-jc-c">
-                    <form class='quiz__options' data='{{ questionDetail.answer }}' action="">
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-1" value = 'd3Jvbmc='><label id="{{ questionDetail.id }}-1" for="{{ questionDetail.id }}-1"> {{ questionDetail.option_1 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-2" value = 'dW5jb3JyZWN0'><label id="{{ questionDetail.id }}-2" for="{{ questionDetail.id }}-2"> {{ questionDetail.option_2 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-3" value = 'bm9vaw=='><label id="{{ questionDetail.id }}-3" for="{{ questionDetail.id }}-3"> {{ questionDetail.option_3 }} </label>
-                        <input type="radio" name="answer" id="{{ questionDetail.id }}-4" value = 'YmFkb25l'><label id="{{ questionDetail.id }}-4" for="{{ questionDetail.id }}-4"> {{ questionDetail.option_4 }} </label>
-                    </form>
-                </div>
+                
+                {% set imgOrText = questionDetail.option_1.split('.') %}
+                {% if imgOrText[-1] == 'jpg' %}
+                    <div class="flex flex-jc-c">
+                        <form class='quiz__options' data='{{ questionDetail.answer }}' action="">
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-1" value = 'd3Jvbmc='><label id="{{ questionDetail.id }}-1" for="{{ questionDetail.id }}-1"> <img class="quiz__imgQuestion__inputs" src="/static/img/ImgQuizzes/{{ questionDetail.option_1 }}" loading='lazy'> </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-2" value = 'dW5jb3JyZWN0'><label id="{{ questionDetail.id }}-2" for="{{ questionDetail.id }}-2"> <img class="quiz__imgQuestion__inputs" src="/static/img/ImgQuizzes/{{ questionDetail.option_2 }}" loading='lazy'> </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-3" value = 'bm9vaw=='><label id="{{ questionDetail.id }}-3" for="{{ questionDetail.id }}-3"> <img class="quiz__imgQuestion__inputs" src="/static/img/ImgQuizzes/{{ questionDetail.option_3 }}" loading='lazy'> </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-4" value = 'YmFkb25l'><label id="{{ questionDetail.id }}-4" for="{{ questionDetail.id }}-4"> <img class="quiz__imgQuestion__inputs" src="/static/img/ImgQuizzes/{{ questionDetail.option_4 }}" loading='lazy'> </label>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="flex flex-jc-c">
+                        <form class='quiz__options' data='{{ questionDetail.answer }}' action="">
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-1" value = 'd3Jvbmc='><label id="{{ questionDetail.id }}-1" for="{{ questionDetail.id }}-1"> {{ questionDetail.option_1 }} </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-2" value = 'dW5jb3JyZWN0'><label id="{{ questionDetail.id }}-2" for="{{ questionDetail.id }}-2"> {{ questionDetail.option_2 }} </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-3" value = 'bm9vaw=='><label id="{{ questionDetail.id }}-3" for="{{ questionDetail.id }}-3"> {{ questionDetail.option_3 }} </label>
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-4" value = 'YmFkb25l'><label id="{{ questionDetail.id }}-4" for="{{ questionDetail.id }}-4"> {{ questionDetail.option_4 }} </label>
+                        </form>
+                    </div>
+                {% endif %}
+                
             </div>
 
             {% endfor %} 
