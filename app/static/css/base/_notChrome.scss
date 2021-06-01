@@ -1,0 +1,75 @@
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .lightGls {
+        background: rgba(255, 255, 255, 0.61) !important;
+    }
+
+    .darkGls {
+        background: rgba(0, 0, 0, 0.83) !important;
+    }
+    
+    .header {
+        &__menu {
+            background: rgb(183, 183, 183) !important;
+        }
+
+        &__searchInput {
+            background: rgba(0, 0, 0, 0.22) !important;
+        }
+
+        &__categories {
+            background: rgba(0, 0, 0, 0.51) !important;
+        }
+
+        &__quizzes {
+            background: rgba(0, 0, 0, 0.51) !important;
+        }
+    }
+    
+    .sort { 
+        &__right {
+            box-shadow: 0 0 15px #666 !important;
+            background: #fff !important;
+        }
+
+        &__left {
+            > div {
+                box-shadow: 0 0 15px #666 !important;
+                background: #fff !important; 
+            }
+        }
+    }
+
+    .tools {
+        &__submit {
+            background: rgba(0, 0, 0, 0.54) url("/static/img/base/arw-submit.svg") no-repeat center center !important;
+        }
+    }
+
+    .quiz {
+        &__head {
+            font-family: $font-notChrome !important;
+            font-weight: 300;
+        }
+
+        &__question {
+            background: #0000008f !important;
+            font-family: $font-notChrome !important;
+            font-weight: 300;
+        }
+    }
+
+    .newsletter {
+        &__blurBackground__show {
+            background: rgba(0, 0, 0, 0.81) !important;
+        }
+    }
+
+    .nightMode__container {
+        display: none !important;
+    }
+
+    .result {
+        font-family: $font-notChrome !important;
+        font-weight: 300;
+    }
+}

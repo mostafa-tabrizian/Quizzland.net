@@ -270,7 +270,7 @@ const calculateResult = (FinalTitleOfQuiz) => {
     showCalculatingResult()
     setTimeout(() => {
         window.location.replace(`/result/${FinalTitleOfQuiz}`); 
-    }, 2500)
+    }, 3000)
 }
 
 const calculateResult_pointy = (FinalTitleOfQuiz) => {

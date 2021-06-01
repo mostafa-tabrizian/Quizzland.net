@@ -1,4 +1,44 @@
 @charset "UTF-8";
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .lightGls {
+    background: rgba(255, 255, 255, 0.61) !important;
+  }
+  .darkGls {
+    background: rgba(0, 0, 0, 0.83) !important;
+  }
+  .header__menu {
+    background: #b7b7b7 !important;
+  }
+  .header__searchInput {
+    background: rgba(0, 0, 0, 0.22) !important;
+  }
+  .header__categories {
+    background: rgba(0, 0, 0, 0.51) !important;
+  }
+  .header__quizzes {
+    background: rgba(0, 0, 0, 0.51) !important;
+  }
+  .sort__right {
+    -webkit-box-shadow: 0 0 15px #666 !important;
+            box-shadow: 0 0 15px #666 !important;
+    background: #fff !important;
+  }
+  .sort__left > div {
+    -webkit-box-shadow: 0 0 15px #666 !important;
+            box-shadow: 0 0 15px #666 !important;
+    background: #fff !important;
+  }
+  .quiz__question {
+    background: #0000008f !important;
+  }
+  .newsletter__blurBackground__show {
+    background: rgba(0, 0, 0, 0.81) !important;
+  }
+  .nightMode__container {
+    display: none !important;
+  }
+}
+
 @font-face {
   font-family: "myHarmattan";
   src: url("/static/font/Harmattan-Regular.ttf");
@@ -7,6 +47,11 @@
 @font-face {
   font-family: "myChanga";
   src: url("/static/font/Changa-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: "changeForNotChrome";
+  src: url("/static/font/Changa-Light.ttf");
 }
 
 @font-face {
@@ -754,7 +799,7 @@ input {
   background: url("/static/img/base/close-btn.svg") center center no-repeat;
   width: 1.75rem;
   height: 1.75rem;
-  position: fixed;
+  position: absolute;
   top: 1rem;
   right: 1.5rem;
 }
@@ -1993,11 +2038,11 @@ body {
 }
 
 .quiz__correctAnswer {
-  border: 4px solid green !important;
+  border: 3px solid green !important;
 }
 
 .quiz__wrongAnswer {
-  border: 4px solid red !important;
+  border: 3px solid red !important;
 }
 
 .quiz .lowHighContainer {

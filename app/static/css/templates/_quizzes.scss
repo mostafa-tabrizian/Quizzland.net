@@ -350,11 +350,11 @@ body {
     }
 
     &__correctAnswer {
-        border: 4px solid green !important;
+        border: 3px solid green !important;
     }
 
     &__wrongAnswer {
-        border: 4px solid red !important;
+        border: 3px solid red !important;
     }
 
     .lowHighContainer {
@@ -403,7 +403,7 @@ body {
 }
 
 .countingResult {
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translate(-50%);
     top: 28%;
