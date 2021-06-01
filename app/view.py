@@ -39,14 +39,14 @@ def search():
     userSearchInput = request.form['userSearchInput']
     if request.method == 'POST':
         return render_template('searchResult.html', 
+            headTitle = f'QuizLand | {userSearchInput} جستجو عبارت ',
             userSearchInput = userSearchInput,
             userSearchInputInCategoriesDb_far =      categoriesByTitleFar(f'%{userSearchInput}%').limit(2),
             userSearchInputInCategoriesDb_eng =      categoriesByTitleEng(f'%{userSearchInput}%').limit(2),
             userSearchInputInQuizzesDb_far =         quizzesWithTitle(f'%{userSearchInput}%').limit(8),
             userSearchInputInQuizzesDb_eng =         quizzesByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
-            userSearchInputInQuizzesPointyDb_far =  quizzesPointyWithTitle(f'%{userSearchInput}%').limit(8),
-            userSearchInputInQuizzesPointyDb_eng =  quizzesPointyByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
-            headTitle = f'QuizLand | {userSearchInput} جستجو عبارت ',
+            userSearchInputInQuizzesPointyDb_far =   quizzesPointyWithTitle(f'%{userSearchInput}%').limit(8),
+            userSearchInputInQuizzesPointyDb_eng =   quizzesPointyByPublishWithInnerCategory(f'%{userSearchInput}%').limit(8),
         )
     else:
         return render_template('404.html', 

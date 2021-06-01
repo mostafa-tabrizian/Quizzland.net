@@ -39,21 +39,72 @@
     <div class="searchResult__quizzes">
         <h3 class="tx-al-c">کوئیز‌ها</h3>
         <h4 class="searchResult__quizzes__item__notFound tx-al-c"></h4>
-        {% for quiz in userSearchInputInQuizzesDb_far %}
-            <a class="searchResult__quizzes__item tx-al-r" href="{{quiz.href}}">{{ quiz.title_far }}</a>
-        {% endfor %}
+        <ul>
+            {%  for quiz in userSearchInputInQuizzesDb_far %}
+                <li>
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    {% if quiz.category == 'physiologies' %}
+                    <a class="searchResult__quizzes__item tx-al-r" href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% else %}
+                    <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
 
-        {% for quiz in userSearchInputInQuizzesDb_eng %}
-            <a class="searchResult__quizzes__item tx-al-r" href="{{quiz.href}}">{{ quiz.title_far }}</a>
-        {% endfor %}
+            {%  for quiz in userSearchInputInQuizzesDb_eng %}
+                <li>
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    {% if quiz.category == 'physiologies' %}
+                    <a class="searchResult__quizzes__item tx-al-r" href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% else %}
+                    <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
 
-        {% for quiz in userSearchInputInQuizzes4OptionDb_far %}
-            <a class="searchResult__quizzes__item tx-al-r" href="{{quiz.href}}">{{ quiz.title_far }}</a>
-        {% endfor %}
+            {%  for quiz in userSearchInputInQuizzesPointyDb_far %}
+                <li>
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    {% if quiz.category == 'physiologies' %}
+                    <a class="searchResult__quizzes__item tx-al-r" href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% else %}
+                    <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
 
-        {% for quiz in userSearchInputInQuizzes4OptionDb_eng %}
-            <a class="searchResult__quizzes__item tx-al-r" href="{{quiz.href}}">{{ quiz.title_far }}</a>
-        {% endfor %}
+            {%  for quiz in userSearchInputInQuizzesPointyDb_eng %}
+                <li>
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    {% if quiz.category == 'physiologies' %}
+                    <a class="searchResult__quizzes__item tx-al-r" href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% else %}
+                    <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+
+        </ul>
     
         <div class="searchResult__quizzes__seeMore"> 
             <a href="/search/{{userSearchInput}}">
