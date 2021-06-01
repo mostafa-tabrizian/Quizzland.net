@@ -1733,9 +1733,9 @@ body {
   border-radius: 1.2rem;
 }
 
-.quiz__imgQuestion__inputs {
-  width: 15rem;
-  border-radius: 2rem;
+.quiz__imgOption {
+  width: 9.9rem;
+  border-radius: 1.4rem;
 }
 
 .quiz__autoQuestionChangerSwitch {
@@ -1864,30 +1864,70 @@ body {
 }
 
 .quiz__options {
+  width: 23rem;
+}
+
+.quiz__options__img {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.quiz__options__text {
   padding-left: 1rem;
   padding-right: 1rem;
-  width: 23rem;
 }
 
 .quiz__options input {
   opacity: 0;
+  position: absolute;
 }
 
 .quiz__options label {
   color: #f0f0f0;
   display: block;
-  width: 21rem;
-  border: 2px solid #adadad;
   border-radius: 25px;
-  padding: 0.6rem;
   cursor: pointer;
 }
 
-.quiz__options label:hover {
+.quiz__options__imgLabel {
+  width: 10.3rem;
+  height: 15.3rem;
+  border: 4px solid #adadad;
+  padding: 0;
+  margin-right: .2rem;
+  margin-left: .2rem;
+  margin-bottom: .5rem;
+  -webkit-transition: -webkit-box-shadow .1s ease-in-out;
+  transition: -webkit-box-shadow .1s ease-in-out;
+  transition: box-shadow .1s ease-in-out;
+  transition: box-shadow .1s ease-in-out, -webkit-box-shadow .1s ease-in-out;
+}
+
+.quiz__options__imgLabel:hover {
+  -webkit-box-shadow: 0 0 15px gray;
+          box-shadow: 0 0 15px gray;
+}
+
+.quiz__options__textLabel {
+  width: 21rem;
+  border: 2px solid #adadad;
+  padding: 0.6rem;
+}
+
+.quiz__options__textLabel:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.quiz__options__textLabel:hover {
   background: #00000017;
 }
 
-.quiz__options label::before {
+.quiz__options__textLabel::before {
   content: '';
   height: 1px;
   font-family: vermin-vibes-2-soft, myChanga, sans-serif;
@@ -1903,19 +1943,19 @@ body {
   box-sizing: border-box;
 }
 
-.quiz__options label:nth-child(2)::before {
+.quiz__options__textLabel:nth-child(2)::before {
   content: '1';
 }
 
-.quiz__options label:nth-child(4)::before {
+.quiz__options__textLabel:nth-child(4)::before {
   content: '2';
 }
 
-.quiz__options label:nth-child(6)::before {
+.quiz__options__textLabel:nth-child(6)::before {
   content: '3';
 }
 
-.quiz__options label:nth-child(8)::before {
+.quiz__options__textLabel:nth-child(8)::before {
   content: '4';
 }
 
@@ -1935,11 +1975,11 @@ body {
 }
 
 .quiz__correctAnswer {
-  border: 2px solid green !important;
+  border: 4px solid green !important;
 }
 
 .quiz__wrongAnswer {
-  border: 2px solid red !important;
+  border: 4px solid red !important;
 }
 
 .quiz .lowHighContainer {
