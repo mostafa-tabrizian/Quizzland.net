@@ -498,6 +498,16 @@ input {
     }
 }
 
+.divider {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    width: 15rem;
+    margin-left: 50%;
+    transform: translate(-50%);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+}
+
 // Visibility
 .hideForMobile {
     @include breakpoints-down(medium) {
