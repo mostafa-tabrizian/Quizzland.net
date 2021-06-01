@@ -218,7 +218,6 @@ if (quiz__questions) {
     quiz__questionChanger__next.addEventListener('click', () => {
         goToAnotherQuestion(next)
         pauseTheFunctionOfChangingQuestions()
-        checkIfTheQuizEndedAndShowResultPage()
         shouldLetTheUserChooseAnotherOption('let')
     })
 
