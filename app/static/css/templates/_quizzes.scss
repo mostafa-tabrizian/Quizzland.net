@@ -250,11 +250,13 @@ body {
             display: grid;
             grid-template-columns: auto auto;
             justify-content: center;
+            padding-top: 1rem;
         }
 
         &__text {
             padding-left: 1rem;
             padding-right: 1rem;
+            padding-top: 1rem;
         }
 
         input {

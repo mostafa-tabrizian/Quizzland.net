@@ -475,11 +475,15 @@ if (nightMode) {
     if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode.length == 9 || // innerCategory
         checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'quiz')
         {
-            nightMode__container.classList.add('noVis')
-            document.head.removeChild(nightThemeCss)
-            nightMode.forEach(each => {
-                each.classList.add('nightMode-Off')
-            })
+            try {
+                nightMode__container.classList.add('noVis')
+                document.head.removeChild(nightThemeCss)
+                nightMode.forEach(each => {
+                    each.classList.add('nightMode-Off')
+                })
+            } catch {
+                log('no nightMode')
+            }
         }       
 } else {log ('no nightMode')}
 
