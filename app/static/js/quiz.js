@@ -247,7 +247,10 @@ if (quiz__questions) {
 
 // -------------------------------------------------------------------------
 
-
+const showCalculatingResult = () => {
+    fadeIn(loadingScreen)
+    fadeIn(countingResult)
+}
 
 const calculateResult = (FinalTitleOfQuiz) => {
     let quizUrl = decodeURIComponent(window.location.href)
@@ -264,7 +267,10 @@ const calculateResult = (FinalTitleOfQuiz) => {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }
 
-    window.location.replace(`/result/${FinalTitleOfQuiz}`); 
+    showCalculatingResult()
+    setTimeout(() => {
+        window.location.replace(`/result/${FinalTitleOfQuiz}`); 
+    }, 2500)
 }
 
 const calculateResult_pointy = (FinalTitleOfQuiz) => {
@@ -281,7 +287,11 @@ const calculateResult_pointy = (FinalTitleOfQuiz) => {
         pointOfThisAnswer = parseInt(each.getAttribute('data'))
         score += pointOfThisAnswer
     })
-    window.location.replace(`/result_2/${FinalTitleOfQuiz}/${score}`); 
+
+    showCalculatingResult()
+    setTimeout(() => {
+        window.location.replace(`/result_2/${FinalTitleOfQuiz}/${score}`); 
+    }, 3000)
 }
 
 log('quiz.js working ________________________________________________')

@@ -94,6 +94,8 @@ const resultQuizPointy__title = document.querySelector('.resultQuizPointy__title
 const resultQuizPointy__resultTitle = document.querySelector('.resultQuizPointy__resultTitle')
 const resultQuizPointy__share__btn = document.querySelector('.resultQuizPointy__share__btn')
 
+const countingResult = document.querySelector('.countingResult')
+
 const log = (code) => {
     console.log(code)
 }

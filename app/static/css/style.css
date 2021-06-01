@@ -291,7 +291,7 @@ input {
   background: linear-gradient(-45deg, #4D1420, #9D272D);
   width: 100%;
   height: 100%;
-  z-index: 999;
+  z-index: 99;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2044,6 +2044,18 @@ body {
 
 .quiz__lowHigh :checked + label {
   background: #af282f;
+}
+
+.countingResult {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  top: 28%;
+  z-index: 99;
+  font-size: 1.325rem;
+  color: white;
+  font-family: myChanga, sans-serif, serif;
 }
 
 .result {

@@ -399,3 +399,14 @@ body {
         }   
     }
 }
+
+.countingResult {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 28%;
+    z-index: 99;
+    font-size: $font-med;
+    color: white;
+    font-family: $font-sec;
+}
