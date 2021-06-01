@@ -164,6 +164,14 @@
     &__style {
         margin-left: 2rem;
         margin-right: 2rem;
+        margin-top: 0;
+        line-height: 2rem;
+
+        li {
+            &:nth-child(even) {
+                color: rgb(95, 95, 95);
+            }
+        }
     }
 
     &__right {

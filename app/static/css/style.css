@@ -1401,6 +1401,12 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 .sort__style {
   margin-left: 2rem;
   margin-right: 2rem;
+  margin-top: 0;
+  line-height: 2rem;
+}
+
+.sort__style li:nth-child(even) {
+  color: #5f5f5f;
 }
 
 .sort__right {
