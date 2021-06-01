@@ -379,7 +379,7 @@ if (backBtn) {
 
 if (result__share__btn) {
     result__share__btn.addEventListener('click', () => {
-        quizUrl = localStorage.getItem('OF2WS6SVOJWA====')
+        quizUrl = localStorage.getItem('quizUrl')
         
         const quizTitle = result__title.innerHTML.slice(25,)
         const quizScore = result__score.innerHTML.split(' ')
@@ -398,7 +398,7 @@ if (result__share__btn) {
 
 if (resultQuizPointy__share__btn) {
     resultQuizPointy__share__btn.addEventListener('click', () => {
-        quizUrl = localStorage.getItem('OF2WS6SVOJWA====')
+        quizUrl = localStorage.getItem('quizUrl')
 
         const quizTitle = resultQuizPointy__title.innerHTML.slice(25,)
         const quizResult = resultQuizPointy__resultTitle.innerHTML
@@ -430,7 +430,7 @@ const nightMode_turnOff = () => {
     nightMode.forEach (each => {
         each.classList.add('nightMode-Off')
         each.style.backgroundImage = 'url(/static/img/base/nightMode.png)'
-        localStorage.setItem('NVXWIZI=', 'lightMode')
+        localStorage.setItem('mode', 'lightMode')
     })
 }
 
@@ -439,11 +439,11 @@ const nightMode_turnOn = () => {
     nightMode.forEach (each => {
         each.classList.remove('nightMode-Off')
         each.style.backgroundImage = 'url(/static/img/base/lightMode.png)'
-        localStorage.setItem('NVXWIZI=', 'nightMode')
+        localStorage.setItem('mode', 'nightMode')
     })
 }
 
-userFavoriteMode = localStorage.getItem('NVXWIZI=')
+userFavoriteMode = localStorage.getItem('mode')
 if (userFavoriteMode == 'lightMode') {
     nightMode_turnOff()
 } else {

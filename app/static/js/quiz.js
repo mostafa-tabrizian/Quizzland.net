@@ -32,9 +32,9 @@ if (quiz__container__eachOne) {
         let correct = 0
         let wrong = 0
     
-        const scoreDATA = localStorage.getItem('ONRW64TF')
-        const correctAnswerCounterDATA = localStorage.getItem('MNXXE4TFMN2EC3TTO5SXEQ3POVXHIZLS')
-        const wrongAnswerCounterDATA = localStorage.getItem('O5ZG63THIFXHG53FOJBW65LOORSXE===')
+        const scoreDATA = localStorage.getItem('score')
+        const correctAnswerCounterDATA = localStorage.getItem('correctAnswer')
+        const wrongAnswerCounterDATA = localStorage.getItem('wrongAnswer')
 
         if (result__detail__correctTime) {
             result__detail__correctTime.innerHTML = correctAnswerCounterDATA
@@ -256,10 +256,10 @@ const calculateResult = (FinalTitleOfQuiz) => {
     const wrongAnswerCounter = questionCounter - correctAnswerCounter
     const score = ((correctAnswerCounter / (correctAnswerCounter + wrongAnswerCounter)) * 100).toFixed(0)
     try {
-        localStorage.setItem('OF2WS6SVOJWA====', quizUrl)
-        localStorage.setItem('MNXXE4TFMN2EC3TTO5SXEQ3POVXHIZLS', correctAnswerCounter)
-        localStorage.setItem('O5ZG63THIFXHG53FOJBW65LOORSXE===', wrongAnswerCounter)
-        localStorage.setItem('ONRW64TF', score)
+        localStorage.setItem('quizUrl', quizUrl)
+        localStorage.setItem('correctAnswer', correctAnswerCounter)
+        localStorage.setItem('wrongAnswer', wrongAnswerCounter)
+        localStorage.setItem('score', score)
     } catch {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }
@@ -270,7 +270,7 @@ const calculateResult = (FinalTitleOfQuiz) => {
 const calculateResult_pointy = (FinalTitleOfQuiz) => {
     let quizUrl = decodeURIComponent(window.location.href)
     try {
-        localStorage.setItem('OF2WS6SVOJWA====', quizUrl)
+        localStorage.setItem('quizUrl', quizUrl)
     } catch {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }
