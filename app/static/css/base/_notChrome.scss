@@ -54,7 +54,7 @@
         &__question {
             background: #0000008f !important;
             font-family: $font-notChrome !important;
-            font-weight: 300;
+            font-weight: 600 !important;
         }
     }
 
@@ -70,6 +70,6 @@
 
     .result {
         font-family: $font-notChrome !important;
-        font-weight: 300;
+        font-weight: 300 !important;
     }
 }

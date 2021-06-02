@@ -444,10 +444,18 @@ const nightMode_turnOn = () => {
 }
 
 userFavoriteMode = localStorage.getItem('mode')
-if (userFavoriteMode == 'lightMode') {
-    nightMode_turnOff()
+if(navigator.userAgent.indexOf("Firefox") != -1 ) {
+    if (userFavoriteMode == 'lightMode') {
+        log('firefox no nightMode')
+    } else {
+        nightMode_turnOff()
+    }
 } else {
-    nightMode_turnOn()
+    if (userFavoriteMode == 'lightMode') {
+        nightMode_turnOff()
+    } else {
+        nightMode_turnOn()
+    }
 }
 
 if (nightMode) {
