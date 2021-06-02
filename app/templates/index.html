@@ -43,6 +43,43 @@
 
     </div>
 
+    <div class="indexQuiz">
+        <div class="indexQuiz__category space-l">
+            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
+                <a class="btn" href="/newest/celebrities/0">...بیشتر</a>
+                <h2>سلبریتی</h2>
+            </div>
+            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+                {% for quiz in NewestCelebrityQuizSection2 %}
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    <button style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a></button>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="indexQuiz__category space-l">
+            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
+                <button type="button">...بیشتر</button>
+                <h2>فیلم و سریال</h2>
+            </div>
+            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+                {% for quiz in NewestMovieSeriesQuizSection2 %}
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    <button style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        {{ quiz.title_far }}
+                    </a></button>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
     <div class="sort__controller flex flex-jc-c" id="sort">
         <ul>
             <button class="sort__controller__btn" type="button">گیمینگ 🎮</button>

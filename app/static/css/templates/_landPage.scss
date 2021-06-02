@@ -74,6 +74,54 @@
     }
 }
 
+.indexQuiz {
+    &__category {
+
+        &__header {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        &__inner {
+            max-width: 67.5rem;
+
+            button {
+                width: 20%;
+                height: 7rem;
+                background-position: center center !important;
+                background-size: cover !important;
+                position: relative;
+                border-radius: 10px 10px 0 0;
+                border: 0.5px solid #6f6f6f;
+
+                &:not(:last-child) {
+                    margin-right: 1.125rem;
+                }
+
+                a {
+                    position: absolute;
+                    top: 7.2rem;
+                    right: 1rem;
+                    z-index: 2;
+                    text-align: right;
+                }
+
+                &::after {
+                    content: '';
+                    height: 5rem;
+                    background: white;
+                    box-shadow: 0 0 10px #00000045;
+                    width: 100%;
+                    position: absolute;
+                    left: 0;
+                    bottom: -5rem;
+                    border-radius: 0 0 10px 10px;
+                }
+            }
+        }
+    }
+}
+
 .sort {
     height: 36rem;
     position: relative;

@@ -15,18 +15,22 @@ def Main():
         bestestQuizzesForThisMonth = quizzesByMonthlyViews().limit(5),
 
         NewestCelebrityQuizSection =  quizzesByPublishWithCategory('celebrities').limit(15),
+        NewestCelebrityQuizSection2 =  quizzesByPublishWithCategory('celebrities').limit(5),
         BestestCelebrityQuizSection = quizzesBothByViewsWithCategory('celebrities').limit(5),
         MonthlyBestestCelebrityQuizSection = quizzesByMonthlyViewsWithCategory('celebrities').limit(5),
 
         NewestMovieSeriesQuizSection =  quizzesByPublishWithCategory('movieSeries').limit(15),
+        NewestMovieSeriesQuizSection2 =  quizzesByPublishWithCategory('movieSeries').limit(5),
         BestestMovieSeriesQuizSection = quizzesBothByViewsWithCategory('movieSeries').limit(5),
         MonthlyBestestMovieSeriesQuizSection = quizzesByMonthlyViewsWithCategory('movieSeries').limit(5),
         
         NewestGamingQuizSection =  quizzesByPublishWithCategory('Gaming').limit(15),
+        NewestGamingQuizSection2 =  quizzesByPublishWithCategory('Gaming').limit(5),
         BestestGamingQuizSection = quizzesBothByViewsWithCategory('Gaming').limit(5),
         MonthlyBestestGamingQuizSection = quizzesByMonthlyViewsWithCategory('Gaming').limit(5),
         
         NewestPhysiologiesQuizSection =  quizzesPointyByPublishWithCategory('Physiologies').limit(15),
+        NewestPhysiologiesQuizSection2 =  quizzesPointyByPublishWithCategory('Physiologies').limit(5),
         BestestPhysiologiesQuizSection = quizzesPointyByViewsWithCategory('Physiologies').limit(5),
         MonthlyBestestPhysiologiesQuizSection = quizzesPointyByMonthlyViewsWithCategory('Physiologies').limit(5),
 
