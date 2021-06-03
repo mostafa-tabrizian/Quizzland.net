@@ -9,6 +9,11 @@
                 {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
                 <a href="/quiz_2/{{quiz.category}}/{{innerCategory}}/{{title}}">
                     <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
+                        {% if quiz.views >= 1000  %}
+                            {% set views = (quiz.views| string)[0] + '.' + (quiz.views| string)[1] + 'k' %}
+                        {% else %}
+                            {% set views = quiz.views %}
+                        {% endif %}
                     <div class="sortMore__container__views">{{quiz.views}}</div>
                     <div class="sortMore__container__title">{{ quiz.title_far }}</div>
                 </a>
@@ -21,6 +26,11 @@
                 {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
                 <a href="/{{quizPage}}/{{quiz.category}}/{{innerCategory}}/{{title}}">
                     <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
+                        {% if quiz.views >= 1000  %}
+                            {% set views = (quiz.views| string)[0] + '.' + (quiz.views| string)[1] + 'k' %}
+                        {% else %}
+                            {% set views = quiz.views %}
+                        {% endif %}
                     <div class="sortMore__container__views">{{quiz.views}}</div>
                     <div class="sortMore__container__title">{{ quiz.title_far }}</div>
                 </a>

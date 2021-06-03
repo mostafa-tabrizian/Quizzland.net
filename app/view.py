@@ -31,7 +31,7 @@ def Main():
         MonthlyBestestPhysiologiesQuizSection = quizzesPointyByMonthlyViewsWithCategory('Physiologies').limit(10),
 
         colorOfHeader = 'header__white',
-        headTitle = 'QuizLand | کوئیزلند بزرگترین وب‌سایت کوئيز'
+        headTitle = 'QuizLand | کوئیزلند بزرگترین وب‌سایت کوئيز',
     )
 
 @app.route('/search', methods=['GET', 'POST'])

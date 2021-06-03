@@ -55,7 +55,12 @@
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
                     <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
                         <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
-                        <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
+                        {% if quiz.views >= 1000  %}
+                            {% set views = (quiz.views| string)[0] + '.' + (quiz.views| string)[1] + 'k' %}
+                        {% else %}
+                            {% set views = quiz.views %}
+                        {% endif %}
+                        <div class="indexQuiz__category__inner__views">{{views}}</div>
                         <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
                     </a>
                 {% endfor %}
@@ -73,7 +78,12 @@
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
                     <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
                         <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
-                        <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
+                        {% if quiz.views >= 1000  %}
+                            {% set views = (quiz.views| string)[0] + '.' + (quiz.views| string)[1] + 'k' %}
+                        {% else %}
+                            {% set views = quiz.views %}
+                        {% endif %}
+                        <div class="indexQuiz__category__inner__views">{{views}}</div>
                         <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
                     </a>
                 {% endfor %}
@@ -92,7 +102,12 @@
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
                     <a href="/quiz_2/{{quiz.category}}/{{innerCategory}}/{{title}}">
                         <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
-                        <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
+                        {% if quiz.views >= 1000  %}
+                            {% set views = (quiz.views| string)[0] + '.' + (quiz.views| string)[1] + 'k' %}
+                        {% else %}
+                            {% set views = quiz.views %}
+                        {% endif %}
+                        <div class="indexQuiz__category__inner__views">{{views}}</div>
                         <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
                     </a>
                 {% endfor %}
@@ -111,7 +126,12 @@
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
                     <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
                         <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
-                        <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
+                        {% if quiz.views >= 1000  %}
+                            {% set views = (quiz.views| string)[0] + '.' + (quiz.views| string)[1] + 'k' %}
+                        {% else %}
+                            {% set views = quiz.views %}
+                        {% endif %}
+                        <div class="indexQuiz__category__inner__views">{{views}}</div>
                         <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
                     </a>
                 {% endfor %}
@@ -139,11 +159,7 @@
                     <h2 class="tx-al-c">محبوب ترین کوئیز های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in bestestQuizzesForThisMonth %}
-                            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
-                            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                            <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                                {{ quiz.title_far }}
-                            </a></li>
+                            {{indexQuiz | safe}}
                         {% endfor %}
                     </ul>
                     <a class="sort__more" href="/bestest/0"> ..بیشتر</a>
