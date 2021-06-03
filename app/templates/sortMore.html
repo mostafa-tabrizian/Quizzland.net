@@ -8,7 +8,8 @@
             {% for quiz in sortPointy %}
                 {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                 {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
                     <div class="sortMore__container__views">{{quiz.views}}</div>
                     <div class="sortMore__container__title">{{ quiz.title_far }}</div>
                 </a>
@@ -19,7 +20,8 @@
             {% for quiz in sort %}
                 {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                 {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
                     <div class="sortMore__container__views">{{quiz.views}}</div>
                     <div class="sortMore__container__title">{{ quiz.title_far }}</div>
                 </a>

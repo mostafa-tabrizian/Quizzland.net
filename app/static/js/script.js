@@ -19,9 +19,7 @@ const fadeOut = (element) => {
 window.onload = (event) => {
     loadingScreen.classList.add('fade-out')
     loadingScreen.classList.remove('fade-in')
-};
-
-//----------------------------------------------------------
+}
 
 // open and close the category list when click on category in the list
 header__categories__btn.addEventListener('click', () => {

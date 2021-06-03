@@ -1374,18 +1374,15 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 .indexQuiz__category__inner a {
   width: 14rem;
   height: 8rem;
-  background-position: center center !important;
-  background-size: cover !important;
-  background-color: white;
   -webkit-box-shadow: 0 0 10px #000000bd;
           box-shadow: 0 0 10px #000000bd;
   position: relative;
-  border-radius: 10px 10px 0 0;
   border: 0.5px solid #6f6f6f;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
   margin-bottom: 6rem;
   margin-right: 1.125rem;
+  border-radius: 12px 12px 0 0;
 }
 
 @media (max-width: 49.9375em) {
@@ -1419,10 +1416,15 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
           box-shadow: 0 6px 7px #0000002a;
 }
 
+.indexQuiz__category__inner a img {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+
 .indexQuiz__category__inner__views {
   position: absolute;
   left: 0.2rem;
-  bottom: .125rem;
+  bottom: .325rem;
   background: #eaeaea;
   padding: 0 0.5rem;
   font-size: 0.9rem;
@@ -2574,6 +2576,11 @@ body {
 .sortMore__container a:hover::after {
   -webkit-box-shadow: 0 6px 7px #0000002a;
           box-shadow: 0 6px 7px #0000002a;
+}
+
+.sortMore__container a img {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
 }
 
 .sortMore__container__views {

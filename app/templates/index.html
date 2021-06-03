@@ -53,7 +53,8 @@
                 {% for quiz in NewestCelebrityQuizSection %}
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
                         <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
                         <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
                     </a>
@@ -70,7 +71,8 @@
                 {% for quiz in NewestMovieSeriesQuizSection %}
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
                         <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
                         <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
                     </a>
@@ -88,7 +90,8 @@
                 {% for quiz in NewestPhysiologiesQuizSection %}
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
                         <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
                         <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
                     </a>
@@ -106,7 +109,8 @@
                 {% for quiz in NewestGamingQuizSection %}
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
                         <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
                         <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
                     </a>
