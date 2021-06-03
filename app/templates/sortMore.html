@@ -3,12 +3,11 @@
 
 <h3 class="tx-al-c">{{title}} {{ category }}</h3>
 <div class="sortMore {{categoryStyle}} space-med tx-al-c">
-
         <div class="sortMore__container {{hideSecondColumn}} flex flex-jc-fe">
             {% for quiz in sortPointy %}
                 {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                 {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                <a href="/quiz_2/{{quiz.category}}/{{innerCategory}}/{{title}}">
                     <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
                     <div class="sortMore__container__views">{{quiz.views}}</div>
                     <div class="sortMore__container__title">{{ quiz.title_far }}</div>
@@ -20,7 +19,7 @@
             {% for quiz in sort %}
                 {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                 {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                <a href="/{{quizPage}}/{{quiz.category}}/{{innerCategory}}/{{title}}">
                     <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
                     <div class="sortMore__container__views">{{quiz.views}}</div>
                     <div class="sortMore__container__title">{{ quiz.title_far }}</div>

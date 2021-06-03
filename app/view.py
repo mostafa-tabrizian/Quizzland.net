@@ -83,6 +83,7 @@ def sortAll(sortOfQuiz, page):
         title = "پر بازدیدترین کوئیز های این ماه"
 
     return render_template('/sortMore.html',
+        quizPage = 'quiz',
         pageTravel = pageTravel(finalPage(howManyElementToShow, 'quizzes')),
         sort = sort,
         sortPointy = sortPointy,
@@ -98,12 +99,17 @@ def sortCategories(category, page, sortOfQuiz):
     if sortOfQuiz == 'newest':
         sort = sortBothQuizzesByPublishWithCategories(category).all()[fTPage[0]:fTPage[1]]
         title = "جدیدترین کوئیز های"
-
     elif sortOfQuiz == 'bestest':
         sort = quizzesBothByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
         title = "پر بازدیدترین کوئیز های"
 
+    if category == 'physiologies':
+        quizPage = 'quiz_2'
+    else:
+        quizPage = 'quiz'
+
     return render_template('/sortMore.html',
+        quizPage = quizPage,
         hideSecondColumn = 'fade-out',
         categoryStyle = 'sortMore__categoryStyle wrapper-med',
         sort = sort,
