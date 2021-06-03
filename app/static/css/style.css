@@ -2210,12 +2210,13 @@ body {
 
 .result__share h5 {
   margin-bottom: 1rem;
-  text-shadow: 0 0 5px white;
 }
 
 .result__share__btn {
   font-size: 0.98rem;
-  font-weight: 600;
+  font-weight: 300;
+  background: linear-gradient(-45deg, #4D1420, #9D272D) !important;
+  color: white !important;
 }
 
 .result__share__message {

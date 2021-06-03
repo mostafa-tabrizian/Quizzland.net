@@ -33,12 +33,13 @@
     &__share {
         h5 {
             margin-bottom: 1rem;
-            text-shadow: 0 0 5px white;
         }
 
         &__btn {
             font-size: $font-sm - .2rem;
-            font-weight: 600;
+            font-weight: 300;
+            background: linear-gradient(-45deg, #4D1420, #9D272D) !important;
+            color: white !important;
         }
 
         &__message {
