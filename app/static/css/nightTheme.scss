@@ -72,7 +72,7 @@ body {
 
 .category {
     img {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 25px #000000, 0 0 25px #000000;
         border: 1px solid #404040;
     }
 
@@ -87,6 +87,33 @@ body {
     &__item {
         a > img {
             filter: brightness(70%) !important;
+        }
+    }
+}
+
+.indexQuiz {
+    &__category {
+        &__inner {
+            a {
+                border: inherit;
+
+                &::after {
+                    background: #121212;
+                    box-shadow: 0 6px 7px #0000008c, 0 6px 7px #0000003b;
+                }
+
+                &:hover {
+                    box-shadow: 0 0 20px #000000;
+
+                    &::after {
+                        box-shadow: 0 6px 10px #000000b2, 0 6px 10px #00000081;
+                    }
+                }
+            }
+
+            &__views {
+                background: #181818;
+            }
         }
     }
 }
@@ -202,4 +229,8 @@ body {
             content: '◽'
         }
     }
+}
+
+button, .btn {
+    color: black !important;
 }

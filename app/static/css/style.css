@@ -1339,8 +1339,8 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   width: 14.6875rem;
   height: 14.6875rem;
   border-radius: 20px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0 35px;
-          box-shadow: rgba(0, 0, 0, 0.5) 0 0 35px;
+  -webkit-box-shadow: 0 0 10px black;
+          box-shadow: 0 0 10px black;
   margin: 1.4375rem;
   margin-bottom: 0;
   -webkit-transition: all .3s ease-in-out;
@@ -1348,8 +1348,8 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 .category img:hover {
-  -webkit-box-shadow: rgba(105, 13, 17, 0.5) 0 0 55px;
-          box-shadow: rgba(105, 13, 17, 0.5) 0 0 55px;
+  -webkit-box-shadow: rgba(105, 13, 17, 0.5) 0 0 20px;
+          box-shadow: rgba(105, 13, 17, 0.5) 0 0 20px;
   -webkit-transform: translateY(-0.625rem);
           transform: translateY(-0.625rem);
 }
@@ -1380,8 +1380,8 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   background-position: center center !important;
   background-size: cover !important;
   background-color: white;
-  -webkit-box-shadow: 0 0 10px #0000001a;
-          box-shadow: 0 0 10px #0000001a;
+  -webkit-box-shadow: 0 0 10px #000000bd;
+          box-shadow: 0 0 10px #000000bd;
   position: relative;
   border-radius: 10px 10px 0 0;
   border: 0.5px solid #6f6f6f;
@@ -1409,8 +1409,8 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 .indexQuiz__category__inner a:hover {
-  -webkit-box-shadow: 0 0 10px #000000a2;
-          box-shadow: 0 0 10px #000000a2;
+  -webkit-box-shadow: 0 0 13px #000000;
+          box-shadow: 0 0 13px #000000;
 }
 
 .indexQuiz__category__inner a:hover::after {
