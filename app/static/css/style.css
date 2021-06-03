@@ -2203,6 +2203,12 @@ body {
   font-family: myChanga, sans-serif, serif;
 }
 
+@media (max-width: 49.9375em) {
+  .countingResult {
+    font-size: 1.025rem;
+  }
+}
+
 .result {
   font-family: myChanga, sans-serif, serif;
   padding-left: 2rem;

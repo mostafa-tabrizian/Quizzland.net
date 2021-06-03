@@ -411,4 +411,8 @@ body {
     font-size: $font-med;
     color: white;
     font-family: $font-sec;
+
+    @include breakpoints-down(medium) {
+        font-size: $font-med - .3rem;
+    }
 }
