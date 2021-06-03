@@ -45,7 +45,7 @@ body {
     overflow-y: overlay;
     
     &::-webkit-scrollbar {
-        width: 10px;
+        width: .625rem;
       }
     
     &::-webkit-scrollbar-thumb {
@@ -477,7 +477,7 @@ input {
 .nightMode {
     background: url('/static/img/base/nightMode.png') no-repeat center center;
     transform: translate(0.54rem, -0.33rem);
-    height: 27px;
+    height: 1.6875rem;
     z-index: 3;
 
     @include breakpoints-down(medium) {
@@ -486,8 +486,8 @@ input {
 
     &__container {
         background: rgba(0, 0, 0, 0.493);
-        width: 27px;
-        height: 27px;
+        width: 1.6875rem;
+        height: 1.6875rem;
         padding: .3rem;
 
         @include breakpoints-down(medium) {
