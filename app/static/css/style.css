@@ -58,7 +58,7 @@
   .quiz__question {
     background: #0000008f !important;
     font-family: changeForNotChrome, sans-serif, serif !important;
-    font-weight: 600 !important;
+    font-weight: 300 !important;
   }
   .newsletter__blurBackground__show {
     background: rgba(0, 0, 0, 0.81) !important;
@@ -2424,6 +2424,13 @@ body {
 
 .basicPage h4::before {
   content: '_';
+}
+
+.pleaseUseChrome {
+  background: rgba(255, 230, 0, 0.719);
+  padding: .5rem .5rem;
+  border: 1px solid #585858;
+  border-radius: 2rem;
 }
 
 @media (max-width: 49.9375em) {
