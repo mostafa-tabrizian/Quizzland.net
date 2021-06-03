@@ -8,6 +8,10 @@
   color: white;
 }
 
+.header__menu {
+  background: rgba(56, 56, 56, 0.3);
+}
+
 .header__menu__openBtn span {
   background: white;
 }

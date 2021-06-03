@@ -4,7 +4,7 @@ const backBtn = document.querySelector('.backBtn')
 
 const nightMode__link = document.querySelector('.nightMode__link')
 const nightMode = document.querySelectorAll('.nightMode')
-const nightMode__container = document.querySelector('.nightMode__container')
+const nightMode__container = document.querySelectorAll('.nightMode__container')
 
 const header__categories__btn = document.querySelector('.header__categories__btn')
 const header__categories = document.querySelector('.header__categories')

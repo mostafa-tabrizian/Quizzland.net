@@ -275,10 +275,6 @@ button, .btn {
   -webkit-transition: all .1s ease-in-out;
   transition: all .1s ease-in-out;
   cursor: pointer;
-  padding: 0.3rem 1rem;
-  background: #ececec;
-  -webkit-box-shadow: 0 0 5px #00000047;
-          box-shadow: 0 0 5px #00000047;
 }
 
 button__grad, .btn__grad {
@@ -775,7 +771,7 @@ input {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(56, 56, 56, 0.3);
   -webkit-box-shadow: 0 7px 20px black;
           box-shadow: 0 7px 20px black;
   -webkit-backdrop-filter: blur(20px);
@@ -1372,6 +1368,13 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.indexQuiz__category__header a {
+  padding: 0.3rem 1rem;
+  background: #ececec;
+  -webkit-box-shadow: 0 0 5px #00000047;
+          box-shadow: 0 0 5px #00000047;
 }
 
 .indexQuiz__category__inner a {

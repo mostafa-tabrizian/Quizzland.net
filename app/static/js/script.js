@@ -484,11 +484,13 @@ if (nightMode) {
         checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'quiz')
         {
             try {
-                nightMode__container.classList.add('noVis')
-                document.head.removeChild(nightThemeCss)
+                nightMode__container.forEach(each => {
+                    each.classList.add('noVis')
+                })
                 nightMode.forEach(each => {
                     each.classList.add('nightMode-Off')
                 })
+                document.head.removeChild(nightThemeCss)
             } catch {
                 log('no nightMode')
             }
