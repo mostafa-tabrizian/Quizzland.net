@@ -66,7 +66,7 @@ def moreSearchResult(searchMoreOfThis):
 
 @app.route('/<sortOfQuiz>/<int:page>')
 def sortAll(sortOfQuiz, page):
-    howManyElementToShow = 7
+    howManyElementToShow = 12
     fTPage = frToPage(page, howManyElementToShow)
 
     if (sortOfQuiz == 'newest'):
@@ -104,6 +104,8 @@ def sortCategories(category, page, sortOfQuiz):
         title = "پر بازدیدترین کوئیز های"
 
     return render_template('/sortMore.html',
+        hideSecondColumn = 'fade-out',
+        categoryStyle = 'sortMore__categoryStyle wrapper-med',
         sort = sort,
         title = title,
         category = categoryInFar[category],

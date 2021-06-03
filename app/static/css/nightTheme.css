@@ -127,6 +127,26 @@ body::-webkit-scrollbar-thumb {
   background: #181818;
 }
 
+.sortMore__container a::after {
+  background: #121212;
+  -webkit-box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081;
+          box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081;
+}
+
+.sortMore__container a:hover {
+  -webkit-box-shadow: 0 0 13px #000000;
+          box-shadow: 0 0 13px #000000;
+}
+
+.sortMore__container a:hover::after {
+  -webkit-box-shadow: 0 6px 7px #0000002a;
+          box-shadow: 0 6px 7px #0000002a;
+}
+
+.sortMore__container__views {
+  background: #181818;
+}
+
 .sort__style li:nth-child(even) {
   color: #c4c4c4;
 }

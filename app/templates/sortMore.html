@@ -1,28 +1,30 @@
 {% extends './layout.html' %}
 {% block content %}
 
-<div class="basicTwoColumn center tx-al-c">
-    <h3 class="tx-al-c">{{title}} {{ category }}</h3>
+<h3 class="tx-al-c">{{title}} {{ category }}</h3>
+<div class="sortMore {{categoryStyle}} tx-al-c">
 
-    <div class="basicTwoColumn__sort flex flex-jc-c flex-ai-c">
-        <div class="basicTwoColumn__container">
+        <div class="sortMore__container {{hideSecondColumn}} flex flex-jc-fe">
             {% for quiz in sortPointy %}
                 {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                 {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                <a class="basicTwoColumn__item flex flex-jc-fe" href="/quiz_2/{{quiz.category}}/{{innerCategory}}/{{title}}">{{ quiz.title_far }}</a>
+                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                    <div class="sortMore__container__views">{{quiz.views}}</div>
+                    <div class="sortMore__container__title">{{ quiz.title_far }}</div>
+                </a>
             {% endfor %}
         </div>
 
-        <div class="divider hideForDesktop"></div>
-
-        <div class="basicTwoColumn__container">
+        <div class="sortMore__container flex flex-jc-fe">
             {% for quiz in sort %}
                 {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                 {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                <a class="basicTwoColumn__item flex flex-jc-fe" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">{{ quiz.title_far }}</a>
+                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                    <div class="sortMore__container__views">{{quiz.views}}</div>
+                    <div class="sortMore__container__title">{{ quiz.title_far }}</div>
+                </a>
             {% endfor %}
         </div>
-    </div>
 
 </div>
 
