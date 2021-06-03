@@ -148,7 +148,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .wrapper-med {
-  max-width: 62.5rem;
+  max-width: 67.5rem;
   margin: 1.125rem auto;
   position: relative;
 }
@@ -275,6 +275,10 @@ button, .btn {
   -webkit-transition: all .1s ease-in-out;
   transition: all .1s ease-in-out;
   cursor: pointer;
+  padding: 0.3rem 1rem;
+  background: #ececec;
+  -webkit-box-shadow: 0 0 5px #00000047;
+          box-shadow: 0 0 5px #00000047;
 }
 
 button__grad, .btn__grad {
@@ -1370,43 +1374,76 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
           justify-content: space-between;
 }
 
-.indexQuiz__category__inner {
-  max-width: 67.5rem;
-}
-
-.indexQuiz__category__inner button {
+.indexQuiz__category__inner a {
   width: 20%;
-  height: 7rem;
+  height: 8rem;
   background-position: center center !important;
   background-size: cover !important;
+  background-color: white;
+  -webkit-box-shadow: 0 0 10px #0000001a;
+          box-shadow: 0 0 10px #0000001a;
   position: relative;
   border-radius: 10px 10px 0 0;
   border: 0.5px solid #6f6f6f;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
-.indexQuiz__category__inner button:not(:last-child) {
-  margin-right: 1.125rem;
-}
-
-.indexQuiz__category__inner button a {
-  position: absolute;
-  top: 7.2rem;
-  right: 1rem;
-  z-index: 2;
-  text-align: right;
-}
-
-.indexQuiz__category__inner button::after {
+.indexQuiz__category__inner a::after {
   content: '';
   height: 5rem;
   background: white;
-  -webkit-box-shadow: 0 0 10px #00000045;
-          box-shadow: 0 0 10px #00000045;
+  -webkit-box-shadow: 0 6px 7px #0000001a;
+          box-shadow: 0 6px 7px #0000001a;
   width: 100%;
   position: absolute;
   left: 0;
   bottom: -5rem;
   border-radius: 0 0 10px 10px;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.indexQuiz__category__inner a:not(:last-child) {
+  margin-right: 1.125rem;
+}
+
+.indexQuiz__category__inner a:hover {
+  -webkit-box-shadow: 0 0 10px #000000a2;
+          box-shadow: 0 0 10px #000000a2;
+}
+
+.indexQuiz__category__inner a:hover::after {
+  -webkit-box-shadow: 0 6px 7px #0000002a;
+          box-shadow: 0 6px 7px #0000002a;
+}
+
+.indexQuiz__category__inner__views {
+  position: absolute;
+  left: 0.2rem;
+  bottom: 2px;
+  background: #eaeaea;
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
+  z-index: 2;
+  border-radius: 4px;
+  border: .5px solid #0000002e;
+}
+
+.indexQuiz__category__inner__views::before {
+  content: url("/static/img/base/eyeEmoji.png");
+  position: relative;
+  top: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+.indexQuiz__category__inner__title {
+  position: absolute;
+  top: 8.2rem;
+  right: 1rem;
+  z-index: 2;
+  text-align: right;
+  font-size: 1.18rem;
 }
 
 .sort {

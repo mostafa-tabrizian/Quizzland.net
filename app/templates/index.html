@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <h2 class="category__title tx-al-c">دسته‌ی دلخوات رو انتخاب کن</h2>
+    <h2 class="category__title tx-al-r wrapper-med">کتگوری</h2>
 
     <div class="category flex flex-jc-c flex-ai-c flex-jc-sb" id="category">
 
@@ -44,26 +44,25 @@
     </div>
 
     <div class="indexQuiz">
-        <div class="indexQuiz__category space-l">
+        <div class="indexQuiz__category space-med">
             <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
                 <a class="btn" href="/newest/celebrities/0">...بیشتر</a>
                 <h2>سلبریتی</h2>
             </div>
             <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
-
                 {% for quiz in NewestCelebrityQuizSection2 %}
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                    <button style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
-                    </a></button>
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                        <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
+                        <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
+                    </a>
                 {% endfor %}
-
             </div>
         </div>
         <div class="indexQuiz__category space-l">
             <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
-                <button type="button">...بیشتر</button>
+                <a class="btn" href="/newest/movieSeries/0">...بیشتر</a>
                 <h2>فیلم و سریال</h2>
             </div>
             <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
@@ -71,9 +70,46 @@
                 {% for quiz in NewestMovieSeriesQuizSection2 %}
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
                     {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                    <button style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
-                    </a></button>
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                        <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
+                        <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
+                    </a>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="indexQuiz__category space-l">
+            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
+                <a class="btn" href="/newest/physiologies/0">...بیشتر</a>
+                <h2>روانشناسی</h2>
+            </div>
+            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+                {% for quiz in NewestPhysiologiesQuizSection2 %}
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                        <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
+                        <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
+                    </a>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="indexQuiz__category space-l">
+            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
+                <a class="btn" href="/newest/gaming/0">...بیشتر</a>
+                <h2>گیمینگ</h2>
+            </div>
+            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+                {% for quiz in NewestGamingQuizSection2 %}
+                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}" style='background: url(/static/img/Bg-quizzes/{{quiz.background}})'>
+                        <div class="indexQuiz__category__inner__views">{{quiz.views}}</div>
+                        <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
+                    </a>
                 {% endfor %}
 
             </div>

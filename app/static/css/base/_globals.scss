@@ -65,7 +65,7 @@ body {
     }
 
     &-med {
-        max-width: 62.5rem;
+        max-width: 67.5rem;
         margin: 1.125rem auto;
         position: relative;
     
@@ -177,6 +177,9 @@ button, .btn {
     font-size: $font-sm;
     transition: all .1s ease-in-out;
     cursor: pointer;
+    padding: 0.3rem 1rem;
+    background: #ececec;
+    box-shadow: 0 0 5px #00000047;
 
     &__grad {
         background-image: $red-grad;
