@@ -30,7 +30,7 @@ tools = "   <div class='tools wrapper-sm flex flex-ai-c'>\
         "
 
 def pageTravel (finalPage):
-    return f"  <div class='pageTravel darkGls flex flex-jc-c flex-ai-c'>\
+    return f"  <div class='pageTravel darkGls flex flex-jc-c flex-ai-c space-med'>\
                     <a class='pageTravel__arwLast' href=''></a>\
                     <div class='pageTravel__pages flex flex-jc-c flex-ai-c'>\
                         <a class='pageTravel__pages__last' href=''></a>\

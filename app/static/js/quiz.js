@@ -42,19 +42,19 @@ if (quiz__container__eachOne) {
             
             if (scoreDATA > 80){
                 result__score.innerHTML = (`😎 ${scoreDATA}%`)
-                result__subtitle.innerHTML = (`! شما یک ${ fanName } واقعی هستید`)}
+                result__subtitle.innerHTML = (`! تو یک ${ fanName } واقعی هستی <br/> 😎 وقتشه خودت رو به بقیه نشون بدی`)}
             else if (scoreDATA > 60){
                 result__score.innerHTML = (`😀 ${scoreDATA}%`)
-                result__subtitle.innerHTML = ('شما 70% از بقیه‌ی فن ها جلوترید')}
+                result__subtitle.innerHTML = ('عالیه، فقط یکم با یه فن واقعی بودن فاصله داری')}
             else if (scoreDATA > 40){
                 result__score.innerHTML = (`🙂 ${scoreDATA}%`)
                 result__subtitle.innerHTML = ('بد نیست ولی میتونست بهتر هم باشه')}
             else if (scoreDATA > 20){
-                result__score.innerHTML = (`🙄 ${scoreDATA}%`)
-                result__subtitle.innerHTML = ('نیاز به بیشتر شناختش داری')}
-            else if (scoreDATA >= 0){
                 result__score.innerHTML = (`😭 ${scoreDATA}%`)
-                result__subtitle.innerHTML = ('😅 عیبی نداره کسی نمیفهمه، میتونی دوباره کوئیز رو بدی ')}
+                result__subtitle.innerHTML = ('بیشتر تلاش کن. میتونی انجامش بدی')}
+            else if (scoreDATA >= 0){
+                result__score.innerHTML = (`🙄 ${scoreDATA}%`)
+                result__subtitle.innerHTML = (' .فکر کنم کوئیز رو اشتباهی انتخاب کردی <br/>😅 میتونی سریع کوئیز دیگه ای انتخاب کنی تا کسی نیومده ')}
         } else { log('no result page') } 
     }
 } else { log('no quiz.js') }

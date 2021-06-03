@@ -199,9 +199,9 @@ def addViewToQuizzes(title):
 
 def finalPage(howManyElementToShow, whichTypeWantToKnowTheFinalPage):
     if whichTypeWantToKnowTheFinalPage == 'quizzes':
-        sort = allQuizzes()
+        sort = quizzesByPublishWithInnerCategory(whichTypeWantToKnowTheFinalPage).all()
     else: # categories
-        sort = allCategories()
+        sort = categoriesByPublish(whichTypeWantToKnowTheFinalPage).all()
 
     finalPage = round((len(sort)) / howManyElementToShow)
 

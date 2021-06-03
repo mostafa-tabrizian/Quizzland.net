@@ -134,26 +134,26 @@ def category(category, page, sortType, numberOfResult):
         )
 
     else:
-        return render_template('404.html')
+        return redirect(url_for('pageNotFoundManual'))
 
 @app.route('/category/<category>/<innerCategory>/<int:page>/<sortType>/<numberOfResult>')
 def innerCategory(category, innerCategory, page, sortType, numberOfResult):
     if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
         howManyElementToShow = int(numberOfResult)
         fTPage = frToPage(page, howManyElementToShow)
-        InnerCat = titleConverterFromUrlToNormalOne(innerCategory)
-        addViewToCategories(InnerCat)
+        InnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
+        addViewToCategories(InnerCategory)
 
         return render_template(f'/category/inner-category-list.html',
             colorOfHeader = 'header__white',
             tools = tools,
             innerCategory = innerCategory,
-            quizzes = quizzes(category, InnerCat, fTPage[0], fTPage[1], sortType),
-            pageTravel = pageTravel(finalPage(howManyElementToShow, InnerCat)),
+            quizzes = quizzes(category, InnerCategory, fTPage[0], fTPage[1], sortType),
+            pageTravel = pageTravel(finalPage(howManyElementToShow, InnerCategory)),
             headTitle = f'QuizLand | {innerCategory} ',
         )
     else:
-        return render_template('404.html')
+        return redirect(url_for('pageNotFoundManual'))
 
 @app.route('/quiz/<category>/<innerCategory>/<title>')
 def Quiz(category, innerCategory, title):
@@ -268,10 +268,10 @@ def newsletter():
             )
 
 @app.route('/404')
-def pageNotFound():
+def pageNotFoundManual():
     return render_template('errorHandler.html',
     backBtn = backBtn,
-    headTitle = f'QuizLand | صفحه مورد نظر پیدا نشد ',  
+    headTitle = f'QuizLand | صفحه مورد نظر پیدا نشد ', 
     message = "🤔 صفحه‌ی مورد نظر پیدا نشد"), 404
 
 @app.errorhandler(404)

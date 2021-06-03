@@ -69,34 +69,3 @@
         }
     }
 }
-
-.pageTravel {
-    padding: .2rem .7rem;
-    margin-bottom: 2rem;
-    margin-top: 0;
-
-    &__pages {
-        > a , span {
-            &:not(:last-child) {
-                margin-right: 1.125rem;
-            }
-        }
-
-        &__curr {
-            text-decoration: underline;
-            text-decoration-color: $red;
-            text-decoration-style: solid;
-        }
-    }
-
-    &__arwLast {
-        transform: rotate(-90deg);
-        margin-right: 1.125rem;
-    }
-
-    &__arwNext {
-        transform: rotate(90deg);
-        margin-right: 1.125rem;
-        margin-left: 1rem;
-    }
-}
