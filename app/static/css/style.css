@@ -1453,17 +1453,37 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   position: relative;
 }
 
+.sort__container > div {
+  border-radius: 20px;
+  border: solid 2px transparent;
+  min-width: 25rem;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  background-clip: padding-box;
+  -webkit-box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
+          box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
+  padding: 2rem;
+  margin: 1rem 2rem 0 0;
+}
+
 @media (max-width: 49.9375em) {
-  .sort {
+  .sort__container > div {
+    min-width: inherit;
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 49.9375em) {
+  .sort__container {
     height: 62rem;
   }
 }
 
-.sort h2 {
+.sort__container h2 {
   font-size: 1.18rem;
 }
 
-.sort h2::before, .sort h2::after {
+.sort__container h2::before, .sort__container h2::after {
   content: '____';
   position: relative;
   bottom: .5rem;
@@ -1472,11 +1492,11 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   font-family: Courier, monospace;
 }
 
-.sort h2::before {
+.sort__container h2::before {
   padding-right: .6rem;
 }
 
-.sort h2::after {
+.sort__container h2::after {
   padding-left: .6rem;
 }
 
@@ -1560,61 +1580,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .sort__style li:nth-child(even) {
   color: #5f5f5f;
-}
-
-.sort__right {
-  -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
-  min-width: 25rem;
-  border-radius: 40px;
-  border: solid 2px transparent;
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  background-clip: padding-box;
-  -webkit-box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
-          box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
-  padding: 2rem;
-  margin: 1rem 2rem 0 0;
-}
-
-@media (max-width: 49.9375em) {
-  .sort__right {
-    min-width: inherit;
-    margin: auto;
-  }
-}
-
-.sort__left {
-  display: block;
-}
-
-.sort__left > div {
-  border-radius: 40px;
-  border: solid 2px transparent;
-  min-width: 25rem;
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  background-clip: padding-box;
-  -webkit-box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
-          box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
-  padding: 2rem;
-  margin: 1rem 2rem 0 0;
-}
-
-@media (max-width: 49.9375em) {
-  .sort__left > div {
-    min-width: inherit;
-    margin: 1rem auto;
-  }
-}
-
-.sort__left-1 {
-  height: 46.5%;
-}
-
-.sort__left-2 {
-  height: 46.5%;
 }
 
 .sort__more {

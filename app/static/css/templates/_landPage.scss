@@ -163,27 +163,46 @@
     height: 36rem;
     position: relative;
 
-    @include breakpoints-down(medium) {
-        height: 62rem;
-    }
+    &__container {
+
+        > div {
+            border-radius: 20px;
+            border: solid 2px transparent;
+            min-width: 25rem;
+            backdrop-filter: blur(2px);
+            background-clip: padding-box;
+            box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
+            padding: 2rem;
+            margin: 1rem 2rem 0 0;
     
-    h2 {
-        font-size: $font-sm;
-        &::before, &::after {
-            content: '____';
-            position: relative;
-            bottom: .5rem;
-            display: inline-block;
-            color: $darkRed;
-            font-family: Courier, monospace;
+            @include breakpoints-down(medium) {
+                min-width: inherit;
+                margin: 1rem auto;
+            }
         }
-
-        &::before {
-            padding-right: .6rem;
+    
+        @include breakpoints-down(medium) {
+            height: 62rem;
         }
-
-        &::after {
-            padding-left: .6rem;
+        
+        h2 {
+            font-size: $font-sm;
+            &::before, &::after {
+                content: '____';
+                position: relative;
+                bottom: .5rem;
+                display: inline-block;
+                color: $darkRed;
+                font-family: Courier, monospace;
+            }
+    
+            &::before {
+                padding-right: .6rem;
+            }
+    
+            &::after {
+                padding-left: .6rem;
+            }
         }
     }
 
@@ -256,51 +275,6 @@
             &:nth-child(even) {
                 color: rgb(95, 95, 95);
             }
-        }
-    }
-
-    &__right {
-        order: 1;
-        min-width: 25rem;
-        border-radius: 40px;
-        border: solid 2px transparent;
-        backdrop-filter: blur(2px);
-        background-clip: padding-box;
-        box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
-        padding: 2rem;
-        margin: 1rem 2rem 0 0;
-
-        @include breakpoints-down(medium) {
-            min-width: inherit;
-            margin: auto;
-        }
-    }
-
-    &__left {
-        display: block;
-
-        > div {
-            border-radius: 40px;
-            border: solid 2px transparent;
-            min-width: 25rem;
-            backdrop-filter: blur(2px);
-            background-clip: padding-box;
-            box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
-            padding: 2rem;
-            margin: 1rem 2rem 0 0;
-
-            @include breakpoints-down(medium) {
-                min-width: inherit;
-                margin: 1rem auto;
-            }
-        }
-
-        &-1 {
-            height: 46.5%;
-        }
-
-        &-2 {
-            height: 46.5%;
         }
     }
 
