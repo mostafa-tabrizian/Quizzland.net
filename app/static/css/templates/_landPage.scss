@@ -78,7 +78,6 @@
     &__category {
 
         &__header {
-            width: 100%;
             justify-content: space-between;
 
             a {
@@ -89,9 +88,10 @@
         }
 
         &__inner {
+            flex-wrap: wrap;
 
             a {
-                width: 20%;
+                width: 14rem;
                 height: 8rem;
                 background-position: center center !important;
                 background-size: cover !important;
@@ -101,6 +101,11 @@
                 border-radius: 10px 10px 0 0;
                 border: 0.5px solid #6f6f6f;
                 transition: all .2s ease-in-out;
+                margin-bottom: 6rem;
+
+                @include breakpoints-down(medium) {
+                    width: 11rem;
+                }
 
                 &::after {
                     content: '';
@@ -115,9 +120,7 @@
                     transition: all .2s ease-in-out;
                 }
 
-                &:not(:last-child) {
-                    margin-right: 1.125rem;
-                }
+                margin-right: 1.125rem;
 
                 &:hover {
                     box-shadow: 0 0 13px #000000;

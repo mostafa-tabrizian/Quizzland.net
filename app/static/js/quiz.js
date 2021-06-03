@@ -253,13 +253,13 @@ const showCalculatingResult = () => {
 }
 
 const calculateResult = (FinalTitleOfQuiz) => {
-    let quizUrl = decodeURIComponent(window.location.href)
+    let lastQuiz = decodeURIComponent(window.location.href)
     const correctAnswerCounter = document.querySelectorAll(".quiz__container div form input[value='Y29ycmVjdA==']:checked").length
     const questionCounter = quiz__container.length
     const wrongAnswerCounter = questionCounter - correctAnswerCounter
     const score = ((correctAnswerCounter / (correctAnswerCounter + wrongAnswerCounter)) * 100).toFixed(0)
     try {
-        localStorage.setItem('quizUrl', quizUrl)
+        localStorage.setItem('lastQuiz', lastQuiz)
         localStorage.setItem('correctAnswer', correctAnswerCounter)
         localStorage.setItem('wrongAnswer', wrongAnswerCounter)
         localStorage.setItem('score', score)
@@ -274,9 +274,9 @@ const calculateResult = (FinalTitleOfQuiz) => {
 }
 
 const calculateResult_pointy = (FinalTitleOfQuiz) => {
-    let quizUrl = decodeURIComponent(window.location.href)
+    let lastQuiz = decodeURIComponent(window.location.href)
     try {
-        localStorage.setItem('quizUrl', quizUrl)
+        localStorage.setItem('lastQuiz', lastQuiz)
     } catch {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }

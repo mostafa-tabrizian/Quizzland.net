@@ -379,15 +379,15 @@ if (backBtn) {
 
 if (result__share__btn) {
     result__share__btn.addEventListener('click', () => {
-        quizUrl = localStorage.getItem('quizUrl')
+        lastQuiz = localStorage.getItem('lastQuiz')
         
         const quizTitle = result__title.innerHTML.slice(25,)
         const quizScore = result__score.innerHTML.split(' ')
 
-        const messageShare =  // `من تو کوئیز ( فلانی ) انقدر درصد درست زدم ایموجی. تو چقدر میتونی بزنی ؟ <br/> ${quizUrl}`
+        const messageShare =  // `من تو کوئیز ( فلانی ) انقدر درصد درست زدم ایموجی. تو چقدر میتونی بزنی ؟ <br/> ${lastQuiz}`
             `من تو کوئیز (${quizTitle}) ${quizScore[1]} درصد درست زدم ${quizScore[0]}. تو چقدر میتونی بزنی ؟
             <br/> -----------------------------------------
-            <br/> ${quizUrl}`
+            <br/> ${lastQuiz}`
         
         result__clipboard.innerHTML = messageShare
         new ClipboardJS('.result__share__btn');
@@ -398,7 +398,7 @@ if (result__share__btn) {
 
 if (resultQuizPointy__share__btn) {
     resultQuizPointy__share__btn.addEventListener('click', () => {
-        quizUrl = localStorage.getItem('quizUrl')
+        lastQuiz = localStorage.getItem('lastQuiz')
 
         const quizTitle = resultQuizPointy__title.innerHTML.slice(25,)
         const quizResult = resultQuizPointy__resultTitle.innerHTML
@@ -406,7 +406,7 @@ if (resultQuizPointy__share__btn) {
         const messageShare =
             `😃 من تو تست ${quizTitle} ( ${quizResult} ) در اومدم. ببینیم تو چی در میای
             <br/> -----------------------------------------
-            <br/> ${quizUrl}`
+            <br/> ${lastQuiz}`
         
         result__clipboard.innerHTML = messageShare
         new ClipboardJS('.resultQuizPointy__share__btn');

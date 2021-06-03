@@ -14,19 +14,19 @@ def Main():
         bestestQuizzes = quizzesByViews().limit(5),
         bestestQuizzesForThisMonth = quizzesByMonthlyViews().limit(5),
 
-        NewestCelebrityQuizSection =  quizzesByPublishWithCategory('celebrities').limit(5),
+        NewestCelebrityQuizSection =  quizzesByPublishWithCategory('celebrities').limit(4),
         BestestCelebrityQuizSection = quizzesBothByViewsWithCategory('celebrities').limit(13),
         MonthlyBestestCelebrityQuizSection = quizzesByMonthlyViewsWithCategory('celebrities').limit(13),
 
-        NewestMovieSeriesQuizSection =  quizzesByPublishWithCategory('movieSeries').limit(5),
+        NewestMovieSeriesQuizSection =  quizzesByPublishWithCategory('movieSeries').limit(4),
         BestestMovieSeriesQuizSection = quizzesBothByViewsWithCategory('movieSeries').limit(13),
         MonthlyBestestMovieSeriesQuizSection = quizzesByMonthlyViewsWithCategory('movieSeries').limit(13),
         
-        NewestGamingQuizSection =  quizzesByPublishWithCategory('Gaming').limit(5),
+        NewestGamingQuizSection =  quizzesByPublishWithCategory('Gaming').limit(4),
         BestestGamingQuizSection = quizzesBothByViewsWithCategory('Gaming').limit(13),
         MonthlyBestestGamingQuizSection = quizzesByMonthlyViewsWithCategory('Gaming').limit(13),
         
-        NewestPhysiologiesQuizSection =  quizzesPointyByPublishWithCategory('Physiologies').limit(5),
+        NewestPhysiologiesQuizSection =  quizzesPointyByPublishWithCategory('Physiologies').limit(4),
         BestestPhysiologiesQuizSection = quizzesPointyByViewsWithCategory('Physiologies').limit(13),
         MonthlyBestestPhysiologiesQuizSection = quizzesPointyByMonthlyViewsWithCategory('Physiologies').limit(10),
 
@@ -92,7 +92,7 @@ def sortAll(sortOfQuiz, page):
 
 @app.route('/<sortOfQuiz>/<category>/<int:page>')
 def sortCategories(category, page, sortOfQuiz):
-    howManyElementToShow = 14
+    howManyElementToShow = 12
     fTPage = frToPage(page, howManyElementToShow)
 
     if sortOfQuiz == 'newest':

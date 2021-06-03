@@ -1354,7 +1354,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 .indexQuiz__category__header {
-  width: 100%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -1367,8 +1366,13 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
           box-shadow: 0 0 5px #00000047;
 }
 
+.indexQuiz__category__inner {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 .indexQuiz__category__inner a {
-  width: 20%;
+  width: 14rem;
   height: 8rem;
   background-position: center center !important;
   background-size: cover !important;
@@ -1380,6 +1384,14 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   border: 0.5px solid #6f6f6f;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
+  margin-bottom: 6rem;
+  margin-right: 1.125rem;
+}
+
+@media (max-width: 49.9375em) {
+  .indexQuiz__category__inner a {
+    width: 11rem;
+  }
 }
 
 .indexQuiz__category__inner a::after {
@@ -1395,10 +1407,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   border-radius: 0 0 10px 10px;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
-}
-
-.indexQuiz__category__inner a:not(:last-child) {
-  margin-right: 1.125rem;
 }
 
 .indexQuiz__category__inner a:hover {
@@ -2516,11 +2524,11 @@ body {
 .sortMore__container {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-right: 5rem;
+  margin-right: 3rem;
 }
 
 .sortMore__container a {
-  width: 12rem;
+  width: 14rem;
   height: 8rem;
   background-position: center center !important;
   background-size: cover !important;
@@ -2534,6 +2542,12 @@ body {
   transition: all .2s ease-in-out;
   margin-left: 1.125rem;
   margin-bottom: 7rem;
+}
+
+@media (max-width: 49.9375em) {
+  .sortMore__container a {
+    width: 11rem;
+  }
 }
 
 .sortMore__container a::after {

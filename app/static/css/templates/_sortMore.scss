@@ -4,10 +4,10 @@
 
     &__container {
         flex-wrap: wrap;
-        margin-right: 5rem;
+        margin-right: 3rem;
 
         a {
-            width: 12rem;
+            width: 14rem;
             height: 8rem;
             background-position: center center !important;
             background-size: cover !important;
@@ -19,6 +19,10 @@
             transition: all .2s ease-in-out;
             margin-left: 1.125rem;
             margin-bottom: 7rem;
+
+            @include breakpoints-down(medium) {
+                width: 11rem;
+            }
 
             &::after {
                 content: '';
