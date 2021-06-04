@@ -1651,6 +1651,10 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   margin-left: .7rem;
 }
 
+.tools__sort__btn {
+  border: inherit;
+}
+
 .tools__sort__options {
   margin-top: .5rem;
 }
@@ -1661,6 +1665,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 
 .tools__numberOfResult__btn {
   font-size: 1.18rem;
+  border: inherit;
 }
 
 .tools__numberOfResult__options {

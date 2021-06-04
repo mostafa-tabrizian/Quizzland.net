@@ -31,6 +31,10 @@
     &__sort {
         margin-left: .7rem;
 
+        &__btn {
+            border: inherit;
+        }
+
         &__options {
             margin-top: .5rem;
 
@@ -43,8 +47,9 @@
     &__numberOfResult {
         &__btn {
             font-size: $font-sm;
-
+            border: inherit;
         }
+        
         &__options {
             margin-top: .5rem;
 

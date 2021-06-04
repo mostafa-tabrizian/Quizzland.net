@@ -200,6 +200,10 @@ body::-webkit-scrollbar-thumb {
   color: black !important;
 }
 
+.tools__submit {
+  border: 1px solid #838282;
+}
+
 .quizzes__item a > img {
   -webkit-box-shadow: 0 0 15px #828282;
           box-shadow: 0 0 15px #828282;
