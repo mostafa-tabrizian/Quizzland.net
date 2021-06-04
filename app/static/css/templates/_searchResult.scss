@@ -42,7 +42,8 @@
                 object-fit: cover;
                 border: 3px solid $gray;
                 border-radius: 40px;
-                filter: brightness(40%);
+                filter: brightness(50%);
+                box-shadow: 0 5px 15px black;
             }
     
             h5 {

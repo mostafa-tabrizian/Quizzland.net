@@ -4,6 +4,7 @@
 
     @include breakpoints-down(medium) {
         grid-template-columns: 1fr;
+        margin: 0;
     }
 
     &__container {
@@ -36,6 +37,8 @@
 
             @include breakpoints-down(medium) {
                 width: 11rem;
+                height: 6rem;
+                border: inherit;
             }
 
             &::after {
@@ -91,6 +94,10 @@
             z-index: 2;
             text-align: right;
             font-size: $font-sm;
+
+            @include breakpoints-down(medium) {
+                top: 6.4rem;
+            }
         }
     }
 

@@ -215,8 +215,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .searchResult__category__item a > img {
-  -webkit-box-shadow: 0 0 15px #828282;
-          box-shadow: 0 0 15px #828282;
+  -webkit-box-shadow: 0 5px 15px black;
+          box-shadow: 0 5px 15px black;
 }
 
 .searchResult__quizzes__item::before {

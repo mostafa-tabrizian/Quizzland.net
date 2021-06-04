@@ -22,6 +22,10 @@
 
     &__subtitle {
         font-size: $font-l;
+
+        @include breakpoints-down(medium) {
+            font-size: $font-l - .3;
+        }
     }
 
     &__clipboard {

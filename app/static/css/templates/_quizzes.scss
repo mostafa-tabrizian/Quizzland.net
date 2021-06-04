@@ -23,6 +23,7 @@ body {
         @include breakpoints-down(medium) {
             width: 10rem;
             height: 12.75rem;
+            margin-bottom: .5rem;
         }
 
         & a > img {
@@ -45,8 +46,8 @@ body {
             }
 
             @include breakpoints-down(medium) {
-                transform: translateY(-8.75rem);
-                font-size: $font-sm
+                transform: translateY(-9.75rem);
+                font-size: $font-sm + .1
             }
 
         }
