@@ -2,9 +2,23 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 
+    @include breakpoints-down(medium) {
+        grid-template-columns: 1fr;
+    }
+
     &__container {
         flex-wrap: wrap;
         margin-right: 3rem;
+
+        &:first-child {
+            @include breakpoints-down(medium) {
+                order: 1;
+            }
+        }
+
+        h3 {
+            width: 100%
+        }
 
         a {
             width: 14rem;
@@ -12,7 +26,7 @@
             background-position: center center !important;
             background-size: cover !important;
             background-color: white;
-            box-shadow: 0 0 10px #000000bd;
+            box-shadow: 0 0 10px #0000009e;
             position: relative;
             border-radius: 10px 10px 0 0;
             border: 0.5px solid #6f6f6f;
@@ -28,7 +42,7 @@
                 content: '';
                 height: 5rem;
                 background: white;
-                box-shadow: 0 6px 7px #0000001a;
+                box-shadow: 0 6px 7px #00000061;
                 width: 100%;
                 position: absolute;
                 left: 0;
@@ -38,10 +52,10 @@
             }
 
             &:hover {
-                box-shadow: 0 0 13px #000000;
+                box-shadow: 0 0 17px #0000009e;
 
                 &::after {
-                    box-shadow: 0 6px 7px #0000002a;
+                    box-shadow: 0 6px 13px #0000008a;
                 }
             }
 

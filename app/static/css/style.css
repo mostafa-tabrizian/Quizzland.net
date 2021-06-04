@@ -445,6 +445,8 @@ input {
 .noVis {
   visibility: hidden;
   display: none;
+  height: 0;
+  width: 0;
 }
 
 .pointerOff {
@@ -2518,10 +2520,29 @@ body {
       grid-template-columns: 1fr 1fr;
 }
 
+@media (max-width: 49.9375em) {
+  .sortMore {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+
 .sortMore__container {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin-right: 3rem;
+}
+
+@media (max-width: 49.9375em) {
+  .sortMore__container:first-child {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
+}
+
+.sortMore__container h3 {
+  width: 100%;
 }
 
 .sortMore__container a {
@@ -2530,8 +2551,8 @@ body {
   background-position: center center !important;
   background-size: cover !important;
   background-color: white;
-  -webkit-box-shadow: 0 0 10px #000000bd;
-          box-shadow: 0 0 10px #000000bd;
+  -webkit-box-shadow: 0 0 10px #0000009e;
+          box-shadow: 0 0 10px #0000009e;
   position: relative;
   border-radius: 10px 10px 0 0;
   border: 0.5px solid #6f6f6f;
@@ -2551,8 +2572,8 @@ body {
   content: '';
   height: 5rem;
   background: white;
-  -webkit-box-shadow: 0 6px 7px #0000001a;
-          box-shadow: 0 6px 7px #0000001a;
+  -webkit-box-shadow: 0 6px 7px #00000061;
+          box-shadow: 0 6px 7px #00000061;
   width: 100%;
   position: absolute;
   left: 0;
@@ -2563,13 +2584,13 @@ body {
 }
 
 .sortMore__container a:hover {
-  -webkit-box-shadow: 0 0 13px #000000;
-          box-shadow: 0 0 13px #000000;
+  -webkit-box-shadow: 0 0 17px #0000009e;
+          box-shadow: 0 0 17px #0000009e;
 }
 
 .sortMore__container a:hover::after {
-  -webkit-box-shadow: 0 6px 7px #0000002a;
-          box-shadow: 0 6px 7px #0000002a;
+  -webkit-box-shadow: 0 6px 13px #0000008a;
+          box-shadow: 0 6px 13px #0000008a;
 }
 
 .sortMore__container a img {

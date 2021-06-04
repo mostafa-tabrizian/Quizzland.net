@@ -110,7 +110,7 @@ def sortCategories(category, page, sortOfQuiz):
 
     return render_template('/sortMore.html',
         quizPage = quizPage,
-        hideSecondColumn = 'fade-out',
+        hideSecondColumn = 'noVis',
         categoryStyle = 'sortMore__categoryStyle wrapper-med',
         sort = sort,
         title = title,
