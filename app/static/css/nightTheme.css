@@ -93,8 +93,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .quizzes__item a > img {
-  -webkit-filter: brightness(70%) !important;
-          filter: brightness(70%) !important;
+  -webkit-filter: brightness(60%) !important;
+          filter: brightness(60%) !important;
+  -webkit-box-shadow: 0 15px 15px black !important;
+          box-shadow: 0 15px 15px black !important;
 }
 
 .indexQuiz__category__header a {

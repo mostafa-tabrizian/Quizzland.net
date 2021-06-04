@@ -88,7 +88,8 @@ body {
 .quizzes {
     &__item {
         a > img {
-            filter: brightness(70%) !important;
+            filter: brightness(60%) !important;
+            box-shadow: 0 15px 15px black !important;
         }
     }
 }
