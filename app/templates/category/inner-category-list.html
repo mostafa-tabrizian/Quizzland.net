@@ -14,24 +14,21 @@
     
     {{ tools | safe }}
 
-    <div class="categoryList tx-al-r wrapper-sm">
-        <ul class="darkGls">
-            {%  for quiz in quizzes %}
-                <li>
-                    {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
-                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
-                    {% if quiz.category == 'physiologies' %}
-                    <a href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
-                    </a>
-                    {% else %}
-                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
-                    </a>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="categoryList indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+        {% for quiz in quizzes %}
+            {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
+            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+            <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
+                {% if quiz.views >= 1000  %}
+                    {% set views = (quiz.views| string)[0] + '.' + (quiz.views| string)[1] + 'k' %}
+                {% else %}
+                    {% set views = quiz.views %}
+                {% endif %}
+                <div class="indexQuiz__category__inner__views">{{views}}</div>
+                <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
+            </a>
+        {% endfor %}
     </div>
 
     {{ pageTravel | safe }}

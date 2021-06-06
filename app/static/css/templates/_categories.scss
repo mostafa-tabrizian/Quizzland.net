@@ -1,21 +1,15 @@
 .categoryList{
-    line-height: 2.2rem;
-    transform: translateY(-2rem);
+    a {
+        &::after {
+            background: rgba(0, 0, 0, 0.466) !important;
+            backdrop-filter: blur(9px) !important;
+        }
 
-    @include breakpoints-down(medium) {
-        margin: auto;
-    }
+        div:nth-child(3) {
+            color: white;
 
-    > ul {
-        padding: 1.1rem;
-        margin-bottom: 0;
-        min-height: 22rem;
-
-        > li {
-            &::before {
-                content: '◾';
-                position: relative;
-                top: 0.2rem;
+            &:hover {
+                color: rgb(158, 158, 158);
             }
         }
     }

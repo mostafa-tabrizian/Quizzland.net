@@ -1623,28 +1623,18 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   opacity: 1;
 }
 
-.categoryList {
-  line-height: 2.2rem;
-  -webkit-transform: translateY(-2rem);
-          transform: translateY(-2rem);
+.categoryList a::after {
+  background: rgba(0, 0, 0, 0.466) !important;
+  -webkit-backdrop-filter: blur(9px) !important;
+          backdrop-filter: blur(9px) !important;
 }
 
-@media (max-width: 49.9375em) {
-  .categoryList {
-    margin: auto;
-  }
+.categoryList a div:nth-child(3) {
+  color: white;
 }
 
-.categoryList > ul {
-  padding: 1.1rem;
-  margin-bottom: 0;
-  min-height: 22rem;
-}
-
-.categoryList > ul > li::before {
-  content: '◾';
-  position: relative;
-  top: 0.2rem;
+.categoryList a div:nth-child(3):hover {
+  color: #9e9e9e;
 }
 
 .tools {
