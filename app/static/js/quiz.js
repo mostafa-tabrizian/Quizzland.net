@@ -280,9 +280,11 @@ const calculateResult = (FinalTitleOfQuiz) => {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }
 
+    const innerCategory = splitUrl(lastQuiz)[5]
+
     showCalculatingResult()
     setTimeout(() => {
-        window.location.replace(`/result/${FinalTitleOfQuiz}`); 
+        window.location.replace(`/result/${innerCategory}/${FinalTitleOfQuiz}`); 
     }, 3000)
 }
 

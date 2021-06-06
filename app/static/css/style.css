@@ -508,7 +508,8 @@ input {
   content: '';
   width: 3.18rem;
   height: 0.187rem;
-  background: #363636;
+  background: -webkit-gradient(linear, right top, left top, from(darkRed), to(#c41f1f));
+  background: linear-gradient(270deg, darkRed, #c41f1f);
   margin-right: 1rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -520,7 +521,8 @@ input {
   content: '';
   width: 3.18rem;
   height: 0.187rem;
-  background: #363636;
+  background: -webkit-gradient(linear, left top, right top, from(darkRed), to(#c41f1f));
+  background: linear-gradient(90deg, darkRed, #c41f1f);
   margin-right: 1rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -2199,7 +2201,7 @@ body {
 }
 
 .result__container {
-  min-height: 44vh;
+  min-height: 40vh;
 }
 
 .result__title > h3 {

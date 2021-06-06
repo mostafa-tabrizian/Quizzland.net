@@ -177,10 +177,12 @@ def QuizPointy(category, innerCategory, title):
         headTitle = f'QuizLand | {title}',
     )
 
-@app.route('/result/<title>')
-def result(title):
+@app.route('/result/<innerCategory>/<title>')
+def result(innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
+    innerCategory = titleConverterFromUrlToNormalOne(innerCategory)
     return render_template('/result.html',
+        suggestingQuiz = quizzesByRandomWithInnerCategory(innerCategory),
         fullTitle = fullTitle,
         backBtn = backBtn,
         fanName = fanNameOfQuiz(fullTitle),

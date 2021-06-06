@@ -1,5 +1,6 @@
 from crud import *
 from funcs import *
+import random
 
 # ------------------Category
 def allCategories():
@@ -99,6 +100,16 @@ def quizzesByAlphabetWithInnerCategory(innerCategory):
     grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{innerCategory}%'))\
                                   .order_by(Quizzes.innerCategory.asc())
     return grabbedQuiz
+
+def quizzesByRandomWithInnerCategory(innerCategory):
+    # quizzes = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{innerCategory}%'))
+    # countAllQuizzes = len(quizzes.all())
+    # randomOffset = random.randint(0, countAllQuizzes - 4)
+    grabbedQuiz = s.query(Quizzes).filter(Quizzes.innerCategory.ilike(f'%{innerCategory}%'))\
+                                    .limit(4)
+                                    # .offset(randomOffset)\
+    return grabbedQuiz
+
 
 def quizzesPointyByPublishWithInnerCategory(innerCategory):
     grabbedQuiz = s.query(QuizzesPointy).filter(QuizzesPointy.innerCategory.ilike(f'%{innerCategory}%'))\
