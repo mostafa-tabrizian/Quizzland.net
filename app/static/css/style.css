@@ -2112,6 +2112,10 @@ body {
   border: 3px solid red !important;
 }
 
+.quiz__answerImGif img {
+  width: 21rem;
+}
+
 .quiz .lowHighContainer {
   margin: 0 15rem !important;
   margin-top: 5rem !important;

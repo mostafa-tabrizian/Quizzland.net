@@ -66,6 +66,14 @@
                     </div>
                 {% endif %}
                 
+                <div class="quiz__answerImGif noVis space-sm">
+                    <img src="/static/img/imGif_quizzes/{{questionDetail.answer_imGif}}" alt="">
+                </div>
+
+                <div class="quiz__answerText noVis">
+                    {{questionDetail.answer_text}}
+                </div>
+                
             </div>
 
             {% endfor %} 

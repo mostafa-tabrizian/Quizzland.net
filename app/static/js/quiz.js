@@ -117,21 +117,22 @@ if (quiz__questions) {
     const next = -1076.05
     const last = +1076.05
     const goToAnotherQuestion = (changeToWhat) => {
-            checkIfTheQuizEndedAndShowResultPage()
-            plusOneToAnsweredQuestionsIfItsNotTheLast()
-            shouldLetTheUserChooseAnotherOption('let')
+        checkIfTheQuizEndedAndShowResultPage()
+        plusOneToAnsweredQuestionsIfItsNotTheLast()
+        shouldLetTheUserChooseAnotherOption('let')
+        hideImGifTextAnswer()
 
-            quiz__container.forEach(each => {
-                currQuestionPosition = parseInt(getComputedStyle(each).transform.split(', ')[4])
-                currQuestionPosition = currQuestionPosition + changeToWhat
-                each.style.transform = `translate(${currQuestionPosition}px)`
-            })
+        quiz__container.forEach(each => {
+            currQuestionPosition = parseInt(getComputedStyle(each).transform.split(', ')[4])
+            currQuestionPosition = currQuestionPosition + changeToWhat
+            each.style.transform = `translate(${currQuestionPosition}px)`
+        })
     }
 
     const goToAnotherQuestionWithDelay = (changeToWhat) => {
         setTimeout(() => {
             goToAnotherQuestion(changeToWhat)
-        }, 3000);
+        }, 5000);
         
     }
 
@@ -156,6 +157,16 @@ if (quiz__questions) {
         return optionUserChose
     }
 
+    const showImGifTextAnswer = () => {
+        quiz__answerImGif[currentQuestion - 1].classList.remove('noVis')
+        quiz__answerText[currentQuestion - 1].classList.remove('noVis')
+    }
+
+    const hideImGifTextAnswer = () => {
+        quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
+        quiz__answerText[currentQuestion - 2].classList.add('noVis')
+    }
+
     const showTheCorrectAnswer = (correctAnswer) => {
         const currentQuestionOptions = quiz__container__eachOne[currentQuestion - 1]
         const correctOption = currentQuestionOptions.querySelectorAll(`label`)[correctAnswer - 1]
@@ -167,6 +178,7 @@ if (quiz__questions) {
         const userChose = whatIsTheUserAnswer(each)
         const userOption = `label[id='${each.id}']`
         const userOptionDOM = document.querySelector(userOption)
+        showImGifTextAnswer()
         if (userChose == correctAnswer) {
             userOptionDOM.classList.add('quiz__correctAnswer')
         } else {
@@ -184,10 +196,12 @@ if (quiz__questions) {
     }
 
     quiz__options.forEach(each => {
+
         each.addEventListener('click', () => {
             scaleAnimationAfterChoosingAnswer()
             const switchBtn = quiz__autoQuestionChangerSwitch__innerBtn
             pauseTheFunctionOfChangingQuestions()
+
             if (typeOfQuiz == 'quiz') {
                 shouldLetTheUserChooseAnotherOption('doNot')
                 checkUserAnswer(each)

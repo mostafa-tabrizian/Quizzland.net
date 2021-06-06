@@ -67,6 +67,8 @@ class quizQuestions(quizQuestionsBase):
     option_3 = Column(String)
     option_4 = Column(String)
     answer = Column(String)
+    answer_imGif = Column(String)
+    answer_text = Column(String)
     category = Column(String)
 
 quizPointyQuestionsBase = declarative_base()

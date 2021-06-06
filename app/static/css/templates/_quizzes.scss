@@ -359,6 +359,17 @@ body {
         border: 3px solid red !important;
     }
 
+    
+    &__answerImGif {
+        img {
+            width: 21rem;
+        }
+    }
+
+    &__answerText {
+
+    }
+
     .lowHighContainer {
         margin: 0 15rem !important;
         margin-top: 5rem !important;

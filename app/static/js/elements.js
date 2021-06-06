@@ -80,6 +80,8 @@ const quiz__container = document.querySelectorAll('.quiz__container')
 const quiz__questionCounter__totalAnswered = document.querySelector('.quiz__questionCounter__totalAnswered')
 const quiz__questionCounter__totalQuestions = document.querySelector('.quiz__questionCounter__totalQuestions')
 const quiz__options = document.querySelectorAll('input[name=answer]')
+const quiz__answerImGif = document.querySelectorAll('.quiz__answerImGif')
+const quiz__answerText = document.querySelectorAll('.quiz__answerText')
 
 const result__title = document.querySelector('.result__title h3')
 const result__subtitle = document.querySelector('.result__subtitle')
