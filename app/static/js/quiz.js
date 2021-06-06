@@ -138,7 +138,6 @@ if (quiz__questions) {
 
     const shouldLetTheUserChooseAnotherOption = (toDo) => {
         // toDo = let or doNot
-        log('do not let the user choose another option');
         if (toDo == 'doNot') {
             quiz__questions.classList.add('pointerOff')
         } else {
@@ -206,7 +205,7 @@ if (quiz__questions) {
                 shouldLetTheUserChooseAnotherOption('doNot')
                 checkUserAnswer(each)
             }
-            if (!(switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched'))) {
+            if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
                 goToAnotherQuestionWithDelay(next)
             }
         })
@@ -216,15 +215,15 @@ if (quiz__questions) {
         const switchBtn = quiz__autoQuestionChangerSwitch__innerBtn
         if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.remove('quiz__autoQuestionChangerSwitch__innerBtn__switched')
-            fadeOut(quiz__questionChanger__next)
-            if (typeOfQuiz == 'pointy') {
-                fadeOut(quiz__questionChanger__last)
-            }
-        } else {
-            quiz__autoQuestionChangerSwitch__innerBtn.classList.add('quiz__autoQuestionChangerSwitch__innerBtn__switched')
             fadeIn(quiz__questionChanger__next)
             if (typeOfQuiz == 'pointy') {
                 fadeIn(quiz__questionChanger__last)
+            }
+        } else {
+            quiz__autoQuestionChangerSwitch__innerBtn.classList.add('quiz__autoQuestionChangerSwitch__innerBtn__switched')
+            fadeOut(quiz__questionChanger__next)
+            if (typeOfQuiz == 'pointy') {
+                fadeOut(quiz__questionChanger__last)
             }
         }
     })

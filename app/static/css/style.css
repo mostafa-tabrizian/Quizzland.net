@@ -1892,12 +1892,12 @@ body {
 .quiz__autoQuestionChangerSwitch__innerBtn {
   width: 0.8rem;
   height: 0.8rem;
-  background: green;
+  background: red;
   border-radius: 10px;
   margin: 0;
   padding: 0;
   position: relative;
-  left: 1rem;
+  left: .1rem;
   -webkit-box-shadow: inset 0 0 4px black;
           box-shadow: inset 0 0 4px black;
   -webkit-transition: all .3s ease-in-out;
@@ -1906,8 +1906,8 @@ body {
 }
 
 .quiz__autoQuestionChangerSwitch__innerBtn__switched {
-  background: red;
-  left: .1rem;
+  background: green;
+  left: 1rem;
 }
 
 .quiz__questionChanger {
