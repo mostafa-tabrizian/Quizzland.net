@@ -2051,22 +2051,6 @@ body {
   box-sizing: border-box;
 }
 
-.quiz__options__textLabel:nth-child(2)::before {
-  content: '1';
-}
-
-.quiz__options__textLabel:nth-child(4)::before {
-  content: '2';
-}
-
-.quiz__options__textLabel:nth-child(6)::before {
-  content: '3';
-}
-
-.quiz__options__textLabel:nth-child(8)::before {
-  content: '4';
-}
-
 .quiz__options [type="radio"]:checked + label {
   background: #0000005e;
   -webkit-backdrop-filter: blur(93px);

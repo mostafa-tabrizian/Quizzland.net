@@ -19,7 +19,7 @@ const whatIsTypeOfQuiz = () => {
     return typeOfQuiz
 }
 
-if (quiz__container__eachOne) {
+if (quiz__container__eachOne && !(quiz__polls)) {
     typeOfQuiz = whatIsTypeOfQuiz()
     if (typeOfQuiz == 'quiz') {
         quiz__container__eachOne.forEach(each => {
@@ -202,7 +202,12 @@ if (quiz__questions) {
 
             if (typeOfQuiz == 'quiz') {
                 shouldLetTheUserChooseAnotherOption('doNot')
-                checkUserAnswer(each)
+                if (!(quiz__polls)) {
+                    checkUserAnswer(each)           
+                } else {
+                    log('poll')
+                    
+                }
             }
             if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
                 goToAnotherQuestionWithDelay(next)

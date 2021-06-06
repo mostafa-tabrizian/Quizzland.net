@@ -20,6 +20,7 @@ admin.add_view(ModelView(QuizzesPointy, session()))
 
 admin.add_view(ModelView(quizQuestions, session()))
 admin.add_view(ModelView(quizPointyQuestions, session()))
+admin.add_view(ModelView(quizPollQuestions, session()))
 
 path = op.join(op.dirname(__file__), 'static')
 

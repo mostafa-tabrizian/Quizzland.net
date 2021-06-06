@@ -90,6 +90,23 @@ class quizPointyQuestions(quizPointyQuestionsBase):
     category = Column(String)
     innerCategory = Column(String)
 
+quizPollQuestionsBase = declarative_base()
+class quizPollQuestions(quizPollQuestionsBase):
+    __tablename__ = 'Poll_Questions'
+    id = Column(Integer, primary_key=True)
+    category = Column(String)
+    innerCategory = Column(String)
+    title = Column(String)
+    question = Column(String)
+    option_1 = Column(String)
+    option_2 = Column(String)
+    option_3 = Column(String)
+    option_4 = Column(String)
+    votes_1 = Column(Integer)
+    votes_2 = Column(Integer)
+    votes_3 = Column(Integer)
+    votes_4 = Column(Integer)
+
 newsletterBase = declarative_base()
 class NewsletterUser(newsletterBase):
     __tablename__ = 'Newsletter_User'

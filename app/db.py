@@ -145,8 +145,6 @@ def quizzesByMonthlyViewsWithCategory(category):
                                   .order_by(Quizzes.monthly_views.desc())
     return grabbedQuiz
 
-
-
 def quizzesPointyByPublishWithCategory(category):
     quizzes = s.query(QuizzesPointy).filter(QuizzesPointy.category.ilike(f'%{category}%'))\
                                      .order_by(QuizzesPointy.publish.desc())
@@ -191,7 +189,9 @@ def quizQuestion(category, titleFar):
     if category == 'physiologies':
         questions = s.query(quizPointyQuestions).filter(quizPointyQuestions.title_far.ilike(titleFar)).all()
     else:
-        questions = s.query(quizQuestions).filter(quizQuestions.title_far.ilike(titleFar)).all()
+        questions = s.query(quizPollQuestions).filter(quizPollQuestions.title.ilike(titleFar)).all()\
+                    + s.query(quizQuestions).filter(quizQuestions.title_far.ilike(titleFar)).all()
+    
     return questions
 
 #----------------------------------------------------------------

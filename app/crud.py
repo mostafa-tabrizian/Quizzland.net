@@ -35,6 +35,9 @@ def recreate_quizPointyQuestions():
     quizPointyQuestionsBase.metadata.drop_all(engine)
     quizPointyQuestionsBase.metadata.create_all(engine)
 
+def recreate_quizPollQuestions():
+    quizPollQuestionsBase.metadata.drop_all(engine)
+    quizPollQuestionsBase.metadata.create_all(engine)
 
 def add_session(data):
     try:
@@ -85,6 +88,7 @@ def up_session():
 # recreate_categories()
 # recreate_quizQuestions()
 # recreate_quizPointyQuestions()
+# recreate_quizPollQuestions()
 # recreate_newsletterUrl()
 # del_session()
 # up_session()
