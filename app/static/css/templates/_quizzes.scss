@@ -69,8 +69,20 @@ body {
         h3 {
             font-size: $font-med - .1rem;
         }
+
         h5{
             font-size: $font-sm - .2rem;
+        }
+
+        div:nth-child(3) {
+            h5 {
+                margin-right: 2.5rem;
+                margin-left: 2.5rem;
+
+                &:nth-child(2) {
+                    order: -1;
+                }
+            }
         }
     }
 
@@ -206,28 +218,28 @@ body {
 
     &__questionCounter {
         position: relative;
-        top: -3.4rem;
-        left: -9rem;
-        display: block;
-        transform: translate(-50%);
+        // top: -3.4rem;
+        // left: -9rem;
+        // display: block;
+        // transform: translate(-50%);
         color: $white;
 
-        @include breakpoints-down(medium) {
-            left: -6rem;
-        }
+        // @include breakpoints-down(medium) {
+        //     left: -6rem;
+        // }
 
-        &__divider {
-            position: relative;
-            bottom: 0.7rem;
-            left: 0.29rem;
-            transform: rotate(16.3deg) scaleY(2.9);
-        }
+        // &__divider {
+        //     position: relative;
+        //     bottom: 0.7rem;
+        //     left: 0.29rem;
+        //     transform: rotate(16.3deg) scaleY(2.9);
+        // }
 
-        &__totalQuestions {
-            position: relative;
-            bottom: 1.7rem;
-            left: 0.8rem;
-        }
+        // &__totalQuestions {
+        //     position: relative;
+        //     bottom: 1.7rem;
+        //     left: 0.8rem;
+        // }
     }
 
     &__hider {

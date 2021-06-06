@@ -68,8 +68,7 @@ if (quiz__questions) {
     const numberOfQuestions = quiz__container.length
     let currentQuestion = 1
 
-    quiz__numberOfQuestions.innerHTML = `سوال&nbsp:&nbsp&nbsp${numberOfQuestions}`
-    quiz__questionCounter__totalQuestions.innerHTML = numberOfQuestions
+    quiz__numberOfQuestions.innerHTML = `تعداد سوال ها&nbsp:&nbsp&nbsp${numberOfQuestions}`
     quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
     
     const pauseTheFunctionOfChangingQuestions = () => {
@@ -178,6 +177,7 @@ if (quiz__questions) {
         const userOption = `label[id='${each.id}']`
         const userOptionDOM = document.querySelector(userOption)
         showImGifTextAnswer()
+        document.getElementById('quiz__top').scrollIntoView();
         if (userChose == correctAnswer) {
             userOptionDOM.classList.add('quiz__correctAnswer')
         } else {
@@ -195,7 +195,6 @@ if (quiz__questions) {
     }
 
     quiz__options.forEach(each => {
-
         each.addEventListener('click', () => {
             scaleAnimationAfterChoosingAnswer()
             const switchBtn = quiz__autoQuestionChangerSwitch__innerBtn
