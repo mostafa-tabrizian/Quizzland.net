@@ -68,7 +68,7 @@ def quizzesPointyByMonthlyViews():
     quizzesGrabbedByPublish = s.query(QuizzesPointy).order_by(QuizzesPointy.monthly_views.desc())
     return quizzesGrabbedByPublish
 
-def quizzes(category, innerCategory, fr, to, sortType):
+def quizzesWithInnerCategory(category, innerCategory, fr, to, sortType):
     if category == 'physiologies':
         if sortType == 'newest':
             grabbedQuizzes = quizzesPointyByPublishWithInnerCategory(innerCategory).all()[fr:to]

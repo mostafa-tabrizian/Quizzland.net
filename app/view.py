@@ -148,7 +148,7 @@ def innerCategory(category, innerCategory, page, sortType, numberOfResult):
             colorOfHeader = 'header__white',
             tools = tools,
             innerCategory = innerCategory,
-            quizzes = quizzes(category, InnerCategory, fTPage[0], fTPage[1], sortType),
+            quizzes = quizzesWithInnerCategory(category, InnerCategory, fTPage[0], fTPage[1], sortType),
             pageTravel = pageTravel(finalPage(howManyElementToShow, InnerCategory)),
             headTitle = f'QuizLand | {innerCategory} ',
         )
