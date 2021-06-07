@@ -9,25 +9,32 @@
         <div class="beforeAfterDecor flex flex-jc-c flex-ai-c">
             <h1 class="result__subtitle tx-al-c"></h1>
         </div>
-        <div class="result wrapper-med flex flex-ai-c flex-jc-sb">
+        <div class="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
+            <div class="result__img flex flex-jc-c flex-ai-c">
+                <img src="/static/img/imGif_quizzes/jamesPotter.gif" alt="">
+            </div>
+
             <div class="result__score"></div>
-            
+
             <div class="result__detail tx-al-r">
                 <h5>تعداد پاسخ های درست:‌ <span class="result__detail__correctTime"> 0 </span></h5>
                 <h5>تعداد پاسخ های غلط: <span class="result__detail__wrongTime"> 0 </span></h5>
             </div>
+        </div>
 
-            <div class="result__share tx-al-c">
+        <div class='wrapper-med flex flex-ai-c flex-jc-c'>
+            <div class="result__share space-sm tx-al-c">
                 <h5>دوستات رو به چالش بکش </br> ببین میتونن امتیازت رو بشکنن</h5>
                 <button class='result__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
                 <h6 class="result__share__message noVis">نتیجه و لینک کوئیز کپی شد</h6>
             </div> 
         </div>
+
     </div>
 
     <div class="result__clipboard"></div>
 
-    <h2 class='tx-al-c beforeAfterDecor'>کوئیز های شبیه</h2>
+    <h2 class='tx-al-c space-med beforeAfterDecor'>کوئیز های شبیه</h2>
 
     <div class="result__suggester indexQuiz__category__inner flex flex-jc-c flex-ai-c wrapper-med">
         {% for quiz in suggestingQuiz %}

@@ -1,7 +1,7 @@
 .result {
     font-family: $font-sec;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    display: grid;
+    grid-template-columns: 15rem 15rem 15rem;
 
     @include breakpoints-down(medium){
         display: block;
@@ -57,13 +57,17 @@
     &__score {
         font-size: $font-xl;
         font-weight: 600;
-        order: 2;
+        order: 1;
 
         @include breakpoints-down(medium){
             text-align: center;
             margin-top: 3rem;
             margin-bottom: 1.125rem;
         }
+    }
+
+    &__img {
+        order: 2;
     }
 
     &__detail {

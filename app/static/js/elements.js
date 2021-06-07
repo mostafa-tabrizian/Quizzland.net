@@ -83,7 +83,7 @@ const quiz__options__textLabel = document.querySelector('.quiz__options__textLab
 const quiz__answerImGif = document.querySelectorAll('.quiz__answerImGif')
 const quiz__answerText = document.querySelectorAll('.quiz__answerText')
 
-const result__title = document.querySelector('.result__title h3')
+const result__title = document.querySelector('.result__title h5')
 const result__subtitle = document.querySelector('.result__subtitle')
 const result__score = document.querySelector('.result__score')
 const result__share__btn = document.querySelector('.result__share__btn')
