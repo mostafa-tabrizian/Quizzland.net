@@ -19,7 +19,7 @@ const whatIsTypeOfQuiz = () => {
     return typeOfQuiz
 }
 
-if (quiz__container__eachOne && !(quiz__polls)) {
+if (quiz__container__eachOne) {
     typeOfQuiz = whatIsTypeOfQuiz()
     if (typeOfQuiz == 'quiz') {
         quiz__container__eachOne.forEach(each => {
@@ -161,10 +161,8 @@ if (quiz__questions) {
     }
 
     const hideImGifTextAnswer = () => {
-        if (!(quiz__polls)) {
-            quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
-            quiz__answerText[currentQuestion - 2].classList.add('noVis')
-        }
+        quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
+        quiz__answerText[currentQuestion - 2].classList.add('noVis')
     }
 
     const showTheCorrectAnswer = (correctAnswer) => {
@@ -188,12 +186,6 @@ if (quiz__questions) {
         }
     }
 
-    const showThePercentage = (each) => {
-        const userOption = `label[id='${each.id}']`
-        const percent = quiz__options.getAttribute('value')
-        each.innerHTML = percent
-    }
-
     const scaleAnimationAfterChoosingAnswer = () => {
         quiz__hider.classList.add('quiz__options__scaleUp')
 
@@ -210,11 +202,7 @@ if (quiz__questions) {
 
             if (typeOfQuiz == 'quiz') {
                 shouldLetTheUserChooseAnotherOption('doNot')
-                if (!(quiz__polls)) {
-                    checkUserAnswer(each)           
-                } else {
-                    showThePercentage(each)
-                }
+                checkUserAnswer(each)
             }
             if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
                 goToAnotherQuestionWithDelay(next)
