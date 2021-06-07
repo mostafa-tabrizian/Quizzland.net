@@ -3,15 +3,18 @@ from view import *
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.contrib.fileadmin import FileAdmin
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 admin = Admin(
     app,
     index_view=AdminIndexView(
-        url='/admin/$Quizland19931506'
+        url= os.getenv('ADMIN_URL')
     )
 )
 
-app.secret_key = '$Postgresql19931506'
+app.secret_key = os.getenv('APP_SECRET_KEY')
 
 admin.add_view(ModelView(Categories, session()))
 

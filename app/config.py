@@ -1,1 +1,5 @@
-DATABASE_URL = 'postgresql://postgres:$Postgresql19931506@localhost/Quizland'
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+DATABASE_URL = os.getenv('DATABASE_URL')
