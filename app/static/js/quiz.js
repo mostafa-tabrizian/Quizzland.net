@@ -36,21 +36,11 @@ if (quiz__container__eachOne) {
         const correctAnswerCounterDATA = localStorage.getItem('correctAnswer')
         const wrongAnswerCounterDATA = localStorage.getItem('wrongAnswer')
 
-        const removeResultImg20 = () => {
-            document.querySelector('.result__img20').remove()
-        }
-        const removeResultImg40 = () => {
-            document.querySelector('.result__img40').remove()
-        }
-        const removeResultImg60 = () => {
-            document.querySelector('.result__img60').remove()
-        }
-        const removeResultImg80 = () => {
-            document.querySelector('.result__img80').remove()
-        }
-        const removeResultImg100 = () => {
-            document.querySelector('.result__img100').remove()
-        }
+        const removeResultImg20 = () => {document.querySelector('.result__img20').remove()}
+        const removeResultImg40 = () => {document.querySelector('.result__img40').remove()}
+        const removeResultImg60 = () => {document.querySelector('.result__img60').remove()}
+        const removeResultImg80 = () => {document.querySelector('.result__img80').remove()}
+        const removeResultImg100 = () => {document.querySelector('.result__img100').remove()}
 
         if (result__detail__correctTime) {
             result__detail__correctTime.innerHTML = correctAnswerCounterDATA
@@ -86,7 +76,21 @@ if (quiz__container__eachOne) {
     }
 } else { log('no quiz.js') }
 
-//----------------------------------------------------------
+// ----------------------------------------------
+
+const ifOptionEmptyRemoveIt = (question) => {
+    question.forEach(eachOption => {
+        const labelContent = eachOption.innerHTML
+        if (labelContent == ' None ') {
+            eachOption.remove()
+        }
+    })
+}
+
+ifOptionEmptyRemoveIt(quiz__options__imgLabel)
+ifOptionEmptyRemoveIt(quiz__options__textLabelAll)
+
+// ----------------------------------------------
 
 if (quiz__questions) {
     typeOfQuiz = whatIsTypeOfQuiz()
