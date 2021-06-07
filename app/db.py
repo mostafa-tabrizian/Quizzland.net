@@ -168,7 +168,7 @@ def sortBothQuizzesByPublishWithCategories(category):
     return quizzes
 
 def quizzesWithTitle(title):
-    quizzes = s.query(Quizzes).filter(Quizzes.title_far.ilike(f'%{title}%'))
+    quizzes = s.query(Quizzes).filter(Quizzes.title.ilike(f'%{title}%'))
     return quizzes
 
 def quizzesPointyWithTitle(title):

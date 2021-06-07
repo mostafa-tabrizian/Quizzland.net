@@ -36,25 +36,52 @@ if (quiz__container__eachOne) {
         const correctAnswerCounterDATA = localStorage.getItem('correctAnswer')
         const wrongAnswerCounterDATA = localStorage.getItem('wrongAnswer')
 
+        const removeResultImg20 = () => {
+            document.querySelector('.result__img20').remove()
+        }
+        const removeResultImg40 = () => {
+            document.querySelector('.result__img40').remove()
+        }
+        const removeResultImg60 = () => {
+            document.querySelector('.result__img60').remove()
+        }
+        const removeResultImg80 = () => {
+            document.querySelector('.result__img80').remove()
+        }
+        const removeResultImg100 = () => {
+            document.querySelector('.result__img100').remove()
+        }
+
         if (result__detail__correctTime) {
             result__detail__correctTime.innerHTML = correctAnswerCounterDATA
             result__detail__wrongTime.innerHTML = wrongAnswerCounterDATA
             
             if (scoreDATA > 80){
                 result__score.innerHTML = (`😎 ${scoreDATA}%`)
-                result__subtitle.innerHTML = (`! تو یک ${ fanName } واقعی هستی <br/> 😎 وقتشه خودت رو به بقیه نشون بدی`)}
-            else if (scoreDATA > 60){
+                result__subtitle.innerHTML = (`! تو یک ${ fanName } واقعی هستی <br/> 😎 وقتشه خودت رو به بقیه نشون بدی`)
+                removeResultImg20(), removeResultImg40(), removeResultImg60(), removeResultImg80()
+            }
+                
+                else if (scoreDATA > 60){
                 result__score.innerHTML = (`😀 ${scoreDATA}%`)
-                result__subtitle.innerHTML = ('عالیه، فقط یکم با یه فن واقعی بودن فاصله داری')}
+                result__subtitle.innerHTML = ('عالیه، فقط یکم با یه فن واقعی بودن فاصله داری')
+                removeResultImg20(), removeResultImg40(), removeResultImg60(), removeResultImg100()
+            }
             else if (scoreDATA > 40){
                 result__score.innerHTML = (`🙂 ${scoreDATA}%`)
-                result__subtitle.innerHTML = ('بد نیست ولی میتونست بهتر هم باشه')}
+                result__subtitle.innerHTML = ('بد نیست ولی میتونست بهتر هم باشه')
+                removeResultImg20(), removeResultImg40(), removeResultImg80(), removeResultImg100()
+            }
             else if (scoreDATA > 20){
                 result__score.innerHTML = (`😭 ${scoreDATA}%`)
-                result__subtitle.innerHTML = ('بیشتر تلاش کن. میتونی انجامش بدی')}
+                result__subtitle.innerHTML = ('بیشتر تلاش کن. میتونی انجامش بدی')
+                removeResultImg20(), removeResultImg60(), removeResultImg80(), removeResultImg100()
+            }
             else if (scoreDATA >= 0){
                 result__score.innerHTML = (`🙄 ${scoreDATA}%`)
-                result__subtitle.innerHTML = (' .فکر کنم کوئیز رو اشتباهی انتخاب کردی <br/>😅 میتونی سریع کوئیز دیگه ای انتخاب کنی تا کسی نیومده ')}
+                result__subtitle.innerHTML = (' .فکر کنم کوئیز رو اشتباهی انتخاب کردی <br/>😅 میتونی سریع کوئیز دیگه ای انتخاب کنی تا کسی نیومده ')
+                removeResultImg40(), removeResultImg60(), removeResultImg80(), removeResultImg100()
+            }
         } else { log('no result page') } 
     }
 } else { log('no quiz.js') }

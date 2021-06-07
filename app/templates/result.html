@@ -11,11 +11,13 @@
         </div>
         <div class="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
             <div class="result__img flex flex-jc-c flex-ai-c">
-                <img src="/static/img/imGif_quizzes/jamesPotter.gif" alt="">
+                <img class="result__img20" src='/static/img/imGif_quizzes/{{quizDetail.GIF20}}' alt=''></img>
+                <img class="result__img40" src='/static/img/imGif_quizzes/{{quizDetail.GIF40}}' alt=''></img>
+                <img class="result__img60" src='/static/img/imGif_quizzes/{{quizDetail.GIF60}}' alt=''></img>
+                <img class="result__img80" src='/static/img/imGif_quizzes/{{quizDetail.GIF80}}' alt=''></img>
+                <img class="result__img100" src='/static/img/imGif_quizzes/{{quizDetail.GIF100}}' alt=''></img>
             </div>
-
             <div class="result__score"></div>
-
             <div class="result__detail tx-al-r">
                 <h5>تعداد پاسخ های درست:‌ <span class="result__detail__correctTime"> 0 </span></h5>
                 <h5>تعداد پاسخ های غلط: <span class="result__detail__wrongTime"> 0 </span></h5>
@@ -39,16 +41,16 @@
     <div class="result__suggester indexQuiz__category__inner flex flex-jc-c flex-ai-c wrapper-med">
         {% for quiz in suggestingQuiz %}
             {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
-            {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+            {% set title = (quiz.title | replace(" ", "-", 99)) | safe %}
             <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title_far}}" loading='lazy'>
+                <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                 {% if quiz.views >= 1000  %}
                     {% set views = (quiz.views| string)[0] + '.' + (quiz.views| string)[1] + 'k' %}
                 {% else %}
                     {% set views = quiz.views %}
                 {% endif %}
                 <div class="indexQuiz__category__inner__views">{{views}}</div>
-                <div class="indexQuiz__category__inner__title">{{ quiz.title_far }}</div>
+                <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
             </a>
         {% endfor %}
     </div>

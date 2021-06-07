@@ -43,14 +43,14 @@
             {%  for quiz in userSearchInputInQuizzesDb_far %}
                 <li>
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
-                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title | replace(" ", "-", 99)) | safe %}
                     {% if quiz.category == 'physiologies' %}
                     <a class="searchResult__quizzes__item tx-al-r" href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
+                        {{ quiz.title }}
                     </a>
                     {% else %}
                     <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
+                        {{ quiz.title }}
                     </a>
                     {% endif %}
                 </li>
@@ -59,14 +59,14 @@
             {%  for quiz in userSearchInputInQuizzesDb_eng %}
                 <li>
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
-                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title | replace(" ", "-", 99)) | safe %}
                     {% if quiz.category == 'physiologies' %}
                     <a class="searchResult__quizzes__item tx-al-r" href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
+                        {{ quiz.title }}
                     </a>
                     {% else %}
                     <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
+                        {{ quiz.title }}
                     </a>
                     {% endif %}
                 </li>
@@ -75,14 +75,14 @@
             {%  for quiz in userSearchInputInQuizzesPointyDb_far %}
                 <li>
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
-                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title | replace(" ", "-", 99)) | safe %}
                     {% if quiz.category == 'physiologies' %}
                     <a class="searchResult__quizzes__item tx-al-r" href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
+                        {{ quiz.title }}
                     </a>
                     {% else %}
                     <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
+                        {{ quiz.title }}
                     </a>
                     {% endif %}
                 </li>
@@ -91,14 +91,14 @@
             {%  for quiz in userSearchInputInQuizzesPointyDb_eng %}
                 <li>
                     {% set innerCategory = (quiz.innerCategory | replace(" ", "-", 99)) | safe %}
-                    {% set title = (quiz.title_far | replace(" ", "-", 99)) | safe %}
+                    {% set title = (quiz.title | replace(" ", "-", 99)) | safe %}
                     {% if quiz.category == 'physiologies' %}
                     <a class="searchResult__quizzes__item tx-al-r" href="/quiz_2/physiologies/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
+                        {{ quiz.title }}
                     </a>
                     {% else %}
                     <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        {{ quiz.title_far }}
+                        {{ quiz.title }}
                     </a>
                     {% endif %}
                 </li>

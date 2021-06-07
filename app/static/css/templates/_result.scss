@@ -1,7 +1,7 @@
 .result {
     font-family: $font-sec;
     display: grid;
-    grid-template-columns: 15rem 15rem 15rem;
+    grid-template-columns: 17rem 19rem 18rem;
 
     @include breakpoints-down(medium){
         display: block;
@@ -68,6 +68,10 @@
 
     &__img {
         order: 2;
+
+        img {
+            width: 26rem;
+        }
     }
 
     &__detail {

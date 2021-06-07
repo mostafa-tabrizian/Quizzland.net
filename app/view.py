@@ -182,9 +182,10 @@ def result(innerCategory, title):
     innerCategory = titleConverterFromUrlToNormalOne(innerCategory)
     return render_template('/result.html',
         suggestingQuiz = quizzesByRandomWithInnerCategory(innerCategory),
+        quizDetail = firstQuizByFarsiTitle(fullTitle),
+        fanName = fanNameOfQuiz(fullTitle),
         fullTitle = fullTitle,
         backBtn = backBtn,
-        fanName = fanNameOfQuiz(fullTitle),
         headTitle = f'QuizLand | نتیجه کوئیز ',  
     )
 
