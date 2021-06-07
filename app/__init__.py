@@ -1,4 +1,3 @@
-from flask import Flask, redirect, url_for, render_template
 from crud import *
 from view import *
 from admin import *
