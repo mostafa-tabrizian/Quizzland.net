@@ -254,23 +254,6 @@ newsletter__categoryOptions__input.forEach(each => {
 
 //----------------------------------------------------------
 
-// Show the detail of the category
-// categories__item.forEach(item => 
-//     item.addEventListener('mouseover', () => {
-//         const categories__item__img = item.querySelector('.categories__item__img')
-//         categories__item__img.classList.add('categories__item__detail__show')
-//     })
-// )
-    
-// categories__item.forEach(item =>
-//     item.addEventListener('mouseout', () => {
-//         const categories__item__img = item.querySelector('.categories__item__img')
-//         categories__item__img.classList.remove('categories__item__detail__show')
-//     })
-// )
-
-//----------------------------------------------------------
-
 // Page travel
 if (pageTravel__arwNext) {
 
@@ -382,7 +365,7 @@ if (result__share__btn) {
         const quizTitle = result__title.innerHTML.slice(25,)
         const quizScore = result__score.innerHTML.split(' ')
 
-        const messageShare =  // `من تو کوئیز ( فلانی ) انقدر درصد درست زدم ایموجی. تو چقدر میتونی بزنی ؟ <br/> ${lastQuiz}`
+        const messageShare =
             `من تو کوئیز (${quizTitle}) ${quizScore[1]} درصد درست زدم ${quizScore[0]}. تو چقدر میتونی بزنی ؟
             <br/> -----------------------------------------
             <br/> ${lastQuiz}`

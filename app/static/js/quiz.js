@@ -61,7 +61,6 @@ if (quiz__container__eachOne) {
 
 //----------------------------------------------------------
 
-// quiz questions
 if (quiz__questions) {
     typeOfQuiz = whatIsTypeOfQuiz()
 

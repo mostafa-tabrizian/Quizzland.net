@@ -64,9 +64,6 @@ def del_session():
 def up_session():
     try:
         sessionToUpdate = s.query(Quizzes).filter(Quizzes.id == 1).first()
-        # sessionToUpdate = s.query(Categories).filter(Categories.id == 6).first()
-        # sessionToUpdate.view = 7
-        # sessionToUpdate.img = 'TRASH-jennifer.jpg'
         sessionToUpdate.title_eng = 'Taylor Swift'
         s.add(sessionToUpdate)
         s.commit()
@@ -75,11 +72,6 @@ def up_session():
         raise 
     finally:
         s.close()
-
-# data = Documents(
-#     title = 'title',
-#     note = 'note'
-# )
 
 #--------------------
 # recreate_documents()

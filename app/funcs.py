@@ -41,13 +41,13 @@ def saveMonthlyViewsInExcel():
 
         for quiz in quizzes:
             data = [quiz.title_far, ' ', quiz.category, quiz.innerCategory,\
-                    quiz.views, quiz.publish]  # category.monthly_views   
+                    quiz.views, quiz.monthly_views, quiz.publish]
             writer_object = writer(f_object)
             writer_object.writerow(data)
 
         for quiz in quizzesPointy:
             data = [quiz.title_far, ' ', quiz.category, quiz.innerCategory,\
-                    quiz.views, category.monthly_views, quiz.publish]
+                    quiz.views, quiz.monthly_views, quiz.publish]
             writer_object = writer(f_object)
             writer_object.writerow(data)
 
