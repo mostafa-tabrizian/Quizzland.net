@@ -7,15 +7,20 @@
 <adverts class="adverts adverts__right hideForMobile">
 </adverts> -->
 
+<div class="countingResult fade-out">
+    ___ در حال محاسبه نتیجه کوئیز___
+</div>
 <body style="background-image: url('/static/img/Bg-quizzes/{{ quizDetail.background }}');">
     
     <!-- <div class="adverts__top">
     </div> -->
     
-    <div class="quiz__head tx-al-c">
-        <h1>{{ quizDetail.title_eng }}</h1>
-        <h3>{{ quizDetail.title_far }}</h3>
-        <h5>سوال: ?</h5>
+    <div class="quiz__head tx-al-c" id="quiz__top">
+        <h1>{{ quizDetail.title_far }}</h1>
+        <div class="flex flex-jc-c flex-ai-c">
+            <h5>تعداد سوال ها: ?</h5>
+            <h5>{{ (quizDetail.publish | string)[0:10] }}</h5>
+        </div>
 
         <div class="quiz__autoQuestionChangerSwitch center flex flex-jc-c flex-ai-c">
             <h5>تغییر خودکار</h5>
@@ -25,9 +30,14 @@
         </div>
         
         <div class="quiz__questionChanger__container center">
-            <button class="quiz__questionChanger quiz__questionChanger__next fade-out"></button>
-            <button class="quiz__questionChanger quiz__questionChanger__last fade-out"></button>
+            <button class="quiz__questionChanger quiz__questionChanger__next fade-in"></button>
+            <button class="quiz__questionChanger quiz__questionChanger__last fade-in"></button>
         </div>
+    </div>
+
+    <div class="quiz__questionCounter flex flex-jc-c flex-ai-c">
+        <div class="quiz__questionCounter__totalAnswered">?</div>
+        &nbspسوال شماره
     </div>
 
     <div class="quiz__questions tx-al-c" tag="pointy">
@@ -80,12 +90,6 @@
             </div>
 
             {% endfor %} 
-        </div>
-
-        <div class="quiz__questionCounter flex flex-jc-c flex-ai-c">
-            <div class="quiz__questionCounter__totalAnswered">?</div>
-            <div class="quiz__questionCounter__divider">&nbsp/&nbsp</div>
-            <div class="quiz__questionCounter__totalQuestions">?</div>
         </div>
     </div>
 

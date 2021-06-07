@@ -331,6 +331,7 @@ input {
 .backBtn {
   position: relative;
   margin-left: 25%;
+  margin-bottom: 3rem;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
 }
@@ -759,10 +760,17 @@ input {
   padding: 1rem;
 }
 
+.header__logo {
+  position: relative;
+  z-index: 1;
+}
+
 .header__links {
   padding: 1.25rem 0;
   margin-right: 1.5rem;
   direction: rtl;
+  position: relative;
+  z-index: 1;
 }
 
 .header__links a {
@@ -801,6 +809,7 @@ input {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  z-index: 1;
 }
 
 @media (max-width: 49.9375em) {
@@ -868,13 +877,13 @@ input {
   border: 0;
 }
 
-.header__searchInput {
+.header__searchInput, .header__searchInput__m {
   border: 1px solid #8080808f;
   font-family: harmattan, myHarmattan, sans-serif, serif;
   font-size: 1.18rem;
   background: rgba(0, 0, 0, 0.178);
-  -webkit-backdrop-filter: blur(165px);
-          backdrop-filter: blur(165px);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
   border-radius: 15px;
   height: 2.125rem;
   padding-right: 1.3125rem;
@@ -886,28 +895,28 @@ input {
   z-index: 1;
 }
 
-.header__searchInput::-webkit-input-placeholder {
+.header__searchInput::-webkit-input-placeholder, .header__searchInput__m::-webkit-input-placeholder {
   color: black;
 }
 
-.header__searchInput:-ms-input-placeholder {
+.header__searchInput:-ms-input-placeholder, .header__searchInput__m:-ms-input-placeholder {
   color: black;
 }
 
-.header__searchInput::-ms-input-placeholder {
+.header__searchInput::-ms-input-placeholder, .header__searchInput__m::-ms-input-placeholder {
   color: black;
 }
 
-.header__searchInput::placeholder {
+.header__searchInput::placeholder, .header__searchInput__m::placeholder {
   color: black;
 }
 
-.header__searchInput:focus {
+.header__searchInput:focus, .header__searchInput__m:focus {
   -webkit-box-shadow: -2px 2px 5px black;
           box-shadow: -2px 2px 5px black;
 }
 
-.header__searchInput__m {
+.header__searchInput__m, .header__searchInput__m__m {
   -webkit-transform: translate(0.5rem, 0);
           transform: translate(0.5rem, 0);
   position: absolute;
@@ -1695,7 +1704,6 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
 }
 
 body {
-  background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -1765,6 +1773,8 @@ body {
 
 .quiz__head {
   font-family: myChanga, sans-serif, serif;
+  position: relative;
+  z-index: 1;
 }
 
 .quiz__head h1, .quiz__head h2, .quiz__head h3, .quiz__head h4, .quiz__head h5, .quiz__head p {
@@ -1808,12 +1818,11 @@ body {
   content: "";
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.466);
   pointer-events: none;
-  z-index: -1;
 }
 
 .quiz__container {
@@ -1828,8 +1837,8 @@ body {
   margin-right: 22rem;
   margin-left: 22rem;
   position: relative;
-  -webkit-transform: translate(-16rem);
-          transform: translate(-16rem);
+  -webkit-transform: translate(-17rem);
+          transform: translate(-17rem);
 }
 
 @media (max-width: 49.9375em) {
@@ -1946,6 +1955,7 @@ body {
 
 .quiz__questionCounter {
   position: relative;
+  z-index: 1;
   color: #f0f0f0;
 }
 
@@ -2259,42 +2269,26 @@ body {
   margin-right: 1rem;
 }
 
-.resultQuiz4Option div {
-  width: 35rem;
+.resultQuizPointy__container h3 {
+  position: relative;
+  z-index: 2;
 }
 
-@media (max-width: 49.9375em) {
-  .resultQuiz4Option div {
-    width: 23rem;
-  }
+.resultQuizPointy__container div {
+  position: relative;
+  z-index: 2;
 }
 
-.resultQuiz4Option__bg {
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.resultQuiz4Option img {
-  position: absolute;
+.resultQuizPointy__container::after {
+  content: "";
+  position: fixed;
   top: 0;
   left: 0;
-  -webkit-transform: translate(-25.7%, -26%);
-          transform: translate(-25.7%, -26%);
-  z-index: -1;
-}
-
-.resultQuiz4Option__container {
-  min-height: 58vh;
-}
-
-.resultQuiz4Option__title {
-  margin-top: 0;
-  text-shadow: 0 0 5px white;
-}
-
-.resultQuiz4Option__txt {
-  padding: 0 1rem;
-  direction: rtl;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.466);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .searchResult {

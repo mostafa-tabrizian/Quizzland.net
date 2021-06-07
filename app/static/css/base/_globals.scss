@@ -228,6 +228,7 @@ input {
 .backBtn {
     position: relative;
     margin-left: 25%;
+    margin-bottom: 3rem;
     transform: translate(-50%);
 
     @include breakpoints-down(medium) {

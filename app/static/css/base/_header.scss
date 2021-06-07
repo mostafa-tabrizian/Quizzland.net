@@ -4,11 +4,18 @@
     margin-bottom: 2rem;
     padding: 1rem;
 
+    &__logo {
+        position: relative;
+        z-index: 1;
+    }
+
     &__links {
         padding: 1.25rem 0;
         margin-right: 1.5rem;
         direction: rtl;
-        
+        position: relative;
+        z-index: 1;
+
         a {
             color: $black;
             text-shadow: 0 0 5px white;
@@ -35,13 +42,14 @@
         width: 100%;
         border-radius: 0 0 55px 55px;
         transition: all .3s ease-in-out;
-        
+
         &__openBtn {
             background: inherit;
             position: absolute;
             top: 1rem;
             right: 1rem;
-            
+            z-index: 1;
+
             @include breakpoints-down(medium) {
                 top: 2rem;
             }
@@ -104,12 +112,12 @@
         border: 0;
     }
 
-    &__searchInput {
+    &__searchInput, &__searchInput__m {
         border: 1px solid #8080808f;
         font-family: $font-pr;
         font-size: $font-sm;
         background: rgba(0, 0, 0, 0.178);
-        backdrop-filter: blur(165px);
+        backdrop-filter: blur(5px);
         border-radius: 15px;
         height: 2.125rem;
         padding-right: 1.3125rem;

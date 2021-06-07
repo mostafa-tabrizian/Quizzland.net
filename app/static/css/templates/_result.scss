@@ -85,39 +85,27 @@
     }
 }
 
-.resultQuiz4Option {
-    div {
-        width: 35rem;
-
-        @include breakpoints-down(medium) {
-            width: 23rem;
-        }
-    }
-
-    &__bg {
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translate(-25.7%, -26%);
-        z-index: -1;
-    }
-
+.resultQuizPointy {
     &__container {
-        min-height: 58vh;
-    }
+        
+        h3 {
+            position: relative;
+            z-index: 2;
+        }
 
-    &__title {
-        margin-top: 0;
-        text-shadow: 0 0 5px white;
-    }
+        div {
+            position: relative;
+            z-index: 2;
+        }
 
-    &__txt {
-        padding: 0 1rem;
-        direction: rtl;
+        &::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.466);
+            pointer-events: none;
+            z-index: 0;
+        }
     }
 }

@@ -479,7 +479,7 @@ if (nightMode) {
     checkTheUrlSoWeCheckIfShouldRemoveTheNightMode = splitUrl()
     
     if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode.length == 9 || // innerCategory
-        checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'quiz')
+        checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3].includes('quiz'))
         {
             try {
                 nightMode__container.forEach(each => {

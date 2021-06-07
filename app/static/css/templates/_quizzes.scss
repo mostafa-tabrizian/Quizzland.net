@@ -1,5 +1,4 @@
 body {
-    background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
@@ -57,6 +56,8 @@ body {
 .quiz {
     &__head {
         font-family: $font-sec;
+        position: relative;
+        z-index: 1;
 
         h1, h2, h3, h4, h5, p {
             margin: 0;
@@ -94,10 +95,10 @@ body {
         &::after {
             content: "";
             position: fixed;
-            top: 0; bottom: 0; left: 0; right: 0; 
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             background: rgba(0, 0, 0, 0.466);
             pointer-events: none;
-            z-index: -1;
         }
     }
 
@@ -112,7 +113,7 @@ body {
         margin-right: 22rem;
         margin-left: 22rem;
         position: relative;
-        transform: translate(-16rem); //-67rem each step
+        transform: translate(-17rem); //-67rem each step
 
         @include breakpoints-down(medium) {
             transform: translate(-19.8rem); //-67rem each step
@@ -218,28 +219,8 @@ body {
 
     &__questionCounter {
         position: relative;
-        // top: -3.4rem;
-        // left: -9rem;
-        // display: block;
-        // transform: translate(-50%);
+        z-index: 1;
         color: $white;
-
-        // @include breakpoints-down(medium) {
-        //     left: -6rem;
-        // }
-
-        // &__divider {
-        //     position: relative;
-        //     bottom: 0.7rem;
-        //     left: 0.29rem;
-        //     transform: rotate(16.3deg) scaleY(2.9);
-        // }
-
-        // &__totalQuestions {
-        //     position: relative;
-        //     bottom: 1.7rem;
-        //     left: 0.8rem;
-        // }
     }
 
     &__hider {
