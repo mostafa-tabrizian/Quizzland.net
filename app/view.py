@@ -132,7 +132,6 @@ def category(category, page, sortType, numberOfResult):
             pageTravel = pageTravel(finalPage(howManyElementToShow, category)),
             headTitle = f'QuizLand | کوئیز های {categoryInFar[category]} ',  
         )
-
     else:
         return redirect(url_for('pageNotFoundManual'))
 

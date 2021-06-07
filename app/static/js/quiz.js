@@ -86,7 +86,7 @@ if (quiz__questions) {
 
     let FinalTitleOfQuiz = ''
     const titleOfTheQuiz = () => {
-        const titleOfQuiz = document.querySelector('.quiz__head h3').innerText
+        const titleOfQuiz = document.querySelector('.quiz__head h1').innerText
         const splittedTitleOfQuiz = titleOfQuiz.split(' ')
         splittedTitleOfQuiz.forEach(each => {
             FinalTitleOfQuiz += `-${each}`
@@ -156,13 +156,17 @@ if (quiz__questions) {
     }
 
     const showImGifTextAnswer = () => {
-        quiz__answerImGif[currentQuestion - 1].classList.remove('noVis')
-        quiz__answerText[currentQuestion - 1].classList.remove('noVis')
+        if (quiz__answerImGif[currentQuestion - 1]) {
+            quiz__answerImGif[currentQuestion - 1].classList.remove('noVis')
+            quiz__answerText[currentQuestion - 1].classList.remove('noVis')
+        }
     }
 
     const hideImGifTextAnswer = () => {
-        quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
-        quiz__answerText[currentQuestion - 2].classList.add('noVis')
+        if (quiz__answerImGif[currentQuestion - 2]) {
+            quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
+            quiz__answerText[currentQuestion - 2].classList.add('noVis')
+        }
     }
 
     const showTheCorrectAnswer = (correctAnswer) => {
