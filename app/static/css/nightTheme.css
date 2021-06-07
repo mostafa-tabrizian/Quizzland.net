@@ -4,6 +4,10 @@
   /* both supported */
 }
 
+html {
+  background: #121212;
+}
+
 .header__links a {
   color: white;
 }
@@ -147,6 +151,16 @@ body::-webkit-scrollbar-thumb {
 
 .sortMore__container__views {
   background: #181818;
+}
+
+.sort-views h2, .sort-monthlyViews h2 {
+  color: #e09e9e;
+  -webkit-text-stroke: .5px darkred;
+}
+
+.sort-views h2::after, .sort-monthlyViews h2::after {
+  color: #e09e9e1f;
+  -webkit-text-stroke: 0;
 }
 
 .sort__style li:nth-child(even) {

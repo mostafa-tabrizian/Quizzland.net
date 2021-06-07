@@ -1524,7 +1524,7 @@ footer__copyRight > h5 > a:hover, .footer__copyRight > h5 > a:hover {
   right: -2rem;
   top: -3rem;
   font-size: 6rem;
-  color: rgba(136, 135, 135, 0.1);
+  color: rgba(160, 27, 27, 0.12);
 }
 
 .sort__container h2::after {

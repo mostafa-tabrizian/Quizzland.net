@@ -2,6 +2,10 @@
     color-scheme: light dark; /* both supported */
   }
 
+html {
+    background: #121212;
+}
+
 .header {
     &__links {
         a {
@@ -152,6 +156,19 @@ body {
 }
 
 .sort {
+    &-views, &-monthlyViews {
+        h2 {
+            color: #e09e9e;
+            -webkit-text-stroke: .5px darkred;
+
+            &::after {
+                color: #e09e9e1f;
+                -webkit-text-stroke: 0;
+
+            }
+        }
+    }
+
     &__style {
         li {
             &:nth-child(even) {
