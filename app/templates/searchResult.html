@@ -12,10 +12,10 @@
             {% for category in userSearchInputInCategoriesDb_eng %}
             <div class="searchResult__category__item">
                 {% set img = (category.title_eng).split(' ') %}
-                <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
+                <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/16">
                     <img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt="{{ category.title_eng }} | کوئیز های {{ category.title_far }}">
                 </a>
-                <h5 class="tx-al-c"><a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
+                <h5 class="tx-al-c"><a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/16">
                     {{ category.title_eng }}
                 </a></h5>
             </div>
@@ -24,10 +24,10 @@
             {% for category in userSearchInputInCategoriesDb_far %}
             <div class="searchResult__category__item">
                 {% set img = (category.title_eng).split(' ') %}
-                <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
+                <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/16">
                     <img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt="{{ category.title_eng }} | کوئیز های {{ category.title_far }}">
                 </a>
-                <h5 class="tx-al-c"><a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
+                <h5 class="tx-al-c"><a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/16">
                     {{ category.title_eng }}
                 </a></h5>
             </div>

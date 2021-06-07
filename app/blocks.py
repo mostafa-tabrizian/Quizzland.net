@@ -14,14 +14,13 @@ tools = "   <div class='tools wrapper-sm flex flex-ai-c'>\
                 </div>\
                 <div class='tools__numberOfResult'>\
                     <div class='tools__numberOfResult__btn darkGls btn'>تعداد نمایش: \
-                        <span class='tools__numberOfResult__current'>8</span>\
+                        <span class='tools__numberOfResult__current'>16</span>\
                     </div>\
                     <div class='tools__numberOfResult__options__container fade-out'>\
                         <ul class='tools__numberOfResult__options'>\
-                            <button class='darkGls' type='button'>8</button>\
                             <button class='darkGls' type='button'>16</button>\
-                            <button class='darkGls' type='button'>24</button>\
                             <button class='darkGls' type='button'>32</button>\
+                            <button class='darkGls' type='button'>48</button>\
                         </ul>\
                     </div>\
                 </div>\

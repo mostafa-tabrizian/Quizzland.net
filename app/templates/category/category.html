@@ -18,12 +18,12 @@
 
         {% if category == 'celebrities' %}
             <div class="quizzes__item">
-                <a href="/category/celebrities/Mix-Celebrity/0/newest/8">
+                <a href="/category/celebrities/Mix-Celebrity/0/newest/16">
                     <img src="/static/img/Thn-Category/mix-celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
                 </a>
 
                 <h5 class="tx-al-c">
-                    <a href="/category/celebrities/Mix-Celebrity/0/newest/8">
+                    <a href="/category/celebrities/Mix-Celebrity/0/newest/16">
                         میکس سلبریتی ها
                     </a>
                 </h5>
@@ -31,12 +31,12 @@
 
         {% elif category == 'movieSeries' %}
             <div class="quizzes__item">
-                <a href="/category/movieSeries/Mix-movieSeries/0/newest/8">
+                <a href="/category/movieSeries/Mix-movieSeries/0/newest/16">
                     <img src="/static/img/Thn-Category/mix-movieSeries.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
                 </a>
 
                 <h5 class="tx-al-c">
-                    <a href="/category/movieSeries/Mix-movieSeries/0/newest/8">
+                    <a href="/category/movieSeries/Mix-movieSeries/0/newest/16">
                         میکس فیلم و سریال ها
                     </a>
                 </h5>
@@ -47,12 +47,12 @@
             <div class="quizzes__item">
                 {% set img = (category.title_eng).split(' ') %}
 
-                <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
+                <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/16">
                     <img src="/static/img/Thn-Category/{{img[0]}}-{{img[1]}}.jpg" alt="{{ category.title_eng }} |‌ کوئیز های {{ category.title_far }}" loading='lazy'>
                 </a>
 
                 <h5 class="tx-al-c">
-                    <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/8">
+                    <a href="/category/{{category.category}}/{{img[0]}}-{{img[1]}}/0/newest/16">
     
                     {% if category.category == 'physiologies' %}
                         {{ category.title_far }}

@@ -173,6 +173,7 @@
 .sort {
     height: 36rem;
     position: relative;
+    margin-bottom: 3rem;
 
     &__container {
         @include breakpoints-down(medium) {

@@ -492,7 +492,22 @@ if (nightMode) {
             } catch {
                 log('no nightMode')
             }
-        }       
+        } 
+    else if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == ('result_2'))
+        {
+            try {
+                nightMode__container.forEach(each => {
+                    each.classList.add('noVis')
+                })
+                nightMode.forEach(each => {
+                    each.classList.remove('nightMode-Off')
+                })
+                document.head.appendChild(nightThemeCss)
+            } catch {
+                log('no nightMode')
+            }
+        } 
+        
 } else {log ('no nightMode')}
 
 // --------------------------------------------------------------------

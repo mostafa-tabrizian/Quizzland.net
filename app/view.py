@@ -121,7 +121,7 @@ def sortCategories(category, page, sortOfQuiz):
 
 @app.route('/category/<category>/<int:page>/<sortType>/<numberOfResult>')
 def category(category, page, sortType, numberOfResult):
-    if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
+    if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
         howManyElementToShow = int(numberOfResult)
         fTPage = frToPage(page, howManyElementToShow)
 
@@ -137,7 +137,7 @@ def category(category, page, sortType, numberOfResult):
 
 @app.route('/category/<category>/<innerCategory>/<int:page>/<sortType>/<numberOfResult>')
 def innerCategory(category, innerCategory, page, sortType, numberOfResult):
-    if numberOfResult == '8' or numberOfResult == '16' or numberOfResult == '24' or numberOfResult == '32' :
+    if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
         howManyElementToShow = int(numberOfResult)
         fTPage = frToPage(page, howManyElementToShow)
         InnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
