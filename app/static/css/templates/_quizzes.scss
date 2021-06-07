@@ -66,15 +66,15 @@ body {
             text-align: center;
         }
 
-        h3 {
+        h1 {
             font-size: $font-med - .1rem;
         }
 
-        h5{
+        h5 {
             font-size: $font-sm - .2rem;
         }
 
-        div:nth-child(3) {
+        div:nth-child(2) {
             h5 {
                 margin-right: 2.5rem;
                 margin-left: 2.5rem;
@@ -259,6 +259,7 @@ body {
 
     &__options {
         width: 23rem;
+        position: relative;
 
         &__img {
             display: grid;
@@ -325,6 +326,27 @@ body {
                 color: $white;
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 1.15rem;
+                left: 1.15rem;
+                border: 2px solid transparent;
+                border-radius: 2rem;
+                background: rgb(255, 0, 0);
+                width: 20%;
+                height: 2.95rem;
+                opacity: 0;
+            }
+
+            &__active {
+                .quiz__options__textLabel {
+                    &::after {
+                        opacity: 1 !important;
+                    }
+                }
             }
         }
         

@@ -16,8 +16,7 @@
     </div> -->
     
     <div class="quiz__head tx-al-c" id="quiz__top">
-        <h1>{{ quizDetail.title_eng }}</h1>
-        <h3>{{ quizDetail.title_far }}</h3>
+        <h1>{{ quizDetail.title_far }}</h1>
         <div class="flex flex-jc-c flex-ai-c">
             <h5>تعداد سوال ها: ?</h5>
             <h5>{{ (quizDetail.publish | string)[0:10] }}</h5>
@@ -67,10 +66,10 @@
                     {% if questionDetail.votes_1 %}
                         <div class="flex flex-jc-c">
                             <form class='quiz__options quiz__polls quiz__options__text' action="">
-                                <input type="radio" name="answer" id="{{ questionDetail.id }}-1"><label class="quiz__options__textLabel" id="{{ questionDetail.id }}-1" for="{{ questionDetail.id }}-1"> {{ questionDetail.option_1 }} </label>
-                                <input type="radio" name="answer" id="{{ questionDetail.id }}-2"><label class="quiz__options__textLabel" id="{{ questionDetail.id }}-2" for="{{ questionDetail.id }}-2"> {{ questionDetail.option_2 }} </label>
-                                <input type="radio" name="answer" id="{{ questionDetail.id }}-3"><label class="quiz__options__textLabel" id="{{ questionDetail.id }}-3" for="{{ questionDetail.id }}-3"> {{ questionDetail.option_3 }} </label>
-                                <input type="radio" name="answer" id="{{ questionDetail.id }}-4"><label class="quiz__options__textLabel" id="{{ questionDetail.id }}-4" for="{{ questionDetail.id }}-4"> {{ questionDetail.option_4 }} </label>
+                                <input type="radio" name="answer" id="{{ questionDetail.id }}-1" value='{{ questionDetail.votes_1 }}'><label class="quiz__options__textLabel" id="{{ questionDetail.id }}-1" for="{{ questionDetail.id }}-1"> {{ questionDetail.option_1 }} </label>
+                                <input type="radio" name="answer" id="{{ questionDetail.id }}-2" value='{{ questionDetail.votes_2 }}'><label class="quiz__options__textLabel" id="{{ questionDetail.id }}-2" for="{{ questionDetail.id }}-2"> {{ questionDetail.option_2 }} </label>
+                                <input type="radio" name="answer" id="{{ questionDetail.id }}-3" value='{{ questionDetail.votes_3 }}'><label class="quiz__options__textLabel" id="{{ questionDetail.id }}-3" for="{{ questionDetail.id }}-3"> {{ questionDetail.option_3 }} </label>
+                                <input type="radio" name="answer" id="{{ questionDetail.id }}-4" value='{{ questionDetail.votes_4 }}'><label class="quiz__options__textLabel" id="{{ questionDetail.id }}-4" for="{{ questionDetail.id }}-4"> {{ questionDetail.option_4 }} </label>
                             </form>
                         </div>
                     {% else %}
@@ -86,26 +85,21 @@
                 {% endif %}
                 
                 {% if not questionDetail.votes_1 %}
-                    <div class="quiz__answerImGif noVis space-sm">
-                        <img src="/static/img/imGif_quizzes/{{questionDetail.answer_imGif}}" alt="">
-                    </div>
+                    {% if questionDetail.answer_imGif %}
+                        <div class="quiz__answerImGif noVis space-sm">
+                            <img src="/static/img/imGif_quizzes/{{questionDetail.answer_imGif}}" alt="">
+                        </div>
+                    {% endif %}
+                    {% if questionDetail.answer_text %}
+                        <div class="quiz__answerText noVis">
+                            {{questionDetail.answer_text}}
+                        </div>
+                    {% endif %}
                 {% endif %}
-
-                <div class="quiz__answerText noVis">
-                    {{questionDetail.answer_text}}
-                </div>
-                
             </div>
 
             {% endfor %} 
         </div>
-
-        <!-- <div class="quiz__questionCounter flex flex-jc-c flex-ai-c">
-            <div class="quiz__questionCounter__totalAnswered">?</div>
-            <div class="quiz__questionCounter__divider">&nbsp/&nbsp</div>
-            <div class="quiz__questionCounter__totalQuestions">?</div>
-        </div> -->
-
     </div>
 
     <!-- <div class="adverts__bottom">

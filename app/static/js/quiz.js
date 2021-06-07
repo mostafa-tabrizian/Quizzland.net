@@ -161,8 +161,10 @@ if (quiz__questions) {
     }
 
     const hideImGifTextAnswer = () => {
-        quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
-        quiz__answerText[currentQuestion - 2].classList.add('noVis')
+        if (!(quiz__polls)) {
+            quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
+            quiz__answerText[currentQuestion - 2].classList.add('noVis')
+        }
     }
 
     const showTheCorrectAnswer = (correctAnswer) => {
@@ -186,6 +188,12 @@ if (quiz__questions) {
         }
     }
 
+    const showThePercentage = (each) => {
+        const userOption = `label[id='${each.id}']`
+        const percent = quiz__options.getAttribute('value')
+        each.innerHTML = percent
+    }
+
     const scaleAnimationAfterChoosingAnswer = () => {
         quiz__hider.classList.add('quiz__options__scaleUp')
 
@@ -205,8 +213,7 @@ if (quiz__questions) {
                 if (!(quiz__polls)) {
                     checkUserAnswer(each)           
                 } else {
-                    log('poll')
-                    
+                    showThePercentage(each)
                 }
             }
             if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
