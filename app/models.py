@@ -59,8 +59,9 @@ quizQuestionsBase = declarative_base()
 class quizQuestions(quizQuestionsBase):
     __tablename__ = 'Quiz_Questions'
     id = Column(Integer, primary_key=True)
-    title_eng = Column(String)
-    title_far = Column(String)
+    category = Column(String)
+    innerCategory = Column(String)
+    title = Column(String)
     question = Column(String)
     option_1 = Column(String)
     option_2 = Column(String)
@@ -69,7 +70,6 @@ class quizQuestions(quizQuestionsBase):
     answer = Column(String)
     answer_imGif = Column(String)
     answer_text = Column(String)
-    category = Column(String)
 
 quizPointyQuestionsBase = declarative_base()
 class quizPointyQuestions(quizPointyQuestionsBase):

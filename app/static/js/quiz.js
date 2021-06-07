@@ -157,6 +157,8 @@ if (quiz__questions) {
     const showImGifTextAnswer = () => {
         if (quiz__answerImGif[currentQuestion - 1]) {
             quiz__answerImGif[currentQuestion - 1].classList.remove('noVis')
+        }
+        if (quiz__answerText[currentQuestion - 1]) {
             quiz__answerText[currentQuestion - 1].classList.remove('noVis')
         }
     }
@@ -164,6 +166,8 @@ if (quiz__questions) {
     const hideImGifTextAnswer = () => {
         if (quiz__answerImGif[currentQuestion - 2]) {
             quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
+        }
+        if (quiz__answerText[currentQuestion - 2]) {
             quiz__answerText[currentQuestion - 2].classList.add('noVis')
         }
     }
