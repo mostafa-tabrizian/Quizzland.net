@@ -3,6 +3,7 @@
     grid-template-columns: auto auto;
     direction: rtl;
     min-height: 30rem;
+    margin-bottom: 1.125rem;
 
     @include breakpoints-down(medium) {
         grid-template-columns: auto;

@@ -410,15 +410,18 @@ body {
 
 .countingResult {
     position: fixed;
-    left: 50%;
-    transform: translate(-50%);
-    top: 28%;
     z-index: 99;
     font-size: $font-med;
     color: white;
     font-family: $font-sec;
+    background: $red-grad;
 
     @include breakpoints-down(medium) {
         font-size: $font-med - .3rem;
+    }
+    
+    &::after {
+        position: absolute;
+        top: 27rem;
     }
 }

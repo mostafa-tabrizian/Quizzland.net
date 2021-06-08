@@ -4,11 +4,11 @@
 <div class="resultQuizPointy__container">
 
     <h3 class="resultQuizPointy__title flex flex-jc-c">نتیجه‌ تست&nbsp:&nbsp{{ fullTitle }}</h3>
-    <div class="resultQuizPointy space-sm center tx-al-c">
+    <div class="resultQuizPointy wrapper-sm space-sm tx-al-c">
             {% if DbOfQuiz.result_UpTo_1 != None and DbOfQuiz.result_UpTo_1.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_1.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -21,7 +21,7 @@
             {% elif DbOfQuiz.result_UpTo_2 != None and DbOfQuiz.result_UpTo_2.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_2.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -34,7 +34,7 @@
             {% elif DbOfQuiz.result_UpTo_3 != None and DbOfQuiz.result_UpTo_3.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_3.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -47,7 +47,7 @@
             {% elif DbOfQuiz.result_UpTo_4 != None and DbOfQuiz.result_UpTo_4.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_4.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -60,7 +60,7 @@
             {% elif DbOfQuiz.result_UpTo_5 != None and DbOfQuiz.result_UpTo_5.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_5.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -73,7 +73,7 @@
             {% elif DbOfQuiz.result_UpTo_6 != None and DbOfQuiz.result_UpTo_6.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_6.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -86,7 +86,7 @@
             {% elif DbOfQuiz.result_UpTo_7 != None and DbOfQuiz.result_UpTo_7.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_7.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -99,7 +99,7 @@
             {% elif DbOfQuiz.result_UpTo_8 != None and DbOfQuiz.result_UpTo_8.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_8.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -112,7 +112,7 @@
             {% elif DbOfQuiz.result_UpTo_9 != None and DbOfQuiz.result_UpTo_9.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_9.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -125,7 +125,7 @@
             {% elif DbOfQuiz.result_UpTo_10 != None and DbOfQuiz.result_UpTo_10.split('=')[0]|int >= score %}
                 {% set sliceDb = DbOfQuiz.result_UpTo_10.split('=') %}
                 <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ sliceDb[3] }}')">
-                    <div class="darkGls center">
+                    <div class="darkGls">
                         <h1 class="resultQuizPointy__resultTitle">
                             {{ sliceDb[1] }}
                         </h1>
@@ -142,7 +142,7 @@
         </h1>
     </div>
     
-    <div class="result wrapper-med flex-ai-c flex-jc-c">
+    <div class="resultQuizPointy wrapper-med flex-ai-c flex-jc-c">
         <div class="result__share tx-al-c">
             <h5>برای دوست و اشناهات بفرست </br> ببین شبیه تو در میان یا نه</h5>
             <button class='resultQuizPointy__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>

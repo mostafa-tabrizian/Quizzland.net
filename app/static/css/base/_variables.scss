@@ -39,4 +39,63 @@ $red-grad: linear-gradient(-45deg, #4D1420, #9D272D);
 $red-bt-grad: linear-gradient(0, #4D1420, #9D272D);
 $red-tb-grad: linear-gradient(180deg, #4D1420, #9D272D);
 
-// Animations
+.wrapper {
+    &-sm {
+        max-width:30rem;
+        margin: 1.125rem auto;
+        
+        @include breakpoints-down(medium) {
+            max-width: 25rem;
+        }
+    }
+
+    &-med {
+        max-width: 67.5rem;
+        margin: 1.125rem auto;
+        position: relative;
+    
+        @include breakpoints-down(medium) {
+            max-width: 45.75rem;
+            margin: 1.125rem 1rem;
+        }
+    }
+
+    &-l {
+        max-width: 82.5rem;
+        margin: 1.125rem auto;
+    }
+}
+
+.space {
+    &-sm {
+        margin-top: 2rem;
+
+        @include breakpoints-down(medium) {
+            margin-top: 1rem;
+        }
+    }
+
+    &-med {
+        margin-top: 5rem;
+
+        @include breakpoints-down(medium) {
+            margin-top: 2.5rem;
+        }
+    }
+
+    &-l{
+        margin-top: 8rem;
+
+        @include breakpoints-down(medium) {
+            margin-top: 4rem;
+        }
+    }
+
+    &-xl{
+        margin-top: 12rem;
+
+        @include breakpoints-down(medium) {
+            margin-top: 6rem;
+        }
+    }
+}

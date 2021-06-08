@@ -19,6 +19,75 @@
   src: url("/static/font/Vermin-Vibes-2-Soft.ttf");
 }
 
+.wrapper-sm {
+  max-width: 30rem;
+  margin: 1.125rem auto;
+}
+
+@media (max-width: 49.9375em) {
+  .wrapper-sm {
+    max-width: 25rem;
+  }
+}
+
+.wrapper-med {
+  max-width: 67.5rem;
+  margin: 1.125rem auto;
+  position: relative;
+}
+
+@media (max-width: 49.9375em) {
+  .wrapper-med {
+    max-width: 45.75rem;
+    margin: 1.125rem 1rem;
+  }
+}
+
+.wrapper-l {
+  max-width: 82.5rem;
+  margin: 1.125rem auto;
+}
+
+.space-sm {
+  margin-top: 2rem;
+}
+
+@media (max-width: 49.9375em) {
+  .space-sm {
+    margin-top: 1rem;
+  }
+}
+
+.space-med {
+  margin-top: 5rem;
+}
+
+@media (max-width: 49.9375em) {
+  .space-med {
+    margin-top: 2.5rem;
+  }
+}
+
+.space-l {
+  margin-top: 8rem;
+}
+
+@media (max-width: 49.9375em) {
+  .space-l {
+    margin-top: 4rem;
+  }
+}
+
+.space-xl {
+  margin-top: 12rem;
+}
+
+@media (max-width: 49.9375em) {
+  .space-xl {
+    margin-top: 6rem;
+  }
+}
+
 @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .lightGls {
     background: rgba(255, 255, 255, 0.61) !important;
@@ -134,75 +203,6 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.452);
   border-radius: 25px;
-}
-
-.wrapper-sm {
-  max-width: 30rem;
-  margin: 1.125rem auto;
-}
-
-@media (max-width: 49.9375em) {
-  .wrapper-sm {
-    max-width: 21rem;
-  }
-}
-
-.wrapper-med {
-  max-width: 67.5rem;
-  margin: 1.125rem auto;
-  position: relative;
-}
-
-@media (max-width: 49.9375em) {
-  .wrapper-med {
-    max-width: 45.75rem;
-    margin: 1.125rem 1rem;
-  }
-}
-
-.wrapper-l {
-  max-width: 82.5rem;
-  margin: 1.125rem auto;
-}
-
-.space-sm {
-  margin-top: 2rem;
-}
-
-@media (max-width: 49.9375em) {
-  .space-sm {
-    margin-top: 1rem;
-  }
-}
-
-.space-med {
-  margin-top: 5rem;
-}
-
-@media (max-width: 49.9375em) {
-  .space-med {
-    margin-top: 2.5rem;
-  }
-}
-
-.space-l {
-  margin-top: 8rem;
-}
-
-@media (max-width: 49.9375em) {
-  .space-l {
-    margin-top: 4rem;
-  }
-}
-
-.space-xl {
-  margin-top: 12rem;
-}
-
-@media (max-width: 49.9375em) {
-  .space-xl {
-    margin-top: 6rem;
-  }
 }
 
 h1 {
@@ -2160,20 +2160,22 @@ body {
 
 .countingResult {
   position: fixed;
-  left: 50%;
-  -webkit-transform: translate(-50%);
-          transform: translate(-50%);
-  top: 28%;
   z-index: 99;
   font-size: 1.325rem;
   color: white;
   font-family: myChanga, sans-serif, serif;
+  background: linear-gradient(-45deg, #4D1420, #9D272D);
 }
 
 @media (max-width: 49.9375em) {
   .countingResult {
     font-size: 1.025rem;
   }
+}
+
+.countingResult::after {
+  position: absolute;
+  top: 27rem;
 }
 
 .result {
@@ -2285,6 +2287,10 @@ body {
   margin-right: 1rem;
 }
 
+.resultQuizPointy {
+  display: block;
+}
+
 .resultQuizPointy__container h3 {
   position: relative;
   z-index: 2;
@@ -2307,6 +2313,11 @@ body {
   z-index: 0;
 }
 
+.resultQuizPointy__txt {
+  margin-right: 1.125rem;
+  margin-left: 1.125rem;
+}
+
 .searchResult {
   display: -ms-grid;
   display: grid;
@@ -2314,6 +2325,7 @@ body {
       grid-template-columns: auto auto;
   direction: rtl;
   min-height: 30rem;
+  margin-bottom: 1.125rem;
 }
 
 @media (max-width: 49.9375em) {

@@ -13,12 +13,18 @@ const fadeOut = (element) => {
     element.classList.remove('fade-in')
 }
 
+const removeDOM = (element) => {
+    element.remove()
+}
+
 //----------------------------------------------------------
 
 // Loading screen
 window.onload = (event) => {
-    loadingScreen.classList.add('fade-out')
-    loadingScreen.classList.remove('fade-in')
+    fadeOut(loadingScreen)
+    setTimeout(() => {
+        removeDOM(loadingScreen)
+    }, 540)
 }
 
 // open and close the category list when click on category in the list
@@ -306,24 +312,24 @@ if (pageTravel__arwNext) {
     finalPageNumberDOM.href = finalPage
     
     if (currPageNumber == 1) {
-        pageTravel__arwLast.classList.add('noVis')
-        pageTravel__pages__last.classList.add('noVis')
+        removeDOM(pageTravel__arwLast)
+        removeDOM(pageTravel__pages__last)
     }
 
     if (currPageNumber == finalPageNumberDOM.innerHTML) {
-        pageTravel__arwNext.classList.add('noVis')
-        pageTravel__pages__next.classList.add('noVis')
-        pageTravel__pages__nextTwo.classList.add('noVis')
-        finalPageDOM.classList.add('noVis')
+        removeDOM(pageTravel__arwNext)
+        removeDOM(pageTravel__pages__next)
+        removeDOM(pageTravel__pages__nextTwo)
+        removeDOM(finalPageDOM)
     }
 
     if (currPageNumber + 1 == finalPageNumberDOM.innerHTML) {
-        finalPageDOM.classList.add('noVis')
-        pageTravel__pages__nextTwo.classList.add('noVis')
+        removeDOM(finalPageDOM)
+        removeDOM(pageTravel__pages__nextTwo)
     }
     
     if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
-        finalPageDOM.classList.add('noVis')
+        removeDOM(finalPageDOM)
     }
 } else { log ('no page travel')}
 
@@ -339,11 +345,11 @@ if (searchResult__category__item || searchResult__category__item__notFound) {
 
     if (countSearchResult == 3) { // empty
         searchResult__quizzes__item__notFound.innerHTML = 'هیچ کوئیزی پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'
-        searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
+        removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
     }
 
     if (countSearchResult == 3 || countSearchResult <= 11) {
-        searchResult__quizzes__seeMore.querySelector('a').classList.add('noVis') 
+        removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
     }
 } else {log('no search result page')}
 

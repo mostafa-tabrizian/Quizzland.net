@@ -7,8 +7,8 @@
 <adverts class="adverts adverts__right hideForMobile">
 </adverts> -->
 
-<div class="countingResult fade-out">
-    ___ در حال محاسبه نتیجه کوئیز___
+<div class="countingResult loadingScreen fade-out">
+        ___ در حال محاسبه نتیجه کوئیز___
 </div>
 <body style="background-image: url('/static/img/Bg-quizzes/{{ quizDetail.background }}');">
     
@@ -73,16 +73,12 @@
                     </div>
                 {% endif %}
                 
-                {% if questionDetail.answer_imGif %}
-                    <div class="quiz__answerImGif noVis space-sm">
-                        <img src="/static/img/imGif_quizzes/{{questionDetail.answer_imGif}}" alt="">
-                    </div>
-                {% endif %}
-                {% if questionDetail.answer_text %}
-                    <div class="quiz__answerText space-sm noVis">
-                        {{questionDetail.answer_text}}
-                    </div>
-                {% endif %}
+                <div class="quiz__answerImGif noVis space-sm">
+                    <img src="/static/img/imGif_quizzes/{{questionDetail.answer_imGif}}" alt="quiz-question-gif">
+                </div>
+                <div class="quiz__answerText space-sm noVis">
+                    {{questionDetail.answer_text}}
+                </div>
             </div>
 
             {% endfor %} 

@@ -94,6 +94,8 @@
 }
 
 .resultQuizPointy {
+    display: block;
+
     &__container {
         
         h3 {
@@ -115,5 +117,10 @@
             pointer-events: none;
             z-index: 0;
         }
+    }
+
+    &__txt {
+        margin-right: 1.125rem;
+        margin-left: 1.125rem;
     }
 }

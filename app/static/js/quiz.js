@@ -185,6 +185,22 @@ if (quiz__questions) {
         return optionUserChose
     }
 
+    const removeEmptyImGifText = () => {
+        quiz__answerImGif.forEach(each => {
+            const element = (each.innerHTML).trim()
+            if (element.substring(element.length-35, element.length-26) == 'empty.jpg') {
+                each.remove()
+            }
+        })
+        quiz__answerText.forEach(each => {
+            const element = (each.innerHTML).trim()
+            if (element == 'None') {
+                each.remove()
+            }
+        })
+    }
+    removeEmptyImGifText()
+
     const showImGifTextAnswer = () => {
         if (quiz__answerImGif[currentQuestion - 1]) {
             quiz__answerImGif[currentQuestion - 1].classList.remove('noVis')
@@ -196,10 +212,10 @@ if (quiz__questions) {
 
     const hideImGifTextAnswer = () => {
         if (quiz__answerImGif[currentQuestion - 2]) {
-            quiz__answerImGif[currentQuestion - 2].classList.add('noVis')
+            removeDOM(quiz__answerImGif[currentQuestion - 2])
         }
         if (quiz__answerText[currentQuestion - 2]) {
-            quiz__answerText[currentQuestion - 2].classList.add('noVis')
+            removeDOM(quiz__answerText[currentQuestion - 2])
         }
     }
 
