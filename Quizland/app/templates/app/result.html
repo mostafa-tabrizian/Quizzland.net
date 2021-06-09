@@ -1,0 +1,64 @@
+{% extends './layout.html' %}
+{% block content %}
+{% load templateTags %}
+
+<body>
+    <div class="result__container">
+        <div class="result__title flex flex-jc-c">
+           <h5>نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h5>
+        </div>
+        <div class="beforeAfterDecor flex flex-jc-c flex-ai-c">
+            <h1 class="result__subtitle tx-al-c"></h1>
+        </div>
+        <div class="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
+            <div class="result__img flex flex-jc-c flex-ai-c">
+                <img class="result__img20" src='/static/img/imGif_quizzes/{{quizDetail.GIF20}}' alt=''></img>
+                <img class="result__img40" src='/static/img/imGif_quizzes/{{quizDetail.GIF40}}' alt=''></img>
+                <img class="result__img60" src='/static/img/imGif_quizzes/{{quizDetail.GIF60}}' alt=''></img>
+                <img class="result__img80" src='/static/img/imGif_quizzes/{{quizDetail.GIF80}}' alt=''></img>
+                <img class="result__img100" src='/static/img/imGif_quizzes/{{quizDetail.GIF100}}' alt=''></img>
+            </div>
+            <div class="result__score"></div>
+            <div class="result__detail tx-al-r">
+                <h5>تعداد پاسخ های درست:‌ <span class="result__detail__correctTime"> 0 </span></h5>
+                <h5>تعداد پاسخ های غلط: <span class="result__detail__wrongTime"> 0 </span></h5>
+            </div>
+        </div>
+
+        <div class='wrapper-med flex flex-ai-c flex-jc-c'>
+            <div class="result__share space-sm tx-al-c">
+                <h5>دوستات رو به چالش بکش </br> ببین میتونن امتیازت رو بشکنن</h5>
+                <button class='result__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
+                <h6 class="result__share__message noVis">نتیجه و لینک کوئیز کپی شد</h6>
+            </div> 
+        </div>
+
+    </div>
+
+    <div class="result__clipboard"></div>
+
+    <h2 class='tx-al-c space-med beforeAfterDecor'>کوئیز های شبیه</h2>
+
+    <div class="result__suggester indexQuiz__category__inner flex flex-jc-c flex-ai-c wrapper-med">
+        {% for quiz in suggestingQuiz %}
+            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+            {% with quiz.title|replaceToHyphen as title %}
+            <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                {% with quiz.views|viewsFormat as views %}
+                <div class="indexQuiz__category__inner__views">{{views}}</div>
+                <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                {% endwith %}
+            </a>
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+
+    {{ backBtn | safe }}
+    
+</body>
+
+<script> const fanName = '{{ fanName }}' </script>
+ 
+{% endblock content %}

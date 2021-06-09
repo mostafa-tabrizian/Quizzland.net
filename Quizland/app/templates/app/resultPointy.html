@@ -1,0 +1,152 @@
+{% extends './layout.html' %}
+{% block content %}
+{% load templateTags %}
+
+<div class="resultQuizPointy__container">
+
+    <h3 class="resultQuizPointy__title flex flex-jc-c">نتیجه‌ تست&nbsp:&nbsp{{ fullTitle }}</h3>
+    <div class="resultQuizPointy wrapper-sm space-sm tx-al-c">
+            {% if quizDetail.result_upTo_1|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_1 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_1 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_1|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+                
+            {% elif quizDetail.result_upTo_2|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_2 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_2 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_2|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+                                    
+            {% elif quizDetail.result_upTo_3|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_3 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_3 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_3|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+
+            {% elif quizDetail.result_upTo_4|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_4 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_4 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_4|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+                
+            {% elif quizDetail.result_upTo_5|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_5 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_5 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_5|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+
+            {% elif quizDetail.result_upTo_6|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_6 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_6 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_6|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+
+            {% elif quizDetail.result_upTo_7|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_7 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_7 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_7|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+                
+            {% elif quizDetail.result_upTo_8|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_8 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_8 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_8|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+
+            {% elif quizDetail.result_upTo_9|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_9 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_9 }}
+                        </h1>
+                        <p class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_9|linebreaks }}
+                        </p>
+                    </div>
+                </body>
+
+            {% elif quizDetail.result_upTo_10|toInteger >= score %}
+                <body class="resultQuizPointy__bg" style="background-image:url('/static/img/Bg-pointyResult/{{ quizDetail.result_img_10 }}')">
+                    <div class="darkGls">
+                        <h1 class="resultQuizPointy__resultTitle">
+                            {{ quizDetail.result_title_10 }}
+                        </h1>
+                        <pre class="resultQuizPointy__txt tx-al-r space-sm">
+                            {{ quizDetail.result_text_10|linebreaks }}
+                        </pre>
+                    </div>
+                </body>
+
+            {% else %}
+                خطا در محاسبه نتیجه‌
+                لطفا با پشتیبانی تماس بگیرید
+            {% endif %}
+        </h1>
+    </div>
+    
+    <div class="resultQuizPointy wrapper-med flex-ai-c flex-jc-c">
+        <div class="result__share tx-al-c">
+            <h5>برای دوست و اشناهات بفرست </br> ببین شبیه تو در میان یا نه</h5>
+            <button class='resultQuizPointy__share__btn' data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
+            <h6 class="result__share__message noVis">نتیجه و لینک تست کپی شد</h6>
+        </div>
+    </div>
+
+</div>
+
+    <div class="result__clipboard"></div>
+
+    {{ backBtn | safe }}
+
+</body>
+ 
+{% endblock content %}

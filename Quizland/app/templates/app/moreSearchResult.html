@@ -1,0 +1,42 @@
+{% extends './layout.html' %}
+{% block content %}
+
+<div class="basicTwoColumn center tx-al-c">    
+    <h3>{{ userSearchInput }} &nbsp : &nbsp کوئیز های بیشتر با عبارت</h3>
+    
+    <div class="basicTwoColumn__container">
+
+        {% for quiz in quizzesByTitle %}
+            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.title|replaceToHyphen as title %}
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                        {% with quiz.views|viewsFormat as views %}
+                            <div class="indexQuiz__category__inner__views">{{ views }}</div>
+                        {% endwith %}
+                        <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                    </a>
+                {% endwith %}
+            {% endwith%}
+        {% endfor %}
+
+        {% for quiz in quizzesPointyByTitle %}
+            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.title|replaceToHyphen as title %}
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                        {% with quiz.views|viewsFormat as views %}
+                            <div class="indexQuiz__category__inner__views">{{ views }}</div>
+                        {% endwith %}
+                        <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                    </a>
+                {% endwith %}
+            {% endwith%}
+        {% endfor %}
+    </div>
+
+</div>
+
+<button type="button" class="backBtn">بازگشت</button>
+
+{% endblock content %}

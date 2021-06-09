@@ -1,0 +1,333 @@
+{% extends './layout.html' %}
+{% block content %}
+{% load templateTags %}
+
+<body>
+    <div class="landingPage">
+        <div class="bg"></div>
+        <div class="wrapper-med">
+            <div class="hero felx felx-jc-c flex-ai-c">
+                <div class="hero-inner tx-al-c lightGls">
+                    <h1>اینجا کوئیزلندِ</h1>
+                    <p class="tx-al-c">جایی که میتونی خودت رو به عنوان به فن واقعی خودترو به بقیه ثابت کنی <br/> 😎 پس اگر آماده‌ای میدان نبردت رو انتخاب کن و وارد شو</p>
+                    <button class=' flex btn__grad hero__btn center'><a href="#category">بزن بریم</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="category__title tx-al-r wrapper-med">کتگوری</h2>
+
+    <div class="category flex flex-jc-c flex-ai-c flex-jc-sb" id="category">
+
+        <a href="/category/movieSeries/0/newest/16">
+                <img src="static/img/base/category-movieSeries.jpg" alt="کوئیز کتگوری دسته ی فیلم و سریال مربوط به سوالات در مورد کارکتر شخصیت فیلم ها یا داستان آن">
+                <p class='tx-al-c'>🎬 فیلم و سریال</p>
+        </a>
+
+        <a href="/category/celebrities/0/newest/16">
+            <img src="static/img/base/category-celebrities.jpg" alt="کوئیز های کتگوری دسته ی سلبریتی مربوط به افراد مشهور مانند بازیگر و خواننده که مربوط به سوالات در مورد اطلاعات شخصی آنها یا فعالیت آنهاست">
+            <p class='tx-al-c'>✨ سلبریتی</p>
+        </a>
+
+        <a href="/category/gaming/0/newest/16">
+            <img src="static/img/base/category-gaming.jpg" alt="کوئیز های کتگوری دسته ی گیمینگ مخصوص گیمرها که سوالات مربوط به سوالات کارکتر شخصیت و داستان گیم بازی هستش">
+            <p class='tx-al-c'>🎮 گیمینگ</p>
+        </a>
+
+        <a href="/category/physiologies/0/newest/16">
+            <img src="static/img/base/category-physiologies.jpg" alt="کوئیز های کتگوری دسته ی روانشناسی برای افرادی که علاقه مند به روانشناسی یا خودشناسی هستند از منابع معتبر خارجی">
+            <p class='tx-al-c'>🧠 روانشناسی</p>
+        </a>
+
+    </div>
+
+    <div class="indexQuiz">
+        <div class="indexQuiz__category space-med">
+            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
+                <a class="btn" href="/newest/celebrities/0">...بیشتر</a>
+                <h2>سلبریتی</h2>
+            </div>
+            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+                {% for quiz in NewestCelebrityQuizSection %}
+                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                    {% with quiz.title|replaceToHyphen as title %}
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                        {% with quiz.views|viewsFormat as views %}
+                            <div class="indexQuiz__category__inner__views">{{views}}</div>
+                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                        {% endwith %}
+                    </a>
+                    {% endwith %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="indexQuiz__category space-med">
+            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
+                <a class="btn" href="/newest/movieSeries/0">...بیشتر</a>
+                <h2>فیلم و سریال</h2>
+            </div>
+            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+                {% for quiz in NewestMovieSeriesQuizSection %}
+                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                    {% with quiz.title|replaceToHyphen as title %}
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                        {% with quiz.views|viewsFormat as views %}
+                            <div class="indexQuiz__category__inner__views">{{views}}</div>
+                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                        {% endwith %}
+                    </a>
+                    {% endwith %}
+                    {% endwith %}
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="indexQuiz__category space-med">
+            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
+                <a class="btn" href="/newest/physiologies/0">...بیشتر</a>
+                <h2>روانشناسی</h2>
+            </div>
+            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+                {% for quiz in NewestPhysiologiesQuizSection %}
+                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                    {% with quiz.title|replaceToHyphen as title %}
+                    <a href="/quizPointy/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                        {% with quiz.views|viewsFormat as views %}
+                            <div class="indexQuiz__category__inner__views">{{views}}</div>
+                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                        {% endwith %}
+                    </a>
+                    {% endwith %}
+                    {% endwith %}
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="indexQuiz__category space-med">
+            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
+                <a class="btn" href="/newest/gaming/0">...بیشتر</a>
+                <h2>گیمینگ</h2>
+            </div>
+            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+                {% for quiz in NewestGamingQuizSection %}
+                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                    {% with quiz.title|replaceToHyphen as title %}
+                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                        {% with quiz.views|viewsFormat as views %}
+                            <div class="indexQuiz__category__inner__views">{{views}}</div>
+                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                        {% endwith %}
+                    </a>
+                    {% endwith %}
+                    {% endwith %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="sort__controller flex flex-jc-c" id="sort">
+        <ul>
+            <button class="sort__controller__btn" type="button">گیمینگ 🎮</button>
+            <button class="sort__controller__btn" type="button">روانشناسی 🧠</button>
+            <button class="sort__controller__btn" type="button">فیلم و سریال 🎬</button>
+            <button class="sort__controller__btn" type="button">سلبریتی ✨</button>
+            <button class="sort__controller__btn sort__controller__selected" type="button">همه</button>
+        </ul>
+        <h5 class="pointerOff">برای تغییر کلیک کنید</h5>
+    </div>
+
+    <div class="sort flex flex-jc-c space-l">
+
+        <div class="sort__all fade-in">
+            <div class="sort__container flex flex-jc-c">
+                <div class="sort-monthlyViews">
+                    <h2 class="tx-al-c">محبوب ترین کوئیز های این ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in bestestQuizzesForThisMonth %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}    
+                            {% endwith %}    
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/0"> ..بیشتر</a>
+                </div>
+                <div class="sort-views">
+                    <h2 class="tx-al-c">محبوب ترین کوئیز ها</h2>
+                    <ul class="sort__style">
+                        {% for quiz in bestestQuizzes %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/0"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="sort__celebrities fade-out">
+            <div class="sort__container flex flex-jc-c">
+                <div class="sort-monthlyViews">
+                    <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز های این ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in MonthlyBestestCelebrityQuizSection %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/celebrities/0"> ..بیشتر</a>
+                </div>
+                <div class="sort-views">
+                    <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestCelebrityQuizSection %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/celebrities/0"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sort__movieAndSeries fade-out">
+            <div class="sort__container flex flex-jc-c">
+                <div class="sort-monthlyViews">
+                    <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز های این ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in MonthlyBestestMovieSeriesQuizSection %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/movieSeries/0"> ..بیشتر</a>
+                </div>
+                <div class="sort-views">
+                    <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestMovieSeriesQuizSection %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/movieSeries/0"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sort__gaming fade-out">
+            <div class="sort__container flex flex-jc-c">
+                <div>
+                    <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز های این ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in MonthlyBestestGamingQuizSection %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/gaming/0"> ..بیشتر</a>
+                </div>
+                <div>
+                    <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز</h2>
+                    <ul class="sort__style">
+                        {% for quiz in MonthlyBestestGamingQuizSection %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/gaming/0"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sort__physiologies fade-out">
+            <div class="sort__container flex flex-jc-c">
+                <div class="sort-monthlyViews">
+                    <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز های این ماه</h2>
+                    <ul class="sort__style">
+                        {% for quiz in MonthlyBestestPhysiologiesQuizSection %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quizPointy/physiologies/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/physiologies/0"> ..بیشتر</a>
+                </div>
+                <div class="sort-views">
+                    <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز</h2>
+                    <ul class="sort__style">
+                        {% for quiz in BestestPhysiologiesQuizSection %}
+                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.title|replaceToHyphen as title %}
+                                <li><a href="/quizPointy/physiologies/{{innerCategory}}/{{title}}">
+                                    {{ quiz.title }}
+                                </a></li>
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                    <a class="sort__more" href="/bestest/physiologies/0"> ..بیشتر</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- <adverts class="adverts adverts__bottomIndex">
+        this is special adverts for landPage
+    </adverts> -->
+</body>
+
+{% endblock content %}

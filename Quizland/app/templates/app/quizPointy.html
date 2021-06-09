@@ -1,0 +1,96 @@
+{% extends './layout.html' %}
+{% block content %}
+{% load templateTags %}
+
+<!-- <adverts class="adverts adverts__left hideForMobile">
+</adverts>
+
+<adverts class="adverts adverts__right hideForMobile">
+</adverts> -->
+
+<div class="countingResult loadingScreen fade-out">
+    ___ در حال محاسبه نتیجه کوئیز___
+</div>
+<body style="background-image: url('/static/img/Bg-quizzes/{{ quizDetail.background }}');">
+    
+    <!-- <div class="adverts__top">
+    </div> -->
+    
+    <div class="quiz__head tx-al-c" id="quiz__top">
+        <h1>{{ quizDetail.title }}</h1>
+        <div class="flex flex-jc-c flex-ai-c">
+            <h5>تعداد سوال ها: ?</h5>
+            <h5>{{ quizDetail.publish|makeTheDatePublishReadyToShow }}</h5>
+        </div>
+
+        <div class="quiz__autoQuestionChangerSwitch center flex flex-jc-c flex-ai-c">
+            <h5>تغییر خودکار</h5>
+            <div class="quiz__autoQuestionChangerSwitch__btn">
+                <div class="quiz__autoQuestionChangerSwitch__innerBtn"></div>
+            </div>
+        </div>
+        
+        <div class="quiz__questionChanger__container center">
+            <button class="quiz__questionChanger quiz__questionChanger__next fade-in"></button>
+            <button class="quiz__questionChanger quiz__questionChanger__last fade-in"></button>
+        </div>
+    </div>
+
+    <div class="quiz__questionCounter flex flex-jc-c flex-ai-c">
+        <div class="quiz__questionCounter__totalAnswered">?</div>
+        &nbspسوال شماره
+    </div>
+
+    <div class="quiz__questions tx-al-c" tag="pointy">
+
+        <div class="quiz__hider">
+            {% for questionDetail in quiz_Question %}
+
+            <div class="quiz__container darkGls">
+                <p class='quiz__question'>{{ questionDetail.question }}</p>
+                <div class="flex flex-jc-c">
+                    <form class='quiz__options quiz__options__text' action="">
+                        {% if questionDetail.option_Value_1 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-1" data = "{{ questionDetail.option_Point_1 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-1"> {{ questionDetail.option_Value_1 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_2 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-2" data = "{{ questionDetail.option_Point_2 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-2">{{ questionDetail.option_Value_2 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_3 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-3" data = "{{ questionDetail.option_Point_3 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-3">{{ questionDetail.option_Value_3 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_4 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-4" data = "{{ questionDetail.option_Point_4 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-4">{{ questionDetail.option_Value_4 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_5 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-5" data = "{{ questionDetail.option_Point_5 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-5"> {{ questionDetail.option_Value_5 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_6 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-6" data = "{{ questionDetail.option_Point_6 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-6"> {{ questionDetail.option_Value_6 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_7 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-7" data = "{{ questionDetail.option_Point_7 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-7">{{ questionDetail.option_Value_7 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_8 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-8" data = "{{ questionDetail.option_Point_8 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-8">{{ questionDetail.option_Value_8 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_9 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-9" data = "{{ questionDetail.option_Point_9 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-9">{{ questionDetail.option_Value_9 }}</label>
+                        {% endif %}
+                        {% if questionDetail.option_Value_10 != None %}
+                            <input type="radio" name="answer" id="{{ questionDetail.id }}-10" data = "{{ questionDetail.option_Point_10 }}"><label class="quiz__options__textLabel" for="{{ questionDetail.id }}-10">{{ questionDetail.option_Value_10 }}</label>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+
+            {% endfor %} 
+        </div>
+    </div>
+
+    <!-- <div class="adverts__bottom">
+    </div> -->
+
+</body>
+
+{% endblock content %}

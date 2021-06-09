@@ -1,183 +1,0 @@
-<!DOCTYPE html>
-<html lang="Fa">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" crossorigin="anonymous" href="/static/font/Harmattan-Regular.ttf" as="font"/>
-    <link rel="preload" crossorigin="anonymous" href="/static/font/Changa-ExtraLight.ttf" as="font"/>
-    <link rel="preload" crossorigin="anonymous" href="/static/font/Vermin-Vibes-2-Soft.ttf" as="font"/>
-    <link rel="icon" href="/static/img/base/favicon.png" sizes="32x32" loading='lazy' />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}"/>
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/minified.css') }}"></link> -->
-    <title>{{ headTitle }}</title>
-</head>
-
-<header class="header">
-    <nav class="flex flex-ai-c flex-jc-sb">
-
-        <!-- Search -->
-        <div class="flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb hideForDesktop" href="/" class="">
-                <img src="/static/img/base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
-            </a>
-            <form class="header__search hideForMobile {{colorOfHeader}} flex" action="/search" method="post">
-                <input class='header__searchSubmit fade-out flex flex-ai-c' type="submit" value="">
-                <input class='header__searchInput tx-al-r' type="search" name='userSearchInput' placeholder="...جستجو" pattern=".{3,}" required title="عبارت حداقل باید ۳ حرف باشد">
-            </form>
-
-            <form class="header__search hideForDesktop {{colorOfHeader}} flex" action="/search" method="post">
-                <input class='header__searchInput__m header__searchInput fade-out tx-al-r' type="search" name='userSearchInput' placeholder="...جستجو" pattern=".{3,}" required title="عبارت حداقل باید ۳ حرف باشد">
-                <input class='header__searchShow header__searchSubmit fade-in flex flex-ai-c' type="button" value="">
-            </form>
-        </div>
-
-        <!-- Links -->
-        <div class="header__links {{colorOfHeader}} hideForMobile hoverAnimation flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb" href="/" class="header__logo">
-                <img src="/static/img/base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
-            </a>
-            <a class="header__categories__btn">کتگوری‌ ها</a>
-            <a class="header__quizzes__btn">کویز ها</a>
-            <a href="/guide">راهنما</a>
-            <a href="/contact">تماس با ما</a>
-
-            <!--Night Mode-->
-            <div class="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
-                <button class="nightMode" type="button"></button>
-            </div>
-        </div>
-
-        <ul class="header__categories {{colorOfHeader}} subHeader pointerOff tx-al-r">
-            <li><a href="/category/movieSeries/0/newest/16">🎬 فیلم و سریال</a></li>
-            <li><a href="/category/gaming/0/newest/16">🎮 گیمینگ</a></li>
-            <li><a href="/category/celebrities/0/newest/16">✨ سلبریتی</a></li>
-            <li><a href="/category/physiologies/0/newest/16">🧠 روانشناسی</a></li>
-        </ul>
-        <ul class="header__quizzes {{colorOfHeader}} subHeader pointerOff tx-al-r">
-            <li><a href="/newest/0">⏳ جدیدترین ها</a></li>
-            <li><a href="/bestest/0">👑 بهترین ها</a></li>
-            <li><a href="/monthlyBestest/0">👑 بهترین های ماه</a></li>
-            <li><a href="/#sort">📚 مرتب شده</a></li>
-        </ul>
-
-        <!-- Menu -->
-        <button type="button" class="header__menu__openBtn {{colorOfHeader}} hideForDesktop">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="header__menu slideMenu-hide tx-al-r hide-for-desktop">
-            <button class="header__menu__closeBtn"></button>
-            <div class="header__menu__inner grid grid-jc-c">
-                <div class="header__menu__inner__category">
-                    <h4><a href="/#category">کتگوری ها</a></h4>
-                    <ul>
-                        <li><a href="/category/movieSeries/0/newest/16">🎬 فیلم و سریال</a></li>
-                        <li><a href="/category/celebrities/0/newest/16">✨ سلبریتی</a></li>
-                        <li><a href="/category/gaming/0/newest/16">🎮 گیمینگ</a></li>
-                        <li><a href="/category/physiologies/0/newest/16">🧠 روانشناسی</a></li>
-                    </ul>
-                </div>
-                <div class="header__menu__inner__nav">
-                    <h4>کویز ها</h4>
-                    <ul class="header__menu__inner__quizzes tx-al-r">
-                        <li><a href="/newest/0">جدیدترین ها</a></li>
-                        <li><a href="/bestest/0">بهترین ها</a></li>
-                        <li><a href="/monthlyBestest/0">بهترین های ماه</a></li>
-                        <li><a href="/#sort">مرتب شده</a></li>
-                    </ul>
-                </div>
-                <div class="header__menu__inner__other">
-                    <ul>
-                        <li><a href="/guide">راهنما</a></li>
-                        <li><a href="/contact">تماس با ما</a></li>
-
-                        <!--Night Mode-->
-                        <div class="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
-                            <button class="nightMode" type="button"></button>
-                        </div>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-    </nav>
-
-    <div class="loadingScreen"></div>
-</header>
-
-
-{% block content %} {% endblock content %}
-
-<footer class="tx-al-c">
-    <p class="tx-al-c wrapper-sm"> اگه هیجان داری کوئیز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا تو 8 ثانیه اطلاعاتت رو وارد کنی که سریعتر از هر کسی خبردار بشی </p>
-    <button class="newsletter__show" type="button">🖊️ ثبت نام در خبرنامه</button>
-
-    <div class="newsletter__blurBackground">
-        <form class="newsletter fade-out" action="/newsletter" method="post">
-            <button class="newsletter__closeBtn"></button>
-            <p class="tx-al-c">ایمیلت رو وارد کن و کتگوری مورد علاقه‌ات رو انتخاب کن</p>
-            <button class='newsletter__submit' type="button" method="POST">ثبت نام </button>
-            <input class="input" name="userEmail" type="email" placeholder='  ایمیل ...' required>
-            <input class="input input__userName" name="userName"  type="text" placeholder='  نام ...' minlength="3" maxlength = "15" required>
-            <textarea class="newsletter__categoryOptions__selectedByUser" name='chosenCategory'></textarea>
-            <div class="newsletter__categoryOptions flex flex-ai-c">
-                
-                <label for="physiologies">
-                    <input type="checkbox" name="physiologies" id="physiologies">
-                    روانشناسی
-                </label>
-                
-                <label for="movieSeries">
-                    <input type="checkbox" name="movieSeries " id="movieSeries">
-                    فیلم و سریال
-                </label>
-                
-                <label for="gaming">
-                    <input type="checkbox" name="gaming " id="gaming ">
-                    گیمینگ
-                </label>
-        
-                <label for="celebrities"><input type="checkbox" name="celebrities " id="celebrities">
-                    سلبریتی
-                </label>
-        
-            </div>
-            <h5 class="newsletter__message noVis">لطفا حداقل یکی از کتگوری ها را انتخاب کنید</h5>
-        </form>
-    </div>
-
-    <div>
-        <ul class="footer__navbar flex flex-jc-c flex-ai-c">
-            <li><a href="/">صفحه اصلی</a></li>
-            <li><a href="/#category">کتگوری ها</a></li>
-            <li><a href="/newest/0">کوئیز ها</a></li>
-            <li><a href="/contact">تماس با ما</a></li>
-        </ul>
-        <ul class="footer__detail flex flex-jc-c flex-ai-c">
-            <li><a href="/adverts">تبلیغات</a></li>
-            <li><a href="/privacy-policy">حریم خصوصی</a></li>
-            <li><a href="/guide">راهنما</a></li>
-            <li><a href="/support">حمایت</a></li>
-        </ul>
-    </div>
-    <div class="footer__copyRight">
-        <h5>
-            1400-2021 © تمام حقوق به کوئیزلند تعلق دارد
-            <br/>
-            <a href="#">Mt-Code</a> : ساخته شده توسط 
-        </h5>
-    </div>
-
-    <script src="{{ url_for('static', filename = 'js/clipboard.min.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/ScrollTrigger.min.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/elements.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/gsap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/quiz.js') }}"></script>
-    <!-- <script src="{{ url_for('static', filename = 'js/script-min.js') }}"></script> -->
-</footer>
-
-</html>
