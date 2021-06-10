@@ -47,7 +47,6 @@ def search(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             searchInput = form.cleaned_data['searchInput']
-            print(searchInput)
             template = loader.get_template('app/search.html')
             context = {
                 'searchForm': SearchForm(),
@@ -60,6 +59,20 @@ def search(request):
             }
 
             return HttpResponse(template.render(context))
+
+def searchMore(request, target):
+    template = loader.get_template('app/moreSearchResult.html')
+    context = {
+        'searchForm': SearchForm(),
+        'newsletterForm': NewsletterForm(),
+        'headTitle': f'QuizLand | {target} جستجو عبارت ',
+        'userSearchInput': target,
+        'innerCategoriesByTitle': innerCategoriesByTitle(target)[:2],
+        'quizzesByTitle': quizzesByTitle(target)[:28],
+        'quizzesPointyByTitle': quizzesPointyByTitle(target)[:28],
+    }
+
+    return HttpResponse(template.render(context))
 
 def category(request, categoryArg, page, sortType, numberOfResult ):
     if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':

@@ -3,7 +3,7 @@ from django import forms
 class SearchForm(forms.Form):
     searchInput = forms.CharField(
         max_length=50, min_length=3,
-        required=True, label="",
+        label="", required=True,
         widget=forms.TextInput(
             attrs={
                 'class': 'header__searchInput tx-al-r',

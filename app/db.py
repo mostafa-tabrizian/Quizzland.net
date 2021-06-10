@@ -225,6 +225,9 @@ def quizQuestionByTitle(title):
         questions = Quiz_Questions.objects.filter(title=title).all()
     elif Quiz_Pointy_Questions.objects.filter(title=title).all():
         questions = Quiz_Pointy_Questions.objects.filter(title=title).all()
+    else:
+        print('error in quizQuiestionByTitle')
+        return ' '
     
     return questions
 

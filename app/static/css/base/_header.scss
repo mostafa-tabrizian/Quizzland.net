@@ -110,6 +110,10 @@
         width: 1.5rem;
         height: 2rem;
         border: 0;
+   
+        @include breakpoints-down(medium) {
+            transform: translate(1.2rem);
+        }
     }
 
     &__searchInput, &__searchInput__m {
@@ -124,6 +128,10 @@
         width: 75%;
         transition: box-shadow 0.3s ease-in-out;
         z-index: 1;
+
+        @include breakpoints-down(medium) {
+            transform: translate(-1rem);
+        }
 
         &::placeholder {
             color: black
@@ -208,14 +216,17 @@
         input {
             color: $white !important;
         }
+        
         .input {
             color: $white !important;
         }
+
         .header__searchInput {
             &::placeholder {
                 color: white;
             }
         }
+
         .header__searchSubmit {
             background: url('/static/img/base/srch-white.svg') no-repeat center center !important;
         }   

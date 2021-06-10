@@ -20,17 +20,12 @@
 
         <!-- Search -->
         <div class="flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb hideForDesktop" href="/" class="">
+            <a class="header__logo flex flex-jc-sb hideForDesktop" href="/">
                 <img src="/static/img/base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
             </a>
-            <form class="header__search hideForMobile {{colorOfHeader}} flex" action='/search' method="post">
-                <input class='header__searchSubmit fade-out flex flex-ai-c' type="submit" value="">
+            <form class="header__search {{colorOfHeader}} flex" action='/search' method="post">
+                <button class='header__searchSubmit fade-out flex flex-ai-c' type="submit"></button>
                 {{ searchForm }}
-            </form>
-
-            <form class="header__search hideForDesktop {{colorOfHeader}} flex" action="/search" method="post">
-                <input class='header__searchInput__m header__searchInput fade-out tx-al-r' type="search" name='userSearchInput' placeholder="...جستجو" pattern=".{3,}" required title="عبارت حداقل باید ۳ حرف باشد">
-                <input class='header__searchShow header__searchSubmit fade-in flex flex-ai-c' type="button" value="">
             </form>
         </div>
 

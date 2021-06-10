@@ -89,6 +89,7 @@
 
         &__inner {
             flex-wrap: wrap;
+            margin-bottom: 2rem;
 
             a {
                 width: 14rem;
@@ -97,8 +98,8 @@
                 position: relative;
                 border: 0.5px solid #6f6f6f;
                 transition: all .2s ease-in-out;
-                margin-bottom: 6rem;
-                margin-right: 1.125rem;
+                margin-bottom: 7rem;
+                margin-right: 2rem;
                 border-radius: 12px 12px 0 0;
                 
                 @include breakpoints-down(medium) {

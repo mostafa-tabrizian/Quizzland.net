@@ -14,7 +14,7 @@ const header__menu = document.querySelector('.header__menu')
 const header__menu__openBtn = document.querySelector('.header__menu__openBtn')
 const header__menu__closeBtn = document.querySelector('.header__menu__closeBtn')
 const header__searchInput = document.querySelector('.header__searchInput')
-const header__searchInput__m = document.querySelector('.header__searchInput__m')
+const header__searchInput__m = document.querySelector('.header__searchInput__')
 const header__searchSubmit = document.querySelector('.header__searchSubmit')
 const header__searchShow = document.querySelector('.header__searchShow')
 

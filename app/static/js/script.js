@@ -73,18 +73,6 @@ header__searchInput.addEventListener('blur', () => {
 })
 
 //----------------------------------------------------------
-// show searchBar for mobile
-header__searchShow.addEventListener('click', () => {
-    if (header__searchInput__m.classList.contains('fade-out')) {
-        fadeIn(header__searchInput__m)
-        header__searchInput__m.style.transform = 'translate(.5rem, 2.5rem)';
-    } else {
-        header__searchInput__m.style.transform = 'translate(.5rem, 0)';
-        fadeOut(header__searchInput__m)
-    }
-})
-
-//----------------------------------------------------------
 // sort changer
 findTheSortByBtnName = {
     'گیمینگ 🎮': sort__gaming,
@@ -338,10 +326,10 @@ if (searchResult) {
 
     const countSearchResult = searchResult__quizzes__item.length
 
-    if (countSearchResult && countSearchResult <= 8) {
+    if (countSearchResult && countSearchResult <= 1) {
         removeDOM(searchResult__quizzes__item__notFound)
         removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
-    } else if (countSearchResult && countSearchResult > 8) {
+    } else if (countSearchResult && countSearchResult > 1) {
         removeDOM(searchResult__quizzes__item__notFound)
     } else {
         removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
