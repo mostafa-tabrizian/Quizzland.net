@@ -77,10 +77,14 @@
                 {% endwith %}
                 
                 <div class="quiz__answerImGif noVis space-sm">
-                    <img src="/static/img/imGif_quizzes/{{questionDetail.answer_imGif}}" alt="quiz-question-gif">
+                    {% if questionDetail.answer_imGif %}
+                        <img src="/static/img/imGif_quizzes/{{questionDetail.answer_imGif}}" alt="quiz-question-gif">
+                    {% endif %}
                 </div>
                 <div class="quiz__answerText space-sm noVis">
-                    {{questionDetail.answer_text}}
+                    {% if questionDetail.answer_text %}
+                        {{questionDetail.answer_text}}
+                    {% endif %}
                 </div>
             </div>
 
