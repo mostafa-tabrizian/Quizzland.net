@@ -18,7 +18,6 @@ const removeDOM = (element) => {
 }
 
 //----------------------------------------------------------
-
 // Loading screen
 window.onload = (event) => {
     fadeOut(loadingScreen)
