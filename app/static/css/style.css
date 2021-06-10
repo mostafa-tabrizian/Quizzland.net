@@ -1,22 +1,22 @@
 @charset "UTF-8";
 @font-face {
   font-family: "myHarmattan";
-  src: url("/static/font/Harmattan-Regular.ttf");
+  src: url("/static/font/Harmattan-Regular.woff2") format("woff2"), url("/static/font/Harmattan-Regular.woff") format("woff"), url("/static/font/Harmattan-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "myChanga";
-  src: url("/static/font/Changa-ExtraLight.ttf");
+  src: url("/static/font/Changa-ExtraLight.woff2") format("woff2"), url("/static/font/Changa-ExtraLight.woff") format("woff"), url("/static/font/Changa-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "changeForNotChrome";
-  src: url("/static/font/Changa-Light.ttf");
+  src: url("/static/font/Changa-Light.woff2") format("woff2"), url("/static/font/Changa-Light.woff") format("woff"), url("/static/font/Changa-Light.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "vermin-vibes-2-soft";
-  src: url("/static/font/Vermin-Vibes-2-Soft.ttf");
+  font-family: "Vermin-Vibes-2-Soft";
+  src: url("/static/font/Vermin-Vibes-2-Soft.woff2") format("woff2"), url("/static/font/Vermin-Vibes-2-Soft.woff") format("woff"), url("/static/font/Vermin-Vibes-2-Soft.ttf") format("truetype");
 }
 
 .wrapper-sm {
@@ -2068,7 +2068,7 @@ body {
 .quiz__options__textLabel::before {
   content: '';
   height: .0625rem;
-  font-family: vermin-vibes-2-soft, myChanga, sans-serif;
+  font-family: Vermin-Vibes-2-Soft, myChanga, sans-serif;
   width: 1.25rem;
   border-radius: 50%;
   margin: 0;
