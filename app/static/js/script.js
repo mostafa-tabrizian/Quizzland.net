@@ -65,7 +65,6 @@ header__menu__closeBtn.addEventListener('click', () => {
 
 //----------------------------------------------------------
 // show the submit search btn when focus
-
 header__searchInput.addEventListener('click', () => {
     fadeIn(header__searchSubmit)
 })
@@ -218,7 +217,23 @@ if (tools__sort__btn) {
 } else {log('no tools')}
 
 //----------------------------------------------------------
+// submit the newsletter of user
+let chosenCategory = []
 
+newsletter__categoryOptions__input.forEach(each => {
+    log(chosenCategory)
+    each.addEventListener('click', () => {
+        inputOfTheCategory = each.checked
+        if (inputOfTheCategory == true) { //checked
+            chosenCategory.push(each.id)
+        } else {
+            indexOfChosenToRemove = chosenCategory.indexOf(each.id)
+            chosenCategory.splice(indexOfChosenToRemove, 1)
+        }
+        newsletter__categoryOptions__selectedByUser.innerHTML = chosenCategory
+    })
+})
+//----------------------------------------------------------
 // newsletter pop up
 newsletter__show.addEventListener('click', () => {
     fadeIn(newsletter)
@@ -231,32 +246,13 @@ newsletter__closeBtn.addEventListener('click', () => {
     newsletter__blurBackground.classList.remove('newsletter__blurBackground__show')
 })
 newsletter__submit.addEventListener('click', () => {
-    const numberOfCheckedOption = newsletter__categoryOptions__selectedByUser.innerHTML.split(',').length
-    if (numberOfCheckedOption == 1) {
-        newsletter__message.classList.remove('noVis')
-    } else {
+    if (chosenCategory.length > 0) {
         newsletter__submit.setAttribute('type', 'submit')
+    } else {
+        newsletter__message.classList.remove('noVis')
     }
 })
 
-//----------------------------------------------------------
-
-// submit the newsletter of user
-let chosenCategory = [,]
-
-newsletter__categoryOptions__input.forEach(each => {
-    each.addEventListener('click', () => {
-        inputOfTheCategory = each.checked
-        if (inputOfTheCategory == true) { //checked
-            chosenCategory.push(each.id)
-        } else {
-            indexOfChosenToRemove = chosenCategory.indexOf(each.id)
-            chosenCategory.splice(indexOfChosenToRemove, 1)
-        }
-
-        newsletter__categoryOptions__selectedByUser.innerHTML = chosenCategory
-    })
-})
 
 //----------------------------------------------------------
 
@@ -334,23 +330,23 @@ if (pageTravel__arwNext) {
 } else { log ('no page travel')}
 
 //----------------------------------------------------------
-
-// searchResult page
-if (searchResult__category__item || searchResult__category__item__notFound) {
-    if (!(searchResult__category__item)) {
-        searchResult__category__item__notFound.innerHTML = 'هیچ کتگوری پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'
+// search page
+if (searchResult) {
+    if (searchResult__category__item) {
+        removeDOM(searchResult__category__item__notFound)
     }
 
-    const countSearchResult = searchResult__quizzes.childElementCount
+    const countSearchResult = searchResult__quizzes__item.length
 
-    if (countSearchResult == 3) { // empty
-        searchResult__quizzes__item__notFound.innerHTML = 'هیچ کوئیزی پیدا نشد <br> لطفا از عبارتی دیگر یا زبان دیگر دوباره تلاش کنید'
+    if (countSearchResult && countSearchResult <= 8) {
+        removeDOM(searchResult__quizzes__item__notFound)
+        removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
+    } else if (countSearchResult && countSearchResult > 8) {
+        removeDOM(searchResult__quizzes__item__notFound)
+    } else {
         removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
     }
 
-    if (countSearchResult == 3 || countSearchResult <= 11) {
-        removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
-    }
 } else {log('no search result page')}
 
 //----------------------------------------------------------

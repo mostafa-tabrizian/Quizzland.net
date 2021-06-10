@@ -8,7 +8,9 @@
 
     <div class="searchResult__category">
         <h3 class="tx-al-c">کتگوری‌ها</h3>
-        <h4 class="searchResult__category__item__notFound tx-al-c"></h4>
+        <h4 class="searchResult__category__item__notFound tx-al-c">
+            هیچ کتگوریی پیدا نشد <br> لطفا از عبارتی دیگر یا با زبان دیگری دوباره امتحان کنید
+        </h4>
         <div class="searchResult__category__container flex flex-jc-c">
             {% for innerCategory in innerCategoriesByTitle %}
                 <div class="searchResult__category__item">
@@ -27,7 +29,9 @@
     
     <div class="searchResult__quizzes">
         <h3 class="tx-al-c">کوئیز‌ها</h3>
-        <h4 class="searchResult__quizzes__item__notFound tx-al-c"></h4>
+        <h4 class="searchResult__quizzes__item__notFound tx-al-c">
+            هیچ کوئیزی پیدا نشد <br> لطفا از عبارتی دیگر یا با زبان دیگری دوباره امتحان کنید
+        </h4>
         <ul>
             {% for quiz in quizzesByTitle %}
                 <li>

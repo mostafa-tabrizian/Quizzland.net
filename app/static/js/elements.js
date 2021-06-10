@@ -61,10 +61,10 @@ const pageTravel__pages__last = document.querySelector('.pageTravel__pages__last
 const finalPageDOM = document.querySelector('.finalPage')
 const finalPageNumberDOM = document.querySelector('.finalPage > a')
 
+const searchResult = document.querySelector('.searchResult')
 const searchResult__category__item = document.querySelector('.searchResult__category__item')
 const searchResult__category__item__notFound = document.querySelector('.searchResult__category__item__notFound')
-const searchResult__quizzes = document.querySelector('.searchResult__quizzes')
-const searchResult__quizzes__item = document.querySelector('.searchResult__quizzes__item')
+const searchResult__quizzes__item = document.querySelectorAll('.searchResult__quizzes__item')
 const searchResult__quizzes__item__notFound = document.querySelector('.searchResult__quizzes__item__notFound')
 const searchResult__quizzes__seeMore = document.querySelector('.searchResult__quizzes__seeMore')
 

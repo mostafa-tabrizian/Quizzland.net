@@ -48,7 +48,7 @@ def search(request):
         if form.is_valid():
             searchInput = form.cleaned_data['searchInput']
             print(searchInput)
-            template = loader.get_template('app/searchResult.html')
+            template = loader.get_template('app/search.html')
             context = {
                 'searchForm': SearchForm(),
                 'newsletterForm': NewsletterForm(),
@@ -62,26 +62,6 @@ def search(request):
             return HttpResponse(template.render(context))
 
 def category(request, categoryArg, page, sortType, numberOfResult ):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            searchInput = form.cleaned_data['searchInput']
-            print(searchInput)
-            template = loader.get_template('app/searchResult.html')
-            context = {
-                'searchForm': SearchForm(),
-                'newsletterForm': NewsletterForm(),
-                'headTitle': f'QuizLand | {searchInput} جستجو عبارت ',
-                'userSearchInput': searchInput,
-                'userSearchInputInCategoriesDb_eng':    innerCategoriesByTitle(searchInput)[:2],
-                'userSearchInputInQuizzesDb_far':       quizzesByTitle(searchInput)[:8],
-                'userSearchInputInQuizzesDb_eng':       quizzesByPublishWithInnerCategory(searchInput)[:8],
-                'userSearchInputInQuizzesPointyDb_far': quizzesPointyWithTitle(searchInput)[:8],
-                'userSearchInputInQuizzesPointyDb_eng': quizzesPointyByPublishWithInnerCategory(searchInput)[:8],
-            }
-
-        return HttpResponse(template.render(context))
-
     if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
         howManyElementToShow = int(numberOfResult)
         fTPage = frToPage(page, howManyElementToShow)
