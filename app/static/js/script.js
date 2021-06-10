@@ -450,9 +450,9 @@ if (nightMode) {
 
 if (nightMode) {
     checkTheUrlSoWeCheckIfShouldRemoveTheNightMode = splitUrl()
-    
+    log(checkTheUrlSoWeCheckIfShouldRemoveTheNightMode)
     if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode.length == 9 || // innerCategory
-        checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3].includes('quiz'))
+        checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3].includes('quiz')) 
         {
             try {
                 nightMode__container.forEach(each => {
@@ -466,7 +466,8 @@ if (nightMode) {
                 log('no nightMode')
             }
         } 
-    else if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == ('result_2'))
+    else if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'result_2' ||
+        checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'resultPointy')
         {
             try {
                 nightMode__container.forEach(each => {

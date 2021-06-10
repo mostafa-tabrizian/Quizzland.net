@@ -163,6 +163,8 @@ def resultPointy(request, title, score):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     template = loader.get_template('app/resultPointy.html')
     context = {
+        'searchForm': SearchForm(),
+        'newsletterForm': NewsletterForm(),
         'fullTitle': fullTitle,
         'quizDetail': quizzesPointyByTitle(fullTitle)[0],
         'backBtn': backBtn,
@@ -295,6 +297,7 @@ def newsletter(request):
                 template = loader.get_template('app/fails.html')
                 context = {
                     'searchForm': SearchForm(),
+                    'newsletterForm': NewsletterForm(),
                     'headTitle': 'QuizLand | خطا در ثبت ایمیل ',
                     'backBtn': backBtn
                 }
@@ -307,6 +310,7 @@ def newsletter(request):
                 template = loader.get_template('app/success.html')
                 context = {
                     'searchForm': SearchForm(),
+                    'newsletterForm': NewsletterForm(),
                     'headTitle': 'QuizLand | ایمیل ثبت شد ',
                     'backBtn': backBtn
                 }
