@@ -4,8 +4,9 @@
 
 <div class="sortMore {{categoryStyle}} tx-al-c">
 
+    <div>
+        <h3 class="tx-al-c">{{ titlePointy }}</h3>
         <div class="sortMore__container {{hideSecondColumn}} flex flex-jc-fe">
-            <h3 class="tx-al-c">{{ titlePointy }}</h3>
             {% for quiz in sortPointy %}
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
@@ -20,8 +21,10 @@
                 {% endwith %}
             {% endfor %}
         </div>
+    </div>
+    <div>
+        <h3 class="tx-al-c">{{title}} {{ category }}</h3>
         <div class="sortMore__container flex flex-jc-fe">
-            <h3 class="tx-al-c">{{title}} {{ category }}</h3>
             {% for quiz in sort %}
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
@@ -36,6 +39,7 @@
                 {% endwith %}
             {% endfor %}
         </div>
+    </div>
 </div>
 
 {{ pageTravel | safe }}
