@@ -15,7 +15,7 @@
     
     {{ tools | safe }}
 
-    <div class="categoryList indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+    <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
         {% for quiz in quizzes %}
             {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
@@ -23,9 +23,9 @@
                     <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
                         <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                         {% with quiz.views|viewsFormat as views %}
-                            <div class="indexQuiz__category__inner__views">{{ views }}</div>
+                            <div class="quizContainer__category__inner__views">{{ views }}</div>
                         {% endwith %}
-                        <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
                     </a>
                 {% endwith %}
             {% endwith%}

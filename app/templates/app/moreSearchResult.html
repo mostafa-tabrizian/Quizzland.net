@@ -6,14 +6,14 @@
     <h3>{{ userSearchInput }} &nbsp : &nbsp کوئیز های بیشتر با عبارت</h3>
     
     <div class="moreSearchResult__container">
-        <div class="categoryList indexQuiz__category__inner flex flex-jc-fe">
+        <div class="categoryList quizContainer__category__inner flex flex-jc-fe">
         
             <a href="/quiz/celebrities/Taylor-Swift/کامل-ترین-کویز-تیلور-سویفت">
                 <img src="/static/img/Bg-quizzes/taylorSwift_1.jpg" alt="Taylor Swift | کامل ترین کویز تیلور سویفت" loading="lazy">
                 
-                    <div class="indexQuiz__category__inner__views">989</div>
+                    <div class="quizContainer__category__inner__views">989</div>
                 
-                <div class="indexQuiz__category__inner__title">کامل ترین کویز تیلور سویفت</div>
+                <div class="quizContainer__category__inner__title">کامل ترین کویز تیلور سویفت</div>
             </a>
         
             {% for quiz in quizzesPointyByTitle %}
@@ -22,9 +22,9 @@
                     <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
                         <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                         {% with quiz.views|viewsFormat as views %}
-                            <div class="indexQuiz__category__inner__views">{{ views }}</div>
+                            <div class="quizContainer__category__inner__views">{{ views }}</div>
                         {% endwith %}
-                        <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
                     </a>
                 {% endwith %}
                 {% endwith%}
@@ -32,7 +32,7 @@
         
         </div>
 
-        <div class="categoryList indexQuiz__category__inner flex flex-jc-fe">
+        <div class="categoryList quizContainer__category__inner flex flex-jc-fe">
 
             {% for quiz in quizzesByTitle %}
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
@@ -40,9 +40,9 @@
                         <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
                             <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                             {% with quiz.views|viewsFormat as views %}
-                                <div class="indexQuiz__category__inner__views">{{ views }}</div>
+                                <div class="quizContainer__category__inner__views">{{ views }}</div>
                             {% endwith %}
-                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                            <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
                         </a>
                     {% endwith %}
                 {% endwith%}

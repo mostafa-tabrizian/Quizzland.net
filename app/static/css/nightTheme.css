@@ -103,33 +103,33 @@ body::-webkit-scrollbar-thumb {
           box-shadow: 0 15px 15px black !important;
 }
 
-.indexQuiz__category__header a {
+.quizContainer__category__header a {
   background: rgba(251, 251, 251, 0.158) !important;
   -webkit-box-shadow: inset 0 0 10px #000000, 0 0 15px black !important;
           box-shadow: inset 0 0 10px #000000, 0 0 15px black !important;
 }
 
-.indexQuiz__category__inner a {
+.quizContainer__category__inner a {
   border: inherit;
 }
 
-.indexQuiz__category__inner a::after {
+.quizContainer__category__inner a::after {
   background: #121212;
   -webkit-box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081;
           box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081;
 }
 
-.indexQuiz__category__inner a:hover {
+.quizContainer__category__inner a:hover {
   -webkit-box-shadow: 0 0 20px #000000;
           box-shadow: 0 0 20px #000000;
 }
 
-.indexQuiz__category__inner a:hover::after {
+.quizContainer__category__inner a:hover::after {
   -webkit-box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081;
           box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081;
 }
 
-.indexQuiz__category__inner__views {
+.quizContainer__category__inner__views {
   background: #181818;
 }
 

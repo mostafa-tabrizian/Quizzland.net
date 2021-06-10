@@ -42,96 +42,94 @@
 
     </div>
 
-    <div class="indexQuiz">
-        <div class="indexQuiz__category space-med">
-            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
-                <a class="btn" href="/newest/celebrities/0">...بیشتر</a>
-                <h2>سلبریتی</h2>
-            </div>
-            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
-                {% for quiz in NewestCelebrityQuizSection %}
-                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
-                    {% with quiz.title|replaceToHyphen as title %}
-                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
-                        {% with quiz.views|viewsFormat as views %}
-                            <div class="indexQuiz__category__inner__views">{{views}}</div>
-                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
-                        {% endwith %}
-                    </a>
-                    {% endwith %}
-                    {% endwith %}
-                {% endfor %}
-            </div>
+    <div class="quizContainer space-med">
+        <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
+            <a class="btn" href="/newest/celebrities/0">...بیشتر</a>
+            <h2>سلبریتی</h2>
         </div>
-        <div class="indexQuiz__category space-med">
-            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
-                <a class="btn" href="/newest/movieSeries/0">...بیشتر</a>
-                <h2>فیلم و سریال</h2>
-            </div>
-            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
-
-                {% for quiz in NewestMovieSeriesQuizSection %}
-                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
-                    {% with quiz.title|replaceToHyphen as title %}
-                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
-                        {% with quiz.views|viewsFormat as views %}
-                            <div class="indexQuiz__category__inner__views">{{views}}</div>
-                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
-                        {% endwith %}
-                    </a>
+        <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+            {% for quiz in NewestCelebrityQuizSection %}
+                {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.title|replaceToHyphen as title %}
+                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                    {% with quiz.views|viewsFormat as views %}
+                        <div class="quizContainer__category__inner__views">{{views}}</div>
+                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
                     {% endwith %}
-                    {% endwith %}
-                {% endfor %}
-
-            </div>
+                </a>
+                {% endwith %}
+                {% endwith %}
+            {% endfor %}
         </div>
-        <div class="indexQuiz__category space-med">
-            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
-                <a class="btn" href="/newest/physiologies/0">...بیشتر</a>
-                <h2>روانشناسی</h2>
-            </div>
-            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
-
-                {% for quiz in NewestPhysiologiesQuizSection %}
-                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
-                    {% with quiz.title|replaceToHyphen as title %}
-                    <a href="/quizPointy/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
-                        {% with quiz.views|viewsFormat as views %}
-                            <div class="indexQuiz__category__inner__views">{{views}}</div>
-                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
-                        {% endwith %}
-                    </a>
-                    {% endwith %}
-                    {% endwith %}
-                {% endfor %}
-
-            </div>
+    </div>
+    <div class="quizContainer space-med">
+        <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
+            <a class="btn" href="/newest/movieSeries/0">...بیشتر</a>
+            <h2>فیلم و سریال</h2>
         </div>
-        <div class="indexQuiz__category space-med">
-            <div class="indexQuiz__category__header flex flex-ai-c wrapper-med">
-                <a class="btn" href="/newest/gaming/0">...بیشتر</a>
-                <h2>گیمینگ</h2>
-            </div>
-            <div class="indexQuiz__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+        <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
-                {% for quiz in NewestGamingQuizSection %}
-                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
-                    {% with quiz.title|replaceToHyphen as title %}
-                    <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
-                        {% with quiz.views|viewsFormat as views %}
-                            <div class="indexQuiz__category__inner__views">{{views}}</div>
-                            <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
-                        {% endwith %}
-                    </a>
+            {% for quiz in NewestMovieSeriesQuizSection %}
+                {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.title|replaceToHyphen as title %}
+                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                    {% with quiz.views|viewsFormat as views %}
+                        <div class="quizContainer__category__inner__views">{{views}}</div>
+                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
                     {% endwith %}
-                    {% endwith %}
-                {% endfor %}
+                </a>
+                {% endwith %}
+                {% endwith %}
+            {% endfor %}
 
-            </div>
+        </div>
+    </div>
+    <div class="quizContainer space-med">
+        <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
+            <a class="btn" href="/newest/physiologies/0">...بیشتر</a>
+            <h2>روانشناسی</h2>
+        </div>
+        <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+            {% for quiz in NewestPhysiologiesQuizSection %}
+                {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.title|replaceToHyphen as title %}
+                <a href="/quizPointy/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                    {% with quiz.views|viewsFormat as views %}
+                        <div class="quizContainer__category__inner__views">{{views}}</div>
+                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
+                    {% endwith %}
+                </a>
+                {% endwith %}
+                {% endwith %}
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="quizContainer space-med">
+        <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
+            <a class="btn" href="/newest/gaming/0">...بیشتر</a>
+            <h2>گیمینگ</h2>
+        </div>
+        <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
+            {% for quiz in NewestGamingQuizSection %}
+                {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.title|replaceToHyphen as title %}
+                <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                    {% with quiz.views|viewsFormat as views %}
+                        <div class="quizContainer__category__inner__views">{{views}}</div>
+                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
+                    {% endwith %}
+                </a>
+                {% endwith %}
+                {% endwith %}
+            {% endfor %}
+
         </div>
     </div>
 

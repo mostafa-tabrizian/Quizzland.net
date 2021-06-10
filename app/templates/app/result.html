@@ -39,15 +39,15 @@
 
     <h2 class='tx-al-c space-med beforeAfterDecor'>کوئیز های شبیه</h2>
 
-    <div class="result__suggester indexQuiz__category__inner flex flex-jc-c flex-ai-c wrapper-med">
+    <div class="result__suggester quizContainer__category__inner flex flex-jc-c flex-ai-c wrapper-med">
         {% for quiz in suggestingQuiz %}
             {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
             {% with quiz.title|replaceToHyphen as title %}
             <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
                 <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                 {% with quiz.views|viewsFormat as views %}
-                <div class="indexQuiz__category__inner__views">{{views}}</div>
-                <div class="indexQuiz__category__inner__title">{{ quiz.title }}</div>
+                <div class="quizContainer__category__inner__views">{{views}}</div>
+                <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
                 {% endwith %}
             </a>
             {% endwith %}
