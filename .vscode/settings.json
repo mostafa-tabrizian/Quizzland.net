@@ -1,9 +1,7 @@
 {
     "cSpell.ignoreWords": [
-        "s",
-        "witcher"
     ],
-    "python.pythonPath": "Quizland-env\\Scripts\\python.exe",
+    "python.pythonPath": "Quizland-venv\\Scripts\\python.exe",
     "sqltools.connections": [
         {
             "mysqlOptions": {
@@ -18,5 +16,6 @@
             "username": "root",
             "password": "root"
         }
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }
