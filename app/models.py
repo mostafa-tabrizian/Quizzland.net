@@ -23,7 +23,6 @@ class InnerCategories(models.Model):
         return self.innerCategory
 
 class Quizzes(models.Model):
-    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, default=None)
     innerCategory = models.CharField(max_length=100, default=None)
     title = models.CharField(max_length=100, default=None)
@@ -44,7 +43,6 @@ class Quizzes(models.Model):
 
 
 class Quizzes_Pointy(models.Model):
-    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, default=None)
     innerCategory = models.CharField(max_length=100, default=None)
     title = models.CharField(max_length=100, default=None)
@@ -110,7 +108,6 @@ class Quizzes_Pointy(models.Model):
 
 
 class Quiz_Questions(models.Model):
-    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, default=None)
     innerCategory = models.CharField(max_length=100, default=None)
     title = models.CharField(max_length=100, default=None)
@@ -129,7 +126,6 @@ class Quiz_Questions(models.Model):
 
 
 class Quiz_Pointy_Questions(models.Model):
-    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, default=None)
     innerCategory = models.CharField(max_length=100, default=None)
     title = models.CharField(max_length=100, default=None)
@@ -173,7 +169,6 @@ class Quiz_Pointy_Questions(models.Model):
 
 
 class Newsletter(models.Model):
-    id = models.AutoField(primary_key=True)
     email = models.CharField(max_length=200, default=None)
     username = models.CharField(max_length=100, default=None)
     favorite_Category = models.CharField(max_length=200, default=None)
