@@ -5,7 +5,7 @@
 <div class="sortMore {{categoryStyle}} tx-al-c">
 
         <div class="sortMore__container {{hideSecondColumn}} flex flex-jc-fe">
-            <h3 class="tx-al-c">جدیدترین تست ها</h3>
+            <h3 class="tx-al-c">{{ titlePointy }}</h3>
             {% for quiz in sortPointy %}
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}

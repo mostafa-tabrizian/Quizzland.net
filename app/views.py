@@ -190,14 +190,17 @@ def sortTheQuizzes(request, sortOfQuiz, page):
         sort = quizzesByPublish().all()[fTPage[0]:fTPage[1]]
         sortPointy = quizzesPointyByPublish().all()[fTPage[0]:fTPage[1]]
         title = "جدیدترین کوئیز ها"
+        titlePointy = "جدیدترین تست ها"
     elif (sortOfQuiz == 'bestest'):
         sort = quizzesByViews().all()[fTPage[0]:fTPage[1]]
         sortPointy = quizzesPointyByViews().all()[fTPage[0]:fTPage[1]]
         title = "پربازدیدترین کوئيز ها"
+        titlePointy = "پربازدیدترین تست ها"
     elif sortOfQuiz == 'monthlyBestest':
         sort = quizzesByMonthlyViews()[fTPage[0]:fTPage[1]]
         sortPointy = quizzesPointyByMonthlyViews().all()[fTPage[0]:fTPage[1]]
         title = "پر بازدیدترین کوئیز های این ماه"
+        titlePointy = "پر بازدیدترین تست های این ماه"
 
     template = loader.get_template('app/sort.html')
     context = {
@@ -208,6 +211,7 @@ def sortTheQuizzes(request, sortOfQuiz, page):
         'sort': sort,
         'sortPointy': sortPointy,
         'title': title,
+        'titlePointy': titlePointy,
         'headTitle': f'QuizLand | {title}'
     }
     return HttpResponse(template.render(context))
