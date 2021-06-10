@@ -80,8 +80,8 @@ if (quiz__container__eachOne) {
 
 const ifOptionEmptyRemoveIt = (question) => {
     question.forEach(eachOption => {
-        const labelContent = eachOption.innerHTML
-        if (labelContent == ' None ') {
+        const labelContent = eachOption.innerText
+        if (labelContent == '') {
             eachOption.remove()
         }
     })
