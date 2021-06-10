@@ -3,5 +3,20 @@
         "s",
         "witcher"
     ],
-    "python.pythonPath": "env-Quizland(Django)\\Scripts\\python.exe"
+    "python.pythonPath": "Quizland-env\\Scripts\\python.exe",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "QuizLand",
+            "database": "mysql",
+            "username": "root",
+            "password": "root"
+        }
+    ]
 }
