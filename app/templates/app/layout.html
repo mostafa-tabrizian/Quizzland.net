@@ -4,15 +4,19 @@
 <html lang="Fa">
 
 <head>
-    <meta charset="utf-8">
+    <title>{{ headTitle }}</title>
+    <meta name="description" content="{{ description }}">
+    <meta name="keywords" content="{{ keywords }}">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preload" href="/static/font/Harmattan-Regular.woff2" as='font' type="font/woff2" crossorigin="anonymous"/>
     <link rel="preload" href="/static/font/Changa-ExtraLight.woff2" as='font' type="font/woff2" crossorigin="anonymous"/>
     <link rel="preload" href="/static/font/Vermin-Vibes-2-Soft.woff2" as='font' type="font/woff2" crossorigin="anonymous"/>
+    <link rel="preload" href="/static/css/nightTheme.css" as='style'/>
+    <link rel="preload" href="/static/css/style.css" as='style'/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
     <link rel="icon" href="/static/img/base/favicon.png" sizes="32x32" loading='lazy' />
-    <title>{{ headTitle }}</title>
 </head>
 
 <header class="header">
@@ -24,7 +28,7 @@
                 <img src="/static/img/base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
             </a>
             <form class="header__search {{colorOfHeader}} flex" action='/search' method="post">
-                <button class='header__searchSubmit fade-out flex flex-ai-c' type="submit"></button>
+                <button class='header__searchSubmit fade-out flex flex-ai-c' aria-label="Search" type="submit"></button>
                 {{ searchForm }}
             </form>
         </div>
@@ -41,7 +45,7 @@
 
             <!--Night Mode-->
             <div class="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
-                <button class="nightMode" type="button"></button>
+                <button class="nightMode" type="button" aria-label="Night Mode De-Activator"></button>
             </div>
         </div>
 
@@ -59,13 +63,13 @@
         </ul>
 
         <!-- Menu -->
-        <button type="button" class="header__menu__openBtn {{colorOfHeader}} hideForDesktop">
+        <button type="button" class="header__menu__openBtn {{colorOfHeader}} hideForDesktop" aria-label="Menu Button">
             <span></span>
             <span></span>
             <span></span>
         </button>
         <div class="header__menu slideMenu-hide tx-al-r hide-for-desktop">
-            <button class="header__menu__closeBtn"></button>
+            <button class="header__menu__closeBtn" aria-label="Close Menu Button"></button>
             <div class="header__menu__inner grid grid-jc-c">
                 <div class="header__menu__inner__category">
                     <h4><a href="/#category">کتگوری ها</a></h4>
@@ -92,7 +96,7 @@
 
                         <!--Night Mode-->
                         <div class="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
-                            <button class="nightMode" type="button"></button>
+                            <button class="nightMode" type="button" aria-label="Night Mode De-Activator"></button>
                         </div>
                     </ul>
                 </div>
@@ -109,13 +113,13 @@
 
 <footer class="tx-al-c">
     <p class="tx-al-c wrapper-sm"> اگه هیجان داری کوئیز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا تو 8 ثانیه اطلاعاتت رو وارد کنی که سریعتر از هر کسی خبردار بشی </p>
-    <button class="newsletter__show" type="button">🖊️ ثبت نام در خبرنامه</button>
+    <button class="newsletter__show" type="button" aria-label="Sign Up To Newsletter">🖊️ ثبت نام در خبرنامه</button>
 
     <div class="newsletter__blurBackground">
         <form class="newsletter fade-out" action="/newsletter" method="post">
-            <button class="newsletter__closeBtn"></button>
+            <button class="newsletter__closeBtn" aria-label="Close Newsletter Form Button"></button>
             <p class="tx-al-c">ایمیلت رو وارد کن و کتگوری مورد علاقه‌ات رو انتخاب کن</p>
-            <button class='newsletter__submit' type="button" method="POST">ثبت نام </button>
+            <button class='newsletter__submit' type="button" method="POST" aria-label="Submit Newsletter Form For Signing Up">ثبت نام </button>
             {{ newsletterForm }}
             <div class="newsletter__categoryOptions flex flex-ai-c">
                 
@@ -158,11 +162,11 @@
         </ul>
     </div>
     <div class="footer__copyRight">
-        <h5>
+        <p>
             1400-2021 © تمام حقوق به کوئیزلند تعلق دارد
             <br/>
             <a href="#">Mt-Code</a> : ساخته شده توسط 
-        </h5>
+        </p>
     </div>
 
     <script src="{% static 'js/clipboard.min.js' %}"></script>

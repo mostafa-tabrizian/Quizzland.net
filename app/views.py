@@ -18,6 +18,8 @@ def index(request):
         'newsletterForm': NewsletterForm(),
         'colorOfHeader': 'header__white',
         'headTitle': 'QuizLand | کوئیزلند بزرگترین وب‌سایت کوئيز',
+        'description': 'کوئیزلند بزرگترین وب‌ سایت کوئيز برای کتگوری و گروه های متنوع همچون کوئیز های سلبریتی ها, کوئيز های فیلم و سریال, کوئیز های گیمینگ و تست های روانشناسی معتبر از سایت های رسمی. باحال ترین کوئيز ها رو اینجا پیدا میکنید',
+        'keywords': 'کوئیز, کوئیز های فیلم و سریال, کوئیز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوئیز های گیمینگ, تست های روانشناسی معتبر, کوئیز های باحال, کوئيز های فان, بهترین وب سایت کوئيز, بهترین وب سایت تست',
 
         'newestQuizzes': quizzesByPublish()[:15],
         'bestestQuizzes': quizzesByViews()[:5],
@@ -82,7 +84,9 @@ def category(request, categoryArg, page, sortType, numberOfResult ):
         context = {
             'searchForm': SearchForm(),
             'newsletterForm': NewsletterForm(),
-            # 'headTitle': f'QuizLand | کوئیز های {categoryInFar[category]} ',
+            'headTitle': f'QuizLand | کوئیز های {categoryInFar[categoryArg]} ',
+            'description': 'کتگوری و گروه های متنوع همچون آدم های معروف و سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ و تست های روانشناسی',
+            'keywords': 'تست های روانشناسی, سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ,آدم های معروف, کوئيز',
             'tools': tools,
             'category': categoryArg,
             'categories': innerCategories(categoryArg, fTPage[0], fTPage[1], sortType),
@@ -102,12 +106,14 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
         context = {
             'searchForm': SearchForm(),
             'newsletterForm': NewsletterForm(),
+            'headTitle': f'QuizLand | {innerCategory} ',
+            'description': f'کوئيزلند {innerCategory} کوئيز های',
+            'keywords': f'{innerCategory} بهترین کوئيز های , {innerCategory} کوئيز های',
             'colorOfHeader': 'header__white',
             'tools': tools,
             'innerCategory': innerCategory,
             'quizzes': quizzesWithInnerCategory(category, InnerCategory, fTPage[0], fTPage[1], sortType),
             'pageTravel': pageTravel(finalPage(howManyElementToShow, InnerCategory)),
-            'headTitle': f'QuizLand | {innerCategory} '
         }
         return HttpResponse(template.render(context))
     else:
@@ -115,17 +121,18 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
 
 def quiz(request, category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
-    print(fullTitle)
     addViewToQuizzes(fullTitle)
 
     template = loader.get_template('app/quiz.html')
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
+        'headTitle': f'QuizLand | {title} ', 
+        'description': f'کوئيز {fullTitle} ',
+        'keywords': f'{fullTitle}, {innerCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
         'quizDetail': quizzesByTitle(fullTitle)[0],
         'quiz_Question': quizQuestionByTitle(fullTitle),
-        'headTitle': f'QuizLand | {title} ', 
     }
     return HttpResponse(template.render(context))
 
@@ -136,10 +143,12 @@ def quizPointy(request, category, innerCategory, title):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
+        'headTitle': f'QuizLand | {title}',
+        'description': f'کوئيز {fullTitle} ',
+        'keywords': f'{fullTitle}, {innerCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
         'quizDetail': quizzesPointyByTitle(fullTitle)[0],
         'quiz_Question': quizQuestionByTitle(fullTitle),
-        'headTitle': f'QuizLand | {title}',
     }
     return HttpResponse(template.render(context))
 
@@ -238,9 +247,11 @@ def contact(request):
     template = loader.get_template('app/contact.html')
     context = {
         'searchForm': SearchForm(),
-                'newsletterForm': NewsletterForm(),
+        'newsletterForm': NewsletterForm(),
+        'description': 'تماس با پشتیبانی کوئيزلند',
+        'keywords': 'پشتیبانی کوئيزلند',
+        'headTitle': f'QuizLand | تماس با ما ',
         'backBtn': backBtn,
-        'headTitle': f'QuizLand | تماس با ما '
     }
     return HttpResponse(template.render(context))
 
@@ -258,9 +269,11 @@ def guide(request):
     template = loader.get_template('app/guide.html')
     context = {
         'searchForm': SearchForm(),
-                'newsletterForm': NewsletterForm(),
+        'newsletterForm': NewsletterForm(),
+        'headTitle': f'QuizLand | راهنما ',
+        'description': 'راهنمای وب سایت کوئيزلند',
+        'keywords': 'کوئيزلند, راهنمای وب سایت کوئيزلند',
         'backBtn': backBtn,
-        'headTitle': f'QuizLand | راهنما ' 
     }
     return HttpResponse(template.render(context))
 

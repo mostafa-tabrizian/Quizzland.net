@@ -131,7 +131,8 @@
                 }
 
                 img {
-                    width: 100%;
+                    width: 14.2rem;
+                    height: 8rem;
                     border-radius: 10px 10px 0 0;
                 }
             }
@@ -267,9 +268,10 @@
             box-shadow: 0 0 7px black;
         }
 
-        > h5 {
+        p {
             position: absolute;
-            bottom: -1.8rem;
+            bottom: -1.5rem;
+            transform: translate(-1rem);
             font-size: $font-sm - .3;
             opacity: 0.5;
         }

@@ -223,10 +223,10 @@ footer, .footer {
     }
 
     &__copyRight {
-        font-size: .9rem;
         opacity: .25;
-        > h5 {
+        > p {
             margin: 0;
+            font-size: .9rem;
             
             > a{
                 opacity: .8;
