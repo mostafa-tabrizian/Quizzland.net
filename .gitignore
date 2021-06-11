@@ -1,3 +1,8 @@
 *__pycache__*
 *.pyc
 node_modules
+htmlcov
+.coverage
+QuizLand.session.sql
+*package*
+.vscode

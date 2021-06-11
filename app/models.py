@@ -41,6 +41,9 @@ class Quizzes(models.Model):
     def __str__(self):
         return self.title_english
 
+    def __unicode__(self):
+        return 'test'
+
 
 class Quizzes_Pointy(models.Model):
     category = models.CharField(max_length=100, default=None)
@@ -124,6 +127,9 @@ class Quiz_Questions(models.Model):
     def __str__(self):
         return self.title_english
 
+    def __unicode__(self):
+        return 'test'
+
 
 class Quiz_Pointy_Questions(models.Model):
     category = models.CharField(max_length=100, default=None)
@@ -168,7 +174,7 @@ class Quiz_Pointy_Questions(models.Model):
         return self.title_english
 
 
-class Newsletter(models.Model):
+class Newsletter_Users(models.Model):
     email = models.CharField(max_length=200, default=None)
     username = models.CharField(max_length=100, default=None)
     favorite_Category = models.CharField(max_length=200, default=None)
@@ -176,3 +182,6 @@ class Newsletter(models.Model):
 
     def __str__(self):
         return self.email
+
+    def __unicode__(self):
+        return 'test'
