@@ -209,13 +209,13 @@ input {
 
 .fade {
     &-out {
-        visibility: hidden;
-        opacity: 0;
+        visibility: hidden !important;
+        opacity: 0 !important;
         transition: all .53s ease-in-out !important;
     }
     &-in {
-        visibility: visible;
-        opacity: 1;
+        visibility: visible !important;
+        opacity: 1 !important;
         transition: all .53s ease-in-out !important;  
     }
 }

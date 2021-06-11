@@ -27,7 +27,7 @@
                 <img src="/static/img/base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
             </a>
             <form class="header__search {{colorOfHeader}} flex" action='/search' method="post">
-                <button class='header__searchSubmit fade-out flex flex-ai-c' aria-label="Search" type="submit"></button>
+                <button class='header__searchSubmit fade-out hideForMobile flex flex-ai-c' aria-label="Search" type="submit"></button>
                 {{ searchForm }}
             </form>
         </div>
@@ -101,7 +101,10 @@
                 </div>
             </div>
         </div>
-
+        <button class='header__searchOpener hideForDesktop flex flex-ai-c' type="button"></button>
+        <div class="header__searchOpener__bg fade-out darkGls">
+            <button class="header__search__closeBtn header__menu__closeBtn" aria-label="Close Search Bar"></button>
+        </div>
     </nav>
 
     <div class="loadingScreen"></div>

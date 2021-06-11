@@ -434,15 +434,15 @@ input {
 }
 
 .fade-out {
-  visibility: hidden;
-  opacity: 0;
+  visibility: hidden !important;
+  opacity: 0 !important;
   -webkit-transition: all .53s ease-in-out !important;
   transition: all .53s ease-in-out !important;
 }
 
 .fade-in {
-  visibility: visible;
-  opacity: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
   -webkit-transition: all .53s ease-in-out !important;
   transition: all .53s ease-in-out !important;
 }
@@ -868,6 +868,7 @@ input {
   font-family: harmattan, myHarmattan, sans-serif, serif;
   margin-bottom: 2rem;
   padding: 1rem;
+  position: relative;
 }
 
 .header__logo {
@@ -986,6 +987,25 @@ input {
   margin-top: 2.5rem;
 }
 
+.header__searchOpener {
+  background: url("/static/img/base/srch-black.svg") no-repeat center center;
+  width: 1.5rem;
+  height: 2rem;
+  margin-right: 4rem;
+  -webkit-transform: translateY(-0.1rem);
+          transform: translateY(-0.1rem);
+}
+
+.header__searchOpener__bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.75);
+}
+
 .header__searchSubmit {
   background: url("/static/img/base/srch-black.svg") no-repeat center center;
   -webkit-transform: translate(2.2rem);
@@ -1006,7 +1026,7 @@ input {
   }
 }
 
-.header__searchInput, .header__searchInput__m {
+.header__searchInput {
   border: 1px solid #8080808f;
   font-family: harmattan, myHarmattan, sans-serif, serif;
   font-size: 1.18rem;
@@ -1021,50 +1041,52 @@ input {
   transition: -webkit-box-shadow 0.3s ease-in-out;
   transition: box-shadow 0.3s ease-in-out;
   transition: box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
-  z-index: 1;
+  z-index: 4;
 }
 
 @media (max-width: 49.9375em) {
-  .header__searchInput, .header__searchInput__m {
-    -webkit-transform: translate(-1rem);
-            transform: translate(-1rem);
+  .header__searchInput {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    -webkit-transform: translate(-50%);
+            transform: translate(-50%);
+    left: 50%;
+    top: 25%;
+    height: 4.125rem;
+    font-size: 1.6rem;
+    background: rgba(0, 0, 0, 0.35);
   }
 }
 
-.header__searchInput::-webkit-input-placeholder, .header__searchInput__m::-webkit-input-placeholder {
+.header__searchInput::-webkit-input-placeholder {
   color: black;
 }
 
-.header__searchInput:-ms-input-placeholder, .header__searchInput__m:-ms-input-placeholder {
+.header__searchInput:-ms-input-placeholder {
   color: black;
 }
 
-.header__searchInput::-ms-input-placeholder, .header__searchInput__m::-ms-input-placeholder {
+.header__searchInput::-ms-input-placeholder {
   color: black;
 }
 
-.header__searchInput::placeholder, .header__searchInput__m::placeholder {
+.header__searchInput::placeholder {
   color: black;
 }
 
-.header__searchInput:focus, .header__searchInput__m:focus {
+.header__searchInput:focus {
   -webkit-box-shadow: -2px 2px 5px black;
           box-shadow: -2px 2px 5px black;
 }
 
-.header__searchInput__m, .header__searchInput__m__m {
+.header__searchInput__m {
   -webkit-transform: translate(0.5rem, 0);
           transform: translate(0.5rem, 0);
   position: absolute;
   top: 1.4rem;
   right: 5.1rem;
   width: 14rem;
-}
-
-.header__searchShow {
-  position: absolute;
-  top: 1.4rem;
-  right: 7.1rem;
 }
 
 .header .subHeader {

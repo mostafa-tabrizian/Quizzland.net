@@ -3,6 +3,7 @@
     font-family: $font-pr;
     margin-bottom: 2rem;
     padding: 1rem;
+    position: relative;
 
     &__logo {
         position: relative;
@@ -111,6 +112,22 @@
         }
     }
 
+    &__searchOpener {
+        background: url('/static/img/base/srch-black.svg') no-repeat center center;
+        width: 1.5rem;
+        height: 2rem;
+        margin-right: 4rem;
+        transform: translateY(-.1rem);
+
+        &__bg {
+            width: 100%; height: 100%;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 3;
+            background:rgba(0, 0, 0, 0.75);
+        }
+    }
+
     &__searchSubmit {
         background: url('/static/img/base/srch-black.svg') no-repeat center center;
         transform: translate(2.2rem);
@@ -126,7 +143,7 @@
         }
     }
 
-    &__searchInput, &__searchInput__m {
+    &__searchInput {
         border: 1px solid #8080808f;
         font-family: $font-pr;
         font-size: $font-sm;
@@ -137,10 +154,16 @@
         padding-right: 1.3125rem;
         width: 75%;
         transition: box-shadow 0.3s ease-in-out;
-        z-index: 1;
+        z-index: 4;
 
         @include breakpoints-down(medium) {
-            transform: translate(-1rem);
+            opacity: 0; visibility: hidden;
+            position: fixed;
+            transform: translate(-50%);
+            left: 50%; top: 25%;
+            height: 4.125rem;
+            font-size: $font-l;
+            background:rgba(0, 0, 0, 0.35)
         }
 
         &::placeholder {
@@ -158,12 +181,6 @@
             right: 5.1rem;
             width: 14rem;
         }
-    }
-
-    &__searchShow {
-        position: absolute;
-        top: 1.4rem;
-        right: 7.1rem;
     }
 
     .subHeader {

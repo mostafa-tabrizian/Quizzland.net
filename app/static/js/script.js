@@ -70,6 +70,26 @@ header__searchInput.addEventListener('click', () => {
 header__searchInput.addEventListener('blur', () => {
     fadeOut(header__searchSubmit)
 })
+//----------------------------------------------------------
+// search in mobile
+header__searchOpener.addEventListener('click', () => {
+    if (header__searchOpener__bg.classList.contains('fade-out')) {
+        fadeIn(header__searchOpener__bg)
+        fadeIn(header__searchInput)
+    } else {
+        fadeOut(header__searchOpener__bg)
+        fadeOut(header__searchInput)
+    }
+})
+header__search__closeBtn.addEventListener('click', () => {
+    if (header__searchOpener__bg.classList.contains('fade-out')) {
+        fadeIn(header__searchOpener__bg)
+        fadeIn(header__searchInput)
+    } else {
+        fadeOut(header__searchOpener__bg)
+        fadeOut(header__searchInput)
+    }
+})
 
 //----------------------------------------------------------
 // sort changer
