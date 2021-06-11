@@ -19,26 +19,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-RQ_QUEUES = {
-    'default': {
-    'HOST': 'localhost',
-    'PORT': 6379,
-    'DB': 1,
-    'DEFAULT_TIMEOUT': 360,
-    }
-}
-
 CACHE_TTL = 15 * 60
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        }
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379/1",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient"
+#         }
+#     }
+# }
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
@@ -111,6 +102,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

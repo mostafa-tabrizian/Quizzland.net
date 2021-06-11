@@ -20,7 +20,7 @@
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
                     <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                        <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                        <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                         {% with quiz.views|viewsFormat as views %}
                             <div class="quizContainer__category__inner__views">{{ views }}</div>
                         {% endwith %}
@@ -38,7 +38,7 @@
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                     {% with quiz.title|replaceToHyphen as title %}
                         <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                            <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                            <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                             {% with quiz.views|viewsFormat as views %}
                                 <div class="quizContainer__category__inner__views">{{ views }}</div>
                             {% endwith %}

@@ -12,11 +12,11 @@
         </div>
         <div class="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
             <div class="result__img flex flex-jc-c flex-ai-c">
-                <img class="result__img20" src='/static/img/imGif_quizzes/{{quizDetail.GIF20}}' alt=''></img>
-                <img class="result__img40" src='/static/img/imGif_quizzes/{{quizDetail.GIF40}}' alt=''></img>
-                <img class="result__img60" src='/static/img/imGif_quizzes/{{quizDetail.GIF60}}' alt=''></img>
-                <img class="result__img80" src='/static/img/imGif_quizzes/{{quizDetail.GIF80}}' alt=''></img>
-                <img class="result__img100" src='/static/img/imGif_quizzes/{{quizDetail.GIF100}}' alt=''></img>
+                <img class="result__img20" src='/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF20}}' alt=''></img>
+                <img class="result__img40" src='/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF40}}' alt=''></img>
+                <img class="result__img60" src='/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF60}}' alt=''></img>
+                <img class="result__img80" src='/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF80}}' alt=''></img>
+                <img class="result__img100" src='/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF100}}' alt=''></img>
             </div>
             <div class="result__score"></div>
             <div class="result__detail tx-al-r">
@@ -44,7 +44,7 @@
             {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
             {% with quiz.title|replaceToHyphen as title %}
             <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                 {% with quiz.views|viewsFormat as views %}
                 <div class="quizContainer__category__inner__views">{{views}}</div>
                 <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>

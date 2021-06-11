@@ -21,22 +21,22 @@
     <div class="category flex flex-jc-c flex-ai-c flex-jc-sb" id="category">
 
         <a href="/category/movieSeries/0/newest/16">
-                <img src="static/img/base/category-movieSeries.jpg" alt="کوئیز کتگوری دسته ی فیلم و سریال مربوط به سوالات در مورد کارکتر شخصیت فیلم ها یا داستان آن">
+                <img src="static/img/Base/category-movieSeries.jpg" alt="کوئیز کتگوری دسته ی فیلم و سریال مربوط به سوالات در مورد کارکتر شخصیت فیلم ها یا داستان آن">
                 <p class='tx-al-c'>🎬 فیلم و سریال</p>
         </a>
 
         <a href="/category/celebrities/0/newest/16">
-            <img src="static/img/base/category-celebrities.jpg" alt="کوئیز های کتگوری دسته ی سلبریتی مربوط به افراد مشهور مانند بازیگر و خواننده که مربوط به سوالات در مورد اطلاعات شخصی آنها یا فعالیت آنهاست">
+            <img src="static/img/Base/category-celebrities.jpg" alt="کوئیز های کتگوری دسته ی سلبریتی مربوط به افراد مشهور مانند بازیگر و خواننده که مربوط به سوالات در مورد اطلاعات شخصی آنها یا فعالیت آنهاست">
             <p class='tx-al-c'>✨ سلبریتی</p>
         </a>
 
         <a href="/category/gaming/0/newest/16">
-            <img src="static/img/base/category-gaming.jpg" alt="کوئیز های کتگوری دسته ی گیمینگ مخصوص گیمرها که سوالات مربوط به سوالات کارکتر شخصیت و داستان گیم بازی هستش">
+            <img src="static/img/Base/category-gaming.jpg" alt="کوئیز های کتگوری دسته ی گیمینگ مخصوص گیمرها که سوالات مربوط به سوالات کارکتر شخصیت و داستان گیم بازی هستش">
             <p class='tx-al-c'>🎮 گیمینگ</p>
         </a>
 
         <a href="/category/physiologies/0/newest/16">
-            <img src="static/img/base/category-physiologies.jpg" alt="کوئیز های کتگوری دسته ی روانشناسی برای افرادی که علاقه مند به روانشناسی یا خودشناسی هستند از منابع معتبر خارجی">
+            <img src="static/img/Base/category-physiologies.jpg" alt="کوئیز های کتگوری دسته ی روانشناسی برای افرادی که علاقه مند به روانشناسی یا خودشناسی هستند از منابع معتبر خارجی">
             <p class='tx-al-c'>🧠 روانشناسی</p>
         </a>
 
@@ -52,7 +52,7 @@
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
                 <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
@@ -74,7 +74,7 @@
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
                 <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
@@ -97,7 +97,7 @@
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
                 <a href="/quizPointy/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
@@ -120,7 +120,7 @@
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
                 <a href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                    <img src="/static/img/Bg-quizzes/{{quiz.background}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>

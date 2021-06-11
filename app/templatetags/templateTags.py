@@ -31,3 +31,9 @@ def makeTheDatePublishReadyToShow(date):
 @register.filter(name='toInteger')
 def toInteger(str):
     return int(str)
+
+@register.filter(name='makeTheDirValidForImg')
+def makeTheDirValidForImg(oldHref):
+    newHref = str(oldHref)[3:]
+    print(newHref)
+    return newHref
