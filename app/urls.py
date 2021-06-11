@@ -18,5 +18,5 @@ urlpatterns = [
     path('guide', views.guide),
     path('adverts', views.adverts),
     path('support', views.support),
-    path('newsletter', views.newsletter),
+    path('newsletter', views.newsletter)
 ]

@@ -1,17 +1,23 @@
+from django import template
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, reverse
 from django.template import loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.views.decorators.cache import cache_page
 from .models import *
 from .blocks import *
 from .functions import *
 from .db import *
 from .forms import *
 
-from django import template
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 register = template.Library()
 
+@cache_page(CACHE_TTL)
 def index(request):
+
     template = loader.get_template('app/index.html')
     context = {
         'searchForm': SearchForm(),
@@ -40,6 +46,7 @@ def index(request):
         'BestestPhysiologiesQuizSection': quizzesPointyByViewsWithCategory('Physiologies')[:13],
         'MonthlyBestestPhysiologiesQuizSection': quizzesPointyByMonthlyViewsWithCategory('Physiologies')[:10]
     }
+
     return HttpResponse(template.render(context))
 
 @csrf_exempt
@@ -75,6 +82,7 @@ def searchMore(request, target):
 
     return HttpResponse(template.render(context))
 
+@cache_page(CACHE_TTL)
 def category(request, categoryArg, page, sortType, numberOfResult ):
     if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
         howManyElementToShow = int(numberOfResult)
@@ -95,6 +103,7 @@ def category(request, categoryArg, page, sortType, numberOfResult ):
     else:
         return pageNotFoundManual(request)
 
+@cache_page(CACHE_TTL)
 def innerCategory(request, category, innerCategory, page, sortType, numberOfResult):
     if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
         howManyElementToShow = int(numberOfResult)
@@ -181,6 +190,7 @@ def resultPointy(request, title, score):
     }
     return HttpResponse(template.render(context))
 
+@cache_page(CACHE_TTL)
 def sortTheQuizzes(request, sortOfQuiz, page):
     howManyElementToShow = 12
     fTPage = frToPage(page, howManyElementToShow)
@@ -215,6 +225,7 @@ def sortTheQuizzes(request, sortOfQuiz, page):
     }
     return HttpResponse(template.render(context))
 
+@cache_page(CACHE_TTL)
 def sortTheQuizzesByCategory(request, category, page, sortOfQuiz):
     howManyElementToShow = 12
     fTPage = frToPage(page, howManyElementToShow)
@@ -246,6 +257,7 @@ def sortTheQuizzesByCategory(request, category, page, sortOfQuiz):
     }
     return HttpResponse(template.render(context))
 
+@cache_page(CACHE_TTL)
 def contact(request):
     template = loader.get_template('app/contact.html')
     context = {
@@ -258,6 +270,7 @@ def contact(request):
     }
     return HttpResponse(template.render(context))
 
+@cache_page(CACHE_TTL)
 def privacyPolicy(request):
     template = loader.get_template('app/privacyPolicy.html')
     context = {
@@ -268,6 +281,7 @@ def privacyPolicy(request):
     }
     return HttpResponse(template.render(context))
 
+@cache_page(CACHE_TTL)
 def guide(request):
     template = loader.get_template('app/guide.html')
     context = {
@@ -280,6 +294,7 @@ def guide(request):
     }
     return HttpResponse(template.render(context))
 
+@cache_page(CACHE_TTL)
 def adverts(request):
     template = loader.get_template('app/adverts.html')
     context = {
@@ -290,6 +305,7 @@ def adverts(request):
     }
     return HttpResponse(template.render(context))
 
+@cache_page(CACHE_TTL)
 def support(request):
     template = loader.get_template('app/support.html')
     context = {

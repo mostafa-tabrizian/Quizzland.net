@@ -19,6 +19,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+RQ_QUEUES = {
+    'default': {
+    'HOST': 'localhost',
+    'PORT': 6379,
+    'DB': 1,
+    'DEFAULT_TIMEOUT': 360,
+    }
+}
+
+CACHE_TTL = 15 * 60
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -30,6 +41,7 @@ CACHES = {
 }
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -37,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware'
 ]
 
 ROOT_URLCONF = 'Quizland.urls'
@@ -59,10 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Quizland.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -73,11 +82,6 @@ DATABASES = {
         'PORT': 3306,
     }
 }
-
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -93,10 +97,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 

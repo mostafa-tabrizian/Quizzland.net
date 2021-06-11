@@ -1,12 +1,9 @@
 import random
+from django.core.cache import cache
 from .models import *
 from .functions import *
 
 # ------------------Category
-def allInnerCategories():
-    allCategories = InnerCategories.objects.all()
-    return allCategories
-
 def innerCategories(category, fr, to, sortType):
     if sortType == 'newest':
         categories = innerCategoriesByPublish(category).all()[fr:to]
@@ -18,17 +15,17 @@ def innerCategories(category, fr, to, sortType):
 
 def innerCategoriesByPublish(categoryArg):
     category = InnerCategories.objects.filter(category=categoryArg)\
-                                      .order_by('-publish')
+                                    .order_by('-publish')
     return category
 
 def innerCategoryByViews(categoryArg):
     category = InnerCategories.objects.filter(category=categoryArg)\
-                                      .order_by('-views')
+                                    .order_by('-views')
     return category
 
 def innerCategoryAlphabet(categoryArg):
     category = InnerCategories.objects.filter(category=categoryArg)\
-                                  .order_by('innerCategory')
+                                .order_by('innerCategory')
     return category
 
 def innerCategoriesByTitle(title):
@@ -40,6 +37,7 @@ def innerCategoriesByTitle(title):
     category_exact_far = InnerCategories.objects.filter(innerCategory__exact=title)
     category_iexact_eng = InnerCategories.objects.filter(innerCategory__iexact=title)
     category_iexact_far = InnerCategories.objects.filter(innerCategory__iexact=title)
+
     category = category_contains_eng | category_contains_far | \
                category_icontains_eng | category_icontains_far | \
                category_exact_eng | category_exact_far | \
@@ -49,27 +47,51 @@ def innerCategoriesByTitle(title):
 
 # # ------------------Quizzes
 def quizzesByPublish():
-    quizzesGrabbedByPublish = Quizzes.objects.order_by('-publish')
+    if cache.get('quizzesByPublish'):
+        quizzesGrabbedByPublish = cache.get('quizzesByPublish')
+    else:
+        quizzesGrabbedByPublish = Quizzes.objects.order_by('-publish')
+        cache.set('quizzesByPublish', quizzesGrabbedByPublish)
     return quizzesGrabbedByPublish
 
 def quizzesPointyByPublish():
-    quizzesGrabbedByPublish = Quizzes_Pointy.objects.order_by('-publish')
+    if cache.get('quizzesPointyByPublish'):
+        quizzesGrabbedByPublish = cache.get('quizzesPointyByPublish')
+    else:
+        quizzesGrabbedByPublish = Quizzes_Pointy.objects.order_by('-publish')
+        cache.set('quizzesPointyByPublish', quizzesGrabbedByPublish)
     return quizzesGrabbedByPublish
 
 def quizzesByViews():
-    quizzesGrabbedByPublish = Quizzes.objects.order_by('-views')
+    if cache.get('quizzesByViews'):
+        quizzesGrabbedByPublish = cache.get('quizzesByViews')
+    else:
+        quizzesGrabbedByPublish = Quizzes.objects.order_by('-views')
+        cache.set('quizzesByViews', quizzesGrabbedByPublish)
     return quizzesGrabbedByPublish
 
 def quizzesPointyByViews():
-    quizzesGrabbedByPublish = Quizzes_Pointy.objects.order_by('-views')
+    if cache.get('quizzesPointyByViews'):
+        quizzesGrabbedByPublish = cache.get('quizzesPointyByViews')
+    else:
+        quizzesGrabbedByPublish = Quizzes_Pointy.objects.order_by('-views')
+        cache.set('quizzesPointyByViews', quizzesGrabbedByPublish)
     return quizzesGrabbedByPublish
 
 def quizzesByMonthlyViews():
-    quizzesGrabbedByPublish = Quizzes.objects.order_by('-monthly_views')
+    if cache.get('quizzesByMonthlyViews'):
+        quizzesGrabbedByPublish = cache.get('quizzesByMonthlyViews')
+    else:
+        quizzesGrabbedByPublish = Quizzes.objects.order_by('-monthly_views')
+        cache.set('quizzesByMonthlyViews', quizzesGrabbedByPublish)
     return quizzesGrabbedByPublish
 
 def quizzesPointyByMonthlyViews():
-    quizzesGrabbedByPublish = Quizzes_Pointy.objects.order_by('-monthly_views')
+    if cache.get('quizzesPointyByMonthlyViews'):
+        quizzesGrabbedByPublish = cache.get('quizzesPointyByMonthlyViews')
+    else:
+        quizzesGrabbedByPublish = Quizzes_Pointy.objects.order_by('-monthly_views')
+        cache.set('quizzesPointyByMonthlyViews', quizzesGrabbedByPublish)
     return quizzesGrabbedByPublish
 
 def quizzesWithInnerCategory(category, innerCategory, fr, to, sortType):
@@ -92,17 +114,17 @@ def quizzesWithInnerCategory(category, innerCategory, fr, to, sortType):
 
 def quizzesByPublishWithInnerCategory(innerCategory):
     grabbedQuiz = Quizzes.objects.filter(innerCategory=innerCategory)\
-                                 .order_by('publish')
+                                .order_by('publish')
     return grabbedQuiz
 
 def quizzesByViewsWithInnerCategory(innerCategory):
     grabbedQuiz = Quizzes.objects.filter(innerCategory=innerCategory)\
-                                  .order_by('-views')
+                                .order_by('-views')
     return grabbedQuiz
 
 def quizzesByAlphabetWithInnerCategory(innerCategory):
     grabbedQuiz = Quizzes.objects.filter(innerCategory=innerCategory)\
-                                  .order_by('innerCategory')
+                                .order_by('innerCategory')
     return grabbedQuiz
 
 def quizzesByRandomWithInnerCategory(innerCategory):
@@ -116,22 +138,22 @@ def quizzesByRandomWithInnerCategory(innerCategory):
 
 def quizzesPointyByPublishWithInnerCategory(innerCategory):
     grabbedQuiz = Quizzes_Pointy.objects.filter(innerCategory=innerCategory)\
-                                         .order_by('-publish')
+                                        .order_by('-publish')
     return grabbedQuiz
 
 def quizzesPointyByViewsWithInnerCategory(innerCategory):
     grabbedQuiz = Quizzes_Pointy.objects.filter(innerCategory=innerCategory)\
-                                         .order_by('-views')
+                                        .order_by('-views')
     return grabbedQuiz
 
 def quizzesPointyByAlphabetWithInnerCategory(innerCategory):
     grabbedQuiz = Quizzes_Pointy.objects.filter(innerCategory=innerCategory)\
-                                         .order_by('title')
+                                        .order_by('title')
     return grabbedQuiz
 
 def quizzesByPublishWithCategory(category):
     quizzes = Quizzes.objects.filter(category=category)\
-                                  .order_by('-publish')
+                                .order_by('-publish')
     return quizzes
 
 def quizzesBothByViewsWithCategory(category):
@@ -145,22 +167,22 @@ def quizzesBothByViewsWithCategory(category):
 
 def quizzesByMonthlyViewsWithCategory(category):
     grabbedQuiz = Quizzes.objects.filter(category=category)\
-                                  .order_by('-monthly_views')
+                                .order_by('-monthly_views')
     return grabbedQuiz
 
 def quizzesPointyByPublishWithCategory(category):
     quizzes = Quizzes_Pointy.objects.filter(category=category)\
-                                     .order_by('-publish')
+                                    .order_by('-publish')
     return quizzes
 
 def quizzesPointyByViewsWithCategory(category):
     grabbedQuiz = Quizzes_Pointy.objects.filter(category=category)\
-                                         .order_by('-views')
+                                        .order_by('-views')
     return grabbedQuiz
 
 def quizzesPointyByMonthlyViewsWithCategory(category):
     grabbedQuiz = Quizzes_Pointy.objects.filter(category=category)\
-                                         .order_by('-monthly_views')
+                                        .order_by('-monthly_views')
     return grabbedQuiz
 
 def sortBothQuizzesByPublishWithCategories(category):
@@ -175,7 +197,7 @@ def quizzesByTitle(title):
     quizzes_icontains_title = Quizzes.objects.filter(title__icontains=title)
     quizzes_exact_title = Quizzes.objects.filter(title__exact=title)
     quizzes_iexact_title = Quizzes.objects.filter(title__iexact=title)
-    
+
     quizzes_contains_title_eng = Quizzes.objects.filter(title_english__contains=title)
     quizzes_icontains_title_eng = Quizzes.objects.filter(title_english__icontains=title)
     quizzes_exact_title_eng = Quizzes.objects.filter(title_english__exact=title)
@@ -223,10 +245,10 @@ def quizzesPointyByTitle(title):
 def quizQuestionByTitle(title):
     if Quiz_Questions.objects.filter(title=title).all():
         questions = Quiz_Questions.objects.filter(title=title).all()
+        
     elif Quiz_Pointy_Questions.objects.filter(title=title).all():
         questions = Quiz_Pointy_Questions.objects.filter(title=title).all()
     else:
-        print('error in quizQuiestionByTitle')
         return ' '
     
     return questions
@@ -269,6 +291,6 @@ def addViewToCategories(title):
 
 def checkIfTheUserExistInNewsletter(emailInput):
     try:
-        return Newsletter.objects.get(email=emailInput)
+        return Newsletter_Users.objects.get(email=emailInput)
     except:
         return None
