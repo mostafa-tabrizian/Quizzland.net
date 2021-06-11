@@ -21,7 +21,6 @@ def index(request):
         'description': 'کوئیزلند بزرگترین وب‌ سایت کوئيز برای کتگوری و گروه های متنوع همچون کوئیز های سلبریتی ها, کوئيز های فیلم و سریال, کوئیز های گیمینگ و تست های روانشناسی معتبر از سایت های رسمی. باحال ترین کوئيز ها رو اینجا پیدا میکنید',
         'keywords': 'کوئیز, کوئیز های فیلم و سریال, کوئیز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوئیز های گیمینگ, تست های روانشناسی معتبر, کوئیز های باحال, کوئيز های فان, بهترین وب سایت کوئيز, بهترین وب سایت تست',
 
-        'newestQuizzes': quizzesByPublish()[:15],
         'bestestQuizzes': quizzesByViews()[:5],
         'bestestQuizzesForThisMonth': quizzesByMonthlyViews()[:5],
 
@@ -94,7 +93,7 @@ def category(request, categoryArg, page, sortType, numberOfResult ):
         }
         return HttpResponse(template.render(context))
     else:
-        return pageNotFoundManual()
+        return pageNotFoundManual(request)
 
 def innerCategory(request, category, innerCategory, page, sortType, numberOfResult):
     if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
@@ -117,7 +116,7 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
         }
         return HttpResponse(template.render(context))
     else:
-        return pageNotFoundManual()
+        return pageNotFoundManual(request)
 
 def quiz(request, category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
@@ -319,7 +318,7 @@ def newsletter(request):
                     'backBtn': backBtn
                 }
             else:
-                Newsletter.objects.create(
+                Newsletter_Users.objects.create(
                     email= emailInput,
                     username= usernameInput,
                     favorite_Category= favoriteCategory
@@ -334,9 +333,9 @@ def newsletter(request):
 
             return HttpResponse(template.render(context))
     else:
-        return pageNotFoundManual()
+        return pageNotFoundManual(request)
 
-def pageNotFoundManual():
+def pageNotFoundManual(request):
     template = loader.get_template('app/errorHandler.html')
     context = {
         'searchForm': SearchForm(),

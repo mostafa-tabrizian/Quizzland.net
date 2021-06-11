@@ -1,0 +1,379 @@
+1623396611740	geckodriver	INFO	Listening on 127.0.0.1:58739
+1623396614774	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilek5SIH6"
+1623396615625	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623396617466	Marionette	INFO	Listening on port 58753
+1623396617921	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623396660071	Marionette	INFO	Stopped listening on port 58753
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623396726886	geckodriver	INFO	Listening on 127.0.0.1:59079
+1623396729894	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileWqseBb"
+1623396730222	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623396731631	Marionette	INFO	Listening on port 59089
+1623396731921	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623396737205	Marionette	INFO	Stopped listening on port 59089
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623396750864	geckodriver	INFO	Listening on 127.0.0.1:59264
+1623396753882	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileKhTENp"
+1623396754194	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623396755817	Marionette	INFO	Listening on port 59274
+1623396755914	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+console.error: services.settings: 
+  main/message-groups Signature failed  TypeError: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  main/partitioning-exempt-urls Signature failed  TypeError: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  main/fxmonitor-breaches Signature failed  TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: AbortError: A request was aborted, for example through a call to IDBTransaction.abort.
+1623396760841	Marionette	INFO	Stopped listening on port 59274
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623396817207	geckodriver	INFO	Listening on 127.0.0.1:59567
+1623396820236	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileUoUNcM"
+1623396820543	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623396822020	Marionette	INFO	Listening on port 59578
+1623396822273	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623396827826	Marionette	INFO	Stopped listening on port 59578
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623396834453	geckodriver	INFO	Listening on 127.0.0.1:59695
+1623396846668	geckodriver	INFO	Listening on 127.0.0.1:59750
+1623396849684	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilezij28p"
+1623396850023	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623396851514	Marionette	INFO	Listening on port 59764
+1623396851710	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623396932726	Marionette	INFO	Stopped listening on port 59764
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+"--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofiled5sJGk"
+1623396931517	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623396933224	Marionette	INFO	Listening on port 60094
+1623396933329	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623396936908	Marionette	INFO	Stopped listening on port 60094
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623397018066	geckodriver	INFO	Listening on 127.0.0.1:60319
+1623397021095	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile0M8K9u"
+1623397021413	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397022879	Marionette	INFO	Listening on port 60332
+1623397023131	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623397027116	Marionette	INFO	Stopped listening on port 60332
+1623397045664	geckodriver	INFO	Listening on 127.0.0.1:60446
+1623397048687	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilerENBha"
+1623397049183	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397050983	Marionette	INFO	Listening on port 60462
+1623397051332	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623397055524	Marionette	INFO	Stopped listening on port 60462
+1623397073604	geckodriver	INFO	Listening on 127.0.0.1:60602
+1623397076632	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileVnuYDJ"
+1623397076962	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397078485	Marionette	INFO	Listening on port 60616
+1623397078659	Marionette	WARN	TLS certificate errors will be ignored for this session
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+1623397096699	Marionette	INFO	Stopped listening on port 60616
+1623397126050	geckodriver	INFO	Listening on 127.0.0.1:60771
+1623397129080	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileqDmonA"
+1623397129411	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397130943	Marionette	INFO	Listening on port 60779
+1623397131113	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623397135053	Marionette	INFO	Stopped listening on port 60779
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623397244300	geckodriver	INFO	Listening on 127.0.0.1:61125
+1623397247328	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileZKdVvN"
+1623397247638	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397249133	Marionette	INFO	Listening on port 61137
+1623397249351	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623397259381	Marionette	INFO	Stopped listening on port 61137
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623397574354	geckodriver	INFO	Listening on 127.0.0.1:62617
+1623397577381	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilezaHwP9"
+1623397577726	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397579276	Marionette	INFO	Listening on port 62628
+1623397579413	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x3A0144,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+1623397583858	Marionette	INFO	Stopped listening on port 62628
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623397593731	geckodriver	INFO	Listening on 127.0.0.1:62703
+1623397596770	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileCisApu"
+1623397597089	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397598721	Marionette	INFO	Listening on port 62713
+1623397598796	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+console.error: services.settings: 
+  main/whats-new-panel Signature failed  TypeError: NetworkError when attempting to fetch resource.
+1623397606018	Marionette	INFO	Stopped listening on port 62713
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623397734663	geckodriver	INFO	Listening on 127.0.0.1:63317
+1623397737690	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileWpcBaK"
+1623397738010	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397739485	Marionette	INFO	Listening on port 63328
+1623397739716	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623397748940	Marionette	INFO	Stopped listening on port 63328
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623397827017	geckodriver	INFO	Listening on 127.0.0.1:63552
+1623397830036	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilegjz7U0"
+1623397830398	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397831891	Marionette	INFO	Listening on port 63561
+1623397832066	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+console.error: services.settings: 
+  main/fxmonitor-breaches Signature failed  TypeError: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  main/message-groups Signature failed  TypeError: NetworkError when attempting to fetch resource.
+console.error: services.settings: 
+  main/partitioning-exempt-urls Signature failed  TypeError: NetworkError when attempting to fetch resource.
+1623397834487	Marionette	INFO	Stopped listening on port 63561
+1623397856203	geckodriver	INFO	Listening on 127.0.0.1:63651
+1623397859209	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileMFTEEI"
+*** You are running in headless mode.
+1623397859515	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397860562	Marionette	INFO	Listening on port 63659
+1623397860735	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623397966819	geckodriver	INFO	Listening on 127.0.0.1:63953
+1623397969847	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile6fRM45"
+*** You are running in headless mode.
+1623397970206	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623397971242	Marionette	INFO	Listening on port 63969
+1623397971376	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623398101333	geckodriver	INFO	Listening on 127.0.0.1:64178
+1623398104361	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileAEz95i"
+*** You are running in headless mode.
+1623398104659	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623398105818	Marionette	INFO	Listening on port 64186
+1623398105884	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623398174581	geckodriver	INFO	Listening on 127.0.0.1:64373
+1623398177608	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilelKuA6M"
+*** You are running in headless mode.
+1623398177985	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623398179142	Marionette	INFO	Listening on port 64384
+1623398179636	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623398259991	geckodriver	INFO	Listening on 127.0.0.1:64591
+1623398263010	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilezU4tni"
+*** You are running in headless mode.
+1623398263323	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623398264466	Marionette	INFO	Listening on port 64601
+1623398264538	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623398304588	geckodriver	INFO	Listening on 127.0.0.1:64725
+1623398307594	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileZec3pB"
+*** You are running in headless mode.
+1623398307896	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623398309136	Marionette	INFO	Listening on port 64737
+1623398309622	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623398467207	geckodriver	INFO	Listening on 127.0.0.1:65294
+1623398470235	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilejA5hnR"
+*** You are running in headless mode.
+1623398470549	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623398471575	Marionette	INFO	Listening on port 65303
+1623398471765	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623398881319	geckodriver	INFO	Listening on 127.0.0.1:50180
+1623398884337	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileJScL9a"
+*** You are running in headless mode.
+1623398884639	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623398885705	Marionette	INFO	Listening on port 50190
+1623398885866	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623399209118	geckodriver	INFO	Listening on 127.0.0.1:51075
+1623399212134	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile4YONXC"
+*** You are running in headless mode.
+1623399212440	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623399213563	Marionette	INFO	Listening on port 51087
+1623399213657	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623399310289	geckodriver	INFO	Listening on 127.0.0.1:51317
+1623399313303	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileXjIVIn"
+*** You are running in headless mode.
+1623399313618	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623399314661	Marionette	INFO	Listening on port 51329
+1623399314824	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623399334956	geckodriver	INFO	Listening on 127.0.0.1:51417
+1623399337962	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileIQMuxX"
+*** You are running in headless mode.
+1623399338304	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623399339407	Marionette	INFO	Listening on port 51430
+1623399339484	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623399377819	geckodriver	INFO	Listening on 127.0.0.1:51602
+1623399380853	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilevbYcMR"
+*** You are running in headless mode.
+1623399381162	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623399382202	Marionette	INFO	Listening on port 51613
+1623399382382	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623399394262	geckodriver	INFO	Listening on 127.0.0.1:51683
+1623399397275	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile66wQQl"
+*** You are running in headless mode.
+1623399397804	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623399398863	Marionette	INFO	Listening on port 51698
+1623399399303	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+1623399409525	geckodriver	INFO	Listening on 127.0.0.1:51769
+1623399412542	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilerAn58I"
+*** You are running in headless mode.
+1623399412867	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623399414184	Marionette	INFO	Listening on port 51794
+1623399414570	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null

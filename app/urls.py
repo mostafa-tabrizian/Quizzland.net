@@ -19,5 +19,4 @@ urlpatterns = [
     path('adverts', views.adverts),
     path('support', views.support),
     path('newsletter', views.newsletter),
-    path('404', views.pageNotFoundManual),
 ]
