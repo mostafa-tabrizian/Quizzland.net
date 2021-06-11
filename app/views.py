@@ -257,7 +257,6 @@ def sortTheQuizzesByCategory(request, category, page, sortOfQuiz):
     }
     return HttpResponse(template.render(context))
 
-@cache_page(CACHE_TTL)
 def contact(request):
     template = loader.get_template('app/contact.html')
     context = {
@@ -270,7 +269,6 @@ def contact(request):
     }
     return HttpResponse(template.render(context))
 
-@cache_page(CACHE_TTL)
 def privacyPolicy(request):
     template = loader.get_template('app/privacyPolicy.html')
     context = {
@@ -281,7 +279,6 @@ def privacyPolicy(request):
     }
     return HttpResponse(template.render(context))
 
-@cache_page(CACHE_TTL)
 def guide(request):
     template = loader.get_template('app/guide.html')
     context = {
@@ -294,7 +291,6 @@ def guide(request):
     }
     return HttpResponse(template.render(context))
 
-@cache_page(CACHE_TTL)
 def adverts(request):
     template = loader.get_template('app/adverts.html')
     context = {
@@ -305,7 +301,6 @@ def adverts(request):
     }
     return HttpResponse(template.render(context))
 
-@cache_page(CACHE_TTL)
 def support(request):
     template = loader.get_template('app/support.html')
     context = {
