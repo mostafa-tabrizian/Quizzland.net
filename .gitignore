@@ -4,5 +4,8 @@ node_modules
 htmlcov
 .coverage
 QuizLand.session.sql
-*package*
 .vscode
+geckodriver.log
+Quizland-venv
+.gitignore
+monthlyViewsData.csv
