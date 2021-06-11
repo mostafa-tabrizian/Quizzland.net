@@ -480,25 +480,18 @@ input {
 
         &__inner {
             flex-wrap: wrap;
+            margin: auto;
             margin-bottom: 2rem;
 
             a {
-                width: 14rem;
-                height: 8rem;
                 box-shadow: 0 0 10px #000000bd;
                 position: relative;
                 border: 0.5px solid #6f6f6f;
                 transition: all .2s ease-in-out;
                 margin-bottom: 7rem;
-                margin-right: 2rem;
+                margin-right: 1.6rem;
                 border-radius: 12px 12px 0 0;
-                
-                @include breakpoints-down(medium) {
-                    width: 11rem;
-                    height: 6rem;
-                    border: inherit;
-                }
-
+            
                 &::after {
                     content: '';
                     height: 5rem;
@@ -507,7 +500,7 @@ input {
                     width: 100%;
                     position: absolute;
                     left: 0;
-                    bottom: -5rem;
+                    bottom: -4rem;
                     border-radius: 0 0 10px 10px;
                     transition: all .2s ease-in-out;
                 }
@@ -522,9 +515,12 @@ input {
                 }
 
                 img {
-                    width: 14rem;
-                    height: 8rem;
+                    width: 14rem; height: 8rem;
                     border-radius: 10px 10px 0 0;
+
+                    @include breakpoints-down(medium) {
+                        width: 12rem; height: 7rem;
+                    }
                 }
             }
 
@@ -549,15 +545,11 @@ input {
             
             &__title {
                 position: absolute;
-                top: 8.2rem;
+                top: 8.5rem;
                 right: 1rem;
                 z-index: 2;
                 text-align: right;
                 font-size: $font-sm;
-
-                @include breakpoints-down(medium) {
-                    top: 6.4rem;
-                }
             }
         }
     }

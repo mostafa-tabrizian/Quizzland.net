@@ -761,12 +761,11 @@ input {
 .quizContainer__category__inner {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin: auto;
   margin-bottom: 2rem;
 }
 
 .quizContainer__category__inner a {
-  width: 14rem;
-  height: 8rem;
   -webkit-box-shadow: 0 0 10px #000000bd;
           box-shadow: 0 0 10px #000000bd;
   position: relative;
@@ -774,16 +773,8 @@ input {
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
   margin-bottom: 7rem;
-  margin-right: 2rem;
+  margin-right: 1.6rem;
   border-radius: 12px 12px 0 0;
-}
-
-@media (max-width: 49.9375em) {
-  .quizContainer__category__inner a {
-    width: 11rem;
-    height: 6rem;
-    border: inherit;
-  }
 }
 
 .quizContainer__category__inner a::after {
@@ -795,7 +786,7 @@ input {
   width: 100%;
   position: absolute;
   left: 0;
-  bottom: -5rem;
+  bottom: -4rem;
   border-radius: 0 0 10px 10px;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
@@ -815,6 +806,13 @@ input {
   width: 14rem;
   height: 8rem;
   border-radius: 10px 10px 0 0;
+}
+
+@media (max-width: 49.9375em) {
+  .quizContainer__category__inner a img {
+    width: 12rem;
+    height: 7rem;
+  }
 }
 
 .quizContainer__category__inner__views {
@@ -838,17 +836,11 @@ input {
 
 .quizContainer__category__inner__title {
   position: absolute;
-  top: 8.2rem;
+  top: 8.5rem;
   right: 1rem;
   z-index: 2;
   text-align: right;
   font-size: 1.18rem;
-}
-
-@media (max-width: 49.9375em) {
-  .quizContainer__category__inner__title {
-    top: 6.4rem;
-  }
 }
 
 @media (max-width: 49.9375em) {
@@ -2260,9 +2252,8 @@ body {
   min-height: 40vh;
 }
 
-.result__title > h3 {
-  font-size: 1.18rem;
-  font-weight: 300;
+.result__title > h5 {
+  opacity: .5;
 }
 
 .result__subtitle {
@@ -2349,11 +2340,7 @@ body {
 
 .resultQuizPointy {
   display: block;
-}
-
-.resultQuizPointy__container h3 {
-  position: relative;
-  z-index: 2;
+  line-height: 2;
 }
 
 .resultQuizPointy__container div {
@@ -2374,8 +2361,8 @@ body {
 }
 
 .resultQuizPointy__txt {
-  margin-right: 1.125rem;
-  margin-left: 1.125rem;
+  padding: 1.125rem;
+  margin-top: 0;
 }
 
 .searchResult {
@@ -2567,18 +2554,20 @@ body {
   }
 }
 
-.sortMore__container {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  margin-right: 3rem;
-}
-
 @media (max-width: 49.9375em) {
-  .sortMore__container:first-child {
+  .sortMore div:first-child {
     -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
             order: 1;
   }
+}
+
+.sortMore__container {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-right: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .sortMore__container a {

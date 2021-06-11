@@ -7,15 +7,19 @@
         margin: 0;
     }
 
-    &__container {
-        flex-wrap: wrap;
-        margin-right: 3rem;
-
+    div {
         &:first-child {
             @include breakpoints-down(medium) {
                 order: 1;
             }
         }
+    }
+
+    &__container {
+        flex-wrap: wrap;
+        margin-right: 3rem;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
 
         a {
             width: 14rem;
