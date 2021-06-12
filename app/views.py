@@ -119,7 +119,7 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
             'keywords': f'{innerCategory} بهترین کوئيز های , {innerCategory} کوئيز های',
             'colorOfHeader': 'header__white',
             'tools': tools,
-            'innerCategory': innerCategory,
+            'innerCategory': innerCategoriesByTitle(InnerCategory)[0].background,
             'quizzes': quizzesWithInnerCategory(category, InnerCategory, fTPage[0], fTPage[1], sortType),
             'pageTravel': pageTravel(finalPage(howManyElementToShow, InnerCategory)),
         }

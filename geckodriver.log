@@ -247,8 +247,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623397966819	geckodriver	INFO	Listening on 127.0.0.1:63953
-1623397969847	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile6fRM45"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofileMFTEEI\bookmarkbackups\bookmarks-2021-06-11_11_dQEY3k8W816FvuoBCKa7Fw==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile6fRM45"
 *** You are running in headless mode.
 1623397970206	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -257,8 +257,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623398101333	geckodriver	INFO	Listening on 127.0.0.1:64178
-1623398104361	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileAEz95i"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofile6fRM45\bookmarkbackups\bookmarks-2021-06-11_11_wikA0evRYh81CCxsSPzHsw==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileAEz95i"
 *** You are running in headless mode.
 1623398104659	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -267,8 +267,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623398174581	geckodriver	INFO	Listening on 127.0.0.1:64373
-1623398177608	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilelKuA6M"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofileAEz95i\bookmarkbackups\bookmarks-2021-06-11_11_9s54DtorwSjzJ9-KixKF6Q==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilelKuA6M"
 *** You are running in headless mode.
 1623398177985	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -277,8 +277,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623398259991	geckodriver	INFO	Listening on 127.0.0.1:64591
-1623398263010	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilezU4tni"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofilelKuA6M\bookmarkbackups\bookmarks-2021-06-11_11_SNXQhRE5dN3ZjqMyrQnrOQ==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilezU4tni"
 *** You are running in headless mode.
 1623398263323	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -287,8 +287,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623398304588	geckodriver	INFO	Listening on 127.0.0.1:64725
-1623398307594	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileZec3pB"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofilezU4tni\bookmarkbackups\bookmarks-2021-06-11_11_sbpMbhM49-93FpSUFXdMjQ==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileZec3pB"
 *** You are running in headless mode.
 1623398307896	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -297,8 +297,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623398467207	geckodriver	INFO	Listening on 127.0.0.1:65294
-1623398470235	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilejA5hnR"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofileZec3pB\bookmarkbackups\bookmarks-2021-06-11_11_Bm+APkIJdtJolWpnwXZI2g==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilejA5hnR"
 *** You are running in headless mode.
 1623398470549	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -307,8 +307,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623398881319	geckodriver	INFO	Listening on 127.0.0.1:50180
-1623398884337	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileJScL9a"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofilejA5hnR\bookmarkbackups\bookmarks-2021-06-11_11_Hm5kUOpFyfLxoI6ZwvrN1Q==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileJScL9a"
 *** You are running in headless mode.
 1623398884639	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -347,8 +347,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623399377819	geckodriver	INFO	Listening on 127.0.0.1:51602
-1623399380853	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilevbYcMR"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofileIQMuxX\bookmarkbackups\bookmarks-2021-06-11_11_RYPXA9tPNlxHP2dszMVZRw==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilevbYcMR"
 *** You are running in headless mode.
 1623399381162	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -367,8 +367,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623399409525	geckodriver	INFO	Listening on 127.0.0.1:51769
-1623399412542	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilerAn58I"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofile66wQQl\bookmarkbackups\bookmarks-2021-06-11_11_-7gWqChJXuziObYLaGL7Dw==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilerAn58I"
 *** You are running in headless mode.
 1623399412867	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -377,8 +377,8 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
-1623400714396	geckodriver	INFO	Listening on 127.0.0.1:53745
-1623400717423	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile4yJ33F"
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofilerAn58I\bookmarkbackups\bookmarks-2021-06-11_11_Sid+9RBwsXBHwizYB7D90g==.jsonlz4) because it does not exist
+C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile4yJ33F"
 *** You are running in headless mode.
 1623400717732	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
@@ -387,3 +387,4 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofile4yJ33F\bookmarkbackups\bookmarks-2021-06-11_11_Q3Gg0Hnsb9HqNoaUN9GDTg==.jsonlz4) because it does not exist

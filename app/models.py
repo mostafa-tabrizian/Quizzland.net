@@ -28,7 +28,7 @@ class Quizzes(models.Model):
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     title_english = models.CharField(max_length=100, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
-    views = models.IntegerField(default=0)
+    viewssssssssssssss = models.IntegerField(default=0)
     background = models.ImageField(upload_to='app/static/img/Quizzes', default='app/static/img/Base/NotExist.jpg')
     fan_name = models.CharField(max_length=100, null=False, blank=False, default=None)
     GIF20 = models.ImageField(upload_to='app/static/img/Answer-And-Result-ImGIf', default='app/static/img/Base/NotExist.jpg')
