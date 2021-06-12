@@ -198,11 +198,6 @@ def quizzesByTitle(title):
     quizzes_exact_title = Quizzes.objects.filter(title__exact=title)
     quizzes_iexact_title = Quizzes.objects.filter(title__iexact=title)
 
-    quizzes_contains_title_eng = Quizzes.objects.filter(title_english__contains=title)
-    quizzes_icontains_title_eng = Quizzes.objects.filter(title_english__icontains=title)
-    quizzes_exact_title_eng = Quizzes.objects.filter(title_english__exact=title)
-    quizzes_iexact_title_eng = Quizzes.objects.filter(title_english__iexact=title)
-
     quizzes_contains_innerCategory = Quizzes.objects.filter(innerCategory=title)
     quizzes_icontains_innerCategory = Quizzes.objects.filter(innerCategory__icontains=title)
     quizzes_exact_innerCategory = Quizzes.objects.filter(innerCategory__exact=title)
@@ -210,8 +205,6 @@ def quizzesByTitle(title):
 
     quizzes = quizzes_contains_title | quizzes_icontains_title | \
               quizzes_exact_title | quizzes_iexact_title | \
-              quizzes_contains_title_eng | quizzes_icontains_title_eng | \
-              quizzes_exact_title_eng | quizzes_iexact_title_eng | \
               quizzes_contains_innerCategory | quizzes_icontains_innerCategory | \
               quizzes_exact_innerCategory | quizzes_iexact_innerCategory   
 
@@ -222,11 +215,6 @@ def quizzesPointyByTitle(title):
     quizzesPointy_icontains_title = Quizzes_Pointy.objects.filter(title__icontains=title)
     quizzesPointy_exact_title = Quizzes_Pointy.objects.filter(title__exact=title)
     quizzesPointy_iexact_title = Quizzes_Pointy.objects.filter(title__iexact=title)
-    
-    quizzesPointy_contains_title_eng = Quizzes_Pointy.objects.filter(title_english__contains=title)
-    quizzesPointy_icontains_title_eng = Quizzes_Pointy.objects.filter(title_english__icontains=title)
-    quizzesPointy_exact_title_eng = Quizzes_Pointy.objects.filter(title_english__exact=title)
-    quizzesPointy_iexact_title_eng = Quizzes_Pointy.objects.filter(title_english__iexact=title)
 
     quizzesPointy_contains_innerCategory = Quizzes_Pointy.objects.filter(innerCategory=title)
     quizzesPointy_icontains_innerCategory = Quizzes_Pointy.objects.filter(innerCategory__icontains=title)
@@ -235,19 +223,17 @@ def quizzesPointyByTitle(title):
 
     quizzesPointy = quizzesPointy_contains_title | quizzesPointy_icontains_title | \
                     quizzesPointy_exact_title | quizzesPointy_iexact_title | \
-                    quizzesPointy_contains_title_eng | quizzesPointy_icontains_title_eng | \
-                    quizzesPointy_exact_title_eng | quizzesPointy_iexact_title_eng | \
                     quizzesPointy_contains_innerCategory | quizzesPointy_icontains_innerCategory | \
                     quizzesPointy_exact_innerCategory | quizzesPointy_iexact_innerCategory
 
     return quizzesPointy
 
 def quizQuestionByTitle(title):
-    if Quiz_Questions.objects.filter(title=title).all():
-        questions = Quiz_Questions.objects.filter(title=title).all()
+    if Questions.objects.filter(title=title).all():
+        questions = Questions.objects.filter(title=title).all()
         
-    elif Quiz_Pointy_Questions.objects.filter(title=title).all():
-        questions = Quiz_Pointy_Questions.objects.filter(title=title).all()
+    elif Pointy_Questions.objects.filter(title=title).all():
+        questions = Pointy_Questions.objects.filter(title=title).all()
     else:
         return ' '
     
@@ -256,7 +242,8 @@ def quizQuestionByTitle(title):
 # #----------------------------------------------------------------
 
 def addViewToQuizzes(title):
-    print('enter')
+    print(title)
+    print('ADD TO QUIZ VIEW')
     try:
         quizToAddView = Quizzes.objects.get(title=title)
         viewsPlusOne(quizToAddView)

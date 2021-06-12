@@ -396,3 +396,4 @@ JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError
 JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofile4yJ33F\bookmarkbackups\bookmarks-2021-06-11_11_Q3Gg0Hnsb9HqNoaUN9GDTg==.jsonlz4) because it does not exist
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE

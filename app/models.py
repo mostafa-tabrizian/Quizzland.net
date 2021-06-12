@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 import datetime
 
@@ -9,6 +10,10 @@ class Document(models.Model):
 
     def __str__(self):
         return self.title
+        
+class Document_Admin(admin.ModelAdmin):
+    list_display = ('title', 'note')
+
 
 class InnerCategories(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False, default=None)
@@ -23,11 +28,13 @@ class InnerCategories(models.Model):
     def __str__(self):
         return self.innerCategory
 
+class InnerCategory_Admin(admin.ModelAdmin):
+    list_display = ('innerCategory', 'title', 'category', 'monthly_views', 'views', 'publish')
+
 class Quizzes(models.Model):
     category = models.CharField(max_length=100, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title_english = models.CharField(max_length=100, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     background = models.ImageField(upload_to='app/static/img/Quizzes', default='app/static/img/Base/NotExist.jpg')
@@ -40,17 +47,18 @@ class Quizzes(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.title_english
+        return self.innerCategory
 
     def __unicode__(self):
         return 'test'
 
+class Quizzes_Admin(admin.ModelAdmin):
+    list_display = ('title', 'innerCategory', 'category', 'monthly_views', 'views', 'publish')
 
 class Quizzes_Pointy(models.Model):
     category = models.CharField(max_length=100, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title_english = models.CharField(max_length=100, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     background = models.ImageField(upload_to='app/static/img/Quizzes', default='app/static/img/Base/NotExist.jpg')
@@ -108,14 +116,15 @@ class Quizzes_Pointy(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.title_english
+        return self.innerCategory
 
+class Quizzes_Pointy_Admin(admin.ModelAdmin):
+    list_display = ('title', 'innerCategory', 'category', 'monthly_views', 'views', 'publish')
 
-class Quiz_Questions(models.Model):
+class Questions(models.Model):
     category = models.CharField(max_length=100, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title_english = models.CharField(max_length=100, null=False, blank=False, default=None)
     question = models.TextField(null=False, blank=False, default=None)
     option_1 = models.CharField(max_length=100, null=False, blank=False, default=None)
     option_2 = models.CharField(max_length=100, null=False, blank=False, default=None)
@@ -126,17 +135,18 @@ class Quiz_Questions(models.Model):
     answer_text = models.TextField(null=False, blank=True, default=None)
 
     def __str__(self):
-        return self.title_english
+        return self.innerCategory
 
     def __unicode__(self):
         return 'test'
 
+class Questions_Admin(admin.ModelAdmin):
+    list_display = ('title', 'question', 'innerCategory', 'category')
 
-class Quiz_Pointy_Questions(models.Model):
+class Pointy_Questions(models.Model):
     category = models.CharField(max_length=100, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title_english = models.CharField(max_length=100, null=False, blank=False, default=None)
     question = models.CharField(max_length=200, null=False, blank=False, default=None)
 
     option_Value_1 = models.CharField(max_length=100, null=False, blank=False, default=None)
@@ -172,8 +182,10 @@ class Quiz_Pointy_Questions(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.title_english
+        return self.innerCategory
 
+class Pointy_Questions_Admin(admin.ModelAdmin):
+    list_display = ('title', 'question', 'innerCategory', 'category', 'publish')
 
 class Newsletter_Users(models.Model):
     email = models.CharField(max_length=200, null=False, blank=False, default=None)
@@ -186,3 +198,6 @@ class Newsletter_Users(models.Model):
 
     def __unicode__(self):
         return 'test'
+
+class Newsletter_Users_Admin(admin.ModelAdmin):
+    list_display = ('email', 'username', 'favorite_Category', 'signedUp_On')

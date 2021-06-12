@@ -1,15 +1,18 @@
-# encoding=utf-8
-
 from django.contrib import admin
-from .models import Document, InnerCategories,\
-                    Quizzes, Quiz_Questions,\
-                    Quizzes_Pointy, Quiz_Pointy_Questions,\
-                    Newsletter_Users
+from .models import Document, Document_Admin,\
+                    InnerCategories, InnerCategory_Admin,\
+                    Quizzes, Quizzes_Admin,\
+                    Quizzes_Pointy, Quizzes_Pointy_Admin,\
+                    Questions, Questions_Admin,\
+                    Pointy_Questions, Pointy_Questions_Admin,\
+                    Newsletter_Users, Newsletter_Users_Admin
 
-admin.site.register(Document)
-admin.site.register(InnerCategories)
-admin.site.register(Quizzes)
-admin.site.register(Quiz_Questions)
-admin.site.register(Quizzes_Pointy)
-admin.site.register(Quiz_Pointy_Questions)
-admin.site.register(Newsletter_Users)
+admin.site.site_header = "Quizland Admin Panel"
+
+admin.site.register(Document, Document_Admin)
+admin.site.register(InnerCategories, InnerCategory_Admin)
+admin.site.register(Quizzes, Quizzes_Admin)
+admin.site.register(Quizzes_Pointy, Quizzes_Pointy_Admin)
+admin.site.register(Questions, Questions_Admin)
+admin.site.register(Pointy_Questions, Pointy_Questions_Admin)
+admin.site.register(Newsletter_Users, Newsletter_Users_Admin)

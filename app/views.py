@@ -138,7 +138,6 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
 def quiz(request, category, innerCategory, title):
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
-
     template = loader.get_template('app/quiz.html')
     context = {
         'searchForm': SearchForm(),
