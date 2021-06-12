@@ -53,7 +53,6 @@ body.addEventListener('click', () => {
 })
 
 //----------------------------------------------------------
-
 // open the menu
 header__menu__openBtn.addEventListener('click', () => {
     header__menu.classList.remove('slideMenu-hide')
@@ -61,6 +60,30 @@ header__menu__openBtn.addEventListener('click', () => {
 header__menu__closeBtn.addEventListener('click', () => {
     header__menu.classList.add('slideMenu-hide')
 })
+
+//----------------------------------------------------------
+// check userSearch input
+// id_searchInput.addEventListener('change', () => {
+//     log(id_searchInput.value)
+//     searchTarget = id_searchInput.value
+
+//     $.ajax({
+//         url: '/ajax/validSearch/',
+//         data: {
+//             'searchTarget': searchTarget
+//         },
+//         dataType: 'json',
+//         success: function (data) {
+//             if (data.searchTarget=='admin') {
+//                 log(data.searchTarget)
+//                 alert("Wrong Hole Idiot");
+//             }
+//             else{
+//                 log('error no ajax')
+//             }
+//         }
+//     });
+// })
 
 //----------------------------------------------------------
 // show the submit search btn when focus
@@ -252,15 +275,30 @@ newsletter__closeBtn.addEventListener('click', () => {
     body.style.overflowY = 'overlay'
     newsletter__blurBackground.classList.remove('newsletter__blurBackground__show')
 })
+
 newsletter__submit.addEventListener('click', () => {
-    if (chosenCategory.length > 0) {
-        newsletter__submit.setAttribute('type', 'submit')
-    } else {
-        newsletter__message.classList.remove('noVis')
-    }
+    userEmail = id_emailInput.value
+
+    $.ajax({
+        url: '/ajax/doesExistInNewsletterUsers/',
+        data: {
+            'userEmail': userEmail
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.userEmail) {
+                alert('شما از قبل ثبت نام کرده اید');
+            }
+            else{
+                if (chosenCategory.length > 0) {
+                    newsletter__submit.setAttribute('type', 'submit')
+                } else {
+                    newsletter__message.classList.remove('noVis')
+                }
+            }
+        }
+    });
 })
-
-
 //----------------------------------------------------------
 
 // Page travel

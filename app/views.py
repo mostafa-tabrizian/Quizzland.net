@@ -1,5 +1,5 @@
 from django import template
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, reverse
 from django.template import loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
@@ -48,6 +48,14 @@ def index(request):
     }
 
     return HttpResponse(template.render(context))
+
+# def validSearch(request):
+#     searchTarget = request.GET.get('searchTarget')
+#     data = {
+#         'searchTarget': searchTarget
+#     }
+#     return JsonResponse(data)
+
 
 @csrf_exempt
 def search(request):
@@ -310,6 +318,13 @@ def support(request):
         'headTitle': f'QuizLand | حمایت '
     }
     return HttpResponse(template.render(context))
+
+def doesExistInNewsletterUsers(request):
+    userEmail = request.GET.get('userEmail')
+    data = {
+        'userEmail': Newsletter_Users.objects.filter(email__iexact=userEmail).exists()
+    }
+    return JsonResponse(data)
 
 @csrf_exempt
 def newsletter(request):

@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -18,5 +19,8 @@ urlpatterns = [
     path('guide', views.guide),
     path('adverts', views.adverts),
     path('support', views.support),
-    path('newsletter', views.newsletter)
+    path('newsletter', views.newsletter),
+
+    # url(r'^ajax/validSearch/$', views.validSearch, name='validSearch'),
+    url(r'^ajax/doesExistInNewsletterUsers/$', views.doesExistInNewsletterUsers, name='doesExistInNewsletterUsers'),
 ]
