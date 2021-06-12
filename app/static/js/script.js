@@ -290,10 +290,11 @@ newsletter__submit.addEventListener('click', () => {
                 alert('شما از قبل ثبت نام کرده اید');
             }
             else{
-                if (chosenCategory.length > 0) {
-                    newsletter__submit.setAttribute('type', 'submit')
-                } else {
+                if (!(chosenCategory.length > 0)) {
                     newsletter__message.classList.remove('noVis')
+                } else if (input__userName.value) {
+                    alert('ثبت نام شما با موفقیت انجام شد')
+                    return
                 }
             }
         }

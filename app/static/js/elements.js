@@ -21,6 +21,7 @@ const header__searchOpener = document.querySelector('.header__searchOpener')
 const header__searchOpener__bg = document.querySelector('.header__searchOpener__bg')
 const header__search__closeBtn = document.querySelector('.header__search__closeBtn')
 
+const input__userName = document.querySelector('.input__userName')
 const id_emailInput = document.getElementById('id_emailInput')
 const newsletter__show = document.querySelector('.newsletter__show')
 const newsletter__blurBackground__show = document.querySelector('.newsletter__blurBackground__show')

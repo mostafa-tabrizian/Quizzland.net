@@ -288,9 +288,3 @@ def fanNameOfQuiz(title):
 def addViewToCategories(title):
     data = innerCategoriesByEng(title).first()
     viewsPlusOne(data)
-
-def checkIfTheUserExistInNewsletter(emailInput):
-    try:
-        return Newsletter_Users.objects.get(email=emailInput)
-    except:
-        return None

@@ -1,6 +1,6 @@
 from django import template
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.template import loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -328,6 +328,8 @@ def doesExistInNewsletterUsers(request):
 
 @csrf_exempt
 def newsletter(request):
+    print('newsletter views')
+
     if request.method == 'POST':
         form = NewsletterForm(request.POST)
         if form.is_valid():
@@ -335,29 +337,14 @@ def newsletter(request):
             usernameInput = form.cleaned_data['usernameInput']
             favoriteCategory = form.cleaned_data['favoriteCategory']
 
-            if checkIfTheUserExistInNewsletter(emailInput) != None:
-                template = loader.get_template('app/fails.html')
-                context = {
-                    'searchForm': SearchForm(),
-                    'newsletterForm': NewsletterForm(),
-                    'headTitle': 'QuizLand | خطا در ثبت ایمیل ',
-                    'backBtn': backBtn
-                }
-            else:
-                Newsletter_Users.objects.create(
-                    email= emailInput,
-                    username= usernameInput,
-                    favorite_Category= favoriteCategory
-                )
-                template = loader.get_template('app/success.html')
-                context = {
-                    'searchForm': SearchForm(),
-                    'newsletterForm': NewsletterForm(),
-                    'headTitle': 'QuizLand | ایمیل ثبت شد ',
-                    'backBtn': backBtn
-                }
-
-            return HttpResponse(template.render(context))
+            Newsletter_Users.objects.create(
+                email= emailInput,
+                username= usernameInput,
+                favorite_Category= favoriteCategory
+            )
+            
+            return redirect('/')
+        
     else:
         return pageNotFoundManual(request)
 
