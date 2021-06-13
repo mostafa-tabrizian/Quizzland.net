@@ -7,7 +7,6 @@ from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
 from .models import *
-from .blocks import *
 from .functions import *
 from .db import *
 from .forms import *
@@ -102,10 +101,9 @@ def category(request, categoryArg, page, sortType, numberOfResult ):
             'headTitle': f'QuizLand | کوئیز های {categoryInFar[categoryArg]} ',
             'description': 'کتگوری و گروه های متنوع همچون آدم های معروف و سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ و تست های روانشناسی',
             'keywords': 'تست های روانشناسی, سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ,آدم های معروف, کوئيز',
-            'tools': tools,
             'category': categoryArg,
             'categories': innerCategories(categoryArg, fTPage[0], fTPage[1], sortType),
-            'pageTravel': pageTravel(finalPage(howManyElementToShow, categoryArg)),
+            'finalPage': finalPage(howManyElementToShow, categoryArg)
         }
         return HttpResponse(template.render(context))
     else:
@@ -126,10 +124,9 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
             'description': f'کوئيزلند {innerCategory} کوئيز های',
             'keywords': f'{innerCategory} بهترین کوئيز های , {innerCategory} کوئيز های',
             'colorOfHeader': 'header__white',
-            'tools': tools,
             'innerCategory': innerCategoriesByTitle(InnerCategory)[0].background,
             'quizzes': quizzesWithInnerCategory(category, InnerCategory, fTPage[0], fTPage[1], sortType),
-            'pageTravel': pageTravel(finalPage(howManyElementToShow, InnerCategory)),
+            'finalPage': finalPage(howManyElementToShow, InnerCategory),
         }
         return HttpResponse(template.render(context))
     else:
@@ -178,7 +175,6 @@ def result(request, innerCategory, title):
         'quizDetail': quizzesByTitle(fullTitle)[0],
         'fanName': fanNameOfQuiz(fullTitle),
         'fullTitle': fullTitle,
-        'backBtn': backBtn,
         'headTitle': f'QuizLand | نتیجه کوئیز ',  
     }
     return HttpResponse(template.render(context))
@@ -191,7 +187,6 @@ def resultPointy(request, title, score):
         'newsletterForm': NewsletterForm(),
         'fullTitle': fullTitle,
         'quizDetail': quizzesPointyByTitle(fullTitle)[0],
-        'backBtn': backBtn,
         'score': abs(int(score)),
         'headTitle': f'QuizLand | نتیجه تست ',  
     }
@@ -223,7 +218,7 @@ def sortTheQuizzes(request, sortOfQuiz, page):
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
         'quizPage': 'quiz',
-        'pageTravel': pageTravel(finalPage(howManyElementToShow, 'quizzes')),
+        'finalPage': finalPage(howManyElementToShow, 'quizzes'),
         'sort': sort,
         'sortPointy': sortPointy,
         'title': title,
@@ -259,7 +254,7 @@ def sortTheQuizzesByCategory(request, category, page, sortOfQuiz):
         'sort': sort,
         'title': title,
         'category': categoryInFar[category],
-        'pageTravel': pageTravel(finalPage(howManyElementToShow, 'quizzes')),
+        'finalPage': finalPage(howManyElementToShow, 'quizzes'),
         'headTitle': f'QuizLand | {title} {categoryInFar[category]} '
     }
     return HttpResponse(template.render(context))
@@ -272,7 +267,6 @@ def contact(request):
         'description': 'تماس با پشتیبانی کوئيزلند',
         'keywords': 'پشتیبانی کوئيزلند',
         'headTitle': f'QuizLand | تماس با ما ',
-        'backBtn': backBtn,
     }
     return HttpResponse(template.render(context))
 
@@ -281,7 +275,6 @@ def privacyPolicy(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'backBtn': backBtn,
         'headTitle': 'QuizLand | حریم خصوصی '
     }
     return HttpResponse(template.render(context))
@@ -294,7 +287,6 @@ def guide(request):
         'headTitle': f'QuizLand | راهنما ',
         'description': 'راهنمای وب سایت کوئيزلند',
         'keywords': 'کوئيزلند, راهنمای وب سایت کوئيزلند',
-        'backBtn': backBtn,
     }
     return HttpResponse(template.render(context))
 
@@ -303,7 +295,6 @@ def adverts(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'backBtn': backBtn,
         'headTitle': f'QuizLand | تبلیغات '
     }
     return HttpResponse(template.render(context))
@@ -313,7 +304,6 @@ def support(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'backBtn': backBtn,
         'headTitle': f'QuizLand | حمایت '
     }
     return HttpResponse(template.render(context))
@@ -352,7 +342,6 @@ def pageNotFoundManual(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'backBtn': backBtn,
         'headTitle': f'QuizLand | صفحه مورد نظر پیدا نشد ', 
         'message': "🤔 صفحه‌ی مورد نظر پیدا نشد",
     }
@@ -363,7 +352,6 @@ def error404(request, exception):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'backBtn': backBtn,
         'headTitle': f'QuizLand | صفحه مورد نظر پیدا نشد ', 
         'message': "🤔 صفحه‌ی مورد نظر پیدا نشد"
     }
@@ -376,7 +364,6 @@ def error403(request, exception):
         'newsletterForm': NewsletterForm(),
         'headTitle': f'QuizLand | دسترسی شما به این صفحه مجاز نیست ', 
         'message': "❌ دسترسی شما به این صفحه مجاز نیست ❌",
-        'backBtn': backBtn,
     }
     return HttpResponse(template.render(context))
 
@@ -387,6 +374,5 @@ def error500(request):
         'newsletterForm': NewsletterForm(),
         'headTitle': f'QuizLand | مشکلی رخ داده است ', 
         'message': "🙄 سرور های سایت احتمالا داغ کرده لطفا یکم دیگه امتحان کنید",
-        'backBtn': backBtn,
     }
     return HttpResponse(template.render(context))
