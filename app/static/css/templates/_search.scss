@@ -26,20 +26,15 @@
         }
     
         &__item {
-            width: 12.5rem;
-            height: 16.2135rem;
-            margin-left: 0.96875rem;
-            margin-right: 0.96875rem;
-            margin-bottom:  1.93757rem;
+            width: 12.5rem; height: 16.2135rem;
+            margin-left: 0.96875rem; margin-right: 0.96875rem; margin-bottom:  1.93757rem;
     
             @include breakpoints-down(medium) {
-                width: 10rem;
-                height: 14.75rem;
+                width: 10rem; height: 14.75rem;
             }
     
             a > img {
-                width: 100%;
-                height: 100%;
+                width: 100%; height: 100%;
                 object-fit: cover;
                 border: 3px solid $gray;
                 border-radius: 40px;

@@ -15,12 +15,10 @@ footer, .footer {
 
     width: 100%;
     position: absolute;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 3rem; padding-bottom: 3rem;
 
     & > div{
         padding-top: 1rem;
-        display: inline-block;
         align-items: center;
         display: block;
     }
@@ -38,13 +36,11 @@ footer, .footer {
         position: fixed;
         padding: 4rem;
         width: 50rem;
-        top: 25%;
-        left: 25%;
+        top: 25%;left: 25%;
         background: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(8px);
         color: $black;
-        border: transparent;
-        border-radius: 15px;
+        border: transparent;border-radius: 15px;
         transition: all .3s ease-in-out;
         
         @include breakpoints-down(medium) {
@@ -90,10 +86,8 @@ footer, .footer {
         &__blurBackground__show {
             position: fixed;
             display: block;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0;left: 0;
+            width: 100vw;height: 100vh;
             z-index: 5;
             background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(25px);
@@ -110,8 +104,7 @@ footer, .footer {
             cursor: pointer;
 
             @include breakpoints-down(medium) {
-                right: .5rem;
-                top: .5rem;
+                right: .5rem; top: .5rem;
             }
         }
 
@@ -133,7 +126,6 @@ footer, .footer {
             & > label {
                 display: flex;
                 justify-content: flex-end;
-                display: flex;
                 align-items: center;
                 
                 &:nth-child(3) {
@@ -141,8 +133,7 @@ footer, .footer {
                 }
 
                 & > input {
-                    margin-left: 1.125rem;
-                    margin-right: .2rem;
+                    margin-left: 1.125rem; margin-right: .2rem;
 
     
                     @include breakpoints-down(medium) {
@@ -159,10 +150,9 @@ footer, .footer {
         }
 
         &__message {
-            margin: 0;
+            margin: 0; margin-top: .5rem;
             color: $red;
             font-size: 1rem;
-            margin-top: .5rem;
         }
 
 
@@ -180,8 +170,7 @@ footer, .footer {
             &__chooseCategory {
                 order: -1;
                 width: 60%;
-                margin: 0 auto;
-                margin-top: 0.425rem;
+                margin: 0 auto; margin-top: 0.425rem;
             }
         }
     }

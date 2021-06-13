@@ -1880,13 +1880,13 @@ body {
 .quiz__container {
   max-width: 30rem;
   margin: auto 2rem;
+  margin-top: 5rem;
+  margin-right: 22rem;
+  margin-left: 22rem;
   padding: 0.1rem;
   border-radius: 24px;
   -webkit-transition: all 1.3s;
   transition: all 1.3s;
-  margin-top: 5rem;
-  margin-right: 22rem;
-  margin-left: 22rem;
   position: relative;
   -webkit-transform: translate(-17rem);
           transform: translate(-17rem);
@@ -1936,9 +1936,9 @@ body {
 .quiz__autoQuestionChangerSwitch {
   position: relative;
   top: 1rem;
+  width: 7rem;
   z-index: 2;
   cursor: pointer;
-  width: 7rem;
 }
 
 .quiz__autoQuestionChangerSwitch > h5 {
@@ -1949,8 +1949,8 @@ body {
   width: 2rem;
   height: 1rem;
   border: 1px solid white;
-  background: white;
   border-radius: 25px;
+  background: white;
   margin-left: .7rem;
   -webkit-box-shadow: inset 0 0 5px black, 0 0 5px black;
           box-shadow: inset 0 0 5px black, 0 0 5px black;
@@ -2104,8 +2104,8 @@ body {
 .quiz__options__textLabel::before {
   content: '';
   height: .0625rem;
-  font-family: Vermin-Vibes-2-Soft, myChanga, sans-serif;
   width: 1.25rem;
+  font-family: Vermin-Vibes-2-Soft, myChanga, sans-serif;
   border-radius: 50%;
   margin: 0;
   display: -webkit-box;
@@ -2598,10 +2598,10 @@ body {
 .sortMore__container a::after {
   content: '';
   height: 5rem;
+  width: 100%;
   background: white;
   -webkit-box-shadow: 0 6px 7px #00000061;
           box-shadow: 0 6px 7px #00000061;
-  width: 100%;
   position: absolute;
   left: 0;
   bottom: -5rem;

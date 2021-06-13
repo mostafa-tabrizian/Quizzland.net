@@ -4,11 +4,9 @@
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: cover;
-    height: 43.75rem;
-    width: 100%;
+    height: 43.75rem; width: 100%;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     box-shadow: black 0 5px 50px;
 }
 
@@ -25,8 +23,7 @@
         margin-top: 0;
 
         @include breakpoints-down(medium) {
-            margin-right: 1rem;
-            margin-left: 1rem;
+            margin-right: 1rem; margin-left: 1rem;
         }
     }
 
@@ -44,12 +41,10 @@
     }
     
     img {
-        width: 14.6875rem;
-        height: 14.6875rem;
+        width: 14.6875rem; height: 14.6875rem;
         border-radius: 20px;
         box-shadow: 0 0 10px black;
-        margin: 1.4375rem;
-        margin-bottom: 0;
+        margin: 1.4375rem; margin-bottom: 0;
         transition: all .3s ease-in-out;
 
         &:hover {
@@ -109,8 +104,7 @@
             &::after {
                 content: '#';
                 position: absolute;
-                right: -2rem;
-                top: -3rem;
+                right: -2rem; top: -3rem;
                 font-size: 6rem;
                 color: rgba(160, 27, 27, .12);
             }
@@ -181,9 +175,7 @@
 
 
     &__style {
-        margin-left: 2rem;
-        margin-right: 2rem;
-        margin-top: 0;
+        margin-left: 2rem; margin-right: 2rem; margin-top: 0;
         line-height: 2rem;
 
         li {
@@ -197,8 +189,7 @@
         font-size: $font-sm;
         opacity: .7;
         position: absolute;
-        bottom: 1rem;
-        left: 2rem;
+        bottom: 1rem; left: 2rem;
 
         &:hover {
             opacity: 1;

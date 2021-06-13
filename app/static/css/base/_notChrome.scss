@@ -47,14 +47,12 @@
 
     .quiz {
         &__head {
-            font-family: $font-notChrome !important;
-            font-weight: 300;
+            font-family: $font-notChrome !important; font-weight: 300;
         }
 
         &__question {
             background: #0000008f !important;
-            font-family: $font-notChrome !important;
-            font-weight: 300 !important;
+            font-family: $font-notChrome !important; font-weight: 300 !important;
         }
     }
 
@@ -69,7 +67,6 @@
     }
 
     .result {
-        font-family: $font-notChrome !important;
-        font-weight: 300 !important;
+        font-family: $font-notChrome !important; font-weight: 300 !important;
     }
 }

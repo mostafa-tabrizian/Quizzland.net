@@ -3,8 +3,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
 }
 
 .quizzes {
@@ -19,21 +18,17 @@ body {
     }
 
     &__item {
-        width: 12.5rem;
-        height: 16.2135rem;
+        width: 12.5rem; height: 16.2135rem;
 
         @include breakpoints-down(medium) {
-            width: 10rem;
-            height: 12.75rem;
+            width: 10rem; height: 12.75rem;
             margin-bottom: .5rem;
         }
 
         & a > img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
-            border: 3px solid $gray;
-            border-radius: 40px;
+            border: 3px solid $gray; border-radius: 40px;
             filter: brightness(50%);
             box-shadow: 0 5px 15px black;
         }
@@ -80,8 +75,7 @@ body {
 
         div:nth-child(2) {
             h5 {
-                margin-right: 2.5rem;
-                margin-left: 2.5rem;
+                margin-right: 2.5rem; margin-left: 2.5rem;
 
                 &:nth-child(2) {
                     order: -1;
@@ -107,13 +101,10 @@ body {
 
     &__container {
         max-width: 30rem;
-        margin: auto 2rem;
+        margin: auto 2rem; margin-top: 5rem; margin-right: 22rem; margin-left: 22rem;
         padding: 0.1rem;
         border-radius: 24px;
         transition: all 1.3s;
-        margin-top: 5rem;
-        margin-right: 22rem;
-        margin-left: 22rem;
         position: relative;
         transform: translate(-17rem); //-67rem each step
 
@@ -127,9 +118,7 @@ body {
     }
 
     &__question {
-        font-family: $font-sec;
-        font-weight: 600;
-        font-size: $font-sm;
+        font-family: $font-sec; font-weight: 600; font-size: $font-sm;
         min-height: 4rem;
         color: white;
         padding: 1.1875rem;
@@ -155,28 +144,24 @@ body {
 
     &__autoQuestionChangerSwitch{
         position: relative;
-        top: 1rem;
+        top: 1rem; width: 7rem;;
         z-index: 2;
         cursor: pointer;
-        width: 7rem;;
 
         & > h5 {
             font-size: .77rem;
         }
 
         &__btn {
-            width: 2rem;
-            height: 1rem;
-            border: 1px solid white;
+            width: 2rem; height: 1rem;
+            border: 1px solid white; border-radius: 25px;
             background: white;
-            border-radius: 25px;
             margin-left: .7rem;
             box-shadow: inset 0 0 5px black, 0 0 5px black;
         }
 
         &__innerBtn {
-            width: 0.8rem;
-            height: 0.8rem;
+            width: 0.8rem; height: 0.8rem;
             background: red;
             border-radius: 10px;
             margin: 0;
@@ -201,14 +186,12 @@ body {
 
         &__container {
             position: relative;
-            width: 23rem;
-            height: 2rem;
+            width: 23rem; height: 2rem;
             z-index: 2;
 
             button {
                 background: url('/static/img/base/arw.svg') no-repeat center center;
-                height: 2rem;
-                width: 2rem;
+                height: 2rem; width: 2rem;
             }
         }
 
@@ -256,9 +239,7 @@ body {
         }
 
         &__text {
-            padding-left: 1rem;
-            padding-right: 1rem;
-            padding-top: 1rem;
+            padding-left: 1rem; padding-right: 1rem; padding-top: 1rem;
         }
 
         input {
@@ -274,13 +255,10 @@ body {
         }
 
         &__imgLabel {
-            width: 10.3rem;
-            height: 15.3rem;
+            width: 10.3rem; height: 15.3rem;
             border: 4px solid #adadad;
             padding: 0;
-            margin-right: .2rem;
-            margin-left: .2rem;
-            margin-bottom: .5rem;
+            margin-right: .2rem; margin-left: .2rem; margin-bottom: .5rem;
             transition: box-shadow .1s ease-in-out;
 
             &:hover {
@@ -303,9 +281,8 @@ body {
 
             &::before {
                 content: '';
-                height: .0625rem;
+                height: .0625rem; width: 1.25rem;
                 font-family: $number;
-                width: 1.25rem;
                 border-radius: 50%;
                 margin: 0;
                 display: flex;
@@ -318,13 +295,11 @@ body {
             &::after {
                 content: '';
                 position: absolute;
-                top: 1.15rem;
-                left: 1.15rem;
+                top: 1.15rem; left: 1.15rem;
                 border: 2px solid transparent;
                 border-radius: 2rem;
                 background: rgb(255, 0, 0);
-                width: 20%;
-                height: 2.95rem;
+                width: 20%; height: 2.95rem;
                 opacity: 0;
             }
 
@@ -362,14 +337,12 @@ body {
     
     &__answerImGif {
         img {
-            width: 21rem;
-            height: 100%;
+            width: 21rem; height: 100%;
         }
     }
 
     .lowHighContainer {
-        margin: 0 15rem !important;
-        margin-top: 5rem !important;
+        margin: 0 15rem !important; margin-top: 5rem !important;
     }
     
     &__lowHigh {
@@ -380,29 +353,23 @@ body {
         }
 
         label {
-            border: 1px solid $gray;
-            border-radius: 100px;
-            margin-right: .4325rem;
-            margin-left: .4325rem;
+            border: 1px solid $gray; border-radius: 100px;
+            margin-right: .4325rem; margin-left: .4325rem;
 
             &:nth-child(3), &:nth-child(19) {
                 padding-right: 2.1875rem;
             }
             &:nth-child(5), &:nth-child(17) {
-                padding-right: 2.4875rem;
-                padding-top: .25rem;
+                padding-right: 2.4875rem; padding-top: .25rem;
             }
             &:nth-child(7), &:nth-child(15) {
-                padding-right: 2.7875rem;
-                padding-top: .5rem;
+                padding-right: 2.7875rem; padding-top: .5rem;
             }
             &:nth-child(9), &:nth-child(13) {
-                padding-right: 3rem;
-                padding-top: .75rem;
+                padding-right: 3rem; padding-top: .75rem;
             }
             &:nth-child(11) {
-                padding-right: 3.3rem;
-                padding-top: 1rem;
+                padding-right: 3.3rem; padding-top: 1rem;
             }
         }
         

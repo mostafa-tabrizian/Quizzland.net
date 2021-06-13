@@ -177,8 +177,7 @@
         &__m {
             transform: translate(.5rem, 0);
             position: absolute;
-            top: 1.4rem;
-            right: 5.1rem;
+            top: 1.4rem; right: 5.1rem;
             width: 14rem;
         }
     }
@@ -186,10 +185,9 @@
     .subHeader {
         position: absolute;
         top: 8rem;
-        border: 1px solid transparent;
+        border: 1px solid transparent; border-radius: 15px;
         background: rgba(0, 0, 0, 0.178);
         backdrop-filter: blur(10px);
-        border-radius: 15px;
         box-shadow: 2px 2px 5px black;
         border-radius: 20px;
         padding: 1.875rem 1.625rem;
