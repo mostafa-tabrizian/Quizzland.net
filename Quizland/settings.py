@@ -10,7 +10,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    'django_extensions',
     'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
