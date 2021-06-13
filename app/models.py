@@ -2,6 +2,13 @@ from django.contrib import admin
 from django.db import models
 import datetime
 
+categoryList = [
+    ('Celebrity', 'Celebrity'),
+    ('MovieSeries', 'MovieSeries'),
+    ('Physiologies', 'Physiologies'),
+    ('Gaming', 'Gaming'),
+]
+
 class Document(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
@@ -13,13 +20,13 @@ class Document(models.Model):
 class Document_Admin(admin.ModelAdmin):
     list_display = ('title', 'note')
     search_fields = ['id', 'title', 'note']
-    
+
 
 class InnerCategories(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=200, null=False, blank=False, default=None)
+    category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
-    title = models.CharField(max_length=200, null=False, blank=False, default=None)
+    title = models.CharField(max_length=100, null=False, blank=False, default=None)
     background = models.ImageField(upload_to='app/static/img/Inner-Category', default='app/static/img/Base/NotExist.jpg')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
@@ -35,7 +42,7 @@ class InnerCategory_Admin(admin.ModelAdmin):
 
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=100, null=False, blank=False, default=None)
+    category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
@@ -62,7 +69,7 @@ class Quizzes_Admin(admin.ModelAdmin):
 
 class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=100, null=False, blank=False, default=None)
+    category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
@@ -131,7 +138,7 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
 
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=100, null=False, blank=False, default=None)
+    category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     question = models.TextField(null=False, blank=False, default=None)
@@ -156,7 +163,7 @@ class Questions_Admin(admin.ModelAdmin):
 
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=100, null=False, blank=False, default=None)
+    category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     question = models.CharField(max_length=200, null=False, blank=False, default=None)
