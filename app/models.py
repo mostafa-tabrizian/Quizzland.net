@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.db import models
 import datetime
 
-
 class Document(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
@@ -13,10 +12,11 @@ class Document(models.Model):
         
 class Document_Admin(admin.ModelAdmin):
     list_display = ('title', 'note')
-
+    search_fields = ['id', 'title', 'note']
+    
 
 class InnerCategories(models.Model):
-    id = models.AutoField(primary_key=True, null=False, blank=False, default=None)
+    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=200, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
@@ -30,8 +30,11 @@ class InnerCategories(models.Model):
 
 class InnerCategory_Admin(admin.ModelAdmin):
     list_display = ('innerCategory', 'title', 'category', 'monthly_views', 'views', 'publish')
+    list_filter = ('innerCategory', 'category', 'publish')
+    search_fields = ['id', 'title']
 
 class Quizzes(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
@@ -54,8 +57,11 @@ class Quizzes(models.Model):
 
 class Quizzes_Admin(admin.ModelAdmin):
     list_display = ('title', 'innerCategory', 'category', 'monthly_views', 'views', 'publish')
+    list_filter = ('innerCategory', 'category', 'publish')
+    search_fields = ['id', 'title']
 
 class Quizzes_Pointy(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
@@ -120,8 +126,11 @@ class Quizzes_Pointy(models.Model):
 
 class Quizzes_Pointy_Admin(admin.ModelAdmin):
     list_display = ('title', 'innerCategory', 'category', 'monthly_views', 'views', 'publish')
+    list_filter = ('innerCategory', 'category', 'publish')
+    search_fields = ['id', 'title']
 
 class Questions(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
@@ -142,8 +151,11 @@ class Questions(models.Model):
 
 class Questions_Admin(admin.ModelAdmin):
     list_display = ('title', 'question', 'innerCategory', 'category')
+    list_filter = ('innerCategory', 'category')
+    search_fields = ['title', 'question']
 
 class Pointy_Questions(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
@@ -186,8 +198,11 @@ class Pointy_Questions(models.Model):
 
 class Pointy_Questions_Admin(admin.ModelAdmin):
     list_display = ('title', 'question', 'innerCategory', 'category', 'publish')
+    list_filter = ('innerCategory', 'category')
+    search_fields = ['title', 'question']
 
 class Newsletter_Users(models.Model):
+    id  = models.AutoField(primary_key=True)
     email = models.CharField(max_length=200, null=False, blank=False, default=None)
     username = models.CharField(max_length=100, null=False, blank=False, default=None)
     favorite_Category = models.CharField(max_length=200, null=False, blank=False, default=None)
@@ -201,3 +216,5 @@ class Newsletter_Users(models.Model):
 
 class Newsletter_Users_Admin(admin.ModelAdmin):
     list_display = ('email', 'username', 'favorite_Category', 'signedUp_On')
+    list_filter = ('favorite_Category', 'signedUp_On')
+    search_fields = ['email', 'username']

@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('app.urls')),
-    path('theKingAlexanderJoseph/', admin.site.urls),
+    path('theKingAlexanderJoseph', admin.site.urls),
 ]
 
 handler404 = 'app.views.error404'

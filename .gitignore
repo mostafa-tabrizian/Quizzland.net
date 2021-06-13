@@ -5,7 +5,7 @@ htmlcov
 .coverage
 QuizLand.session.sql
 .vscode
-geckodriver.log
+geckodriver
 Quizland-venv
 .gitignore
 monthlyViewsData.csv

@@ -14,17 +14,17 @@ def innerCategories(category, fr, to, sortType):
     return categories
 
 def innerCategoriesByPublish(categoryArg):
-    category = InnerCategories.objects.filter(category=categoryArg)\
+    category = InnerCategories.objects.filter(category__iexact=categoryArg)\
                                     .order_by('-publish')
     return category
 
 def innerCategoryByViews(categoryArg):
-    category = InnerCategories.objects.filter(category=categoryArg)\
+    category = InnerCategories.objects.filter(category__iexact=categoryArg)\
                                     .order_by('-views')
     return category
 
 def innerCategoryAlphabet(categoryArg):
-    category = InnerCategories.objects.filter(category=categoryArg)\
+    category = InnerCategories.objects.filter(category__iexact=categoryArg)\
                                 .order_by('innerCategory')
     return category
 
