@@ -50,7 +50,21 @@ def index(request):
 
 @csrf_exempt
 def search(request):
-    if request.method == 'POST':
+    if request.GET.get('s'):
+        search = request.GET.get('s')
+        template = loader.get_template('app/moreSearchResult.html')
+        context = {
+            'searchForm': SearchForm(),
+            'newsletterForm': NewsletterForm(),
+            'headTitle': f'QuizLand | {search} جستجو عبارت ',
+            'userSearchInput': search,
+            'innerCategoriesByTitle': innerCategoriesByTitle(search)[:2],
+            'quizzesByTitle': quizzesByTitle(search)[:28],
+            'quizzesPointyByTitle': quizzesPointyByTitle(search)[:28],
+        }
+
+        return HttpResponse(template.render(context))
+    else:
         form = SearchForm(request.POST)
         if form.is_valid():
             searchInput = form.cleaned_data['searchInput']
@@ -67,24 +81,14 @@ def search(request):
 
             return HttpResponse(template.render(context))
 
-def searchMore(request, target):
-    template = loader.get_template('app/moreSearchResult.html')
-    context = {
-        'searchForm': SearchForm(),
-        'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | {target} جستجو عبارت ',
-        'userSearchInput': target,
-        'innerCategoriesByTitle': innerCategoriesByTitle(target)[:2],
-        'quizzesByTitle': quizzesByTitle(target)[:28],
-        'quizzesPointyByTitle': quizzesPointyByTitle(target)[:28],
-    }
-
-    return HttpResponse(template.render(context))
-
 @cache_page(CACHE_TTL)
-def category(request, categoryArg, page, sortType, numberOfResult ):
-    if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
-        howManyElementToShow = int(numberOfResult)
+def category(request, categoryArg):
+    numberOfResults = int(request.GET.get('nr'))
+    page = int(request.GET.get('p'))
+    sortType = request.GET.get('st')
+
+    if numberOfResults == 16 or numberOfResults == 32 or numberOfResults == 48:
+        howManyElementToShow = 12
         fTPage = frToPage(page, howManyElementToShow)
         template = loader.get_template('app/category.html')
         context = {
@@ -102,15 +106,19 @@ def category(request, categoryArg, page, sortType, numberOfResult ):
         return pageNotFoundManual(request)
 
 @cache_page(CACHE_TTL)
-def innerCategory(request, category, innerCategory, page, sortType, numberOfResult):
-    if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
-        howManyElementToShow = int(numberOfResult)
-        fTPage = frToPage(page, howManyElementToShow)
-        InnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
+def innerCategory(request, category, innerCategory):
+    page = int(request.GET.get('p'))
+    numberOfResults = int(request.GET.get('nr'))
+    sortType = request.GET.get('st')
+    
+    if numberOfResults == 16 or numberOfResults == 32 or numberOfResults == 48:
         if category =='psychology':
             typeOfQuiz = 'quizPointy'
         else:
             typeOfQuiz = 'quiz'
+        howManyElementToShow = 12
+        fTPage = frToPage(page, howManyElementToShow)
+        InnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
         # addViewToCategories(InnerCategory)
         template = loader.get_template('app/innerCategory.html')
         context = {
@@ -129,14 +137,15 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
     else:
         return pageNotFoundManual(request)
 
-def quiz(request, category, innerCategory, title):
+def quiz(request, title):
+    innerCategory = request.GET.get('ic')
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     template = loader.get_template('app/quiz.html')
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | {title} ', 
+        'headTitle': f'QuizLand | {fullTitle} ', 
         'description': f'کوئيز {fullTitle} ',
         'keywords': f'{fullTitle}, {innerCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
@@ -145,7 +154,8 @@ def quiz(request, category, innerCategory, title):
     }
     return HttpResponse(template.render(context))
 
-def quizPointy(request, category, innerCategory, title):
+def quizPointy(request, title):
+    innerCategory = request.GET.get('ic')
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     template = loader.get_template('app/quizPointy.html')
@@ -161,7 +171,9 @@ def quizPointy(request, category, innerCategory, title):
     }
     return HttpResponse(template.render(context))
 
-def result(request, innerCategory, title):
+def result(request):
+    title = request.GET.get('t')
+    innerCategory = request.GET.get('ic')
     fullTitle = titleConverterFromUrlToNormalOne(title)
     innerCategory = titleConverterFromUrlToNormalOne(innerCategory)
     template = loader.get_template('app/result.html')
@@ -176,7 +188,9 @@ def result(request, innerCategory, title):
     }
     return HttpResponse(template.render(context))
 
-def resultPointy(request, title, score):
+def resultPointy(request):
+    title = request.GET.get('t')
+    score = request.GET.get('s')
     fullTitle = titleConverterFromUrlToNormalOne(title)
     template = loader.get_template('app/resultPointy.html')
     context = {
@@ -190,71 +204,71 @@ def resultPointy(request, title, score):
     return HttpResponse(template.render(context))
 
 @cache_page(CACHE_TTL)
-def sortTheQuizzes(request, sortOfQuiz, page):
+def sortTheQuizzes(request):
+    page = int(request.GET.get('p'))
+    sortType = request.GET.get('st')
     howManyElementToShow = 12
     fTPage = frToPage(page, howManyElementToShow)
-
-    if (sortOfQuiz == 'newest'):
-        sort = quizzesByPublish().all()[fTPage[0]:fTPage[1]]
-        sortPointy = quizzesPointyByPublish().all()[fTPage[0]:fTPage[1]]
-        title = "جدیدترین کوئیز ها"
-        titlePointy = "جدیدترین تست ها"
-    elif (sortOfQuiz == 'bestest'):
-        sort = quizzesByViews().all()[fTPage[0]:fTPage[1]]
-        sortPointy = quizzesPointyByViews().all()[fTPage[0]:fTPage[1]]
-        title = "پربازدیدترین کوئيز ها"
-        titlePointy = "پربازدیدترین تست ها"
-    elif sortOfQuiz == 'monthlyBestest':
-        sort = quizzesByMonthlyViews()[fTPage[0]:fTPage[1]]
-        sortPointy = quizzesPointyByMonthlyViews().all()[fTPage[0]:fTPage[1]]
-        title = "پر بازدیدترین کوئیز های این ماه"
-        titlePointy = "پر بازدیدترین تست های این ماه"
-
     template = loader.get_template('app/sort.html')
-    context = {
-        'searchForm': SearchForm(),
-        'newsletterForm': NewsletterForm(),
-        'quizPage': 'quiz',
-        'finalPage': finalPage(howManyElementToShow, 'quizzes'),
-        'sort': sort,
-        'sortPointy': sortPointy,
-        'title': title,
-        'titlePointy': titlePointy,
-        'headTitle': f'QuizLand | {title}'
-    }
-    return HttpResponse(template.render(context))
 
-@cache_page(CACHE_TTL)
-def sortTheQuizzesByCategory(request, category, page, sortOfQuiz):
-    howManyElementToShow = 12
-    fTPage = frToPage(page, howManyElementToShow)
+    if request.GET.get('c'):
+        category = request.GET.get('c')
 
-    if sortOfQuiz == 'newest':
-        sort = sortBothQuizzesByPublishWithCategories(category).all()[fTPage[0]:fTPage[1]]
-        title = "جدیدترین کوئیز های"
-    elif sortOfQuiz == 'bestest':
-        sort = quizzesBothByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
-        title = "پر بازدیدترین کوئیز های"
+        if sortType == 'newest':
+            sort = sortBothQuizzesByPublishWithCategories(category).all()[fTPage[0]:fTPage[1]]
+            title = "جدیدترین کوئیز های"
+        elif sortType == 'bestest':
+            sort = quizzesBothByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
+            title = "پر بازدیدترین کوئیز های"
 
-    if category == 'psychology':
-        quizPage = 'quizPointy'
+        if category == 'psychology':
+            quizPage = 'quizPointy'
+        else:
+            quizPage = 'quiz'
+
+        context = {
+            'searchForm': SearchForm(),
+            'newsletterForm': NewsletterForm(),
+            'quizPage': quizPage,
+            'hideSecondColumn': 'noVis',
+            'categoryStyle': 'sortMore__categoryStyle wrapper-med',
+            'sort': sort,
+            'title': title,
+            'category': categoryInFar[category],
+            'finalPage': finalPage(howManyElementToShow, 'quizzes'),
+            'headTitle': f'QuizLand | {title} {categoryInFar[category]} '
+        }
     else:
-        quizPage = 'quiz'
+        if (sortType == 'newest'):
+            sort = quizzesByPublish().all()[fTPage[0]:fTPage[1]]
+            sortPointy = quizzesPointyByPublish().all()[fTPage[0]:fTPage[1]]
+            title = "جدیدترین کوئیز ها"
+            titlePointy = "جدیدترین تست ها"
+        elif (sortType == 'bestest'):
+            sort = quizzesByViews().all()[fTPage[0]:fTPage[1]]
+            sortPointy = quizzesPointyByViews().all()[fTPage[0]:fTPage[1]]
+            title = "پربازدیدترین کوئيز ها"
+            titlePointy = "پربازدیدترین تست ها"
+        elif sortType == 'monthlyBestest':
+            sort = quizzesByMonthlyViews()[fTPage[0]:fTPage[1]]
+            sortPointy = quizzesPointyByMonthlyViews().all()[fTPage[0]:fTPage[1]]
+            title = "پر بازدیدترین کوئیز های این ماه"
+            titlePointy = "پر بازدیدترین تست های این ماه"
 
-    template = loader.get_template('app/sort.html')
-    context = {
-        'searchForm': SearchForm(),
-        'newsletterForm': NewsletterForm(),
-        'quizPage': quizPage,
-        'hideSecondColumn': 'noVis',
-        'categoryStyle': 'sortMore__categoryStyle wrapper-med',
-        'sort': sort,
-        'title': title,
-        'category': categoryInFar[category],
-        'finalPage': finalPage(howManyElementToShow, 'quizzes'),
-        'headTitle': f'QuizLand | {title} {categoryInFar[category]} '
-    }
+        context = {
+            'searchForm': SearchForm(),
+            'newsletterForm': NewsletterForm(),
+            'quizPage': 'quiz',
+            'finalPage': finalPage(howManyElementToShow, 'quizzes'),
+            'sort': sort,
+            'sortPointy': sortPointy,
+            'title': title,
+            'titlePointy': titlePointy,
+            'headTitle': f'QuizLand | {title}'
+        }
+        
     return HttpResponse(template.render(context))
+
 
 def contact(request):
     template = loader.get_template('app/contact.html')

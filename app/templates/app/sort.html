@@ -10,7 +10,7 @@
             {% for quiz in sortPointy %}
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quizPointy/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                <a href="/quizPointy/{{title}}?ic={{quiz.innerCategory}}">
                     <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                     <div class="sortMore__container__views">{{ views }}</div>
@@ -28,7 +28,7 @@
             {% for quiz in sort %}
                 {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
-                <a href="/{{quizPage}}/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                <a href="/{{quizPage}}/{{title}}?ic={{quiz.innerCategory}}">
                     <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                     <div class="sortMore__container__views">{{ views }}</div>

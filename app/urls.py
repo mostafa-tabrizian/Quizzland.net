@@ -1,25 +1,23 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls import url
-from . import views
+from .views import *
 
 urlpatterns = [
-    path('', views.index),
-    path('search', views.search),
-    path('search/<target>', views.searchMore),
-    path('category/<categoryArg>/<int:page>/<sortType>/<numberOfResult>',views.category),
-    path('category/<category>/<innerCategory>/<int:page>/<sortType>/<numberOfResult>',views.innerCategory),
-    path('quiz/<category>/<innerCategory>/<title>', views.quiz),
-    path('quizPointy/<category>/<innerCategory>/<title>', views.quizPointy),
-    path('result/<innerCategory>/<title>', views.result),
-    path('resultPointy/<title>/<int:score>', views.resultPointy),
-    path('<sortOfQuiz>/<int:page>', views.sortTheQuizzes),
-    path('<sortOfQuiz>/<category>/<int:page>', views.sortTheQuizzesByCategory),
-    path('contact', views.contact),
-    path('privacy-policy', views.privacyPolicy),
-    path('guide', views.guide),
-    path('adverts', views.adverts),
-    path('support', views.support),
-    path('newsletter', views.newsletter),
+    path('', index),
+    path('search', search),
+    path('category/<categoryArg>', category),
+    path('category/<category>/<innerCategory>',innerCategory),
+    path('quiz/<title>', quiz),
+    path('quizPointy/<title>', quizPointy),
+    path('result', result),
+    path('resultPointy', resultPointy),
+    path('sort', sortTheQuizzes),
+    path('contact', contact),
+    path('privacy-policy', privacyPolicy),
+    path('guide', guide),
+    path('adverts', adverts),
+    path('support', support),
+    path('newsletter', newsletter),
 
-    url(r'^ajax/doesExistInNewsletterUsers/$', views.doesExistInNewsletterUsers, name='doesExistInNewsletterUsers'),
+    url(r'^ajax/doesExistInNewsletterUsers/$', doesExistInNewsletterUsers, name='doesExistInNewsletterUsers'),
 ]

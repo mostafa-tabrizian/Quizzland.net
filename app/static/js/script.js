@@ -1,7 +1,7 @@
-const splitUrl = () => {
-    const fullUrl = window.location.href
-    const splitUrl = fullUrl.split('/')
-    return splitUrl
+const takeParameterFromUrl = (parameter) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const parameterValue = urlParams.get(parameter)
+    return parameterValue
 }
 
 const fadeIn = (element) => {
@@ -60,30 +60,6 @@ header__menu__openBtn.addEventListener('click', () => {
 header__menu__closeBtn.addEventListener('click', () => {
     header__menu.classList.add('slideMenu-hide')
 })
-
-//----------------------------------------------------------
-// check userSearch input
-// id_searchInput.addEventListener('change', () => {
-//     log(id_searchInput.value)
-//     searchTarget = id_searchInput.value
-
-//     $.ajax({
-//         url: '/ajax/validSearch/',
-//         data: {
-//             'searchTarget': searchTarget
-//         },
-//         dataType: 'json',
-//         success: function (data) {
-//             if (data.searchTarget=='admin') {
-//                 log(data.searchTarget)
-//                 alert("Wrong Hole Idiot");
-//             }
-//             else{
-//                 log('error no ajax')
-//             }
-//         }
-//     });
-// })
 
 //----------------------------------------------------------
 // show the submit search btn when focus
@@ -162,8 +138,6 @@ sort__controller__btn.forEach(sortControllerBtn => {
 // tools
 
 if (tools__sort__btn) {
-    currentUrl = splitUrl()
-    
     tools__sort__btn.addEventListener('click', () => {
         if(tools__sort__options__container.classList.contains('fade-out')) {
             fadeIn(tools__sort__options__container)
@@ -189,17 +163,6 @@ if (tools__sort__btn) {
         }
     })
     
-    const setTheCurrentSortToTools = (currentUrl) => {
-        if (!(isNaN(parseInt(currentUrl[5])))) { //category
-            tools__sort__current.innerHTML = tools__optionsDefine[currentUrl[6]]
-            tools__numberOfResult__current.innerHTML = currentUrl[7]
-    
-        } else if  (!(isNaN(parseInt(currentUrl[6])))) { //innerCategory
-            tools__sort__current.innerHTML = tools__optionsDefine[currentUrl[7]]
-            tools__numberOfResult__current.innerHTML = currentUrl[8]
-        }
-    }
-    
     const tools__optionsDefine = {
         'newest': 'جدیدترین',
         'bestest': 'بهترین',
@@ -207,6 +170,11 @@ if (tools__sort__btn) {
         'جدیدترین': 'newest',
         'بهترین': 'bestest',
         'الفبا': 'alphabet'
+    }
+
+    const setTheCurrentSortToTools = () => {
+        tools__sort__current.innerHTML = tools__optionsDefine[takeParameterFromUrl('st')]
+        tools__numberOfResult__current.innerHTML = takeParameterFromUrl('nr')
     }
     
     tools__sort__options.forEach(each => {
@@ -220,29 +188,17 @@ if (tools__sort__btn) {
         })
     })
     
-    const whichPageItIsForMakingTheUrl = (currentUrl) => {
-        if (!(isNaN(parseInt(currentUrl[5])))) { //category
-            const category = currentUrl[4]
-            const currentSort = tools__sort__current.innerHTML
-            const currentNumberResult = tools__numberOfResult__current.innerHTML
-            const whichPageItIs = `/category/${category}/0/${tools__optionsDefine[currentSort]}/${currentNumberResult}`
-            return whichPageItIs
-        
-        } else if  (!(isNaN(parseInt(currentUrl[6])))) { //innerCategory
-            const category = currentUrl[4]
-            const innerCategory = currentUrl[5]
-            const currentSort = tools__optionsDefine[tools__sort__current.innerHTML]
-            const currentNumberResult = tools__numberOfResult__current.innerHTML
-            const whichPageItIs = `/category/${category}/${innerCategory}/0/${currentSort}/${currentNumberResult}`
-            return whichPageItIs
-        }
-    }
-    
-    setTheCurrentSortToTools(currentUrl)
+    setTheCurrentSortToTools()
     
     tools__submit.addEventListener('click', () => {
-        whichPageItIs = whichPageItIsForMakingTheUrl(currentUrl)
-        window.location.replace(whichPageItIs); 
+        const currentSort = tools__optionsDefine[tools__sort__current.innerHTML]
+        const currentNumberResult = tools__numberOfResult__current.innerHTML
+        urlPath = window.location.pathname
+        urlParams = new URLSearchParams(window.location.search)
+        urlParams.set('st', currentSort)
+        urlParams.set('nr', currentNumberResult)
+        finalParameters = urlParams.toString()
+        window.location.replace(urlPath + '?' + finalParameters); 
     })
 } else {log('no tools')}
 
@@ -304,54 +260,44 @@ newsletter__submit.addEventListener('click', () => {
 
 // Page travel
 if (pageTravel__arwNext) {
+    const pathName = window.location.pathname
 
-    currentUrl = splitUrl()
-
-    const urlMakerForPageTravel = (currPageNumber, baseUrlPart1, baseUrlPart2) => {
-        lastPage = baseUrlPart1 + (currPageNumber - 2) + baseUrlPart2
-        nextPage = baseUrlPart1 + (currPageNumber) + baseUrlPart2
-        nextTwoPage = baseUrlPart1 + (currPageNumber + 1) + baseUrlPart2
-        finalPage = baseUrlPart1 + (parseInt(finalPageNumberDOM.innerHTML.trim()) - 1)  + baseUrlPart2
+    const urlMakerForPageTravel = (currPageNumber) => {
+        const lastPage = new URLSearchParams(window.location.search)
+        const nextPage = new URLSearchParams(window.location.search)
+        const nextTwoPage = new URLSearchParams(window.location.search)
+        const finalPage = new URLSearchParams(window.location.search)
+        lastPage.set('p', currPageNumber - 2)
+        nextPage.set('p', currPageNumber)
+        nextTwoPage.set('p', currPageNumber + 1)
+        finalPage.set('p', parseInt(finalPageNumberDOM.innerHTML.trim()) - 1)
+        const pages = {
+            'lastPage': pathName +'?'+ lastPage.toString(),
+            'nextPage': pathName +'?'+ nextPage .toString(),
+            'nextTwoPage': pathName +'?'+ nextTwoPage.toString(),
+            'finalPage': pathName +'?'+ finalPage.toString(),
+        }
+        return pages
     }
     
-    if  (!(isNaN(parseInt(currentUrl[4])))) { //sortPages-all
-        baseUrlPart1 = '/' + currentUrl[3] + '/'
-        currPageNumber = parseInt(currentUrl[4]) + 1
-        urlMakerForPageTravel(currPageNumber, baseUrlPart1, '')
-
-    } else if (!(isNaN(parseInt(currentUrl[5]))) && !(currentUrl[6])) { //sortPages-categories
-        baseUrlPart1 = '/' + currentUrl[3] + '/' + currentUrl[4] + '/'
-        currPageNumber = parseInt(currentUrl[5]) + 1
-        urlMakerForPageTravel(currPageNumber, baseUrlPart1, '')
-
-    } else if (!(isNaN(parseInt(currentUrl[5])))) { //category
-        baseUrlPart1 = '/' + currentUrl[3] + '/' + currentUrl[4] + '/'
-        baseUrlPart2 = '/' + currentUrl[6] + '/' + currentUrl[7]
-        currPageNumber = parseInt(currentUrl[5]) + 1
-        urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
-
-    } else if  (!(isNaN(parseInt(currentUrl[6])))) { //innerCategory
-        baseUrlPart1 = '/' + currentUrl[3] + '/' + currentUrl[4] + '/' + currentUrl[5] + '/'
-        baseUrlPart2 = '/' + currentUrl[7] + '/' + currentUrl[8]
-        currPageNumber = parseInt(currentUrl[6]) + 1
-        urlMakerForPageTravel(currPageNumber, baseUrlPart1, baseUrlPart2)
-    }
+    const currPageNumber = parseInt(new URLSearchParams(window.location.search).get('p')) + 1
+    pages = urlMakerForPageTravel(currPageNumber)
 
     pageTravel__pages__last.innerHTML = currPageNumber - 1
-    pageTravel__arwLast.href = lastPage
-    pageTravel__pages__last.href = lastPage
+    pageTravel__arwLast.href = pages['lastPage']
+    pageTravel__pages__last.href = pages['lastPage']
 
     pageTravel__pages__curr.innerHTML = currPageNumber
 
     pageTravel__pages__next.innerHTML = currPageNumber + 1
-    pageTravel__pages__next.href = nextPage
+    pageTravel__pages__next.href = pages['nextPage']
 
     pageTravel__pages__nextTwo.innerHTML = currPageNumber + 2
-    pageTravel__pages__nextTwo.href = nextTwoPage
+    pageTravel__pages__nextTwo.href = pages['nextTwoPage']
     
-    pageTravel__arwNext.href = nextPage
+    pageTravel__arwNext.href = pages['nextPage']
 
-    finalPageNumberDOM.href = finalPage
+    finalPageNumberDOM.href = pages['finalPage']
     
     if (currPageNumber == 1) {
         removeDOM(pageTravel__arwLast)
@@ -506,41 +452,41 @@ if (nightMode) {
 
 // --------------------------------------------------------------------
 
-if (nightMode) {
-    checkTheUrlSoWeCheckIfShouldRemoveTheNightMode = splitUrl()
-    log(checkTheUrlSoWeCheckIfShouldRemoveTheNightMode)
-    if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode.length == 9 || // innerCategory
-        checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3].includes('quiz')) 
-        {
-            try {
-                nightMode__container.forEach(each => {
-                    each.classList.add('noVis')
-                })
-                nightMode.forEach(each => {
-                    each.classList.add('nightMode-Off')
-                })
-                document.head.removeChild(nightThemeCss)
-            } catch {
-                log('no nightMode')
-            }
-        } 
-    else if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'result_2' ||
-        checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'resultPointy')
-        {
-            try {
-                nightMode__container.forEach(each => {
-                    each.classList.add('noVis')
-                })
-                nightMode.forEach(each => {
-                    each.classList.remove('nightMode-Off')
-                })
-                document.head.appendChild(nightThemeCss)
-            } catch {
-                log('no nightMode')
-            }
-        } 
+// if (nightMode) {
+//     checkTheUrlSoWeCheckIfShouldRemoveTheNightMode = takeParameterFromUrl()
+//     log(checkTheUrlSoWeCheckIfShouldRemoveTheNightMode)
+//     if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode.length == 9 || // innerCategory
+//         checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3].includes('quiz')) 
+//         {
+//             try {
+//                 nightMode__container.forEach(each => {
+//                     each.classList.add('noVis')
+//                 })
+//                 nightMode.forEach(each => {
+//                     each.classList.add('nightMode-Off')
+//                 })
+//                 document.head.removeChild(nightThemeCss)
+//             } catch {
+//                 log('no nightMode')
+//             }
+//         } 
+//     else if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'result_2' ||
+//         checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'resultPointy')
+//         {
+//             try {
+//                 nightMode__container.forEach(each => {
+//                     each.classList.add('noVis')
+//                 })
+//                 nightMode.forEach(each => {
+//                     each.classList.remove('nightMode-Off')
+//                 })
+//                 document.head.appendChild(nightThemeCss)
+//             } catch {
+//                 log('no nightMode')
+//             }
+//         } 
         
-} else {log ('no nightMode')}
+// } else {log ('no nightMode')}
 
 // --------------------------------------------------------------------
 if(navigator.userAgent.indexOf("Firefox") != -1 ) {

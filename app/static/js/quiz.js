@@ -333,11 +333,12 @@ const calculateResult = (FinalTitleOfQuiz) => {
         alert('لطفا کوکی و ذخیره محلی خود را فعال کنید | Please enable your Cookies and LocalStorage')
     }
 
-    const innerCategory = splitUrl(lastQuiz)[5]
+    urlParams = new URLSearchParams(window.location.search)
+    innerCategory = urlParams.get('ic')
 
     showCalculatingResult()
     setTimeout(() => {
-        window.location.replace(`/result/${innerCategory}/${FinalTitleOfQuiz}`); 
+        window.location.replace(`/result?ic=${innerCategory}&t=${FinalTitleOfQuiz}`); 
     }, 3000)
 }
 
@@ -358,7 +359,7 @@ const calculateResult_pointy = (FinalTitleOfQuiz) => {
 
     showCalculatingResult()
     setTimeout(() => {
-        window.location.replace(`/resultPointy/${FinalTitleOfQuiz}/${score}`); 
+        window.location.replace(`/resultPointy?t=${FinalTitleOfQuiz}&s=${score}`); 
     }, 3000)
 }
 

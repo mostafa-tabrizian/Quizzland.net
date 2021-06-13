@@ -228,7 +228,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .backBtn {
-  background-image: linear-gradient(-45deg, #6e6e6e, #d8d8d8);
+  background-image: linear-gradient(-45deg, #dacccc, #d8d8d8);
   color: black !important;
 }
 

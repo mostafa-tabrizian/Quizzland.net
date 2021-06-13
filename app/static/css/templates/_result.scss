@@ -92,6 +92,11 @@
 
     &__container {
 
+        h5 {
+            position: relative;
+            z-index: 3;
+        }
+
         div {
             position: relative;
             z-index: 2;
