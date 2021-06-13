@@ -30,21 +30,21 @@ def index(request):
         'bestestQuizzes': quizzesByViews()[:5],
         'bestestQuizzesForThisMonth': quizzesByMonthlyViews()[:5],
 
-        'NewestCelebrityQuizSection':  quizzesByPublishWithCategory('celebrities')[:4],
-        'BestestCelebrityQuizSection': quizzesBothByViewsWithCategory('celebrities')[:13],
-        'MonthlyBestestCelebrityQuizSection': quizzesByMonthlyViewsWithCategory('celebrities')[:13],
+        'NewestCelebrityQuizSection':  quizzesByPublishWithCategory('celebrity')[:4],
+        'BestestCelebrityQuizSection': quizzesBothByViewsWithCategory('celebrity')[:13],
+        'MonthlyBestestCelebrityQuizSection': quizzesByMonthlyViewsWithCategory('celebrity')[:13],
 
-        'NewestMovieSeriesQuizSection':  quizzesByPublishWithCategory('movieSeries')[:4],
-        'BestestMovieSeriesQuizSection': quizzesBothByViewsWithCategory('movieSeries')[:13],
-        'MonthlyBestestMovieSeriesQuizSection': quizzesByMonthlyViewsWithCategory('movieSeries')[:13],
+        'NewestMovieSeriesQuizSection':  quizzesByPublishWithCategory('movie-series')[:4],
+        'BestestMovieSeriesQuizSection': quizzesBothByViewsWithCategory('movie-series')[:13],
+        'MonthlyBestestMovieSeriesQuizSection': quizzesByMonthlyViewsWithCategory('movie-series')[:13],
         
-        'NewestGamingQuizSection':  quizzesByPublishWithCategory('Gaming')[:4],
-        'BestestGamingQuizSection': quizzesBothByViewsWithCategory('Gaming')[:13],
-        'MonthlyBestestGamingQuizSection': quizzesByMonthlyViewsWithCategory('Gaming')[:13],
+        'NewestGamingQuizSection':  quizzesByPublishWithCategory('gaming')[:4],
+        'BestestGamingQuizSection': quizzesBothByViewsWithCategory('gaming')[:13],
+        'MonthlyBestestGamingQuizSection': quizzesByMonthlyViewsWithCategory('gaming')[:13],
         
-        'NewestPhysiologiesQuizSection':  quizzesPointyByPublishWithCategory('Physiologies')[:4],
-        'BestestPhysiologiesQuizSection': quizzesPointyByViewsWithCategory('Physiologies')[:13],
-        'MonthlyBestestPhysiologiesQuizSection': quizzesPointyByMonthlyViewsWithCategory('Physiologies')[:10]
+        'NewestPhysiologiesQuizSection':  quizzesPointyByPublishWithCategory('physiology')[:4],
+        'BestestPhysiologiesQuizSection': quizzesPointyByViewsWithCategory('physiology')[:13],
+        'MonthlyBestestPhysiologiesQuizSection': quizzesPointyByMonthlyViewsWithCategory('physiology')[:10]
     }
 
     return HttpResponse(template.render(context))
@@ -95,7 +95,7 @@ def category(request, categoryArg, page, sortType, numberOfResult ):
     if numberOfResult == '16' or numberOfResult == '32' or numberOfResult == '48':
         howManyElementToShow = int(numberOfResult)
         fTPage = frToPage(page, howManyElementToShow)
-        template = loader.get_template('app/category/category.html')
+        template = loader.get_template('app/category.html')
         context = {
             'searchForm': SearchForm(),
             'newsletterForm': NewsletterForm(),
@@ -118,7 +118,7 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
         fTPage = frToPage(page, howManyElementToShow)
         InnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
         # addViewToCategories(InnerCategory)
-        template = loader.get_template('app/category/innerCategory.html')
+        template = loader.get_template('app/innerCategory.html')
         context = {
             'searchForm': SearchForm(),
             'newsletterForm': NewsletterForm(),
@@ -244,8 +244,8 @@ def sortTheQuizzesByCategory(request, category, page, sortOfQuiz):
         sort = quizzesBothByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
         title = "پر بازدیدترین کوئیز های"
 
-    if category == 'physiologies':
-        quizPage = 'quiz_2'
+    if category == 'physiology':
+        quizPage = 'quizPointy'
     else:
         quizPage = 'quiz'
 

@@ -14,17 +14,17 @@ def innerCategories(category, fr, to, sortType):
     return categories
 
 def innerCategoriesByPublish(categoryArg):
-    category = InnerCategories.objects.filter(category__iexact=categoryArg)\
+    category = InnerCategories.objects.filter(category=categoryArg)\
                                     .order_by('-publish')
     return category
 
 def innerCategoryByViews(categoryArg):
-    category = InnerCategories.objects.filter(category__iexact=categoryArg)\
+    category = InnerCategories.objects.filter(category=categoryArg)\
                                     .order_by('-views')
     return category
 
 def innerCategoryAlphabet(categoryArg):
-    category = InnerCategories.objects.filter(category__iexact=categoryArg)\
+    category = InnerCategories.objects.filter(category=categoryArg)\
                                 .order_by('innerCategory')
     return category
 
@@ -95,7 +95,7 @@ def quizzesPointyByMonthlyViews():
     return quizzesGrabbedByPublish
 
 def quizzesWithInnerCategory(category, innerCategory, fr, to, sortType):
-    if category == 'physiologies':
+    if category == 'Physiologies':
         if sortType == 'newest':
             grabbedQuizzes = quizzesPointyByPublishWithInnerCategory(innerCategory).all()[fr:to]
         elif sortType == 'bestest':
@@ -157,7 +157,7 @@ def quizzesByPublishWithCategory(category):
     return quizzes
 
 def quizzesBothByViewsWithCategory(category):
-    if category == 'physiologies':
+    if category == 'Physiologies':
         grabbedQuiz = Quizzes_Pointy.objects.filter(category=category)\
                                             .order_by('-views')
     else:
@@ -186,7 +186,7 @@ def quizzesPointyByMonthlyViewsWithCategory(category):
     return grabbedQuiz
 
 def sortBothQuizzesByPublishWithCategories(category):
-    if category == 'physiologies':
+    if category == 'Physiologies':
         quizzes = quizzesPointyByPublishWithCategory(category)
     else:
         quizzes = quizzesByPublishWithCategory(category)

@@ -3,10 +3,10 @@ from django.db import models
 import datetime
 
 categoryList = [
-    ('Celebrity', 'Celebrity'),
-    ('MovieSeries', 'MovieSeries'),
-    ('Physiologies', 'Physiologies'),
-    ('Gaming', 'Gaming'),
+    ('celebrity', 'celebrity'),
+    ('movie-series', 'movie-series'),
+    ('physiology', 'physiology'),
+    ('gaming', 'gaming'),
 ]
 
 class Document(models.Model):
@@ -26,7 +26,7 @@ class InnerCategories(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
-    title = models.CharField(max_length=100, null=False, blank=False, default=None)
+    title = models.CharField(max_length=200, null=False, blank=False, default=None)
     background = models.ImageField(upload_to='app/static/img/Inner-Category', default='app/static/img/Base/NotExist.jpg')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)

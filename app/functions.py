@@ -4,9 +4,9 @@ from .forms import *
 
 categoryInFar = {
     'gaming': 'گیمینگ',
-    'celebrities': 'سلبریتی',
-    'movieSeries': 'فیلم و سریال',
-    'physiologies': 'روانشناسی',
+    'celebrity': 'سلبریتی',
+    'movie-series': 'فیلم و سریال',
+    'physiology': 'روانشناسی',
 }
 
 def titleConverterFromUrlToNormalOne(title):

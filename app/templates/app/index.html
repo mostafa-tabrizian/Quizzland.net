@@ -20,12 +20,12 @@
 
     <div class="category flex flex-jc-c flex-ai-c flex-jc-sb" id="category">
 
-        <a href="/category/movieSeries/0/newest/16">
+        <a href="/category/movie-series/0/newest/16">
                 <img src="static/img/Base/category-movieSeries.jpg" alt="کوئیز کتگوری دسته ی فیلم و سریال مربوط به سوالات در مورد کارکتر شخصیت فیلم ها یا داستان آن">
                 <p class='tx-al-c'>🎬 فیلم و سریال</p>
         </a>
 
-        <a href="/category/celebrities/0/newest/16">
+        <a href="/category/celebrity/0/newest/16">
             <img src="static/img/Base/category-celebrities.jpg" alt="کوئیز های کتگوری دسته ی سلبریتی مربوط به افراد مشهور مانند بازیگر و خواننده که مربوط به سوالات در مورد اطلاعات شخصی آنها یا فعالیت آنهاست">
             <p class='tx-al-c'>✨ سلبریتی</p>
         </a>
@@ -35,7 +35,7 @@
             <p class='tx-al-c'>🎮 گیمینگ</p>
         </a>
 
-        <a href="/category/physiologies/0/newest/16">
+        <a href="/category/physiology/0/newest/16">
             <img src="static/img/Base/category-physiologies.jpg" alt="کوئیز های کتگوری دسته ی روانشناسی برای افرادی که علاقه مند به روانشناسی یا خودشناسی هستند از منابع معتبر خارجی">
             <p class='tx-al-c'>🧠 روانشناسی</p>
         </a>
@@ -44,7 +44,7 @@
 
     <div class="quizContainer space-med">
         <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
-            <a class="btn" href="/newest/celebrities/0">...بیشتر</a>
+            <a class="btn" href="/newest/celebrity/0">...بیشتر</a>
             <h2>سلبریتی</h2>
         </div>
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
@@ -65,7 +65,7 @@
     </div>
     <div class="quizContainer space-med">
         <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
-            <a class="btn" href="/newest/movieSeries/0">...بیشتر</a>
+            <a class="btn" href="/newest/movie-series/0">...بیشتر</a>
             <h2>فیلم و سریال</h2>
         </div>
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
@@ -88,7 +88,7 @@
     </div>
     <div class="quizContainer space-med">
         <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
-            <a class="btn" href="/newest/physiologies/0">...بیشتر</a>
+            <a class="btn" href="/newest/physiology/0">...بیشتر</a>
             <h2>روانشناسی</h2>
         </div>
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
@@ -196,7 +196,7 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/monthlyBestest/celebrities/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/monthlyBestest/celebrity/0"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
                     <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز</h2>
@@ -211,7 +211,7 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/bestest/celebrities/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/bestest/celebrity/0"> ..بیشتر</a>
                 </div>
             </div>
         </div>
@@ -231,7 +231,7 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/monthlyBestest/movieSeries/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/monthlyBestest/movie-series/0"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
                     <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز</h2>
@@ -246,7 +246,7 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/bestest/movieSeries/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/bestest/movie-series/0"> ..بیشتر</a>
                 </div>
             </div>
         </div>
@@ -294,14 +294,14 @@
                         {% for quiz in MonthlyBestestPhysiologiesQuizSection %}
                             {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quizPointy/physiologies/{{innerCategory}}/{{title}}">
+                                <li><a href="/quizPointy/physiology/{{innerCategory}}/{{title}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/monthlyBestest/physiologies/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/monthlyBestest/physiology/0"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
                     <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز</h2>
@@ -309,14 +309,14 @@
                         {% for quiz in BestestPhysiologiesQuizSection %}
                             {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quizPointy/physiologies/{{innerCategory}}/{{title}}">
+                                <li><a href="/quizPointy/physiology/{{innerCategory}}/{{title}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/bestest/physiologies/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/bestest/physiology/0"> ..بیشتر</a>
                 </div>
             </div>
         </div>
