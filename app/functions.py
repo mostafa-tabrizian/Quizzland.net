@@ -6,7 +6,7 @@ categoryInFar = {
     'gaming': 'گیمینگ',
     'celebrity': 'سلبریتی',
     'movie-series': 'فیلم و سریال',
-    'physiology': 'روانشناسی',
+    'psychology': 'روانشناسی',
 }
 
 def titleConverterFromUrlToNormalOne(title):

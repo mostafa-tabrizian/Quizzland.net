@@ -5,7 +5,7 @@ import datetime
 categoryList = [
     ('celebrity', 'celebrity'),
     ('movie-series', 'movie-series'),
-    ('physiology', 'physiology'),
+    ('psychology', 'psychology'),
     ('gaming', 'gaming'),
 ]
 

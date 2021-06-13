@@ -35,7 +35,7 @@
             <p class='tx-al-c'>🎮 گیمینگ</p>
         </a>
 
-        <a href="/category/physiology/0/newest/16">
+        <a href="/category/psychology/0/newest/16">
             <img src="static/img/Base/category-physiologies.jpg" alt="کوئیز های کتگوری دسته ی روانشناسی برای افرادی که علاقه مند به روانشناسی یا خودشناسی هستند از منابع معتبر خارجی">
             <p class='tx-al-c'>🧠 روانشناسی</p>
         </a>
@@ -88,7 +88,7 @@
     </div>
     <div class="quizContainer space-med">
         <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
-            <a class="btn" href="/newest/physiology/0">...بیشتر</a>
+            <a class="btn" href="/newest/psychology/0">...بیشتر</a>
             <h2>روانشناسی</h2>
         </div>
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
@@ -294,14 +294,14 @@
                         {% for quiz in MonthlyBestestPhysiologiesQuizSection %}
                             {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quizPointy/physiology/{{innerCategory}}/{{title}}">
+                                <li><a href="/quizPointy/psychology/{{innerCategory}}/{{title}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/monthlyBestest/physiology/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/monthlyBestest/psychology/0"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
                     <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز</h2>
@@ -309,14 +309,14 @@
                         {% for quiz in BestestPhysiologiesQuizSection %}
                             {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quizPointy/physiology/{{innerCategory}}/{{title}}">
+                                <li><a href="/quizPointy/psychology/{{innerCategory}}/{{title}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="/bestest/physiology/0"> ..بیشتر</a>
+                    <a class="sort__more" href="/bestest/psychology/0"> ..بیشتر</a>
                 </div>
             </div>
         </div>

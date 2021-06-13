@@ -41,9 +41,9 @@ def index(request):
         'BestestGamingQuizSection': quizzesBothByViewsWithCategory('gaming')[:13],
         'MonthlyBestestGamingQuizSection': quizzesByMonthlyViewsWithCategory('gaming')[:13],
         
-        'NewestPhysiologiesQuizSection':  quizzesPointyByPublishWithCategory('physiology')[:4],
-        'BestestPhysiologiesQuizSection': quizzesPointyByViewsWithCategory('physiology')[:13],
-        'MonthlyBestestPhysiologiesQuizSection': quizzesPointyByMonthlyViewsWithCategory('physiology')[:10]
+        'NewestPhysiologiesQuizSection':  quizzesPointyByPublishWithCategory('psychology')[:4],
+        'BestestPhysiologiesQuizSection': quizzesPointyByViewsWithCategory('psychology')[:13],
+        'MonthlyBestestPhysiologiesQuizSection': quizzesPointyByMonthlyViewsWithCategory('psychology')[:10]
     }
 
     return HttpResponse(template.render(context))
@@ -107,6 +107,10 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
         howManyElementToShow = int(numberOfResult)
         fTPage = frToPage(page, howManyElementToShow)
         InnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
+        if category =='psychology':
+            typeOfQuiz = 'quizPointy'
+        else:
+            typeOfQuiz = 'quiz'
         # addViewToCategories(InnerCategory)
         template = loader.get_template('app/innerCategory.html')
         context = {
@@ -116,8 +120,9 @@ def innerCategory(request, category, innerCategory, page, sortType, numberOfResu
             'description': f'کوئيزلند {innerCategory} کوئيز های',
             'keywords': f'{innerCategory} بهترین کوئيز های , {innerCategory} کوئيز های',
             'colorOfHeader': 'header__white',
-            'innerCategory': innerCategoriesByTitle(InnerCategory)[0].background,
+            'background': innerCategoriesByTitle(InnerCategory)[0].background,
             'quizzes': quizzesWithInnerCategory(category, InnerCategory, fTPage[0], fTPage[1], sortType),
+            'typeOfQuiz': typeOfQuiz,
             'finalPage': finalPage(howManyElementToShow, InnerCategory),
         }
         return HttpResponse(template.render(context))
@@ -231,7 +236,7 @@ def sortTheQuizzesByCategory(request, category, page, sortOfQuiz):
         sort = quizzesBothByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
         title = "پر بازدیدترین کوئیز های"
 
-    if category == 'physiology':
+    if category == 'psychology':
         quizPage = 'quizPointy'
     else:
         quizPage = 'quiz'

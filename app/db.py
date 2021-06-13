@@ -95,7 +95,7 @@ def quizzesPointyByMonthlyViews():
     return quizzesGrabbedByPublish
 
 def quizzesWithInnerCategory(category, innerCategory, fr, to, sortType):
-    if category == 'Physiologies':
+    if category == 'psychology':
         if sortType == 'newest':
             grabbedQuizzes = quizzesPointyByPublishWithInnerCategory(innerCategory).all()[fr:to]
         elif sortType == 'bestest':
@@ -198,15 +198,8 @@ def quizzesByTitle(title):
     quizzes_exact_title = Quizzes.objects.filter(title__exact=title)
     quizzes_iexact_title = Quizzes.objects.filter(title__iexact=title)
 
-    quizzes_contains_innerCategory = Quizzes.objects.filter(innerCategory=title)
-    quizzes_icontains_innerCategory = Quizzes.objects.filter(innerCategory__icontains=title)
-    quizzes_exact_innerCategory = Quizzes.objects.filter(innerCategory__exact=title)
-    quizzes_iexact_innerCategory = Quizzes.objects.filter(innerCategory__iexact=title)
-
     quizzes = quizzes_contains_title | quizzes_icontains_title | \
-              quizzes_exact_title | quizzes_iexact_title | \
-              quizzes_contains_innerCategory | quizzes_icontains_innerCategory | \
-              quizzes_exact_innerCategory | quizzes_iexact_innerCategory   
+              quizzes_exact_title | quizzes_iexact_title
 
     return quizzes
 
