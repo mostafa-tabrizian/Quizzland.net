@@ -21,6 +21,5 @@ urlpatterns = [
     path('support', views.support),
     path('newsletter', views.newsletter),
 
-    # url(r'^ajax/validSearch/$', views.validSearch, name='validSearch'),
     url(r'^ajax/doesExistInNewsletterUsers/$', views.doesExistInNewsletterUsers, name='doesExistInNewsletterUsers'),
 ]

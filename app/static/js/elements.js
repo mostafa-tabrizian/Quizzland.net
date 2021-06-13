@@ -2,7 +2,6 @@ const body = document.querySelector('body')
 const loadingScreen = document.querySelector('.loadingScreen')
 const backBtn = document.querySelector('.backBtn')
 
-const nightMode__link = document.querySelector('.nightMode__link')
 const nightMode = document.querySelectorAll('.nightMode')
 const nightMode__container = document.querySelectorAll('.nightMode__container')
 
@@ -15,7 +14,6 @@ const header__menu__openBtn = document.querySelector('.header__menu__openBtn')
 const header__menu__closeBtn = document.querySelector('.header__menu__closeBtn')
 const id_searchInput = document.getElementById('id_searchInput')
 const header__searchInput = document.querySelector('.header__searchInput')
-const header__searchInput__m = document.querySelector('.header__searchInput__')
 const header__searchSubmit = document.querySelector('.header__searchSubmit')
 const header__searchOpener = document.querySelector('.header__searchOpener')
 const header__searchOpener__bg = document.querySelector('.header__searchOpener__bg')
@@ -54,7 +52,6 @@ const sort__gaming = document.querySelector('.sort__gaming')
 const sort__physiologies = document.querySelector('.sort__physiologies')
 
 const quizzes__item = document.querySelectorAll('.quizzes__item')
-const categories__item = document.querySelectorAll('.categories__item')
 
 const pageTravel__arwNext = document.querySelector('.pageTravel__arwNext')
 const pageTravel__arwLast = document.querySelector('.pageTravel__arwLast')

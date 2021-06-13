@@ -48,14 +48,6 @@ def index(request):
 
     return HttpResponse(template.render(context))
 
-# def validSearch(request):
-#     searchTarget = request.GET.get('searchTarget')
-#     data = {
-#         'searchTarget': searchTarget
-#     }
-#     return JsonResponse(data)
-
-
 @csrf_exempt
 def search(request):
     if request.method == 'POST':
