@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = os.path.dirname(__file__)
 
 SECRET_KEY = 'django-insecure-57hi20*x0$r=7ea$gfaky6htoai24bou9mjxi7spob7z1$+89g'
 
@@ -61,6 +61,10 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIR, 'templates'),
+)
+
 WSGI_APPLICATION = 'Quizland.wsgi.application'
 
 DATABASES = {
@@ -101,6 +105,6 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
