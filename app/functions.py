@@ -1,6 +1,7 @@
 import time
 from csv import writer
 from .forms import *
+from .models import *
 
 categoryInFar = {
     'gaming': 'گیمینگ',
@@ -24,14 +25,14 @@ def frToPage(page, howManyElementToShow):
 
 def saveMonthlyViewsInExcel():
     filename = './monthlyViewsData.csv'
-    quizzes =  s.query(Quizzes).all()
-    quizzesPointy =  s.query(QuizzesPointy).all()
-    categories =    s.query(Categories).all()
+    quizzes = Quizzes.objects.all()
+    quizzesPointy = Quizzes_Pointy.objects.all()
+    categories = InnerCategories.objects.all()
     
     with open(filename, 'a', encoding='utf8') as f_object:
 
         for category in categories:
-            data = [category.title_far, category.title_eng, category.category,\
+            data = [category.title, category.innerCategory, category.category,\
                     ' ', category.views, category.monthly_views, category.publish]
             writer_object = writer(f_object)
             writer_object.writerow(data)
@@ -40,13 +41,13 @@ def saveMonthlyViewsInExcel():
         writer_object.writerow(['||||||||', '||||||||', '||||||||', '||||||||', '||||||||'])
 
         for quiz in quizzes:
-            data = [quiz.title_far, ' ', quiz.category, quiz.innerCategory,\
+            data = [quiz.title, ' ', quiz.category, quiz.innerCategory,\
                     quiz.views, quiz.monthly_views, quiz.publish]
             writer_object = writer(f_object)
             writer_object.writerow(data)
 
         for quiz in quizzesPointy:
-            data = [quiz.title_far, ' ', quiz.category, quiz.innerCategory,\
+            data = [quiz.title, ' ', quiz.category, quiz.innerCategory,\
                     quiz.views, quiz.monthly_views, quiz.publish]
             writer_object = writer(f_object)
             writer_object.writerow(data)
@@ -79,19 +80,20 @@ def restarterOfMonthlyViews():
         print(f"started new month 'til {endAt}")
 
     def startTheMonthlyViewsFromZero():
-        categories =  s.query(Categories).all()
-        quizzes =  s.query(Quizzes).all()
-        quizzesPointy =  s.query(QuizzesPointy).all()
+        quizzes = Quizzes.objects.all()
+        quizzesPointy = Quizzes_Pointy.objects.all()
+        categories = InnerCategories.objects.all()
+
 
         for eachCategory in categories:
             eachCategory.monthly_views = 0
-            add_session(eachCategory)
+            eachCategory.save()
         for eachQuiz in quizzes:
             eachQuiz.monthly_views = 0
-            add_session(eachQuiz)
+            eachQuiz.save()
         for eachQuiz in quizzesPointy:
             eachQuiz.monthly_views = 0
-            add_session(eachQuiz)
+            eachQuiz.save()
 
         print('done startFromZero function')
 
