@@ -419,18 +419,10 @@ const nightMode_turnOn = () => {
 }
 
 userFavoriteMode = localStorage.getItem('mode')
-if(navigator.userAgent.indexOf("Firefox") != -1 ) {
-    if (userFavoriteMode == 'lightMode') {
-        log('firefox no nightMode')
-    } else {
-        nightMode_turnOff()
-    }
+if (userFavoriteMode == 'lightMode') {
+    nightMode_turnOff()
 } else {
-    if (userFavoriteMode == 'lightMode') {
-        nightMode_turnOff()
-    } else {
-        nightMode_turnOn()
-    }
+    nightMode_turnOn()
 }
 
 if (nightMode) {
@@ -491,7 +483,7 @@ if (nightMode) {
 // --------------------------------------------------------------------
 if(navigator.userAgent.indexOf("Firefox") != -1 ) {
     if (localStorage.getItem('alertUFHB') != 'True') {
-        alert('لطفا از مرورگر کروم استفاده کنید \n در مرورگر شما (فایرفاکس) حالت شب و برخی دیزاین ها قابل اجرا نیست')
+        alert('لطفا از مرورگر کروم یا غیره استفاده کنید \n در مرورگر شما (فایرفاکس) برخی دیزاین ها قابل اجرا نیست')
         // alert User For His Browser
         localStorage.setItem('alertUFHB', 'True')
     }

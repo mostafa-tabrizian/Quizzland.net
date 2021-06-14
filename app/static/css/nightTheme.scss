@@ -1,5 +1,6 @@
 :root {
     color-scheme: light dark; /* both supported */
+    color: white !important;
   }
 
 html {
@@ -68,9 +69,10 @@ body {
     border-radius: 40px;
     box-shadow: 2px 2px 8px #0000005e, 0 0 15px #3f3f3f5e;
     backdrop-filter: blur(15px);
-    background: rgba(0, 0, 0, 0.54);
+    background: rgba(0, 0, 0, 0.54) !important;
     border: solid 1px transparent;
     background-clip: padding-box;
+
 
     button {
         background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
@@ -222,13 +224,13 @@ body {
 .tools {
     &__sort {
         &__btn {
-            background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
+            background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216)) !important;
             color: black !important;
         }
 
         &__options {
             button {
-                background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
+                background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216)) !important;
                 color: black !important;
             }
         }
@@ -236,13 +238,13 @@ body {
 
     &__numberOfResult {
         &__btn {
-            background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
+            background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216)) !important;
             color: black !important;
         }
 
         &__options {
             button {
-                background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
+                background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216)) !important;
                 color: black !important;
             }
         }
@@ -262,7 +264,7 @@ body {
 }
 
 .backBtn {
-    background-image: linear-gradient(-45deg, #dacccc, rgb(216, 216, 216));
+    background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
     color: black !important;
 }
 

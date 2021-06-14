@@ -136,9 +136,6 @@
   .newsletter__blurBackground__show {
     background: rgba(0, 0, 0, 0.81) !important;
   }
-  .nightMode__container {
-    display: none !important;
-  }
   .result {
     font-family: changeForNotChrome, sans-serif, serif !important;
     font-weight: 300 !important;
