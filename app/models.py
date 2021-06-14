@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.db import models
+from ckeditor.fields import RichTextField
 import datetime
+
 
 categoryList = [
     ('celebrity', 'celebrity'),
@@ -12,7 +14,7 @@ categoryList = [
 class Document(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
-    note = models.TextField(max_length=200, null=False, blank=False, default=None)
+    note = RichTextField(blank=True, null=True, default=None)
 
     def __str__(self):
         return self.title
@@ -78,52 +80,52 @@ class Quizzes_Pointy(models.Model):
 
     result_upTo_1 = models.IntegerField(null=False, blank=False, default=None)
     result_title_1 = models.CharField(max_length=200, null=False, blank=False, default=None)
-    result_text_1 = models.TextField(null=False, blank=False, default=None)
+    result_text_1 = RichTextField(blank=True, null=True, default=None)
     result_img_1 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_2 = models.IntegerField(null=False, blank=False, default=None)
     result_title_2 = models.CharField(max_length=200, null=False, blank=False, default=None)
-    result_text_2 = models.TextField(null=False, blank=False, default=None)
+    result_text_2 = RichTextField(blank=True, null=True, default=None)
     result_img_2 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_3 = models.IntegerField(blank=True, null=True, default=None)
     result_title_3 = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_3 = models.TextField(blank=True, default=None)
+    result_text_3 = RichTextField(blank=True, null=True, default=None)
     result_img_3 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_4 = models.IntegerField(blank=True, null=True, default=None)
     result_title_4 = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_4 = models.TextField(blank=True, default=None)
+    result_text_4 = RichTextField(blank=True, null=True, default=None)
     result_img_4 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_5 = models.IntegerField(blank=True, null=True, default=None)
     result_title_5 = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_5 = models.TextField(blank=True, default=None)
+    result_text_5 = RichTextField(blank=True, null=True, default=None)
     result_img_5 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_6 = models.IntegerField(blank=True, null=True, default=None)
     result_title_6 = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_6 = models.TextField(blank=True, default=None)
+    result_text_6 = RichTextField(blank=True, null=True, default=None)
     result_img_6 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_7 = models.IntegerField(blank=True, null=True, default=None)
     result_title_7 = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_7 = models.TextField(blank=True, default=None)
+    result_text_7 = RichTextField(blank=True, null=True, default=None)
     result_img_7 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_8 = models.IntegerField(blank=True, null=True, default=None)
     result_title_8 = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_8 = models.TextField(blank=True, default=None)
+    result_text_8 = RichTextField(blank=True, null=True, default=None)
     result_img_8 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_9 = models.IntegerField(blank=True, null=True, default=None)
     result_title_9 = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_9 = models.TextField(blank=True, default=None)
+    result_text_9 = RichTextField(blank=True, null=True, default=None)
     result_img_9 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
     
     result_upTo_10 = models.IntegerField(blank=True, null=True, default=None)
     result_title_10 = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_10 = models.TextField(blank=True, default=None)
+    result_text_10 = RichTextField(blank=True, null=True, default=None)
     result_img_10 =  models.ImageField(upload_to='app/static/img/Pointy-Quiz-Result', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
 
     publish = models.DateTimeField(default=datetime.datetime.now)
@@ -141,14 +143,14 @@ class Questions(models.Model):
     category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
-    question = models.TextField(null=False, blank=False, default=None)
+    question = RichTextField(blank=True, null=True, default=None)
     option_1 = models.CharField(max_length=100, null=False, blank=False, default=None)
     option_2 = models.CharField(max_length=100, null=False, blank=False, default=None)
     option_3 = models.CharField(max_length=100, null=False, blank=True, default=None)
     option_4 = models.CharField(max_length=100, null=False, blank=True, default=None)
     answer = models.IntegerField(null=False, blank=False, default=None)
     answer_imGif = models.ImageField(upload_to='app/static/img/Answer-And-Result-ImGIf', default='app/static/img/Base/NotExist.jpg')
-    answer_text = models.TextField(null=False, blank=True, default=None)
+    answer_text = RichTextField(blank=True, null=True, default=None)
 
     def __str__(self):
         return self.innerCategory
