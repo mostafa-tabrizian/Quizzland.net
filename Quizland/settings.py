@@ -70,9 +70,9 @@ WSGI_APPLICATION = 'Quizland.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysql',
+        'NAME': 'quizland_develop',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '$Mysql19931506',
         'HOST': '127.0.0.1',
         'PORT': 3306,
     }
