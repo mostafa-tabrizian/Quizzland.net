@@ -490,13 +490,17 @@ if (nightMode) {
 
 // --------------------------------------------------------------------
 if(navigator.userAgent.indexOf("Firefox") != -1 ) {
-    pleaseUseChrome.classList.remove('noVis')
-    alert('لطفا از مرورگر کروم استفاده کنید \n دیزاین و کار با سایت به وسیله ی مرورگر فایرفاکس توصیه نمیشود \n حالت شب و برخی دیزاین ها در این مرورگر قابل اجرا نیست')
+    if (localStorage.getItem('alertUFHB') != 'True') {
+        alert('لطفا از مرورگر کروم استفاده کنید \n در مرورگر شما (فایرفاکس) حالت شب و برخی دیزاین ها قابل اجرا نیست')
+        // alert User For His Browser
+        localStorage.setItem('alertUFHB', 'True')
+    }
+    if (pleaseUseChrome) {
+        pleaseUseChrome.classList.remove('noVis')
+    }
 }
 
 // --------------------------------------------------------------------
-
-
 log('script working___________________________________________')
 
 // -----------------------------GSAP
