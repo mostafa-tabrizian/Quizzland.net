@@ -83,26 +83,49 @@ def search(request):
             return HttpResponse(template.render(context))
 
 @cache_page(CACHE_TTL)
-def category(request, categoryArg):
+def category(request, Sub_Category):
     numberOfResults = int(request.GET.get('nr'))
     page = int(request.GET.get('p'))
     sortType = request.GET.get('st')
-
+    howManyElementToShow = 12
+    fTPage = frToPage(page, howManyElementToShow)
     if numberOfResults == 16 or numberOfResults == 32 or numberOfResults == 48:
-        howManyElementToShow = 12
-        fTPage = frToPage(page, howManyElementToShow)
-        template = loader.get_template('app/category.html')
-        context = {
-            'searchForm': SearchForm(),
-            'newsletterForm': NewsletterForm(),
-            'headTitle': f'QuizLand | کوئیز های {categoryInFar[categoryArg]} ',
-            'description': 'کتگوری و گروه های متنوع همچون آدم های معروف و سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ و تست های روانشناسی',
-            'keywords': 'تست های روانشناسی, سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ,آدم های معروف, کوئيز',
-            'category': categoryArg,
-            'categories': subCategories(categoryArg, fTPage[0], fTPage[1], sortType),
-            'finalPage': finalPage(howManyElementToShow, categoryArg)
-        }
-        return HttpResponse(template.render(context))
+        if request.GET.get('c'):
+            category = request.GET.get('c')
+            if category =='psychology':
+                typeOfQuiz = 'quizPointy'
+            else:
+                typeOfQuiz = 'quiz'
+            Sub_Category = titleConverterFromUrlToNormalOne(Sub_Category)
+            # addViewToCategories(subCategory)
+            template = loader.get_template('app/subCategory.html')
+            context = {
+                'searchForm': SearchForm(),
+                'newsletterForm': NewsletterForm(),
+                'headTitle': f'QuizLand | {Sub_Category} ',
+                'description': f'کوئيزلند {Sub_Category} کوئيز های',
+                'keywords': f'{Sub_Category} بهترین کوئيز های , {Sub_Category} کوئيز های',
+                'colorOfHeader': 'header__white',
+                'background': subCategoriesByTitle(Sub_Category)[0].background,
+                'quizzes': quizzesWithSubCategory(Sub_Category, Sub_Category, fTPage[0], fTPage[1], sortType),
+                'typeOfQuiz': typeOfQuiz,
+                'finalPage': finalPage(howManyElementToShow, Sub_Category),
+            }
+            return HttpResponse(template.render(context))
+
+        else:
+            template = loader.get_template('app/category.html')
+            context = {
+                'searchForm': SearchForm(),
+                'newsletterForm': NewsletterForm(),
+                'headTitle': f'QuizLand | کوئیز های {categoryInFar[Sub_Category]} ',
+                'description': 'کتگوری و گروه های متنوع همچون آدم های معروف و سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ و تست های روانشناسی',
+                'keywords': 'تست های روانشناسی, سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ,آدم های معروف, کوئيز',
+                'category': Sub_Category,
+                'categories': subCategories(Sub_Category, fTPage[0], fTPage[1], sortType),
+                'finalPage': finalPage(howManyElementToShow, Sub_Category)
+            }
+            return HttpResponse(template.render(context))
     else:
         return pageNotFoundManual(request)
 
@@ -112,31 +135,6 @@ def subCategory(request, category, subCategory):
     numberOfResults = int(request.GET.get('nr'))
     sortType = request.GET.get('st')
     
-    if numberOfResults == 16 or numberOfResults == 32 or numberOfResults == 48:
-        if category =='psychology':
-            typeOfQuiz = 'quizPointy'
-        else:
-            typeOfQuiz = 'quiz'
-        howManyElementToShow = 12
-        fTPage = frToPage(page, howManyElementToShow)
-        subCategory = titleConverterFromUrlToNormalOne(subCategory)
-        # addViewToCategories(subCategory)
-        template = loader.get_template('app/subCategory.html')
-        context = {
-            'searchForm': SearchForm(),
-            'newsletterForm': NewsletterForm(),
-            'headTitle': f'QuizLand | {subCategory} ',
-            'description': f'کوئيزلند {subCategory} کوئيز های',
-            'keywords': f'{subCategory} بهترین کوئيز های , {subCategory} کوئيز های',
-            'colorOfHeader': 'header__white',
-            'background': subCategoriesByTitle(subCategory)[0].background,
-            'quizzes': quizzesWithSubCategory(category, subCategory, fTPage[0], fTPage[1], sortType),
-            'typeOfQuiz': typeOfQuiz,
-            'finalPage': finalPage(howManyElementToShow, subCategory),
-        }
-        return HttpResponse(template.render(context))
-    else:
-        return pageNotFoundManual(request)
 
 def quiz(request, title):
     subCategory = request.GET.get('ic')
