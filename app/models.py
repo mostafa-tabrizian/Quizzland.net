@@ -24,28 +24,28 @@ class Document_Admin(admin.ModelAdmin):
     search_fields = ['id', 'title', 'note']
 
 
-class InnerCategories(models.Model):
+class SubCategories(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
-    innerCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
+    subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
-    background = models.ImageField(upload_to='app/static/img/Inner-Category', default='app/static/img/Base/NotExist.jpg')
+    background = models.ImageField(upload_to='app/static/img/Sub-Category', default='app/static/img/Base/NotExist.jpg')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.innerCategory
+        return self.subCategory
 
-class InnerCategory_Admin(admin.ModelAdmin):
-    list_display = ('innerCategory', 'title', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('innerCategory', 'category', 'publish')
+class SubCategories_Admin(admin.ModelAdmin):
+    list_display = ('subCategory', 'title', 'category', 'monthly_views', 'views', 'publish')
+    list_filter = ('subCategory', 'category', 'publish')
     search_fields = ['id', 'title']
 
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
-    innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
+    subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
@@ -59,20 +59,20 @@ class Quizzes(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.innerCategory
+        return self.subCategory
 
     def __unicode__(self):
         return 'test'
 
 class Quizzes_Admin(admin.ModelAdmin):
-    list_display = ('title', 'innerCategory', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('innerCategory', 'category', 'publish')
+    list_display = ('title', 'subCategory', 'category', 'monthly_views', 'views', 'publish')
+    list_filter = ('subCategory', 'category', 'publish')
     search_fields = ['id', 'title']
 
 class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
-    innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
+    subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
@@ -131,17 +131,17 @@ class Quizzes_Pointy(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.innerCategory
+        return self.subCategory
 
 class Quizzes_Pointy_Admin(admin.ModelAdmin):
-    list_display = ('title', 'innerCategory', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('innerCategory', 'category', 'publish')
+    list_display = ('title', 'subCategory', 'category', 'monthly_views', 'views', 'publish')
+    list_filter = ('subCategory', 'category', 'publish')
     search_fields = ['id', 'title']
 
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
-    innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
+    subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     question = RichTextField(blank=True, null=True, default=None)
     option_1 = models.CharField(max_length=100, null=False, blank=False, default=None)
@@ -153,20 +153,20 @@ class Questions(models.Model):
     answer_text = RichTextField(blank=True, null=True, default=None)
 
     def __str__(self):
-        return self.innerCategory
+        return self.subCategory
 
     def __unicode__(self):
         return 'test'
 
 class Questions_Admin(admin.ModelAdmin):
-    list_display = ('title', 'question', 'innerCategory', 'category')
-    list_filter = ('innerCategory', 'category')
+    list_display = ('title', 'question', 'subCategory', 'category')
+    list_filter = ('subCategory', 'category')
     search_fields = ['title', 'question']
 
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
-    innerCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
+    subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
     question = models.CharField(max_length=200, null=False, blank=False, default=None)
 
@@ -203,11 +203,11 @@ class Pointy_Questions(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.innerCategory
+        return self.subCategory
 
 class Pointy_Questions_Admin(admin.ModelAdmin):
-    list_display = ('title', 'question', 'innerCategory', 'category', 'publish')
-    list_filter = ('innerCategory', 'category')
+    list_display = ('title', 'question', 'subCategory', 'category', 'publish')
+    list_filter = ('subCategory', 'category')
     search_fields = ['title', 'question']
 
 class Newsletter_Users(models.Model):

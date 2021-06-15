@@ -3,7 +3,7 @@ from ..models import Quizzes, Newsletter_Users, Quiz_Questions
 
 class QuizzesModelTest(TestCase):
     def test_createQuiz(self, category="test",
-                    innerCategory="test", title="test",
+                    subCategory="test", title="test",
                     title_english="test",
                     monthly_views=0, views=0,
                     background='test', fan_name='test',
@@ -11,7 +11,7 @@ class QuizzesModelTest(TestCase):
                     GIF60='empty.jpg', GIF80='empty.jpg',
                     GIF100='empty.jpg'):
         return Quizzes.objects.create(title=title, category=category,
-                                        innerCategory=innerCategory, title_english=title_english,
+                                        subCategory=subCategory, title_english=title_english,
                                         monthly_views=monthly_views, views=views,
                                         background=background, fan_name=fan_name,
                                         GIF20=GIF20, GIF40=GIF40,
@@ -25,14 +25,14 @@ class QuizzesModelTest(TestCase):
 
 class QuizQuestionsModelTest(TestCase):
     def test_createQuestion(self, category="test",
-                            innerCategory="test", title="test",
+                            subCategory="test", title="test",
                             title_english="test", question='test',
                             option_1='test', option_2='test',
                             option_3='test', option_4='test',
                             answer=1, answer_imGif='empty.jpg',
                             answer_text='test'):
         return Quiz_Questions.objects.create(title=title, category=category,
-                                            innerCategory=innerCategory, title_english=title_english,
+                                            subCategory=subCategory, title_english=title_english,
                                             question=question, option_1=option_1,
                                             option_2=option_2, option_3=option_3,
                                             option_4=option_4, answer=answer,

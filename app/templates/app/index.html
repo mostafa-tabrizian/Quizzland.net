@@ -49,10 +49,10 @@
         </div>
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
             {% for quiz in NewestCelebrityQuizSection %}
-                {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
-                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
+                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
@@ -71,10 +71,10 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestMovieSeriesQuizSection %}
-                {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
-                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
+                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
@@ -94,10 +94,10 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestPhysiologiesQuizSection %}
-                {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quizPointy/{{quiz.category}}/{{innerCategory}}/{{title}}">
-                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                <a href="/quizPointy/{{quiz.category}}/{{subCategory}}/{{title}}">
+                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
@@ -117,10 +117,10 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestGamingQuizSection %}
-                {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
-                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+                <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
+                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
@@ -152,9 +152,9 @@
                     <h2 class="tx-al-c">محبوب ترین کوئیز های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in bestestQuizzesForThisMonth %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
+                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}    
@@ -167,9 +167,9 @@
                     <h2 class="tx-al-c">محبوب ترین کوئیز ها</h2>
                     <ul class="sort__style">
                         {% for quiz in bestestQuizzes %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
+                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
@@ -187,9 +187,9 @@
                     <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestCelebrityQuizSection %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
+                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
@@ -202,9 +202,9 @@
                     <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestCelebrityQuizSection %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
+                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
@@ -222,9 +222,9 @@
                     <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestMovieSeriesQuizSection %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
+                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
@@ -237,9 +237,9 @@
                     <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestMovieSeriesQuizSection %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
+                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
@@ -257,9 +257,9 @@
                     <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestGamingQuizSection %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
+                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
@@ -272,9 +272,9 @@
                     <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestGamingQuizSection %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
+                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
                                     {{ quiz.title }}
                                 </a></li>
                             {% endwith %}
@@ -292,7 +292,7 @@
                     <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestPhysiologiesQuizSection %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
                                 <li><a href="/quizPointy/{{title}}?ic=psychology">
                                     {{ quiz.title }}
@@ -307,7 +307,7 @@
                     <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestPhysiologiesQuizSection %}
-                            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}
                                 <li><a href="/quizPointy/{{title}}?ic=psychology">
                                     {{ quiz.title }}

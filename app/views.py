@@ -58,7 +58,7 @@ def search(request):
             'newsletterForm': NewsletterForm(),
             'headTitle': f'QuizLand | {search} جستجو عبارت ',
             'userSearchInput': search,
-            'innerCategoriesByTitle': innerCategoriesByTitle(search)[:2],
+            'subCategoriesByTitle': subCategoriesByTitle(search)[:2],
             'quizzesByTitle': quizzesByTitle(search)[:28],
             'quizzesPointyByTitle': quizzesPointyByTitle(search)[:28],
         }
@@ -74,7 +74,7 @@ def search(request):
                 'newsletterForm': NewsletterForm(),
                 'headTitle': f'QuizLand | {searchInput} جستجو عبارت ',
                 'userSearchInput': searchInput,
-                'innerCategoriesByTitle': innerCategoriesByTitle(searchInput)[:2],
+                'subCategoriesByTitle': subCategoriesByTitle(searchInput)[:2],
                 'quizzesByTitle': quizzesByTitle(searchInput)[:8],
                 'quizzesPointyByTitle': quizzesPointyByTitle(searchInput)[:8],
             }
@@ -98,7 +98,7 @@ def category(request, categoryArg):
             'description': 'کتگوری و گروه های متنوع همچون آدم های معروف و سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ و تست های روانشناسی',
             'keywords': 'تست های روانشناسی, سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ,آدم های معروف, کوئيز',
             'category': categoryArg,
-            'categories': innerCategories(categoryArg, fTPage[0], fTPage[1], sortType),
+            'categories': subCategories(categoryArg, fTPage[0], fTPage[1], sortType),
             'finalPage': finalPage(howManyElementToShow, categoryArg)
         }
         return HttpResponse(template.render(context))
@@ -106,7 +106,7 @@ def category(request, categoryArg):
         return pageNotFoundManual(request)
 
 @cache_page(CACHE_TTL)
-def innerCategory(request, category, innerCategory):
+def subCategory(request, category, subCategory):
     page = int(request.GET.get('p'))
     numberOfResults = int(request.GET.get('nr'))
     sortType = request.GET.get('st')
@@ -118,27 +118,27 @@ def innerCategory(request, category, innerCategory):
             typeOfQuiz = 'quiz'
         howManyElementToShow = 12
         fTPage = frToPage(page, howManyElementToShow)
-        InnerCategory = titleConverterFromUrlToNormalOne(innerCategory)
-        # addViewToCategories(InnerCategory)
-        template = loader.get_template('app/innerCategory.html')
+        subCategory = titleConverterFromUrlToNormalOne(subCategory)
+        # addViewToCategories(subCategory)
+        template = loader.get_template('app/subCategory.html')
         context = {
             'searchForm': SearchForm(),
             'newsletterForm': NewsletterForm(),
-            'headTitle': f'QuizLand | {innerCategory} ',
-            'description': f'کوئيزلند {innerCategory} کوئيز های',
-            'keywords': f'{innerCategory} بهترین کوئيز های , {innerCategory} کوئيز های',
+            'headTitle': f'QuizLand | {subCategory} ',
+            'description': f'کوئيزلند {subCategory} کوئيز های',
+            'keywords': f'{subCategory} بهترین کوئيز های , {subCategory} کوئيز های',
             'colorOfHeader': 'header__white',
-            'background': innerCategoriesByTitle(InnerCategory)[0].background,
-            'quizzes': quizzesWithInnerCategory(category, InnerCategory, fTPage[0], fTPage[1], sortType),
+            'background': subCategoriesByTitle(subCategory)[0].background,
+            'quizzes': quizzesWithSubCategory(category, subCategory, fTPage[0], fTPage[1], sortType),
             'typeOfQuiz': typeOfQuiz,
-            'finalPage': finalPage(howManyElementToShow, InnerCategory),
+            'finalPage': finalPage(howManyElementToShow, subCategory),
         }
         return HttpResponse(template.render(context))
     else:
         return pageNotFoundManual(request)
 
 def quiz(request, title):
-    innerCategory = request.GET.get('ic')
+    subCategory = request.GET.get('ic')
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     template = loader.get_template('app/quiz.html')
@@ -147,7 +147,7 @@ def quiz(request, title):
         'newsletterForm': NewsletterForm(),
         'headTitle': f'QuizLand | {fullTitle} ', 
         'description': f'کوئيز {fullTitle} ',
-        'keywords': f'{fullTitle}, {innerCategory}, کوئیز های ',
+        'keywords': f'{fullTitle}, {subCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
         'quizDetail': quizzesByTitle(fullTitle)[0],
         'quiz_Question': quizQuestionByTitle(fullTitle),
@@ -155,7 +155,7 @@ def quiz(request, title):
     return HttpResponse(template.render(context))
 
 def quizPointy(request, title):
-    innerCategory = request.GET.get('ic')
+    subCategory = request.GET.get('ic')
     fullTitle = titleConverterFromUrlToNormalOne(title)
     addViewToQuizzes(fullTitle)
     template = loader.get_template('app/quizPointy.html')
@@ -164,7 +164,7 @@ def quizPointy(request, title):
         'newsletterForm': NewsletterForm(),
         'headTitle': f'QuizLand | {title}',
         'description': f'کوئيز {fullTitle} ',
-        'keywords': f'{fullTitle}, {innerCategory}, کوئیز های ',
+        'keywords': f'{fullTitle}, {subCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
         'quizDetail': quizzesPointyByTitle(fullTitle)[0],
         'quiz_Question': quizQuestionByTitle(fullTitle),
@@ -173,14 +173,14 @@ def quizPointy(request, title):
 
 def result(request):
     title = request.GET.get('t')
-    innerCategory = request.GET.get('ic')
+    subCategory = request.GET.get('ic')
     fullTitle = titleConverterFromUrlToNormalOne(title)
-    innerCategory = titleConverterFromUrlToNormalOne(innerCategory)
+    subCategory = titleConverterFromUrlToNormalOne(subCategory)
     template = loader.get_template('app/result.html')
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'suggestingQuiz': quizzesByRandomWithInnerCategory(innerCategory),
+        'suggestingQuiz': quizzesByRandomWithSubCategory(subCategory),
         'quizDetail': quizzesByTitle(fullTitle)[0],
         'fanName': fanNameOfQuiz(fullTitle),
         'fullTitle': fullTitle,

@@ -27,12 +27,12 @@ def saveMonthlyViewsInExcel():
     filename = './monthlyViewsData.csv'
     quizzes = Quizzes.objects.all()
     quizzesPointy = Quizzes_Pointy.objects.all()
-    categories = InnerCategories.objects.all()
+    categories = SubCategories.objects.all()
     
     with open(filename, 'a', encoding='utf8') as f_object:
 
         for category in categories:
-            data = [category.title, category.innerCategory, category.category,\
+            data = [category.title, category.subCategory, category.category,\
                     ' ', category.views, category.monthly_views, category.publish]
             writer_object = writer(f_object)
             writer_object.writerow(data)
@@ -41,13 +41,13 @@ def saveMonthlyViewsInExcel():
         writer_object.writerow(['||||||||', '||||||||', '||||||||', '||||||||', '||||||||'])
 
         for quiz in quizzes:
-            data = [quiz.title, ' ', quiz.category, quiz.innerCategory,\
+            data = [quiz.title, ' ', quiz.category, quiz.subCategory,\
                     quiz.views, quiz.monthly_views, quiz.publish]
             writer_object = writer(f_object)
             writer_object.writerow(data)
 
         for quiz in quizzesPointy:
-            data = [quiz.title, ' ', quiz.category, quiz.innerCategory,\
+            data = [quiz.title, ' ', quiz.category, quiz.subCategory,\
                     quiz.views, quiz.monthly_views, quiz.publish]
             writer_object = writer(f_object)
             writer_object.writerow(data)
@@ -82,7 +82,7 @@ def restarterOfMonthlyViews():
     def startTheMonthlyViewsFromZero():
         quizzes = Quizzes.objects.all()
         quizzesPointy = Quizzes_Pointy.objects.all()
-        categories = InnerCategories.objects.all()
+        categories = SubCategories.objects.all()
 
 
         for eachCategory in categories:

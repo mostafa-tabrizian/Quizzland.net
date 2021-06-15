@@ -12,14 +12,14 @@
             هیچ کتگوریی پیدا نشد <br> لطفا از عبارتی دیگر یا با زبان دیگری دوباره امتحان کنید
         </h4>
         <div class="searchResult__category__container flex flex-jc-c">
-            {% for innerCategory in innerCategoriesByTitle %}
+            {% for subCategory in subCategoriesByTitle %}
                 <div class="searchResult__category__item">
-                    {% with innerCategory.innerCategory|listMaker:' ' as img  %}
-                    <a href="/category/{{innerCategory.category}}/{{img.0}}-{{img.1}}/0/newest/16">
-                        <img src="/static/img/Thn-Category/{{img.0}}-{{img.1}}.jpg" alt="{{ innerCategory.innerCategory }} | کوئیز های {{ category.title_far }}">
+                    {% with subCategory.subCategory|listMaker:' ' as img  %}
+                    <a href="/category/{{subCategory.category}}/{{img.0}}-{{img.1}}/0/newest/16">
+                        <img src="/static/img/Thn-Category/{{img.0}}-{{img.1}}.jpg" alt="{{ subCategory.subCategory }} | کوئیز های {{ category.title_far }}">
                     </a>
-                    <h5 class="tx-al-c"><a href="/category/{{innerCategory.category}}/{{img.0}}-{{img.1}}/0/newest/16">
-                        {{ innerCategory.innerCategory }}
+                    <h5 class="tx-al-c"><a href="/category/{{subCategory.category}}/{{img.0}}-{{img.1}}/0/newest/16">
+                        {{ subCategory.subCategory }}
                     </a></h5>
                     {% endwith %}
                 </div>
@@ -35,14 +35,14 @@
         <ul>
             {% for quiz in quizzesByTitle %}
                 <li>
-                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                    {% with quiz.subCategory|replaceToHyphen as subCategory %}
                     {% with quiz.title|replaceToHyphen as title %}
                     {% if quiz.category == 'physiologies' %}
-                        <a class="searchResult__quizzes__item tx-al-r" href="/quizPointy/physiologies/{{innerCategory}}/{{title}}">
+                        <a class="searchResult__quizzes__item tx-al-r" href="/quizPointy/physiologies/{{subCategory}}/{{title}}">
                             {{ quiz.title }}
                         </a>
                     {% else %}
-                        <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{subCategory}}/{{title}}">
                             {{ quiz.title }}
                         </a>
                     {% endif %}
@@ -53,14 +53,14 @@
 
             {% for quiz in quizzesPointyByTitle %}
                 <li>
-                    {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+                    {% with quiz.subCategory|replaceToHyphen as subCategory %}
                     {% with quiz.title|replaceToHyphen as title %}
                     {% if quiz.category == 'physiologies' %}
-                        <a class="searchResult__quizzes__item tx-al-r" href="/quizPointy/physiologies/{{innerCategory}}/{{title}}">
+                        <a class="searchResult__quizzes__item tx-al-r" href="/quizPointy/physiologies/{{subCategory}}/{{title}}">
                             {{ quiz.title }}
                         </a>
                     {% else %}
-                        <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{innerCategory}}/{{title}}">
+                        <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{subCategory}}/{{title}}">
                             {{ quiz.title }}
                         </a>
                     {% endif %}

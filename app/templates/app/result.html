@@ -41,10 +41,10 @@
 
     <div class="result__suggester quizContainer__category__inner flex flex-jc-c flex-ai-c wrapper-med">
         {% for quiz in suggestingQuiz %}
-            {% with quiz.innerCategory|replaceToHyphen as innerCategory %}
+            {% with quiz.subCategory|replaceToHyphen as subCategory %}
             {% with quiz.title|replaceToHyphen as title %}
-            <a href="/quiz/{{title}}?ic={{quiz.innerCategory}}">
-                <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.innerCategory}} | {{quiz.title}}" loading='lazy'>
+            <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
+                <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
                 {% with quiz.views|viewsFormat as views %}
                 <div class="quizContainer__category__inner__views">{{views}}</div>
                 <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>

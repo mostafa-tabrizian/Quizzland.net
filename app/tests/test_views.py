@@ -5,7 +5,7 @@ class ViewsTest(TestCase):
     def test_View(self):
         views = (
             ('/category/celebrities/0/newest/16', 'app/category/category.html'),
-            ('/category/celebrities/taylor-swift/0/newest/16', 'app/category/innerCategory.html'),
+            ('/category/celebrities/taylor-swift/0/newest/16', 'app/category/subCategory.html'),
             ('/newest/0', 'app/sort.html'),
             ('/bestest/movieSeries/0', 'app/sort.html'),
             ('/contact', 'app/contact.html'),

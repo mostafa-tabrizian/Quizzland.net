@@ -6,7 +6,7 @@ urlpatterns = [
     path('', index),
     path('search', search),
     path('category/<categoryArg>', category),
-    path('category/<category>/<innerCategory>',innerCategory),
+    path('category/<category>/<subCategory>', subCategory),
     path('quiz/<title>', quiz),
     path('quizPointy/<title>', quizPointy),
     path('result', result),

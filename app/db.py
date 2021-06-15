@@ -4,39 +4,39 @@ from .models import *
 from .functions import *
 
 # ------------------Category
-def innerCategories(category, fr, to, sortType):
+def subCategories(category, fr, to, sortType):
     if sortType == 'newest':
-        categories = innerCategoriesByPublish(category).all()[fr:to]
+        categories = subCategoriesByPublish(category).all()[fr:to]
     elif sortType == 'bestest':
-        categories = innerCategoryByViews(category).all()[fr:to]
+        categories = subCategoryByViews(category).all()[fr:to]
     elif sortType == 'alphabet':
-        categories = innerCategoryAlphabet(category).all()[fr:to]
+        categories = subCategoryAlphabet(category).all()[fr:to]
     return categories
 
-def innerCategoriesByPublish(categoryArg):
-    category = InnerCategories.objects.filter(category=categoryArg)\
+def subCategoriesByPublish(categoryArg):
+    category = SubCategories.objects.filter(category=categoryArg)\
                                     .order_by('-publish')
     return category
 
-def innerCategoryByViews(categoryArg):
-    category = InnerCategories.objects.filter(category=categoryArg)\
+def subCategoryByViews(categoryArg):
+    category = SubCategories.objects.filter(category=categoryArg)\
                                     .order_by('-views')
     return category
 
-def innerCategoryAlphabet(categoryArg):
-    category = InnerCategories.objects.filter(category=categoryArg)\
-                                .order_by('innerCategory')
+def subCategoryAlphabet(categoryArg):
+    category = SubCategories.objects.filter(category=categoryArg)\
+                                .order_by('subCategory')
     return category
 
-def innerCategoriesByTitle(title):
-    category_contains_eng = InnerCategories.objects.filter(innerCategory=title)
-    category_contains_far = InnerCategories.objects.filter(title__contains=title)
-    category_icontains_eng = InnerCategories.objects.filter(innerCategory__icontains=title)
-    category_icontains_far = InnerCategories.objects.filter(innerCategory__icontains=title)
-    category_exact_eng = InnerCategories.objects.filter(innerCategory__exact=title)
-    category_exact_far = InnerCategories.objects.filter(innerCategory__exact=title)
-    category_iexact_eng = InnerCategories.objects.filter(innerCategory__iexact=title)
-    category_iexact_far = InnerCategories.objects.filter(innerCategory__iexact=title)
+def subCategoriesByTitle(title):
+    category_contains_eng = SubCategories.objects.filter(subCategory=title)
+    category_contains_far = SubCategories.objects.filter(title__contains=title)
+    category_icontains_eng = SubCategories.objects.filter(subCategory__icontains=title)
+    category_icontains_far = SubCategories.objects.filter(subCategory__icontains=title)
+    category_exact_eng = SubCategories.objects.filter(subCategory__exact=title)
+    category_exact_far = SubCategories.objects.filter(subCategory__exact=title)
+    category_iexact_eng = SubCategories.objects.filter(subCategory__iexact=title)
+    category_iexact_far = SubCategories.objects.filter(subCategory__iexact=title)
 
     category = category_contains_eng | category_contains_far | \
                category_icontains_eng | category_icontains_far | \
@@ -94,60 +94,60 @@ def quizzesPointyByMonthlyViews():
         cache.set('quizzesPointyByMonthlyViews', quizzesGrabbedByPublish)
     return quizzesGrabbedByPublish
 
-def quizzesWithInnerCategory(category, innerCategory, fr, to, sortType):
+def quizzesWithSubCategory(category, subCategory, fr, to, sortType):
     if category == 'psychology':
         if sortType == 'newest':
-            grabbedQuizzes = quizzesPointyByPublishWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesPointyByPublishWithSubCategory(subCategory).all()[fr:to]
         elif sortType == 'bestest':
-            grabbedQuizzes = quizzesPointyByViewsWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesPointyByViewsWithSubCategory(subCategory).all()[fr:to]
         elif sortType == 'alphabet':
-            grabbedQuizzes = quizzesPointyByAlphabetWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesPointyByAlphabetWithSubCategory(subCategory).all()[fr:to]
     else:
         if sortType == 'newest':
-            grabbedQuizzes = quizzesByPublishWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesByPublishWithSubCategory(subCategory).all()[fr:to]
         elif sortType == 'bestest':
-            grabbedQuizzes = quizzesByViewsWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesByViewsWithSubCategory(subCategory).all()[fr:to]
         elif sortType == 'alphabet':
-            grabbedQuizzes = quizzesByAlphabetWithInnerCategory(innerCategory).all()[fr:to]
+            grabbedQuizzes = quizzesByAlphabetWithSubCategory(subCategory).all()[fr:to]
 
     return grabbedQuizzes
 
-def quizzesByPublishWithInnerCategory(innerCategory):
-    grabbedQuiz = Quizzes.objects.filter(innerCategory=innerCategory)\
+def quizzesByPublishWithSubCategory(subCategory):
+    grabbedQuiz = Quizzes.objects.filter(subCategory=subCategory)\
                                 .order_by('publish')
     return grabbedQuiz
 
-def quizzesByViewsWithInnerCategory(innerCategory):
-    grabbedQuiz = Quizzes.objects.filter(innerCategory=innerCategory)\
+def quizzesByViewsWithSubCategory(subCategory):
+    grabbedQuiz = Quizzes.objects.filter(subCategory=subCategory)\
                                 .order_by('-views')
     return grabbedQuiz
 
-def quizzesByAlphabetWithInnerCategory(innerCategory):
-    grabbedQuiz = Quizzes.objects.filter(innerCategory=innerCategory)\
-                                .order_by('innerCategory')
+def quizzesByAlphabetWithSubCategory(subCategory):
+    grabbedQuiz = Quizzes.objects.filter(subCategory=subCategory)\
+                                .order_by('subCategory')
     return grabbedQuiz
 
-def quizzesByRandomWithInnerCategory(innerCategory):
-    # quizzes = Quizzes.objects.filter(innerCategory=innerCategory)
+def quizzesByRandomWithSubCategory(subCategory):
+    # quizzes = Quizzes.objects.filter(subCategory=subCategory)
     # countAllQuizzes = len(quizzes.all())
     # randomOffset = random.randint(0, countAllQuizzes - 4)
-    grabbedQuiz = Quizzes.objects.filter(innerCategory=innerCategory)[:4]
+    grabbedQuiz = Quizzes.objects.filter(subCategory=subCategory)[:4]
                                     # .offset(randomOffset)\
     return grabbedQuiz
 
 
-def quizzesPointyByPublishWithInnerCategory(innerCategory):
-    grabbedQuiz = Quizzes_Pointy.objects.filter(innerCategory=innerCategory)\
+def quizzesPointyByPublishWithSubCategory(subCategory):
+    grabbedQuiz = Quizzes_Pointy.objects.filter(subCategory=subCategory)\
                                         .order_by('-publish')
     return grabbedQuiz
 
-def quizzesPointyByViewsWithInnerCategory(innerCategory):
-    grabbedQuiz = Quizzes_Pointy.objects.filter(innerCategory=innerCategory)\
+def quizzesPointyByViewsWithSubCategory(subCategory):
+    grabbedQuiz = Quizzes_Pointy.objects.filter(subCategory=subCategory)\
                                         .order_by('-views')
     return grabbedQuiz
 
-def quizzesPointyByAlphabetWithInnerCategory(innerCategory):
-    grabbedQuiz = Quizzes_Pointy.objects.filter(innerCategory=innerCategory)\
+def quizzesPointyByAlphabetWithSubCategory(subCategory):
+    grabbedQuiz = Quizzes_Pointy.objects.filter(subCategory=subCategory)\
                                         .order_by('title')
     return grabbedQuiz
 
@@ -198,15 +198,15 @@ def quizzesByTitle(title):
     quizzes_exact_title = Quizzes.objects.filter(title__exact=title)
     quizzes_iexact_title = Quizzes.objects.filter(title__iexact=title)
 
-    quizzes_contains_innerCategory = Quizzes.objects.filter(innerCategory=title)
-    quizzes_icontains_innerCategory = Quizzes.objects.filter(innerCategory__icontains=title)
-    quizzes_exact_innerCategory = Quizzes.objects.filter(innerCategory__exact=title)
-    quizzes_iexact_innerCategory = Quizzes.objects.filter(innerCategory__iexact=title)
+    quizzes_contains_subCategory = Quizzes.objects.filter(subCategory=title)
+    quizzes_icontains_subCategory = Quizzes.objects.filter(subCategory__icontains=title)
+    quizzes_exact_subCategory = Quizzes.objects.filter(subCategory__exact=title)
+    quizzes_iexact_subCategory = Quizzes.objects.filter(subCategory__iexact=title)
 
     quizzes = quizzes_contains_title | quizzes_icontains_title | \
               quizzes_exact_title | quizzes_iexact_title | \
-              quizzes_contains_innerCategory | quizzes_icontains_innerCategory | \
-              quizzes_exact_innerCategory | quizzes_iexact_innerCategory   
+              quizzes_contains_subCategory | quizzes_icontains_subCategory | \
+              quizzes_exact_subCategory | quizzes_iexact_subCategory   
 
     return quizzes
 
@@ -216,15 +216,15 @@ def quizzesPointyByTitle(title):
     quizzesPointy_exact_title = Quizzes_Pointy.objects.filter(title__exact=title)
     quizzesPointy_iexact_title = Quizzes_Pointy.objects.filter(title__iexact=title)
 
-    quizzesPointy_contains_innerCategory = Quizzes_Pointy.objects.filter(innerCategory=title)
-    quizzesPointy_icontains_innerCategory = Quizzes_Pointy.objects.filter(innerCategory__icontains=title)
-    quizzesPointy_exact_innerCategory = Quizzes_Pointy.objects.filter(innerCategory__exact=title)
-    quizzesPointy_iexact_innerCategory = Quizzes_Pointy.objects.filter(innerCategory__iexact=title)
+    quizzesPointy_contains_subCategory = Quizzes_Pointy.objects.filter(subCategory=title)
+    quizzesPointy_icontains_subCategory = Quizzes_Pointy.objects.filter(subCategory__icontains=title)
+    quizzesPointy_exact_subCategory = Quizzes_Pointy.objects.filter(subCategory__exact=title)
+    quizzesPointy_iexact_subCategory = Quizzes_Pointy.objects.filter(subCategory__iexact=title)
 
     quizzesPointy = quizzesPointy_contains_title | quizzesPointy_icontains_title | \
                     quizzesPointy_exact_title | quizzesPointy_iexact_title | \
-                    quizzesPointy_contains_innerCategory | quizzesPointy_icontains_innerCategory | \
-                    quizzesPointy_exact_innerCategory | quizzesPointy_iexact_innerCategory
+                    quizzesPointy_contains_subCategory | quizzesPointy_icontains_subCategory | \
+                    quizzesPointy_exact_subCategory | quizzesPointy_iexact_subCategory
 
     return quizzesPointy
 
@@ -254,9 +254,9 @@ def addViewToQuizzes(title):
 
 def finalPage(howManyElementToShow, whichTypeWantToKnowTheFinalPage):
     if whichTypeWantToKnowTheFinalPage == 'quizzes':
-        sort = quizzesByPublishWithInnerCategory(whichTypeWantToKnowTheFinalPage).all()
+        sort = quizzesByPublishWithSubCategory(whichTypeWantToKnowTheFinalPage).all()
     else: # categories
-        sort = innerCategoriesByPublish(whichTypeWantToKnowTheFinalPage).all()
+        sort = subCategoriesByPublish(whichTypeWantToKnowTheFinalPage).all()
 
     finalPage = round((len(sort)) / howManyElementToShow)
 
@@ -273,5 +273,5 @@ def fanNameOfQuiz(title):
     return fanName
 
 def addViewToCategories(title):
-    data = innerCategoriesByEng(title).first()
+    data = subCategoriesByEng(title).first()
     viewsPlusOne(data)

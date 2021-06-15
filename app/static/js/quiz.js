@@ -334,11 +334,11 @@ const calculateResult = (FinalTitleOfQuiz) => {
     }
 
     urlParams = new URLSearchParams(window.location.search)
-    innerCategory = urlParams.get('ic')
+    subCategory = urlParams.get('ic')
 
     showCalculatingResult()
     setTimeout(() => {
-        window.location.replace(`/result?ic=${innerCategory}&t=${FinalTitleOfQuiz}`); 
+        window.location.replace(`/result?ic=${subCategory}&t=${FinalTitleOfQuiz}`); 
     }, 3000)
 }
 
