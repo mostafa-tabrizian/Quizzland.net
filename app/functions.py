@@ -10,13 +10,12 @@ categoryInFar = {
     'psychology': 'روانشناسی',
 }
 
-def titleConverterFromUrlToNormalOne(title):
-    splittedTitle = title.split('-')
+def titleConverterWithSpilt(title, splitWith, replaceWith):
+    splittedTitle = title.split(splitWith)
     fullTitle = ''
     for word in splittedTitle:
-        fullTitle = fullTitle + ' ' + word
+        fullTitle = fullTitle + replaceWith + word
     return fullTitle.strip()
-
 
 def frToPage(page, howManyElementToShow):
     fr = page * howManyElementToShow

@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from .models import *
+from .functions import titleConverterWithSpilt
 
 class QuizSitemap(Sitemap):
     changefreq = "weekly"
@@ -14,7 +15,8 @@ class QuizSitemap(Sitemap):
         return obj.publish
 
     def location(self,obj):
-        return '/quiz/%s' % (obj.title)
+        title = titleConverterWithSpilt(obj.title, ' ', '-')
+        return '/quiz/%s' % (title)
 
 class SubCategorySitemap(Sitemap):
     changefreq = "weekly"
@@ -28,7 +30,8 @@ class SubCategorySitemap(Sitemap):
         return obj.publish
 
     def location(self,obj):
-        return '/category/%s' % (obj.title)
+        title = titleConverterWithSpilt(obj.subCategory, ' ', '-')
+        return f'/category/{title}?c={obj.category}&nr=16&p=0&st=newest'
 
 class StaticSitemap(Sitemap):
     changefreq = "monthly"

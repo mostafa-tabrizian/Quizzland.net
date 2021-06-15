@@ -96,7 +96,7 @@ def category(request, Sub_Category):
                 typeOfQuiz = 'quizPointy'
             else:
                 typeOfQuiz = 'quiz'
-            Sub_Category = titleConverterFromUrlToNormalOne(Sub_Category)
+            Sub_Category = titleConverterWithSpilt(Sub_Category, '-', ' ')
             # addViewToCategories(subCategory)
             template = loader.get_template('app/subCategory.html')
             context = {
@@ -138,7 +138,7 @@ def subCategory(request, category, subCategory):
 
 def quiz(request, title):
     subCategory = request.GET.get('ic')
-    fullTitle = titleConverterFromUrlToNormalOne(title)
+    fullTitle = titleConverterWithSpilt(title, '-', ' ')
     addViewToQuizzes(fullTitle)
     template = loader.get_template('app/quiz.html')
     context = {
@@ -155,7 +155,7 @@ def quiz(request, title):
 
 def quizPointy(request, title):
     subCategory = request.GET.get('ic')
-    fullTitle = titleConverterFromUrlToNormalOne(title)
+    fullTitle = titleConverterWithSpilt(title, '-', ' ')
     addViewToQuizzes(fullTitle)
     template = loader.get_template('app/quizPointy.html')
     context = {
@@ -173,8 +173,8 @@ def quizPointy(request, title):
 def result(request):
     title = request.GET.get('t')
     subCategory = request.GET.get('ic')
-    fullTitle = titleConverterFromUrlToNormalOne(title)
-    subCategory = titleConverterFromUrlToNormalOne(subCategory)
+    fullTitle = titleConverterWithSpilt(title, '-', ' ')
+    subCategory = titleConverterWithSpilt(subCategory, '-', ' ')
     template = loader.get_template('app/result.html')
     context = {
         'searchForm': SearchForm(),
@@ -190,7 +190,7 @@ def result(request):
 def resultPointy(request):
     title = request.GET.get('t')
     score = request.GET.get('s')
-    fullTitle = titleConverterFromUrlToNormalOne(title)
+    fullTitle = titleConverterWithSpilt(title, '-', ' ')
     template = loader.get_template('app/resultPointy.html')
     context = {
         'searchForm': SearchForm(),
