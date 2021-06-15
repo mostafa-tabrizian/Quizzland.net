@@ -76,14 +76,14 @@
                 {% endif %}
                 {% endwith %}
                 
-                <div class="quiz__answerImGif noVis space-sm">
+                <div class="quiz__answerImGif noVis">
                     {% if questionDetail.answer_imGif %}
                         <img src="{{questionDetail.answer_imGif|makeTheDirValidForImg}}" alt="quiz-question-WebP">
                     {% endif %}
                 </div>
-                <div class="quiz__answerText space-sm noVis">
+                <div class="quiz__answerText noVis">
                     {% if questionDetail.answer_text %}
-                        {{questionDetail.answer_text}}
+                        {{questionDetail.answer_text | safe}}
                     {% endif %}
                 </div>
             </div>

@@ -188,7 +188,7 @@ if (quiz__questions) {
     const removeEmptyImGifText = () => {
         quiz__answerImGif.forEach(each => {
             const element = (each.innerHTML).trim()
-            if (element.substring(element.length-35, element.length-26) == 'empty.jpg') {
+            if (element.substring(element.length-39, element.length-27) == 'NotExist.jpg') {
                 each.remove()
             }
         })

@@ -143,7 +143,7 @@ class Questions(models.Model):
     category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None)
-    question = RichTextField(blank=True, null=True, default=None)
+    question = models.CharField(max_length=100, null=False, blank=False, default=None)
     option_1 = models.CharField(max_length=100, null=False, blank=False, default=None)
     option_2 = models.CharField(max_length=100, null=False, blank=False, default=None)
     option_3 = models.CharField(max_length=100, null=False, blank=True, default=None)
