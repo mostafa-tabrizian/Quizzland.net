@@ -443,42 +443,40 @@ if (nightMode) {
 } else {log ('no nightMode')}
 
 // --------------------------------------------------------------------
-
-// if (nightMode) {
-//     checkTheUrlSoWeCheckIfShouldRemoveTheNightMode = takeParameterFromUrl()
-//     log(checkTheUrlSoWeCheckIfShouldRemoveTheNightMode)
-//     if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode.length == 9 || // innerCategory
-//         checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3].includes('quiz')) 
-//         {
-//             try {
-//                 nightMode__container.forEach(each => {
-//                     each.classList.add('noVis')
-//                 })
-//                 nightMode.forEach(each => {
-//                     each.classList.add('nightMode-Off')
-//                 })
-//                 document.head.removeChild(nightThemeCss)
-//             } catch {
-//                 log('no nightMode')
-//             }
-//         } 
-//     else if (checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'result_2' ||
-//         checkTheUrlSoWeCheckIfShouldRemoveTheNightMode[3] == 'resultPointy')
-//         {
-//             try {
-//                 nightMode__container.forEach(each => {
-//                     each.classList.add('noVis')
-//                 })
-//                 nightMode.forEach(each => {
-//                     each.classList.remove('nightMode-Off')
-//                 })
-//                 document.head.appendChild(nightThemeCss)
-//             } catch {
-//                 log('no nightMode')
-//             }
-//         } 
+if (nightMode) {
+    const url = (window.location.pathname).split('/')
+    log(url)    
+    if (url.length == 4 /* innerCategory */ ||
+        url.includes('quiz')) 
+        {
+            try {
+                nightMode__container.forEach(each => {
+                    each.classList.add('noVis')
+                })
+                nightMode.forEach(each => {
+                    each.classList.add('nightMode-Off')
+                })
+                document.head.removeChild(nightThemeCss)
+            } catch {
+                log('no nightMode')
+            }
+        } 
+    else if (url.includes('resultPointy'))
+        {
+            try {
+                nightMode__container.forEach(each => {
+                    each.classList.add('noVis')
+                })
+                nightMode.forEach(each => {
+                    each.classList.remove('nightMode-Off')
+                })
+                document.head.appendChild(nightThemeCss)
+            } catch {
+                log('no nightMode')
+            }
+        } 
         
-// } else {log ('no nightMode')}
+} else {log ('no nightMode')}
 
 // --------------------------------------------------------------------
 if(navigator.userAgent.indexOf("Firefox") != -1 ) {

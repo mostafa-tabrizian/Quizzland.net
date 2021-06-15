@@ -524,7 +524,7 @@ input {
   height: 0.187rem;
   background: -webkit-gradient(linear, left top, right top, from(darkRed), to(#c41f1f));
   background: linear-gradient(90deg, darkRed, #c41f1f);
-  margin-right: 1rem;
+  margin-left: 1rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
