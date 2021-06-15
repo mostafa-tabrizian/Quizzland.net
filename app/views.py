@@ -1,11 +1,12 @@
 from django import template
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, reverse, redirect
-from django.template import loader, RequestContext
+from django.shortcuts import redirect
+from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
+from django.views.decorators.http import require_GET
 from .models import *
 from .functions import *
 from .db import *
@@ -387,3 +388,12 @@ def error500(request):
         'message': "🙄 سرور های سایت احتمالا داغ کرده لطفا یکم دیگه امتحان کنید",
     }
     return HttpResponse(template.render(context))
+
+@require_GET
+def robotsText(request):
+    lines = [
+        "User-Agent: *",
+        "Disallow: /private/",
+        "Disallow: /junk/",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
