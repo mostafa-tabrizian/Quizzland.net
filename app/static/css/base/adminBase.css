@@ -278,7 +278,7 @@ hr {
 }
 
 .help, p.help, form p.help, div.help, form div.help, div.help li {
-    font-size: 11px;
+    font-size: 14px;
     color: var(--body-quiet-color);
 }
 
