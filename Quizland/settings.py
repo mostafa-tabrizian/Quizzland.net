@@ -1,4 +1,3 @@
-from pathlib import Path
 import os
 
 PROJECT_DIR = os.path.dirname(__file__)
@@ -10,17 +9,17 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    # 'app.apps.AppConfig',
-    'app',
+    'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
     'django.contrib.sites',
-    'django.contrib.sitemaps', 
+    'django.contrib.sitemaps',
+    'ckeditor',
+    'robots',
 ]
 
 SITE_ID = 1
