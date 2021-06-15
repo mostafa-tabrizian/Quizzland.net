@@ -14,7 +14,7 @@ categoryList = [
 class Document(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
-    note = RichTextField(blank=True, null=True, default=None)
+    note = models.TextField(blank=True, null=True, default=None)
 
     def __str__(self):
         return self.title
