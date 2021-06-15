@@ -105,12 +105,6 @@
   .header__searchInput {
     background: rgba(0, 0, 0, 0.22) !important;
   }
-  .header__categories {
-    background: rgba(0, 0, 0, 0.51) !important;
-  }
-  .header__quizzes {
-    background: rgba(0, 0, 0, 0.51) !important;
-  }
   .sort__right {
     -webkit-box-shadow: 0 0 15px #666 !important;
             box-shadow: 0 0 15px #666 !important;
@@ -139,6 +133,13 @@
   .result {
     font-family: changeForNotChrome, sans-serif, serif !important;
     font-weight: 300 !important;
+  }
+  .nightMode {
+    -webkit-transform: translate(0.53rem, -0.45rem) !important;
+            transform: translate(0.53rem, -0.45rem) !important;
+  }
+  .subHeader {
+    background: rgba(0, 0, 0, 0.53) !important;
   }
 }
 
@@ -1109,14 +1110,14 @@ input {
 }
 
 .header__categories {
-  background: rgba(0, 0, 0, 0.18) !important;
+  background: rgba(0, 0, 0, 0.18);
   line-height: 2rem;
   right: 12rem;
   z-index: 3;
 }
 
 .header__quizzes {
-  background: rgba(0, 0, 0, 0.18) !important;
+  background: rgba(0, 0, 0, 0.18);
   line-height: 2rem;
   right: 19rem;
 }

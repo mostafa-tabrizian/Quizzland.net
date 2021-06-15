@@ -15,14 +15,6 @@
         &__searchInput {
             background: rgba(0, 0, 0, 0.22) !important;
         }
-
-        &__categories {
-            background: rgba(0, 0, 0, 0.51) !important;
-        }
-
-        &__quizzes {
-            background: rgba(0, 0, 0, 0.51) !important;
-        }
     }
     
     .sort { 
@@ -65,4 +57,13 @@
     .result {
         font-family: $font-notChrome !important; font-weight: 300 !important;
     }
+    
+    .nightMode {
+        transform: translate(.53rem, -.45rem) !important;
+    }
+    
+    .subHeader {
+        background: rgba(0, 0, 0, 0.53) !important;
+    }
 }
+
