@@ -6,17 +6,17 @@
 
     <div>
         <h3 class="tx-al-c">{{ titlePointy }}</h3>
-        <div class="sortMore__container {{hideSecondColumn}} flex flex-jc-fe">
+        <div class="quizContainer__category__inner {{hideSecondColumn}} flex flex-jc-fe">
             {% for quiz in sortPointy %}
                 {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quizPointy/{{title}}?ic={{quiz.subCategory}}">
-                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                    {% with quiz.views|viewsFormat as views %}
-                    <div class="sortMore__container__views">{{ views }}</div>
-                    <div class="sortMore__container__title">{{ quiz.title }}</div>
-                    {% endwith %}
-                </a>
+                    <a href="/quizPointy/{{title}}?ic={{quiz.subCategory}}">
+                        <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
+                        {% with quiz.views|viewsFormat as views %}
+                            <div class="quizContainer__category__inner__views">{{ views }}</div>
+                            <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
+                        {% endwith %}
+                    </a>
                 {% endwith %}
                 {% endwith %}
             {% endfor %}
@@ -24,15 +24,15 @@
     </div>
     <div>
         <h3 class="tx-al-c">{{title}} {{ category }}</h3>
-        <div class="sortMore__container flex flex-jc-fe">
+        <div class="quizContainer__category__inner flex flex-jc-fe">
             {% for quiz in sort %}
                 {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
                 <a href="/{{quizPage}}/{{title}}?ic={{quiz.subCategory}}">
                     <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
-                    <div class="sortMore__container__views">{{ views }}</div>
-                    <div class="sortMore__container__title">{{ quiz.title }}</div>
+                    <div class="quizContainer__category__inner__views">{{ views }}</div>
+                    <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
                     {% endwith %}
                 </a>
                 {% endwith %}

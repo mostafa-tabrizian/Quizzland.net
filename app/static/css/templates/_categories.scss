@@ -1,20 +1,3 @@
-.categoryList{
-    a {
-        &::after {
-            background: rgba(0, 0, 0, 0.466) !important;
-            backdrop-filter: blur(9px) !important;
-        }
-
-        div:nth-child(3) {
-            color: white;
-
-            &:hover {
-                color: rgb(158, 158, 158);
-            }
-        }
-    }
-}
-
 .tools {
     direction: rtl;
 
