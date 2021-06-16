@@ -4,7 +4,7 @@
 
 <body>
     <div class="landingPage">
-        <div class="bg"></div>
+        <div class="bg pos-abs"></div>
         <div class="wrapper-med">
             <div class="hero felx felx-jc-c flex-ai-c">
                 <div class="hero-inner tx-al-c lightGls">
@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    <div class="sort__controller flex flex-jc-c" id="sort">
+    <div class="sort__controller pos-rel flex flex-jc-c" id="sort">
         <ul>
             <button class="sort__controller__btn" type="button" aria-label="Gaming Category">گیمینگ 🎮</button>
             <button class="sort__controller__btn" type="button" aria-label="Ghysiologies Category">روانشناسی 🧠</button>
@@ -144,7 +144,7 @@
         <p class="pointerOff">برای تغییر کلیک کنید</p>
     </div>
 
-    <div class="sort flex flex-jc-c space-l">
+    <div class="sort pos-rel flex flex-jc-c space-l">
 
         <div class="sort__all fade-in">
             <div class="sort__container flex flex-jc-c">
@@ -161,7 +161,7 @@
                             {% endwith %}    
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=monthlyBestest"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
                     <h2 class="tx-al-c">محبوب ترین کوئیز ها</h2>

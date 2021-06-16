@@ -3,8 +3,8 @@
 {% load templateTags %}
 
 <div class="resultQuizPointy__container">
-    <h5 class="tx-al-c">نتیجه کوئیز: {{fullTitle}}</h5>
-    <div class="resultQuizPointy wrapper-sm space-sm tx-al-c">
+    <h5 class="tx-al-c pos-rel">نتیجه کوئیز: {{fullTitle}}</h5>
+    <div class="resultQuizPointy pos-rel wrapper-sm space-sm tx-al-c">
         {% if quizDetail.result_upTo_1|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_1 }}</h2>
             <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_1 }}')">

@@ -5,7 +5,6 @@
     background-position: center bottom;
     background-size: cover;
     height: 43.75rem; width: 100%;
-    position: absolute;
     top: 0; left: 0;
     box-shadow: black 0 5px 50px;
 }
@@ -71,7 +70,6 @@
 
 .sort {
     height: 36rem;
-    position: relative;
     margin-bottom: 3rem;
 
     &__container {
@@ -129,7 +127,6 @@
 
     &__controller {
         direction: rtl;
-        position: relative;
         top: 7rem;
 
         @include breakpoints-down(medium) {
@@ -188,7 +185,6 @@
     &__more {
         font-size: $font-sm;
         opacity: .7;
-        position: absolute;
         bottom: 1rem; left: 2rem;
 
         &:hover {

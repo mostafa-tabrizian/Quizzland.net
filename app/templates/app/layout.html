@@ -19,12 +19,12 @@
     <link rel="icon" href="/static/img/Base/favicon.png" sizes="32x32" loading='lazy' />
 </head>
 
-<header class="header">
+<header class="header pos-rel">
     <nav class="flex flex-ai-c flex-jc-sb">
 
         <!-- Search -->
         <div class="flex flex-ai-c">
-            <a class="header__logo flex flex-jc-sb hideForDesktop" href="/">
+            <a class="header__logo pos-rel flex flex-jc-sb hideForDesktop" href="/">
                 <img src="/static/img/Base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
             </a>
             <form class="header__search {{colorOfHeader}} flex" action='/search' method="post">
@@ -34,7 +34,7 @@
         </div>
 
         <!-- Links -->
-        <div class="header__links {{colorOfHeader}} hideForMobile hoverAnimation flex flex-ai-c">
+        <div class="header__links pos-rel {{colorOfHeader}} hideForMobile hoverAnimation flex flex-ai-c">
             <a class="header__logo flex flex-jc-sb" href="/" class="header__logo">
                 <img src="/static/img/Base/logo.png" alt="QuizLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی">
             </a>
@@ -49,13 +49,13 @@
             </div>
         </div>
 
-        <ul class="header__categories {{colorOfHeader}} subHeader pointerOff tx-al-r">
+        <ul class="header__categories {{colorOfHeader}} subHeader pos-abs pointerOff tx-al-r">
             <li><a href="/category/movie-series?nr=16&p=0&st=newest">🎬 فیلم و سریال</a></li>
             <li><a href="/category/gaming?nr=16&p=0&st=newest">🎮 گیمینگ</a></li>
             <li><a href="/category/celebrity?nr=16&p=0&st=newest">✨ سلبریتی</a></li>
             <li><a href="/category/psychology?nr=16&p=0&st=newest">🧠 روانشناسی</a></li>
         </ul>
-        <ul class="header__quizzes {{colorOfHeader}} subHeader pointerOff tx-al-r">
+        <ul class="header__quizzes {{colorOfHeader}} subHeader pos-abs pointerOff tx-al-r">
             <li><a href="/sort?p=0&st=newest">⏳ جدیدترین ها</a></li>
             <li><a href="/sort?p=0&st=bestest">👑 بهترین ها</a></li>
             <li><a href="/sort?p=0&st=monthlyBestest">👑 بهترین های ماه</a></li>
@@ -63,13 +63,13 @@
         </ul>
 
         <!-- Menu -->
-        <button type="button" class="header__menu__openBtn {{colorOfHeader}} hideForDesktop" aria-label="Menu Button">
+        <button type="button" class="header__menu__openBtn pos-abs {{colorOfHeader}} hideForDesktop" aria-label="Menu Button">
             <span></span>
             <span></span>
             <span></span>
         </button>
-        <div class="header__menu slideMenu-hide tx-al-r hide-for-desktop">
-            <button class="header__menu__closeBtn" aria-label="Close Menu Button"></button>
+        <div class="header__menu slideMenu-hide pos-fix tx-al-r hide-for-desktop">
+            <button class="header__menu__closeBtn pos-abs" aria-label="Close Menu Button"></button>
             <div class="header__menu__inner grid grid-jc-c">
                 <div class="header__menu__inner__category">
                     <h4><a href="/#category">کتگوری ها</a></h4>
@@ -103,7 +103,7 @@
             </div>
         </div>
         <button class='header__searchOpener hideForDesktop flex flex-ai-c' type="button"></button>
-        <div class="header__searchOpener__bg fade-out darkGls">
+        <div class="header__searchOpener__bg pos-fix fade-out darkGls">
             <button class="header__search__closeBtn header__menu__closeBtn" aria-label="Close Search Bar"></button>
         </div>
     </nav>

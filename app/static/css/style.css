@@ -503,6 +503,18 @@ input {
           transform: translate(-50%);
 }
 
+.pos-abs {
+  position: absolute;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.pos-fix {
+  position: fixed;
+}
+
 .beforeAfterDecor {
   text-align: center;
 }
@@ -874,11 +886,9 @@ input {
   font-family: harmattan, myHarmattan, sans-serif, serif;
   margin-bottom: 2rem;
   padding: 1rem;
-  position: relative;
 }
 
 .header__logo {
-  position: relative;
   z-index: 1;
 }
 
@@ -898,7 +908,6 @@ input {
   padding: 1.25rem 0;
   margin-right: 1.5rem;
   direction: rtl;
-  position: relative;
   z-index: 1;
 }
 
@@ -917,7 +926,6 @@ input {
 
 .header__menu {
   z-index: 3;
-  position: fixed;
   top: 0;
   left: 0;
   background: rgba(56, 56, 56, 0.3);
@@ -935,7 +943,6 @@ input {
 
 .header__menu__openBtn {
   background: inherit;
-  position: absolute;
   top: 1rem;
   right: 1rem;
   z-index: 1;
@@ -962,7 +969,6 @@ input {
   background: url("/static/img/base/close-btn.svg") center center no-repeat;
   width: 1.75rem;
   height: 1.75rem;
-  position: absolute;
   top: 1rem;
   right: 1.5rem;
 }
@@ -1005,7 +1011,6 @@ input {
 .header__searchOpener__bg {
   width: 100%;
   height: 100%;
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 3;
@@ -1096,7 +1101,6 @@ input {
 }
 
 .header .subHeader {
-  position: absolute;
   top: 8rem;
   border: 1px solid transparent;
   border-radius: 15px;
@@ -1473,7 +1477,6 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
   background-size: cover;
   height: 43.75rem;
   width: 100%;
-  position: absolute;
   top: 0;
   left: 0;
   -webkit-box-shadow: black 0 5px 50px;
@@ -1548,7 +1551,6 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
 
 .sort {
   height: 36rem;
-  position: relative;
   margin-bottom: 3rem;
 }
 
@@ -1619,7 +1621,6 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
 
 .sort__controller {
   direction: rtl;
-  position: relative;
   top: 7rem;
 }
 
@@ -1684,7 +1685,6 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
 .sort__more {
   font-size: 1.18rem;
   opacity: .7;
-  position: absolute;
   bottom: 1rem;
   left: 2rem;
 }
@@ -1736,7 +1736,6 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
   background: rgba(0, 0, 0, 0.54) url("/static/img/base/arw-submit.svg") no-repeat center center;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
-  position: relative;
   bottom: 2rem;
   right: 0.6rem;
   display: -webkit-box;
@@ -1823,7 +1822,6 @@ body {
 
 .quiz__head {
   font-family: myChanga, sans-serif, serif;
-  position: relative;
   z-index: 1;
 }
 
@@ -1854,16 +1852,6 @@ body {
           order: -1;
 }
 
-.quiz__questions {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  position: relative;
-}
-
 .quiz__questions::after {
   content: "";
   position: fixed;
@@ -1885,7 +1873,6 @@ body {
   border-radius: 24px;
   -webkit-transition: all 1.3s;
   transition: all 1.3s;
-  position: relative;
   -webkit-transform: translate(-17rem);
           transform: translate(-17rem);
 }
@@ -1928,7 +1915,6 @@ body {
 }
 
 .quiz__autoQuestionChangerSwitch {
-  position: relative;
   top: 1rem;
   width: 7rem;
   z-index: 2;
@@ -1957,7 +1943,6 @@ body {
   border-radius: 10px;
   margin: 0;
   padding: 0;
-  position: relative;
   left: .1rem;
   -webkit-box-shadow: inset 0 0 4px black;
           box-shadow: inset 0 0 4px black;
@@ -1973,12 +1958,10 @@ body {
 
 .quiz__questionChanger {
   cursor: pointer;
-  position: absolute;
   top: -1rem;
 }
 
 .quiz__questionChanger__container {
-  position: relative;
   width: 23rem;
   height: 2rem;
   z-index: 2;
@@ -2003,7 +1986,6 @@ body {
 }
 
 .quiz__questionCounter {
-  position: relative;
   z-index: 1;
   color: #f0f0f0;
 }
@@ -2015,7 +1997,6 @@ body {
   width: 34rem;
   min-height: 32rem;
   overflow: hidden;
-  position: relative;
   bottom: 3.5rem;
   z-index: 1;
   -webkit-transition: bottom 0.35s cubic-bezier(0, 0.79, 0.88, 0.56);
@@ -2030,7 +2011,6 @@ body {
 
 .quiz__options {
   width: 23rem;
-  position: relative;
 }
 
 .quiz__options__img {
@@ -2211,7 +2191,6 @@ body {
 }
 
 .countingResult {
-  position: fixed;
   z-index: 99;
   font-size: 1.325rem;
   color: white;
@@ -2267,7 +2246,6 @@ body {
 }
 
 .result__clipboard {
-  position: absolute;
   top: -100vh;
   left: -100vw;
 }
@@ -2344,12 +2322,10 @@ body {
 }
 
 .resultQuizPointy__container h5 {
-  position: relative;
   z-index: 3;
 }
 
 .resultQuizPointy__container div {
-  position: relative;
   z-index: 2;
 }
 
