@@ -397,3 +397,144 @@ JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: 
 JavaScript error: http://localhost:8000/static/js/script.js, line 508: TypeError: pleaseUseChrome is null
 JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofile4yJ33F\bookmarkbackups\bookmarks-2021-06-11_11_Q3Gg0Hnsb9HqNoaUN9GDTg==.jsonlz4) because it does not exist
 JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1623782116026	geckodriver	INFO	Listening on 127.0.0.1:54407
+1623782118926	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileKD80ft"
+*** You are running in headless mode.
+1623782119929	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileKD80ft\\search.json.mozlz4", (void 0)))
+1623782121597	Marionette	INFO	Listening on port 54417
+1623782121631	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:55335
+1623782500871	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileTYNRvG"
+*** You are running in headless mode.
+1623782501165	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileTYNRvG\\search.json.mozlz4", (void 0)))
+1623782502203	Marionette	INFO	Listening on port 55349
+1623782502396	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:55877
+1623782655887	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileHwmS58"
+*** You are running in headless mode.
+1623782656182	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileHwmS58\\search.json.mozlz4", (void 0)))
+1623782657228	Marionette	INFO	Listening on port 55888
+1623782657408	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:56323
+1623782815198	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile5V9ZF9"
+*** You are running in headless mode.
+1623782815516	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile5V9ZF9\\search.json.mozlz4", (void 0)))
+1623782816567	Marionette	INFO	Listening on port 56333
+1623782816726	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: NotFoundError: Could not move source file(C:\Users\Mostafa.T\AppData\Local\Temp\rust_mozprofile5V9ZF9\bookmarkbackups\bookmarks-2021-06-15_11_whF2Qn+oyuomC+LuqPjtLw==.jsonlz4) because it does not exist
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+profileeSE6ZH"
+*** You are running in headless mode.
+1623782862524	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileeSE6ZH\\search.json.mozlz4", (void 0)))
+1623782863771	Marionette	INFO	Listening on port 56533
+1623782864240	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:57075
+1623783038206	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileHOqAJh"
+*** You are running in headless mode.
+1623783038712	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileHOqAJh\\search.json.mozlz4", (void 0)))
+1623783039838	Marionette	INFO	Listening on port 57086
+1623783040236	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:57309
+1623783108908	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile9gnU6e"
+*** You are running in headless mode.
+1623783109213	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile9gnU6e\\search.json.mozlz4", (void 0)))
+1623783110269	Marionette	INFO	Listening on port 57318
+1623783110433	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:57419
+1623783124469	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilePzw3ZV"
+*** You are running in headless mode.
+1623783124779	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofilePzw3ZV\\search.json.mozlz4", (void 0)))
+1623783125887	Marionette	INFO	Listening on port 57430
+1623783125994	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:57590
+1623783175394	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileDUMRZa"
+*** You are running in headless mode.
+1623783175714	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileDUMRZa\\search.json.mozlz4", (void 0)))
+1623783176747	Marionette	INFO	Listening on port 57600
+1623783176919	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1:58264
+1623783469540	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileBJSB9A"
+1623783470085	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileBJSB9A\\search.json.mozlz4", (void 0)))
+1623783472475	Marionette	INFO	Listening on port 58273
+1623783472670	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+console.error: services.settings: 
+  main/message-groups Signature failed  TypeError: NetworkError when attempting to fetch resource.
+1623783478884	Marionette	INFO	Stopped listening on port 58273
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623783626871	geckodriver	INFO	Listening on 127.0.0.1:58622
+1623783629894	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile99Dnz7"
+1623783630232	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile99Dnz7\\search.json.mozlz4", (void 0)))
+1623783632499	Marionette	INFO	Listening on port 58631
+1623783632535	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1623871121639	Marionette	INFO	Stopped listening on port 58631
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileBGbQcW"
+1623839700780	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileBGbQcW\\search.json.mozlz4", (void 0)))
+1623839703721	Marionette	INFO	Listening on port 49922
+1623839704018	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1623839860177	Marionette	INFO	Stopped listening on port 49922
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623842389799	geckodriver	INFO	Listening on 127.0.0.1:53100
+1623842392808	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile8ILKS7"
+1623842393283	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofile8ILKS7\\search.json.mozlz4", (void 0)))
+1623842395609	Marionette	INFO	Listening on port 53110
+1623842395941	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1623842407975	Marionette	INFO	Stopped listening on port 53110
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623842571971	geckodriver	INFO	Listening on 127.0.0.1:53414
+1623842574985	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileU697xM"
+1623842575312	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileU697xM\\search.json.mozlz4", (void 0)))
+1623842577230	Marionette	INFO	Listening on port 53425
+1623842577608	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1623871122481	Marionette	INFO	Stopped listening on port 53425
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+"--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileLb5wMc"
+1623843165474	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mostafa.T\\AppData\\Local\\Temp\\rust_mozprofileLb5wMc\\search.json.mozlz4", (void 0)))
+1623843167702	Marionette	INFO	Listening on port 54265
+1623843168069	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1623843197770	Marionette	INFO	Stopped listening on port 54265

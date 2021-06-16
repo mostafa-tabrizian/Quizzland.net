@@ -1,17 +1,16 @@
 from .__init__ import *
-from ..models import Quizzes, Newsletter_Users, Quiz_Questions
+from ..models import Quizzes, Newsletter_Users, Questions
 
 class QuizzesModelTest(TestCase):
     def test_createQuiz(self, category="test",
                     subCategory="test", title="test",
-                    title_english="test",
                     monthly_views=0, views=0,
                     background='test', fan_name='test',
                     GIF20='empty.jpg', GIF40='empty.jpg',
                     GIF60='empty.jpg', GIF80='empty.jpg',
                     GIF100='empty.jpg'):
         return Quizzes.objects.create(title=title, category=category,
-                                        subCategory=subCategory, title_english=title_english,
+                                        subCategory=subCategory,
                                         monthly_views=monthly_views, views=views,
                                         background=background, fan_name=fan_name,
                                         GIF20=GIF20, GIF40=GIF40,
@@ -26,21 +25,20 @@ class QuizzesModelTest(TestCase):
 class QuizQuestionsModelTest(TestCase):
     def test_createQuestion(self, category="test",
                             subCategory="test", title="test",
-                            title_english="test", question='test',
+                            question='test', answer_text='test',
                             option_1='test', option_2='test',
                             option_3='test', option_4='test',
-                            answer=1, answer_imGif='empty.jpg',
-                            answer_text='test'):
-        return Quiz_Questions.objects.create(title=title, category=category,
-                                            subCategory=subCategory, title_english=title_english,
-                                            question=question, option_1=option_1,
-                                            option_2=option_2, option_3=option_3,
-                                            option_4=option_4, answer=answer,
-                                            answer_imGif=answer_imGif, answer_text=answer_text)
+                            answer=1, answer_imGif='empty.jpg',):
+        return Questions.objects.create(title=title, category=category,
+                                        subCategory=subCategory,
+                                        question=question, option_1=option_1,
+                                        option_2=option_2, option_3=option_3,
+                                        option_4=option_4, answer=answer,
+                                        answer_imGif=answer_imGif, answer_text=answer_text)
 
     def test_QuestionCreation(self):
         createdQuestion = self.test_createQuestion()
-        self.assertTrue(isinstance(createdQuestion, Quiz_Questions))
+        self.assertTrue(isinstance(createdQuestion, Questions))
         self.assertEqual(createdQuestion.__unicode__(), createdQuestion.title)
 
 class NewsletterUsersModelTest(TestCase):

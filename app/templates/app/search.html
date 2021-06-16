@@ -15,10 +15,10 @@
             {% for subCategory in subCategoriesByTitle %}
                 <div class="searchResult__category__item">
                     {% with subCategory.subCategory|listMaker:' ' as img  %}
-                    <a href="/category/{{subCategory.category}}/{{img.0}}-{{img.1}}/0/newest/16">
+                    <a href="/category/{{img.0}}-{{img.1}}?c={{subCategory.category}}&p=0&st=newest&nr=16">
                         <img src="/static/img/Thn-Category/{{img.0}}-{{img.1}}.jpg" alt="{{ subCategory.subCategory }} | کوئیز های {{ category.title_far }}">
                     </a>
-                    <h5 class="tx-al-c"><a href="/category/{{subCategory.category}}/{{img.0}}-{{img.1}}/0/newest/16">
+                    <h5 class="tx-al-c"><a href="/category/{{img.0}}-{{img.1}}?c={{subCategory.category}}&p=0&st=newest&nr=16">
                         {{ subCategory.subCategory }}
                     </a></h5>
                     {% endwith %}
@@ -38,11 +38,11 @@
                     {% with quiz.subCategory|replaceToHyphen as subCategory %}
                     {% with quiz.title|replaceToHyphen as title %}
                     {% if quiz.category == 'physiologies' %}
-                        <a class="searchResult__quizzes__item tx-al-r" href="/quizPointy/physiologies/{{subCategory}}/{{title}}">
+                        <a class="searchResult__quizzes__item tx-al-r" href="/quizPointy/{{title}}">
                             {{ quiz.title }}
                         </a>
                     {% else %}
-                        <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{subCategory}}/{{title}}">
+                        <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{title}}">
                             {{ quiz.title }}
                         </a>
                     {% endif %}
@@ -56,11 +56,11 @@
                     {% with quiz.subCategory|replaceToHyphen as subCategory %}
                     {% with quiz.title|replaceToHyphen as title %}
                     {% if quiz.category == 'physiologies' %}
-                        <a class="searchResult__quizzes__item tx-al-r" href="/quizPointy/physiologies/{{subCategory}}/{{title}}">
+                        <a class="searchResult__quizzes__item tx-al-r" href="/quizPointy/{{title}}">
                             {{ quiz.title }}
                         </a>
                     {% else %}
-                        <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{quiz.category}}/{{subCategory}}/{{title}}">
+                        <a class="searchResult__quizzes__item tx-al-r" href="/quiz/{{title}}">
                             {{ quiz.title }}
                         </a>
                     {% endif %}

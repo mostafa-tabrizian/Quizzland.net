@@ -15,6 +15,8 @@ class SearchForm(unittest.TestCase):
 
     def test_searched(self):
         self.driver.get(self.startUrl)
+        self.alert = self.driver.switch_to_alert()
+        self.alert.accept()
         self.driver.find_element_by_id('id_searchInput').send_keys('taylor')
         self.driver.find_element_by_id('id_searchInput').send_keys(Keys.ENTER)
 

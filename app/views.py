@@ -107,18 +107,19 @@ def category(request, Sub_Category):
                 'keywords': f'{Sub_Category} بهترین کوئيز های , {Sub_Category} کوئيز های',
                 'colorOfHeader': 'header__white',
                 'background': subCategoriesByTitle(Sub_Category)[0].background,
-                'quizzes': quizzesWithSubCategory(Sub_Category, Sub_Category, fTPage[0], fTPage[1], sortType),
+                'quizzes': quizzesWithSubCategory(category, Sub_Category, fTPage[0], fTPage[1], sortType),
                 'typeOfQuiz': typeOfQuiz,
                 'finalPage': finalPage(howManyElementToShow, Sub_Category),
             }
             return HttpResponse(template.render(context))
 
         else:
+            title = titleConverterWithSpilt(Sub_Category, '-', ' ')
             template = loader.get_template('app/category.html')
             context = {
                 'searchForm': SearchForm(),
                 'newsletterForm': NewsletterForm(),
-                'headTitle': f'QuizLand | کوئیز های {categoryInFar[Sub_Category]} ',
+                'headTitle': f'QuizLand | کوئیز های {title} ',
                 'description': 'کتگوری و گروه های متنوع همچون آدم های معروف و سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ و تست های روانشناسی',
                 'keywords': 'تست های روانشناسی, سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ,آدم های معروف, کوئيز',
                 'category': Sub_Category,
