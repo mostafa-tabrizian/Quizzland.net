@@ -30,21 +30,21 @@ def index(request):
         'bestestQuizzes': quizzesByViews()[:5],
         'bestestQuizzesForThisMonth': quizzesByMonthlyViews()[:5],
 
-        'NewestCelebrityQuizSection':  quizzesByPublishWithCategory('celebrity')[:4],
-        'BestestCelebrityQuizSection': quizzesBothByViewsWithCategory('celebrity')[:13],
-        'MonthlyBestestCelebrityQuizSection': quizzesByMonthlyViewsWithCategory('celebrity')[:13],
+        'NewestCelebrityQuizSection':  quizzesBothWithCategory('celebrity', '-publish')[:4],
+        'BestestCelebrityQuizSection': quizzesBothWithCategory('celebrity', '-views')[:13],
+        'MonthlyBestestCelebrityQuizSection': quizzesBothWithCategory('celebrity', '-monthly_views')[:13],
 
-        'NewestMovieSeriesQuizSection':  quizzesByPublishWithCategory('movie-series')[:4],
-        'BestestMovieSeriesQuizSection': quizzesBothByViewsWithCategory('movie-series')[:13],
-        'MonthlyBestestMovieSeriesQuizSection': quizzesByMonthlyViewsWithCategory('movie-series')[:13],
+        'NewestMovieSeriesQuizSection':  quizzesBothWithCategory('movie-series', '-publish')[:4],
+        'BestestMovieSeriesQuizSection': quizzesBothWithCategory('movie-series', '-views')[:13],
+        'MonthlyBestestMovieSeriesQuizSection': quizzesBothWithCategory('movie-series', '-monthly_views')[:13],
         
-        'NewestGamingQuizSection':  quizzesByPublishWithCategory('gaming')[:4],
-        'BestestGamingQuizSection': quizzesBothByViewsWithCategory('gaming')[:13],
-        'MonthlyBestestGamingQuizSection': quizzesByMonthlyViewsWithCategory('gaming')[:13],
+        'NewestGamingQuizSection':  quizzesBothWithCategory('gaming', '-publish')[:4],
+        'BestestGamingQuizSection': quizzesBothWithCategory('gaming', '-views')[:13],
+        'MonthlyBestestGamingQuizSection': quizzesBothWithCategory('gaming', '-monthly_views')[:13],
         
-        'NewestPhysiologiesQuizSection':  quizzesPointyByPublishWithCategory('psychology')[:4],
-        'BestestPhysiologiesQuizSection': quizzesPointyByViewsWithCategory('psychology')[:13],
-        'MonthlyBestestPhysiologiesQuizSection': quizzesPointyByMonthlyViewsWithCategory('psychology')[:10]
+        'NewestPhysiologiesQuizSection':  quizzesBothWithCategory('psychology', '-publish')[:4],
+        'BestestPhysiologiesQuizSection': quizzesBothWithCategory('psychology', '-views')[:13],
+        'MonthlyBestestPhysiologiesQuizSection': quizzesBothWithCategory('psychology', '-monthly_views')[:10],
     }
 
     return HttpResponse(template.render(context))

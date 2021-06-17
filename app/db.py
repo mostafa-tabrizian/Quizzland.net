@@ -151,46 +151,14 @@ def quizzesPointyByAlphabetWithSubCategory(subCategory):
                                         .order_by('title')
     return grabbedQuiz
 
-def quizzesByPublishWithCategory(category):
-    quizzes = Quizzes.objects.filter(category=category)\
-                                .order_by('-publish')
-    return quizzes
-
-def quizzesBothByViewsWithCategory(category):
+def quizzesBothWithCategory(category, sortType):
     if category == 'psychology':
         grabbedQuiz = Quizzes_Pointy.objects.filter(category=category)\
-                                            .order_by('-views')
+                                            .order_by(sortType)
     else:
         grabbedQuiz = Quizzes.objects.filter(category=category)\
-                                    .order_by('-views')
+                                    .order_by(sortType)
     return grabbedQuiz
-
-def quizzesByMonthlyViewsWithCategory(category):
-    grabbedQuiz = Quizzes.objects.filter(category=category)\
-                                .order_by('-monthly_views')
-    return grabbedQuiz
-
-def quizzesPointyByPublishWithCategory(category):
-    quizzes = Quizzes_Pointy.objects.filter(category=category)\
-                                    .order_by('-publish')
-    return quizzes
-
-def quizzesPointyByViewsWithCategory(category):
-    grabbedQuiz = Quizzes_Pointy.objects.filter(category=category)\
-                                        .order_by('-views')
-    return grabbedQuiz
-
-def quizzesPointyByMonthlyViewsWithCategory(category):
-    grabbedQuiz = Quizzes_Pointy.objects.filter(category=category)\
-                                        .order_by('-monthly_views')
-    return grabbedQuiz
-
-def sortBothQuizzesByPublishWithCategories(category):
-    if category == 'Physiologies':
-        quizzes = quizzesPointyByPublishWithCategory(category)
-    else:
-        quizzes = quizzesByPublishWithCategory(category)
-    return quizzes
 
 def quizzesByTitle(title):
     quizzes_contains_title = Quizzes.objects.filter(title__contains=title)
