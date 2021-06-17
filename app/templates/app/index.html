@@ -149,7 +149,7 @@
         <div class="sort__all fade-in">
             <div class="sort__container flex flex-jc-c">
                 <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">محبوب ترین کوئیز های این ماه</h2>
+                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in bestestQuizzesForThisMonth %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -164,7 +164,7 @@
                     <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
-                    <h2 class="tx-al-c">محبوب ترین کوئیز ها</h2>
+                    <h2 class="tx-al-c">پر بازدید ترین کوئیز ها</h2>
                     <ul class="sort__style">
                         {% for quiz in bestestQuizzes %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -176,7 +176,7 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=bestest"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=bestest"> ..بیشتر</a>
                 </div>
             </div>
         </div>
@@ -184,7 +184,7 @@
         <div class="sort__celebrities fade-out">
             <div class="sort__container flex flex-jc-c">
                 <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز های این ماه</h2>
+                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestCelebrityQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -196,10 +196,10 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=monthlyBestest&c=celebrity"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest&c=celebrity"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
-                    <h2 class="tx-al-c">محبوب ترین سلبریتی کوئیز</h2>
+                    <h2 class="tx-al-c">پر بازدید ترین ها</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestCelebrityQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -211,7 +211,7 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=bestest&c=celebrity"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=bestest&c=celebrity"> ..بیشتر</a>
                 </div>
             </div>
         </div>
@@ -219,7 +219,7 @@
         <div class="sort__movieAndSeries fade-out">
             <div class="sort__container flex flex-jc-c">
                 <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز های این ماه</h2>
+                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestMovieSeriesQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -231,10 +231,10 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=monthlyBestest&c=movie-series"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest&c=movie-series"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
-                    <h2 class="tx-al-c">محبوب ترین فیلم و سریال کوئیز</h2>
+                    <h2 class="tx-al-c">پر بازدید ترین ها</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestMovieSeriesQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -246,15 +246,15 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=bestest&c=movie-series"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=bestest&c=movie-series"> ..بیشتر</a>
                 </div>
             </div>
         </div>
 
         <div class="sort__gaming fade-out">
             <div class="sort__container flex flex-jc-c">
-                <div>
-                    <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز های این ماه</h2>
+                <div class="sort-monthlyViews">
+                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestGamingQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -266,10 +266,10 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=monthlyBestest&c=gaming"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest&c=gaming"> ..بیشتر</a>
                 </div>
-                <div>
-                    <h2 class="tx-al-c">محبوب ترین گیمینگ کوئیز</h2>
+                <div  class="sort-views">
+                    <h2 class="tx-al-c">پر بازدید ترین ها</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestGamingQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -281,7 +281,7 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=bestest&c=gaming"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=bestest&c=gaming"> ..بیشتر</a>
                 </div>
             </div>
         </div>
@@ -289,7 +289,7 @@
         <div class="sort__physiologies fade-out">
             <div class="sort__container flex flex-jc-c">
                 <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز های این ماه</h2>
+                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestPhysiologiesQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -301,10 +301,10 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=monthlyBestest&c=psychology"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest&c=psychology"> ..بیشتر</a>
                 </div>
                 <div class="sort-views">
-                    <h2 class="tx-al-c">محبوب ترین روانشناسی کوئیز</h2>
+                    <h2 class="tx-al-c">پر بازدید ترین ها</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestPhysiologiesQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
@@ -316,7 +316,7 @@
                             {% endwith %}
                         {% endfor %}
                     </ul>
-                    <a class="sort__more" href="sort?p=0&st=bestest&c=psychology"> ..بیشتر</a>
+                    <a class="sort__more pos-abs" href="sort?p=0&st=bestest&c=psychology"> ..بیشتر</a>
                 </div>
             </div>
         </div>

@@ -157,7 +157,7 @@ def quizzesByPublishWithCategory(category):
     return quizzes
 
 def quizzesBothByViewsWithCategory(category):
-    if category == 'Physiologies':
+    if category == 'psychology':
         grabbedQuiz = Quizzes_Pointy.objects.filter(category=category)\
                                             .order_by('-views')
     else:

@@ -129,12 +129,6 @@ def category(request, Sub_Category):
             return HttpResponse(template.render(context))
     else:
         return pageNotFoundManual(request)
-
-@cache_page(CACHE_TTL)
-def subCategory(request, category, subCategory):
-    page = int(request.GET.get('p'))
-    numberOfResults = int(request.GET.get('nr'))
-    sortType = request.GET.get('st')
     
 
 def quiz(request, title):
@@ -215,11 +209,14 @@ def sortTheQuizzes(request):
         category = request.GET.get('c')
 
         if sortType == 'newest':
-            sort = sortBothQuizzesByPublishWithCategories(category).all()[fTPage[0]:fTPage[1]]
+            quizzes = sortBothQuizzesByPublishWithCategories(category).all()[fTPage[0]:fTPage[1]]
             title = "جدیدترین کوئیز های"
         elif sortType == 'bestest':
-            sort = quizzesBothByViewsWithCategory(category)[fTPage[0]:fTPage[1]]
+            quizzes = quizzesBothByViewsWithCategory(category).all()[fTPage[0]:fTPage[1]]
             title = "پر بازدیدترین کوئیز های"
+        elif sortType == 'monthlyBestest':
+            quizzes = quizzesBothByViewsWithCategory(category).all()[fTPage[0]:fTPage[1]]
+            title = "پر بازدیدترین کوئیز های ماه"
 
         if category == 'psychology':
             quizPage = 'quizPointy'
@@ -232,19 +229,19 @@ def sortTheQuizzes(request):
             'quizPage': quizPage,
             'hideSecondColumn': 'noVis',
             'categoryStyle': 'sortMore__categoryStyle wrapper-med',
-            'sort': sort,
+            'sort': quizzes,
             'title': title,
             'category': categoryInFar[category],
             'finalPage': finalPage(howManyElementToShow, 'quizzes'),
             'headTitle': f'QuizLand | {title} {categoryInFar[category]} '
         }
     else:
-        if (sortType == 'newest'):
+        if sortType == 'newest':
             sort = quizzesByPublish().all()[fTPage[0]:fTPage[1]]
             sortPointy = quizzesPointyByPublish().all()[fTPage[0]:fTPage[1]]
             title = "جدیدترین کوئیز ها"
             titlePointy = "جدیدترین تست ها"
-        elif (sortType == 'bestest'):
+        elif sortType == 'bestest':
             sort = quizzesByViews().all()[fTPage[0]:fTPage[1]]
             sortPointy = quizzesPointyByViews().all()[fTPage[0]:fTPage[1]]
             title = "پربازدیدترین کوئيز ها"
