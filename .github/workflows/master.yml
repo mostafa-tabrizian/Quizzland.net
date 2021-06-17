@@ -17,4 +17,4 @@ jobs:
         server: 185.128.136.186
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
-        server-dir: /public-html/quizzland/
+        server-dir: /quizzland
