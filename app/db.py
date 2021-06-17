@@ -6,26 +6,16 @@ from .functions import *
 # ------------------Category
 def subCategories(category, fr, to, sortType):
     if sortType == 'newest':
-        categories = subCategoriesByPublish(category).all()[fr:to]
+        categories = subCategoriesWithCategory(category, '-publish').all()[fr:to]
     elif sortType == 'bestest':
-        categories = subCategoryByViews(category).all()[fr:to]
+        categories = subCategoriesWithCategory(category, '-views').all()[fr:to]
     elif sortType == 'alphabet':
-        categories = subCategoryAlphabet(category).all()[fr:to]
+        categories = subCategoriesWithCategory(category, '-subCategory').all()[fr:to]
     return categories
 
-def subCategoriesByPublish(categoryArg):
+def subCategoriesWithCategory(categoryArg, sortType):
     category = SubCategories.objects.filter(category=categoryArg)\
-                                    .order_by('-publish')
-    return category
-
-def subCategoryByViews(categoryArg):
-    category = SubCategories.objects.filter(category=categoryArg)\
-                                    .order_by('-views')
-    return category
-
-def subCategoryAlphabet(categoryArg):
-    category = SubCategories.objects.filter(category=categoryArg)\
-                                .order_by('subCategory')
+                                    .order_by(sortType)
     return category
 
 def subCategoriesByTitle(title):
@@ -94,37 +84,27 @@ def quizzesPointyByMonthlyViews():
         cache.set('quizzesPointyByMonthlyViews', quizzesGrabbedByPublish)
     return quizzesGrabbedByPublish
 
-def quizzesWithSubCategory(category, subCategory, fr, to, sortType):
+def quizzesWithSubCategory_Handler(category, subCategory, fr, to, sortType):
     if category == 'psychology':
         if sortType == 'newest':
-            grabbedQuizzes = quizzesPointyByPublishWithSubCategory(subCategory).all()[fr:to]
+            grabbedQuizzes = quizzesWithSubCategory(subCategory, '-publish').all()[fr:to]
         elif sortType == 'bestest':
-            grabbedQuizzes = quizzesPointyByViewsWithSubCategory(subCategory).all()[fr:to]
+            grabbedQuizzes = quizzesWithSubCategory(subCategory, '-views').all()[fr:to]
         elif sortType == 'alphabet':
-            grabbedQuizzes = quizzesPointyByAlphabetWithSubCategory(subCategory).all()[fr:to]
+            grabbedQuizzes = quizzesWithSubCategory(subCategory, 'title').all()[fr:to]
     else:
         if sortType == 'newest':
-            grabbedQuizzes = quizzesByPublishWithSubCategory(subCategory).all()[fr:to]
+            grabbedQuizzes = quizzesWithSubCategory(subCategory, '-publish').all()[fr:to]
         elif sortType == 'bestest':
-            grabbedQuizzes = quizzesByViewsWithSubCategory(subCategory).all()[fr:to]
+            grabbedQuizzes = quizzesWithSubCategory(subCategory, '-views').all()[fr:to]
         elif sortType == 'alphabet':
-            grabbedQuizzes = quizzesByAlphabetWithSubCategory(subCategory).all()[fr:to]
+            grabbedQuizzes = subCategory(subCategory, 'subCategory').all()[fr:to]
 
     return grabbedQuizzes
 
-def quizzesByPublishWithSubCategory(subCategory):
+def quizzesWithSubCategory(subCategory, sortType):
     grabbedQuiz = Quizzes.objects.filter(subCategory=subCategory)\
-                                .order_by('publish')
-    return grabbedQuiz
-
-def quizzesByViewsWithSubCategory(subCategory):
-    grabbedQuiz = Quizzes.objects.filter(subCategory=subCategory)\
-                                .order_by('-views')
-    return grabbedQuiz
-
-def quizzesByAlphabetWithSubCategory(subCategory):
-    grabbedQuiz = Quizzes.objects.filter(subCategory=subCategory)\
-                                .order_by('subCategory')
+                                .order_by(sortType)
     return grabbedQuiz
 
 def quizzesByRandomWithSubCategory(subCategory):
@@ -133,22 +113,6 @@ def quizzesByRandomWithSubCategory(subCategory):
     # randomOffset = random.randint(0, countAllQuizzes - 4)
     grabbedQuiz = Quizzes.objects.filter(subCategory=subCategory)[:4]
                                     # .offset(randomOffset)\
-    return grabbedQuiz
-
-
-def quizzesPointyByPublishWithSubCategory(subCategory):
-    grabbedQuiz = Quizzes_Pointy.objects.filter(subCategory=subCategory)\
-                                        .order_by('-publish')
-    return grabbedQuiz
-
-def quizzesPointyByViewsWithSubCategory(subCategory):
-    grabbedQuiz = Quizzes_Pointy.objects.filter(subCategory=subCategory)\
-                                        .order_by('-views')
-    return grabbedQuiz
-
-def quizzesPointyByAlphabetWithSubCategory(subCategory):
-    grabbedQuiz = Quizzes_Pointy.objects.filter(subCategory=subCategory)\
-                                        .order_by('title')
     return grabbedQuiz
 
 def quizzesBothWithCategory(category, sortType):
@@ -208,10 +172,7 @@ def quizQuestionByTitle(title):
     return questions
 
 # #----------------------------------------------------------------
-
 def addViewToQuizzes(title):
-    print(title)
-    print('ADD TO QUIZ VIEW')
     try:
         quizToAddView = Quizzes.objects.get(title=title)
         viewsPlusOne(quizToAddView)
@@ -222,9 +183,9 @@ def addViewToQuizzes(title):
 
 def finalPage(howManyElementToShow, whichTypeWantToKnowTheFinalPage):
     if whichTypeWantToKnowTheFinalPage == 'quizzes':
-        sort = quizzesByPublishWithSubCategory(whichTypeWantToKnowTheFinalPage).all()
+        sort = quizzesWithSubCategory(whichTypeWantToKnowTheFinalPage, '-publish').all()
     else: # categories
-        sort = subCategoriesByPublish(whichTypeWantToKnowTheFinalPage).all()
+        sort = quizzesWithSubCategory(whichTypeWantToKnowTheFinalPage, '-publish').all()
 
     finalPage = round((len(sort)) / howManyElementToShow)
 

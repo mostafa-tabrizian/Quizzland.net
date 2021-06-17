@@ -107,7 +107,7 @@ def category(request, Sub_Category):
                 'keywords': f'{Sub_Category} بهترین کوئيز های , {Sub_Category} کوئيز های',
                 'colorOfHeader': 'header__white',
                 'background': subCategoriesByTitle(Sub_Category)[0].background,
-                'quizzes': quizzesWithSubCategory(category, Sub_Category, fTPage[0], fTPage[1], sortType),
+                'quizzes': quizzesWithSubCategory_Handler(category, Sub_Category, fTPage[0], fTPage[1], sortType),
                 'typeOfQuiz': typeOfQuiz,
                 'finalPage': finalPage(howManyElementToShow, Sub_Category),
             }
@@ -209,13 +209,13 @@ def sortTheQuizzes(request):
         category = request.GET.get('c')
 
         if sortType == 'newest':
-            quizzes = sortBothQuizzesByPublishWithCategories(category).all()[fTPage[0]:fTPage[1]]
+            quizzes = quizzesBothWithCategory(category, '-publish').all()[fTPage[0]:fTPage[1]]
             title = "جدیدترین کوئیز های"
         elif sortType == 'bestest':
-            quizzes = quizzesBothByViewsWithCategory(category).all()[fTPage[0]:fTPage[1]]
+            quizzes = quizzesBothWithCategory(category, '-views').all()[fTPage[0]:fTPage[1]]
             title = "پر بازدیدترین کوئیز های"
         elif sortType == 'monthlyBestest':
-            quizzes = quizzesBothByViewsWithCategory(category).all()[fTPage[0]:fTPage[1]]
+            quizzes = quizzesBothWithCategory(category, '-monthly_views').all()[fTPage[0]:fTPage[1]]
             title = "پر بازدیدترین کوئیز های ماه"
 
         if category == 'psychology':
