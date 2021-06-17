@@ -17,6 +17,6 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
-        ftp-server: ${{ 185.128.136.186 }}
-        ftp-username: ${{ FTP_Quizzland }}
-        ftp-password: ${{ $Quizzland19931506 }}
+        ftp-server: ${{ secrets.FTP_SERVER }}
+        ftp-username: ${{ secrets.FTP_USERNAME }}
+        ftp-password: ${{ secrets.FTP_PASSWORD }}
