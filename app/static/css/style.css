@@ -756,22 +756,11 @@ input {
           box-shadow: 0 0 5px #00000047;
 }
 
-.quizContainer__category__title {
-  text-align: right;
-  margin-right: 5rem;
-}
-
 .quizContainer__category__inner {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 2.5rem;
-}
-
-@media (max-width: 49.9375em) {
-  .quizContainer__category__inner {
-    margin: auto;
-    margin-bottom: 2rem;
-  }
+  margin: auto;
+  margin-bottom: 2rem;
 }
 
 .quizContainer__category__inner a {
@@ -2524,6 +2513,22 @@ body {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
     margin: 0;
+  }
+}
+
+.sortMore__title {
+  text-align: right;
+  margin-right: 5rem;
+}
+
+.sortMore__inner {
+  margin: 2rem;
+}
+
+@media (max-width: 49.9375em) {
+  .sortMore__inner {
+    margin: auto;
+    margin-bottom: 2rem;
   }
 }
 

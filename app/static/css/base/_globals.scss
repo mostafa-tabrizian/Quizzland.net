@@ -457,19 +457,11 @@ input {
             }
         }
 
-        &__title {
-            text-align: right;
-            margin-right: 5rem;
-        }
-
         &__inner {
             flex-wrap: wrap;
-            margin: 2.5rem;
-
-            @include breakpoints-down(medium) {
-                margin: auto; margin-bottom: 2rem;
-            }
-
+            margin: auto;
+            margin-bottom: 2rem;
+            
             a {
                 box-shadow: 0 0 10px #000000bd;
                 position: relative;

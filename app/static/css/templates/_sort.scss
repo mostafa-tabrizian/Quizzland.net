@@ -7,6 +7,20 @@
         margin: 0;
     }
 
+    
+    &__title {
+        text-align: right;
+        margin-right: 5rem;
+    }
+
+    &__inner {
+        margin: 2rem;
+    
+        @include breakpoints-down(medium) {
+            margin: auto; margin-bottom: 2rem;
+        }
+    }
+
     div {
         &:first-child {
             @include breakpoints-down(medium) {

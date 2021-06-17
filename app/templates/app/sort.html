@@ -5,8 +5,8 @@
 <div class="sortMore grid {{categoryStyle}} tx-al-c">
 
     <div>
-        <h3 class='quizContainer__category__title'>{{ titlePointy }}</h3>
-        <div class="quizContainer__category__inner {{hideSecondColumn}} flex flex-jc-fe">
+        <h3 class='sortMore__title'>{{ titlePointy }}</h3>
+        <div class="quizContainer__category__inner sortMore__inner {{hideSecondColumn}} flex flex-jc-fe">
             {% for quiz in sortPointy %}
                 {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
@@ -23,8 +23,8 @@
         </div>
     </div>
     <div>
-        <h3 class='quizContainer__category__title'>{{title}} {{ category }}</h3>
-        <div class="quizContainer__category__inner flex flex-jc-fe">
+        <h3 class='sortMore__title'>{{title}} {{ category }}</h3>
+        <div class="quizContainer__category__inner sortMore__inner flex flex-jc-fe">
             {% for quiz in sort %}
                 {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
