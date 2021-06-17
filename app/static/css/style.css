@@ -885,13 +885,13 @@ input {
 }
 
 .header__logo img {
-  width: 7.7125rem;
+  width: auto;
   height: 2.7875rem;
 }
 
 @media (max-width: 49.9375em) {
   .header__logo img {
-    width: 6.8125rem;
+    width: auto;
     height: 2.4875rem;
   }
 }

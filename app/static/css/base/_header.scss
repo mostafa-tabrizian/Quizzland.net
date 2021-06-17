@@ -8,11 +8,11 @@
         z-index: 1;
 
         img {
-            width: 7.7125rem;
+            width: auto;
             height: 2.7875rem;
     
             @include breakpoints-down(medium) {
-                width: 6.8125rem;
+                width: auto;
                 height: 2.4875rem;
             }
         }
