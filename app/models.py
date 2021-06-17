@@ -23,6 +23,19 @@ class Document_Admin(admin.ModelAdmin):
     list_display = ('title', 'note')
     search_fields = ['id', 'title', 'note']
 
+class Categories(models.Model):
+    id = models.AutoField(primary_key=True)
+    category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
+    monthly_views = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
+    publish = models.DateTimeField(default=datetime.datetime.now)
+
+    def __str__(self):
+        return self.category
+
+class Categories_Admin(admin.ModelAdmin):
+    list_display = ('category', 'monthly_views', 'views', 'publish')
+    search_fields = ['category',]
 
 class SubCategories(models.Model):
     id = models.AutoField(primary_key=True)

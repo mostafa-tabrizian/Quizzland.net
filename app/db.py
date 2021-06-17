@@ -201,6 +201,10 @@ def fanNameOfQuiz(title):
     fanName = quiz_Detail[0].fan_name
     return fanName
 
+def addViewToSubCategories(title):
+    data = subCategoriesByTitle(title).first()
+    viewsPlusOne(data)
+
 def addViewToCategories(title):
-    data = subCategoriesByEng(title).first()
+    data = Categories.objects.get(category=title)
     viewsPlusOne(data)
