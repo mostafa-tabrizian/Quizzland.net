@@ -8,7 +8,7 @@
 <adverts class="adverts adverts__right hideForMobile">
 </adverts> -->
 
-<div class="countingResult pos-fix loadingScreen fade-out">
+<div class="countingResult loadingScreen loadingScreen pos-fix flex flex-jc-c flex-ai-c fade-out">
     ___ در حال محاسبه نتیجه کوئیز___
 </div>
 <body style="background-image: url('{{ quizDetail.background|makeTheDirValidForImg }}');">
@@ -43,7 +43,7 @@
 
     <div class="quiz__questions pos-rel flex flex-jc-c tx-al-c" tag="pointy">
 
-        <div class="quiz__hider pos-rel">
+        <div class="quiz__hider flex pos-rel">
             {% for questionDetail in quiz_Question %}
 
             <div class="quiz__container pos-rel darkGls">

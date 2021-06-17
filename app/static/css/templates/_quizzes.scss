@@ -198,7 +198,6 @@ body {
     }
 
     &__hider {
-        display: flex;
         width: 34rem;
         min-height: 32rem;
         overflow: hidden;
@@ -215,9 +214,7 @@ body {
         width: 23rem;
 
         &__img {
-            display: grid;
             grid-template-columns: auto auto;
-            justify-content: center;
             padding-top: 1rem;
         }
 
