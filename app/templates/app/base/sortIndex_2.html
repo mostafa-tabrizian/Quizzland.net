@@ -1,0 +1,9 @@
+{% load templateTags %}
+
+{% with quiz.subCategory|replaceToHyphen as subCategory %}
+    {% with quiz.title|replaceToHyphen as title %}
+        <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
+            {{ quiz.title }}
+        </a></li>
+    {% endwith %}
+    {% endwith %}

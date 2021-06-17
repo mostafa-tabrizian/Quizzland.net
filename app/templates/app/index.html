@@ -49,17 +49,7 @@
         </div>
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
             {% for quiz in NewestCelebrityQuizSection %}
-                {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                {% with quiz.title|replaceToHyphen as title %}
-                    <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                        <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                        {% with quiz.views|viewsFormat as views %}
-                            <div class="quizContainer__category__inner__views">{{views}}</div>
-                            <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                        {% endwith %}
-                    </a>
-                {% endwith %}
-                {% endwith %}
+                {% include './base/quizContainer.html' %}
             {% endfor %}
         </div>
     </div>
@@ -71,17 +61,7 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestMovieSeriesQuizSection %}
-                {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                    {% with quiz.views|viewsFormat as views %}
-                        <div class="quizContainer__category__inner__views">{{views}}</div>
-                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                    {% endwith %}
-                </a>
-                {% endwith %}
-                {% endwith %}
+                {% include './base/quizContainer.html' %}
             {% endfor %}
 
         </div>
@@ -94,19 +74,8 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestPhysiologiesQuizSection %}
-                {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quizPointy/{{quiz.category}}/{{subCategory}}/{{title}}">
-                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                    {% with quiz.views|viewsFormat as views %}
-                        <div class="quizContainer__category__inner__views">{{views}}</div>
-                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                    {% endwith %}
-                </a>
-                {% endwith %}
-                {% endwith %}
+                {% include './base/pointyQuizContainer.html' %}
             {% endfor %}
-
         </div>
     </div>
     <div class="quizContainer space-med">
@@ -117,17 +86,7 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestGamingQuizSection %}
-                {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                {% with quiz.title|replaceToHyphen as title %}
-                <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                    <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                    {% with quiz.views|viewsFormat as views %}
-                        <div class="quizContainer__category__inner__views">{{views}}</div>
-                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                    {% endwith %}
-                </a>
-                {% endwith %}
-                {% endwith %}
+                {% include './base/quizContainer.html' %}
             {% endfor %}
 
         </div>
@@ -147,18 +106,9 @@
     <div class="sort pos-rel flex flex-jc-c space-l">
 
         <div class="sort__all fade-in">
-            <div class="sort__container flex flex-jc-c">
-                <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
-                    <ul class="sort__style">
+                {% include './base/sortIndex_1.html' %}
                         {% for quiz in bestestQuizzesForThisMonth %}
-                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                            {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                                    {{ quiz.title }}
-                                </a></li>
-                            {% endwith %}    
-                            {% endwith %}    
+                            {% include './base/sortIndex_2.html' %}
                         {% endfor %}
                     </ul>
                     <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest"> ..بیشتر</a>
@@ -167,13 +117,7 @@
                     <h2 class="tx-al-c">پر بازدید ترین کوئیز ها</h2>
                     <ul class="sort__style">
                         {% for quiz in bestestQuizzes %}
-                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                            {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                                    {{ quiz.title }}
-                                </a></li>
-                            {% endwith %}
-                            {% endwith %}
+                            {% include './base/sortIndex_2.html' %}
                         {% endfor %}
                     </ul>
                     <a class="sort__more pos-abs" href="sort?p=0&st=bestest"> ..بیشتر</a>
@@ -182,18 +126,9 @@
         </div>
     
         <div class="sort__celebrities fade-out">
-            <div class="sort__container flex flex-jc-c">
-                <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
-                    <ul class="sort__style">
+                {% include './base/sortIndex_1.html' %}
                         {% for quiz in MonthlyBestestCelebrityQuizSection %}
-                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                            {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                                    {{ quiz.title }}
-                                </a></li>
-                            {% endwith %}
-                            {% endwith %}
+                            {% include './base/sortIndex_2.html' %}
                         {% endfor %}
                     </ul>
                     <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest&c=celebrity"> ..بیشتر</a>
@@ -202,13 +137,7 @@
                     <h2 class="tx-al-c">پر بازدید ترین ها</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestCelebrityQuizSection %}
-                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                            {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                                    {{ quiz.title }}
-                                </a></li>
-                            {% endwith %}
-                            {% endwith %}
+                            {% include './base/sortIndex_2.html' %}
                         {% endfor %}
                     </ul>
                     <a class="sort__more pos-abs" href="sort?p=0&st=bestest&c=celebrity"> ..بیشتر</a>
@@ -217,18 +146,9 @@
         </div>
 
         <div class="sort__movieAndSeries fade-out">
-            <div class="sort__container flex flex-jc-c">
-                <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
-                    <ul class="sort__style">
+                {% include './base/sortIndex_1.html' %}
                         {% for quiz in MonthlyBestestMovieSeriesQuizSection %}
-                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                            {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                                    {{ quiz.title }}
-                                </a></li>
-                            {% endwith %}
-                            {% endwith %}
+                            {% include './base/sortIndex_2.html' %}
                         {% endfor %}
                     </ul>
                     <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest&c=movie-series"> ..بیشتر</a>
@@ -237,13 +157,7 @@
                     <h2 class="tx-al-c">پر بازدید ترین ها</h2>
                     <ul class="sort__style">
                         {% for quiz in BestestMovieSeriesQuizSection %}
-                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                            {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                                    {{ quiz.title }}
-                                </a></li>
-                            {% endwith %}
-                            {% endwith %}
+                            {% include './base/sortIndex_2.html' %}
                         {% endfor %}
                     </ul>
                     <a class="sort__more pos-abs" href="sort?p=0&st=bestest&c=movie-series"> ..بیشتر</a>
@@ -252,18 +166,9 @@
         </div>
 
         <div class="sort__gaming fade-out">
-            <div class="sort__container flex flex-jc-c">
-                <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
-                    <ul class="sort__style">
+                {% include './base/sortIndex_1.html' %}
                         {% for quiz in MonthlyBestestGamingQuizSection %}
-                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                            {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                                    {{ quiz.title }}
-                                </a></li>
-                            {% endwith %}
-                            {% endwith %}
+                            {% include './base/sortIndex_2.html' %}
                         {% endfor %}
                     </ul>
                     <a class="sort__more pos-abs" href="sort?p=0&st=monthlyBestest&c=gaming"> ..بیشتر</a>
@@ -272,13 +177,7 @@
                     <h2 class="tx-al-c">پر بازدید ترین ها</h2>
                     <ul class="sort__style">
                         {% for quiz in MonthlyBestestGamingQuizSection %}
-                            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                            {% with quiz.title|replaceToHyphen as title %}
-                                <li><a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                                    {{ quiz.title }}
-                                </a></li>
-                            {% endwith %}
-                            {% endwith %}
+                            {% include './base/sortIndex_2.html' %}
                         {% endfor %}
                     </ul>
                     <a class="sort__more pos-abs" href="sort?p=0&st=bestest&c=gaming"> ..بیشتر</a>
@@ -287,10 +186,7 @@
         </div>
 
         <div class="sort__physiologies fade-out">
-            <div class="sort__container flex flex-jc-c">
-                <div class="sort-monthlyViews">
-                    <h2 class="tx-al-c">پر بازدید ترین های این ماه</h2>
-                    <ul class="sort__style">
+                {% include './base/sortIndex_1.html' %}
                         {% for quiz in MonthlyBestestPhysiologiesQuizSection %}
                             {% with quiz.subCategory|replaceToHyphen as subCategory %}
                             {% with quiz.title|replaceToHyphen as title %}

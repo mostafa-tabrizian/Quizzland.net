@@ -7,39 +7,15 @@
     
     <div class="moreSearchResult__container">
         <div class="categoryList quizContainer__category__inner flex flex-jc-fe">
-        
             {% for quiz in quizzesPointyByTitle %}
-                {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                {% with quiz.title|replaceToHyphen as title %}
-                    <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                        <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                        {% with quiz.views|viewsFormat as views %}
-                            <div class="quizContainer__category__inner__views">{{ views }}</div>
-                        {% endwith %}
-                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                    </a>
-                {% endwith %}
-                {% endwith%}
+                {% include './base/quizContainer.html' %}
             {% endfor %}
-        
         </div>
 
         <div class="categoryList quizContainer__category__inner flex flex-jc-fe">
-
             {% for quiz in quizzesByTitle %}
-                {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                    {% with quiz.title|replaceToHyphen as title %}
-                        <a href="/quiz/{{title}}">
-                            <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                            {% with quiz.views|viewsFormat as views %}
-                                <div class="quizContainer__category__inner__views">{{ views }}</div>
-                            {% endwith %}
-                            <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                        </a>
-                    {% endwith %}
-                {% endwith%}
+                {% include './base/quizContainer.html' %}
             {% endfor %}
-    
         </div>
     </div>
 </div>

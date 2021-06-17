@@ -8,17 +8,7 @@
         <h3 class='sortMore__title'>{{ titlePointy }}</h3>
         <div class="quizContainer__category__inner sortMore__inner {{hideSecondColumn}} flex flex-jc-fe">
             {% for quiz in sortPointy %}
-                {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                {% with quiz.title|replaceToHyphen as title %}
-                    <a href="/quizPointy/{{title}}?ic={{quiz.subCategory}}">
-                        <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                        {% with quiz.views|viewsFormat as views %}
-                            <div class="quizContainer__category__inner__views">{{ views }}</div>
-                            <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                        {% endwith %}
-                    </a>
-                {% endwith %}
-                {% endwith %}
+                {% include './base/pointyQuizContainer.html' %}
             {% endfor %}
         </div>
     </div>

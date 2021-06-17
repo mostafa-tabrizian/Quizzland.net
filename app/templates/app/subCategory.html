@@ -18,17 +18,7 @@
     <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
         {% for quiz in quizzes %}
-            {% with quiz.subCategory|replaceToHyphen as subCategory %}
-                {% with quiz.title|replaceToHyphen as title %}
-                    <a href="/{{typeOfQuiz}}/{{title}}?ic={{quiz.subCategory}}">
-                        <img src="{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                        {% with quiz.views|viewsFormat as views %}
-                            <div class="quizContainer__category__inner__views">{{ views }}</div>
-                        {% endwith %}
-                        <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                    </a>
-                {% endwith %}
-            {% endwith%}
+            {% include './base/quizContainer.html' %}
         {% endfor %}
 
     </div>
