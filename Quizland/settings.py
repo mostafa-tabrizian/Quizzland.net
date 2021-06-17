@@ -2,11 +2,11 @@ import os
 
 PROJECT_DIR = os.path.dirname(__file__)
 
-SECRET_KEY = 'django-insecure-57hi20*x0$r=7ea$gfaky6htoai24bou9mjxi7spob7z1$+89g'
+SECRET_KEY = '$Quizzland1993150657hi20*x0$r=7ea$gfaky6htoai24bou9mjxi7spob7z1$+89g'
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['www.quizzland.ir']
 
 INSTALLED_APPS = [
     'app.apps.AppConfig',
@@ -26,15 +26,19 @@ SITE_ID = 1
 
 CACHE_TTL = 15 * 60
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis://127.0.0.1:6379/1",
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient"
-#         }
-#     }
-# }
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        }
+    }
+}
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
@@ -76,10 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'quizland_develop',
-        'USER': 'root',
-        'PASSWORD': '$Mysql19931506',
-        'HOST': '127.0.0.1',
-        'PORT': 3306,
+        'USER': 'MostafaT19',
+        'PASSWORD': '$Quizzlanddb19931506',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -108,6 +112,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = (
+os.path.join(BASE_DIR, 'static'),
+)
 
 STATIC_URL = '/static/'
 STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, 'static')
