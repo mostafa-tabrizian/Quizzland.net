@@ -778,14 +778,16 @@ input {
 .quizContainer__category__inner a::after {
   content: '';
   height: 5rem;
-  width: 100%;
+  width: 101%;
   background: white;
   position: absolute;
-  left: 0;
+  left: -.1rem;
   bottom: -4rem;
   border-radius: 0 0 10px 10px;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
+  -webkit-box-shadow: 0 3px 10px #00000047;
+          box-shadow: 0 3px 10px #00000047;
 }
 
 .quizContainer__category__inner a::before {
