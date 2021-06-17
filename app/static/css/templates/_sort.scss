@@ -1,6 +1,6 @@
 .sortMore {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: .8fr 1.2fr;
 
     @include breakpoints-down(medium) {
         grid-template-columns: 1fr;
