@@ -80,8 +80,8 @@ WSGI_APPLICATION = 'Quizland.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'quizlan_db',
-        'USER': 'quizlan_admin',
+        'NAME': 'quizzlan_db',
+        'USER': 'quizzlan_admin',
         'PASSWORD': '$Quizzlanddb19931506',
         'HOST': 'localhost',
         'PORT': '3306',
