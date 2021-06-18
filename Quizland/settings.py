@@ -120,7 +120,6 @@ STATICFILES_DIRS = (
 STATIC_ROOT = '/home1/quizzlan/public_html/static' 
 MEDIA_ROOT = '/home1/quizzlan/public_html/media'
 
-
 STATIC_URL = '/static/'
 MEDIA_URL = '/media' 
 
