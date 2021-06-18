@@ -6,7 +6,7 @@ SECRET_KEY = '$Quizzland1993150657hi20*x0$r=7ea$gfaky6htoai24bou9mjxi7spob7z1$+8
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.quizzland.ir']
+ALLOWED_HOSTS = ['quizzland.ir', 'www.quizzland.ir']
 
 INSTALLED_APPS = [
     'app.apps.AppConfig',
@@ -113,13 +113,18 @@ USE_L10N = True
 USE_TZ = True
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
-os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
+STATIC_ROOT = '/home1/quizzlan/public_html/static' 
+MEDIA_ROOT = '/home1/quizzlan/public_html/media'
+
+
 STATIC_URL = '/static/'
+MEDIA_URL = '/media' 
+
 STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
