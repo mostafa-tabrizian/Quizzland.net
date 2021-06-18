@@ -5,9 +5,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SECRET_KEY = '$Quizzland1993150657hi20*x0$r=7ea$gfaky6htoai24bou9mjxi7spob7z1$+89g'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['quizzland.ir', 'www.quizzland.ir']
+ALLOWED_HOSTS = ['quizzland.ir', 'www.quizzland.ir',
+                 'quizzland.net', 'www.quizzland.net']
 
 INSTALLED_APPS = [
     'app.apps.AppConfig',
@@ -27,15 +28,15 @@ SITE_ID = 1
 
 CACHE_TTL = 15 * 60
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        }
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379/1",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient"
+#         }
+#     }
+# }
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
@@ -113,17 +114,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
+STATIC_URL = '/static/' 
+MEDIA_URL = '/media' 
+STATICFILES_DIRS = [ BASE_DIR+"/assets", ] 
 STATIC_ROOT = '/home1/quizzlan/public_html/static' 
 MEDIA_ROOT = '/home1/quizzlan/public_html/media'
-
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/' 
 
 STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-

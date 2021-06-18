@@ -6,6 +6,7 @@ htmlcov
 QuizLand.session.sql
 .vscode
 geckodriver
-Quizland-venv
+venv_dev
 .gitignore
 monthlyViewsData.csv
+*.scss
