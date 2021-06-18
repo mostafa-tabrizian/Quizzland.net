@@ -1,2 +1,2 @@
-import Quizland.wsgi
-application = Quizland.wsgi.application
+import Quizzland.wsgi
+application = Quizzland.wsgi.application

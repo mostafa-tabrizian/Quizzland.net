@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.cache.FetchFromCacheMiddleware'
 ]
 
-ROOT_URLCONF = 'Quizland.urls'
+ROOT_URLCONF = 'Quizzland.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
-WSGI_APPLICATION = 'Quizland.wsgi.application'
+WSGI_APPLICATION = 'Quizzland.wsgi.application'
 
 DATABASES = {
     'default': {
