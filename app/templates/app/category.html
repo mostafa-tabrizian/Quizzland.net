@@ -20,7 +20,7 @@
         {% if category == 'celebrity' %}
             <div class="quizzes__item">
                 <a href="/category/mix-celebrity?nr=16&p=0&st=newest">
-                    <img src="/static/img/Thn-Category/mix-celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
+                    <img src="/media/app/static/img/Thn-Category/mix-celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
                 </a>
 
                 <h5 class="tx-al-c">
@@ -33,7 +33,7 @@
         {% elif category == 'movie-series' %}
             <div class="quizzes__item">
                 <a href="/category/mix-movie-series?c=movie-series&nr=16&p=0&st=newest">
-                    <img src="/static/img/Thn-Category/mix-movie-series.jpg" alt="mix movie-series |‌ کوئیز های میکس فیلم و سریال" loading='lazy'>
+                    <img src="/media/app/static/img/Thn-Category/mix-movie-series.jpg" alt="mix movie-series |‌ کوئیز های میکس فیلم و سریال" loading='lazy'>
                 </a>
 
                 <h5 class="tx-al-c">
@@ -49,7 +49,7 @@
 
                 {% with category.subCategory|listMaker:' ' as img %}
                 <a href="/category/{{img.0}}-{{img.1}}?c={{category.category}}&nr=16&p=0&st=newest">
-                    <img src="/static/img/Thn-Category/{{img.0}}-{{img.1}}.jpg" alt="{{ category.subCategory }} |‌ کوئیز های {{ category.title }}" loading='lazy'>
+                    <img src="/media/app/static/img/Thn-Category/{{img.0}}-{{img.1}}.jpg" alt="{{ category.subCategory }} |‌ کوئیز های {{ category.title }}" loading='lazy'>
                 </a>
 
                 {% endwith %}
