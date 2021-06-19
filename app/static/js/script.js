@@ -230,7 +230,7 @@ newsletter__submit.addEventListener('click', () => {
             }
             else{
                 alert('ثبت نام شما با موفقیت انجام شد')
-                return
+                // return
             }
         }
     });
