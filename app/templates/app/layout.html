@@ -124,6 +124,8 @@
             <p class="tx-al-c">ایمیلت رو وارد کن و کتگوری مورد علاقه‌ات رو انتخاب کن</p>
             <button class='newsletter__submit' type="submit" method="POST" aria-label="Submit Newsletter Form For Signing Up">ثبت نام </button>
             {{ newsletterForm }}
+
+            <div class="g-recaptcha" data-sitekey="6LcS7EEbAAAAAKVX777DIicauKZ4XWTYZFcsUjFV"></div>
             <div class="newsletter__categoryOptions flex flex-ai-c">
                 
                 <label for="physiologies">
@@ -171,7 +173,8 @@
             <a href="#">Mt-Code</a> : ساخته شده توسط 
         </p>
     </div>
-    
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/clipboard.min.js' %}"></script>
     <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>

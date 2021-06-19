@@ -4,6 +4,9 @@ from django.shortcuts import redirect
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from django.contrib import messages
+import json
+import urllib
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_GET
@@ -330,16 +333,34 @@ def newsletter(request):
     if request.method == 'POST':
         form = NewsletterForm(request.POST)
         if form.is_valid():
-            emailInput = form.cleaned_data['emailInput']
-            usernameInput = form.cleaned_data['usernameInput']
-            favoriteCategory = form.cleaned_data['favoriteCategory']
 
-            Newsletter_Users.objects.create(
-                email= emailInput,
-                username= usernameInput,
-                favorite_Category= favoriteCategory
-            )
-            
+            ''' Begin reCAPTCHA validation '''
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            ''' End reCAPTCHA validation '''
+
+            if result['success']:
+                emailInput = form.cleaned_data['emailInput']
+                usernameInput = form.cleaned_data['usernameInput']
+                favoriteCategory = form.cleaned_data['favoriteCategory']
+
+                Newsletter_Users.objects.create(
+                    email= emailInput,
+                    username= usernameInput,
+                    favorite_Category= favoriteCategory
+                )
+                
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+
             return redirect('/')
         
     else:
