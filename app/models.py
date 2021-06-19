@@ -42,7 +42,7 @@ class SubCategories(models.Model):
     category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
     subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
-    background = models.ImageField(upload_to='app/static/img/Sub-Category', default='app/static/img/Base/NotExist.jpg', help_text='background of choosing subCategory')
+    background = models.ImageField(upload_to='app/static/img/Sub-Category', default='app/static/img/Base/NotExist.jpg', help_text='background of choosing quizzes | name of the file should be the title')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     publish = models.DateTimeField(default=datetime.datetime.now)
