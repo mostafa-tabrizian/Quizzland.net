@@ -200,14 +200,13 @@ if (tools__sort__btn) {
         finalParameters = urlParams.toString()
         window.location.replace(urlPath + '?' + finalParameters); 
     })
-} else {log('no tools')}
+}
 
 //----------------------------------------------------------
 // submit the newsletter of user
 let chosenCategory = []
 
 newsletter__categoryOptions__input.forEach(each => {
-    log(chosenCategory)
     each.addEventListener('click', () => {
         inputOfTheCategory = each.checked
         if (inputOfTheCategory == true) { //checked
@@ -319,7 +318,7 @@ if (pageTravel__arwNext) {
     if (currPageNumber + 2 == finalPageNumberDOM.innerHTML) {
         removeDOM(finalPageDOM)
     }
-} else { log ('no page travel')}
+}
 
 //----------------------------------------------------------
 // search page
@@ -339,7 +338,7 @@ if (searchResult) {
         removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
     }
 
-} else {log('no search result page')}
+}
 
 //----------------------------------------------------------
 
@@ -348,7 +347,7 @@ if (backBtn) {
         event.preventDefault();
         history.go(-1)
     })
-} else {log('no backBtn')}
+}
 
 //----------------------------------------------------------
 
@@ -369,7 +368,7 @@ if (result__share__btn) {
 
         result__share__message.classList.remove('noVis')
     })
-} else {log('no result share')}
+}
 
 if (resultQuizPointy__share__btn) {
     resultQuizPointy__share__btn.addEventListener('click', () => {
@@ -388,7 +387,7 @@ if (resultQuizPointy__share__btn) {
 
         result__share__message.classList.remove('noVis')
     })
-} else {log('no resultPointy share')}
+}
 
 
 // --------------------------------------------------------------------
@@ -401,7 +400,7 @@ nightThemeCss.setAttribute('href', "/static/css/nightTheme.css")
 const nightMode_turnOff = () => {
     try {
         document.head.removeChild(nightThemeCss)
-    } catch {log("it's default on lightMode no need removing")}
+    } catch {}
     nightMode.forEach (each => {
         each.classList.add('nightMode-Off')
         each.style.backgroundImage = 'url(/static/img/Base/nightMode.png)'
@@ -440,12 +439,11 @@ if (nightMode) {
         })
     })
 
-} else {log ('no nightMode')}
+}
 
 // --------------------------------------------------------------------
 if (nightMode) {
     const url = (window.location.pathname).split('/')
-    log(url)    
     if (url.length == 4 /* innerCategory */ ||
         url.includes('quiz')) 
         {
@@ -457,9 +455,7 @@ if (nightMode) {
                     each.classList.add('nightMode-Off')
                 })
                 document.head.removeChild(nightThemeCss)
-            } catch {
-                log('no nightMode')
-            }
+            } catch {}
         } 
     else if (url.includes('resultPointy'))
         {
@@ -471,12 +467,10 @@ if (nightMode) {
                     each.classList.remove('nightMode-Off')
                 })
                 document.head.appendChild(nightThemeCss)
-            } catch {
-                log('no nightMode')
-            }
+            } catch {}
         } 
         
-} else {log ('no nightMode')}
+}
 
 // --------------------------------------------------------------------
 if(navigator.userAgent.indexOf("Firefox") != -1 ) {
@@ -491,11 +485,11 @@ if(navigator.userAgent.indexOf("Firefox") != -1 ) {
 }
 
 // --------------------------------------------------------------------
-log('script working___________________________________________')
+log('sw')
 
 // -----------------------------GSAP
 // hero animation
 tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 1 }})
 tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
 
-log('gsap Working._________________________________________')
+log('gw')
