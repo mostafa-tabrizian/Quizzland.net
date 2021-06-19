@@ -18,7 +18,7 @@ class NewsletterForm(forms.Form):
         label="",
         widget=forms.EmailInput(
             attrs={
-                'class': 'input',
+                'class': 'input input__email',
                 'name': "userEmail",
                 'type': "email",
                 'placeholder': '  ایمیل ...'

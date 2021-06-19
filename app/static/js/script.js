@@ -215,25 +215,25 @@ newsletter__closeBtn.addEventListener('click', () => {
     newsletter__blurBackground.classList.remove('newsletter__blurBackground__show')
 })
 
-// newsletter__submit.addEventListener('click', () => {
-//     userEmail = id_emailInput.value
+input__email.addEventListener('change', () => {
+    userEmail = id_emailInput.value
 
-//     $.ajax({
-//         url: '/ajax/doesExistInNewsletterUsers/',
-//         data: {
-//             'userEmail': userEmail
-//         },
-//         dataType: 'json',
-//         success: function (data) {
-//             if (data.userEmail) {
-//                 alert('شما از قبل ثبت نام کرده اید');
-//             }
-//             else{
-//                 alert('ثبت نام شما با موفقیت انجام شد')
-//             }
-//         }
-//     });
-// })
+    $.ajax({
+        url: '/ajax/doesExistInNewsletterUsers/',
+        data: {
+            'userEmail': userEmail
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.userEmail) {
+                alert('شما از قبل ثبت نام کرده اید');
+                newsletter__submit.setAttribute('type', 'button')
+            } else {
+                newsletter__submit.setAttribute('type', 'submit')
+            }
+        }
+    });
+})
 //----------------------------------------------------------
 
 // Page travel
