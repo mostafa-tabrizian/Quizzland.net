@@ -37,14 +37,3 @@ class NewsletterForm(forms.Form):
             }
         ) 
     )
-
-    favoriteCategory = forms.CharField(
-        max_length=100, required=True,
-        label="",
-        widget=forms.Textarea(
-            attrs={
-                'class': 'newsletter__categoryOptions__selectedByUser',
-                'name': "chosenCategory",
-            }
-        )
-    )

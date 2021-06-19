@@ -203,22 +203,6 @@ if (tools__sort__btn) {
 }
 
 //----------------------------------------------------------
-// submit the newsletter of user
-let chosenCategory = []
-
-newsletter__categoryOptions__input.forEach(each => {
-    each.addEventListener('click', () => {
-        inputOfTheCategory = each.checked
-        if (inputOfTheCategory == true) { //checked
-            chosenCategory.push(each.id)
-        } else {
-            indexOfChosenToRemove = chosenCategory.indexOf(each.id)
-            chosenCategory.splice(indexOfChosenToRemove, 1)
-        }
-        newsletter__categoryOptions__selectedByUser.innerHTML = chosenCategory
-    })
-})
-//----------------------------------------------------------
 // newsletter pop up
 newsletter__show.addEventListener('click', () => {
     fadeIn(newsletter)
@@ -245,12 +229,8 @@ newsletter__submit.addEventListener('click', () => {
                 alert('شما از قبل ثبت نام کرده اید');
             }
             else{
-                if (!(chosenCategory.length > 0)) {
-                    newsletter__message.classList.remove('noVis')
-                } else if (input__userName.value) {
-                    alert('ثبت نام شما با موفقیت انجام شد')
-                    return
-                }
+                alert('ثبت نام شما با موفقیت انجام شد')
+                return
             }
         }
     });

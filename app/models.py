@@ -227,7 +227,6 @@ class Newsletter_Users(models.Model):
     id  = models.AutoField(primary_key=True)
     email = models.CharField(max_length=200, null=False, blank=False, default=None)
     username = models.CharField(max_length=100, null=False, blank=False, default=None)
-    favorite_Category = models.CharField(max_length=200, null=False, blank=False, default=None)
     signedUp_On = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
@@ -237,6 +236,6 @@ class Newsletter_Users(models.Model):
         return 'test'
 
 class Newsletter_Users_Admin(admin.ModelAdmin):
-    list_display = ('email', 'username', 'favorite_Category', 'signedUp_On')
-    list_filter = ('favorite_Category', 'signedUp_On')
+    list_display = ('email', 'username', 'signedUp_On')
+    list_filter = ('signedUp_On')
     search_fields = ['email', 'username']
