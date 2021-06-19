@@ -14,6 +14,7 @@ from .models import *
 from .functions import *
 from .db import *
 from .forms import *
+import requests
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 register = template.Library()
@@ -334,18 +335,13 @@ def newsletter(request):
         form = NewsletterForm(request.POST)
         if form.is_valid():
 
-            ''' Begin reCAPTCHA validation '''
             recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
+            data = {
                 'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
                 'response': recaptcha_response
             }
-            data = urllib.parse.urlencode(values).encode()
-            req =  urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode())
-            ''' End reCAPTCHA validation '''
+            response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+            result = response.json()
 
             if result['success']:
                 emailInput = form.cleaned_data['emailInput']
@@ -357,7 +353,7 @@ def newsletter(request):
                     username= usernameInput,
                     favorite_Category= favoriteCategory
                 )
-                messages.success(request, 'New comment added with success!')
+                messages.success('DONE!')
                 
             else:
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
