@@ -353,6 +353,8 @@ def newsletter(request):
                 )
 
                 return redirect('/')
+            else:
+                print('no approve')
     else:
         return pageNotFoundManual(request)
 
