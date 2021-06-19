@@ -5,7 +5,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SECRET_KEY = '$Quizzland1993150657hi20*x0$r=7ea$gfaky6htoai24bou9mjxi7spob7z1$+89g'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['quizzland.ir', 'www.quizzland.ir',
                  'quizzland.net', 'www.quizzland.net']

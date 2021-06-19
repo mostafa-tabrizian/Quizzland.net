@@ -404,7 +404,7 @@ const nightMode_turnOff = () => {
     } catch {log("it's default on lightMode no need removing")}
     nightMode.forEach (each => {
         each.classList.add('nightMode-Off')
-        each.style.backgroundImage = 'url(/static/img/base/nightMode.png)'
+        each.style.backgroundImage = 'url(/static/img/Base/nightMode.png)'
         localStorage.setItem('mode', 'lightMode')
     })
 }
@@ -413,7 +413,7 @@ const nightMode_turnOn = () => {
     document.head.appendChild(nightThemeCss)
     nightMode.forEach (each => {
         each.classList.remove('nightMode-Off')
-        each.style.backgroundImage = 'url(/static/img/base/lightMode.png)'
+        each.style.backgroundImage = 'url(/static/img/Base/lightMode.png)'
         localStorage.setItem('mode', 'nightMode')
     })
 }
