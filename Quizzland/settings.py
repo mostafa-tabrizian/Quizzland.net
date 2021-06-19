@@ -1,11 +1,14 @@
 import os
+from decouple import config
 
 PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-SECRET_KEY = '$Quizzland1993150657hi20*x0$r=7ea$gfaky6htoai24bou9mjxi7spob7z1$+89g'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
+
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['quizzland.ir', 'www.quizzland.ir',
                  'quizzland.net', 'www.quizzland.net']
@@ -81,10 +84,11 @@ WSGI_APPLICATION = 'Quizzland.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'quizzlan_db',
-        'USER': 'quizzlan_admin',
-        'PASSWORD': '$Quizzlanddb19931506',
-        'HOST': 'localhost',
+        
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
         'PORT': '3306',
     }
 }

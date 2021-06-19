@@ -10,3 +10,4 @@ venv_dev
 .gitignore
 monthlyViewsData.csv
 *.scss
+.env
