@@ -1,0 +1,49 @@
+.tools {
+    direction: rtl;
+
+    @include breakpoints-down(medium) {
+        margin-right: 2rem;
+    }
+
+    &__sort {
+        margin-left: .7rem;
+
+        &__btn {
+            border: inherit;
+        }
+
+        &__options {
+            margin-top: .5rem;
+
+            button {
+                padding: 0rem 0.4rem 0rem 0.4rem;
+            }
+        }
+    }
+
+    &__numberOfResult {
+        &__btn {
+            font-size: $font-sm;
+            border: inherit;
+        }
+        
+        &__options {
+            margin-top: .5rem;
+
+            button {
+                padding: 0rem 0.5rem 0rem 0.5rem;
+            }
+        }
+    }
+
+    &__submit {
+        background: rgba(0, 0, 0, 0.54) url('/static/img/base/arw-submit.svg') no-repeat center center;
+        transform: rotate(-90deg);
+        bottom: 2rem; right: 0.6rem;
+        width: 2.15rem; height: 2.15rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
