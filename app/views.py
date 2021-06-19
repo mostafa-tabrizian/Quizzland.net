@@ -346,12 +346,10 @@ def newsletter(request):
             if result['success']:
                 emailInput = form.cleaned_data['emailInput']
                 usernameInput = form.cleaned_data['usernameInput']
-                favoriteCategory = form.cleaned_data['favoriteCategory']
 
                 Newsletter_Users.objects.create(
                     email= emailInput,
                     username= usernameInput,
-                    favorite_Category= favoriteCategory
                 )
                 messages.success(request, 'DONE!')
                 

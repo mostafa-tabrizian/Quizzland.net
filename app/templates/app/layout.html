@@ -122,12 +122,13 @@
         <form class="newsletter fade-out" action="/newsletter" method="post">
             <button class="newsletter__closeBtn" aria-label="Close Newsletter Form Button"></button>
             <p class="tx-al-c">ایمیلت رو وارد کن و کتگوری مورد علاقه‌ات رو انتخاب کن</p>
-            <button class='newsletter__submit' type="submit" method="POST" aria-label="Submit Newsletter Form For Signing Up">ثبت نام </button>
-
+            
             {{ newsletterForm }}
-
+            
             <script src='https://www.google.com/recaptcha/api.js'></script>
             <div class="g-recaptcha" data-sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"></div>
+            
+            <button class='newsletter__submit' type="submit" method="POST" aria-label="Submit Newsletter Form For Signing Up">ثبت نام </button>
         </form>
     </div>
 
@@ -157,7 +158,7 @@
     <script src="{% static 'js/clipboard.min.js' %}"></script>
     <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
     <script src="{% static 'js/elements.js' %}"></script>
-    <script src="{% static 'js/gsap.js' %}"></script>
+    <script src="{% static 'js/gsap.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/quiz.js' %}"></script>
 
