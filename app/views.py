@@ -353,7 +353,7 @@ def newsletter(request):
                     username= usernameInput,
                     favorite_Category= favoriteCategory
                 )
-                messages.success('DONE!')
+                messages.success(request, 'DONE!')
                 
             else:
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
