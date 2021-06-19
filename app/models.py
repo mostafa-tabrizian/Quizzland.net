@@ -239,3 +239,15 @@ class Newsletter_Users_Admin(admin.ModelAdmin):
     list_display = ('email', 'username', 'signedUp_On')
     list_filter = ('signedUp_On', )
     search_fields = ['email', 'username']
+
+
+class Thumbnil_SubCategory(models.Model):
+    title = models.CharField(max_length=100, null=True, blank=True)
+    Thumbnil_SubCategory =  models.ImageField(upload_to='app/static/img/Thn-Category', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
+
+    def __str__(self):
+        return self.title
+
+class Thumbnil_SubCategory_Admin(models.Model):
+    list_display = ('title', )
+    search_fields = ['title']
