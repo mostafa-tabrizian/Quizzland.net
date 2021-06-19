@@ -115,10 +115,10 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/' 
-MEDIA_URL = '/media' 
+MEDIA_URL = '/media/' 
 STATICFILES_DIRS = [ BASE_DIR+"/assets", ] 
-STATIC_ROOT = '/home1/quizzlan/public_html/static' 
-MEDIA_ROOT = '/home1/quizzlan/public_html/media'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static_media')
 
 STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
