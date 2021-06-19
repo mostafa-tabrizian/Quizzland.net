@@ -351,13 +351,8 @@ def newsletter(request):
                     email= emailInput,
                     username= usernameInput,
                 )
-                messages.success(request, 'DONE!')
-                
-            else:
-                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
 
-            return redirect('/')
-        
+                return redirect('/')
     else:
         return pageNotFoundManual(request)
 
