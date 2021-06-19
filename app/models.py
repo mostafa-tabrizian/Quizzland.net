@@ -237,5 +237,5 @@ class Newsletter_Users(models.Model):
 
 class Newsletter_Users_Admin(admin.ModelAdmin):
     list_display = ('email', 'username', 'signedUp_On')
-    list_filter = ('signedUp_On')
+    list_filter = ('signedUp_On', )
     search_fields = ['email', 'username']
