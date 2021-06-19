@@ -125,7 +125,6 @@
             <button class='newsletter__submit' type="submit" method="POST" aria-label="Submit Newsletter Form For Signing Up">ثبت نام </button>
             {{ newsletterForm }}
 
-            <div class="g-recaptcha" data-sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"></div>
             <div class="newsletter__categoryOptions flex flex-ai-c">
                 
                 <label for="physiologies">
@@ -149,6 +148,9 @@
         
             </div>
             <h5 class="newsletter__message noVis">لطفا حداقل یکی از کتگوری ها را انتخاب کنید</h5>
+
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha" data-sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"></div>
         </form>
     </div>
 
@@ -174,7 +176,6 @@
         </p>
     </div>
 
-    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/clipboard.min.js' %}"></script>
     <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>

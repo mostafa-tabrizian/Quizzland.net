@@ -357,6 +357,7 @@ def newsletter(request):
                     username= usernameInput,
                     favorite_Category= favoriteCategory
                 )
+                messages.success(request, 'New comment added with success!')
                 
             else:
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
