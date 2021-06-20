@@ -11,3 +11,4 @@ venv_dev
 monthlyViewsData.csv
 .env
 venv
+migrations

@@ -13,6 +13,6 @@ admin.site.register(Quizzes_Pointy, Quizzes_Pointy_Admin)
 admin.site.register(Questions, Questions_Admin)
 admin.site.register(Pointy_Questions, Pointy_Questions_Admin)
 admin.site.register(Newsletter_Users, Newsletter_Users_Admin)
-admin.site.register(Thumbnil_SubCategory)
+admin.site.register(Thumbnail_SubCategory)
 
 admin.site.unregister(auth.models.Group)

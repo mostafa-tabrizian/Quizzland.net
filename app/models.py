@@ -241,9 +241,9 @@ class Newsletter_Users_Admin(admin.ModelAdmin):
     search_fields = ['email', 'username']
 
 
-class Thumbnil_SubCategory(models.Model):
+class Thumbnail_SubCategory(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
-    Thumbnil_SubCategory =  models.ImageField(upload_to='app/static/img/Thn-Category', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
+    Thumbnail_SubCategory =  models.ImageField(upload_to='app/static/img/Thn-Category', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
 
     def __str__(self):
         return self.title
