@@ -12,3 +12,4 @@ monthlyViewsData.csv
 .env
 venv
 migrations
+settings.py

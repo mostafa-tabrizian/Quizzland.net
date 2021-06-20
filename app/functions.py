@@ -6,7 +6,7 @@ from .models import *
 categoryInFar = {
     'gaming': 'گیمینگ',
     'celebrity': 'سلبریتی',
-    'movie-series': 'فیلم و سریال',
+    'movie series': 'فیلم و سریال',
     'psychology': 'روانشناسی',
 }
 

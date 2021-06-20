@@ -116,7 +116,7 @@
     background: #fff !important;
   }
   .tools__submit {
-    background: rgba(0, 0, 0, 0.54) url("/static/img/Base/arw-submit.svg") no-repeat center center !important;
+    background: rgba(0, 0, 0, 0.54) url("/static/img/base/arw-submit.svg") no-repeat center center !important;
   }
   .quiz__head {
     font-family: changeForNotChrome, sans-serif, serif !important;
@@ -662,7 +662,7 @@ input {
 .pageTravel__arwLast {
   width: 1.25rem;
   height: 1.25rem;
-  background: url("/static/img/Base/arw-travelPage.svg") no-repeat;
+  background: url("/static/img/base/arw-travelPage.svg") no-repeat;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
   margin-right: 1.125rem;
@@ -671,7 +671,7 @@ input {
 .pageTravel__arwNext {
   width: 1.25rem;
   height: 1.25rem;
-  background: url("/static/img/Base/arw-travelPage.svg") no-repeat;
+  background: url("/static/img/base/arw-travelPage.svg") no-repeat;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }
@@ -705,7 +705,7 @@ input {
 }
 
 .nightMode {
-  background: url("/static/img/Base/nightMode.png") no-repeat center center;
+  background: url("/static/img/base/nightMode.png") no-repeat center center;
   -webkit-transform: translate(0.54rem, -0.33rem);
           transform: translate(0.54rem, -0.33rem);
   height: 1.6875rem;
@@ -846,7 +846,7 @@ input {
 }
 
 .quizContainer__category__inner__views::before {
-  content: url("/static/img/Base/eyeEmoji.png");
+  content: url("/static/img/base/eyeEmoji.png");
   position: relative;
   top: 0.2rem;
   margin-right: 0.2rem;
@@ -958,7 +958,7 @@ input {
 }
 
 .header__menu__closeBtn {
-  background: url("/static/img/Base/close-btn.svg") center center no-repeat;
+  background: url("/static/img/base/close-btn.svg") center center no-repeat;
   width: 1.75rem;
   height: 1.75rem;
   top: 1rem;
@@ -992,7 +992,7 @@ input {
 }
 
 .header__searchOpener {
-  background: url("/static/img/Base/srch-black.svg") no-repeat center center;
+  background: url("/static/img/base/srch-black.svg") no-repeat center center;
   width: 1.5rem;
   height: 2rem;
   margin-right: 4rem;
@@ -1010,7 +1010,7 @@ input {
 }
 
 .header__searchSubmit {
-  background: url("/static/img/Base/srch-black.svg") no-repeat center center;
+  background: url("/static/img/base/srch-black.svg") no-repeat center center;
   -webkit-transform: translate(2.2rem);
           transform: translate(2.2rem);
   -webkit-transition: all 0.2s ease-in-out;
@@ -1174,7 +1174,7 @@ input {
 }
 
 .header__white .header__searchSubmit {
-  background: url("/static/img/Base/srch-white.svg") no-repeat center center !important;
+  background: url("/static/img/base/srch-white.svg") no-repeat center center !important;
 }
 
 footer, .footer {
@@ -1307,7 +1307,7 @@ footer .newsletter__blurBackground__show, .footer .newsletter__blurBackground__s
 }
 
 footer .newsletter__closeBtn, .footer .newsletter__closeBtn {
-  background: url("/static/img/Base/close-btn.svg") no-repeat center center;
+  background: url("/static/img/base/close-btn.svg") no-repeat center center;
   width: 1.75rem;
   height: 1.75rem;
   position: absolute;
@@ -1761,51 +1761,6 @@ body {
     -ms-grid-columns: (11rem)[auto-fill];
         grid-template-columns: repeat(auto-fill, 11rem);
     gap: .7rem;
-  }
-}
-
-.quizzes__item {
-  width: 12.5rem;
-  height: 16.2135rem;
-}
-
-@media (max-width: 49.9375em) {
-  .quizzes__item {
-    width: 10rem;
-    height: 12.75rem;
-    margin-bottom: .5rem;
-  }
-}
-
-.quizzes__item a > img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border: 3px solid #707070;
-  border-radius: 40px;
-  -webkit-filter: brightness(50%);
-          filter: brightness(50%);
-  -webkit-box-shadow: 0 5px 15px black;
-          box-shadow: 0 5px 15px black;
-}
-
-.quizzes__item > h5 {
-  -webkit-transform: translateY(-13.125rem);
-          transform: translateY(-13.125rem);
-  color: #f0f0f0;
-  font-size: 1.6rem;
-}
-
-.quizzes__item > h5 > a:hover {
-  color: inherit;
-}
-
-@media (max-width: 49.9375em) {
-  .quizzes__item > h5 {
-    -webkit-transform: translateY(-9.75rem);
-            transform: translateY(-9.75rem);
-    font-size: 1.28rem;
   }
 }
 

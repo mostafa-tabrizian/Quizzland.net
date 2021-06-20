@@ -23,26 +23,12 @@ class Document_Admin(admin.ModelAdmin):
     list_display = ('title', 'note')
     search_fields = ['id', 'title', 'note']
 
-class Categories(models.Model):
-    id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
-    monthly_views = models.IntegerField(default=0)
-    views = models.IntegerField(default=0)
-    publish = models.DateTimeField(default=datetime.datetime.now)
-
-    def __str__(self):
-        return self.category
-
-class Categories_Admin(admin.ModelAdmin):
-    list_display = ('category', 'monthly_views', 'views', 'publish')
-    search_fields = ['category',]
-
 class SubCategories(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
     subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
-    background = models.ImageField(upload_to='app/static/img/Sub-Category', default='app/static/img/Base/NotExist.jpg', help_text='background of choosing quizzes | name of the file should be the title')
+    background = models.ImageField(upload_to='app/static/img/Sub-Category', default='app/static/img/Base/NotExist.jpg', help_text='background of choosing quizzes')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     publish = models.DateTimeField(default=datetime.datetime.now)
@@ -243,7 +229,7 @@ class Newsletter_Users_Admin(admin.ModelAdmin):
 
 class Thumbnail_SubCategory(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
-    Thumbnail_SubCategory =  models.ImageField(upload_to='app/static/img/Thn-Category', null=True, blank=True, default='app/static/img/Base/NotExist.jpg')
+    Thumbnail_SubCategory =  models.ImageField(upload_to='app/static/img/Thn-Category', null=True, blank=True, default='app/static/img/Base/NotExist.jpg', help_text='file name same as the title')
 
     def __str__(self):
         return self.title

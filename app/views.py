@@ -100,25 +100,25 @@ def category(request, Sub_Category):
                 typeOfQuiz = 'quizPointy'
             else:
                 typeOfQuiz = 'quiz'
-            Sub_Category = titleConverterWithSpilt(Sub_Category, '-', ' ')
-            # addViewToCategories(subCategory)
+            title = titleConverterWithSpilt(Sub_Category, '-', ' ')
+            addViewToCategories(title)
             template = loader.get_template('app/subCategory.html')
             context = {
                 'searchForm': SearchForm(),
                 'newsletterForm': NewsletterForm(),
-                'headTitle': f'QuizLand | {Sub_Category} ',
-                'description': f'کوئيزلند {Sub_Category} کوئيز های',
-                'keywords': f'{Sub_Category} بهترین کوئيز های , {Sub_Category} کوئيز های',
+                'headTitle': f'QuizLand | {title} ',
+                'description': f'کوئيزلند {title} کوئيز های',
+                'keywords': f'{title} بهترین کوئيز های , {title} کوئيز های',
                 'colorOfHeader': 'header__white',
-                'background': subCategoriesByTitle(Sub_Category)[0].background,
-                'quizzes': quizzesWithSubCategory_Handler(category, Sub_Category, fTPage[0], fTPage[1], sortType),
+                'background': subCategoriesByTitle(title)[0].background,
+                'quizzes': quizzesWithSubCategory_Handler(category, title, fTPage[0], fTPage[1], sortType),
                 'typeOfQuiz': typeOfQuiz,
-                'finalPage': finalPage(howManyElementToShow, Sub_Category),
+                'finalPage': finalPage(howManyElementToShow, title),
             }
             return HttpResponse(template.render(context))
 
         else:
-            title = titleConverterWithSpilt(Sub_Category, '-', ' ')
+            title = categoryInFar[titleConverterWithSpilt(Sub_Category, '-', ' ')]
             template = loader.get_template('app/category.html')
             context = {
                 'searchForm': SearchForm(),

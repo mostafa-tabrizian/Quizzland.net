@@ -206,5 +206,5 @@ def addViewToSubCategories(title):
     viewsPlusOne(data)
 
 def addViewToCategories(title):
-    data = Categories.objects.get(category=title)
+    data = SubCategories.objects.get(subCategory=title)
     viewsPlusOne(data)

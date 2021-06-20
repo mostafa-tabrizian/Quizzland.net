@@ -18,53 +18,51 @@
     <div class="quizzes wrapper-med grid grid-jc-c">
 
         {% if category == 'celebrity' %}
-            <div class="quizzes__item">
+            <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+
                 <a href="/category/mix-celebrity?nr=16&p=0&st=newest">
                     <img src="/media/app/static/img/Thn-Category/mix-celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
+                    <div class="quizContainer__category__inner__title">
+                        میکس سلبریتی ها
+                    </div>
                 </a>
 
-                <h5 class="tx-al-c">
-                    <a href="/category/mix-celebrity?nr=16&p=0&st=newest">
-                        میکس سلبریتی ها
-                    </a>
-                </h5>
             </div>
 
         {% elif category == 'movie-series' %}
-            <div class="quizzes__item">
-                <a href="/category/mix-movie-series?c=movie-series&nr=16&p=0&st=newest">
-                    <img src="/media/app/static/img/Thn-Category/mix-movie-series.jpg" alt="mix movie-series |‌ کوئیز های میکس فیلم و سریال" loading='lazy'>
-                </a>
 
-                <h5 class="tx-al-c">
-                    <a href="/category/mix-movie-series?c=movie-series&nr=16&p=0&st=newest">
-                        میکس فیلم و سریال ها
-                    </a>
-                </h5>
-            </div>
+            <a href="/category/mix-movie-series?c=movie-series&nr=16&p=0&st=newest">
+                <img src="/media/app/static/img/Thn-Category/mix-movie-series.jpg" alt="mix movie-series |‌ کوئیز های میکس فیلم و سریال" loading='lazy'>
+                <div class="quizContainer__category__inner__title">
+                    میکس فیلم و سریال ها
+                </div>
+            </a>
+
         {% endif %}
 
         {% for category in categories %}
-            <div class="quizzes__item">
+            <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
                 {% with category.subCategory|listMaker:' ' as img %}
                 <a href="/category/{{img.0}}-{{img.1}}?c={{category.category}}&nr=16&p=0&st=newest">
                     <img src="/media/app/static/img/Thn-Category/{{img.0}}-{{img.1}}.jpg" alt="{{ category.subCategory }} |‌ کوئیز های {{ category.title }}" loading='lazy'>
+                    {% with category.views|viewsFormat as views %}
+                        <div class="quizContainer__category__inner__views">{{views}}</div>
+                        <div class="quizContainer__category__inner__title">
+                            {% if category.category == 'psychology' %}
+                                {{ category.title }}
+                            {% else %}
+                                {{ category.title}}
+                                <br/>
+                                {{ category.subCategory}}
+                            {% endif %}
+                        </div>
+                    {% endwith %}
                 </a>
-
                 {% endwith %}
 
-                <h5 class="tx-al-c">
-
-                    {% if category.category == 'psychology' %}
-                        {{ category.title }}
-                    {% else %}
-                        {{ category.subCategory}}
-                    {% endif %}
-
-                    </a>
-                </h5>
             </div>
+
         {% endfor %}
     </div>
 
