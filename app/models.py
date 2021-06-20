@@ -247,7 +247,3 @@ class Thumbnil_SubCategory(models.Model):
 
     def __str__(self):
         return self.title
-
-class Thumbnil_SubCategory_Admin(models.Model):
-    list_display = ('title', )
-    search_fields = ['title']
