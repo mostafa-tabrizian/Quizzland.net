@@ -2,7 +2,6 @@ import time
 from csv import writer
 from .forms import *
 from .models import *
-from django.contrib import messages
 
 
 categoryInFar = {
@@ -57,7 +56,6 @@ def saveMonthlyViewsInExcel():
         writer_object.writerow(['----------', '----------', '----------', '----------', '----------'])
         f_object.close()
 
-    messages.success('Exceling Done Successfully')
     return
 
 def viewsPlusOne(quizToAddView):
@@ -98,8 +96,6 @@ def restarterOfMonthlyViews():
         startNewMonth()
         saveMonthlyViewsInExcel()
         startTheMonthlyViewsFromZero()
-        messages.success('Started new monthly views')
 
     else:
-        messages.error('New monthly views could not started | errorLine=100 file=functions.py ')
         return
