@@ -19,25 +19,24 @@
 
         {% if category == 'celebrity' %}
             <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
-
                 <a href="/category/mix-celebrity?nr=16&p=0&st=newest">
-                    <img src="/media/app/static/img/Thn-Category/mix-celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
+                    <img src="/media/app/static/img/Thn-Category/Mix-Celebrity.jpg" alt="mix celebrity |‌ کوئیز های میکس سلبریتی" loading='lazy'>
                     <div class="quizContainer__category__inner__title">
                         میکس سلبریتی ها
                     </div>
                 </a>
-
             </div>
 
         {% elif category == 'movie-series' %}
 
-            <a href="/category/mix-movie-series?c=movie-series&nr=16&p=0&st=newest">
-                <img src="/media/app/static/img/Thn-Category/mix-movie-series.jpg" alt="mix movie-series |‌ کوئیز های میکس فیلم و سریال" loading='lazy'>
-                <div class="quizContainer__category__inner__title">
-                    میکس فیلم و سریال ها
-                </div>
-            </a>
-
+            <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+                <a href="/category/mix-movie-series?c=movie-series&nr=16&p=0&st=newest">
+                    <img src="/media/app/static/img/Thn-Category/Mix-Movie-Series.jpg" alt="mix movie-series |‌ کوئیز های میکس فیلم و سریال" loading='lazy'>
+                    <div class="quizContainer__category__inner__title">
+                        میکس فیلم و سریال ها
+                    </div>
+                </a>
+            </div>
         {% endif %}
 
         {% for category in categories %}
