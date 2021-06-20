@@ -28,21 +28,22 @@ html {
         }
     }
 
-    &__searchOpener {
-        background: url('/static/img/Base/srch-white.svg') no-repeat center center;
-    }
-
-    &__searchInput {
-        color: white;
-
-        &::placeholder {
-            color: white;
+    &__search {
+        &__opener {
+            background: url('/static/img/Base/srch-white.svg') no-repeat center center;
         }
-    }
     
-
-    &__searchSubmit {
-        background: url('/static/img/Base/srch-white.svg') no-repeat center center;
+        &__input {
+            color: white;
+    
+            &::placeholder {
+                color: white;
+            }
+        }
+        
+        &__submit {
+            background: url('/static/img/Base/srch-white.svg') no-repeat center center;
+        }
     }
 
 

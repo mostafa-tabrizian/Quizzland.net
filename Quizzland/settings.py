@@ -12,7 +12,8 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = [
     'www.quizzland.net', 'quizzland.net', 
-    'www.quizzland.ir', 'quizzland.ir'
+    'www.quizzland.ir', 'quizzland.ir',
+    '127.0.0.1', 'localhost'
 ]
 
 INSTALLED_APPS = [

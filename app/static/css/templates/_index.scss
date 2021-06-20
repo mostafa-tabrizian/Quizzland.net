@@ -1,34 +1,65 @@
-.bg {
-    z-index: -1;
-    background-image: url("/static/img/Base/hero-bg.jpg");
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: cover;
-    height: 43.75rem; width: 100%;
-    top: 0; left: 0;
-    box-shadow: black 0 5px 50px;
-}
-
 .hero{
-    a:hover {
-        color: inherit;
+    // grid-template-columns: auto auto;
+
+    &__path {
+        background-image: url('/static/img/Base/landPage-path.png');
+        background-repeat: no-repeat;
+        z-index: -1;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        height: 110%; width: 100%;
+        top: -16rem;; left: 0;
     }
 
-    h1 {
-        margin-bottom: 0; 
-    }
-    p {
-        line-height: 2.5rem;
-        margin-top: 0;
+    &__logo {
+        margin-right: 12rem;
 
-        @include breakpoints-down(medium) {
-            margin-right: 1rem; margin-left: 1rem;
+        img {
+            width: 25rem;
         }
     }
 
-    &-inner {
-        padding: 1.5rem;
-        margin: 8rem 0;
+    &__start {
+        margin-right: 3rem;
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            letter-spacing: 0;
+            max-width:  33rem;
+            margin-bottom: 1.5rem; margin-left: 1.5rem;
+            text-shadow: 0 0 25px black;
+        }
+
+        a {
+            font-size: 1.6rem;
+            background: $red-grad;
+            padding: .5rem 3rem;
+            border: 1px solid white;
+            border-radius: .5rem;
+            display: inline-flex;
+            color: white;
+
+            img {
+                transform: rotate(90deg);
+                transition: transform .15s ease-in-out;
+                pointer-events: none;
+            }
+
+            &:hover {
+                color: white;
+
+                img {
+                    transform: rotate(90deg) translateY(.5rem);
+                }
+            }
+        }
     }
 }
 

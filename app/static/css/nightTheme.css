@@ -25,31 +25,31 @@ html {
   color: white !important;
 }
 
-.header__searchOpener {
+.header__search__opener {
   background: url("/static/img/Base/srch-white.svg") no-repeat center center;
 }
 
-.header__searchInput {
+.header__search__input {
   color: white;
 }
 
-.header__searchInput::-webkit-input-placeholder {
+.header__search__input::-webkit-input-placeholder {
   color: white;
 }
 
-.header__searchInput:-ms-input-placeholder {
+.header__search__input:-ms-input-placeholder {
   color: white;
 }
 
-.header__searchInput::-ms-input-placeholder {
+.header__search__input::-ms-input-placeholder {
   color: white;
 }
 
-.header__searchInput::placeholder {
+.header__search__input::placeholder {
   color: white;
 }
 
-.header__searchSubmit {
+.header__search__submit {
   background: url("/static/img/Base/srch-white.svg") no-repeat center center;
 }
 

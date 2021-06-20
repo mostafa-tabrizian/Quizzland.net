@@ -6,7 +6,7 @@ class SearchForm(forms.Form):
         label="", required=True,
         widget=forms.TextInput(
             attrs={
-                'class': 'header__searchInput tx-al-r',
+                'class': 'header__search__input tx-al-r',
                 'placeholder': '...جستجو',
             }
         )

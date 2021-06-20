@@ -63,30 +63,30 @@ header__menu__closeBtn.addEventListener('click', () => {
 
 //----------------------------------------------------------
 // show the submit search btn when focus
-header__searchInput.addEventListener('click', () => {
-    fadeIn(header__searchSubmit)
+header__search__input.addEventListener('click', () => {
+    fadeIn(header__search__submit)
 })
-header__searchInput.addEventListener('blur', () => {
-    fadeOut(header__searchSubmit)
+header__search__input.addEventListener('blur', () => {
+    fadeOut(header__search__submit)
 })
 //----------------------------------------------------------
 // search in mobile
-header__searchOpener.addEventListener('click', () => {
-    if (header__searchOpener__bg.classList.contains('fade-out')) {
-        fadeIn(header__searchOpener__bg)
-        fadeIn(header__searchInput)
+header__search__opener.addEventListener('click', () => {
+    if (header__search__opener__bg.classList.contains('fade-out')) {
+        fadeIn(header__search__opener__bg)
+        fadeIn(header__search__input)
     } else {
-        fadeOut(header__searchOpener__bg)
-        fadeOut(header__searchInput)
+        fadeOut(header__search__opener__bg)
+        fadeOut(header__search__input)
     }
 })
 header__search__closeBtn.addEventListener('click', () => {
-    if (header__searchOpener__bg.classList.contains('fade-out')) {
-        fadeIn(header__searchOpener__bg)
-        fadeIn(header__searchInput)
+    if (header__search__opener__bg.classList.contains('fade-out')) {
+        fadeIn(header__search__opener__bg)
+        fadeIn(header__search__input)
     } else {
-        fadeOut(header__searchOpener__bg)
-        fadeOut(header__searchInput)
+        fadeOut(header__search__opener__bg)
+        fadeOut(header__search__input)
     }
 })
 
@@ -383,6 +383,8 @@ const nightMode_turnOff = () => {
     nightMode.forEach (each => {
         each.classList.add('nightMode-Off')
         each.style.backgroundImage = 'url(/static/img/Base/nightMode.png)'
+        hero__path.style.background = 'url(/static/img/Base/landPage-path-light.png) no-repeat center center'
+        hero__path.style.backgroundSize = 'cover'
         localStorage.setItem('mode', 'lightMode')
     })
 }
@@ -392,6 +394,8 @@ const nightMode_turnOn = () => {
     nightMode.forEach (each => {
         each.classList.remove('nightMode-Off')
         each.style.backgroundImage = 'url(/static/img/Base/lightMode.png)'
+        hero__path.style.background = 'url(/static/img/Base/landPage-path.png) no-repeat center center'
+        hero__path.style.backgroundSize = 'cover'
         localStorage.setItem('mode', 'nightMode')
     })
 }

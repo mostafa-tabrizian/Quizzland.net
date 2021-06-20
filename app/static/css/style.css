@@ -961,8 +961,8 @@ input {
   background: url("/static/img/Base/close-btn.svg") center center no-repeat;
   width: 1.75rem;
   height: 1.75rem;
-  top: 1rem;
-  right: 1.5rem;
+  top: 1.5rem;
+  left: 1.5rem;
 }
 
 .header__menu__inner {
@@ -991,7 +991,7 @@ input {
   margin-top: 2.5rem;
 }
 
-.header__searchOpener {
+.header__search__opener {
   background: url("/static/img/Base/srch-black.svg") no-repeat center center;
   width: 1.5rem;
   height: 2rem;
@@ -1000,7 +1000,7 @@ input {
           transform: translateY(-0.1rem);
 }
 
-.header__searchOpener__bg {
+.header__search__opener__bg {
   width: 100%;
   height: 100%;
   top: 0;
@@ -1009,7 +1009,7 @@ input {
   background: rgba(0, 0, 0, 0.75);
 }
 
-.header__searchSubmit {
+.header__search__submit {
   background: url("/static/img/Base/srch-black.svg") no-repeat center center;
   -webkit-transform: translate(2.2rem);
           transform: translate(2.2rem);
@@ -1023,13 +1023,13 @@ input {
 }
 
 @media (max-width: 49.9375em) {
-  .header__searchSubmit {
+  .header__search__submit {
     -webkit-transform: translate(1.2rem);
             transform: translate(1.2rem);
   }
 }
 
-.header__searchInput {
+.header__search__input {
   border: 1px solid #8080808f;
   font-family: harmattan, myHarmattan, sans-serif, serif;
   font-size: 1.18rem;
@@ -1048,7 +1048,7 @@ input {
 }
 
 @media (max-width: 49.9375em) {
-  .header__searchInput {
+  .header__search__input {
     opacity: 0;
     visibility: hidden;
     position: fixed;
@@ -1062,28 +1062,28 @@ input {
   }
 }
 
-.header__searchInput::-webkit-input-placeholder {
+.header__search__input::-webkit-input-placeholder {
   color: black;
 }
 
-.header__searchInput:-ms-input-placeholder {
+.header__search__input:-ms-input-placeholder {
   color: black;
 }
 
-.header__searchInput::-ms-input-placeholder {
+.header__search__input::-ms-input-placeholder {
   color: black;
 }
 
-.header__searchInput::placeholder {
+.header__search__input::placeholder {
   color: black;
 }
 
-.header__searchInput:focus {
+.header__search__input:focus {
   -webkit-box-shadow: -2px 2px 5px black;
           box-shadow: -2px 2px 5px black;
 }
 
-.header__searchInput__m {
+.header__search__input__m {
   -webkit-transform: translate(0.5rem, 0);
           transform: translate(0.5rem, 0);
   position: absolute;
@@ -1461,43 +1461,75 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
   opacity: 1;
 }
 
-.bg {
-  z-index: -1;
-  background-image: url("/static/img/Base/hero-bg.jpg");
+.hero__path {
+  background-image: url("/static/img/Base/landPage-path.png");
   background-repeat: no-repeat;
-  background-position: center bottom;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-position: top center;
   background-size: cover;
-  height: 43.75rem;
+  height: 110%;
   width: 100%;
-  top: 0;
+  top: -16rem;
   left: 0;
-  -webkit-box-shadow: black 0 5px 50px;
-          box-shadow: black 0 5px 50px;
 }
 
-.hero a:hover {
-  color: inherit;
+.hero__logo {
+  margin-right: 12rem;
 }
 
-.hero h1 {
-  margin-bottom: 0;
+.hero__logo img {
+  width: 25rem;
 }
 
-.hero p {
-  line-height: 2.5rem;
-  margin-top: 0;
+.hero__start {
+  margin-right: 3rem;
 }
 
-@media (max-width: 49.9375em) {
-  .hero p {
-    margin-right: 1rem;
-    margin-left: 1rem;
-  }
+.hero__start h1 {
+  font-size: 4.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
 }
 
-.hero-inner {
-  padding: 1.5rem;
-  margin: 8rem 0;
+.hero__start h2 {
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  max-width: 33rem;
+  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;
+  text-shadow: 0 0 25px black;
+}
+
+.hero__start a {
+  font-size: 1.6rem;
+  background: linear-gradient(-45deg, #4D1420, #9D272D);
+  padding: .5rem 3rem;
+  border: 1px solid white;
+  border-radius: .5rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  color: white;
+}
+
+.hero__start a img {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  -webkit-transition: -webkit-transform .15s ease-in-out;
+  transition: -webkit-transform .15s ease-in-out;
+  transition: transform .15s ease-in-out;
+  transition: transform .15s ease-in-out, -webkit-transform .15s ease-in-out;
+  pointer-events: none;
+}
+
+.hero__start a:hover {
+  color: white;
+}
+
+.hero__start a:hover img {
+  -webkit-transform: rotate(90deg) translateY(0.5rem);
+          transform: rotate(90deg) translateY(0.5rem);
 }
 
 .category {
