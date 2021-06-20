@@ -4,7 +4,6 @@ from django.shortcuts import redirect
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-from django.contrib import messages
 import json
 import urllib
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
@@ -28,7 +27,7 @@ def index(request):
         'newsletterForm': NewsletterForm(),
         'colorOfHeader': 'header__white',
         'headTitle': 'QuizLand | کوئیزلند بزرگترین وب‌سایت کوئيز',
-        'description': 'کوئیزلند بزرگترین وب‌ سایت کوئيز برای کتگوری و گروه های متنوع همچون کوئیز های سلبریتی ها, کوئيز های فیلم و سریال, کوئیز های گیمینگ و تست های روانشناسی معتبر از سایت های رسمی. باحال ترین کوئيز ها رو اینجا پیدا میکنید',
+        'description': 'کوئیزلند بزرگترین وب‌ سایت کوئيز برای کتگوری های متنوع همچون کوئیز سلبریتی ها, کوئيز های فیلم و سریال, کوئیز های گیمینگ و تست های روانشناسی معتبر از سایت های رسمی و باحال ترین کوئيز ها',
         'keywords': 'کوئیز, کوئیز های فیلم و سریال, کوئیز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوئیز های گیمینگ, تست های روانشناسی معتبر, کوئیز های باحال, کوئيز های فان, بهترین وب سایت کوئيز, بهترین وب سایت تست',
 
         'bestestQuizzes': quizzesByViews()[:5],
@@ -48,7 +47,7 @@ def index(request):
         
         'NewestPhysiologiesQuizSection':  quizzesBothWithCategory('psychology', '-publish')[:4],
         'BestestPhysiologiesQuizSection': quizzesBothWithCategory('psychology', '-views')[:13],
-        'MonthlyBestestPhysiologiesQuizSection': quizzesBothWithCategory('psychology', '-monthly_views')[:10],
+        'MonthlyBestestPhysiologiesQuizSection': quizzesBothWithCategory('psychology', '-monthly_views')[:13],
     }
 
     return HttpResponse(template.render(context))
@@ -80,8 +79,8 @@ def search(request):
                 'headTitle': f'QuizLand | {searchInput} جستجو عبارت ',
                 'userSearchInput': searchInput,
                 'subCategoriesByTitle': subCategoriesByTitle(searchInput)[:2],
-                'quizzesByTitle': quizzesByTitle(searchInput)[:8],
-                'quizzesPointyByTitle': quizzesPointyByTitle(searchInput)[:8],
+                'quizzesByTitle': quizzesByTitle(searchInput)[:28],
+                'quizzesPointyByTitle': quizzesPointyByTitle(searchInput)[:28],
             }
 
             return HttpResponse(template.render(context))
@@ -91,7 +90,7 @@ def category(request, Sub_Category):
     numberOfResults = int(request.GET.get('nr'))
     page = int(request.GET.get('p'))
     sortType = request.GET.get('st')
-    howManyElementToShow = 12
+    howManyElementToShow = 16
     fTPage = frToPage(page, howManyElementToShow)
     if numberOfResults == 16 or numberOfResults == 32 or numberOfResults == 48:
         if request.GET.get('c'):
@@ -205,7 +204,7 @@ def resultPointy(request):
 def sortTheQuizzes(request):
     page = int(request.GET.get('p'))
     sortType = request.GET.get('st')
-    howManyElementToShow = 12
+    howManyElementToShow = 16
     fTPage = frToPage(page, howManyElementToShow)
     template = loader.get_template('app/sort.html')
 

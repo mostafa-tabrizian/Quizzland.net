@@ -98,8 +98,8 @@ def restarterOfMonthlyViews():
 
     if now >= endAt:
         startNewMonth()
-        # saveMonthlyViewsInExcel()
-        # startTheMonthlyViewsFromZero()
+        saveMonthlyViewsInExcel()
+        startTheMonthlyViewsFromZero()
 
     else:
         print(f'currentTime: {now}')
