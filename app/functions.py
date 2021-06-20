@@ -2,6 +2,8 @@ import time
 from csv import writer
 from .forms import *
 from .models import *
+from django.contrib import messages
+
 
 categoryInFar = {
     'gaming': 'گیمینگ',
@@ -55,7 +57,7 @@ def saveMonthlyViewsInExcel():
         writer_object.writerow(['----------', '----------', '----------', '----------', '----------'])
         f_object.close()
 
-    print('Exceling done')
+    messages.success('Exceling Done Successfully')
     return
 
 def viewsPlusOne(quizToAddView):
@@ -66,7 +68,6 @@ def viewsPlusOne(quizToAddView):
 startedAt = 1622007943
 endAt = 1622007990
 def restarterOfMonthlyViews():
-    print('XXXXXXXXXXXXXXaddViewToMonthlyFunctionXXXXXXXXXXXXXXX')
     global startedAt
     global endAt
     now = time.time()
@@ -76,7 +77,6 @@ def restarterOfMonthlyViews():
         global endAt
         startedAt = endAt
         endAt = now + 2_592_000 #1Month
-        print(f"started new month 'til {endAt}")
 
     def startTheMonthlyViewsFromZero():
         quizzes = Quizzes.objects.all()
@@ -94,14 +94,12 @@ def restarterOfMonthlyViews():
             eachQuiz.monthly_views = 0
             eachQuiz.save()
 
-        print('done startFromZero function')
-
     if now >= endAt:
         startNewMonth()
         saveMonthlyViewsInExcel()
         startTheMonthlyViewsFromZero()
+        messages.success('Started new monthly views')
 
     else:
-        print(f'currentTime: {now}')
-        print(f'targetTime: {endAt}')
+        messages.error('New monthly views could not started | errorLine=100 file=functions.py ')
         return
