@@ -10,7 +10,10 @@ GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = [
+    'www.quizzland.net', 'quizzland.net', 
+    'www.quizzland.ir', 'quizzland.ir'
+]
 
 INSTALLED_APPS = [
     'app.apps.AppConfig',
@@ -40,9 +43,9 @@ CACHE_TTL = 15 * 60
 #     }
 # }
 
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
