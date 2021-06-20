@@ -13,3 +13,6 @@ monthlyViewsData.csv
 venv
 migrations
 settings.py
+*.jpg
+*.png
+*.gif
