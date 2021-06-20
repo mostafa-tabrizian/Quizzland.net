@@ -20,7 +20,7 @@ register = template.Library()
 
 @cache_page(CACHE_TTL)
 def index(request):
-
+    saveMonthlyViewsInExcel()
     template = loader.get_template('app/index.html')
     context = {
         'searchForm': SearchForm(),

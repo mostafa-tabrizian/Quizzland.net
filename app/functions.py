@@ -65,8 +65,8 @@ def viewsPlusOne(quizToAddView):
     quizToAddView.monthly_views += 1
     quizToAddView.save()
 
-startedAt = 1622007943
-endAt = 1622007990
+startedAt = 1624181387
+endAt = 1626773387
 def restarterOfMonthlyViews():
     global startedAt
     global endAt
