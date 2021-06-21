@@ -14,11 +14,11 @@
         <div class="searchResult__category__container flex flex-jc-c">
             {% for subCategory in subCategoriesByTitle %}
                 <div class="searchResult__category__item">
-                    {% with subCategory.subCategory|listMaker:' ' as img  %}
-                    <a href="/category/{{img.0}}-{{img.1}}?c={{subCategory.category}}&p=0&st=newest&nr=16">
-                        <img src="/media/app/static/img/Thn-Category/{{img.0}}-{{img.1}}.jpg" alt="{{ subCategory.subCategory }} | کوئیز های {{ category.title_far }}">
+                    {% with subCategory.subCategory|titleToImgName:' ' as imgTitle  %}
+                    <a href="/category/{{imgTitle}}?c={{subCategory.category}}&p=0&st=newest&nr=16">
+                        <img src="/media/app/static/img/Thn-Category/{{imgTitle}}.jpg" alt="{{ subCategory.subCategory }} | کوئیز های {{ category.title_far }}">
                     </a>
-                    <h5 class="tx-al-c"><a href="/category/{{img.0}}-{{img.1}}?c={{subCategory.category}}&p=0&st=newest&nr=16">
+                    <h5 class="tx-al-c"><a href="/category/{{imgTitle}}?c={{subCategory.category}}&p=0&st=newest&nr=16">
                         {{ subCategory.subCategory }}
                     </a></h5>
                     {% endwith %}

@@ -42,9 +42,9 @@
         {% for category in categories %}
             <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
-                {% with category.subCategory|listMaker:' ' as img %}
-                <a href="/category/{{img.0}}-{{img.1}}?c={{category.category}}&nr=16&p=0&st=newest">
-                    <img src="/media/app/static/img/Thn-Category/{{img.0}}-{{img.1}}.jpg" alt="{{ category.subCategory }} |‌ کوئیز های {{ category.title }}" loading='lazy'>
+                {% with category.subCategory|titleToImgName:' ' as imgTitle %}
+                <a href="/category/{{imgTitle}}?c={{category.category}}&nr=16&p=0&st=newest">
+                    <img src="/media/app/static/img/Thn-Category/{{imgTitle}}.jpg" alt="{{ category.subCategory }} |‌ کوئیز های {{ category.title }}" loading='lazy'>
                     {% with category.views|viewsFormat as views %}
                         <div class="quizContainer__category__inner__views">{{views}}</div>
                         <div class="quizContainer__category__inner__title">

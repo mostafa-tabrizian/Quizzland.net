@@ -7,6 +7,16 @@ def listMaker(str, splitWithEach):
     splitted = str.split(f'{splitWithEach}')
     return splitted
 
+@register.filter(name='titleToImgName')
+def titleToImgName(str, splitWithEach):
+    splitted = str.split(splitWithEach)
+    final = ''
+    for word in splitted:
+        final += word
+        if word != splitted[-1]:
+            final += '-'
+    return final
+
 @register.filter(name='replaceToHyphen')
 def replaceToHyphen(str):
     oldValue = ' '
