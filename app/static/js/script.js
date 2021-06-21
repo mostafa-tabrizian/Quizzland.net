@@ -372,7 +372,7 @@ if (resultQuizPointy__share__btn) {
 const nightThemeCss = document.createElement('link')
 nightThemeCss.setAttribute('rel', 'stylesheet')
 nightThemeCss.setAttribute('type', 'text/css')
-nightThemeCss.setAttribute('href', "/static/css/nightTheme.css")
+nightThemeCss.setAttribute('href', "/static/css/nightTheme.min.css")
 
 const nightMode_turnOff = () => {
     try {
