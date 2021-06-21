@@ -379,21 +379,25 @@ const nightMode_turnOff = () => {
         document.head.removeChild(nightThemeCss)
     } catch {}
     nightMode.forEach (each => {
+        if (hero__path) {
+            hero__path.style.background = 'url(/static/img/Base/landPage-path-light.png) no-repeat center center'
+            hero__path.style.backgroundSize = 'cover'
+        }
         each.classList.add('nightMode-Off')
-        each.style.backgroundImage = 'url(/static/img/Base/nightMode.png)'
-        hero__path.style.background = 'url(/static/img/Base/landPage-path-light.png) no-repeat center center'
-        hero__path.style.backgroundSize = 'cover'
+        each.style.backgroundImage = 'url(/static/img/Base/lightMode.png)'
         localStorage.setItem('mode', 'lightMode')
     })
 }
 
 const nightMode_turnOn = () => {
     document.head.appendChild(nightThemeCss)
-    nightMode.forEach (each => {
-        each.classList.remove('nightMode-Off')
-        each.style.backgroundImage = 'url(/static/img/Base/lightMode.png)'
+    if (hero__path) {
         hero__path.style.background = 'url(/static/img/Base/landPage-path.png) no-repeat center center'
         hero__path.style.backgroundSize = 'cover'
+    }
+    nightMode.forEach (each => {
+        each.classList.remove('nightMode-Off')
+        each.style.backgroundImage = 'url(/static/img/Base/nightMode.png)'
         localStorage.setItem('mode', 'nightMode')
     })
 }
