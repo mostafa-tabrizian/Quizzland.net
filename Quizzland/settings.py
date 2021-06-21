@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'ckeditor',
     'robots',
+    'admin_honeypot',
 ]
 
 SITE_ID = 1
