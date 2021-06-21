@@ -72,7 +72,7 @@ if (quiz__container__eachOne) {
                 result__subtitle.innerHTML = (' .فکر کنم کوئیز رو اشتباهی انتخاب کردی <br/>😅 میتونی سریع کوئیز دیگه ای انتخاب کنی تا کسی نیومده ')
                 removeResultImg40(), removeResultImg60(), removeResultImg80(), removeResultImg100()
             }
-        } 
+        }
     }
 }
 
@@ -306,7 +306,6 @@ if (quiz__questions) {
             pauseTheFunctionOfChangingQuestions()
         }) 
     }
-
 }
 
 
@@ -363,4 +362,4 @@ const calculateResult_pointy = (FinalTitleOfQuiz) => {
     }, 3000)
 }
 
-log('qw')
+log('qz')

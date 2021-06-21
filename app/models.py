@@ -229,7 +229,7 @@ class Newsletter_Users_Admin(admin.ModelAdmin):
 
 class Thumbnail_SubCategory(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
-    Thumbnail_SubCategory =  models.ImageField(upload_to='app/static/img/Thn-Category', null=True, blank=True, default='app/static/img/Base/NotExist.jpg', help_text='file name same as the title')
+    Thumbnail_SubCategory =  models.ImageField(upload_to='app/static/img/Thn-Category', null=True, blank=True, default='app/static/img/Base/NotExist.jpg', help_text='Sentence Case Like Me')
 
     def __str__(self):
         return self.title

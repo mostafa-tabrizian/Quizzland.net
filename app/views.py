@@ -26,7 +26,7 @@ def index(request):
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
         'colorOfHeader': 'header__white',
-        'headTitle': 'QuizLand | کوئیزلند بزرگترین وب‌سایت کوئيز',
+        'headTitle': 'QuizzLand | کوئیزلند بزرگترین وب‌سایت کوئيز',
         'description': 'کوئیزلند بزرگترین وب‌ سایت کوئيز برای کتگوری های متنوع همچون کوئیز سلبریتی ها, کوئيز های فیلم و سریال, کوئیز های گیمینگ و تست های روانشناسی معتبر از سایت های رسمی و باحال ترین کوئيز ها',
         'keywords': 'کوئیز, کوئیز های فیلم و سریال, کوئیز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوئیز های گیمینگ, تست های روانشناسی معتبر, کوئیز های باحال, کوئيز های فان, بهترین وب سایت کوئيز, بهترین وب سایت تست',
 
@@ -60,7 +60,7 @@ def search(request):
         context = {
             'searchForm': SearchForm(),
             'newsletterForm': NewsletterForm(),
-            'headTitle': f'QuizLand | {search} جستجو عبارت ',
+            'headTitle': f'QuizzLand | {search} جستجو عبارت ',
             'userSearchInput': search,
             'subCategoriesByTitle': subCategoriesByTitle(search)[:2],
             'quizzesByTitle': quizzesByTitle(search)[:28],
@@ -76,7 +76,7 @@ def search(request):
             context = {
                 'searchForm': SearchForm(),
                 'newsletterForm': NewsletterForm(),
-                'headTitle': f'QuizLand | {searchInput} جستجو عبارت ',
+                'headTitle': f'QuizzLand | {searchInput} جستجو عبارت ',
                 'userSearchInput': searchInput,
                 'subCategoriesByTitle': subCategoriesByTitle(searchInput)[:2],
                 'quizzesByTitle': quizzesByTitle(searchInput)[:28],
@@ -105,7 +105,7 @@ def category(request, Sub_Category):
             context = {
                 'searchForm': SearchForm(),
                 'newsletterForm': NewsletterForm(),
-                'headTitle': f'QuizLand | {title} ',
+                'headTitle': f'QuizzLand | {title} ',
                 'description': f'کوئيزلند {title} کوئيز های',
                 'keywords': f'{title} بهترین کوئيز های , {title} کوئيز های',
                 'colorOfHeader': 'header__white',
@@ -122,7 +122,7 @@ def category(request, Sub_Category):
             context = {
                 'searchForm': SearchForm(),
                 'newsletterForm': NewsletterForm(),
-                'headTitle': f'QuizLand | کوئیز های {title} ',
+                'headTitle': f'QuizzLand | کوئیز های {title} ',
                 'description': 'کتگوری و گروه های متنوع همچون آدم های معروف و سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ و تست های روانشناسی',
                 'keywords': 'تست های روانشناسی, سلبریتی, خواننده, بازیگر, فیلم و سریال, گیمینگ,آدم های معروف, کوئيز',
                 'category': Sub_Category,
@@ -142,7 +142,7 @@ def quiz(request, title):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | {fullTitle} ', 
+        'headTitle': f'QuizzLand | {fullTitle} ', 
         'description': f'کوئيز {fullTitle} ',
         'keywords': f'{fullTitle}, {subCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
@@ -159,7 +159,7 @@ def quizPointy(request, title):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | {title}',
+        'headTitle': f'QuizzLand | {title}',
         'description': f'کوئيز {fullTitle} ',
         'keywords': f'{fullTitle}, {subCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
@@ -181,7 +181,7 @@ def result(request):
         'quizDetail': quizzesByTitle(fullTitle)[0],
         'fanName': fanNameOfQuiz(fullTitle),
         'fullTitle': fullTitle,
-        'headTitle': f'QuizLand | نتیجه کوئیز ',  
+        'headTitle': f'QuizzLand | نتیجه کوئیز ',  
     }
     return HttpResponse(template.render(context))
 
@@ -196,7 +196,7 @@ def resultPointy(request):
         'fullTitle': fullTitle,
         'quizDetail': quizzesPointyByTitle(fullTitle)[0],
         'score': abs(int(score)),
-        'headTitle': f'QuizLand | نتیجه تست ',  
+        'headTitle': f'QuizzLand | نتیجه تست ',  
     }
     return HttpResponse(template.render(context))
 
@@ -236,7 +236,7 @@ def sortTheQuizzes(request):
             'title': title,
             'category': categoryInFar[category],
             'finalPage': finalPage(howManyElementToShow, 'quizzes'),
-            'headTitle': f'QuizLand | {title} {categoryInFar[category]} '
+            'headTitle': f'QuizzLand | {title} {categoryInFar[category]} '
         }
     else:
         if sortType == 'newest':
@@ -264,7 +264,7 @@ def sortTheQuizzes(request):
             'sortPointy': sortPointy,
             'title': title,
             'titlePointy': titlePointy,
-            'headTitle': f'QuizLand | {title}'
+            'headTitle': f'QuizzLand | {title}'
         }
         
     return HttpResponse(template.render(context))
@@ -277,7 +277,7 @@ def contact(request):
         'newsletterForm': NewsletterForm(),
         'description': 'تماس با پشتیبانی کوئيزلند',
         'keywords': 'پشتیبانی کوئيزلند',
-        'headTitle': f'QuizLand | تماس با ما ',
+        'headTitle': f'QuizzLand | تماس با ما ',
     }
     return HttpResponse(template.render(context))
 
@@ -286,7 +286,7 @@ def privacyPolicy(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': 'QuizLand | حریم خصوصی '
+        'headTitle': 'QuizzLand | حریم خصوصی '
     }
     return HttpResponse(template.render(context))
 
@@ -295,7 +295,7 @@ def guide(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | راهنما ',
+        'headTitle': f'QuizzLand | راهنما ',
         'description': 'راهنمای وب سایت کوئيزلند',
         'keywords': 'کوئيزلند, راهنمای وب سایت کوئيزلند',
     }
@@ -306,7 +306,7 @@ def adverts(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | تبلیغات '
+        'headTitle': f'QuizzLand | تبلیغات '
     }
     return HttpResponse(template.render(context))
 
@@ -315,7 +315,7 @@ def support(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | حمایت '
+        'headTitle': f'QuizzLand | حمایت '
     }
     return HttpResponse(template.render(context))
 
@@ -328,8 +328,6 @@ def doesExistInNewsletterUsers(request):
 
 @csrf_exempt
 def newsletter(request):
-    print('newsletter views')
-
     if request.method == 'POST':
         form = NewsletterForm(request.POST)
         if form.is_valid():
@@ -362,7 +360,7 @@ def pageNotFoundManual(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | صفحه مورد نظر پیدا نشد ', 
+        'headTitle': f'QuizzLand | صفحه مورد نظر پیدا نشد ', 
         'message': "🤔 صفحه‌ی مورد نظر پیدا نشد",
     }
     return HttpResponse(template.render(context))
@@ -372,7 +370,7 @@ def error404(request, exception):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | صفحه مورد نظر پیدا نشد ', 
+        'headTitle': f'QuizzLand | صفحه مورد نظر پیدا نشد ', 
         'message': "🤔 صفحه‌ی مورد نظر پیدا نشد"
     }
     return HttpResponse(template.render(context))
@@ -382,7 +380,7 @@ def error403(request, exception):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | دسترسی شما به این صفحه مجاز نیست ', 
+        'headTitle': f'QuizzLand | دسترسی شما به این صفحه مجاز نیست ', 
         'message': "❌ دسترسی شما به این صفحه مجاز نیست ❌",
     }
     return HttpResponse(template.render(context))
@@ -392,7 +390,7 @@ def error500(request):
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
-        'headTitle': f'QuizLand | مشکلی رخ داده است ', 
+        'headTitle': f'QuizzLand | مشکلی رخ داده است ', 
         'message': "🙄 سرور های سایت احتمالا داغ کرده لطفا یکم دیگه امتحان کنید",
     }
     return HttpResponse(template.render(context))

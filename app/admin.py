@@ -4,7 +4,7 @@ import django.contrib.auth.models
 from django.contrib import auth
 from .models import *
 
-admin.site.site_header = "Quizland Admin Panel"
+admin.site.site_header = "Quizzland Admin Panel"
 
 admin.site.register(Document, Document_Admin)
 admin.site.register(SubCategories, SubCategories_Admin)

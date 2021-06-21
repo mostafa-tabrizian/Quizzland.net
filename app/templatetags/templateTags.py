@@ -35,5 +35,4 @@ def toInteger(str):
 @register.filter(name='makeTheDirValidForImg')
 def makeTheDirValidForImg(oldHref):
     newHref = str(oldHref)[3:]
-    print(newHref)
     return newHref

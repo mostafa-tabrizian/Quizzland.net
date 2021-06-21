@@ -316,7 +316,6 @@ if (searchResult) {
     } else {
         removeDOM(searchResult__quizzes__seeMore.querySelector('a'))
     }
-
 }
 
 //----------------------------------------------------------
@@ -367,7 +366,6 @@ if (resultQuizPointy__share__btn) {
         result__share__message.classList.remove('noVis')
     })
 }
-
 
 // --------------------------------------------------------------------
 
@@ -421,7 +419,6 @@ if (nightMode) {
             nightModeFunction()
         })
     })
-
 }
 
 // --------------------------------------------------------------------
@@ -452,7 +449,6 @@ if (nightMode) {
                 document.head.appendChild(nightThemeCss)
             } catch {}
         } 
-        
 }
 
 // --------------------------------------------------------------------
@@ -468,11 +464,11 @@ if(navigator.userAgent.indexOf("Firefox") != -1 ) {
 }
 
 // --------------------------------------------------------------------
-log('sw')
+log('st')
 
 // -----------------------------GSAP
 // hero animation
 tl = gsap.timeline({defaults: { ease: "power2.inOut", duration: 1 }})
 tl.from('.hero-inner', {y: '20%', opacity: 0, backdropFilter: 'blur(0px)',})
 
-log('gw')
+log('gp')
