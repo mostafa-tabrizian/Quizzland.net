@@ -760,7 +760,7 @@ input {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin: auto;
-  margin-bottom: 2rem;
+  margin-bottom: -4rem;
 }
 
 .quizContainer__category__inner a {
@@ -859,6 +859,12 @@ input {
   z-index: 2;
   text-align: right;
   font-size: 1.18rem;
+}
+
+@media (max-width: 49.9375em) {
+  .quizContainer__category__inner__title {
+    top: 7.5rem;
+  }
 }
 
 @media (max-width: 49.9375em) {
@@ -1784,7 +1790,7 @@ body {
       grid-template-columns: repeat(auto-fill, 12.6rem);
   -ms-grid-rows: (14.4rem)[auto];
       grid-template-rows: repeat(auto, 14.4rem);
-  gap: 2rem;
+  gap: 3rem;
   margin-top: 0;
 }
 
@@ -1792,7 +1798,6 @@ body {
   .quizzes {
     -ms-grid-columns: (11rem)[auto-fill];
         grid-template-columns: repeat(auto-fill, 11rem);
-    gap: .7rem;
   }
 }
 

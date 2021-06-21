@@ -460,7 +460,7 @@ input {
         &__inner {
             flex-wrap: wrap;
             margin: auto;
-            margin-bottom: 2rem;
+            margin-bottom: -4rem;
             
             a {
                 box-shadow: 0 0 10px #000000bd;
@@ -537,6 +537,10 @@ input {
                 z-index: 2;
                 text-align: right;
                 font-size: $font-sm;
+
+                @include breakpoints-down(medium) {
+                    top: 7.5rem;
+                }
             }
         }
     }
