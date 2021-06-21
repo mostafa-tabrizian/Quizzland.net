@@ -222,10 +222,10 @@ newsletter__submit.addEventListener('click', () => {
 
     $.ajax({
         url: '/ajax/doesExistInNewsletterUsers/',
-        data: {
-            'userEmail': userEmail
-        },
+        data: 'userEmail='+encodeURIComponent ( userEmail ),
         dataType: 'json',
+        scriptCharset: "utf-8",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         success: function (data) {
             if (data.userEmail) {
                 alert('شما از قبل ثبت نام کرده اید');

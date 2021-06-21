@@ -318,7 +318,7 @@ def support(request):
     return HttpResponse(template.render(context))
 
 def doesExistInNewsletterUsers(request):
-    userEmail = request.GET.get('userEmail').replace('%40', '@')
+    userEmail = request.GET.get('userEmail')
     data = {
         'userEmail': Newsletter_Users.objects.filter(email__iexact=userEmail).exists()
     }
