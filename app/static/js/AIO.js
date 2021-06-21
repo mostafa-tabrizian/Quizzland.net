@@ -112,9 +112,7 @@ const log = (code) => {
     console.log(code)
 }
 
-log('em')
-
-// ######################################################################################################
+// !############################################################################################################################################ QUIZ
 
 encodedNumbers = {
     1: 'b25l',
@@ -482,8 +480,7 @@ const calculateResult_pointy = (FinalTitleOfQuiz) => {
 
 log('qz')
 
-
-// ######################################################################################################
+// !############################################################################################################################################ SCRIPT
 
 const takeParameterFromUrl = (parameter) => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -702,7 +699,9 @@ newsletter__closeBtn.addEventListener('click', () => {
     newsletter__blurBackground.classList.remove('newsletter__blurBackground__show')
 })
 
-input__email.addEventListener('change', () => {
+
+
+newsletter__submit.addEventListener('click', () => {
     userEmail = id_emailInput.value
 
     $.ajax({
@@ -714,9 +713,12 @@ input__email.addEventListener('change', () => {
         success: function (data) {
             if (data.userEmail) {
                 alert('شما از قبل ثبت نام کرده اید');
-                newsletter__submit.setAttribute('type', 'button')
             } else {
-                newsletter__submit.setAttribute('type', 'submit')
+                responseLength = (document.querySelector('.g-recaptcha-response').value).length
+
+                if (responseLength != 0) {
+                    newsletter__submit.setAttribute('type', 'submit')
+                } 
             }
         }
     });
@@ -955,5 +957,3 @@ if(navigator.userAgent.indexOf("Firefox") != -1 ) {
 }
 
 log('st')
-
-// ######################################################################################################

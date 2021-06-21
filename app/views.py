@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django import template
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
@@ -5,7 +7,6 @@ from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import json
-import urllib
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_GET
@@ -320,7 +321,7 @@ def support(request):
     return HttpResponse(template.render(context))
 
 def doesExistInNewsletterUsers(request):
-    userEmail = request.GET.get('userEmail')
+    userEmail = (request.GET.get('userEmail'))
     data = {
         'userEmail': Newsletter_Users.objects.filter(email__iexact=userEmail).exists()
     }
@@ -348,10 +349,10 @@ def newsletter(request):
                     email= emailInput,
                     username= usernameInput,
                 )
-
-                return redirect('/')
             else:
-                return
+                return pageNotFoundManual(request)
+
+            return redirect('/')
     else:
         return pageNotFoundManual(request)
 

@@ -1329,6 +1329,11 @@ footer .newsletter__closeBtn, .footer .newsletter__closeBtn {
   }
 }
 
+footer .newsletter__reCaptcha, .footer .newsletter__reCaptcha {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 footer .newsletter__submit, .footer .newsletter__submit {
   color: white;
   background: #690D11;
@@ -1380,13 +1385,6 @@ footer .newsletter__categoryOptions > label > input, .footer .newsletter__catego
   footer .newsletter__categoryOptions > label > input:not(:last-child), .footer .newsletter__categoryOptions > label > input:not(:last-child) {
     margin-right: 1.125rem;
   }
-}
-
-footer .newsletter__message, .footer .newsletter__message {
-  margin: 0;
-  margin-top: .5rem;
-  color: #af282f;
-  font-size: 1rem;
 }
 
 @media (max-width: 49.9375em) {

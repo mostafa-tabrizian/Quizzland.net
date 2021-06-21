@@ -108,6 +108,11 @@ footer, .footer {
             }
         }
 
+        &__reCaptcha {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
         &__submit {
             color: white;
             background: $darkRed;
@@ -148,13 +153,6 @@ footer, .footer {
             }
 
         }
-
-        &__message {
-            margin: 0; margin-top: .5rem;
-            color: $red;
-            font-size: 1rem;
-        }
-
 
         @include breakpoints-down(medium) {
             &__userName {

@@ -123,11 +123,11 @@
         <form class="newsletter fade-out" action="/newsletter" method="post">
             <button class="newsletter__closeBtn" aria-label="Close Newsletter Form Button"></button>
             <p class="tx-al-c">ایمیلت رو وارد کن و کتگوری مورد علاقه‌ات رو انتخاب کن</p>
-            
+            {% csrf_token %}
             {{ newsletterForm }}
-            
-            <div class="g-recaptcha" data-sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"></div>
-            <input class='newsletter__submit' type="button" value="Submit" aria-label="Submit Newsletter Form For Signing Up">ثبت نام </input>
+
+            <div class="g-recaptcha newsletter__reCaptcha grid flex-jc-c" data-sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"></div>
+            <button class='newsletter__submit' type="button" value="send" aria-label="Submit Newsletter Form For Signing Up">ثبت نام </button>
         </form>
     </div>
 
@@ -152,11 +152,17 @@
             <a href="#">Mt-Code</a> : ساخته شده توسط 
         </p>
     </div>
-
+    
+    
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/clipboard.min.js' %}"></script>
     <script src="{% static 'js/AIO.min.js' %}"></script>
+    
+    <!-- <script src="{% static 'js/elements.js' %}"></script>
+    <script src="{% static 'js/quiz.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script> -->
+
 
 </footer>
 
