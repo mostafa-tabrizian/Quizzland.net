@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django import template
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
@@ -134,7 +132,6 @@ def category(request, Sub_Category):
     else:
         return pageNotFoundManual(request)
     
-
 def quiz(request, title):
     subCategory = request.GET.get('ic')
     fullTitle = titleConverterWithSpilt(title, '-', ' ')
@@ -321,7 +318,7 @@ def support(request):
     return HttpResponse(template.render(context))
 
 def doesExistInNewsletterUsers(request):
-    userEmail = (request.GET.get('userEmail'))
+    userEmail = request.GET.get('userEmail').replace('%40', '@')
     data = {
         'userEmail': Newsletter_Users.objects.filter(email__iexact=userEmail).exists()
     }
