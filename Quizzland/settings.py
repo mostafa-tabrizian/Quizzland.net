@@ -13,7 +13,7 @@ DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = [
     'www.quizzland.net', 'quizzland.net', 
     'www.quizzland.ir', 'quizzland.ir',
-    '127.0.0.1', 'localhost'
+    # '127.0.0.1', 'localhost'
 ]
 
 INSTALLED_APPS = [
@@ -45,10 +45,15 @@ CACHE_TTL = 15 * 60
 #     }
 # }
 
+# HTTPS settings
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 3600
+
+# HSTS settings
+SECURE_HSTS_SECONDS = 31536000 # 1 year
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
