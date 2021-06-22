@@ -471,10 +471,10 @@ input {
             
                 &::after {
                     content: '';
-                    height: 5rem; width: 101%;
+                    height: 6rem; width: 101%;
                     background: white;
                     position: absolute;
-                    left: -.1rem; bottom: -4rem;
+                    left: -.1rem; bottom: -5rem;
                     border-radius: 0 0 10px 10px;
                     transition: all .2s ease-in-out;
                     box-shadow: 0 3px 10px #00000047;
@@ -536,7 +536,7 @@ input {
                 top: 8.5rem; right: 1rem;
                 z-index: 2;
                 text-align: right;
-                font-size: $font-sm;
+                font-size: $font-sm - .1;
 
                 @include breakpoints-down(medium) {
                     top: 7.5rem;
