@@ -48,6 +48,7 @@ CACHE_TTL = 15 * 60
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 3600
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',

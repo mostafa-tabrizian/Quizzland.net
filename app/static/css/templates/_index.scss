@@ -17,6 +17,8 @@
 
         img {
             width: 25rem;
+            height: 100%;
+            pointer-events: none;
         }
     }
 
@@ -46,16 +48,17 @@
             display: inline-flex;
             color: white;
 
-            img {
+            span {
+                background: url('/static/img/Base/arw.svg');
+                width: 2.5rem; height: 2.2rem;
                 transform: rotate(90deg);
                 transition: transform .15s ease-in-out;
-                pointer-events: none;
             }
 
             &:hover {
                 color: white;
 
-                img {
+                span {
                     transform: rotate(90deg) translateY(.5rem);
                 }
             }

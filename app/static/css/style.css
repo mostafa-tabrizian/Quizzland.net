@@ -891,13 +891,12 @@ input {
 }
 
 .header__logo img {
-  width: auto;
+  width: 100%;
   height: 2.7875rem;
 }
 
 @media (max-width: 49.9375em) {
   .header__logo img {
-    width: auto;
     height: 2.4875rem;
   }
 }
@@ -1484,6 +1483,8 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
 
 .hero__logo img {
   width: 25rem;
+  height: 100%;
+  pointer-events: none;
 }
 
 .hero__start {
@@ -1517,21 +1518,23 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
   color: white;
 }
 
-.hero__start a img {
+.hero__start a span {
+  background: url("/static/img/Base/arw.svg");
+  width: 2.5rem;
+  height: 2.2rem;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
   -webkit-transition: -webkit-transform .15s ease-in-out;
   transition: -webkit-transform .15s ease-in-out;
   transition: transform .15s ease-in-out;
   transition: transform .15s ease-in-out, -webkit-transform .15s ease-in-out;
-  pointer-events: none;
 }
 
 .hero__start a:hover {
   color: white;
 }
 
-.hero__start a:hover img {
+.hero__start a:hover span {
   -webkit-transform: rotate(90deg) translateY(0.5rem);
           transform: rotate(90deg) translateY(0.5rem);
 }
