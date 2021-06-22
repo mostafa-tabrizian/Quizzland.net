@@ -51,11 +51,11 @@ class Quizzes(models.Model):
     thumbnail = models.ImageField(upload_to='app/static/img/QuizzesThumbnail', default='app/static/img/Base/NotExist.jpg', help_text='thumbnail of quiz')
     background = models.ImageField(upload_to='app/static/img/QuizzesBackground', default='app/static/img/Base/NotExist.jpg', help_text='background of playing quiz')
     fan_name = models.CharField(max_length=100, null=False, blank=False, default=None)
-    GIF20 = models.ImageField(upload_to='app/static/img/Answer-And-Result-ImGIf', default='app/static/img/Base/NotExist.jpg', help_text='img or gif up to score 20%')
-    GIF40 = models.ImageField(upload_to='app/static/img/Answer-And-Result-ImGIf', default='app/static/img/Base/NotExist.jpg', help_text='img or gif up to score 40%')
-    GIF60 = models.ImageField(upload_to='app/static/img/Answer-And-Result-ImGIf', default='app/static/img/Base/NotExist.jpg', help_text='img or gif up to score 60%')
-    GIF80 = models.ImageField(upload_to='app/static/img/Answer-And-Result-ImGIf', default='app/static/img/Base/NotExist.jpg', help_text='img or gif up to score 80%')
-    GIF100 = models.ImageField(upload_to='app/static/img/Answer-And-Result-ImGIf', default='app/static/img/Base/NotExist.jpg', help_text='img or gif up to score 100%')
+    GIF20 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
+    GIF40 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
+    GIF60 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
+    GIF80 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
+    GIF100 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
@@ -234,3 +234,16 @@ class Thumbnail_SubCategory(models.Model):
 
     def __str__(self):
         return self.title
+
+class Result_gif(models.Model):
+    title = models.CharField(max_length=150, null=True, blank=False)
+    subCategory = models.CharField(max_length=150, null=True, blank=False)
+    gif = models.ImageField(upload_to='app/static/img/Answer-And-Result-ImGIf/', default='app/static/img/Base/NotExist.jpg')
+
+    def __str__(self):
+        return 'Result gif created'
+
+class Result_gif_Admin(admin.ModelAdmin):
+    list_display = ('title', )
+    list_filter = ('subCategory', )
+    search_fields = ['subCategory']
