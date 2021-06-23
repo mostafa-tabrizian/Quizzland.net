@@ -216,6 +216,7 @@ def sortTheQuizzes(request):
 
     if request.GET.get('c'):
         category = request.GET.get('c')
+        categoryClean = categoryInFar[titleConverterWithSpilt(category, '-', ' ')]
 
         if sortType == 'newest':
             quizzes = quizzesBothWithCategory(category, '-publish').all()[fTPage[0]:fTPage[1]]
@@ -240,9 +241,9 @@ def sortTheQuizzes(request):
             'categoryStyle': 'sortMore__categoryStyle wrapper-med',
             'sort': quizzes,
             'title': title,
-            'category': categoryInFar[category],
+            'category': categoryInFar[titleConverterWithSpilt(category, '-', ' ')],
             'finalPage': finalPage(howManyElementToShow, 'quizzes'),
-            'headTitle': f'QuizzLand | {title} {categoryInFar[category]} '
+            'headTitle': f'QuizzLand | {title} {categoryClean} '
         }
     else:
         if sortType == 'newest':

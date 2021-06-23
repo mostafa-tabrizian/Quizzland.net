@@ -112,7 +112,7 @@
         > div {
             border-radius: 20px;
             border: solid 2px transparent;
-            min-width: 25rem;
+            max-width: 33rem;
             backdrop-filter: blur(2px);
             background-clip: padding-box;
             box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
@@ -207,8 +207,19 @@
         line-height: 2rem;
 
         li {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 22rem;
+
             &:nth-child(even) {
                 color: rgb(95, 95, 95);
+            }
+
+            &::before {
+                content: '◾';
+                position: relative;
+                top: .2rem;
             }
         }
     }

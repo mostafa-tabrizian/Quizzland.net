@@ -50,6 +50,8 @@ body {
     }
 
     &__questions {
+        margin-bottom: 3rem;
+
         &::after {
             content: "";
             position: fixed;

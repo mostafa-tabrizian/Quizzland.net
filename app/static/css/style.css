@@ -1596,7 +1596,7 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
 .sort__container > div {
   border-radius: 20px;
   border: solid 2px transparent;
-  min-width: 25rem;
+  max-width: 33rem;
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   background-clip: padding-box;
@@ -1709,8 +1709,21 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
   line-height: 2rem;
 }
 
+.sort__style li {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 22rem;
+}
+
 .sort__style li:nth-child(even) {
   color: #5f5f5f;
+}
+
+.sort__style li::before {
+  content: '◾';
+  position: relative;
+  top: .2rem;
 }
 
 .sort__more {
@@ -1832,6 +1845,10 @@ body {
   -webkit-box-ordinal-group: 0;
       -ms-flex-order: -1;
           order: -1;
+}
+
+.quiz__questions {
+  margin-bottom: 3rem;
 }
 
 .quiz__questions::after {
