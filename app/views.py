@@ -16,6 +16,7 @@ from .functions import *
 from .db import *
 from .forms import *
 import requests
+import urllib.parse
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 register = template.Library()
@@ -138,6 +139,7 @@ def category(request, Sub_Category):
 def quiz(request, title):
     subCategory = request.GET.get('ic')
     fullTitle = titleConverterWithSpilt(title, '-', ' ')
+    fullTitle = urllib.parse.unquote(fullTitle)
     quizDetail = quizzesByTitle(fullTitle)[0]
     addViewToQuizzes(quizDetail.id)
     template = loader.get_template('app/quiz.html')
@@ -148,7 +150,7 @@ def quiz(request, title):
         'description': f'کوئيز {fullTitle} ',
         'keywords': f'{fullTitle}, {subCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
-        'quizDetail': quizzesByTitle(fullTitle)[0],
+        'quizDetail': quizDetail,
         'quiz_Question': quizQuestionByTitle(fullTitle),
     }
     return HttpResponse(template.render(context))
