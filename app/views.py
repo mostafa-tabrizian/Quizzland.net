@@ -138,7 +138,8 @@ def category(request, Sub_Category):
 def quiz(request, title):
     subCategory = request.GET.get('ic')
     fullTitle = titleConverterWithSpilt(title, '-', ' ')
-    addViewToQuizzes(fullTitle)
+    quizDetail = quizzesByTitle(fullTitle)[0]
+    addViewToQuizzes(quizDetail.id)
     template = loader.get_template('app/quiz.html')
     context = {
         'searchForm': SearchForm(),

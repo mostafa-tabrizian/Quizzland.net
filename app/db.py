@@ -127,16 +127,16 @@ def quizzesBothWithCategory(category, sortType):
                                     .order_by(sortType)
     return grabbedQuiz
 
-def quizzesByTitle(title):
-    quizzes_contains_title = Quizzes.objects.filter(title__contains=title)
-    quizzes_icontains_title = Quizzes.objects.filter(title__icontains=title)
-    quizzes_exact_title = Quizzes.objects.filter(title__exact=title)
-    quizzes_iexact_title = Quizzes.objects.filter(title__iexact=title)
+def quizzesByTitle(titleArg):
+    quizzes_contains_title = Quizzes.objects.filter(title__contains=titleArg)
+    quizzes_icontains_title = Quizzes.objects.filter(title__icontains=titleArg)
+    quizzes_exact_title = Quizzes.objects.filter(title__exact=titleArg)
+    quizzes_iexact_title = Quizzes.objects.filter(title__iexact=titleArg)
 
-    quizzes_contains_subCategory = Quizzes.objects.filter(subCategory=title)
-    quizzes_icontains_subCategory = Quizzes.objects.filter(subCategory__icontains=title)
-    quizzes_exact_subCategory = Quizzes.objects.filter(subCategory__exact=title)
-    quizzes_iexact_subCategory = Quizzes.objects.filter(subCategory__iexact=title)
+    quizzes_contains_subCategory = Quizzes.objects.filter(subCategory=titleArg)
+    quizzes_icontains_subCategory = Quizzes.objects.filter(subCategory__icontains=titleArg)
+    quizzes_exact_subCategory = Quizzes.objects.filter(subCategory__exact=titleArg)
+    quizzes_iexact_subCategory = Quizzes.objects.filter(subCategory__iexact=titleArg)
 
     quizzes = quizzes_contains_title | quizzes_icontains_title | \
               quizzes_exact_title | quizzes_iexact_title | \
@@ -175,12 +175,12 @@ def quizQuestionByTitle(title):
     return questions
 
 # #----------------------------------------------------------------
-def addViewToQuizzes(title):
+def addViewToQuizzes(quizId):
     try:
-        quizToAddView = Quizzes.objects.get(title=title)
+        quizToAddView = Quizzes.objects.get(id=quizId)
         viewsPlusOne(quizToAddView)
     except:
-        quiz4OptionToAddView = Quizzes_Pointy.objects.get(title=title)
+        quiz4OptionToAddView = Quizzes_Pointy.objects.get(title=quizId)
         viewsPlusOne(quiz4OptionToAddView)
 
 
