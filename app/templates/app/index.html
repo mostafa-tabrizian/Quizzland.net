@@ -49,7 +49,7 @@
         </div>
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
             {% for quiz in NewestCelebrityQuizSection %}
-                {% include './base/quizContainer.html' %}
+                {% include './base/quizContainerWithoutViews.html' %}
             {% endfor %}
         </div>
     </div>
@@ -61,7 +61,7 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestMovieSeriesQuizSection %}
-                {% include './base/quizContainer.html' %}
+                {% include './base/quizContainerWithoutViews.html' %}
             {% endfor %}
 
         </div>
@@ -74,8 +74,9 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestPhysiologiesQuizSection %}
-                {% include './base/pointyQuizContainer.html' %}
+                {% include './base/quizPointyContainerWithoutViews.html' %}
             {% endfor %}
+            
         </div>
     </div>
     <div class="quizContainer space-med">
@@ -86,7 +87,7 @@
         <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
             {% for quiz in NewestGamingQuizSection %}
-                {% include './base/quizContainer.html' %}
+                {% include './base/quizContainerWithoutViews.html' %}
             {% endfor %}
 
         </div>

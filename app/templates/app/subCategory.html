@@ -17,9 +17,15 @@
 
     <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
-        {% for quiz in quizzes %}
-            {% include './base/quizContainer.html' %}
-        {% endfor %}
+        {% if typeOfQuiz == 'quiz' %}
+            {% for quiz in quizzes %}
+                {% include './base/quizContainer.html' %}
+            {% endfor %}
+        {% else %}
+            {% for quiz in quizzes %}
+                {% include './base/quizPointyContainer.html' %}
+            {% endfor %}
+        {% endif %}
 
     </div>
 

@@ -1,0 +1,12 @@
+{% load templateTags %}
+
+{% with quiz.subCategory|replaceToHyphen as subCategory %}
+{% with quiz.title|replaceToHyphen as title %}
+    <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
+        <img src="/media/app{{quiz.thumbnail|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
+        {% with quiz.views|viewsFormat as views %}
+            <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
+        {% endwith %}
+    </a>
+{% endwith %}
+{% endwith %}

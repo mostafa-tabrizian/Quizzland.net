@@ -194,11 +194,14 @@ def result(request):
 def resultPointy(request):
     title = request.GET.get('t')
     score = request.GET.get('s')
+    subCategory = request.GET.get('ic')
     fullTitle = titleConverterWithSpilt(title, '-', ' ')
+    subCategory = titleConverterWithSpilt(subCategory, '-', ' ')
     template = loader.get_template('app/resultPointy.html')
     context = {
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
+        'suggestingQuiz': quizzesByRandomWithSubCategory(subCategory),
         'fullTitle': fullTitle,
         'quizDetail': quizzesPointyByTitle(fullTitle)[0],
         'score': abs(int(score)),
