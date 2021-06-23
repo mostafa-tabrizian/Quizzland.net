@@ -777,12 +777,12 @@ input {
 
 .quizContainer__category__inner a::after {
   content: '';
-  height: 5rem;
+  height: 6rem;
   width: 101%;
   background: white;
   position: absolute;
   left: -.1rem;
-  bottom: -4rem;
+  bottom: -5rem;
   border-radius: 0 0 10px 10px;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
@@ -858,7 +858,7 @@ input {
   right: 1rem;
   z-index: 2;
   text-align: right;
-  font-size: 1.18rem;
+  font-size: 1.08rem;
 }
 
 @media (max-width: 49.9375em) {
@@ -2207,6 +2207,8 @@ body {
 
 .result__title > h5 {
   opacity: .5;
+  margin-right: 2.5rem;
+  margin-left: 2.5rem;
 }
 
 .result__subtitle {

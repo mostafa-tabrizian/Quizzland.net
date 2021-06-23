@@ -5,18 +5,18 @@
 <body>
     <div class="result__container">
         <div class="result__title flex flex-jc-c">
-           <h5>نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h5>
+           <h5 class="tx-al-r">نتیجه‌ کوئیز&nbsp:&nbsp{{ fullTitle }}</h5>
         </div>
         <div class="beforeAfterDecor flex flex-jc-c flex-ai-c">
             <h1 class="result__subtitle tx-al-c"></h1>
         </div>
         <div class="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
             <div class="result__img flex flex-jc-c flex-ai-c">
-                <img class="result__img20" src='/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF20}}' alt='{{quizDetail.GIF20}}'></img>
-                <img class="result__img40" src='/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF40}}' alt='{{quizDetail.GIF40}}'></img>
-                <img class="result__img60" src='/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF60}}' alt='{{quizDetail.GIF60}}'></img>
-                <img class="result__img80" src='/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF80}}' alt='{{quizDetail.GIF80}}'></img>
-                <img class="result__img100" src='/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF100}}' alt='{{quizDetail.GIF100}}'></img>
+                <img class="result__img20" src='/media/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF20}}' alt='{{quizDetail.GIF20}}'></img>
+                <img class="result__img40" src='/media/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF40}}' alt='{{quizDetail.GIF40}}'></img>
+                <img class="result__img60" src='/media/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF60}}' alt='{{quizDetail.GIF60}}'></img>
+                <img class="result__img80" src='/media/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF80}}' alt='{{quizDetail.GIF80}}'></img>
+                <img class="result__img100" src='/media/app/static/img/Answer-And-Result-ImGIf/{{quizDetail.GIF100}}' alt='{{quizDetail.GIF100}}'></img>
             </div>
             <div class="result__score"></div>
             <div class="result__detail tx-al-r">
@@ -44,7 +44,7 @@
             {% with quiz.subCategory|replaceToHyphen as subCategory %}
             {% with quiz.title|replaceToHyphen as title %}
             <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-                <img src="/media/app/{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
+                <img src="/media/app/{{quiz.thumbnail|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
                 {% with quiz.views|viewsFormat as views %}
                 <div class="quizContainer__category__inner__views">{{views}}</div>
                 <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
