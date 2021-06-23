@@ -251,7 +251,7 @@ class Result_gif_Admin(admin.ModelAdmin):
     list_filter = ('subCategory', )
     search_fields = ['subCategory']
     
-class Quiestion_Option_Imgs(models.Model):
+class Question_Option_Imgs(models.Model):
     title = models.CharField(max_length=150, null=True, blank=False)
     subCategory = models.CharField(max_length=150, null=True, blank=False)
     img = models.ImageField(upload_to='app/static/img/Question-Option-Imgs/', default='app/static/img/Base/NotExist.jpg')
@@ -259,7 +259,7 @@ class Quiestion_Option_Imgs(models.Model):
     def __str__(self):
         return 'Question option img created'
 
-class Quiestion_Option_Imgs_Admin(admin.ModelAdmin):
+class Question_Option_Imgs_Admin(admin.ModelAdmin):
     list_display = ('title', )
     list_filter = ('subCategory', )
     search_fields = ['subCategory']
