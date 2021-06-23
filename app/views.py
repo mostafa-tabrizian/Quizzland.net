@@ -158,7 +158,9 @@ def quiz(request, title):
 def quizPointy(request, title):
     subCategory = request.GET.get('ic')
     fullTitle = titleConverterWithSpilt(title, '-', ' ')
-    addViewToQuizzes(fullTitle)
+    fullTitle = urllib.parse.unquote(fullTitle)
+    quizDetail = quizzesByTitle(fullTitle)[0]
+    addViewToQuizzes(quizDetail.id)
     template = loader.get_template('app/quizPointy.html')
     context = {
         'searchForm': SearchForm(),
@@ -167,7 +169,7 @@ def quizPointy(request, title):
         'description': f'کوئيز {fullTitle} ',
         'keywords': f'{fullTitle}, {subCategory}, کوئیز های ',
         'colorOfHeader': 'header__white',
-        'quizDetail': quizzesPointyByTitle(fullTitle)[0],
+        'quizDetail': quizDetail,
         'quiz_Question': quizQuestionByTitle(fullTitle),
     }
     return HttpResponse(template.render(context))

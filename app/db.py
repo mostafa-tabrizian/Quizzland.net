@@ -175,12 +175,12 @@ def quizQuestionByTitle(title):
     return questions
 
 # #----------------------------------------------------------------
-def addViewToQuizzes(titleArg):
+def addViewToQuizzes(quizId):
     try:
-        quizToAddView = Quizzes.objects.get(title=titleArg)
+        quizToAddView = Quizzes.objects.get(id=quizId)
         viewsPlusOne(quizToAddView)
     except:
-        quiz4OptionToAddView = Quizzes_Pointy.objects.get(title=titleArg)
+        quiz4OptionToAddView = Quizzes_Pointy.objects.get(id=quizId)
         viewsPlusOne(quiz4OptionToAddView)
 
 

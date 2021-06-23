@@ -19,7 +19,7 @@
                 {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
                 <a href="/{{quizPage}}/{{title}}?ic={{quiz.subCategory}}">
-                    <img src="/media/app/{{quiz.background|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
+                    <img src="/media/app/{{quiz.thumbnail|makeTheDirValidForImg}}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
                     {% with quiz.views|viewsFormat as views %}
                     <div class="quizContainer__category__inner__views">{{ views }}</div>
                     <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
