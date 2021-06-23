@@ -160,6 +160,21 @@ body {
         }
     }
 
+    &__bottomQuestionChanger {
+        background: url('/static/img/base/arw-submit.svg') no-repeat center center;
+        height: 2rem;
+        width: 2rem;
+        transform: rotate(90deg);
+
+        &__container {
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%);
+            z-index: 1;
+            pointer-events: fill;
+        }
+    }
+
     &__questionCounter {
         z-index: 1;
         color: $white;
@@ -287,6 +302,7 @@ body {
         padding-bottom: 0;
         img {
             width: 21rem; height: 100%;
+            border-radius: .5rem;
         }
     }
 
@@ -345,6 +361,6 @@ body {
     
     &::after {
         position: absolute;
-        top: 27rem;
+        top: 55%;
     }
 }

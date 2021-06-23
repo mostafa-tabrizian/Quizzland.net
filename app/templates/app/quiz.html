@@ -42,21 +42,28 @@
                     {% endif %}
                     {% endwith %}
                     
-                    <div class="quiz__answerImGif noVis">
-                        {% if questionDetail.answer_imGif %}
-                            <img src="/media/app{{questionDetail.answer_imGif|makeTheDirValidForImg}}" alt="quiz-question-WebP">
-                        {% endif %}
-                    </div>
                     <div class="quiz__answerText tx-al-r noVis">
                         {% if questionDetail.answer_text %}
                             {{questionDetail.answer_text | safe}}
+                        {% endif %}
+                    </div>
+
+                    <div class="quiz__answerImGif noVis">
+                        {% if questionDetail.answer_imGif %}
+                            <img src="/media/app{{questionDetail.answer_imGif|makeTheDirValidForImg}}" alt="quiz-question-WebP">
                         {% endif %}
                     </div>
                 </div>
 
             {% endfor %} 
         </div>
+
+        <div class='quiz__bottomQuestionChanger__container pos-abs'  id="quiz__answerDetail">
+            <button class="quiz__bottomQuestionChanger fade-out quiz__bottomQuestionChanger__next" aria-label="Next Question"></button>
+        </div>
+            <!-- <button class="quiz__questionChanger pos-abs quiz__questionChanger__next fade-in" aria-label='Next Question'></button> -->
     </div>
+
 
     <!-- <div class="adverts__bottom">
     </div> -->

@@ -8,7 +8,7 @@
         z-index: 1;
 
         img {
-            width: 100%;
+            width: auto;
             height: 2.7875rem;
     
             @include breakpoints-down(medium) {

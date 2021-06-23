@@ -103,11 +103,13 @@ if (quiz__questions) {
     
     const pauseTheFunctionOfChangingQuestions = () => {
         quiz__questionChanger__next.classList.add('pointerOff')
+        quiz__bottomQuestionChanger__next.classList.add('pointerOff')
         if (typeOfQuiz == 'pointy') {
             quiz__questionChanger__last.classList.add('pointerOff')
         }
         setTimeout(() => {
             quiz__questionChanger__next.classList.remove('pointerOff')
+            quiz__bottomQuestionChanger__next.classList.remove('pointerOff')
             if (typeOfQuiz == 'pointy') {
                 quiz__questionChanger__last.classList.remove('pointerOff')
             }
@@ -150,6 +152,8 @@ if (quiz__questions) {
         plusOneToAnsweredQuestionsIfItsNotTheLast()
         shouldLetTheUserChooseAnotherOption('let')
         hideImGifTextAnswer()
+        fadeOut(quiz__bottomQuestionChanger__next)
+        document.getElementById('quiz__head').scrollIntoView()
 
         quiz__container.forEach(each => {
             currQuestionPosition = parseInt(getComputedStyle(each).transform.split(', ')[4])
@@ -231,7 +235,7 @@ if (quiz__questions) {
         const userOption = `label[id='${each.id}']`
         const userOptionDOM = document.querySelector(userOption)
         showImGifTextAnswer()
-        document.getElementById('quiz__top').scrollIntoView();
+        document.getElementById('quiz__answerDetail').scrollIntoView(false)
         if (userChose == correctAnswer) {
             userOptionDOM.classList.add('quiz__correctAnswer')
         } else {
@@ -256,6 +260,7 @@ if (quiz__questions) {
 
             if (typeOfQuiz == 'quiz') {
                 shouldLetTheUserChooseAnotherOption('doNot')
+                fadeIn(quiz__bottomQuestionChanger__next)
                 checkUserAnswer(each)
             }
             if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
@@ -269,22 +274,27 @@ if (quiz__questions) {
         if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.remove('quiz__autoQuestionChangerSwitch__innerBtn__switched')
             fadeIn(quiz__questionChanger__next)
+
             if (typeOfQuiz == 'pointy') {
                 fadeIn(quiz__questionChanger__last)
             }
         } else {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.add('quiz__autoQuestionChangerSwitch__innerBtn__switched')
             fadeOut(quiz__questionChanger__next)
+
             if (typeOfQuiz == 'pointy') {
                 fadeOut(quiz__questionChanger__last)
             }
         }
     })
 
-    quiz__questionChanger__next.addEventListener('click', () => {
-        goToAnotherQuestion(next)
-        pauseTheFunctionOfChangingQuestions()
-        shouldLetTheUserChooseAnotherOption('let')
+    quiz__questionChangerS = [quiz__questionChanger__next, quiz__bottomQuestionChanger__next]
+    quiz__questionChangerS.forEach(each => {
+        each.addEventListener('click', () => {
+            goToAnotherQuestion(next)
+            pauseTheFunctionOfChangingQuestions()
+            shouldLetTheUserChooseAnotherOption('let')
+        })
     })
 
     const minusOneToAnsweredQuestionsIfItsNotTheFirst = () => {

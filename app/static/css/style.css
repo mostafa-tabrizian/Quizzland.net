@@ -333,6 +333,7 @@ input {
 .backBtn {
   position: relative;
   margin-left: 25%;
+  margin-top: 3rem;
   margin-bottom: 3rem;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
@@ -857,13 +858,17 @@ input {
   top: 8.5rem;
   right: 1rem;
   z-index: 2;
+  width: 10rem;
   text-align: right;
   font-size: 1.08rem;
+  text-align: justify;
+  direction: rtl;
 }
 
 @media (max-width: 49.9375em) {
   .quizContainer__category__inner__title {
     top: 7.5rem;
+    width: 12rem;
   }
 }
 
@@ -891,7 +896,7 @@ input {
 }
 
 .header__logo img {
-  width: 100%;
+  width: auto;
   height: 2.7875rem;
 }
 
@@ -1984,6 +1989,23 @@ body {
           transform: rotate(-90deg);
 }
 
+.quiz__bottomQuestionChanger {
+  background: url("/static/img/base/arw-submit.svg") no-repeat center center;
+  height: 2rem;
+  width: 2rem;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.quiz__bottomQuestionChanger__container {
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  z-index: 1;
+  pointer-events: fill;
+}
+
 .quiz__questionCounter {
   z-index: 1;
   color: #f0f0f0;
@@ -2127,6 +2149,7 @@ body {
 .quiz__answerImGif img {
   width: 21rem;
   height: 100%;
+  border-radius: .5rem;
 }
 
 .quiz__answerText {
@@ -2197,7 +2220,7 @@ body {
 
 .countingResult::after {
   position: absolute;
-  top: 27rem;
+  top: 55%;
 }
 
 .result {

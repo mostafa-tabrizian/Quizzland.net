@@ -433,8 +433,7 @@ if (nightMode) {
 // --------------------------------------------------------------------
 if (nightMode) {
     const url = (window.location.pathname).split('/')
-    if (url.length == 4 /* innerCategory */ ||
-        url.includes('quiz')) 
+    if (url.length == 4 /* innerCategory */) 
         {
             try {
                 nightMode__container.forEach(each => {
@@ -446,7 +445,8 @@ if (nightMode) {
                 document.head.removeChild(nightThemeCss)
             } catch {}
         } 
-    else if (url.includes('resultPointy'))
+    else if (url.includes('resultPointy') ||
+             url.includes('quiz'))
         {
             try {
                 nightMode__container.forEach(each => {
