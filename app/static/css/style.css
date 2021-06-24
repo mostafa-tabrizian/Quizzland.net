@@ -1830,11 +1830,11 @@ body {
   line-height: 2rem;
   color: #f0f0f0;
   font-weight: 100;
-  text-align: center;
 }
 
 .quiz__head h1 {
   font-size: 1.225rem;
+  margin-bottom: 1.5rem;
 }
 
 .quiz__head h5 {

@@ -7,6 +7,7 @@ from django.contrib.sitemaps.views import sitemap
 from .views import *
 from .sitemaps import *
 
+
 sitemaps = {
     'quiz':QuizSitemap,
     'subCategory':SubCategorySitemap,
@@ -33,4 +34,5 @@ urlpatterns = [
     url('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     url(r'^ajax/doesExistInNewsletterUsers/$', doesExistInNewsletterUsers, name='doesExistInNewsletterUsers'),
+    
 ]

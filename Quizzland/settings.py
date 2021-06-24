@@ -128,12 +128,25 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/' 
-MEDIA_URL = '/media/' 
-STATICFILES_DIRS = [ BASE_DIR+"/assets", ] 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static_media')
-
-STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, 'static')
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media')
+] 
+
+STATIC_URL = '/static/' 
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+
+
+# AWS_QUERYSTRING_AUTH = False
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
+# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_KEY')
+
+# AWS_STORAGE_BUCKET_NAME = 'quizzland'
+
+# endpoint_url=config('ENDPOINT_URL'),
