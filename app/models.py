@@ -1,10 +1,9 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from django.contrib import admin
 from django.db import models
 from ckeditor.fields import RichTextField
 import datetime
+import os
+from django.core.exceptions import ValidationError
 
 
 categoryList = [
@@ -31,7 +30,7 @@ class SubCategories(models.Model):
     category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
     subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
-    Thumbnail =  models.ImageField(upload_to='Thn-Category', null=True, blank=True, default='NotExist.jpg')
+    thumbnail =  models.ImageField(upload_to='Thn-Category', null=True, blank=True, default='NotExist.jpg')
     background = models.ImageField(upload_to='Sub-Category', default='NotExist.jpg', help_text='background of choosing quizzes')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
@@ -55,11 +54,11 @@ class Quizzes(models.Model):
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
     background = models.ImageField(upload_to='QuizzesBackground', default='NotExist.jpg', help_text='background of playing quiz')
     fan_name = models.CharField(max_length=100, null=False, blank=False, default=None)
-    GIF20 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
-    GIF40 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
-    GIF60 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
-    GIF80 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
-    GIF100 = models.CharField(max_length=250, default='NotExist.jpg', help_text='title from Result_Gif files')
+    GIF20 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
+    GIF40 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
+    GIF60 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
+    GIF80 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
+    GIF100 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
@@ -235,16 +234,3 @@ class Newsletter_Users_Admin(admin.ModelAdmin):
     list_display = ('email', 'username', 'signedUp_On')
     list_filter = ('signedUp_On', )
     search_fields = ['email', 'username']
-
-class Result_gif(models.Model):
-    title = models.CharField(max_length=150, null=True, blank=False)
-    subCategory = models.CharField(max_length=150, null=True, blank=False)
-    gif = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
-
-    def __str__(self):
-        return 'Result gif created'
-
-class Result_gif_Admin(admin.ModelAdmin):
-    list_display = ('title', )
-    list_filter = ('subCategory', )
-    search_fields = ['subCategory']

@@ -25,6 +25,10 @@
     &__start {
         margin-right: 3rem;
 
+        @include breakpoints-down(medium) {
+            margin-right: 2rem;
+        }
+
         h1 {
             font-size: 4.5rem;
             font-weight: 600;
@@ -112,7 +116,7 @@
         > div {
             border-radius: 20px;
             border: solid 2px transparent;
-            max-width: 33rem;
+            max-width: 100vw;
             backdrop-filter: blur(2px);
             background-clip: padding-box;
             box-shadow: 2px 5px 40px rgba(0, 0, 0, 0.233);
@@ -205,6 +209,10 @@
     &__style {
         margin-left: 2rem; margin-right: 2rem; margin-top: 0;
         line-height: 2rem;
+
+        @include breakpoints-down(medium) {
+            margin-right: -1rem; margin-left: 0;
+        }
 
         li {
             text-overflow: ellipsis;

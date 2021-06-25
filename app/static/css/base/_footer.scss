@@ -45,7 +45,7 @@ footer, .footer {
         
         @include breakpoints-down(medium) {
             padding: 1rem;
-            width: 25rem;
+            width: 90vw;
             left: 5%;
             display: grid;
             justify-content: center;
@@ -75,7 +75,8 @@ footer, .footer {
             }
 
             @include breakpoints-down(medium) {
-                width: 22rem;
+                margin-left: 0;
+                width: 100%;
                 
                 &:not(:last-child) {
                     margin-bottom: .325rem;

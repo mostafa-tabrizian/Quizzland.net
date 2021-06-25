@@ -75,8 +75,8 @@
             background: url('/static/img/Base/close-btn.svg') center center no-repeat;
             width: 1.75rem;
             height: 1.75rem;
-            top: 1.5rem;
-            left: 1.5rem;
+            top: .5rem;
+            left: .5rem;
         }
 
         &__inner {
@@ -84,7 +84,7 @@
             font-size: $font-sm - .28;
             z-index: 2;
             grid-template-columns: auto auto auto;
-            grid-gap: 3rem;
+            grid-gap: 1rem;
             margin-top: 1rem;
 
             ul > li {

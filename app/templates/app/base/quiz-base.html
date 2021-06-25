@@ -1,9 +1,11 @@
 {% load templateTags %}
 
+<html style="background: url('{{ quizDetail.background.url }}') center center no-repeat; background-size: cover; background-attachment: fixed;">
+
 <div class="countingResult loadingScreen pos-fix flex flex-jc-c flex-ai-c fade-out">
     ___ در حال محاسبه نتیجه کوئیز___
 </div>
-<body style="background-image: url('{{ quizDetail.background.url }}');">
+<body>
 
 <!-- <div class="adverts__top">
 </div> -->

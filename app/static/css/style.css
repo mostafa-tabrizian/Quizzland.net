@@ -971,8 +971,8 @@ input {
   background: url("/static/img/Base/close-btn.svg") center center no-repeat;
   width: 1.75rem;
   height: 1.75rem;
-  top: 1.5rem;
-  left: 1.5rem;
+  top: .5rem;
+  left: .5rem;
 }
 
 .header__menu__inner {
@@ -981,7 +981,7 @@ input {
   z-index: 2;
   -ms-grid-columns: auto auto auto;
       grid-template-columns: auto auto auto;
-  grid-gap: 3rem;
+  grid-gap: 1rem;
   margin-top: 1rem;
 }
 
@@ -1244,7 +1244,7 @@ footer .newsletter, .footer .newsletter {
 @media (max-width: 49.9375em) {
   footer .newsletter, .footer .newsletter {
     padding: 1rem;
-    width: 25rem;
+    width: 90vw;
     left: 5%;
     display: -ms-grid;
     display: grid;
@@ -1294,7 +1294,8 @@ footer .newsletter > input::placeholder, .footer .newsletter > input::placeholde
 
 @media (max-width: 49.9375em) {
   footer .newsletter > input, .footer .newsletter > input {
-    width: 22rem;
+    margin-left: 0;
+    width: 100%;
   }
   footer .newsletter > input:not(:last-child), .footer .newsletter > input:not(:last-child) {
     margin-bottom: .325rem;
@@ -1496,6 +1497,12 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
   margin-right: 3rem;
 }
 
+@media (max-width: 49.9375em) {
+  .hero__start {
+    margin-right: 2rem;
+  }
+}
+
 .hero__start h1 {
   font-size: 4.5rem;
   font-weight: 600;
@@ -1601,7 +1608,7 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
 .sort__container > div {
   border-radius: 20px;
   border: solid 2px transparent;
-  max-width: 33rem;
+  max-width: 100vw;
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   background-clip: padding-box;
@@ -1712,6 +1719,13 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
   margin-right: 2rem;
   margin-top: 0;
   line-height: 2rem;
+}
+
+@media (max-width: 49.9375em) {
+  .sort__style {
+    margin-right: -1rem;
+    margin-left: 0;
+  }
 }
 
 .sort__style li {
