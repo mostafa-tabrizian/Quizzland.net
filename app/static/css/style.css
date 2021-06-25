@@ -1826,7 +1826,6 @@ body {
 }
 
 .quiz__head h1, .quiz__head h2, .quiz__head h3, .quiz__head h4, .quiz__head h5, .quiz__head p {
-  margin: 0;
   line-height: 2rem;
   color: #f0f0f0;
   font-weight: 100;
