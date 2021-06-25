@@ -207,7 +207,7 @@
 
 
     &__style {
-        margin-left: 2rem; margin-right: 2rem; margin-top: 0;
+        margin-top: 0;
         line-height: 2rem;
 
         @include breakpoints-down(medium) {
@@ -218,7 +218,8 @@
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
-            width: 22rem;
+            width: 27rem;
+            font-size: $font-sm - .06;
 
             &:nth-child(even) {
                 color: rgb(95, 95, 95);

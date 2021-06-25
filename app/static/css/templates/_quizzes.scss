@@ -31,7 +31,7 @@ body {
 
         h1 {
             font-size: $font-med - .1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: .5rem;
             padding-right: 1.5rem;
             padding-left: 1.5rem;
             transform: translate(-1.5rem);
@@ -74,7 +74,7 @@ body {
         transform: translate(-17rem); //-67rem each step
 
         @include breakpoints-down(medium) {
-            transform: translate(-21.8rem); //-67rem each step
+            transform: translate(-20.8rem); //-67rem each step
         }
     }
 
@@ -104,7 +104,7 @@ body {
     }
 
     &__autoQuestionChangerSwitch{
-        top: 1rem; width: 7rem;;
+        top: 1rem; width: 7rem; height: 4rem;
         z-index: 2;
         cursor: pointer;
 
@@ -140,10 +140,10 @@ body {
 
     &__questionChanger {
         cursor: pointer;
-        top: -1rem;
+        top: -2rem;
 
         &__container {
-            width: 23rem; height: 2rem;
+            width: 23rem; height: 1rem;
             z-index: 2;
 
             button {

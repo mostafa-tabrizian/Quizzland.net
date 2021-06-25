@@ -1715,8 +1715,6 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
 }
 
 .sort__style {
-  margin-left: 2rem;
-  margin-right: 2rem;
   margin-top: 0;
   line-height: 2rem;
 }
@@ -1732,7 +1730,8 @@ footer__copyRight > p > a:hover, .footer__copyRight > p > a:hover {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  width: 22rem;
+  width: 27rem;
+  font-size: 1.12rem;
 }
 
 .sort__style li:nth-child(even) {
@@ -1848,7 +1847,7 @@ body {
 
 .quiz__head h1 {
   font-size: 1.225rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: .5rem;
   padding-right: 1.5rem;
   padding-left: 1.5rem;
   -webkit-transform: translate(-1.5rem);
@@ -1901,8 +1900,8 @@ body {
 
 @media (max-width: 49.9375em) {
   .quiz__container {
-    -webkit-transform: translate(-21.8rem);
-            transform: translate(-21.8rem);
+    -webkit-transform: translate(-20.8rem);
+            transform: translate(-20.8rem);
   }
 }
 
@@ -1939,6 +1938,7 @@ body {
 .quiz__autoQuestionChangerSwitch {
   top: 1rem;
   width: 7rem;
+  height: 4rem;
   z-index: 2;
   cursor: pointer;
 }
@@ -1980,12 +1980,12 @@ body {
 
 .quiz__questionChanger {
   cursor: pointer;
-  top: -1rem;
+  top: -2rem;
 }
 
 .quiz__questionChanger__container {
   width: 23rem;
-  height: 2rem;
+  height: 1rem;
   z-index: 2;
 }
 

@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.db import models
 from ckeditor.fields import RichTextField
 import datetime
-import os
-from django.core.exceptions import ValidationError
 
 
 categoryList = [
@@ -143,7 +141,6 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
 
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None, help_text='same quiz title')
     question = models.CharField(max_length=200, null=True, blank=True, default=None)
