@@ -1843,11 +1843,16 @@ body {
   line-height: 2rem;
   color: #f0f0f0;
   font-weight: 100;
+  margin: auto;
 }
 
 .quiz__head h1 {
   font-size: 1.225rem;
   margin-bottom: 1.5rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  -webkit-transform: translate(-1.5rem);
+          transform: translate(-1.5rem);
 }
 
 .quiz__head h5 {
@@ -1896,8 +1901,8 @@ body {
 
 @media (max-width: 49.9375em) {
   .quiz__container {
-    -webkit-transform: translate(-19.8rem);
-            transform: translate(-19.8rem);
+    -webkit-transform: translate(-21.8rem);
+            transform: translate(-21.8rem);
   }
 }
 
@@ -2003,7 +2008,7 @@ body {
 }
 
 .quiz__bottomQuestionChanger {
-  background: url("/static/img/base/arw-submit.svg") no-repeat center center;
+  background: url("/static/img/Base/arw-submit.svg") no-repeat center center;
   height: 2rem;
   width: 2rem;
   -webkit-transform: rotate(90deg);

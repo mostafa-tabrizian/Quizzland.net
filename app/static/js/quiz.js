@@ -145,8 +145,8 @@ if (quiz__questions) {
         }
     }
 
-    const next = -1076.05
-    const last = +1076.05
+    const next = -1080  // last on 1076.05
+    const last = +1080  // last on 1076.05
     const goToAnotherQuestion = (changeToWhat) => {
         checkIfTheQuizEndedAndShowResultPage()
         plusOneToAnsweredQuestionsIfItsNotTheLast()

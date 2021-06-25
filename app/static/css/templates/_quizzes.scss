@@ -26,11 +26,15 @@ body {
             line-height: 2rem;
             color: $white;
             font-weight: 100;
+            margin: auto;
         }
 
         h1 {
             font-size: $font-med - .1rem;
             margin-bottom: 1.5rem;
+            padding-right: 1.5rem;
+            padding-left: 1.5rem;
+            transform: translate(-1.5rem);
         }
 
         h5 {
@@ -70,7 +74,7 @@ body {
         transform: translate(-17rem); //-67rem each step
 
         @include breakpoints-down(medium) {
-            transform: translate(-19.8rem); //-67rem each step
+            transform: translate(-21.8rem); //-67rem each step
         }
     }
 
@@ -160,7 +164,7 @@ body {
     }
 
     &__bottomQuestionChanger {
-        background: url('/static/img/base/arw-submit.svg') no-repeat center center;
+        background: url('/static/img/Base/arw-submit.svg') no-repeat center center;
         height: 2rem;
         width: 2rem;
         transform: rotate(90deg);
