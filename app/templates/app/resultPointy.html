@@ -7,7 +7,7 @@
     <div class="resultQuizPointy pos-rel wrapper-sm space-sm tx-al-c">
         {% if quizDetail.result_upTo_1|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_1 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_1 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_1.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_1 | safe }}
                     </div>
@@ -15,7 +15,7 @@
                 
         {% elif quizDetail.result_upTo_2|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_2 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_2 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_2.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_2 | safe }}
                     </div>
@@ -23,7 +23,7 @@
                                 
         {% elif quizDetail.result_upTo_3|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_3 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_3 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_3.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_3 | safe }}
                     </div>
@@ -31,7 +31,7 @@
 
         {% elif quizDetail.result_upTo_4|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_4 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_4 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_4.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_4 | safe }}
                     </div>
@@ -39,7 +39,7 @@
             
         {% elif quizDetail.result_upTo_5|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_5 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_5 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_5.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_5 | safe }}
                     </div>
@@ -47,7 +47,7 @@
 
         {% elif quizDetail.result_upTo_6|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_6 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_6 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_6.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_6 | safe }}
                     </div>
@@ -55,7 +55,7 @@
 
         {% elif quizDetail.result_upTo_7|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_7 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_7 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_7.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_7 | safe }}
                     </div>
@@ -63,7 +63,7 @@
             
         {% elif quizDetail.result_upTo_8|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_8 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_8 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_8.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_8 | safe }}
                     </div>
@@ -71,7 +71,7 @@
 
         {% elif quizDetail.result_upTo_9|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_9 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_9 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_9.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_9 | safe }}
                     </div>
@@ -79,7 +79,7 @@
 
         {% elif quizDetail.result_upTo_10|toInteger >= score %}
             <h2 class="tx-al-c">{{ quizDetail.result_title_10 }}</h2>
-            <body class="resultQuizPointy__bg" style="background-image:url('/{{ quizDetail.result_img_10 }}')">
+            <body class="resultQuizPointy__bg" style="background-image:url(' {{ quizDetail.result_img_10.url }} ')">
                     <div class="resultQuizPointy__txt tx-al-r space-sm darkGls">
                         {{ quizDetail.result_text_10 | safe }}
                     </div>

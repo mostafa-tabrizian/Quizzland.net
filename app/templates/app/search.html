@@ -16,7 +16,7 @@
                 <div class="searchResult__category__item">
                     {% with subCategory.subCategory|titleToImgName:' ' as imgTitle  %}
                     <a href="/category/{{imgTitle}}?c={{subCategory.category}}&p=0&st=newest&nr=16">
-                        <img src="/media/app/static/img/Thn-Category/{{imgTitle}}.jpg" alt="{{ subCategory.subCategory }} | کوئیز های {{ category.title_far }}">
+                        <img src="{{ category.thumbnail.url }}" alt="{{ subCategory.subCategory }} | کوئیز های {{ category.title_far }}">
                     </a>
                     <h5 class="tx-al-c"><a href="/category/{{imgTitle}}?c={{subCategory.category}}&p=0&st=newest&nr=16">
                         {{ subCategory.subCategory }}

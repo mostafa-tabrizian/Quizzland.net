@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+
     'ckeditor',
     'robots',
     'admin_honeypot',
+    'storages'
 ]
 
 SITE_ID = 1
@@ -131,22 +133,17 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'media')
+    os.path.join(BASE_DIR, 'static')
 ] 
 
-STATIC_URL = '/static/' 
-MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+STATIC_URL = '/static/'
 
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_KEY')
+AWS_STORAGE_BUCKET_NAME = 'quizzland2'
+AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
 
-# AWS_QUERYSTRING_AUTH = False
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
-# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_KEY')
-
-# AWS_STORAGE_BUCKET_NAME = 'quizzland'
-
-# endpoint_url=config('ENDPOINT_URL'),
+AWS_DEFAULT_ACL = None
+AWS_S3_FILE_OVERWRITE = False
