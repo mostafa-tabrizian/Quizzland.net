@@ -227,6 +227,14 @@ input {
         justify-content: flex-end;
     }
 
+    &-jc-fs {
+        justify-content: flex-start;
+    }
+
+    &-ai-fs {
+        align-items: flex-start;
+    }
+
     &-ai-c {
         align-items: center;
     }
@@ -460,69 +468,92 @@ input {
 
         &__inner {
             flex-wrap: wrap;
-            margin: auto;
-            margin-bottom: -4rem;
-            
-            a {
+            max-width: 67.5rem;
+            margin: 1.125rem auto;
+            position: relative;
+
+            @include breakpoints-down(medium) {
+                max-width: auto;
+                margin: auto;
+            }
+
+            li {
+                margin-bottom: 1.5rem; margin-left: 1.5rem;
                 box-shadow: 0 0 10px #000000bd;
                 position: relative;
-                border: 0.5px solid #6f6f6f; border-radius: 12px 12px 0 0;
                 transition: all .2s ease-in-out;
-                margin-bottom: 7rem; margin-right: 1.6rem;
-            
-                &::after {
-                    content: '';
-                    height: 6rem; width: 101%;
-                    background: white;
-                    position: absolute;
-                    left: -.1rem; bottom: -5rem;
-                    border-radius: 0 0 10px 10px;
-                    transition: all .2s ease-in-out;
-                    box-shadow: 0 3px 10px #00000047;
+                border-radius: .65rem;
+                height: 11rem;
+
+                @include breakpoints-down(medium) {
+                    height: 9.6rem;
+                    margin: .5rem auto;
                 }
-
-                &::before {
-                    content: '';
-                    height: 12.6rem; width: 100%;
-                    background: $darkRed;
-                    position: absolute;
-                    left: 0; bottom: -4rem;
-                    z-index: -1;
-                    border-radius: 10px 10px 10px 10px;
-                    transition: all .2s ease-in-out;
-
-                    @include breakpoints-down(medium){
-                        height: 11.6rem;
-                    }
-                }
-
 
                 &:hover {
                     transform: translate(10px, -10px);
+                }
+
+                article {
+                    background: #fff;
+                    box-shadow: 0 0 10px 0 0 10px #c7c7c7bd, inset 0 0 10px #5f5f5f;
+                    padding-bottom: 1rem;
+                    border-radius: .65rem;
 
                     &::before {
-                        transform: translate(-10px, 10px);
+                        content: '';
+                        height: 100%; width: 100%;
+                        background: $darkRed;
+                        position: absolute;
+                        left: 0; top: 0;
+                        z-index: -1;
+                        border-radius: .65rem;
+                        transition: all .2s ease-in-out;
+                    }
+
+                    &:hover {
+                        &::before {
+                            transform: translate(-10px, 10px);
+                        }
                     }
                 }
 
+                a {
+                    box-shadow: none !important;
+                }
+                
                 img {
                     width: 14rem; height: 8rem;
                     border-radius: 10px 10px 0 0;
 
                     @include breakpoints-down(medium) {
-                        width: 12rem; height: 7rem;
+                        width: 11rem; height: 6.5rem;
+                    }
+                }
+
+                span {
+                    padding-right: .5rem;
+                    overflow-wrap: anywhere;
+                    padding-left: 1rem; padding-right: 1rem;
+                    direction: rtl;
+                    font-size: $font-sm;
+                    width: 14rem;
+
+                    @include breakpoints-down(medium) {
+                        width: 11rem;
                     }
                 }
             }
 
             &__views {
                 position: absolute;
-                left: 0.2rem; bottom: .325rem;
+                left: 0.5rem; bottom: 2.5rem;
                 background: #eaeaea;
                 padding: 0 0.5rem;
                 font-size: 0.9rem;
                 z-index: 2;
                 border-radius: 4px; border: .5px solid #0000002e;
+                box-shadow: 0 0 5px #797979;
 
                 &::before {
                     content: url('/static/img/Base/eyeEmoji.png');
@@ -531,28 +562,6 @@ input {
                     margin-right: 0.2rem;
                 }
             }
-            
-            &__title {
-                position: absolute;
-                top: 7.5rem; right: 1rem;
-                z-index: 2;
-                width: 12rem;
-                font-size: $font-sm - .1;
-                font-weight: 100;
-                text-align: justify;
-                direction: rtl;
-                letter-spacing: 0;
-
-                @include breakpoints-down(medium) {
-                    top: 6.1rem;
-                    width: 10rem;
-                }
-
-                &__noViews {
-                    top: 8.5rem !important;
-                }
-            }
-
         }
     }
 }

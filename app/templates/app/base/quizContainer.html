@@ -2,12 +2,20 @@
 
 {% with quiz.subCategory|replaceToHyphen as subCategory %}
 {% with quiz.title|replaceToHyphen as title %}
-    <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
-        <img src="{{ quiz.thumbnail.url }}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-        {% with quiz.views|viewsFormat as views %}
-            <div class="quizContainer__category__inner__views">{{views}}</div>
-            <h3 class="quizContainer__category__inner__title tx-al-r">{{ quiz.title }}</h3>
-        {% endwith %}
-    </a>
+    <li>
+        <article class="flex tx-al-r">
+            <a href="/quiz/{{title}}?ic={{quiz.subCategory}}">
+                <div>
+                    <img src="{{ quiz.thumbnail.url }}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
+                </div>
+                {% with quiz.views|viewsFormat as views %}
+                    <div class="quizContainer__category__inner__views">{{views}}</div>
+                {% endwith %}
+                <span class="quizContainer__category__inner__title quizContainer__category__inner__title__noViews flex">
+                    {{ quiz.title }}
+                </span>
+            </a>
+        </article>
+    </li>
 {% endwith %}
 {% endwith %}

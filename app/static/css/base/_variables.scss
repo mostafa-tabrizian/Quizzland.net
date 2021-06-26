@@ -58,7 +58,7 @@ $red-tb-grad: linear-gradient(180deg, #4D1420, #9D272D);
         margin: 1.125rem auto;
         
         @include breakpoints-down(medium) {
-            max-width: 25rem;
+            max-width: 21rem;
         }
     }
 

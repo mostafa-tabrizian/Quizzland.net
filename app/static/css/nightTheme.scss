@@ -117,25 +117,14 @@ body {
         }
 
         &__inner {
-            a {
-                border: inherit;
-
-                &::after {
-                    background: #121212;
-                    box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081;
-                }
-
-                &:hover {
-                    box-shadow: 0 0 20px #000000;
-
-                    &::after {
-                        box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081;
-                    }
-                }
+            article {
+                background: #121212 !important;
+                box-shadow: 0 0 10px #000000bd, inset 0 0 10px #1f1f1f;
             }
-
+            
             &__views {
                 background: #181818;
+                box-shadow: 0 0 5px black;
             }
         }
     }

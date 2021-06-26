@@ -10,21 +10,21 @@ GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool)
 
-# HTTPS settings
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# # HTTPS settings
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
-# HSTS settings
-SECURE_HSTS_SECONDS = 31536000 # 1 year
-SECURE_HSTS_PRELOAD = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# # HSTS settings
+# SECURE_HSTS_SECONDS = 31536000 # 1 year
+# SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
 ALLOWED_HOSTS = [
     'www.quizzland.net', 'quizzland.net', 
     'www.quizzland.ir', 'quizzland.ir',
-    # '127.0.0.1', 'localhost'
+    '127.0.0.1', 'localhost'
 ]
 
 INSTALLED_APPS = [
@@ -133,17 +133,20 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media')
 ] 
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = 'quizzland2'
-AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
+# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_KEY')
+# AWS_STORAGE_BUCKET_NAME = 'quizzland2'
+# AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
 
-AWS_DEFAULT_ACL = None
-AWS_S3_FILE_OVERWRITE = True
+# AWS_DEFAULT_ACL = None
+# AWS_S3_FILE_OVERWRITE = True

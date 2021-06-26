@@ -17,3 +17,5 @@ settings.py
 *.png
 *.gif
 *.svg
+Quizzland
+Quizzland/settings.py

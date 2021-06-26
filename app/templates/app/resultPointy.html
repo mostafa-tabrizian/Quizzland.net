@@ -106,11 +106,11 @@
 
     <h2 class='tx-al-c space-med beforeAfterDecor'>تست های شبیه</h2>
 
-    <div class="result__suggester quizContainer__category__inner flex flex-jc-c flex-ai-c wrapper-med">
+    <ul class="result__suggester quizContainer__category__inner flex flex-jc-c flex-ai-c wrapper-med">
         {% for quiz in suggestingQuiz %}
             {% include './base/quizPointyContainer.html' %}
         {% endfor %}
-    </div>
+    </ul>
 
     {% include "app/base/backBtn.html" %}
 

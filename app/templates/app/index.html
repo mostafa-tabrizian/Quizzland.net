@@ -48,50 +48,50 @@
             <a class="btn" href="sort?p=0&st=newest&c=celebrity">...بیشتر</a>
             <h2>سلبریتی</h2>
         </div>
-        <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+        <ul class="quizContainer__category__inner flex flex-jc-fs flex-ai-fs wrapper-med">
             {% for quiz in NewestCelebrityQuizSection %}
                 {% include './base/quizContainerWithoutViews.html' %}
             {% endfor %}
-        </div>
+        </ul>
     </div>
     <div class="quizContainer space-med">
         <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
             <a class="btn" href="sort?p=0&st=newest&c=movie-series">...بیشتر</a>
             <h2>فیلم و سریال</h2>
         </div>
-        <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+        <ul class="quizContainer__category__inner flex flex-jc-fs flex-ai-fs wrapper-med">
 
             {% for quiz in NewestMovieSeriesQuizSection %}
                 {% include './base/quizContainerWithoutViews.html' %}
             {% endfor %}
 
-        </div>
+        </ul>
     </div>
     <div class="quizContainer space-med">
         <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
             <a class="btn" href="sort?p=0&st=newest&c=psychology">...بیشتر</a>
             <h2>روانشناسی</h2>
         </div>
-        <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+        <ul class="quizContainer__category__inner flex flex-jc-fs flex-ai-fs wrapper-med">
 
             {% for quiz in NewestPhysiologiesQuizSection %}
                 {% include './base/quizPointyContainerWithoutViews.html' %}
             {% endfor %}
             
-        </div>
+        </ul>
     </div>
     <div class="quizContainer space-med">
         <div class="quizContainer__category__header flex flex-ai-c wrapper-med">
             <a class="btn" href="sort?p=0&st=newest&c=gaming">...بیشتر</a>
             <h2>گیمینگ</h2>
         </div>
-        <div class="quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+        <ul class="quizContainer__category__inner flex flex-jc-fs flex-ai-fs wrapper-med">
 
             {% for quiz in NewestGamingQuizSection %}
                 {% include './base/quizContainerWithoutViews.html' %}
             {% endfor %}
 
-        </div>
+        </ul>
     </div>
 
     <div class="sort__controller pos-rel flex flex-jc-c" id="sort">

@@ -6,17 +6,17 @@
     <h3>{{ userSearchInput }} &nbsp : &nbsp کوئیز های بیشتر با عبارت</h3>
     
     <div class="moreSearchResult__container">
-        <div class="categoryList quizContainer__category__inner flex flex-jc-fe">
+        <ul class="categoryList quizContainer__category__inner flex flex-jc-fe">
             {% for quiz in quizzesPointyByTitle %}
                 {% include './base/quizContainer.html' %}
             {% endfor %}
-        </div>
+        </ul>
 
-        <div class="categoryList quizContainer__category__inner flex flex-jc-fe">
+        <ul class="categoryList quizContainer__category__inner flex flex-jc-fe">
             {% for quiz in quizzesByTitle %}
                 {% include './base/quizContainer.html' %}
             {% endfor %}
-        </div>
+        </ul>
     </div>
 </div>
 

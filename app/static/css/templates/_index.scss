@@ -221,6 +221,10 @@
             width: 27rem;
             font-size: $font-sm - .06;
 
+            @include breakpoints-down(medium) {
+                width: 21rem;
+            }
+
             &:nth-child(even) {
                 color: rgb(95, 95, 95);
             }

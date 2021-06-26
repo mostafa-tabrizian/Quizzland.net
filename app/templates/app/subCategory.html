@@ -15,7 +15,7 @@
     
     {% include 'app/base/tools.html' %}
 
-    <div class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+    <ul class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
 
         {% if typeOfQuiz == 'quiz' %}
             {% for quiz in quizzes %}
@@ -27,7 +27,7 @@
             {% endfor %}
         {% endif %}
 
-    </div>
+    </ul>
 
     {% include 'app/base/pageTravel.html' %}
 

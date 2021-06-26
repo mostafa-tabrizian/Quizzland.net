@@ -6,29 +6,37 @@
 
     <div>
         <h3 class='sortMore__title'>{{ titlePointy }}</h3>
-        <div class="quizContainer__category__inner sortMore__inner {{hideSecondColumn}} flex flex-jc-fe">
+        <ul class="quizContainer__category__inner sortMore__inner {{hideSecondColumn}} flex flex-jc-fe">
             {% for quiz in sortPointy %}
                 {% include './base/quizPointyContainer.html' %}
             {% endfor %}
-        </div>
+        </ul>
     </div>
     <div>
         <h3 class='sortMore__title'>{{title}} {{ category }}</h3>
-        <div class="quizContainer__category__inner sortMore__inner flex flex-jc-fe">
+        <ul class="quizContainer__category__inner sortMore__inner flex flex-jc-fs">
             {% for quiz in sort %}
                 {% with quiz.subCategory|replaceToHyphen as subCategory %}
                 {% with quiz.title|replaceToHyphen as title %}
-                <a href="/{{quizPage}}/{{title}}?ic={{quiz.subCategory}}">
-                    <img src="{{ quiz.thumbnail.url }}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
-                    {% with quiz.views|viewsFormat as views %}
-                    <div class="quizContainer__category__inner__views">{{ views }}</div>
-                    <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
-                    {% endwith %}
-                </a>
+                    <li>
+                        <article class="flex tx-al-r">
+                            <a href="/{{quizPage}}/{{title}}?ic={{quiz.subCategory}}">
+                                <div>
+                                    <img src="{{ quiz.thumbnail.url }}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
+                                </div>
+                                {% with quiz.views|viewsFormat as views %}
+                                    <div class="quizContainer__category__inner__views">{{views}}</div>
+                                {% endwith %}
+                                <span class="quizContainer__category__inner__title quizContainer__category__inner__title__noViews flex">
+                                    {{ quiz.title }}
+                                </span>
+                            </a>
+                        </article>
+                    </li>
                 {% endwith %}
                 {% endwith %}
             {% endfor %}
-        </div>
+        </ul>
     </div>
 </div>
 
