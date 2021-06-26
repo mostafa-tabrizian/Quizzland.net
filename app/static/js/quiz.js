@@ -191,8 +191,8 @@ if (quiz__questions) {
 
     const removeEmptyImGifText = () => {
         quiz__answerImGif.forEach(each => {
-            const element = (each.innerHTML).trim()
-            if (element.substring(element.length-39, element.length-27) == 'NotExist.jpg') {
+            const src = each.querySelector('img').src
+            if (src.includes('NotExist')) {
                 each.remove()
             }
         })
@@ -317,8 +317,6 @@ if (quiz__questions) {
         }) 
     }
 }
-
-
 
 // -------------------------------------------------------------------------
 

@@ -5,7 +5,7 @@
     <a href="/quizPointy/{{title}}?ic={{quiz.subCategory}}">
         <img src="{{ quiz.thumbnail.url }}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
         {% with quiz.views|viewsFormat as views %}
-            <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
+            <div class="quizContainer__category__inner__title quizContainer__category__inner__title__noViews">{{ quiz.title }}</div>
         {% endwith %}
     </a>
 {% endwith %}
