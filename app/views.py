@@ -391,7 +391,7 @@ def error403(request, exception):
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
         'headTitle': f'QuizzLand | دسترسی شما به این صفحه مجاز نیست ', 
-        'message': "❌ دسترسی شما به این صفحه مجاز نیست ❌",
+        'message': "❌ دسترسی شما به این صفحه مجاز نیست",
     }
     return HttpResponse(template.render(context))
 
@@ -401,7 +401,7 @@ def error500(request):
         'searchForm': SearchForm(),
         'newsletterForm': NewsletterForm(),
         'headTitle': f'QuizzLand | مشکلی رخ داده است ', 
-        'message': "🙄 سرور های سایت احتمالا داغ کرده لطفا یکم دیگه امتحان کنید",
+        'message': "🌠 خطایی رخ داده است. لطفا بعدا دوباره امتحان کنید",
     }
     return HttpResponse(template.render(context))
 

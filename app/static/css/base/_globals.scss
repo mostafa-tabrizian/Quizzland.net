@@ -534,17 +534,18 @@ input {
             
             &__title {
                 position: absolute;
-                top: 8.5rem; right: 1rem;
+                top: 7rem; right: 1rem;
                 z-index: 2;
-                width: 10rem;
-                text-align: right;
+                width: 12rem;
                 font-size: $font-sm - .1;
+                font-weight: 100;
                 text-align: justify;
                 direction: rtl;
+                letter-spacing: 0;
 
                 @include breakpoints-down(medium) {
-                    top: 7.5rem;
-                    width: 12rem;
+                    top: 6.1rem;
+                    width: 10rem;
                 }
             }
         }

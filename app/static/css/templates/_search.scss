@@ -62,6 +62,10 @@
                 text-align: center;
             }
         }
+
+        ul > li {
+            font-size: $font-sm - .06;
+        }
         
         &__item {
             display: block;

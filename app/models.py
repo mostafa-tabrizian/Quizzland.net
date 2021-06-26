@@ -164,8 +164,8 @@ class Questions(models.Model):
         return 'test'
 
 class Questions_Admin(admin.ModelAdmin):
-    list_display = ('title', 'question', 'answer_text', 'subCategory', 'category')
-    list_filter = ('subCategory', 'category')
+    list_display = ('title', 'question', 'answer_text', 'subCategory')
+    list_filter = ('subCategory', )
     search_fields = ['title', 'question']
 
 class Pointy_Questions(models.Model):

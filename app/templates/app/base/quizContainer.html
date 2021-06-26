@@ -6,7 +6,7 @@
         <img src="{{ quiz.thumbnail.url }}" alt="{{quiz.subCategory}} | {{quiz.title}}" loading='lazy'>
         {% with quiz.views|viewsFormat as views %}
             <div class="quizContainer__category__inner__views">{{views}}</div>
-            <div class="quizContainer__category__inner__title">{{ quiz.title }}</div>
+            <h3 class="quizContainer__category__inner__title tx-al-r">{{ quiz.title }}</h3>
         {% endwith %}
     </a>
 {% endwith %}

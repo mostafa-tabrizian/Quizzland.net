@@ -16,3 +16,4 @@ settings.py
 *.jpg
 *.png
 *.gif
+*.svg
