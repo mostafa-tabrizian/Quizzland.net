@@ -73,7 +73,8 @@
             transform: translate(-30%);
 
             @include breakpoints-down(medium) {
-                transform: translate(-15%)
+                transform: translate(-15%);
+                width: 20rem;
             }
 
             &::before {

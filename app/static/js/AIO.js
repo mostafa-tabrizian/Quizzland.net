@@ -390,6 +390,7 @@ if (quiz__questions) {
         if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.remove('quiz__autoQuestionChangerSwitch__innerBtn__switched')
             fadeIn(quiz__questionChanger__next)
+            fadeIn(quiz__bottomQuestionChanger__next)
 
             if (typeOfQuiz == 'pointy') {
                 fadeIn(quiz__questionChanger__last)
@@ -397,6 +398,7 @@ if (quiz__questions) {
         } else {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.add('quiz__autoQuestionChangerSwitch__innerBtn__switched')
             fadeOut(quiz__questionChanger__next)
+            fadeOut(quiz__bottomQuestionChanger__next)
 
             if (typeOfQuiz == 'pointy') {
                 fadeOut(quiz__questionChanger__last)
@@ -433,8 +435,6 @@ if (quiz__questions) {
         }) 
     }
 }
-
-
 
 // -------------------------------------------------------------------------
 
