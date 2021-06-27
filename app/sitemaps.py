@@ -4,9 +4,9 @@ from .models import *
 from .functions import titleConverterWithSpilt
 
 class QuizSitemap(Sitemap):
-    changefreq = "weekly"
-    priority = 0.8
-    protocol = 'http'
+    changefreq = "monthly"
+    priority = 1
+    protocol = 'https'
 
     def items(self):
         return Quizzes.objects.all()
@@ -16,12 +16,12 @@ class QuizSitemap(Sitemap):
 
     def location(self,obj):
         title = titleConverterWithSpilt(obj.title, ' ', '-')
-        return '/quiz/%s' % (title)
+        return f'quizzland.net/quiz/{title}'
 
 class SubCategorySitemap(Sitemap):
-    changefreq = "weekly"
+    changefreq = "monthly"
     priority = 0.8
-    protocol = 'http'
+    protocol = 'https'
 
     def items(self):
         return SubCategories.objects.all()
@@ -31,11 +31,11 @@ class SubCategorySitemap(Sitemap):
 
     def location(self,obj):
         title = titleConverterWithSpilt(obj.subCategory, ' ', '-')
-        return f'/category/{title}?c={obj.category}&nr=16&p=0&st=newest'
+        return f'quizzland.net/category/{title}?c={obj.category}&nr=16&p=0&st=newest'
 
 class StaticSitemap(Sitemap):
     changefreq = "monthly"
-    priority = 0.8
+    priority = 0.6
     protocol = 'https'
 
     def items(self):

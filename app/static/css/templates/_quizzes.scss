@@ -34,7 +34,7 @@ body {
             }
 
             li {
-                margin-bottom: 2rem; margin-left: 1.5rem;
+                margin-bottom: 1.5rem; margin-left: 1.5rem;
                 box-shadow: 0 0 10px #000000bd;
                 position: relative;
                 transition: all .2s ease-in-out;
@@ -43,7 +43,6 @@ body {
 
                 @include breakpoints-down(medium) {
                     margin: .5rem auto;
-                    margin-bottom: 4rem;
                 }
 
                 &:hover {
@@ -350,13 +349,14 @@ body {
             width: 21rem;
             border: 2px solid #adadad;
             padding: 0.6rem;
+            transition: all .3s ease-in-out;
 
             &:not(:last-child) {
                 margin-bottom: 1rem;
             }
 
             &:hover {
-                background: #00000017;
+                background: black;
             }
 
             &::before {

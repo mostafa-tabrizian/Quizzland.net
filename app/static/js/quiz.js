@@ -87,7 +87,16 @@ const ifOptionEmptyRemoveIt = (question) => {
     })
 }
 
-ifOptionEmptyRemoveIt(quiz__options__imgLabel)
+const ifNoImgOptionRemoveIt = (img) => {
+    img.forEach(each => {
+        const src = each.querySelector('img').src
+        if (src.includes('NotExist')) {
+            each.remove()
+        }
+    })
+}
+
+ifNoImgOptionRemoveIt(quiz__options__imgLabel)
 ifOptionEmptyRemoveIt(quiz__options__textLabelAll)
 
 // ----------------------------------------------
