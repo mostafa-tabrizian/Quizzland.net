@@ -7,14 +7,6 @@ body {
 }
 
 .quizzes {
-    grid-template-columns: repeat(auto-fill, 12.6rem);
-    grid-template-rows: repeat(auto, 14.4rem);
-    gap: 3rem;
-    margin-top: 0;
-
-    @include breakpoints-down(medium) {
-        grid-template-columns: repeat(auto-fill, 11rem);
-    }
 }
 
 .quizContainer {
@@ -42,7 +34,7 @@ body {
             }
 
             li {
-                margin-bottom: 4.5rem; margin-left: 1.5rem;
+                margin-bottom: 2rem; margin-left: 1.5rem;
                 box-shadow: 0 0 10px #000000bd;
                 position: relative;
                 transition: all .2s ease-in-out;
@@ -50,9 +42,8 @@ body {
                 height: fit-content;
 
                 @include breakpoints-down(medium) {
-                    height: 9.6rem;
                     margin: .5rem auto;
-                    margin-bottom: 5.5rem;
+                    margin-bottom: 4rem;
                 }
 
                 &:hover {
@@ -120,6 +111,10 @@ body {
                 z-index: 2;
                 border-radius: 4px; border: .5px solid #0000002e;
                 box-shadow: 0 0 5px #797979;
+
+                @include breakpoints-down(medium) {
+                    top: 5.8rem;
+                }
 
                 &::before {
                     content: url('/static/img/Base/eyeEmoji.png');
