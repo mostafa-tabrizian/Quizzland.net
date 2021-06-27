@@ -17,8 +17,8 @@
 
     <div class="quizzes wrapper-med grid grid-jc-c">
 
-        {% for category in categories %}
-            <ul class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+        <ul class="categoryList quizContainer__category__inner flex flex-jc-fe flex-ai-c wrapper-med">
+            {% for category in categories %}
                 <li>
                     <article class="flex tx-al-r">
                         {% with category.subCategory|titleToImgName:' ' as imgTitle %}
@@ -42,9 +42,8 @@
                         {% endwith %}
                     </article>
                 </li>
-            </ul>
-
-        {% endfor %}
+            {% endfor %}
+        </ul>
     </div>
 
     {% include 'app/base/pageTravel.html' %}

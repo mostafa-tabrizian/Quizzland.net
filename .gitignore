@@ -17,6 +17,6 @@ settings.py
 *.png
 *.gif
 *.svg
+*.webp
 Quizzland
 Quizzland/settings.py
-*.webp
