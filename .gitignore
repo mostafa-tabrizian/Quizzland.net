@@ -19,3 +19,4 @@ settings.py
 *.svg
 Quizzland
 Quizzland/settings.py
+*.webp

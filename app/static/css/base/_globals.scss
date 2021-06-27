@@ -483,7 +483,6 @@ input {
                 position: relative;
                 transition: all .2s ease-in-out;
                 border-radius: .65rem;
-                height: 11rem;
 
                 @include breakpoints-down(medium) {
                     height: 9.6rem;
@@ -534,7 +533,8 @@ input {
 
                 span {
                     padding-right: .5rem;
-                    overflow-wrap: anywhere;
+                    overflow-wrap: break-word;
+                    text-align: justify;
                     padding-left: 1rem; padding-right: 1rem;
                     direction: rtl;
                     font-size: $font-sm;
