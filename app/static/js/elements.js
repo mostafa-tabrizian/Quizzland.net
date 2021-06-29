@@ -84,6 +84,7 @@ const quiz__autoQuestionChangerSwitch = document.querySelector('.quiz__autoQuest
 const quiz__autoQuestionChangerSwitch__innerBtn = document.querySelector('.quiz__autoQuestionChangerSwitch__innerBtn')
 const quiz__container = document.querySelectorAll('.quiz__container')
 const quiz__questionCounter__totalAnswered = document.querySelector('.quiz__questionCounter__totalAnswered')
+const quiz__imgQuestion = document.querySelectorAll('.quiz__imgQuestion')
 const quiz__options = document.querySelectorAll('input[name=answer]')
 const quiz__options__imgLabel = document.querySelectorAll('.quiz__options__imgLabel')
 const quiz__options__textLabelAll = document.querySelectorAll('.quiz__options__textLabel')

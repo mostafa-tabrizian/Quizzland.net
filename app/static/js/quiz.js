@@ -196,6 +196,16 @@ if (quiz__questions) {
         return optionUserChose
     }
 
+    const removeEmptyImgQuestion = () => {
+        quiz__imgQuestion.forEach(each => {
+            const src = each.querySelector('img').src
+            if (src.includes('NotExist')) {
+                each.remove()
+            }
+        })
+    }
+    removeEmptyImgQuestion()
+
     const removeEmptyImGifText = () => {
         quiz__answerImGif.forEach(each => {
             const src = each.querySelector('img').src
