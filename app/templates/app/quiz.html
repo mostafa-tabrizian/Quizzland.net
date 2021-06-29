@@ -12,9 +12,10 @@
         <div class="quiz__hider flex pos-rel">
             {% for questionDetail in quiz_Question %}
                 <div class="quiz__container pos-rel darkGls">
-                    {% if not questionDetail.question %}
+                    {% if questionDetail.question_img %}
                         <img class="quiz__imgQuestion" src="{{ questionDetail.question_img.url }}" loading='lazy'>
-                    {% else %}
+                    {% endif %}
+                    {% if questionDetail.question %}
                         <p class='quiz__question'> {{ questionDetail.question }} </p>
                     {% endif %}
                     
