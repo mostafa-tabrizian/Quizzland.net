@@ -46,7 +46,7 @@
 
                     <div class="quiz__answerImGif noVis">
                         {% if questionDetail.answer_imGif %}
-                            <img src="{{ questionDetail.answer_imGif.url }}" alt="quiz-question-WebP">
+                            <img src="{{ questionDetail.answer_imGif.url }}" alt="quiz-question-WebP" loading="lazy">
                         {% endif %}
                     </div>
                 </div>
@@ -55,9 +55,8 @@
         </div>
 
         <div class='quiz__bottomQuestionChanger__container pos-abs'  id="quiz__answerDetail">
-            <button class="quiz__bottomQuestionChanger fade-out quiz__bottomQuestionChanger__next" aria-label="Next Question"></button>
+            <button class="quiz__bottomQuestionChanger quiz__bottomQuestionChanger__next fade-out" aria-label="Next Question"></button>
         </div>
-            <!-- <button class="quiz__questionChanger pos-abs quiz__questionChanger__next fade-in" aria-label='Next Question'></button> -->
     </div>
 
 

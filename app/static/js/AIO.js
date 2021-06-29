@@ -219,13 +219,12 @@ ifOptionEmptyRemoveIt(quiz__options__textLabelAll)
 
 if (quiz__questions) {
     typeOfQuiz = whatIsTypeOfQuiz()
-
     const numberOfQuestions = quiz__container.length
     let currentQuestion = 1
 
     quiz__numberOfQuestions.innerHTML = `تعداد سوال ها&nbsp:&nbsp&nbsp${numberOfQuestions}`
     quiz__questionCounter__totalAnswered.innerHTML = currentQuestion
-    
+
     const pauseTheFunctionOfChangingQuestions = () => {
         quiz__questionChanger__next.classList.add('pointerOff')
         quiz__bottomQuestionChanger__next.classList.add('pointerOff')
@@ -277,7 +276,6 @@ if (quiz__questions) {
         plusOneToAnsweredQuestionsIfItsNotTheLast()
         shouldLetTheUserChooseAnotherOption('let')
         hideImGifTextAnswer()
-        fadeOut(quiz__bottomQuestionChanger__next)
         document.getElementById('quiz__head').scrollIntoView()
 
         quiz__container.forEach(each => {
@@ -290,7 +288,7 @@ if (quiz__questions) {
     const goToAnotherQuestionWithDelay = (changeToWhat) => {
         setTimeout(() => {
             goToAnotherQuestion(changeToWhat)
-        }, 5000);
+        }, 3500);
         
     }
 
@@ -389,6 +387,7 @@ if (quiz__questions) {
                 checkUserAnswer(each)
             }
             if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
+                fadeOut(quiz__bottomQuestionChanger__next)
                 goToAnotherQuestionWithDelay(next)
             }
         })
@@ -399,7 +398,6 @@ if (quiz__questions) {
         if (switchBtn.classList.contains('quiz__autoQuestionChangerSwitch__innerBtn__switched')) {
             quiz__autoQuestionChangerSwitch__innerBtn.classList.remove('quiz__autoQuestionChangerSwitch__innerBtn__switched')
             fadeIn(quiz__questionChanger__next)
-            fadeIn(quiz__bottomQuestionChanger__next)
 
             if (typeOfQuiz == 'pointy') {
                 fadeIn(quiz__questionChanger__last)
