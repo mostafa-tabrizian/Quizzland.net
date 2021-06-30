@@ -198,7 +198,7 @@ if (quiz__questions) {
 
     const removeEmptyImgQuestion = () => {
         quiz__imgQuestion.forEach(each => {
-            const src = each.querySelector('img').src
+            const src = each.src
             if (src.includes('NotExist')) {
                 each.remove()
             }
