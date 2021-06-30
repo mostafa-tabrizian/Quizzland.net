@@ -292,7 +292,7 @@ if (quiz__questions) {
     const goToAnotherQuestionWithDelay = (changeToWhat) => {
         setTimeout(() => {
             goToAnotherQuestion(changeToWhat)
-        }, 3500);
+        }, 5000);
         
     }
 
@@ -510,6 +510,7 @@ const calculateResult_pointy = (FinalTitleOfQuiz) => {
 }
 
 log('qz')
+
 
 
 // !############################################################################################################################################ SCRIPT

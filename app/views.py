@@ -413,3 +413,17 @@ def robotsText(request):
         "Disallow: /junk/",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+def owlPage(request):
+    template = loader.get_template('app/specialPage.html')
+    context = {
+        'who': 'owlPage.webp'
+    }
+    return HttpResponse(template.render(context))
+
+def zeynabPage(request):
+    template = loader.get_template('app/specialPage.html')
+    context = {
+        'who': 'zeynabPage.webp'
+    }
+    return HttpResponse(template.render(context))

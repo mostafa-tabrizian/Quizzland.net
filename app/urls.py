@@ -34,5 +34,8 @@ urlpatterns = [
     url('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     url(r'^ajax/doesExistInNewsletterUsers/$', doesExistInNewsletterUsers, name='doesExistInNewsletterUsers'),
+
+    path('welcome-owl', owlPage),
+    path('welcome-zeynab', zeynabPage)
     
 ]

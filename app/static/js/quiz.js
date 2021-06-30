@@ -172,7 +172,7 @@ if (quiz__questions) {
     const goToAnotherQuestionWithDelay = (changeToWhat) => {
         setTimeout(() => {
             goToAnotherQuestion(changeToWhat)
-        }, 3500);
+        }, 5000);
         
     }
 
