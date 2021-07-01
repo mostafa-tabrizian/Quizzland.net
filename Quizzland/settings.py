@@ -20,11 +20,17 @@ SECURE_HSTS_SECONDS = 31536000 # 1 year
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
+# Reffer
+SECURE_REFERRER_POLICY = "strict-origin"
+
+# XSS
+SECURE_BROWSER_XSS_FILTER = True
+
 
 ALLOWED_HOSTS = [
     'www.quizzland.net', 'quizzland.net', 
     'www.quizzland.ir', 'quizzland.ir',
-    # '127.0.0.1', 'localhost'
+    '127.0.0.1', 'localhost'
 ]
 
 INSTALLED_APPS = [
@@ -134,14 +140,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    # os.path.join(BASE_DIR, 'media')
+    os.path.join(BASE_DIR, 'media')
 ] 
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 STATIC_URL = '/static/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
-# MEDIA_URL = /'/media/'
+# MEDIA_URL = '/media/'
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_KEY')
