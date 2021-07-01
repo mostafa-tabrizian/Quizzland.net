@@ -2375,6 +2375,11 @@ body {
   margin-right: 1rem;
 }
 
+.tryAgain__btn button {
+  font-size: 0.98rem;
+  font-weight: 300;
+}
+
 .resultQuizPointy {
   display: block;
   line-height: 2;

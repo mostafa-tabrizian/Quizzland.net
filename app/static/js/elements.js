@@ -108,6 +108,8 @@ const resultQuizPointy__share__btn = document.querySelector('.resultQuizPointy__
 
 const countingResult = document.querySelector('.countingResult')
 
+const tryAgain__btn = document.querySelector('.tryAgain__btn')
+
 const pleaseUseChrome = document.querySelector('.pleaseUseChrome')
 
 const log = (code) => {

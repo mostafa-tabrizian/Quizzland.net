@@ -108,6 +108,8 @@ const resultQuizPointy__share__btn = document.querySelector('.resultQuizPointy__
 
 const countingResult = document.querySelector('.countingResult')
 
+const tryAgain__btn = document.querySelector('.tryAgain__btn')
+
 const pleaseUseChrome = document.querySelector('.pleaseUseChrome')
 
 const log = (code) => {
@@ -515,7 +517,6 @@ log('qz')
 
 // !############################################################################################################################################ SCRIPT
 
-
 const takeParameterFromUrl = (parameter) => {
     const urlParams = new URLSearchParams(window.location.search);
     const parameterValue = urlParams.get(parameter)
@@ -888,6 +889,11 @@ if (resultQuizPointy__share__btn) {
 
         result__share__message.classList.remove('noVis')
     })
+}
+
+// TryAgain btn link
+if (tryAgain__btn) {
+    tryAgain__btn.href = localStorage.getItem('lastQuiz')
 }
 
 // --------------------------------------------------------------------

@@ -372,6 +372,11 @@ if (resultQuizPointy__share__btn) {
     })
 }
 
+// TryAgain btn link
+if (tryAgain__btn) {
+    tryAgain__btn.href = localStorage.getItem('lastQuiz')
+}
+
 // --------------------------------------------------------------------
 
 const nightThemeCss = document.createElement('link')
