@@ -336,8 +336,8 @@ if (quiz__questions) {
             }
         })
         quiz__answerText.forEach(each => {
-            const element = each.innerText
-            if (element == '') {
+            const element = (each.innerText).trim()
+            if (element == "") {
                 each.remove()
             }
         })
@@ -619,7 +619,7 @@ findTheSortByBtnName = {
 }
 
 const numberOfControllerBtn = sort__controller__btn.length
-let lastBtnThatClicked = sort__controller__btn[numberOfControllerBtn + 1]
+let lastBtnThatClicked = sort__controller__btn[numberOfControllerBtn - 1]
 let lastElementThatWereShown = sort__all
 
 const disableTheSortController = () => {

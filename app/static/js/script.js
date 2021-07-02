@@ -101,7 +101,7 @@ findTheSortByBtnName = {
 }
 
 const numberOfControllerBtn = sort__controller__btn.length
-let lastBtnThatClicked = sort__controller__btn[numberOfControllerBtn + 1]
+let lastBtnThatClicked = sort__controller__btn[numberOfControllerBtn - 1]
 let lastElementThatWereShown = sort__all
 
 const disableTheSortController = () => {
