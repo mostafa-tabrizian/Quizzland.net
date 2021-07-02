@@ -2,11 +2,6 @@ from django import template
 
 register = template.Library()
 
-@register.filter(name='listMaker')
-def listMaker(str, splitWithEach):
-    splitted = str.split(f'{splitWithEach}')
-    return splitted
-
 @register.filter(name='titleToImgName')
 def titleToImgName(str, splitWithEach):
     splitted = str.split(splitWithEach)
@@ -41,8 +36,3 @@ def makeTheDatePublishReadyToShow(date):
 @register.filter(name='toInteger')
 def toInteger(str):
     return int(str)
-
-@register.filter(name='makeTheDirValidForImg')
-def makeTheDirValidForImg(oldHref):
-    newHref = str(oldHref)[3:]
-    return newHref

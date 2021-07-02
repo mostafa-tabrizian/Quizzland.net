@@ -143,7 +143,7 @@ class Questions(models.Model):
     id = models.AutoField(primary_key=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=200, null=False, blank=False, default=None, help_text='same quiz title')
-    question = models.CharField(max_length=100, null=True, blank=True, default=None)
+    question = models.CharField(max_length=150, null=True, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_1 = models.CharField(max_length=100, null=False, blank=True, default=None)
     option_2 = models.CharField(max_length=100, null=False, blank=True, default=None)

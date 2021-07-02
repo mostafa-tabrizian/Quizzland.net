@@ -336,8 +336,8 @@ if (quiz__questions) {
             }
         })
         quiz__answerText.forEach(each => {
-            const element = (each.innerHTML).trim()
-            if (element == 'None') {
+            const element = each.innerText
+            if (element == '') {
                 each.remove()
             }
         })
@@ -514,7 +514,6 @@ const calculateResult_pointy = (FinalTitleOfQuiz) => {
 log('qz')
 
 
-
 // !############################################################################################################################################ SCRIPT
 
 const takeParameterFromUrl = (parameter) => {
@@ -619,7 +618,8 @@ findTheSortByBtnName = {
     'همه': sort__all,
 }
 
-let lastBtnThatClicked = sort__controller__btn[4]
+const numberOfControllerBtn = sort__controller__btn.length
+let lastBtnThatClicked = sort__controller__btn[numberOfControllerBtn + 1]
 let lastElementThatWereShown = sort__all
 
 const disableTheSortController = () => {

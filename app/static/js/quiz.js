@@ -214,8 +214,8 @@ if (quiz__questions) {
             }
         })
         quiz__answerText.forEach(each => {
-            const element = (each.innerHTML).trim()
-            if (element == 'None') {
+            const element = each.innerText
+            if (element == '') {
                 each.remove()
             }
         })
