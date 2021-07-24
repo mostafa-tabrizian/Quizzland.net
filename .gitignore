@@ -1,16 +1,13 @@
 *__pycache__*
 *.pyc
-node_modules
 htmlcov
 .coverage
 QuizLand.session.sql
 .vscode
 geckodriver
-venv_dev
+.venv-Quizzland-React
 .gitignore
-monthlyViewsData.csv
 .env
-venv
 migrations
 settings.py
 *.jpg
@@ -18,5 +15,3 @@ settings.py
 *.gif
 *.svg
 *.webp
-Quizzland
-Quizzland/settings.py
