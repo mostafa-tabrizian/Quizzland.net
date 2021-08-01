@@ -7,7 +7,7 @@ import {
     Switch
 } from 'react-router-dom'
 
-import Footer from './components/footer'
+import HotFooter from './components/hotFooter'
 import Quiz from './components/quiz'
 import Result from './components/result'
 
@@ -23,7 +23,7 @@ const QuizApp = () => {
                     <Route path='/result' component={Result} />
                 </Switch>
                 
-                <Footer />
+                <HotFooter />
 
             </Router>
 

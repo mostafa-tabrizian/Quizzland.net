@@ -7,7 +7,7 @@ import {
     Switch
 } from 'react-router-dom'
 
-import Footer from './components/footer'
+import HotFooter from './components/hotFooter'
 import SubCategory from './components/subCategory'
 
 const SubCategoryApp = () => {
@@ -19,7 +19,7 @@ const SubCategoryApp = () => {
                     <Route path='/category/:category/:subCategory' component={SubCategory} />
                 </Switch>
                 
-                <Footer />
+                <HotFooter />
 
             </Router>
         </React.Fragment>
