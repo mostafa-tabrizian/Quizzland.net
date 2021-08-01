@@ -1,0 +1,106 @@
+.quizContainer {
+    flex-wrap: wrap;
+    direction: ltr;
+    
+    &__header {
+        justify-content: space-between;
+        
+        a {
+            padding: 0.3rem 1rem;
+            background: transparent;
+            box-shadow: 0 8px 18px #0000001f;
+        }
+    }
+
+    li {
+        margin-bottom: 1.5rem; margin-left: .75rem; margin-right: .75rem;
+        height: fit-content;
+    }
+    
+    article {
+        padding-bottom: 1rem !important;
+        border-radius: .85rem !important;
+        backdrop-filter: blur(44px) !important;
+        position: relative;
+    }
+    
+    &__trans {
+        background: transparent !important;
+    }
+    
+    &__bg {
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: #ffffff6c !important;
+        }
+
+        @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: #ffffffe7 !important;
+        }
+    }
+
+    a {
+        box-shadow: none !important;
+    }
+    
+    img {
+        width: 14rem; height: 8rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 22px 1px #0000005c;
+
+        @include breakpoints-down(medium) {
+            width: 11rem; height: 6.5rem;
+        }
+    }
+
+    span {
+        padding-right: .5rem;
+        overflow-wrap: break-word;
+        text-align: justify;
+        padding-left: 1rem; padding-right: 1rem;
+        direction: rtl;
+        font-size: 1.125rem;
+        font-weight: 300;
+        width: 14rem;
+        margin-top: 1rem;
+
+        @include breakpoints-down(medium) {
+            width: 11rem;
+        }
+    }
+
+    &__views {
+        position: absolute;
+        left: 0.5rem; top: 7.2rem;
+        background: #eaeaea;
+        padding: 0 0.5rem;
+        font-size: 0.9rem;
+        border-radius: 4px; border: .5px solid #0000002e;
+
+        @include breakpoints-down(medium) {
+            top: 5.8rem;
+        }
+
+        &::before {
+            content: url('/static/img/eyeEmoji.png');
+            position: relative;
+            top: 0.2rem;
+            margin-right: 0.2rem;
+        }
+    }
+
+    &__date {
+        position: absolute;
+        left: 8.5rem;
+        top: 7.2rem;
+        background: #eaeaea;
+        padding: 2px 0.5rem;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        border: .5px solid #0000002e;
+
+        @include breakpoints-down(medium) {
+            top: 5.8rem;
+            left: 5.3rem;
+        }
+    }
+}
