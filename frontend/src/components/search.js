@@ -68,7 +68,7 @@ const Search = (props) => {
                             resultCounter++
                             return (
                                 <li key={quiz.key}>
-                                    <Link className="header__search__result__quizzes__item tx-al-r" to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
+                                    <Link className="header__search__result__quizzes__item tx-al-r" to={`/quiz/${replaceFunction(quiz.subCategory, ' ', '-')}?t=${replaceFunction(quiz.title, ' ', '-')}`}>
                                         { quiz.title }
                                     </Link>
                                 </li>
