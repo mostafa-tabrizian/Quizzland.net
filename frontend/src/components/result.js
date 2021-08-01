@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { log, replaceFunction } from './base'
 import BackBtn from './backBtn'
-import HotHeader from './headerWithHotLink'
+import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 

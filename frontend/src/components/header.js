@@ -145,8 +145,8 @@ const Header = (props) => {
                     </div>
 
                     <ul className={`header__categories ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${categoryNavigationOpen && 'subHeader__open'}`}>
-                        <li><Link to="/category/movie-series">🎬 فیلم و سریال</Link></li>
-                        <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
+                        <li><a href="/category/movie-series">🎬 فیلم و سریال</a></li>
+                        <li><a href="/category/celebrity">✨ سلبریتی</a></li>
                     </ul>
                     <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen && 'subHeader__open'}`}>
                         <li><Link to="/sort?q=newest">⏳ جدیدترین ها</Link></li>
@@ -168,8 +168,8 @@ const Header = (props) => {
                             <div className="header__menu__inner__category">
                                 <h4>کتگوری ها</h4>
                                 <ul>
-                                    <li><Link to="/category/movie-series">🎬 فیلم و سریال</Link></li>
-                                    <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
+                                    <li><a href="/category/movie-series">🎬 فیلم و سریال</a></li>
+                                    <li><a href="/category/celebrity">✨ سلبریتی</a></li>
                                 </ul>
                             </div>
                             <div className="header__menu__inner__nav">

@@ -16,8 +16,6 @@ const Contact           = React.lazy(() => import('./components/contact'))
 const Ads               = React.lazy(() => import('./components/ads'))
 const Support           = React.lazy(() => import('./components/support'))
 const PrivacyPolicy     = React.lazy(() => import('./components/privacyPolicy'))
-const Category          = React.lazy(() => import('./components/category'))
-const SubCategory       = React.lazy(() => import('./components/subCategory'))
 const Search            = React.lazy(() => import('./components/searchMoreResult'))
 const Sort              = React.lazy(() => import('./components/sort'))
 const pageNotFound_404  = React.lazy(() => import('./components/pageNotFound_404'))
@@ -40,8 +38,6 @@ const App = () => {
                         <Route path='/ads' component={Ads} />
                         <Route path='/support' component={Support} />
                         <Route path='/privacy-policy' component={PrivacyPolicy} />
-                        <Route path='/category/:category' exact component={Category} />
-                        <Route path='/category/:category/:subCategory' component={SubCategory} />
                         <Route path='/search' component={Search} />
                         <Route path='/sort' component={Sort} />
                         <Route path='/makeMonthlyRecord19931506' component={monthlyRecord} />

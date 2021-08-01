@@ -68,7 +68,7 @@ const Search = (props) => {
                             resultCounter++
                             return (
                                 <li key={quiz.key}>
-                                    <Link className="header__search__result__quizzes__item tx-al-r" to={`/quiz/${replaceFunction(quiz.subCategory, ' ', '-')}?t=${replaceFunction(quiz.title, ' ', '-')}`}>
+                                    <Link className="header__search__result__quizzes__item tx-al-r" to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
                                         { quiz.title }
                                     </Link>
                                 </li>
@@ -87,11 +87,11 @@ const Search = (props) => {
                 const category = categories[0]
                 return (
                     <div className="header__search__result__category__item">
-                        <Link to={`/category/${replaceFunction(category.title, ' ', '-')}`}>
+                        <Link to={`/category/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
                             <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوئیز های ${category.title_far}`} />
                         </Link>
                         <h5 className='tx-al-c'>
-                            <Link to={`/category/${replaceFunction(category.title, ' ', '-')}?c=${category.category}&p=0&st=newest&nr=16`}>
+                            <Link to={`/category/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
                                 {category.subCategory}
                             </Link>
                         </h5>

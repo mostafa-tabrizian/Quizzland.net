@@ -5,7 +5,7 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 import { log, replaceFunction } from './base'
-import HotHeader from './headerWithHotLink'
+import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
 
 let quiz = 'null'

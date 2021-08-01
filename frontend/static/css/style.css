@@ -629,7 +629,8 @@ input {
 
 .pageTravel__pages > button, .pageTravel__pages span {
   background: none;
-  margin-right: 1.215rem;
+  margin-right: .6rem;
+  margin-left: .6rem;
 }
 
 .pageTravel__pages__curr {

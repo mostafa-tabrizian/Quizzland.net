@@ -6,7 +6,7 @@ import Header from './header'
 import PageTravel from './pageTravel'
 import QuizContainer from './quizContainer'
 
-import { takeParameterFromUrl } from './base'
+import { log, takeParameterFromUrl } from './base'
 
 const Sort = () => {
     const [loadState, setLoadState] = useState()
@@ -15,7 +15,7 @@ const Sort = () => {
     const [sortType, setSortType] = useState()
     const [sortCategory, setSortCategory] = useState()
     const [pageTravel, setPageTravel] = useState([])
-    const [numberOfResult, setNumberOfResult] = useState(16)
+    const [numberOfResult, setNumberOfResult] = useState(8)
     const [offset, setOffset] = useState(0)
 
     useEffect(() => {
@@ -28,6 +28,10 @@ const Sort = () => {
         listQuizzes()
         setLoadState(true)
     }, [sortType])
+
+    useEffect(() => {
+        getQuizzes()
+    }, [offset])
 
     const componentChangeDetector = () => {
         (function(history){
@@ -57,9 +61,9 @@ const Sort = () => {
             case 'newest':
                 setSortTitle('جدیدترین کوئیز ها')
                 if (sortCategory) {
-                    quizzes = await axios.get(`/dbQuizzland$M19931506/new_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbQuizzland$M19931506/new_quiz/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axios.get(`/dbQuizzland$M19931506/new_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbQuizzland$M19931506/new_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)

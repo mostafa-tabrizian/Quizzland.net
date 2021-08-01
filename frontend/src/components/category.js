@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
-import Header from './header'
+import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
 
 import { log, replaceFunction, viewsFormat } from './base'
@@ -67,7 +67,7 @@ const Category = (props) => {
                                 <div>
                                     <img src={`${category.thumbnail}`} alt={`${category.subCategory}} | ${category.title}`} loading='lazy' />
                                 </div>
-                                <div className="quizContainer__views">{viewsFormat(category.views)}</div>
+                                {/* <div className="quizContainer__views">{viewsFormat(category.views)}</div> */}
                                 <div className="quizContainer__date">{replaceFunction(category.publish.slice(0, 10), '-', '/')}</div>
                                 <span className="quizContainer__title quizContainer__title__noViews flex">
                                     { category.title }
@@ -97,7 +97,7 @@ const Category = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <Header
+            <HotHeader
                 title={`کوئيزلند | ${currentTitle} `}
                 description={`کوئيزلند ${currentTitle} کوئيز های`}
                 keywords={`${currentTitle} بهترین کوئيز های , ${currentTitle} کوئيز های`}

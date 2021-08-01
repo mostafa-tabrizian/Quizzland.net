@@ -11,7 +11,13 @@ def index(request):
     return render(request, "frontend/index.html")
 
 def quiz(request, title):
-    return render(request, "frontend/quiz.html")  
+    return render(request, "frontend/quiz.html")
+
+def category(request, category):
+    return render(request, "frontend/category.html")
+
+def subCategory(request, category, subCategory):
+    return render(request, "frontend/subCategory.html")
 
 class new_quiz(viewsets.ModelViewSet):
     queryset = Quizzes.objects.order_by('-publish').all()

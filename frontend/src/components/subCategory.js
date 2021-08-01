@@ -4,7 +4,7 @@ import axios from 'axios'
 import Tools from './tools'
 import PageTravel from './pageTravel'
 import { log, replaceFunction, takeParameterFromUrl } from './base'
-import Header from './header'
+import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 
@@ -64,7 +64,7 @@ const SubCategory = (props) => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header
+            <HotHeader
                 colorOfHeader='header__white'
                 title={`کوئيزلند | کوئیز های ${subCategory}`}
                 description={`کوئيزلند ${subCategory} کوئيز های`}

@@ -116,19 +116,19 @@ const Index = () => {
             <h2 className="category__title tx-al-r wrapper-med">کتگوری</h2>
 
             <div className="category flex flex-ai-c flex-jc-fe wrapper-med" id="category">
-                <Link to="/category/movie-series?q=newest">
+                <a href="/category/movie-series?q=newest">
                         <img src={category_movieSeries} alt="کوئیز کتگوری دسته ی فیلم و سریال مربوط به سوالات در مورد کارکتر شخصیت فیلم ها یا داستان آن" />
                         <span className='tx-al-c'>🎬 فیلم و سریال </span>
-                </Link>
-                <Link to="/category/celebrity?q=newest">
+                </a>
+                <a href="/category/celebrity?q=newest">
                     <img src={category_celebrity} alt="کوئیز های کتگوری دسته ی سلبریتی مربوط به افراد مشهور مانند بازیگر و خواننده که مربوط به سوالات در مورد اطلاعات شخصی آنها یا فعالیت آنهاست" />
                     <span className='tx-al-c'>✨ سلبریتی </span>
-                </Link>
+                </a>
             </div>
 
             <div className="space-med">
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                    <Link className="btn" to="sort?q=newest&c=celebrity">...نمایش بیشتر</Link>
+                    <a className="btn" href="sort?q=newest&c=celebrity">...نمایش بیشتر</a>
                     <h2>سلبریتی</h2>
                 </div>
                 <ul className="quizContainer flex flex-jc-fs flex-ai-fe wrapper-med">
@@ -138,7 +138,7 @@ const Index = () => {
 
             <div className="space-med">
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                    <Link className="btn" to="sort?q=newest&c=movie-series">...نمایش بیشتر</Link>
+                    <a className="btn" href="sort?q=newest&c=movie-series">...نمایش بیشتر</a>
                     <h2>فیلم و سریال</h2>
                 </div>
                 <ul className="quizContainer flex flex-jc-fs flex-ai-fe wrapper-med">
