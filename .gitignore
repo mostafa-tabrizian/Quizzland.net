@@ -5,7 +5,7 @@ htmlcov
 QuizLand.session.sql
 .vscode
 geckodriver
-.venv-Quizzland-React
+venv-QL
 .gitignore
 .env
 migrations
