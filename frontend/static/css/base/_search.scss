@@ -1,0 +1,189 @@
+.header__search {
+    position: absolute;
+    left: 2rem;
+    z-index: 4;
+
+    &__opener {
+        background: url('/static/img/srch-black.svg') no-repeat center center;
+        width: 1.5rem;
+        height: 2rem;
+        margin-right: 4rem;
+        transform: translateY(-.1rem);
+        
+        &__bg {
+            width: 100vw; height: 100vh;
+            top: 0; left: 0;
+            position: absolute;
+            z-index: 3;
+            background:rgba(0, 0, 0, 0.75);
+        }
+    }
+    
+    &__input {
+        border: None;
+        font-family: $font-pr;
+        font-size: $font-sm;
+        backdrop-filter: blur(5px);
+        height: 2.125rem;
+        padding-right: 1.3125rem;
+        width: 75%;
+        z-index: 4;
+        border-radius: 15px;
+        box-shadow: 0 15px 22px #0000002a;
+        
+        @include breakpoints-down(medium) {
+            opacity: 0; visibility: hidden;
+            position: fixed;
+            transform: translate(-50%);
+            left: 50%; top: 10%;
+            height: 4.125rem;
+            font-size: $font-l;
+            background:rgba(0, 0, 0, 0.35);
+        }
+
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: #ffffff94;
+        }
+
+        @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: #fffffff6;
+        }
+
+        &::placeholder {
+            color: black
+        }
+    }
+
+    &__result {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        direction: rtl;
+        min-height: 20rem;
+        white-space: pre-line;
+        position: absolute;
+        left: 0rem;
+        top: 3rem;
+        width: 40rem;
+        padding-top: 1rem;
+        border-radius: 15px;
+        box-shadow: 0 0 40px #00000033;
+        backdrop-filter: blur(22px);
+
+        
+        @include breakpoints-down(medium) {
+            display: grid;
+            grid-template-columns: 1fr;
+            box-shadow: inherit;
+            top: 8rem;
+            width: 24rem;
+            min-height: 30rem;
+            flex-wrap: wrap;
+        }
+
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: #ffffff94;
+        }
+
+        @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: #fffffff6;
+        }
+    
+        &__category {    
+            @include breakpoints-down(medium) {
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            h4 {
+                width: 100%;
+    
+                @include breakpoints-down(medium) {
+                    text-align: center;
+                    margin-bottom: 1.125rem;
+                }
+            }
+
+            &__noCategoryFound {
+                border-radius: 15px;
+            }
+        
+            &__item {
+                width: 12.5rem; height: 16.2135rem;
+                margin-right: 2rem;
+        
+                @include breakpoints-down(medium) {
+                    width: 10rem; height: 14.75rem;
+                }
+        
+                img {
+                    width: 100%; height: 100%;
+                    object-fit: cover;
+                    border: 3px solid $gray;
+                    border-radius: 40px;
+                    filter: brightness(50%);
+                    box-shadow: 0 5px 16px #0000006b;
+                }
+        
+                h5 {
+                    transform: translateY(-13.125rem);
+                    color: $white;
+                    font-size: $font-l;
+    
+                    a {
+                        &:hover {
+                            color: inherit;
+                        }
+                    }
+                }
+            }
+        }
+    
+        &__quizzes {
+            @include breakpoints-down(medium) {
+                width: 20rem;
+            }
+
+            ul {
+                margin-right: 1.25rem;
+    
+                li {
+                    font-size: $font-sm - .06;
+
+                    a {
+                        width: 23rem;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
+                }
+            }
+            
+            &__item {
+                display: block;
+                margin-bottom: 1rem;
+    
+                @include breakpoints-down(medium) {
+                    width: 20rem;
+                }
+    
+                &::before {
+                    content: '◾';
+                    position: relative;
+                    top: 0.2rem;
+                    margin-left: 1rem;
+                }
+            }
+    
+            &__seeMore {
+                position: absolute;
+                bottom: 1rem;
+                left: 1rem;
+                width: 7rem;
+    
+                @include breakpoints-down(medium) {
+                    top: 2rem;
+                }
+            }
+        }
+    }
+}

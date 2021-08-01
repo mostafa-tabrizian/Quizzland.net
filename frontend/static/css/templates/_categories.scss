@@ -1,0 +1,11 @@
+.lowBrightnessBackground {
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #0000004d;
+        z-index: 0;
+    }
+}
