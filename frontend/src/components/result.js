@@ -98,11 +98,11 @@ const Result = (props) => {
                 </div>
                 <div className="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
                     <div className="result__img flex flex-jc-c flex-ai-c">
-                        {score > 80 && <img className="result__img20"  src={`${state.quiz.GIF100}`} alt={state.quiz.GIF2}  />}
-                        {score > 60 && <img className="result__img40"  src={`${state.quiz.GIF80}`}  alt={state.quiz.GIF4}  />}
-                        {score > 40 && <img className="result__img60"  src={`${state.quiz.GIF60}`}  alt={state.quiz.GIF6}  />}
-                        {score > 20 && <img className="result__img80"  src={`${state.quiz.GIF40}`}  alt={state.quiz.GIF8}  />}
-                        {score >= 0 && <img className="result__img100" src={`${state.quiz.GIF20}`}  alt={state.quiz.GIF10} />}
+                        {100 >= score >= 80 && <img className="result__img20"  src={`${state.quiz.GIF100}`} alt={state.quiz.GIF2}  />}
+                        {80 > score >= 60 && <img className="result__img40"  src={`${state.quiz.GIF80}`}  alt={state.quiz.GIF4}  />}
+                        {60 > score >= 40 && <img className="result__img60"  src={`${state.quiz.GIF60}`}  alt={state.quiz.GIF6}  />}
+                        {40 > score >= 20 && <img className="result__img80"  src={`${state.quiz.GIF40}`}  alt={state.quiz.GIF8}  />}
+                        {20 > score >= 0 && <img className="result__img100" src={`${state.quiz.GIF20}`}  alt={state.quiz.GIF10} />}
                     </div>
                     <div className="result__score">{resultScore}</div>
                     <div className="result__detail tx-al-r">
