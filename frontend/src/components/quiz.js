@@ -53,8 +53,7 @@ const Quiz = (props) => {
     }
 
     const setBackground = () => {
-        document.getElementById('html').style=`background: url('${quiz.background}') center center no-repeat fixed !important;`
-        document.getElementById('html').style='background-size: 100vw 100vh;'
+        document.getElementById('html').style=`background: url('${quiz.background}') center/cover no-repeat fixed !important`
     } ;
     
     const grabData = async () => {
