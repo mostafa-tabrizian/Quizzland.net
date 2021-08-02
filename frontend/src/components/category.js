@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
@@ -63,7 +62,7 @@ const Category = (props) => {
                 return (
                     <li key={category.id}>
                         <article className={`flex tx-al-r quizContainer__trans`}>
-                            <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}  >
+                            <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}  >
                                 <div>
                                     <img src={`${category.thumbnail}`} alt={`${category.subCategory}} | ${category.title}`} loading='lazy' />
                                 </div>
@@ -72,7 +71,7 @@ const Category = (props) => {
                                 <span className="quizContainer__title quizContainer__title__noViews flex">
                                     { category.title }
                                 </span>
-                            </Link>
+                            </a>
                         </article>
                     </li>
                 )
