@@ -9,7 +9,6 @@ venv-QL
 .gitignore
 .env
 migrations
-settings.py
 *.jpg
 *.png
 *.gif

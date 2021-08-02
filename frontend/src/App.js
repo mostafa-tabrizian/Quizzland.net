@@ -20,8 +20,8 @@ const Search            = React.lazy(() => import('./components/searchMoreResult
 const Sort              = React.lazy(() => import('./components/sort'))
 const pageNotFound_404  = React.lazy(() => import('./components/pageNotFound_404'))
 const monthlyRecord     = React.lazy(() => import('./components/monthlyRecord'))
-const welcomePage       = React.lazy(() => import('./components/welcomePage'))
-
+const welcomeOwl       = React.lazy(() => import('./components/welcomeOwl'))
+const welcomeZeynab       = React.lazy(() => import('./components/welcomeZeynab'))
 
 const App = () => {
     return (
@@ -41,7 +41,8 @@ const App = () => {
                         <Route path='/search' component={Search} />
                         <Route path='/sort' component={Sort} />
                         <Route path='/makeMonthlyRecord19931506' component={monthlyRecord} />
-                        <Route path='/welcome/:target' component={welcomePage} />
+                        <Route path='/welcomeOwl' component={welcomeOwl} />
+                        <Route path='/welcomeZeynab' component={welcomeZeynab} />
                         <Route component={pageNotFound_404} />
                     </Switch>
                     

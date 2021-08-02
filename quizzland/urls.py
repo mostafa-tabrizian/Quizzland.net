@@ -3,8 +3,6 @@ from django.urls import path, include
 from rest_framework import routers
 from frontend import views
 from django.contrib.sitemaps.views import sitemap
-from django.conf.urls.static import static
-from django.conf import settings
 from .sitemaps import *
 
 sitemaps = {
@@ -33,3 +31,5 @@ urlpatterns = [
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('', include('frontend.urls')),   
 ]
+
+handler404 = "frontend.views.handler404"

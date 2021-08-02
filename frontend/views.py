@@ -1,6 +1,4 @@
-from django.conf import settings
 from django.shortcuts import render
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from .models import *
 from .functions import *
 from rest_framework import viewsets
@@ -18,6 +16,9 @@ def category(request, category):
 
 def subCategory(request, category, subCategory):
     return render(request, "frontend/subCategory.html")
+
+def handler404(request, exception):
+    return render(request, 'frontend/404.html', status=404)
 
 class new_quiz(viewsets.ModelViewSet):
     queryset = Quizzes.objects.order_by('-publish').all()

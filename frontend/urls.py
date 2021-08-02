@@ -15,6 +15,6 @@ urlpatterns = [
     path('search', index),
     path('sort', index),
     path('makeMonthlyRecord19931506', index),
-    path('welcome/<target>', index),
-    path('pageNotFound ', index),
+    path('welcomeOwl', index),
+    path('welcomeZeynab', index),
 ]
