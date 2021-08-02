@@ -164,7 +164,7 @@ const Quiz = (props) => {
     }
 
     const answerImGif = (question) => {
-        if (question.answer_imGif) {
+        if (!(question.answer_imGif.includes('NotExist.jpg'))) {
             return <img src={question.answer_imGif} alt="quiz-question-WebP" />
         }
     }

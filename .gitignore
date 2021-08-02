@@ -16,3 +16,4 @@ settings.py
 *.svg
 *.webp
 frontend/static/build
+*.zip
