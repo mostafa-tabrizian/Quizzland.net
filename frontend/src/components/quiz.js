@@ -14,7 +14,7 @@ const Quiz = (props) => {
     const [questions, setQuestions] = useState([])
     const [correctAnswersCounter, setCorrectAnswersCounter] = useState(0)
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
-    const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(-17)
+    const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [correctAnswerOption, setCorrectAnswerOption] = useState(0)
     const [wrongAnswerOption, setWrongAnswerOption] = useState(0)
     const [scaleAnimation, setScaleAnimation] = useState(false)
@@ -207,7 +207,8 @@ const Quiz = (props) => {
         if (currentQuestionNumber !== questions.length) {
             restartTheStateOfQuestion()
             plusOneToTotalAnsweredQuestions()
-            setCurrentMoveOfQuestions(prev => prev - 67)
+            const sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.33
+            setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
             document.getElementById('quiz__head').scrollIntoView()
 
         } else {

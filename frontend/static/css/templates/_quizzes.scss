@@ -23,10 +23,6 @@ body {
             margin-bottom: .5rem;
             padding-right: 1.5rem;
             padding-left: 1.5rem;
-
-            @include breakpoints-down(medium) {
-                transform: translate(0)
-            }
         }
 
         h5 {
@@ -59,19 +55,14 @@ body {
 
     &__container {
         max-width: 30rem;
-        margin: auto 2rem; margin-top: 5rem; margin-right: 22rem; margin-left: 22rem;
+        margin: auto 2rem; margin-top: 5rem;
         padding: 0.1rem;
         border-radius: 24px;
         transition: all 1.3s;
-        transform: translate(-17rem); //-67rem each step
-
-        @include breakpoints-down(medium) {
-            transform: translate(-20.8rem); //-67rem each step
-        }
     }
 
     &__question {
-        font-family: $font-pr; font-weight: 300; font-size: $font-sm;
+        font-family: $font-pr; font-weight: 300; font-size: $font-med;
         min-height: 4rem;
         color: white;
         padding: 1.1875rem;
@@ -79,10 +70,6 @@ body {
         border-radius: 23px 25px 0 0;
         background: #00000065;
         backdrop-filter: blur(165px);
-
-        @include breakpoints-down(medium) {
-            text-align: center;
-        }
     }
 
     &__imgQuestion {
@@ -180,17 +167,12 @@ body {
     }
 
     &__hider {
-        width: 34rem;
+        width: 27.4rem;
         min-height: 32rem;
         overflow: hidden;
         bottom: 3.5rem;
         z-index: 1;
         transition: bottom .35s cubic-bezier(0, 0.79, 0.88, 0.56);
-
-        @include breakpoints-down(medium) {
-            width: 30rem;
-            transform: translate(-3rem)
-        }
     }
 
     &__options {
