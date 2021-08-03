@@ -6,7 +6,8 @@ module.exports = {
     App: "./src/App.js",
     Quiz: "./src/Quiz.js",
     Category: "./src/Category.js",
-    SubCategory: "./src/SubCategory.js"
+    SubCategory: "./src/SubCategory.js",
+    404: "./src/404.js",
   },
 
   output: {

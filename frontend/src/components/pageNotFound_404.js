@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import BackBtn from './backBtn'
-import Header from './header'
+import HotHeader from './hotHeader'
 
 const pathRed = '/static/img/bubbles.png'
 
@@ -16,7 +16,7 @@ const PageNotFound_404 = () => {
     return (
         <React.Fragment>
             
-            <Header
+            <HotHeader
                 title='صفحه مورد نظر پیدا نشد |‌ کوئيزلند'
             />
     
