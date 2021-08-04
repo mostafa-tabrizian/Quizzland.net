@@ -426,7 +426,7 @@ input {
     box-shadow: 0 8px 15px #00000059;
     
     @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-        background: rgba(255, 255, 255, .34);
+        background: rgba(255, 255, 255, 0.748);
     }
 
     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
@@ -497,6 +497,8 @@ input {
     font-weight: 300;
     font-size: 2rem;
     margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
 }
 
 .lowTitle {
@@ -504,9 +506,10 @@ input {
     left: 50%;
     transform: translate(-50%, -116%);
     font-size: 5rem;
-    opacity: .15;
+    opacity: .25;
     font-family: lalezar, serif;
     font-weight: 300;
+    z-index: 1;
 }
 
 // Visibility

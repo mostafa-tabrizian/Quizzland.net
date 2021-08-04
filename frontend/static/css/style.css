@@ -671,7 +671,7 @@ input {
 
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .lightGls {
-    background: rgba(255, 255, 255, 0.34);
+    background: rgba(255, 255, 255, 0.748);
   }
 }
 
@@ -760,6 +760,8 @@ input {
   font-weight: 300;
   font-size: 2rem;
   margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
 }
 
 .lowTitle {
@@ -768,9 +770,10 @@ input {
   -webkit-transform: translate(-50%, -116%);
           transform: translate(-50%, -116%);
   font-size: 5rem;
-  opacity: .15;
+  opacity: .25;
   font-family: lalezar, serif;
   font-weight: 300;
+  z-index: 1;
 }
 
 @media (max-width: 49.9375em) {
@@ -1723,6 +1726,16 @@ input {
   z-index: 0;
 }
 
+#subCategoryRoot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000098;
+}
+
 body {
   background-position: center center;
   background-size: cover;
@@ -2153,8 +2166,8 @@ body {
 .quizContainer article {
   padding-bottom: 1rem !important;
   border-radius: .85rem !important;
-  -webkit-backdrop-filter: blur(44px) !important;
-          backdrop-filter: blur(44px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+          backdrop-filter: blur(10px) !important;
   position: relative;
 }
 

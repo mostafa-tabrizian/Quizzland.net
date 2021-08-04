@@ -222,6 +222,7 @@ body::-webkit-scrollbar-thumb {
 .quizContainer article {
   padding-bottom: 1rem !important;
   border-radius: .65rem !important;
+  background: rgba(0, 0, 0, 0.33);
   -webkit-backdrop-filter: blur(44px) !important;
           backdrop-filter: blur(44px) !important;
 }

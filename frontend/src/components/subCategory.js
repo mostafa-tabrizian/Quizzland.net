@@ -32,7 +32,7 @@ const SubCategory = (props) => {
 
     const listQuizzes = () => {
         return (
-            <QuizContainer quizzes={quizzes} />
+            <QuizContainer quizzes={quizzes} bgStyle='bg' />
         )
     }
 
@@ -40,7 +40,8 @@ const SubCategory = (props) => {
         const new_category = await axios.get(`/dbQuizzland$M19931506/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
         const background = new_category.data.results[0].background
         document.getElementById('html').style = `
-            background: url('${background}') center/cover fixed no-repeat !important;`
+            background: url('https://wallpapercave.com/wp/wp4468048.jpg') center/cover fixed no-repeat !important;
+        `
     }
 
     useEffect(() => {
@@ -64,8 +65,8 @@ const SubCategory = (props) => {
                 keywords={`${subCategory} بهترین کوئيز های , ${subCategory} کوئيز های`}
             />
 
-            <h3 className='lowTitle'>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>
-            <h3 className='title'>{replaceFunction(takeParameterFromUrl('t'), '-', ' ')}</h3>
+            <h3 className='lowTitle' style={{color: 'white'}}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>
+            <h3 className='title' style={{color: 'white'}}>{replaceFunction(takeParameterFromUrl('t'), '-', ' ')}</h3>
 
             <Tools 
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
