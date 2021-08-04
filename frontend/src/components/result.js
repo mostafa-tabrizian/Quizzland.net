@@ -16,9 +16,8 @@ const Result = (props) => {
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
 
-    useEffect(() => {
+    useEffect(async () => {
         calculateTheResultScore()
-        detailOfResult()
         setLoadState(true)
         getSuggestionsQuiz()
         if (document.getElementById('html')) {
@@ -26,13 +25,19 @@ const Result = (props) => {
         }
     }, [])
 
+    useEffect(() => {
+        detailOfResult()
+    }, [score])
+
     let clipboardRef = useRef(null)
 
     const calculateTheResultScore = () => {
         const questionsCounter = state.questions.length
         const correctAnswersCounter = state.correctAnswersCounter
-        const score = ((correctAnswersCounter / questionsCounter) * 100).toFixed(0)
-        setScore(score)
+        if (questionsCounter && correctAnswersCounter) {
+            const score = ((correctAnswersCounter / questionsCounter) * 100).toFixed(0)
+            setScore(score)
+        }
     }
 
     const detailOfResult = () => {
@@ -113,7 +118,7 @@ const Result = (props) => {
 
                 <div className='wrapper-med'>
                     <div className="result__share space-sm tx-al-c">
-                        <h5>{'دوستات رو به چالش بکش  \n ببین میتونن امتیازت رو بشکنن'}</h5>
+                        <h5>{'دوستات رو به چالش بکش  \n ببین میتونن بیشتر از تو بیارن'}</h5>
                         <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
                         {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک کوئیز کپی شد</h6> */}
                     </div>

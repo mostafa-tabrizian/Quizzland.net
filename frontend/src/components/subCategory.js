@@ -39,15 +39,8 @@ const SubCategory = (props) => {
     const backgroundOfSubCategory = async () => {
         const new_category = await axios.get(`/dbQuizzland$M19931506/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
         const background = new_category.data.results[0].background
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = `
-                background: url('${background}');
-                background-position: center center;
-                background-size: cover;
-                background-attachment: fixed;
-                background-repeat: no-repeat;
-            `
-        }
+        document.getElementById('html').style = `
+            background: url('${background}') center/cover fixed no-repeat !important;`
     }
 
     useEffect(() => {
