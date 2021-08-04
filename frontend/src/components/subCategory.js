@@ -40,7 +40,7 @@ const SubCategory = (props) => {
         const new_category = await axios.get(`/dbQuizzland$M19931506/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
         const background = new_category.data.results[0].background
         document.getElementById('html').style = `
-            background: url('https://wallpapercave.com/wp/wp4468048.jpg') center/cover fixed no-repeat !important;
+            background: url('${background}') center/cover fixed no-repeat !important;
         `
     }
 
