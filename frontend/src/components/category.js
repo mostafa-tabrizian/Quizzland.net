@@ -16,6 +16,7 @@ const Category = (props) => {
     const [offset, setOffset] = useState(0)
     const [sortType, setSortType] = useState('newest')
     const [loadState, setLoadState] = useState()
+    const [contentLoaded, setContentLoaded] = useState(false)
     
     const categoryDefinitionInFarsi = {
         'celebrity': 'سلبریتی',
@@ -54,6 +55,7 @@ const Category = (props) => {
         const pageTravelAndCategories = await axios.get(`/dbQuizzland$M19931506/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryTarget}&limit=${numberOfResult}&offset=${offset}`)
         setPageTravel(pageTravelAndCategories.data)
         setCategories(pageTravelAndCategories.data.results)
+        setContentLoaded(true)
     }
 
     const listCategories = () => {
@@ -109,6 +111,19 @@ const Category = (props) => {
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                 sortType={sortType} setSortType={setSortType}
             />
+
+            <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
+
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+
+            </ul>
 
             <ul className="quizContainer flex flex-jc-fe flex-ai-c wrapper-med">
                 

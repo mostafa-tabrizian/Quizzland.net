@@ -21,7 +21,7 @@ body {
         font-family: $font-sec;
         z-index: 1;
 
-        h1, h2, h3, h4, h5, p {
+        h1, h2, h3, h4, h5, h6, p {
             line-height: 2rem;
             color: $white;
             font-weight: 100;
@@ -37,16 +37,16 @@ body {
 
         h5 {
             font-size: $font-sm - .2rem;
+            margin-right: 1.5rem;
+            margin-left: 1.5rem;
+
+            &:nth-child(2) {
+                order: -1;
+            }
         }
 
-        div:nth-child(2) {
-            h5 {
-                margin-right: 2.5rem; margin-left: 2.5rem;
-
-                &:nth-child(2) {
-                    order: -1;
-                }
-            }
+        h6 {
+            font-size: $font-sm - .4rem;
         }
     }
 

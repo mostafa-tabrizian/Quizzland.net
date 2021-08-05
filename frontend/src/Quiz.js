@@ -7,6 +7,7 @@ import {
     Switch
 } from 'react-router-dom'
 
+import { log } from './components/base'
 import HotFooter from './components/hotFooter'
 import Quiz from './components/quiz'
 import Result from './components/result'

@@ -25,6 +25,7 @@ const Quiz = (props) => {
     const [quizEnded, setQuizEnded] = useState(false)
     const [loadState, setLoadState] = useState()
     const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
+    const [contentLoaded, setContentLoaded] = useState(false)
 
     const result = useRef(null)
 
@@ -33,6 +34,7 @@ const Quiz = (props) => {
     useEffect(() => {
         grabData()
         setLoadState(true)
+        setContentLoaded(true)
     }, [quizTitle])
 
     useEffect(() => {
@@ -252,14 +254,21 @@ const Quiz = (props) => {
             />
 
             <div className="quiz__head pos-rel tx-al-c" id="quiz__head">
+                <div className='flex flex-jc-c flex-ai-c'>
+                    <div className={`skeletonLoading skeletonLoading__quizTitle tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
+                </div>
                 <h1 className="tx-al-c wrapper-sm">{ quiz.title }</h1>
+
                 <div className="flex flex-jc-c flex-ai-c">
+                    <div className={`skeletonLoading skeletonLoading__quizInfo tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                     <h5>تعداد سوال ها: {questions.length}</h5>
+
+                    <div className={`skeletonLoading skeletonLoading__quizInfo tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                     <h5>{ makeTheDatePublishReadyToShow(quiz.publish) }</h5>
                 </div>
                 
                 <div className='quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c' title='با انتخاب گزینه، پس از ۵ ثانیه به سوال بعدی میرود'>
-                    <h5>تغییر خودکار</h5>
+                    <h6>تغییر خودکار</h6>
                     <button onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className="quiz__autoQuestionChangerSwitch__btn btn">
                         <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
                     </button>
@@ -271,12 +280,14 @@ const Quiz = (props) => {
             </div>
 
             <div className="quiz__questionCounter pos-rel flex flex-jc-c flex-ai-c">
+                <div className={`skeletonLoading skeletonLoading__quizInfo tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                 <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
                 سوال شماره
             </div>
 
             <div className={`quiz__questions ${!ableToSelectOption && 'pointerOff'} pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
                 <div className={`quiz__hider flex pos-rel ${scaleAnimation && 'quiz__options__scaleUp'}`}>
+                    <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                     { quizQuestions() }
                 </div>
 

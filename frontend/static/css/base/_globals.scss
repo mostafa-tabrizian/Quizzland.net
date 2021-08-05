@@ -505,6 +505,54 @@ input {
     z-index: 1;
 }
 
+.skeletonLoading {
+    width: 14rem; 
+    border-radius: 15px;
+    box-shadow: 0 10px 22px 1px #0000005c;
+    background: #828282b9;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    margin: 1rem;
+    
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -150px;
+        top: 0;
+        height: 100%;
+        width: 150px;
+        background: linear-gradient(to right, transparent 0%, #E8E8E8 50%, transparent 100%);
+        animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    }
+
+    &__quizContainer {
+        width: 14rem; height: 8rem !important; 
+    }
+
+    &__quizTitle {
+        width: 14rem; height: 1.5rem !important;
+    }
+
+    &__quizInfo {
+        width: 8rem; height: 1rem !important;
+    }
+
+    &__quizQuestion {
+        width: 30rem; height: 25rem !important;
+    }
+}
+
+@keyframes load {
+    from {
+        left: -150px;
+    }
+    to   {
+        left: 100%;
+    }
+}
+
 // Visibility
 .hideForMobile {
     @include breakpoints-down(medium) {

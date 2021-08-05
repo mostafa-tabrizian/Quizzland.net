@@ -17,6 +17,7 @@ const SubCategory = (props) => {
     const [offset, setOffset] = useState(0)
     const [sortType, setSortType] = useState('newest')
     const [loadState, setLoadState] = useState()
+    const [contentLoaded, setContentLoaded] = useState(false)
     
     const sortTypeDefinitionForDb = {
         'newest': 'new_quiz',
@@ -28,6 +29,7 @@ const SubCategory = (props) => {
         const pageTravelAndQuizzes = await axios.get(`/dbQuizzland$M19931506/${sortTypeDefinitionForDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=${numberOfResult}&offset=${offset}`)
         setPageTravel(pageTravelAndQuizzes.data)
         setQuizzes(pageTravelAndQuizzes.data.results)
+        setContentLoaded(true)
     }
 
     const listQuizzes = () => {
@@ -53,6 +55,7 @@ const SubCategory = (props) => {
         setLoadState(true)
     }, [])
 
+
     return (
         <React.Fragment>
 
@@ -73,7 +76,20 @@ const SubCategory = (props) => {
                 sortType={sortType} setSortType={setSortType}
             />
 
-            <ul className="quizContainer flex flex-jc-fe flex-ai-c wrapper-med">
+            <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
+
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                
+            </ul>
+
+            <ul className='quizContainer flex flex-jc-fe flex-ai-c wrapper-med'>
 
                 {listQuizzes()}
                 

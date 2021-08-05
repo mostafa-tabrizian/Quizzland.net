@@ -29,11 +29,13 @@ const Index = () => {
     const [bestMovieSeriesQuizzes, setBestMovieSeriesQuizzes] = useState([])
 
     const [loadState, setLoadState] = useState()
+    const [contentLoaded, setContentLoaded] = useState(false)
     
     useEffect(() => {
         landPagePathSelector()
         grabData()
         setLoadState(true)
+        setContentLoaded(true)
         if (document.getElementById('html')) {
             document.getElementById('html').style='background: None'
         }
@@ -127,23 +129,51 @@ const Index = () => {
             </div>
 
             <div className="space-med">
+
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest&c=celebrity">...نمایش بیشتر</a>
                     <h2>سلبریتی</h2>
                 </div>
+
+                <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                </ul>
+
                 <ul className="quizContainer flex flex-jc-fs flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={newestCelebrityQuizzes} bgStyle='trans' />
                 </ul>
+
             </div>
 
             <div className="space-med">
+
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest&c=movie-series">...نمایش بیشتر</a>
                     <h2>فیلم و سریال</h2>
                 </div>
+
+                <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                </ul>
+
                 <ul className="quizContainer flex flex-jc-fs flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={newestMovieSeriesQuizzes} bgStyle='trans' />
                 </ul>
+
             </div>
 
             <SortIndex />
