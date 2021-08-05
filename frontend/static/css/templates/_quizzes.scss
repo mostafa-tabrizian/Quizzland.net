@@ -6,6 +6,16 @@ body {
     width: 100%; height: 100vh;
 }
 
+#quizRoot {
+    &::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: #0000004d
+    }
+}
+
 .quiz {
     &__head {
         font-family: $font-sec;
