@@ -29,7 +29,7 @@ const Newsletter = () => {
     }
 
     const alertUserThatHeSignedUpBefore = (userDetail) => {
-        alert(`عزیز ${userDetail.username} \n شما  از قبل در تاریخ ${userDetail.signedUp_On.slice(0, 10)} \n ثبت نام کرده‌اید. \n با تشکر، کوئیزلند 💜`)
+        alert(`عزیز ${userDetail.username} \n شما  از قبل در تاریخ ${userDetail.signedUp_On.slice(0, 10)} \n ثبت نام کرده‌اید. \n با تشکر، کوییزلند 💜`)
     }
 
     const checkIfTheUserExists = async (userEmail) => {
@@ -62,7 +62,7 @@ const Newsletter = () => {
 
     return (
         <React.Fragment>
-            <p className="tx-al-c wrapper-sm"> اگه هیجان داری کوئیز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا ایمیلت رو وارد کنی که سریعتر از هر کسی خبر دارت کنیم </p>
+            <p className="tx-al-c wrapper-sm"> اگه هیجان داری کوییز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا ایمیلت رو وارد کنی که سریعتر از هر کسی خبر دارت کنیم </p>
 
             <button onClick={openCloseNewsletter} className="btn" type="button" aria-label="Sign Up To Newsletter">🖊️ ثبت نام در خبرنامه</button>
 

@@ -59,7 +59,7 @@ const Result = (props) => {
         }
         else if (score >= 0){
             setResultScore(`🙄 ${score}%`)
-            setResultSubtitle(` .فکر کنم کوئیز رو اشتباهی انتخاب کردی \n😅 میتونی سریع کوئیز دیگه ای انتخاب کنی تا کسی نیومده `)
+            setResultSubtitle(` .فکر کنم کوییز رو اشتباهی انتخاب کردی \n😅 میتونی سریع کوییز دیگه ای انتخاب کنی تا کسی نیومده `)
         }
     }
 
@@ -67,7 +67,7 @@ const Result = (props) => {
         const quizUrl = `${window.location.origin}/quiz/${replaceFunction(state.quiz.title, ' ', '-')}`
 
         const messageShare =
-            `من تو کوئیز ${state.quiz.title} (${resultScore}) درصد درست زدم . تو چقدر میتونی بزنی ؟
+            `من تو کوییز ${state.quiz.title} (${resultScore}) درصد درست زدم . تو چقدر میتونی بزنی ؟
             \n -----------------------------------------
             \n ${quizUrl}`
 
@@ -91,12 +91,12 @@ const Result = (props) => {
             <LoadingScreen loadState={loadState} />
 
             <HotHeader
-                title='نتیجه کوئیز | کوئيزلند '
+                title='نتیجه کوییز | کوییزلند '
             />
 
             <div className="result__container">
                 <div className="result__title flex flex-jc-c">
-                    <h5 className="tx-al-r">"نتیجه‌ کوئیز  "{state.quiz.title}</h5>
+                    <h5 className="tx-al-r">"نتیجه‌ کوییز  "{state.quiz.title}</h5>
                 </div>
                 <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
                     <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
@@ -120,7 +120,7 @@ const Result = (props) => {
                     <div className="result__share space-sm tx-al-c">
                         <h5>{'دوستات رو به چالش بکش  \n ببین میتونن بیشتر از تو بیارن'}</h5>
                         <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
-                        {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک کوئیز کپی شد</h6> */}
+                        {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک کوییز کپی شد</h6> */}
                     </div>
                 </div>
 
@@ -128,7 +128,7 @@ const Result = (props) => {
 
             <textarea ref={(value) => clipboardRef = value} value={clipboard} className="result__clipboard pos-abs" />
 
-            <h2 className='tx-al-c space-med beforeAfterDecor'>کوئیز های مشابه</h2>
+            <h2 className='tx-al-c space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
             <ul className="quizContainer flex flex-jc-fe flex-ai-c wrapper-med">
                 {
@@ -138,7 +138,7 @@ const Result = (props) => {
 
             <BackBtn />
             
-            <button onClick={tryAgainTheQuiz} className='tryAgain btn tx-al-c' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوئيز</button>
+            <button onClick={tryAgainTheQuiz} className='tryAgain btn tx-al-c' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
 
         </React.Fragment>
     );

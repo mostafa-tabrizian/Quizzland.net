@@ -17,9 +17,9 @@ const Contact = () => {
         <React.Fragment>
 
             <Header
-                title='تماس با ما | ‌کوئيزلند '
-                description= 'تماس با پشتیبانی کوئيزلند'
-                keywords= 'پشتیبانی کوئيزلند'
+                title='تماس با ما | ‌کوییزلند '
+                description= 'تماس با پشتیبانی کوییزلند'
+                keywords= 'پشتیبانی کوییزلند'
             /> 
 
             <div className="basicPage center wrapper-sm">

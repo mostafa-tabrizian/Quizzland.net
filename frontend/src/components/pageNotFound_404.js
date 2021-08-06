@@ -17,14 +17,14 @@ const PageNotFound_404 = () => {
         <React.Fragment>
             
             <HotHeader
-                title='صفحه مورد نظر پیدا نشد |‌ کوئيزلند'
+                title='صفحه مورد نظر پیدا نشد |‌ کوییزلند'
             />
     
             <div class="basicPage wrapper-sm center">
                 <h1> 🤔 صفحه‌ی مورد نظر پیدا نشد </h1>
                 <div class="space-sm">
-                    <p>💖 اگه فکر میکنی اشتباهی پیش اومدی ممنون میشیم برامون به<a href="mailto:quizzland.net@gmail.com?subject= در سایت کوئيزلند به یه مشکلی برخوردم"> این ایمیل</a> پیام بدی</p>
-                    <a href="mailto:quizzland.net@gmail.com?subject= در سایت کوئيزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">quizzland.net@gmail.com</a>
+                    <p>💖 اگه فکر میکنی اشتباهی پیش اومدی ممنون میشیم برامون به<a href="mailto:quizzland.net@gmail.com?subject= در سایت کوییزلند به یه مشکلی برخوردم"> این ایمیل</a> پیام بدی</p>
+                    <a href="mailto:quizzland.net@gmail.com?subject= در سایت کوییزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">quizzland.net@gmail.com</a>
                 </div>
             </div>
     

@@ -242,7 +242,7 @@ const Quiz = (props) => {
             <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
                 <div className={'loadingScreen pos-fix flex flex-jc-c flex-ai-c'}></div>
                 <div className='countingResult loadingScreen pos-fix flex flex-jc-c flex-ai-c'>
-                    ___ در حال محاسبه نتیجه کوئیز___
+                    ___ در حال محاسبه نتیجه کوییز___
                 </div>  
             </div>
             
@@ -250,7 +250,7 @@ const Quiz = (props) => {
 
             <HotHeader
                 colorOfHeader='header__white'
-                title={`کوئيزلند | ${quiz.title}`}
+                title={`کوییزلند | ${quiz.title}`}
             />
 
             <div className="quiz__head pos-rel tx-al-c" id="quiz__head">

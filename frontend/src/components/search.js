@@ -88,7 +88,7 @@ const Search = (props) => {
                 return (
                     <div className="header__search__result__category__item">
                         <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
-                            <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوئیز های ${category.title_far}`} />
+                            <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوییز های ${category.title_far}`} />
                         </a>
                         <h5 className='tx-al-c'>
                             <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>

@@ -17,6 +17,7 @@ const Sort = () => {
     const [pageTravel, setPageTravel] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(8)
     const [offset, setOffset] = useState(0)
+    const [contentLoaded, setContentLoaded] = useState(false)
 
     useEffect(() => {
         componentChangeDetector()
@@ -59,7 +60,7 @@ const Sort = () => {
         let quizzes
         switch (sortType) {
             case 'newest':
-                setSortTitle('جدیدترین کوئیز ها')
+                setSortTitle('جدیدترین کوییز ها')
                 if (sortCategory) {
                     quizzes = await axios.get(`/dbQuizzland$M19931506/new_quiz/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
@@ -67,10 +68,11 @@ const Sort = () => {
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
+                setContentLoaded(true)
                 break
 
             case 'bestest':
-                setSortTitle('بهترین کوئیز ها')
+                setSortTitle('بهترین کوییز ها')
                 if (sortCategory) {
                     quizzes = await axios.get(`/dbQuizzland$M19931506/best_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
@@ -78,10 +80,11 @@ const Sort = () => {
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
+                setContentLoaded(true)
                 break
 
             case 'monthlyBestest':
-                setSortTitle('بهترین کوئيز های این ماه')
+                setSortTitle('بهترین کوییز های این ماه')
                 if (sortCategory) {
                     quizzes = await axios.get(`/dbQuizzland$M19931506/monthlyBest_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
@@ -89,6 +92,7 @@ const Sort = () => {
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
+                setContentLoaded(true)
                 break
 
             default:
@@ -109,10 +113,23 @@ const Sort = () => {
             <LoadingScreen loadState={loadState} />
 
             <Header
-                title={`${sortTitle} | کوئیزلند`}
+                title={`${sortTitle} | کوییزلند`}
             />
 
             <h3 className='title'>{sortTitle}</h3>
+
+            <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
+
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+
+            </ul>
             
             <ul className="quizContainer flex flex-jc-fe flex-ai-c wrapper-med">
                 

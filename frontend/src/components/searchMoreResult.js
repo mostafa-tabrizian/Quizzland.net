@@ -65,7 +65,7 @@ const SearchMoreResult = () => {
     return (
         <React.Fragment>
             <Header
-                title={`کوئيزلند | ${searchValue} جستجو عبارت `}
+                title={`کوییزلند | ${searchValue} جستجو عبارت `}
             />
             <div className='flex flex-jc-c flex-ai-c'>
                 ‌<span > ‌تعداد نتایج :‌ {matchedQuizzesCounter} </span>‌‌

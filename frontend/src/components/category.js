@@ -22,7 +22,7 @@ const Category = (props) => {
         'celebrity': 'سلبریتی',
         'movie-series': 'فیلم و سریال'
     }
-    const currentTitle = categoryDefinitionInFarsi[categoryTarget]
+    const currentCategory = categoryDefinitionInFarsi[categoryTarget]
 
     useEffect(() => {
         searchChangeDetector()
@@ -99,9 +99,9 @@ const Category = (props) => {
             <LoadingScreen loadState={loadState} />
 
             <HotHeader
-                title={`کوئيزلند | ${currentTitle} `}
-                description={`کوئيزلند ${currentTitle} کوئيز های`}
-                keywords={`${currentTitle} بهترین کوئيز های , ${currentTitle} کوئيز های`}
+                title={`کوییزلند | ${currentCategory} کوییز های `}
+                description={`کوییزلند ${currentCategory} کوییز های`}
+                keywords={`${currentCategory} بهترین کوییز های , ${currentCategory} کوییز های`}
             />
             
             <h3 className='lowTitle'>{categoryTarget}</h3>

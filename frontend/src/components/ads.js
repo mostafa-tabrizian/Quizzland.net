@@ -17,11 +17,11 @@ const Ads = () => {
         <React.Fragment>
 
             <Header
-                title='تبلیغات |‌کوئيزلند'
+                title='تبلیغات |‌ کوییزلند'
             />
                 
             <div className="basicPage center wrapper-sm">
-                <h3>برای تبلیغ در بنر های کوئیزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>
+                <h3>برای تبلیغ در بنر های کوییزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>
                 <a href="mailto:quizzland.net@gmail.com">Quizzland.net@gmail.com</a>
                 <div>
                     <ul className="contact__socialMedia flex flex-jc-c flex-ai-c">
@@ -30,7 +30,7 @@ const Ads = () => {
                         <li><a href="mailto:quizzland.net@gmail.com">ایمیل</a></li>
                     </ul>
                 </div>
-                <h5>💗کوئیزلند</h5>
+                <h5>💗کوییزلند</h5>
             </div>
 
             <BackBtn />

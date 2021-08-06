@@ -63,9 +63,9 @@ const SubCategory = (props) => {
 
             <HotHeader
                 colorOfHeader='header__white'
-                title={`کوئيزلند | کوئیز های ${subCategory}`}
-                description={`کوئيزلند ${subCategory} کوئيز های`}
-                keywords={`${subCategory} بهترین کوئيز های , ${subCategory} کوئيز های`}
+                title={`کوییزلند | کوییز های ${subCategory}`}
+                description={`کوییزلند ${subCategory} کوییز های`}
+                keywords={`${subCategory} بهترین کوییز های , ${subCategory} کوییز های`}
             />
 
             <h3 className='lowTitle' style={{color: 'white'}}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>

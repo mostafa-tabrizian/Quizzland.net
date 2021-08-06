@@ -109,11 +109,11 @@ const Header = (props) => {
     return (
         <React.Fragment>
             
-            {/* <head>
-                <title>{props.title || 'کوئیزلند | Quizzland'}</title>
+            <head>
+                <title>{props.title || 'کوییزلند | کوییز و تست - تریویا'}</title>
                 <meta name="description" content={props.description || ''} />
                 <meta name="keywords" content={props.keywords || ''} />
-            </head> */}
+            </head>
 
             <header className="header pos-rel">
 
@@ -122,7 +122,7 @@ const Header = (props) => {
 
                     <div className="flex flex-ai-c">
                         <Link to="/" className='header__logo flex flex-jc-sb flex-ai-c hideForDesktop'>
-                            <img src={logo} alt="QuizzLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی" />
+                            <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال، گیمینگ و کوییز های روانشناسی و خودشناسی" />
                             <h3>uizzland</h3>
                         </Link>
                         <Search/>
@@ -131,7 +131,7 @@ const Header = (props) => {
                     <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
                         <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
                             <h3>uizzland</h3>
-                            <img src={logo} alt="QuizzLand | کوئیزلند بهترین وب سایت کوئیز های سرگرمی مانند کوئیز های سلبریتی ها، فیلم و سریال، گیمینگ و کوئیز های روانشناسی و خودشناسی" />
+                            <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال، گیمینگ و کوییز های روانشناسی و خودشناسی" />
                         </Link>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
                         <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>

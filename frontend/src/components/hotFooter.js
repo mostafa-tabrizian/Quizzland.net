@@ -9,7 +9,7 @@ const Footer = () => {
             <div className='footer__container flex-jc-c'>
 
                 <div>
-                    <h3>کوئیز ها</h3>
+                    <h3>کوییز ها</h3>
                     <ul>
                         <li><a href="/sort?q=newest">جدیدترین ها</a></li>
                         <li><a href="/sort?q=bestest">بهترین ها</a></li>
@@ -50,7 +50,7 @@ const Footer = () => {
 
             <div className="footer__copyRight flex flex-jc-c flex-ai-c">
                 <p>
-                    1400-2021 © تمام حقوق به کوئیزلند تعلق دارد
+                    1400-2021 © تمام حقوق به کوییزلند تعلق دارد
                 </p>
             </div>
 
