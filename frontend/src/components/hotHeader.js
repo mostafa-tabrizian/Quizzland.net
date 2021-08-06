@@ -19,17 +19,20 @@ const Header = (props) => {
     useEffect(() => {
         componentChangeDetector()
     })
+
+    useEffect(() => {
+
+        if (nightMode) {
+            if (localStorage.getItem('lightMode') !== 'true') {
+                require('/static/css/nightTheme.css')
+            }
+        }
+    }, [nightMode])
     
     if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
-        if (localStorage.getItem('alertUFHB') !== 'True') {
+        if (localStorage.getItem('alertUFHB') !== 'true') {
             alert('لطفا از مرورگر کروم یا غیره استفاده کنید \n در مرورگر شما (فایرفاکس) برخی دیزاین ها قابل اجرا نیست')
             localStorage.setItem('alertUFHB', 'True')
-        }
-    }
-    
-    if (nightMode) {
-        if (localStorage.getItem('lightMode') !== 'true') {
-            require('/static/css/nightTheme.css')
         }
     }
 
@@ -56,9 +59,7 @@ const Header = (props) => {
     const checkIfShouldShowNightModeBtn = () => {
         const pageUrl = window.location.pathname.split('/')
 
-        if (pageUrl.includes('resultPointy') ||
-            pageUrl.includes('quiz'))
-        {
+        if (pageUrl.includes('quiz')) {
             setNightMode(false)
         } else {
             setNightMode(true)
@@ -66,6 +67,7 @@ const Header = (props) => {
     }
 
     const nightModeTurnOnOff = () => {
+
         if (localStorage.getItem('lightMode') === 'true') {
             localStorage.setItem('lightMode', false)
             window.location.reload();
