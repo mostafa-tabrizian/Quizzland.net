@@ -236,6 +236,18 @@ const Quiz = (props) => {
         }
     }
 
+    const splitTheTags = () => {
+        if (quiz !== 'null') {
+            const tags = quiz.tags
+            const splittedTags = tags.split('،')
+            return (    
+                splittedTags.map(tag => {
+                    return <li><h2>{tag}</h2></li>
+                })
+            )
+        }
+    }
+
     return (
         <React.Fragment>
 
@@ -295,6 +307,11 @@ const Quiz = (props) => {
                     <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__bottomQuestionChanger btn ${shouldShowTheBottomQuestionChanger()}` } aria-label="Next Question"></button>
                 </div>
             </div>
+
+            <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
+            <ul className='quiz__tags flex flex-jc-c flex-ai-c'>
+                { splitTheTags() }
+            </ul>
             
             <Link
                 ref={result} className='noVis'

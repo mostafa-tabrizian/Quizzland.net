@@ -1858,10 +1858,6 @@ body {
   font-size: 0.78rem;
 }
 
-.quiz__questions {
-  margin-bottom: 3rem;
-}
-
 .quiz__questions::after {
   content: "";
   position: fixed;
@@ -2007,7 +2003,6 @@ body {
 
 .quiz__hider {
   width: 27.4rem;
-  min-height: 32rem;
   overflow: hidden;
   bottom: 3.5rem;
   z-index: 1;
@@ -2130,6 +2125,41 @@ body {
 
 .quiz__wrongAnswer {
   border: 3px solid red !important;
+}
+
+.quiz__tags {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 3rem;
+}
+
+.quiz__tags__title {
+  color: white;
+  z-index: 1;
+  position: relative;
+  width: 16rem;
+  margin: auto;
+  margin-bottom: .6rem;
+}
+
+.quiz__tags li > h2 {
+  font-size: .9rem;
+  font-family: myHarmattan, sans-serif;
+  color: white;
+  z-index: 1;
+  position: relative;
+  border: none;
+  border-bottom: 1px solid darkRed !important;
+  border-right: 1px solid darkRed !important;
+  border-radius: 20px;
+  padding-right: 0.8rem;
+  padding-left: 0.8rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  margin-right: .6rem;
+  margin-left: .6rem;
 }
 
 .quiz__answerImGif {

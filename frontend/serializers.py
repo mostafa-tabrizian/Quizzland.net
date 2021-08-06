@@ -10,6 +10,7 @@ class QuizzesSerializer(serializers.ModelSerializer):
             'category',
             'subCategory',
             'title',
+            'tags',
             'monthly_views',
             'views',
             'thumbnail',
