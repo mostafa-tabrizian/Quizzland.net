@@ -2,6 +2,10 @@
     flex-wrap: wrap;
     direction: ltr;
     
+    @include breakpoints-down(medium) {
+        margin: 0;
+    }
+    
     &__header {
         justify-content: space-between;
         
@@ -15,6 +19,10 @@
     li {
         margin-bottom: 1.5rem; margin-left: .75rem; margin-right: .75rem;
         height: fit-content;
+
+        @include breakpoints-down(medium) {
+            margin-left: 0; margin-right: 0;
+        }
     }
     
     article {
@@ -48,7 +56,7 @@
         box-shadow: 0 10px 22px 1px #0000005c;
 
         @include breakpoints-down(medium) {
-            width: 11rem; height: 6.5rem;
+            width: 10rem; height: 6.5rem;
         }
     }
 
