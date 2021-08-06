@@ -103,6 +103,10 @@ const Category = (props) => {
                 description={`کوییزلند ${currentCategory} کوییز های`}
                 keywords={`${currentCategory} بهترین کوییز های , ${currentCategory} کوییز های`}
             />
+
+            <div className='adverts adverts__left'>
+                <div id="pos-article-display-28434"></div>
+            </div>
             
             <h3 className='lowTitle'>{categoryTarget}</h3>
             <h3 className='title'>کتگوری {categoryDefinitionInFarsi[categoryTarget]}</h3>

@@ -68,6 +68,10 @@ const SubCategory = (props) => {
                 keywords={`${subCategory} بهترین کوییز های , ${subCategory} کوییز های`}
             />
 
+            <div className='adverts adverts__left'>
+                <div id="pos-article-display-28433"></div>
+            </div>
+
             <h3 className='lowTitle' style={{color: 'white'}}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>
             <h3 className='title' style={{color: 'white'}}>{replaceFunction(takeParameterFromUrl('t'), '-', ' ')}</h3>
 

@@ -264,6 +264,10 @@ const Quiz = (props) => {
                 title={`کوییزلند | ${quiz.title}`}
             />
 
+            <div className='adverts adverts__left'>
+                <div id="pos-article-display-26094"></div>
+            </div>
+
             <div className="quiz__head pos-rel tx-al-c" id="quiz__head">
                 <div className='flex flex-jc-c flex-ai-c'>
                     <div className={`skeletonLoading skeletonLoading__quizTitle tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>

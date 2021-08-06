@@ -116,6 +116,10 @@ const Sort = () => {
                 title={`${sortTitle} | کوییزلند`}
             />
 
+            <div className='adverts adverts__left'>
+                <div id="pos-article-display-28432"></div>
+            </div>
+
             <h3 className='title'>{sortTitle}</h3>
 
             <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
