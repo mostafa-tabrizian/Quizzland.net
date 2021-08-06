@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { a } from 'react-router-hash-link'
 
 import { log } from './base'
 import Search from './search'
@@ -14,20 +12,11 @@ const Header = (props) => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)
     const [quizNavigationOpen, setQuizNavigationOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
-    const [nightMode, setNightMode] = useState(true)
+    const [showNightModeButton, setShowNightModeButton] = useState(true)
 
     useEffect(() => {
         componentChangeDetector()
     })
-
-    useEffect(() => {
-
-        if (nightMode) {
-            if (localStorage.getItem('lightMode') !== 'true') {
-                require('/static/css/nightTheme.css')
-            }
-        }
-    }, [nightMode])
     
     if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
         if (localStorage.getItem('alertUFHB') !== 'true') {
@@ -60,9 +49,12 @@ const Header = (props) => {
         const pageUrl = window.location.pathname.split('/')
 
         if (pageUrl.includes('quiz')) {
-            setNightMode(false)
+            setShowNightModeButton(false)
         } else {
-            setNightMode(true)
+            setShowNightModeButton(true)
+            if (localStorage.getItem('lightMode') !== 'true') {
+                require('/static/css/nightTheme.css')
+            }
         }
     }
 
@@ -138,7 +130,7 @@ const Header = (props) => {
                         <a href="/contact">تماس با ما</a>
 
                         {
-                            nightMode &&
+                            showNightModeButton &&
                             <div className="nightMode__container darkGls" title="تبدیل به حالت شب/روز">
                                 <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
                             </div>
@@ -188,7 +180,8 @@ const Header = (props) => {
                                     <li><a href="/contact">تماس با ما</a></li>
 
                                     {/* Night Mode */}
-                                    {nightMode &&
+                                    {
+                                        showNightModeButton &&
                                         <div className="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
                                             <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
                                         </div>

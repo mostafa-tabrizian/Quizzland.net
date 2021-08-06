@@ -34,7 +34,6 @@ const Quiz = (props) => {
     useEffect(() => {
         grabData()
         setLoadState(true)
-        setContentLoaded(true)
     }, [quizTitle])
 
     useEffect(() => {
@@ -65,7 +64,7 @@ const Quiz = (props) => {
         
         const questions = await axios.get(`/dbQuizzland$M19931506/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         setQuestions(questions.data)
-        
+        setContentLoaded(true)
         setBackground()
         addView(quizDB.data.results[0])
     }
