@@ -1507,12 +1507,12 @@ input {
   }
 }
 
-.hero__start h1 {
+.hero__start h1:nth-child(1) {
   font-size: 4.5rem;
   margin-bottom: 1.5rem;
 }
 
-.hero__start h2 {
+.hero__start h1:nth-child(2) {
   font-size: 1.6rem;
   font-family: myHarmattan;
   font-weight: 600;

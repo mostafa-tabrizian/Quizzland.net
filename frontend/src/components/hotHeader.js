@@ -101,13 +101,12 @@ const Header = (props) => {
     return (
         <React.Fragment>
             <head>
-                <title>{props.title || 'کوییزلند | کوییز و تست - تریویا'}</title>
-                <meta name="description" content={props.description || ''} />
-                <meta name="keywords" content={props.keywords || ''} />
+                <title>{props.title || 'کوییزلند | کوییز - تست و تریویا | کوییز هایی از فیلم و سریال و سلبریتی ها'}</title>
+                <meta name="description" content={props.description || 'سایت کوییزلند وب‌ سایت کوییز و تست برای کتگوری های متنوع همچون کوییز سلبریتی ها, کوییز های فیلم و سریال, کوییز های گیمینگ و تست های روانشناسی معتبر از سایت های رسمی و باحال ترین کوییز ها'} />
+                <meta name="keywords" content={props.keywords || 'کوییز, سایت بازی کوییز, بازی کوییز, بازی کوییز, کوییزلند, کوییزلند, کوییز, کوییز های فیلم و سریال, کوییز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوییز های گیمینگ, تست های روانشناسی معتبر, کوییز های باحال, کوییز های فان, بهترین وب سایت کوییز, بهترین وب سایت تست'} />
             </head>
 
             <header className="header pos-rel">
-
 
                 <nav className="flex flex-ai-c flex-jc-sb">
 
