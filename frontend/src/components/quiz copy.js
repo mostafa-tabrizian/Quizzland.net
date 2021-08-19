@@ -26,7 +26,6 @@ const Quiz = (props) => {
     const [loadState, setLoadState] = useState()
     const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [showDivider, setShowDivider] = useState(false)
 
     const result = useRef(null)
 
@@ -56,7 +55,7 @@ const Quiz = (props) => {
 
     const setBackground = () => {
         document.getElementById('html').style=`background: url('${quiz.background}') center/cover no-repeat fixed !important`
-    }
+    } ;
     
     const grabData = async () => {
         const quizDB = await axios.get(`/dbQuizzland$M19931506/new_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
@@ -206,18 +205,10 @@ const Quiz = (props) => {
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
-        let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
-        
         if (currentQuestionNumber !== questions.length) {
             restartTheStateOfQuestion()
             plusOneToTotalAnsweredQuestions()
-
-            if (window.navigator.userAgent.includes('Windows')) {
-                sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46
-            } else {
-                sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.33
-            }
-
+            const sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.33
             setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
             document.getElementById('quiz__head').scrollIntoView()
 
@@ -256,12 +247,6 @@ const Quiz = (props) => {
         }
     }
 
-    const isItDesktop = () => {
-        if (window.navigator.userAgent.includes('Windows')) {
-            setShowDivider(true)
-        }
-    }
-
     return (
         <React.Fragment>
 
@@ -283,13 +268,13 @@ const Quiz = (props) => {
                 <div id="pos-article-display-26094"></div>
             </div>
 
-            <div className="quiz__head pos-rel tx-al-r" id="quiz__head">
+            <div className="quiz__head pos-rel tx-al-c" id="quiz__head">
                 <div className='flex flex-jc-c flex-ai-c'>
                     <div className={`skeletonLoading skeletonLoading__quizTitle tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                 </div>
                 <h1 className="tx-al-c wrapper-sm">{ quiz.title }</h1>
 
-                <div className="quiz__detail flex flex-jc-c flex-ai-c">
+                <div className="flex flex-jc-c flex-ai-c">
                     <div className={`skeletonLoading skeletonLoading__quizInfo tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                     <h5>تعداد سوال ها: {questions.length}</h5>
 
@@ -297,26 +282,17 @@ const Quiz = (props) => {
                     <h5>{ makeTheDatePublishReadyToShow(quiz.publish) }</h5>
                 </div>
                 
-                { !(isItDesktop) &&
-                    <div className='quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c' title='با انتخاب گزینه، پس از ۵ ثانیه به سوال بعدی میرود'>
-                        <h6>تغییر خودکار</h6>
-                        <button onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className="quiz__autoQuestionChangerSwitch__btn btn">
-                            <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
-                        </button>
-                    </div> 
-                }
+                <div className='quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c' title='با انتخاب گزینه، پس از ۵ ثانیه به سوال بعدی میرود'>
+                    <h6>تغییر خودکار</h6>
+                    <button onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className="quiz__autoQuestionChangerSwitch__btn btn">
+                        <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
+                    </button>
+                </div>
 
-                { !(isItDesktop) &&
-                    <div className="quiz__questionChanger__container pos-rel center">
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
-                    </div>
-                }
-                
+                <div className="quiz__questionChanger__container pos-rel center">
+                    <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
+                </div>
             </div>
-
-            { isItDesktop &&
-                <hr className='divider'></hr>
-            }
 
             <div className="quiz__questionCounter pos-rel flex flex-jc-c flex-ai-c">
                 <div className={`skeletonLoading skeletonLoading__quizInfo tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
@@ -328,18 +304,11 @@ const Quiz = (props) => {
                 <div className={`quiz__hider flex pos-rel ${scaleAnimation && 'quiz__options__scaleUp'}`}>
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                     { quizQuestions() }
-                    
-                    <div className="quiz__questionChanger__container pos-abs">
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
-                    </div>
                 </div>
 
-
-                { !(isItDesktop) &&
-                    <div className='quiz__bottomQuestionChanger__container pos-abs'  id="quiz__answerDetail">
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__bottomQuestionChanger btn ${shouldShowTheBottomQuestionChanger()}` } aria-label="Next Question"></button>
-                    </div>
-                }
+                <div className='quiz__bottomQuestionChanger__container pos-abs'  id="quiz__answerDetail">
+                    <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__bottomQuestionChanger btn ${shouldShowTheBottomQuestionChanger()}` } aria-label="Next Question"></button>
+                </div>
             </div>
 
             <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>

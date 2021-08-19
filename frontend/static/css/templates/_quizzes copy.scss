@@ -26,13 +26,6 @@ body {
             color: $white;
             font-weight: 100;
             margin: auto;
-            @include breakpoints-up(medium) {
-                margin: 0;
-                padding: 0;
-                margin-bottom: 0;
-                max-width: 70%;
-                text-align: right;
-            }
         }
 
         h1 {
@@ -57,14 +50,6 @@ body {
         }
     }
 
-    @include breakpoints-up(medium) {
-        &__detail {
-            width: 70%; 
-            display: flex;
-            justify-content: flex-end;
-        }
-    }
-
     &__questions {
         &::after {
             content: "";
@@ -82,14 +67,6 @@ body {
         padding: 0.1rem;
         border-radius: 24px;
         transition: all 1.3s;
-
-        @include breakpoints-up(medium) {
-            margin: auto 8rem;
-            background: none;
-            border: none;
-            box-shadow: none;
-            backdrop-filter: none;
-        }
     }
 
     &__question {
@@ -101,14 +78,6 @@ body {
         border-radius: 23px 25px 0 0;
         background: #00000065;
         backdrop-filter: blur(165px);
-
-        @include breakpoints-up(medium) {
-            background: none;
-            backdrop-filter: none;
-            text-align: right;
-            width: 31rem;
-            font-size: 1.85rem;
-        }
     }
 
     &__imgQuestion {
@@ -159,27 +128,10 @@ body {
     &__questionChanger {
         cursor: pointer;
         top: -2rem;
-        
-        @include breakpoints-up(medium) {
-            top: auto;
-            display: flex;
-            justify-content: flex-end;
-            position: relative;
-        }
 
         &__container {
             width: 23rem; height: 1rem;
             z-index: 2;
-
-            @include breakpoints-up(medium) {
-                width: auto; height: auto;
-                position: relative;
-                position: absolute;
-                top: 15.5rem;
-                right: 0;
-                pointer-events: all;
-                z-index: -1;
-            }
 
             button {
                 background: url('/static/img/arw.svg') no-repeat center center;
@@ -187,7 +139,13 @@ body {
             }
         }
 
+        &__last {
+            left: 5rem;
+            transform: rotate(90deg);
+        }
+
         &__next {
+            right: 5rem;
             transform: rotate(-90deg);
         }
     }
@@ -208,11 +166,6 @@ body {
     }
 
     &__questionCounter {
-
-        @include breakpoints-up(medium) {
-            display: none;
-        }
-
         z-index: 1;
         color: $white;
 
@@ -222,13 +175,6 @@ body {
     }
 
     &__hider {
-        @include breakpoints-up(medium) {
-            width: 44rem;
-            bottom: auto;
-            margin-top: 1.5rem;
-            margin-bottom: 3rem;
-        }
-        
         width: 27.4rem;
         overflow: hidden;
         bottom: 3.5rem;
@@ -238,10 +184,6 @@ body {
 
     &__options {
         width: 23rem;
-
-        @include breakpoints-up(medium) {
-            width: 32rem;
-        }
 
         &__img {
             grid-template-columns: auto auto;
@@ -262,12 +204,6 @@ body {
             display: block;
             border-radius: 26px;
             cursor: pointer;
-
-            @include breakpoints-up(medium) {
-                border-radius: 20px;
-                font-size: 1.7rem;
-                text-align: right;
-            }
         }
 
         &__imgLabel {
@@ -286,25 +222,10 @@ body {
             width: 21rem;
             border: 2px solid #adadad;
             padding: 0.6rem;
+            transition: all .3s ease-in-out;
 
             &:not(:last-child) {
                 margin-bottom: 1rem;
-            }
-
-            @include breakpoints-up(medium) {
-                width: 30rem;
-                border: 1.5px solid #adadad;
-                padding-top: 1rem;
-                padding-bottom: 1rem;
-                padding-right: 2rem;
-                padding-left: 2rem;
-                transition: all .3s ease-in-out;
-                backdrop-filter: blur(20px);
-                background: #00000094;
-
-                &:not(:last-child) {
-                    margin-bottom: 1.5rem;
-                }
             }
 
             &:hover {
@@ -408,12 +329,6 @@ body {
     &__answerText {
         padding-right: 1rem;
         padding-left: 1rem;
-
-        @include breakpoints-up(medium) {
-            p {
-                font-size: 2rem;
-            }
-        }
     }
 
     .lowHighContainer {
