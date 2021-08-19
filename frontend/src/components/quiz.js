@@ -287,13 +287,18 @@ const Quiz = (props) => {
                 <div className='flex flex-jc-c flex-ai-c'>
                     <div className={`skeletonLoading skeletonLoading__quizTitle tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                 </div>
-                <h1 className="tx-al-c wrapper-sm">{ quiz.title }</h1>
+                
+                <div className="tx-al-c">
+                    <h1>{ quiz.title }</h1>
+                </div>
 
                 <div className="quiz__detail flex flex-jc-c flex-ai-c">
-                    <div className={`skeletonLoading skeletonLoading__quizInfo tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
-                    <h5>تعداد سوال ها: {questions.length}</h5>
+                    <div className={`flex ${contentLoaded && 'noVis'}`}>
+                        <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
+                        <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
+                    </div>
 
-                    <div className={`skeletonLoading skeletonLoading__quizInfo tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
+                    <h5>تعداد سوال ها: {questions.length}</h5>
                     <h5>{ makeTheDatePublishReadyToShow(quiz.publish) }</h5>
                 </div>
                 

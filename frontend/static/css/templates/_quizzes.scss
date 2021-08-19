@@ -26,20 +26,10 @@ body {
             color: $white;
             font-weight: 100;
             margin: auto;
-            @include breakpoints-up(medium) {
-                margin: 0;
-                padding: 0;
-                margin-bottom: 0;
-                max-width: 70%;
-                text-align: right;
-            }
         }
 
         h1 {
             font-size: $font-med - .1rem;
-            margin-bottom: .5rem;
-            padding-right: 1.5rem;
-            padding-left: 1.5rem;
         }
 
         h5 {
@@ -54,14 +44,6 @@ body {
 
         h6 {
             font-size: $font-sm - .4rem;
-        }
-    }
-
-    @include breakpoints-up(medium) {
-        &__detail {
-            width: 70%; 
-            display: flex;
-            justify-content: flex-end;
         }
     }
 

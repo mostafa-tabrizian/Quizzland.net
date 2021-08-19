@@ -800,12 +800,19 @@ input {
 
 .skeletonLoading__quizInfo {
   width: 8rem;
-  height: 1rem !important;
+  height: 1.5rem !important;
 }
 
 .skeletonLoading__quizQuestion {
   width: 30rem;
   height: 25rem !important;
+}
+
+@media (min-width: 40em) {
+  .skeletonLoading__quizQuestion {
+    -webkit-transform: translate(6rem);
+            transform: translate(6rem);
+  }
 }
 
 @-webkit-keyframes load {
@@ -1831,21 +1838,8 @@ body {
   margin: auto;
 }
 
-@media (min-width: 40em) {
-  .quiz__head h1, .quiz__head h2, .quiz__head h3, .quiz__head h4, .quiz__head h5, .quiz__head h6, .quiz__head p {
-    margin: 0;
-    padding: 0;
-    margin-bottom: 0;
-    max-width: 70%;
-    text-align: right;
-  }
-}
-
 .quiz__head h1 {
   font-size: 1.225rem;
-  margin-bottom: .5rem;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
 }
 
 .quiz__head h5 {
@@ -1862,18 +1856,6 @@ body {
 
 .quiz__head h6 {
   font-size: 0.78rem;
-}
-
-@media (min-width: 40em) {
-  .quiz__detail {
-    width: 70%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
-  }
 }
 
 .quiz__questions::after {

@@ -531,11 +531,15 @@ input {
     }
 
     &__quizInfo {
-        width: 8rem; height: 1rem !important;
+            width: 8rem; height: 1.5rem !important;
     }
 
     &__quizQuestion {
         width: 30rem; height: 25rem !important;
+
+        @include breakpoints-up(medium) {
+            transform: translate(6rem);
+        }
     }
 }
 
