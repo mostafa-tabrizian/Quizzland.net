@@ -7,6 +7,7 @@ axios.defaults.xsrfCookieName = "csrftoken";
 import { log, replaceFunction } from './base'
 import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
+import QuizContainer from './quizContainer'
 
 let quiz = 'null'
 
@@ -27,6 +28,7 @@ const Quiz = (props) => {
     const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
     const [showDivider, setShowDivider] = useState(false)
+    const [suggestionQuizzes, setSuggestionQuizzes] = useState()
 
     const result = useRef(null)
 
@@ -65,6 +67,7 @@ const Quiz = (props) => {
         
         const questions = await axios.get(`/dbQuizzland$M19931506/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         setQuestions(questions.data)
+        getSuggestionsQuiz(questions.data[0].subCategory)
         setContentLoaded(true)
         setBackground()
         addView(quizDB.data.results[0])
@@ -262,6 +265,11 @@ const Quiz = (props) => {
         }
     }
 
+    const getSuggestionsQuiz = (subCategory) => {
+        axios.get(`/dbQuizzland$M19931506/new_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+            .then((res) => {setSuggestionQuizzes(res.data.results)})
+    }
+
     return (
         <React.Fragment>
 
@@ -347,10 +355,21 @@ const Quiz = (props) => {
                 }
             </div>
 
-            <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
-            <ul className='quiz__tags flex flex-jc-c flex-ai-c'>
-                { splitTheTags() }
-            </ul>
+            <div>
+                <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
+                <ul className='quiz__tags flex flex-jc-c flex-ai-c'>
+                    { splitTheTags() }
+                </ul>
+            </div>
+
+            <div className='space-med'>
+                <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
+                <ul className="quizContainer flex flex-jc-fe flex-ai-c wrapper-med">
+                    {
+                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                    }
+                </ul>
+            </div>
             
             <Link
                 ref={result} className='noVis'

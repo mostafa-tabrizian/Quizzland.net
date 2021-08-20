@@ -18,12 +18,12 @@ const Header = (props) => {
         componentChangeDetector()
     })
     
-    if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
-        if (localStorage.getItem('alertUFHB') !== 'true') {
-            alert('لطفا از مرورگر کروم یا غیره استفاده کنید \n در مرورگر شما (فایرفاکس) برخی دیزاین ها قابل اجرا نیست')
-            localStorage.setItem('alertUFHB', 'True')
-        }
-    }
+    // if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
+    //     if (localStorage.getItem('alertUFHB') !== 'true') {
+    //         alert('لطفا از مرورگر کروم یا غیره استفاده کنید \n در مرورگر شما (فایرفاکس) برخی دیزاین ها قابل اجرا نیست')
+    //         localStorage.setItem('alertUFHB', 'True')
+    //     }
+    // }
 
     const componentChangeDetector = () => {
         (function(history){

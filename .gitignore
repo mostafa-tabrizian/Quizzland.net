@@ -16,3 +16,4 @@ migrations
 *.webp
 frontend/static/build
 *.zip
+*.log

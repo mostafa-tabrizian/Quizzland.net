@@ -498,6 +498,10 @@ input {
     font-family: lalezar, serif;
     font-weight: 300;
     z-index: 1;
+
+    @include breakpoints-down(medium) {
+        font-size: 2rem;
+    }
 }
 
 .skeletonLoading {
