@@ -17,3 +17,4 @@ migrations
 frontend/static/build
 *.zip
 *.log
+changes.txt

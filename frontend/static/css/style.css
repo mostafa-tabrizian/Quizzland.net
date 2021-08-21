@@ -572,7 +572,7 @@ input {
 .adverts__left {
   width: 13rem;
   height: 35rem;
-  left: 1.5rem;
+  left: 4.5rem;
 }
 
 @media (max-width: 85em) {
@@ -1829,6 +1829,28 @@ body {
   width: 100vw;
   height: 100vh;
   background: #0000004d;
+}
+
+.SFXController {
+  z-index: 2;
+  margin-left: 1.5rem;
+  top: 6rem;
+}
+
+.SFXController button {
+  background: none;
+  outline: none;
+  border: none;
+}
+
+.SFXController button:hover {
+  cursor: pointer;
+}
+
+.at4-share-title {
+  font-size: 0.8rem;
+  color: white;
+  margin-bottom: 0.3rem;
 }
 
 .quiz__head {

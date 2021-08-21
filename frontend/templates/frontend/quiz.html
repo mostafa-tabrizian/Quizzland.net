@@ -10,16 +10,13 @@
 
     <!-- Adverts -->
     <script type="text/javascript">
-      (function(){
-      var now = new Date();
-      var head = document.getElementsByTagName('head')[0];
-      var script = document.createElement('script');
-      script.async = true;
-      var script_address = 'https://cdn.yektanet.com/js/Quizzland.net/native-Quizzland.net-18610.js';
-      script.src = script_address + '?v=' + now.getFullYear().toString() + '0' + now.getMonth() + '0' + now.getDate() + '0' + now.getHours();
+      var head = document.getElementsByTagName("head")[0];
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.async=1;
+      script.src = "https://s1.mediaad.org/serve/Quizzland.net/loader.js" ;
       head.appendChild(script);
-      })();
-    </script>
+    </script> 
 
   </head>
   <body>
@@ -27,6 +24,8 @@
     <div id="quizRoot"></div>
 
     <script src="{% static 'build/Quiz.js' %}"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6120f96aac92469e"></script>
+
   </body>
 </html>
 

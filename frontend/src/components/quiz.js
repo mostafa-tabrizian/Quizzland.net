@@ -18,7 +18,7 @@ const Quiz = (props) => {
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [correctAnswerOption, setCorrectAnswerOption] = useState(0)
     const [wrongAnswerOption, setWrongAnswerOption] = useState(0)
-    const [scaleAnimation, setScaleAnimation] = useState(false)
+    // const [scaleAnimation, setScaleAnimation] = useState(false)
     const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
     const [showImGifTextAnswer, setShowImGifTextAnswer] = useState(false)
     const [showBottomQuestionChanger, setShowBottomQuestionChanger] = useState(false)
@@ -29,15 +29,20 @@ const Quiz = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [showDivider, setShowDivider] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
+    const [SFXAllowed, setSFXAllowed] = useState(true)
 
     const result = useRef(null)
 
     const quizTitleReplacedWithHyphen = replaceFunction(quizTitle, '-', '+')
+    const SFXCorrect = new Audio('../../static/sound/SFXCorrect.mp3')
+    const SFXWrong = new Audio('../../static/sound/SFXWrong.mp3')
+    const speakerIconOn = '/static/img/speakerOn.png'
+    const speakerIconOff = '/static/img/speakerOff.png'
 
     useEffect(() => {
         grabData()
         setLoadState(true)
-    }, [quizTitle])
+    }, quizTitle)
 
     useEffect(() => {
         quizChangeDetector()
@@ -90,19 +95,27 @@ const Quiz = (props) => {
         
         if (userChose !== correctAnswer) {
             setWrongAnswerOption(parseInt(userChose))
+            if (SFXAllowed) {
+                SFXWrong.play()
+            }
         } else {
             setCorrectAnswersCounter(prev => prev + 1)
+            if (SFXAllowed) {
+                SFXCorrect.play()
+            }
         }
 
     }
 
-    const scaleAnimationAfterChoosingAnswer = () => {
-        setScaleAnimation(true)
-
-        setTimeout(() => {
-            setScaleAnimation(false)
-        }, 150)
-    }
+    // const scaleAnimationAfterChoosingAnswer = () => {
+    //     if (!(window.navigator.userAgent.includes('Windows'))) {
+    //         setScaleAnimation(true)
+    
+    //         setTimeout(() => {
+    //             setScaleAnimation(false)
+    //         }, 150)
+    //     }
+    // }
 
     const automaticallyGoNextQuestionOrEndTheQuiz = () => {
         setTimeout(() => {
@@ -122,7 +135,7 @@ const Quiz = (props) => {
 
         disableSelectingOption()
         checkTheSelectedOption(props.target)
-        scaleAnimationAfterChoosingAnswer()
+        // scaleAnimationAfterChoosingAnswer()
         setShowImGifTextAnswer(true)
         setShowBottomQuestionChanger(true)
         if (autoQuestionChanger) {
@@ -231,7 +244,6 @@ const Quiz = (props) => {
                     result.current.click()
                 } catch{}
             }, 3500)
-            
         }
     }
 
@@ -270,6 +282,10 @@ const Quiz = (props) => {
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
+    const SFXController = () => {
+        setSFXAllowed(SFXAllowed ? false : true)
+    }
+
     return (
         <React.Fragment>
 
@@ -288,7 +304,13 @@ const Quiz = (props) => {
             />
 
             <div className='adverts adverts__left'>
-                <div id="pos-article-display-26094"></div>
+                <div id='mediaad-Spcz'></div>
+            </div>
+
+            <div className='SFXController pos-abs' onClick={() => {SFXController()}} >
+                <button type="button">
+                    <img src={SFXAllowed ? speakerIconOn : speakerIconOff} alt="کوییزلند ‌| Quizzland" />
+                </button>
             </div>
 
             <div className="quiz__head pos-rel tx-al-r" id="quiz__head">
@@ -338,7 +360,7 @@ const Quiz = (props) => {
             </div>
 
             <div className={`quiz__questions ${!ableToSelectOption && 'pointerOff'} pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
-                <div className={`quiz__hider flex pos-rel ${scaleAnimation && 'quiz__options__scaleUp'}`}>
+                <div className={`quiz__hider flex pos-rel`}>  {/* ${scaleAnimation && 'quiz__options__scaleUp'} */}
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                     { quizQuestions() }
                     
@@ -364,9 +386,9 @@ const Quiz = (props) => {
 
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
-                <ul className="quizContainer flex flex-jc-fe flex-ai-c wrapper-med">
+                <ul className="quizContainer flex flex-jc-fs flex-ai-c wrapper-med">
                     {
-                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
                 </ul>
             </div>
