@@ -1948,6 +1948,12 @@ body {
   border-radius: 1.2rem;
 }
 
+@media (min-width: 40em) {
+  .quiz__imgQuestion {
+    width: 29rem;
+  }
+}
+
 .quiz__imgOption {
   width: 9.9rem;
   border-radius: 1.4rem;
@@ -2495,8 +2501,9 @@ body {
 
 .quizContainer__date {
   position: absolute;
-  left: 8.5rem;
+  left: 8rem;
   top: 7.2rem;
+  width: 5.6rem;
   background: #eaeaea;
   padding: 2px 0.5rem;
   font-size: 0.9rem;
@@ -2508,7 +2515,7 @@ body {
 @media (max-width: 49.9375em) {
   .quizContainer__date {
     top: 5.8rem;
-    left: 5.3rem;
+    left: 4rem;
   }
 }
 

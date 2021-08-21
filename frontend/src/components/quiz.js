@@ -82,7 +82,7 @@ const Quiz = (props) => {
         await axios.patch(`/dbQuizzland$M19931506/new_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
     }
 
-    const makeTheDatePublishReadyToShow = (time) => {
+    const makeDatePublishFormatForDetailInHead = (time) => {
         return replaceFunction(String(time).slice(0, 10), '-', '/')
     }
 
@@ -143,7 +143,13 @@ const Quiz = (props) => {
         }
     }
 
-    const questionsOptions = (question) => {
+    const questionShowIfNotNull = (question) => {
+        if (question !== null) {
+            return <p className='quiz__question tx-al-c'> { question } </p>
+        }
+    }
+
+    const questionOptionsCheckBetweenStringOrImg = (question) => {
         if (question.option_1) {
             return (
                 <div className="flex flex-jc-c">
@@ -169,7 +175,7 @@ const Quiz = (props) => {
         }
     }
 
-    const answerText = (question) => {
+    const answerOfQuestionIfExistShow = (question) => {
         if (question.answer_text) {
             return (
                 <div
@@ -181,7 +187,7 @@ const Quiz = (props) => {
         }
     }
 
-    const answerImGif = (question) => {
+    const gifAnswerOfQuestionIfExistShow = (question) => {
         if (!(question.answer_imGif.includes('NotExist.jpg'))) {
             return <img src={question.answer_imGif} alt="quiz-question-WebP" />
         }
@@ -193,15 +199,17 @@ const Quiz = (props) => {
                 return (
                     <div style={{transform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container pos-rel darkGls">
                         { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} loading='lazy' /> }
-                        <p className='quiz__question tx-al-c'> { question.question } </p>
-                        { questionsOptions(question) }
                         
-                        <div className={`quiz__answerText tx-al-r ${!showImGifTextAnswer && 'noVis'}`}>
-                            { answerText(question) }
+                        { questionShowIfNotNull(question.question) }
+                        
+                        { questionOptionsCheckBetweenStringOrImg(question) }
+                        
+                        <div className={`quiz__answerOfQuestionIfExistShow tx-al-r ${!showImGifTextAnswer && 'noVis'}`}>
+                            { answerOfQuestionIfExistShow(question) }
                         </div>
     
                         <div className={`quiz__answerImGif ${!showImGifTextAnswer && 'noVis'}`}>
-                            { answerImGif(question) }
+                            { gifAnswerOfQuestionIfExistShow(question) }
                         </div>
                     </div>
                 )
@@ -259,7 +267,7 @@ const Quiz = (props) => {
         }
     }
 
-    const splitTheTags = () => {
+    const showTheTagsIfNotNull = () => {
         if (quiz !== 'null') {
             const tags = quiz.tags
             const splittedTags = tags.split('،')
@@ -329,7 +337,7 @@ const Quiz = (props) => {
                     </div>
 
                     <h5>تعداد سوال ها: {questions.length}</h5>
-                    <h5>{ makeTheDatePublishReadyToShow(quiz.publish) }</h5>
+                    <h5>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
                 </div>
                 
                 { !(isItDesktop) &&
@@ -380,7 +388,7 @@ const Quiz = (props) => {
             <div>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
                 <ul className='quiz__tags flex flex-jc-c flex-ai-c'>
-                    { splitTheTags() }
+                    { showTheTagsIfNotNull() }
                 </ul>
             </div>
 

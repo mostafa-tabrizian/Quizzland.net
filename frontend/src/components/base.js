@@ -41,3 +41,36 @@ export const nightMode = () => {
         return 'darkGls'
     }
 }
+
+export const datePublishHandler = (publishFullDate) => {
+    if (publishFullDate) {
+        const publishHour = parseInt(publishFullDate.slice(11, 13))
+        const publishDay = parseInt(publishFullDate.slice(8, 10))
+        const publishMonth = parseInt(publishFullDate.slice(5, 7))
+        const publishYear = parseInt(publishFullDate.slice(0, 4))
+
+        const currentHour = new Date().getHours()
+        const currentDay = new Date().getDate()
+        const currentMonth = new Date().getMonth() + 1
+        const currentYear = new Date().getFullYear()
+
+        if (currentYear > publishYear) {
+            const totalYearsAfterPublishingTheQuiz = currentYear - publishYear
+            return `${totalYearsAfterPublishingTheQuiz} سال پیش`
+        } else if (currentMonth > publishMonth){
+            const totalMonthsAfterPublishingTheQuiz = currentMonth - publishMonth
+            return `${totalMonthsAfterPublishingTheQuiz} ماه پیش`
+        } else if (currentDay > publishDay) {
+            const totalDaysAfterPublishingTheQuiz = currentDay - publishDay
+            return `${totalDaysAfterPublishingTheQuiz} روز پیش`
+        } else {
+            const totalHoursAfterPublishingTheQuiz = currentHour - publishHour
+            if (totalHoursAfterPublishingTheQuiz === 0) {
+                return 'چند دقیقه پیش'
+            } else {
+                return `${totalHoursAfterPublishingTheQuiz} ساعت پیش`
+            }
+        }
+    }
+    return publishFullDate
+}

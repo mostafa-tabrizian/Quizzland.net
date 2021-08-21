@@ -98,8 +98,9 @@
 
     &__date {
         position: absolute;
-        left: 8.5rem;
+        left: 8rem;
         top: 7.2rem;
+        width: 5.6rem;
         background: #eaeaea;
         padding: 2px 0.5rem;
         font-size: 0.9rem;
@@ -109,7 +110,7 @@
 
         @include breakpoints-down(medium) {
             top: 5.8rem;
-            left: 5.3rem;
+            left: 4rem;
         }
     }
 }

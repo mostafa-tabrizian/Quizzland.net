@@ -118,6 +118,10 @@ body {
     &__imgQuestion {
         width: 23rem;
         border-radius: 1.2rem;
+
+        @include breakpoints-up(medium) {
+            width: 29rem;
+        }
     }
 
     &__imgOption {
