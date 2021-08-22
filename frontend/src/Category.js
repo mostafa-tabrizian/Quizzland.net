@@ -9,8 +9,7 @@ import {
 
 import HotFooter from './components/hotFooter'
 import Category from './components/category'
-
-
+import ScrollToTop from './components/scrollToTop'
 
 const CategoryApp = () => {
     return (

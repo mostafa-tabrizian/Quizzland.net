@@ -13,24 +13,41 @@ class QuizSitemap(Sitemap):
     def items(self):
         return Quizzes.objects.all()
 
-    def lastmod(self, obj):
-        return obj.publish
+    def lastmod(self, item):
+        return item.publish
 
-    def location(self,obj):
-        title = titleConverterWithSpilt(obj.title, ' ', '-')
+    def location(self, item):
+        title = titleConverterWithSpilt(item.title, ' ', '-')
         return f'/quiz/{title}'
 
 class SubCategorySitemap(Sitemap):
     changefreq = "monthly"
-    priority = 0.8
+    priority = 0.9
     protocol = 'https'
 
     def items(self):
         return SubCategories.objects.all()
 
-    def lastmod(self, obj):
-        return obj.publish
+    def lastmod(self, item):
+        return item.publish
 
-    def location(self,obj):
-        title = titleConverterWithSpilt(obj.subCategory, ' ', '-')
-        return f'/category/{obj.category}/{title}'
+    def location(self, item):
+        subCategory = titleConverterWithSpilt(item.subCategory, ' ', '-')
+        title = titleConverterWithSpilt(item.title, ' ', '-')
+        return f'/category/{item.category}/{subCategory}?t={title}'
+
+categoryTitle = {
+    'کوییز هایی درمورد سلبریتی ها':'celebrity',
+    'کوییز هایی درمورد فیلم و سریال':'movie-series'
+}
+
+class CategorySitemap(Sitemap):
+    changefreq = "monthly"
+    priority = 0.9
+    protocol = 'https'
+
+    def items(self):
+        return ['کوییز هایی درمورد سلبریتی ها' ,'کوییز هایی درمورد فیلم و سریال']
+
+    def location(self, item):
+        return f'/category/{categoryTitle[item]}'

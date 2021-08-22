@@ -6,7 +6,7 @@ import PageTravel from './pageTravel'
 import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
 
-import { log, replaceFunction, viewsFormat } from './base'
+import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
 const Category = (props) => {
     const [pageTravel, setPageTravel] = useState([])
@@ -69,7 +69,7 @@ const Category = (props) => {
                                     <img src={`${category.thumbnail}`} alt={`${category.subCategory}} | ${category.title}`} loading='lazy' />
                                 </div>
                                 {/* <div className="quizContainer__views">{viewsFormat(category.views)}</div> */}
-                                <div className="quizContainer__date">{ datePublishHandler(category.publish) }</div>
+                                <div className="quizContainer__date tx-al-c">{datePublishHandler(category.publish)}</div>
                                 <span className="quizContainer__title quizContainer__title__noViews flex">
                                     { category.title }
                                 </span>
@@ -92,30 +92,6 @@ const Category = (props) => {
         }
         setLoadState(true)
     }, [])
-
-    const datePublishHandler = (publishFullDate) => {
-        if (publishFullDate) {
-            const publishDay = parseInt(publishFullDate.slice(8, 10))
-            const publishMonth = parseInt(publishFullDate.slice(5, 7))
-            const publishYear = parseInt(publishFullDate.slice(1, 4)) + 2000
-
-            const currentDay = new Date().getDay() + 1
-            const currentMonth = new Date().getMonth() + 1
-            const currentYear = new Date().getFullYear()
-
-            if (currentYear > publishYear) {
-                const totalYearsAfterPublishingTheQuiz = currentYear - publishYear
-                return `${totalYearsAfterPublishingTheQuiz} سال پیش`
-            } else if (currentMonth > publishMonth){
-                const totalMonthsAfterPublishingTheQuiz = currentMonth - publishMonth
-                return `${totalMonthsAfterPublishingTheQuiz} ماه پیش`
-            } else if (currentDay > publishDay) {
-                const totalDaysAfterPublishingTheQuiz = currentDay - publishDay
-                return `${totalDaysAfterPublishingTheQuiz} روز پیش`
-            }
-        }
-        return publishFullDate
-    }
 
     return (
         <React.Fragment>

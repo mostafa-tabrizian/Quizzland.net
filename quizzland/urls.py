@@ -7,7 +7,8 @@ from .sitemaps import *
 
 sitemaps = {
     'quiz':QuizSitemap,
-    'subCategory':SubCategorySitemap
+    'subCategory':SubCategorySitemap,
+    'category':CategorySitemap
 }
 
 router = routers.DefaultRouter()

@@ -8,6 +8,7 @@ import {
 
 import PageNotFound_404 from './components/pageNotFound_404'
 import HotFooter from './components/hotFooter'
+import ScrollToTop from './components/scrollToTop'
 
 const CategoryApp = () => {
     return (
