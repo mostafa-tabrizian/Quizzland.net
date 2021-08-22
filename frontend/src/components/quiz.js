@@ -204,7 +204,7 @@ const Quiz = (props) => {
                         
                         { questionOptionsCheckBetweenStringOrImg(question) }
                         
-                        <div className={`quiz__answerOfQuestionIfExistShow tx-al-r ${!showImGifTextAnswer && 'noVis'}`}>
+                        <div className={`quiz__answerText tx-al-r ${!showImGifTextAnswer && 'noVis'}`}>
                             { answerOfQuestionIfExistShow(question) }
                         </div>
     
@@ -273,7 +273,8 @@ const Quiz = (props) => {
             const splittedTags = tags.split('،')
             return (    
                 splittedTags.map(tag => {
-                    return <li><h2>{tag}</h2></li>
+                    tag = replaceFunction(tag, '-', ' ')
+                    return <li><h2><a href={`/search?s=${tag}`} >{tag}</a></h2></li>
                 })
             )
         }
@@ -314,6 +315,8 @@ const Quiz = (props) => {
             <div className='adverts adverts__left'>
                 <div id='mediaad-Spcz'></div>
             </div>
+
+            <div id='mediaad-Spcz'></div>
 
             <div className='SFXController pos-abs' onClick={() => {SFXController()}} >
                 <button type="button">

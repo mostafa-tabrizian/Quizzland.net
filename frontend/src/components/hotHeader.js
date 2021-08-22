@@ -108,7 +108,7 @@ const Header = (props) => {
                             <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال، گیمینگ و کوییز های روانشناسی و خودشناسی" />
                             <h3>uizzland</h3>
                         </a>
-                        <Search/>
+                        <Search />
                     </div>
 
                     <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>

@@ -11,7 +11,8 @@ const SearchMoreResult = () => {
     const [quizzesList, setQuizzesList] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
-    const [searchValue, setSearchValue] = useState()
+    const [searchValue, setSearchValue] = useState('')
+    const [searchValueButWithoutHyphen, setSearchValueButWithoutHyphen] = useState()
     const [matchedQuizzesCounter, setMatchedQuizzesCounter] = useState()
 
     useEffect(() => {
@@ -27,6 +28,7 @@ const SearchMoreResult = () => {
 
     useEffect(() => {
         getQuizzes()
+        setSearchValueButWithoutHyphen(replaceFunction(searchValue, '+', ' '))
     }, [searchValue])
 
     const searchChangeDetector = () => {
@@ -50,12 +52,15 @@ const SearchMoreResult = () => {
         
         const search_new_quiz_subCategory = await axios.get(`/dbQuizzland$M19931506/new_quiz/?subCategory__icontains=${searchValue}&limit=16&offset=${offset}`)
         Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
+
+        const search_new_quiz_tag = await axios.get(`/dbQuizzland$M19931506/new_quiz/?tags__icontains=${searchValue}&limit=6`)
+        Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
         
         const quizzesList = () => {
             return (
                 <QuizContainer quizzes={matchedQuizzes}/>
-                )
-            }
+            )
+        }
             
         setMatchedQuizzesCounter(matchedQuizzes.length)
         setQuizzesList([])
@@ -65,11 +70,11 @@ const SearchMoreResult = () => {
     return (
         <React.Fragment>
             <Header
-                title={`کوییزلند | ${searchValue} جستجو عبارت `}
+                title={`کوییزلند | ${searchValueButWithoutHyphen} جستجو عبارت `}
             />
             <div className='flex flex-jc-c flex-ai-c'>
                 ‌<span > ‌تعداد نتایج :‌ {matchedQuizzesCounter} </span>‌‌
-                ‌<h3 className='title'> ‌ عبارت جستجو شده : {searchValue}</h3>‌
+                ‌<h3 className='title'> ‌ عبارت جستجو شده : {searchValueButWithoutHyphen}</h3>‌
             </div>
 
             <ul className='quizContainer flex flex-jc-fe flex-ai-c wrapper-med'>

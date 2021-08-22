@@ -1,5 +1,6 @@
 .quizContainer {
     flex-wrap: wrap;
+    align-items: baseline;
     direction: rtl;
     
     @include breakpoints-down(medium) {

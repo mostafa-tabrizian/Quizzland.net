@@ -44,6 +44,9 @@ const Search = (props) => {
             const search_new_quiz_subCategory = await axios.get(`/dbQuizzland$M19931506/new_quiz/?subCategory__icontains=${searchValue}&limit=6`)
             Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
 
+            const search_new_quiz_tag = await axios.get(`/dbQuizzland$M19931506/new_quiz/?tags__icontains=${searchValue}&limit=6`)
+            Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+
             // Search Category
             const search_new_category_title = await axios.get(`/dbQuizzland$M19931506/new_category/?title__icontains=${searchValue}&limit=1`)
             Array.prototype.push.apply(matchedCategories, search_new_category_title.data.results)

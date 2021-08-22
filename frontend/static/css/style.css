@@ -2300,7 +2300,7 @@ body {
 
 @media (min-width: 40em) {
   .quiz__answerText p {
-    font-size: 2rem;
+    font-size: 1.18rem;
   }
 }
 
@@ -2374,6 +2374,9 @@ body {
 .quizContainer {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   direction: rtl;
 }
 

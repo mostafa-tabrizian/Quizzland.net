@@ -29,6 +29,7 @@ const Footer = () => {
                 <div>
                     <h3>دسترسی سریع</h3>
                     <ul>
+                        <li><a href='/'>صفحه اصلی</a></li>
                         <li><a href='/guide'>راهنما</a></li>
                         <li><a href='/contact'>تماس با ما</a></li>
                         <li><a href="/ads">تبلیغات</a></li>
@@ -37,14 +38,14 @@ const Footer = () => {
                     </ul>
                 </div>
 
-                <div>
+                {/* <div>
                     <h3>با ما همراه باشید</h3>
                     <ul className='flex flex-ai-c flex-jc-c'>
                         <li><a href='#'>
                             <img src={instagramIcon} alt='quizzlnad instagram' />
                         </a></li>
                     </ul>
-                </div>
+                </div> */}
 
             </div>
 

@@ -7,7 +7,8 @@ class QuizzesFilter(filters.FilterSet):
         fields= {
             'category': ['icontains'],
             'subCategory': ['icontains'],
-            'title': ['iexact', 'icontains']
+            'title': ['iexact', 'icontains'],
+            'tags': ['iexact', 'icontains']
         }
 
 class CategoriesFilter(filters.FilterSet):
