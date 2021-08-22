@@ -9,11 +9,13 @@ import {
 
 import HotFooter from './components/hotFooter'
 import SubCategory from './components/subCategory'
+import ScrollToTop from './components/scrollToTop'
 
 const SubCategoryApp = () => {
     return (
         <React.Fragment>
             <Router>
+                <ScrollToTop />
 
                 <Switch>
                     <Route path='/category/:category/:subCategory' component={SubCategory} />

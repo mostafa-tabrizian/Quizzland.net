@@ -16,13 +16,13 @@ const CategoryApp = () => {
     return (
         <React.Fragment>
             <Router>
-
+                <ScrollToTop />
+                
                 <Switch>
                     <Route path='/category/:category' exact component={Category} />
                 </Switch>
                 
                 <HotFooter />
-
             </Router>
         </React.Fragment>
     );

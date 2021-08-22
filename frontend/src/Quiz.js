@@ -11,13 +11,13 @@ import { log } from './components/base'
 import HotFooter from './components/hotFooter'
 import Quiz from './components/quiz'
 import Result from './components/result'
-
+import ScrollToTop from './components/scrollToTop'
 
 const QuizApp = () => {
     return (
         <React.Fragment>
-            
             <Router>
+                <ScrollToTop />
 
                 <Switch>
                     <Route path='/quiz/:title' component={Quiz} />
@@ -25,9 +25,7 @@ const QuizApp = () => {
                 </Switch>
                 
                 <HotFooter />
-
             </Router>
-
         </React.Fragment>
     );
 }

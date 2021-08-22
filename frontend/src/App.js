@@ -9,6 +9,7 @@ import {
 
 import { log } from './components/base'
 import Footer from './components/footer'
+import ScrollToTop from './components/scrollToTop'
 
 import Index from './components/landPage'
 const Guide             = React.lazy(() => import('./components/guide'))
@@ -26,10 +27,9 @@ const welcomeZeynab       = React.lazy(() => import('./components/welcomeZeynab'
 const App = () => {
     return (
         <React.Fragment>
-
             <Suspense fallback={ <div className='loadingScreen pos-fix flex flex-jc-c flex-ai-c'></div> }>
-
                 <Router>
+                    <ScrollToTop />
 
                     <Switch>
                         <Route path='/' exact component={Index} />
@@ -47,9 +47,7 @@ const App = () => {
                     </Switch>
                     
                     <Footer />
-
                 </Router>
-
             </Suspense>
         </React.Fragment>
     );

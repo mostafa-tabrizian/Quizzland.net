@@ -12,17 +12,15 @@ import HotFooter from './components/hotFooter'
 const CategoryApp = () => {
     return (
         <React.Fragment>
-
             <Router>
+                <ScrollToTop />
 
                 <Switch>
                     <Route component={PageNotFound_404} />
                 </Switch>
                 
                 <HotFooter />
-
             </Router>
-
         </React.Fragment>
     );
 }

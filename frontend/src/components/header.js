@@ -45,13 +45,6 @@ const Header = (props) => {
             };
 
             checkIfShouldShowNightModeBtn()
-            
-            if (document.getElementById('root')) {
-                document.getElementById('root').scrollIntoView()
-            }
-            else if (document.getElementById('quizRoot')) {
-                document.getElementById('quizRoot').scrollIntoView()
-            }
 
         })(window.history);
     }
