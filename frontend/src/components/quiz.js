@@ -9,6 +9,8 @@ import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 
+const logo = '/static/img/Q2.png'
+
 let quiz = 'null'
 
 const Quiz = (props) => {
@@ -27,9 +29,10 @@ const Quiz = (props) => {
     const [loadState, setLoadState] = useState()
     const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [showDivider, setShowDivider] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [SFXAllowed, setSFXAllowed] = useState(true)
+    const [quizThumbnail, setQuizThumbnail] = useState()
+    const [quizUrl, setQuizUrl] = useState(window.document.URL)
 
     const result = useRef(null)
 
@@ -68,13 +71,13 @@ const Quiz = (props) => {
     const grabData = async () => {
         const quizDB = await axios.get(`/dbQuizzland$M19931506/new_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
         quiz = quizDB.data.results[0]
-
         
         const questions = await axios.get(`/dbQuizzland$M19931506/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         setQuestions(questions.data)
         getSuggestionsQuiz(questions.data[0].subCategory)
         setContentLoaded(true)
         setBackground()
+        setQuizThumbnail(quiz.thumbnail)
         addView(quizDB.data.results[0])
     }
     
@@ -286,7 +289,7 @@ const Quiz = (props) => {
 
     const isItDesktop = () => {
         if (window.navigator.userAgent.includes('Windows')) {
-            setShowDivider(true)
+            return true
         }
     }
 
@@ -301,6 +304,26 @@ const Quiz = (props) => {
 
     return (
         <React.Fragment>
+            <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid={`${quizUrl}`} />
+
+            <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject" style={{display: 'none'}}>
+                <img src={`${quizThumbnail}`} />
+                <meta itemprop="url" content={`${quizThumbnail}`} />
+                <meta itemprop="width" content="800" />
+                <meta itemprop="height" content="800" />
+            </div>
+
+            <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style={{display: 'none'}}>
+                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src={`${logo}`} />
+                    <meta itemprop="url" content={`${logo}`} />
+                    <meta itemprop="width" content="600" />
+                    <meta itemprop="height" content="60" />
+                </div>
+                <meta itemprop="name" content="Quizzland | کوییزلند" />
+            </div>
+
+            <meta itemprop="datePublished" content={`${quiz.publish}`}/>
 
             <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
                 <div className={'loadingScreen pos-fix flex flex-jc-c flex-ai-c'}></div>
@@ -334,7 +357,7 @@ const Quiz = (props) => {
                 </div>
                 
                 <div className="tx-al-c">
-                    <h1>{ quiz.title }</h1>
+                    <h1 itemprop="title">{ quiz.title }</h1>
                 </div>
 
                 <div className="quiz__detail flex flex-jc-c flex-ai-c">
@@ -347,14 +370,12 @@ const Quiz = (props) => {
                     <h5>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
                 </div>
                 
-                { !(isItDesktop) &&
-                    <div className='quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c' title='با انتخاب گزینه، پس از ۵ ثانیه به سوال بعدی میرود'>
-                        <h6>تغییر خودکار</h6>
-                        <button onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className="quiz__autoQuestionChangerSwitch__btn btn">
-                            <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
-                        </button>
-                    </div> 
-                }
+                <div className='quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c' title='با انتخاب گزینه، پس از ۵ ثانیه به سوال بعدی میرود'>
+                    <h6>تغییر خودکار</h6>
+                    <button onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className="quiz__autoQuestionChangerSwitch__btn btn">
+                        <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
+                    </button>
+                </div> 
 
                 { !(isItDesktop) &&
                     <div className="quiz__questionChanger__container pos-rel center">

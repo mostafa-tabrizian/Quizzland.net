@@ -130,7 +130,9 @@ body {
     }
 
     &__autoQuestionChangerSwitch{
-        top: 1rem; width: 7rem; height: 4rem;
+        top: .5rem;
+        width: 7rem; height: 2rem;
+        margin-bottom: 2rem;
         z-index: 2;
         cursor: pointer;
 
@@ -216,10 +218,7 @@ body {
     }
 
     &__questionCounter {
-
-        @include breakpoints-up(medium) {
-            display: none;
-        }
+        margin-top: 1rem;
 
         z-index: 1;
         color: $white;
@@ -233,7 +232,6 @@ body {
         @include breakpoints-up(medium) {
             width: 44rem;
             bottom: auto;
-            margin-top: 1.5rem;
             margin-bottom: 3rem;
         }
         

@@ -1960,9 +1960,10 @@ body {
 }
 
 .quiz__autoQuestionChangerSwitch {
-  top: 1rem;
+  top: .5rem;
   width: 7rem;
-  height: 4rem;
+  height: 2rem;
+  margin-bottom: 2rem;
   z-index: 2;
   cursor: pointer;
 }
@@ -2068,14 +2069,9 @@ body {
 }
 
 .quiz__questionCounter {
+  margin-top: 1rem;
   z-index: 1;
   color: #f0f0f0;
-}
-
-@media (min-width: 40em) {
-  .quiz__questionCounter {
-    display: none;
-  }
 }
 
 .quiz__questionCounter__totalAnswered {
@@ -2095,7 +2091,6 @@ body {
   .quiz__hider {
     width: 44rem;
     bottom: auto;
-    margin-top: 1.5rem;
     margin-bottom: 3rem;
   }
 }
