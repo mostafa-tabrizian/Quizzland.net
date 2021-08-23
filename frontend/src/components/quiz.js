@@ -130,7 +130,11 @@ const Quiz = (props) => {
 
     const selectedOption = (props) => {
         setTimeout(() => {
-            document.getElementById('quiz__answerDetail').scrollIntoView(false)
+            if (document.getElementById('quiz__answerDetail')) {
+                document.getElementById('quiz__answerDetail').scrollIntoView(false)
+            } else {
+                document.getElementById('quiz__answerImGif').scrollIntoView(false)
+            }
         }, 170)
 
         disableSelectingOption()
@@ -208,7 +212,7 @@ const Quiz = (props) => {
                             { answerOfQuestionIfExistShow(question) }
                         </div>
     
-                        <div className={`quiz__answerImGif ${!showImGifTextAnswer && 'noVis'}`}>
+                        <div className={`quiz__answerImGif ${!showImGifTextAnswer && 'noVis'}`} id='quiz__answerImGif'>
                             { gifAnswerOfQuestionIfExistShow(question) }
                         </div>
                     </div>
@@ -243,7 +247,7 @@ const Quiz = (props) => {
             }
 
             setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
-            document.getElementById('quiz__head').scrollIntoView()
+            window.scrollTo(0, 0);
 
         } else {
             setQuizEnded(true)

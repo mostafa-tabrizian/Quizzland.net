@@ -1908,7 +1908,7 @@ body {
 
 @media (min-width: 40em) {
   .quiz__container {
-    margin: auto 8rem;
+    margin: 0 8rem;
     background: none;
     border: none;
     -webkit-box-shadow: none;
