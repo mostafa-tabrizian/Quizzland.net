@@ -1453,7 +1453,7 @@ input {
 
 .hero__path {
   z-index: -1;
-  height: 110%;
+  height: 115%;
   width: 100%;
   top: -16rem;
   left: 0;
@@ -2424,7 +2424,7 @@ body {
 
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .quizContainer__bg {
-    background: #ffffff6c !important;
+    background: #ffffff8c !important;
   }
 }
 

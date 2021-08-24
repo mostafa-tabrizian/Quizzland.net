@@ -31,78 +31,82 @@ const Search = (props) => {
 
     const searchHandler = async (value) => {
         try {
-            let searchValue = replaceFunction(value, ' ', '+')
-            setSearchValue(searchValue)
-            
-            let matchedQuizzes = []
-            let matchedCategories = []
+            if (value.length >= 3) {
 
-            // Search Quiz
-            const search_new_quiz_title = await axios.get(`/dbQuizzland$M19931506/new_quiz/?title__icontains=${searchValue}&limit=6`)
-            Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
-
-            const search_new_quiz_subCategory = await axios.get(`/dbQuizzland$M19931506/new_quiz/?subCategory__icontains=${searchValue}&limit=6`)
-            Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
-
-            const search_new_quiz_tag = await axios.get(`/dbQuizzland$M19931506/new_quiz/?tags__icontains=${searchValue}&limit=6`)
-            Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
-
-            // Search Category
-            const search_new_category_title = await axios.get(`/dbQuizzland$M19931506/new_category/?title__icontains=${searchValue}&limit=1`)
-            Array.prototype.push.apply(matchedCategories, search_new_category_title.data.results)
-
-            const search_new_category_subCategory = await axios.get(`/dbQuizzland$M19931506/new_category/?subCategory__icontains=${searchValue}&limit=1`)
-            Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
-
-            const quizzesList = () => {
-                let resultCounter = 0
-                const maxQuizSearchResult = 6
-
-                setNoQuizFoundState(true)
-                return (
-                    matchedQuizzes.map(quiz => {
-                        if (resultCounter !== maxQuizSearchResult) {
-                            setNoQuizFoundState(false)
-                            setShowMoreResults(false)
-        
-                            resultCounter++
-                            return (
-                                <li key={quiz.key}>
-                                    <a className="header__search__result__quizzes__item tx-al-r" href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
-                                        { quiz.title }
-                                    </a>
-                                </li>
-                            )
-                        } else {
-                            setShowMoreResults(true)
-                        }
-                    })
-                )
-            }
-
-            const categoriesList = () => {
-                try {
-                    setNoCategoryFoundState(false)
-                    const category = matchedCategories[0]
+                let searchValue = replaceFunction(value, ' ', '+')
+                setSearchValue(searchValue)
+                
+                let matchedQuizzes = []
+                let matchedCategories = []
+    
+                // Search Quiz
+                const search_new_quiz_title = await axios.get(`/dbQuizzland$M19931506/new_quiz/?title__icontains=${searchValue}&limit=6`)
+                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
+    
+                const search_new_quiz_subCategory = await axios.get(`/dbQuizzland$M19931506/new_quiz/?subCategory__icontains=${searchValue}&limit=6`)
+                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
+    
+                const search_new_quiz_tag = await axios.get(`/dbQuizzland$M19931506/new_quiz/?tags__icontains=${searchValue}&limit=6`)
+                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+    
+                // Search Category
+                const search_new_category_title = await axios.get(`/dbQuizzland$M19931506/new_category/?title__icontains=${searchValue}&limit=1`)
+                Array.prototype.push.apply(matchedCategories, search_new_category_title.data.results)
+    
+                const search_new_category_subCategory = await axios.get(`/dbQuizzland$M19931506/new_category/?subCategory__icontains=${searchValue}&limit=1`)
+                Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
+    
+                const quizzesList = () => {
+                    let resultCounter = 0
+                    const maxQuizSearchResult = 6
+    
+                    setNoQuizFoundState(true)
+    
                     return (
-                        <div className="header__search__result__category__item">
-                            <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
-                                <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوییز های ${category.title_far}`} />
-                            </a>
-                            <h5 className='tx-al-c'>
-                                <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
-                                    {category.subCategory}
-                                </a>
-                            </h5>
-                        </div>
-                    )
-                } catch {
-                    setNoCategoryFoundState(true)
-                }
-            }   
+                        matchedQuizzes.map(quiz => {
+                            if (resultCounter !== maxQuizSearchResult) {
+                                setNoQuizFoundState(false)
+                                setShowMoreResults(false)
             
-            setQuizzesList(quizzesList)
-            setCategoriesList(categoriesList)
+                                resultCounter++
+                                return (
+                                    <li key={quiz.key}>
+                                        <a className="header__search__result__quizzes__item tx-al-r" href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
+                                            { quiz.title }
+                                        </a>
+                                    </li>
+                                )
+                            } else {
+                                setShowMoreResults(true)
+                            }
+                        })
+                    )
+                }
+    
+                const categoriesList = () => {
+                    try {
+                        setNoCategoryFoundState(false)
+                        const category = matchedCategories[0]
+                        return (
+                            <div className="header__search__result__category__item">
+                                <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
+                                    <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوییز های ${category.title_far}`} />
+                                </a>
+                                <h5 className='tx-al-c'>
+                                    <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
+                                        {category.subCategory}
+                                    </a>
+                                </h5>
+                            </div>
+                        )
+                    } catch {
+                        setNoCategoryFoundState(true)
+                    }
+                }   
+                
+                setQuizzesList(quizzesList)
+                setCategoriesList(categoriesList)
+            }
         } catch (e) {
             log('Error in search | cause : database')
         }

@@ -5,19 +5,26 @@ import { log, nightMode} from './base'
 const PageTravel = (props) => {
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
 
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+    }
+
     const goNextPage = () => {
         props.setOffset(props.offset + props.numberOfResult)
         setCurrentPageNumber(prev => prev + 1)
+        scrollToTop()
     }
 
     const goDoubleNextPage = () => {
         props.setOffset((props.offset * 2) + props.numberOfResult)
         setCurrentPageNumber(prev => prev + 2)
+        scrollToTop()
     }
 
     const goPreviousPage = () => {
         props.setOffset(props.offset - props.numberOfResult)
         setCurrentPageNumber(prev => prev - 1)
+        scrollToTop()
     }
 
     return (

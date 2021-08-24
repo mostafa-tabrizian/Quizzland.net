@@ -39,7 +39,7 @@
     
     &__bg {
         @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-            background: #ffffff6c !important;
+            background: #ffffff8c !important;
         }
 
         @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
