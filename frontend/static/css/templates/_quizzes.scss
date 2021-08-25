@@ -70,6 +70,8 @@ body {
     }
 
     &__questions {
+        margin-bottom: 1rem;
+        
         &::after {
             content: "";
             position: fixed;
@@ -219,7 +221,6 @@ body {
 
     &__questionCounter {
         margin-top: 1rem;
-
         z-index: 1;
         color: $white;
 

@@ -205,10 +205,11 @@ const Quiz = (props) => {
             questions.map(question => {
                 return (
                     <div style={{transform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container pos-rel darkGls">
-                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} loading='lazy' /> }
-                        
+
                         { questionShowIfNotNull(question.question) }
-                        
+
+                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} loading='lazy' /> }
+                    
                         { questionOptionsCheckBetweenStringOrImg(question) }
                         
                         <div className={`quiz__answerText tx-al-r ${!showImGifTextAnswer && 'noVis'}`}>
@@ -242,15 +243,15 @@ const Quiz = (props) => {
         if (currentQuestionNumber !== questions.length) {
             restartTheStateOfQuestion()
             plusOneToTotalAnsweredQuestions()
+            setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
 
             if (window.navigator.userAgent.includes('Windows')) {
                 sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46
             } else {
                 sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.33
+                window.scrollTo(0, 0);
             }
 
-            setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
-            window.scrollTo(0, 0);
 
         } else {
             setQuizEnded(true)

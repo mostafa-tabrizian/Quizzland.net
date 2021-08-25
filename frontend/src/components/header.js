@@ -132,7 +132,7 @@ const Header = (props) => {
 
                         {
                             nightMode &&
-                            <div className="nightMode__container darkGls" title="تبدیل به حالت شب/روز">
+                            <div className="nightMode__container" title="تبدیل به حالت شب/روز">
                                 <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
                             </div>
                         }
@@ -182,7 +182,7 @@ const Header = (props) => {
 
                                     {/* Night Mode */}
                                     {nightMode &&
-                                        <div className="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
+                                        <div className="nightMode__container" title="تبدیل به حالت شب و بالعکس">
                                             <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
                                         </div>
                                     }   

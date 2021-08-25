@@ -716,7 +716,6 @@ input {
 }
 
 .nightMode__container {
-  background: rgba(0, 0, 0, 0.493);
   width: 1.6875rem;
   height: 1.6875rem;
   padding: .3rem;
@@ -1883,6 +1882,10 @@ body {
 
 .quiz__head h6 {
   font-size: 0.78rem;
+}
+
+.quiz__questions {
+  margin-bottom: 1rem;
 }
 
 .quiz__questions::after {
