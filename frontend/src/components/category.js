@@ -69,7 +69,7 @@ const Category = (props) => {
                                     <img src={`${category.thumbnail}`} alt={`${category.subCategory}} | ${category.title}`} loading='lazy' />
                                 </div>
                                 {/* <div className="quizContainer__views">{viewsFormat(category.views)}</div> */}
-                                <div className="quizContainer__date tx-al-c">{datePublishHandler(category.publish)}</div>
+                                {/* <div className="quizContainer__date tx-al-c">{datePublishHandler(category.publish)}</div> */}
                                 <span className="quizContainer__title quizContainer__title__noViews flex">
                                     { category.title }
                                 </span>

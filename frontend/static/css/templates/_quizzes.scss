@@ -12,7 +12,8 @@ body {
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        background: #0000004d
+        background: #0000004d;
+        z-index: -1;
     }
 }
 
@@ -374,9 +375,14 @@ body {
     }
 
     &__tags {
-        width: fit-content;
         margin: auto;
         margin-bottom: 3rem;
+        max-width: 25rem;
+        flex-wrap: wrap;
+
+        li {
+            margin-bottom: .5rem;
+        }
 
         &__title {
             color: white;

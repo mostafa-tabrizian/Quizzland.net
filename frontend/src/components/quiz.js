@@ -123,8 +123,7 @@ const Quiz = (props) => {
     const automaticallyGoNextQuestionOrEndTheQuiz = () => {
         setTimeout(() => {
             goNextQuestionOrEndTheQuiz()
-        }, 5000);
-        
+        }, 3500);
     }
 
     const disableSelectingOption = () => {
@@ -237,21 +236,23 @@ const Quiz = (props) => {
         setAbleToSelectOption(true)
     }
 
+    let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
+    if (window.navigator.userAgent.includes('Windows')) {
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46
+    } else {
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.33
+    }
+
     const goNextQuestionOrEndTheQuiz = () => {
-        let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
         
         if (currentQuestionNumber !== questions.length) {
             restartTheStateOfQuestion()
             plusOneToTotalAnsweredQuestions()
             setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
-
-            if (window.navigator.userAgent.includes('Windows')) {
-                sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46
-            } else {
-                sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.33
+            
+            if (!(window.navigator.userAgent.includes('Windows'))) {  // if mobile, scroll to top
                 window.scrollTo(0, 0);
             }
-
 
         } else {
             setQuizEnded(true)
@@ -371,7 +372,7 @@ const Quiz = (props) => {
                     <h5>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
                 </div>
                 
-                <div className='quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c' title='با انتخاب گزینه، پس از ۵ ثانیه به سوال بعدی میرود'>
+                <div className='quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c' title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>
                     <h6>تغییر خودکار</h6>
                     <button onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className="quiz__autoQuestionChangerSwitch__btn btn">
                         <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>

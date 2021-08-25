@@ -1828,6 +1828,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: #0000004d;
+  z-index: -1;
 }
 
 .SFXController {
@@ -2247,11 +2248,15 @@ body {
 }
 
 .quiz__tags {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   margin: auto;
   margin-bottom: 3rem;
+  max-width: 25rem;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.quiz__tags li {
+  margin-bottom: .5rem;
 }
 
 .quiz__tags__title {
