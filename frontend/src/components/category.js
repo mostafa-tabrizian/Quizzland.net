@@ -129,7 +129,7 @@ const Category = (props) => {
 
             </ul>
 
-            <ul className="quizContainer flex flex-jc-fe flex-ai-c wrapper-med">
+            <ul className="quizContainer flex flex-ai-c wrapper-med">
                 
                 {listCategories()}
 

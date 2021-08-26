@@ -146,7 +146,7 @@ const Index = () => {
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                 </ul>
 
-                <ul className="quizContainer flex flex-jc-fs flex-ai-fe wrapper-med">
+                <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={newestCelebrityQuizzes} bgStyle='trans' />
                 </ul>
 
@@ -170,7 +170,7 @@ const Index = () => {
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                 </ul>
 
-                <ul className="quizContainer flex flex-jc-fs flex-ai-fe wrapper-med">
+                <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={newestMovieSeriesQuizzes} bgStyle='trans' />
                 </ul>
 

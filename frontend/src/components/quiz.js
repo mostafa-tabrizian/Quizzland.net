@@ -283,7 +283,7 @@ const Quiz = (props) => {
             return (    
                 splittedTags.map(tag => {
                     tag = replaceFunction(tag, '-', ' ')
-                    return <li><h2><a href={`/search?s=${tag}`} >{tag}</a></h2></li>
+                    return <li><h2><Link to={`/search?s=${tag}`} >{tag}</Link></h2></li>
                 })
             )
         }
@@ -423,7 +423,7 @@ const Quiz = (props) => {
 
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
-                <ul className="quizContainer flex flex-jc-fs flex-ai-c wrapper-med">
+                <ul className="quizContainer flex flex-ai-c wrapper-med">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
