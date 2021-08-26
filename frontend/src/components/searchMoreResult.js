@@ -31,6 +31,7 @@ const SearchMoreResult = () => {
         setSearchValueButWithoutHyphen(replaceFunction(searchValue, '+', ' '))
     }, [searchValue, offset])
 
+
     const searchChangeDetector = () => {
         (function(history){
 
@@ -40,7 +41,6 @@ const SearchMoreResult = () => {
             };
 
             setSearchValue(replaceFunction(takeParameterFromUrl('s'), ' ', '+'))
-
         })(window.history);
     }
 

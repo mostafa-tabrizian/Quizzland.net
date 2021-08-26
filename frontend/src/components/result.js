@@ -12,6 +12,7 @@ const Result = (props) => {
     const [score, setScore] = useState(0)
     const [resultScore, setResultScore] = useState(0)
     const [resultSubtitle, setResultSubtitle] = useState()
+    const [resultGif, setResultGif] = useState()
     const [clipboard, setClipboard] = useState()
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
@@ -43,23 +44,32 @@ const Result = (props) => {
     const detailOfResult = () => {
         if (score > 80){
             setResultScore(`😎 ${score}%`)
-            setResultSubtitle(`! تو یک ${state.quiz.fan_name} واقعی هستی \n 😎 وقتشه خودت رو به بقیه نشون بدی`)
+            setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
+            setResultGif(<img src={`${state.quiz.GIF100}`} alt={state.quiz.GIF2} />)
         }
         else if (score > 60){
-            setResultScore(`😀 ${score}%`)
-            setResultSubtitle('عالیه، فقط یکم با یه فن واقعی بودن فاصله داری')
+            setResultScore(`😎 ${score}%`)
+            setResultSubtitle(`😎 ایول\n! تو یک ${state.quiz.fan_name} واقعی هستی `)
+            setResultGif(<img src={`${state.quiz.GIF80}`}  alt={state.quiz.GIF4} />)
         }
         else if (score > 40){
             setResultScore(`🙂 ${score}%`)
-            setResultSubtitle('بد نیست ولی میتونست بهتر هم باشه')
+            setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
+            setResultGif(<img src={`${state.quiz.GIF60}`}  alt={state.quiz.GIF6} />)
         }
         else if (score > 20){
-            setResultScore(`😭 ${score}%`)
+            setResultScore(`😉 ${score}%`)
             setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
+            setResultGif(<img src={`${state.quiz.GIF40}`}  alt={state.quiz.GIF8} />)
         }
         else if (score >= 0){
-            setResultScore(`🙄 ${score}%`)
-            setResultSubtitle(` .فکر کنم کوییز رو اشتباهی انتخاب کردی \n😅 میتونی سریع کوییز دیگه ای انتخاب کنی تا کسی نیومده `)
+            setResultScore(`😭 ${score}%`)
+            setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
+            setResultGif(<img src={`${state.quiz.GIF20}`}  alt={state.quiz.GIF10} />)
+        }
+        else {
+            setResultScore(`👀`)
+            setResultSubtitle('😰 خطا در محاسبه امتیاز\n.لطفا بعدا امتحان کنید و یا در غیر اینصورت به پشتیبانی اطلاع دهید')
         }
     }
 
@@ -103,11 +113,7 @@ const Result = (props) => {
                 </div>
                 <div className="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
                     <div className="result__img flex flex-jc-c flex-ai-c">
-                        {100 >= score >= 80 && <img className="result__img20"  src={`${state.quiz.GIF100}`} alt={state.quiz.GIF2}  />}
-                        {80 > score >= 60 && <img className="result__img40"  src={`${state.quiz.GIF80}`}  alt={state.quiz.GIF4}  />}
-                        {60 > score >= 40 && <img className="result__img60"  src={`${state.quiz.GIF60}`}  alt={state.quiz.GIF6}  />}
-                        {40 > score >= 20 && <img className="result__img80"  src={`${state.quiz.GIF40}`}  alt={state.quiz.GIF8}  />}
-                        {20 > score >= 0 && <img className="result__img100" src={`${state.quiz.GIF20}`}  alt={state.quiz.GIF10} />}
+                        {resultGif}
                     </div>
                     <div className="result__score">{resultScore}</div>
                     <div className="result__detail tx-al-r">

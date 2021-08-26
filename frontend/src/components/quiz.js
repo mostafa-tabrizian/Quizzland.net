@@ -392,7 +392,6 @@ const Quiz = (props) => {
             }
 
             <div className="quiz__questionCounter pos-rel flex flex-jc-c flex-ai-c">
-                <div className={`skeletonLoading skeletonLoading__quizInfo tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                 <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
                 سوال شماره
             </div>
