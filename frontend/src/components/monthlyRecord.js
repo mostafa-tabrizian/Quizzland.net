@@ -83,12 +83,12 @@ const QuizMonthlyRecord = () => {
         categories.data.forEach(category => {
             if (category.monthly_views !== 0) {
                 return worksheet.addRow({
-                    id: quiz.id,
-                    subCategory: quiz.subCategory,
-                    title: quiz.title,
-                    views: quiz.views,
-                    monthly_views: quiz.monthly_views,
-                    publish: quiz.publish
+                    id: category.id,
+                    subCategory: category.subCategory,
+                    title: category.title,
+                    views: category.views,
+                    monthly_views: category.monthly_views,
+                    publish: category.publish
                 });
             }
         })
@@ -120,7 +120,7 @@ const QuizMonthlyRecord = () => {
         await categories.data.map(async category => {
             if (category.monthly_views !== 0) {
                 log(category)
-                const restartCategoryMonthlyViews = await axios.patch(`/dbQuizzland$M19931506/new_category/${quiz.id}/`, {monthly_views: 0})
+                const restartCategoryMonthlyViews = await axios.patch(`/dbQuizzland$M19931506/new_category/${category.id}/`, {monthly_views: 0})
                 return restartCategoryMonthlyViews
             }
         })
