@@ -99,11 +99,13 @@ const Quiz = (props) => {
         if (userChose !== correctAnswer) {
             setWrongAnswerOption(parseInt(userChose))
             if (SFXAllowed) {
+                SFXWrong.volume = .5
                 SFXWrong.play()
             }
         } else {
             setCorrectAnswersCounter(prev => prev + 1)
             if (SFXAllowed) {
+                SFXCorrect.volume = .5
                 SFXCorrect.play()
             }
         }

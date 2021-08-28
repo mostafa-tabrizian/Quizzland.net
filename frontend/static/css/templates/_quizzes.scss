@@ -86,7 +86,7 @@ body {
 
     &__container {
         max-width: 30rem;
-        margin: auto 2rem; margin-top: 5rem;
+        margin: auto 1.25rem; margin-top: 5rem;
         padding: 0.1rem;
         border-radius: 24px;
         transition: all 1.3s;
@@ -171,13 +171,13 @@ body {
 
     &__questionChanger {
         cursor: pointer;
+        pointer-events: all;
         display: flex;
         justify-content: flex-end;
         position: relative;
 
 
         &__container {
-            // width: 23rem; height: 1rem;
             z-index: 2;
             position: absolute;
 
@@ -209,6 +209,7 @@ body {
         height: 2rem;
         width: 2rem;
         transform: rotate(90deg);
+        pointer-events: all;
 
         &__container {
             bottom: 0;
@@ -235,7 +236,7 @@ body {
 
     &__hider {
         @include breakpoints-up(medium) {
-            width: 44rem;
+            width: 47rem;
             bottom: auto;
             margin-bottom: 3rem;
         }
@@ -287,6 +288,7 @@ body {
             padding: 0;
             margin-right: .2rem; margin-left: .2rem; margin-bottom: .5rem;
             transition: box-shadow .1s ease-in-out;
+            overflow: hidden;
 
             &:hover {
                 box-shadow: 0 0 15px gray;
@@ -400,11 +402,12 @@ body {
             font-size: .9rem;
             font-family: myHarmattan, sans-serif;
             color: white;
+            background: linear-gradient(-45deg, darkRed, transparent);
             z-index: 1;
             position: relative;
             border: none;
-            border-bottom: 1px solid darkRed !important;
-            border-right: 1px solid darkRed !important;
+            border-bottom: .5px solid rgba(255, 255, 255, 0.46) !important;
+            border-right: .5px solid rgba(255, 255, 255, 0.46) !important;
             border-radius: 20px;
             padding-right: 0.8rem; padding-left: 0.8rem;
             padding-top: 0.2rem; padding-bottom: 0.2rem;

@@ -486,6 +486,11 @@ input {
     margin-bottom: 4rem;
     position: relative;
     z-index: 1;
+
+    @include breakpoints-down(medium) {
+        max-width: 16rem;
+        margin: 0 auto 4rem auto;
+    }
 }
 
 .lowTitle {
