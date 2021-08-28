@@ -2326,7 +2326,7 @@ body {
 
 @media (max-width: 49.9375em) {
   .quiz__answerImGif img {
-    width: 22rem;
+    width: 22rem !important;
   }
 }
 

@@ -423,7 +423,7 @@ body {
             border-radius: .5rem;
 
             @include breakpoints-down(medium) {
-                width: 22rem;
+                width: 22rem !important;
             }
         }
     }
