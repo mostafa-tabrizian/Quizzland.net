@@ -135,7 +135,7 @@ const Index = () => {
                     <h2>سلبریتی</h2>
                 </div>
 
-                <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
@@ -159,7 +159,7 @@ const Index = () => {
                     <h2>فیلم و سریال</h2>
                 </div>
 
-                <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>

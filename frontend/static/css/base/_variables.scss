@@ -67,6 +67,10 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
         @include breakpoints-down(medium) {
             max-width: inherit;
         }
+
+        // @include breakpoints-up(medium) {
+        //     max-width:
+        // }
     }
 
     &-med {
@@ -76,6 +80,10 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
         @include breakpoints-down(medium) {
             max-width: 45.75rem;
             margin: 1.125rem 1rem;
+        }
+
+        @include breakpoints-up(medium) {
+            max-width: 50rem;
         }
     }
 

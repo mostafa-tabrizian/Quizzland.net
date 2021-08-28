@@ -101,7 +101,7 @@ const Guide = () => {
                     <h5 className="space-med tx-al-c">
                         اگر به کمک بیشتری هستید میتوانید از <a style={{textDecoration: 'underline'}} href="/contact">اینجا</a> با ما در تماس باشید
                     </h5>
-                    <h5 className="tx-al-l">💗کوییزلند</h5>
+                    <h5 className="tx-al-l"><a href="/welcomeZeynab">💗</a> کوییزلند</h5>
                     
                 </div>
             </div>

@@ -86,7 +86,7 @@ const SearchMoreResult = () => {
 
             {
                 matchedQuizzesCounter ? 
-                <ul className='quizContainer flex flex-jc-fe flex-ai-c wrapper-med'>
+                <ul className='quizContainer flex wrapper-med'>
                     {quizzesList}
                 </ul>
                 :

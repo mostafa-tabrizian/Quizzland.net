@@ -8,7 +8,8 @@
     }
 
     &__logo {
-        margin-right: 12rem;
+        margin-right: 5rem;
+        margin-left: 5rem;
         position: relative;
 
         .Q {
@@ -134,7 +135,7 @@
     margin-bottom: 3rem;
 
     @include breakpoints-down(medium) {
-        height: 50rem;
+        height: 60rem;
     }
 
     &__container {

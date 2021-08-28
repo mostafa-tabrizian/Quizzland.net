@@ -5,6 +5,12 @@
     
     @include breakpoints-down(medium) {
         margin: .5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__minHeight {
+        min-height: 40vh;
     }
     
     &__header {
@@ -18,7 +24,7 @@
     }
 
     li {
-        margin-bottom: 1.5rem; margin-left: .75rem; margin-right: .75rem;
+        margin-bottom: 1rem; margin-left: .75rem; margin-right: .75rem;
         height: fit-content;
 
         @include breakpoints-down(medium) {
@@ -73,6 +79,7 @@
         margin-top: 1rem;
 
         @include breakpoints-down(medium) {
+            font-size: .9rem;
             width: 10rem;
         }
     }

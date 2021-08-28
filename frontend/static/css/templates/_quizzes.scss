@@ -42,7 +42,7 @@ body {
 .quiz {
     &__head {
         font-family: $font-sec;
-        z-index: 1;
+        z-index: 2;
 
         h1, h2, h3, h4, h5, h6, p {
             line-height: 2rem;
@@ -136,7 +136,6 @@ body {
     &__autoQuestionChangerSwitch{
         top: .5rem;
         width: 7rem; height: 2rem;
-        margin-bottom: 2rem;
         z-index: 2;
         cursor: pointer;
 
@@ -172,27 +171,26 @@ body {
 
     &__questionChanger {
         cursor: pointer;
-        top: -2rem;
-        
-        @include breakpoints-up(medium) {
-            top: auto;
-            display: flex;
-            justify-content: flex-end;
-            position: relative;
-        }
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+
 
         &__container {
-            width: 23rem; height: 1rem;
+            // width: 23rem; height: 1rem;
             z-index: 2;
+            position: absolute;
 
-            @include breakpoints-up(medium) {
-                width: auto; height: auto;
-                position: relative;
-                position: absolute;
-                top: 15.5rem;
-                right: 0;
-                pointer-events: all;
-                z-index: -1;
+            @include breakpoints-down(medium) {
+                right: 4rem; top: 6rem;
+            }
+    
+            @include breakpoints-up(large) {
+                right: 22rem; top: 6rem;
+            }
+            
+            @include breakpoints-up(xLarge) {
+                right: 0; top: 9.5rem;
             }
 
             button {
@@ -222,9 +220,13 @@ body {
     }
 
     &__questionCounter {
-        margin-top: 1rem;
+        margin-top: 1rem; margin-bottom: 2rem;
         z-index: 1;
         color: $white;
+
+        @include breakpoints-down(medium) {
+            margin-bottom: 1rem;
+        }
 
         &__totalAnswered {
             margin-right: .5rem;

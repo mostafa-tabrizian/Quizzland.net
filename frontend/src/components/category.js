@@ -116,7 +116,7 @@ const Category = (props) => {
                 sortType={sortType} setSortType={setSortType}
             />
 
-            <ul className={`quizContainer flex flex-jc-fe flex-ai-c wrapper-med ${contentLoaded && 'noVis'}`}>
+            <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
 
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>
@@ -129,7 +129,7 @@ const Category = (props) => {
 
             </ul>
 
-            <ul className="quizContainer flex flex-ai-c wrapper-med">
+            <ul className="quizContainer quizContainer__minHeight flex wrapper-med">
                 
                 {listCategories()}
 

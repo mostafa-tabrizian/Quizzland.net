@@ -26,8 +26,8 @@ const Contact = () => {
                 <h3>برای تماس با ما میتونید از روش های زیر استفاده کنید </h3>
                 <div>
                     <ul className="contact__socialMedia flex flex-jc-c flex-ai-c">
-                        <li className="hoverAnimation"><a href="#">انستگرام</a></li>
-                        <li className="hoverAnimation"><a href="#">تلگرام</a></li>
+                        {/* <li className="hoverAnimation"><a href="#">انستگرام</a></li> */}
+                        {/* <li className="hoverAnimation"><a href="#">تلگرام</a></li> */}
                         <li className="hoverAnimation"><a href="mailto:quizzland.net@gmail.com">ایمیل</a></li>
                     </ul>
                     <a href="mailto:quizzland.net@gmail.com">Quizzland.net@gmail.com</a>

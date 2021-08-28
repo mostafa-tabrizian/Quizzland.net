@@ -237,9 +237,10 @@ const Quiz = (props) => {
     }
 
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
-    if (window.navigator.userAgent.includes('Windows')) {
+    if (window.navigator.userAgent.includes('Windows') || window.navigator.userAgent.includes('iPad')) {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46
-    } else {
+    } 
+    else if (window.navigator.userAgent.includes('Mobile')) {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.33
     }
 
@@ -290,9 +291,7 @@ const Quiz = (props) => {
     }
 
     const isItDesktop = () => {
-        if (window.navigator.userAgent.includes('Windows')) {
-            return true
-        }
+        return window.navigator.userAgent.includes('Windows')
     }
 
     const getSuggestionsQuiz = (subCategory) => {
@@ -368,30 +367,30 @@ const Quiz = (props) => {
                         <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
                     </div>
 
-                    <h5>تعداد سوال ها: {questions.length}</h5>
-                    <h5>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
+                    <h5 className={`${!(contentLoaded) && 'noVis'}`}>تعداد سوال ها: {questions.length}</h5>
+                    <h5 className={`${!(contentLoaded) && 'noVis'}`}>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
                 </div>
                 
-                <div className='quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c' title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>
+                <div className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c ${!(contentLoaded) && 'noVis'} `} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>
                     <h6>تغییر خودکار</h6>
                     <button onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className="quiz__autoQuestionChangerSwitch__btn btn">
                         <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
                     </button>
                 </div> 
 
-                { !(isItDesktop) &&
-                    <div className="quiz__questionChanger__container pos-rel center">
+                { !(isItDesktop()) &&
+                    <div className={` quiz__questionChanger__container pos-rel center ${!(contentLoaded) && 'noVis'} `}>
                         <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
                     </div>
                 }
                 
             </div>
 
-            { isItDesktop &&
+            { isItDesktop() &&
                 <hr className='divider'></hr>
             }
 
-            <div className="quiz__questionCounter pos-rel flex flex-jc-c flex-ai-c">
+            <div className={`quiz__questionCounter pos-rel flex flex-jc-c flex-ai-c ${!(contentLoaded) && 'noVis'} `}>
                 <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
                 سوال شماره
             </div>
@@ -401,14 +400,16 @@ const Quiz = (props) => {
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
                     { quizQuestions() }
                     
-                    <div className="quiz__questionChanger__container pos-abs">
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
-                    </div>
+                    { isItDesktop() &&
+                        <div className={`quiz__questionChanger__container pos-abs ${!(contentLoaded) && 'noVis'} `}>
+                            <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
+                        </div>
+                    }
                 </div>
 
 
-                { !(isItDesktop) &&
-                    <div className='quiz__bottomQuestionChanger__container pos-abs'  id="quiz__answerDetail">
+                { !(isItDesktop()) &&
+                    <div className={`quiz__bottomQuestionChanger__container pos-abs ${!(contentLoaded) && 'noVis'} `}  id="quiz__answerDetail">
                         <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__bottomQuestionChanger btn ${shouldShowTheBottomQuestionChanger()}` } aria-label="Next Question"></button>
                     </div>
                 }
@@ -423,7 +424,7 @@ const Quiz = (props) => {
 
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
-                <ul className="quizContainer flex flex-ai-c wrapper-med">
+                <ul className="quizContainer flex wrapper-med">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
