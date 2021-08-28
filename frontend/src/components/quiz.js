@@ -243,7 +243,7 @@ const Quiz = (props) => {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46
     } 
     else if (window.navigator.userAgent.includes('Mobile')) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.33
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 25.83
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
