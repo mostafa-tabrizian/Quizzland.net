@@ -421,6 +421,10 @@ body {
         img {
             width: 27rem; height: 100%;
             border-radius: .5rem;
+
+            @include breakpoints-down(medium) {
+                width: 22rem;
+            }
         }
     }
 

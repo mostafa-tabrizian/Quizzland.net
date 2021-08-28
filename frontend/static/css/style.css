@@ -2324,6 +2324,12 @@ body {
   border-radius: .5rem;
 }
 
+@media (max-width: 49.9375em) {
+  .quiz__answerImGif img {
+    width: 22rem;
+  }
+}
+
 .quiz__answerText {
   padding-right: 1rem;
   padding-left: 1rem;
