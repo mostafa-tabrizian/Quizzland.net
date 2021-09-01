@@ -10,7 +10,9 @@ import {
 import { log } from './components/base'
 import HotFooter from './components/hotFooter'
 import Quiz from './components/quiz'
+import QuizPointy from './components/quizPointy'
 import Result from './components/result'
+import ResultPointy from './components/resultPointy'
 import SearchMoreResult from './components/searchMoreResult'
 import ScrollToTop from './components/scrollToTop'
 
@@ -22,7 +24,9 @@ const QuizApp = () => {
 
                 <Switch>
                     <Route path='/quiz/:title' component={Quiz} />
+                    <Route path='/test/:title' component={QuizPointy} />
                     <Route path='/result' component={Result} />
+                    <Route path='/result_p' component={ResultPointy} />
                     <Route path='/search' component={SearchMoreResult} />
                 </Switch>
                 

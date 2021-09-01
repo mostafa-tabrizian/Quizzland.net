@@ -40,6 +40,30 @@ class alphabet_quiz(viewsets.ModelViewSet):
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
+# --------------------------------------------------------
+
+class new_pointy_quiz(viewsets.ModelViewSet):
+    queryset = Quizzes_Pointy.objects.order_by('-publish').all()
+    serializer_class = PointyQuizzesSerializer
+    filterset_class = PointyQuizzesFilter
+
+class monthlyBest_pointy_quiz(viewsets.ModelViewSet):
+    queryset = Quizzes_Pointy.objects.order_by('-monthly_views').all()
+    serializer_class = PointyQuizzesSerializer
+    filterset_class = PointyQuizzesFilter
+
+class best_pointy_quiz(viewsets.ModelViewSet):
+    queryset = Quizzes_Pointy.objects.order_by('-views').all()
+    serializer_class = PointyQuizzesSerializer
+    filterset_class = PointyQuizzesFilter
+
+class alphabet_pointy_quiz(viewsets.ModelViewSet):
+    queryset = Quizzes_Pointy.objects.order_by('-subCategory').all()
+    serializer_class = PointyQuizzesSerializer
+    filterset_class = PointyQuizzesFilter
+
+# --------------------------------------------------------
+
 class new_category(viewsets.ModelViewSet):
     queryset = SubCategories.objects.order_by('-publish').all()
     serializer_class = CategoriesSerializer
@@ -55,10 +79,19 @@ class alphabet_category(viewsets.ModelViewSet):
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
+# --------------------------------------------------------
+
 class questions(viewsets.ModelViewSet):
     queryset = Questions.objects.all()
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter    
+
+class pointyQuestions(viewsets.ModelViewSet):
+    queryset = Pointy_Questions.objects.all()
+    serializer_class = PointyQuestionsSerializer
+    filterset_class = PointyQuestionsFilter  
+
+# --------------------------------------------------------
 
 class newsletter_users(viewsets.ModelViewSet):
     queryset = Newsletter_Users.objects.all()

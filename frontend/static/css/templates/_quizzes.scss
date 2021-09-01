@@ -202,6 +202,21 @@ body {
         &__next {
             transform: rotate(-90deg);
         }
+
+        &__last {
+            transform: rotate(90deg);
+            position: relative;
+            bottom: 2rem;
+            right: 45.5rem;
+
+            @include breakpoints-down(medium) {
+                right: 14rem;
+            }
+
+            @include breakpoints-up(medium) {
+                right: 16rem;
+            }
+        }
     }
 
     &__bottomQuestionChanger {

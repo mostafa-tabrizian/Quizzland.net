@@ -99,6 +99,15 @@
 .category {
     flex-wrap: wrap;
 
+    @include breakpoints-down(medium) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        a {
+            text-align: center;
+        }
+    }
+
     &__title {
         padding-top: 12rem;
     }

@@ -5,8 +5,10 @@ const SortIndex = () => {
     const sort__all = document.querySelector('.sort__all')
     const sort__celebrities = document.querySelector('.sort__celebrities')
     const sort__movieAndSeries = document.querySelector('.sort__movieAndSeries')
+    const sort__psychology = document.querySelector('.sort__psychology')
 
     const findTheSortByBtnName = {
+        'روانشناسی 🧠': sort__psychology,
         'فیلم و سریال 🎬': sort__movieAndSeries,
         'سلبریتی ✨': sort__celebrities,
         'همه': sort__all,
@@ -50,6 +52,7 @@ const SortIndex = () => {
     return (
         <div className="sort__controller pos-rel flex flex-jc-c" id="sort">
             <ul>
+                <button className='sort__controller__btn btn' type="button" aria-label="Psychology Category">روانشناسی 🧠</button>
                 <button className='sort__controller__btn btn' type="button" aria-label="Movie And Series Category">فیلم و سریال 🎬</button>
                 <button className='sort__controller__btn btn' type="button" aria-label="Celebrity Category">سلبریتی ✨</button>
                 <button className='sort__controller__btn btn sort__controller__selected' type="button">همه</button>

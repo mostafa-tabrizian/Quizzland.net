@@ -100,33 +100,15 @@
     }
 }
 
-.resultQuizPointy {
-    display: block;
-    line-height: 2;
-
-    &__container {
-
-        h5 {
-            z-index: 3;
-        }
-
-        div {
-            z-index: 2;
-        }
-
-        &::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.466);
-            pointer-events: none;
-            z-index: 0;
-        }
+.resultPointy {
+    p {
+        margin-left: 2.125rem;
+        margin-right: 2.125rem;
     }
 
-    &__txt {
-        padding: 1.125rem;
-        margin-top: 0;
+    &__img {
+        img {
+            margin: 1rem auto 0 auto;
+        }
     }
 }

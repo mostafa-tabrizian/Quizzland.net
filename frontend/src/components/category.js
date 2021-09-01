@@ -20,7 +20,8 @@ const Category = (props) => {
     
     const categoryDefinitionInFarsi = {
         'celebrity': 'سلبریتی',
-        'movie-series': 'فیلم و سریال'
+        'movie-series': 'فیلم و سریال',
+        'psychology': 'روانشناسی'
     }
     const currentCategory = categoryDefinitionInFarsi[categoryTarget]
 

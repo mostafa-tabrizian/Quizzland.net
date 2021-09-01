@@ -7,14 +7,25 @@ import { log, replaceFunction, takeParameterFromUrl } from './base'
 import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
+import QuizPointyContainer from './quizPointyContainer'
 
 const SubCategory = (props) => {
 
-    const [pageTravel, setPageTravel] = useState([])
+    const [pageTravelQuiz, setPageTravelQuiz] = useState([])
+    const [pageTravelQuizPointy, setPageTravelQuizPointy] = useState([])
+
     const [quizzes, setQuizzes] = useState([])
+    const [quizzesPointy, setQuizzesPointy] = useState([])
+
+    const [hideQuizzes, setHideQuizzes] = useState(false)
+    const [hideQuizzesPointy, setHideQuizzesPointy] = useState(false)
+
     const subCategory = props.match.params.subCategory
     const [numberOfResult, setNumberOfResult] = useState(16)
-    const [offset, setOffset] = useState(0)
+
+    const [offsetQuiz, setOffsetQuiz] = useState(0)
+    const [offsetQuizPointy, setOffsetQuizPointy] = useState(0)
+
     const [sortType, setSortType] = useState('newest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -26,15 +37,37 @@ const SubCategory = (props) => {
     }
 
     const getQuizzes = async () => {
-        const pageTravelAndQuizzes = await axios.get(`/dbQuizzland$M19931506/${sortTypeDefinitionForDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=${numberOfResult}&offset=${offset}`)
-        setPageTravel(pageTravelAndQuizzes.data)
-        setQuizzes(pageTravelAndQuizzes.data.results)
+        const Quizzes = await axios.get(`/dbQuizzland$M19931506/${sortTypeDefinitionForDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=${numberOfResult}&offset=${offsetQuiz}`)
+        const QuizzesPointy = await axios.get(`/dbQuizzland$M19931506/new_pointy_quiz/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=${numberOfResult}&offset=${offsetQuizPointy}`)
+        
+        if (Quizzes.data.count !== 0) {
+            setQuizzes(Quizzes.data.results)
+            setPageTravelQuiz(Quizzes.data)
+        } else {
+            setHideQuizzes(true)
+        }
+
+        if (QuizzesPointy.data.count !== 0) {
+            setQuizzesPointy(QuizzesPointy.data.results)
+            setPageTravelQuizPointy(QuizzesPointy.data)
+        } else {
+            setHideQuizzesPointy(true)
+        }
+
         setContentLoaded(true)
     }
 
     const listQuizzes = () => {
         return (
             <QuizContainer quizzes={quizzes} bgStyle='bg' />
+        )
+    }
+
+    const listQuizzesPointy = () => {
+        log(quizzesPointy)
+        return (
+            <QuizPointyContainer quizzes={quizzesPointy} bgStyle='bg' />
+            // <QuizContainer quizzes={quizzesPointy} bgStyle='bg' />
         )
     }
 
@@ -48,7 +81,7 @@ const SubCategory = (props) => {
 
     useEffect(() => {
         getQuizzes()
-    }, [sortType, numberOfResult, offset])
+    }, [sortType, numberOfResult, offsetQuiz, offsetQuizPointy])
 
     useEffect(() => {
         backgroundOfSubCategory()
@@ -93,17 +126,37 @@ const SubCategory = (props) => {
                 
             </ul>
 
-            <ul className='quizContainer flex wrapper-med'>
+            <div className={hideQuizzes && 'noVis'}>
 
-                {listQuizzes()}
-                
-            </ul>
+                <h2 className={`wrapper-med ${hideQuizzesPointy && 'noVis'}`} style={{color: 'white'}}>کوییز ها</h2>
 
-            <PageTravel
-                pageTravel={pageTravel} setPageTravel={setPageTravel}
-                numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                offset={offset} setOffset={setOffset}
-            />
+                <ul className={`quizContainer flex wrapper-med`}>
+                    {listQuizzes()}
+                </ul>
+
+                <PageTravel
+                    pageTravel={pageTravelQuiz} setPageTravelQuiz={setPageTravelQuiz}
+                    numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                    offset={offsetQuiz} setOffset={setOffsetQuiz}
+                />
+
+            </div>
+
+            <div className={hideQuizzesPointy && 'noVis'}>
+
+                <h2 className={`wrapper-med ${hideQuizzes && 'noVis'}`} style={{color: 'white'}}>تست ها</h2>
+
+                <ul className={`quizContainer flex wrapper-med`}>
+                    {listQuizzesPointy()}
+                </ul>
+
+                <PageTravel
+                    pageTravel={pageTravelQuizPointy} setPageTravelQuiz={setPageTravelQuizPointy}
+                    numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                    offset={offsetQuizPointy} setOffset={setOffsetQuizPointy}
+                />
+
+            </div>
 
         </React.Fragment>
     );

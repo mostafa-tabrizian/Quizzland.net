@@ -23,6 +23,7 @@ const Footer = () => {
                     <ul>
                         <li><a href="/category/movieSeries">فیلم و سریال</a></li>
                         <li><a href="/category/celebrity">سلبریتی</a></li>
+                        <li><a href="/category/psychology">روانشناسی</a></li>
                     </ul>
                 </div>
 

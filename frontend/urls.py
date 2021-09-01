@@ -11,6 +11,7 @@ urlpatterns = [
     path('category/<category>', category),
     path('category/<category>/<subCategory>', subCategory),
     path('quiz/<title>', quiz),
+    path('test/<title>', quiz),
     path('result', index),
     path('search', index),
     path('sort', index),
