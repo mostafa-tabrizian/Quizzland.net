@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 
 import {
@@ -19,19 +19,21 @@ import ScrollToTop from './components/scrollToTop'
 const QuizApp = () => {
     return (
         <React.Fragment>
-            <Router>
-                <ScrollToTop />
+            <Suspense fallback={ <div className='loadingScreen pos-fix flex flex-jc-c flex-ai-c'></div> }>
+                <Router>
+                    <ScrollToTop />
 
-                <Switch>
-                    <Route path='/quiz/:title' component={Quiz} />
-                    <Route path='/test/:title' component={QuizPointy} />
-                    <Route path='/result' component={Result} />
-                    <Route path='/result_p' component={ResultPointy} />
-                    <Route path='/search' component={SearchMoreResult} />
-                </Switch>
-                
-                <HotFooter />
-            </Router>
+                    <Switch>
+                        <Route path='/quiz/:title' component={Quiz} />
+                        <Route path='/test/:title' component={QuizPointy} />
+                        <Route path='/result' component={Result} />
+                        <Route path='/result_p' component={ResultPointy} />
+                        <Route path='/search' component={SearchMoreResult} />
+                    </Switch>
+                    
+                    <HotFooter />
+                </Router>
+            </Suspense>
         </React.Fragment>
     );
 }

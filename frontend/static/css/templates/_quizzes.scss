@@ -207,14 +207,17 @@ body {
             transform: rotate(90deg);
             position: relative;
             bottom: 2rem;
-            right: 45.5rem;
-
+            
             @include breakpoints-down(medium) {
                 right: 14rem;
             }
-
-            @include breakpoints-up(medium) {
+            
+            @include breakpoints-down(xLarge) {
                 right: 16rem;
+            }
+
+            @include breakpoints-up(xLarge) {
+                right: 45.5rem;
             }
         }
     }

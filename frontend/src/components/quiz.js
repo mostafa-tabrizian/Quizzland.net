@@ -351,7 +351,7 @@ const Quiz = (props) => {
 
             <HotHeader
                 colorOfHeader='header__white'
-                title={`کوییزلند | ${quiz.title}`}
+                title={`کوییزلند | ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}
             />
 
             <div className='adverts adverts__left'>

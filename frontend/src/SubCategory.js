@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 
 import {
@@ -14,16 +14,18 @@ import ScrollToTop from './components/scrollToTop'
 const SubCategoryApp = () => {
     return (
         <React.Fragment>
-            <Router>
-                <ScrollToTop />
+            <Suspense fallback={ <div className='loadingScreen pos-fix flex flex-jc-c flex-ai-c'></div> }>
+                <Router>
+                    <ScrollToTop />
 
-                <Switch>
-                    <Route path='/category/:category/:subCategory' component={SubCategory} />
-                </Switch>
-                
-                <HotFooter />
+                    <Switch>
+                        <Route path='/category/:category/:subCategory' component={SubCategory} />
+                    </Switch>
+                    
+                    <HotFooter />
 
-            </Router>
+                </Router>
+            </Suspense>
         </React.Fragment>
     );
 }

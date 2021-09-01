@@ -90,7 +90,19 @@ const SearchMoreResult = () => {
                     {quizzesList}
                 </ul>
                 :
-                <p className='wrapper-med flex flex-jc-c flex-ai-c tx-al-c'> 🤨 هیچ نتیجه ای پیدا نشد <br/> .لطغا از عبارت دیگه ای یا به زبان دیگر (انگلیسی یا فارسی) جستجو کنید</p>
+                // <p className='wrapper-med flex flex-jc-c flex-ai-c tx-al-c'> 🤨 هیچ نتیجه ای پیدا نشد <br/> .لطغا از عبارت دیگه ای یا به زبان دیگر (انگلیسی یا فارسی) جستجو کنید</p>
+                <ul className='quizContainer flex wrapper-med'>
+
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                
+                </ul>
             }
 
             <PageTravel

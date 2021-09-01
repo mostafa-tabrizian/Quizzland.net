@@ -31,7 +31,7 @@
         z-index: 1;
 
         a {
-            color: $black;
+            color: black;
 
             &:hover {
                 color: inherit;
@@ -163,12 +163,12 @@
         }
 
         a {
-            color: black;
+            color: white;
             &:not(:last-child){
                 margin-bottom: 1.25rem
             }
             &:hover {
-                color: rgba(163, 163, 163, 0.692) !important;
+                color: rgba(255, 207, 207, 0.692) !important;
             }
         }
     }
@@ -193,6 +193,10 @@
         
         a, button {
             color: $white;
+
+            &:hover {
+                color: white !important;
+            }
             
             &::after{
                 border-bottom: 2px solid $white !important;

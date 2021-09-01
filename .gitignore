@@ -18,3 +18,4 @@ frontend/static/build
 *.zip
 *.log
 changes.txt
+node_modules

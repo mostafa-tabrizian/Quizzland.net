@@ -907,7 +907,7 @@ input {
 }
 
 .header__links a {
-  color: #161616;
+  color: black;
 }
 
 .header__links a:hover {
@@ -1054,7 +1054,7 @@ input {
 }
 
 .header .subHeader a {
-  color: black;
+  color: white;
 }
 
 .header .subHeader a:not(:last-child) {
@@ -1062,7 +1062,7 @@ input {
 }
 
 .header .subHeader a:hover {
-  color: rgba(163, 163, 163, 0.692) !important;
+  color: rgba(255, 207, 207, 0.692) !important;
 }
 
 .header ul {
@@ -1084,6 +1084,10 @@ input {
 
 .header__white a, .header__white button {
   color: #f0f0f0;
+}
+
+.header__white a:hover, .header__white button:hover {
+  color: white !important;
 }
 
 .header__white a::after, .header__white button::after {
@@ -2094,7 +2098,6 @@ body {
           transform: rotate(90deg);
   position: relative;
   bottom: 2rem;
-  right: 45.5rem;
 }
 
 @media (max-width: 49.9375em) {
@@ -2103,9 +2106,15 @@ body {
   }
 }
 
-@media (min-width: 40em) {
+@media (max-width: null) {
   .quiz__questionChanger__last {
     right: 16rem;
+  }
+}
+
+@media (min-width: 80.5em) {
+  .quiz__questionChanger__last {
+    right: 45.5rem;
   }
 }
 
