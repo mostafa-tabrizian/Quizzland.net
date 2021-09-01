@@ -9,7 +9,7 @@ import PageTravel from './pageTravel';
 const SearchMoreResult = () => {
     const [pageTravel, setPageTravel] = useState([])
     const [quizzesList, setQuizzesList] = useState([])
-    const [numberOfResult, setNumberOfResult] = useState(16)
+    const [numberOfResult, setNumberOfResult] = useState(8)
     const [offset, setOffset] = useState(0)
     const [searchValue, setSearchValue] = useState('')
     const [searchValueButWithoutHyphen, setSearchValueButWithoutHyphen] = useState()
