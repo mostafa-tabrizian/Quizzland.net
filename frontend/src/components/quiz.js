@@ -64,8 +64,8 @@ const Quiz = (props) => {
         })(window.history);
     }
 
-    const setBackground = () => {
-        document.getElementById('html').style=`background: url('${quiz.background}') center/cover no-repeat fixed !important`
+    const setBackground = (background) => {
+        document.getElementById('html').style=`background: url('${background}') center/cover no-repeat fixed !important`
     }
     
     const grabData = () => {
@@ -81,6 +81,7 @@ const Quiz = (props) => {
         
         grabQuiz().then((quiz) => {
             setQuizThumbnail(quiz.thumbnail)
+            setBackground(quiz.background)
             addView(quiz)
         })
 
@@ -90,7 +91,6 @@ const Quiz = (props) => {
         })
 
         setContentLoaded(true)
-        setBackground()
     }
     
     const addView = async (quiz) => {
