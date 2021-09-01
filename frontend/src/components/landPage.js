@@ -224,17 +224,44 @@ const Index = () => {
                     <div className="sort__container flex flex-jc-c">
                         <div className="sort-monthlyViews">
                             <h2 className="tx-al-c">پر بازدید ترین های این ماه</h2>
+
+                            <ul className={`sort__style quizContainer ${contentLoaded && 'noVis'}`}>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                            </ul>
+
                             <ul className="sort__style">
                                 <QuizIndex quizzes={monthlyBestQuizzes} />
                             </ul>
-                            <Link className="sort__more pos-abs" to="sort?q=monthlyBestest"></Link>
+
+                            <Link className={`sort__more pos-abs ${contentLoaded ? '' : 'noVis'}`} to="sort?q=monthlyBestest"></Link>
                         </div>
+
                         <div className="sort-views">
                             <h2 className="tx-al-c">پر بازدید ترین کوییز ها</h2>
+
+                            <ul className={`sort__style quizContainer ${contentLoaded && 'noVis'}`}>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                                <li className='skeletonLoading skeletonLoading__sortIndex'></li>
+                            </ul>
+
                             <ul className="sort__style">
                                 <QuizIndex quizzes={bestQuizzes} />
                             </ul>
-                            <Link className="sort__more pos-abs" to="sort?q=bestest"></Link>
+
+                            <Link className={`sort__more pos-abs ${contentLoaded ? '' : 'noVis'}`} to="sort?q=bestest"></Link>
                         </div>
                     </div>
                 </div>

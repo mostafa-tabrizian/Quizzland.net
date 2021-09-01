@@ -44,33 +44,34 @@ export const nightMode = () => {
 
 export const datePublishHandler = (publishFullDate) => {
     if (publishFullDate) {
-        const publishHour = parseInt(publishFullDate.slice(11, 13))
-        const publishDay = parseInt(publishFullDate.slice(8, 10))
-        const publishMonth = parseInt(publishFullDate.slice(5, 7))
-        const publishYear = parseInt(publishFullDate.slice(0, 4))
+        const publishUnixTime = new Date(Date.UTC(publishYear, publishMonth, publishDay, publishHour, '0', '0'))
+        const currentUnixTime = Date.now()
 
-        const currentHour = new Date().getHours()
-        const currentDay = new Date().getDate()
-        const currentMonth = new Date().getMonth() + 1
-        const currentYear = new Date().getFullYear()
+        const convertToYear = (time) => time / 1000 / 60 / 60 / 24 / 30 / 365
+        const convertToMonth = (time) => time / 1000 / 60 / 60 / 24 / 30
+        const convertToDay = (time) => time / 1000 / 60 / 60 / 24
+        const convertToHour = (time) => time / 1000 / 60 / 60
 
-        if (currentYear > publishYear) {
-            const totalYearsAfterPublishingTheQuiz = currentYear - publishYear
-            return `${totalYearsAfterPublishingTheQuiz} سال پیش`
-        } else if (currentMonth > publishMonth){
-            const totalMonthsAfterPublishingTheQuiz = currentMonth - publishMonth
-            return `${totalMonthsAfterPublishingTheQuiz} ماه پیش`
-        } else if (currentDay > publishDay) {
-            const totalDaysAfterPublishingTheQuiz = currentDay - publishDay
-            return `${totalDaysAfterPublishingTheQuiz} روز پیش`
+        const yearsPast = Math.floor(convertToYear(currentUnixTime - publishUnixTime))
+        const monthsPast =  Math.floor(convertToMonth(currentUnixTime - publishUnixTime))
+        const daysPast =  Math.floor(convertToDay(currentUnixTime - publishUnixTime))
+        const hoursPast =  Math.floor(convertToHour(currentUnixTime - publishUnixTime))
+
+        if (yearsPast >= 1) {
+            return `${yearsPast} سال پیش`
+
+        } else if (monthsPast >= 1){
+            return `${monthsPast} ماه پیش`
+
+        } else if (daysPast >= 1) {
+            return `${daysPast} روز پیش`
+
+        } else if (hoursPast >= 1) {
+            return `${hoursPast} ساعت پیش`
+
         } else {
-            const totalHoursAfterPublishingTheQuiz = currentHour - publishHour
-            if (totalHoursAfterPublishingTheQuiz === 0) {
-                return 'چند دقیقه پیش'
-            } else {
-                return `${totalHoursAfterPublishingTheQuiz} ساعت پیش`
-            }
-        }
+            return 'چند دقیقه پیش'
+        } 
     }
     return publishFullDate
 }

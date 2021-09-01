@@ -803,7 +803,7 @@ input {
   content: '';
   display: block;
   position: absolute;
-  left: -150px;
+  left: -450px;
   top: 0;
   height: 100%;
   width: 150px;
@@ -840,9 +840,14 @@ input {
   }
 }
 
+.skeletonLoading__sortIndex {
+  width: 14rem;
+  height: 1.5rem !important;
+}
+
 @-webkit-keyframes load {
   from {
-    left: -150px;
+    left: -450px;
   }
   to {
     left: 100%;
@@ -851,7 +856,7 @@ input {
 
 @keyframes load {
   from {
-    left: -150px;
+    left: -450px;
   }
   to {
     left: 100%;
