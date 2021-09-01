@@ -43,35 +43,37 @@ export const nightMode = () => {
 }
 
 export const datePublishHandler = (publishFullDate) => {
-    if (publishFullDate) {
-        const publishUnixTime = new Date(Date.UTC(publishYear, publishMonth, publishDay, publishHour, '0', '0'))
-        const currentUnixTime = Date.now()
+    const publishHour = publishFullDate.slice(11, 13)
+    const publishDay = publishFullDate.slice(8, 10)
+    const publishMonth = publishFullDate.slice(5, 7) - 1
+    const publishYear = publishFullDate.slice(0, 4)
 
-        const convertToYear = (time) => time / 1000 / 60 / 60 / 24 / 30 / 365
-        const convertToMonth = (time) => time / 1000 / 60 / 60 / 24 / 30
-        const convertToDay = (time) => time / 1000 / 60 / 60 / 24
-        const convertToHour = (time) => time / 1000 / 60 / 60
+    const publishUnixTime = new Date(Date.UTC(publishYear, publishMonth, publishDay, publishHour, '0', '0'))
+    const currentUnixTime = Date.now()
 
-        const yearsPast = Math.floor(convertToYear(currentUnixTime - publishUnixTime))
-        const monthsPast =  Math.floor(convertToMonth(currentUnixTime - publishUnixTime))
-        const daysPast =  Math.floor(convertToDay(currentUnixTime - publishUnixTime))
-        const hoursPast =  Math.floor(convertToHour(currentUnixTime - publishUnixTime))
+    const convertToYear = (time) => time / 1000 / 60 / 60 / 24 / 30 / 365
+    const convertToMonth = (time) => time / 1000 / 60 / 60 / 24 / 30
+    const convertToDay = (time) => time / 1000 / 60 / 60 / 24
+    const convertToHour = (time) => time / 1000 / 60 / 60
 
-        if (yearsPast >= 1) {
-            return `${yearsPast} سال پیش`
+    const yearsPast = Math.floor(convertToYear(currentUnixTime - publishUnixTime))
+    const monthsPast =  Math.floor(convertToMonth(currentUnixTime - publishUnixTime))
+    const daysPast =  Math.floor(convertToDay(currentUnixTime - publishUnixTime))
+    const hoursPast =  Math.floor(convertToHour(currentUnixTime - publishUnixTime))
 
-        } else if (monthsPast >= 1){
-            return `${monthsPast} ماه پیش`
+    if (yearsPast >= 1) {
+        return `${yearsPast} سال پیش`
 
-        } else if (daysPast >= 1) {
-            return `${daysPast} روز پیش`
+    } else if (monthsPast >= 1){
+        return `${monthsPast} ماه پیش`
 
-        } else if (hoursPast >= 1) {
-            return `${hoursPast} ساعت پیش`
+    } else if (daysPast >= 1) {
+        return `${daysPast} روز پیش`
 
-        } else {
-            return 'چند دقیقه پیش'
-        } 
-    }
-    return publishFullDate
+    } else if (hoursPast >= 1) {
+        return `${hoursPast} ساعت پیش`
+
+    } else {
+        return 'چند دقیقه پیش'
+    } 
 }
