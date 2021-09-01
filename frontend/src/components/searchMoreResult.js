@@ -9,7 +9,7 @@ import PageTravel from './pageTravel';
 const SearchMoreResult = () => {
     const [pageTravel, setPageTravel] = useState([])
     const [quizzesList, setQuizzesList] = useState([])
-    const [numberOfResult, setNumberOfResult] = useState(8)
+    const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
     const [searchValue, setSearchValue] = useState('')
     const [searchValueButWithoutHyphen, setSearchValueButWithoutHyphen] = useState()
@@ -47,13 +47,13 @@ const SearchMoreResult = () => {
         if (searchValue !== '') {
             let matchedQuizzes = []
             
-            const search_new_quiz_title = await axios.get(`/dbQuizzland$M19931506/new_quiz/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
+            const search_new_quiz_title = await axios.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
             Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
             
-            const search_new_quiz_subCategory = await axios.get(`/dbQuizzland$M19931506/new_quiz/?subCategory__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
+            const search_new_quiz_subCategory = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
             Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
     
-            const search_new_quiz_tag = await axios.get(`/dbQuizzland$M19931506/new_quiz/?tags__icontains=${searchValue}&limit=${numberOfResult}`)
+            const search_new_quiz_tag = await axios.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=${numberOfResult}`)
             Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
             
             setPageTravel(search_new_quiz_title.data)

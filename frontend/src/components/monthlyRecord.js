@@ -20,13 +20,13 @@ const QuizMonthlyRecord = () => {
 
     const getAllQuizzes = async () => {
         setRecordStartStatue_1('Getting Quiz Data...')
-        const quizzes = await axios.get('/dbQuizzland$M19931506/new_quiz/')
+        const quizzes = await axios.get('/dbAPI/new_quiz/')
         quizDataSaveInExcel(quizzes)
     }
     
     const getAllCategories = async () => {
         setRecordStartStatue_1_2('Getting Category Data...')
-        const categories = await axios.get('/dbQuizzland$M19931506/new_category/')
+        const categories = await axios.get('/dbAPI/new_category/')
         categoryDataSaveInExcel(categories)
     }
     
@@ -109,7 +109,7 @@ const QuizMonthlyRecord = () => {
         await quizzes.data.map(async quiz => {
             if (quiz.monthly_views !== 0) {
                 log(quiz)
-                const restartQuizMonthlyViews = await axios.patch(`/dbQuizzland$M19931506/new_quiz/${quiz.id}/`, {monthly_views: 0})
+                const restartQuizMonthlyViews = await axios.patch(`/dbAPI/new_quiz/${quiz.id}/`, {monthly_views: 0})
                 return restartQuizMonthlyViews
             }
         })
@@ -120,7 +120,7 @@ const QuizMonthlyRecord = () => {
         await categories.data.map(async category => {
             if (category.monthly_views !== 0) {
                 log(category)
-                const restartCategoryMonthlyViews = await axios.patch(`/dbQuizzland$M19931506/new_category/${category.id}/`, {monthly_views: 0})
+                const restartCategoryMonthlyViews = await axios.patch(`/dbAPI/new_category/${category.id}/`, {monthly_views: 0})
                 return restartCategoryMonthlyViews
             }
         })

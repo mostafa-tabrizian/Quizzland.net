@@ -59,13 +59,13 @@ const Quiz = (props) => {
     
     const grabData = () => {
         const grabQuiz = async () => {
-            const quizDB = await axios.get(`/dbQuizzland$M19931506/new_pointy_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
+            const quizDB = await axios.get(`/dbAPI/new_pointy_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
             quiz = quizDB.data.results[0]
             return quiz
         }
 
         const grabQuestions = async () => {
-            return await axios.get(`/dbQuizzland$M19931506/pointyQuestions/?title__iexact=${quizTitleReplacedWithHyphen}`)
+            return await axios.get(`/dbAPI/pointyQuestions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         }
         
         grabQuiz().then((quiz) => {
@@ -83,7 +83,7 @@ const Quiz = (props) => {
     }
     
     const addView = async (quiz) => {
-        await axios.patch(`/dbQuizzland$M19931506/new_pointy_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
+        await axios.patch(`/dbAPI/new_pointy_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
     }
 
     const makeDatePublishFormatForDetailInHead = (time) => {
@@ -250,7 +250,7 @@ const Quiz = (props) => {
     }
 
     const getSuggestionsQuiz = (subCategory) => {
-        axios.get(`/dbQuizzland$M19931506/new_pointy_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        axios.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 

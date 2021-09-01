@@ -34,7 +34,7 @@ router.register(r'newsletter_users', views.newsletter_users)
 
 urlpatterns = [
     path('adminTheKingAlexanderJosef/', admin.site.urls),
-    path('dbQuizzland$M19931506/', include(router.urls)),
+    path('dbAPI/', include(router.urls)),
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('', include('frontend.urls')),   
 ]

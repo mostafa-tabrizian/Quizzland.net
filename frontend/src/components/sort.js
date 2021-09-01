@@ -15,7 +15,7 @@ const Sort = () => {
     const [sortType, setSortType] = useState()
     const [sortCategory, setSortCategory] = useState()
     const [pageTravel, setPageTravel] = useState([])
-    const [numberOfResult, setNumberOfResult] = useState(8)
+    const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
     const [contentLoaded, setContentLoaded] = useState(false)
 
@@ -62,9 +62,9 @@ const Sort = () => {
             case 'newest':
                 setSortTitle('جدیدترین کوییز ها')
                 if (sortCategory) {
-                    quizzes = await axios.get(`/dbQuizzland$M19931506/new_quiz/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/new_quiz/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axios.get(`/dbQuizzland$M19931506/new_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/new_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -74,9 +74,9 @@ const Sort = () => {
             case 'bestest':
                 setSortTitle('بهترین کوییز ها')
                 if (sortCategory) {
-                    quizzes = await axios.get(`/dbQuizzland$M19931506/best_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/best_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axios.get(`/dbQuizzland$M19931506/best_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/best_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -86,9 +86,9 @@ const Sort = () => {
             case 'monthlyBestest':
                 setSortTitle('بهترین کوییز های این ماه')
                 if (sortCategory) {
-                    quizzes = await axios.get(`/dbQuizzland$M19931506/monthlyBest_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/monthlyBest_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axios.get(`/dbQuizzland$M19931506/monthlyBest_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/monthlyBest_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)

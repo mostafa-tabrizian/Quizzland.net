@@ -30,15 +30,25 @@ const SubCategory = (props) => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     
-    const sortTypeDefinitionForDb = {
+    const sortTypeDefinitionForQuizDb = {
         'newest': 'new_quiz',
         'bestest': 'best_quiz',
         'alphabet': 'alphabet_quiz'
     }
 
+    const sortTypeDefinitionForPointyQuizDb = {
+        'newest': "new_pointy_quiz",
+        'bestest': "best_pointy_quiz",
+        'alphabet': "alphabet_pointy_quiz"
+    };
+    
     const getQuizzes = async () => {
-        const Quizzes = await axios.get(`/dbQuizzland$M19931506/${sortTypeDefinitionForDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=${numberOfResult}&offset=${offsetQuiz}`)
-        const QuizzesPointy = await axios.get(`/dbQuizzland$M19931506/new_pointy_quiz/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=${numberOfResult}&offset=${offsetQuizPointy}`)
+        const Quizzes = await axios.get(
+          `/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
+        );
+        const QuizzesPointy = await axios.get(
+          `/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
+        );
         
         if (Quizzes.data.count !== 0) {
             setQuizzes(Quizzes.data.results)
@@ -72,7 +82,7 @@ const SubCategory = (props) => {
     }
 
     const backgroundOfSubCategory = async () => {
-        const new_category = await axios.get(`/dbQuizzland$M19931506/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
+        const new_category = await axios.get(`/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
         const background = new_category.data.results[0].background
         document.getElementById('html').style = `
             background: url('${background}') center/cover fixed no-repeat !important;

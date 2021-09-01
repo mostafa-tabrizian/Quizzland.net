@@ -91,7 +91,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = () => {
-        axios.get(`/dbQuizzland$M19931506/new_quiz/?subCategory__icontains=${replaceFunction(props.location.state.quiz.subCategory, ' ', '+')}&limit=4`)
+        axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(props.location.state.quiz.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
