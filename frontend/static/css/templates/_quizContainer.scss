@@ -6,7 +6,6 @@
     @include breakpoints-down(medium) {
         margin: .5rem;
         display: flex;
-        justify-content: center;
     }
 
     &__minHeight {
@@ -15,7 +14,11 @@
     
     &__header {
         justify-content: space-between;
-        
+
+        @include breakpoints-down(medium) {
+            padding: 0 1.125rem;
+        }
+
         a {
             padding: 0.3rem 1rem;
             background: transparent;

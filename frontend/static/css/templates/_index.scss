@@ -98,11 +98,13 @@
 
 .category {
     flex-wrap: wrap;
+    margin: 0 auto;
+
+    a {
+        margin-right: 1rem;
+    }
 
     @include breakpoints-down(medium) {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-
         a {
             text-align: center;
         }
@@ -110,6 +112,7 @@
 
     &__title {
         padding-top: 12rem;
+        padding-right: 1.125rem;
     }
     
     img {
@@ -137,7 +140,6 @@
         display: block;
     }
 }
-
 
 .sort {
     height: 36rem;
