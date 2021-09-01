@@ -1956,6 +1956,7 @@ body {
 
 @media (min-width: 40em) {
   .quiz__container {
+    max-width: 32rem;
     margin: 0 8rem;
     background: none;
     border: none;

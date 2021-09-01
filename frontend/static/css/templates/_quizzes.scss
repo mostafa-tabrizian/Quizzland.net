@@ -92,6 +92,7 @@ body {
         transition: all 1.3s;
 
         @include breakpoints-up(medium) {
+            max-width: 32rem;
             margin: 0 8rem;
             background: none;
             border: none;
@@ -322,6 +323,7 @@ body {
             &:not(:last-child) {
                 margin-bottom: 1rem;
             }
+
 
             @include breakpoints-up(medium) {
                 width: 30rem;
