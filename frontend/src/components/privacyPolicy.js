@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import BackBtn from '../components/backBtn'
+import { Helmet } from "react-helmet";
 import Header from './header'
 
 const pathRed = '/static/img/bubbles.png'
@@ -14,10 +15,14 @@ const PrivacyPolicy = () => {
 
     return (
         <React.Fragment>
+            
+            <Header />
 
-            <Header
-                title='حریم خصوصی | کوییزلند'
-            />
+            <Helmet>
+                <title>حریم خصوصی | کوییزلند</title>
+                <meta name="description" content="حریم خصوصی در کوییزلند" />
+                <meta name="keywords" content="حریم خصوصی, کوییزلند" />
+            </Helmet>
 
             <div className="basicPage wrapper-sm center">
                 <h2>تمام اطلاعات جزئی شما که توسط کوییزلند دریافت میشود تنها برای بهتر کردن تجربه‌ی شما است و این اطلاعات</h2>

@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { Helmet } from "react-helmet";
+
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 import { log, replaceFunction } from './base'
-import HotHeader from './hotHeader'
+import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 
-const logo = '/static/img/Q2.png'
+const logo = '/static/img/Q-small.png'
 
 let quiz = 'null'
 
@@ -185,10 +187,10 @@ const Quiz = (props) => {
             return (
                 <div className="flex flex-jc-c">
                     <form className='quiz__options quiz__options__img grid flex-jc-c pos-rel' data={question.answer} action="">
-                        { !(question.option_img_1st.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-1`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 1 && 'quiz__correctAnswer'} ${wrongAnswerOption === 1 && 'quiz__wrongAnswer'}`} id={`${question.id}-1`} htmlFor={`${question.id}-1`}> <img className="quiz__imgOption" src={question.option_img_1st} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
-                        { !(question.option_img_2nd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-2`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 2 && 'quiz__correctAnswer'} ${wrongAnswerOption === 2 && 'quiz__wrongAnswer'}`} id={`${question.id}-2`} htmlFor={`${question.id}-2`}> <img className="quiz__imgOption" src={question.option_img_2nd} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
-                        { !(question.option_img_3rd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-3`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 3 && 'quiz__correctAnswer'} ${wrongAnswerOption === 3 && 'quiz__wrongAnswer'}`} id={`${question.id}-3`} htmlFor={`${question.id}-3`}> <img className="quiz__imgOption" src={question.option_img_3rd} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
-                        { !(question.option_img_4th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-4`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 4 && 'quiz__correctAnswer'} ${wrongAnswerOption === 4 && 'quiz__wrongAnswer'}`} id={`${question.id}-4`} htmlFor={`${question.id}-4`}> <img className="quiz__imgOption" src={question.option_img_4th} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_1st.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-1`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 1 && 'quiz__correctAnswer'} ${wrongAnswerOption === 1 && 'quiz__wrongAnswer'}`} id={`${question.id}-1`} htmlFor={`${question.id}-1`}> <img className="quiz__imgOption" src={question.option_img_1st} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_2nd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-2`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 2 && 'quiz__correctAnswer'} ${wrongAnswerOption === 2 && 'quiz__wrongAnswer'}`} id={`${question.id}-2`} htmlFor={`${question.id}-2`}> <img className="quiz__imgOption" src={question.option_img_2nd} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_3rd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-3`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 3 && 'quiz__correctAnswer'} ${wrongAnswerOption === 3 && 'quiz__wrongAnswer'}`} id={`${question.id}-3`} htmlFor={`${question.id}-3`}> <img className="quiz__imgOption" src={question.option_img_3rd} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_4th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-4`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 4 && 'quiz__correctAnswer'} ${wrongAnswerOption === 4 && 'quiz__wrongAnswer'}`} id={`${question.id}-4`} htmlFor={`${question.id}-4`}> <img className="quiz__imgOption" src={question.option_img_4th} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
                     </form>
                 </div>
             )
@@ -209,7 +211,7 @@ const Quiz = (props) => {
 
     const gifAnswerOfQuestionIfExistShow = (question) => {
         if (!(question.answer_imGif.includes('NotExist.jpg'))) {
-            return <img src={question.answer_imGif} alt="quiz-question-WebP" />
+            return <img src={question.answer_imGif} alt={question.title} title={question.title} />
         }
     }
 
@@ -221,7 +223,7 @@ const Quiz = (props) => {
 
                         { questionShowIfNotNull(question.question) }
 
-                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} loading='lazy' /> }
+                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} loading='lazy' /> }
                     
                         { questionOptionsCheckBetweenStringOrImg(question) }
                         
@@ -319,26 +321,54 @@ const Quiz = (props) => {
 
     return (
         <React.Fragment>
-            <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid={`${quizUrl}`} />
 
-            <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject" style={{display: 'none'}}>
-                <img src={`${quizThumbnail}`} />
-                <meta itemprop="url" content={`${quizThumbnail}`} />
-                <meta itemprop="width" content="800" />
-                <meta itemprop="height" content="800" />
-            </div>
+            <LoadingScreen loadState={loadState} />
 
-            <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style={{display: 'none'}}>
-                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src={`${logo}`} />
-                    <meta itemprop="url" content={`${logo}`} />
-                    <meta itemprop="width" content="600" />
-                    <meta itemprop="height" content="60" />
-                </div>
-                <meta itemprop="name" content="Quizzland | کوییزلند" />
-            </div>
-
-            <meta itemprop="datePublished" content={`${quiz.publish}`}/>
+            <Header
+                colorOfHeader='header__white'
+            />
+            <Helmet>
+                <title>{`کوییزلند | ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
+                <meta name="description" content="کوییز های کوییزلند" />
+                <meta name="keywords" content="کوییز, کوییزلند" />
+                <meta name="msapplication-TileImage" content={quizThumbnail} />
+                <meta property="og:site_name" content="کوییزلند" />
+                <meta property="og:title" content={quiz.title} />
+                <meta property="og:description" content={`${quiz.subCategory} کوییز`} />
+                <meta property="og:image:type" content="image/jpeg" />
+                <meta property="og:image:width" content="300" />
+                <meta property="og:image:height" content="300" />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={window.location.href} />
+                <script type="application/ld+json">
+                {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Article",
+                        "headline": "${quiz.title}",
+                        "image": [
+                            "${quizThumbnail}",
+                            "${quiz.background}"
+                         ],
+                        "datePublished": "${quiz.publish}",
+                        "dateModified": "${quiz.publish}",
+                        "author": {
+                            "@type": "Person",
+                            "name": "مصطفی تبریزیان",
+                            "url": "https://quizzland.net/contact"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "کوییزلند",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://quizzland.net${logo}"
+                            }
+                        }
+                    }
+                `}
+                </script>
+            </Helmet>
 
             <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
                 <div className={'loadingScreen pos-fix flex flex-jc-c flex-ai-c'}></div>
@@ -347,13 +377,6 @@ const Quiz = (props) => {
                 </div>  
             </div>
             
-            <LoadingScreen loadState={loadState} />
-
-            <HotHeader
-                colorOfHeader='header__white'
-                title={`کوییزلند | ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}
-            />
-
             <div className='adverts adverts__left'>
                 <div id='mediaad-Spcz'></div>
             </div>
@@ -372,7 +395,7 @@ const Quiz = (props) => {
                 </div>
                 
                 <div className="tx-al-c">
-                    <h1 itemprop="title">{ quiz.title }</h1>
+                    <h1>{ quiz.title }</h1>
                 </div>
 
                 <div className="quiz__detail flex flex-jc-c flex-ai-c">

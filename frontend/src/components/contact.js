@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from "react-helmet";
 
 import BackBtn from '../components/backBtn'
 import Header from './header'
@@ -16,11 +17,13 @@ const Contact = () => {
     return (
         <React.Fragment>
 
-            <Header
-                title='تماس با ما | ‌کوییزلند '
-                description= 'تماس با پشتیبانی کوییزلند'
-                keywords= 'پشتیبانی کوییزلند'
-            /> 
+            <Header />
+
+            <Helmet>
+                <title>تماس با ما | ‌کوییزلند</title>
+                <meta name="description" content="تماس با پشتیبانی کوییزلند" />
+                <meta name="keywords" content="پشتیبانی کوییزلند" />
+            </Helmet>
 
             <div className="basicPage center wrapper-sm">
                 <h3>برای تماس با ما میتونید از روش های زیر استفاده کنید </h3>

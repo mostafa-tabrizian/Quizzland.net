@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import BackBtn from './backBtn'
-import HotHeader from './hotHeader'
+import Header from './hotHeader'
 
 const pathRed = '/static/img/bubbles.png'
 
@@ -16,9 +16,13 @@ const PageNotFound_404 = () => {
     return (
         <React.Fragment>
             
-            <HotHeader
-                title='صفحه مورد نظر پیدا نشد |‌ کوییزلند'
-            />
+            <Header />
+
+            <Helmet>
+                <title>صفحه مورد نظر پیدا نشد |‌ کوییزلند</title>
+                <meta name="description" content="صفحه مورد نظر پیدا نشد" />
+                <meta name="keywords" content="کوییزلند" />
+            </Helmet>
     
             <div class="basicPage wrapper-sm center">
                 <h1> 🤔 صفحه‌ی مورد نظر پیدا نشد </h1>

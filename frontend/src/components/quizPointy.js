@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { Helmet } from "react-helmet";
+
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 import { log, replaceFunction } from './base'
-import HotHeader from './hotHeader'
+import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
 
-const logo = '/static/img/Q2.png'
+const logo = '/static/img/Q-small.png'
 
 let quiz = 'null'
 
@@ -251,31 +253,60 @@ const Quiz = (props) => {
 
     const getSuggestionsQuiz = (subCategory) => {
         axios.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
-            .then((res) => {setSuggestionQuizzes(res.data.results)})
+        .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
-
+    
     return (
         <React.Fragment>
-            <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid={`${quizUrl}`} />
 
-            <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject" style={{display: 'none'}}>
-                <img src={`${quizThumbnail}`} />
-                <meta itemprop="url" content={`${quizThumbnail}`} />
-                <meta itemprop="width" content="800" />
-                <meta itemprop="height" content="800" />
-            </div>
+            <LoadingScreen loadState={loadState} />
+        
+            <Header
+                colorOfHeader='header__white'
+            />
 
-            <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" style={{display: 'none'}}>
-                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src={`${logo}`} />
-                    <meta itemprop="url" content={`${logo}`} />
-                    <meta itemprop="width" content="600" />
-                    <meta itemprop="height" content="60" />
-                </div>
-                <meta itemprop="name" content="Quizzland | کوییزلند" />
-            </div>
-
-            <meta itemprop="datePublished" content={`${quiz.publish}`}/>
+            <Helmet>
+                <title>{`کوییزلند | ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
+                <meta name="description" content="تست های کوییزلند" />
+                <meta name="keywords" content="کوییز, تست, کوییزلند" />
+                <meta name="msapplication-TileImage" content={quizThumbnail} />
+                <meta property="og:site_name" content="کوییزلند" />
+                <meta property="og:title" content={quiz.title} />
+                <meta property="og:description" content={`${quiz.subCategory} تست`} />
+                <meta property="og:image:type" content="image/jpeg" />
+                <meta property="og:image:width" content="300" />
+                <meta property="og:image:height" content="300" />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={window.location.href} />
+                <script type="application/ld+json">
+                {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Article",
+                        "headline": "${quiz.title}",
+                        "image": [
+                            "${quizThumbnail}",
+                            "${quiz.background}"
+                         ],
+                        "datePublished": "${quiz.publish}",
+                        "dateModified": "${quiz.publish}",
+                        "author": {
+                            "@type": "Person",
+                            "name": "مصطفی تبریزیان",
+                            "url": "https://quizzland.net/contact"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "کوییزلند",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://quizzland.net${logo}"
+                            }
+                        }
+                    }
+                `}
+                </script>
+            </Helmet>
 
             <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
                 <div className={'loadingScreen pos-fix flex flex-jc-c flex-ai-c'}></div>
@@ -284,12 +315,6 @@ const Quiz = (props) => {
                 </div>  
             </div>
             
-            <LoadingScreen loadState={loadState} />
-
-            <HotHeader
-                colorOfHeader='header__white'
-                title={`کوییزلند | ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}
-            />
 
             <div className='adverts adverts__left'>
                 <div id='mediaad-Spcz'></div>
@@ -303,7 +328,7 @@ const Quiz = (props) => {
                 </div>
                 
                 <div className="tx-al-c">
-                    <h1 itemprop="title">{ quiz.title }</h1>
+                    <h1>{ quiz.title }</h1>
                 </div>
 
                 <div className="quiz__detail flex flex-jc-c flex-ai-c">

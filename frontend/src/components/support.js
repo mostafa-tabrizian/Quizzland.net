@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from "react-helmet";
 
 import BackBtn from '../components/backBtn'
 import Header from './header'
@@ -16,9 +17,13 @@ const Support = () => {
     return (
         <React.Fragment>
 
-            <Header
-                title='حمایت |‌کوییزلند'
-            />
+            <Header />
+
+            <Helmet>
+                <title>حمایت |‌کوییزلند</title>
+                <meta name="description" content="حمایت از کوییزلند" />
+                <meta name="keywords" content="کوییزلند, حمایت" />
+            </Helmet>
 
             <div className="basicPage wrapper-sm center">
                 <h2>از این که تصمیم به حمایت از کوییزلند کردید خیلی قدردانیم</h2>

@@ -1492,6 +1492,8 @@ input {
   margin-right: 5rem;
   margin-left: 5rem;
   position: relative;
+  -webkit-filter: drop-shadow(2px 4px 6px black);
+          filter: drop-shadow(2px 4px 6px black);
 }
 
 .hero__logo .Q {
@@ -1549,12 +1551,12 @@ input {
   }
 }
 
-.hero__start h1:nth-child(1) {
+.hero__start h1 {
   font-size: 4.5rem;
   margin-bottom: 1.5rem;
 }
 
-.hero__start h1:nth-child(2) {
+.hero__start h2 {
   font-size: 1.6rem;
   font-family: myHarmattan;
   font-weight: 600;

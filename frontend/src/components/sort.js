@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Helmet } from "react-helmet";
 
 import LoadingScreen from './loadingScreen'
-import Header from './header'
 import PageTravel from './pageTravel'
 import QuizContainer from './quizContainer'
+import Header from './header'
 
 import { log, takeParameterFromUrl } from './base'
 
@@ -112,9 +113,13 @@ const Sort = () => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header
-                title={`${sortTitle} | کوییزلند`}
-            />
+            <Header />
+
+            <Helmet>
+                <title>{`${sortTitle} | کوییزلند`}</title>
+                <meta name="description" content="کوییز های مرتب شده کوییزلند" />
+                <meta name="keywords" content="کوییز, کوییزلند" />
+            </Helmet>
 
             <div className='adverts adverts__left'>
                 <div id="pos-article-display-28432"></div>

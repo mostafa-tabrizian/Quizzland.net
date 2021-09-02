@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import { Helmet } from "react-helmet";
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
 import { log, replaceFunction, takeParameterFromUrl } from './base'
-import HotHeader from './hotHeader'
+import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 import QuizPointyContainer from './quizPointyContainer'
@@ -104,12 +105,15 @@ const SubCategory = (props) => {
 
             <LoadingScreen loadState={loadState} />
 
-            <HotHeader
+            <Header
                 colorOfHeader='header__white'
-                title={`کوییزلند | کوییز های ${subCategory}`}
-                description={`کوییزلند ${subCategory} کوییز های`}
-                keywords={`${subCategory} بهترین کوییز های , ${subCategory} کوییز های`}
             />
+
+            <Helmet>
+                <title>{`کوییزلند | کوییز های ${subCategory}`}</title>
+                <meta name="description" content={`کوییزلند ${subCategory} کوییز های`} />
+                <meta name="keywords" content={`${subCategory} بهترین کوییز های , ${subCategory} کوییز های`} />
+            </Helmet>
 
             <div className='adverts adverts__left'>
                 <div id="pos-article-display-28433"></div>

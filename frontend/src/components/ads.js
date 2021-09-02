@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from "react-helmet";
 
 import BackBtn from '../components/backBtn'
 import Header from './header'
@@ -16,9 +17,13 @@ const Ads = () => {
     return (
         <React.Fragment>
 
-            <Header
-                title='تبلیغات |‌ کوییزلند'
-            />
+            <Header />
+                
+            <Helmet>
+                <title>تبلیغات |‌ کوییزلند</title>
+                <meta name="description" content="تبلیغات در سایت کوییزلند" />
+                <meta name="keywords" content="تبلیغات, کوییزلند" />
+            </Helmet>
                 
             <div className="basicPage center wrapper-sm">
                 <h3>برای تبلیغ در بنر های کوییزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>

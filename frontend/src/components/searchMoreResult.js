@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios'
+import { Helmet } from "react-helmet";
 
-import Header from './hotHeader';
 import QuizContainer from './quizContainer';
 import { log, takeParameterFromUrl, replaceFunction } from './base'
 import PageTravel from './pageTravel';
+import Header from './hotHeader';
 
 const SearchMoreResult = () => {
     const [pageTravel, setPageTravel] = useState([])
@@ -76,9 +77,15 @@ const SearchMoreResult = () => {
 
     return (
         <React.Fragment>
-            <Header
-                title={`کوییزلند | ${searchValueButWithoutHyphen} جستجو عبارت `}
-            />
+
+            <Header />
+
+            <Helmet>
+                <title>{`کوییزلند | ${searchValueButWithoutHyphen} جستجو عبارت `}</title>
+                <meta name="description" content="صفحه جستجو کوییزلند" />
+                <meta name="keywords" content="جستجو, کوییز, کوییزلند" />
+            </Helmet>
+
             <div className='flex flex-jc-c flex-ai-c'>
                 ‌<span > ‌تعداد نتایج :‌ {matchedQuizzesCounter} </span>‌‌
                 ‌<h3 className='title'> ‌ عبارت جستجو شده : {searchValueButWithoutHyphen}</h3>‌

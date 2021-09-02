@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Helmet } from "react-helmet";
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
-import HotHeader from './hotHeader'
+import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 
 import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
@@ -99,11 +100,13 @@ const Category = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <HotHeader
-                title={`کوییزلند | ${currentCategory} کوییز های `}
-                description={`کوییزلند ${currentCategory} کوییز های`}
-                keywords={`${currentCategory} بهترین کوییز های , ${currentCategory} کوییز های`}
-            />
+            <Header />
+
+            <Helmet>
+                <title>{`کوییزلند | ${currentCategory} کوییز های `}</title>
+                <meta name="description" content={`کوییزلند ${currentCategory} کوییز های`} />
+                <meta name="keywords" content={`${currentCategory} بهترین کوییز های , ${currentCategory} کوییز های`} />
+            </Helmet>
 
             <div className='adverts adverts__left'>
                 <div id="pos-article-display-28434"></div>

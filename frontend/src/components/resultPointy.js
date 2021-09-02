@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
+import { Helmet } from "react-helmet";
 
 import { log, replaceFunction } from './base'
 import BackBtn from './backBtn'
-import HotHeader from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
+import Header from './hotHeader'
 
 const Result = (props) => {
     const [state, setState] = useState(props.location.state)
@@ -110,9 +111,13 @@ const Result = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <HotHeader
-                title='نتیجه تست | کوییزلند '
-            />
+            <Header />
+
+            <Helmet>
+                <title>نتیجه تست | کوییزلند </title>
+                <meta name="description" content="نتیجه تست انجام شده" />
+                <meta name="keywords" content="کوییز, تست, کوییزلند" />
+            </Helmet>
 
             <div className="result__container">
                 <div className="result__title flex flex-jc-c">
