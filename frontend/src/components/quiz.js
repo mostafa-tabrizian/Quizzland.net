@@ -334,7 +334,7 @@ const Quiz = (props) => {
             />
             <Helmet>
                 <title>{`کوییزلند | ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
-                <meta name="description" content="کوییز های کوییزلند" />
+                <meta name="description" content={`کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')} کوییزلند`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quizThumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
@@ -398,7 +398,7 @@ const Quiz = (props) => {
                         radius: 15,            // the corner radius on each button (INTEGER)
                         show_total: true,     // show/hide the total share count (true, false)
                         show_mobile: true,    // show/hide the buttons on mobile (true, false)
-                        // show_toggle: true,    // show/hide the toggle buttons (true, false)
+                        show_toggle: false,    // show/hide the toggle buttons (true, false)
                         size: 48,             // the size of each button (INTEGER)
                         top: 450,             // offset in pixels from the top of the page
                         url: `${currentUrl()}`

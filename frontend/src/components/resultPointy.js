@@ -145,6 +145,32 @@ const Result = (props) => {
                         <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
                         {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک تست کپی شد</h6> */}
                     </div>
+
+                    <div className='space-sm'>
+                        <InlineReactionButtons
+                            config={{
+                                alignment: 'center',  // alignment of buttons (left, center, right)
+                                enabled: true,        // show/hide buttons (true, false)
+                                language: 'en',       // which language to use (see LANGUAGES)
+                                min_count: 0,         // hide react counts less than min_count (INTEGER)
+                                padding: 12,          // padding within buttons (INTEGER)
+                                reactions: [          // which reactions to include (see REACTIONS)
+                                    'slight_smile',
+                                    'heart_eyes',
+                                    'laughing',
+                                    'astonished',
+                                    'sob',
+                                    'rage'
+                                ],
+                                size: 45,             // the size of each button (INTEGER)
+                                spacing: 8,           // the spacing between buttons (INTEGER)
+
+                                // OPTIONAL PARAMETERS
+                                url: `https://quizzland.net/quiz/${replaceFunction(state.quiz.title, ' ', '-')}`, // (defaults to current url)
+                            }}
+                        />
+                    </div>
+                    
                 </div>
 
             </div>
