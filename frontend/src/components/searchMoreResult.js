@@ -47,15 +47,36 @@ const SearchMoreResult = () => {
     const getQuizzes = async () => {
         if (searchValue !== '') {
             let matchedQuizzes = []
-            
+
+            // Search Quiz
             const search_new_quiz_title = await axios.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
             Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
             
             const search_new_quiz_subCategory = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
             Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
     
-            const search_new_quiz_tag = await axios.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=${numberOfResult}`)
+            const search_new_quiz_tag = await axios.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
             Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+
+            // Search Pointy Quiz
+            const search_new_pointy_quiz_title = await axios.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
+            Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_title.data.results)
+
+            const search_new_pointy_quiz_subCategory = await axios.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
+            Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_subCategory.data.results)
+
+            const search_new_pointy_quiz_tag = await axios.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
+            Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_tag.data.results)
+
+            // Remove duplicated quizzes
+            let uniqueMatchedQuizzes = {};
+
+            for ( let i = 0; i < matchedQuizzes.length; i++ )
+                uniqueMatchedQuizzes[matchedQuizzes[i]['title']] = matchedQuizzes[i];
+
+            matchedQuizzes = new Array();
+            for ( let key in uniqueMatchedQuizzes )
+                matchedQuizzes.push(uniqueMatchedQuizzes[key]);
             
             setPageTravel(search_new_quiz_title.data)
     
