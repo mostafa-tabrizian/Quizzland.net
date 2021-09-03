@@ -2,21 +2,18 @@
 @font-face {
   font-family: "myHarmattan";
   font-display: swap;
-  unicode-range: U+20,U+30-39,U+60C,U+621,U+627,U+628,U+62A-63A,U+641,U+642,U+644-648,U+64E-650,U+67E,U+686,U+698,U+6A9,U+6AF,U+6CC,U+6F0-6F9;
   src: url("/static/font/Harmattan-Regular.woff2") format("woff2"), url("/static/font/Harmattan-Regular.woff") format("woff"), url("/static/font/Harmattan-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "myChanga";
   font-display: swap;
-  unicode-range: U+20,U+30-39,U+60C,U+621,U+627,U+628,U+62A-63A,U+641,U+642,U+644-648,U+64E-650,U+67E,U+686,U+698,U+6A9,U+6AF,U+6CC,U+6F0-6F9;
   src: url("/static/font/Changa-ExtraLight.woff2") format("woff2"), url("/static/font/Changa-ExtraLight.woff") format("woff"), url("/static/font/Changa-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
   font-family: 'lalezar';
   font-display: swap;
-  unicode-range: U+20,U+30-39,U+60C,U+621,U+627,U+628,U+62A-63A,U+641,U+642,U+644-648,U+64E-650,U+67E,U+686,U+698,U+6A9,U+6AF,U+6CC,U+6F0-6F9;
   src: url("/static/font/Lalezar-Regular.woff2") format("woff2"), url("/static/font/Lalezar-Regular.woff") format("woff"), url("/static/font/Lalezar-Regular.ttf") format("truetype");
 }
 
@@ -29,7 +26,6 @@
 @font-face {
   font-family: "Vermin-Vibes-2-Soft";
   font-display: swap;
-  unicode-range: U+30-39;
   src: url("/static/font/Vermin-Vibes-2-Soft.woff2") format("woff2"), url("/static/font/Vermin-Vibes-2-Soft.woff") format("woff"), url("/static/font/Vermin-Vibes-2-Soft.ttf") format("truetype");
 }
 

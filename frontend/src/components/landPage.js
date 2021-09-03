@@ -66,8 +66,7 @@ const Index = () => {
     }
 
     const recommendationQuiz = async () => {
-        if (JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']) {
-
+        try {
             const interest = JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']
             const hightestVisitedCategory = grabAndSortMostVisitedCategories(interest)
             const top1stUserCategory = hightestVisitedCategory[0][0]
@@ -105,6 +104,8 @@ const Index = () => {
     
             setRecommendedQuizzes([])
             setRecommendedQuizzes(recommendedQuizzesList)
+        } catch(e) {
+            return ''
         }
     }
 
