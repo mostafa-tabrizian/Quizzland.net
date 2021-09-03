@@ -5,6 +5,13 @@ import { log } from './base'
 
 const instagramIcon = '/static/img/instagram-icon.svg'
 
+const copyRightDate = () => {
+    const date = new Date();
+    const westYear = date.getFullYear()
+    const eastYear = date.toLocaleDateString('fa-IR').slice(0, 4)
+    return `${westYear}-${eastYear}`
+}
+
 const Footer = () => {
     return (
         <div className='footer'>
@@ -55,7 +62,7 @@ const Footer = () => {
 
             <div className="footer__copyRight flex flex-jc-c flex-ai-c">
                 <p>
-                    1400-2021 © تمام حقوق به کوییزلند تعلق دارد
+                    {copyRightDate()} © تمام حقوق به کوییزلند تعلق دارد
                 </p>
             </div>
 

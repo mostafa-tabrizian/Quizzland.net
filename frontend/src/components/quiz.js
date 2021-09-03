@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { Helmet } from "react-helmet";
+import {StickyShareButtons} from 'sharethis-reactjs';
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -319,6 +320,10 @@ const Quiz = (props) => {
         setSFXAllowed(SFXAllowed ? false : true)
     }
 
+    const currentUrl = () => {
+        return `https://quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
+    }
+
     return (
         <React.Fragment>
 
@@ -369,6 +374,37 @@ const Quiz = (props) => {
                 `}
                 </script>
             </Helmet>
+            
+            {quiz.title &&
+                <StickyShareButtons
+                    config={{
+                        alignment: 'left',    // alignment of buttons (left, right)
+                        color: 'social',      // set the color of buttons (social, white)
+                        enabled: true,        // show/hide buttons (true, false)
+                        font_size: 16,        // font size for the buttons
+                        hide_desktop: false,  // hide buttons on desktop (true, false)
+                        labels: 'counts',     // button labels (cta, counts, null)
+                        language: 'en',       // which language to use (see LANGUAGES)
+                        min_count: 10,         // hide react counts less than min_count (INTEGER)
+                        networks: [           // which networks to include (see SHARING NETWORKS)
+                            'whatsapp',
+                            'telegram',
+                            'sms',
+                            'gmail',
+                            'twitter',
+                            'facebook',
+                        ],
+                        padding: 12,          // padding within buttons (INTEGER)
+                        radius: 15,            // the corner radius on each button (INTEGER)
+                        show_total: true,     // show/hide the total share count (true, false)
+                        show_mobile: true,    // show/hide the buttons on mobile (true, false)
+                        // show_toggle: true,    // show/hide the toggle buttons (true, false)
+                        size: 48,             // the size of each button (INTEGER)
+                        top: 450,             // offset in pixels from the top of the page
+                        url: `${currentUrl()}`
+                    }}
+                />
+            }
 
             <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
                 <div className={'loadingScreen pos-fix flex flex-jc-c flex-ai-c'}></div>
