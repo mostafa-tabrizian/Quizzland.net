@@ -16,11 +16,7 @@
 
         img {
             width: auto;
-            height: 2.7875rem;
-    
-            @include breakpoints-down(medium) {
-                height: 2.4875rem;
-            }
+            height: 2.4rem;
         }
     }
 

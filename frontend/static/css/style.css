@@ -421,39 +421,39 @@ input {
 }
 
 .flex-jc-sb {
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: justify !important;
+      -ms-flex-pack: justify !important;
+          justify-content: space-between !important;
 }
 
 .flex-jc-c {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
 }
 
 .flex-jc-fe {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: end !important;
+      -ms-flex-pack: end !important;
+          justify-content: flex-end !important;
 }
 
 .flex-jc-fs {
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: start !important;
+      -ms-flex-pack: start !important;
+          justify-content: flex-start !important;
 }
 
 .flex-ai-fs {
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: start !important;
+      -ms-flex-align: start !important;
+          align-items: flex-start !important;
 }
 
 .flex-ai-c {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
 }
 
 .grid {
@@ -896,13 +896,7 @@ input {
 
 .header__logo img {
   width: auto;
-  height: 2.7875rem;
-}
-
-@media (max-width: 49.9375em) {
-  .header__logo img {
-    height: 2.4875rem;
-  }
+  height: 2.4rem;
 }
 
 .header__links {
@@ -1489,11 +1483,10 @@ input {
 }
 
 .hero__logo {
-  margin-right: 5rem;
-  margin-left: 5rem;
+  margin-right: 10rem;
   position: relative;
-  -webkit-filter: drop-shadow(2px 4px 6px black);
-          filter: drop-shadow(2px 4px 6px black);
+  -webkit-filter: drop-shadow(10px 15px 10px black);
+          filter: drop-shadow(10px 15px 10px black);
 }
 
 .hero__logo .Q {
@@ -1505,7 +1498,7 @@ input {
 .hero__logo .Q__Bubbles {
   position: absolute;
   width: 26rem;
-  left: 0;
+  left: 1rem;
   pointer-events: none;
   -webkit-animation: dancingBubbles 5s infinite linear;
           animation: dancingBubbles 5s infinite linear;

@@ -8,10 +8,9 @@
     }
 
     &__logo {
-        margin-right: 5rem;
-        margin-left: 5rem;
+        margin-right: 10rem;
         position: relative;
-        filter: drop-shadow(2px 4px 6px black);
+        filter: drop-shadow(10px 15px 10px black);
 
         .Q {
             width: 25rem;
@@ -21,7 +20,7 @@
             &__Bubbles {
                 position: absolute;
                 width: 26rem;
-                left: 0;
+                left: 1rem;
                 pointer-events: none;
                 animation: dancingBubbles 5s infinite linear;
             }

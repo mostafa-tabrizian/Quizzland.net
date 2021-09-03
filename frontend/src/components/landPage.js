@@ -20,6 +20,7 @@ const category_movieSeries = '/static/img/category-movieSeries.jpg'
 const category_psychology = '/static/img/category-psychology.jpg'
 
 const Index = () => {
+    const [recommendedQuizzes, setRecommendedQuizzes] = useState([])
     const [newestCelebrityQuizzes, setNewestCelebrityQuizzes] = useState([])
     const [newestMovieSeriesQuizzes, setNewestMovieSeriesQuizzes] = useState([])
     const [newestPsychologyPointyQuizzes, setNewestPsychologyPointyQuizzes] = useState([])
@@ -40,6 +41,7 @@ const Index = () => {
     useEffect(() => {
         landPagePathSelector()
         grabData()
+        recommendationQuiz()
         setLoadState(true)
         setContentLoaded(true)
         if (document.getElementById('html')) {
@@ -47,7 +49,67 @@ const Index = () => {
         }
     }, [])
 
+    const grabAndSortMostVisitedCategories = (interest) => {
+        if (interest !== null) {
+            let hightestVisitedCategory = [];
+
+            for (let category in interest) {
+                hightestVisitedCategory.push([category, interest[category]]);
+            }
+            
+            hightestVisitedCategory.sort(function(a, b) {
+                return b[1] - a[1];
+            });
+
+            return hightestVisitedCategory
+        }
+    }
+
+    const recommendationQuiz = async () => {
+        if (JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']) {
+
+            const interest = JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']
+            const hightestVisitedCategory = grabAndSortMostVisitedCategories(interest)
+            const top1stUserCategory = hightestVisitedCategory[0][0]
+            const top2ndUserCategory = hightestVisitedCategory[1][0]
+            const top3rdUserCategory = hightestVisitedCategory[2][0]
+    
+            let matchedQuizzes = []
+    
+            const search_top_1st_category = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${top1stUserCategory}&limit=4`)
+            Array.prototype.push.apply(matchedQuizzes, search_top_1st_category.data.results)
+            
+            const search_top_2nd_category = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${top2ndUserCategory}&limit=2`)
+            Array.prototype.push.apply(matchedQuizzes, search_top_2nd_category.data.results)
+            
+            const search_top_3rd_category = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${top3rdUserCategory}&limit=2`)
+            Array.prototype.push.apply(matchedQuizzes, search_top_3rd_category.data.results)
+    
+            const recommendedQuizzesList = () => {
+                return (
+                    matchedQuizzes.length >= 4 &&
+                    <div className="space-med">
+    
+                        <div className="quizContainer__header flex flex-jc-fe flex-ai-c wrapper-med">
+                            <h2>پیشنهادی های کوییزلند به شما</h2>
+                        </div>
+                        
+                        <div>
+                            <ul className="quizContainer flex flex-ai-fe wrapper-med">
+                                <QuizContainerWithoutViews quizzes={matchedQuizzes} bgStyle='trans' />
+                            </ul>
+                        </div>
+                    </div>
+                )
+            }
+    
+            setRecommendedQuizzes([])
+            setRecommendedQuizzes(recommendedQuizzesList)
+        }
+    }
+
     const grabData = async () => {
+
         const new_quiz_celebrity = await axios.get('/dbAPI/new_quiz/?category__icontains=celebrity&limit=8')
         setNewestCelebrityQuizzes(new_quiz_celebrity.data.results)
 
@@ -146,6 +208,8 @@ const Index = () => {
                     <span className='tx-al-c'>✨ سلبریتی </span>
                 </a>
             </div>
+
+            {recommendedQuizzes}
 
             <div className="space-med">
 

@@ -48,25 +48,25 @@ const Quiz = (props) => {
     useEffect(() => {
         grabData()
         setLoadState(true)
-    }, quizTitle)
+    }, [])
 
     useEffect(() => {
         quizChangeDetector()
     })
-
+    
     const quizChangeDetector = () => {
         (function(history){
-
+            
             let pushState = history.pushState;
             history.pushState = function() {
                 pushState.apply(history, arguments);
             };
-
+            
             setQuizTitle(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
-
+            
         })(window.history);
     }
-
+    
     const setBackground = (background) => {
         document.getElementById('html').style=`background: url('${background}') center/cover no-repeat fixed !important`
     }
@@ -77,7 +77,7 @@ const Quiz = (props) => {
             quiz = quizDB.data.results[0]
             return quiz
         }
-
+        
         const grabQuestions = async () => {
             return await axios.get(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         }
@@ -86,16 +86,37 @@ const Quiz = (props) => {
             setQuizThumbnail(quiz.thumbnail)
             setBackground(quiz.background)
             addView(quiz)
+            sendCategoryAsInterest(quiz.subCategory)
         })
-
+        
         grabQuestions().then((question) => {
             setQuestions(question.data)
             getSuggestionsQuiz(question.data[0].subCategory)
         })
-
+        
         setContentLoaded(true)
     }
     
+    const sendCategoryAsInterest = (category) => {
+        const interest = JSON.parse(localStorage.getItem('interest'))
+
+        if (interest !== null) {
+            if (category in interest['categoryWatchedCounter']) {
+                const oldValue = interest['categoryWatchedCounter'][category]
+                let interestNew = JSON.parse(localStorage.getItem('interest'))
+                interestNew['categoryWatchedCounter'][category] = oldValue+1
+                localStorage.setItem('interest', JSON.stringify(interestNew))
+                
+            } else {
+                let interestNew = JSON.parse(localStorage.getItem('interest'))
+                interestNew['categoryWatchedCounter'][category] = 1
+                localStorage.setItem('interest', JSON.stringify(interestNew))
+            }
+        } else {
+            localStorage.setItem('interest', JSON.stringify({categoryWatchedCounter: {[category]: 1}}))
+        }
+    }
+
     const addView = async (quiz) => {
         await axios.patch(`/dbAPI/new_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
     }
@@ -124,7 +145,6 @@ const Quiz = (props) => {
                 SFXCorrect.play()
             }
         }
-
     }
 
     // const scaleAnimationAfterChoosingAnswer = () => {
@@ -340,6 +360,7 @@ const Quiz = (props) => {
                 <meta property="og:site_name" content="کوییزلند" />
                 <meta property="og:title" content={quiz.title} />
                 <meta property="og:description" content={`${quiz.subCategory} کوییز`} />
+                <meta property="og:image" content={quizThumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
                 <meta property="og:image:height" content="300" />

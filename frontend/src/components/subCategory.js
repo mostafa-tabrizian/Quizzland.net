@@ -75,10 +75,8 @@ const SubCategory = (props) => {
     }
 
     const listQuizzesPointy = () => {
-        log(quizzesPointy)
         return (
             <QuizPointyContainer quizzes={quizzesPointy} bgStyle='bg' />
-            // <QuizContainer quizzes={quizzesPointy} bgStyle='bg' />
         )
     }
 

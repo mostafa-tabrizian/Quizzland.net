@@ -224,27 +224,27 @@ input {
     display: flex;
 
     &-jc-sb {
-        justify-content: space-between;
+        justify-content: space-between !important;
     }
     
     &-jc-c {
-        justify-content: center;
+        justify-content: center !important;
     }
 
     &-jc-fe {
-        justify-content: flex-end;
+        justify-content: flex-end !important;
     }
 
     &-jc-fs {
-        justify-content: flex-start;
+        justify-content: flex-start !important;
     }
 
     &-ai-fs {
-        align-items: flex-start;
+        align-items: flex-start !important;
     }
 
     &-ai-c {
-        align-items: center;
+        align-items: center !important;
     }
 }
 
