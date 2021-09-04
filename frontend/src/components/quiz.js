@@ -352,6 +352,7 @@ const Quiz = (props) => {
             <Header
                 colorOfHeader='header__white'
             />
+
             <Helmet>
                 <title>{`کوییزلند | ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
                 <meta name="description" content={`کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')} کوییزلند`} />
@@ -359,13 +360,14 @@ const Quiz = (props) => {
                 <meta name="msapplication-TileImage" content={quizThumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
                 <meta property="og:title" content={quiz.title} />
-                <meta property="og:description" content={`${quiz.subCategory} کوییز`} />
+                <meta property="og:description" content={`کوییز ${quiz.subCategory}`} />
                 <meta property="og:image" content={quizThumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
                 <meta property="og:image:height" content="300" />
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content={window.location.href} />
+
                 <script type="application/ld+json">
                 {`
                     {

@@ -108,9 +108,9 @@ const SubCategory = (props) => {
             />
 
             <Helmet>
-                <title>{`کوییزلند | کوییز های ${subCategory}`}</title>
-                <meta name="description" content={`کوییزلند ${subCategory} کوییز های`} />
-                <meta name="keywords" content={`${subCategory} بهترین کوییز های , ${subCategory} کوییز های`} />
+                <title>{`کوییزلند | کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')}`}</title>
+                <meta name="description" content={`کوییزلند - کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')} `} />
+                <meta name="keywords" content={`بهترین کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')} , کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')}`} />
             </Helmet>
 
             <div className='adverts adverts__left'>

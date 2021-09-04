@@ -145,6 +145,11 @@
                 @include breakpoints-down(medium) {
                     transform: translate(2.15rem);
                 }
+
+                img {
+                    width: 23rem;
+                    height: 16rem;
+                }
     
                 li {
                     font-size: $font-sm - .06;

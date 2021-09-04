@@ -27,7 +27,6 @@ const Result = (props) => {
     let clipboardRef = useRef(null)
 
     // const setBackground = (backgroundUrl) => {
-    //     log(backgroundUrl)
     //     if (backgroundUrl !== undefined) {
     //         document.getElementById('html').style = `
     //             background: url('${backgroundUrl}') center/cover fixed no-repeat !important;

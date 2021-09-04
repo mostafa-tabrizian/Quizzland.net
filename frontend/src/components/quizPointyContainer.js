@@ -20,7 +20,6 @@ const QuizContainer = (props) => {
 
     return (
         props.quizzes.map((quiz) => {
-            log(replaceFunction(quiz.title, ' ', '-'))
             return (
                 <li key={quiz.id}>
                     <article className={`flex tx-al-r ${bgStyle}`}>

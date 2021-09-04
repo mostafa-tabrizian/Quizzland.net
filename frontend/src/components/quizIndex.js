@@ -13,7 +13,6 @@ const QuizIndex = (props) => {
             })
         );
     } catch {
-        log('no QuizIndex')
         return ''
     }
 }

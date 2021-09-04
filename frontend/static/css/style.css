@@ -895,7 +895,7 @@ input {
 }
 
 .header__logo img {
-  width: auto;
+  width: 1.7rem;
   height: 2.4rem;
 }
 
@@ -1327,6 +1327,11 @@ input {
     -webkit-transform: translate(2.15rem);
             transform: translate(2.15rem);
   }
+}
+
+.header__search__result__quizzes ul img {
+  width: 23rem;
+  height: 16rem;
 }
 
 .header__search__result__quizzes ul li {
@@ -2557,7 +2562,7 @@ body {
   }
 }
 
-.quizContainer span {
+.quizContainer__title {
   padding-right: .5rem;
   overflow-wrap: break-word;
   text-align: justify;
@@ -2571,7 +2576,7 @@ body {
 }
 
 @media (max-width: 49.9375em) {
-  .quizContainer span {
+  .quizContainer__title {
     font-size: .9rem;
     width: 10rem;
   }

@@ -103,9 +103,9 @@ const Category = (props) => {
             <Header />
 
             <Helmet>
-                <title>{`کوییزلند | ${currentCategory} کوییز های `}</title>
-                <meta name="description" content={`کوییزلند ${currentCategory} کوییز های`} />
-                <meta name="keywords" content={`${currentCategory} بهترین کوییز های , ${currentCategory} کوییز های`} />
+                <title>{`کوییزلند | کوییز های ${currentCategory} `}</title>
+                <meta name="description" content={`کوییزلند کوییز های ${currentCategory}`} />
+                <meta name="keywords" content={`بهترین کوییز های ${currentCategory} ,کوییز های ${currentCategory}`} />
             </Helmet>
 
             <div className='adverts adverts__left'>

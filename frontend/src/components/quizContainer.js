@@ -28,7 +28,9 @@ const QuizContainer = (props) => {
                                 <img src={`${quiz.thumbnail}`} alt={`${quiz.subCategory}} | ${quiz.title}`} loading='lazy' />
                             </div>
                             {/* <div className="quizContainer__views">{viewsFormat(quiz.views)}</div> */}
-                            <div className="quizContainer__date tx-al-c">{datePublishHandler(quiz.publish)}</div>
+                            <span className="quizContainer__date tx-al-c">
+                                {datePublishHandler(quiz.publish)}
+                            </span>
                             <span className="quizContainer__title quizContainer__title__noViews flex">
                                 { quiz.title }
                             </span>
