@@ -7,7 +7,7 @@ import {StickyShareButtons} from 'sharethis-reactjs';
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-import { log, replaceFunction, fadeIn, fadeOut } from './base'
+import { log, replaceFunction } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
@@ -127,10 +127,10 @@ const Quiz = (props) => {
     const ImGifTextAnswerShowOrHide = (questionId, hideOrShow) => {
         const question = document.querySelectorAll('.quiz__container')[questionId - 1]
         if (hideOrShow == 'block') {
-            fadeIn(question.querySelector('.quiz__answerText'))
+            question.querySelector('.quiz__answerText').classList.add('answerShow')
         }
         else if (hideOrShow == 'none') {
-            fadeOut(question.querySelector('.quiz__answerText'))
+            question.querySelector('.quiz__answerText').classList.add('answerHide')
         }
     }
 

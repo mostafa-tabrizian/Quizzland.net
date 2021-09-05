@@ -3,6 +3,8 @@
     font-family: $font-pr;
     margin-bottom: 2rem;
     padding: 1rem;
+    z-index: 99;
+    position: relative;
 
     &__logo {
         z-index: 1;
@@ -15,7 +17,7 @@
         }
 
         img {
-            width: 1.7rem;
+            width: 1.6rem;
             height: 2.4rem;
         }
     }

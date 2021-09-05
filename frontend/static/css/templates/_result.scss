@@ -86,6 +86,65 @@
             margin-right: 1rem;
         }
     }
+
+    &__popUpQuizSuggester {
+        pointer-events: all;
+        left: calc(50% - 2rem); top: 50%;
+        background: #8b0000f2;
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        height: 30rem; min-width: 45rem;
+        /* max-width: 18rem; */
+        margin-left: 2rem; margin-right: 2rem;
+        border-radius: 15px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        direction: rtl;
+
+        &__headline {
+            font-size: 1.125rem;
+            color: #ffb3b3;
+        }
+
+        &__thumbnail {
+            width: 20rem;
+            height: 26rem;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 10px black;
+
+            img {
+                width: 47rem;
+                /* position: relative; */
+                right: 50%;
+                transform: translate(50%);
+                position: relative;
+                transition: width .3s ease-in-out;
+
+                &:hover {
+                    width: 48.5rem;
+                }
+            }
+        }
+
+        &__title {
+            width: 19rem;
+            font-size: 1.5rem;
+
+            &:hover {
+                color: #c7c7c7;
+            }
+        }
+
+        &__closeBtn {
+            top: -1.4rem; right: -0.7rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: cursive, 'myHarmattan';
+        }
+    }
 }
 
 .tryAgain {

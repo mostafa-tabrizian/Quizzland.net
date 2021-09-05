@@ -197,18 +197,48 @@ input {
       }
 }
 
+.popUp {
+    &-show {
+        transform: translate(-50%, -50%);
+        visibility: visible !important;
+        opacity: 1 !important;
+        transition: all .53s ease-in-out !important; 
+    }
+
+    &-hide {
+        transform: translate(-50%, -45%);
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transition: all .53s ease-in-out !important;
+    }
+}
+
 .fade {
     &Out {
-        height: 0;
         visibility: hidden !important;
         opacity: 0 !important;
         transition: all .53s ease-in-out !important;
     }
     &In {
-        height: 100%;
         visibility: visible !important;
         opacity: 1 !important;
         transition: all .53s ease-in-out !important;  
+    }
+}
+
+.answer {
+    &Show {
+        visibility: visible !important;
+        opacity: 1 !important;
+        transition: all .53s ease-in-out !important;
+        height: 100%;
+    }
+
+    &Hide {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transition: all .53s ease-in-out !important;
+        height: 0;
     }
 }
 

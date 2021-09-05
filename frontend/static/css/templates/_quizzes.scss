@@ -85,11 +85,12 @@ body {
     }
 
     &__container {
+        z-index: -1;
         max-width: 21rem;
         margin: auto 1.25rem; margin-top: 5rem;
         padding: 0.1rem;
         border-radius: 24px;
-        transition: all 1.3s;
+        transition: all 1.3s ease-in-out;
 
         @include breakpoints-up(medium) {
             max-width: 32rem;

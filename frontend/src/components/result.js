@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Helmet } from "react-helmet";
 import {InlineReactionButtons} from 'sharethis-reactjs';
 
-import { log, replaceFunction } from './base'
+import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from './base'
 import BackBtn from './backBtn'
 import LoadingScreen from './loadingScreen'
 import Header from './hotHeader'
@@ -23,9 +23,11 @@ const Result = (props) => {
         calculateTheResultScore()
         setLoadState(true)
         getSuggestionsQuiz()
+
         if (document.getElementById('html')) {
             document.getElementById('html').style=`background: None`
         }
+        showPopUpSuggestion()
     }, [])
 
     useEffect(() => {
@@ -95,6 +97,49 @@ const Result = (props) => {
     const getSuggestionsQuiz = () => {
         axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(props.location.state.quiz.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
+    }
+
+    const showPopUpSuggestion = () => {
+        setTimeout(() => {
+            popUpShow(document.querySelector('.result__popUpQuizSuggester'))
+
+            document.querySelector('body').style.overflow = 'hidden'
+            document.querySelector('#quizRoot').style.pointerEvents = 'none'
+            document.querySelector('#quizRoot').style.overflow = 'none'
+            document.querySelector('.header').style.filter = 'blur(7px)'
+            document.querySelector('.result__container').style.filter = 'blur(7px)'
+            document.querySelector('h2').style.filter = 'blur(7px)'
+            document.querySelector('.quizContainer').style.filter = 'blur(7px)'
+
+            setTimeout(() => {
+                fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
+            }, 2000)
+        }, 5000)
+    }
+
+    const closePopUpQuizSuggester = () => {
+        popUpHide(document.querySelector('.result__popUpQuizSuggester'))
+
+        document.querySelector('body').style.overflow = 'auto'
+        document.querySelector('#quizRoot').style.pointerEvents = 'all'
+        document.querySelector('.header').style.filter = 'blur(0)'
+        document.querySelector('.result__container').style.filter = 'blur(0)'
+        document.querySelector('h2').style.filter = 'blur(0)'
+        document.querySelector('.quizContainer').style.filter = 'blur(0)'
+    }
+
+    const chooseUniqueQuizToSuggest = () => {
+        if (suggestionQuizzes[0].title === state.quiz.title) {
+            if (suggestionQuizzes[1]) {
+                return suggestionQuizzes[1]
+            }
+            else {
+                return suggestionQuizzes[0]
+            }
+        }
+        else {
+            return suggestionQuizzes[0]
+        }
     }
 
     return (
@@ -173,6 +218,29 @@ const Result = (props) => {
                     suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 }
             </ul>
+
+            {
+                suggestionQuizzes &&
+                <div className='result__popUpQuizSuggester pos-fix popUp-hide'>
+                    <button className='result__popUpQuizSuggester__closeBtn fadeOut pos-abs' onClick={() => {
+                        closePopUpQuizSuggester();
+                    }}> X </button>
+
+                    <div>
+                        <h3 className='result__popUpQuizSuggester__headline'>پیشنهاد برای کوییز بعدیت :</h3>
+                        <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
+                            <h3 className="result__popUpQuizSuggester__title flex">
+                                {chooseUniqueQuizToSuggest().title}
+                            </h3>
+                        </a>
+                    </div>
+                    <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
+                        <div className='result__popUpQuizSuggester__thumbnail'>
+                            <img src={chooseUniqueQuizToSuggest().thumbnail} alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`} loading='lazy' />
+                        </div>
+                    </a>
+                </div>
+            }
 
             <BackBtn />
             
