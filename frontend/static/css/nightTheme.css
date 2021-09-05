@@ -302,10 +302,6 @@ body::-webkit-scrollbar-thumb {
   content: '◽';
 }
 
-.sort__more {
-  background: url("/static/img/arw-submit.svg") no-repeat;
-}
-
 .newsletter__submit {
   color: white !important;
 }

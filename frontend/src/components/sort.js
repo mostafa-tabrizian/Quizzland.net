@@ -117,8 +117,8 @@ const Sort = () => {
 
             <Helmet>
                 <title>{`${sortTitle} | کوییزلند`}</title>
-                <meta name="description" content="کوییز های مرتب شده کوییزلند" />
-                <meta name="keywords" content="کوییز, کوییزلند" />
+                <meta name="description" content="بهترین و جدید ترین کوییز و تست های کوییزلند" />
+                <meta name="keywords" content="کوییز, بهترین کوییز ها, جدیدترین کوییز ها, بهترین تست ها, جدیدترین تست ها, کوییزلند" />
             </Helmet>
 
             <div className='adverts adverts__left'>

@@ -931,7 +931,7 @@ input {
 }
 
 .header__logo img {
-  width: 1.6rem;
+  width: 1.67rem;
   height: 2.4rem;
 }
 
@@ -1592,9 +1592,10 @@ input {
 
 .hero__start h2 {
   font-size: 1.6rem;
-  font-family: myHarmattan;
-  font-weight: 600;
+  font-family: lalezar, harmattan, serif;
+  font-weight: 100;
   letter-spacing: 0;
+  line-height: 3rem;
   max-width: 33rem;
   margin-bottom: 1.5rem;
   margin-left: 1.5rem;
@@ -1687,6 +1688,8 @@ input {
 .category span {
   margin-top: 0;
   display: block;
+  font-family: lalezar, harmattan, sans-serif;
+  font-weight: 100;
 }
 
 .sort {
@@ -1857,12 +1860,6 @@ input {
   opacity: .7;
   bottom: 1rem;
   left: 2rem;
-  background: url("/static/img/arw-submit-black.png") no-repeat;
-  background-size: 2rem;
-  width: 2rem;
-  height: 2rem;
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
 }
 
 .sort__more:hover {

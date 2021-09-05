@@ -178,6 +178,7 @@ const Index = () => {
                 <title>کوییزلند | بهترین و جدیدترین کوییز، تست و تریویا ها</title>
                 <meta name="description" content="سایت کوییزلند وب‌ سایت کوییز و تست برای کتگوری های متنوع همچون سلبریتی , فیلم و سریال,  گیمینگ و تست های روانشناسی معتبر از سایت های رسمی و کوییزهای باحال دیگه" />
                 <meta name="keywords" content="کوییز, سایت بازی کوییز, بازی کوییز, بازی کوییز, کوییزلند, کوییزلند, کوییز, کوییز های فیلم و سریال, کوییز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوییز های گیمینگ, تست های روانشناسی معتبر, کوییز های باحال, کوییز های فان, بهترین وب سایت کوییز, بهترین وب سایت تست، کوییز تیلور سویفت، کوییز فرندز، کوییز مارول" />
+                <link rel='canonical' href='https://quizzland.net/' />
             </Helmet>
 
             <div className="hero flex flex-jc-c flex-ai-c">
@@ -188,7 +189,7 @@ const Index = () => {
                 </div>
                 <div className='hero__start tx-al-r'>
                     <h1>اینجا کوییزلندِ</h1>
-                    <h2>😎 جایی که میتونی خودت رو به عنوان فن واقعی به بقیه ثابت کنی پس اگر آماده ای</h2>
+                    <h2>جایی که میتونی خودت رو به عنوان فن واقعی به بقیه ثابت کنی پس اگر آماده ای 😎 </h2>
                     <button onClick={() => {document.getElementById('category').scrollIntoView()}} className='flex-ai-c btn'><span></span> بزن بریم </button>
                 </div>
             </div>
@@ -215,7 +216,7 @@ const Index = () => {
             <div className="space-med">
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                    <a className="btn" href="sort?q=newest&c=celebrity">...نمایش بیشتر</a>
+                    <a className="btn" href="sort?q=newest&c=celebrity">... نمایش بیشتر </a>
                     <h2>سلبریتی</h2>
                 </div>
 
@@ -239,7 +240,7 @@ const Index = () => {
             <div className="space-med">
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                    <a className="btn" href="sort?q=newest&c=movie-series">...نمایش بیشتر</a>
+                    <a className="btn" href="sort?q=newest&c=movie-series">... نمایش بیشتر </a>
                     <h2>فیلم و سریال</h2>
                 </div>
 
@@ -263,7 +264,7 @@ const Index = () => {
             <div className="space-med">
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                    <a className="btn" href="sort?q=newest&c=psychology">...نمایش بیشتر</a>
+                    <a className="btn" href="sort?q=newest&c=psychology">... نمایش بیشتر </a>
                     <h2>روانشناسی</h2>
                 </div>
 
@@ -308,7 +309,7 @@ const Index = () => {
                                 <QuizIndex quizzes={monthlyBestQuizzes} />
                             </ul>
 
-                            <Link className={`sort__more pos-abs ${contentLoaded ? '' : 'noVis'}`} to="sort?q=monthlyBestest"></Link>
+                            <Link className={`sort__more pos-abs ${contentLoaded ? '' : 'noVis'}`} to="sort?q=monthlyBestest"> ... نمایش بیشتر</Link>
                         </div>
 
                         <div className="sort-views">
@@ -329,7 +330,7 @@ const Index = () => {
                                 <QuizIndex quizzes={bestQuizzes} />
                             </ul>
 
-                            <Link className={`sort__more pos-abs ${contentLoaded ? '' : 'noVis'}`} to="sort?q=bestest"></Link>
+                            <Link className={`sort__more pos-abs ${contentLoaded ? '' : 'noVis'}`} to="sort?q=bestest"> ... نمایش بیشتر</Link>
                         </div>
                     </div>
                 </div>
@@ -341,14 +342,14 @@ const Index = () => {
                             <ul className="sort__style">
                                 <QuizIndex quizzes={monthlyCelebrityBestQuizzes} />
                             </ul>
-                            <Link className="sort__more pos-abs" to="sort?q=monthlyBestest&c=celebrity"></Link>
+                            <Link className="sort__more pos-abs" to="sort?q=monthlyBestest&c=celebrity"> ... نمایش بیشتر</Link>
                         </div>
                         <div className="sort-views">
                             <h2 className="tx-al-c">پر بازدید ترین ها</h2>
                             <ul className="sort__style">
                                 <QuizIndex quizzes={bestCelebrityQuizzes} />
                             </ul>
-                            <Link className="sort__more pos-abs" to="sort?q=bestest&c=celebrity"></Link>
+                            <Link className="sort__more pos-abs" to="sort?q=bestest&c=celebrity"> ... نمایش بیشتر</Link>
                         </div>
                     </div>
                 </div>
@@ -360,14 +361,14 @@ const Index = () => {
                             <ul className="sort__style">
                                 <QuizIndex quizzes={monthlyMovieSeriesBestQuizzes} />
                             </ul>
-                            <Link className="sort__more pos-abs" to="sort?q=monthlyBestest&c=movie-series"></Link>
+                            <Link className="sort__more pos-abs" to="sort?q=monthlyBestest&c=movie-series"> ... نمایش بیشتر</Link>
                         </div>
                         <div className="sort-views">
                             <h2 className="tx-al-c">پر بازدید ترین ها</h2>
                             <ul className="sort__style">
                                 <QuizIndex quizzes={bestMovieSeriesQuizzes} />
                             </ul>
-                            <Link className="sort__more pos-abs" to="sort?q=bestest&c=movie-series"></Link>
+                            <Link className="sort__more pos-abs" to="sort?q=bestest&c=movie-series"> ... نمایش بیشتر</Link>
                         </div>
                     </div>
                 </div>
@@ -379,14 +380,14 @@ const Index = () => {
                             <ul className="sort__style">
                                 <QuizIndex quizzes={monthlyPsychologyBestQuizzes} />
                             </ul>
-                            <Link className="sort__more pos-abs" to="sort?q=monthlyBestest&c=movie-series"></Link>
+                            <Link className="sort__more pos-abs" to="sort?q=monthlyBestest&c=movie-series"> ... نمایش بیشتر</Link>
                         </div>
                         <div className="sort-views">
                             <h2 className="tx-al-c">پر بازدید ترین ها</h2>
                             <ul className="sort__style">
                                 <QuizIndex quizzes={bestPsychologyQuizzes} />
                             </ul>
-                            <Link className="sort__more pos-abs" to="sort?q=bestest&c=psychology"></Link>
+                            <Link className="sort__more pos-abs" to="sort?q=bestest&c=psychology"> ... نمایش بیشتر</Link>
                         </div>
                     </div>
                 </div>

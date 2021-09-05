@@ -59,9 +59,10 @@
 
         h2 {
             font-size: 1.6rem;
-            font-family: myHarmattan;
-            font-weight: 600;
+            font-family: lalezar, harmattan, serif;
+            font-weight: 100;
             letter-spacing: 0;
+            line-height: 3rem;
             max-width:  33rem;
             margin-bottom: 1.5rem; margin-left: 1.5rem;
             text-shadow: 0 0 25px black;
@@ -136,6 +137,8 @@
     span {
         margin-top: 0;
         display: block;
+        font-family: lalezar, harmattan, sans-serif;
+        font-weight: 100;
     }
 }
 
@@ -280,11 +283,6 @@
         font-size: $font-sm;
         opacity: .7;
         bottom: 1rem; left: 2rem;
-        background: url('/static/img/arw-submit-black.png') no-repeat;
-        background-size: 2rem;
-        width: 2rem;
-        height: 2rem;
-        transform: rotate(-90deg);
 
         &:hover {
             opacity: 1;
