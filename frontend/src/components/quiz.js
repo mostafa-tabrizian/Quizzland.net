@@ -120,8 +120,57 @@ const Quiz = (props) => {
         await axios.patch(`/dbAPI/new_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
     }
 
-    const makeDatePublishFormatForDetailInHead = (time) => {
-        return replaceFunction(String(time).slice(0, 10), '-', '/')
+    const makeDatePublishFormatForDetailInHead = (fullDate) => {
+        if (fullDate) {
+            const date = fullDate.slice(0, 10)
+            const time = fullDate.slice(11, 19)
+            const region = fullDate.slice(19, 25)
+
+            const newDate = new Date(`${date} ${time} ${region} UTC`);
+            const persianDate = newDate.toLocaleDateString('fa-IR').split('/')
+            let monthsInPersian
+
+            switch (persianDate[1]) {
+                case '۱':
+                    monthsInPersian = 'فروردين'
+                    break;
+                case '۲':
+                    monthsInPersian = 'ارديبهشت'
+                    break
+                case '۳':
+                    monthsInPersian = 'خرداد'
+                    break
+                case '۴':
+                    monthsInPersian = 'تير'
+                    break
+                case '۵':
+                    monthsInPersian = 'مرداد'
+                    break
+                case '۶':
+                    monthsInPersian = 'شهريور'
+                    break
+                case '۷':
+                    monthsInPersian = 'مهر'
+                    break
+                case '۸':
+                    monthsInPersian = 'آبان'
+                    break
+                case '۹':
+                    monthsInPersian = 'آذر'
+                    break
+                case '۱۰':
+                    monthsInPersian = 'دي'
+                    break
+                case '۱۱':
+                    monthsInPersian = 'بهمن'
+                    break
+                case '۱۲':
+                    monthsInPersian = 'اسفند'
+                    break
+            }
+
+            return `${persianDate[2]} ${monthsInPersian} ${persianDate[0]}`
+        }
     }
 
     const ImGifTextAnswerShowOrHide = (questionId, hideOrShow) => {

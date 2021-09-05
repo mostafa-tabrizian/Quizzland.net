@@ -94,12 +94,18 @@
         backdrop-filter: blur(10px);
         padding: 2rem;
         height: 30rem; min-width: 45rem;
-        /* max-width: 18rem; */
         margin-left: 2rem; margin-right: 2rem;
         border-radius: 15px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         direction: rtl;
+
+        @include breakpoints-down(medium) {
+            grid-template-columns: 1fr;
+            min-width: inherit;
+            width: calc(100% - 1rem);
+            height: 27rem;
+        }
 
         &__headline {
             font-size: 1.125rem;
@@ -113,6 +119,11 @@
             border-radius: 15px;
             box-shadow: 0 0 10px black;
 
+            @include breakpoints-down(medium) {
+                width: 18rem;
+                height: 12rem;
+            }
+
             img {
                 width: 47rem;
                 /* position: relative; */
@@ -120,6 +131,11 @@
                 transform: translate(50%);
                 position: relative;
                 transition: width .3s ease-in-out;
+
+                @include breakpoints-down(medium) {
+                    top: 50%;
+                    transform: translate(50%, -50%);
+                }
 
                 &:hover {
                     width: 48.5rem;
@@ -130,6 +146,11 @@
         &__title {
             width: 19rem;
             font-size: 1.5rem;
+
+            @include breakpoints-down(medium) {
+                font-size: 1.2rem;
+                letter-spacing: 0.3px;
+            }
 
             &:hover {
                 color: #c7c7c7;
@@ -143,6 +164,10 @@
             border: none;
             cursor: pointer;
             font-family: cursive, 'myHarmattan';
+
+            @include breakpoints-down(medium) {
+                right: .5rem;
+            }
         }
     }
 }
