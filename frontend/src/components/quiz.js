@@ -234,13 +234,13 @@ const Quiz = (props) => {
     }
 
     const selectedOption = (props) => {
-        // setTimeout(() => {
-        //     if (document.getElementById('quiz__answerDetail')) {
-        //         document.getElementById('quiz__answerDetail').scrollIntoView(false)
-        //     } else {
-        //         document.getElementById('quiz__answerImGif').scrollIntoView(false)
-        //     }
-        // }, 170)
+        setTimeout(() => {
+            if (document.getElementById('quiz__answerDetail')) {
+                document.getElementById('quiz__answerDetail').scrollIntoView(false)
+            } else {
+                document.getElementById('quiz__answerImGif').scrollIntoView(false)
+            }
+        }, 170)
 
         disableSelectingOption()
         checkTheSelectedOption(props.target)
@@ -361,8 +361,13 @@ const Quiz = (props) => {
             setQuizEnded(true)
             setTimeout(() => {
                 try {
+                    localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
+                    localStorage.setItem('resultQuestions',  JSON.stringify(questions))
+                    localStorage.setItem('resultCorrectAnswersCounter', correctAnswersCounter)
                     result.current.click()
-                } catch{}
+                } catch{
+                    log("Can't show set the result in localStorage!")
+                }
             }, 3500)
         }
     }
@@ -594,7 +599,7 @@ const Quiz = (props) => {
             
             <Link
                 ref={result} className='noVis'
-                to={{ pathname: '/result', state: {quiz: quiz, questions: questions, correctAnswersCounter: correctAnswersCounter} }}
+                to='/result/s'
             ></Link>
 
         </React.Fragment>

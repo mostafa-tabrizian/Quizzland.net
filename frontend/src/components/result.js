@@ -34,11 +34,13 @@ const Result = (props) => {
         detailOfResult()
     }, [score])
 
+    const questions = JSON.parse(localStorage.getItem('resultQuestions'))
+    const correctAnswersCounter = localStorage.getItem('resultCorrectAnswersCounter')
+    const resultQuiz = JSON.parse(localStorage.getItem('resultQuiz'))
     let clipboardRef = useRef(null)
 
     const calculateTheResultScore = () => {
-        const questionsCounter = state.questions.length
-        const correctAnswersCounter = state.correctAnswersCounter
+        const questionsCounter = questions.length
         if (questionsCounter && correctAnswersCounter) {
             const score = ((correctAnswersCounter / questionsCounter) * 100).toFixed(0)
             setScore(score)
@@ -49,27 +51,27 @@ const Result = (props) => {
         if (score > 80){
             setResultScore(`😎 ${score}%`)
             setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
-            setResultGif(<img src={`${state.quiz.GIF100}`} alt={state.quiz.GIF2} />)
+            setResultGif(<img src={`${resultQuiz.GIF100}`} alt={resultQuiz.GIF2} />)
         }
         else if (score > 60){
             setResultScore(`😎 ${score}%`)
-            setResultSubtitle(`😎 ایول\n! تو یک ${state.quiz.fan_name} واقعی هستی `)
-            setResultGif(<img src={`${state.quiz.GIF80}`}  alt={state.quiz.GIF4} />)
+            setResultSubtitle(`😎 ایول\n! تو یک ${resultQuiz.fan_name} واقعی هستی `)
+            setResultGif(<img src={`${resultQuiz.GIF80}`}  alt={resultQuiz.GIF4} />)
         }
         else if (score > 40){
             setResultScore(`🙂 ${score}%`)
             setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
-            setResultGif(<img src={`${state.quiz.GIF60}`}  alt={state.quiz.GIF6} />)
+            setResultGif(<img src={`${resultQuiz.GIF60}`}  alt={resultQuiz.GIF6} />)
         }
         else if (score > 20){
             setResultScore(`😉 ${score}%`)
             setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
-            setResultGif(<img src={`${state.quiz.GIF40}`}  alt={state.quiz.GIF8} />)
+            setResultGif(<img src={`${resultQuiz.GIF40}`}  alt={resultQuiz.GIF8} />)
         }
         else if (score >= 0){
             setResultScore(`😭 ${score}%`)
             setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
-            setResultGif(<img src={`${state.quiz.GIF20}`}  alt={state.quiz.GIF10} />)
+            setResultGif(<img src={`${resultQuiz.GIF20}`}  alt={resultQuiz.GIF10} />)
         }
         else {
             setResultScore(`👀`)
@@ -78,10 +80,10 @@ const Result = (props) => {
     }
 
     const copyResultAndQuizLink = () => {
-        const quizUrl = `${window.location.origin}/quiz/${replaceFunction(state.quiz.title, ' ', '-')}`
+        const quizUrl = `${window.location.origin}/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`
 
         const messageShare =
-            `من تو کوییز ${state.quiz.title} (${resultScore}) درصد درست زدم . تو چقدر میتونی بزنی ؟
+            `من تو کوییز ${resultQuiz.title} (${resultScore}) درصد درست زدم . تو چقدر میتونی بزنی ؟
             \n -----------------------------------------
             \n ${quizUrl}`
 
@@ -95,7 +97,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = () => {
-        axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(props.location.state.quiz.subCategory, ' ', '+')}&limit=4`)
+        axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(resultQuiz.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
@@ -113,7 +115,7 @@ const Result = (props) => {
 
             setTimeout(() => {
                 fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
-            }, 3500)
+            }, 3000)
         }, 10000)
     }
 
@@ -129,7 +131,7 @@ const Result = (props) => {
     }
 
     const chooseUniqueQuizToSuggest = () => {
-        if (suggestionQuizzes[0].title === state.quiz.title) {
+        if (suggestionQuizzes[0].title === resultQuiz.title) {
             if (suggestionQuizzes[1]) {
                 return suggestionQuizzes[1]
             }
@@ -157,7 +159,7 @@ const Result = (props) => {
 
             <div className="result__container">
                 <div className="result__title flex flex-jc-c">
-                    <h5 className="tx-al-r">"نتیجه‌ کوییز  "{state.quiz.title}</h5>
+                    <h5 className="tx-al-r">"نتیجه‌ کوییز  "{resultQuiz.title}</h5>
                 </div>
                 <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
                     <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
@@ -168,8 +170,8 @@ const Result = (props) => {
                     </div>
                     <div className="result__score">{resultScore}</div>
                     <div className="result__detail tx-al-r">
-                        <h5>تعداد پاسخ های درست:‌ <span className="result__detail__correctTime">{state.correctAnswersCounter}</span></h5>
-                        <h5>تعداد پاسخ های غلط: <span className="result__detail__wrongTime">{state.questions.length - state.correctAnswersCounter}</span></h5>
+                        <h5>تعداد پاسخ های درست:‌ <span className="result__detail__correctTime">{correctAnswersCounter}</span></h5>
+                        <h5>تعداد پاسخ های غلط: <span className="result__detail__wrongTime">{questions.length - correctAnswersCounter}</span></h5>
                     </div>
                 </div>
 
@@ -179,8 +181,10 @@ const Result = (props) => {
                         <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
                         {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک کوییز کپی شد</h6> */}
                     </div>
+
+                    <h2 className='flex flex-jc-c flex-ai-c space-med'>این کوییز چطور بود؟</h2>
                     
-                    <div className='space-sm'>
+                    <div>
                         <InlineReactionButtons
                             config={{
                                 alignment: 'center',  // alignment of buttons (left, center, right)
@@ -200,7 +204,7 @@ const Result = (props) => {
                                 spacing: 8,           // the spacing between buttons (INTEGER)
 
                                 // OPTIONAL PARAMETERS
-                                url: `https://quizzland.net/quiz/${replaceFunction(state.quiz.title, ' ', '-')}`, // (defaults to current url)
+                                url: `https://quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`, // (defaults to current url)
                             }}
                         />
                     </div>
