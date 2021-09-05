@@ -426,7 +426,7 @@ input {
   opacity: 1 !important;
   -webkit-transition: all .53s ease-in-out !important;
   transition: all .53s ease-in-out !important;
-  height: 100%;
+  height: auto;
 }
 
 .answerHide {

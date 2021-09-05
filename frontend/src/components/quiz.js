@@ -176,10 +176,18 @@ const Quiz = (props) => {
     const ImGifTextAnswerShowOrHide = (questionId, hideOrShow) => {
         const question = document.querySelectorAll('.quiz__container')[questionId - 1]
         if (hideOrShow == 'block') {
+            question.querySelector('.quiz__answerText').classList.remove('answerHide')
             question.querySelector('.quiz__answerText').classList.add('answerShow')
+
+            question.querySelector('.quiz__answerImGif').classList.remove('answerHide')
+            question.querySelector('.quiz__answerImGif').classList.add('answerShow')
         }
         else if (hideOrShow == 'none') {
+            question.querySelector('.quiz__answerText').classList.remove('answerShow')
             question.querySelector('.quiz__answerText').classList.add('answerHide')
+
+            question.querySelector('.quiz__answerImGif').classList.remove('answerShow')
+            question.querySelector('.quiz__answerImGif').classList.add('answerHide')
         }
     }
 
@@ -305,11 +313,11 @@ const Quiz = (props) => {
                     
                         { questionOptionsCheckBetweenStringOrImg(question) }
                         
-                        <div className={`quiz__answerText fadeOut tx-al-r`}>
+                        <div className={`quiz__answerText answerHide tx-al-r`}>
                             { answerOfQuestionIfExistShow(question) }
                         </div>
     
-                        <div className={`quiz__answerImGif fadeOut`} id='quiz__answerImGif'>
+                        <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
                             { gifAnswerOfQuestionIfExistShow(question) }
                         </div>
                     </div>

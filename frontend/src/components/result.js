@@ -23,11 +23,11 @@ const Result = (props) => {
         calculateTheResultScore()
         setLoadState(true)
         getSuggestionsQuiz()
+        showPopUpSuggestion()
 
         if (document.getElementById('html')) {
             document.getElementById('html').style=`background: None`
         }
-        showPopUpSuggestion()
     }, [])
 
     useEffect(() => {
@@ -113,8 +113,8 @@ const Result = (props) => {
 
             setTimeout(() => {
                 fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
-            }, 2000)
-        }, 5000)
+            }, 3500)
+        }, 10000)
     }
 
     const closePopUpQuizSuggester = () => {

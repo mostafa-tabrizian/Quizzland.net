@@ -231,7 +231,7 @@ input {
         visibility: visible !important;
         opacity: 1 !important;
         transition: all .53s ease-in-out !important;
-        height: 100%;
+        height: auto;
     }
 
     &Hide {
