@@ -7,7 +7,7 @@ import {StickyShareButtons} from 'sharethis-reactjs';
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-import { log, replaceFunction } from './base'
+import { log, replaceFunction, fadeIn, fadeOut } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
@@ -25,7 +25,6 @@ const Quiz = (props) => {
     const [wrongAnswerOption, setWrongAnswerOption] = useState(0)
     // const [scaleAnimation, setScaleAnimation] = useState(false)
     const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
-    const [showImGifTextAnswer, setShowImGifTextAnswer] = useState(false)
     const [showBottomQuestionChanger, setShowBottomQuestionChanger] = useState(false)
     const [ableToSelectOption, setAbleToSelectOption] = useState(true)
     const [quizEnded, setQuizEnded] = useState(false)
@@ -66,9 +65,9 @@ const Quiz = (props) => {
             
         })(window.history);
     }
-    
-    const setBackground = (background) => {
-        document.getElementById('html').style=`background: url('${background}') center/cover no-repeat fixed !important`
+
+    const setBackground = () => {
+        document.getElementById('html').style=`background: url('${quiz.background}') center/cover no-repeat fixed !important`
     }
     
     const grabData = () => {
@@ -84,17 +83,17 @@ const Quiz = (props) => {
         
         grabQuiz().then((quiz) => {
             setQuizThumbnail(quiz.thumbnail)
-            setBackground(quiz.background)
             addView(quiz)
             sendCategoryAsInterest(quiz.subCategory)
+            setBackground()
         })
         
         grabQuestions().then((question) => {
             setQuestions(question.data)
             getSuggestionsQuiz(question.data[0].subCategory)
+            setContentLoaded(true)
         })
         
-        setContentLoaded(true)
     }
     
     const sendCategoryAsInterest = (category) => {
@@ -125,12 +124,22 @@ const Quiz = (props) => {
         return replaceFunction(String(time).slice(0, 10), '-', '/')
     }
 
-    const checkTheSelectedOption = (userSelection) => {
+    const ImGifTextAnswerShowOrHide = (questionId, hideOrShow) => {
+        const question = document.querySelectorAll('.quiz__container')[questionId - 1]
+        if (hideOrShow == 'block') {
+            fadeIn(question.querySelector('.quiz__answerText'))
+        }
+        else if (hideOrShow == 'none') {
+            fadeOut(question.querySelector('.quiz__answerText'))
+        }
+    }
 
+    const checkTheSelectedOption = (userSelection) => {
         let userChose = parseInt(userSelection.id.slice(-1))
         let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
 
         setCorrectAnswerOption(correctAnswer)
+        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
         
         if (userChose !== correctAnswer) {
             setWrongAnswerOption(parseInt(userChose))
@@ -168,18 +177,17 @@ const Quiz = (props) => {
     }
 
     const selectedOption = (props) => {
-        setTimeout(() => {
-            if (document.getElementById('quiz__answerDetail')) {
-                document.getElementById('quiz__answerDetail').scrollIntoView(false)
-            } else {
-                document.getElementById('quiz__answerImGif').scrollIntoView(false)
-            }
-        }, 170)
+        // setTimeout(() => {
+        //     if (document.getElementById('quiz__answerDetail')) {
+        //         document.getElementById('quiz__answerDetail').scrollIntoView(false)
+        //     } else {
+        //         document.getElementById('quiz__answerImGif').scrollIntoView(false)
+        //     }
+        // }, 170)
 
         disableSelectingOption()
         checkTheSelectedOption(props.target)
         // scaleAnimationAfterChoosingAnswer()
-        setShowImGifTextAnswer(true)
         setShowBottomQuestionChanger(true)
         if (autoQuestionChanger) {
             automaticallyGoNextQuestionOrEndTheQuiz()
@@ -248,11 +256,11 @@ const Quiz = (props) => {
                     
                         { questionOptionsCheckBetweenStringOrImg(question) }
                         
-                        <div className={`quiz__answerText tx-al-r ${!showImGifTextAnswer && 'noVis'}`}>
+                        <div className={`quiz__answerText fadeOut tx-al-r`}>
                             { answerOfQuestionIfExistShow(question) }
                         </div>
     
-                        <div className={`quiz__answerImGif ${!showImGifTextAnswer && 'noVis'}`} id='quiz__answerImGif'>
+                        <div className={`quiz__answerImGif fadeOut`} id='quiz__answerImGif'>
                             { gifAnswerOfQuestionIfExistShow(question) }
                         </div>
                     </div>
@@ -266,7 +274,7 @@ const Quiz = (props) => {
     }
 
     const restartTheStateOfQuestion = () => {
-        setShowImGifTextAnswer(false)
+        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
         setShowBottomQuestionChanger(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)

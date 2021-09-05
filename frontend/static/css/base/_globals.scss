@@ -199,11 +199,13 @@ input {
 
 .fade {
     &Out {
+        height: 0;
         visibility: hidden !important;
         opacity: 0 !important;
         transition: all .53s ease-in-out !important;
     }
     &In {
+        height: 100%;
         visibility: visible !important;
         opacity: 1 !important;
         transition: all .53s ease-in-out !important;  

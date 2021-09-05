@@ -61,12 +61,13 @@ const Quiz = (props) => {
     }
     
     const grabData = () => {
+        
         const grabQuiz = async () => {
             const quizDB = await axios.get(`/dbAPI/new_pointy_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
             quiz = quizDB.data.results[0]
             return quiz
         }
-
+        
         const grabQuestions = async () => {
             return await axios.get(`/dbAPI/pointyQuestions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         }
@@ -74,15 +75,14 @@ const Quiz = (props) => {
         grabQuiz().then((quiz) => {
             setQuizThumbnail(quiz.thumbnail)
             addView(quiz)
+            setBackground()
         })
 
         grabQuestions().then((question) => {
             setQuestions(question.data)
             getSuggestionsQuiz(question.data[0].subCategory)
+            setContentLoaded(true)
         })
-
-        setContentLoaded(true)
-        setBackground()
     }
     
     const addView = async (quiz) => {

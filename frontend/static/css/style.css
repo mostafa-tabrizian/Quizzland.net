@@ -390,6 +390,7 @@ input {
 }
 
 .fadeOut {
+  height: 0;
   visibility: hidden !important;
   opacity: 0 !important;
   -webkit-transition: all .53s ease-in-out !important;
@@ -397,6 +398,7 @@ input {
 }
 
 .fadeIn {
+  height: 100%;
   visibility: visible !important;
   opacity: 1 !important;
   -webkit-transition: all .53s ease-in-out !important;
@@ -2320,11 +2322,11 @@ body {
 }
 
 .quiz__correctAnswer {
-  border: 3px solid green !important;
+  border: 1.5px solid green !important;
 }
 
 .quiz__wrongAnswer {
-  border: 3px solid red !important;
+  border: 1.5px solid red !important;
 }
 
 .quiz__tags {
