@@ -66,9 +66,9 @@ const Sort = () => {
             case 'newest':
                 setSortTitle('جدیدترین کوییز ها')
                 if (sortCategory) {
-                    quizzes = await axiosLimited(`/dbAPI/new_quiz/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axiosLimited.get(`/dbAPI/new_quiz/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axiosLimited(`/dbAPI/new_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axiosLimited.get(`/dbAPI/new_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -78,9 +78,9 @@ const Sort = () => {
             case 'bestest':
                 setSortTitle('بهترین کوییز ها')
                 if (sortCategory) {
-                    quizzes = await axiosLimited(`/dbAPI/best_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axiosLimited.get(`/dbAPI/best_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axiosLimited(`/dbAPI/best_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axiosLimited.get(`/dbAPI/best_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -90,9 +90,9 @@ const Sort = () => {
             case 'monthlyBestest':
                 setSortTitle('بهترین کوییز های این ماه')
                 if (sortCategory) {
-                    quizzes = await axiosLimited(`/dbAPI/monthlyBest_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axiosLimited.get(`/dbAPI/monthlyBest_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axiosLimited(`/dbAPI/monthlyBest_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axiosLimited.get(`/dbAPI/monthlyBest_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)

@@ -3,6 +3,9 @@ import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 import Tools from './tools'
 import PageTravel from './pageTravel'
 import { log, replaceFunction, takeParameterFromUrl } from './base'
@@ -22,35 +25,52 @@ const SubCategory = (props) => {
     const [hideQuizzes, setHideQuizzes] = useState(false)
     const [hideQuizzesPointy, setHideQuizzesPointy] = useState(false)
 
-    const subCategory = props.match.params.subCategory
     const [numberOfResult, setNumberOfResult] = useState(16)
-
+    
     const [offsetQuiz, setOffsetQuiz] = useState(0)
     const [offsetQuizPointy, setOffsetQuizPointy] = useState(0)
-
+    
     const [sortType, setSortType] = useState('newest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-
+    
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1000, maxRPS: 2 })
     
+    const subCategory = props.match.params.subCategory
+
     const sortTypeDefinitionForQuizDb = {
         'newest': 'new_quiz',
         'bestest': 'best_quiz',
         'alphabet': 'alphabet_quiz'
     }
-
+    
     const sortTypeDefinitionForPointyQuizDb = {
         'newest': "new_pointy_quiz",
         'bestest': "best_pointy_quiz",
         'alphabet': "alphabet_pointy_quiz"
     };
+
+    useEffect(() => {
+        getQuizzes()
+    }, [sortType, numberOfResult, offsetQuiz, offsetQuizPointy])
+
+    useEffect(() => {
+        backgroundOfSubCategory()
+        setLoadState(true)
+        addView()
+    }, [])
     
+    const addView = async () => {
+        let grabSubCategoryDetail = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=1`)
+        grabSubCategoryDetail = grabSubCategoryDetail.data.results[0]
+        await axiosLimited.patch(`/dbAPI/new_category/${grabSubCategoryDetail.id}/`, {views: grabSubCategoryDetail.views+1, monthly_views:grabSubCategoryDetail.monthly_views+1})
+    }
+
     const getQuizzes = async () => {
-        const Quizzes = await axiosLimited(
+        const Quizzes = await axiosLimited.get(
           `/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
         );
-        const QuizzesPointy = await axiosLimited(
+        const QuizzesPointy = await axiosLimited.get(
           `/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
         );
         
@@ -84,22 +104,12 @@ const SubCategory = (props) => {
     }
 
     const backgroundOfSubCategory = async () => {
-        const new_category = await axiosLimited(`/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
+        const new_category = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
         const background = new_category.data.results[0].background
         document.getElementById('html').style = `
             background: url('${background}') center/cover fixed no-repeat !important;
         `
     }
-
-    useEffect(() => {
-        getQuizzes()
-    }, [sortType, numberOfResult, offsetQuiz, offsetQuizPointy])
-
-    useEffect(() => {
-        backgroundOfSubCategory()
-        setLoadState(true)
-    }, [])
-
 
     return (
         <React.Fragment>

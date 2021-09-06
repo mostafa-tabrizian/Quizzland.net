@@ -75,13 +75,13 @@ const Quiz = (props) => {
     
     const grabData = () => {
         const grabQuiz = async () => {
-            const quizDB = await axiosLimited(`/dbAPI/new_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
+            const quizDB = await axiosLimited.get(`/dbAPI/new_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
             quiz = quizDB.data.results[0]
             return quiz
         }
         
         const grabQuestions = async () => {
-            return await axiosLimited(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
+            return await axiosLimited.get(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         }
         
         grabQuiz().then((quiz) => {
@@ -120,7 +120,7 @@ const Quiz = (props) => {
     }
 
     const addView = async (quiz) => {
-        await axios.patch(`/dbAPI/new_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
+        await axiosLimited.patch(`/dbAPI/new_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
     }
 
     const makeDatePublishFormatForDetailInHead = (fullDate) => {
@@ -405,7 +405,7 @@ const Quiz = (props) => {
     }
 
     const getSuggestionsQuiz = (subCategory) => {
-        axiosLimited(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 

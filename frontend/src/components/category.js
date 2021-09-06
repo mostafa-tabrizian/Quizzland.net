@@ -57,7 +57,7 @@ const Category = (props) => {
             'alphabet': 'alphabet_category'
         }
 
-        const pageTravelAndCategories = await axiosLimited(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryTarget}&limit=${numberOfResult}&offset=${offset}`)
+        const pageTravelAndCategories = await axiosLimited.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryTarget}&limit=${numberOfResult}&offset=${offset}`)
         setPageTravel(pageTravelAndCategories.data)
         setCategories(pageTravelAndCategories.data.results)
         setContentLoaded(true)
