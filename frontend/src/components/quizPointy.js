@@ -383,10 +383,9 @@ const Quiz = (props) => {
                         networks: [           // which networks to include (see SHARING NETWORKS)
                             'whatsapp',
                             'telegram',
-                            'sms',
-                            'gmail',
                             'twitter',
-                            'facebook',
+                            'sms',
+                            'sharethis',
                         ],
                         padding: 12,          // padding within buttons (INTEGER)
                         radius: 15,            // the corner radius on each button (INTEGER)

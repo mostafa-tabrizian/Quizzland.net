@@ -182,6 +182,24 @@ const Index = () => {
                 <meta name="description" content="سایت کوییزلند وب‌ سایت کوییز و تست برای کتگوری های متنوع همچون سلبریتی , فیلم و سریال,  گیمینگ و تست های روانشناسی معتبر از سایت های رسمی و کوییزهای باحال دیگه" />
                 <meta name="keywords" content="کوییز, سایت بازی کوییز, بازی کوییز, بازی کوییز, کوییزلند, کوییزلند, کوییز, کوییز های فیلم و سریال, کوییز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوییز های گیمینگ, تست های روانشناسی معتبر, کوییز های باحال, کوییز های فان, بهترین وب سایت کوییز, بهترین وب سایت تست، کوییز تیلور سویفت، کوییز فرندز، کوییز مارول" />
                 <link rel='canonical' href='https://quizzland.net/' />
+
+                <script type='application/ld+json'>
+                {`
+                    <script type="application/ld+json">
+                        {
+                            "@context": "https://schema.org/",
+                            "@type": "WebSite",
+                            "name": "کوییزلند",
+                            "url": "https://quizzland.net",
+                            "potentialAction": {
+                                "@type": "SearchAction",
+                                "target": "https://quizzland.net/search?s={search_term_string}",
+                                "query-input": "required name=search_term_string"
+                            }
+                        }
+                    </script>
+                `}
+                </script>
             </Helmet>
 
             <div className="hero flex flex-jc-c flex-ai-c">

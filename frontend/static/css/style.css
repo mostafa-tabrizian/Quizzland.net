@@ -160,6 +160,7 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   overflow-y: overlay;
+  scroll-behavior: smooth;
 }
 
 body::-webkit-scrollbar {

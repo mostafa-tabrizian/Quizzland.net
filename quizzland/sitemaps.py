@@ -6,7 +6,7 @@ def titleConverterWithSpilt(title, oldValue, newValue):
     return updatedTitle
 
 class QuizSitemap(Sitemap):
-    changefreq = "monthly"
+    changefreq = "yearly"
     priority = 1
     protocol = 'https'
 
@@ -21,7 +21,7 @@ class QuizSitemap(Sitemap):
         return f'/quiz/{title}'
 
 class SubCategorySitemap(Sitemap):
-    changefreq = "monthly"
+    changefreq = "daily"
     priority = 0.9
     protocol = 'https'
 
@@ -42,7 +42,7 @@ categoryTitle = {
 }
 
 class CategorySitemap(Sitemap):
-    changefreq = "monthly"
+    changefreq = "weekly"
     priority = 0.9
     protocol = 'https'
 

@@ -40,6 +40,7 @@ body {
     position: relative;
     max-width: 100%;
     overflow-x: hidden; overflow-y: overlay;
+    scroll-behavior: smooth;
     
     &::-webkit-scrollbar {
         width: .625rem;
