@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
 import {InlineReactionButtons} from 'sharethis-reactjs';
+import rateLimit from 'axios-rate-limit';
 
 import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from './base'
 import BackBtn from './backBtn'
@@ -33,6 +34,8 @@ const Result = (props) => {
     useEffect(() => {
         detailOfResult()
     }, [score])
+
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1000, maxRPS: 2 })
 
     const questions = JSON.parse(localStorage.getItem('resultQuestions'))
     const correctAnswersCounter = localStorage.getItem('resultCorrectAnswersCounter')
@@ -97,7 +100,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = () => {
-        axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(resultQuiz.subCategory, ' ', '+')}&limit=4`)
+        axiosLimited(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(resultQuiz.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 

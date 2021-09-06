@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
+import rateLimit from 'axios-rate-limit';
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
@@ -25,6 +26,8 @@ const Category = (props) => {
         'psychology': 'روانشناسی'
     }
     const currentCategory = categoryDefinitionInFarsi[categoryTarget]
+
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1000, maxRPS: 2 })
 
     useEffect(() => {
         searchChangeDetector()
@@ -54,7 +57,7 @@ const Category = (props) => {
             'alphabet': 'alphabet_category'
         }
 
-        const pageTravelAndCategories = await axios.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryTarget}&limit=${numberOfResult}&offset=${offset}`)
+        const pageTravelAndCategories = await axiosLimited(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryTarget}&limit=${numberOfResult}&offset=${offset}`)
         setPageTravel(pageTravelAndCategories.data)
         setCategories(pageTravelAndCategories.data.results)
         setContentLoaded(true)

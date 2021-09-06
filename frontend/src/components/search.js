@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import rateLimit from 'axios-rate-limit';
 
 import { log, replaceFunction } from './base'
 
@@ -19,6 +20,8 @@ const Search = (props) => {
     const [noQuizFoundState, setNoQuizFoundState] = useState(true)
 
     const searchSubmit = useRef()
+
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 2 })
 
     const searchMobileFocusChangedHideOrShow = () => {
         setSearchMobile(searchMobile ? false : true)
@@ -40,30 +43,30 @@ const Search = (props) => {
                 let matchedCategories = []
     
                 // Search Quiz
-                const search_new_quiz_title = await axios.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=6`)
+                const search_new_quiz_title = await axiosLimited(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=6`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
     
-                const search_new_quiz_subCategory = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=6`)
+                const search_new_quiz_subCategory = await axiosLimited(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=6`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
     
-                const search_new_quiz_tag = await axios.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=6`)
+                const search_new_quiz_tag = await axiosLimited(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=6`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
 
                 // Search Pointy Quiz
-                const search_new_pointy_quiz_title = await axios.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=6`)
+                const search_new_pointy_quiz_title = await axiosLimited(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=6`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_title.data.results)
     
-                const search_new_pointy_quiz_subCategory = await axios.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=6`)
+                const search_new_pointy_quiz_subCategory = await axiosLimited(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=6`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_subCategory.data.results)
     
-                const search_new_pointy_quiz_tag = await axios.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=6`)
+                const search_new_pointy_quiz_tag = await axiosLimited(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=6`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_tag.data.results)
     
                 // Search Category
-                const search_new_category_title = await axios.get(`/dbAPI/new_category/?title__icontains=${searchValue}&limit=1`)
+                const search_new_category_title = await axiosLimited(`/dbAPI/new_category/?title__icontains=${searchValue}&limit=1`)
                 Array.prototype.push.apply(matchedCategories, search_new_category_title.data.results)
     
-                const search_new_category_subCategory = await axios.get(`/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
+                const search_new_category_subCategory = await axiosLimited(`/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
                 Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
     
                 // Remove duplicated quizzes

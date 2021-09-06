@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
 
 import Tools from './tools'
@@ -30,6 +31,8 @@ const SubCategory = (props) => {
     const [sortType, setSortType] = useState('newest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
+
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1000, maxRPS: 2 })
     
     const sortTypeDefinitionForQuizDb = {
         'newest': 'new_quiz',
@@ -44,10 +47,10 @@ const SubCategory = (props) => {
     };
     
     const getQuizzes = async () => {
-        const Quizzes = await axios.get(
+        const Quizzes = await axiosLimited(
           `/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
         );
-        const QuizzesPointy = await axios.get(
+        const QuizzesPointy = await axiosLimited(
           `/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
         );
         
@@ -81,7 +84,7 @@ const SubCategory = (props) => {
     }
 
     const backgroundOfSubCategory = async () => {
-        const new_category = await axios.get(`/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
+        const new_category = await axiosLimited(`/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
         const background = new_category.data.results[0].background
         document.getElementById('html').style = `
             background: url('${background}') center/cover fixed no-repeat !important;

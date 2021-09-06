@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
 import Header from './header'
 
@@ -18,6 +19,8 @@ const QBubbles = '/static/img/QBubbles.png'
 const category_celebrity = '/static/img/category-celebrity.jpg'
 const category_movieSeries = '/static/img/category-movieSeries.jpg'
 const category_psychology = '/static/img/category-psychology.jpg'
+
+const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 2 })
 
 const Index = () => {
     const [recommendedQuizzes, setRecommendedQuizzes] = useState([])
@@ -75,13 +78,13 @@ const Index = () => {
     
             let matchedQuizzes = []
     
-            const search_top_1st_category = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${top1stUserCategory}&limit=4`)
+            const search_top_1st_category = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${top1stUserCategory}&limit=4`)
             Array.prototype.push.apply(matchedQuizzes, search_top_1st_category.data.results)
             
-            const search_top_2nd_category = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${top2ndUserCategory}&limit=2`)
+            const search_top_2nd_category = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${top2ndUserCategory}&limit=2`)
             Array.prototype.push.apply(matchedQuizzes, search_top_2nd_category.data.results)
             
-            const search_top_3rd_category = await axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${top3rdUserCategory}&limit=2`)
+            const search_top_3rd_category = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${top3rdUserCategory}&limit=2`)
             Array.prototype.push.apply(matchedQuizzes, search_top_3rd_category.data.results)
     
             const recommendedQuizzesList = () => {
@@ -111,41 +114,41 @@ const Index = () => {
 
     const grabData = async () => {
 
-        const new_quiz_celebrity = await axios.get('/dbAPI/new_quiz/?category__icontains=celebrity&limit=8')
+        const new_quiz_celebrity = await axiosLimited.get('/dbAPI/new_quiz/?category__icontains=celebrity&limit=8')
         setNewestCelebrityQuizzes(new_quiz_celebrity.data.results)
 
-        const new_quiz_movieSeries = await axios.get('/dbAPI/new_quiz/?category__icontains=movie-series&limit=8')
+        const new_quiz_movieSeries = await axiosLimited.get('/dbAPI/new_quiz/?category__icontains=movie-series&limit=8')
         setNewestMovieSeriesQuizzes(new_quiz_movieSeries.data.results)
 
-        const new_quiz_psychology = await axios.get('/dbAPI/new_pointy_quiz/?category__icontains=psychology&limit=8')
+        const new_quiz_psychology = await axiosLimited.get('/dbAPI/new_pointy_quiz/?category__icontains=psychology&limit=8')
         setNewestPsychologyPointyQuizzes(new_quiz_psychology.data.results)
 
         // ---------
 
-        const monthlyBest_quiz = await axios.get('/dbAPI/monthlyBest_quiz/?limit=5')
+        const monthlyBest_quiz = await axiosLimited.get('/dbAPI/monthlyBest_quiz/?limit=5')
         setMonthlyBestQuizzes(monthlyBest_quiz.data.results)
 
-        const monthlyBest_quiz_celebrity = await axios.get('/dbAPI/monthlyBest_quiz/?category__icontains=celebrity&limit=13')
+        const monthlyBest_quiz_celebrity = await axiosLimited.get('/dbAPI/monthlyBest_quiz/?category__icontains=celebrity&limit=13')
         setMonthlyCelebrityBestQuizzes(monthlyBest_quiz_celebrity.data.results)
 
-        const monthlyBest_quiz_movieSeries = await axios.get('/dbAPI/monthlyBest_quiz/?category__icontains=movie-series&limit=13')
+        const monthlyBest_quiz_movieSeries = await axiosLimited.get('/dbAPI/monthlyBest_quiz/?category__icontains=movie-series&limit=13')
         setMonthlyMovieSeriesBestQuizzes(monthlyBest_quiz_movieSeries.data.results)
 
-        const monthlyBest_pointy_quiz_psychology = await axios.get('/dbAPI/monthlyBest_pointy_quiz/?category__icontains=psychology&limit=13')
+        const monthlyBest_pointy_quiz_psychology = await axiosLimited.get('/dbAPI/monthlyBest_pointy_quiz/?category__icontains=psychology&limit=13')
         setMonthlyPsychologyBestQuizzes(monthlyBest_pointy_quiz_psychology.data.results)
 
         // ---------
         
-        const best_quiz = await axios.get('/dbAPI/best_quiz/?limit=5')
+        const best_quiz = await axiosLimited.get('/dbAPI/best_quiz/?limit=5')
         setBestQuizzes(best_quiz.data.results)
 
-        const best_quiz_celebrity = await axios.get('/dbAPI/best_quiz/?category__icontains=celebrity&limit=13')
+        const best_quiz_celebrity = await axiosLimited.get('/dbAPI/best_quiz/?category__icontains=celebrity&limit=13')
         setBestCelebrityQuizzes(best_quiz_celebrity.data.results)
 
-        const best_quiz_movieSeries = await axios.get('/dbAPI/best_quiz/?category__icontains=movie-series&limit=13')
+        const best_quiz_movieSeries = await axiosLimited.get('/dbAPI/best_quiz/?category__icontains=movie-series&limit=13')
         setBestMovieSeriesQuizzes(best_quiz_movieSeries.data.results)
 
-        const best_pointy_quiz_psychology = await axios.get('/dbAPI/best_pointy_quiz/?category__icontains=psychology&limit=13')
+        const best_pointy_quiz_psychology = await axiosLimited.get('/dbAPI/best_pointy_quiz/?category__icontains=psychology&limit=13')
         setBestPsychologyQuizzes(best_pointy_quiz_psychology.data.results) 
     }
 

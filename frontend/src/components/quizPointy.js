@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
+import rateLimit from 'axios-rate-limit';
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -28,7 +29,7 @@ const Quiz = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [quizThumbnail, setQuizThumbnail] = useState()
-    const [quizUrl, setQuizUrl] = useState(window.document.URL)
+    const [showQuestionChangerToNext, setShowQuestionChangerToNext] = useState(false)
 
     const result = useRef(null)
 
@@ -42,6 +43,8 @@ const Quiz = (props) => {
     useEffect(() => {
         quizChangeDetector()
     })
+
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 3, perMilliseconds: 1000, maxRPS: 2 })
 
     const quizChangeDetector = () => {
         (function(history){
@@ -63,13 +66,13 @@ const Quiz = (props) => {
     const grabData = () => {
         
         const grabQuiz = async () => {
-            const quizDB = await axios.get(`/dbAPI/new_pointy_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
+            const quizDB = await axiosLimited(`/dbAPI/new_pointy_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
             quiz = quizDB.data.results[0]
             return quiz
         }
         
         const grabQuestions = async () => {
-            return await axios.get(`/dbAPI/pointyQuestions/?title__iexact=${quizTitleReplacedWithHyphen}`)
+            return await axiosLimited(`/dbAPI/pointyQuestions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         }
         
         grabQuiz().then((quiz) => {
@@ -89,8 +92,57 @@ const Quiz = (props) => {
         await axios.patch(`/dbAPI/new_pointy_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
     }
 
-    const makeDatePublishFormatForDetailInHead = (time) => {
-        return replaceFunction(String(time).slice(0, 10), '-', '/')
+    const makeDatePublishFormatForDetailInHead = (fullDate) => {
+        if (fullDate) {
+            const date = fullDate.slice(0, 10)
+            const time = fullDate.slice(11, 19)
+            const region = fullDate.slice(19, 25)
+
+            const newDate = new Date(`${date} ${time} ${region} UTC`);
+            const persianDate = newDate.toLocaleDateString('fa-IR').split('/')
+            let monthsInPersian
+
+            switch (persianDate[1]) {
+                case '۱':
+                    monthsInPersian = 'فروردين'
+                    break;
+                case '۲':
+                    monthsInPersian = 'ارديبهشت'
+                    break
+                case '۳':
+                    monthsInPersian = 'خرداد'
+                    break
+                case '۴':
+                    monthsInPersian = 'تير'
+                    break
+                case '۵':
+                    monthsInPersian = 'مرداد'
+                    break
+                case '۶':
+                    monthsInPersian = 'شهريور'
+                    break
+                case '۷':
+                    monthsInPersian = 'مهر'
+                    break
+                case '۸':
+                    monthsInPersian = 'آبان'
+                    break
+                case '۹':
+                    monthsInPersian = 'آذر'
+                    break
+                case '۱۰':
+                    monthsInPersian = 'دي'
+                    break
+                case '۱۱':
+                    monthsInPersian = 'بهمن'
+                    break
+                case '۱۲':
+                    monthsInPersian = 'اسفند'
+                    break
+            }
+
+            return `${persianDate[2]} ${monthsInPersian} ${persianDate[0]}`
+        }
     }
 
     const selectedOption = (props) => {
@@ -98,13 +150,14 @@ const Quiz = (props) => {
 
         if (autoQuestionChanger) {
             automaticallyGoNextQuestionOrEndTheQuiz()
+        } else {
+            setShowQuestionChangerToNext(true)
         }
     }
 
     const takeSelectedOptionValue = (userSelection) => {
         let userChose = userSelection.id
         const questionNumber = parseInt(userChose.slice(0, 1))
-        const optionsSelectedNumber = parseInt(userChose.slice(2, 3)) - 1
 
         document.getElementById(`inputLabel ${questionNumber}-1`).style.borderColor = '#f0f0f0'
         document.getElementById(`inputLabel ${questionNumber}-2`).style.borderColor = '#f0f0f0'
@@ -121,7 +174,7 @@ const Quiz = (props) => {
     const automaticallyGoNextQuestionOrEndTheQuiz = () => {
         setTimeout(() => {
             goNextQuestionOrEndTheQuiz()
-        }, 3500);
+        }, 1500);
     }
 
 
@@ -185,10 +238,10 @@ const Quiz = (props) => {
     
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
     if (window.navigator.userAgent.includes('Windows') || window.navigator.userAgent.includes('iPad')) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 48
     } 
     else if (window.navigator.userAgent.includes('Mobile')) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 25.83
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 23.5
     }
 
     const calculateThePoints = () => {
@@ -211,6 +264,7 @@ const Quiz = (props) => {
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
+        setShowQuestionChangerToNext(false)
         if (currentQuestionNumber !== questions.length) {
             plusOneToTotalAnsweredQuestions()
             setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
@@ -242,7 +296,7 @@ const Quiz = (props) => {
             return (    
                 splittedTags.map(tag => {
                     tag = replaceFunction(tag, '-', ' ')
-                    return <li><h2><Link to={`/search?s=${tag}`} >{tag}</Link></h2></li>
+                    return <li><h2><Link rel='tag' to={`/search?s=${tag}`} >{tag}</Link></h2></li>
                 })
             )
         }
@@ -253,7 +307,7 @@ const Quiz = (props) => {
     }
 
     const getSuggestionsQuiz = (subCategory) => {
-        axios.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        axiosLimited(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
         .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
@@ -388,7 +442,7 @@ const Quiz = (props) => {
 
                 { !(isItDesktop()) &&
                     <div className={` quiz__questionChanger__container pos-rel center ${!(contentLoaded) && 'noVis'} `}>
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
+                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${showQuestionChangerToNext ? 'fadeIn' : 'fadeOut'}`} aria-label='Next Question'></button>
                         <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
                     </div>
                 }
@@ -411,8 +465,8 @@ const Quiz = (props) => {
                     
                     { isItDesktop() &&
                         <div className={`quiz__questionChanger__container pos-abs ${!(contentLoaded) && 'noVis'} `}>
-                            <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
-                            <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
+                            <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${showQuestionChangerToNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
+                            <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn`} aria-label='Next Question'></button>
                         </div>
                     }
                 </div>

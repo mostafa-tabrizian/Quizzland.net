@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
+import rateLimit from 'axios-rate-limit';
 
 import { log, replaceFunction } from './base'
 import BackBtn from './backBtn'
@@ -23,6 +24,8 @@ const Result = (props) => {
         detailOfResult()
         // setBackground()
     }, [])
+
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1000, maxRPS: 2 })
 
     let clipboardRef = useRef(null)
 
@@ -101,7 +104,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = () => {
-        axios.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(props.location.state.quiz.subCategory, ' ', '+')}&limit=4`)
+        axiosLimited(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(props.location.state.quiz.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 

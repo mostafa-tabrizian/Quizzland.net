@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
+import rateLimit from 'axios-rate-limit';
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -52,6 +53,8 @@ const Quiz = (props) => {
     useEffect(() => {
         quizChangeDetector()
     })
+
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 3, perMilliseconds: 1000, maxRPS: 2 })
     
     const quizChangeDetector = () => {
         (function(history){
@@ -72,13 +75,13 @@ const Quiz = (props) => {
     
     const grabData = () => {
         const grabQuiz = async () => {
-            const quizDB = await axios.get(`/dbAPI/new_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
+            const quizDB = await axiosLimited(`/dbAPI/new_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
             quiz = quizDB.data.results[0]
             return quiz
         }
         
         const grabQuestions = async () => {
-            return await axios.get(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
+            return await axiosLimited(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
         }
         
         grabQuiz().then((quiz) => {
@@ -391,7 +394,7 @@ const Quiz = (props) => {
             return (    
                 splittedTags.map(tag => {
                     tag = replaceFunction(tag, '-', ' ')
-                    return <li><h2><Link to={`/search?s=${tag}`} >{tag}</Link></h2></li>
+                    return <li><h2><Link rel='tag' to={`/search?s=${tag}`}>{tag}</Link></h2></li>
                 })
             )
         }
@@ -402,7 +405,7 @@ const Quiz = (props) => {
     }
 
     const getSuggestionsQuiz = (subCategory) => {
-        axios.get(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        axiosLimited(`/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
