@@ -33,10 +33,9 @@ const Quiz = (props) => {
     const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
-    const [SFXAllowed, setSFXAllowed] = useState(true)
     const [quizThumbnail, setQuizThumbnail] = useState()
-    const [quizUrl, setQuizUrl] = useState(window.document.URL)
     const [ableToGoNext, setAbleToGoNext] = useState(false)
+    const [SFXAllowed, setSFXAllowed] = useState()
 
     const result = useRef(null)
 
@@ -49,14 +48,24 @@ const Quiz = (props) => {
     useEffect(() => {
         grabData()
         setLoadState(true)
+        SFXLocalStorage()
     }, [])
-
+    
     useEffect(() => {
         quizChangeDetector()
     })
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
     
+    const SFXLocalStorage = () => {
+        if (localStorage.getItem('SFXAllowed')) {
+            setSFXAllowed(localStorage.getItem('SFXAllowed'))
+        } else {
+            localStorage.setItem('SFXAllowed', 'true')
+            setSFXAllowed('true')
+        }
+    }
+
     const quizChangeDetector = () => {
         (function(history){
             
@@ -202,15 +211,16 @@ const Quiz = (props) => {
         setCorrectAnswerOption(correctAnswer)
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
         
+        const SFXAllowed = localStorage.getItem('SFXAllowed')
         if (userChose !== correctAnswer) {
             setWrongAnswerOption(parseInt(userChose))
-            if (SFXAllowed) {
+            if (SFXAllowed === 'true') {
                 SFXWrong.volume = .5
                 SFXWrong.play()
             }
         } else {
             setCorrectAnswersCounter(prev => prev + 1)
-            if (SFXAllowed) {
+            if (SFXAllowed === 'true') {
                 SFXCorrect.volume = .5
                 SFXCorrect.play()
             }
@@ -407,7 +417,9 @@ const Quiz = (props) => {
     }
 
     const SFXController = () => {
-        setSFXAllowed(SFXAllowed ? false : true)
+        const changeToThis = SFXAllowed === 'true' ? 'false' : 'true'
+        setSFXAllowed(changeToThis)
+        localStorage.setItem('SFXAllowed', changeToThis)
     }
 
     const currentUrl = () => {
@@ -513,7 +525,7 @@ const Quiz = (props) => {
 
             <div className='SFXController pos-abs' onClick={() => {SFXController()}} >
                 <button type="button">
-                    <img src={SFXAllowed ? speakerIconOn : speakerIconOff} alt="کوییزلند ‌| Quizzland" />
+                    <img src={SFXAllowed === 'true' ? speakerIconOn : speakerIconOff} alt="کوییزلند ‌| Quizzland" />
                 </button>
             </div>
 

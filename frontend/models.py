@@ -84,54 +84,48 @@ class Quizzes_Pointy(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     result_upTo_1st = models.IntegerField(null=False, blank=False, default=None)
-    result_img_1st =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_1st = models.CharField(max_length=200, null=False, blank=False, default=None)
-    result_text_1st = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_2nd = models.IntegerField(null=False, blank=False, default=None)
-    result_img_2nd =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_2nd = models.CharField(max_length=200, null=False, blank=False, default=None)
-    result_text_2nd = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_3rd = models.IntegerField(blank=True, null=True, default=None)
-    result_img_3rd =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_3rd = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_3rd = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_4th = models.IntegerField(blank=True, null=True, default=None)
-    result_img_4th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_4th = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_4th = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_5th = models.IntegerField(blank=True, null=True, default=None)
-    result_img_5th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_5th = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_5th = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_6th = models.IntegerField(blank=True, null=True, default=None)
-    result_img_6th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_6th = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_6th = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_7th = models.IntegerField(blank=True, null=True, default=None)
-    result_img_7th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_7th = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_7th = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_8th = models.IntegerField(blank=True, null=True, default=None)
-    result_img_8th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_8th = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_8th = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_9th = models.IntegerField(blank=True, null=True, default=None)
-    result_img_9th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
-    result_title_9th = models.CharField(max_length=200, blank=True, null=True, default=None)
-    result_text_9th = RichTextField(blank=True, null=True, default=None)
-    
     result_upTo_10th = models.IntegerField(blank=True, null=True, default=None)
-    result_img_10th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    
+    result_title_1st = models.CharField(max_length=200, null=False, blank=False, default=None)
+    result_title_2nd = models.CharField(max_length=200, null=False, blank=False, default=None)
+    result_title_3rd = models.CharField(max_length=200, blank=True, null=True, default=None)
+    result_title_4th = models.CharField(max_length=200, blank=True, null=True, default=None)
+    result_title_5th = models.CharField(max_length=200, blank=True, null=True, default=None)
+    result_title_6th = models.CharField(max_length=200, blank=True, null=True, default=None)
+    result_title_7th = models.CharField(max_length=200, blank=True, null=True, default=None)
+    result_title_8th = models.CharField(max_length=200, blank=True, null=True, default=None)
+    result_title_9th = models.CharField(max_length=200, blank=True, null=True, default=None)
     result_title_10th = models.CharField(max_length=200, blank=True, null=True, default=None)
+
+    result_text_1st = RichTextField(blank=True, null=True, default=None)
+    result_text_2nd = RichTextField(blank=True, null=True, default=None)
+    result_text_3rd = RichTextField(blank=True, null=True, default=None)
+    result_text_4th = RichTextField(blank=True, null=True, default=None)
+    result_text_5th = RichTextField(blank=True, null=True, default=None)
+    result_text_6th = RichTextField(blank=True, null=True, default=None)
+    result_text_7th = RichTextField(blank=True, null=True, default=None)
+    result_text_8th = RichTextField(blank=True, null=True, default=None)
+    result_text_9th = RichTextField(blank=True, null=True, default=None)
     result_text_10th = RichTextField(blank=True, null=True, default=None)
+
+    result_img_1st =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_2nd =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_3rd =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_4th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_5th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_6th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_7th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_8th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_9th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
+    result_img_10th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
 
     def __str__(self):
         return self.subCategory
@@ -144,7 +138,7 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title = models.CharField(max_length=200, null=False, blank=False, default=None, help_text='same quiz title')
+    title = models.CharField(max_length=100, null=False, blank=False, default=None, help_text='same quiz title')
     question = models.CharField(max_length=150, null=True, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_1st = models.CharField(max_length=100, null=False, blank=True, default=None)
@@ -174,47 +168,40 @@ class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=100, null=False, blank=False, default=None, help_text='same quiz title')
-    question = models.CharField(max_length=100, null=False, blank=False, default=None)
+    question = models.CharField(max_length=150, null=True, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
 
     option_1st = models.CharField(max_length=100, null=False, blank=False, default=None)
-    option_img_1st = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_1st = models.IntegerField(null=False, blank=False, default=None)
-    
     option_2nd = models.CharField(max_length=100, null=False, blank=False, default=None)
-    option_img_2st = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_2nd = models.IntegerField(null=False, blank=False, default=None)
-    
     option_3rd = models.CharField(max_length=100, blank=True)
-    option_img_3rd = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_3rd = models.IntegerField(null=False, blank=True, default=None)
-    
     option_4th = models.CharField(max_length=100, blank=True)
-    option_img_4th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_4th = models.IntegerField(null=True, blank=True, default=None)
-    
     option_5th = models.CharField(max_length=100, blank=True)
-    option_img_5th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_5th = models.IntegerField(null=True, blank=True, default=None)
-    
     option_6th = models.CharField(max_length=100, blank=True)
-    option_img_6th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_6th = models.IntegerField(null=True, blank=True, default=None)
-    
     option_7th = models.CharField(max_length=100, blank=True)
-    option_img_7th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_7th = models.IntegerField(null=True, blank=True, default=None)
-    
     option_8th = models.CharField(max_length=100, blank=True)
-    option_img_8th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_8th = models.IntegerField(null=True, blank=True, default=None)
-    
     option_9th = models.CharField(max_length=100, blank=True)
-    option_img_9th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_point_9th = models.IntegerField(null=True, blank=True, default=None)
-    
     option_10th = models.CharField(max_length=100, blank=True)
+    
+    option_img_1st = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_2st = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_3rd = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_4th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_5th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_6th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_7th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_8th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_9th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_10th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    
+    option_point_1st = models.IntegerField(null=False, blank=False, default=None)
+    option_point_2nd = models.IntegerField(null=False, blank=False, default=None)
+    option_point_3rd = models.IntegerField(null=False, blank=True, default=None)
+    option_point_4th = models.IntegerField(null=True, blank=True, default=None)
+    option_point_5th = models.IntegerField(null=True, blank=True, default=None)
+    option_point_6th = models.IntegerField(null=True, blank=True, default=None)
+    option_point_7th = models.IntegerField(null=True, blank=True, default=None)
+    option_point_8th = models.IntegerField(null=True, blank=True, default=None)
+    option_point_9th = models.IntegerField(null=True, blank=True, default=None)
     option_point_10th = models.IntegerField(null=True, blank=True, default=None)
 
     def __str__(self):
