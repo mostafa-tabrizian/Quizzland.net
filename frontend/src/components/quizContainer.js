@@ -25,7 +25,7 @@ const QuizContainer = (props) => {
                     <article className={`flex tx-al-r ${bgStyle}`}>
                         <a href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
                             <div>
-                                <img src={`${quiz.thumbnail}`} alt={`${quiz.subCategory}} | ${quiz.title}`} loading='lazy' />
+                                <img src={`${quiz.thumbnail}`} alt={`${quiz.subCategory} | ${quiz.title}`} loading='lazy' />
                             </div>
                             {/* <div className="quizContainer__views">{viewsFormat(quiz.views)}</div> */}
                             <span className="quizContainer__date tx-al-c">

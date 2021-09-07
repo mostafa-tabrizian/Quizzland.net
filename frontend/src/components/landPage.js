@@ -20,7 +20,7 @@ const category_celebrity = '/static/img/category-celebrity.jpg'
 const category_movieSeries = '/static/img/category-movieSeries.jpg'
 const category_psychology = '/static/img/category-psychology.jpg'
 
-const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 2 })
+const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
 
 const Index = () => {
     const [recommendedQuizzes, setRecommendedQuizzes] = useState([])

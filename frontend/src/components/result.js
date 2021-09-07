@@ -35,7 +35,7 @@ const Result = (props) => {
         detailOfResult()
     }, [score])
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1000, maxRPS: 2 })
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     const questions = JSON.parse(localStorage.getItem('resultQuestions'))
     const correctAnswersCounter = localStorage.getItem('resultCorrectAnswersCounter')

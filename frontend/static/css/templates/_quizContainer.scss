@@ -6,6 +6,7 @@
     @include breakpoints-down(medium) {
         margin: .5rem;
         display: flex;
+        justify-content: center;
     }
 
     &__minHeight {

@@ -27,7 +27,7 @@ const Category = (props) => {
     }
     const currentCategory = categoryDefinitionInFarsi[categoryTarget]
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1000, maxRPS: 2 })
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     useEffect(() => {
         searchChangeDetector()

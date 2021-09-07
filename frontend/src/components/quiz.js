@@ -8,7 +8,7 @@ import rateLimit from 'axios-rate-limit';
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-import { log, replaceFunction } from './base'
+import { log, replaceFunction, isItDesktop, isItMobile, isItIPad } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
@@ -55,7 +55,7 @@ const Quiz = (props) => {
         quizChangeDetector()
     })
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 3, perMilliseconds: 1000, maxRPS: 2 })
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
     
     const quizChangeDetector = () => {
         (function(history){
@@ -242,8 +242,8 @@ const Quiz = (props) => {
 
         // scaleAnimationAfterChoosingAnswer()
         setAbleToSelectOption(false)
-        checkTheSelectedOption(props.target)
         setAbleToGoNext(true)
+        checkTheSelectedOption(props.target)
         setShowBottomQuestionChanger(true)
 
         if (autoQuestionChanger) {
@@ -254,6 +254,52 @@ const Quiz = (props) => {
     const questionShowIfNotNull = (question) => {
         if (question !== null) {
             return <p className='quiz__question tx-al-c'> { question } </p>
+        }
+    }
+
+    const restartTheStateOfQuestion = () => {
+        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
+        setShowBottomQuestionChanger(false)
+        setAbleToGoNext(false)
+        setCorrectAnswerOption(0)
+        setWrongAnswerOption(0)
+    }
+
+    let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
+    if (isItDesktop || isItIPad) {
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 48
+    } 
+    else if (isItMobile) {
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 23.5
+    }
+
+    const goNextQuestionOrEndTheQuiz = () => {
+        if (ableToGoNext || isItDesktop()) {
+            if (currentQuestionNumber !== questions.length) {
+                setTimeout(() => {
+                    setAbleToSelectOption(true)
+                }, 1500)
+                restartTheStateOfQuestion()
+                plusOneToTotalAnsweredQuestions()
+                setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+                
+                if (!(window.navigator.userAgent.includes('Windows'))) {  // if mobile, scroll to top
+                    window.scrollTo(0, 0);
+                }
+    
+            } else {
+                setQuizEnded(true)
+                setTimeout(() => {
+                    try {
+                        localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
+                        localStorage.setItem('resultQuestions',  JSON.stringify(questions))
+                        localStorage.setItem('resultCorrectAnswersCounter', correctAnswersCounter)
+                        result.current.click()
+                    } catch{
+                        log("Can't show set the result in localStorage!")
+                    }
+                }, 3500)
+            }
         }
     }
 
@@ -330,52 +376,6 @@ const Quiz = (props) => {
         setCurrentQuestionNumber(prev => prev + 1)
     }
 
-    const restartTheStateOfQuestion = () => {
-        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        setShowBottomQuestionChanger(false)
-        setAbleToGoNext(false)
-        setCorrectAnswerOption(0)
-        setWrongAnswerOption(0)
-    }
-
-    let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
-    if (window.navigator.userAgent.includes('Windows') || window.navigator.userAgent.includes('iPad')) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 48
-    } 
-    else if (window.navigator.userAgent.includes('Mobile')) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 23.5
-    }
-
-    const goNextQuestionOrEndTheQuiz = () => {
-        if (ableToGoNext || isItDesktop()) {
-            if (currentQuestionNumber !== questions.length) {
-                setTimeout(() => {
-                    setAbleToSelectOption(true)
-                }, 1500)
-                restartTheStateOfQuestion()
-                plusOneToTotalAnsweredQuestions()
-                setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
-                
-                if (!(window.navigator.userAgent.includes('Windows'))) {  // if mobile, scroll to top
-                    window.scrollTo(0, 0);
-                }
-    
-            } else {
-                setQuizEnded(true)
-                setTimeout(() => {
-                    try {
-                        localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
-                        localStorage.setItem('resultQuestions',  JSON.stringify(questions))
-                        localStorage.setItem('resultCorrectAnswersCounter', correctAnswersCounter)
-                        result.current.click()
-                    } catch{
-                        log("Can't show set the result in localStorage!")
-                    }
-                }, 3500)
-            }
-        }
-    }
-
     const shouldShowTheBottomQuestionChanger = () => {
         if (showBottomQuestionChanger) {
             if (autoQuestionChanger) {
@@ -399,10 +399,6 @@ const Quiz = (props) => {
                 })
             )
         }
-    }
-
-    const isItDesktop = () => {
-        return window.navigator.userAgent.includes('Windows')
     }
 
     const getSuggestionsQuiz = (subCategory) => {

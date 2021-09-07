@@ -26,7 +26,7 @@
         backdrop-filter: blur(5px);
         height: 2.125rem;
         padding-right: 1.3125rem;
-        width: 75%;
+        width: 95%;
         z-index: 4;
         border-radius: 15px;
         box-shadow: 0 15px 22px #0000002a;
@@ -56,12 +56,13 @@
 
     &__result {
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 5fr;
         direction: rtl;
         white-space: pre-line;
         position: absolute;
         left: 0; top: 3rem;
-        width: 40rem; min-height: 20rem;
+        width: 93vw;
+        max-width: 73rem; min-height: 27rem;
         padding-top: 1rem;
         border-radius: 15px;
         box-shadow: 0 0 40px #00000033;
@@ -72,8 +73,9 @@
             grid-template-columns: 1fr;
             box-shadow: inherit;
             top: 8rem;
-            width: 21.5rem; min-height: 30rem;
+            width: 100vw; min-height: 30rem;
             flex-wrap: wrap;
+            left: -2rem;
         }
 
         @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
@@ -82,6 +84,12 @@
 
         @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
             background: #fffffff6;
+        }
+
+        &__title {
+            span {
+                white-space: pre-wrap;
+            }
         }
     
         &__category {    
@@ -102,13 +110,24 @@
             &__noCategoryFound {
                 border-radius: 15px;
             }
+
+            &__container {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+
+                span {
+                    margin-right: 2rem;
+                    margin-bottom: 1rem;
+                }
+            }
         
             &__item {
                 width: 12.5rem; height: 16.2135rem;
                 margin-right: 2rem;
         
                 @include breakpoints-down(medium) {
-                    width: 10rem; height: 14.75rem;
+                    width: 19.5rem; height: 10rem;
                 }
         
                 img {
@@ -118,12 +137,20 @@
                     border-radius: 40px;
                     filter: brightness(50%);
                     box-shadow: 0 5px 16px #0000006b;
+                
+                    @include breakpoints-down(medium) {
+                        object-position: top;
+                    }
                 }
         
                 h5 {
                     transform: translateY(-13.125rem);
                     color: $white;
                     font-size: $font-l;
+
+                    @include breakpoints-down(medium) {
+                        transform: translateY(-9.125rem)
+                    }
     
                     a {
                         &:hover {
@@ -140,19 +167,36 @@
             }
 
             ul {
-                margin-right: 1.25rem;
+                margin-right: 4rem;
+                flex-wrap: wrap;
 
                 @include breakpoints-down(medium) {
-                    transform: translate(2.15rem);
+                    grid-template-columns: 1fr 1fr;
+                    display: grid;
+                    gap: 1rem;
+                    margin-right: 2rem;
                 }
 
                 img {
-                    width: 23rem;
-                    height: 16rem;
+                    width: 16rem;
+                    height: 12rem;
+                    border-radius: 15px;
+
+                    @include breakpoints-down(medium) {
+                        width: 9rem;
+                        height: 6rem;
+                    }
                 }
     
                 li {
                     font-size: $font-sm - .06;
+                    margin-left: 2rem; margin-bottom: 1rem; margin-bottom: 1rem;
+                    width: 16rem;
+
+                    @include breakpoints-down(medium) {
+                        margin: 0;
+                        width: 9rem;
+                    }
 
                     a {
                         width: 23rem;
@@ -182,16 +226,18 @@
                     margin-left: 1rem;
                 }
             }
-    
-            &__seeMore {
-                position: absolute;
-                bottom: 1rem;
+        }
+
+        &__seeMore {
+            margin-right: 2rem;
+            margin-bottom: 1rem;
+            position: absolute;
+            bottom: 1rem;
+
+            @include breakpoints-down(medium) {
+                top: 1rem;
                 left: 1rem;
-                width: 7rem;
-    
-                @include breakpoints-down(medium) {
-                    top: 2rem;
-                }
+                bottom: inherit;
             }
         }
     }

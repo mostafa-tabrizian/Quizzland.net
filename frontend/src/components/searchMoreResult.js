@@ -32,7 +32,7 @@ const SearchMoreResult = () => {
         setSearchValueButWithoutHyphen(replaceFunction(searchValue, '+', ' '))
     }, [searchValue, offset])
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 6, perMilliseconds: 1000, maxRPS: 2 })
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
 
     const searchChangeDetector = () => {
         (function(history){
@@ -110,9 +110,8 @@ const SearchMoreResult = () => {
             </Helmet>
 
             <div className='flex flex-jc-c flex-ai-c'>
-                ‌<span > ‌تعداد نتایج :‌ {matchedQuizzesCounter} </span>‌‌
-                ‌<h3 className='title'> ‌ عبارت جستجو شده : {searchValueButWithoutHyphen}</h3>‌
-            </div>
+                ‌<h3 className='title'> ‌ <span style={{fontSize: '1rem'}}>عبارت جستجو شده : <br/></span> {searchValueButWithoutHyphen}</h3>‌
+            </div>‌‌
 
             {
                 matchedQuizzesCounter ? 

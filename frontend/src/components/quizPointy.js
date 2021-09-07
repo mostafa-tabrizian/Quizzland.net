@@ -44,7 +44,7 @@ const Quiz = (props) => {
         quizChangeDetector()
     })
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 3, perMilliseconds: 1000, maxRPS: 2 })
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     const quizChangeDetector = () => {
         (function(history){

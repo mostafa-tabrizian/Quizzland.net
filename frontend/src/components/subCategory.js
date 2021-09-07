@@ -34,7 +34,7 @@ const SubCategory = (props) => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1000, maxRPS: 2 })
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
     
     const subCategory = props.match.params.subCategory
 

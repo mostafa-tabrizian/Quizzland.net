@@ -36,7 +36,7 @@ const Sort = () => {
         getQuizzes()
     }, [offset])
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 6, perMilliseconds: 1000, maxRPS: 2 })
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
 
     const componentChangeDetector = () => {
         (function(history){

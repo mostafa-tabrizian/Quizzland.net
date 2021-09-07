@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 
-import { log, replaceFunction } from './base'
-
-const noCategoryFound = '/static/img/noCategoryFound.jpg'
-const noQuizFound = '/static/img/noQuizFound.png'
-const noQuizFound2 = '/static/img/noQuizFound2.png'
+import { log, replaceFunction, isItMobile } from './base'
 
 const Search = (props) => {
     const [categoriesList, setCategoriesList] = useState([])
@@ -15,13 +11,11 @@ const Search = (props) => {
     const [searchMobile, setSearchMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchValue, setSearchValue] = useState(null)
-    const [showMoreResults, setShowMoreResults] = useState(false)
-    const [noCategoryFoundState, setNoCategoryFoundState] = useState(true)
-    const [noQuizFoundState, setNoQuizFoundState] = useState(true)
+    const [quizzesGrabbedCounter, setQuizzesGrabbedCounter] = useState(0)
 
     const searchSubmit = useRef()
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 2 })
+    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     const searchMobileFocusChangedHideOrShow = () => {
         setSearchMobile(searchMobile ? false : true)
@@ -34,8 +28,8 @@ const Search = (props) => {
 
     const searchHandler = async (value) => {
         try {
-            if (value.length >= 3) {
-
+            const minimumKeywordForSearch = 3
+            if (value.length >= minimumKeywordForSearch) {
                 let searchValue = replaceFunction(value, ' ', '+')
                 setSearchValue(searchValue)
                 
@@ -69,49 +63,63 @@ const Search = (props) => {
                 const search_new_category_subCategory = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
                 Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
     
+                setQuizzesGrabbedCounter(matchedQuizzes.length)
+
                 // Remove duplicated quizzes
                 let uniqueMatchedQuizzes = {};
+                let maxQuizSearchResult
 
-                for ( let i = 0; i < matchedQuizzes.length; i++ )
+                if (matchedQuizzes.length >= 6) {
+                    if (isItMobile()) maxQuizSearchResult = 5  // 4
+                    else maxQuizSearchResult = 7  // 6
+                }
+                else {
+                    maxQuizSearchResult = matchedQuizzes.length
+                }
+
+                for ( let i = 0; i < maxQuizSearchResult; i++ ) {
                     uniqueMatchedQuizzes[matchedQuizzes[i]['title']] = matchedQuizzes[i];
+                }
 
                 matchedQuizzes = new Array();
-                for ( let key in uniqueMatchedQuizzes )
+                for ( let key in uniqueMatchedQuizzes ) {
                     matchedQuizzes.push(uniqueMatchedQuizzes[key]);
+                }
 
                 const quizzesList = () => {
-                    let resultCounter = 0
-                    const maxQuizSearchResult = 6
-    
-                    setNoQuizFoundState(true)
-    
-                    return (
-                        matchedQuizzes.map(quiz => {
-                            if (resultCounter !== maxQuizSearchResult) {
-                                setNoQuizFoundState(false)
-                                setShowMoreResults(false)
-            
-                                resultCounter++
+                    matchedQuizzes.length >= 1 && setSearchResult(true)  // show result if there quizzes
+
+                    try {
+                        return (
+                            matchedQuizzes.map((quiz) => {
                                 return (
-                                    <li key={quiz.key}>
-                                        <a className="header__search__result__quizzes__item tx-al-r" href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
-                                            { quiz.title }
-                                        </a>
+                                    <li key={quiz.id}>
+                                        <article className={`flex tx-al-r quizContainer__trans`}>
+                                            <a href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
+                                                <div>
+                                                    <img src={`${quiz.thumbnail}`} alt={`${quiz.subCategory}} | ${quiz.title}`} loading='lazy' />
+                                                </div>
+                                                <div className="header__search__result__title flex">
+                                                    <span>
+                                                        { quiz.title }
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </article>
                                     </li>
                                 )
-                            } else {
-                                setShowMoreResults(true)
-                            }
-                        })
-                    )
+                            })
+                        )
+                    } catch {e} {
+                        log('no quiz found...')
+                    }
                 }
     
                 const categoriesList = () => {
                     try {
-                        setNoCategoryFoundState(false)
                         const category = matchedCategories[0]
                         return (
-                            <div className="header__search__result__category__item">
+                            <div className={`header__search__result__category__item`}>
                                 <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
                                     <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوییز های ${category.title_far}`} />
                                 </a>
@@ -122,8 +130,8 @@ const Search = (props) => {
                                 </h5>
                             </div>
                         )
-                    } catch {
-                        setNoCategoryFoundState(true)
+                    } catch (e){
+                        log('no category found...')
                     }
                 }   
                 
@@ -139,111 +147,44 @@ const Search = (props) => {
         searchHandler(input.target.value)
     }
 
-    const openSearchResult = () => {
-        setSearchResult(true)
-    }
-
     document.body.addEventListener(("click"), (e) => {
         if (!e.target.className.includes('header__search__result__quizzes') && !e.target.className.includes('header__search__input')) {
             setSearchResult(false)
         }
     })
 
-    const noQuizFoundStyle = () => {
-        const nightMode = localStorage.getItem('lightMode')
-        if (nightMode === 'true') {
-            return <img src={noQuizFound2} style={{pointerEvents: 'None', filter: 'drop-shadow(0px 4px 3px gray)'}} alt='No quiz' />
-        } else {
-            return <img src={noQuizFound} style={{pointerEvents: 'None', filter: 'drop-shadow(0 3px 5px black)'}} alt='No quiz' />
-        }
-    }
-
-    const noCategoryFoundStyle = () => {
-        const nightMode = localStorage.getItem('lightMode')
-        if (nightMode === 'true') {
-            return <img src={noCategoryFound} style={{pointerEvents: 'None', filter: 'None', border: 'None'}} alt='No category' />
-        } else {
-            return <img src={noCategoryFound} style={{pointerEvents: 'None', border: 'None'}} alt='No category' />
-        }
-    }
-
     return (
         <React.Fragment>
             <div className={`header__search flex ${props.colorOfHeader}`}>
                 <input
                     type='text'
-                    className={`header__search__input tx-al-r hideForMobile ${searchMobile ? 'fadeOut' : 'fadeIn'}`}
+                    className={`header__search__input tx-al-r`}
                     placeholder='...جستجو'
-                    onFocus={openSearchResult}
                     onChange={inputChanged}
                 />
-                <div  className={`header__search__result hideForMobile ${searchResult ? 'fadeIn' : 'fadeOut'}`}>
+                <div  className={`header__search__result ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
                     <div className="header__search__result__category">
                         <div className="header__search__result__category__container flex flex-jc-c">
+                            {quizzesGrabbedCounter !== 0
+                                &&
+                                <span>تعداد نتایج پیدا شده: {quizzesGrabbedCounter}</span>
+                            }
+
                             {categoriesList}
 
-                            { noCategoryFoundState &&
-                                <div className="header__search__result__category__item">
-                                    {noCategoryFoundStyle()}
-                                </div>
-                            }
+                            {quizzesGrabbedCounter !== 0
+                                &&
+                                <Link to={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
+                                    نمایش بقیه نتایج...
+                                </Link>
+                            } 
                         </div>
                     </div>
                     
                     <div className="header__search__result__quizzes">
-                        <ul>
+                        <ul className='flex'>
                             {quizzesList}
-
-                            { noQuizFoundState &&
-                                noQuizFoundStyle()
-                            }
                         </ul>
-
-                        {
-                            showMoreResults &&
-
-                            <div onClick={() => setSearchResult(false)} className="header__search__result__quizzes__seeMore"> 
-                                <Link to={`/search?s=${searchValue}`} ref={searchSubmit}>
-                                    جستجوی بیشتر ...
-                                </Link>
-                            </div>
-                        }
-
-                    </div>
-                </div>
-
-                <div  className={`header__search__result hideForDesktop ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
-                    <div className="header__search__result__category">
-                        <div className="header__search__result__category__container flex flex-jc-c">
-                            {categoriesList}
-
-                            { noCategoryFoundState &&
-                                <div className="header__search__result__category__item">
-                                    {noCategoryFoundStyle()}
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    
-                    <div className="header__search__result__quizzes">
-                        <ul>
-                            {quizzesList}
-
-                            { noQuizFoundState &&
-                                noQuizFoundStyle()
-                            }
-                        </ul>
-                        
-                        {
-                            showMoreResults &&
-
-                            <div onClick={() => setSearchResult(false)} className="header__search__result__quizzes__seeMore"> 
-                                <Link to={`/search?s=${searchValue}`} >
-                                    جستجوی بیشتر ...
-                                </Link>
-                            </div>
-                        }
-
                     </div>
                 </div>
             </div>
@@ -255,7 +196,6 @@ const Search = (props) => {
                     type='text'
                     className={`header__search__input tx-al-r ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
                     placeholder='...جستجو'
-                    onFocus={openSearchResult}
                     onChange={inputChanged}
                 />
             </div>

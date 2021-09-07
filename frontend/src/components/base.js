@@ -87,3 +87,15 @@ export const datePublishHandler = (publishFullDate) => {
         return 'چند دقیقه پیش'
     } 
 }
+
+export const isItDesktop = () => {
+    return window.navigator.userAgent.includes('Windows')
+}
+
+export const isItMobile = () => {
+    return window.navigator.userAgent.includes('Mobile')
+}
+
+export const isItIpad = () => {
+    return window.navigator.userAgent.includes('iPad')
+}
