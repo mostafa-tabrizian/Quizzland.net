@@ -77,7 +77,7 @@ const Quiz = (props) => {
         
         grabQuiz().then((quiz) => {
             setQuizThumbnail(quiz.thumbnail)
-            addView(quiz)
+            // addView(quiz)
             setBackground()
         })
 

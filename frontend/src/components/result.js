@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
-import {InlineReactionButtons} from 'sharethis-reactjs';
+import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
 import rateLimit from 'axios-rate-limit';
 
 import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from './base'
@@ -181,8 +181,35 @@ const Result = (props) => {
                 <div className='wrapper-med'>
                     <div className="result__share space-sm tx-al-c">
                         <h5>{'دوستات رو به چالش بکش  \n ببین میتونن بیشتر از تو بیارن'}</h5>
-                        <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
+                        {/* <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button> */}
                         {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک کوییز کپی شد</h6> */}
+
+                        <InlineShareButtons
+                            config={{
+                                alignment: 'center',  // alignment of buttons (left, center, right)
+                                color: 'social',      // set the color of buttons (social, white)
+                                enabled: true,        // show/hide buttons (true, false)
+                                font_size: 16,        // font size for the buttons
+                                labels: 'null',        // button labels (cta, counts, null)
+                                language: 'en',       // which language to use (see LANGUAGES)
+                                networks: [           // which networks to include (see SHARING NETWORKS)
+                                    'whatsapp',
+                                    'telegram',
+                                    'twitter',
+                                    'sharethis',
+                                ],
+                                padding: 10,          // padding within buttons (INTEGER)
+                                radius: 10,            // the corner radius on each button (INTEGER)
+                                show_total: false,
+                                size: 45,             // the size of each button (INTEGER)
+
+                                // OPTIONAL PARAMETERS
+                                url: `https://quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`,
+                                image: resultQuiz.thumbnail,  // (defaults to og:image or twitter:image)
+                                title: resultQuiz.title,            // (defaults to og:title or twitter:title)
+                            }}
+                        />
+
                     </div>
 
                     <h2 className='flex flex-jc-c flex-ai-c space-med'>این کوییز چطور بود؟</h2>
@@ -206,8 +233,10 @@ const Result = (props) => {
                                 size: 45,             // the size of each button (INTEGER)
                                 spacing: 8,           // the spacing between buttons (INTEGER)
 
-                                // OPTIONAL PARAMETERS
-                                url: `https://quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`, // (defaults to current url)
+                               // OPTIONAL PARAMETERS
+                               url: `https://quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`,
+                               image: resultQuiz.thumbnail,  // (defaults to og:image or twitter:image)
+                               title: resultQuiz.title,            // (defaults to og:title or twitter:title)
                             }}
                         />
                     </div>

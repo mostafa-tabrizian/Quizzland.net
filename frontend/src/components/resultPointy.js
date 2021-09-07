@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
 import rateLimit from 'axios-rate-limit';
+import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
 
 import { log, replaceFunction } from './base'
 import BackBtn from './backBtn'
@@ -144,11 +145,40 @@ const Result = (props) => {
                 <div className='wrapper-med'>
                     <div className="result__share space-sm tx-al-c">
                         <h5>{'ببین نتیجه‌ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
-                        <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button>
+                        {/* <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button> */}
                         {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک تست کپی شد</h6> */}
+
+                        <InlineShareButtons
+                            config={{
+                                alignment: 'center',  // alignment of buttons (left, center, right)
+                                color: 'social',      // set the color of buttons (social, white)
+                                enabled: true,        // show/hide buttons (true, false)
+                                font_size: 16,        // font size for the buttons
+                                labels: 'null',        // button labels (cta, counts, null)
+                                language: 'en',       // which language to use (see LANGUAGES)
+                                networks: [           // which networks to include (see SHARING NETWORKS)
+                                    'whatsapp',
+                                    'telegram',
+                                    'twitter',
+                                    'sharethis',
+                                ],
+                                padding: 10,          // padding within buttons (INTEGER)
+                                radius: 10,            // the corner radius on each button (INTEGER)
+                                show_total: false,
+                                size: 45,             // the size of each button (INTEGER)
+
+                                // OPTIONAL PARAMETERS
+                                url: `https://quizzland.net/test/${replaceFunction(state.quiz.title, ' ', '-')}`,
+                                image: state.quiz.thumbnail,  // (defaults to og:image or twitter:image)
+                                title: state.quiz.title,            // (defaults to og:title or twitter:title)
+                            }}
+                        />
+
                     </div>
 
-                    <div className='space-sm'>
+                    <h2 className='flex flex-jc-c flex-ai-c space-med'>این تست چطور بود؟</h2>
+                    
+                    <div>
                         <InlineReactionButtons
                             config={{
                                 alignment: 'center',  // alignment of buttons (left, center, right)
@@ -167,8 +197,10 @@ const Result = (props) => {
                                 size: 45,             // the size of each button (INTEGER)
                                 spacing: 8,           // the spacing between buttons (INTEGER)
 
-                                // OPTIONAL PARAMETERS
-                                url: `https://quizzland.net/quiz/${replaceFunction(state.quiz.title, ' ', '-')}`, // (defaults to current url)
+                               // OPTIONAL PARAMETERS
+                               url: `https://quizzland.net/test/${replaceFunction(state.quiz.title, ' ', '-')}`,
+                               image: state.quiz.thumbnail,  // (defaults to og:image or twitter:image)
+                               title: state.quiz.title,            // (defaults to og:title or twitter:title)
                             }}
                         />
                     </div>

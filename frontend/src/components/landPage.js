@@ -202,7 +202,7 @@ const Index = () => {
 
             <div className="hero flex flex-jc-c flex-ai-c">
                 <div className="hero__path pos-abs" style={landPagePathSelector()}></div>
-                <div className='hero__logo tx-al-c hideForMobile'>
+                <div className='hero__logo tx-al-c hideForMobile pos-rel'>
                     <img src={Q} className='Q' alt="لوگوی کوییزلند" />
                     <img src={QBubbles} className='Q__Bubbles' alt="لوگوی کوییزلند" />
                 </div>

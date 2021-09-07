@@ -57,7 +57,7 @@ const SubCategory = (props) => {
     useEffect(() => {
         backgroundOfSubCategory()
         setLoadState(true)
-        addView()
+        // addView()
     }, [])
     
     const addView = async () => {
