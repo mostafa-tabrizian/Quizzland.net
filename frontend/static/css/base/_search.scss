@@ -179,12 +179,12 @@
 
                 img {
                     width: 16rem;
-                    height: 12rem;
+                    height: 9rem;
                     border-radius: 15px;
 
                     @include breakpoints-down(medium) {
                         width: 9rem;
-                        height: 6rem;
+                        height: 5.06rem;
                     }
                 }
     

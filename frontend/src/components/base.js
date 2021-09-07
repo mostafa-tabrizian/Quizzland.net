@@ -96,6 +96,6 @@ export const isItMobile = () => {
     return window.navigator.userAgent.includes('Mobile')
 }
 
-export const isItIpad = () => {
+export const isItIPad = () => {
     return window.navigator.userAgent.includes('iPad')
 }

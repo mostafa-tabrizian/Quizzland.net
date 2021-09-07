@@ -1413,14 +1413,14 @@ input {
 
 .header__search__result__quizzes ul img {
   width: 16rem;
-  height: 12rem;
+  height: 9rem;
   border-radius: 15px;
 }
 
 @media (max-width: 49.9375em) {
   .header__search__result__quizzes ul img {
     width: 9rem;
-    height: 6rem;
+    height: 5.06rem;
   }
 }
 
