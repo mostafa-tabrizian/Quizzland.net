@@ -174,22 +174,19 @@ body::-webkit-scrollbar-thumb {
 
 h1, h2, h3, h4, h5, h6, p, ul, li {
   direction: rtl;
+  margin: 0;
 }
 
 h1 {
   font-size: 2rem;
   padding-bottom: 1.25rem;
   padding: 0;
-  margin: 0;
   font-family: Lalezar, myHarmattan;
   font-weight: 300;
 }
 
 h2 {
   font-size: 1.6rem;
-  padding: 0 0 1rem 0;
-  margin: 0;
-  font-family: lalezar, myHarmattan;
   font-weight: 300;
   position: relative;
 }
@@ -201,7 +198,11 @@ h2 {
 }
 
 h3 {
-  letter-spacing: .1rem;
+  font-size: 1.6rem;
+  padding: 0 0 1rem 0;
+  font-weight: 300;
+  position: relative;
+  font-family: lalezar, myHarmattan;
 }
 
 @media (max-width: 49.9375em) {
@@ -330,6 +331,39 @@ input {
   font-size: 5rem;
 }
 
+@keyframes changeContent {
+  10% {
+    content: "⠙";
+  }
+  20% {
+    content: "⠹";
+  }
+  30% {
+    content: "⠸";
+  }
+  40% {
+    content: "⠼";
+  }
+  50% {
+    content: "⠴";
+  }
+  60% {
+    content: "⠦";
+  }
+  70% {
+    content: "⠧";
+  }
+  80% {
+    content: "⠇";
+  }
+  90% {
+    content: "⠏";
+  }
+  100% {
+    content: '⠏';
+  }
+}
+
 @-webkit-keyframes changeContent {
   10% {
     content: "⠙";
@@ -358,35 +392,8 @@ input {
   90% {
     content: "⠏";
   }
-}
-
-@keyframes changeContent {
-  10% {
-    content: "⠙";
-  }
-  20% {
-    content: "⠹";
-  }
-  30% {
-    content: "⠸";
-  }
-  40% {
-    content: "⠼";
-  }
-  50% {
-    content: "⠴";
-  }
-  60% {
-    content: "⠦";
-  }
-  70% {
-    content: "⠧";
-  }
-  80% {
-    content: "⠇";
-  }
-  90% {
-    content: "⠏";
+  100% {
+    content: '⠏';
   }
 }
 
@@ -1752,11 +1759,14 @@ input {
   }
 }
 
-.category span {
+.category h3 {
   margin-top: 0;
   display: block;
   font-family: lalezar, harmattan, sans-serif;
   font-weight: 100;
+  -webkit-transform: translate(1rem);
+          transform: translate(1rem);
+  font-size: 1.8rem;
 }
 
 .sort {
@@ -2685,6 +2695,7 @@ body {
   font-weight: 300;
   width: 14rem;
   margin-top: 1rem;
+  letter-spacing: 0;
 }
 
 @media (max-width: 49.9375em) {

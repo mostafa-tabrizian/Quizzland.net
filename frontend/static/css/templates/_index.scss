@@ -133,11 +133,13 @@
         }
     }
 
-    span {
+    h3 {
         margin-top: 0;
         display: block;
         font-family: lalezar, harmattan, sans-serif;
         font-weight: 100;
+        transform: translate(1rem);
+        font-size: 1.8rem;
     }
 }
 

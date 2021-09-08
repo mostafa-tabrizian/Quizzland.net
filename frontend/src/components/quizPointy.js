@@ -480,6 +480,18 @@ const Quiz = (props) => {
 
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
+
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                </ul>
+                
                 <ul className="quizContainer flex wrapper-med">
                     {
                         suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='bg' />

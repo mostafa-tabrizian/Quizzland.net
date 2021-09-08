@@ -81,6 +81,7 @@
         font-weight: 300;
         width: 14rem;
         margin-top: 1rem;
+        letter-spacing: 0;
 
         @include breakpoints-down(medium) {
             font-size: .9rem;

@@ -30,9 +30,9 @@ const QuizContainerWithoutViews = (props) => {
                             <span className="quizContainer__date tx-al-c">
                                 {datePublishHandler(quiz.publish)}
                             </span>
-                            <span className="quizContainer__title quizContainer__title__noViews flex">
+                            <h2 className="quizContainer__title quizContainer__title__noViews flex">
                                 {quiz.title}
-                            </span>
+                            </h2>
                         </a>
                     </article>
                 </li>

@@ -54,21 +54,18 @@ body {
 
 h1, h2, h3, h4, h5, h6, p, ul, li {
     direction: rtl;
+    margin: 0;
 }
 
 h1 {
     font-size: $font-xl;
     padding-bottom: 1.25rem; padding: 0;
-    margin: 0;
     font-family: Lalezar, myHarmattan;
     font-weight: 300;
 }
 
 h2 {
     font-size: $font-l;
-    padding: 0 0 1rem 0;
-    margin: 0;
-    font-family: lalezar, myHarmattan;
     font-weight: 300;
     position: relative;
 
@@ -78,7 +75,11 @@ h2 {
 }
 
 h3 {
-    letter-spacing: .1rem;
+    font-size: $font-l;
+    padding: 0 0 1rem 0;
+    font-weight: 300;
+    position: relative;
+    font-family: lalezar, myHarmattan;
 
     @include breakpoints-down(medium) {
         text-align: right;
@@ -194,8 +195,16 @@ input {
         30% { content: "⠸"; } 40% { content: "⠼"; }
         50% { content: "⠴"; } 60% { content: "⠦"; }
         70% { content: "⠧"; } 80% { content: "⠇"; }
-        90% { content: "⠏"; }
+        90% { content: "⠏"; } 100% { content: '⠏'; }
       }
+
+      @-webkit-keyframes changeContent {
+        10% { content: "⠙"; } 20% { content: "⠹"; }
+        30% { content: "⠸"; } 40% { content: "⠼"; }
+        50% { content: "⠴"; } 60% { content: "⠦"; }
+        70% { content: "⠧"; } 80% { content: "⠇"; }
+        90% { content: "⠏"; } 100% { content: '⠏'; }
+    }
 }
 
 .popUp {

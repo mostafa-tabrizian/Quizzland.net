@@ -249,6 +249,17 @@ const Result = (props) => {
 
             <h2 className='tx-al-c space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
+            <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+            </ul>
+
             <ul className="quizContainer flex wrapper-med">
                 {
                     suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
