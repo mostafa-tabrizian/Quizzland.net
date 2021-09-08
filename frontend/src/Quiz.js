@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 
 import {
@@ -8,13 +8,14 @@ import {
 } from 'react-router-dom'
 
 import { log } from './components/base'
-import HotFooter from './components/hotFooter'
-import Quiz from './components/quiz'
-import QuizPointy from './components/quizPointy'
-import Result from './components/result'
-import ResultPointy from './components/resultPointy'
-import SearchMoreResult from './components/searchMoreResult'
-import ScrollToTop from './components/scrollToTop'
+
+const HotFooter  = lazy(() => import ('./components/hotFooter'))
+const Quiz  = lazy(() => import ('./components/quiz'))
+const QuizPointy = lazy(() => import ('./components/quizPointy'))
+const Result = lazy(() => import ('./components/result'))
+const ResultPointy = lazy(() => import ('./components/resultPointy'))
+const SearchMoreResult = lazy(() => import ('./components/searchMoreResult'))
+const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
 log(" \n\n\
                                     ((((())))))))))))))))) \n\

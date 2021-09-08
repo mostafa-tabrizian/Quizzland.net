@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 
 import {
@@ -8,21 +8,21 @@ import {
 } from 'react-router-dom'
 
 import { log } from './components/base'
-import Footer from './components/footer'
-import ScrollToTop from './components/scrollToTop'
 
-import Index from './components/landPage'
-const Guide             = React.lazy(() => import('./components/guide'))
-const Contact           = React.lazy(() => import('./components/contact'))
-const Ads               = React.lazy(() => import('./components/ads'))
-const Support           = React.lazy(() => import('./components/support'))
-const PrivacyPolicy     = React.lazy(() => import('./components/privacyPolicy'))
-const Search            = React.lazy(() => import('./components/searchMoreResult'))
-const Sort              = React.lazy(() => import('./components/sort'))
-const pageNotFound_404  = React.lazy(() => import('./components/pageNotFound_404'))
-const monthlyRecord     = React.lazy(() => import('./components/monthlyRecord'))
-const welcomeOwl       = React.lazy(() => import('./components/welcomeOwl'))
-const welcomeZeynab       = React.lazy(() => import('./components/welcomeZeynab'))
+const Footer            = lazy(() => import('./components/footer'))
+const ScrollToTop       = lazy(() => import('./components/scrollToTop'))
+const Index             = lazy(() => import('./components/landPage'))
+const Guide             = lazy(() => import('./components/guide'))
+const Contact           = lazy(() => import('./components/contact'))
+const Ads               = lazy(() => import('./components/ads'))
+const Support           = lazy(() => import('./components/support'))
+const PrivacyPolicy     = lazy(() => import('./components/privacyPolicy'))
+const Search            = lazy(() => import('./components/searchMoreResult'))
+const Sort              = lazy(() => import('./components/sort'))
+const pageNotFound_404  = lazy(() => import('./components/pageNotFound_404'))
+const monthlyRecord     = lazy(() => import('./components/monthlyRecord'))
+const welcomeOwl        = lazy(() => import('./components/welcomeOwl'))
+const welcomeZeynab     = lazy(() => import('./components/welcomeZeynab'))
 
 log(" \n\n\
                                     ((((())))))))))))))))) \n\

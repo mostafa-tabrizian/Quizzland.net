@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 
 import {
@@ -8,9 +8,10 @@ import {
 } from 'react-router-dom'
 
 import { log } from './components/base'
-import HotFooter from './components/hotFooter'
-import SubCategory from './components/subCategory'
-import ScrollToTop from './components/scrollToTop'
+
+const SubCategory = lazy(() => import ('./components/subCategory'))
+const HotFooter  = lazy(() => import ('./components/hotFooter'))
+const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
 log(" \n\n\
                                     ((((())))))))))))))))) \n\

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import {
     BrowserRouter as Router,
@@ -7,9 +7,10 @@ import {
 } from 'react-router-dom'
 
 import { log } from './components/base'
-import PageNotFound_404 from './components/pageNotFound_404'
-import HotFooter from './components/hotFooter'
-import ScrollToTop from './components/scrollToTop'
+
+const PageNotFound_404  = lazy(() => import ('./components/pageNotFound_404'))
+const HotFooter  = lazy(() => import ('./components/hotFooter'))
+const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
 const CategoryApp = () => {
     return (

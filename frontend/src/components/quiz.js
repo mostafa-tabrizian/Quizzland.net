@@ -425,7 +425,7 @@ const Quiz = (props) => {
             />
 
             <Helmet>
-                <title>{`کوییزلند | ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
+                <title>{`کوییزلند | کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
                 <meta name="description" content={`کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')} کوییزلند`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quizThumbnail} />
@@ -537,9 +537,9 @@ const Quiz = (props) => {
                     <h5 className={`${contentLoaded ? '' : 'noVis'}`}>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
                 </div>
                 
-                <div className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c ${contentLoaded ? '' : 'noVis'} `} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>
+                <div onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c ${contentLoaded ? '' : 'noVis'} `} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>
                     <h6>تغییر خودکار</h6>
-                    <button onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className="quiz__autoQuestionChangerSwitch__btn btn">
+                    <button className="quiz__autoQuestionChangerSwitch__btn btn">
                         <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
                     </button>
                 </div> 

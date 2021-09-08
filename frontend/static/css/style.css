@@ -2430,11 +2430,13 @@ body {
 }
 
 .quiz__correctAnswer {
-  border: 1.5px solid green !important;
+  border: 3px solid green !important;
+  background: #0019007d !important;
 }
 
 .quiz__wrongAnswer {
-  border: 1.5px solid red !important;
+  border: 3px solid red !important;
+  background: #1f000052 !important;
 }
 
 .quiz__tags {
@@ -2546,10 +2548,6 @@ body {
 .quiz__lowHigh label:nth-child(11) {
   padding-right: 3.3rem;
   padding-top: 1rem;
-}
-
-.quiz__lowHigh :checked + label {
-  background: #af282f;
 }
 
 .countingResult {
@@ -2773,6 +2771,7 @@ body {
   margin-right: 2.5rem;
   margin-left: 2.5rem;
   margin-bottom: 2.25rem;
+  direction: ltr;
 }
 
 .result__subtitle {
@@ -2784,30 +2783,6 @@ body {
   .result__subtitle {
     font-size: 1.3rem;
   }
-}
-
-.result__clipboard {
-  top: -100vh;
-  left: -100vw;
-}
-
-.result__share h5 {
-  margin-bottom: 1rem;
-  white-space: pre-line;
-}
-
-.result__share__btn {
-  font-size: 0.98rem;
-  font-weight: 300;
-  background: linear-gradient(-45deg, #4D1420, #9D272D) !important;
-  color: white !important;
-}
-
-.result__share__message {
-  color: green;
-  font-family: harmattan, myHarmattan, sans-serif, serif;
-  margin: 0;
-  margin-top: 1.25rem;
 }
 
 .result__score {

@@ -31,9 +31,9 @@ const Footer = () => {
                 <div>
                     <h3>کتگوری ها</h3>
                     <ul>
-                        <li><Link to="/category/movieSeries">فیلم و سریال</Link></li>
-                        <li><Link to="/category/celebrity">سلبریتی</Link></li>
-                        <li><Link to="/category/psychology">روانشناسی</Link></li>
+                        <li><a href="/category/movieSeries">فیلم و سریال</a></li>
+                        <li><a href="/category/celebrity">سلبریتی</a></li>
+                        <li><a href="/category/psychology">روانشناسی</a></li>
                     </ul>
                 </div>
 

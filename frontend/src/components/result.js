@@ -10,12 +10,11 @@ import LoadingScreen from './loadingScreen'
 import Header from './hotHeader'
 import QuizContainer from './quizContainer'
 
-const Result = (props) => {
+const Result = () => {
     const [score, setScore] = useState(0)
     const [resultScore, setResultScore] = useState(0)
     const [resultSubtitle, setResultSubtitle] = useState()
     const [resultGif, setResultGif] = useState()
-    const [clipboard, setClipboard] = useState()
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -40,7 +39,6 @@ const Result = (props) => {
     const questions = JSON.parse(localStorage.getItem('resultQuestions'))
     const correctAnswersCounter = localStorage.getItem('resultCorrectAnswersCounter')
     const resultQuiz = JSON.parse(localStorage.getItem('resultQuiz'))
-    let clipboardRef = useRef(null)
 
     const calculateTheResultScore = () => {
         const questionsCounter = questions.length
@@ -82,19 +80,6 @@ const Result = (props) => {
         }
     }
 
-    const copyResultAndQuizLink = () => {
-        const quizUrl = `${window.location.origin}/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`
-
-        const messageShare =
-            `من تو کوییز ${resultQuiz.title} (${resultScore}) درصد درست زدم . تو چقدر میتونی بزنی ؟
-            \n -----------------------------------------
-            \n ${quizUrl}`
-
-        setClipboard(messageShare)
-        clipboardRef.select()
-        document.execCommand('copy')
-    }
-
     const tryAgainTheQuiz = () => {
         window.history.go(-1)
     }
@@ -119,7 +104,7 @@ const Result = (props) => {
 
             setTimeout(() => {
                 fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
-            }, 3000)
+            }, 2000)
         }, 10000)
     }
 
@@ -182,8 +167,6 @@ const Result = (props) => {
                 <div className='wrapper-med'>
                     <div className="result__share space-sm tx-al-c">
                         <h5>{'دوستات رو به چالش بکش  \n ببین میتونن بیشتر از تو بیارن'}</h5>
-                        {/* <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button> */}
-                        {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک کوییز کپی شد</h6> */}
 
                         <InlineShareButtons
                             config={{
@@ -245,8 +228,6 @@ const Result = (props) => {
                 </div>
 
             </div>
-
-            <textarea ref={(value) => clipboardRef = value} value={clipboard} className="result__clipboard pos-abs" />
 
             <h2 className='tx-al-c space-med beforeAfterDecor'>کوییز های مشابه</h2>
 

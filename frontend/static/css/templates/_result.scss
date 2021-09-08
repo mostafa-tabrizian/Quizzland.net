@@ -19,6 +19,7 @@
         margin-right: 2.5rem;
         margin-left: 2.5rem;
         margin-bottom: 2.25rem;
+        direction: ltr;
     }
 
     &__subtitle {
@@ -27,29 +28,6 @@
 
         @include breakpoints-down(medium) {
             font-size: $font-l - .3;
-        }
-    }
-
-    &__clipboard {
-        top:-100vh; left: -100vw;
-    }
-
-    &__share {
-        h5 {
-            margin-bottom: 1rem;
-            white-space: pre-line;
-        }
-
-        &__btn {
-            font-size: $font-sm - .2rem; font-weight: 300;
-            background: linear-gradient(-45deg, #4D1420, #9D272D) !important;
-            color: white !important;
-        }
-
-        &__message {
-            color: green;
-            font-family: $font-pr;
-            margin: 0; margin-top: 1.25rem;
         }
     }
 

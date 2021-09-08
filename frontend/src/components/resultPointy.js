@@ -15,7 +15,6 @@ const Result = (props) => {
     const [resultSubtitle, setResultSubtitle] = useState()
     const [resultImg, setResultImg] = useState()
     const [resultText, setResultText] = useState()
-    const [clipboard, setClipboard] = useState()
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -28,8 +27,6 @@ const Result = (props) => {
     }, [])
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
-
-    let clipboardRef = useRef(null)
 
     // const setBackground = (backgroundUrl) => {
     //     if (backgroundUrl !== undefined) {
@@ -93,14 +90,6 @@ const Result = (props) => {
         }
     }
 
-    const copyResultAndQuizLink = () => {
-        const quizUrl = `${window.location.origin}/quiz/${replaceFunction(state.quiz.title, ' ', '-')}`
-
-        setClipboard(quizUrl)
-        clipboardRef.select()
-        document.execCommand('copy')
-    }
-
     const tryAgainTheQuiz = () => {
         window.history.go(-1)
     }
@@ -147,8 +136,6 @@ const Result = (props) => {
                 <div className='wrapper-med'>
                     <div className="result__share space-sm tx-al-c">
                         <h5>{'ببین نتیجه‌ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
-                        {/* <button onClick={copyResultAndQuizLink} className='result__share__btn btn' aria-label="Copy Result For Share" data-clipboard-target='.result__clipboard' type="button">🙋🏻‍♂️ اشتراک گذاری</button> */}
-                        {/* <h6 className={`result__share__message ${clipboard === null && 'noVis'}`}>نتیجه و لینک تست کپی شد</h6> */}
 
                         <InlineShareButtons
                             config={{
@@ -210,8 +197,6 @@ const Result = (props) => {
                 </div>
 
             </div>
-
-            <textarea ref={(value) => clipboardRef = value} value={clipboard} className="result__clipboard pos-abs" />
 
             <h2 className='tx-al-c space-med beforeAfterDecor'>تست های مشابه</h2>
 
