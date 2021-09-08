@@ -799,7 +799,7 @@ input {
   font-family: lalezar, serif;
   font-weight: 300;
   font-size: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 0;
   position: relative;
   z-index: 1;
 }
@@ -813,13 +813,13 @@ input {
 
 .lowTitle {
   position: absolute;
-  font-size: 3rem;
+  font-size: 3.5rem;
   opacity: .25;
   font-family: lalezar, serif;
   font-weight: 300;
   z-index: 1;
   width: 100%;
-  top: 4.5rem;
+  top: 6.5rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -831,7 +831,7 @@ input {
 @media (max-width: 49.9375em) {
   .lowTitle {
     font-size: 2.5rem;
-    top: 2.5rem;
+    top: 5rem;
   }
 }
 
@@ -937,11 +937,12 @@ input {
   z-index: 1;
 }
 
-.header__logo h3 {
+.header__logo span {
   font-family: lalezar, serif;
   color: darkRed;
   margin: 0;
   margin-left: .2rem;
+  font-size: 1.6rem;
 }
 
 .header__logo img {
@@ -1126,10 +1127,6 @@ input {
 
 .header__quizzes {
   right: 19rem;
-}
-
-.header__white span {
-  background-color: #f0f0f0 !important;
 }
 
 .header__white a, .header__white button {
@@ -1888,7 +1885,7 @@ input {
 
 .sort__controller p {
   position: absolute;
-  bottom: -1.5rem;
+  bottom: -2rem;
   -webkit-transform: translate(-1rem);
           transform: translate(-1rem);
   font-size: 0.88rem;
@@ -2090,7 +2087,7 @@ body {
   background: #00000065;
   -webkit-backdrop-filter: blur(165px);
           backdrop-filter: blur(165px);
-  width: 21rem;
+  width: 20.9rem;
 }
 
 @media (min-width: 40em) {
@@ -2105,12 +2102,12 @@ body {
 }
 
 .quiz__imgQuestion {
-  width: 23rem;
-  border-radius: 1.2rem;
+  width: 20.8rem;
 }
 
 @media (min-width: 40em) {
   .quiz__imgQuestion {
+    border-radius: 1.2rem;
     width: 29rem;
   }
 }
@@ -2775,6 +2772,7 @@ body {
   opacity: .5;
   margin-right: 2.5rem;
   margin-left: 2.5rem;
+  margin-bottom: 2.25rem;
 }
 
 .result__subtitle {

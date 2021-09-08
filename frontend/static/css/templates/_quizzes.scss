@@ -111,7 +111,7 @@ body {
         border-radius: 23px 25px 0 0;
         background: #00000065;
         backdrop-filter: blur(165px);
-        width: 21rem;
+        width: 20.9rem;
 
         @include breakpoints-up(medium) {
             background: none;
@@ -123,10 +123,10 @@ body {
     }
 
     &__imgQuestion {
-        width: 23rem;
-        border-radius: 1.2rem;
+        width: 20.8rem;
 
         @include breakpoints-up(medium) {
+            border-radius: 1.2rem;
             width: 29rem;
         }
     }

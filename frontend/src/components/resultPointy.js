@@ -18,6 +18,7 @@ const Result = (props) => {
     const [clipboard, setClipboard] = useState()
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
+    const [contentLoaded, setContentLoaded] = useState(false)
 
     useEffect(async () => {
         setLoadState(true)
@@ -107,6 +108,7 @@ const Result = (props) => {
     const getSuggestionsQuiz = () => {
         axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(props.location.state.quiz.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
+        setContentLoaded(true)
     }
 
     return (

@@ -227,16 +227,6 @@ const Quiz = (props) => {
         }
     }
 
-    // const scaleAnimationAfterChoosingAnswer = () => {
-    //     if (!(window.navigator.userAgent.includes('Windows'))) {
-    //         setScaleAnimation(true)
-    
-    //         setTimeout(() => {
-    //             setScaleAnimation(false)
-    //         }, 150)
-    //     }
-    // }
-
     const automaticallyGoNextQuestionOrEndTheQuiz = () => {
         setAbleToGoNext(true)
 
@@ -250,7 +240,6 @@ const Quiz = (props) => {
             document.getElementById('quiz__answerImGif').scrollIntoView(false)
         }, 170)
 
-        // scaleAnimationAfterChoosingAnswer()
         setAbleToSelectOption(false)
         setAbleToGoNext(true)
         checkTheSelectedOption(props.target)
@@ -276,15 +265,16 @@ const Quiz = (props) => {
     }
 
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
-    if (isItDesktop || isItIPad) {
+
+    if (isItDesktop() || isItIPad()) {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 48
     } 
-    else if (isItMobile) {
+    else if (isItMobile()) {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 23.5
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
-        if (ableToGoNext || isItDesktop()) {
+        if (ableToGoNext) {
             if (currentQuestionNumber !== questions.length) {
                 setTimeout(() => {
                     setAbleToSelectOption(true)
@@ -404,8 +394,7 @@ const Quiz = (props) => {
             const splittedTags = tags.split('،')
             return (    
                 splittedTags.map(tag => {
-                    tag = replaceFunction(tag, '-', ' ')
-                    return <li><h2><Link rel='tag' to={`/search?s=${tag}`}>{tag}</Link></h2></li>
+                    return <li><h2><Link rel='tag' to={`/search?s=${replaceFunction(tag, ' ', '+')}`} >{tag}</Link></h2></li>
                 })
             )
         }
@@ -554,14 +543,6 @@ const Quiz = (props) => {
                         <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
                     </button>
                 </div> 
-
-                {/* { isItDesktop() ?
-                    ''
-                    :
-                    <div className={` quiz__questionChanger__container pos-rel center ${contentLoaded ? '' : 'noVis'} `}>
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
-                    </div>
-                } */}
                 
             </div>
 
@@ -575,23 +556,17 @@ const Quiz = (props) => {
             </div>
 
             <div onTouchEnd={goNextQuestionOrEndTheQuiz} className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
-                <div className={`quiz__hider flex pos-rel`}>  {/* ${scaleAnimation && 'quiz__options__scaleUp'} */}
+                <div className={`quiz__hider flex pos-rel`}>
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded ? 'noVis' : ''}`}></div>
                     
                     { quizQuestions() }
                     
                     { isItDesktop() &&
-                        <div className={`quiz__questionChanger__container pos-abs ${!(contentLoaded) ? 'noVis' : ''} `}>
+                        <div className={`quiz__questionChanger__container pos-abs ${ableToGoNext ? 'fadeIn' : 'fadeOut'} ${contentLoaded ? '' : 'noVis'} `}>
                             <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
                         </div>
                     }
                 </div>
-
-                {/* { !(isItDesktop()) &&
-                    <div className={`quiz__bottomQuestionChanger__container pos-abs ${contentLoaded ? '' : 'noVis'} `}  id="quiz__answerDetail">
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__bottomQuestionChanger btn ${shouldShowTheBottomQuestionChanger()}` } aria-label="Next Question"></button>
-                    </div>
-                } */}
 
             </div>
 

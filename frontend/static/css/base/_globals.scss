@@ -529,7 +529,7 @@ input {
     font-family: lalezar, serif;
     font-weight: 300;
     font-size: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 0;
     position: relative;
     z-index: 1;
 
@@ -541,19 +541,19 @@ input {
 
 .lowTitle {
     position: absolute;
-    font-size: 3rem;
+    font-size: 3.5rem;
     opacity: .25;
     font-family: lalezar, serif;
     font-weight: 300;
     z-index: 1;
     width: 100%;
-    top: 4.5rem;
+    top: 6.5rem;
     justify-content: center;
     display: flex;
 
     @include breakpoints-down(medium) {
         font-size: 2.5rem;
-        top: 2.5rem;
+        top: 5rem;
     }
 }
 

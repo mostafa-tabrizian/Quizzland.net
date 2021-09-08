@@ -8,7 +8,7 @@ import rateLimit from 'axios-rate-limit';
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-import { log, replaceFunction } from './base'
+import { log, replaceFunction, isItDesktop } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
@@ -295,15 +295,10 @@ const Quiz = (props) => {
             const splittedTags = tags.split('،')
             return (    
                 splittedTags.map(tag => {
-                    tag = replaceFunction(tag, '-', ' ')
-                    return <li><h2><Link rel='tag' to={`/search?s=${tag}`} >{tag}</Link></h2></li>
+                    return <li><h2><Link rel='tag' to={`/search?s=r${replaceFunction(tag, ' ', '+')}`} >{tag}</Link></h2></li>
                 })
             )
         }
-    }
-
-    const isItDesktop = () => {
-        return window.navigator.userAgent.includes('Windows')
     }
 
     const getSuggestionsQuiz = (subCategory) => {

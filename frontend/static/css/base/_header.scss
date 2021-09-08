@@ -9,11 +9,12 @@
     &__logo {
         z-index: 1;
 
-        h3 {
+        span {
             font-family: lalezar, serif;
             color: darkRed;
             margin: 0;
             margin-left: .2rem;
+            font-size: 1.6rem;
         }
 
         img {
@@ -185,10 +186,6 @@
     }
 
     &__white {
-        span {
-            background-color: $white !important;
-        }
-        
         a, button {
             color: $white;
 

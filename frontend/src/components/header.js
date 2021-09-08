@@ -110,14 +110,14 @@ const Header = (props) => {
                     <div className="flex flex-ai-c">
                         <Link to="/" className='header__logo flex flex-jc-sb flex-ai-c hideForDesktop'>
                             <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال، گیمینگ و کوییز های روانشناسی و خودشناسی" />
-                            <h3>uizzland</h3>
+                            <span>uizzland</span>
                         </Link>
                         <Search/>
                     </div>
 
                     <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
                         <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
-                            <h3>uizzland</h3>
+                            <span>uizzland</span>
                             <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال، گیمینگ و کوییز های روانشناسی و خودشناسی" />
                         </Link>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
