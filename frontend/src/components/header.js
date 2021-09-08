@@ -158,9 +158,9 @@ const Header = (props) => {
                             <div className="header__menu__inner__category">
                                 <h4>کتگوری ها</h4>
                                 <ul>
-                                    <li><a href="/category/movie-series">🎬 فیلم و سریال</a></li>
-                                    <li><a href="/category/celebrity">✨ سلبریتی</a></li>
-                                    <li><a href="/category/psychology">🧠 روانشناسی</a></li>
+                                    <li><a href="/category/movie-series">فیلم و سریال 🎬</a></li>
+                                    <li><a href="/category/celebrity">سلبریتی ✨</a></li>
+                                    <li><a href="/category/psychology">روانشناسی 🧠</a></li>
                                 </ul>
                             </div>
                             <div className="header__menu__inner__nav">

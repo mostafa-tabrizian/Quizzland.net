@@ -503,7 +503,7 @@ input {
     }
 
     @include breakpoints-down(medium) {
-        transform: translate(0.49rem, -0.33rem);
+        transform: translate(-0.51rem, -0.33rem);
     }
 
     &__container {
@@ -595,7 +595,7 @@ input {
         width: 30rem; height: 25rem !important;
 
         @include breakpoints-up(medium) {
-            transform: translate(6rem);
+            transform: translate(8rem);
         }
     }
 

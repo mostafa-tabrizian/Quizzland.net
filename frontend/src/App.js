@@ -79,7 +79,7 @@ const App = () => {
                         <Route path='/privacy-policy' component={PrivacyPolicy} />
                         <Route path='/search' component={Search} />
                         <Route path='/sort' component={Sort} />
-                        <Route path='/makeMonthlyRecord19931506' component={monthlyRecord} />
+                        <Route path='/makeMonthlyRecord' component={monthlyRecord} />
                         <Route path='/welcomeOwl' component={welcomeOwl} />
                         <Route path='/welcomeZeynab' component={welcomeZeynab} />
                         <Route component={pageNotFound_404} />

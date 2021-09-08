@@ -49,7 +49,7 @@
     &__menu {
         z-index: 3;
         top: 0; left: 0;
-        background: rgba(56, 56, 56, 0.3);
+        background: rgba(148, 148, 148, 0.3);
         box-shadow: 0 7px 20px black;
         backdrop-filter: blur(20px);
         border: 2px solid transparent;
@@ -94,10 +94,15 @@
             z-index: 2;
             grid-template-columns: auto auto auto;
             grid-gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 2rem;
+            font-weight: 600;
+
+            h4 {
+                margin-bottom: 1rem;
+            }
 
             ul > li {
-                margin-bottom: .2rem;
+                margin-bottom: .6rem;
 
                 & > a:hover {
                     color: inherit !important;
@@ -186,6 +191,13 @@
     }
 
     &__white {
+
+        @include breakpoints-down(medium) {
+            span {
+                background-color: $white !important;
+            }
+        }
+        
         a, button {
             color: $white;
 

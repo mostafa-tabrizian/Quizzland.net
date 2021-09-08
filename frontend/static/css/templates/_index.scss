@@ -109,14 +109,18 @@
     }
 
     &__title {
-        padding-top: 12rem;
+        padding-top: 2rem;
         padding-right: 1.125rem;
+
+        @include breakpoints-down(medium) {
+            padding-top: 5rem;
+        }
     }
     
     img {
         width: 14.6875rem; height: 14.6875rem;
         border-radius: 20px;
-        box-shadow: 5px 10px 22px #000000a3;
+        box-shadow: 5px 10px 16px #000000d9;
         margin: 1.4375rem; margin-bottom: .5rem;
         transition: all .3s ease-in-out;
         
@@ -139,7 +143,11 @@
         font-family: lalezar, harmattan, sans-serif;
         font-weight: 100;
         transform: translate(1rem);
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+
+        @include breakpoints-down(medium) {
+            font-size: 1.3rem; 
+        }
     }
 }
 

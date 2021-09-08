@@ -56,8 +56,8 @@ html {
     }
 
     &__menu {
-        background: rgba(56, 56, 56, 0.3) !important;
-
+        background:rgba(29, 29, 29, 0.624) !important;
+        
         &__openBtn {
             span {
                 background: white !important;
@@ -71,7 +71,7 @@ html {
 
     &__search {
         &__opener {
-            background: url('/static/img/srch-white.svg') no-repeat center center !important;
+            background: url('/static/img/srch-white.svg') no-repeat center !important;
         }
 
         &__input {

@@ -31,6 +31,13 @@
         }
     }
 
+    &__share {
+        h5 {
+            margin-bottom: 1rem;
+            white-space: pre-line;
+        }
+    }
+
     &__score {
         font-size: $font-xl; font-weight: 600;
         order: 1;

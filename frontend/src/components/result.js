@@ -196,7 +196,7 @@ const Result = () => {
 
                     </div>
 
-                    <h2 className='flex flex-jc-c flex-ai-c space-med'>این کوییز چطور بود؟</h2>
+                    <h2 className='flex flex-jc-c flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
                     
                     <div>
                         <InlineReactionButtons

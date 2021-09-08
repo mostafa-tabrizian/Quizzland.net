@@ -15,7 +15,7 @@ urlpatterns = [
     path('result/<title>', quiz),
     path('search', index),
     path('sort', index),
-    path('makeMonthlyRecord19931506', index),
+    path('makeMonthlyRecord', index),
     path('welcomeOwl', index),
     path('welcomeZeynab', index),
 ]

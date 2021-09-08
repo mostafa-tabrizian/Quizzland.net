@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { saveAs } from 'file-saver'
 import axios from 'axios';
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -8,7 +8,11 @@ import Header from './header'
 
 import { log } from './base'
 
+let sha256 = require('js-sha256');
+
 const QuizMonthlyRecord = () => {
+    const [showPassword, setShowPassword] = useState(false)
+
     const [recordStartStatue_1, setRecordStartStatue_1] = useState()
     const [recordStartStatue_1_2, setRecordStartStatue_1_2] = useState()
 
@@ -17,6 +21,8 @@ const QuizMonthlyRecord = () => {
 
     const [recordStartStatue_3, setRecordStartStatue_3] = useState()
     const [recordStartStatue_3_2, setRecordStartStatue_3_2] = useState()
+
+    const passwordInput = useRef(null)
 
     const getAllQuizzes = async () => {
         setRecordStartStatue_1('Getting Quiz Data...')
@@ -125,16 +131,33 @@ const QuizMonthlyRecord = () => {
             }
         })
     }
-        
-    useEffect(() => {
+
+    const adminChecker = () => {
+        const InputValueHashed = sha256(passwordInput.current.value)
+        const password = '4717a31189f18bd8313df862bd052c8ab02f8b83831864f3aeb5343a2919f8cf'
+
+        if(InputValueHashed === password) {
+            startRecord()
+        }
+    }
+
+    const startRecord = () => {
+        log('record start')
         getAllQuizzes()
         getAllCategories()
-    }, [])
+    }
 
     return (
         <React.Fragment>
 
             <Header />
+
+            <h3 className='tx-al-c'>💜 Enter The Password Fucker</h3>
+            <div className="flex flex-jc-c">
+                <input type="text" type={showPassword ? 'string' : 'password'} style={{fontSize: '1.5rem', padding: '1rem', background: 'transparent', border: '1px solid gray', borderRadius: '15px', boxShadow: '0 0 15px #8080803d'}}
+                ref={passwordInput} onChange={adminChecker} />
+                <button onClick={() => showPassword ? setShowPassword(false) : setShowPassword(true)} style={{marginLeft: '1rem', background: 'transparent', border: 'none'}}>Show Input</button>
+            </div>
 
             <div className='basicPage wrapper-med'>
                 <h1 className='space-sm tx-al-l'> {recordStartStatue_1} </h1>

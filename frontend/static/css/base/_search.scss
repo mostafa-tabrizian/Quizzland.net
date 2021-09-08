@@ -63,7 +63,7 @@
         left: 0; top: 3rem;
         width: 93vw;
         max-width: 73rem; min-height: 27rem;
-        padding-top: 1rem;
+        padding-top: 1rem; padding-bottom: 1rem;
         border-radius: 15px;
         box-shadow: 0 0 40px #00000033;
         backdrop-filter: blur(22px);
@@ -144,12 +144,12 @@
                 }
         
                 h5 {
-                    transform: translateY(-13.125rem);
+                    transform: translateY(-9.125rem);
                     color: $white;
                     font-size: $font-l;
 
                     @include breakpoints-down(medium) {
-                        transform: translateY(-9.125rem)
+                        transform: translateY(-6.5rem)
                     }
     
                     a {
@@ -165,6 +165,8 @@
             @include breakpoints-down(medium) {
                 width: 20rem;
             }
+
+            margin-top: 1.5rem;
 
             ul {
                 margin-right: 4rem;
