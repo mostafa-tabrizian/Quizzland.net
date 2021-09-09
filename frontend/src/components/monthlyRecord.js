@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { saveAs } from 'file-saver'
 import axios from 'axios';
+import { Helmet } from "react-helmet";
+
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
@@ -151,6 +153,10 @@ const QuizMonthlyRecord = () => {
         <React.Fragment>
 
             <Header />
+
+            <Helmet>
+                <meta name="robots" content="noindex" />
+            </Helmet>
 
             <h3 className='tx-al-c'>💜 Enter The Password Fucker</h3>
             <div className="flex flex-jc-c">

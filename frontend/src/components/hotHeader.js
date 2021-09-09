@@ -124,12 +124,12 @@ const Header = (props) => {
                         }
                     </div>
 
-                    <ul className={`header__categories ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${categoryNavigationOpen && 'subHeader__open'}`}>
+                    <ul className={`header__categories ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${categoryNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><a href="/category/movie-series">🎬 فیلم و سریال</a></li>
                         <li><a href="/category/celebrity">✨ سلبریتی</a></li>
                         <li><a href="/category/psychology">🧠 روانشناسی</a></li>
                     </ul>
-                    <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen && 'subHeader__open'}`}>
+                    <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><a href="/sort?q=newest">⏳ جدیدترین ها</a></li>
                         <li><a href="/sort?q=bestest">👑 بهترین ها</a></li>
                         <li><a href="/sort?q=monthlyBestest">👑 بهترین های ماه</a></li>
@@ -143,7 +143,7 @@ const Header = (props) => {
                         <span></span>
                     </button>
                     
-                    <div className={`header__menu pos-fix tx-al-r hideForDesktop ${!menuOpen && 'slideMenu-hide'}`}>
+                    <div className={`header__menu pos-fix tx-al-r hideForDesktop ${menuOpen ? '' : 'slideMenu-hide'}`}>
                         <button onClick={openCloseMenu} className="header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Menu Button"></button>
                         <div className="header__menu__inner grid grid-jc-c">
                             <div className="header__menu__inner__category">
@@ -168,7 +168,6 @@ const Header = (props) => {
                                     <li><a href="/guide">راهنما</a></li>
                                     <li><a href="/contact">تماس با ما</a></li>
 
-                                    {/* Night Mode */}
                                     {
                                         showNightModeButton &&
                                         <div className="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">

@@ -23,6 +23,7 @@ const PageNotFound_404 = () => {
                 <title>صفحه مورد نظر پیدا نشد |‌ کوییزلند</title>
                 <meta name="description" content="صفحه مورد نظر پیدا نشد" />
                 <meta name="keywords" content="کوییزلند" />
+                <meta name="robots" content="noindex"></meta>
             </Helmet>
     
             <div class="basicPage wrapper-sm center">

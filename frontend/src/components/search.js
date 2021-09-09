@@ -14,16 +14,21 @@ const Search = (props) => {
     const [quizzesGrabbedCounter, setQuizzesGrabbedCounter] = useState(0)
 
     const searchSubmit = useRef()
+    const mobileSearchInput = useRef()
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     const searchMobileFocusChangedHideOrShow = () => {
-        setSearchMobile(searchMobile ? false : true)
-        if (!searchMobile) {
+        const menuIsOpened = !(searchMobile)
+        if (menuIsOpened) {
             document.body.style.overflow = 'hidden'
+            setTimeout(() => {
+                mobileSearchInput.current.focus()
+            }, 18)
         } else {
             document.body.style.overflow = 'overlay'
         }
+        setSearchMobile(searchMobile ? false : true)
     }
 
     const searchHandler = async (value) => {
@@ -195,6 +200,7 @@ const Search = (props) => {
                 <input
                     type='text'
                     className={`header__search__input tx-al-r ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
+                    ref={mobileSearchInput}
                     placeholder='...جستجو'
                     onChange={inputChanged}
                 />

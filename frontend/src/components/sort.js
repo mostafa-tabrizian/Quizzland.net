@@ -130,7 +130,7 @@ const Sort = () => {
 
             <h3 className='title'>{sortTitle}</h3>
 
-            <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+            <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
 
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>

@@ -17,16 +17,15 @@ const logo = '/static/img/Q-small.png'
 
 let quiz = 'null'
 
-const Quiz = (props) => {
+const Quiz = () => {
     const [questions, setQuestions] = useState([])
     const [correctAnswersCounter, setCorrectAnswersCounter] = useState(0)
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [correctAnswerOption, setCorrectAnswerOption] = useState(0)
     const [wrongAnswerOption, setWrongAnswerOption] = useState(0)
-    // const [scaleAnimation, setScaleAnimation] = useState(false)
     const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
-    const [showBottomQuestionChanger, setShowBottomQuestionChanger] = useState(false)
+    const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [ableToSelectOption, setAbleToSelectOption] = useState(true)
     const [quizEnded, setQuizEnded] = useState(false)
     const [loadState, setLoadState] = useState()
@@ -34,7 +33,6 @@ const Quiz = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [quizThumbnail, setQuizThumbnail] = useState()
-    const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [SFXAllowed, setSFXAllowed] = useState()
 
     const result = useRef(null)
@@ -227,26 +225,33 @@ const Quiz = (props) => {
         }
     }
 
-    const automaticallyGoNextQuestionOrEndTheQuiz = () => {
-        setAbleToGoNext(true)
-
-        setTimeout(() => {
-            goNextQuestionOrEndTheQuiz()
-        }, 3500);
+    const amountOfPauseCalculator = () => {
+        let amountOfPause = 1500
+        const currentQuestions = questions[currentQuestionNumber - 1]
+        if (currentQuestions.answer_text !== '') {
+            amountOfPause += 2000
+        }
+        if (!(currentQuestions.answer_imGif.includes('NotExist'))) {
+            amountOfPause += 2000
+        }
+        return amountOfPause
     }
 
     const selectedOption = (props) => {
-        setTimeout(() => {
-            document.getElementById('quiz__answerImGif').scrollIntoView(false)
-        }, 170)
-
-        setAbleToSelectOption(false)
-        setAbleToGoNext(true)
-        checkTheSelectedOption(props.target)
-        setShowBottomQuestionChanger(true)
-
-        if (autoQuestionChanger) {
-            automaticallyGoNextQuestionOrEndTheQuiz()
+        if (ableToSelectOption) {
+            setTimeout(() => {
+                document.getElementById('quiz__answerImGif').scrollIntoView(false)
+            }, 170)
+            
+            setAbleToSelectOption(false)
+            setAbleToGoNext(true)
+            checkTheSelectedOption(props.target)
+    
+            if (autoQuestionChanger) {
+                setTimeout(() => {
+                    goNextQuestionOrEndTheQuiz()
+                }, amountOfPauseCalculator())
+            }
         }
     }
 
@@ -258,10 +263,13 @@ const Quiz = (props) => {
 
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        setShowBottomQuestionChanger(false)
         setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
+
+        setTimeout(() => {
+            setAbleToSelectOption(true)
+        }, 1300)
     }
 
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
@@ -274,11 +282,8 @@ const Quiz = (props) => {
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
-        if (ableToGoNext) {
+        if (ableToGoNext || autoQuestionChanger) {
             if (currentQuestionNumber !== questions.length) {
-                setTimeout(() => {
-                    setAbleToSelectOption(true)
-                }, 1500)
                 restartTheStateOfQuestion()
                 plusOneToTotalAnsweredQuestions()
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
@@ -296,7 +301,7 @@ const Quiz = (props) => {
                         localStorage.setItem('resultCorrectAnswersCounter', correctAnswersCounter)
                         result.current.click()
                     } catch{
-                        log("Can't show set the result in localStorage!")
+                        log("Can't show the result from localStorage!")
                     }
                 }, 3500)
             }
@@ -308,10 +313,10 @@ const Quiz = (props) => {
             return (
                 <div className="flex flex-jc-c">
                     <form className='quiz__options quiz__options__text' action="">
-                        { question.option_1st !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-1`} /> <label className={`quiz__options__textLabel ${correctAnswerOption === 1 && 'quiz__correctAnswer'} ${wrongAnswerOption === 1 && 'quiz__wrongAnswer'} ${!ableToSelectOption && 'pointerOff'}`} id={`${question.id}-1`} htmlFor={`${question.id}-1`}> { question.option_1st } </label> </React.Fragment> }
-                        { question.option_2nd !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-2`} /> <label className={`quiz__options__textLabel ${correctAnswerOption === 2 && 'quiz__correctAnswer'} ${wrongAnswerOption === 2 && 'quiz__wrongAnswer'} ${!ableToSelectOption && 'pointerOff'}`} id={`${question.id}-2`} htmlFor={`${question.id}-2`}> { question.option_2nd } </label> </React.Fragment> }
-                        { question.option_3rd !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-3`} /> <label className={`quiz__options__textLabel ${correctAnswerOption === 3 && 'quiz__correctAnswer'} ${wrongAnswerOption === 3 && 'quiz__wrongAnswer'} ${!ableToSelectOption && 'pointerOff'}`} id={`${question.id}-3`} htmlFor={`${question.id}-3`}> { question.option_3rd } </label> </React.Fragment> }
-                        { question.option_4th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-4`} /> <label className={`quiz__options__textLabel ${correctAnswerOption === 4 && 'quiz__correctAnswer'} ${wrongAnswerOption === 4 && 'quiz__wrongAnswer'} ${!ableToSelectOption && 'pointerOff'}`} id={`${question.id}-4`} htmlFor={`${question.id}-4`}> { question.option_4th } </label> </React.Fragment> }
+                        { question.option_1st !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-1`} /> <label className={`quiz__options__textLabel ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : '' } ${!ableToSelectOption ? 'pointerOff' : '' }`} id={`${question.id}-1`} htmlFor={`${question.id}-1`}> { question.option_1st } </label> </React.Fragment> }
+                        { question.option_2nd !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-2`} /> <label className={`quiz__options__textLabel ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : '' } ${!ableToSelectOption ? 'pointerOff' : '' }`} id={`${question.id}-2`} htmlFor={`${question.id}-2`}> { question.option_2nd } </label> </React.Fragment> }
+                        { question.option_3rd !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-3`} /> <label className={`quiz__options__textLabel ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : '' } ${!ableToSelectOption ? 'pointerOff' : '' }`} id={`${question.id}-3`} htmlFor={`${question.id}-3`}> { question.option_3rd } </label> </React.Fragment> }
+                        { question.option_4th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-4`} /> <label className={`quiz__options__textLabel ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : '' } ${!ableToSelectOption ? 'pointerOff' : '' }`} id={`${question.id}-4`} htmlFor={`${question.id}-4`}> { question.option_4th } </label> </React.Fragment> }
                     </form>
                 </div>
             )
@@ -319,10 +324,10 @@ const Quiz = (props) => {
             return (
                 <div className="flex flex-jc-c">
                     <form className='quiz__options quiz__options__img grid flex-jc-c pos-rel' data={question.answer} action="">
-                        { !(question.option_img_1st.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-1`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 1 && 'quiz__correctAnswer'} ${wrongAnswerOption === 1 && 'quiz__wrongAnswer'} ${!ableToSelectOption && 'pointerOff'}`} id={`${question.id}-1`} htmlFor={`${question.id}-1`}> <img className="quiz__imgOption" src={question.option_img_1st} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
-                        { !(question.option_img_2nd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-2`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 2 && 'quiz__correctAnswer'} ${wrongAnswerOption === 2 && 'quiz__wrongAnswer'} ${!ableToSelectOption && 'pointerOff'}`} id={`${question.id}-2`} htmlFor={`${question.id}-2`}> <img className="quiz__imgOption" src={question.option_img_2nd} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
-                        { !(question.option_img_3rd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-3`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 3 && 'quiz__correctAnswer'} ${wrongAnswerOption === 3 && 'quiz__wrongAnswer'} ${!ableToSelectOption && 'pointerOff'}`} id={`${question.id}-3`} htmlFor={`${question.id}-3`}> <img className="quiz__imgOption" src={question.option_img_3rd} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
-                        { !(question.option_img_4th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-4`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 4 && 'quiz__correctAnswer'} ${wrongAnswerOption === 4 && 'quiz__wrongAnswer'} ${!ableToSelectOption && 'pointerOff'}`} id={`${question.id}-4`} htmlFor={`${question.id}-4`}> <img className="quiz__imgOption" src={question.option_img_4th} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_1st.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-1`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : '' } ${!ableToSelectOption ? 'pointerOff' : '' }`} id={`${question.id}-1`} htmlFor={`${question.id}-1`}> <img className="quiz__imgOption" src={question.option_img_1st} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_2nd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-2`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : '' } ${!ableToSelectOption ? 'pointerOff' : '' }`} id={`${question.id}-2`} htmlFor={`${question.id}-2`}> <img className="quiz__imgOption" src={question.option_img_2nd} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_3rd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-3`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : '' } ${!ableToSelectOption ? 'pointerOff' : '' }`} id={`${question.id}-3`} htmlFor={`${question.id}-3`}> <img className="quiz__imgOption" src={question.option_img_3rd} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_4th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-4`} /> <label className={`quiz__options__imgLabel ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : '' } ${!ableToSelectOption ? 'pointerOff' : '' }`} id={`${question.id}-4`} htmlFor={`${question.id}-4`}> <img className="quiz__imgOption" src={question.option_img_4th} alt={question.title} title={question.title} loading='lazy' /> </label> </React.Fragment> }
                     </form>
                 </div>
             )
@@ -376,18 +381,6 @@ const Quiz = (props) => {
         setCurrentQuestionNumber(prev => prev + 1)
     }
 
-    const shouldShowTheBottomQuestionChanger = () => {
-        if (showBottomQuestionChanger) {
-            if (autoQuestionChanger) {
-                return 'fadeOut'
-            } else {
-                return 'fadeIn'
-            }
-        } else {
-            return 'fadeOut'
-        }
-    }
-
     const showTheTagsIfNotNull = () => {
         if (quiz !== 'null') {
             const tags = quiz.tags
@@ -426,6 +419,9 @@ const Quiz = (props) => {
 
             <Helmet>
                 <title>{`کوییزلند | کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
+
+                <link rel="canonical" href={`https://quizzalnd.net/${window.location.pathname}`} />
+                
                 <meta name="description" content={`کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')} کوییزلند`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quizThumbnail} />
@@ -540,7 +536,7 @@ const Quiz = (props) => {
                 <div onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c ${contentLoaded ? '' : 'noVis'} `} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>
                     <h6>تغییر خودکار</h6>
                     <button className="quiz__autoQuestionChangerSwitch__btn btn">
-                        <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
+                        <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : '' } pos-rel`}></div>
                     </button>
                 </div> 
                 
@@ -555,7 +551,7 @@ const Quiz = (props) => {
                 سوال شماره
             </div>
 
-            <div onTouchEnd={goNextQuestionOrEndTheQuiz} className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
+            <div onTouchEnd={autoQuestionChanger ? () => {return} : goNextQuestionOrEndTheQuiz } className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
                 <div className={`quiz__hider flex pos-rel`}>
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded ? 'noVis' : ''}`}></div>
                     
@@ -563,7 +559,7 @@ const Quiz = (props) => {
                     
                     { isItDesktop() &&
                         <div className={`quiz__questionChanger__container pos-abs ${ableToGoNext ? 'fadeIn' : 'fadeOut'} ${contentLoaded ? '' : 'noVis'} `}>
-                            <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
+                            <button onClick={autoQuestionChanger ? () => {return} : goNextQuestionOrEndTheQuiz } className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
                         </div>
                     }
                 </div>
@@ -580,7 +576,7 @@ const Quiz = (props) => {
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
                 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>

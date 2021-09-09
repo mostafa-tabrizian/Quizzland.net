@@ -2,31 +2,31 @@
 @font-face {
   font-family: "myHarmattan";
   font-display: swap;
-  src: url("/static/build/fonts/Harmattan-Regular.woff2") format("woff2"), url("/static/build/fonts/Harmattan-Regular.woff") format("woff"), url("/static/build/fonts/Harmattan-Regular.ttf") format("truetype");
+  src: url("/static/fonts/Harmattan-Regular.woff2") format("woff2"), url("/static/fonts/Harmattan-Regular.woff") format("woff"), url("/static/fonts/Harmattan-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "myChanga";
   font-display: swap;
-  src: url("/static/build/fonts/Changa-ExtraLight.woff2") format("woff2"), url("/static/build/fonts/Changa-ExtraLight.woff") format("woff"), url("/static/build/fonts/Changa-ExtraLight.ttf") format("truetype");
+  src: url("/static/fonts/Changa-ExtraLight.woff2") format("woff2"), url("/static/fonts/Changa-ExtraLight.woff") format("woff"), url("/static/fonts/Changa-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'lalezar';
+  font-family: 'myLalezar';
   font-display: swap;
-  src: url("/static/build/fonts/Lalezar-Regular.woff2") format("woff2"), url("/static/build/fonts/Lalezar-Regular.woff") format("woff"), url("/static/build/fonts/Lalezar-Regular.ttf") format("truetype");
+  src: url("/static/fonts/Lalezar-Regular.woff2") format("woff2"), url("/static/fonts/Lalezar-Regular.woff") format("woff"), url("/static/fonts/Lalezar-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "changeForNotChrome";
   font-display: swap;
-  src: url("/static/build/fonts/Changa-Light.woff2") format("woff2"), url("/static/build/fonts/Changa-Light.woff") format("woff"), url("/static/build/fonts/Changa-Light.ttf") format("truetype");
+  src: url("/static/fonts/Changa-Light.woff2") format("woff2"), url("/static/fonts/Changa-Light.woff") format("woff"), url("/static/fonts/Changa-Light.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Vermin-Vibes-2-Soft";
+  font-family: "myVermin";
   font-display: swap;
-  src: url("/static/build/fonts/Vermin-Vibes-2-Soft.woff2") format("woff2"), url("/static/build/fonts/Vermin-Vibes-2-Soft.woff") format("woff"), url("/static/build/fonts/Vermin-Vibes-2-Soft.ttf") format("truetype");
+  src: url("/static/fonts/Vermin-Vibes-2-Soft.woff2") format("woff2"), url("/static/fonts/Vermin-Vibes-2-Soft.woff") format("woff"), url("/static/fonts/Vermin-Vibes-2-Soft.ttf") format("truetype");
 }
 
 .wrapper-sm {
@@ -154,7 +154,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.3;
-  font-family: harmattan, myHarmattan, sans-serif, serif;
+  font-family: myHarmattan, sans-serif, serif;
   font-size: 1.325rem;
   position: relative;
   max-width: 100%;
@@ -181,7 +181,7 @@ h1 {
   font-size: 2rem;
   padding-bottom: 1.25rem;
   padding: 0;
-  font-family: Lalezar, myHarmattan;
+  font-family: myLalezar, myHarmattan;
   font-weight: 300;
 }
 
@@ -202,7 +202,7 @@ h3 {
   padding: 0 0 1rem 0;
   font-weight: 300;
   position: relative;
-  font-family: lalezar, myHarmattan;
+  font-family: myLalezar, myHarmattan;
 }
 
 @media (max-width: 49.9375em) {
@@ -241,7 +241,7 @@ li {
   border-radius: 5px;
   padding: 0 1rem;
   outline: none;
-  font-family: harmattan, myHarmattan, sans-serif, serif;
+  font-family: myHarmattan, sans-serif, serif;
   font-size: 1.18rem;
   -webkit-transition: all .1s ease-in-out;
   transition: all .1s ease-in-out;
@@ -273,7 +273,7 @@ input {
   border-radius: 20px;
   padding-right: 1rem;
   padding-left: 1rem;
-  font-family: harmattan, myHarmattan, sans-serif, serif;
+  font-family: myHarmattan, sans-serif, serif;
   font-size: 1.18rem;
   color: #161616;
   margin: 0;
@@ -796,7 +796,7 @@ input {
 
 .title {
   text-align: center;
-  font-family: lalezar, serif;
+  font-family: myLalezar, serif;
   font-weight: 300;
   font-size: 2rem;
   margin-bottom: 0;
@@ -815,7 +815,7 @@ input {
   position: absolute;
   font-size: 3.5rem;
   opacity: .25;
-  font-family: lalezar, serif;
+  font-family: myLalezar, serif;
   font-weight: 300;
   z-index: 1;
   width: 100%;
@@ -926,7 +926,7 @@ input {
 
 .header {
   font-size: 1.18rem;
-  font-family: harmattan, myHarmattan, sans-serif, serif;
+  font-family: myHarmattan, sans-serif, serif;
   margin-bottom: 2rem;
   padding: 1rem;
   z-index: 99;
@@ -938,7 +938,7 @@ input {
 }
 
 .header__logo span {
-  font-family: lalezar, serif;
+  font-family: myLalezar, serif;
   color: darkRed;
   margin: 0;
   margin-left: .2rem;
@@ -1203,7 +1203,7 @@ input {
 
 .header__search__input {
   border: None;
-  font-family: harmattan, myHarmattan, sans-serif, serif;
+  font-family: myHarmattan, sans-serif, serif;
   font-size: 1.18rem;
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
@@ -1679,7 +1679,7 @@ input {
 
 .hero__start h2 {
   font-size: 1.6rem;
-  font-family: lalezar, harmattan, serif;
+  font-family: myLalezar, myHarmattan, serif;
   font-weight: 100;
   letter-spacing: 0;
   line-height: 3rem;
@@ -1781,7 +1781,7 @@ input {
 .category h3 {
   margin-top: 0;
   display: block;
-  font-family: lalezar, harmattan, sans-serif;
+  font-family: myLalezar, myHarmattan, sans-serif;
   font-weight: 100;
   -webkit-transform: translate(1rem);
           transform: translate(1rem);
@@ -2032,7 +2032,7 @@ body {
 }
 
 .quiz__head {
-  font-family: Lalezar, Harmattan, sans-serif;
+  font-family: myLalezar, myHarmattan, sans-serif;
   z-index: 2;
 }
 
@@ -2104,7 +2104,7 @@ body {
 }
 
 .quiz__question {
-  font-family: harmattan, myHarmattan, sans-serif, serif;
+  font-family: myHarmattan, sans-serif, serif;
   font-weight: 300;
   font-size: 1.325rem;
   min-height: 4rem;
@@ -3033,7 +3033,7 @@ body {
 }
 
 .basicPage h3 {
-  font-family: lalezar, serif;
+  font-family: myLalezar, serif;
   font-weight: 300;
 }
 

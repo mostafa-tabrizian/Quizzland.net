@@ -107,7 +107,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 16px;
-    font-family: harmattan, myHarmattan, sans-serif, serif;
+    font-family: myHarmattan, sans-serif, serif;
     color: var(--body-fg);
     background: var(--body-bg);
 }

@@ -66,7 +66,7 @@ const Newsletter = () => {
 
             <button onClick={openCloseNewsletter} className="btn" type="button" aria-label="Sign Up To Newsletter">🖊️ ثبت نام در خبرنامه</button>
 
-            <div className={`${newsletterOpen && 'newsletter__blurBackground'}`}>
+            <div className={`${newsletterOpen ? 'newsletter__blurBackground' : ''}`}>
                 <form onSubmit={reCaptchaRef} className={`newsletter ${newsletterOpen ? 'fadeIn' : 'fadeOut'}`}>
                     <button ref={openCloseNewsletterRef} onClick={openCloseNewsletter} type="button" className="btn newsletter__closeBtn" aria-label="Close Newsletter Form Button"></button>
                     <p className="tx-al-c">لطفا نام و ایمیل خود را وارد نمائيد</p>

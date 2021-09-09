@@ -200,7 +200,7 @@ const Result = (props) => {
 
             <h2 className='tx-al-c space-med beforeAfterDecor'>تست های مشابه</h2>
 
-            <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+            <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>

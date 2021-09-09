@@ -138,7 +138,7 @@ const SubCategory = (props) => {
                 sortType={sortType} setSortType={setSortType}
             />
 
-            <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+            <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
 
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                 <li className='skeletonLoading skeletonLoading__quizContainer'></li>
@@ -151,9 +151,9 @@ const SubCategory = (props) => {
                 
             </ul>
 
-            <div className={hideQuizzes && 'noVis'}>
+            <div className={hideQuizzes ? 'noVis' : '' }>
 
-                <h2 className={`wrapper-med ${hideQuizzesPointy && 'noVis'}`} style={{color: 'white'}}>کوییز ها</h2>
+                <h2 className={`wrapper-med ${hideQuizzesPointy ? 'noVis' : '' }`} style={{color: 'white'}}>کوییز ها</h2>
 
                 <ul className={`quizContainer flex wrapper-med`}>
                     {listQuizzes()}
@@ -167,9 +167,9 @@ const SubCategory = (props) => {
 
             </div>
 
-            <div className={hideQuizzesPointy && 'noVis'}>
+            <div className={hideQuizzesPointy ? 'noVis' : '' }>
 
-                <h2 className={`wrapper-med ${hideQuizzes && 'noVis'}`} style={{color: 'white'}}>تست ها</h2>
+                <h2 className={`wrapper-med ${hideQuizzes ? 'noVis' : '' }`} style={{color: 'white'}}>تست ها</h2>
 
                 <ul className={`quizContainer flex wrapper-med`}>
                     {listQuizzesPointy()}

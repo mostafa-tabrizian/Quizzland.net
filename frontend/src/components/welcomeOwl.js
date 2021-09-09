@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from "react-helmet";
 
 const owlPage = '/static/img/owlPage.webp'
 
@@ -12,6 +13,10 @@ const welcomePage = () => {
 
     return (
         <React.Fragment>
+
+            <Helmet>
+                <meta name="robots" content="noindex" />
+            </Helmet>
 
             <div style={{marginBottom: '80rem'}}></div>
 

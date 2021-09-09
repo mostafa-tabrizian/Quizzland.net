@@ -410,7 +410,7 @@ const Quiz = () => {
 
             <div className="quiz__head pos-rel tx-al-r" id="quiz__head">
                 <div className='flex flex-jc-c flex-ai-c'>
-                    <div className={`skeletonLoading skeletonLoading__quizTitle tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
+                    <div className={`skeletonLoading skeletonLoading__quizTitle tx-al-c wrapper-sm ${contentLoaded ? 'noVis' : '' }`}></div>
                 </div>
                 
                 <div className="tx-al-c">
@@ -418,24 +418,24 @@ const Quiz = () => {
                 </div>
 
                 <div className="quiz__detail flex flex-jc-c flex-ai-c">
-                    <div className={`flex ${contentLoaded && 'noVis'}`}>
+                    <div className={`flex ${contentLoaded ? 'noVis' : '' }`}>
                         <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
                         <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
                     </div>
 
-                    <h5 className={`${!(contentLoaded) && 'noVis'}`}>تعداد سوال ها: {questions.length}</h5>
-                    <h5 className={`${!(contentLoaded) && 'noVis'}`}>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
+                    <h5 className={`${!(contentLoaded) ? 'noVis' : '' }`}>تعداد سوال ها: {questions.length}</h5>
+                    <h5 className={`${!(contentLoaded) ? 'noVis' : '' }`}>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
                 </div>
                 
                 <div onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c ${contentLoaded ? '' : 'noVis'} `} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>
                     <h6>تغییر خودکار</h6>
                     <button className="quiz__autoQuestionChangerSwitch__btn btn">
-                        <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger && 'quiz__autoQuestionChangerSwitch__innerBtn__switched'} pos-rel`}></div>
+                        <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : '' } pos-rel`}></div>
                     </button>
                 </div>
 
                 { !(isItDesktop()) &&
-                    <div className={` quiz__questionChanger__container pos-rel center ${!(contentLoaded) && 'noVis'} `}>
+                    <div className={` quiz__questionChanger__container pos-rel center ${!(contentLoaded) ? 'noVis' : '' } `}>
                         <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${showQuestionChangerToNext ? 'fadeIn' : 'fadeOut'}`} aria-label='Next Question'></button>
                         <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
                     </div>
@@ -447,18 +447,18 @@ const Quiz = () => {
                 <hr className='divider'></hr>
             }
 
-            <div className={`quiz__questionCounter pos-rel flex flex-jc-c flex-ai-c ${!(contentLoaded) && 'noVis'} `}>
+            <div className={`quiz__questionCounter pos-rel flex flex-jc-c flex-ai-c ${!(contentLoaded) ? 'noVis' : '' } `}>
                 <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
                 سوال شماره
             </div>
 
             <div className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
                 <div className={`quiz__hider flex pos-rel`}>
-                    <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded && 'noVis'}`}></div>
+                    <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded ? 'noVis' : '' }`}></div>
                     { quizQuestions() }
                     
                     { isItDesktop() &&
-                        <div className={`quiz__questionChanger__container pos-abs ${!(contentLoaded) && 'noVis'} `}>
+                        <div className={`quiz__questionChanger__container pos-abs ${!(contentLoaded) ? 'noVis' : '' } `}>
                             <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${showQuestionChangerToNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
                             <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn`} aria-label='Next Question'></button>
                         </div>
@@ -476,7 +476,7 @@ const Quiz = () => {
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>

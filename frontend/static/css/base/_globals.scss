@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 h1 {
     font-size: $font-xl;
     padding-bottom: 1.25rem; padding: 0;
-    font-family: Lalezar, myHarmattan;
+    font-family: myLalezar, myHarmattan;
     font-weight: 300;
 }
 
@@ -79,7 +79,7 @@ h3 {
     padding: 0 0 1rem 0;
     font-weight: 300;
     position: relative;
-    font-family: lalezar, myHarmattan;
+    font-family: myLalezar, myHarmattan;
 
     @include breakpoints-down(medium) {
         text-align: right;
@@ -526,7 +526,7 @@ input {
 
 .title {
     text-align: center;
-    font-family: lalezar, serif;
+    font-family: myLalezar, serif;
     font-weight: 300;
     font-size: 2rem;
     margin-bottom: 0;
@@ -543,7 +543,7 @@ input {
     position: absolute;
     font-size: 3.5rem;
     opacity: .25;
-    font-family: lalezar, serif;
+    font-family: myLalezar, serif;
     font-weight: 300;
     z-index: 1;
     width: 100%;

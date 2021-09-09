@@ -107,6 +107,7 @@ const SearchMoreResult = () => {
                 <title>{`کوییزلند | ${searchValueButWithoutHyphen} جستجو عبارت `}</title>
                 <meta name="description" content="صفحه جستجو کوییزلند" />
                 <meta name="keywords" content="جستجو, کوییز, کوییزلند" />
+                <meta name="robots" content="noindex, follow"></meta>
             </Helmet>
 
             <div className='flex flex-jc-c flex-ai-c'>

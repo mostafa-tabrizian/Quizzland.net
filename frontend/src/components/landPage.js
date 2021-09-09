@@ -217,15 +217,15 @@ const Index = () => {
             <h3 className="category__title tx-al-r wrapper-med">کتگوری</h3>
 
             <div className="category flex flex-ai-c flex-jc-fe wrapper-med" id="category">
-                <a href="/category/psychology?q=newest">
+                <a href="/category/psychology">
                     <img src={category_psychology} alt="کتگوری مختص تست های روانشناسی، شخصیت از منابع معتبر و بعضی برای سرگرمی خود" />
                     <h3 className='tx-al-c'>🧠 روانشناسی</h3>
                 </a>
-                <a href="/category/movie-series?q=newest">
+                <a href="/category/movie-series">
                         <img src={category_movieSeries} alt="کوییز کتگوری دسته ی فیلم و سریال مربوط به سوالات در مورد کارکتر شخصیت فیلم ها یا داستان آن" />
                         <h3 className='tx-al-c'>🎬 فیلم و سریال </h3>
                 </a>
-                <a href="/category/celebrity?q=newest">
+                <a href="/category/celebrity">
                     <img src={category_celebrity} alt="کوییز های کتگوری دسته ی سلبریتی مربوط به افراد مشهور مانند بازیگر و خواننده که مربوط به سوالات در مورد اطلاعات شخصی آنها یا فعالیت آنهاست" />
                     <h3 className='tx-al-c'>✨ سلبریتی </h3>
                 </a>
@@ -240,7 +240,7 @@ const Index = () => {
                     <h3>سلبریتی</h3>
                 </div>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
@@ -264,7 +264,7 @@ const Index = () => {
                     <h3>فیلم و سریال</h3>
                 </div>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
@@ -288,7 +288,7 @@ const Index = () => {
                     <h3>روانشناسی</h3>
                 </div>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded && 'noVis'}`}>
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
                     <li className='skeletonLoading skeletonLoading__quizContainer'></li>
@@ -314,7 +314,7 @@ const Index = () => {
                         <div className="sort-monthlyViews">
                             <h3 className="tx-al-c">پر بازدید ترین های این ماه</h3>
 
-                            <ul className={`sort__style quizContainer ${contentLoaded && 'noVis'}`}>
+                            <ul className={`sort__style quizContainer ${contentLoaded ? 'noVis' : ''}`}>
                                 <li className='skeletonLoading skeletonLoading__sortIndex'></li>
                                 <li className='skeletonLoading skeletonLoading__sortIndex'></li>
                                 <li className='skeletonLoading skeletonLoading__sortIndex'></li>
@@ -335,7 +335,7 @@ const Index = () => {
                         <div className="sort-views">
                             <h3 className="tx-al-c">پر بازدید ترین کوییز ها</h3>
 
-                            <ul className={`sort__style quizContainer ${contentLoaded && 'noVis'}`}>
+                            <ul className={`sort__style quizContainer ${contentLoaded ? 'noVis' : ''}`}>
                                 <li className='skeletonLoading skeletonLoading__sortIndex'></li>
                                 <li className='skeletonLoading skeletonLoading__sortIndex'></li>
                                 <li className='skeletonLoading skeletonLoading__sortIndex'></li>
