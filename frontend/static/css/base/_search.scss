@@ -176,7 +176,29 @@
                     grid-template-columns: 1fr 1fr;
                     display: grid;
                     gap: 1rem;
-                    margin-right: 2rem;
+                    margin-right: 1rem;
+                }
+
+                li {
+                    font-size: $font-sm - .06;
+                    margin-left: 2rem; margin-bottom: 1rem; margin-bottom: 1rem;
+                    width: 16rem;
+                    
+                    @include breakpoints-down(medium) {
+                        margin: 0;
+                        width: 10rem;
+                    }
+                    
+                    a {
+                        width: 23rem;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        
+                        @include breakpoints-down (medium) {
+                            width: 18rem;
+                        }
+                    }
                 }
 
                 img {
@@ -185,30 +207,8 @@
                     border-radius: 15px;
 
                     @include breakpoints-down(medium) {
-                        width: 9rem;
-                        height: 5.06rem;
-                    }
-                }
-    
-                li {
-                    font-size: $font-sm - .06;
-                    margin-left: 2rem; margin-bottom: 1rem; margin-bottom: 1rem;
-                    width: 16rem;
-
-                    @include breakpoints-down(medium) {
-                        margin: 0;
-                        width: 9rem;
-                    }
-
-                    a {
-                        width: 23rem;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                        white-space: nowrap;
-
-                        @include breakpoints-down (medium) {
-                            width: 18rem;
-                        }
+                        width: 10rem;
+                        height: 5.625rem;
                     }
                 }
             }

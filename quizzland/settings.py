@@ -13,8 +13,10 @@ DEBUG = config('DEBUG', cast=bool)
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
 
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+
 # # HSTS settings
-# SECURE_HSTS_SECONDS = 31536000 # 1 year
+# SECURE_HSTS_SECONDS = 86400 # 6 Month
 # SECURE_HSTS_PRELOAD = True
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
@@ -23,6 +25,14 @@ DEBUG = config('DEBUG', cast=bool)
 
 # # XSS
 # SECURE_BROWSER_XSS_FILTER = True
+
+# CSP
+CSP_DEFAULT_SRC = ("'none'",)
+CSP_STYLE_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_FONT_SRC = ("'self'",)
+CSP_IMG_SRC = ("'self'",)
+
 
 # Rest framework setup
 REST_FRAMEWORK = {
@@ -83,9 +93,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-
     'django.middleware.common.CommonMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'quizzland.urls'

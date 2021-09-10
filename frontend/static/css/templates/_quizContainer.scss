@@ -38,7 +38,7 @@
     
     article {
         padding-bottom: 1rem !important;
-        border-radius: .85rem !important;
+        border-radius: .75rem !important;
         backdrop-filter: blur(10px) !important;
         position: relative;
     }
@@ -62,12 +62,12 @@
     }
     
     img {
-        width: 14rem; height: 8rem;
-        border-radius: 15px;
+        width: 14rem; height: 7.875rem;
+        border-radius: 12px;
         box-shadow: 0 10px 22px 1px #0000005c;
 
         @include breakpoints-down(medium) {
-            width: 10rem; height: 6.5rem;
+            width: 10rem; height: 5.625rem;
         }
     }
 
@@ -122,7 +122,7 @@
         direction: rtl;
 
         @include breakpoints-down(medium) {
-            top: 5.8rem;
+            top: 4.8rem;
             left: 4rem;
         }
     }

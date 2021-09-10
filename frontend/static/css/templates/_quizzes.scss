@@ -54,6 +54,10 @@ body {
         h1 {
             font-size: $font-med - .1rem;
             max-width: 21rem;
+
+            @include breakpoints-down(medium) {
+                max-width: 15rem;
+            }
         }
 
         h5 {
@@ -379,29 +383,18 @@ body {
                 }
             }
         }
-        
-        [type="radio"]:checked + label {
-            background: #0000005e;
-            backdrop-filter: blur(93px);
-            &::before {
-                color: white;
-            }
-        }
-
-        &__scaleUp {
-            position: relative;
-            bottom: 4rem;
-        }
     }
 
     &__correctAnswer {
         border: 3px solid green !important;
         background: #0019007d !important;
+        opacity: 1 !important;
     }
 
     &__wrongAnswer {
-        border: 3px solid red !important;
+        border: 2px solid #a2000090 !important;
         background: #1f000052 !important;
+        opacity: 1 !important;
     }
 
     &__tags {

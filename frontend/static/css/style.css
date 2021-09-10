@@ -866,19 +866,33 @@ input {
   content: '';
   display: block;
   position: absolute;
-  left: -450px;
-  top: 0;
-  height: 100%;
-  width: 150px;
   background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(50%, #E8E8E8), to(transparent));
   background: linear-gradient(to right, transparent 0%, #E8E8E8 50%, transparent 100%);
-  -webkit-animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-          animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  left: 0;
+  top: -32rem;
+  height: 75rem;
+  width: 24rem;
+  -webkit-animation: load 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
+          animation: load 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
 }
 
 .skeletonLoading__quizContainer {
   width: 14rem;
   height: 8rem !important;
+  -webkit-box-shadow: 0 0 15px #6d6d6d5c !important;
+          box-shadow: 0 0 15px #6d6d6d5c !important;
+}
+
+.skeletonLoading__quizContainer::before {
+  -webkit-transform: rotate(317deg);
+          transform: rotate(317deg);
+}
+
+@media (max-width: 49.9375em) {
+  .skeletonLoading__quizContainer {
+    width: 10rem;
+    height: 5.625rem !important;
+  }
 }
 
 .skeletonLoading__quizTitle {
@@ -898,8 +912,8 @@ input {
 
 @media (min-width: 40em) {
   .skeletonLoading__quizQuestion {
-    -webkit-transform: translate(8rem);
-            transform: translate(8rem);
+    -webkit-transform: translate(7.5rem);
+            transform: translate(7.5rem);
   }
 }
 
@@ -1446,20 +1460,7 @@ input {
     display: -ms-grid;
     display: grid;
     gap: 1rem;
-    margin-right: 2rem;
-  }
-}
-
-.header__search__result__quizzes ul img {
-  width: 16rem;
-  height: 9rem;
-  border-radius: 15px;
-}
-
-@media (max-width: 49.9375em) {
-  .header__search__result__quizzes ul img {
-    width: 9rem;
-    height: 5.06rem;
+    margin-right: 1rem;
   }
 }
 
@@ -1474,7 +1475,7 @@ input {
 @media (max-width: 49.9375em) {
   .header__search__result__quizzes ul li {
     margin: 0;
-    width: 9rem;
+    width: 10rem;
   }
 }
 
@@ -1488,6 +1489,19 @@ input {
 @media (max-width: 49.9375em) {
   .header__search__result__quizzes ul li a {
     width: 18rem;
+  }
+}
+
+.header__search__result__quizzes ul img {
+  width: 16rem;
+  height: 9rem;
+  border-radius: 15px;
+}
+
+@media (max-width: 49.9375em) {
+  .header__search__result__quizzes ul img {
+    width: 10rem;
+    height: 5.625rem;
   }
 }
 
@@ -2067,6 +2081,12 @@ body {
   max-width: 21rem;
 }
 
+@media (max-width: 49.9375em) {
+  .quiz__head h1 {
+    max-width: 15rem;
+  }
+}
+
 .quiz__head h5 {
   font-size: 0.98rem;
   margin-right: 1.5rem;
@@ -2461,29 +2481,16 @@ body {
   opacity: 1 !important;
 }
 
-.quiz__options [type="radio"]:checked + label {
-  background: #0000005e;
-  -webkit-backdrop-filter: blur(93px);
-          backdrop-filter: blur(93px);
-}
-
-.quiz__options [type="radio"]:checked + label::before {
-  color: white;
-}
-
-.quiz__options__scaleUp {
-  position: relative;
-  bottom: 4rem;
-}
-
 .quiz__correctAnswer {
   border: 3px solid green !important;
   background: #0019007d !important;
+  opacity: 1 !important;
 }
 
 .quiz__wrongAnswer {
-  border: 3px solid red !important;
+  border: 2px solid #a2000090 !important;
   background: #1f000052 !important;
+  opacity: 1 !important;
 }
 
 .quiz__tags {
@@ -2684,7 +2691,7 @@ body {
 
 .quizContainer article {
   padding-bottom: 1rem !important;
-  border-radius: .85rem !important;
+  border-radius: .75rem !important;
   -webkit-backdrop-filter: blur(10px) !important;
           backdrop-filter: blur(10px) !important;
   position: relative;
@@ -2713,8 +2720,8 @@ body {
 
 .quizContainer img {
   width: 14rem;
-  height: 8rem;
-  border-radius: 15px;
+  height: 7.875rem;
+  border-radius: 12px;
   -webkit-box-shadow: 0 10px 22px 1px #0000005c;
           box-shadow: 0 10px 22px 1px #0000005c;
 }
@@ -2722,7 +2729,7 @@ body {
 @media (max-width: 49.9375em) {
   .quizContainer img {
     width: 10rem;
-    height: 6.5rem;
+    height: 5.625rem;
   }
 }
 
@@ -2786,7 +2793,7 @@ body {
 
 @media (max-width: 49.9375em) {
   .quizContainer__date {
-    top: 5.8rem;
+    top: 4.8rem;
     left: 4rem;
   }
 }

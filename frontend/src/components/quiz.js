@@ -237,14 +237,31 @@ const Quiz = () => {
         return amountOfPause
     }
 
+    const makeEveryOptionLowOpacity = (type) => {
+        const allOptions = document.querySelectorAll('.quiz__options__textLabel')
+
+        if (type === 'low') {
+            for (let i = 0; i < allOptions.length; i++) {
+                allOptions[i].style.opacity = .5
+            }
+        }
+
+        else if (type === 'high') {
+            for (let i = 0; i < allOptions.length; i++) {
+                allOptions[i].style.opacity = 1
+            }
+        }
+    }
+
     const selectedOption = (props) => {
         if (ableToSelectOption) {
             setTimeout(() => {
                 document.getElementById('quiz__answerImGif').scrollIntoView(false)
             }, 170)
-            
+
             setAbleToSelectOption(false)
             setAbleToGoNext(true)
+            makeEveryOptionLowOpacity('low')
             checkTheSelectedOption(props.target)
     
             if (autoQuestionChanger) {
@@ -266,6 +283,7 @@ const Quiz = () => {
         setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
+        makeEveryOptionLowOpacity('high')
 
         setTimeout(() => {
             setAbleToSelectOption(true)
@@ -422,12 +440,12 @@ const Quiz = () => {
 
                 <link rel="canonical" href={`https://quizzalnd.net/${window.location.pathname}`} />
                 
-                <meta name="description" content={`کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')} کوییزلند`} />
+                <meta name="description" content={`با ${questions.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz.title} ${quiz.subCategory} کوییز از`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quizThumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
                 <meta property="og:title" content={quiz.title} />
-                <meta property="og:description" content={`کوییز ${quiz.subCategory}`} />
+                <meta property="og:description" content={`با ${questions.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz.title} ${quiz.subCategory} کوییز از`} />
                 <meta property="og:image" content={quizThumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />

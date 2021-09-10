@@ -317,12 +317,12 @@ const Quiz = () => {
 
             <Helmet>
                 <title>{`کوییزلند | تست ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
-                <meta name="description" content={`تست ${replaceFunction(decodeURI(quizTitle), '+', ' ')} کوییزلند`} />
+                <meta name="description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz.title} ${quiz.subCategory} تست با موضوع`} />
                 <meta name="keywords" content="کوییز, تست, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quizThumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
                 <meta property="og:title" content={quiz.title} />
-                <meta property="og:description" content={`تست ${quiz.subCategory}`} />
+                <meta property="og:description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz.title} ${quiz.subCategory} تست با موضوع`} />
                 <meta property="og:image" content={quizThumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
