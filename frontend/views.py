@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.views.decorators.cache import never_cache
+import datetime
 
 from .models import *
 from .functions import *
 from rest_framework import viewsets
 from .serializers import *
 from .filters import *
+
+from urllib.parse import unquote
 
 def index(request):
     return render(request, "frontend/index.html")
@@ -17,20 +20,28 @@ def quiz(request, title):
 
 def addViewToQuizzes(title):
     titleWithOutHyphens = title.replace("-", " ")
-
+    finalTitle = unquote(titleWithOutHyphens)
+    
+    shouldTryPointy = True
     try:
-        quiz = Quizzes.objects.get(title=titleWithOutHyphens)
+        quiz = Quizzes.objects.get(title=finalTitle)
         quiz.views += 1
+        quiz.monthly_views += 1
         quiz.save()
+        shouldTryPointy = False
     except Exception as e:
-        return None
+        # print(f'{datetime.datetime.now()}:{e}:{finalTitle} Not in Quizzes database')
+        # print('----------------------------------')
+        pass
 
-    try:
-        quizPointy = Quizzes_Pointy.objects.get(title=titleWithOutHyphens)
-        quizPointy.views += 1
-        quizPointy.save()
-    except Exception as e:
-        return None
+    if shouldTryPointy:
+        try:
+            quizPointy = Quizzes_Pointy.objects.get(title=finalTitle)
+            quizPointy.views += 1
+            quizPointy.monthly_views += 1
+            quizPointy.save()
+        except Exception as e:
+            pass
 
 def category(request, category):
     return render(request, "frontend/category.html")
@@ -41,13 +52,17 @@ def subCategory(request, category, subCategory):
     return render(request, "frontend/subCategory.html")
 
 def addViewToSubCategories(title):
+    titleWithOutHyphens = title.replace("-", " ")
+    finalTitle = unquote(titleWithOutHyphens)
+
     try:
-        titleWithOutHyphens = title.replace("-", " ")
-        subCategory = SubCategories.objects.get(subCategory=titleWithOutHyphens)
+        subCategory = SubCategories.objects.get(subCategory=finalTitle)
         subCategory.views += 1
+        subCategory.monthly_views += 1
         subCategory.save()
     except:
-        return None
+        pass
+
 
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)

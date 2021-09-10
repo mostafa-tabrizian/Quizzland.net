@@ -11,7 +11,11 @@
 
         span {
             font-family: myLalezar, serif;
-            color: darkRed;
+            background: linear-gradient(#b52633, #791118);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
             margin: 0;
             margin-left: .2rem;
             font-size: 1.6rem;

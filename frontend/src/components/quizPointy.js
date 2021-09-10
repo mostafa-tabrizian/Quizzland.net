@@ -19,7 +19,6 @@ let quiz = 'null'
 
 const Quiz = () => {
     const [questions, setQuestions] = useState([])
-    const [totalPoints, setTotalPoints] = useState(0)
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
@@ -77,7 +76,6 @@ const Quiz = () => {
         
         grabQuiz().then((quiz) => {
             setQuizThumbnail(quiz.thumbnail)
-            // addView(quiz)
             setBackground()
         })
 
@@ -86,10 +84,6 @@ const Quiz = () => {
             getSuggestionsQuiz(question.data[0].subCategory)
             setContentLoaded(true)
         })
-    }
-    
-    const addView = async (quiz) => {
-        await axiosLimited.patch(`/dbAPI/new_pointy_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
     }
 
     const makeDatePublishFormatForDetailInHead = (fullDate) => {
@@ -260,7 +254,7 @@ const Quiz = () => {
             }
         }
 
-        return setTotalPoints(totalPoints)
+        return totalPoints
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
@@ -271,12 +265,14 @@ const Quiz = () => {
 
         } else {
             setQuizEnded(true)
-            calculateThePoints()
-
             setTimeout(() => {
                 try {
+                    localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
+                    localStorage.setItem('testResult', calculateThePoints())
                     result.current.click()
-                } catch{}
+                } catch{
+                    log("Can't show the result from localStorage!")
+                }
             }, 3500)
         }
     }
@@ -496,7 +492,7 @@ const Quiz = () => {
             
             <Link
                 ref={result} className='noVis'
-                to={{ pathname: '/result_p', state: {quiz: quiz,  totalPoints: totalPoints} }}
+                to='/result_p/s'
             ></Link>
 
         </React.Fragment>

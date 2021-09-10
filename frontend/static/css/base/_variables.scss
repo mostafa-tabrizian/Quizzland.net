@@ -95,6 +95,16 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
         max-width: 82.5rem;
         margin: 1.125rem auto;
     }
+
+    &-p {
+        max-width: 46rem;
+        margin: 1.125rem auto;
+
+        @include breakpoints-down(medium) {
+            max-width: 45.75rem;
+            margin: 1.125rem 2rem;
+        }
+    }
 }
 
 .space {

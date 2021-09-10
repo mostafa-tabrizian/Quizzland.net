@@ -171,14 +171,16 @@
 }
 
 .resultPointy {
+    margin-bottom: 4rem;
+
     p {
-        margin-left: 2.125rem;
-        margin-right: 2.125rem;
+        font-size: 1.3rem;
+        line-height: 2.5rem;
     }
 
     &__img {
         img {
-            margin: 1rem auto 0 auto;
+            margin: 2rem auto 2rem auto;
         }
     }
 }

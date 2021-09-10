@@ -28,6 +28,9 @@ const Result = (props) => {
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
+    const testResult = localStorage.getItem('testResult')
+    const resultQuiz = JSON.parse(localStorage.getItem('resultQuiz'))
+
     // const setBackground = (backgroundUrl) => {
     //     if (backgroundUrl !== undefined) {
     //         document.getElementById('html').style = `
@@ -37,56 +40,55 @@ const Result = (props) => {
     // }
 
     const detailOfResult = () => {
-        const totalPoints = state.totalPoints
-        if (totalPoints > state.quiz.result_upTo_2nd){
-            setResultImg(state.quiz.result_img_1st)
-            setResultSubtitle(state.quiz.result_title_1st)
-            setResultText(state.quiz.result_text_1st)
+        if (testResult > resultQuiz.result_upTo_2nd){
+            setResultImg(resultQuiz.result_img_1st)
+            setResultSubtitle(resultQuiz.result_title_1st)
+            setResultText(resultQuiz.result_text_1st)
         }
-        else if (totalPoints >= state.quiz.result_upTo_3rd) {
-            setResultImg(state.quiz.result_img_2nd)
-            setResultSubtitle(state.quiz.result_title_2nd)
-            setResultText(state.quiz.result_text_2nd)
+        else if (testResult >= resultQuiz.result_upTo_3rd) {
+            setResultImg(resultQuiz.result_img_2nd)
+            setResultSubtitle(resultQuiz.result_title_2nd)
+            setResultText(resultQuiz.result_text_2nd)
         }
-        else if (totalPoints > state.quiz.result_upTo_4th) {
-            setResultImg(state.quiz.result_img_3rd)
-            setResultSubtitle(state.quiz.result_title_3rd)
-            setResultText(state.quiz.result_text_3rd)
+        else if (testResult > resultQuiz.result_upTo_4th) {
+            setResultImg(resultQuiz.result_img_3rd)
+            setResultSubtitle(resultQuiz.result_title_3rd)
+            setResultText(resultQuiz.result_text_3rd)
         }
-        else if (totalPoints > state.quiz.result_upTo_5th) {
-            setResultImg(state.quiz.result_img_4th)
-            setResultSubtitle(state.quiz.result_title_4th)
-            setResultText(state.quiz.result_text_4th)
+        else if (testResult > resultQuiz.result_upTo_5th) {
+            setResultImg(resultQuiz.result_img_4th)
+            setResultSubtitle(resultQuiz.result_title_4th)
+            setResultText(resultQuiz.result_text_4th)
         }
-        else if (totalPoints > state.quiz.result_upTo_6th) {
-            setResultImg(state.quiz.result_img_5th)
-            setResultSubtitle(state.quiz.result_title_5th)
-            setResultText(state.quiz.result_text_5th)
+        else if (testResult > resultQuiz.result_upTo_6th) {
+            setResultImg(resultQuiz.result_img_5th)
+            setResultSubtitle(resultQuiz.result_title_5th)
+            setResultText(resultQuiz.result_text_5th)
         }
-        else if (totalPoints > state.quiz.result_upTo_7th) {
-            setResultImg(state.quiz.result_img_6th)
-            setResultSubtitle(state.quiz.result_title_6th)
-            setResultText(state.quiz.result_text_6th)
+        else if (testResult > resultQuiz.result_upTo_7th) {
+            setResultImg(resultQuiz.result_img_6th)
+            setResultSubtitle(resultQuiz.result_title_6th)
+            setResultText(resultQuiz.result_text_6th)
         }
-        else if (totalPoints > state.quiz.result_upTo_8th) {
-            setResultImg(state.quiz.result_img_7th)
-            setResultSubtitle(state.quiz.result_title_7th)
-            setResultText(state.quiz.result_text_7th)
+        else if (testResult > resultQuiz.result_upTo_8th) {
+            setResultImg(resultQuiz.result_img_7th)
+            setResultSubtitle(resultQuiz.result_title_7th)
+            setResultText(resultQuiz.result_text_7th)
         }
-        else if (totalPoints > state.quiz.result_upTo_9th) {
-            setResultImg(state.quiz.result_img_8th)
-            setResultSubtitle(state.quiz.result_title_8th)
-            setResultText(state.quiz.result_text_8th)
+        else if (testResult > resultQuiz.result_upTo_9th) {
+            setResultImg(resultQuiz.result_img_8th)
+            setResultSubtitle(resultQuiz.result_title_8th)
+            setResultText(resultQuiz.result_text_8th)
         }
-        else if (totalPoints > state.quiz.result_upTo_10th) {
-            setResultImg(state.quiz.result_img_9th)
-            setResultSubtitle(state.quiz.result_title_9th)
-            setResultText(state.quiz.result_text_9th)
+        else if (testResult > resultQuiz.result_upTo_10th) {
+            setResultImg(resultQuiz.result_img_9th)
+            setResultSubtitle(resultQuiz.result_title_9th)
+            setResultText(resultQuiz.result_text_9th)
         }
-        else if (totalPoints <= state.quiz.result_upTo_10th) {
-            setResultImg(state.quiz.result_img_10t)
-            setResultSubtitle(state.quiz.result_title_10th)
-            setResultText(state.quiz.result_text_10th)
+        else if (testResult <= resultQuiz.result_upTo_10th) {
+            setResultImg(resultQuiz.result_img_10t)
+            setResultSubtitle(resultQuiz.result_title_10th)
+            setResultText(resultQuiz.result_text_10th)
         }
     }
 
@@ -95,7 +97,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = () => {
-        axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(props.location.state.quiz.subCategory, ' ', '+')}&limit=4`)
+        axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(resultQuiz.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
         setContentLoaded(true)
     }
@@ -115,7 +117,7 @@ const Result = (props) => {
 
             <div className="result__container">
                 <div className="result__title flex flex-jc-c">
-                    <h5 className="tx-al-r">"نتیجه‌ تست  "{state.quiz.title}</h5>
+                    <h5 className="tx-al-r">"نتیجه‌ تست  "{resultQuiz.title}</h5>
                 </div>
                 <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
                     <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
@@ -125,12 +127,10 @@ const Result = (props) => {
                     <img src={resultImg} alt="" />
                 </div>
 
-                <div className="resultPointy wrapper-sm flex flex-ai-c flex-jc-c">
-                    <p
-                        dangerouslySetInnerHTML={{
-                            __html: resultText
-                        }}>
-                    </p>
+                <div className="resultPointy wrapper-p"
+                    dangerouslySetInnerHTML={{
+                        __html: resultText
+                    }}>
                 </div>
 
                 <div className='wrapper-med'>
@@ -157,9 +157,9 @@ const Result = (props) => {
                                 size: 45,             // the size of each button (INTEGER)
 
                                 // OPTIONAL PARAMETERS
-                                url: `https://quizzland.net/test/${replaceFunction(state.quiz.title, ' ', '-')}`,
-                                image: state.quiz.thumbnail,  // (defaults to og:image or twitter:image)
-                                title: state.quiz.title,            // (defaults to og:title or twitter:title)
+                                url: `https://quizzland.net/test/${replaceFunction(resultQuiz.title, ' ', '-')}`,
+                                image: resultQuiz.thumbnail,  // (defaults to og:image or twitter:image)
+                                title: resultQuiz.title,            // (defaults to og:title or twitter:title)
                             }}
                         />
 
@@ -187,9 +187,9 @@ const Result = (props) => {
                                 spacing: 8,           // the spacing between buttons (INTEGER)
 
                                // OPTIONAL PARAMETERS
-                               url: `https://quizzland.net/test/${replaceFunction(state.quiz.title, ' ', '-')}`,
-                               image: state.quiz.thumbnail,  // (defaults to og:image or twitter:image)
-                               title: state.quiz.title,            // (defaults to og:title or twitter:title)
+                               url: `https://quizzland.net/test/${replaceFunction(resultQuiz.title, ' ', '-')}`,
+                               image: resultQuiz.thumbnail,  // (defaults to og:image or twitter:image)
+                               title: resultQuiz.title,            // (defaults to og:title or twitter:title)
                             }}
                         />
                     </div>
