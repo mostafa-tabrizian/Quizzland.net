@@ -118,7 +118,7 @@ const Header = (props) => {
 
                         {
                             showNightModeButton &&
-                            <div className="nightMode__container darkGls" title="تبدیل به حالت شب/روز">
+                            <div className="nightMode__container" title="تبدیل به حالت شب/روز">
                                 <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
                             </div>
                         }
@@ -146,7 +146,7 @@ const Header = (props) => {
                     <div className={`header__menu pos-fix tx-al-r hideForDesktop ${menuOpen ? '' : 'slideMenu-hide'}`}>
                         <button onClick={openCloseMenu} className="header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Menu Button"></button>
                         <div className="header__menu__inner grid grid-jc-c">
-                            <div className="header__menu__inner__category">
+                            <div className={`header__menu__inner__category ${props.colorOfHeader}`}>
                                 <h4>کتگوری ها</h4>
                                 <ul>
                                     <li><a href="/category/movie-series">🎬 فیلم و سریال</a></li>
@@ -154,9 +154,9 @@ const Header = (props) => {
                                     <li><a href="/category/psychology">🧠 روانشناسی</a></li>
                                 </ul>
                             </div>
-                            <div className="header__menu__inner__nav">
+                            <div className={`header__menu__inner__nav ${props.colorOfHeader}`}>
                                 <h4>کویز ها</h4>
-                                <ul className="header__menu__inner__quizzes tx-al-r">
+                                <ul className={`header__menu__inner__quizzes tx-al-r`}>
                                     <li><a href="/sort?q=newest">جدیدترین ها</a></li>
                                     <li><a href="/sort?q=bestest">بهترین ها</a></li>
                                     <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
@@ -164,13 +164,13 @@ const Header = (props) => {
                                 </ul>
                             </div>
                             <div className="header__menu__inner__other">
-                                <ul>
+                                <ul className={props.colorOfHeader}>
                                     <li><a href="/guide">راهنما</a></li>
                                     <li><a href="/contact">تماس با ما</a></li>
 
                                     {
                                         showNightModeButton &&
-                                        <div className="nightMode__container darkGls" title="تبدیل به حالت شب و بالعکس">
+                                        <div className="nightMode__container" title="تبدیل به حالت شب و بالعکس">
                                             <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
                                         </div>
                                     }   

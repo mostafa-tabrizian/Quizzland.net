@@ -6,11 +6,6 @@
         "src": "/static/img/Q-192.png",
         "type": "image/png",
         "sizes": "192x192"
-      },
-      {
-        "src": "/static/img/Q-512.png",
-        "type": "image/png",
-        "sizes": "512x512"
       }
     ],
     "start_url": "/",

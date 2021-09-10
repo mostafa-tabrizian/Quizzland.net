@@ -1063,7 +1063,6 @@ input {
       grid-template-columns: auto auto auto;
   grid-gap: 1rem;
   margin-top: 2rem;
-  font-weight: 600;
 }
 
 .header__menu__inner h4 {
@@ -1182,6 +1181,18 @@ input {
 }
 
 .header__white a::after, .header__white button::after {
+  border-bottom: 2px solid #f0f0f0 !important;
+}
+
+.header__white h4 {
+  color: #f0f0f0;
+}
+
+.header__white h4:hover {
+  color: white !important;
+}
+
+.header__white h4::after {
   border-bottom: 2px solid #f0f0f0 !important;
 }
 
@@ -1773,7 +1784,7 @@ input {
 }
 
 .category__title {
-  padding-top: 2rem;
+  padding-top: 13rem;
   padding-right: 1.125rem;
 }
 
@@ -3180,5 +3191,20 @@ body {
 
 .tools__numberOfResult__options button:not(:last-child) {
   margin-left: .2rem;
+}
+
+.pageNotFound {
+  font-size: 56rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -53%);
+          transform: translate(-50%, -53%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#b52633), to(#46080c));
+  background: linear-gradient(#b52633, #46080c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
 }
 /*# sourceMappingURL=style.css.map */

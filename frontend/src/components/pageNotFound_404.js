@@ -26,13 +26,15 @@ const PageNotFound_404 = () => {
                 <meta name="robots" content="noindex"></meta>
             </Helmet>
     
-            <div class="basicPage wrapper-sm center">
+            <div class="basicPage wrapper-sm center" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none'}}>
                 <h1> 🤔 صفحه‌ی مورد نظر پیدا نشد </h1>
                 <div class="space-sm">
                     <p>💖 اگه فکر میکنی اشتباهی پیش اومدی ممنون میشیم برامون به<a href="mailto:quizzland.net@gmail.com?subject= در سایت کوییزلند به یه مشکلی برخوردم"> این ایمیل</a> پیام بدی</p>
                     <a href="mailto:quizzland.net@gmail.com?subject= در سایت کوییزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">quizzland.net@gmail.com</a>
                 </div>
             </div>
+
+            <span className="pageNotFound">404</span>
     
             <BackBtn />
         </React.Fragment>
