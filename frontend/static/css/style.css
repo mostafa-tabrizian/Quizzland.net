@@ -923,6 +923,25 @@ input {
   height: 1.5rem !important;
 }
 
+.paintBrush {
+  position: relative;
+  z-index: 1;
+}
+
+.paintBrush::before {
+  background: url("/static/img/redBrush.png") no-repeat center center;
+  content: '';
+  display: block;
+  width: 10rem;
+  height: 1.5rem;
+  -webkit-transform: translate(2rem, 2.5rem);
+          transform: translate(2rem, 2.5rem);
+  z-index: -1;
+  position: relative;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+
 @-webkit-keyframes load {
   from {
     left: -450px;
@@ -1766,77 +1785,6 @@ input {
 .hero__start button:hover span {
   -webkit-transform: rotate(90deg) translateY(0.5rem);
           transform: rotate(90deg) translateY(0.5rem);
-}
-
-.category {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  margin: 0 auto;
-}
-
-.category a {
-  margin-right: 1rem;
-}
-
-@media (max-width: 49.9375em) {
-  .category a {
-    text-align: center;
-  }
-}
-
-.category__title {
-  padding-top: 13rem;
-  padding-right: 1.125rem;
-}
-
-@media (max-width: 49.9375em) {
-  .category__title {
-    padding-top: 5rem;
-  }
-}
-
-.category img {
-  width: 14.6875rem;
-  height: 14.6875rem;
-  border-radius: 20px;
-  -webkit-box-shadow: 5px 10px 16px #000000d9;
-          box-shadow: 5px 10px 16px #000000d9;
-  margin: 1.4375rem;
-  margin-bottom: .5rem;
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-}
-
-.category img:hover {
-  -webkit-box-shadow: 5px 10px 22px rgba(65, 0, 0, 0.645);
-          box-shadow: 5px 10px 22px rgba(65, 0, 0, 0.645);
-  -webkit-transform: translateY(-0.625rem);
-          transform: translateY(-0.625rem);
-}
-
-@media (max-width: 49.9375em) {
-  .category img {
-    width: 9rem;
-    height: 9rem;
-    margin: .5rem;
-    margin-bottom: 0;
-  }
-}
-
-.category h3 {
-  margin-top: 0;
-  display: block;
-  font-family: myLalezar, myHarmattan, sans-serif;
-  font-weight: 100;
-  -webkit-transform: translate(1rem);
-          transform: translate(1rem);
-  font-size: 1.5rem;
-}
-
-@media (max-width: 49.9375em) {
-  .category h3 {
-    font-size: 1.3rem;
-  }
 }
 
 .sort {

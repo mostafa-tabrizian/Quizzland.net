@@ -612,6 +612,23 @@ input {
     }
 }
 
+.paintBrush {
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        background: url('/static/img/redBrush.png') no-repeat center center;
+        content: '';
+        display: block;
+        width: 10rem;
+        height: 1.5rem;
+        transform: translate(2rem, 2.5rem);
+        z-index: -1;
+        position: relative;
+        filter: blur(1px);
+    }
+}
+
 @keyframes load {
     from {
         left: -450px;

@@ -94,7 +94,7 @@ const Index = () => {
                     <div className="space-med">
     
                         <div className="quizContainer__header flex flex-jc-fe flex-ai-c wrapper-med">
-                            <h3>پیشنهادی های کوییزلند به شما</h3>
+                            <h3 className='paintBrush'>پیشنهادی های کوییزلند به شما</h3>
                         </div>
                         
                         <div>
@@ -238,13 +238,11 @@ const Index = () => {
 
             {recommendedQuizzes}
 
-            <hr />
-
             <div className="space-med">
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest">... نمایش بیشتر </a>
-                    <h3>جدیدترین کوییز ها</h3>
+                    <h3 className='paintBrush'>جدیدترین کوییز ها</h3>
                 </div>
 
                 <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
@@ -268,7 +266,7 @@ const Index = () => {
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=monthlyBestest">... نمایش بیشتر </a>
-                    <h3>بهترین کوییز های این ماه</h3>
+                    <h3 className='paintBrush'>بهترین کوییز های این ماه</h3>
                 </div>
 
                 <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
@@ -292,7 +290,7 @@ const Index = () => {
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest&c=celebrity">... نمایش بیشتر </a>
-                    <h3>کوییز سلبریتی</h3>
+                    <h3 className='paintBrush'>کوییز سلبریتی</h3>
                 </div>
 
                 <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
@@ -316,7 +314,7 @@ const Index = () => {
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest&c=movie-series">... نمایش بیشتر </a>
-                    <h3>کوییز فیلم و سریال</h3>
+                    <h3 className='paintBrush'>کوییز فیلم و سریال</h3>
                 </div>
 
                 <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
@@ -336,11 +334,11 @@ const Index = () => {
 
             </div>
 
-            {/* <div className="space-med">
+            <div className="space-med">
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest&c=psychology">... نمایش بیشتر </a>
-                    <h3>تست روانشناسی</h3>
+                    <h3 className='paintBrush'>تست روانشناسی</h3>
                 </div>
 
                 <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
@@ -358,7 +356,7 @@ const Index = () => {
                     <QuizPointyContainer quizzes={newestPsychologyPointyQuizzes} bgStyle='trans' />
                 </ul>
 
-            </div> */}
+            </div>
 
             <SortIndex />
 

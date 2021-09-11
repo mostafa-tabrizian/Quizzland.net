@@ -5,9 +5,6 @@ import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
 import rateLimit from 'axios-rate-limit';
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
-
 import { log, replaceFunction, isItDesktop } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
@@ -151,15 +148,33 @@ const Quiz = () => {
 
     const takeSelectedOptionValue = (userSelection) => {
         let userChose = userSelection.id
-        const questionNumber = parseInt(userChose.slice(0, 1))
+        const currentQuestionNumber = parseInt(userChose.split('-')[0])
 
-        document.getElementById(`inputLabel ${questionNumber}-1`).style.borderColor = '#f0f0f0'
-        document.getElementById(`inputLabel ${questionNumber}-2`).style.borderColor = '#f0f0f0'
-        if(document.getElementById(`inputLabel ${questionNumber}-3`)) {
-            document.getElementById(`inputLabel ${questionNumber}-3`).style.borderColor = '#f0f0f0'
+        document.getElementById(`inputLabel ${currentQuestionNumber}-1`).style.borderColor = '#f0f0f0'
+        document.getElementById(`inputLabel ${currentQuestionNumber}-2`).style.borderColor = '#f0f0f0'
+        if(document.getElementById(`inputLabel ${currentQuestionNumber}-3`)) {
+            document.getElementById(`inputLabel ${currentQuestionNumber}-3`).style.borderColor = '#f0f0f0'
         }
-        if(document.getElementById(`inputLabel ${questionNumber}-4`)) {
-            document.getElementById(`inputLabel ${questionNumber}-4`).style.borderColor = '#f0f0f0'
+        if(document.getElementById(`inputLabel ${currentQuestionNumber}-4`)) {
+            document.getElementById(`inputLabel ${currentQuestionNumber}-4`).style.borderColor = '#f0f0f0'
+        }
+        if(document.getElementById(`inputLabel ${currentQuestionNumber}-5`)) {
+            document.getElementById(`inputLabel ${currentQuestionNumber}-5`).style.borderColor = '#f0f0f0'
+        }
+        if(document.getElementById(`inputLabel ${currentQuestionNumber}-6`)) {
+            document.getElementById(`inputLabel ${currentQuestionNumber}-6`).style.borderColor = '#f0f0f0'
+        }
+        if(document.getElementById(`inputLabel ${currentQuestionNumber}-7`)) {
+            document.getElementById(`inputLabel ${currentQuestionNumber}-7`).style.borderColor = '#f0f0f0'
+        }
+        if(document.getElementById(`inputLabel ${currentQuestionNumber}-8`)) {
+            document.getElementById(`inputLabel ${currentQuestionNumber}-8`).style.borderColor = '#f0f0f0'
+        }
+        if(document.getElementById(`inputLabel ${currentQuestionNumber}-9`)) {
+            document.getElementById(`inputLabel ${currentQuestionNumber}-9`).style.borderColor = '#f0f0f0'
+        }
+        if(document.getElementById(`inputLabel ${currentQuestionNumber}-10`)) {
+            document.getElementById(`inputLabel ${currentQuestionNumber}-10`).style.borderColor = '#f0f0f0'
         }
 
         document.getElementById(`inputLabel ${userChose}`).style.borderColor = 'green'
@@ -187,6 +202,12 @@ const Quiz = () => {
                         { question.option_2nd !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-2`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-2`} htmlFor={`${question.id}-2`}> { question.option_2nd } </label> </React.Fragment> }
                         { question.option_3rd !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-3`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-3`} htmlFor={`${question.id}-3`}> { question.option_3rd } </label> </React.Fragment> }
                         { question.option_4th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-4`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-4`} htmlFor={`${question.id}-4`}> { question.option_4th } </label> </React.Fragment> }
+                        { question.option_5th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-5`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-5`} htmlFor={`${question.id}-5`}> { question.option_5th } </label> </React.Fragment> }
+                        { question.option_6th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-6`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-6`} htmlFor={`${question.id}-6`}> { question.option_6th } </label> </React.Fragment> }
+                        { question.option_7th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-7`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-7`} htmlFor={`${question.id}-7`}> { question.option_7th } </label> </React.Fragment> }
+                        { question.option_8th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-8`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-8`} htmlFor={`${question.id}-8`}> { question.option_8th } </label> </React.Fragment> }
+                        { question.option_9th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-9`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-9`} htmlFor={`${question.id}-9`}> { question.option_9th } </label> </React.Fragment> }
+                        { question.option_10th !== ('') && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-10`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${question.id}-10`} htmlFor={`${question.id}-10`}> { question.option_10th } </label> </React.Fragment> }
                     </form>
                 </div>
             )
@@ -198,6 +219,12 @@ const Quiz = () => {
                         { !(question.option_img_2nd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-2`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-2`} htmlFor={`${question.id}-2`}> <img className="quiz__imgOption" src={question.option_img_2nd} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
                         { !(question.option_img_3rd.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-3`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-3`} htmlFor={`${question.id}-3`}> <img className="quiz__imgOption" src={question.option_img_3rd} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
                         { !(question.option_img_4th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-4`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-4`} htmlFor={`${question.id}-4`}> <img className="quiz__imgOption" src={question.option_img_4th} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_5th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-5`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-5`} htmlFor={`${question.id}-5`}> <img className="quiz__imgOption" src={question.option_img_5th} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_6th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-6`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-6`} htmlFor={`${question.id}-6`}> <img className="quiz__imgOption" src={question.option_img_6th} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_7th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-7`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-7`} htmlFor={`${question.id}-7`}> <img className="quiz__imgOption" src={question.option_img_7th} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_8th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-8`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-8`} htmlFor={`${question.id}-8`}> <img className="quiz__imgOption" src={question.option_img_8th} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_9th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-9`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-9`} htmlFor={`${question.id}-9`}> <img className="quiz__imgOption" src={question.option_img_9th} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
+                        { !(question.option_img_10th.includes('NotExist')) && <React.Fragment> <input onClick={selectedOption} type="radio" name="answer" id={`${question.id}-10`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${question.id}-10`} htmlFor={`${question.id}-10`}> <img className="quiz__imgOption" src={question.option_img_10th} alt={question.title} loading='lazy' /> </label> </React.Fragment> }
                     </form>
                 </div>
             )
@@ -240,20 +267,24 @@ const Quiz = () => {
 
     const calculateThePoints = () => {
         const allOptions = document.querySelectorAll('input[type=radio]')
-        const optionPoints = ['option_point_1st', 'option_point_2nd', 'option_point_3rd', 'option_point_4th']
+        const optionPoints = ['option_point_1st', 'option_point_2nd', 'option_point_3rd', 'option_point_4th', 'option_point_5th', 'option_point_6th', 'option_point_7th', 'option_point_8th', 'option_point_9th', 'option_point_10th']
+        
+        const firstQuestionId = allOptions[0].getAttribute('id')
+        const firstQuestionIndex = parseInt(firstQuestionId.split('-')[0])
+        
         let totalPoints = 0
-
         for (let i = 0; i < allOptions.length; i++) {
-            const question = allOptions[i].getAttribute('id')
-            const questionNumber = question.slice(0, 1)
-            const OptionSelected = parseInt(question.slice(2, 3)) - 1
-
+            const questionId = allOptions[i].getAttribute('id')
+            const currentQuestionId = parseInt(questionId.split('-')[0])
+            const currentQuestionNumber = currentQuestionId - firstQuestionIndex
+            const OptionSelected = parseInt(questionId.split('-')[1]) - 1
+            
             if (allOptions[i].checked) {
-                const pointOfOptions = questions[questionNumber - 1][optionPoints[OptionSelected]]
+                const pointOfOptions = questions[currentQuestionNumber][optionPoints[OptionSelected]]
                 totalPoints += pointOfOptions
             }
         }
-
+        
         return totalPoints
     }
 
