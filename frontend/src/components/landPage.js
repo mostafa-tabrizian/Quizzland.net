@@ -11,14 +11,15 @@ import QuizPointyContainer from './quizPointyContainer'
 import QuizIndex from './quizIndex'
 import SortIndex from './sortIndex'
 import LoadingScreen from './loadingScreen'
+import SkeletonLoading from './skeletonLoading'
 
 const landPagePath = '/static/img/landPage-path.png'
 const landPagePath_light = '/static/img/landPage-path-light.png'
 const Q = '/static/img/Q.png'
 const QBubbles = '/static/img/QBubbles.png'
-const category_celebrity = '/static/img/category-celebrity.jpg'
-const category_movieSeries = '/static/img/category-movieSeries.jpg'
-const category_psychology = '/static/img/category-psychology.jpg'
+// const category_celebrity = '/static/img/category-celebrity.jpg'
+// const category_movieSeries = '/static/img/category-movieSeries.jpg'
+// const category_psychology = '/static/img/category-psychology.jpg'
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
 
@@ -129,7 +130,7 @@ const Index = () => {
 
         // ---------
 
-        const monthlyBest_quiz = await axiosLimited.get('/dbAPI/monthlyBest_quiz/?limit=5')
+        const monthlyBest_quiz = await axiosLimited.get('/dbAPI/monthlyBest_quiz/?limit=8')
         setMonthlyBestQuizzes(monthlyBest_quiz.data.results)
 
         const monthlyBest_quiz_celebrity = await axiosLimited.get('/dbAPI/monthlyBest_quiz/?category__icontains=celebrity&limit=13')
@@ -187,7 +188,7 @@ const Index = () => {
                 <title>کوییزلند | بهترین و جدیدترین کوییز، تست و تریویا ها</title>
                 <meta name="description" content="سایت کوییزلند وب‌ سایت کوییز و تست برای کتگوری های متنوع همچون سلبریتی , فیلم و سریال و تست های روانشناسی معتبر از سایت های رسمی و کوییزهای باحال دیگه" />
                 <meta name="keywords" content="کوییز, سایت بازی کوییز, بازی کوییز, بازی کوییز, کوییزلند, کوییزلند, کوییز, کوییز های فیلم و سریال, کوییز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوییز های تست های روانشناسی معتبر, کوییز های باحال, کوییز های فان, بهترین وب سایت کوییز, بهترین وب سایت تست، کوییز تیلور سویفت، کوییز فرندز، کوییز مارول" />
-                <link rel='canonical' href='https://quizzland.net/' />
+                <link rel='canonical' href='https://www.quizzland.net/' />
 
                 <script type='application/ld+json'>
                 {`
@@ -198,7 +199,7 @@ const Index = () => {
                         "url": "https://quizzland.net",
                         "potentialAction": {
                             "@type": "SearchAction",
-                            "target": "https://quizzland.net/search?s={search_term_string}",
+                            "target": "https://www.quizzland.net/search?s={search_term_string}",
                             "query-input": "required name=search_term_string"
                         }
                     }
@@ -245,16 +246,7 @@ const Index = () => {
                     <h3 className='paintBrush'>جدیدترین کوییز ها</h3>
                 </div>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                </ul>
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={newestQuizzes} bgStyle='trans' />
@@ -269,16 +261,7 @@ const Index = () => {
                     <h3 className='paintBrush'>بهترین کوییز های این ماه</h3>
                 </div>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                </ul>
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={monthlyBestQuizzes} bgStyle='trans' />
@@ -293,16 +276,7 @@ const Index = () => {
                     <h3 className='paintBrush'>کوییز سلبریتی</h3>
                 </div>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                </ul>
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={newestCelebrityQuizzes} bgStyle='trans' />
@@ -317,16 +291,7 @@ const Index = () => {
                     <h3 className='paintBrush'>کوییز فیلم و سریال</h3>
                 </div>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                </ul>
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={newestMovieSeriesQuizzes} bgStyle='trans' />
@@ -341,16 +306,7 @@ const Index = () => {
                     <h3 className='paintBrush'>تست روانشناسی</h3>
                 </div>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                </ul>
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizPointyContainer quizzes={newestPsychologyPointyQuizzes} bgStyle='trans' />

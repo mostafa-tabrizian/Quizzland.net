@@ -9,6 +9,7 @@ import { log, replaceFunction, isItDesktop } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
+import SkeletonLoading from './skeletonLoading'
 
 const logo = '/static/img/Q-small.png'
 
@@ -150,34 +151,16 @@ const Quiz = () => {
         let userChose = userSelection.id
         const currentQuestionNumber = parseInt(userChose.split('-')[0])
 
-        document.getElementById(`inputLabel ${currentQuestionNumber}-1`).style.borderColor = '#f0f0f0'
-        document.getElementById(`inputLabel ${currentQuestionNumber}-2`).style.borderColor = '#f0f0f0'
-        if(document.getElementById(`inputLabel ${currentQuestionNumber}-3`)) {
-            document.getElementById(`inputLabel ${currentQuestionNumber}-3`).style.borderColor = '#f0f0f0'
-        }
-        if(document.getElementById(`inputLabel ${currentQuestionNumber}-4`)) {
-            document.getElementById(`inputLabel ${currentQuestionNumber}-4`).style.borderColor = '#f0f0f0'
-        }
-        if(document.getElementById(`inputLabel ${currentQuestionNumber}-5`)) {
-            document.getElementById(`inputLabel ${currentQuestionNumber}-5`).style.borderColor = '#f0f0f0'
-        }
-        if(document.getElementById(`inputLabel ${currentQuestionNumber}-6`)) {
-            document.getElementById(`inputLabel ${currentQuestionNumber}-6`).style.borderColor = '#f0f0f0'
-        }
-        if(document.getElementById(`inputLabel ${currentQuestionNumber}-7`)) {
-            document.getElementById(`inputLabel ${currentQuestionNumber}-7`).style.borderColor = '#f0f0f0'
-        }
-        if(document.getElementById(`inputLabel ${currentQuestionNumber}-8`)) {
-            document.getElementById(`inputLabel ${currentQuestionNumber}-8`).style.borderColor = '#f0f0f0'
-        }
-        if(document.getElementById(`inputLabel ${currentQuestionNumber}-9`)) {
-            document.getElementById(`inputLabel ${currentQuestionNumber}-9`).style.borderColor = '#f0f0f0'
-        }
-        if(document.getElementById(`inputLabel ${currentQuestionNumber}-10`)) {
-            document.getElementById(`inputLabel ${currentQuestionNumber}-10`).style.borderColor = '#f0f0f0'
+        for(let i = 1; i <= 10; i++) {
+            if (document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`)) {
+                document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`).style.opacity = .5
+                document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`).style.borderColor = 'white'
+            }
         }
 
-        document.getElementById(`inputLabel ${userChose}`).style.borderColor = 'green'
+        document.getElementById(`inputLabel ${userChose}`).style.opacity = 1
+        document.getElementById(`inputLabel ${userChose}`).style.background = '#000000bf'
+        document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#f34b4b'
     }
 
     const automaticallyGoNextQuestionOrEndTheQuiz = () => {
@@ -334,7 +317,7 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
+        return `https://www.quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
     }
     
     return (
@@ -376,14 +359,14 @@ const Quiz = () => {
                         "author": {
                             "@type": "Person",
                             "name": "مصطفی تبریزیان",
-                            "url": "https://quizzland.net/contact"
+                            "url": "https://www.quizzland.net/contact"
                         },
                         "publisher": {
                             "@type": "Organization",
                             "name": "کوییزلند",
                             "logo": {
                                 "@type": "ImageObject",
-                                "url": "https://quizzland.net${logo}"
+                                "url": "https://www.quizzland.net${logo}"
                             }
                         }
                     }
@@ -503,16 +486,7 @@ const Quiz = () => {
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                </ul>
+                {SkeletonLoading(contentLoaded)}
                 
                 <ul className="quizContainer flex wrapper-med">
                     {

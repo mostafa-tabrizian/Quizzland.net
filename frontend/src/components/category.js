@@ -7,6 +7,7 @@ import Tools from './tools'
 import PageTravel from './pageTravel'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
+import SkeletonLoading from './skeletonLoading';
 
 import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
@@ -123,18 +124,7 @@ const Category = (props) => {
                 sortType={sortType} setSortType={setSortType}
             />
 
-            <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
-
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-
-            </ul>
+            {SkeletonLoading(contentLoaded)}
 
             <ul className="quizContainer quizContainer__minHeight flex wrapper-med">
                 

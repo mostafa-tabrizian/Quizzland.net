@@ -15,6 +15,7 @@
     
     &__header {
         justify-content: space-between;
+        padding-right: 2rem; padding-left: 2rem;
 
         @include breakpoints-down(medium) {
             padding: 0 1.125rem;

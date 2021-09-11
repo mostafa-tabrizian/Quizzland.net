@@ -7,6 +7,7 @@ import LoadingScreen from './loadingScreen'
 import PageTravel from './pageTravel'
 import QuizContainer from './quizContainer'
 import Header from './header'
+import SkeletonLoading from './skeletonLoading'
 
 import { log, takeParameterFromUrl } from './base'
 
@@ -130,18 +131,7 @@ const Sort = () => {
 
             <h3 className='title'>{sortTitle}</h3>
 
-            <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
-
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-
-            </ul>
+            {SkeletonLoading(contentLoaded)}
             
             <ul className="quizContainer flex wrapper-med">
                 

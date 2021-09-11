@@ -7,6 +7,7 @@ import QuizContainer from './quizContainer';
 import { log, takeParameterFromUrl, replaceFunction } from './base'
 import PageTravel from './pageTravel';
 import Header from './hotHeader';
+import SkeletonLoading from './skeletonLoading'
 
 const SearchMoreResult = () => {
     const [pageTravel, setPageTravel] = useState([])
@@ -16,6 +17,7 @@ const SearchMoreResult = () => {
     const [searchValue, setSearchValue] = useState('')
     const [searchValueButWithoutHyphen, setSearchValueButWithoutHyphen] = useState()
     const [matchedQuizzesCounter, setMatchedQuizzesCounter] = useState()
+    const [contentLoaded, setContentLoaded] = useState(false)
 
     useEffect(() => {
         searchChangeDetector()
@@ -96,6 +98,8 @@ const SearchMoreResult = () => {
         else {
             setMatchedQuizzesCounter(0)
         }
+
+        setContentLoaded(true)
     }
 
     return (
@@ -120,19 +124,7 @@ const SearchMoreResult = () => {
                     {quizzesList}
                 </ul>
                 :
-                // <p className='wrapper-med flex flex-jc-c flex-ai-c tx-al-c'> 🤨 هیچ نتیجه ای پیدا نشد <br/> .لطغا از عبارت دیگه ای یا به زبان دیگر (انگلیسی یا فارسی) جستجو کنید</p>
-                <ul className='quizContainer flex wrapper-med'>
-
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                
-                </ul>
+                SkeletonLoading(contentLoaded)
             }
 
             <PageTravel

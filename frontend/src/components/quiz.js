@@ -5,13 +5,11 @@ import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
 import rateLimit from 'axios-rate-limit';
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
-
 import { log, replaceFunction, isItDesktop, isItMobile, isItIPad } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
+import SkeletonLoading from './skeletonLoading'
 
 const logo = '/static/img/Q-small.png'
 
@@ -94,7 +92,6 @@ const Quiz = () => {
         
         grabQuiz().then((quiz) => {
             setQuizThumbnail(quiz.thumbnail)
-            // addView(quiz)
             sendCategoryAsInterest(quiz.subCategory)
             setBackground()
         })
@@ -125,10 +122,6 @@ const Quiz = () => {
         } else {
             localStorage.setItem('interest', JSON.stringify({categoryWatchedCounter: {[category]: 1}}))
         }
-    }
-
-    const addView = async (quiz) => {
-        await axiosLimited.patch(`/dbAPI/new_quiz/${quiz.id}/`, {views: quiz.views+1, monthly_views:quiz.monthly_views+1})
     }
 
     const makeDatePublishFormatForDetailInHead = (fullDate) => {
@@ -423,7 +416,7 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
+        return `https://www.quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
     }
 
     return (
@@ -438,7 +431,7 @@ const Quiz = () => {
             <Helmet>
                 <title>{`کوییزلند | کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
 
-                <link rel="canonical" href={`https://quizzalnd.net/${window.location.pathname}`} />
+                <link rel="canonical" href={`https://www.quizzland.net/${window.location.pathname}`} />
                 
                 <meta name="description" content={`با ${questions.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz.title} ${quiz.subCategory} کوییز از`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
@@ -468,14 +461,14 @@ const Quiz = () => {
                         "author": {
                             "@type": "Person",
                             "name": "مصطفی تبریزیان",
-                            "url": "https://quizzland.net/contact"
+                            "url": "https://www.quizzland.net/contact"
                         },
                         "publisher": {
                             "@type": "Organization",
                             "name": "کوییزلند",
                             "logo": {
                                 "@type": "ImageObject",
-                                "url": "https://quizzland.net${logo}"
+                                "url": "https://www.quizzland.net${logo}"
                             }
                         }
                     }
@@ -594,16 +587,7 @@ const Quiz = () => {
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
                 
-                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                </ul>
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex wrapper-med">
                     {

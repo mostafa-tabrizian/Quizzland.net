@@ -1,5 +1,7 @@
 .hero{
-    // grid-template-columns: auto auto;
+    @include breakpoints-down(medium) {
+        margin-bottom: 20rem;
+    }
 
     &__path {
         z-index: -1;

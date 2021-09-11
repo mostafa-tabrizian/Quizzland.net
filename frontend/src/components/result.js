@@ -9,6 +9,7 @@ import BackBtn from './backBtn'
 import LoadingScreen from './loadingScreen'
 import Header from './hotHeader'
 import QuizContainer from './quizContainer'
+import SkeletonLoading from './skeletonLoading'
 
 const Result = () => {
     const [score, setScore] = useState(0)
@@ -188,7 +189,7 @@ const Result = () => {
                                 size: 45,             // the size of each button (INTEGER)
 
                                 // OPTIONAL PARAMETERS
-                                url: `https://quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`,
+                                url: `https://www.quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`,
                                 image: resultQuiz.thumbnail,  // (defaults to og:image or twitter:image)
                                 title: resultQuiz.title,            // (defaults to og:title or twitter:title)
                             }}
@@ -218,7 +219,7 @@ const Result = () => {
                                 spacing: 8,           // the spacing between buttons (INTEGER)
 
                                // OPTIONAL PARAMETERS
-                               url: `https://quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`,
+                               url: `https://www.quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`,
                                image: resultQuiz.thumbnail,  // (defaults to og:image or twitter:image)
                                title: resultQuiz.title,            // (defaults to og:title or twitter:title)
                             }}
@@ -231,16 +232,7 @@ const Result = () => {
 
             <h2 className='tx-al-c space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
-            <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-            </ul>
+            {SkeletonLoading(contentLoaded)}
 
             <ul className="quizContainer flex wrapper-med">
                 {

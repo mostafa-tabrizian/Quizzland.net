@@ -50,7 +50,7 @@
 @media (min-width: 40em) {
   .wrapper-med {
     max-width: 50rem;
-    margin: 1.125rem auto;
+    margin: 1.125rem 1rem;
   }
 }
 
@@ -1250,7 +1250,8 @@ input {
   background: url("/static/img/srch-black.svg") no-repeat center center;
   width: 1.5rem;
   height: 2rem;
-  margin-right: 4rem;
+  position: absolute;
+  right: 5rem;
   -webkit-transform: translateY(-0.1rem);
           transform: translateY(-0.1rem);
 }
@@ -1664,6 +1665,12 @@ input {
 
 .footer__copyRight > p > a:hover {
   opacity: 1;
+}
+
+@media (max-width: 49.9375em) {
+  .hero {
+    margin-bottom: 20rem;
+  }
 }
 
 .hero__path {
@@ -2618,6 +2625,8 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
 @media (max-width: 49.9375em) {

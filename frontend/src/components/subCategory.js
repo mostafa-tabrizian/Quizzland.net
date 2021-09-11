@@ -3,9 +3,6 @@ import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
-
 import Tools from './tools'
 import PageTravel from './pageTravel'
 import { log, replaceFunction, takeParameterFromUrl } from './base'
@@ -13,6 +10,7 @@ import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 import QuizPointyContainer from './quizPointyContainer'
+import SkeletonLoading from './skeletonLoading'
 
 const SubCategory = (props) => {
 
@@ -138,18 +136,7 @@ const SubCategory = (props) => {
                 sortType={sortType} setSortType={setSortType}
             />
 
-            <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : '' }`}>
-
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                <li className='skeletonLoading skeletonLoading__quizContainer'></li>
-                
-            </ul>
+            {SkeletonLoading(contentLoaded)}
 
             <div className={hideQuizzes ? 'noVis' : '' }>
 
