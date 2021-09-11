@@ -24,10 +24,12 @@ const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMillisecond
 
 const Index = () => {
     const [recommendedQuizzes, setRecommendedQuizzes] = useState([])
+
     const [newestCelebrityQuizzes, setNewestCelebrityQuizzes] = useState([])
     const [newestMovieSeriesQuizzes, setNewestMovieSeriesQuizzes] = useState([])
     const [newestPsychologyPointyQuizzes, setNewestPsychologyPointyQuizzes] = useState([])
 
+    const [newestQuizzes, setNewestQuizzes] = useState([])
     const [monthlyBestQuizzes, setMonthlyBestQuizzes] = useState([])
     const [bestQuizzes, setBestQuizzes] = useState([])
 
@@ -112,6 +114,9 @@ const Index = () => {
     }
 
     const grabData = async () => {
+
+        const new_quiz = await axiosLimited.get('/dbAPI/new_quiz/?limit=8')
+        setNewestQuizzes(new_quiz.data.results)
 
         const new_quiz_celebrity = await axiosLimited.get('/dbAPI/new_quiz/?category__icontains=celebrity&limit=8')
         setNewestCelebrityQuizzes(new_quiz_celebrity.data.results)
@@ -214,7 +219,7 @@ const Index = () => {
                 </div>
             </div>
 
-            <h3 className="category__title tx-al-r wrapper-med">کتگوری</h3>
+            {/* <h3 className="category__title tx-al-r wrapper-med">کتگوری</h3>
 
             <div className="category flex flex-ai-c flex-jc-fe wrapper-med" id="category">
                 <a href="/category/psychology">
@@ -229,15 +234,65 @@ const Index = () => {
                     <img src={category_celebrity} alt="کوییز های کتگوری دسته ی سلبریتی مربوط به افراد مشهور مانند بازیگر و خواننده که مربوط به سوالات در مورد اطلاعات شخصی آنها یا فعالیت آنهاست" />
                     <h3 className='tx-al-c'>✨ سلبریتی </h3>
                 </a>
-            </div>
+            </div> */}
 
             {recommendedQuizzes}
+
+            <hr />
+
+            <div className="space-med">
+
+                <div className="quizContainer__header flex flex-ai-c wrapper-med">
+                    <a className="btn" href="sort?q=newest">... نمایش بیشتر </a>
+                    <h3>جدیدترین کوییز ها</h3>
+                </div>
+
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                </ul>
+
+                <ul className="quizContainer flex flex-ai-fe wrapper-med">
+                    <QuizContainerWithoutViews quizzes={newestQuizzes} bgStyle='trans' />
+                </ul>
+
+            </div>
+
+            <div className="space-med">
+
+                <div className="quizContainer__header flex flex-ai-c wrapper-med">
+                    <a className="btn" href="sort?q=monthlyBestest">... نمایش بیشتر </a>
+                    <h3>بهترین کوییز های این ماه</h3>
+                </div>
+
+                <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                    <li className='skeletonLoading skeletonLoading__quizContainer'></li>
+                </ul>
+
+                <ul className="quizContainer flex flex-ai-fe wrapper-med">
+                    <QuizContainerWithoutViews quizzes={monthlyBestQuizzes} bgStyle='trans' />
+                </ul>
+
+            </div>
 
             <div className="space-med">
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest&c=celebrity">... نمایش بیشتر </a>
-                    <h3>سلبریتی</h3>
+                    <h3>کوییز سلبریتی</h3>
                 </div>
 
                 <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
@@ -261,7 +316,7 @@ const Index = () => {
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest&c=movie-series">... نمایش بیشتر </a>
-                    <h3>فیلم و سریال</h3>
+                    <h3>کوییز فیلم و سریال</h3>
                 </div>
 
                 <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
@@ -281,11 +336,11 @@ const Index = () => {
 
             </div>
 
-            <div className="space-med">
+            {/* <div className="space-med">
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest&c=psychology">... نمایش بیشتر </a>
-                    <h3>روانشناسی</h3>
+                    <h3>تست روانشناسی</h3>
                 </div>
 
                 <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
@@ -303,7 +358,7 @@ const Index = () => {
                     <QuizPointyContainer quizzes={newestPsychologyPointyQuizzes} bgStyle='trans' />
                 </ul>
 
-            </div>
+            </div> */}
 
             <SortIndex />
 

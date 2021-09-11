@@ -180,7 +180,8 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.452);
+  background: -webkit-gradient(linear, left top, left bottom, from(#b52633), to(#791118));
+  background: linear-gradient(#b52633, #791118);
   border-radius: 25px;
 }
 

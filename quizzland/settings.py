@@ -26,13 +26,12 @@ DEBUG = config('DEBUG', cast=bool)
 # # XSS
 # SECURE_BROWSER_XSS_FILTER = True
 
-# CSP
-CSP_DEFAULT_SRC = ("'none'",)
-CSP_STYLE_SRC = ("'self'",)
-CSP_SCRIPT_SRC = ("'self'",)
-CSP_FONT_SRC = ("'self'",)
-CSP_IMG_SRC = ("'self'",)
-
+# # CSP
+# CSP_DEFAULT_SRC = ("'none'",)
+# CSP_STYLE_SRC = ("'self'",)
+# CSP_SCRIPT_SRC = ("'self'",)
+# CSP_FONT_SRC = ("'self'",)
+# CSP_IMG_SRC = ("'self'",)
 
 # Rest framework setup
 REST_FRAMEWORK = {
