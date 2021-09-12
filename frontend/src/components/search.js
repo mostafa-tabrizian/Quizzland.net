@@ -196,7 +196,7 @@ const Search = (props) => {
 
             <button onClick={searchMobileFocusChangedHideOrShow} className='header__search__opener header__btn hideForDesktop flex flex-ai-c' type="button"></button>
             <div className={`header__search__opener__bg pos-fix darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
-                <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg pos-rel header__menu__closeBtn" aria-label="Close Search Bar"></button>
+                <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Search Bar"></button>
                 <input
                     type='text'
                     className={`header__search__input tx-al-r ${searchMobile ? 'fadeIn' : 'fadeOut'}`}

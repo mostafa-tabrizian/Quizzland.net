@@ -91,9 +91,14 @@ const Quiz = () => {
         }
         
         grabQuiz().then((quiz) => {
-            setQuizThumbnail(quiz.thumbnail)
-            sendCategoryAsInterest(quiz.subCategory)
-            setBackground()
+            try {
+                setQuizThumbnail(quiz.thumbnail)
+                sendCategoryAsInterest(quiz.subCategory)
+                setBackground()
+            }
+            catch {
+                window.location.href = "/404";
+            }
         })
         
         grabQuestions().then((question) => {
@@ -101,7 +106,6 @@ const Quiz = () => {
             getSuggestionsQuiz(question.data[0].subCategory)
             setContentLoaded(true)
         })
-        
     }
     
     const sendCategoryAsInterest = (category) => {

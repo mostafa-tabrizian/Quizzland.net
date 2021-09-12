@@ -208,12 +208,17 @@ body {
 
         &__next {
             transform: rotate(-90deg);
+            top: 2.1rem;
+
+            @include breakpoints-down(medium) {
+                position: relative;
+                left: 2rem;
+            }
         }
 
         &__last {
             transform: rotate(90deg);
             position: relative;
-            bottom: 2rem;
             
             @include breakpoints-down(medium) {
                 right: 14rem;

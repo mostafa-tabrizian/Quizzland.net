@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
 import rateLimit from 'axios-rate-limit';
 
-import { log, replaceFunction, isItDesktop } from './base'
+import { log, replaceFunction, isItDesktop, isItMobile } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
@@ -26,7 +26,7 @@ const Quiz = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [quizThumbnail, setQuizThumbnail] = useState()
-    const [showQuestionChangerToNext, setShowQuestionChangerToNext] = useState(false)
+    const [ableToGoNext, setAbleToGoNext] = useState(false)
 
     const result = useRef(null)
 
@@ -143,7 +143,7 @@ const Quiz = () => {
         if (autoQuestionChanger) {
             automaticallyGoNextQuestionOrEndTheQuiz()
         } else {
-            setShowQuestionChangerToNext(true)
+            setAbleToGoNext(true)
         }
     }
 
@@ -272,22 +272,24 @@ const Quiz = () => {
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
-        setShowQuestionChangerToNext(false)
-        if (currentQuestionNumber !== questions.length) {
-            plusOneToTotalAnsweredQuestions()
-            setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+        if (ableToGoNext || autoQuestionChanger) {
+            setAbleToGoNext(false)
+            if (currentQuestionNumber !== questions.length) {
+                plusOneToTotalAnsweredQuestions()
+                setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
 
-        } else {
-            setQuizEnded(true)
-            setTimeout(() => {
-                try {
-                    localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
-                    localStorage.setItem('testResult', calculateThePoints())
-                    result.current.click()
-                } catch{
-                    log("Can't show the result from localStorage!")
-                }
-            }, 3500)
+            } else {
+                setQuizEnded(true)
+                setTimeout(() => {
+                    try {
+                        localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
+                        localStorage.setItem('testResult', calculateThePoints())
+                        result.current.click()
+                    } catch{
+                        log("Can't show the result from localStorage!")
+                    }
+                }, 3500)
+            }
         }
     }
 
@@ -446,7 +448,7 @@ const Quiz = () => {
 
                 { !(isItDesktop()) &&
                     <div className={` quiz__questionChanger__container pos-rel center ${!(contentLoaded) ? 'noVis' : '' } `}>
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${showQuestionChangerToNext ? 'fadeIn' : 'fadeOut'}`} aria-label='Next Question'></button>
+                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${ableToGoNext ? 'fadeIn' : 'fadeOut'}`} aria-label='Next Question'></button>
                         <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
                     </div>
                 }
@@ -469,7 +471,7 @@ const Quiz = () => {
                     
                     { isItDesktop() &&
                         <div className={`quiz__questionChanger__container pos-abs ${!(contentLoaded) ? 'noVis' : '' } `}>
-                            <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${showQuestionChangerToNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
+                            <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${ableToGoNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
                             <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn`} aria-label='Next Question'></button>
                         </div>
                     }

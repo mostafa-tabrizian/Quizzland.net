@@ -50,7 +50,7 @@
 @media (min-width: 40em) {
   .wrapper-med {
     max-width: 50rem;
-    margin: 1.125rem 1rem;
+    margin: 1.125rem auto;
   }
 }
 
@@ -1072,7 +1072,7 @@ input {
   width: 1.75rem;
   height: 1.75rem;
   top: 1rem;
-  left: 1rem;
+  right: 1.5rem;
 }
 
 .header__menu__inner {
@@ -2241,13 +2241,20 @@ body {
 .quiz__questionChanger__next {
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
+  top: 2.1rem;
+}
+
+@media (max-width: 49.9375em) {
+  .quiz__questionChanger__next {
+    position: relative;
+    left: 2rem;
+  }
 }
 
 .quiz__questionChanger__last {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
   position: relative;
-  bottom: 2rem;
 }
 
 @media (max-width: 49.9375em) {
