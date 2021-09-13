@@ -10,7 +10,7 @@ const Support = () => {
 
     useEffect(() => {
         if (document.getElementById('html')) {
-            document.getElementById('html').style=`background: url('${pathRed}') center center scroll !important`
+            document.getElementById('html').style=`background: black url('${pathRed}') center center scroll !important`
         }
     }, [])
 

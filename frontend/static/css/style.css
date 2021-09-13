@@ -173,6 +173,7 @@ body {
   overflow-x: hidden;
   overflow-y: overlay;
   scroll-behavior: smooth;
+  scrollbar-color: #b52633 transparent;
 }
 
 body::-webkit-scrollbar {
@@ -1173,6 +1174,12 @@ input {
   color: rgba(255, 207, 207, 0.692) !important;
 }
 
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .header .subHeader a:hover {
+    color: darkRed !important;
+  }
+}
+
 .header ul {
   line-height: 1.5rem;
   z-index: 3;
@@ -1202,6 +1209,12 @@ input {
 
 .header__white a::after, .header__white button::after {
   border-bottom: 2px solid #f0f0f0 !important;
+}
+
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .header__white li > a {
+    color: black !important;
+  }
 }
 
 .header__white h4 {

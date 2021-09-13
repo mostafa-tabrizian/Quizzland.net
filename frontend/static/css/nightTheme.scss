@@ -39,6 +39,10 @@ html {
             @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
                 color: black !important;
             }
+            
+            &:hover {
+                color: rgba(255, 0, 0, 0.692) !important;
+            }
         }
     }
 

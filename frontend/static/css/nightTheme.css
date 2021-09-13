@@ -38,6 +38,10 @@ html {
   }
 }
 
+.header .subHeader > li > a:hover {
+  color: rgba(255, 0, 0, 0.692) !important;
+}
+
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .header__categories .header__quizzes {
     background: rgba(255, 255, 255, 0.18) !important;

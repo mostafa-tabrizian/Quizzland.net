@@ -102,23 +102,20 @@ const Index = () => {
     }
 
     const grabData = async () => {
-
-        const new_quiz = await axiosLimited.get('/dbAPI/new_quiz/?limit=8')
-        setNewestQuizzes(new_quiz.data.results)
-
-        const new_quiz_celebrity = await axiosLimited.get('/dbAPI/new_quiz/?category__icontains=celebrity&limit=8')
-        setNewestCelebrityQuizzes(new_quiz_celebrity.data.results)
+        const new_quiz_psychology = await axiosLimited.get('/dbAPI/new_pointy_quiz/?category__icontains=psychology&limit=8')
+        setNewestPsychologyPointyQuizzes(new_quiz_psychology.data.results)
 
         const new_quiz_movieSeries = await axiosLimited.get('/dbAPI/new_quiz/?category__icontains=movie-series&limit=8')
         setNewestMovieSeriesQuizzes(new_quiz_movieSeries.data.results)
 
-        const new_quiz_psychology = await axiosLimited.get('/dbAPI/new_pointy_quiz/?category__icontains=psychology&limit=8')
-        setNewestPsychologyPointyQuizzes(new_quiz_psychology.data.results)
-
-        // ---------
-
+        const new_quiz_celebrity = await axiosLimited.get('/dbAPI/new_quiz/?category__icontains=celebrity&limit=8')
+        setNewestCelebrityQuizzes(new_quiz_celebrity.data.results)
+        
         const monthlyBest_quiz = await axiosLimited.get('/dbAPI/monthlyBest_quiz/?limit=8')
         setMonthlyBestQuizzes(monthlyBest_quiz.data.results)
+        
+        const new_quiz = await axiosLimited.get('/dbAPI/new_quiz/?limit=8')
+        setNewestQuizzes(new_quiz.data.results)
 
         setContentLoaded(true)
     }

@@ -41,7 +41,8 @@ body {
     max-width: 100%;
     overflow-x: hidden; overflow-y: overlay;
     scroll-behavior: smooth;
-    
+    scrollbar-color: #b52633 transparent;
+
     &::-webkit-scrollbar {
         width: .625rem;
       }

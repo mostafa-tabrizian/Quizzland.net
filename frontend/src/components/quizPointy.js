@@ -86,12 +86,16 @@ const Quiz = () => {
 
     const makeDatePublishFormatForDetailInHead = (fullDate) => {
         if (fullDate) {
-            const date = fullDate.slice(0, 10)
-            const time = fullDate.slice(11, 19)
-            const region = fullDate.slice(19, 25)
+            const year = parseInt(fullDate.slice(0, 4))
+            const month = parseInt(fullDate.slice(5, 7)) - 1
+            const day = parseInt(fullDate.slice(8, 10))
+            const hour = parseInt(fullDate.slice(11, 13))
+            const minute = parseInt(fullDate.slice(14, 16))
+            const second = parseInt(fullDate.slice(17, 20))
 
-            const newDate = new Date(`${date} ${time} ${region} UTC`);
+            const newDate = new Date(year, month, day, hour, minute, second)
             const persianDate = newDate.toLocaleDateString('fa-IR').split('/')
+            
             let monthsInPersian
 
             switch (persianDate[1]) {
@@ -218,7 +222,7 @@ const Quiz = () => {
         return (
             questions.map(question => {
                 return (
-                    <div style={{transform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container pos-rel darkGls">
+                    <div style={{transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container pos-rel darkGls">
 
                         { questionShowIfNotNull(question.question) }
 
