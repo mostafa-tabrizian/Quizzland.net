@@ -31,9 +31,9 @@ const Contact = () => {
                     <ul className="contact__socialMedia flex flex-jc-c flex-ai-c">
                         {/* <li className="hoverAnimation"><a href="#">انستگرام</a></li> */}
                         {/* <li className="hoverAnimation"><a href="#">تلگرام</a></li> */}
-                        <li className="hoverAnimation"><a href="mailto:quizzland.net@gmail.com">ایمیل</a></li>
+                        <li className="hoverAnimation"><a href="mailto:support@quizzland.net">ایمیل</a></li>
                     </ul>
-                    <a href="mailto:quizzland.net@gmail.com">Quizzland.net@gmail.com</a>
+                    <a href="mailto:support@quizzland.net">support@quizzland.net</a>
                 </div>
                 <p>
                     .میتونی تمام نظرات و پیشنهادات خودت رو برامون بفرستی <br/> 💖 اینطوری کمکمون میکنی و باعث میشی سریعتر پیشرفت کنیم

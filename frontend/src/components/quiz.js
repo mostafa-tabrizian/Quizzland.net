@@ -379,7 +379,7 @@ const Quiz = () => {
 
                         { questionShowIfNotNull(question.question) }
 
-                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} loading='lazy' /> }
+                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} /> } {/* loading='lazy' */}
                     
                         { questionOptionsCheckBetweenStringOrImg(question) }
                         
@@ -424,7 +424,9 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
+        if (quiz.title) {
+            return `https://www.quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
+        }
     }
 
     return (
@@ -439,7 +441,7 @@ const Quiz = () => {
             <Helmet>
                 <title>{`کوییزلند | کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
 
-                <link rel="canonical" href={`https://www.quizzland.net/${window.location.pathname}`} />
+                <link rel="canonical" href={currentUrl()} />
                 
                 <meta name="description" content={`با ${questions.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz.title} ${quiz.subCategory} کوییز از`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
