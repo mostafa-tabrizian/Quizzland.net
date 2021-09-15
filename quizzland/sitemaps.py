@@ -51,3 +51,18 @@ class CategorySitemap(Sitemap):
 
     def location(self, item):
         return f'/category/{categoryTitle[item]}'
+
+class BlogSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.8
+    protocol = 'https'
+
+    def items(self):
+        return Blog.objects.all()
+
+    def lastmod(self, item):
+        return item.publish
+
+    def location(self, item):
+        title = titleConverterWithSpilt(item.title, ' ', '+')
+        return f'/blog/{title}'

@@ -34,6 +34,12 @@ const Article = (props) => {
         }
     }
 
+    const description = () => {
+        if (article.content) {
+            return article.content.split('\n')[0].slice(3, -5)
+        }
+    }
+
     return (
         <React.Fragment>
             
@@ -41,51 +47,53 @@ const Article = (props) => {
 
             <Header />
 
-            <Helmet>
-                <link rel="canonical" href={currentUrl()} />
-                
-                <title>{`کوییزلند | ${article.title}`}</title>
-                <meta name="description" content={article.content.split('\n')[0]} />
-                <meta name="keywords" content="کوییزلند" />
-                <meta name="msapplication-TileImage" content={article.thumbnail} />
-                <meta property="og:site_name" content="کوییزلند" />
-                <meta property="og:title" content={article.title} />
-                <meta property="og:description" content={article.content.split('\n')[0]} />
-                <meta property="og:image" content={article.thumbnail} />
-                <meta property="og:image:type" content="image/jpeg" />
-                <meta property="og:image:width" content="300" />
-                <meta property="og:image:height" content="300" />
-                <meta property="og:type" content="article" />
-                <meta property="og:url" content={currentUrl()} />
+            {article &&
+                <Helmet>
+                    <link rel="canonical" href={currentUrl()} />
+                    
+                    <title>{`کوییزلند | ${article.title}`}</title>
+                    <meta name="description" content={description()} />
+                    <meta name="keywords" content="کوییزلند" />
+                    <meta name="msapplication-TileImage" content={article.thumbnail} />
+                    <meta property="og:site_name" content="کوییزلند" />
+                    <meta property="og:title" content={article.title} />
+                    <meta property="og:description" content={description()} />
+                    <meta property="og:image" content={article.thumbnail} />
+                    <meta property="og:image:type" content="image/jpeg" />
+                    <meta property="og:image:width" content="300" />
+                    <meta property="og:image:height" content="300" />
+                    <meta property="og:type" content="article" />
+                    <meta property="og:url" content={currentUrl()} />
 
-                <script type="application/ld+json">
-                {`
-                    {
-                        "@context": "https://schema.org",
-                        "@type": "Article",
-                        "headline": "${article.title}",
-                        "image": [
-                            "${article.thumbnail}",
-                         ],
-                        "datePublished": "${article.publish}",
-                        "dateModified": "${article.publish}",
-                        "author": {
-                            "@type": "Person",
-                            "name": "مصطفی تبریزیان",
-                            "url": "https://www.quizzland.net/contact"
-                        },
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "کوییزلند",
-                            "logo": {
-                                "@type": "ImageObject",
-                                "url": "https://www.quizzland.net${logo}"
+                    <script type="application/ld+json">
+                    {`
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "Article",
+                            "headline": "${article.title}",
+                            "image": [
+                                "${article.thumbnail}",
+                            ],
+                            "datePublished": "${article.publish}",
+                            "dateModified": "${article.publish}",
+                            "author": {
+                                "@type": "Person",
+                                "name": "مصطفی تبریزیان",
+                                "url": "https://www.quizzland.net/contact"
+                            },
+                            "publisher": {
+                                "@type": "Organization",
+                                "name": "کوییزلند",
+                                "logo": {
+                                    "@type": "ImageObject",
+                                    "url": "https://www.quizzland.net${logo}"
+                                }
                             }
                         }
-                    }
-                `}
-                </script>
-            </Helmet>
+                    `}
+                    </script>
+                </Helmet>
+            }
 
             <div className='article wrapper-med tx-al-c'>
                 <h1>

@@ -223,7 +223,7 @@ class Blog(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
 class Blog_Admin(admin.ModelAdmin):
-    list_display = ('title', 'publish')
+    list_display = ('title', 'monthly_views', 'views', 'publish')
     list_filter = ('tags', )
     search_field = ['title', 'publish']
 

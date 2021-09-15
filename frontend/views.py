@@ -67,7 +67,22 @@ def blog(request):
     return render(request, "frontend/blog.html")
 
 def article(request, title):
+    addViewToArticle(title)
     return render(request, "frontend/blog.html")
+
+def addViewToArticle(title):
+    titleWithOutHyphens = title.replace("+", " ")
+    finalTitle = unquote(titleWithOutHyphens)
+    
+    try:
+        article = Blog.objects.get(title=finalTitle)
+        article.views += 1
+        article.monthly_views += 1
+        article.save()
+    except Exception as e:
+        # print(f'{datetime.datetime.now()}:{e}:{finalTitle} Not in Quizzes database')
+        # print('----------------------------------')
+        pass
 
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
