@@ -41,6 +41,7 @@ const Footer = () => {
                     <h3>دسترسی سریع</h3>
                     <ul>
                         <li><Link to='/'>صفحه اصلی</Link></li>
+                        <li><Link to='/blog'>وبلاگ</Link></li>
                         <li><Link to='/guide'>راهنما</Link></li>
                         <li><Link to='/contact'>تماس با ما</Link></li>
                         <li><Link to="/ads">تبلیغات</Link></li>

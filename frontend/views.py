@@ -63,6 +63,11 @@ def addViewToSubCategories(title):
     except:
         pass
 
+def blog(request):
+    return render(request, "frontend/blog.html")
+
+def article(request, title):
+    return render(request, "frontend/blog.html")
 
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
@@ -140,7 +145,14 @@ class pointyQuestions(viewsets.ReadOnlyModelViewSet):
 
 # --------------------------------------------------------
 
-class newsletter_users(viewsets.ReadOnlyModelViewSet):
-    queryset = Newsletter_Users.objects.all()
-    serializer_class = NewsletterUsersSerializer
-    filterset_class = NewsletterUserFilter
+class new_blog(viewsets.ReadOnlyModelViewSet):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+    filterset_class = BlogFilter
+
+# --------------------------------------------------------
+
+# class newsletter_users(viewsets.ReadOnlyModelViewSet):
+#     queryset = Newsletter_Users.objects.all()
+#     serializer_class = NewsletterUsersSerializer
+#     filterset_class = NewsletterUserFilter

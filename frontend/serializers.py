@@ -176,12 +176,26 @@ class PointyQuestionsSerializer(serializers.ModelSerializer):
             'option_point_10th',
         )
 
-class NewsletterUsersSerializer(serializers.ModelSerializer):
+class BlogSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Newsletter_Users
+        model = Blog
         fields = (
             'id',
-            'email',
-            'username',
-            'signedUp_On'
+            'title',
+            'thumbnail',
+            'content',
+            'tags',
+            'monthly_views',
+            'views',
+            'publish'
         )
+
+# class NewsletterUsersSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Newsletter_Users
+#         fields = (
+#             'id',
+#             'email',
+#             'username',
+#             'signedUp_On'
+#         )

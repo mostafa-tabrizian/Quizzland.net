@@ -44,9 +44,16 @@ class PointyQuestionsFilter(filters.FilterSet):
             'title': ['iexact', 'icontains']
         }
 
-class NewsletterUserFilter(filters.FilterSet):
+class BlogFilter(filters.FilterSet):
     class Meta:
-        model = Newsletter_Users
+        model = Blog
         fields = {
-            'email': ['iexact']
+            'title': ['iexact', 'icontains']
         }
+
+# class NewsletterUserFilter(filters.FilterSet):
+#     class Meta:
+#         model = Newsletter_Users
+#         fields = {
+#             'email': ['iexact']
+#         }

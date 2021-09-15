@@ -113,6 +113,7 @@ const Header = (props) => {
                         </a>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
                         <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
+                        <a href="/blog">وبلاگ</a>
                         <a href="/guide">راهنما</a>
                         <a href="/contact">تماس با ما</a>
 
@@ -165,6 +166,7 @@ const Header = (props) => {
                             </div>
                             <div className="header__menu__inner__other">
                                 <ul className={props.colorOfHeader}>
+                                    <li><a href="/blog">وبلاگ</a></li>
                                     <li><a href="/guide">راهنما</a></li>
                                     <li><a href="/contact">تماس با ما</a></li>
 

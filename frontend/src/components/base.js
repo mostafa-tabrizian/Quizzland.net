@@ -88,6 +88,63 @@ export const datePublishHandler = (publishFullDate) => {
     } 
 }
 
+export const makeDatePublishFormatForQuizDetail = (fullDate) => {
+    if (fullDate) {
+        const year = parseInt(fullDate.slice(0, 4))
+        const month = parseInt(fullDate.slice(5, 7)) - 1
+        const day = parseInt(fullDate.slice(8, 10))
+        const hour = parseInt(fullDate.slice(11, 13))
+        const minute = parseInt(fullDate.slice(14, 16))
+        const second = parseInt(fullDate.slice(17, 20))
+
+        const newDate = new Date(year, month, day, hour, minute, second)
+        const persianDate = newDate.toLocaleDateString('fa-IR').split('/')
+        
+        let monthsInPersian
+
+        switch (persianDate[1]) {
+            case '۱':
+                monthsInPersian = 'فروردين'
+                break;
+            case '۲':
+                monthsInPersian = 'ارديبهشت'
+                break
+            case '۳':
+                monthsInPersian = 'خرداد'
+                break
+            case '۴':
+                monthsInPersian = 'تير'
+                break
+            case '۵':
+                monthsInPersian = 'مرداد'
+                break
+            case '۶':
+                monthsInPersian = 'شهريور'
+                break
+            case '۷':
+                monthsInPersian = 'مهر'
+                break
+            case '۸':
+                monthsInPersian = 'آبان'
+                break
+            case '۹':
+                monthsInPersian = 'آذر'
+                break
+            case '۱۰':
+                monthsInPersian = 'دي'
+                break
+            case '۱۱':
+                monthsInPersian = 'بهمن'
+                break
+            case '۱۲':
+                monthsInPersian = 'اسفند'
+                break
+        }
+
+        return `${persianDate[2]} ${monthsInPersian} ${persianDate[0]}`
+    }
+}
+
 export const isItDesktop = () => {
     return window.navigator.userAgent.includes('Windows')
 }

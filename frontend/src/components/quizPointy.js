@@ -348,7 +348,7 @@ const Quiz = () => {
                 <meta property="og:image:width" content="300" />
                 <meta property="og:image:height" content="300" />
                 <meta property="og:type" content="article" />
-                <meta property="og:url" content={window.location.href} />
+                <meta property="og:url" content={currentUrl()} />
 
                 <script type="application/ld+json">
                 {`
@@ -405,7 +405,7 @@ const Quiz = () => {
                         show_toggle: false,    // show/hide the toggle buttons (true, false)
                         size: 48,             // the size of each button (INTEGER)
                         top: 450,             // offset in pixels from the top of the page
-                        url: `${currentUrl()}`
+                        url: currentUrl()
                     }}
                 />
             }

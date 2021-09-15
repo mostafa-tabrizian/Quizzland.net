@@ -12,8 +12,8 @@ categoryList = [
 ]
 
 class Document(models.Model):
-    id = models.AutoField(primary_key=True, null=False, blank=False, default=None)
-    title = models.CharField(max_length=200, null=False, blank=False, default=None)
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=80, null=False, blank=False, default=None)
     note = models.TextField(blank=True, null=True, default=None)
 
     def __str__(self):
@@ -27,7 +27,7 @@ class SubCategories(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
     subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
-    title = models.CharField(max_length=200, null=False, blank=False, default=None)
+    title = models.CharField(max_length=80, null=False, blank=False, default=None)
     thumbnail =  models.ImageField(upload_to='Thn-Category', null=True, blank=True, default='NotExist.jpg')
     background = models.ImageField(upload_to='Sub-Category', default='NotExist.jpg', help_text='background of choosing quizzes')
     monthly_views = models.IntegerField(default=0)
@@ -46,8 +46,8 @@ class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title = models.CharField(max_length=100, null=False, blank=False, default=None)
-    tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
+    title = models.CharField(max_length=80, null=False, blank=False, default=None)
+    tags = models.CharField(max_length=100, null=False, blank=False, default='کوییز')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
@@ -75,8 +75,8 @@ class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title = models.CharField(max_length=100, null=False, blank=False, default=None)
-    tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
+    title = models.CharField(max_length=80, null=False, blank=False, default=None)
+    tags = models.CharField(max_length=100, null=False, blank=False, default='کوییز')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
@@ -138,7 +138,7 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title = models.CharField(max_length=100, null=False, blank=False, default=None, help_text='same quiz title')
+    title = models.CharField(max_length=80, null=False, blank=False, default=None, help_text='same quiz title')
     question = models.CharField(max_length=150, null=True, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_1st = models.CharField(max_length=100, null=False, blank=True, default=None)
@@ -167,7 +167,7 @@ class Questions_Admin(admin.ModelAdmin):
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title = models.CharField(max_length=100, null=False, blank=False, default=None, help_text='same quiz title')
+    title = models.CharField(max_length=80, null=False, blank=False, default=None, help_text='same quiz title')
     question = models.CharField(max_length=150, null=True, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
 
@@ -212,19 +212,34 @@ class Pointy_Questions_Admin(admin.ModelAdmin):
     list_filter = ('subCategory',)
     search_fields = ['title', 'question']
 
-class Newsletter_Users(models.Model):
-    id  = models.AutoField(primary_key=True)
-    email = models.CharField(max_length=200, null=False, blank=False, default=None)
-    username = models.CharField(max_length=100, null=False, blank=False, default=None)
-    signedUp_On = models.DateTimeField(default=datetime.datetime.now)
+class Blog(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=80, null=False, blank=False, default=None)
+    thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg')
+    content = RichTextField(blank=False, null=False, default=None)
+    tags = models.CharField(max_length=100, null=False, blank=False, default=None)
+    monthly_views = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
+    publish = models.DateTimeField(default=datetime.datetime.now)
 
-    def __str__(self):
-        return self.email
+class Blog_Admin(admin.ModelAdmin):
+    list_display = ('title', 'publish')
+    list_filter = ('tags', )
+    search_field = ['title', 'publish']
 
-    def __unicode__(self):
-        return 'test'
+# class Newsletter_Users(models.Model):
+#     id  = models.AutoField(primary_key=True)
+#     email = models.CharField(max_length=200, null=False, blank=False, default=None)
+#     username = models.CharField(max_length=100, null=False, blank=False, default=None)
+#     signedUp_On = models.DateTimeField(default=datetime.datetime.now)
 
-class Newsletter_Users_Admin(admin.ModelAdmin):
-    list_display = ('email', 'username', 'signedUp_On')
-    list_filter = ('signedUp_On', )
-    search_fields = ['email', 'username']
+#     def __str__(self):
+#         return self.email
+
+#     def __unicode__(self):
+#         return 'test'
+
+# class Newsletter_Users_Admin(admin.ModelAdmin):
+#     list_display = ('email', 'username', 'signedUp_On')
+#     list_filter = ('signedUp_On', )
+#     search_fields = ['email', 'username']

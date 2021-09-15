@@ -608,9 +608,13 @@ input {
         }
     }
 
-    &__sortIndex {
-        width: 14rem; height: 1.5rem !important;
+    &__blog {
+        width: 60rem; height: 9rem !important;
     }
+
+    // &__sortIndex {
+    //     width: 14rem; height: 1.5rem !important;
+    // }
 }
 
 .paintBrush {

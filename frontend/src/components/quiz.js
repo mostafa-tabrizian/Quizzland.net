@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
 import rateLimit from 'axios-rate-limit';
 
-import { log, replaceFunction, isItDesktop, isItMobile, isItIPad } from './base'
+import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from './base'
 import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
@@ -125,63 +125,6 @@ const Quiz = () => {
             }
         } else {
             localStorage.setItem('interest', JSON.stringify({categoryWatchedCounter: {[category]: 1}}))
-        }
-    }
-
-    const makeDatePublishFormatForDetailInHead = (fullDate) => {
-        if (fullDate) {
-            const year = parseInt(fullDate.slice(0, 4))
-            const month = parseInt(fullDate.slice(5, 7)) - 1
-            const day = parseInt(fullDate.slice(8, 10))
-            const hour = parseInt(fullDate.slice(11, 13))
-            const minute = parseInt(fullDate.slice(14, 16))
-            const second = parseInt(fullDate.slice(17, 20))
-
-            const newDate = new Date(year, month, day, hour, minute, second)
-            const persianDate = newDate.toLocaleDateString('fa-IR').split('/')
-            
-            let monthsInPersian
-
-            switch (persianDate[1]) {
-                case '۱':
-                    monthsInPersian = 'فروردين'
-                    break;
-                case '۲':
-                    monthsInPersian = 'ارديبهشت'
-                    break
-                case '۳':
-                    monthsInPersian = 'خرداد'
-                    break
-                case '۴':
-                    monthsInPersian = 'تير'
-                    break
-                case '۵':
-                    monthsInPersian = 'مرداد'
-                    break
-                case '۶':
-                    monthsInPersian = 'شهريور'
-                    break
-                case '۷':
-                    monthsInPersian = 'مهر'
-                    break
-                case '۸':
-                    monthsInPersian = 'آبان'
-                    break
-                case '۹':
-                    monthsInPersian = 'آذر'
-                    break
-                case '۱۰':
-                    monthsInPersian = 'دي'
-                    break
-                case '۱۱':
-                    monthsInPersian = 'بهمن'
-                    break
-                case '۱۲':
-                    monthsInPersian = 'اسفند'
-                    break
-            }
-
-            return `${persianDate[2]} ${monthsInPersian} ${persianDate[0]}`
         }
     }
 
@@ -454,7 +397,7 @@ const Quiz = () => {
                 <meta property="og:image:width" content="300" />
                 <meta property="og:image:height" content="300" />
                 <meta property="og:type" content="article" />
-                <meta property="og:url" content={window.location.href} />
+                <meta property="og:url" content={currentUrl()} />
 
                 <script type="application/ld+json">
                 {`
@@ -511,7 +454,7 @@ const Quiz = () => {
                         show_toggle: false,    // show/hide the toggle buttons (true, false)
                         size: 48,             // the size of each button (INTEGER)
                         top: 450,             // offset in pixels from the top of the page
-                        url: `${currentUrl()}`
+                        url: currentUrl()
                     }}
                 />
             }
@@ -551,7 +494,7 @@ const Quiz = () => {
                     </div>
 
                     <h5 className={`${contentLoaded ? '' : 'noVis'}`}>تعداد سوال ها: {questions.length}</h5>
-                    <h5 className={`${contentLoaded ? '' : 'noVis'}`}>{ makeDatePublishFormatForDetailInHead(quiz.publish) }</h5>
+                    <h5 className={`${contentLoaded ? '' : 'noVis'}`}>{ makeDatePublishFormatForQuizDetail(quiz.publish) }</h5>
                 </div>
                 
                 <div onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c ${contentLoaded ? '' : 'noVis'} `} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>

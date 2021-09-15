@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, quiz, category, subCategory
+from .views import index, quiz, category, subCategory, blog, article
 
 urlpatterns = [
     path('', index),
@@ -16,6 +16,8 @@ urlpatterns = [
     path('result_p/<title>', quiz),
     path('search', index),
     path('sort', index),
+    path('blog/<title>', article),
+    path('blog', blog),
     path('makeMonthlyRecord', index),
     path('welcomeOwl', index),
     path('welcomeZeynab', index),

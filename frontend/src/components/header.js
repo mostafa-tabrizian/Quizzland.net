@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
-import { Helmet } from "react-helmet";
 
 import { log } from './base'
 import Search from './search'
@@ -122,6 +121,7 @@ const Header = (props) => {
                         </Link>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
                         <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
+                        <Link to="/blog">وبلاگ</Link>
                         <Link to="/guide">راهنما</Link>
                         <Link to="/contact">تماس با ما</Link>
 
@@ -174,6 +174,7 @@ const Header = (props) => {
                             </div>
                             <div className="header__menu__inner__other">
                                 <ul>
+                                    <li><Link to="/blog">وبلاگ</Link></li>
                                     <li><Link to="/guide">راهنما</Link></li>
                                     <li><Link to="/contact">تماس با ما</Link></li>
 
