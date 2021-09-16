@@ -7,7 +7,7 @@
     border-radius: 15px;
 
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         margin-bottom: 60vh;
     }
 

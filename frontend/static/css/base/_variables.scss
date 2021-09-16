@@ -64,28 +64,28 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
         max-width:30rem;
         margin: 1.125rem auto;
         
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             max-width: inherit;
         }
 
-        // @include breakpoints-up(medium) {
+        // @include breakpoints-up(small) {
         //     max-width:
         // }
     }
 
     &-med {
         
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             max-width: 45.75rem;
             margin: 1.125rem 1rem;
         }
         
-        @include breakpoints-up(medium) {
+        @include breakpoints-up(small) {
             max-width: 50rem;
             margin: 1.125rem auto;
         }
         
-        @include breakpoints-up(large) {
+        @include breakpoints-up(medium) {
             max-width: 67.5rem;
             margin: 1.125rem auto;
         }
@@ -100,7 +100,7 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
         max-width: 46rem;
         margin: 1.125rem auto;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             max-width: 45.75rem;
             margin: 1.125rem 2rem;
         }
@@ -111,7 +111,7 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
     &-sm {
         margin-top: 2rem;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             margin-top: 1rem;
         }
     }
@@ -119,7 +119,7 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
     &-med {
         margin-top: 5rem;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             margin-top: 2.5rem;
         }
     }
@@ -127,7 +127,7 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
     &-l{
         margin-top: 8rem;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             margin-top: 4rem;
         }
     }
@@ -135,7 +135,7 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
     &-xl{
         margin-top: 12rem;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             margin-top: 6rem;
         }
     }

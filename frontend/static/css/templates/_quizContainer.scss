@@ -3,7 +3,7 @@
     align-items: baseline;
     direction: rtl;
     
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         margin: .5rem;
         display: flex;
         justify-content: center;
@@ -17,7 +17,7 @@
         justify-content: space-between;
         padding-right: 2rem; padding-left: 2rem;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             padding: 0 1.125rem;
         }
 
@@ -32,7 +32,7 @@
         margin-bottom: 1rem; margin-left: .75rem; margin-right: .75rem;
         height: fit-content;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             margin-left: .30rem; margin-right: .30rem;
         }
     }
@@ -67,7 +67,7 @@
         border-radius: 12px;
         box-shadow: 0 10px 22px 1px #0000005c;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             width: 10rem; height: 5.625rem;
         }
     }
@@ -84,7 +84,7 @@
         margin-top: 1rem;
         letter-spacing: 0;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             font-size: .9rem;
             width: 10rem;
         }
@@ -98,7 +98,7 @@
         font-size: 0.9rem;
         border-radius: 4px; border: .5px solid #0000002e;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             top: 5.8rem;
         }
 
@@ -122,7 +122,7 @@
         border: .5px solid #0000002e;
         direction: rtl;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             top: 4.8rem;
             left: 4rem;
         }

@@ -70,7 +70,7 @@ h2 {
     font-weight: 300;
     position: relative;
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         text-align: right;
     }
 }
@@ -82,7 +82,7 @@ h3 {
     position: relative;
     font-family: myLalezar, myHarmattan;
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         text-align: right;
     }
 }
@@ -173,7 +173,7 @@ input {
     margin-bottom: 3rem;
     transform: translate(-50%);
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         margin-left: 15%;
     }
 }
@@ -354,7 +354,7 @@ input {
         align-items: center;
         margin-bottom: 1.125rem;
 
-        @include breakpoints-down(large) {
+        @include breakpoints-down(xLarge) {
             display: flex;
         }
     }
@@ -374,7 +374,7 @@ input {
         height: 10rem;
         margin-bottom: 1.125rem;
 
-        @include breakpoints-down(large) {
+        @include breakpoints-down(xLarge) {
             display: flex;
         }
     }
@@ -389,7 +389,7 @@ input {
         width: 13rem; height: 35rem;
         left: 4.5rem;
 
-        @include breakpoints-down(large) {
+        @include breakpoints-down(xLarge) {
             display: none;
         }
     }
@@ -399,7 +399,7 @@ input {
         height: 35rem;
         right: 1.5rem;
 
-        @include breakpoints-down(large) {
+        @include breakpoints-down(xLarge) {
             display: none;
         }
     }
@@ -504,7 +504,7 @@ input {
         width: 0 !important;
     }
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         transform: translate(-0.51rem, -0.33rem);
     }
 
@@ -512,7 +512,7 @@ input {
         width: 1.6875rem; height: 1.6875rem;
         padding: .3rem;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             position: relative;
             top: 2rem;
         }
@@ -535,7 +535,7 @@ input {
     position: relative;
     z-index: 1;
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         max-width: 16rem;
         margin: 0 auto 0 auto;
     }
@@ -553,7 +553,7 @@ input {
     justify-content: center;
     display: flex;
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         font-size: 2.5rem;
         top: 5rem;
     }
@@ -587,7 +587,7 @@ input {
             transform: rotate(317deg);
         }
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             width: 10rem; height: 5.625rem !important; 
         }
     }
@@ -603,7 +603,7 @@ input {
     &__quizQuestion {
         width: 30rem; height: 25rem !important;
 
-        @include breakpoints-up(medium) {
+        @include breakpoints-up(small) {
             transform: translate(7.5rem);
         }
     }
@@ -645,7 +645,7 @@ input {
 
 // Visibility
 .hideForMobile {
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         display: none !important;
     }
 }

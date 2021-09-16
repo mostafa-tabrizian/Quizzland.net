@@ -115,7 +115,7 @@ html {
           box-shadow: 0 0 40px #87878733 !important;
 }
 
-@media (max-width: 49.9375em) {
+@media (max-width: 70em) {
   .header__search__result {
     -webkit-box-shadow: inherit !important;
             box-shadow: inherit !important;

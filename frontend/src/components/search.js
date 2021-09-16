@@ -76,11 +76,9 @@ const Search = (props) => {
                 let uniqueMatchedQuizzes = {};
                 let maxQuizSearchResult
 
-                log(matchedQuizzes.length)
-
                 if (matchedQuizzes.length >= 6) {
-                    if (isItMobile()) maxQuizSearchResult = 5  // 4
-                    else maxQuizSearchResult = 7  // 6
+                    if (isItMobile()) maxQuizSearchResult = 4 + 1
+                    else maxQuizSearchResult = 6
                 }
                 else {
                     maxQuizSearchResult = matchedQuizzes.length

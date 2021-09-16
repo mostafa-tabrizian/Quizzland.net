@@ -2,7 +2,7 @@
     margin-top: 3rem;
     margin-bottom: 8rem;
 
-    @include breakpoints-down(large) {
+    @include breakpoints-down(xLarge) {
         margin-right: 3rem;
         margin-left: 3rem;
     }
@@ -15,7 +15,7 @@
     &-container {
         display: flex;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             display: block;
         }
     }
@@ -45,7 +45,7 @@
         height: 4rem; width: 39rem;
         overflow: hidden;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             width: 20rem;
         }
     }

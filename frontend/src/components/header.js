@@ -13,6 +13,7 @@ const nightModeIcon = '/static/img/lightMode.png'
 const Header = (props) => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)
     const [quizNavigationOpen, setQuizNavigationOpen] = useState(false)
+    const [pointyNavigationOpen, setPointyNavigationOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
     const [nightMode, setNightMode] = useState(true)
 
@@ -85,18 +86,23 @@ const Header = (props) => {
 
     const openCloseCategoryNavigation = () => {
         setCategoryNavigationOpen(categoryNavigationOpen ? false : true)
-
-        if (quizNavigationOpen) {
-            setQuizNavigationOpen(false)
-        }
+        // close every other panel
+        setQuizNavigationOpen(false)
+        setPointyNavigationOpen(false)
     }
     
     const openCloseQuizNavigation = () => {
         setQuizNavigationOpen(quizNavigationOpen ? false : true)
+        // close every other panel
+        setCategoryNavigationOpen(false)
+        setPointyNavigationOpen(false)
+    }
 
-        if (categoryNavigationOpen) {
-            setCategoryNavigationOpen(false)
-        }
+    const openClosePointyNavigation = () => {
+        setPointyNavigationOpen(pointyNavigationOpen ? false : true)
+        // close every other panel
+        setCategoryNavigationOpen(false)
+        setQuizNavigationOpen(false)
     }
 
     return (
@@ -121,6 +127,7 @@ const Header = (props) => {
                         </Link>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
                         <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
+                        <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
                         <Link to="/blog">وبلاگ</Link>
                         <Link to="/guide">راهنما</Link>
                         <Link to="/contact">تماس با ما</Link>
@@ -140,9 +147,13 @@ const Header = (props) => {
                     </ul>
                     <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><Link to="/sort?q=newest">⏳ جدیدترین ها</Link></li>
-                        <li><Link to="/sort?q=bestest">👑 بهترین ها</Link></li>
                         <li><Link to="/sort?q=monthlyBestest">👑 بهترین های ماه</Link></li>
-                        <li><HashLink to="/#sort">📚 مرتب شده</HashLink></li>
+                        <li><Link to="/sort?q=bestest">👑 بهترین ها</Link></li>
+                    </ul>
+                    <ul className={`header__pointy ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${pointyNavigationOpen ? 'subHeader__open' : ''}`}>
+                        <li><Link to="/sort?q=newest_test">⏳ جدیدترین ها</Link></li>
+                        <li><Link to="/sort?q=monthlyBestest_test">👑 بهترین های ماه</Link></li>
+                        <li><Link to="/sort?q=bestest_test">👑 بهترین ها</Link></li>
                     </ul>
 
                     {/* Menu */}
@@ -167,9 +178,14 @@ const Header = (props) => {
                                 <h4>کویز ها</h4>
                                 <ul className="header__menu__inner__quizzes tx-al-r">
                                     <li><Link to="/sort?q=newest">جدیدترین ها</Link></li>
-                                    <li><Link to="/sort?q=bestest">بهترین ها</Link></li>
                                     <li><Link to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
-                                    <li><HashLink to="/#sort">مرتب شده</HashLink></li>
+                                    <li><Link to="/sort?q=bestest">بهترین ها</Link></li>
+                                </ul>
+                                <h4 className='space-med'>تست ها</h4>
+                                <ul className="header__menu__inner__quizzes tx-al-r">
+                                    <li><Link to="/sort?q=newest">جدیدترین ها</Link></li>
+                                    <li><Link to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
+                                    <li><Link to="/sort?q=bestest">بهترین ها</Link></li>
                                 </ul>
                             </div>
                             <div className="header__menu__inner__other">

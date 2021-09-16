@@ -125,7 +125,8 @@ const Result = () => {
             if (suggestionQuizzes[1]) {
                 return suggestionQuizzes[1]
             }
-            else {
+            else {  // there is no unique quiz, don't show the pop up
+                setSuggestionQuizzes(false)
                 return suggestionQuizzes[0]
             }
         }

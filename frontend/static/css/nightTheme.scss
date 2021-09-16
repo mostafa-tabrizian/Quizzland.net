@@ -100,7 +100,7 @@ html {
         &__result {
             box-shadow: 0 0 40px #87878733 !important;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 box-shadow: inherit !important;
             }
 

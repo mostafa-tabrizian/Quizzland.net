@@ -55,7 +55,7 @@ body {
             font-size: $font-med - .1rem;
             max-width: 21rem;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 max-width: 15rem;
             }
         }
@@ -87,7 +87,7 @@ body {
         border-radius: 24px;
         transition: all 1.3s ease-in-out;
 
-        @include breakpoints-up(medium) {
+        @include breakpoints-up(small) {
             max-width: 32rem;
             margin: 0 8rem;
             background: none;
@@ -108,7 +108,7 @@ body {
         backdrop-filter: blur(165px);
         width: 20.9rem;
 
-        @include breakpoints-up(medium) {
+        @include breakpoints-up(small) {
             background: none;
             backdrop-filter: none;
             text-align: right;
@@ -120,7 +120,7 @@ body {
     &__imgQuestion {
         width: 20.8rem;
 
-        @include breakpoints-up(medium) {
+        @include breakpoints-up(small) {
             border-radius: 1.2rem;
             width: 29rem;
         }
@@ -179,15 +179,15 @@ body {
             z-index: 2;
             position: absolute;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 right: 4rem; top: 6rem;
             }
     
-            @include breakpoints-up(large) {
+            @include breakpoints-up(medium) {
                 right: 22rem; top: 6rem;
             }
             
-            @include breakpoints-up(xLarge) {
+            @include breakpoints-up(large) {
                 right: 0; top: 9.5rem;
             }
 
@@ -201,7 +201,7 @@ body {
             transform: rotate(-90deg);
             top: 2.1rem;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 position: relative;
                 left: 2rem;
             }
@@ -211,7 +211,7 @@ body {
             transform: rotate(90deg);
             position: relative;
             
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 right: 14rem;
             }
             
@@ -219,7 +219,7 @@ body {
                 right: 16rem;
             }
 
-            @include breakpoints-up(xLarge) {
+            @include breakpoints-up(large) {
                 right: 45.5rem;
             }
         }
@@ -246,7 +246,7 @@ body {
         z-index: 1;
         color: $white;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             margin-bottom: 1rem;
         }
 
@@ -256,7 +256,7 @@ body {
     }
 
     &__hider {
-        @include breakpoints-up(medium) {
+        @include breakpoints-up(small) {
             width: 47rem;
             bottom: auto;
             margin-bottom: 3rem;
@@ -272,7 +272,7 @@ body {
     &__options {
         width: 23rem;
 
-        @include breakpoints-up(medium) {
+        @include breakpoints-up(small) {
             width: 32rem;
         }
 
@@ -296,7 +296,7 @@ body {
             border-radius: 26px;
             cursor: pointer;
 
-            @include breakpoints-up(medium) {
+            @include breakpoints-up(small) {
                 border-radius: 20px;
                 font-size: 1.7rem;
                 text-align: right;
@@ -327,7 +327,7 @@ body {
             }
 
 
-            @include breakpoints-up(medium) {
+            @include breakpoints-up(small) {
                 width: 30rem;
                 border: 1.5px solid #adadad;
                 padding-top: 1rem;
@@ -436,7 +436,7 @@ body {
             width: 27rem; height: 100%;
             border-radius: .5rem;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 width: 22rem !important;
             }
         }
@@ -446,7 +446,7 @@ body {
         padding-right: 1rem;
         padding-left: 1rem;
 
-        @include breakpoints-up(medium) {
+        @include breakpoints-up(small) {
             p {
                 font-size: 1.18rem;
             }
@@ -494,7 +494,7 @@ body {
     font-family: $font-sec;
     background: $red-grad;
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         font-size: $font-med - .3rem;
     }
     

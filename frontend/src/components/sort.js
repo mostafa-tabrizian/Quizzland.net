@@ -100,6 +100,33 @@ const Sort = () => {
                 setContentLoaded(true)
                 break
 
+            case 'newest_test':
+                quizzes = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                
+                setSortTitle('جدیدترین تست ها')
+                setQuizzes(quizzes.data.results)
+                setPageTravel(quizzes.data)
+                setContentLoaded(true)
+                break
+
+            case 'bestest_test':
+                quizzes = await axiosLimited.get(`/dbAPI/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                
+                setSortTitle('بهترین تست ها')
+                setQuizzes(quizzes.data.results)
+                setPageTravel(quizzes.data)
+                setContentLoaded(true)
+                break
+
+            case 'monthlyBestest_test':
+                quizzes = await axiosLimited.get(`/dbAPI/monthlyBest_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                
+                setSortTitle('بهترین تست های این ماه')
+                setQuizzes(quizzes.data.results)
+                setPageTravel(quizzes.data)
+                setContentLoaded(true)
+                break
+
             default:
                 break
         }

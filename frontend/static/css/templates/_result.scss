@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 17rem 19rem 18rem;
 
-    @include breakpoints-down(medium){
+    @include breakpoints-down(large){
         display: block;
         margin-left: 50%;
         transform: translate(-50%);
@@ -26,7 +26,7 @@
         font-size: $font-l;
         white-space: pre;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             font-size: $font-l - .3;
         }
     }
@@ -42,7 +42,7 @@
         font-size: $font-xl; font-weight: 600;
         order: 1;
 
-        @include breakpoints-down(medium){
+        @include breakpoints-down(large){
             text-align: center;
             margin-top: 3rem; margin-bottom: 1.125rem;
         }
@@ -59,7 +59,7 @@
     &__detail {
         order: 3;
         
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             text-align: center;
             margin-bottom: 4rem;
         }
@@ -86,7 +86,7 @@
         grid-template-columns: 1fr 1fr;
         direction: rtl;
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             grid-template-columns: 1fr;
             min-width: inherit;
             width: calc(100% - 1rem);
@@ -105,7 +105,7 @@
             border-radius: 15px;
             box-shadow: 0 0 10px black;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 width: 18rem;
                 height: 12rem;
             }
@@ -118,7 +118,7 @@
                 position: relative;
                 transition: width .3s ease-in-out;
 
-                @include breakpoints-down(medium) {
+                @include breakpoints-down(large) {
                     top: 50%;
                     transform: translate(50%, -50%);
                 }
@@ -133,7 +133,7 @@
             width: 19rem;
             font-size: 1.5rem;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 font-size: 1.2rem;
                 letter-spacing: 0.3px;
             }
@@ -151,7 +151,7 @@
             cursor: pointer;
             font-family: cursive, 'myHarmattan';
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 right: .5rem;
             }
         }

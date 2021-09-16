@@ -47,7 +47,7 @@
     }
 
     .slideMenu-hide {
-        top: -14rem !important;
+        top: -22rem !important;
     }
 
     &__menu {
@@ -57,7 +57,7 @@
         box-shadow: 0 7px 20px black;
         backdrop-filter: blur(20px);
         border: 2px solid transparent;
-        height: 14rem;
+        height: 21rem;
         width: 100%;
         border-radius: 0 0 55px 55px;
         transition: all .3s ease-in-out;
@@ -68,7 +68,7 @@
             right: 1rem;
             z-index: 1;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 top: 1.7rem;
             }
             
@@ -197,9 +197,13 @@
         right: 19rem;
     }
 
+    &__pointy {
+        right: 25rem;
+    }
+
     &__white {
 
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             span {
                 background-color: $white !important;
             }

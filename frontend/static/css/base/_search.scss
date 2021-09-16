@@ -31,7 +31,7 @@
         border-radius: 15px;
         box-shadow: 0 15px 22px #0000002a;
         
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             opacity: 0; visibility: hidden;
             position: fixed;
             transform: translate(-50%);
@@ -68,7 +68,7 @@
         box-shadow: 0 0 40px #00000033;
         backdrop-filter: blur(22px);
         
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             display: grid;
             grid-template-columns: 1fr;
             box-shadow: inherit;
@@ -93,7 +93,7 @@
         }
     
         &__category {    
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 display: flex;
                 justify-content: flex-start;
             }
@@ -101,7 +101,7 @@
             h4 {
                 width: 100%;
     
-                @include breakpoints-down(medium) {
+                @include breakpoints-down(large) {
                     text-align: center;
                     margin-bottom: 1.125rem;
                 }
@@ -126,7 +126,7 @@
                 width: 12.5rem; height: 16.2135rem;
                 margin-right: 2rem;
         
-                @include breakpoints-down(medium) {
+                @include breakpoints-down(large) {
                     width: 19.5rem; height: 10rem;
                 }
         
@@ -138,7 +138,7 @@
                     filter: brightness(50%);
                     box-shadow: 0 5px 16px #0000006b;
                 
-                    @include breakpoints-down(medium) {
+                    @include breakpoints-down(large) {
                         object-position: top;
                     }
                 }
@@ -148,7 +148,7 @@
                     color: $white;
                     font-size: $font-l;
 
-                    @include breakpoints-down(medium) {
+                    @include breakpoints-down(large) {
                         transform: translateY(-6.5rem)
                     }
     
@@ -162,7 +162,7 @@
         }
     
         &__quizzes {
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 width: 20rem;
             }
 
@@ -172,7 +172,7 @@
                 margin-right: 4rem;
                 flex-wrap: wrap;
 
-                @include breakpoints-down(medium) {
+                @include breakpoints-down(large) {
                     grid-template-columns: 1fr 1fr;
                     display: grid;
                     gap: 1rem;
@@ -184,7 +184,7 @@
                     margin-left: 2rem; margin-bottom: 1rem; margin-bottom: 1rem;
                     width: 16rem;
                     
-                    @include breakpoints-down(medium) {
+                    @include breakpoints-down(large) {
                         margin: 0;
                         width: 10rem;
                     }
@@ -206,7 +206,7 @@
                     height: 9rem;
                     border-radius: 15px;
 
-                    @include breakpoints-down(medium) {
+                    @include breakpoints-down(large) {
                         width: 10rem;
                         height: 5.625rem;
                     }
@@ -217,7 +217,7 @@
                 display: block;
                 margin-bottom: 1rem;
     
-                @include breakpoints-down(medium) {
+                @include breakpoints-down(large) {
                     width: 20rem;
                 }
     
@@ -236,7 +236,7 @@
             position: absolute;
             bottom: 1rem;
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 top: 1rem;
                 left: 1rem;
                 bottom: inherit;

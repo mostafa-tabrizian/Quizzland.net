@@ -28,6 +28,9 @@ const Index = () => {
     const [newestQuizzes, setNewestQuizzes] = useState([])
     const [monthlyBestQuizzes, setMonthlyBestQuizzes] = useState([])
 
+    const [newestPointy, setNewestPointy] = useState([])
+    const [monthlyBestestPointy, setMonthlyBestestPointy] = useState([])
+
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     
@@ -97,7 +100,7 @@ const Index = () => {
             setRecommendedQuizzes([])
             setRecommendedQuizzes(recommendedQuizzesList)
         } catch(e) {
-            return log('Recommender Error!')
+            return log('No Recommending -- New User')
         }
     }
 
@@ -116,6 +119,12 @@ const Index = () => {
         
         const new_quiz = await axiosLimited.get('/dbAPI/new_quiz/?limit=8')
         setNewestQuizzes(new_quiz.data.results)
+
+        const new_pointy = await axiosLimited.get('/dbAPI/new_pointy_quiz/?limit=8')
+        setNewestPointy(new_pointy.data.results)
+
+        const monthlyBest_pointy = await axiosLimited.get('/dbAPI/monthlyBest_pointy_quiz/?limit=8')
+        setMonthlyBestestPointy(monthlyBest_pointy.data.results)
 
         setContentLoaded(true)
     }
@@ -209,6 +218,36 @@ const Index = () => {
 
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizContainerWithoutViews quizzes={monthlyBestQuizzes} bgStyle='trans' />
+                </ul>
+
+            </div>
+
+            <div className="space-med">
+
+                <div className="quizContainer__header flex flex-ai-c wrapper-med">
+                    <a className="btn" href="sort?q=newest_test">... نمایش بیشتر </a>
+                    <h3 className='paintBrush'>جدیدترین تست ها</h3>
+                </div>
+
+                {SkeletonLoading(contentLoaded)}
+
+                <ul className="quizContainer flex flex-ai-fe wrapper-med">
+                    <QuizContainerWithoutViews quizzes={newestPointy} bgStyle='trans' />
+                </ul>
+
+            </div>
+
+            <div className="space-med">
+
+                <div className="quizContainer__header flex flex-ai-c wrapper-med">
+                    <a className="btn" href="sort?q=monthlyBestest_test">... نمایش بیشتر </a>
+                    <h3 className='paintBrush'>بهترین تست های این ماه</h3>
+                </div>
+
+                {SkeletonLoading(contentLoaded)}
+
+                <ul className="quizContainer flex flex-ai-fe wrapper-med">
+                    <QuizContainerWithoutViews quizzes={monthlyBestestPointy} bgStyle='trans' />
                 </ul>
 
             </div>

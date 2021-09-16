@@ -3,7 +3,7 @@
     position: relative;
     z-index: 1;
 
-    @include breakpoints-down(medium) {
+    @include breakpoints-down(large) {
         margin-right: 2rem;
     }
 

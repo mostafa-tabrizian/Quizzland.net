@@ -22,7 +22,7 @@
         display: flex;
         
         
-        @include breakpoints-down(medium) {
+        @include breakpoints-down(large) {
             display: grid;
             grid-template-columns: 1fr 1fr;
             text-align: right;
@@ -33,12 +33,12 @@
             &:not(:first-child) {
                 margin-right: 5rem;
 
-                @include breakpoints-down(medium) {
+                @include breakpoints-down(large) {
                     margin-right: 3.25rem;
                 }
             }
 
-            @include breakpoints-down(medium) {
+            @include breakpoints-down(large) {
                 margin-right: 3.25rem;
             }
         }
