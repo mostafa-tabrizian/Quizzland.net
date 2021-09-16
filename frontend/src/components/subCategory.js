@@ -55,14 +55,7 @@ const SubCategory = (props) => {
     useEffect(() => {
         backgroundOfSubCategory()
         setLoadState(true)
-        // addView()
     }, [])
-    
-    const addView = async () => {
-        let grabSubCategoryDetail = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=1`)
-        grabSubCategoryDetail = grabSubCategoryDetail.data.results[0]
-        await axiosLimited.patch(`/dbAPI/new_category/${grabSubCategoryDetail.id}/`, {views: grabSubCategoryDetail.views+1, monthly_views:grabSubCategoryDetail.monthly_views+1})
-    }
 
     const getQuizzes = async () => {
         const Quizzes = await axiosLimited.get(

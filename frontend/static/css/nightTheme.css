@@ -191,16 +191,6 @@ html {
   }
 }
 
-.category img {
-  -webkit-box-shadow: 5px 0 30px #1417338c, -5px 0 30px #1b1c2d8a !important;
-          box-shadow: 5px 0 30px #1417338c, -5px 0 30px #1b1c2d8a !important;
-  border: 1px solid #404040 !important;
-}
-
-.categoryList ul > li::before {
-  content: '◽' !important;
-}
-
 .lowBrightnessBackground::before {
   background: #00000086;
 }

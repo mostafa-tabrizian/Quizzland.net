@@ -193,16 +193,16 @@ class Pointy_Questions(models.Model):
     option_img_9th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_10th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     
-    option_point_1st = models.IntegerField(null=False, blank=False, default=None)
-    option_point_2nd = models.IntegerField(null=False, blank=False, default=None)
-    option_point_3rd = models.IntegerField(null=False, blank=True, default=None)
-    option_point_4th = models.IntegerField(null=True, blank=True, default=None)
-    option_point_5th = models.IntegerField(null=True, blank=True, default=None)
-    option_point_6th = models.IntegerField(null=True, blank=True, default=None)
-    option_point_7th = models.IntegerField(null=True, blank=True, default=None)
-    option_point_8th = models.IntegerField(null=True, blank=True, default=None)
-    option_point_9th = models.IntegerField(null=True, blank=True, default=None)
-    option_point_10th = models.IntegerField(null=True, blank=True, default=None)
+    option_point_1st = models.IntegerField(null=False, blank=False, default=1)
+    option_point_2nd = models.IntegerField(null=False, blank=False, default=2)
+    option_point_3rd = models.IntegerField(null=False, blank=True, default=3)
+    option_point_4th = models.IntegerField(null=True, blank=True, default=4)
+    option_point_5th = models.IntegerField(null=True, blank=True, default=5)
+    option_point_6th = models.IntegerField(null=True, blank=True, default=6)
+    option_point_7th = models.IntegerField(null=True, blank=True, default=7)
+    option_point_8th = models.IntegerField(null=True, blank=True, default=8)
+    option_point_9th = models.IntegerField(null=True, blank=True, default=9)
+    option_point_10th = models.IntegerField(null=True, blank=True, default=10)
 
     def __str__(self):
         return self.subCategory

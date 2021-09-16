@@ -1826,6 +1826,7 @@ input {
   width: 100vw;
   height: 100vh;
   background: #00000098;
+  z-index: -1;
 }
 
 body {
@@ -1844,7 +1845,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #00000069;
+  background: #0000009e;
   z-index: -1;
 }
 
@@ -1911,17 +1912,6 @@ body {
 
 .quiz__questions {
   margin-bottom: 1rem;
-}
-
-.quiz__questions::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.466);
-  pointer-events: none;
 }
 
 .quiz__container {
@@ -2828,11 +2818,16 @@ body {
 
 .resultPointy {
   margin-bottom: 4rem;
+  padding: 1rem;
 }
 
 .resultPointy p {
   font-size: 1.3rem;
   line-height: 2.5rem;
+}
+
+.resultPointy__img {
+  border-radius: 15px;
 }
 
 .resultPointy__img img {

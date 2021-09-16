@@ -164,7 +164,7 @@ const Quiz = () => {
 
         document.getElementById(`inputLabel ${userChose}`).style.opacity = 1
         document.getElementById(`inputLabel ${userChose}`).style.background = '#000000bf'
-        document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#f34b4b'
+        document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
     }
 
     const automaticallyGoNextQuestionOrEndTheQuiz = () => {
@@ -218,11 +218,31 @@ const Quiz = () => {
         }
     }
 
+    const isSafari = navigator.userAgent.indexOf("Chrome")!=-1 === false && navigator.userAgent.indexOf("Chrome")!=-1
+
     const quizQuestions = () => {
         return (
             questions.map(question => {
                 return (
                     <div style={{transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container pos-rel darkGls">
+
+                        { questionShowIfNotNull(question.question) }
+
+                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} loading='lazy' /> }
+                    
+                        { questionOptionsCheckBetweenStringOrImg(question) }
+                        
+                    </div>
+                )
+            })
+        )
+    }
+
+    const quizQuestionsForSafari = () => {
+        return (
+            questions.map(question => {
+                return (
+                    <div style={{left: `${currentMoveOfQuestions}rem`}} className="quiz__container pos-rel darkGls">
 
                         { questionShowIfNotNull(question.question) }
 
@@ -323,7 +343,9 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
+        if (quiz.title) {
+            return `https://www.quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
+        } 
     }
     
     return (
@@ -471,7 +493,10 @@ const Quiz = () => {
             <div className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
                 <div className={`quiz__hider flex pos-rel`}>
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded ? 'noVis' : '' }`}></div>
-                    { quizQuestions() }
+                    
+                    {
+                        isSafari ? quizQuestionsForSafari() : quizQuestions()
+                    }
                     
                     { isItDesktop() &&
                         <div className={`quiz__questionChanger__container pos-abs ${!(contentLoaded) ? 'noVis' : '' } `}>

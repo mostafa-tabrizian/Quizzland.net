@@ -313,13 +313,39 @@ const Quiz = () => {
             return <img src={question.answer_imGif} alt={question.title} title={question.title} />
         }
     }
-    
+
+    const isSafari = navigator.userAgent.indexOf("Chrome")!=-1 === false && navigator.userAgent.indexOf("Chrome")!=-1
+
     const quizQuestions = () => {
         return (
             questions.map(question => {
                 return (
                     <div style={{transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container pos-rel darkGls">
 
+                        { questionShowIfNotNull(question.question) }
+
+                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} /> } {/* loading='lazy' */}
+                    
+                        { questionOptionsCheckBetweenStringOrImg(question) }
+                        
+                        <div className={`quiz__answerText answerHide tx-al-r`}>
+                            { answerOfQuestionIfExistShow(question) }
+                        </div>
+    
+                        <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
+                            { gifAnswerOfQuestionIfExistShow(question) }
+                        </div>
+                    </div>
+                )
+            })
+        )
+    }
+
+    const quizQuestionsForSafari = () => {
+        return (
+            questions.map(question => {
+                return (
+                    <div style={{left: `${currentMoveOfQuestions}rem`}} className="quiz__container pos-rel darkGls">
                         { questionShowIfNotNull(question.question) }
 
                         { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} /> } {/* loading='lazy' */}
@@ -519,7 +545,9 @@ const Quiz = () => {
                 <div className={`quiz__hider flex pos-rel`}>
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded ? 'noVis' : ''}`}></div>
                     
-                    { quizQuestions() }
+                    {
+                        isSafari ? quizQuestionsForSafari() : quizQuestions()
+                    }
                     
                     { isItDesktop() &&
                         <div className={`quiz__questionChanger__container pos-abs ${ableToGoNext ? 'fadeIn' : 'fadeOut'} ${contentLoaded ? '' : 'noVis'} `}>

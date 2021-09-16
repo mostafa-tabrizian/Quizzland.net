@@ -12,7 +12,7 @@ body {
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        background: #00000069;
+        background: #0000009e;
         z-index: -1;
     }
 }
@@ -77,15 +77,6 @@ body {
 
     &__questions {
         margin-bottom: 1rem;
-        
-        &::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.466);
-            pointer-events: none;
-        }
     }
 
     &__container {

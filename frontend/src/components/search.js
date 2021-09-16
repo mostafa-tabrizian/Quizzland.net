@@ -42,23 +42,25 @@ const Search = (props) => {
                 let matchedCategories = []
     
                 // Search Quiz
-                const search_new_quiz_title = await axiosLimited.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=6`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
-    
-                const search_new_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=6`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
-    
-                const search_new_quiz_tag = await axiosLimited.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=6`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
-
                 // Search Pointy Quiz
-                const search_new_pointy_quiz_title = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=6`)
+                const search_new_quiz_title = await axiosLimited.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=4`)
+                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
+
+                const search_new_pointy_quiz_title = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=4`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_title.data.results)
     
-                const search_new_pointy_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=6`)
+
+                const search_new_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=4`)
+                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
+
+                const search_new_pointy_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=4`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_subCategory.data.results)
     
-                const search_new_pointy_quiz_tag = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=6`)
+
+                const search_new_quiz_tag = await axiosLimited.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=4`)
+                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+
+                const search_new_pointy_quiz_tag = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=4`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_tag.data.results)
     
                 // Search Category
@@ -73,6 +75,8 @@ const Search = (props) => {
                 // Remove duplicated quizzes
                 let uniqueMatchedQuizzes = {};
                 let maxQuizSearchResult
+
+                log(matchedQuizzes.length)
 
                 if (matchedQuizzes.length >= 6) {
                     if (isItMobile()) maxQuizSearchResult = 5  // 4

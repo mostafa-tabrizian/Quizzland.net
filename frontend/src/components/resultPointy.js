@@ -128,7 +128,7 @@ const Result = (props) => {
                     <img src={resultImg} alt="" />
                 </div>
 
-                <div className="resultPointy wrapper-p"
+                <div className="resultPointy wrapper-p darkGls"
                     dangerouslySetInnerHTML={{
                         __html: resultText
                     }}>

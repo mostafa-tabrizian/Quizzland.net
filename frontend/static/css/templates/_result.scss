@@ -172,6 +172,7 @@
 
 .resultPointy {
     margin-bottom: 4rem;
+    padding: 1rem;
 
     p {
         font-size: 1.3rem;
@@ -179,6 +180,8 @@
     }
 
     &__img {
+        border-radius: 15px;
+
         img {
             margin: 2rem auto 2rem auto;
         }
