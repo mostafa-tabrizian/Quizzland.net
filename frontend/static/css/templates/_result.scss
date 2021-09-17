@@ -19,7 +19,7 @@
         margin-right: 2.5rem;
         margin-left: 2.5rem;
         margin-bottom: 2.25rem;
-        direction: ltr;
+        direction: rtl;
     }
 
     &__subtitle {
@@ -150,6 +150,7 @@
             border: none;
             cursor: pointer;
             font-family: cursive, 'myHarmattan';
+            color: whitesmoke !important;
 
             @include breakpoints-down(large) {
                 right: .5rem;

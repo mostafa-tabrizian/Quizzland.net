@@ -246,7 +246,7 @@ const Quiz = () => {
 
                         { questionShowIfNotNull(question.question) }
 
-                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} loading='lazy' /> }
+                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title}/> } {/* loading='lazy' */}
                     
                         { questionOptionsCheckBetweenStringOrImg(question) }
                         
@@ -344,7 +344,7 @@ const Quiz = () => {
 
     const currentUrl = () => {
         if (quiz.title) {
-            return `https://www.quizzland.net/quiz/${replaceFunction(quiz.title, ' ', '-')}`
+            return `https://www.quizzland.net/test/${replaceFunction(quiz.title, ' ', '-')}`
         } 
     }
     

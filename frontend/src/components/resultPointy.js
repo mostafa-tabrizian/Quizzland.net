@@ -12,7 +12,6 @@ import Header from './hotHeader'
 import SkeletonLoading from './skeletonLoading'
 
 const Result = (props) => {
-    const [state, setState] = useState(props.location.state)
     const [resultSubtitle, setResultSubtitle] = useState()
     const [resultImg, setResultImg] = useState()
     const [resultText, setResultText] = useState()

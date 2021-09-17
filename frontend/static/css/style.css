@@ -2687,7 +2687,7 @@ body {
   margin-right: 2.5rem;
   margin-left: 2.5rem;
   margin-bottom: 2.25rem;
-  direction: ltr;
+  direction: rtl;
 }
 
 .result__subtitle {
@@ -2852,6 +2852,7 @@ body {
   border: none;
   cursor: pointer;
   font-family: cursive, 'myHarmattan';
+  color: whitesmoke !important;
 }
 
 @media (max-width: 70em) {

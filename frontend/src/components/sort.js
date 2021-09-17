@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import LoadingScreen from './loadingScreen'
 import PageTravel from './pageTravel'
 import QuizContainer from './quizContainer'
+import QuizPointyContainer from './quizPointyContainer'
 import Header from './header'
 import SkeletonLoading from './skeletonLoading'
 
@@ -14,6 +15,7 @@ import { log, takeParameterFromUrl } from './base'
 const Sort = () => {
     const [loadState, setLoadState] = useState()
     const [quizzes, setQuizzes] = useState([])
+    const [pointy, setPointy] = useState([])
     const [sortTitle, setSortTitle] = useState()
     const [sortType, setSortType] = useState()
     const [sortCategory, setSortCategory] = useState()
@@ -29,13 +31,8 @@ const Sort = () => {
     useEffect(() => {
         checkWhatSort()
         getQuizzes()
-        listQuizzes()
         setLoadState(true)
     }, [sortType])
-
-    useEffect(() => {
-        getQuizzes()
-    }, [offset])
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
 
@@ -62,6 +59,8 @@ const Sort = () => {
     }
 
     const getQuizzes = async () => {
+        setQuizzes([])  // restart list
+        setPointy([])  // restart list
         let quizzes
         switch (sortType) {
             case 'newest':
@@ -104,7 +103,7 @@ const Sort = () => {
                 quizzes = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setSortTitle('جدیدترین تست ها')
-                setQuizzes(quizzes.data.results)
+                setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
                 break
@@ -113,7 +112,7 @@ const Sort = () => {
                 quizzes = await axiosLimited.get(`/dbAPI/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setSortTitle('بهترین تست ها')
-                setQuizzes(quizzes.data.results)
+                setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
                 break
@@ -122,7 +121,7 @@ const Sort = () => {
                 quizzes = await axiosLimited.get(`/dbAPI/monthlyBest_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setSortTitle('بهترین تست های این ماه')
-                setQuizzes(quizzes.data.results)
+                setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
                 break
@@ -130,12 +129,6 @@ const Sort = () => {
             default:
                 break
         }
-    }
-
-    const listQuizzes = () => {
-        return (
-            <QuizContainer quizzes={quizzes} bgStyle='trans' />
-        )
     }
 
     return (
@@ -162,7 +155,13 @@ const Sort = () => {
             
             <ul className="quizContainer flex wrapper-med">
                 
-                {listQuizzes()}
+                {
+                    quizzes.length !== 0 && <QuizContainer quizzes={quizzes} bgStyle='trans' />
+                }
+
+                {
+                    pointy.length !== 0 && <QuizPointyContainer quizzes={pointy} bgStyle='trans' />
+                }
 
             </ul>
 

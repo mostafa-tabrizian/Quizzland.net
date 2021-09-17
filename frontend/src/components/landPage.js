@@ -258,7 +258,7 @@ const Index = () => {
                 {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
-                    <QuizContainerWithoutViews quizzes={newestPointy} bgStyle='trans' />
+                    <QuizPointyContainer quizzes={newestPointy} bgStyle='trans' />
                 </ul>
 
             </div>
@@ -273,7 +273,7 @@ const Index = () => {
                 {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
-                    <QuizContainerWithoutViews quizzes={monthlyBestestPointy} bgStyle='trans' />
+                    <QuizPointyContainer quizzes={monthlyBestestPointy} bgStyle='trans' />
                 </ul>
 
             </div>
