@@ -24,6 +24,7 @@ const SearchMoreResult = () => {
     })
 
     useEffect(() => {
+        document.body.style.overflow = 'overlay'
         if (document.getElementById('html')) {
             document.getElementById('html').style=`background: None`
         }

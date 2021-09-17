@@ -34,5 +34,5 @@ export default CategoryApp;
 
 ReactDOM.render(
     <CategoryApp />,
-    document.getElementById('404Root')
+    document.getElementById('404Land')
 );

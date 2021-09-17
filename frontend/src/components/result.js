@@ -96,8 +96,8 @@ const Result = () => {
             popUpShow(document.querySelector('.result__popUpQuizSuggester'))
 
             document.querySelector('body').style.overflow = 'hidden'
-            document.querySelector('#quizRoot').style.pointerEvents = 'none'
-            document.querySelector('#quizRoot').style.overflow = 'none'
+            document.querySelector('#quizLand').style.pointerEvents = 'none'
+            document.querySelector('#quizLand').style.overflow = 'none'
             document.querySelector('.header').style.filter = 'blur(7px)'
             document.querySelector('.result__container').style.filter = 'blur(7px)'
             document.querySelector('h2').style.filter = 'blur(7px)'
@@ -113,7 +113,7 @@ const Result = () => {
         popUpHide(document.querySelector('.result__popUpQuizSuggester'))
 
         document.querySelector('body').style.overflow = 'auto'
-        document.querySelector('#quizRoot').style.pointerEvents = 'all'
+        document.querySelector('#quizLand').style.pointerEvents = 'all'
         document.querySelector('.header').style.filter = 'blur(0)'
         document.querySelector('.result__container').style.filter = 'blur(0)'
         document.querySelector('h2').style.filter = 'blur(0)'

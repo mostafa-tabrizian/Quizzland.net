@@ -82,5 +82,5 @@ export default QuizApp;
 
 ReactDOM.render(
     <QuizApp />,
-    document.getElementById('quizRoot')
+    document.getElementById('quizLand')
 );

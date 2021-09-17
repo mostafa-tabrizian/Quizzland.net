@@ -988,8 +988,10 @@ input {
 
 .header__logo span {
   font-family: myLalezar, serif;
-  background: -webkit-gradient(linear, left top, left bottom, from(#b52633), to(#791118));
-  background: linear-gradient(#b52633, #791118);
+  background: linear-gradient(45deg, #a20000, #aa4949, #4b0000);
+  background-size: 400% 400%;
+  -webkit-animation: logo 5s ease infinite alternate;
+          animation: logo 5s ease infinite alternate;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
@@ -997,6 +999,30 @@ input {
   margin: 0;
   margin-left: .2rem;
   font-size: 1.6rem;
+}
+
+@-webkit-keyframes logo {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes logo {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .header__logo img {
@@ -1779,7 +1805,6 @@ input {
 
 .hero__start button {
   font-size: 1.6rem;
-  background: linear-gradient(-45deg, #6a0d11, #ac272e);
   padding: .5rem 3rem;
   border-radius: .5rem;
   display: -webkit-inline-box;
@@ -1788,6 +1813,34 @@ input {
   color: white;
   -webkit-box-shadow: inset 6px 0px 22px #000000eb, 6px 0 18px #000000f7;
           box-shadow: inset 6px 0px 22px #000000eb, 6px 0 18px #000000f7;
+  background: linear-gradient(-45deg, #a20000, #4b0000, #aa4949, #a20000);
+  background-size: 400% 400%;
+  -webkit-animation: heroButton 10s ease infinite alternate;
+          animation: heroButton 10s ease infinite alternate;
+}
+
+@-webkit-keyframes heroButton {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes heroButton {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .hero__start button span {
@@ -1822,7 +1875,7 @@ input {
   z-index: 0;
 }
 
-#subCategoryRoot::before {
+#subCategoryLand::before {
   content: "";
   position: fixed;
   top: 0;
@@ -1842,7 +1895,7 @@ body {
   height: 100vh;
 }
 
-#quizRoot::before {
+#quizLand::before {
   content: "";
   position: fixed;
   top: 0;
@@ -2868,6 +2921,7 @@ body {
           box-shadow: 0 0 22px rgba(0, 0, 0, 0.227);
   padding: 3rem;
   border-radius: 15px;
+  line-height: 2rem;
 }
 
 @media (max-width: 70em) {

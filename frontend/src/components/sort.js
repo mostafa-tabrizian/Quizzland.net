@@ -48,7 +48,7 @@ const Sort = () => {
             };
 
             checkWhatSort()
-            document.getElementById('root').scrollIntoView()
+            document.getElementById('land').scrollIntoView()
 
         })(window.history);
     }

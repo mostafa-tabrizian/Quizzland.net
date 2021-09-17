@@ -150,9 +150,9 @@ export const isItDesktop = () => {
 }
 
 export const isItMobile = () => {
-    return window.navigator.userAgent.includes('Mobile')
+    return window.navigator.userAgent.includes('Mobile') && !(window.navigator.userAgent.includes('iPad'))
 }
 
 export const isItIPad = () => {
-    return window.navigator.userAgent.includes('iPad')
+    return window.navigator.userAgent.includes('Mobile' ) && window.navigator.userAgent.includes('iPad')
 }

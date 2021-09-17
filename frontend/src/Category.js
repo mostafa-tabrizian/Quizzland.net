@@ -74,5 +74,5 @@ export default CategoryApp;
 
 ReactDOM.render(
     <CategoryApp />,
-    document.getElementById('categoryRoot')
+    document.getElementById('categoryLand')
 );

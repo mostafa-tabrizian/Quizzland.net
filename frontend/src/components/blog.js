@@ -35,7 +35,7 @@ const Blog = (props) => {
                     <div>
                         <li className='space-sm'>
                             <article>
-                                <Link to={`/blog/${replaceFunction(blog.title, ' ', '+')}`}>
+                                <a href={`/blog/${replaceFunction(blog.title, ' ', '+')}`}>
                                     <div className='blog-container'>
                                         <div className='blog-thumbnail'>
                                             <img src="https://media.vanityfair.com/photos/602c3ebab3de5e8d0957c44f/master/pass/VF1421_Taylor_Swift_Tout.jpg" alt="" />
@@ -54,7 +54,7 @@ const Blog = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                </Link>
+                                </a>
                             </article>
                         </li>
                         

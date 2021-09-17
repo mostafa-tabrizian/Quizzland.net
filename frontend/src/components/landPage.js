@@ -5,7 +5,7 @@ import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
 import Header from './header'
 
-import { log } from './base'
+import { log, isItMobile, isItDesktop, isItIPad } from './base'
 import QuizContainerWithoutViews from './quizContainerWithoutViews'
 import QuizPointyContainer from './quizPointyContainer'
 import LoadingScreen from './loadingScreen'
@@ -13,6 +13,8 @@ import SkeletonLoading from './skeletonLoading'
 
 const landPagePath = '/static/img/landPage-path.png'
 const landPagePath_light = '/static/img/landPage-path-light.png'
+const landPagePath_mobile = '/static/img/landPage-path-mobile.png'
+const landPagePath_light_mobile = '/static/img/landPage-path-light-mobile.png'
 const Q = '/static/img/Q.png'
 const QBubbles = '/static/img/QBubbles.png'
 
@@ -130,19 +132,38 @@ const Index = () => {
     }
 
     const landPagePathSelector = () => {
-        if (localStorage.getItem('lightMode') === 'true') {
-            return {
-                background: `url('${landPagePath_light}')`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'top center',
-                backgroundSize: 'cover'
+        if (isItDesktop()) {
+            if (localStorage.getItem('lightMode') === 'true') {
+                return {
+                    background: `url('${landPagePath_light}')`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'top center',
+                    backgroundSize: 'cover'
+                }
+            } else {
+                return {
+                    background: `url('${landPagePath}')`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'top center',
+                    backgroundSize: 'cover'
+                }
             }
-        } else {
-            return {
-                background: `url('${landPagePath}')`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'top center',
-                backgroundSize: 'cover'
+        }
+        else {  // mobile or tablet path
+            if (localStorage.getItem('lightMode') === 'true') {
+                return {
+                    background: `url('${landPagePath_light_mobile}')`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'top center',
+                    backgroundSize: 'cover'
+                }
+            } else {
+                return {
+                    background: `url('${landPagePath_mobile}')`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'top center',
+                    backgroundSize: 'cover'
+                }
             }
         }
     }
@@ -179,16 +200,21 @@ const Index = () => {
 
             <div className="hero flex flex-jc-c flex-ai-c">
                 <div className="hero__path pos-abs" style={landPagePathSelector()}></div>
-                <div className='hero__logo tx-al-c hideForMobile pos-rel'>
-                    <img src={Q} className='Q' alt="لوگوی کوییزلند" />
-                    <img src={QBubbles} className='Q__Bubbles' alt="لوگوی کوییزلند" />
-                </div>
+                {
+                    !(isItMobile()) &&
+                    <div className='hero__logo tx-al-c pos-rel'>
+                        <img src={Q} className='Q' alt="لوگوی کوییزلند" />
+                        <img src={QBubbles} className='Q__Bubbles' alt="لوگوی کوییزلند" />
+                    </div>
+                }
                 <div className='hero__start tx-al-r'>
                     <h1>اینجا کوییزلندِ</h1>
                     <h2>جایی که میتونی خودت رو به عنوان فن واقعی به بقیه ثابت کنی پس اگر آماده ای 😎 </h2>
-                    <button onClick={() => {document.getElementById('category').scrollIntoView()}} className='flex-ai-c btn'><span></span> بزن بریم </button>
+                    <button onClick={() => {document.getElementById('scroll').scrollIntoView()}} className='flex-ai-c btn'><span></span> بزن بریم </button>
                 </div>
             </div>
+
+            <tag id='scroll' />
 
             {recommendedQuizzes}
 

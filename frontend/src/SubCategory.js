@@ -75,5 +75,5 @@ export default SubCategoryApp;
 
 ReactDOM.render(
     <SubCategoryApp />,
-    document.getElementById('subCategoryRoot')
+    document.getElementById('subCategoryLand')
 );

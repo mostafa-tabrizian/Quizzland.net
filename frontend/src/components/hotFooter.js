@@ -19,9 +19,17 @@ const Footer = () => {
                     <h3>کوییز ها</h3>
                     <ul>
                         <li><a href="/sort?q=newest">جدیدترین ها</a></li>
-                        <li><a href="/sort?q=bestest">بهترین ها</a></li>
                         <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
-                        <li><a href="/#sort">مرتب شده</a></li>
+                        <li><a href="/sort?q=bestest">بهترین ها</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>تست ها</h3>
+                    <ul>
+                        <li><a href="/sort?q=newest_test">جدیدترین ها</a></li>
+                        <li><a href="/sort?q=monthlyBestest_test">بهترین های ماه</a></li>
+                        <li><a href="/sort?q=bestest_test">بهترین ها</a></li>
                     </ul>
                 </div>
 

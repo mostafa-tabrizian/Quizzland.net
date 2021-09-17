@@ -11,6 +11,7 @@ const nightModeIcon = '/static/img/lightMode.png'
 const Header = (props) => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)
     const [quizNavigationOpen, setQuizNavigationOpen] = useState(false)
+    const [pointyNavigationOpen, setPointyNavigationOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
     const [showNightModeButton, setShowNightModeButton] = useState(true)
 
@@ -91,6 +92,13 @@ const Header = (props) => {
         }
     }
 
+    const openClosePointyNavigation = () => {
+        setPointyNavigationOpen(pointyNavigationOpen ? false : true)
+        // close every other panel
+        setCategoryNavigationOpen(false)
+        setQuizNavigationOpen(false)
+    }
+
     return (
         <React.Fragment>
 
@@ -113,6 +121,7 @@ const Header = (props) => {
                         </a>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
                         <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
+                        <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
                         <a href="/blog">وبلاگ</a>
                         <a href="/guide">راهنما</a>
                         <a href="/contact">تماس با ما</a>
@@ -132,9 +141,13 @@ const Header = (props) => {
                     </ul>
                     <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><a href="/sort?q=newest">⏳ جدیدترین ها</a></li>
-                        <li><a href="/sort?q=bestest">👑 بهترین ها</a></li>
                         <li><a href="/sort?q=monthlyBestest">👑 بهترین های ماه</a></li>
-                        <li><a href="/#sort">📚 مرتب شده</a></li>
+                        <li><a href="/sort?q=bestest">👑 بهترین ها</a></li>
+                    </ul>
+                    <ul className={`header__pointy ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${pointyNavigationOpen ? 'subHeader__open' : ''}`}>
+                        <li><a href="/sort?q=newest_test">⏳ جدیدترین ها</a></li>
+                        <li><a href="/sort?q=monthlyBestest_test">👑 بهترین های ماه</a></li>
+                        <li><a href="/sort?q=bestest_test">👑 بهترین ها</a></li>
                     </ul>
 
                     {/* Menu */}
@@ -162,6 +175,12 @@ const Header = (props) => {
                                     <li><a href="/sort?q=bestest">بهترین ها</a></li>
                                     <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
                                     <li><a href="/#sort">مرتب شده</a></li>
+                                </ul>
+                                <h4 className='space-med'>تست ها</h4>
+                                <ul className="header__menu__inner__quizzes tx-al-r">
+                                    <li><a href="/sort?q=newest">جدیدترین ها</a></li>
+                                    <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
+                                    <li><a href="/sort?q=bestest">بهترین ها</a></li>
                                 </ul>
                             </div>
                             <div className="header__menu__inner__other">

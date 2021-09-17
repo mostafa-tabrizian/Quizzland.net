@@ -76,5 +76,5 @@ export default BlogApp;
 
 ReactDOM.render(
     <BlogApp />,
-    document.getElementById('blogRoot')
+    document.getElementById('blogLand')
 );
