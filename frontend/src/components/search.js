@@ -11,7 +11,6 @@ const Search = (props) => {
     const [searchMobile, setSearchMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchValue, setSearchValue] = useState(null)
-    const [quizzesGrabbedCounter, setQuizzesGrabbedCounter] = useState(0)
 
     const searchSubmit = useRef()
     const mobileSearchInput = useRef()
@@ -39,39 +38,44 @@ const Search = (props) => {
                 setSearchValue(searchValue)
                 
                 let matchedQuizzes = []
-                // let matchedPointy = []
                 let matchedCategories = []
     
                 // Search Quiz
-                // Search Pointy Quiz
-                const search_new_quiz_title = await axiosLimited.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=4`)
+                const search_new_quiz_title = await axiosLimited.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=3`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
+                
+                if (search_new_quiz_title.data.results !== 3) {
+                    const search_new_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=5`)
+                    Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
+                    
+                    if (search_new_quiz_subCategory.length !== 5) {
+                        const search_new_quiz_tag = await axiosLimited.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=5`)
+                        Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+                    }
+                }
+                
+                // Search Pointy Quiz
+                const search_new_pointy_quiz_title = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=1`)
+                Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_title.data.results)
+                
+                if (search_new_pointy_quiz_title.legnth !== 1) {
+                    const search_new_pointy_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=23`)
+                    Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_subCategory.data.results)
 
-                // const search_new_pointy_quiz_title = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=4`)
-                // Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_title.data.results)
-    
-
-                const search_new_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=4`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
-
-                // const search_new_pointy_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=4`)
-                // Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_subCategory.data.results)
-    
-
-                const search_new_quiz_tag = await axiosLimited.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=4`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
-
-                // const search_new_pointy_quiz_tag = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=4`)
-                // Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_tag.data.results)
+                    if (search_new_pointy_quiz_subCategory.length !== 3) {
+                        const search_new_pointy_quiz_tag = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=2`)
+                        Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_tag.data.results)
+                    }
+                }
     
                 // Search Category
                 const search_new_category_title = await axiosLimited.get(`/dbAPI/new_category/?title__icontains=${searchValue}&limit=1`)
                 Array.prototype.push.apply(matchedCategories, search_new_category_title.data.results)
-    
-                const search_new_category_subCategory = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
-                Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
-    
-                setQuizzesGrabbedCounter(matchedQuizzes.length)
+
+                if (search_new_category_title.length !== 1) {
+                    const search_new_category_subCategory = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
+                    Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
+                }
 
                 // Remove duplicated quizzes
                 let uniqueMatchedQuizzes = {};
@@ -79,7 +83,7 @@ const Search = (props) => {
 
                 if (matchedQuizzes.length >= 6) {
                     if (isItMobile()) maxQuizSearchResult = 4 + 1
-                    else maxQuizSearchResult = 6
+                    else maxQuizSearchResult = 7
                 }
                 else {
                     maxQuizSearchResult = matchedQuizzes.length
@@ -119,7 +123,8 @@ const Search = (props) => {
                             })
                         )
                     } catch {e} {
-                        log('no quiz found...')
+                        // log('no quiz found...')
+                        return null
                     }
                 }
     
@@ -139,7 +144,8 @@ const Search = (props) => {
                             </div>
                         )
                     } catch (e){
-                        log('no category found...')
+                        // log('no category found...')
+                        return null
                     }
                 }   
                 
@@ -173,19 +179,11 @@ const Search = (props) => {
                 <div  className={`header__search__result ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
                     <div className="header__search__result__category">
                         <div className="header__search__result__category__container flex flex-jc-c">
-                            {quizzesGrabbedCounter !== 0
-                                &&
-                                <span>تعداد نتایج پیدا شده: {quizzesGrabbedCounter}</span>
-                            }
-
                             {categoriesList}
 
-                            {quizzesGrabbedCounter !== 0
-                                &&
-                                <Link to={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
-                                    نمایش بقیه نتایج...
-                                </Link>
-                            } 
+                            <Link to={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
+                                نمایش بقیه نتایج...
+                            </Link>
                         </div>
                     </div>
                     

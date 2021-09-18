@@ -172,9 +172,8 @@ const Header = (props) => {
                                 <h4>کویز ها</h4>
                                 <ul className={`header__menu__inner__quizzes tx-al-r`}>
                                     <li><a href="/sort?q=newest">جدیدترین ها</a></li>
-                                    <li><a href="/sort?q=bestest">بهترین ها</a></li>
                                     <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
-                                    <li><a href="/#sort">مرتب شده</a></li>
+                                    <li><a href="/sort?q=bestest">بهترین ها</a></li>
                                 </ul>
                                 <h4 className='space-med'>تست ها</h4>
                                 <ul className="header__menu__inner__quizzes tx-al-r">

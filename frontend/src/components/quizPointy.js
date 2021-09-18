@@ -27,14 +27,19 @@ const Quiz = () => {
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [quizThumbnail, setQuizThumbnail] = useState()
     const [ableToGoNext, setAbleToGoNext] = useState(false)
+    const [SFXAllowed, setSFXAllowed] = useState()
+    const speakerIconOn = '/static/img/speakerOn.png'
+    const speakerIconOff = '/static/img/speakerOff.png'
 
     const result = useRef(null)
 
     const quizTitleReplacedWithHyphen = replaceFunction(quizTitle, '-', '+')
+    const SFXClick = new Audio('../../static/sound/SFXClick.mp3')
 
     useEffect(() => {
         grabData()
         setLoadState(true)
+        SFXLocalStorage()
     }, quizTitle)
 
     useEffect(() => {
@@ -42,6 +47,15 @@ const Quiz = () => {
     })
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+
+    const SFXLocalStorage = () => {
+        if (localStorage.getItem('SFXAllowed')) {
+            setSFXAllowed(localStorage.getItem('SFXAllowed'))
+        } else {
+            localStorage.setItem('SFXAllowed', 'true')
+            setSFXAllowed('true')
+        }
+    }
 
     const quizChangeDetector = () => {
         (function(history){
@@ -141,6 +155,14 @@ const Quiz = () => {
         }
     }
 
+    const playSFX = () => {
+        const SFXAllowed = localStorage.getItem('SFXAllowed')
+        if (SFXAllowed === 'true') {
+            SFXClick.volume = .5
+            SFXClick.play()
+        }
+    }
+
     const selectedOption = (props) => {
         takeSelectedOptionValue(props.target)
 
@@ -149,6 +171,8 @@ const Quiz = () => {
         } else {
             setAbleToGoNext(true)
         }
+
+        playSFX()
     }
 
     const takeSelectedOptionValue = (userSelection) => {
@@ -342,6 +366,12 @@ const Quiz = () => {
         .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
+    const SFXController = () => {
+        const changeToThis = SFXAllowed === 'true' ? 'false' : 'true'
+        setSFXAllowed(changeToThis)
+        localStorage.setItem('SFXAllowed', changeToThis)
+    }
+
     const currentUrl = () => {
         if (quiz.title) {
             return `https://www.quizzland.net/test/${replaceFunction(quiz.title, ' ', '-')}`
@@ -445,6 +475,12 @@ const Quiz = () => {
             </div>
 
             <div id='mediaad-Spcz'></div>
+
+            <div className='SFXController pos-abs' onClick={() => {SFXController()}} >
+                <button type="button">
+                    <img src={SFXAllowed === 'true' ? speakerIconOn : speakerIconOff} alt="کوییزلند ‌| Quizzland" />
+                </button>
+            </div>
 
             <div className="quiz__head pos-rel tx-al-r" id="quiz__head">
                 <div className='flex flex-jc-c flex-ai-c'>

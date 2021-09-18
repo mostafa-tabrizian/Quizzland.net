@@ -61,7 +61,9 @@ const Sort = () => {
     const getQuizzes = async () => {
         setQuizzes([])  // restart list
         setPointy([])  // restart list
+        setContentLoaded(false)
         let quizzes
+        
         switch (sortType) {
             case 'newest':
                 setSortTitle('جدیدترین کوییز ها')

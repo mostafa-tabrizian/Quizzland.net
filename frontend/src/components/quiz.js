@@ -146,13 +146,7 @@ const Quiz = () => {
         }
     }
 
-    const checkTheSelectedOption = (userSelection) => {
-        let userChose = parseInt(userSelection.id.slice(-1))
-        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
-
-        setCorrectAnswerOption(correctAnswer)
-        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
-        
+    const playSFX = () => {
         const SFXAllowed = localStorage.getItem('SFXAllowed')
         if (userChose !== correctAnswer) {
             setWrongAnswerOption(parseInt(userChose))
@@ -167,6 +161,16 @@ const Quiz = () => {
                 SFXCorrect.play()
             }
         }
+    }
+
+    const checkTheSelectedOption = (userSelection) => {
+        let userChose = parseInt(userSelection.id.slice(-1))
+        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
+
+        setCorrectAnswerOption(correctAnswer)
+        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
+        
+        playSFX()
     }
 
     const amountOfPauseCalculator = () => {

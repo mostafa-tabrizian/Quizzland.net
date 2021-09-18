@@ -1465,12 +1465,15 @@ input {
   width: 12.5rem;
   height: 16.2135rem;
   margin-right: 2rem;
+  margin-top: 1rem;
 }
 
 @media (max-width: 70em) {
   .header__search__result__category__item {
-    width: 19.5rem;
+    width: 21rem;
     height: 10rem;
+    margin-right: 1rem;
+    margin-top: 3rem;
   }
 }
 
@@ -1480,7 +1483,7 @@ input {
   -o-object-fit: cover;
      object-fit: cover;
   border: 3px solid #707070;
-  border-radius: 40px;
+  border-radius: 20px;
   -webkit-filter: brightness(50%);
           filter: brightness(50%);
   -webkit-box-shadow: 0 5px 16px #0000006b;
