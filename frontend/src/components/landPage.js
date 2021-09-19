@@ -137,14 +137,14 @@ const Index = () => {
                 return {
                     background: `url('${landPagePath_light}')`,
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'top center',
+                    backgroundPosition: 'bottom center',
                     backgroundSize: 'cover'
                 }
             } else {
                 return {
                     background: `url('${landPagePath}')`,
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'top center',
+                    backgroundPosition: 'bottom center',
                     backgroundSize: 'cover'
                 }
             }
@@ -154,14 +154,14 @@ const Index = () => {
                 return {
                     background: `url('${landPagePath_light_mobile}')`,
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'top center',
+                    backgroundPosition: 'Bottom center',
                     backgroundSize: 'cover'
                 }
             } else {
                 return {
                     background: `url('${landPagePath_mobile}')`,
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'top center',
+                    backgroundPosition: 'Bottom center',
                     backgroundSize: 'cover'
                 }
             }
