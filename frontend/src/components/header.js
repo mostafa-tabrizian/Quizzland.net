@@ -177,22 +177,22 @@ const Header = (props) => {
                             <div className="header__menu__inner__nav">
                                 <h4>کویز ها</h4>
                                 <ul className="header__menu__inner__quizzes tx-al-r">
-                                    <li><Link to="/sort?q=newest">جدیدترین ها</Link></li>
-                                    <li><Link to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
-                                    <li><Link to="/sort?q=bestest">بهترین ها</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/sort?q=newest">جدیدترین ها</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/sort?q=bestest">بهترین ها</Link></li>
                                 </ul>
                                 <h4 className='space-med'>تست ها</h4>
                                 <ul className="header__menu__inner__quizzes tx-al-r">
-                                    <li><Link to="/sort?q=newest">جدیدترین ها</Link></li>
-                                    <li><Link to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
-                                    <li><Link to="/sort?q=bestest">بهترین ها</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/sort?q=newest_test">جدیدترین ها</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/sort?q=monthlyBestest_test">بهترین های ماه</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/sort?q=bestest_test">بهترین ها</Link></li>
                                 </ul>
                             </div>
                             <div className="header__menu__inner__other">
                                 <ul>
-                                    <li><Link to="/blog">وبلاگ</Link></li>
-                                    <li><Link to="/guide">راهنما</Link></li>
-                                    <li><Link to="/contact">تماس با ما</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/blog">وبلاگ</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/guide">راهنما</Link></li>
+                                    <li><Link onClick={openCloseMenu} to="/contact">تماس با ما</Link></li>
 
                                     {/* Night Mode */}
                                     {nightMode &&

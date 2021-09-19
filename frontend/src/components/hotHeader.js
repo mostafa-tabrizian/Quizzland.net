@@ -177,9 +177,9 @@ const Header = (props) => {
                                 </ul>
                                 <h4 className='space-med'>تست ها</h4>
                                 <ul className="header__menu__inner__quizzes tx-al-r">
-                                    <li><a href="/sort?q=newest">جدیدترین ها</a></li>
-                                    <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
-                                    <li><a href="/sort?q=bestest">بهترین ها</a></li>
+                                    <li><a href="/sort?q=newest_test">جدیدترین ها</a></li>
+                                    <li><a href="/sort?q=monthlyBestest_test">بهترین های ماه</a></li>
+                                    <li><a href="/sort?q=bestest_test">بهترین ها</a></li>
                                 </ul>
                             </div>
                             <div className="header__menu__inner__other">
