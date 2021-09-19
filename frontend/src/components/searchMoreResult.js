@@ -106,6 +106,7 @@ const SearchMoreResult = () => {
                     Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_tag.data.results)
                 }
             }
+            setContentLoaded(true)
 
             // Remove duplicated pointyQuizzes
             let uniqueMatchedPointy = {};
@@ -133,8 +134,6 @@ const SearchMoreResult = () => {
         else {
             setMatchedQuizzesCounter(0)
         }
-
-        setContentLoaded(true)
     }
 
     return (
@@ -151,44 +150,50 @@ const SearchMoreResult = () => {
 
             <div className='flex flex-jc-c flex-ai-c'>
                 ‌<h3 className='title'> ‌ <span style={{fontSize: '1rem'}}>عبارت جستجو شده : <br/></span> {searchValueButWithoutHyphen}</h3>‌
-            </div>‌‌
-
-            <h2 className='wrapper-med'>
-                کوییز های {searchValueButWithoutHyphen}
-            </h2>
+            </div>
+            
             {
-                matchedQuizzesCounter ? 
-                <ul className='quizContainer flex wrapper-med space-sm'>
-                    {quizzesList}
-                </ul>
-                :
-                SkeletonLoading(contentLoaded)
+                matchedQuizzesCounter !== 0 &&
+                <React.Fragment>
+                    <h2 className='wrapper-med'>
+                        کوییز های {searchValueButWithoutHyphen}
+                    </h2>
+
+                    <ul className='quizContainer flex wrapper-med space-sm'>
+                        {quizzesList}
+                    </ul>
+
+                    {SkeletonLoading(contentLoaded)}
+
+                    <PageTravel
+                        pageTravel={pageTravelQuizzes} setPageTravel={setPageTravelQuizzes}
+                        numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                        offset={offset} setOffset={setOffset}
+                    />
+                </React.Fragment>
+            }‌‌
+
+            {
+                matchedPointyCounter !== 0 &&
+                <React.Fragment>
+                    <h2 className='wrapper-med'>
+                        تست های {searchValueButWithoutHyphen}
+                    </h2>
+
+                    <ul className='quizContainer flex wrapper-med space-sm'>
+                        {pointyList}
+                    </ul>
+
+                    {SkeletonLoading(contentLoaded)}
+
+                    <PageTravel
+                        pageTravel={pageTravelPointy} setPageTravel={setPageTravelPointy}
+                        numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                        offset={offset} setOffset={setOffset}
+                    />
+                </React.Fragment>
             }
 
-            <PageTravel
-                pageTravel={pageTravelQuizzes} setPageTravel={setPageTravelQuizzes}
-                numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                offset={offset} setOffset={setOffset}
-            />
-
-            <h2 className='wrapper-med'>
-                تست های {searchValueButWithoutHyphen}
-            </h2>
-
-            {
-                matchedPointyCounter ? 
-                <ul className='quizContainer flex wrapper-med space-sm'>
-                    {pointyList}
-                </ul>
-                :
-                SkeletonLoading(contentLoaded)
-            }
-
-            <PageTravel
-                pageTravel={pageTravelPointy} setPageTravel={setPageTravelPointy}
-                numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                offset={offset} setOffset={setOffset}
-            />
 
         </React.Fragment>
     );
