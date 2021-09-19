@@ -169,10 +169,9 @@ const Quiz = () => {
     const checkTheSelectedOption = (userSelection) => {
         let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
 
+        playSFX(userSelection)
         setCorrectAnswerOption(correctAnswer)
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
-        
-        playSFX(userSelection)
     }
 
     const amountOfPauseCalculator = () => {
@@ -330,7 +329,7 @@ const Quiz = () => {
 
                         { questionShowIfNotNull(question.question) }
 
-                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} /> } {/* loading='lazy' */}
+                        { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} /> }
                     
                         { questionOptionsCheckBetweenStringOrImg(question) }
                         

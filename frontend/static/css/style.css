@@ -2028,11 +2028,11 @@ body {
 
 .quiz__imgQuestion {
   width: 20.8rem;
+  border-radius: 15px;
 }
 
 @media (min-width: 40em) {
   .quiz__imgQuestion {
-    border-radius: 1.2rem;
     width: 29rem;
   }
 }
@@ -2403,14 +2403,16 @@ body {
 }
 
 .quiz__answerImGif img {
-  width: 27rem;
+  width: 90%;
   height: 100%;
-  border-radius: .5rem;
+  border-radius: 15px;
+  -webkit-transform: translateY(0.6rem);
+          transform: translateY(0.6rem);
 }
 
 @media (max-width: 70em) {
   .quiz__answerImGif img {
-    width: 22rem !important;
+    width: 100%;
   }
 }
 

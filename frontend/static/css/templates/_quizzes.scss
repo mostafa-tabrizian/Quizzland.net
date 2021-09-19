@@ -119,9 +119,9 @@ body {
 
     &__imgQuestion {
         width: 20.8rem;
+        border-radius: 15px;
 
         @include breakpoints-up(small) {
-            border-radius: 1.2rem;
             width: 29rem;
         }
     }
@@ -433,11 +433,12 @@ body {
     &__answerImGif {
         padding-bottom: 0;
         img {
-            width: 27rem; height: 100%;
-            border-radius: .5rem;
+            width: 90%; height: 100%;
+            border-radius: 15px;
+            transform: translateY(.6rem);
 
             @include breakpoints-down(large) {
-                width: 22rem !important;
+                width: 100%;
             }
         }
     }

@@ -164,6 +164,7 @@ const Quiz = () => {
     }
 
     const selectedOption = (props) => {
+        playSFX()
         takeSelectedOptionValue(props.target)
 
         if (autoQuestionChanger) {
@@ -171,8 +172,6 @@ const Quiz = () => {
         } else {
             setAbleToGoNext(true)
         }
-
-        playSFX()
     }
 
     const takeSelectedOptionValue = (userSelection) => {
