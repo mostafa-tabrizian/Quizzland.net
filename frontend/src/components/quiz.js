@@ -146,7 +146,10 @@ const Quiz = () => {
         }
     }
 
-    const playSFX = () => {
+    const playSFX = (userSelection) => {
+        let userChose = parseInt(userSelection.id.slice(-1))
+        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
+
         const SFXAllowed = localStorage.getItem('SFXAllowed')
         if (userChose !== correctAnswer) {
             setWrongAnswerOption(parseInt(userChose))
@@ -164,13 +167,12 @@ const Quiz = () => {
     }
 
     const checkTheSelectedOption = (userSelection) => {
-        let userChose = parseInt(userSelection.id.slice(-1))
         let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
 
         setCorrectAnswerOption(correctAnswer)
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
         
-        playSFX()
+        playSFX(userSelection)
     }
 
     const amountOfPauseCalculator = () => {
@@ -402,6 +404,21 @@ const Quiz = () => {
         }
     }
 
+    let firstTouch
+    const touchScreenStart = (e) => {
+        const positionOfStartTouch = e.changedTouches[0].clientX
+        firstTouch = positionOfStartTouch
+    }
+
+    const touchScreenEnd = (e) => {
+        const positionOfEndTouch = e.changedTouches[0].clientX
+        if (positionOfEndTouch - firstTouch <= -100) {
+            if (!(autoQuestionChanger)) {
+                goNextQuestionOrEndTheQuiz()
+            }
+        }
+    }
+
     return (
         <React.Fragment>
 
@@ -545,7 +562,7 @@ const Quiz = () => {
                 سوال شماره
             </div>
 
-            <div onTouchEnd={autoQuestionChanger ? () => {return} : goNextQuestionOrEndTheQuiz } className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
+            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
                 <div className={`quiz__hider flex pos-rel`}>
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded ? 'noVis' : ''}`}></div>
                     

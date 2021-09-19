@@ -377,6 +377,24 @@ const Quiz = () => {
             return `https://www.quizzland.net/test/${replaceFunction(quiz.title, ' ', '-')}`
         } 
     }
+
+    let firstTouch
+    const touchScreenStart = (e) => {
+        const positionOfStartTouch = e.changedTouches[0].clientX
+        firstTouch = positionOfStartTouch
+    }
+
+    const touchScreenEnd = (e) => {
+        const positionOfEndTouch = e.changedTouches[0].clientX
+        if (positionOfEndTouch - firstTouch <= -100) {
+            if (!(autoQuestionChanger)) {
+                goNextQuestionOrEndTheQuiz()
+            }
+        }
+        else if (positionOfEndTouch - firstTouch >= 100) {
+            goLastQuestion()
+        }
+    }
     
     return (
         <React.Fragment>
@@ -507,13 +525,6 @@ const Quiz = () => {
                         <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : '' } pos-rel`}></div>
                     </button>
                 </div>
-
-                { !(isItDesktop()) &&
-                    <div className={` quiz__questionChanger__container pos-rel center ${!(contentLoaded) ? 'noVis' : '' } `}>
-                        <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${ableToGoNext ? 'fadeIn' : 'fadeOut'}`} aria-label='Next Question'></button>
-                        <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
-                    </div>
-                }
                 
             </div>
 
@@ -526,7 +537,7 @@ const Quiz = () => {
                 سوال شماره
             </div>
 
-            <div className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
+            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
                 <div className={`quiz__hider flex pos-rel`}>
                     <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm ${contentLoaded ? 'noVis' : '' }`}></div>
                     
