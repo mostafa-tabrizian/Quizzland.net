@@ -1087,7 +1087,6 @@ input {
   display: block;
   width: 1.625rem;
   height: 0.18rem;
-  background-color: #161616;
 }
 
 .header__menu__openBtn > span:not(:last-child) {
@@ -1424,12 +1423,11 @@ input {
 
 @media (max-width: 70em) {
   .header__search__result__category {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
+    display: -ms-grid;
+    display: grid;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 
@@ -1472,7 +1470,7 @@ input {
   .header__search__result__category__item {
     width: 21rem;
     height: 10rem;
-    margin-right: 1rem;
+    margin-right: 0;
     margin-top: 3rem;
   }
 }
@@ -1521,7 +1519,11 @@ input {
 
 @media (max-width: 70em) {
   .header__search__result__quizzes {
-    width: 20rem;
+    display: -ms-grid;
+    display: grid;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 
@@ -1538,7 +1540,7 @@ input {
     display: -ms-grid;
     display: grid;
     gap: 1rem;
-    margin-right: 1rem;
+    margin-right: 0;
   }
 }
 
@@ -1910,7 +1912,7 @@ body {
 }
 
 .SFXController {
-  z-index: 2;
+  z-index: 4;
   margin-left: 1.5rem;
   top: 6rem;
 }

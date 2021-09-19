@@ -94,8 +94,8 @@
     
         &__category {    
             @include breakpoints-down(large) {
-                display: flex;
-                justify-content: flex-start;
+                display: grid;
+                justify-content: center;
             }
 
             h4 {
@@ -129,7 +129,7 @@
         
                 @include breakpoints-down(large) {
                     width: 21rem; height: 10rem;
-                    margin-right: 1rem;
+                    margin-right: 0;
                     margin-top: 3rem;
                 }
         
@@ -166,7 +166,8 @@
     
         &__quizzes {
             @include breakpoints-down(large) {
-                width: 20rem;
+                display: grid;
+                justify-content: center;
             }
 
             margin-top: 1.5rem;
@@ -179,7 +180,7 @@
                     grid-template-columns: 1fr 1fr;
                     display: grid;
                     gap: 1rem;
-                    margin-right: 1rem;
+                    margin-right: 0;
                 }
 
                 li {
