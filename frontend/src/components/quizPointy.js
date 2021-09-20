@@ -87,8 +87,13 @@ const Quiz = () => {
         }
         
         grabQuiz().then((quiz) => {
-            setQuizThumbnail(quiz.thumbnail)
-            setBackground()
+            try {
+                setQuizThumbnail(quiz.thumbnail)
+                setBackground()
+            }
+            catch (e) {
+                window.location.href = "/404";
+            }
         })
 
         grabQuestions().then((question) => {

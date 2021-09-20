@@ -85,7 +85,7 @@ html {
             border: None;
 
             &::placeholder {
-                color: white !important;
+                color: rgba(255, 255, 255, 0.775) !important;
             }
 
             @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {

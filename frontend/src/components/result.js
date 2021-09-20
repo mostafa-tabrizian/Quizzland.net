@@ -41,6 +41,10 @@ const Result = () => {
     const correctAnswersCounter = localStorage.getItem('resultCorrectAnswersCounter')
     const resultQuiz = JSON.parse(localStorage.getItem('resultQuiz'))
 
+    if(resultQuiz === null) {
+        window.location.href = "/404";
+    }
+
     const calculateTheResultScore = () => {
         const questionsCounter = questions.length
         if (questionsCounter && correctAnswersCounter) {

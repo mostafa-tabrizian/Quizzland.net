@@ -1,9 +1,10 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 
 import { log, replaceFunction, isItMobile } from './base'
+
 
 const Search = (props) => {
     const [categoriesList, setCategoriesList] = useState([])
@@ -11,11 +12,16 @@ const Search = (props) => {
     const [searchMobile, setSearchMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchValue, setSearchValue] = useState(null)
-
+    const [searchSuggestion, setSearchSuggestion] = useState(null)
+    
     const searchSubmit = useRef()
     const mobileSearchInput = useRef()
-
+    
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+
+    useEffect(() => {
+        searchSuggester()
+    }, [])
 
     const searchMobileFocusChangedHideOrShow = () => {
         const menuIsOpened = !(searchMobile)
@@ -167,13 +173,20 @@ const Search = (props) => {
         }
     })
 
+    const searchSuggester = async () => {
+        const grabAllSubCategories = await axiosLimited.get(`/dbAPI/new_category`)
+        const numberOfCategories = grabAllSubCategories.data.length
+        const randomCategoryIndex = Math.floor(Math.random() * numberOfCategories);
+        setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)
+    }
+
     return (
         <React.Fragment>
             <div className={`header__search flex ${props.colorOfHeader}`}>
                 <input
                     type='text'
                     className={`header__search__input tx-al-r`}
-                    placeholder='...جستجو'
+                    placeholder={`جستجو...    مثال: ${searchSuggestion}`}
                     onChange={inputChanged}
                 />
                 <div  className={`header__search__result ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
