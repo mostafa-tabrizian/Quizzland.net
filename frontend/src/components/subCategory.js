@@ -132,7 +132,7 @@ const SubCategory = (props) => {
             {SkeletonLoading(contentLoaded)}
 
             {
-                hideQuizzes &&
+                !(hideQuizzes) &&
                 <div>
                     {
                         !(hideQuizzesPointy) &&

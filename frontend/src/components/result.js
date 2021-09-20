@@ -24,7 +24,10 @@ const Result = () => {
         calculateTheResultScore()
         setLoadState(true)
         getSuggestionsQuiz()
-        showPopUpSuggestion()
+        {
+            suggestionQuizzes &&
+            showPopUpSuggestion()
+        }
 
         if (document.getElementById('html')) {
             document.getElementById('html').style=`background: None`
