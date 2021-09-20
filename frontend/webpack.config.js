@@ -9,6 +9,7 @@ module.exports = {
     SubCategory: "./src/SubCategory.js",
     Blog: "./src/Blog.js",
     404: "./src/404.js",
+    SOS: "./src/SOS.js",
   },
 
   output: {

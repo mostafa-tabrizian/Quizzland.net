@@ -8,11 +8,11 @@ import {
 
 import { log } from './components/base'
 
-const PageNotFound_404  = lazy(() => import ('./components/pageNotFound_404'))
+const SOS  = lazy(() => import ('./components/SOS'))
 const HotFooter  = lazy(() => import ('./components/hotFooter'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
-const PageNotFound404App = () => {
+const SOSLandApp = () => {
     return (
         <React.Fragment>
             <Suspense fallback={ <div className='loadingScreen pos-fix flex flex-jc-c flex-ai-c'></div> }>
@@ -20,7 +20,7 @@ const PageNotFound404App = () => {
                     <ScrollToTop />
 
                     <Switch>
-                        <Route component={PageNotFound_404} />
+                        <Route component={SOS} />
                     </Switch>
                     
                     <HotFooter />
@@ -30,9 +30,9 @@ const PageNotFound404App = () => {
     );
 }
 
-export default PageNotFound404App;
+export default SOSLandApp;
 
 ReactDOM.render(
-    <PageNotFound404App />,
-    document.getElementById('404Land')
+    <SOSLandApp />,
+    document.getElementById('SOSLand')
 );

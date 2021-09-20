@@ -87,6 +87,12 @@ def addViewToArticle(title):
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 
+def SOS(request, SOS):
+    return render(request, 'frontend/SOS.html')
+
+def SOS_landpage(request):
+    return render(request, 'frontend/SOS.html')
+
 class new_quiz(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes.objects.order_by('-publish').all()
     serializer_class = QuizzesSerializer

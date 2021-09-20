@@ -29,11 +29,6 @@ const Guide = () => {
           <div className="basicPage center wrapper-sm">
               <h1>راهنمای کوییزلند</h1>
 
-              {/* <div className="pleaseUseChrome space-med">
-                  <h3>لطفا از مرورگر کروم استفاده کنید</h3>
-                  <h5> دیزاین و کار با سایت به وسیله ی این مرورگر بسیار بهتر است <br/> حالت شب و برخی دیزاین ها در مرورگر شما قابل اجرا نیست</h5>
-              </div> */}
-
               <div className="tx-al-r space-med">
                   <h2 className="space-sm">انتخاب کتگوری یا دسته </h2>
                   <p>

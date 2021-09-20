@@ -1,7 +1,10 @@
-from django.urls import path
-from .views import index, quiz, category, subCategory, blog, article
+from django.urls import path, re_path
+from .views import index, quiz, category, subCategory, blog, article, SOS, SOS_landpage
 
 urlpatterns = [
+    # re_path(r'^(?P<SOS>.*)/$', SOS),  # SOS Time
+    # re_path('', SOS_landpage),  # SOS Time
+
     path('', index),
     path('guide', index),
     path('contact', index),

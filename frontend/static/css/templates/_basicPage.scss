@@ -26,8 +26,15 @@
     }
 }
 
-.pleaseUseChrome {
-    background: rgba(255, 230, 0, 0.719);
-    padding: .5rem .5rem;
-    border: 1px solid rgb(88, 88, 88); border-radius: 2rem;
+.pageNotFound {
+    font-size: 56rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -53%);
+    background: linear-gradient(#b52633, #46080c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
 }
