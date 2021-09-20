@@ -924,25 +924,6 @@ input {
   height: 9rem !important;
 }
 
-.paintBrush {
-  position: relative;
-  z-index: 1;
-}
-
-.paintBrush::before {
-  background: url("/static/img/redBrush.png") no-repeat center center;
-  content: '';
-  display: block;
-  width: 10rem;
-  height: 1.5rem;
-  -webkit-transform: translate(2rem, 2.5rem);
-          transform: translate(2rem, 2.5rem);
-  z-index: -1;
-  position: relative;
-  -webkit-filter: blur(1px);
-          filter: blur(1px);
-}
-
 @-webkit-keyframes load {
   from {
     left: -450px;

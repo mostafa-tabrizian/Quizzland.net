@@ -214,11 +214,11 @@ const Index = () => {
                 </div>
             </div>
 
-            <tag id='scroll' />
 
             {recommendedQuizzes}
 
             <div className="space-med">
+                <tag id='scroll' />
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
                     <a className="btn" href="sort?q=newest">... نمایش بیشتر </a>

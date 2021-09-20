@@ -131,37 +131,46 @@ const SubCategory = (props) => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <div className={hideQuizzes ? 'noVis' : '' }>
+            {
+                hideQuizzes &&
+                <div>
+                    {
+                        !(hideQuizzesPointy) &&
+                        <h2 className={`wrapper-med`} style={{color: 'white'}}>کوییز ها</h2>
+                    }
 
-                <h2 className={`wrapper-med ${hideQuizzesPointy ? 'noVis' : '' }`} style={{color: 'white'}}>کوییز ها</h2>
+                    <ul className={`quizContainer flex wrapper-med`}>
+                        {listQuizzes()}
+                    </ul>
 
-                <ul className={`quizContainer flex wrapper-med`}>
-                    {listQuizzes()}
-                </ul>
+                    <PageTravel
+                        pageTravel={pageTravelQuiz} setPageTravelQuiz={setPageTravelQuiz}
+                        numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                        offset={offsetQuiz} setOffset={setOffsetQuiz}
+                    />
+                </div>
+            }
 
-                <PageTravel
-                    pageTravel={pageTravelQuiz} setPageTravelQuiz={setPageTravelQuiz}
-                    numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                    offset={offsetQuiz} setOffset={setOffsetQuiz}
-                />
+            {
+                !(hideQuizzesPointy) &&
+                <div>
+                    {
+                        !(hideQuizzes) &&
+                        <h2 className={`wrapper-med`} style={{color: 'white'}}>تست ها</h2>
+                    }
+                    
 
-            </div>
+                    <ul className={`quizContainer flex wrapper-med`}>
+                        {listQuizzesPointy()}
+                    </ul>
 
-            <div className={hideQuizzesPointy ? 'noVis' : '' }>
-
-                <h2 className={`wrapper-med ${hideQuizzes ? 'noVis' : '' }`} style={{color: 'white'}}>تست ها</h2>
-
-                <ul className={`quizContainer flex wrapper-med`}>
-                    {listQuizzesPointy()}
-                </ul>
-
-                <PageTravel
-                    pageTravel={pageTravelQuizPointy} setPageTravelQuiz={setPageTravelQuizPointy}
-                    numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                    offset={offsetQuizPointy} setOffset={setOffsetQuizPointy}
-                />
-
-            </div>
+                    <PageTravel
+                        pageTravel={pageTravelQuizPointy} setPageTravelQuiz={setPageTravelQuizPointy}
+                        numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                        offset={offsetQuizPointy} setOffset={setOffsetQuizPointy}
+                    />
+                </div>
+            }
 
         </React.Fragment>
     );

@@ -85,11 +85,14 @@ const Blog = (props) => {
                 sortType={sortType} setSortType={setSortType}
             /> */}
 
-            <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
-                <li className='skeletonLoading skeletonLoading__blog'></li>
-                <li className='skeletonLoading skeletonLoading__blog'></li>
-                <li className='skeletonLoading skeletonLoading__blog'></li>
-            </ul>
+            {
+                !(contentLoaded) &&
+                <ul className={`quizContainer flex wrapper-med`}>
+                    <li className='skeletonLoading skeletonLoading__blog'></li>
+                    <li className='skeletonLoading skeletonLoading__blog'></li>
+                    <li className='skeletonLoading skeletonLoading__blog'></li>
+                </ul>
+            }
 
             <ul className="blog quizContainer__minHeight wrapper-med">
                 {blogContent()}

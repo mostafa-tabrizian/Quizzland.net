@@ -1,6 +1,7 @@
 const skeletonLoading = (contentLoaded) => {
     return (
-        <ul className={`quizContainer flex wrapper-med ${contentLoaded ? 'noVis' : ''}`}>
+        !(contentLoaded) && 
+        <ul className={`quizContainer flex wrapper-med`}>
             <li className='skeletonLoading skeletonLoading__quizContainer'></li>
             <li className='skeletonLoading skeletonLoading__quizContainer'></li>
             <li className='skeletonLoading skeletonLoading__quizContainer'></li>
