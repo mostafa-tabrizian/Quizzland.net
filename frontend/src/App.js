@@ -22,6 +22,7 @@ const Sort              = lazy(() => import('./components/sort'))
 const Blog              = lazy(() => import('./components/blog'))
 const pageNotFound_404  = lazy(() => import('./components/pageNotFound_404'))
 const monthlyRecord     = lazy(() => import('./components/monthlyRecord'))
+const restartEveryMonthlyViews     = lazy(() => import('./components/restartEveryMonthlyViews'))
 const welcomeOwl        = lazy(() => import('./components/welcomeOwl'))
 const welcomeZeynab     = lazy(() => import('./components/welcomeZeynab'))
 
@@ -82,6 +83,7 @@ const App = () => {
                         <Route path='/sort' component={Sort} />
                         <Route path='/blog' component={Blog} />
                         <Route path='/makeMonthlyRecord' component={monthlyRecord} />
+                        <Route path='/restartEveryMonthlyViews' component={restartEveryMonthlyViews} />
                         <Route path='/welcomeOwl' component={welcomeOwl} />
                         <Route path='/welcomeZeynab' component={welcomeZeynab} />
                         <Route component={pageNotFound_404} />

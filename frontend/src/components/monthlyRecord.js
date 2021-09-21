@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { saveAs } from 'file-saver'
 import axios from 'axios';
 import { Helmet } from "react-helmet";
-
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
 
 import Header from './header'
 
@@ -20,9 +17,6 @@ const QuizMonthlyRecord = () => {
 
     const [recordStartStatue_2, setRecordStartStatue_2] = useState()
     const [recordStartStatue_2_2, setRecordStartStatue_2_2] = useState()
-
-    const [recordStartStatue_3, setRecordStartStatue_3] = useState()
-    const [recordStartStatue_3_2, setRecordStartStatue_3_2] = useState()
 
     const passwordInput = useRef(null)
 
@@ -70,7 +64,7 @@ const QuizMonthlyRecord = () => {
             `${date.getMonth()}-${date.getFullYear()}-quiz`
         )
 
-        setRecordStartStatue_3('Creating Quizzes Excel - Downloading')
+        setRecordStartStatue_2('Creating Quizzes Excel - Downloading')
         restartQuizMonthlyViews(quizzes)
     }
 
@@ -108,33 +102,11 @@ const QuizMonthlyRecord = () => {
             `${date.getMonth()}-${date.getFullYear()}-category`
         )
 
-        setRecordStartStatue_3_2('Creating Categories Excel - Downloading')
+        setRecordStartStatue_2_2('Creating Categories Excel - Downloading')
         restartCategoryMonthlyViews(categories)
     }
 
-    const restartQuizMonthlyViews = async (quizzes) => {
-        setRecordStartStatue_2('Restarting Quizzes Data...')
-        await quizzes.data.map(async quiz => {
-            if (quiz.monthly_views !== 0) {
-                log(quiz)
-                const restartQuizMonthlyViews = await axios.patch(`/dbAPI/new_quiz/${quiz.id}/`, {monthly_views: 0})
-                return restartQuizMonthlyViews
-            }
-        })
-    }
-
-    const restartCategoryMonthlyViews = async (categories) => {
-        setRecordStartStatue_2_2('Restarting Categories Data...')
-        await categories.data.map(async category => {
-            if (category.monthly_views !== 0) {
-                log(category)
-                const restartCategoryMonthlyViews = await axios.patch(`/dbAPI/new_category/${category.id}/`, {monthly_views: 0})
-                return restartCategoryMonthlyViews
-            }
-        })
-    }
-
-    const adminChecker = () => {
+    const adminCheckerForStartRecord = () => {
         const InputValueHashed = sha256(passwordInput.current.value)
         const password = '4717a31189f18bd8313df862bd052c8ab02f8b83831864f3aeb5343a2919f8cf'
 
@@ -149,6 +121,19 @@ const QuizMonthlyRecord = () => {
         getAllCategories()
     }
 
+    const adminCheckerForRestartMonthlyViews = () => {
+        const InputValueHashed = sha256(passwordInput.current.value)
+        const password = '4717a31189f18bd8313df862bd052c8ab02f8b83831864f3aeb5343a2919f8cf'
+
+        if(InputValueHashed === password) {
+            restartMonthlyViews()
+        }
+    }
+
+    const restartMonthlyViews = () => {
+        window.location.replace(window.location.origin + '/restartEveryMonthlyViews');
+    }
+
     return (
         <React.Fragment>
 
@@ -161,8 +146,12 @@ const QuizMonthlyRecord = () => {
             <h3 className='tx-al-c'>💜 Enter The Password Fucker</h3>
             <div className="flex flex-jc-c">
                 <input type="text" type={showPassword ? 'string' : 'password'} style={{fontSize: '1.5rem', padding: '1rem', background: 'transparent', border: '1px solid gray', borderRadius: '15px', boxShadow: '0 0 15px #8080803d'}}
-                ref={passwordInput} onChange={adminChecker} />
+                ref={passwordInput} onChange={adminCheckerForStartRecord} />
                 <button onClick={() => showPassword ? setShowPassword(false) : setShowPassword(true)} style={{marginLeft: '1rem', background: 'transparent', border: 'none'}}>Show Input</button>
+            </div>
+
+            <div className='space-sm'>
+                <button onClick={adminCheckerForRestartMonthlyViews}>Restart Monthly Views</button>
             </div>
 
             <div className='basicPage wrapper-med'>
@@ -172,8 +161,8 @@ const QuizMonthlyRecord = () => {
                 <h1 className='space-sm tx-al-l'> {recordStartStatue_2} </h1>
                 <h1 className='space-sm tx-al-l'> {recordStartStatue_2_2} </h1>
 
-                <h1 className='space-sm tx-al-l'> {recordStartStatue_3} </h1>
-                <h1 className='space-sm tx-al-l'> {recordStartStatue_3_2} </h1>
+                <h1 className='space-sm tx-al-l'> {recordStartStatue_2} </h1>
+                <h1 className='space-sm tx-al-l'> {recordStartStatue_2_2} </h1>
             </div>
 
         </React.Fragment>

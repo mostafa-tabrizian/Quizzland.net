@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.cache import never_cache
 import datetime
+from urllib.parse import unquote
 
 from .models import *
 from .functions import *
@@ -8,7 +9,6 @@ from rest_framework import viewsets
 from .serializers import *
 from .filters import *
 
-from urllib.parse import unquote
 
 def index(request):
     return render(request, "frontend/index.html")
@@ -83,6 +83,36 @@ def addViewToArticle(title):
         # print(f'{datetime.datetime.now()}:{e}:{finalTitle} Not in Quizzes database')
         # print('----------------------------------')
         pass
+
+def restartEveryMonthlyViews(request):
+    try:
+        quizzes = Quizzes.objects.all()
+        for quiz in quizzes:
+            quiz.monthly_views = 0
+            quiz.save()
+
+        quizPointies = Quizzes_Pointy.objects.all()
+        for quizPointy in quizPointies:
+            quizPointy.monthly_views = 0
+            quizPointy.save()
+
+        subCategories = SubCategories.objects.all()
+        for subCategory in subCategories:
+            subCategory.monthly_views = 0
+            subCategory.save()
+
+        articles = Blog.objects.all()
+        for article in articles:
+            article.monthly_views = 0
+            article.save()
+
+        
+    except Exception as e:
+        print(f'{datetime.datetime.now()}:{e}')
+        print('----------------------------------')
+        return render(request, "frontend/404.html")
+
+    return render(request, "frontend/index.html")
 
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
