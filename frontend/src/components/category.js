@@ -17,7 +17,7 @@ const Category = (props) => {
     const [categoryTarget, setCategoryTarget] = useState(props.match.params.category)
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
-    const [sortType, setSortType] = useState('newest')
+    const [sortType, setSortType] = useState('bestest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     

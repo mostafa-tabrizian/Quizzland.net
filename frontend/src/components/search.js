@@ -186,7 +186,7 @@ const Search = (props) => {
                 <input
                     type='text'
                     className={`header__search__input tx-al-r`}
-                    placeholder={`جستجو...    مثال: ${searchSuggestion}`}
+                    placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
                     onChange={inputChanged}
                 />
                 <div  className={`header__search__result ${searchResult ? 'fadeIn' : 'fadeOut'} `}>

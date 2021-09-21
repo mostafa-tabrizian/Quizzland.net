@@ -9,7 +9,7 @@ from selenium.webdriver.common.keys import Keys
 class QuizzlandTests(unittest.TestCase):
     def setUp(self):
         options = Options()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         self.driver = webdriver.Firefox(options=options)
         self.startUrl = 'http://localhost:8000/'
         self.driver.get(self.startUrl)

@@ -206,7 +206,7 @@ const Quiz = () => {
         if (ableToSelectOption) {
             setTimeout(() => {
                 document.getElementById('quiz__answerImGif').scrollIntoView(false)
-            }, 170)
+            }, 300)
 
             setAbleToSelectOption(false)
             setAbleToGoNext(true)

@@ -2408,50 +2408,6 @@ body {
   }
 }
 
-.quiz .lowHighContainer {
-  margin: 0 15rem !important;
-  margin-top: 5rem !important;
-}
-
-.quiz__lowHigh {
-  margin-top: 2.5625rem;
-}
-
-.quiz__lowHigh input {
-  display: none;
-}
-
-.quiz__lowHigh label {
-  border: 1px solid #707070;
-  border-radius: 100px;
-  margin-right: .4325rem;
-  margin-left: .4325rem;
-}
-
-.quiz__lowHigh label:nth-child(3), .quiz__lowHigh label:nth-child(19) {
-  padding-right: 2.1875rem;
-}
-
-.quiz__lowHigh label:nth-child(5), .quiz__lowHigh label:nth-child(17) {
-  padding-right: 2.4875rem;
-  padding-top: .25rem;
-}
-
-.quiz__lowHigh label:nth-child(7), .quiz__lowHigh label:nth-child(15) {
-  padding-right: 2.7875rem;
-  padding-top: .5rem;
-}
-
-.quiz__lowHigh label:nth-child(9), .quiz__lowHigh label:nth-child(13) {
-  padding-right: 3rem;
-  padding-top: .75rem;
-}
-
-.quiz__lowHigh label:nth-child(11) {
-  padding-right: 3.3rem;
-  padding-top: 1rem;
-}
-
 .countingResult {
   z-index: 95000;
   font-size: 1.325rem;
