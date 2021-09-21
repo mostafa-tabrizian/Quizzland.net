@@ -11,31 +11,70 @@ let sha256 = require('js-sha256');
 
 const QuizMonthlyRecord = () => {
     const [showPassword, setShowPassword] = useState(false)
-
-    const [recordStartStatue_1, setRecordStartStatue_1] = useState()
-    const [recordStartStatue_1_2, setRecordStartStatue_1_2] = useState()
-
-    const [recordStartStatue_2, setRecordStartStatue_2] = useState()
-    const [recordStartStatue_2_2, setRecordStartStatue_2_2] = useState()
-
+    const [message, setMessage] = useState(null)
     const passwordInput = useRef(null)
 
     const getAllQuizzes = async () => {
-        setRecordStartStatue_1('Getting Quiz Data...')
         const quizzes = await axios.get('/dbAPI/new_quiz/')
+        log(quizzes)
         quizDataSaveInExcel(quizzes)
+    }
+
+    const getAllPointyQuizzes = async () => {
+        const pointyQuizzes = await axios.get('/dbAPI/new_pointy_quiz/')
+        pointyQuizDataSaveInExcel(pointyQuizzes)
     }
     
     const getAllCategories = async () => {
-        setRecordStartStatue_1_2('Getting Category Data...')
         const categories = await axios.get('/dbAPI/new_category/')
         categoryDataSaveInExcel(categories)
     }
+
+    const getAllBlogs = async () => {
+        const blogs = await axios.get('/dbAPI/new_blog/')
+        blogDataSaveInExcel(blogs)
+    }
+
     
     const quizDataSaveInExcel = async (quizzes) => {
         const Excel = require('exceljs')
         const workbook = new Excel.Workbook();
         const worksheet = workbook.addWorksheet("Quizzland-Record(Quizzes)");
+
+        worksheet.columns = [
+            {header: 'Id', key: 'id', width: 5},
+            {header: 'Title', key: 'title', width: 30}, 
+            {header: 'Views', key: 'views', width: 10},
+            {header: 'Monthly_views', key: 'monthly_views', width: 10},
+            {header: 'Publish', key: 'publish', width: 35}
+        ];
+        
+        quizzes.data.forEach(quiz => {
+            log('-------------------------------')
+            log(quiz.monthly_views)
+            if (quiz.monthly_views !== 0) {
+                return worksheet.addRow({
+                    id: quiz.id,
+                    title: quiz.title,
+                    views: quiz.views,
+                    monthly_views: quiz.monthly_views,
+                    publish: quiz.publish
+                });
+            }
+        })
+        
+        const date = new Date();
+        const xls64 = await workbook.xlsx.writeBuffer({ base64: true })
+        saveAs(
+            new Blob([xls64], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+            `${date.getMonth()}-${date.getFullYear()}-quiz`
+        )
+    }
+
+    const pointyQuizDataSaveInExcel = async (quizzes) => {
+        const Excel = require('exceljs')
+        const workbook = new Excel.Workbook();
+        const worksheet = workbook.addWorksheet("Quizzland-Record(Pointies)");
 
         worksheet.columns = [
             {header: 'Id', key: 'id', width: 5},
@@ -61,11 +100,8 @@ const QuizMonthlyRecord = () => {
         const xls64 = await workbook.xlsx.writeBuffer({ base64: true })
         saveAs(
             new Blob([xls64], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
-            `${date.getMonth()}-${date.getFullYear()}-quiz`
+            `${date.getMonth()}-${date.getFullYear()}-pointy`
         )
-
-        setRecordStartStatue_2('Creating Quizzes Excel - Downloading')
-        restartQuizMonthlyViews(quizzes)
     }
 
     const categoryDataSaveInExcel = async (categories) => {
@@ -101,9 +137,39 @@ const QuizMonthlyRecord = () => {
             new Blob([xls64], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
             `${date.getMonth()}-${date.getFullYear()}-category`
         )
+    }
 
-        setRecordStartStatue_2_2('Creating Categories Excel - Downloading')
-        restartCategoryMonthlyViews(categories)
+    const blogDataSaveInExcel = async (Blogs) => {
+        const Excel = require('exceljs')
+        const workbook = new Excel.Workbook();
+        const worksheet = workbook.addWorksheet("Quizzland-Record(Blogs)");
+
+        worksheet.columns = [
+            {header: 'Id', key: 'id', width: 5},
+            {header: 'Title', key: 'title', width: 30}, 
+            {header: 'Views', key: 'views', width: 10},
+            {header: 'Monthly_views', key: 'monthly_views', width: 10},
+            {header: 'Publish', key: 'publish', width: 35}
+        ];
+        
+        Blogs.data.forEach(article => {
+            if (article.monthly_views !== 0) {
+                return worksheet.addRow({
+                    id: article.id,
+                    title: article.title,
+                    views: article.views,
+                    monthly_views: article.monthly_views,
+                    publish: article.publish
+                });
+            }
+        })
+        
+        const date = new Date();
+        const xls64 = await workbook.xlsx.writeBuffer({ base64: true })
+        saveAs(
+            new Blob([xls64], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+            `${date.getMonth()}-${date.getFullYear()}-blog`
+        )
     }
 
     const adminCheckerForStartRecord = () => {
@@ -116,9 +182,11 @@ const QuizMonthlyRecord = () => {
     }
 
     const startRecord = () => {
-        log('record start')
+        setMessage('Start Recording.....')
         getAllQuizzes()
+        getAllPointyQuizzes()
         getAllCategories()
+        getAllBlogs()
     }
 
     const adminCheckerForRestartMonthlyViews = () => {
@@ -155,14 +223,7 @@ const QuizMonthlyRecord = () => {
             </div>
 
             <div className='basicPage wrapper-med'>
-                <h1 className='space-sm tx-al-l'> {recordStartStatue_1} </h1>
-                <h1 className='space-sm tx-al-l'> {recordStartStatue_1_2} </h1>
-
-                <h1 className='space-sm tx-al-l'> {recordStartStatue_2} </h1>
-                <h1 className='space-sm tx-al-l'> {recordStartStatue_2_2} </h1>
-
-                <h1 className='space-sm tx-al-l'> {recordStartStatue_2} </h1>
-                <h1 className='space-sm tx-al-l'> {recordStartStatue_2_2} </h1>
+                {message}
             </div>
 
         </React.Fragment>
