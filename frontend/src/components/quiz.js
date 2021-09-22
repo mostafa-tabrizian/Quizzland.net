@@ -206,7 +206,7 @@ const Quiz = () => {
     const selectedOption = (props) => {
         if (ableToSelectOption) {
             setTimeout(() => {
-                document.getElementById('quiz__answerImGif').scrollIntoView(false)
+                document.querySelector('.quiz__options__textLabel').scrollIntoView()
             }, 300)
 
             setAbleToSelectOption(false)
@@ -371,7 +371,7 @@ const Quiz = () => {
                             {answerOfQuestionIfExistShow(question)}
                         </div>
 
-                        <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
+                        <div className={`quiz__answerImGif answerHide`}>
                             {gifAnswerOfQuestionIfExistShow(question)}
                         </div>
                     </div>

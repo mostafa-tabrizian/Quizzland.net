@@ -157,7 +157,7 @@ const Result = () => {
 
             <div className="result__container">
                 <div className="result__title flex flex-jc-c">
-                    <h5 className="tx-al-r">"نتیجه‌ کوییز  "{resultQuiz.title}</h5>
+                    <h5 className="tx-al-r">"نتیجه  "{resultQuiz.title}</h5>
                 </div>
                 <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
                     <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
@@ -175,7 +175,7 @@ const Result = () => {
 
                 <div className='wrapper-med'>
                     <div className="result__share space-sm tx-al-c">
-                        <h5>{'دوستات رو به چالش بکش  \n ببین میتونن بیشتر از تو بیارن'}</h5>
+                        <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${resultQuiz.fan_name} هستن`}</h5>
 
                         <InlineShareButtons
                             config={{
