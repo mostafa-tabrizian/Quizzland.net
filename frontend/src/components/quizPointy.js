@@ -28,6 +28,8 @@ const Quiz = () => {
     const [quizThumbnail, setQuizThumbnail] = useState()
     const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [SFXAllowed, setSFXAllowed] = useState()
+    const [showQuestionChangingHelper, setShowQuestionChangingHelper] = useState(false)
+
     const speakerIconOn = '/static/img/speakerOn.png'
     const speakerIconOff = '/static/img/speakerOff.png'
 
@@ -176,6 +178,12 @@ const Quiz = () => {
             automaticallyGoNextQuestionOrEndTheQuiz()
         } else {
             setAbleToGoNext(true)
+
+            setTimeout(() => {
+                if (showQuestionChangingHelper !== 'never') {
+                    setShowQuestionChangingHelper(true)
+                }
+            }, 5000)
         }
     }
 
@@ -327,6 +335,7 @@ const Quiz = () => {
 
     const goNextQuestionOrEndTheQuiz = () => {
         if (ableToGoNext || autoQuestionChanger) {
+            setShowQuestionChangingHelper('never')
             setAbleToGoNext(false)
             if (currentQuestionNumber !== questions.length) {
                 plusOneToTotalAnsweredQuestions()
@@ -557,6 +566,10 @@ const Quiz = () => {
                     سوال شماره
                 </div>
             }
+
+            <div className={`tx-al-c ${showQuestionChangingHelper === true ? 'fadeIn' : 'fadeOut'}`}>
+                <h5>برای رفتن به سوال بعدی به از راست به چپ بکشید!</h5>
+            </div>
 
             <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
                 <div className={`quiz__hider flex pos-rel`}>

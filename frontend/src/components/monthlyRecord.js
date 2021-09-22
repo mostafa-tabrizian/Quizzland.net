@@ -16,7 +16,6 @@ const QuizMonthlyRecord = () => {
 
     const getAllQuizzes = async () => {
         const quizzes = await axios.get('/dbAPI/new_quiz/')
-        log(quizzes)
         quizDataSaveInExcel(quizzes)
     }
 
@@ -50,8 +49,6 @@ const QuizMonthlyRecord = () => {
         ];
         
         quizzes.data.forEach(quiz => {
-            log('-------------------------------')
-            log(quiz.monthly_views)
             if (quiz.monthly_views !== 0) {
                 return worksheet.addRow({
                     id: quiz.id,
