@@ -220,7 +220,7 @@ const Quiz = () => {
                 }, amountOfPauseCalculator())
             } else {
                 setTimeout(() => {
-                    if (showQuestionChangingHelper !== 'never') {
+                    if (showQuestionChangingHelper !== 'never' && !(isItDesktop())) {
                         setShowQuestionChangingHelper(true)
                     }
                 }, 5000)
@@ -256,7 +256,6 @@ const Quiz = () => {
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
-
         if (ableToGoNext || autoQuestionChanger) {
             setShowQuestionChangingHelper('never')
             if (currentQuestionNumber !== questions.length) {
@@ -504,12 +503,12 @@ const Quiz = () => {
                             'sms',
                             'sharethis',
                         ],
-                        padding: 12,          // padding within buttons (INTEGER)
+                        padding: 9,          // padding within buttons (INTEGER)
                         radius: 15,            // the corner radius on each button (INTEGER)
                         show_total: true,     // show/hide the total share count (true, false)
                         show_mobile: true,    // show/hide the buttons on mobile (true, false)
                         show_toggle: false,    // show/hide the toggle buttons (true, false)
-                        size: 48,             // the size of each button (INTEGER)
+                        size: 38,             // the size of each button (INTEGER)
                         top: 450,             // offset in pixels from the top of the page
                         url: currentUrl()
                     }}
@@ -550,7 +549,7 @@ const Quiz = () => {
                 <div className="quiz__detail flex flex-jc-c flex-ai-c">
                     {
                         !(contentLoaded) &&
-                        <div className={`flex`}>
+                        <div className={`flex`} style={{height: '8rem'}}>
                             <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
                             <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
                         </div>
@@ -589,7 +588,7 @@ const Quiz = () => {
             }
 
             <div className={`tx-al-c ${showQuestionChangingHelper === true ? 'fadeIn' : 'fadeOut'}`}>
-                <h5>برای رفتن به سوال بعدی به از راست به چپ بکشید!</h5>
+                <h5>برای رفتن به سوال بعدی از راست به چپ بکشید!</h5>
             </div>
 
             <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">

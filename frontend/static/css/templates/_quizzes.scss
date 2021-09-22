@@ -444,8 +444,7 @@ body {
     }
 
     &__answerText {
-        padding-right: 1rem;
-        padding-left: 1rem;
+        padding: 1rem 2rem;
 
         @include breakpoints-up(small) {
             p {
