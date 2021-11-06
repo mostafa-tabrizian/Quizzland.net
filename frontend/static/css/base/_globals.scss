@@ -87,6 +87,10 @@ h3 {
     }
 }
 
+h5 {
+    font-weight: 300;
+}
+
 p {
     font-size: $font-sm;
     text-align: right;
@@ -110,6 +114,11 @@ ul {
 li {
     list-style: none;
     font-size: $font-med;
+}
+
+hr {
+    border: 1px solid #8080802e;
+    width: 50%;
 }
 
 .btn {

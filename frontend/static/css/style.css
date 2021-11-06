@@ -225,6 +225,10 @@ h3 {
   }
 }
 
+h5 {
+  font-weight: 300;
+}
+
 p {
   font-size: 1.18rem;
   text-align: right;
@@ -248,6 +252,11 @@ ul {
 li {
   list-style: none;
   font-size: 1.325rem;
+}
+
+hr {
+  border: 1px solid #8080802e;
+  width: 50%;
 }
 
 .btn {
@@ -1012,7 +1021,7 @@ input {
 }
 
 .header__links {
-  padding: 1.25rem 0;
+  padding: .6rem 0;
   margin-right: 1.5rem;
   direction: rtl;
   z-index: 1;
@@ -1028,6 +1037,10 @@ input {
 
 .header__links a:not(:last-child) {
   margin-left: 2rem;
+}
+
+.header_profile {
+  margin-left: .5rem;
 }
 
 .header .slideMenu-hide {
@@ -2228,6 +2241,7 @@ body {
   color: #f0f0f0;
   display: block;
   border-radius: 26px;
+  direction: rtl;
   cursor: pointer;
 }
 
@@ -3085,5 +3099,134 @@ body {
 .article-publish {
   color: #b5b5b5;
   font-size: 1rem;
+}
+
+.profile {
+  line-height: 5rem;
+}
+
+.profile_information {
+  border: 1px solid rgba(128, 128, 128, 0.508);
+  border-radius: 20px;
+  padding: 2rem;
+  direction: rtl;
+}
+
+.profile_information input {
+  border: 1px solid rgba(128, 128, 128, 0.446);
+  border-radius: 8px;
+  background: none;
+  font-size: 1.225rem;
+  padding: .2rem;
+  font-family: myHarmattan, sans-serif, serif;
+}
+
+.profile_picture {
+  margin-bottom: 2rem;
+}
+
+.profile_picture img {
+  border-radius: 50%;
+  width: 10rem;
+  margin-left: 2rem;
+}
+
+.profile_picture button {
+  border: none;
+  background: none;
+  border-radius: 8px;
+  padding: .5rem;
+  display: block;
+  margin-top: .5rem;
+  font-family: myHarmattan, sans-serif, serif;
+}
+
+.profile_picture_uploadBtn {
+  font-size: 1.18rem;
+  border: 1px solid #690D11 !important;
+}
+
+.profile_detail div:not(:last-child) {
+  margin-left: 3rem;
+}
+
+.profile_detail input {
+  border: 1px solid rgba(128, 128, 128, 0.446);
+  border-radius: 8px;
+  background: none;
+  font-size: 1.225rem;
+  padding: .2rem;
+  font-family: myHarmattan, sans-serif, serif;
+}
+
+.profile_accountSetting {
+  border: 1px solid rgba(128, 128, 128, 0.508);
+  border-radius: 20px;
+  padding: 2rem;
+  direction: rtl;
+}
+
+.profile_accountSetting button {
+  border: 1px solid #690D11;
+  background: none;
+  border-radius: 8px;
+  padding: .5rem;
+  margin-top: 1rem;
+  font-family: myHarmattan, sans-serif, serif;
+  font-size: 1.18rem;
+}
+
+.profile_accountSetting div:not(:last-child) {
+  margin-left: 5rem;
+}
+
+.profile_saveBtn {
+  background: linear-gradient(45deg, green, #0b3f0b);
+  padding: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-family: myHarmattan, sans-serif, serif;
+  font-size: 1.18rem;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 5rem;
+}
+
+.signIn {
+  padding: 3rem;
+  border: 1px solid #80808017;
+  border-radius: 20px;
+  margin-bottom: 4rem;
+  line-height: 3rem;
+}
+
+.signIn_OrLine hr {
+  margin: 2rem;
+}
+
+.signIn_manual {
+  line-height: 4rem;
+}
+
+.signIn_manual input {
+  border: 1px solid #80808017;
+  background: none;
+  font-size: 1.325rem;
+  font-family: myHarmattan, sans-serif, serif;
+  padding: .5rem;
+  border-radius: 10px;
+}
+
+.signIn_submit {
+  background: #690D11;
+  padding: 0 5rem;
+  font-size: 1.325rem;
+  font-family: myHarmattan, sans-serif, serif;
+  border: none;
+  border-radius: 10px;
+}
+
+.signIn_forgotPassword {
+  color: #ff7e84;
 }
 /*# sourceMappingURL=style.css.map */

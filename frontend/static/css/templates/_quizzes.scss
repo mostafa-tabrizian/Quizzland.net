@@ -294,6 +294,7 @@ body {
             color: $white;
             display: block;
             border-radius: 26px;
+            direction: rtl;
             cursor: pointer;
 
             @include breakpoints-up(small) {

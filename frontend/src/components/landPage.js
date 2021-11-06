@@ -196,6 +196,15 @@ const Index = () => {
                     }
                 `}
                 </script>
+                
+                <script type="text/javascript">
+                    var head = document.getElementsByTagName("head")[0];
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.async=1;
+                    script.src = "https://s1.mediaad.org/serve/Quizzland.net/loader.js" ;
+                    head.appendChild(script);
+                </script> 
             </Helmet>
 
             <div className="hero flex flex-jc-c flex-ai-c">
@@ -217,6 +226,9 @@ const Index = () => {
 
             {recommendedQuizzes}
 
+            <h1>Banner</h1>
+            <div id='mediaad-TZsp'></div>
+
             <div className="space-med">
                 <tag id='scroll' />
 
@@ -233,6 +245,8 @@ const Index = () => {
 
             </div>
 
+            <div id='mediaad-WSYR'></div>
+
             <div className="space-med">
 
                 <div className="quizContainer__header flex flex-ai-c wrapper-med">
@@ -247,6 +261,8 @@ const Index = () => {
                 </ul>
 
             </div>
+
+            <div id='mediaad-WSYR'></div>
 
             <div className="space-med">
 
@@ -323,9 +339,9 @@ const Index = () => {
 
             </div>
 
-            {/* <adverts className="adverts adverts__bottomIndex">
+            <adverts className="adverts adverts__bottomIndex">
                 this is special adverts for landPage
-            </adverts> */}
+            </adverts>
 
         </React.Fragment>
     );

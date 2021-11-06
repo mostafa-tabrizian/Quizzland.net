@@ -115,10 +115,20 @@ const SubCategory = (props) => {
                 <title>{`کوییزلند | کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')}`}</title>
                 <meta name="description" content={`کوییزلند - کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')} `} />
                 <meta name="keywords" content={`بهترین کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')} , کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')}`} />
+                
+                <script type="text/javascript">
+                    var head = document.getElementsByTagName("head")[0];
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.async=1;
+                    script.src = "https://s1.mediaad.org/serve/Quizzland.net/loader.js" ;
+                    head.appendChild(script);
+                </script> 
             </Helmet>
 
             <div className='adverts adverts__left'>
-                <div id="pos-article-display-28433"></div>
+                Banner
+                <div id='mediaad-TZsp'></div>
             </div>
 
             <h3 className='lowTitle' style={{color: 'white'}}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>

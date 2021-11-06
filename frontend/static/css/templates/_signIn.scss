@@ -1,0 +1,40 @@
+.signIn {
+    padding: 3rem;
+    border: 1px solid #80808017;
+    border-radius: 20px;
+    margin-bottom: 4rem;
+    line-height: 3rem;
+
+    &_OrLine {
+        hr {
+            margin: 2rem;
+        }
+    }
+
+    &_manual {
+        line-height: 4rem;
+        
+        input {
+            border: 1px solid #80808017;
+            background: none;
+            font-size: $font-med;
+            font-family: $font-pr;
+            padding: .5rem;
+            border-radius: 10px;
+        }
+    }
+
+    &_submit {
+        background: $darkRed;
+        padding: 0 5rem;
+        font-size: $font-med;
+        font-family: $font-pr;
+        border: none;
+        border-radius: 10px;
+    }
+
+    &_forgotPassword {
+        color: #ff7e84;
+    }
+}
+

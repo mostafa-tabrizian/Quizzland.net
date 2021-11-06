@@ -110,6 +110,16 @@ const Header = (props) => {
 
             <header className="header pos-rel">
 
+                <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
+                    <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
+                        <span>uizzland</span>
+                        <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
+                    </Link>
+                    <img className='header_profile' src="/static/img/profile.svg" alt="" />
+                    <li>ثبت نام</li>
+                    <Search/>
+                </div>
+
                 <nav className="flex flex-ai-c flex-jc-sb">
 
                     <div className="flex flex-ai-c">
@@ -117,20 +127,13 @@ const Header = (props) => {
                             <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
                             <span>uizzland</span>
                         </Link>
-                        <Search/>
                     </div>
 
                     <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
-                        <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
-                            <span>uizzland</span>
-                            <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
-                        </Link>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
                         <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
                         <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
                         <Link to="/blog">وبلاگ</Link>
-                        <Link to="/guide">راهنما</Link>
-                        <Link to="/contact">تماس با ما</Link>
 
                         {
                             nightMode &&
