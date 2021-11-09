@@ -3224,6 +3224,7 @@ body {
   font-family: myHarmattan, sans-serif, serif;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .signIn_forgotPassword {

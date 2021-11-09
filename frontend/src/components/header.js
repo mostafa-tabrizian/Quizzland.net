@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
+import axios from 'axios'
+import rateLimit from 'axios-rate-limit';
+
+const axiosLimited = rateLimit(axios.create(), { maxRequests: 10, perMilliseconds: 1000, maxRPS: 150 })
 
 import { log } from './base'
 import Search from './search'
@@ -16,6 +20,7 @@ const Header = (props) => {
     const [pointyNavigationOpen, setPointyNavigationOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
     const [nightMode, setNightMode] = useState(true)
+    const [profileDetail, setProfileDetail] = useState(null)
 
     useEffect(() => {
         componentChangeDetector()
@@ -29,6 +34,22 @@ const Header = (props) => {
             }
         }
     }, [nightMode])
+
+    useEffect(async () => {
+        checkProfileSignedIn()
+    }, [])
+
+    const checkProfileSignedIn = async () => {
+        try {
+            const session = localStorage.getItem("signInSession")
+            const username = session.split('"')[3]
+            const profileData = await axiosLimited.get(`/dbAPI/profile/?username=${username}`)
+            setProfileDetail(profileData.data[0])
+        } 
+        catch (err) {
+            log('Not signed in...')
+        }
+    }
     
     // if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
     //     if (localStorage.getItem('alertUFHB') !== 'true') {
@@ -116,13 +137,16 @@ const Header = (props) => {
                         <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
                     </Link>
                     <img className='header_profile' src="/static/img/profile.svg" alt="" />
-                    <li>ثبت نام</li>
+                    {
+
+                    }
+                    <li><Link to={profileDetail ? '/profile' : '/signIn'}>{profileDetail ? profileDetail.username : 'ورود'}</Link></li>
                     <Search/>
                 </div>
 
                 <nav className="flex flex-ai-c flex-jc-sb">
 
-                    <div className="flex flex-ai-c">
+                    <div>
                         <Link to="/" className='header__logo flex flex-jc-sb flex-ai-c hideForDesktop'>
                             <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
                             <span>uizzland</span>

@@ -104,27 +104,30 @@ const Header = (props) => {
 
             <header className="header pos-rel">
 
+                <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
+                    <a href="/" className='header__logo flex flex-jc-sb flex-ai-c'>
+                        <span>uizzland</span>
+                        <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
+                    </a>
+                    <img className='header_profile' src="/static/img/profile.svg" alt="" />
+                    <li><Link to='/signIn'>ورود</Link></li>
+                    <Search />
+                </div>
+
                 <nav className="flex flex-ai-c flex-jc-sb">
 
-                    <div className="flex flex-ai-c">
-                        <a href="/" className='header__logo flex flex-jc-sb flex-ai-c hideForDesktop'>
+                    <div>
+                        <a className="header__logo flex flex-jc-sb flex-ai-c hideForDesktop" href="/">
                             <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
                             <span>uizzland</span>
                         </a>
-                        <Search />
                     </div>
 
                     <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
-                        <a className="header__logo flex flex-jc-sb flex-ai-c" href="/">
-                            <span>uizzland</span>
-                            <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
-                        </a>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
                         <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
                         <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
                         <a href="/blog">وبلاگ</a>
-                        <a href="/guide">راهنما</a>
-                        <a href="/contact">تماس با ما</a>
 
                         {
                             showNightModeButton &&

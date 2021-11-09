@@ -227,6 +227,35 @@ class Blog_Admin(admin.ModelAdmin):
     list_filter = ('tags', )
     search_field = ['title', 'publish']
 
+class Profile(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=20, null=False, blank=False, default=None)
+    email = models.CharField(max_length=50, null=False, blank=False, default=None)
+    password = models.CharField(max_length=200, null=False, blank=False, default=None)
+    avatar = models.ImageField(upload_to='profileAvatars', unique=True, default='NotExist.jpg')
+    joinedDate = models.DateTimeField(default=datetime.datetime.now)
+    birthday = models.DateTimeField()
+    bio = models.CharField(max_length=100, default=None)
+
+    genderList = [
+        ('Male', 'مذکر'),
+        ('Female', 'مؤنث'),
+        ('PreferNotToSay', 'ترجیح میدم نگم')
+    ]
+    gender = models.CharField(choices=genderList, max_length=100, default='Male')
+
+    points = models.IntegerField(default=0)
+    comments = models.TextField(null=True, blank=True, default=None)
+    categoryHistory = models.TextField(null=True, blank=True, default=None)
+    saveList = models.TextField(null=True, blank=True, default=None)
+    playedQuizzesCounter = models.IntegerField(default=0)
+    averageScoreResult = models.IntegerField(default=0)
+    inviteUrl = models.URLField(max_length=200, default=None)
+
+class Profile_Admin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'gender', 'joinedDate')
+    search_fields = ['id', 'username', 'email']
+
 # class Newsletter_Users(models.Model):
 #     id  = models.AutoField(primary_key=True)
 #     email = models.CharField(max_length=200, null=False, blank=False, default=None)

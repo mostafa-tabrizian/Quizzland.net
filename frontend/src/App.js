@@ -78,6 +78,7 @@ log(" \n\n\
 \n\n")
 
 const App = () => {
+
     return (
         <React.Fragment>
             <Suspense fallback={ <div className='loadingScreen pos-fix flex flex-jc-c flex-ai-c'></div> }>

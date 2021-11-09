@@ -32,6 +32,8 @@ router.register(r'pointyQuestions', views.pointyQuestions)
 
 router.register(r'new_blog', views.new_blog)
 
+router.register(r'profile', views.profile)
+
 # router.register(r'newsletter_users', views.newsletter_users)
 
 urlpatterns = [

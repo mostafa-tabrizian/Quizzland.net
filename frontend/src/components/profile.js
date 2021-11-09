@@ -1,17 +1,36 @@
-import React, { useEffect } from 'react'
-import BackBtn from '../components/backBtn'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import Header from './header'
+import axios from 'axios'
+import rateLimit from 'axios-rate-limit';
+
+const axiosLimited = rateLimit(axios.create(), { maxRequests: 10, perMilliseconds: 1000, maxRPS: 150 })
 
 const pathRed = '/static/img/bubbles.png'
 
 const PrivacyPolicy = () => {
 
+    const [profileDetail, setProfileDetail] = useState(null)
+
     useEffect(() => {
+        checkProfileSignedIn()
+
         if (document.getElementById('html')) {
             document.getElementById('html').style=`background: #0a0d13 url(${pathRed})) center center scroll !important`
         }
     }, [])
+
+    const checkProfileSignedIn = async () => {
+        try {
+            const session = localStorage.getItem("signInSession")
+            const username = session.split('"')[3]
+            const profileData = await axiosLimited.get(`/dbAPI/profile/?username=${username}`)
+            setProfileDetail(profileData.data[0])
+        } 
+        catch (err) {
+            log('Not signed in...')
+        }
+    }
 
     return (
         <React.Fragment>
@@ -42,7 +61,7 @@ const PrivacyPolicy = () => {
                     </div>
                     <div className="profile_username">
                         <h3>نام کاربری</h3>
-                        <input type="text"placeholder='username' />
+                        <input type="text" placeholder='username' value={profileDetail && profileDetail.username} />
                     </div>
                     <div className="profile_detail space-sm">
                         <div className='flex flex-ai-c'>

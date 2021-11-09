@@ -190,6 +190,28 @@ class BlogSerializer(serializers.ModelSerializer):
             'publish'
         )
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = (
+            'id',
+            'username',
+            'email',
+            'password',
+            'avatar',
+            'joinedDate',
+            'birthday',
+            'bio',
+            'gender',
+            'points',
+            'comments',
+            'categoryHistory',
+            'saveList',
+            'playedQuizzesCounter',
+            'averageScoreResult',
+            'inviteUrl'
+        )
+
 # class NewsletterUsersSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Newsletter_Users

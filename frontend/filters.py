@@ -51,6 +51,13 @@ class BlogFilter(filters.FilterSet):
             'title': ['iexact', 'icontains']
         }
 
+class ProfileFilter(filters.FilterSet):
+    class Meta:
+        model = Profile
+        fields = {
+            'username': ['exact']
+        }
+
 # class NewsletterUserFilter(filters.FilterSet):
 #     class Meta:
 #         model = Newsletter_Users

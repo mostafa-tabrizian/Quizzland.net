@@ -203,6 +203,13 @@ class new_blog(viewsets.ReadOnlyModelViewSet):
 
 # --------------------------------------------------------
 
+class profile(viewsets.ReadOnlyModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    filterset_class = ProfileFilter
+
+# --------------------------------------------------------
+
 # class newsletter_users(viewsets.ReadOnlyModelViewSet):
 #     queryset = Newsletter_Users.objects.all()
 #     serializer_class = NewsletterUsersSerializer

@@ -1,16 +1,65 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import axios from 'axios'
+import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
+
+import { buffer } from 'buffer'
+import shajs from 'sha.js'
+
 import '/static/css/style.css'
 require('/static/css/nightTheme.css')
+import { log } from './base'
 
 const pathRed = '/static/img/bubbles.png'
 
-const PrivacyPolicy = () => {
+const axiosLimited = rateLimit(axios.create(), { maxRequests: 10, perMilliseconds: 1000, maxRPS: 150 })
+
+const SignIn = () => {
+    const [userNotFound, setUserNotFound] = useState(false)
+    const [passwordIncorrect, setPasswordIncorrect] = useState(false)
+
+    const usernameEmailRef = useRef(null)
+    const passwordRef = useRef(null)
 
     useEffect(() => {
         document.getElementById('html').style=`background: #0a0d13 url(${pathRed})) center center scroll !important`
         document.querySelector('.footer').remove()
     }, [])
+
+    const signIn = (password) => {
+        const username = usernameEmailRef.current.value
+        const session = JSON.stringify({ username, password })
+        localStorage.setItem('signInSession', session);
+        // go profile page
+    }
+
+    const checkPassword = (loggedPassword, userPassword) => {
+        const loggedPasswordHashed = shajs('sha256').update(loggedPassword).digest('hex')
+        
+        if (loggedPasswordHashed == userPassword) {
+            setPasswordIncorrect(false)
+            signIn(loggedPasswordHashed)
+        } else {
+            setUserNotFound(false)
+            setPasswordIncorrect(true)
+        }
+    }
+
+    const submitSignInForm = async () => {
+        const username = usernameEmailRef.current.value
+        const loggedPassword = passwordRef.current.value
+
+        
+        const grabUsernameDate = await axiosLimited.get(`/dbAPI/profile/?username=${username}&limit=1`)
+        const checkUsernameExist = grabUsernameDate.data.results[0]
+        
+        if (checkUsernameExist) {
+            const userPassword = grabUsernameDate.data.results[0].password
+            checkPassword(loggedPassword, userPassword)
+        } else {
+            setUserNotFound(true)
+        }
+    }
 
     return (
         <React.Fragment>
@@ -36,13 +85,15 @@ const PrivacyPolicy = () => {
                 </div>
 
                 <div className='signIn_manual space-sm'>
-                    <h2>نام کاربری یا ایمیل</h2>
-                    <input type="text" />
-                    <h2>رمز عبور</h2>
-                    <input type="password" name="" id="" />
+                    <h3>نام کاربری یا ایمیل</h3>
+                    <input ref={usernameEmailRef} type="text" />
+                    {userNotFound && <h4 style={{color: 'red'}}>همچین نام کاربری وجود ندارد</h4>}
+                    <h3>رمز عبور</h3>
+                    <input ref={passwordRef} type="password" name="" id="" />
+                    {passwordIncorrect && <h4 style={{color: 'red'}}>رمز وارد شده اشتباه است</h4>}
                 </div>
 
-                <button className='signIn_submit space-sm'>ورود</button>
+                <button className='signIn_submit space-sm' onClick={() => {submitSignInForm()}}>ورود</button>
 
                 <p className='space-sm tx-al-c'>
                     کوییزلند توسط reCaptcha محافظت میشود و تمام قوانین امنیتی گوگل اعمال میشود.
@@ -55,4 +106,4 @@ const PrivacyPolicy = () => {
     );
 }
  
-export default PrivacyPolicy;
+export default SignIn;
