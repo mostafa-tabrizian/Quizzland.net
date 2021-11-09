@@ -229,21 +229,16 @@ class Blog_Admin(admin.ModelAdmin):
 
 class Profile(models.Model):
     id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=20, null=False, blank=False, default=None)
-    email = models.CharField(max_length=50, null=False, blank=False, default=None)
+    username = models.CharField(max_length=100, null=False, blank=False, default=None)
+    firstname = models.CharField(max_length=100, null=False, blank=False, default=None)
+    lastname = models.CharField(max_length=100, null=False, blank=False, default=None)
+    email = models.CharField(max_length=100, null=False, blank=False, default=None)
     password = models.CharField(max_length=200, null=False, blank=False, default=None)
     avatar = models.ImageField(upload_to='profileAvatars', unique=True, default='NotExist.jpg')
     joinedDate = models.DateTimeField(default=datetime.datetime.now)
     birthday = models.DateTimeField()
     bio = models.CharField(max_length=100, default=None)
-
-    genderList = [
-        ('Male', 'مذکر'),
-        ('Female', 'مؤنث'),
-        ('PreferNotToSay', 'ترجیح میدم نگم')
-    ]
-    gender = models.CharField(choices=genderList, max_length=100, default='Male')
-
+    redFlag = models.IntegerField(default=0)
     points = models.IntegerField(default=0)
     comments = models.TextField(null=True, blank=True, default=None)
     categoryHistory = models.TextField(null=True, blank=True, default=None)
@@ -251,6 +246,15 @@ class Profile(models.Model):
     playedQuizzesCounter = models.IntegerField(default=0)
     averageScoreResult = models.IntegerField(default=0)
     inviteUrl = models.URLField(max_length=200, default=None)
+    authenticated = models.BooleanField(default=True)
+    newsletter = models.BooleanField(default=False)
+
+    genderList = [
+        ('Male', 'مذکر'),
+        ('Female', 'مؤنث'),
+        ('PreferNotToSay', 'ترجیح میدم نگم')
+    ]
+    gender = models.CharField(choices = genderList, max_length=100, default='Male')
 
 class Profile_Admin(admin.ModelAdmin):
     list_display = ('username', 'email', 'gender', 'joinedDate')

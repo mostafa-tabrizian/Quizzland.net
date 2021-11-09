@@ -198,6 +198,8 @@ class ProfileSerializer(serializers.ModelSerializer):
             'username',
             'email',
             'password',
+            'firstname',
+            'lastname',
             'avatar',
             'joinedDate',
             'birthday',
@@ -209,7 +211,10 @@ class ProfileSerializer(serializers.ModelSerializer):
             'saveList',
             'playedQuizzesCounter',
             'averageScoreResult',
-            'inviteUrl'
+            'inviteUrl',
+            'redFlag',
+            'authenticated',
+            'newsletter',
         )
 
 # class NewsletterUsersSerializer(serializers.ModelSerializer):
