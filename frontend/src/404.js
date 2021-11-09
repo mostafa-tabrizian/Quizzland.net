@@ -9,7 +9,7 @@ import {
 import { log } from './components/base'
 
 const PageNotFound_404  = lazy(() => import ('./components/pageNotFound_404'))
-const HotFooter  = lazy(() => import ('./components/hotFooter'))
+const Footer  = lazy(() => import ('./components/footer'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
 const PageNotFound404App = () => {
@@ -23,7 +23,7 @@ const PageNotFound404App = () => {
                         <Route component={PageNotFound_404} />
                     </Switch>
                     
-                    <HotFooter />
+                    <Footer linkType='Hot'/>
                 </Router>
             </Suspense>
         </React.Fragment>

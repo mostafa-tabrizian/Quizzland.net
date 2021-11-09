@@ -12,7 +12,7 @@ const copyRightDate = () => {
     return `${westYear}-${eastYear}`
 }
 
-const Footer = () => {
+const Footer = (props) => {
     return (
         <div className='footer'>
             
@@ -20,20 +20,42 @@ const Footer = () => {
 
                 <div>
                     <h3>کوییز ها</h3>
-                    <ul>
-                        <li><Link to="/sort?q=newest">جدیدترین ها</Link></li>
-                        <li><Link to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
-                        <li><Link to="/sort?q=bestest">بهترین ها</Link></li>
-                    </ul>
+                    {
+                        props.linkType == 'Link' &&
+                        <ul>
+                            <li><Link to="/sort?q=newest">جدیدترین ها</Link></li>
+                            <li><Link to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
+                            <li><Link to="/sort?q=bestest">بهترین ها</Link></li>
+                        </ul>
+                    }
+                    {
+                        props.linkType == 'Hot' &&
+                        <ul>
+                            <li><a href="/sort?q=newest">جدیدترین ها</a></li>
+                            <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
+                            <li><a href="/sort?q=bestest">بهترین ها</a></li>
+                        </ul>
+                    }
                 </div>
 
                 <div>
                     <h3>تست ها</h3>
-                    <ul>
-                        <li><Link to="/sort?q=newest_test">جدیدترین ها</Link></li>
-                        <li><Link to="/sort?q=monthlyBestest_test">بهترین های ماه</Link></li>
-                        <li><Link to="/sort?q=bestest_test">بهترین ها</Link></li>
-                    </ul>
+                    {
+                        props.linkType == 'Link' &&
+                        <ul>
+                            <li><Link to="/sort?q=newest_test">جدیدترین ها</Link></li>
+                            <li><Link to="/sort?q=monthlyBestest_test">بهترین های ماه</Link></li>
+                            <li><Link to="/sort?q=bestest_test">بهترین ها</Link></li>
+                        </ul>
+                    }
+                    {
+                        props.linkType == 'Hot' &&
+                        <ul>
+                            <li><a href="/sort?q=newest_test">جدیدترین ها</a></li>
+                            <li><a href="/sort?q=monthlyBestest_test">بهترین های ماه</a></li>
+                            <li><a href="/sort?q=bestest_test">بهترین ها</a></li>
+                        </ul>
+                    }
                 </div>
 
                 <div>
@@ -47,15 +69,30 @@ const Footer = () => {
 
                 <div>
                     <h3>دسترسی سریع</h3>
-                    <ul>
-                        <li><Link to='/'>صفحه اصلی</Link></li>
-                        <li><Link to='/blog'>وبلاگ</Link></li>
-                        <li><Link to='/guide'>راهنما</Link></li>
-                        <li><Link to='/contact'>تماس با ما</Link></li>
-                        <li><Link to="/ads">تبلیغات</Link></li>
-                        <li><Link to="/privacy-policy">حریم خصوصی</Link></li>
-                        <li><Link to="/support">حمایت</Link></li>
-                    </ul>
+                    {
+                        props.linkType == 'Link' &&
+                        <ul>
+                            <li><Link to='/'>صفحه اصلی</Link></li>
+                            <li><Link to='/blog'>وبلاگ</Link></li>
+                            <li><Link to='/guide'>راهنما</Link></li>
+                            <li><Link to='/contact'>تماس با ما</Link></li>
+                            <li><Link to="/ads">تبلیغات</Link></li>
+                            <li><Link to="/privacy-policy">حریم خصوصی</Link></li>
+                            <li><Link to="/support">حمایت</Link></li>
+                        </ul>
+                    }
+                    {
+                        props.linkType == 'Hot' &&
+                        <ul>
+                            <li><a href='/'>صفحه اصلی</a></li>
+                            <li><a href='/blog'>وبلاگ</a></li>
+                            <li><a href='/guide'>راهنما</a></li>
+                            <li><a href='/contact'>تماس با ما</a></li>
+                            <li><a href="/ads">تبلیغات</a></li>
+                            <li><a href="/privacy-policy">حریم خصوصی</a></li>
+                            <li><a href="/support">حمایت</a></li>
+                        </ul>
+                    }
                 </div>
 
                 {/* <div>

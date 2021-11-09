@@ -10,7 +10,7 @@ import {
 import { log } from './components/base'
 
 const SubCategory = lazy(() => import ('./components/subCategory'))
-const HotFooter  = lazy(() => import ('./components/hotFooter'))
+const Footer  = lazy(() => import ('./components/footer'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
 log(" \n\n\
@@ -63,7 +63,7 @@ const SubCategoryApp = () => {
                         <Route path='/category/:category/:subCategory' component={SubCategory} />
                     </Switch>
                     
-                    <HotFooter />
+                    <Footer linkType='Hot'/>
 
                 </Router>
             </Suspense>

@@ -11,7 +11,7 @@ import { log } from './components/base'
 
 const Blog = lazy(() => import ('./components/blog'))
 const Article = lazy(() => import ('./components/article'))
-const HotFooter = lazy(() => import ('./components/hotFooter'))
+const Footer = lazy(() => import ('./components/footer'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
 log(" \n\n\
@@ -65,7 +65,7 @@ const BlogApp = () => {
                         <Route path='/blog/:title' component={Article} />
                     </Switch>
                     
-                    <HotFooter />
+                    <Footer linkType='Hot'/>
                 </Router>
             </Suspense>
         </React.Fragment>

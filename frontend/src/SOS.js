@@ -9,7 +9,7 @@ import {
 import { log } from './components/base'
 
 const SOS  = lazy(() => import ('./components/SOS'))
-const HotFooter  = lazy(() => import ('./components/hotFooter'))
+const Footer  = lazy(() => import ('./components/footer'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
 const SOSLandApp = () => {
@@ -23,7 +23,7 @@ const SOSLandApp = () => {
                         <Route component={SOS} />
                     </Switch>
                     
-                    <HotFooter />
+                    <Footer linkType='Hot'/>
                 </Router>
             </Suspense>
         </React.Fragment>

@@ -9,7 +9,7 @@ import {
 
 import { log } from './components/base'
 
-const HotFooter  = lazy(() => import ('./components/hotFooter'))
+const Footer  = lazy(() => import ('./components/footer'))
 const Quiz  = lazy(() => import ('./components/quiz'))
 const QuizPointy = lazy(() => import ('./components/quizPointy'))
 const Result = lazy(() => import ('./components/result'))
@@ -71,7 +71,7 @@ const QuizApp = () => {
                         <Route path='/search' component={SearchMoreResult} />
                     </Switch>
                     
-                    <HotFooter />
+                    <Footer />
                 </Router>
             </Suspense>
         </React.Fragment>

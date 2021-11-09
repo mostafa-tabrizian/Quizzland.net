@@ -10,7 +10,7 @@ import {
 import { log } from './components/base'
 
 const Category = lazy(() => import ('./components/category'))
-const HotFooter = lazy(() => import ('./components/hotFooter'))
+const Footer = lazy(() => import ('./components/footer'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
 log(" \n\n\
@@ -63,7 +63,7 @@ const CategoryApp = () => {
                         <Route path='/category/:category' exact component={Category} />
                     </Switch>
                     
-                    <HotFooter />
+                    <Footer linkType='Hot'/>
                 </Router>
             </Suspense>
         </React.Fragment>
