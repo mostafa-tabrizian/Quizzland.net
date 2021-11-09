@@ -17,7 +17,7 @@ const Ads = () => {
     return (
         <React.Fragment>
 
-            <Header />
+            <Header linkType='Link'/>
                 
             <Helmet>
                 <title>تبلیغات |‌ کوییزلند</title>

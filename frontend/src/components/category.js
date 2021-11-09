@@ -5,9 +5,9 @@ import rateLimit from 'axios-rate-limit';
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
-import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import SkeletonLoading from './skeletonLoading';
+import Header from './header'
 
 import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
@@ -104,7 +104,7 @@ const Category = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <Header />
+            <Header linkType='Hot'/>
 
             <Helmet>
                 <title>{`کوییزلند | کوییز های ${currentCategory} `}</title>

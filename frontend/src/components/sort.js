@@ -139,7 +139,7 @@ const Sort = () => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header />
+            <Header linkType='Link'/>
 
             <Helmet>
                 <title>{`${sortTitle} | کوییزلند`}</title>

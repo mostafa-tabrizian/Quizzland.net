@@ -16,7 +16,7 @@ const PrivacyPolicy = () => {
     return (
         <React.Fragment>
             
-            <Header />
+            <Header linkType='Link'/>
 
             <Helmet>
                 <title>ثبت نام | کوییزلند</title>

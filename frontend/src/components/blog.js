@@ -8,9 +8,9 @@ import { log, replaceFunction, datePublishHandler } from './base'
 
 // import Tools from './tools'
 // import PageTravel from './pageTravel'
-import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import SkeletonLoading from './skeletonLoading';
+import Header from './header'
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
@@ -69,7 +69,7 @@ const Blog = (props) => {
     return (
         <React.Fragment>
 
-            <Header />
+            <Header linkType='Hot'/>
 
             <Helmet>
                 <title>{`وبلاگ | ‌کوییزلند`}</title>

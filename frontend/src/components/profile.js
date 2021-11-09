@@ -35,7 +35,7 @@ const PrivacyPolicy = () => {
     return (
         <React.Fragment>
             
-            <Header />
+            <Header linkType='Link'/>
 
             <Helmet>
                 <title>پروفایل | کوییزلند</title>

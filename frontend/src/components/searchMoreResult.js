@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
+import Header from './header'
 
 import QuizContainer from './quizContainer';
 import QuizPointyContainer from './quizPointyContainer';
 import { log, takeParameterFromUrl, replaceFunction } from './base'
 import PageTravel from './pageTravel';
-import Header from './hotHeader';
 import SkeletonLoading from './skeletonLoading'
 
 const SearchMoreResult = () => {
@@ -139,7 +139,7 @@ const SearchMoreResult = () => {
     return (
         <React.Fragment>
 
-            <Header />
+            <Header linkType='Hot'/>
 
             <Helmet>
                 <title>{`کوییزلند | ${searchValueButWithoutHyphen} جستجو عبارت `}</title>

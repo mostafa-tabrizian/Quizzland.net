@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from "react-helmet";
 
 import BackBtn from './backBtn'
-import Header from './hotHeader'
+import Header from './header'
 
 const pathRed = '/static/img/bubbles.png'
 
@@ -17,7 +17,7 @@ const PageNotFound_404 = () => {
     return (
         <React.Fragment>
             
-            <Header />
+            <Header linkType='Hot'/>
 
             <Helmet>
                 <title>صفحه مورد نظر پیدا نشد |‌ کوییزلند</title>

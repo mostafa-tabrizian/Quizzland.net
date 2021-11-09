@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Helmet } from "react-helmet";
+import Header from './header'
 
 import BackBtn from './backBtn'
-import Header from './hotHeader'
 
 const pathRed = '/static/img/bubbles.png'
 
@@ -17,7 +17,7 @@ const SOS = () => {
     return (
         <React.Fragment>
             
-            <Header />
+            <Header linkType='Hot'/>
 
             <Helmet>
                 <title>کوییزلند تحت تیم فنی است</title>

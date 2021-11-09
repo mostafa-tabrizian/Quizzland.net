@@ -6,8 +6,8 @@ import {InlineReactionButtons, InlineShareButtons, StickyShareButtons} from 'sha
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
 
-import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
+import Header from './header'
 
 const logo = '/static/img/Q-small.png'
 
@@ -45,7 +45,7 @@ const Article = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <Header />
+            <Header linkType='Hot'/>
 
             {article &&
                 <Helmet>

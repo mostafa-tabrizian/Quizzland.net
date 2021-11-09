@@ -4,9 +4,9 @@ import axios from 'axios';
 import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
 import rateLimit from 'axios-rate-limit';
+import Header from './header'
 
 import { log, replaceFunction, isItDesktop, isItMobile } from './base'
-import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
 import SkeletonLoading from './skeletonLoading'
@@ -418,6 +418,7 @@ const Quiz = () => {
         
             <Header
                 colorOfHeader='header__white'
+                linkType='Hot'
             />
 
             <Helmet>

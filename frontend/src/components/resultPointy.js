@@ -3,12 +3,12 @@ import axios from 'axios'
 import { Helmet } from "react-helmet";
 import rateLimit from 'axios-rate-limit';
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
+import Header from './header'
 
 import { log, replaceFunction } from './base'
 import BackBtn from './backBtn'
 import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
-import Header from './hotHeader'
 import SkeletonLoading from './skeletonLoading'
 
 const Result = (props) => {
@@ -107,7 +107,7 @@ const Result = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <Header />
+            <Header linkType='Link'/>
 
             <Helmet>
                 <title>نتیجه تست | کوییزلند </title>

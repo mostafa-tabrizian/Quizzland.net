@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
+import Header from './header'
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
 import { log, replaceFunction, takeParameterFromUrl } from './base'
-import Header from './hotHeader'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 import QuizPointyContainer from './quizPointyContainer'
@@ -109,6 +109,7 @@ const SubCategory = (props) => {
 
             <Header
                 colorOfHeader='header__white'
+                linkType='Hot'
             />
 
             <Helmet>

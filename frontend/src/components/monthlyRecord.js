@@ -202,7 +202,7 @@ const QuizMonthlyRecord = () => {
     return (
         <React.Fragment>
 
-            <Header />
+            <Header linkType='Link'/>
 
             <Helmet>
                 <meta name="robots" content="noindex" />
