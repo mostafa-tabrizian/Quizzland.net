@@ -3,34 +3,25 @@ import { Helmet } from "react-helmet";
 import Header from './header'
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
+import { ProfileDetail } from './profileChecker'
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 10, perMilliseconds: 1000, maxRPS: 150 })
 
 const pathRed = '/static/img/bubbles.png'
 
 const PrivacyPolicy = () => {
-
     const [profileDetail, setProfileDetail] = useState(null)
 
     useEffect(() => {
-        checkProfileSignedIn()
+        const userDetaInPromise = ProfileDetail()
+        userDetaInPromise.then((x) => {
+            setProfileDetail(x)
+        })
 
         if (document.getElementById('html')) {
             document.getElementById('html').style=`background: #0a0d13 url(${pathRed})) center center scroll !important`
         }
     }, [])
-
-    const checkProfileSignedIn = async () => {
-        try {
-            const session = localStorage.getItem("signInSession")
-            const username = session.split('"')[3]
-            const profileData = await axiosLimited.get(`/dbAPI/profile/?username=${username}`)
-            setProfileDetail(profileData.data[0])
-        } 
-        catch (err) {
-            log('Not signed in...')
-        }
-    }
 
     return (
         <React.Fragment>
@@ -48,7 +39,7 @@ const PrivacyPolicy = () => {
                 <div className="profile_information tx-al-r space-sm">
                     <div className='profile_picture flex flex-ai-c flex-jc-fs'>
                         <div>
-                            <img src="https://i.pinimg.com/474x/8e/d5/0a/8ed50a01d82d46364dc6208972ec20f4.jpg" alt="" />
+                            <img src={profileDetail && profileDetail.avatar} alt="" />
                         </div>
                         <div className='tx-al-c'>
                             <button className='profile_picture_uploadBtn'>
@@ -66,32 +57,31 @@ const PrivacyPolicy = () => {
                     <div className="profile_detail space-sm">
                         <div className='flex flex-ai-c'>
                             <div>
-                                <h3>اسم کامل</h3>
-                                <input type="text" placeholder='full name' />
+                                <h3>نام</h3>
+                                <input type="text" placeholder='full name' value={`${profileDetail && profileDetail.firstname}`} />
                             </div>
                             <div>
-                                <h3>عنوان</h3>
-                                <input type="text" placeholder='title' />
+                                <h3>نام خانوادگی</h3>
+                                <input type="text" placeholder='full name' value={`${profileDetail && profileDetail.firstname}`} />
                             </div>
                         </div>
 
-                        <div className='flex flex-ai-c space-sm'>
-                            <div>
-                                <h3>درباره</h3>
-                                <input type="text" placeholder='bio' />
-                            </div>
-                            <div>
-                                <h3>تاریخ تولد</h3>
-                                <select name="" id="">
-                                    <option value="month">month</option>
-                                    <option value="day">day</option>
-                                </select>
-                                
-                                <select name="" id="">
-                                    <option value="month">month</option>
-                                    <option value="day">day</option>
-                                </select>
-                            </div>
+                        <div>
+                            <h3>درباره</h3>
+                            <textarea className='profile_bio' rows="10">{profileDetail && profileDetail.bio}</textarea>
+                        </div>
+
+                        <div>
+                            <h3>تاریخ تولد</h3>
+                            <select name="" id="">
+                                <option value="month">month</option>
+                                <option value="day">day</option>
+                            </select>
+                            
+                            <select name="" id="">
+                                <option value="month">month</option>
+                                <option value="day">day</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -101,7 +91,7 @@ const PrivacyPolicy = () => {
                     <div className="profile_accountSetting wrapper-med space-sm flex">
                         <div>
                             <h3>ایمیل</h3>
-                            <h4>tabrizian.codes@gmail.com</h4>
+                            <h4>{profileDetail && profileDetail.email}</h4>
                             <button>تغییر ایمیل</button>
                         </div>
                         <div>

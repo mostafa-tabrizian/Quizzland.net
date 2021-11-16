@@ -234,7 +234,7 @@ class Profile(models.Model):
     lastname = models.CharField(max_length=100, null=False, blank=False, default=None)
     email = models.CharField(max_length=100, null=False, blank=False, default=None)
     password = models.CharField(max_length=200, null=False, blank=False, default=None)
-    avatar = models.ImageField(upload_to='profileAvatars', unique=True, default='NotExist.jpg')
+    avatar = models.ImageField(upload_to='profileAvatars', unique=True, default='defaultAvatar.jpg')
     joinedDate = models.DateTimeField(default=datetime.datetime.now)
     birthday = models.DateTimeField()
     bio = models.CharField(max_length=100, default=None)

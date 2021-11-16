@@ -148,7 +148,8 @@ const Sort = () => {
             </Helmet>
 
             <div className='adverts adverts__left'>
-                <div id="pos-article-display-28432"></div>
+                <div id='mediaad-DLgb'></div>
+                <div id="pos-article-display-26094"></div>
             </div>
 
             <h3 className='title'>{sortTitle}</h3>
@@ -167,11 +168,16 @@ const Sort = () => {
 
             </ul>
 
+            {/* Adverts */}
+
             <PageTravel 
                 pageTravel={pageTravel} setPageTravel={setPageTravel}
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                 offset={offset} setOffset={setOffset}
             />
+
+            {/* Adverts */}
+            <div className='adverts_center' id='mediaad-DLgb'></div>
             
         </React.Fragment>
     );

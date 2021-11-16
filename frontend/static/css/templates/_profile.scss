@@ -57,6 +57,17 @@
         }
     }
 
+    &_bio {
+        width: 42.5rem;
+        max-width: 42.5rem; min-width: 42.5rem;
+        border: 1px solid rgba(128, 128, 128, 0.446);
+        border-radius: 8px;
+        background: none;
+        font-size: $font-med - .1;
+        padding: .2rem;
+        font-family: $font-pr;
+    }
+
     &_accountSetting {
         border: 1px solid rgba(128, 128, 128, 0.508);
         border-radius: 20px;

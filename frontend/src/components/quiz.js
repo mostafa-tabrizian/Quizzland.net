@@ -523,11 +523,15 @@ const Quiz = () => {
                 </div>
             </div>
 
+            {/* Adverts */}
             <div className='adverts adverts__left'>
-                <div id='mediaad-Spcz'></div>
+                <div id='mediaad-TZsp'></div>
             </div>
 
-            <div id='mediaad-Spcz'></div>
+            {/* Adverts */}
+            <div className='adverts adverts__right'>
+                <div id='mediaad-cpLp'></div>
+            </div>
 
             <div className='SFXController pos-abs' onClick={() => { SFXController() }} >
                 <button type="button">
@@ -620,6 +624,9 @@ const Quiz = () => {
                 </ul>
             </div>
 
+            {/* Adverts */}
+            <div className='adverts_center' id='mediaad-bNpr'></div>
+
             <div className='space-med'>
                 <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
 
@@ -631,6 +638,12 @@ const Quiz = () => {
                     }
                 </ul>
             </div>
+
+
+            <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>مطالب پیشنهادی</h7>
+
+            {/* Adverts */}
+            <div className='adverts_center' id='mediaad-dESu'></div>
 
             <Link
                 ref={result} className='noVis'

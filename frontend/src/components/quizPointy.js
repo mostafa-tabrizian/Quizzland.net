@@ -505,10 +505,8 @@ const Quiz = () => {
             
 
             <div className='adverts adverts__left'>
-                <div id='mediaad-Spcz'></div>
-            </div>
 
-            <div id='mediaad-Spcz'></div>
+            </div>
 
             <div className='SFXController pos-abs' onClick={() => {SFXController()}} >
                 <button type="button">

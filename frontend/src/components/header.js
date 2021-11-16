@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { HashLink } from 'react-router-hash-link'
-import axios from 'axios'
-import rateLimit from 'axios-rate-limit';
-
-const axiosLimited = rateLimit(axios.create(), { maxRequests: 10, perMilliseconds: 1000, maxRPS: 150 })
+import { Helmet } from "react-helmet";
 
 import { log } from './base'
 import Search from './search'
+import { ProfileDetail } from './profileChecker'
 
 import '/static/css/style.css'
 
@@ -35,21 +32,12 @@ const Header = (props) => {
         }
     }, [nightMode])
 
-    useEffect(async () => {
-        checkProfileSignedIn()
+    useEffect(() => {
+        const userDetaInPromise = ProfileDetail()
+        userDetaInPromise.then((x) => {
+            setProfileDetail(x)
+        })
     }, [])
-
-    const checkProfileSignedIn = async () => {
-        try {
-            const session = localStorage.getItem("signInSession")
-            const username = session.split('"')[3]
-            const profileData = await axiosLimited.get(`/dbAPI/profile/?username=${username}`)
-            setProfileDetail(profileData.data[0])
-        } 
-        catch (err) {
-            log('Not signed in...')
-        }
-    }
     
     // if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
     //     if (localStorage.getItem('alertUFHB') !== 'true') {
@@ -128,8 +116,36 @@ const Header = (props) => {
 
     return (
         <React.Fragment>
+        
 
             <header className="header pos-rel">
+            
+                <Helmet>
+                    <script type="text/javascript">
+                        {`
+                            var head = document.getElementsByTagName("head")[0];
+                            var script = document.createElement("script");
+                            script.type = "text/javascript";
+                            script.async=1;
+                            script.src = "https://s1.mediaad.org/serve/Quizzland.net/loader.js" ;
+                            head.appendChild(script); 
+                        `}
+                    </script>
+
+                    <script type="text/javascript">
+                        {`
+                            (function(){
+                            var now = new Date();
+                            var head = document.getElementsByTagName('head')[0];
+                            var script = document.createElement('script');
+                            script.async = true;
+                            var script_address = 'https://cdn.yektanet.com/js/Quizlqnd.com/native-Quizlqnd.com-18610.js';
+                            script.src = script_address + '?v=' + now.getFullYear().toString() + '0' + now.getMonth() + '0' + now.getDate() + '0' + now.getHours();
+                            head.appendChild(script);
+                            })();
+                        `}
+                    </script>
+                </Helmet>
 
                 <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
 

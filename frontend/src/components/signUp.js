@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Helmet } from "react-helmet";
 import Header from './header'
 import { Link } from 'react-router-dom'
@@ -12,6 +12,17 @@ const PrivacyPolicy = () => {
             document.getElementById('html').style=`background: #0a0d13 url(${pathRed})) center center scroll !important`
         }
     }, [])
+
+    const userEmail = useRef(null)
+    const userName = useRef(null)
+    const userPassword = useRef(null)
+    const userPasswordRepeat = useRef(null)
+
+    const submitSignUpUserData = () => {
+        // check if not null
+        // check if not existy
+        // send to data base
+    }
 
     return (
         <React.Fragment>
@@ -38,14 +49,26 @@ const PrivacyPolicy = () => {
                 </div>
 
                 <div className='signIn_manual space-sm'>
-                    <h2>ایمیل</h2>
-                    <input type="text" />
-                    <h2>یه رمز انتخاب کن</h2>
-                    <input type="password" name="" id="" />
-                    <h2>رمزت رو دوباره وارد کن</h2>
-                    <input type="text" name="" id="" />
-                    <h2>یه نام کاربری انتخاب کن</h2>
-                    <input type="text" name="" id="" />
+                    <div className="flex flex-jc-c">
+                        <div>
+                            <h2>یه نام کاربری انتخاب کن</h2>
+                            <input ref={userName} type="text" name="" id="" />
+                        </div>
+                        <div>
+                            <h2>ایمیل</h2>
+                            <input ref={userEmail} type="text" />
+                        </div>
+                    </div>
+                    <div className='flex flex-jc-c space-sm'>
+                        <div>
+                            <h2>رمزت رو دوباره وارد کن</h2>
+                            <input ref={userPasswordRepeat} type="text" name="" id="" />
+                        </div>
+                        <div>
+                            <h2>یه رمز انتخاب کن</h2>
+                            <input ref={userPassword} type="password" name="" id="" />
+                        </div>
+                    </div>
                 </div>
 
                 <button className='signIn_submit space-sm'>ثبت نام</button>
