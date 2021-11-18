@@ -206,7 +206,7 @@ const Quiz = () => {
     const selectedOption = (props) => {
         if (ableToSelectOption) {
             setTimeout(() => {
-                document.querySelector('.quiz__options__textLabel').scrollIntoView()
+                document.querySelector('.quiz__questions').scrollIntoView()
             }, 300)
 
             setAbleToSelectOption(false)
