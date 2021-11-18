@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import { Helmet } from "react-helmet";
 import Header from './header'
-import { Link } from 'react-router-dom'
+import { log } from './base'
+import axios from 'axios'
+import rateLimit from 'axios-rate-limit';
+
+const axiosLimited = rateLimit(axios.create(), { maxRequests: 10, perMilliseconds: 1000, maxRPS: 150 })
 
 const pathRed = '/static/img/bubbles.png'
 
@@ -18,10 +22,36 @@ const PrivacyPolicy = () => {
     const userPassword = useRef(null)
     const userPasswordRepeat = useRef(null)
 
-    const submitSignUpUserData = () => {
-        // check if not null
-        // check if not existy
-        // send to data base
+    const submitSignUpUserData = async () => {
+        const userNameInput = userName.current.value
+        const userEmailInput = userEmail.current.value
+
+        const inputFilled = () => {
+            return (userNameInput !== '' && userEmailInput !== '')
+        }
+
+        const newUserNameAndEmail = async () => {
+            const grabUsernameData = await axiosLimited.get(`/dbAPI/profile/?username=${userNameInput}&limit=1`)
+            const grabEmailData = await axiosLimited.get(`/dbAPI/profile/?email=${userEmailInput}&limit=1`)
+            const emailExistInDB = grabEmailData.data.results[0] != null
+            const userNameExistInDB = grabUsernameData.data.results[0] != null
+
+            if (emailExistInDB) {
+                // message email sign before
+            }
+
+            else if (userNameExistInDB) {
+                // message username sign before
+            }
+
+            else { // New User
+                return true
+            }
+        }
+
+        if (inputFilled() && await newUserNameAndEmail()) {
+            log('send to db...')
+        }
     }
 
     return (
@@ -71,7 +101,7 @@ const PrivacyPolicy = () => {
                     </div>
                 </div>
 
-                <button className='signIn_submit space-sm'>ثبت نام</button>
+                <button className='signIn_submit space-sm' onClick={submitSignUpUserData}>ثبت نام</button>
 
                 <p className='space-sm tx-al-c'>
                     کوییزلند توسط reCaptcha محافظت میشود و تمام قوانین امنیتی گوگل اعمال میشود.

@@ -55,7 +55,8 @@ class ProfileFilter(filters.FilterSet):
     class Meta:
         model = Profile
         fields = {
-            'username': ['exact']
+            'username': ['exact'],
+            'email': ['exact']
         }
 
 # class NewsletterUserFilter(filters.FilterSet):
