@@ -71,7 +71,7 @@ const QuizApp = () => {
                         <Route path='/search' component={SearchMoreResult} />
                     </Switch>
                     
-                    <Footer />
+                    <Footer linkType='Hot'/>
                 </Router>
             </Suspense>
         </React.Fragment>

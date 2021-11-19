@@ -118,9 +118,9 @@ const SubCategory = (props) => {
                 <meta name="keywords" content={`بهترین کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')} , کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')}`} />
             </Helmet>
 
-            <div className='adverts adverts__left'>
+            {/* <div className='adverts adverts__left'>
                 Banner
-            </div>
+            </div> */}
 
             <h3 className='lowTitle' style={{color: 'white'}}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>
             <h3 className='title' style={{color: 'white'}}>{replaceFunction(takeParameterFromUrl('t'), '-', ' ')}</h3>

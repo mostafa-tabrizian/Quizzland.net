@@ -480,9 +480,9 @@ input {
 }
 
 .flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 
 .flex-jc-sb {
@@ -722,7 +722,7 @@ input {
   font-family: myLalezar, serif;
   font-weight: 300;
   font-size: 2rem;
-  margin-bottom: 0;
+  margin-top: -3rem;
   position: relative;
   z-index: 1;
 }
@@ -737,7 +737,7 @@ input {
 .lowTitle {
   position: absolute;
   font-size: 3.5rem;
-  opacity: .25;
+  opacity: .15;
   font-family: myLalezar, serif;
   font-weight: 300;
   z-index: 1;
@@ -3256,5 +3256,11 @@ body {
   padding: 7rem;
   margin: 1rem;
   color: black;
+}
+
+.adverts_between {
+  min-width: 100%;
+  -webkit-transition: all 1.3s ease-in-out;
+  transition: all 1.3s ease-in-out;
 }
 /*# sourceMappingURL=style.css.map */

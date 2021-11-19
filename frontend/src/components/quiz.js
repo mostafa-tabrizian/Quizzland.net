@@ -14,6 +14,8 @@ import SkeletonLoading from './skeletonLoading'
 const logo = '/static/img/Q-small.png'
 
 let quiz = 'null'
+let advertPos = 0
+let quizCounter = 0
 
 const Quiz = () => {
     const [questions, setQuestions] = useState([])
@@ -255,6 +257,7 @@ const Quiz = () => {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 23.5
     }
 
+
     const goNextQuestionOrEndTheQuiz = () => {
         if (ableToGoNext || autoQuestionChanger) {
             setShowQuestionChangingHelper('never')
@@ -262,6 +265,9 @@ const Quiz = () => {
                 restartTheStateOfQuestion()
                 plusOneToTotalAnsweredQuestions()
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+                
+                advertPos -= 48
+                document.querySelector('.adverts_between').style.transform = `translate(${advertPos}rem)`
 
                 if (!(window.navigator.userAgent.includes('Windows'))) {  // if mobile, scroll to top
                     window.scrollTo(0, 0);
@@ -332,26 +338,40 @@ const Quiz = () => {
     const isSafari = navigator.userAgent.indexOf("Chrome") != -1 === false && navigator.userAgent.indexOf("Chrome") != -1
 
     const quizQuestions = () => {
+        let quizCounter = 0
+
         return (
             questions.map(question => {
-                return (
-                    <div style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }} className="quiz__container pos-rel darkGls">
+                quizCounter += 1
 
-                        {questionShowIfNotNull(question.question)}
+                if (quizCounter == 2) {
+                    // setAbleToGoNext(true)
 
-                        {!question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} />}
+                    return (
+                        <div className='adverts_between flex flex-jc-c' id='mediaad-cpLp'></div>
+                    )
+                }
 
-                        {questionOptionsCheckBetweenStringOrImg(question)}
+                else {
+                    return (
+                        <div style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }} className="quiz__container pos-rel darkGls">
 
-                        <div className={`quiz__answerText answerHide tx-al-r`}>
-                            {answerOfQuestionIfExistShow(question)}
+                            {questionShowIfNotNull(question.question)}
+
+                            {!question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} />}
+
+                            {questionOptionsCheckBetweenStringOrImg(question)}
+
+                            <div className={`quiz__answerText answerHide tx-al-r`}>
+                                {answerOfQuestionIfExistShow(question)}
+                            </div>
+
+                            <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
+                                {gifAnswerOfQuestionIfExistShow(question)}
+                            </div>
                         </div>
-
-                        <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
-                            {gifAnswerOfQuestionIfExistShow(question)}
-                        </div>
-                    </div>
-                )
+                    )
+                }
             })
         )
     }
@@ -523,16 +543,6 @@ const Quiz = () => {
                 </div>
             </div>
 
-            {/* Adverts */}
-            <div className='adverts adverts__left'>
-                <div id='mediaad-TZsp'></div>
-            </div>
-
-            {/* Adverts */}
-            <div className='adverts adverts__right'>
-                <div id='mediaad-cpLp'></div>
-            </div>
-
             <div className='SFXController pos-abs' onClick={() => { SFXController() }} >
                 <button type="button">
                     <img src={SFXAllowed === 'true' ? speakerIconOn : speakerIconOff} alt="کوییزلند ‌| Quizzland" />
@@ -614,7 +624,6 @@ const Quiz = () => {
                         </div>
                     }
                 </div>
-
             </div>
 
             <div>

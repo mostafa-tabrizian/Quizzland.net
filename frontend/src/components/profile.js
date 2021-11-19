@@ -23,6 +23,11 @@ const PrivacyPolicy = () => {
         }
     }, [])
 
+    const signOut = () => {
+        localStorage.removeItem('signInSession');
+        window.location.pathname = '/'
+    }
+
     return (
         <React.Fragment>
             
@@ -100,6 +105,8 @@ const PrivacyPolicy = () => {
                         </div>
                     </div>
                 </div>
+
+                <button className='profile_signOutBtn space-sm' onClick={signOut}>خروج از حساب کاربری</button>
 
                 <button className='profile_saveBtn space-sm'>ذخیره اطلاعات</button>
 

@@ -30,7 +30,7 @@ const SignIn = () => {
         const username = usernameEmailRef.current.value
         const session = JSON.stringify({ username, password })
         localStorage.setItem('signInSession', session);
-        // go profile page
+        window.location.pathname = '/profile'
     }
 
     const checkPassword = (loggedPassword, userPassword) => {
@@ -68,6 +68,8 @@ const SignIn = () => {
                 <title>ورود | کوییزلند</title>
                 <meta name="description" content="ورود به کوییزلند" />
                 <meta name="keywords" content="ورود, کوییزلند" />
+                <script src="https://apis.google.com/js/platform.js" async defer></script>
+                <meta name="google-signin-client_id" content="34258115759-t1kjdq9fokd6gmocj1mg6c713hp6d5vk.apps.googleusercontent.com"></meta>
             </Helmet>
 
 
@@ -75,7 +77,7 @@ const SignIn = () => {
                 <h1>ورود به کوییزلند</h1>
                 <h5>یا <span style={{color: '#cf3815'}}><a href='/signUp'>ثبت نام</a></span> برای دسترسی به امکانات بسیار به علاوه پست کردن کوییز خود</h5>
                 <div>
-                    sign in with google
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 </div>
 
                 <div className='signIn_OrLine flex flex-jc-c flex-ai-c tx-al-c'>
@@ -93,7 +95,7 @@ const SignIn = () => {
                     {passwordIncorrect && <h4 style={{color: 'red'}}>رمز وارد شده اشتباه است</h4>}
                 </div>
 
-                <button className='signIn_submit space-sm' onClick={() => {submitSignInForm()}}>ورود</button>
+                <button className='signIn_submit space-sm' onClick={submitSignInForm}>ورود</button>
 
                 <p className='space-sm tx-al-c'>
                     کوییزلند توسط reCaptcha محافظت میشود و تمام قوانین امنیتی گوگل اعمال میشود.

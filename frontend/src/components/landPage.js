@@ -235,7 +235,15 @@ const Index = () => {
             </div>
 
             {/* Adverts */}
-            <div className='adverts_center' id='mediaad-WSYR'></div>
+            {
+                !(isItMobile()) &&
+                <div className='adverts_center' id='mediaad-WSYR'></div>
+            }
+
+            {
+                isItMobile() &&
+                <div className='adverts_center' id='mediaad-KlKX'></div>
+            }
 
             <div className="space-med">
 
@@ -268,7 +276,15 @@ const Index = () => {
             </div>
 
             {/* Adverts */}
-            <div className='adverts_center' id='mediaad-kvDM'></div>
+            {
+                !(isItMobile()) &&
+                <div className='adverts_center' id='mediaad-kvDM'></div>
+            }
+
+            {
+                isItMobile() &&
+                <div className='adverts_center' id='mediaad-OheS'></div>
+            }
 
             <div className="space-med">
 
@@ -301,7 +317,15 @@ const Index = () => {
             </div>
 
             {/* Adverts */}
-            <div className='adverts_center' id='mediaad-niPM'></div>
+            {
+                !(isItMobile()) &&
+                <div className='adverts_center' id='mediaad-niPM'></div>
+            }
+
+            {
+                isItMobile() &&
+                <div className='adverts_center' id='mediaad-QCZY'></div>
+            }
 
             <div className="space-med">
 
@@ -330,14 +354,19 @@ const Index = () => {
                 <ul className="quizContainer flex flex-ai-fe wrapper-med">
                     <QuizPointyContainer quizzes={newestPsychologyPointyQuizzes} bgStyle='trans' />
                 </ul>
-            
-                {/* Adverts */}
-                <div id='mediaad-iQug'></div>
 
             </div>
 
             {/* Adverts */}
-            <div className='adverts_center' id='mediaad-bXEw'></div>
+            {
+                !(isItMobile()) &&
+                <div className='adverts_center' id='mediaad-bXEw'></div>
+            }
+
+            {
+                isItMobile() &&
+                <div className='adverts_center' id='mediaad-qBZW'></div>
+            }
 
         </React.Fragment>
     );

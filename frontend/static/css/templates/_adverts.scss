@@ -76,5 +76,10 @@
         padding: 7rem;
         margin: 1rem;
         color: black;
-    }       
+    }     
+    
+    &_between {
+        min-width: 100%;
+        transition: all 1.3s ease-in-out;
+    }
 }

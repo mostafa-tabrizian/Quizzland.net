@@ -273,7 +273,7 @@ input {
 }
 
 .flex {
-    display: flex;
+    display: flex !important;
 
     &-jc-sb {
         justify-content: space-between !important;
@@ -465,7 +465,7 @@ input {
     font-family: myLalezar, serif;
     font-weight: 300;
     font-size: 2rem;
-    margin-bottom: 0;
+    margin-top: -3rem;
     position: relative;
     z-index: 1;
 
@@ -478,7 +478,7 @@ input {
 .lowTitle {
     position: absolute;
     font-size: 3.5rem;
-    opacity: .25;
+    opacity: .15;
     font-family: myLalezar, serif;
     font-weight: 300;
     z-index: 1;
