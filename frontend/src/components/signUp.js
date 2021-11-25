@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Helmet } from "react-helmet";
 import Header from './header'
 import { log } from './base'
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
+import { buffer } from 'buffer'
+import shajs from 'sha.js'
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 10, perMilliseconds: 1000, maxRPS: 150 })
 
@@ -22,9 +24,15 @@ const PrivacyPolicy = () => {
     const userPassword = useRef(null)
     const userPasswordRepeat = useRef(null)
 
+    const [passwordNotTheSameState, setPasswordNotTheSameState] = useState(false)
+    const [userNameExistState, setUserNameExistState] = useState(false)
+    const [emailExistState, setEmailExistState] = useState(false)
+
     const submitSignUpUserData = async () => {
         const userNameInput = userName.current.value
         const userEmailInput = userEmail.current.value
+        const userPasswordRef = userPassword.current.value
+        const userPasswordRepeatRef = userPasswordRepeat.current.value
 
         const inputFilled = () => {
             return (userNameInput !== '' && userEmailInput !== '')
@@ -37,11 +45,15 @@ const PrivacyPolicy = () => {
             const userNameExistInDB = grabUsernameData.data.results[0] != null
 
             if (emailExistInDB) {
-                // message email sign before
+                setEmailExistState(true)
             }
 
             else if (userNameExistInDB) {
-                // message username sign before
+                setUserNameExistState(true)
+            }
+
+            else if (userPasswordRef !== userPasswordRepeatRef) {
+                setPasswordNotTheSameState(true)
             }
 
             else { // New User
@@ -50,7 +62,12 @@ const PrivacyPolicy = () => {
         }
 
         if (inputFilled() && await newUserNameAndEmail()) {
-            log('send to db...')
+            const hashUserPasswordBeforeSubmit = shajs('sha256').update(userPasswordRef).digest('hex')
+
+            const session = JSON.stringify({ userNameInput, hashUserPasswordBeforeSubmit })
+            localStorage.setItem('signInSession', session);
+
+            window.location.href = `${window.location.origin}/newProfile?u=${userNameInput}&e=${userEmailInput}&p=${hashUserPasswordBeforeSubmit}`  // Send data to db
         }
     }
 
@@ -83,16 +100,28 @@ const PrivacyPolicy = () => {
                         <div>
                             <h2>یه نام کاربری انتخاب کن</h2>
                             <input ref={userName} type="text" name="" id="" />
+                            {
+                                userNameExistState &&
+                                <h5 style={{color: 'red'}}>نام کاربری از قبل استفاده شده</h5>
+                            }
                         </div>
                         <div>
                             <h2>ایمیل</h2>
                             <input ref={userEmail} type="text" />
+                            {
+                                emailExistState &&
+                                <h5 style={{color: 'red'}}>ایمیل از قبل ثبت شده</h5>
+                            }
                         </div>
                     </div>
                     <div className='flex flex-jc-c space-sm'>
                         <div>
                             <h2>رمزت رو دوباره وارد کن</h2>
-                            <input ref={userPasswordRepeat} type="text" name="" id="" />
+                            <input ref={userPasswordRepeat} type="password" name="" id="" />
+                            {
+                                passwordNotTheSameState &&
+                                <h5 style={{color: 'red'}}>رمز ها یکسان نیستند</h5>
+                            }
                         </div>
                         <div>
                             <h2>یه رمز انتخاب کن</h2>

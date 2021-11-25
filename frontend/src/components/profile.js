@@ -37,6 +37,7 @@ const PrivacyPolicy = () => {
                 <title>پروفایل | کوییزلند</title>
                 <meta name="description" content="پروفایل شما در کوییزلند" />
                 <meta name="keywords" content="پروفایل, کوییزلند" />
+                <meta name="robots" content="noindex" />
             </Helmet>
 
             <div className='wrapper-med'>

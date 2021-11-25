@@ -84,6 +84,19 @@ def addViewToArticle(title):
         # print('----------------------------------')
         pass
 
+def newProfile(request):
+    try:
+        Profile.objects.get(username=(request.GET.get('u', '')))  # if there is no error that mean that is exist before
+        return render(request, "frontend/404.html")
+    except:
+        Profile.objects.create(
+            username=request.GET.get('u', ''),
+            email=request.GET.get('e', ''),
+            password=request.GET.get('p', ''),
+        )
+        return render(request, "frontend/index.html")
+
+
 def restartEveryMonthlyViews(request):
     try:
         quizzes = Quizzes.objects.all()
