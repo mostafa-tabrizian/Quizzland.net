@@ -266,8 +266,8 @@ const Quiz = () => {
                 plusOneToTotalAnsweredQuestions()
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
                 
-                advertPos -= 48
-                document.querySelector('.adverts_between').style.transform = `translate(${advertPos}rem)`
+                // advertPos -= 48
+                // document.querySelector('.adverts_between').style.transform = `translate(${advertPos}rem)`
 
                 if (!(window.navigator.userAgent.includes('Windows'))) {  // if mobile, scroll to top
                     window.scrollTo(0, 0);
@@ -344,34 +344,34 @@ const Quiz = () => {
             questions.map(question => {
                 quizCounter += 1
 
-                if (quizCounter == 2) {
-                    // setAbleToGoNext(true)
+                // if (quizCounter == 2) {
+                //     // setAbleToGoNext(true)
 
-                    return (
-                        <div className='adverts_between flex flex-jc-c' id='mediaad-cpLp'></div>
-                    )
-                }
+                //     return (
+                //         <div className='adverts_between flex flex-jc-c' id='mediaad-cpLp'></div>
+                //     )
+                // }
 
-                else {
-                    return (
-                        <div style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }} className="quiz__container pos-rel darkGls">
+                // else {
+                return (
+                    <div style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }} className="quiz__container pos-rel darkGls">
 
-                            {questionShowIfNotNull(question.question)}
+                        {questionShowIfNotNull(question.question)}
 
-                            {!question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} />}
+                        {!question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} />}
 
-                            {questionOptionsCheckBetweenStringOrImg(question)}
+                        {questionOptionsCheckBetweenStringOrImg(question)}
 
-                            <div className={`quiz__answerText answerHide tx-al-r`}>
-                                {answerOfQuestionIfExistShow(question)}
-                            </div>
-
-                            <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
-                                {gifAnswerOfQuestionIfExistShow(question)}
-                            </div>
+                        <div className={`quiz__answerText answerHide tx-al-r`}>
+                            {answerOfQuestionIfExistShow(question)}
                         </div>
-                    )
-                }
+
+                        <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
+                            {gifAnswerOfQuestionIfExistShow(question)}
+                        </div>
+                    </div>
+                )
+                // }
             })
         )
     }

@@ -1,0 +1,23 @@
+.dashboard {
+    direction: rtl;
+
+    > div {
+        border: 1px solid rgb(28, 28, 28);
+        box-shadow: 0 0 15px rgb(28, 28, 28);
+        padding: 3rem;
+        margin: 2rem; margin-bottom: 4rem;
+        border-radius: 25px;
+    }
+
+    &_profile {
+        margin-left: 3rem;
+
+        img {
+            border-radius: 50%;
+        }
+    }
+
+    &_points {
+        margin-right: 5rem;
+    }
+}

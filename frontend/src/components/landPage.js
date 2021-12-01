@@ -11,6 +11,7 @@ import QuizPointyContainer from './quizPointyContainer'
 import LoadingScreen from './loadingScreen'
 import SkeletonLoading from './skeletonLoading'
 
+
 const landPagePath = '/static/img/landPage-path.png'
 const landPagePath_light = '/static/img/landPage-path-light.png'
 const landPagePath_mobile = '/static/img/landPage-path-mobile.png'
@@ -44,6 +45,12 @@ const Index = () => {
         if (document.getElementById('html')) {
             document.getElementById('html').style='background: None'
         }
+
+        log('hello world')
+        log(django)
+        log(typeof(django))
+        log(django.email)
+
     }, [])
 
     const grabAndSortMostVisitedCategories = (interest) => {

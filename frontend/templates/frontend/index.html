@@ -44,9 +44,12 @@
 </head>
 
 <body>
-
+  
   <div id="land"></div>
 
+  <script id='profileDetail' type='text/javascript'>
+    var django = {email: "{{profileDetail.email}}", username: "{{profileDetail.username}}", password: "{{profileDetail.password}}"}
+  </script>
   <script src="{% static 'build/App.js' %}"></script>
 </body>
 

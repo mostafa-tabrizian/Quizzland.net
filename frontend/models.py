@@ -227,12 +227,12 @@ class Blog_Admin(admin.ModelAdmin):
     list_filter = ('tags', )
     search_field = ['title', 'publish']
 
-class Profile(models.Model):
+class UserG(AbstractUser):
     id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=100, null=False, blank=False, default=None)
+    username = models.CharField(max_length=100, null=False, blank=False, default=None, unique=True)
     firstname = models.CharField(max_length=100, null=True, blank=True, default=None)
     lastname = models.CharField(max_length=100, null=True, blank=True, default=None)
-    email = models.CharField(max_length=100, null=False, blank=False, default=None)
+    email = models.CharField(max_length=100, null=False, blank=False, default=None, unique=True)
     password = models.CharField(max_length=200, null=False, blank=False, default=None)
     avatar = models.ImageField(upload_to='profileAvatars', default='defaultAvatar.jpg')
     joinedDate = models.DateTimeField(default=datetime.datetime.now)
@@ -255,10 +255,11 @@ class Profile(models.Model):
         ('PreferNotToSay', 'ترجیح میدم نگم')
     ]
     gender = models.CharField(choices = genderList, max_length=100, default='Male')
+    
 
-class Profile_Admin(admin.ModelAdmin):
+class UserG_Admin(admin.ModelAdmin):
     list_display = ('username', 'email', 'gender', 'joinedDate')
-    search_fields = ['id', 'username', 'email']
+    search_fields = ['id', 'username', 'email'] 
 
 # class Newsletter_Users(models.Model):
 #     id  = models.AutoField(primary_key=True)

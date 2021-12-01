@@ -1,5 +1,6 @@
 from django.urls import path, re_path
-from .views import index, quiz, category, subCategory, blog, article, restartEveryMonthlyViews, SOS, SOS_landpage, newProfile
+from .views import index, quiz, category, subCategory, blog, article, restartEveryMonthlyViews, \
+                    SOS, SOS_landpage, newProfile
 
 urlpatterns = [
     # re_path(r'^(?P<SOS>.*)/$', SOS),  # SOS Time
@@ -11,6 +12,7 @@ urlpatterns = [
     path('signUp', index),
     path('signIn', index),
     path('newProfile', newProfile),
+    path('dashboard', index),
 
     path('guide', index),
     path('contact', index),
@@ -23,8 +25,8 @@ urlpatterns = [
 
     path('quiz/<title>', quiz),
     path('test/<title>', quiz),
-    path('result/<title>', quiz),
-    path('result_p/<title>', quiz),
+    path('result/s', quiz),
+    path('result_p/s', quiz),
 
     path('search', index),
 

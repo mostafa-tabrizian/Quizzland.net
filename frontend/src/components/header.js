@@ -165,7 +165,7 @@ const Header = (props) => {
                         </a>
                     }
 
-                    <img className='header_profile' src="/static/img/profile.svg" alt="" />
+                    <img className='header_profile' src={profileDetail && profileDetail.avatar} alt="" />
                     <li><Link to={profileDetail ? '/profile' : '/signIn'}>{profileDetail ? profileDetail.username : 'ورود'}</Link></li>
                     <Search/>
                 </div>

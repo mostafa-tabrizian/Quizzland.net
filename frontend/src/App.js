@@ -18,6 +18,7 @@ const Profile     = lazy(() => import('./components/profile'))
 const SignUp     = lazy(() => import('./components/signUp'))
 const SignIn     = lazy(() => import('./components/signIn'))
 const NewProfile     = lazy(() => import('./components/profile'))
+const Dashboard     = lazy(() => import('./components/dashboard'))
 
 const Guide             = lazy(() => import('./components/guide'))
 const Contact           = lazy(() => import('./components/contact'))
@@ -92,6 +93,7 @@ const App = () => {
                         <Route path='/signUp' component={SignUp} />
                         <Route path='/signIn' component={SignIn} />
                         <Route path='/newProfile' component={NewProfile} />
+                        <Route path='/dashboard' component={Dashboard} />
                         <Route path='/sort' component={Sort} />
                         <Route path='/search' component={Search} />
                         <Route path='/blog' component={Blog} />

@@ -939,6 +939,8 @@ input {
 
 .header_profile {
   margin-left: .5rem;
+  width: 2rem;
+  border-radius: 50%;
 }
 
 .header .slideMenu-hide {
@@ -3262,5 +3264,31 @@ body {
   min-width: 100%;
   -webkit-transition: all 1.3s ease-in-out;
   transition: all 1.3s ease-in-out;
+}
+
+.dashboard {
+  direction: rtl;
+}
+
+.dashboard > div {
+  border: 1px solid #1c1c1c;
+  -webkit-box-shadow: 0 0 15px #1c1c1c;
+          box-shadow: 0 0 15px #1c1c1c;
+  padding: 3rem;
+  margin: 2rem;
+  margin-bottom: 4rem;
+  border-radius: 25px;
+}
+
+.dashboard_profile {
+  margin-left: 3rem;
+}
+
+.dashboard_profile img {
+  border-radius: 50%;
+}
+
+.dashboard_points {
+  margin-right: 5rem;
 }
 /*# sourceMappingURL=style.css.map */
