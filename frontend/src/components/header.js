@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet";
 
 import { log } from './base'
 import Search from './search'
-import { ProfileDetail } from './profileChecker'
 
 import '/static/css/style.css'
 
@@ -17,7 +16,6 @@ const Header = (props) => {
     const [pointyNavigationOpen, setPointyNavigationOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
     const [nightMode, setNightMode] = useState(true)
-    const [profileDetail, setProfileDetail] = useState(null)
 
     useEffect(() => {
         componentChangeDetector()
@@ -31,13 +29,6 @@ const Header = (props) => {
             }
         }
     }, [nightMode])
-
-    useEffect(() => {
-        const userDetaInPromise = ProfileDetail()
-        userDetaInPromise.then((x) => {
-            setProfileDetail(x)
-        })
-    }, [])
     
     // if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
     //     if (localStorage.getItem('alertUFHB') !== 'true') {
@@ -147,30 +138,29 @@ const Header = (props) => {
                     </script>
                 </Helmet>
 
-                <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
-
-                    {
-                        props.linkType == 'Link' &&
-                        <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
-                            <span>uizzland</span>
-                            <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
-                        </Link>
-                    }
-
-                    {
-                        props.linkType == 'Hot' &&
-                        <a className="header__logo flex flex-jc-sb flex-ai-c" href="/">
-                            <span>uizzland</span>
-                            <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
-                        </a>
-                    }
-
-                    <img className='header_profile' src={profileDetail && profileDetail.avatar} alt="" />
-                    <li><Link to={profileDetail ? '/profile' : '/signIn'}>{profileDetail ? profileDetail.username : 'ورود'}</Link></li>
-                    <Search/>
-                </div>
 
                 <nav className="flex flex-ai-c flex-jc-sb">
+
+                    <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
+
+                        {
+                            props.linkType == 'Link' &&
+                            <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
+                                <span>uizzland</span>
+                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
+                            </Link>
+                        }
+
+                        {
+                            props.linkType == 'Hot' &&
+                            <a className="header__logo flex flex-jc-sb flex-ai-c" href="/">
+                                <span>uizzland</span>
+                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
+                            </a>
+                        }
+
+                        <Search/>
+                    </div>
 
                     <div>
                         {

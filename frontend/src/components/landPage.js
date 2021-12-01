@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 import { Helmet } from "react-helmet";
@@ -45,12 +44,6 @@ const Index = () => {
         if (document.getElementById('html')) {
             document.getElementById('html').style='background: None'
         }
-
-        log('hello world')
-        log(django)
-        log(typeof(django))
-        log(django.email)
-
     }, [])
 
     const grabAndSortMostVisitedCategories = (interest) => {

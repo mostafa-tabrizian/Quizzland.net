@@ -137,21 +137,21 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
 
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title = models.CharField(max_length=80, null=False, blank=False, default=None, help_text='same quiz title')
-    question = models.CharField(max_length=150, null=True, blank=True, default=None)
+    subCategory = models.CharField(max_length=100, blank=False, default=None)
+    title = models.CharField(max_length=80, blank=False, default=None, help_text='same quiz title')
+    question = models.CharField(max_length=150, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_1st = models.CharField(max_length=100, null=True, blank=True, default=None)
-    option_2nd = models.CharField(max_length=100, null=True, blank=True, default=None)
-    option_3rd = models.CharField(max_length=100, null=True, blank=True, default=None)
-    option_4th = models.CharField(max_length=100, null=True, blank=True, default=None)
+    option_1st = models.CharField(max_length=100, blank=True, default=None)
+    option_2nd = models.CharField(max_length=100, blank=True, default=None)
+    option_3rd = models.CharField(max_length=100, blank=True, default=None)
+    option_4th = models.CharField(max_length=100, blank=True, default=None)
     option_img_1st = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_2nd = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_3rd = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_4th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    answer = models.IntegerField(null=False, blank=False, default=None)
+    answer = models.IntegerField(blank=False, default=None)
     answer_imGif = models.ImageField(upload_to='Answer-And-Result-ImGIf', default='NotExist.jpg')
-    answer_text = RichTextField(blank=True, null=True, default=None)
+    answer_text = RichTextField(blank=True, default=None)
 
     def __str__(self):
         return self.subCategory
@@ -193,16 +193,16 @@ class Pointy_Questions(models.Model):
     option_img_9th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_10th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     
-    option_point_1st = models.IntegerField(null=True, blank=True, default=1)
-    option_point_2nd = models.IntegerField(null=True, blank=True, default=2)
-    option_point_3rd = models.IntegerField(null=True, blank=True, default=3)
-    option_point_4th = models.IntegerField(null=True, blank=True, default=4)
-    option_point_5th = models.IntegerField(null=True, blank=True, default=5)
-    option_point_6th = models.IntegerField(null=True, blank=True, default=6)
-    option_point_7th = models.IntegerField(null=True, blank=True, default=7)
-    option_point_8th = models.IntegerField(null=True, blank=True, default=8)
-    option_point_9th = models.IntegerField(null=True, blank=True, default=9)
-    option_point_10th = models.IntegerField(null=True, blank=True, default=10)
+    option_point_1st = models.IntegerField(blank=True, default=1)
+    option_point_2nd = models.IntegerField(blank=True, default=2)
+    option_point_3rd = models.IntegerField(blank=True, default=3)
+    option_point_4th = models.IntegerField(blank=True, default=4)
+    option_point_5th = models.IntegerField(blank=True, default=5)
+    option_point_6th = models.IntegerField(blank=True, default=6)
+    option_point_7th = models.IntegerField(blank=True, default=7)
+    option_point_8th = models.IntegerField(blank=True, default=8)
+    option_point_9th = models.IntegerField(blank=True, default=9)
+    option_point_10th = models.IntegerField(blank=True, default=10)
 
     def __str__(self):
         return self.subCategory
@@ -226,40 +226,6 @@ class Blog_Admin(admin.ModelAdmin):
     list_display = ('title', 'monthly_views', 'views', 'publish')
     list_filter = ('tags', )
     search_field = ['title', 'publish']
-
-class Profile(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=100, null=False, blank=False, default=None, unique=True)
-    firstname = models.CharField(max_length=100, null=True, blank=True, default=None)
-    lastname = models.CharField(max_length=100, null=True, blank=True, default=None)
-    email = models.CharField(max_length=100, null=False, blank=False, default=None, unique=True)
-    password = models.CharField(max_length=200, null=False, blank=False, default=None)
-    avatar = models.ImageField(upload_to='profileAvatars', default='defaultAvatar.jpg')
-    joinedDate = models.DateTimeField(default=datetime.datetime.now)
-    birthday = models.DateTimeField(null=True, blank=True)
-    bio = models.CharField(max_length=100, default=None, null=True, blank=True)
-    redFlag = models.IntegerField(default=0)
-    points = models.IntegerField(default=0)
-    comments = models.TextField(null=True, blank=True, default=None)
-    categoryHistory = models.TextField(null=True, blank=True, default=None)
-    saveList = models.TextField(null=True, blank=True, default=None)
-    playedQuizzesCounter = models.IntegerField(default=0)
-    averageScoreResult = models.IntegerField(default=0)
-    inviteUrl = models.URLField(max_length=200, default=None, null=True, blank=True)
-    authenticated = models.BooleanField(default=True)
-    newsletter = models.BooleanField(default=False)
-
-    genderList = [
-        ('Male', 'مذکر'),
-        ('Female', 'مؤنث'),
-        ('PreferNotToSay', 'ترجیح میدم نگم')
-    ]
-    gender = models.CharField(choices = genderList, max_length=100, default='Male')
-    
-
-class Profile_Admin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'gender', 'joinedDate')
-    search_fields = ['id', 'username', 'email'] 
 
 # class Newsletter_Users(models.Model):
 #     id  = models.AutoField(primary_key=True)

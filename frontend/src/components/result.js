@@ -5,15 +5,11 @@ import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
 import rateLimit from 'axios-rate-limit';
 import Header from './header'
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
-
 import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from './base'
 import BackBtn from './backBtn'
 import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 import SkeletonLoading from './skeletonLoading'
-import { ProfileDetail } from './profileChecker';
 
 const Result = () => {
     const [score, setScore] = useState(0)
@@ -23,9 +19,9 @@ const Result = () => {
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [profileDetail, setProfileDetail] = useState()
 
     useEffect(async () => {
+        calculateTheResultScore()
         setLoadState(true)
         getSuggestionsQuiz()
         {
@@ -36,17 +32,7 @@ const Result = () => {
         if (document.getElementById('html')) {
             document.getElementById('html').style=`background: None`
         }
-
-        const userDetaInPromise = ProfileDetail()
-        userDetaInPromise.then((x) => {
-            setProfileDetail(x)
-        })
-
     }, [])
-
-    useEffect(async () => {
-        calculateTheResultScore(profileDetail)
-    }, [profileDetail])
 
     useEffect(() => {
         detailOfResult()
@@ -62,29 +48,11 @@ const Result = () => {
         window.location.href = "/404";
     }
 
-    const calculateTheResultScore = (profile) => {
+    const calculateTheResultScore = () => {
         const questionsCounter = questions.length
         if (questionsCounter && correctAnswersCounter) {
             const score = ((correctAnswersCounter / questionsCounter) * 100).toFixed(0)
             setScore(score)
-            givePoints(score, profile)
-        }
-    }
-
-    const givePoints = async (score, profile) => {
-        // check if quiz didn't play (not exist of played quizzes)
-
-        if (profile !== undefined) {  // signIn Check
-            if (score >= 40) {  // to prevent fake playing
-                calculatePointsToGive = score * 10
-                try{
-                    await axiosLimited.patch(`/dbAPI/profile/${profile.id}/`, {
-                        points: profile.points + calculatePointsToGive,
-                    })
-                    // show message for given point
-                }
-                catch(err){}
-            }
         }
     }
 

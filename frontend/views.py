@@ -2,11 +2,6 @@ from django.shortcuts import render
 from django.views.decorators.cache import never_cache
 import datetime
 from urllib.parse import unquote
-import requests
-
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
 
 from .models import *
 from .functions import *
@@ -14,22 +9,8 @@ from rest_framework import viewsets
 from .serializers import *
 from .filters import *
 
-def auth():
-    x = requests.post('http://localhost:8000/api/token/auth/', data = {'username': 'MostafaT19', 'password': '$M19931506'})
-    print(x)
-
-
 
 def index(request):
-    print('hello auth')
-    auth()
-    profileDetail = Profile.objects.get(id=15)
-    # authentication_classes = (TokenAuthentication,)
-    # permission_classes = (IsAuthenticated,)
-
-    # Users = Profile.objects.create_user('myusername', 'myemail@crazymail.com', 'mypassword')
-
-    # return render(request, "frontend/index.html", {'profileDetail': profileDetail})
     return render(request, "frontend/index.html")
 
 @never_cache
@@ -103,19 +84,6 @@ def addViewToArticle(title):
         # print('----------------------------------')
         pass
 
-def newProfile(request):
-    try:
-        Profile.objects.get(username=(request.GET.get('u', '')))  # if there is no error that mean that is exist before
-        return render(request, "frontend/404.html")
-    except:
-        Profile.objects.create(
-            username=request.GET.get('u', ''),
-            email=request.GET.get('e', ''),
-            password=request.GET.get('p', ''),
-        )
-        return render(request, "frontend/index.html")
-
-
 def restartEveryMonthlyViews(request):
     try:
         quizzes = Quizzes.objects.all()
@@ -154,19 +122,6 @@ def SOS(request, SOS):
 
 def SOS_landpage(request):
     return render(request, 'frontend/SOS.html')
-
-class CustomAuthToken(ObtainAuthToken):
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'email': user.email
-        })
 
 class new_quiz(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes.objects.order_by('-publish').all()
@@ -245,13 +200,6 @@ class new_blog(viewsets.ReadOnlyModelViewSet):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
     filterset_class = BlogFilter
-
-# --------------------------------------------------------
-
-# class profile(viewsets.ReadOnlyModelViewSet):
-#     queryset = Profile.objects.all()
-    # serializer_class = ProfileSerializer
-    # filterset_class = ProfileFilter
 
 # --------------------------------------------------------
 

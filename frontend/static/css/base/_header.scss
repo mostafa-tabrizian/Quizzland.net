@@ -46,7 +46,7 @@
     }
 
     &__links {
-        padding: .6rem 0;
+        padding: 1.25rem 0;
         margin-right: 1.5rem;
         direction: rtl;
         z-index: 1;
@@ -62,12 +62,6 @@
                 margin-left: 2rem;
             }
         }
-    }
-
-    &_profile {
-        margin-left: .5rem;
-        width: 2rem;
-        border-radius: 50%;
     }
 
     .slideMenu-hide {
@@ -188,7 +182,7 @@
 
         &__open {
             opacity: 1;
-            top: 8.5rem;
+            top: 5.5rem;
             pointer-events: visibleFill;
         }
 
@@ -213,15 +207,15 @@
     }
     
     &__categories {
-        right: 3rem;
+        right: 12rem;
     }
 
     &__quizzes {
-        right: 10rem;
+        right: 19rem;
     }
 
     &__pointy {
-        right: 16rem;
+        right: 25rem;
     }
 
     &__white {

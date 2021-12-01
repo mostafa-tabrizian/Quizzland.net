@@ -36,12 +36,11 @@ DEBUG = config('DEBUG', cast=bool)
 # Rest framework setup
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
 
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ),
 
     'DEFAULT_FILTER_BACKENDS': (
@@ -49,6 +48,7 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+
 }
 
 ALLOWED_HOSTS = [
@@ -71,7 +71,6 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'rest_framework',
-    'rest_framework.authtoken',
 
     'ckeditor',
     'robots',

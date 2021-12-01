@@ -190,34 +190,6 @@ class BlogSerializer(serializers.ModelSerializer):
             'publish'
         )
 
-# class ProfileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Profile
-#         fields = (
-#             'id',
-#             'username',
-#             'email',
-#             'password',
-#             'firstname',
-#             'lastname',
-#             'avatar',
-#             'joinedDate',
-#             'birthday',
-#             'bio',
-#             'gender',
-#             'points',
-#             'comments',
-#             'categoryHistory',
-#             'saveList',
-#             'playedQuizzesCounter',
-#             'averageScoreResult',
-#             'inviteUrl',
-#             'redFlag',
-#             'authenticated',
-#             'newsletter',
-#         )
-        # extra_kwargs = {'password': {'write_only': True}}
-
 # class NewsletterUsersSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Newsletter_Users
