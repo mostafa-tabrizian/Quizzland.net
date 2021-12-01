@@ -227,7 +227,7 @@ class Blog_Admin(admin.ModelAdmin):
     list_filter = ('tags', )
     search_field = ['title', 'publish']
 
-class UserG(AbstractUser):
+class Profile(models.Model):
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=100, null=False, blank=False, default=None, unique=True)
     firstname = models.CharField(max_length=100, null=True, blank=True, default=None)
@@ -257,7 +257,7 @@ class UserG(AbstractUser):
     gender = models.CharField(choices = genderList, max_length=100, default='Male')
     
 
-class UserG_Admin(admin.ModelAdmin):
+class Profile_Admin(admin.ModelAdmin):
     list_display = ('username', 'email', 'gender', 'joinedDate')
     search_fields = ['id', 'username', 'email'] 
 
