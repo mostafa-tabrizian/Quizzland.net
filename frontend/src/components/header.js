@@ -140,28 +140,6 @@ const Header = (props) => {
 
 
                 <nav className="flex flex-ai-c flex-jc-sb">
-
-                    <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
-
-                        {
-                            props.linkType == 'Link' &&
-                            <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
-                                <span>uizzland</span>
-                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
-                            </Link>
-                        }
-
-                        {
-                            props.linkType == 'Hot' &&
-                            <a className="header__logo flex flex-jc-sb flex-ai-c" href="/">
-                                <span>uizzland</span>
-                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
-                            </a>
-                        }
-
-                        <Search/>
-                    </div>
-
                     <div>
                         {
                             props.linkType == 'Link' &&
@@ -180,6 +158,22 @@ const Header = (props) => {
                     </div>
 
                     <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
+                        {
+                            props.linkType == 'Link' &&
+                            <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
+                                <span>uizzland</span>
+                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
+                            </Link>
+                        }
+
+                        {
+                            props.linkType == 'Hot' &&
+                            <a className="header__logo flex flex-jc-sb flex-ai-c" href="/">
+                                <span>uizzland</span>
+                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
+                            </a>
+                        }
+
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
                         <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
                         <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
@@ -198,6 +192,8 @@ const Header = (props) => {
                             </div>
                         }
                     </div>
+
+                    <Search/>
 
                     <ul className={`header__categories ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${categoryNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><a href="/category/movie-series">🎬 فیلم و سریال</a></li>
