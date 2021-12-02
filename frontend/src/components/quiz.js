@@ -35,6 +35,7 @@ const Quiz = () => {
     const [quizThumbnail, setQuizThumbnail] = useState()
     const [SFXAllowed, setSFXAllowed] = useState()
     const [showQuestionChangingHelper, setShowQuestionChangingHelper] = useState(false)
+    const [showingAdverts, setShowingAdverts] = useState(false)
 
     const result = useRef(null)
 
@@ -259,15 +260,17 @@ const Quiz = () => {
 
 
     const goNextQuestionOrEndTheQuiz = () => {
-        if (ableToGoNext || autoQuestionChanger) {
+        if (ableToGoNext || autoQuestionChanger || showingAdverts) {
             setShowQuestionChangingHelper('never')
             if (currentQuestionNumber !== questions.length) {
                 restartTheStateOfQuestion()
                 plusOneToTotalAnsweredQuestions()
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+
+                log('go next...')
                 
-                // advertPos -= 48
-                // document.querySelector('.adverts_between').style.transform = `translate(${advertPos}rem)`
+                advertPos -= 48
+                document.querySelector('.adverts_between').style.transform = `translate(${advertPos}rem)`
 
                 if (!(window.navigator.userAgent.includes('Windows'))) {  // if mobile, scroll to top
                     window.scrollTo(0, 0);
@@ -337,41 +340,51 @@ const Quiz = () => {
 
     const isSafari = navigator.userAgent.indexOf("Chrome") != -1 === false && navigator.userAgent.indexOf("Chrome") != -1
 
+    let quizCounter = 0
+    
     const quizQuestions = () => {
-        let quizCounter = 0
 
         return (
             questions.map(question => {
                 quizCounter += 1
+                log(quizCounter)
 
-                // if (quizCounter == 2) {
-                //     // setAbleToGoNext(true)
+                if (quizCounter == 2) {
+                    log('adverts')
+                    // setShowingAdverts(true)  // causing error
 
-                //     return (
-                //         <div className='adverts_between flex flex-jc-c' id='mediaad-cpLp'></div>
-                //     )
-                // }
+                    return (
+                        <React.Fragment>
+                            <div className='adverts_between flex flex-jc-c' id='mediaad-cpLp'></div>
+                            
+                            <div className={`quiz__questionChanger__container pos-abs ${currentQuestionNumber == 2 ? 'fadeIn' : 'fadeOut'}`}>
+                                <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
+                            </div>
+                        </React.Fragment>
+                        
+                    )
+                }
 
-                // else {
-                return (
-                    <div style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }} className="quiz__container pos-rel darkGls">
+                else {
+                    return (
+                        <div style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }} className="quiz__container pos-rel darkGls">
 
-                        {questionShowIfNotNull(question.question)}
+                            {questionShowIfNotNull(question.question)}
 
-                        {!question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} />}
+                            {!question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title} title={question.title} />}
 
-                        {questionOptionsCheckBetweenStringOrImg(question)}
+                            {questionOptionsCheckBetweenStringOrImg(question)}
 
-                        <div className={`quiz__answerText answerHide tx-al-r`}>
-                            {answerOfQuestionIfExistShow(question)}
+                            <div className={`quiz__answerText answerHide tx-al-r`}>
+                                {answerOfQuestionIfExistShow(question)}
+                            </div>
+
+                            <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
+                                {gifAnswerOfQuestionIfExistShow(question)}
+                            </div>
                         </div>
-
-                        <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
-                            {gifAnswerOfQuestionIfExistShow(question)}
-                        </div>
-                    </div>
-                )
-                // }
+                    )
+                }
             })
         )
     }
