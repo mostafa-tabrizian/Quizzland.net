@@ -1,0 +1,11 @@
+User-Agent: *
+
+Crawl-Delay: 10
+
+Allow: /
+
+Disallow: /private/
+Disallow: /junk/
+Disallow: /search
+
+Sitemap: https://www.quizzland.net/sitemap.xml

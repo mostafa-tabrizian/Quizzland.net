@@ -1,0 +1,512 @@
+body {
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 100%; height: 100vh;
+}
+
+#quizLand {
+    &::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: #0000009e;
+        z-index: -1;
+    }
+}
+
+.SFXController {
+    z-index: 4;
+    margin-left: 1.5rem;
+    top: 6rem;
+
+    button {
+        background: none;
+        outline: none;
+        border: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.at4-share-title {
+    font-size: 0.8rem;
+    color: white;
+    margin-bottom: 0.3rem;
+}
+
+.quiz {
+    &__head {
+        font-family: myLalezar, myHarmattan, sans-serif;
+        z-index: 2;
+
+        h1, h2, h3, h4, h5, h6, p {
+            line-height: 2rem;
+            color: $white;
+            font-weight: 100;
+            margin: auto;
+        }
+
+        h1 {
+            font-size: $font-med - .1rem;
+            max-width: 21rem;
+
+            @include breakpoints-down(large) {
+                max-width: 15rem;
+            }
+        }
+
+        h5 {
+            font-size: 1.180rem - .2rem;
+            margin-right: 1.5rem;
+            margin-left: 1.5rem;
+
+            &:nth-child(2) {
+                order: -1;
+            }
+        }
+
+        h6 {
+            font-size: 1.180rem - .4rem;
+        }
+    }
+
+    &__questions {
+        margin-bottom: 1rem;
+    }
+
+    &__container {
+        z-index: -1;
+        max-width: 21rem;
+        margin: auto 1.25rem; margin-top: 5rem;
+        padding: 0.1rem;
+        border-radius: 24px;
+        transition: all 1.3s ease-in-out;
+
+        @include breakpoints-up(small) {
+            max-width: 32rem;
+            margin: 0 8rem;
+            background: none;
+            border: none;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+    }
+
+    &__question {
+        font-family: $font-pr; font-weight: 300; font-size: $font-med;
+        min-height: 4rem;
+        color: white;
+        padding: 1.1875rem;
+        margin: -.125rem;
+        border-radius: 23px 25px 0 0;
+        background: #00000065;
+        backdrop-filter: blur(165px);
+        width: 20.9rem;
+
+        @include breakpoints-up(small) {
+            background: none;
+            backdrop-filter: none;
+            text-align: right;
+            width: 31rem;
+            font-size: 1.85rem;
+        }
+    }
+
+    &__imgQuestion {
+        width: 20.8rem;
+        border-radius: 15px;
+
+        @include breakpoints-up(small) {
+            width: 29rem;
+        }
+    }
+
+    &__imgOption {
+        width: 9.9rem;
+        border-radius: .9rem;
+    }
+
+    &__autoQuestionChangerSwitch{
+        top: .5rem;
+        width: 7rem; height: 2rem;
+        z-index: 2;
+        cursor: pointer;
+
+        & > h5 {
+            font-size: .77rem;
+        }
+
+        &__btn {
+            width: 2rem; height: 1rem;
+            border: 1px solid white; border-radius: 25px;
+            background: white;
+            margin-left: .7rem;
+            box-shadow: inset 0 0 5px black, 0 0 5px black;
+        }
+
+        &__innerBtn {
+            width: 0.8rem; height: 0.8rem;
+            background: red;
+            border-radius: 10px;
+            margin: 0;
+            padding: 0;
+            left: -1rem;
+            box-shadow: inset 0 0 4px black;
+            transition: all .3s ease-in-out;
+            z-index: 3;
+
+            &__switched {
+                background: green;
+                left: .1rem;
+            }
+        }
+    }
+
+    &__questionChanger {
+        cursor: pointer;
+        pointer-events: all;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+
+
+        &__container {
+            z-index: 2;
+            position: absolute;
+
+            @include breakpoints-down(large) {
+                right: 4rem; top: 6rem;
+            }
+    
+            @include breakpoints-up(medium) {
+                right: 22rem; top: 6rem;
+            }
+            
+            @include breakpoints-up(large) {
+                right: 0; top: 9.5rem;
+            }
+
+            button {
+                background: url('/static/img/arw.svg') no-repeat center center;
+                height: 2rem; width: 2rem;
+            }
+        }
+
+        &__next {
+            transform: rotate(-90deg);
+            top: 2.1rem;
+
+            @include breakpoints-down(large) {
+                position: relative;
+                left: 2rem;
+            }
+        }
+
+        &__last {
+            transform: rotate(90deg);
+            position: relative;
+            
+            @include breakpoints-down(large) {
+                right: 14rem;
+            }
+            
+            @include breakpoints-down(xLarge) {
+                right: 16rem;
+            }
+
+            @include breakpoints-up(large) {
+                right: 45.5rem;
+            }
+        }
+    }
+
+    &__bottomQuestionChanger {
+        background: url('/static/img/arw-submit.svg') no-repeat center center;
+        height: 2rem;
+        width: 2rem;
+        transform: rotate(90deg);
+        pointer-events: all;
+
+        &__container {
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%);
+            z-index: 1;
+            pointer-events: fill;
+        }
+    }
+
+    &__questionCounter {
+        margin-top: 1rem; margin-bottom: 2rem;
+        z-index: 1;
+        color: $white;
+
+        @include breakpoints-down(large) {
+            margin-bottom: 1rem;
+        }
+
+        &__totalAnswered {
+            margin-right: .5rem;
+        }
+    }
+
+    &__hider {
+        @include breakpoints-up(small) {
+            width: 47rem;
+            bottom: auto;
+            margin-bottom: 3rem;
+        }
+        
+        width: 23rem;
+        overflow: hidden;
+        bottom: 3.5rem;
+        z-index: 1;
+        transition: bottom .35s cubic-bezier(0, 0.79, 0.88, 0.56);
+    }
+
+    &__options {
+        width: 23rem;
+
+        @include breakpoints-up(small) {
+            width: 32rem;
+        }
+
+        &__img {
+            grid-template-columns: auto auto;
+            padding-top: 1rem;
+        }
+
+        &__text {
+            padding: 1rem;
+        }
+
+        input {
+            opacity: 0;
+            position: absolute;
+        }
+
+        label {
+            color: $white;
+            display: block;
+            border-radius: 26px;
+            direction: rtl;
+            cursor: pointer;
+
+            @include breakpoints-up(small) {
+                border-radius: 20px;
+                font-size: 1.7rem;
+                text-align: right;
+            }
+        }
+
+        &__imgLabel {
+            width: 10.4rem; height: 12.3rem;
+            border: 4px solid #adadad;
+            padding: 0;
+            margin-right: .2rem; margin-left: .2rem; margin-bottom: .5rem;
+            transition: box-shadow .1s ease-in-out;
+            overflow: hidden;
+
+            &:hover {
+                box-shadow: 0 0 15px gray;
+            }
+        }
+
+        &__textLabel {
+            width: 19rem;
+            border: 2px solid #adadad;
+            padding: 0.6rem;
+            transition: border .3s ease-in-out;
+
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+
+
+            @include breakpoints-up(small) {
+                width: 30rem;
+                border: 1.5px solid #adadad;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                padding-right: 2rem;
+                padding-left: 2rem;
+                transition: all .3s ease-in-out;
+                backdrop-filter: blur(20px);
+                background: #00000094;
+
+                &:not(:last-child) {
+                    margin-bottom: 1.5rem;
+                }
+            }
+
+            &:hover {
+                background: black;
+            }
+
+            &::before {
+                content: '';
+                height: .0625rem; width: 1.25rem;
+                font-family: $number;
+                border-radius: 50%;
+                margin: 0;
+                display: flex;
+                padding-left: 1rem;
+                color: $white;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 1.15rem; left: 1.15rem;
+                border: 2px solid transparent;
+                border-radius: 2rem;
+                background: rgb(255, 0, 0);
+                width: 20%; height: 2.95rem;
+                opacity: 0;
+            }
+
+            &__active {
+                .quiz__options__textLabel {
+                    &::after {
+                        opacity: 1 !important;
+                    }
+                }
+            }
+        }
+    }
+
+    &__correctAnswer {
+        border: 3px solid green !important;
+        background: #0019007d !important;
+        opacity: 1 !important;
+    }
+
+    &__wrongAnswer {
+        border: 2px solid #a2000090 !important;
+        background: #1f000052 !important;
+        opacity: 1 !important;
+    }
+
+    &__tags {
+        margin: auto;
+        margin-bottom: 3rem;
+        max-width: 25rem;
+        flex-wrap: wrap;
+
+        li {
+            margin-bottom: .5rem;
+        }
+
+        &__title {
+            color: white;
+            z-index: 1;
+            position: relative;
+            width: 16rem;
+            margin: auto;
+            margin-bottom: .6rem;
+        }
+        
+        li > h2 {
+            font-size: .9rem;
+            font-family: myHarmattan, sans-serif;
+            color: white;
+            background: linear-gradient(-45deg, darkRed, transparent);
+            z-index: 1;
+            position: relative;
+            border: none;
+            border-bottom: .5px solid rgba(255, 255, 255, 0.46) !important;
+            border-right: .5px solid rgba(255, 255, 255, 0.46) !important;
+            border-radius: 20px;
+            padding-right: 0.8rem; padding-left: 0.8rem;
+            padding-top: 0.2rem; padding-bottom: 0.2rem;
+            margin-right: .6rem;
+            margin-left: .6rem;
+        }
+    }
+
+    &__answerImGif {
+        padding-bottom: 0;
+        img {
+            width: 90%; height: 100%;
+            border-radius: 15px;
+            transform: translateY(.6rem);
+
+            @include breakpoints-down(large) {
+                width: 100%;
+            }
+        }
+    }
+
+    &__answerText {
+        padding: 1rem 2rem;
+
+        @include breakpoints-up(small) {
+            p {
+                font-size: 1.18rem;
+            }
+        }
+    }
+
+    // .lowHighContainer {
+    //     margin: 0 15rem !important; margin-top: 5rem !important;
+    // }
+    
+    // &__lowHigh {
+    //     margin-top: 2.5625rem;
+
+    //     input {
+    //         display: none;
+    //     }
+
+    //     label {
+    //         border: 1px solid $gray; border-radius: 100px;
+    //         margin-right: .4325rem; margin-left: .4325rem;
+
+    //         &:nth-child(3), &:nth-child(19) {
+    //             padding-right: 2.1875rem;
+    //         }
+    //         &:nth-child(5), &:nth-child(17) {
+    //             padding-right: 2.4875rem; padding-top: .25rem;
+    //         }
+    //         &:nth-child(7), &:nth-child(15) {
+    //             padding-right: 2.7875rem; padding-top: .5rem;
+    //         }
+    //         &:nth-child(9), &:nth-child(13) {
+    //             padding-right: 3rem; padding-top: .75rem;
+    //         }
+    //         &:nth-child(11) {
+    //             padding-right: 3.3rem; padding-top: 1rem;
+    //         }
+    //     }  
+    // }
+}
+
+.countingResult {
+    z-index: 95000;
+    font-size: $font-med;
+    color: white;
+    font-family: $font-sec;
+    background: $red-grad;
+
+    @include breakpoints-down(large) {
+        font-size: $font-med - .3rem;
+    }
+    
+    &::after {
+        position: absolute;
+        top: 55%;
+    }
+}
+
+.slider {
+    padding: 0;
+    min-height: 500px;
+    color: #fff;
+}
