@@ -381,13 +381,13 @@ input {
 
     &__arwLast {
         width: 1.25rem; height: 1.25rem;
-        background: url('/static/img/arw-travelPage.svg') no-repeat;
+        background: url('/images/arw-travelPage.svg') no-repeat;
         transform: rotate(-90deg);
     }
 
     &__arwNext {
         width: 1.25rem; height: 1.25rem;
-        background: url('/static/img/arw-travelPage.svg') no-repeat;
+        background: url('/images/arw-travelPage.svg') no-repeat;
         transform: rotate(90deg);
     }
 }
@@ -422,7 +422,7 @@ input {
 }
 
 .nightMode {
-    background: url('/static/img/nightMode.png') no-repeat center center;
+    background: url('/images/nightMode.png') no-repeat center center;
     filter: drop-shadow(0px 0px 4px white);
     transform: translate(0.54rem, -0.43rem);
     height: 1.6875rem;
@@ -550,7 +550,7 @@ input {
 /* .paintBrush {
     position: relative;
     z-index: 1;    &::before {
-        background: url('/static/img/redBrush.png') no-repeat center center;
+        background: url('/images/redBrush.png') no-repeat center center;
         content: '';
         display: block;
         width: 10rem;

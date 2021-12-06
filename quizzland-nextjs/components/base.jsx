@@ -14,8 +14,17 @@ export const replaceFunction = (string, oldValue, newValue) => {
 
 export const viewsFormat = (views) => {
     if (views >= 1000) {
-        const stringed = toString(views)
-        const newViewsFormat = stringed[0] + '.' + stringed[1] + 'k'
+        const stringed = String(views)
+        const stringedLength = stringed.length
+        const separateThousands = Math.ceil((stringedLength / 2)) - 1
+        let newViewsFormat = ''
+        for (let i = 0; i < separateThousands; i++) {
+            if (i + 1 === separateThousands) {  // some fake fucking views for amaze the user for more popularity
+                newViewsFormat = newViewsFormat + stringed[i] + '.' + (parseInt(stringed[1]) + 1) + 'k'
+            } else {
+                newViewsFormat = newViewsFormat + stringed[i]
+            }
+        }
         return newViewsFormat
     } else {
         return views
@@ -146,13 +155,19 @@ export const makeDatePublishFormatForQuizDetail = (fullDate) => {
 }
 
 export const isItDesktop = () => {
-    return window.navigator.userAgent.includes('Windows')
+    if (typeof window !== 'undefined') {
+        return window.navigator.userAgent.includes('Windows')
+    }
 }
 
 export const isItMobile = () => {
-    return window.navigator.userAgent.includes('Mobile') && !(window.navigator.userAgent.includes('iPad'))
+    if (typeof window !== 'undefined') {
+        return window.navigator.userAgent.includes('Mobile') && !(window.navigator.userAgent.includes('iPad'))
+    }
 }
 
 export const isItIPad = () => {
-    return window.navigator.userAgent.includes('Mobile' ) && window.navigator.userAgent.includes('iPad')
+    if (typeof window !== 'undefined') {
+        return window.navigator.userAgent.includes('Mobile' ) && window.navigator.userAgent.includes('iPad')
+    }
 }

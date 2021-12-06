@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'next/link'
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 
@@ -34,6 +34,14 @@ const Search = (props) => {
             document.body.style.overflow = 'overlay'
         }
         setSearchMobile(searchMobile ? false : true)
+
+        if (typeof window !== 'undefined') {
+            document.body.addEventListener(("click"), (e) => {
+                if (!e.target.className.includes('header__search__result__quizzes') && !e.target.className.includes('header__search__input')) {
+                    setSearchResult(false)
+                }
+            })
+        }
     }
 
     const searchHandler = async (value) => {
@@ -47,39 +55,39 @@ const Search = (props) => {
                 let matchedCategories = []
     
                 // Search Quiz
-                const search_new_quiz_title = await axiosLimited.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=3`)
+                const search_new_quiz_title = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=3`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
                 
                 if (search_new_quiz_title.data.results !== 3) {
-                    const search_new_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=5`)
+                    const search_new_quiz_subCategory = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=5`)
                     Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
                     
                     if (search_new_quiz_subCategory.length !== 5) {
-                        const search_new_quiz_tag = await axiosLimited.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=5`)
+                        const search_new_quiz_tag = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=5`)
                         Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
                     }
                 }
                 
                 // Search Pointy Quiz
-                const search_new_pointy_quiz_title = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=1`)
+                const search_new_pointy_quiz_title = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=1`)
                 Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_title.data.results)
                 
                 if (search_new_pointy_quiz_title.legnth !== 1) {
-                    const search_new_pointy_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=23`)
+                    const search_new_pointy_quiz_subCategory = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=23`)
                     Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_subCategory.data.results)
 
                     if (search_new_pointy_quiz_subCategory.length !== 3) {
-                        const search_new_pointy_quiz_tag = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=2`)
+                        const search_new_pointy_quiz_tag = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=2`)
                         Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_tag.data.results)
                     }
                 }
     
                 // Search Category
-                const search_new_category_title = await axiosLimited.get(`/dbAPI/new_category/?title__icontains=${searchValue}&limit=1`)
+                const search_new_category_title = await axiosLimited.get(`http://localhost:8000/dbAPI/new_category/?title__icontains=${searchValue}&limit=1`)
                 Array.prototype.push.apply(matchedCategories, search_new_category_title.data.results)
 
                 if (search_new_category_title.length !== 1) {
-                    const search_new_category_subCategory = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
+                    const search_new_category_subCategory = await axiosLimited.get(`http://localhost:8000/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
                     Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
                 }
 
@@ -113,16 +121,25 @@ const Search = (props) => {
                                 return (
                                     <li key={quiz.id}>
                                         <article className={`flex tx-al-r quizContainer__trans`}>
-                                            <a href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
-                                                <div>
-                                                    <img src={`${quiz.thumbnail}`} alt={`${quiz.subCategory}} | ${quiz.title}`} loading='lazy' />
-                                                </div>
-                                                <div className="header__search__result__title flex">
-                                                    <span>
-                                                        { quiz.title }
-                                                    </span>
-                                                </div>
-                                            </a>
+                                            <Link href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
+                                                <a>
+                                                    <div>
+                                                        <Image
+                                                            src={quiz.thumbnail}
+                                                            alt={`${quiz.subCategory}} | ${quiz.title}`}
+                                                            blurDataURL={quiz.thumbnail}
+                                                            width='224'
+                                                            height='126'
+                                                            placeholder='blur'
+                                                        />
+                                                    </div>
+                                                    <div className="header__search__result__title flex">
+                                                        <span>
+                                                            { quiz.title }
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            </Link>
                                         </article>
                                     </li>
                                 )
@@ -139,13 +156,24 @@ const Search = (props) => {
                         const category = matchedCategories[0]
                         return (
                             <div className={`header__search__result__category__item`}>
-                                <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
-                                    <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوییز های ${category.title_far}`} />
-                                </a>
-                                <h5 className='tx-al-c'>
-                                    <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
-                                        {category.subCategory}
+                                <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
+                                    <a>
+                                        <Image
+                                            src={category.thumbnail}
+                                            alt={`${category.subCategory}} | های ${category.title_far}}`}
+                                            blurDataURL={category.thumbnail}
+                                            width='336'
+                                            height='160'
+                                            placeholder='blur'
+                                        />
                                     </a>
+                                </Link>
+                                <h5 className='tx-al-c'>
+                                    <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
+                                        <a>
+                                            {category.subCategory}
+                                        </a>
+                                    </Link>
                                 </h5>
                             </div>
                         )
@@ -167,21 +195,15 @@ const Search = (props) => {
         searchHandler(input.target.value)
     }
 
-    document.body.addEventListener(("click"), (e) => {
-        if (!e.target.className.includes('header__search__result__quizzes') && !e.target.className.includes('header__search__input')) {
-            setSearchResult(false)
-        }
-    })
-
     const searchSuggester = async () => {
-        const grabAllSubCategories = await axiosLimited.get(`/dbAPI/new_category`)
+        const grabAllSubCategories = await axiosLimited.get(`http://localhost:8000/dbAPI/new_category`)
         const numberOfCategories = grabAllSubCategories.data.length
         const randomCategoryIndex = Math.floor(Math.random() * numberOfCategories);
         setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)
     }
 
     return (
-        <React.Fragment>
+        <>
             <div className={`header__search flex ${props.colorOfHeader}`}>
                 <input
                     type='text'
@@ -194,9 +216,9 @@ const Search = (props) => {
                         <div className="header__search__result__category__container flex flex-jc-c">
                             {categoriesList}
 
-                            <Link to={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
-                                نمایش بقیه نتایج...
-                            </Link>
+                            {/* <Link href={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
+                                <a> نمایش بقیه نتایج...</a>
+                            </Link> */}
                         </div>
                     </div>
                     
@@ -219,7 +241,7 @@ const Search = (props) => {
                     onChange={inputChanged}
                 />
             </div>
-        </React.Fragment>
+        </>
     )
 }
 

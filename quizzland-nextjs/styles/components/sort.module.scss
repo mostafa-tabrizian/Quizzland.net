@@ -1,0 +1,29 @@
+.sortMore {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+
+    @include breakpoints-down(large) {
+        grid-template-columns: 1fr;
+        margin: 0;
+    }
+
+    &__inner {
+        margin: 2rem;
+    
+        @include breakpoints-down(large) {
+            margin: auto; margin-bottom: 2rem;
+        }
+    }
+
+    div {
+        &:first-child {
+            @include breakpoints-down(large) {
+                order: 1;
+            }
+        }
+    }
+
+    &__categoryStyle {
+        display: inherit !important;
+    }
+}

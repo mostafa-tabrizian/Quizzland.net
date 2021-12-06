@@ -11,7 +11,7 @@ import LoadingScreen from './loadingScreen'
 import QuizContainer from './quizContainer'
 import SkeletonLoading from './skeletonLoading'
 
-const logo = '/static/img/Q-small.png'
+const logo = '../images/Q-small.png'
 
 let quiz = 'null'
 let advertPos = 0
@@ -42,8 +42,8 @@ const Quiz = () => {
     const quizTitleReplacedWithHyphen = replaceFunction(quizTitle, '-', '+')
     const SFXCorrect = new Audio('../../static/sound/SFXCorrect.mp3')
     const SFXWrong = new Audio('../../static/sound/SFXWrong.mp3')
-    const speakerIconOn = '/static/img/speakerOn.png'
-    const speakerIconOff = '/static/img/speakerOff.png'
+    const speakerIconOn = '../images/speakerOn.png'
+    const speakerIconOff = '../images/speakerOff.png'
 
     useEffect(() => {
         grabData()

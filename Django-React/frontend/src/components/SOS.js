@@ -4,7 +4,7 @@ import Header from './header'
 
 import BackBtn from './backBtn'
 
-const pathRed = '/static/img/bubbles.png'
+const pathRed = '../images/bubbles.png'
 
 const SOS = () => {
 

@@ -11,12 +11,12 @@ import LoadingScreen from './loadingScreen'
 import SkeletonLoading from './skeletonLoading'
 
 
-const landPagePath = '/static/img/landPage-path.png'
-const landPagePath_light = '/static/img/landPage-path-light.png'
-const landPagePath_mobile = '/static/img/landPage-path-mobile.png'
-const landPagePath_light_mobile = '/static/img/landPage-path-light-mobile.png'
-const Q = '/static/img/Q.png'
-const QBubbles = '/static/img/QBubbles.png'
+const landPagePath = '../images/landPage-path.png'
+const landPagePath_light = '../images/landPage-path-light.png'
+const landPagePath_mobile = '../images/landPage-path-mobile.png'
+const landPagePath_light_mobile = '../images/landPage-path-light-mobile.png'
+const Q = '../images/Q.png'
+const QBubbles = '../images/QBubbles.png'
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 10, perMilliseconds: 1000, maxRPS: 150 })
 

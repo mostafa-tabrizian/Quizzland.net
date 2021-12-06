@@ -71,7 +71,7 @@ html {
 }
 
 .header__search__opener {
-  background: url("/static/img/srch-white.svg") no-repeat center !important;
+  background: url("../images/srch-white.svg") no-repeat center !important;
 }
 
 .header__search__input {

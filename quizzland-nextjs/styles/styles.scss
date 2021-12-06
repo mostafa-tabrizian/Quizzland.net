@@ -1,3 +1,20 @@
 @import './mixins';
 @import './variables';
 @import './globals';
+@import './nightTheme';
+
+@import './components/header.module';
+@import './components/footer.module';
+@import './components/index.module';
+@import './components/categories.module';
+@import './components/quizzes.module';
+@import './components/quizContainer.module';
+@import './components/result.module';
+@import './components/moreSearchResult.module';
+@import './components/basicPage.module';
+@import './components/contact.module';
+@import './components/sort.module';
+@import './components/tools.module';
+@import './components/blog.module';
+@import './components/adverts.module';
+@import './components/search.module';

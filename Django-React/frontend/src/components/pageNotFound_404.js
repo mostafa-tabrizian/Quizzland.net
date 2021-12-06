@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import BackBtn from './backBtn'
 import Header from './header'
 
-const pathRed = '/static/img/bubbles.png'
+const pathRed = '../images/bubbles.png'
 
 const PageNotFound_404 = () => {
 

@@ -7,8 +7,8 @@ import Search from './search'
 
 import '/static/css/style.css'
 
-const logo = '/static/img/Q-small.png'
-const nightModeIcon = '/static/img/lightMode.png'
+const logo = '../images/Q-small.png'
+const nightModeIcon = '../images/lightMode.png'
 
 const Header = (props) => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)

@@ -1,17 +1,17 @@
 import Meta from './meta'
 import Header from './header'
+import Footer from './footer'
 
 const Layout = ({ children }) => {
     return (
         <>
             <Meta />
+
             <Header />
 
-            <div>
-                layout component
-            </div>
+            { children }
 
-            <h1>Footer</h1>
+            <Footer/>
         </>
     );
 }

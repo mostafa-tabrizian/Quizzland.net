@@ -11,7 +11,7 @@ import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
 import SkeletonLoading from './skeletonLoading'
 
-const logo = '/static/img/Q-small.png'
+const logo = '../images/Q-small.png'
 
 let quiz = 'null'
 
@@ -30,8 +30,8 @@ const Quiz = () => {
     const [SFXAllowed, setSFXAllowed] = useState()
     const [showQuestionChangingHelper, setShowQuestionChangingHelper] = useState(false)
 
-    const speakerIconOn = '/static/img/speakerOn.png'
-    const speakerIconOff = '/static/img/speakerOff.png'
+    const speakerIconOn = '../images/speakerOn.png'
+    const speakerIconOff = '../images/speakerOff.png'
 
     const result = useRef(null)
 

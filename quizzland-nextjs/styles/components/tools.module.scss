@@ -1,0 +1,50 @@
+.tools {
+    direction: rtl;
+    position: relative;
+    z-index: 1;
+
+    @include breakpoints-down(large) {
+        margin-right: 2rem;
+    }
+
+    &__sort {
+        margin-left: .7rem;
+        height: 5rem;
+
+        &__btn {
+            font-size: 1.180rem;
+            border: inherit;
+        }
+
+        &__options {
+            margin-top: .5rem;
+
+            button {
+                padding: 0rem 0.3rem 0rem 0.3rem;
+                margin-left: .1rem;
+                margin-right: .1rem;
+            }
+        }
+    }
+
+    &__numberOfResult {
+        height: 5rem;
+
+        &__btn {
+            font-size: 1.180rem;
+            border: inherit;
+        }
+        
+        &__options {
+            margin-top: .5rem;
+
+            button {
+                padding: 0rem 0.5rem 0rem 0.5rem;
+
+                &:not(:last-child) {
+                    margin-left: .2rem;
+                }
+            }
+        }
+    }
+}

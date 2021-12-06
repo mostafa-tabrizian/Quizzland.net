@@ -3,7 +3,7 @@ import BackBtn from '../components/backBtn'
 import { Helmet } from "react-helmet";
 import Header from './header'
 
-const pathRed = '/static/img/bubbles.png'
+const pathRed = '../images/bubbles.png'
 
 const PrivacyPolicy = () => {
 

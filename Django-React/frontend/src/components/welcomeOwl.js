@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from "react-helmet";
 
-const owlPage = '/static/img/owlPage.webp'
+const owlPage = '../images/owlPage.webp'
 
 const welcomePage = () => {
     document.body.style = `

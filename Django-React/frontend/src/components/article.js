@@ -9,7 +9,7 @@ import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from './base
 import LoadingScreen from './loadingScreen'
 import Header from './header'
 
-const logo = '/static/img/Q-small.png'
+const logo = '../images/Q-small.png'
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 

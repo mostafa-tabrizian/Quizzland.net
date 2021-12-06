@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet";
 
 import Header from './header'
 
-const lightMode = '/static/img/lightMode.png'
-const nightMode = '/static/img/nightMode.png'
-const pathRed = '/static/img/bubbles.png'
+const lightMode = '../images/lightMode.png'
+const nightMode = '/images/nightMode.png'
+const pathRed = '../images/bubbles.png'
 
 const Guide = () => {
 

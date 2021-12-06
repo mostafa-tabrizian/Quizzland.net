@@ -3,7 +3,7 @@ import { HashLink } from 'react-router-hash-link'
 
 import { log } from './base'
 
-const instagramIcon = '/static/img/instagram-icon.svg'
+const instagramIcon = '../images/instagram-icon.svg'
 
 const copyRightDate = () => {
     const date = new Date();
