@@ -2,12 +2,6 @@ export const log = (code) => {
     console.log(code)
 }
 
-export const takeParameterFromUrl = (parameter) => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const parameterValue = urlParams.get(parameter)
-    return parameterValue
-}
-
 export const replaceFunction = (string, oldValue, newValue) => {
     return string.replaceAll(oldValue, newValue)
 }
@@ -49,16 +43,6 @@ export const popUpShow = (element) => {
 export const popUpHide = (element) => {
     element.classList.add('popUp-hide')
     element.classList.remove('popUp-show')
-}
-
-export const nightMode = () => {
-    const nightModeType = localStorage.getItem('lightMode')
-
-    if (nightModeType === 'true') {
-        return 'lightGls'
-    } else {
-        return 'darkGls'
-    }
 }
 
 export const datePublishHandler = (publishFullDate) => {

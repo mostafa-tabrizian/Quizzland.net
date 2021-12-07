@@ -5,77 +5,11 @@ import Image from 'next/image'
 import { log } from './base'
 import Search from '../components/search'
 
-// const nightModeIcon = '../images/lightMode.png'
-
 const Header = (props) => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)
     const [quizNavigationOpen, setQuizNavigationOpen] = useState(false)
     const [pointyNavigationOpen, setPointyNavigationOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
-    // const [nightMode, setNightMode] = useState(true)
-
-    useEffect(() => {
-        componentChangeDetector()
-    })
-
-    // useEffect(() => {
-
-    //     if (nightMode) {
-    //         if (localStorage.getItem('lightMode') !== 'true') {
-    //             // require('/static/css/nightTheme.css')
-    //         }
-    //     }
-    // }, [nightMode])
-
-    // if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
-    //     if (localStorage.getItem('alertUFHB') !== 'true') {
-    //         alert('لطفا از مرورگر کروم یا غیره استفاده کنید \n در مرورگر شما (فایرفاکس) برخی دیزاین ها قابل اجرا نیست')
-    //         localStorage.setItem('alertUFHB', 'True')
-    //     }
-    // }
-
-    const componentChangeDetector = () => {
-        (function (history) {
-
-            let pushState = history.pushState;
-            history.pushState = function () {
-                pushState.apply(history, arguments);
-            };
-
-            // checkIfShouldShowNightModeBtn()
-
-        })(window.history);
-    }
-
-    // const checkIfShouldShowNightModeBtn = () => {
-    //     const pageUrl = window.location.pathname.split('/')
-
-    //     if (pageUrl.includes('quiz')) {
-    //         setNightMode(false)
-    //     } else {
-    //         setNightMode(true)
-    //     }
-    // }
-
-    // const nightModeTurnOnOff = () => {
-
-    //     if (localStorage.getItem('lightMode') === 'true') {
-    //         localStorage.setItem('lightMode', false)
-    //         window.location.reload();
-    //     } else {
-    //         require('../styles/nightTheme.scss')
-    //         localStorage.setItem('lightMode', true)
-    //         window.location.reload();
-    //     }
-    // }
-
-    // const nightModeIconChanger = () => {
-    //     if (localStorage.getItem('lightMode') === 'true') {
-    //         return {
-    //             background: `url('${nightModeIcon}') no-repeat center center`
-    //         }
-    //     }
-    // }
 
     const openCloseMenu = () => {
         setMenuOpen(menuOpen ? false : true)
@@ -185,15 +119,15 @@ const Header = (props) => {
                     </ul>
 
                     <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
-                        <li><Link href="/sort?q=newest"><a> ⏳ جدیدترین ها </a></Link></li>
-                        <li><Link href="/sort?q=monthlyBestest"><a> 👑 بهترین های ماه </a></Link></li>
-                        <li><Link href="/sort?q=bestest"><a> 👑 بهترین ها </a></Link></li>
+                        <li><Link href="/sort?st=newest"><a> ⏳ جدیدترین ها </a></Link></li>
+                        <li><Link href="/sort?st=monthlyBestest"><a> 👑 بهترین های ماه </a></Link></li>
+                        <li><Link href="/sort?st=bestest"><a> 👑 بهترین ها </a></Link></li>
                     </ul>
 
                     <ul className={`header__pointy ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${pointyNavigationOpen ? 'subHeader__open' : ''}`}>
-                        <li><Link href="/sort?q=newest_test"><a> ⏳ جدیدترین ها </a></Link></li>
-                        <li><Link href="/sort?q=monthlyBestest_test"><a> 👑 بهترین های ماه </a></Link></li>
-                        <li><Link href="/sort?q=bestest_test"><a> 👑 بهترین ها </a></Link></li>
+                        <li><Link href="/sort?st=newest_test"><a> ⏳ جدیدترین ها </a></Link></li>
+                        <li><Link href="/sort?st=monthlyBestest_test"><a> 👑 بهترین های ماه </a></Link></li>
+                        <li><Link href="/sort?st=bestest_test"><a> 👑 بهترین ها </a></Link></li>
                     </ul>
 
                     {/* Menu */}
@@ -217,16 +151,16 @@ const Header = (props) => {
                             <div className="header__menu__inner__nav">
                                 <h4>کویز ها</h4>
                                 <ul className="header__menu__inner__quizzes tx-al-r">
-                                    <li onClick={openCloseMenu}><Link href="/sort?q=newest"><a> جدیدترین ها </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/sort?q=monthlyBestest"><a> بهترین های ماه </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/sort?q=bestest"><a> بهترین ها </a></Link></li>
+                                    <li onClick={openCloseMenu}><Link href="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
+                                    <li onClick={openCloseMenu}><Link href="/sort?st=monthlyBestest"><a> بهترین های ماه </a></Link></li>
+                                    <li onClick={openCloseMenu}><Link href="/sort?st=bestest"><a> بهترین ها </a></Link></li>
                                 </ul>
 
                                 <h4 className='space-med'>تست ها</h4>
                                 <ul className="header__menu__inner__quizzes tx-al-r">
-                                    <li onClick={openCloseMenu}><Link href="/sort?q=newest_test"><a> جدیدترین ها </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/sort?q=monthlyBestest_test"><a> بهترین های ماه </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/sort?q=bestest_test"><a> بهترین ها </a></Link></li>
+                                    <li onClick={openCloseMenu}><Link href="/sort?st=newest_test"><a> جدیدترین ها </a></Link></li>
+                                    <li onClick={openCloseMenu}><Link href="/sort?st=monthlyBestest_test"><a> بهترین های ماه </a></Link></li>
+                                    <li onClick={openCloseMenu}><Link href="/sort?st=bestest_test"><a> بهترین ها </a></Link></li>
                                 </ul>
                             </div>
                             <div className="header__menu__inner__other">

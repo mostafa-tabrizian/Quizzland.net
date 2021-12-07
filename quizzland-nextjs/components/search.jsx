@@ -156,7 +156,7 @@ const Search = (props) => {
                         const category = matchedCategories[0]
                         return (
                             <div className={`header__search__result__category__item`}>
-                                <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
+                                <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
                                     <a>
                                         <Image
                                             src={category.thumbnail}
@@ -169,7 +169,7 @@ const Search = (props) => {
                                     </a>
                                 </Link>
                                 <h5 className='tx-al-c'>
-                                    <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
+                                    <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
                                         <a>
                                             {category.subCategory}
                                         </a>

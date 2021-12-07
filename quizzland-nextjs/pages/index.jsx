@@ -74,8 +74,8 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
         landPagePathSelector()
         recommendationQuiz()
         setLoadState(true)
-        if (document.getElementById('html')) {
-            document.getElementById('html').style='background: None'
+        if (document.querySelector('html')) {
+            document.querySelector('html').style='background: None'
         }
     }, [])
 
@@ -220,7 +220,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                     <tag id='scroll' />
 
                     <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                        <Link href="sort?q=newest"><a className="btn">... نمایش بیشتر </a></Link>
+                        <Link href="sort?st=newest"><a className="btn">... نمایش بیشتر </a></Link>
                         <h3 className='paintBrush'>جدیدترین کوییز ها</h3>
                     </div>
 
@@ -247,7 +247,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                 <div className="space-med">
 
                     <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                        <Link href="sort?q=monthlyBestest"><a className="btn">... نمایش بیشتر </a></Link>
+                        <Link href="sort?st=monthlyBestest"><a className="btn">... نمایش بیشتر </a></Link>
                         <h3 className='paintBrush'>بهترین کوییز های این ماه</h3>
                     </div>
 
@@ -263,7 +263,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                 <div className="space-med">
 
                     <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                        <Link href="sort?q=newest_test"><a className="btn">... نمایش بیشتر </a></Link>
+                        <Link href="sort?st=newest_test"><a className="btn">... نمایش بیشتر </a></Link>
                         <h3 className='paintBrush'>جدیدترین تست ها</h3>
                     </div>
 
@@ -290,7 +290,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                 <div className="space-med">
 
                     <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                        <Link href="sort?q=monthlyBestest_test"><a className="btn">... نمایش بیشتر </a></Link>
+                        <Link href="sort?st=monthlyBestest_test"><a className="btn">... نمایش بیشتر </a></Link>
                         <h3 className='paintBrush'>بهترین تست های این ماه</h3>
                     </div>
 
@@ -306,7 +306,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                 <div className="space-med">
 
                     <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                        <Link href="sort?q=newest&c=celebrity"><a className="btn">... نمایش بیشتر </a></Link>
+                        <Link href="sort?st=newest&c=celebrity"><a className="btn">... نمایش بیشتر </a></Link>
                         <h3 className='paintBrush'>کوییز سلبریتی</h3>
                     </div>
 
@@ -333,7 +333,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                 <div className="space-med">
 
                     <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                        <Link href="sort?q=newest&c=movie-series"><a className="btn">... نمایش بیشتر </a></Link>
+                        <Link href="sort?st=newest&c=movie-series"><a className="btn">... نمایش بیشتر </a></Link>
                         <h3 className='paintBrush'>کوییز فیلم و سریال</h3>
                     </div>
 
@@ -349,7 +349,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                 <div className="space-med">
 
                     <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                        <Link href="sort?q=newest&c=psychology"><a className="btn">... نمایش بیشتر </a></Link>
+                        <Link href="sort?st=newest&c=psychology"><a className="btn">... نمایش بیشتر </a></Link>
                         <h3 className='paintBrush'>تست روانشناسی</h3>
                     </div>
 
@@ -375,7 +375,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
 
                 <div className="space-med">
                     <div className="quizContainer__header flex flex-ai-c wrapper-med">
-                        <Link href="sort?q=newest"><a className="btn">... نمایش بیشتر تر </a></Link>
+                        <Link href="sort?st=newest"><a className="btn">... نمایش بیشتر تر </a></Link>
                         <h3 className='paintBrush'>کوییز های بیشتر</h3>
                     </div>
 

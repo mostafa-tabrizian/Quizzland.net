@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { log, nightMode } from './base'
+import { log } from './base'
 
 const Tools = (props) => {
     const [showToolsSort, setShowToolsSort] = useState(false)
@@ -36,26 +36,26 @@ const Tools = (props) => {
     return (
         <div className='tools wrapper-med flex flex-ai-c'>
             <div className='tools__sort'>
-                <button onClick={showHideToolsSort} className={`tools__sort__btn btn ${nightMode()}`}>ترتیب بر اساس: 
+                <button onClick={showHideToolsSort} className={`tools__sort__btn btn`}>ترتیب بر اساس: 
                     <span>  {sortTypeDefinition[props.sortType]}  </span>
                 </button>
                 <div className={showToolsSort ? 'fadeIn' : 'fadeOut'}>
                     <ul className='tools__sort__options'>
-                        <button onClick={() => {changeSortType('newest')}} className={`btn ${nightMode()}`} type='button'>جدیدترین</button>
-                        <button onClick={() => {changeSortType('bestest')}} className={`btn ${nightMode()}`} type='button'>بهترین</button>
-                        <button onClick={() => {changeSortType('alphabet')}} className={`btn ${nightMode()}`} type='button'>الفبا</button>
+                        <button onClick={() => {changeSortType('newest')}} className={`btn`} type='button'>جدیدترین</button>
+                        <button onClick={() => {changeSortType('bestest')}} className={`btn`} type='button'>بهترین</button>
+                        <button onClick={() => {changeSortType('alphabet')}} className={`btn`} type='button'>الفبا</button>
                     </ul>
                 </div>
             </div>
             <div className='tools__numberOfResult'>
-                <button onClick={showHideToolsNumberOfResult} className={`tools__numberOfResult__btn ${nightMode()} btn`}>تعداد نمایش: 
+                <button onClick={showHideToolsNumberOfResult} className={`tools__numberOfResult__btn btn`}>تعداد نمایش: 
                     <span> {props.numberOfResult} </span>
                 </button>
                 <div className={showToolsNumberOfResults ? 'fadeIn' : 'fadeOut'}>
                     <ul className='tools__numberOfResult__options'>
-                        <button onClick={() => {changeNumberOfResults(16)}} className={`${nightMode()} btn`} type='button'>16</button>
-                        <button onClick={() => {changeNumberOfResults(32)}} className={`${nightMode()} btn`} type='button'>32</button>
-                        <button onClick={() => {changeNumberOfResults(48)}} className={`${nightMode()} btn`} type='button'>48</button>
+                        <button onClick={() => {changeNumberOfResults(2)}} className={`btn`} type='button'>2</button>
+                        <button onClick={() => {changeNumberOfResults(32)}} className={`btn`} type='button'>32</button>
+                        <button onClick={() => {changeNumberOfResults(48)}} className={`btn`} type='button'>48</button>
                     </ul>
                 </div>
             </div>

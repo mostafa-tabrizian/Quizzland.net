@@ -13,10 +13,10 @@ const QuizContainerWithoutViews = (props) => {
                             <div>
                                 <Image
                                     src={quiz.thumbnail}
-                                    blurDataURL={quiz.thumbnail}
                                     width='224'
                                     height='126'
                                     alt={`${quiz.subCategory} | ${quiz.title}`}
+                                    blurDataURL={quiz.thumbnail}
                                     placeholder='blur'
                                 />
                             </div>
