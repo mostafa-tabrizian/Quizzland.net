@@ -1,81 +1,80 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Helmet } from "react-helmet";
 import rateLimit from 'axios-rate-limit';
-import {InlineReactionButtons, InlineShareButtons, StickyShareButtons} from 'sharethis-reactjs';
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+// import {InlineReactionButtons, InlineShareButtons, StickyShareButtons} from 'sharethis-reactjs';
 
-import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
+import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from '../../components/base'
+import Layout from '../../components/layout'
 
-import LoadingScreen from './loadingScreen'
-import Header from './header'
+// import LoadingScreen from './loadingScreen'
 
 const logo = '../images/Q-small.png'
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
-const Article = (props) => {
-    const [article, setArticle] = useState([])
+const Article = () => {
+    const router = useRouter()
+    const { articleTitle } = router.query
+
+    const [article, setArticle] = useState(null)
     const [loadState, setLoadState] = useState(false)
 
-    const getBlogContentFromDb = async () => {
-        const contentTitle = props.match.params.title
-        const contentData = await axiosLimited.get(`/dbAPI/new_blog/?title__iexact=${contentTitle}&limit=1`)
-        setArticle(contentData.data.results[0])
-        setLoadState(true)
+    const getArticleContentFromDb = async () => {
+        await axiosLimited.get(`http://localhost:8000/dbAPI/new_article/?title__iexact=${articleTitle}&limit=1`).then((res) => {
+            setArticle(res.data.results[0])
+            setArticle(res.data.results[0])
+        })
+        // setLoadState(true)
     }
 
-    useEffect(async () => {
-        getBlogContentFromDb()
-    }, [])
+    useEffect(() => {
+        getArticleContentFromDb()
+    }, [articleTitle])
 
     const currentUrl = () => {
-        if (article.title) {
-            return `https://www.quizzland.net/blog/${replaceFunction(article.title, ' ', '+')}`
-        }
+        return `https://www.quizzland.net/blog/${replaceFunction(article.title, ' ', '+')}`
     }
 
     const description = () => {
-        if (article.content) {
-            return article.content.split('\n')[0].slice(3, -5)
-        }
+        return article.content.split('\n')[0].slice(3, -5)
     }
 
     return (
-        <React.Fragment>
-            
-            <LoadingScreen loadState={loadState} />
+        <>
+            <Layout>
+                
+                {/* <LoadingScreen loadState={loadState} /> */}
 
-            <Header linkType='Hot'/>
-
-            {article &&
-                <Helmet>
-                    <link rel="canonical" href={currentUrl()} />
+                <Head>
+                    <link rel="canonical" href={article && currentUrl()} />
                     
-                    <title>{`کوییزلند | ${article.title}`}</title>
-                    <meta name="description" content={description()} />
+                    <title>{`کوییزلند | ${article && article.title}`}</title>
+                    <meta name="description" content={article && description()} />
                     <meta name="keywords" content="کوییزلند" />
-                    <meta name="msapplication-TileImage" content={article.thumbnail} />
+                    <meta name="msapplication-TileImage" content={article && article.thumbnail} />
                     <meta property="og:site_name" content="کوییزلند" />
-                    <meta property="og:title" content={article.title} />
-                    <meta property="og:description" content={description()} />
-                    <meta property="og:image" content={article.thumbnail} />
+                    <meta property="og:title" content={article && article.title} />
+                    <meta property="og:description" content={article && description()} />
+                    <meta property="og:image" content={article && article.thumbnail} />
                     <meta property="og:image:type" content="image/jpeg" />
                     <meta property="og:image:width" content="300" />
                     <meta property="og:image:height" content="300" />
                     <meta property="og:type" content="article" />
-                    <meta property="og:url" content={currentUrl()} />
+                    <meta property="og:url" content={article && currentUrl()} />
 
                     <script type="application/ld+json">
                     {`
                         {
                             "@context": "https://schema.org",
                             "@type": "Article",
-                            "headline": "${article.title}",
+                            "headline": "${article && article.title}",
                             "image": [
-                                "${article.thumbnail}",
+                                "${article && article.thumbnail}",
                             ],
-                            "datePublished": "${article.publish}",
-                            "dateModified": "${article.publish}",
+                            "datePublished": "${article && article.publish}",
+                            "dateModified": "${article && article.publish}",
                             "author": {
                                 "@type": "Person",
                                 "name": "مصطفی تبریزیان",
@@ -92,32 +91,29 @@ const Article = (props) => {
                         }
                     `}
                     </script>
-                </Helmet>
-            }
+                </Head>
 
-            <div className='article wrapper-med tx-al-c'>
-                <h1>
-                    {article.title}
-                </h1>
+                <div className='article wrapper-med tx-al-c'>
+                    <h1>
+                        {articleTitle && replaceFunction(articleTitle, '+' , ' ')}
+                    </h1>
 
-                <h5 className='article-publish'>
-                    {makeDatePublishFormatForQuizDetail(article.publish)}
-                </h5>
+                    <h5 className='article-publish'>
+                        {makeDatePublishFormatForQuizDetail(article && article.publish)}
+                    </h5>
 
-                <div className='wrapper-p'
-                    dangerouslySetInnerHTML={{
-                        __html: article.content
-                    }}>
-                </div>
+                    <div className='wrapper-p'
+                        dangerouslySetInnerHTML={{
+                            __html: article && article.content
+                        }}>
+                    </div>
 
-                {
-                    article.title &&
                     <div className='space-med'>
                         <h5 className='wrapper-sm'>
                             اگه فکر میکنید این مقاله میتونه برای یکی از دوستات جالب و مفید باشه ممنون میشیم براشون بفرستی
                         </h5>
 
-                        <div>
+                        {/* <div>
                             <InlineShareButtons
                                 config={{
                                     alignment: 'center',  // alignment of buttons (left, center, right)
@@ -138,18 +134,20 @@ const Article = (props) => {
                                     size: 45,             // the size of each button (INTEGER)
 
                                     // OPTIONAL PARAMETERS
-                                    url: currentUrl(),
-                                    image: article.thumbnail,  // (defaults to og:image or twitter:image)
-                                    title: article.title,            // (defaults to og:title or twitter:title)
+                                    url: article && currentUrl(),
+                                    image: article && article.thumbnail,  // (defaults to og:image or twitter:image)
+                                    title: article && article.title,            // (defaults to og:title or twitter:title)
                                 }}
                             />
-                        </div>
+                        </div> */}
+
+                        <div class="sharethis-inline-share-buttons"></div>
 
                         <h5 className='space-sm'>
                             و نظرت رو برامون بزاری
                         </h5>
 
-                        <div>
+                        {/* <div>
                             <InlineReactionButtons
                                 config={{
                                     alignment: 'center',  // alignment of buttons (left, center, right)
@@ -169,9 +167,9 @@ const Article = (props) => {
                                     spacing: 8,           // the spacing between buttons (INTEGER)
 
                                 // OPTIONAL PARAMETERS
-                                url: currentUrl(),
-                                image: article.thumbnail,  // (defaults to og:image or twitter:image)
-                                title: article.title,            // (defaults to og:title or twitter:title)
+                                url: article && currentUrl(),
+                                image: article && article.thumbnail,  // (defaults to og:image or twitter:image)
+                                title: article && article.title,            // (defaults to og:title or twitter:title)
                                 }}
                             />
                         </div>
@@ -201,20 +199,19 @@ const Article = (props) => {
                                     show_toggle: false,    // show/hide the toggle buttons (true, false)
                                     size: 48,             // the size of each button (INTEGER)
                                     top: 250,             // offset in pixels from the top of the page
-                                    url: currentUrl()
+                                    url: article && currentUrl()
                                 }}
                             />
-                        </div>
+                        </div> */}
                     </div>
-                }
 
-                {/* <div>
-                    Suggestions
-                </div> */}
-            </div>
-            
-
-        </React.Fragment>
+                    {/* <div>
+                        Suggestions
+                    </div> */}
+                </div>
+                
+            </Layout>
+        </>
     );
 }
  

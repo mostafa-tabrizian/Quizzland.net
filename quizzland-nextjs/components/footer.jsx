@@ -54,7 +54,7 @@ const Footer = (props) => {
                         <li><Link href='/contact'><a>تماس با ما</a></Link></li>
                         <li><Link href='/advertising'><a>تبلیغات</a></Link></li>
                         <li><Link href='/privacy-policy'><a>حریم خصوصی</a></Link></li>
-                        <li><Link href='/support'><a>حمایت</a></Link></li>
+                        <li><Link href='/supportUs'><a>حمایت</a></Link></li>
                     </ul>
                 </div>
 

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import rateLimit from 'axios-rate-limit';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 // import LoadingScreen from './loadingScreen'
 import PageTravel from '../components/pageTravel'
@@ -15,72 +16,56 @@ import { log } from '../components/base'
 
 const Sort = () => {
     const router = useRouter()
-    const { st, c } = router.query
+    const { st } = router.query
 
     const [loadState, setLoadState] = useState()
     const [quizzes, setQuizzes] = useState([])
     const [pointy, setPointy] = useState([])
     const [sortTitle, setSortTitle] = useState()
-    const [sortType, setSortType] = useState('newest')
-    const [sortCategory, setSortCategory] = useState()
+    // const [sortType, setSortType] = useState('newest')
     const [pageTravel, setPageTravel] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
     const [contentLoaded, setContentLoaded] = useState(false)
 
     useEffect(() => {
+        setPointy([])  // restart list
+        setQuizzes([])  // restart list
         checkWhatSort()
         getQuizzes()
         setLoadState(true)
-    }, [st, c, sortType, offset])
+    }, [st])
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
     
     const checkWhatSort = async () => {
         document.querySelector('html').style=`background: None`
-        setSortType(st)
-        setSortCategory(c)
     }
 
     const getQuizzes = async () => {
-        log('again')
-        setQuizzes([])  // restart list
-        setPointy([])  // restart list
         setContentLoaded(false)
         let quizzes
-        
-        switch (sortType) {
+
+        switch (st) {
             case 'newest':
+                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('جدیدترین کوییز ها')
-                if (sortCategory) {
-                    quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
-                } else {
-                    quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?limit=${numberOfResult}&offset=${offset}`)
-                }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
                 break
 
             case 'bestest':
+                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/best_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('بهترین کوییز ها')
-                if (sortCategory) {
-                    quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/best_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
-                } else {
-                    quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/best_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
-                }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
                 break
 
             case 'monthlyBestest':
+                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/monthlyBest_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('بهترین کوییز های این ماه')
-                if (sortCategory) {
-                    quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/monthlyBest_quiz/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
-                } else {
-                    quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/monthlyBest_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
-                }
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
@@ -88,7 +73,6 @@ const Sort = () => {
 
             case 'newest_test':
                 quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
-                
                 setSortTitle('جدیدترین تست ها')
                 setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -97,7 +81,6 @@ const Sort = () => {
 
             case 'bestest_test':
                 quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
-                
                 setSortTitle('بهترین تست ها')
                 setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -106,7 +89,6 @@ const Sort = () => {
 
             case 'monthlyBestest_test':
                 quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/monthlyBest_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
-                
                 setSortTitle('بهترین تست های این ماه')
                 setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)

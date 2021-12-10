@@ -44,9 +44,9 @@ class PointyQuestionsFilter(filters.FilterSet):
             'title': ['iexact', 'icontains']
         }
 
-class BlogFilter(filters.FilterSet):
+class ArticleFilter(filters.FilterSet):
     class Meta:
-        model = Blog
+        model = Articles
         fields = {
             'title': ['iexact', 'icontains']
         }

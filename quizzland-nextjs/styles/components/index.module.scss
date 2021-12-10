@@ -20,8 +20,8 @@
 
             &__Bubbles {
                 position: absolute;
-                width: 27rem;
-                left: 0; top: -1.5rem;
+                width: 24rem;
+                left: -1rem; top: -1.5rem;
                 pointer-events: none;
                 animation: dancingBubbles 5s infinite linear;
             }

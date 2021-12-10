@@ -30,7 +30,7 @@ router.register(r'alphabet_category', views.alphabet_category)
 router.register(r'questions', views.questions)
 router.register(r'pointyQuestions', views.pointyQuestions)
 
-router.register(r'new_blog', views.new_blog)
+router.register(r'new_article', views.new_article)
 
 # router.register(r'newsletter_users', views.newsletter_users)
 

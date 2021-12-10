@@ -50,10 +50,7 @@
 
     &__img {
         order: 2;
-
-        img {
-            width: 26rem;
-        }
+        margin-left: 4rem; margin-right: 4rem;
     }
 
     &__detail {
@@ -181,10 +178,12 @@
     }
 
     &__img {
-        border-radius: 15px;
-
+        justify-content: center;
+        padding: 1rem;
+        margin: 2rem;
+        
         img {
-            margin: 2rem auto 2rem auto;
+            border-radius: 15px;
         }
     }
 }

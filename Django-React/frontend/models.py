@@ -212,7 +212,7 @@ class Pointy_Questions_Admin(admin.ModelAdmin):
     list_filter = ('subCategory',)
     search_fields = ['title', 'question']
 
-class Blog(models.Model):
+class Articles(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg')
@@ -222,7 +222,7 @@ class Blog(models.Model):
     views = models.IntegerField(default=0)
     publish = models.DateTimeField(default=datetime.datetime.now)
 
-class Blog_Admin(admin.ModelAdmin):
+class Articles_Admin(admin.ModelAdmin):
     list_display = ('title', 'monthly_views', 'views', 'publish')
     list_filter = ('tags', )
     search_field = ['title', 'publish']

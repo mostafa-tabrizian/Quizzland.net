@@ -176,9 +176,9 @@ class PointyQuestionsSerializer(serializers.ModelSerializer):
             'option_point_10th',
         )
 
-class BlogSerializer(serializers.ModelSerializer):
+class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Blog
+        model = Articles
         fields = (
             'id',
             'title',

@@ -126,7 +126,7 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                         
                         <div>
                             <ul className="quizContainer flex flex-ai-fe wrapper-med">
-                                {/* <QuizContainerWithoutViews quizzes={matchedQuizzes} bgStyle='trans' /> */}
+                                <QuizContainerWithoutViews quizzes={matchedQuizzes} bgStyle='trans' />
                             </ul>
                         </div>
                     </div>
@@ -198,8 +198,8 @@ const Index = ({ new_quiz, new_pointy, monthlyBest_quiz,
                         <div className='hero__logo tx-al-c pos-rel'>
                             <Image
                                 src={Q}
-                                width='400'
-                                height='553'
+                                width='350'
+                                height='500'
                                 alt='لوگوی کوییزلند'
                                 priority
                                 className='Q'          

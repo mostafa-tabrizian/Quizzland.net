@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps }) {
   const { pathname } = useRouter();
 
   useEffect(() => {
+
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 100)
