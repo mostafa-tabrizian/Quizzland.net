@@ -195,7 +195,7 @@ const QuizMonthlyRecord = () => {
     }
 
     const restartMonthlyViews = () => {
-        window.location.replace(window.location.origin + '/restartEveryMonthlyViews');
+        window.location.replace(window.location.origin + '/re$tartEveryMonthlyViewsDone');
     }
 
     return (
