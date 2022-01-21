@@ -19,12 +19,14 @@ const Blog = () => {
     const [blogContentData, setBlogContentData] = useState([])
     const [contentLoaded, setContentLoaded] = useState(false)
 
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
     const getBlogsFromDb = async () => {
-        const contentData = await axiosLimited.get('http://localhost:8000/dbAPI/new_article/')
+        const contentData = await axiosLimited.get(`${API_URL}/dbAPI/blog_new/`)
         setBlogContentData(contentData.data)
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         getBlogsFromDb()
         setContentLoaded(true)
     }, [])
@@ -33,7 +35,7 @@ const Blog = () => {
         return (
             blogContentData.map((blog) => {
                 return (
-                    <div>
+                    <div key={blog.id}>
                         <li className='space-sm'>
                             <article>
                                 <Link href={`/blog/${replaceFunction(blog.title, ' ', '+')}`}>
@@ -81,7 +83,7 @@ const Blog = () => {
             <Layout>
 
                 <Head>
-                    <title>{`وبلاگ | ‌کوییزلند`}</title>
+                    <title>{`وبلاگ | کوییزلند`}</title>
                     <meta name="description" content={`وبلاگ کوییزلند`} />
                     <meta name="keywords" content={`وبلاگ`} />
                 </Head>

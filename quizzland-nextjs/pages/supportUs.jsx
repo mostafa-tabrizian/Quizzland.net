@@ -16,7 +16,7 @@ const Support = () => {
         <>
             <Layout>
                 <Head>
-                    <title>حمایت |‌کوییزلند</title>
+                    <title>حمایت | کوییزلند</title>
                     <meta name="description" content="حمایت از کوییزلند" />
                     <meta name="keywords" content="کوییزلند, حمایت" />
                 </Head>

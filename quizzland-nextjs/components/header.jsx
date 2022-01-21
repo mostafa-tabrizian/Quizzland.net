@@ -73,9 +73,9 @@ const Header = (props) => {
                 <nav className="flex flex-ai-c flex-jc-sb">
                     <div>
                         <Link href="/">
-                            <a className='header__logo flex flex-jc-sb flex-ai-c hideForDesktop'>
+                            <a className='header__logo flex-jc-sb flex-ai-c flex md:hidden'>
                                 <Image
-                                    src='/../public/images/Q-small.png'
+                                    src='/images/Q-small.png'
                                     alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
                                     width={24}
                                     height={35}
@@ -85,12 +85,12 @@ const Header = (props) => {
                         </Link>
                     </div>
 
-                    <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
+                    <div className={`header__links pos-rel ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
                         <Link href="/">
                             <a className="header__logo flex flex-jc-sb flex-ai-c">
                                 <span>uizzland</span>
                                 <Image
-                                    src='/../public/images/Q-small.png'
+                                    src='/images/Q-small.png'
                                     alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
                                     width={24}
                                     height={35}
@@ -98,19 +98,18 @@ const Header = (props) => {
                             </a>
                         </Link>
 
-                        <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
-                        <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
-                        <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
-                        <Link href="/blog"><a>وبلاگ</a></Link>
-                        {/* {
-                            nightMode &&
-                            <div className="nightMode__container" title="تبدیل به حالت شب/روز">
-                                <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
-                            </div>
-                        } */}
+                        <div className="hoverAnimation">
+                            <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
+                            <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
+                            <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
+                            <button className="header__btn">
+                                <Link href="/blog"><a> وبلاگ </a></Link>
+                            </button>
+                        </div>
+
                     </div>
 
-                    {/* <Search/> */}
+                    <Search />
 
                     <ul className={`header__categories ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${categoryNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><Link href="/category/movie-series"><a>🎬 فیلم و سریال</a></Link></li>
@@ -131,53 +130,48 @@ const Header = (props) => {
                     </ul>
 
                     {/* Menu */}
-                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn pos-abs ${props.colorOfHeader} hideForDesktop`} aria-label="Menu Button">
+                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn pos-abs ${props.colorOfHeader} md:hidden`} aria-label="Menu Button">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
 
-                    <div className={`header__menu pos-fix tx-al-r hideForDesktop ${menuOpen ? '' : 'slideMenu-hide'}`}>
-                        <button onClick={openCloseMenu} className="header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Menu Button"></button>
-                        <div className="header__menu__inner grid grid-jc-c">
-                            <div className="header__menu__inner__category">
-                                <h4>کتگوری ها</h4>
-                                <ul>
-                                    <li><Link href="/category/movie-series"><a >فیلم و سریال 🎬</a></Link></li>
-                                    <li><Link href="/category/celebrity"><a>سلبریتی ✨</a></Link></li>
-                                    <li><Link href="/category/psychology"><a>روانشناسی 🧠</a></Link></li>
-                                </ul>
-                            </div>
-                            <div className="header__menu__inner__nav">
-                                <h4>کویز ها</h4>
-                                <ul className="header__menu__inner__quizzes tx-al-r">
-                                    <li onClick={openCloseMenu}><Link href="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/sort?st=monthlyBestest"><a> بهترین های ماه </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/sort?st=bestest"><a> بهترین ها </a></Link></li>
-                                </ul>
-
-                                <h4 className='space-med'>تست ها</h4>
-                                <ul className="header__menu__inner__quizzes tx-al-r">
-                                    <li onClick={openCloseMenu}><Link href="/sort?st=newest_test"><a> جدیدترین ها </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/sort?st=monthlyBestest_test"><a> بهترین های ماه </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/sort?st=bestest_test"><a> بهترین ها </a></Link></li>
-                                </ul>
-                            </div>
-                            <div className="header__menu__inner__other">
-                                <ul>
-                                    <li onClick={openCloseMenu}><Link href="/blog"><a> وبلاگ </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/guide"><a> راهنما </a></Link></li>
-                                    <li onClick={openCloseMenu}><Link href="/contact"><a> تماس با ما </a></Link></li>
-
-                                    {/* Night Mode */}
-                                    {/* {nightMode &&
-                                        <div className="nightMode__container" title="تبدیل به حالت شب و بالعکس">
-                                            <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
-                                        </div>
-                                    }    */}
-                                </ul>
-
-                            </div>
+                    <div className={`header__menu fixed text-right z-10 h-[25rem] w-[100%]
+                                    bg-[rgba(148, 148, 148, 0.3)] top-0 right-0
+                                    rounded-b-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
+                                    pr-8 pt-5 absolute top-0 right-0`}>
+                        <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button"></button>
+                        
+                        <div className='mt-5'>
+                            <h4 className='text-xl'>کتگوری ها</h4>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg'><Link href="/category/movie-series"><a >فیلم و سریال 🎬</a></Link></li>
+                                <li className='text-lg'><Link href="/category/celebrity"><a>سلبریتی ✨</a></Link></li>
+                                <li className='text-lg'><Link href="/category/psychology"><a>روانشناسی 🧠</a></Link></li>
+                            </ul>
+                        </div>
+                        <div className='mt-5'>
+                            <h4 className='text-xl'>کویز ها</h4>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/sort?st=monthlyBestest"><a> بهترین های ماه </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/sort?st=bestest"><a> بهترین ها </a></Link></li>
+                            </ul>
+                        </div>
+                        <div className='mt-5'>
+                            <h4 className='text-xl'>تست ها</h4>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/sort?st=newest_test"><a> جدیدترین ها </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/sort?st=monthlyBestest_test"><a> بهترین های ماه </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/sort?st=bestest_test"><a> بهترین ها </a></Link></li>
+                            </ul>
+                        </div>
+                        <div className='mt-5'>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/blog"><a> وبلاگ </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/guide"><a> راهنما </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link href="/contact"><a> تماس با ما </a></Link></li>
+                            </ul>
                         </div>
                     </div>
 

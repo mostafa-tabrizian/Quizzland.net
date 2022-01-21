@@ -14,8 +14,8 @@ import QuizContainer from '../../components/quizContainer'
 // import SkeletonLoading from '../../components/'
 
 const logo = '../images/Q-small.png'
-const speakerIconOn = '/../public/images/speakerOn.png'
-const speakerIconOff = '/../public/images/speakerOff.png'
+const speakerIconOn = '/images/speakerOn.png'
+const speakerIconOff = '/images/speakerOff.png'
 
 let quiz = 'null'
 let advertPos = 0
@@ -47,6 +47,8 @@ const Quiz = () => {
 
     const result = useRef(null)
 
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
     const quizTitleReplacedWithHyphen = () =>  {
         return replaceFunction(quizTitle, '-', '+')
     }
@@ -57,7 +59,7 @@ const Quiz = () => {
         SFXLocalStorage()
         setSFXCorrect(new Audio('../sounds/SFXCorrect.mp3'))
         setSFXWrong(new Audio('../sounds/SFXWrong.mp3'))
-    }, quizTitle)
+    }, [quizTitle])
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
@@ -77,11 +79,11 @@ const Quiz = () => {
     const grabData = () => {
         if (quizTitle != undefined) {
             const grabQuiz = async () => {
-                return await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?title__iexact=${quizTitleReplacedWithHyphen()}&limit=1`).then((res) => res.data.results[0])
+                return await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen()}&limit=1`).then((res) => res.data.results[0])
             }
     
             const grabQuestions = async () => {
-                return await axiosLimited.get(`http://localhost:8000/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen()}`)
+                return await axiosLimited.get(`${API_URL}/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen()}`)
             }
     
             grabQuiz().then((quiz) => {
@@ -370,7 +372,7 @@ const Quiz = () => {
 
                 // else {
                     return (
-                        <div style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }} className="quiz__container pos-rel darkGls">
+                        <div key={question.id} style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }} className="quiz__container pos-rel darkGls">
 
                             {questionShowIfNotNull(question.question)}
 
@@ -406,7 +408,7 @@ const Quiz = () => {
         return (
             questions && questions.map(question => {
                 return (
-                    <div style={{ left: `${currentMoveOfQuestions}rem` }} className="quiz__container pos-rel darkGls">
+                    <div key={question.id} style={{ left: `${currentMoveOfQuestions}rem` }} className="quiz__container pos-rel darkGls">
                         {questionShowIfNotNull(question.question)}
 
                         {
@@ -446,13 +448,13 @@ const Quiz = () => {
         const splittedTags = quiz.tags.split('،')
         return (
             splittedTags.map(tag => {
-                return <li><h2><Link href={`/search?s=${replaceFunction(tag, ' ', '+')}`} ><a rel='tag'>{tag}</a></Link></h2></li>
+                return <li key={tag}><h2><Link href={`/search?s=${replaceFunction(tag, ' ', '+')}`} ><a rel='tag'>{tag}</a></Link></h2></li>
             })
         )
     }
 
     const getSuggestionsQuiz = (subCategory) => {
-        axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => { setSuggestionQuizzes(res.data.results) })
     }
 
@@ -578,7 +580,7 @@ const Quiz = () => {
                             src={SFXAllowed === 'true' ? speakerIconOn : speakerIconOff}
                             width='24'
                             height='24'
-                            alt='کوییزلند ‌| Quizzland'       
+                            alt='کوییزلند | Quizzland'       
                         />
                     </button>
                 </div>
@@ -614,7 +616,7 @@ const Quiz = () => {
 
                     {
                         contentLoaded &&
-                        <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می‌شوید'>
+                        <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
                             <h6>تغییر خودکار</h6>
                             <button className="quiz__autoQuestionChangerSwitch__btn btn">
                                 <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} pos-rel`}></div>
@@ -624,9 +626,9 @@ const Quiz = () => {
 
                 </div>
 
-                {isItDesktop() &&
+                {/* {isItDesktop() &&
                     <hr className='divider'></hr>
-                }
+                } */}
 
                 {
                     contentLoaded &&

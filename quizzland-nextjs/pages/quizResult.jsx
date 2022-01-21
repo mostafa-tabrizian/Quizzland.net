@@ -13,6 +13,8 @@ import Layout from '../components/layout'
 import QuizContainer from '../components/quizContainer'
 // import SkeletonLoading from '../components/skeletonLoading'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 const Result = () => {
     const [score, setScore] = useState(0)
     const [resultScore, setResultScore] = useState(0)
@@ -25,15 +27,17 @@ const Result = () => {
     const [correctAnswersCounter, setCorrectAnswersCounter] = useState(null)
     const [quizResult, setQuizResult] = useState(null)
 
-    useEffect(async () => {
-        document.querySelector('html').style=`background: None`
-        setLoadState(true)
-        setQuestions(JSON.parse(localStorage.getItem('resultQuestions')))
-        setCorrectAnswersCounter(localStorage.getItem('resultCorrectAnswersCounter'))
-        setQuizResult(JSON.parse(localStorage.getItem('quizResult')))
-        
-        if(JSON.parse(localStorage.getItem('quizResult')) === null) {
-            window.location.href = "/404";
+    useEffect(() => {
+        async () => {
+            document.querySelector('html').style=`background: None`
+            setLoadState(true)
+            setQuestions(JSON.parse(localStorage.getItem('resultQuestions')))
+            setCorrectAnswersCounter(localStorage.getItem('resultCorrectAnswersCounter'))
+            setQuizResult(JSON.parse(localStorage.getItem('quizResult')))
+            
+            if(JSON.parse(localStorage.getItem('quizResult')) === null) {
+                window.location.href = "/404";
+            }
         }
     }, [])
 
@@ -98,7 +102,7 @@ const Result = () => {
 
     const getSuggestionsQuiz = () => {
         quizResult &&
-        axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?subCategory__icontains=${replaceFunction(quizResult.subCategory, ' ', '+')}&limit=4`)
+        axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(quizResult.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
         setContentLoaded(true)
     }
@@ -162,7 +166,7 @@ const Result = () => {
 
                 <div className="result__container">
                     <div className="result__title flex flex-jc-c">
-                        <h5 className="tx-al-r">"نتیجه  "{quizResult && quizResult.title}</h5>
+                        <h5 className="tx-al-r">&quot نتیجه  &quot {quizResult && quizResult.title}</h5>
                     </div>
                     <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
                         <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
@@ -176,7 +180,7 @@ const Result = () => {
                         </div>
                         <div className="result__score">{resultScore}</div>
                         <div className="result__detail tx-al-r">
-                            <h5>تعداد پاسخ های درست:‌ <span className="result__detail__correctTime">{correctAnswersCounter}</span></h5>
+                            <h5>تعداد پاسخ های درست: <span className="result__detail__correctTime">{correctAnswersCounter}</span></h5>
                             <h5>تعداد پاسخ های غلط: <span className="result__detail__wrongTime">{questions && questions.length - correctAnswersCounter}</span></h5>
                         </div>
                     </div>
@@ -276,7 +280,14 @@ const Result = () => {
                         <Link href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
                             <a>
                                 <div className='result__popUpQuizSuggester__thumbnail'>
-                                    <img src={chooseUniqueQuizToSuggest().thumbnail} alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`} loading='lazy' />
+                                    <Image
+                                        src={chooseUniqueQuizToSuggest().thumbnail}
+                                        alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
+                                        blurDataURL={chooseUniqueQuizToSuggest().thumbnail}
+                                        width='500'
+                                        height='500'
+                                        placeholder='blur'
+                                    />
                                 </div>
                             </a>
                         </Link>

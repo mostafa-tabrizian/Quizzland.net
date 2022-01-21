@@ -3,7 +3,7 @@ export const log = (code) => {
 }
 
 export const replaceFunction = (string, oldValue, newValue) => {
-    return string.replaceAll(oldValue, newValue)
+        return string.replaceAll(oldValue, newValue)
 }
 
 export const viewsFormat = (views) => {
@@ -139,19 +139,25 @@ export const makeDatePublishFormatForQuizDetail = (fullDate) => {
 }
 
 export const isItDesktop = () => {
-    if (typeof window !== 'undefined') {
-        return window.navigator.userAgent.includes('Windows')
-    }
+    try {
+        if (typeof window !== 'undefined') {
+            return window.navigator.userAgent.includes('Windows')
+        }
+    } catch {}
 }
 
 export const isItMobile = () => {
-    if (typeof window !== 'undefined') {
-        return window.navigator.userAgent.includes('Mobile') && !(window.navigator.userAgent.includes('iPad'))
-    }
+    try {
+        if (typeof window !== 'undefined') {
+            return window.navigator.userAgent.includes('Mobile') && !(window.navigator.userAgent.includes('iPad'))
+        }
+    } catch {}
 }
 
 export const isItIPad = () => {
-    if (typeof window !== 'undefined') {
-        return window.navigator.userAgent.includes('Mobile' ) && window.navigator.userAgent.includes('iPad')
-    }
+    try {
+        if (typeof window !== 'undefined') {
+            return window.navigator.userAgent.includes('Mobile' ) && window.navigator.userAgent.includes('iPad')
+        }
+    } catch {}
 }

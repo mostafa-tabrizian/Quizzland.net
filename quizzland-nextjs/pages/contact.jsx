@@ -17,7 +17,7 @@ const Contact = () => {
         <>
             <Layout>
                 <Head>
-                    <title>تماس با ما | ‌کوییزلند</title>
+                    <title>تماس با ما | کوییزلند</title>
                     <meta name="description" content="تماس با پشتیبانی کوییزلند" />
                     <meta name="keywords" content="پشتیبانی کوییزلند" />
                 </Head>

@@ -19,14 +19,14 @@ const PageNotFound_404 = () => {
         <>
             <Layout>
                 <Head>
-                    <title>صفحه مورد نظر پیدا نشد |‌ کوییزلند</title>
+                    <title>صفحه مورد نظر پیدا نشد | کوییزلند</title>
                     <meta name="description" content="صفحه مورد نظر پیدا نشد" />
                     <meta name="keywords" content="کوییزلند" />
                     <meta name="robots" content="noindex"></meta>
                 </Head>
         
                 <div className="basicPage wrapper-sm center pos-rel" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
-                    <h1> 🤔 صفحه‌ی مورد نظر پیدا نشد </h1>
+                    <h1> 🤔 صفحه ی مورد نظر پیدا نشد </h1>
                     <div className="space-sm">
                         <p>💖 اگه فکر میکنی اشتباهی پیش اومدی ممنون میشیم برامون به<Link href="mailto:support@quizzland.net?subject=  در سایت کوییزلند به یه مشکلی برخوردم به کد ۴۰۴"><a> این ایمیل</a></Link> پیام بدی</p>
                         <Link href="mailto:support@quizzland.net?subject=  در سایت کوییزلند به یه مشکلی برخوردم به کد ۴۰۴"><a target="_blank" rel="noreferrer">support@quizzland.net</a></Link>

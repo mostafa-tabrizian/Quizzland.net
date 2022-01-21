@@ -17,7 +17,7 @@ const Ads = () => {
         <>
             <Layout>
                 <Head>
-                    <title>تبلیغات |‌ کوییزلند</title>
+                    <title>تبلیغات | کوییزلند</title>
                     <meta name="description" content="تبلیغات در سایت کوییزلند" />
                     <meta name="keywords" content="تبلیغات, کوییزلند" />
                 </Head>

@@ -13,6 +13,7 @@ import Layout from '../../components/layout'
 const logo = '../images/Q-small.png'
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const Article = () => {
     const router = useRouter()
@@ -22,7 +23,7 @@ const Article = () => {
     const [loadState, setLoadState] = useState(false)
 
     const getArticleContentFromDb = async () => {
-        await axiosLimited.get(`http://localhost:8000/dbAPI/new_article/?title__iexact=${articleTitle}&limit=1`).then((res) => {
+        await axiosLimited.get(`${API_URL}/dbAPI/blog_new/?title__iexact=${articleTitle}&limit=1`).then((res) => {
             setArticle(res.data.results[0])
             setArticle(res.data.results[0])
         })
@@ -141,7 +142,7 @@ const Article = () => {
                             />
                         </div> */}
 
-                        <div class="sharethis-inline-share-buttons"></div>
+                        <div className="sharethis-inline-share-buttons"></div>
 
                         <h5 className='space-sm'>
                             و نظرت رو برامون بزاری

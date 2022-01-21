@@ -11,6 +11,8 @@ import PageTravel from '../../components/pageTravel';
 // import SkeletonLoading from '../../components/skeletonLoading'
 import Layout from '../../components/layout';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 const SearchMoreResult = () => {
     const router = useRouter()
     const { searchQuery } = router.query
@@ -44,16 +46,16 @@ const SearchMoreResult = () => {
             let matchedPointy = []
 
             // Search Quiz
-            const search_new_quiz_title = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?title__icontains=${searchQuery}&limit=${numberOfResult}&offset=${offset}`)
-            Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
+            const search_quiz_new_title = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?title__icontains=${searchQuery}&limit=${numberOfResult}&offset=${offset}`)
+            Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
 
-            if (search_new_quiz_title.length !== numberOfResult) {
-                const search_new_quiz_subCategory = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?subCategory__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
+            if (search_quiz_new_title.length !== numberOfResult) {
+                const search_quiz_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?subCategory__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
+                Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
 
-                if (search_new_quiz_subCategory.length !== numberOfResult * 2) {
-                    const search_new_quiz_tag = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?tags__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
-                    Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+                if (search_quiz_new_subCategory.length !== numberOfResult * 2) {
+                    const search_quiz_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?tags__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
+                    Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
                 }
             }
 
@@ -67,7 +69,7 @@ const SearchMoreResult = () => {
             for ( let key in uniqueMatchedQuizzes )
                 matchedQuizzes.push(uniqueMatchedQuizzes[key]);
             
-            setPageTravelQuizzes(search_new_quiz_title.data)
+            setPageTravelQuizzes(search_quiz_new_title.data)
     
             const quizzesList = () => {
                 return (
@@ -79,16 +81,16 @@ const SearchMoreResult = () => {
             setQuizzesList(quizzesList)
 
             // Search Pointy Quiz
-            const search_new_pointy_quiz_title = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?title__icontains=${searchQuery}&limit=${numberOfResult}&offset=${offset}`)
-            Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_title.data.results)
+            const search_pointy_new_title = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?title__icontains=${searchQuery}&limit=${numberOfResult}&offset=${offset}`)
+            Array.prototype.push.apply(matchedPointy, search_pointy_new_title.data.results)
 
-            if (search_new_pointy_quiz_title.length !== numberOfResult) {
-                const search_new_pointy_quiz_subCategory = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
-                Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_subCategory.data.results)
+            if (search_pointy_new_title.length !== numberOfResult) {
+                const search_pointy_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
+                Array.prototype.push.apply(matchedPointy, search_pointy_new_subCategory.data.results)
                 
-                if (search_new_pointy_quiz_subCategory !== numberOfResult * 2) {
-                    const search_new_pointy_quiz_tag = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?tags__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
-                    Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_tag.data.results)
+                if (search_pointy_new_subCategory !== numberOfResult * 2) {
+                    const search_pointy_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?tags__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
+                    Array.prototype.push.apply(matchedPointy, search_pointy_new_tag.data.results)
                 }
             }
             setContentLoaded(true)
@@ -103,7 +105,7 @@ const SearchMoreResult = () => {
             for ( let key in uniqueMatchedPointy )
                 matchedPointy.push(uniqueMatchedPointy[key]);
             
-            setPageTravelPointy(search_new_quiz_title.data)
+            setPageTravelPointy(search_quiz_new_title.data)
     
             const pointyList = () => {
                 return (
@@ -133,7 +135,7 @@ const SearchMoreResult = () => {
                 </Head>
 
                 <div className='flex flex-jc-c flex-ai-c'>
-                    ‌<h3 className='title'> ‌ <span style={{fontSize: '1rem'}}>عبارت جستجو شده : <br/></span> {searchValueButWithoutHyphen}</h3>‌
+                    <h3 className='title'> <span style={{fontSize: '1rem'}}>عبارت جستجو شده : <br/></span> {searchValueButWithoutHyphen}</h3>
                 </div>
                 
                 {
@@ -155,7 +157,7 @@ const SearchMoreResult = () => {
                             offset={offset} setOffset={setOffset}
                         />
                     </>
-                }‌‌
+                }
 
                 {
                     matchedPointyCounter !== 0 &&

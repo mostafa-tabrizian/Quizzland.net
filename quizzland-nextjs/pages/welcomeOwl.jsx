@@ -5,7 +5,7 @@ import Layout from '../components/layout'
 
 const owlPage = '../images/owlPage.webp'
 
-const welcomePage = () => {
+const WelcomePage = () => {
     
     useEffect(() => {
         document.querySelector('body').style = `
@@ -29,4 +29,4 @@ const welcomePage = () => {
     );
 }
  
-export default welcomePage;
+export default WelcomePage;

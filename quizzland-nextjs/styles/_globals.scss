@@ -159,8 +159,8 @@ input {
 .hoverAnimation {
     display: flex;
 
-    a, li, button {
-
+    button {
+        
         &::after{
             content: '';
             border-bottom: 2px solid $black;
@@ -273,7 +273,7 @@ input {
 }
 
 .flex {
-    display: flex !important;
+    // display: flex !important;
 
     &-jc-sb {
         justify-content: space-between !important;
@@ -578,7 +578,7 @@ input {
     }
 }
 
-.hideForDesktop {
+.md:hidden {
     @include breakpoints-up(large) {
         display: none !important;
     }

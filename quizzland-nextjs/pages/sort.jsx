@@ -14,6 +14,8 @@ import Layout from '../components/layout'
 
 import { log } from '../components/base'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 const Sort = () => {
     const router = useRouter()
     const { st } = router.query
@@ -26,6 +28,7 @@ const Sort = () => {
     const [pageTravel, setPageTravel] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
+    const [currentPageNumber, setCurrentPageNumber] = useState(1)
     const [contentLoaded, setContentLoaded] = useState(false)
 
     useEffect(() => {
@@ -34,6 +37,12 @@ const Sort = () => {
         checkWhatSort()
         getQuizzes()
         setLoadState(true)
+    }, [st, numberOfResult, offset])
+
+    useEffect(() => {
+        setOffset(0)
+        setCurrentPageNumber(1)
+        setNumberOfResult(16)
     }, [st])
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
@@ -48,7 +57,7 @@ const Sort = () => {
 
         switch (st) {
             case 'newest':
-                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('جدیدترین کوییز ها')
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -56,7 +65,7 @@ const Sort = () => {
                 break
 
             case 'bestest':
-                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/best_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axiosLimited.get(`${API_URL}/dbAPI/quiz_best/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('بهترین کوییز ها')
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -64,7 +73,7 @@ const Sort = () => {
                 break
 
             case 'monthlyBestest':
-                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/monthlyBest_quiz/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axiosLimited.get(`${API_URL}/dbAPI/quiz_monthlyBest/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('بهترین کوییز های این ماه')
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -72,7 +81,7 @@ const Sort = () => {
                 break
 
             case 'newest_test':
-                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('جدیدترین تست ها')
                 setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -80,7 +89,7 @@ const Sort = () => {
                 break
 
             case 'bestest_test':
-                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axiosLimited.get(`${API_URL}/dbAPI/pointy_best/?limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('بهترین تست ها')
                 setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -88,7 +97,7 @@ const Sort = () => {
                 break
 
             case 'monthlyBestest_test':
-                quizzes = await axiosLimited.get(`http://localhost:8000/dbAPI/monthlyBest_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axiosLimited.get(`${API_URL}/dbAPI/pointy_monthlyBest/?limit=${numberOfResult}&offset=${offset}`)
                 setSortTitle('بهترین تست های این ماه')
                 setPointy(quizzes.data.results)
                 setPageTravel(quizzes.data)
@@ -140,6 +149,7 @@ const Sort = () => {
                     pageTravel={pageTravel} setPageTravel={setPageTravel}
                     numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                     offset={offset} setOffset={setOffset}
+                    currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
                 />
 
                 {/* Adverts */}

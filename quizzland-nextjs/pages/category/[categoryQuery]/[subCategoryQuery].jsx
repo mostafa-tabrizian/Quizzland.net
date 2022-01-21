@@ -12,6 +12,8 @@ import QuizContainer from '../../../components/quizContainer'
 import QuizPointyContainer from '../../../components/quizPointyContainer'
 import Layout from '../../../components/layout'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 const SubCategory = () => {
     const router = useRouter()
     const { subCategoryQuery, sc } = router.query  // sc for subCategory which in persian
@@ -36,32 +38,35 @@ const SubCategory = () => {
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     const sortTypeDefinitionForQuizDb = {
-        'newest': 'new_quiz',
-        'bestest': 'best_quiz',
-        'alphabet': 'alphabet_quiz'
+        'newest': 'quiz_new',
+        'bestest': 'quiz_best',
+        'alphabet': 'quiz_alphabet'
     }
     
     const sortTypeDefinitionForPointyQuizDb = {
-        'newest': "new_pointy_quiz",
-        'bestest': "best_pointy_quiz",
-        'alphabet': "alphabet_pointy_quiz"
+        'newest': "pointy_new",
+        'bestest': "pointy_best",
+        'alphabet': "pointy_alphabet"
     };
 
     useEffect(() => {
-        getQuizzes()
-    }, [sortType, numberOfResult, offsetQuiz, offsetQuizPointy])
+        if (sc) {
+            getQuizzes()
+        }
+    }, [sc, sortType, numberOfResult, offsetQuiz, offsetQuizPointy])
+
 
     useEffect(() => {
         backgroundOfSubCategory()
         setLoadState(true)
-    }, [])
+    }, [sc])
 
     const getQuizzes = async () => {
         const Quizzes = await axiosLimited.get(
-          `http://localhost:8000/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategoryQuery, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
+          `${API_URL}/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${subCategoryQuery && replaceFunction(subCategoryQuery, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
         );
         const QuizzesPointy = await axiosLimited.get(
-          `http://localhost:8000/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategoryQuery, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
+          `${API_URL}/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${subCategoryQuery && replaceFunction(subCategoryQuery, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
         );
         
         if (Quizzes.data.count !== 0) {
@@ -94,11 +99,13 @@ const SubCategory = () => {
     }
 
     const backgroundOfSubCategory = async () => {
-        const new_category = await axiosLimited.get(`http://localhost:8000/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategoryQuery, '-', ' ')}&limit=1`)
-        const background = new_category.data.results[0].background
-        document.querySelector('html').style = `
-            background: url('${background}') center/cover fixed no-repeat !important;
-        `
+        if (subCategoryQuery) {
+            const category_new = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?subCategory__icontains=${replaceFunction(subCategoryQuery, '-', ' ')}&limit=1`)
+            const background = category_new.data.results[0].background
+            document.querySelector('html').style = `
+                background: url('${background}') center/cover fixed no-repeat !important;
+            `
+        }
     }
 
     return (
@@ -108,17 +115,17 @@ const SubCategory = () => {
                 {/* <LoadingScreen loadState={loadState} /> */}
 
                 <Head>
-                    <title>{`کوییزلند | کوییز های ${replaceFunction(sc, '-', ' ')}`}</title>
-                    <meta name="description" content={`کوییزلند - کوییز های ${replaceFunction(sc, '-', ' ')} `} />
-                    <meta name="keywords" content={`بهترین کوییز های ${replaceFunction(sc, '-', ' ')} , کوییز های ${replaceFunction(sc, '-', ' ')}`} />
+                    <title>{`کوییزلند | کوییز های ${sc && replaceFunction(sc, '-', ' ')}`}</title>
+                    <meta name="description" content={`کوییزلند - کوییز های ${sc && replaceFunction(sc, '-', ' ')} `} />
+                    <meta name="keywords" content={`بهترین کوییز های ${sc && replaceFunction(sc, '-', ' ')} , کوییز های ${sc && replaceFunction(sc, '-', ' ')}`} />
                 </Head>
 
                 {/* <div className='adverts adverts__left'>
                     Banner
                 </div> */}
 
-                <h3 className='lowTitle' style={{color: 'white'}}>{replaceFunction(subCategoryQuery, '-', ' ')}</h3>
-                <h3 className='title' style={{color: 'white'}}>{replaceFunction(sc, '-', ' ')}</h3>
+                <h3 className='lowTitle' style={{color: 'white'}}>{subCategoryQuery && replaceFunction(subCategoryQuery, '-', ' ')}</h3>
+                <h3 className='title' style={{color: 'white'}}>{sc && replaceFunction(sc, '-', ' ')}</h3>
 
                 <Tools 
                     numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}

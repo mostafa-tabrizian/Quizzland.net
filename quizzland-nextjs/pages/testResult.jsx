@@ -13,6 +13,8 @@ import QuizPointyContainer from '../components/quizPointyContainer'
 // import SkeletonLoading from '../components/skeletonLoading'
 import Layout from '../components/layout'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 const Result = () => {
     const [resultSubtitle, setResultSubtitle] = useState()
     const [resultImg, setResultImg] = useState()
@@ -25,13 +27,15 @@ const Result = () => {
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
     
-    useEffect(async () => {
-        setLoadState(true)
-        setTestResult(JSON.parse(localStorage.getItem('testResult')))
-        setTestDetail(JSON.parse(localStorage.getItem('resultQuiz')))
-
-        if(JSON.parse(localStorage.getItem('resultQuiz')) === null) {
-            window.location.href = "/404";
+    useEffect(() => {
+        async () => {
+            setLoadState(true)
+            setTestResult(JSON.parse(localStorage.getItem('testResult')))
+            setTestDetail(JSON.parse(localStorage.getItem('resultQuiz')))
+    
+            if(JSON.parse(localStorage.getItem('resultQuiz')) === null) {
+                window.location.href = "/404";
+            }
         }
     }, [])
 
@@ -109,7 +113,7 @@ const Result = () => {
 
     const getSuggestionsQuiz = () => {
         testResult &&
-        axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4`)
+        axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
         setContentLoaded(true)
     }
@@ -129,7 +133,7 @@ const Result = () => {
 
                 <div className="result__container">
                     <div className="result__title flex flex-jc-c">
-                        <h5 className="tx-al-r">"نتیجه‌ تست  "{testDetail && testDetail.title}</h5>
+                        <h5 className="tx-al-r">&quot نتیجه تست  &quot {testDetail && testDetail.title}</h5>
                     </div>
                     <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
                         <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
@@ -160,7 +164,7 @@ const Result = () => {
 
                     <div className='wrapper-med'>
                         <div className="result__share space-sm tx-al-c">
-                            <h5>{'ببین نتیجه‌ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
+                            <h5>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
                             {/* <InlineShareButtons
                                 config={{

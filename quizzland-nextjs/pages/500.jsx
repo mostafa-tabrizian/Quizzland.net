@@ -17,7 +17,7 @@ const PageNotFound_404 = () => {
         <>
             <Layout>
                 <Head>
-                    <title>سرور های کوییزلند به مشکل برخورده |‌ کوییزلند</title>
+                    <title>سرور های کوییزلند به مشکل برخورده | کوییزلند</title>
                     <meta name="description" content="سرور های کوییزلند به مشکل برخورده" />
                     <meta name="keywords" content="کوییزلند" />
                     <meta name="robots" content="noindex"></meta>

@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { log } from './base'
 
 const PageTravel = (props) => {
-    const [currentPageNumber, setCurrentPageNumber] = useState(1)
 
     const scrollToTop = () => {
         window.scrollTo(0, 0);
@@ -11,7 +10,7 @@ const PageTravel = (props) => {
 
     const goNextPage = () => {
         props.setOffset(props.offset + props.numberOfResult)
-        setCurrentPageNumber(prev => prev + 1)
+        props.setCurrentPageNumber(prev => prev + 1)
         scrollToTop()
     }
 
@@ -22,13 +21,13 @@ const PageTravel = (props) => {
             props.setOffset(props.numberOfResult * 2 + props.offset)
         }
 
-        setCurrentPageNumber(prev => prev + 2)
+        props.setCurrentPageNumber(prev => prev + 2)
         scrollToTop()
     }
 
     const goPreviousPage = () => {
         props.setOffset(props.offset - props.numberOfResult)
-        setCurrentPageNumber(prev => prev - 1)
+        props.setCurrentPageNumber(prev => prev - 1)
         scrollToTop()
     }
 
@@ -37,7 +36,7 @@ const PageTravel = (props) => {
             const totalDataCount = props.pageTravel.count
             const resultToShow = props.numberOfResult
             props.setOffset(totalDataCount - totalDataCount % resultToShow)
-            setCurrentPageNumber(Math.ceil(totalDataCount / resultToShow))
+            props.setCurrentPageNumber(Math.ceil(totalDataCount / resultToShow))
             scrollToTop()
         }
     }
@@ -67,10 +66,10 @@ const PageTravel = (props) => {
         <div className={`pageTravel flex flex-jc-c flex-ai-c space-med`}>
             {props.pageTravel.previous && <button className='pageTravel__arwLast' onClick={goPreviousPage}></button>}
             <div className='pageTravel__pages flex flex-jc-c flex-ai-c'>
-                {props.pageTravel.previous && <button onClick={goPreviousPage}>{currentPageNumber - 1}</button>}
-                <span className='pageTravel__pages__curr'>{currentPageNumber}</span>
-                {props.pageTravel.next && <button onClick={goNextPage}>{currentPageNumber + 1}</button>}
-                {thereIsEnoughDataToDoubleNext() && <button onClick={goDoubleNextPage}>{currentPageNumber + 2}</button>}
+                {props.pageTravel.previous && <button onClick={goPreviousPage}>{props.currentPageNumber - 1}</button>}
+                <span className='pageTravel__pages__curr'>{props.currentPageNumber}</span>
+                {props.pageTravel.next && <button onClick={goNextPage}>{props.currentPageNumber + 1}</button>}
+                {thereIsEnoughDataToDoubleNext() && <button onClick={goDoubleNextPage}>{props.currentPageNumber + 2}</button>}
                 {thereIsEnoughDataToDoubleNext() && '....'}
                 {thereIsEnoughDataToDoubleNext() && <button onClick={goLastPage}>{whatIsTheLastPageNumber()}</button>}
             </div>

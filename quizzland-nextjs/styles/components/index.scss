@@ -1,82 +1,40 @@
 .hero{
-    @include breakpoints-down(large) {
-        margin-bottom: 20rem;
-    }
+    &_bubbles {
+        animation: dancingBubbles 5s infinite linear;
 
-    &__path {
-        z-index: -1;
-        height: 115%; width: 100%;
-        top: -16rem;; left: 0;
-    }
-
-    &__logo {
-        margin-right: 5rem; margin-left: 5rem;
-        filter: drop-shadow(10px 15px 10px black);
-
-        .Q {
-            width: 25rem;
-            height: 100%;
-            pointer-events: none;
-
-            &__Bubbles {
-                position: absolute;
-                width: 24rem;
-                left: -1rem; top: -1.5rem;
-                pointer-events: none;
-                animation: dancingBubbles 5s infinite linear;
+        @keyframes dancingBubbles {
+            0%{
+                transform:rotate(0deg)
+                        translate(-10px)
+                        rotate(0deg);
             }
-
-            @keyframes dancingBubbles {
-                0%{
-                    transform:rotate(0deg)
-                            translate(-10px)
-                            rotate(0deg);
-                }
-                50%{
-                    transform:rotate(180deg)
-                            translate(0px)
-                            rotate(-180deg);
-                }
-                100%{
-                    transform:rotate(360deg)
-                            translate(-10px)
-                            rotate(-360deg);
-                }
+            50%{
+                transform:rotate(180deg)
+                        translate(0px)
+                        rotate(-180deg);
+            }
+            100%{
+                transform:rotate(360deg)
+                        translate(-10px)
+                        rotate(-360deg);
             }
         }
+    }
+
+    &_path {
+        background: url("/images/landPage-path.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center bottom;
     }
 
     &__start {
-        margin-right: 3rem;
-
-        @include breakpoints-down(large) {
-            margin-right: 2rem;
-        }
-
-        h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1.5rem;
-        }
 
         h2 {
-            font-size: 1.6rem;
             font-family: myLalezar, myHarmattan, serif;
-            font-weight: 100;
-            letter-spacing: 0;
-            line-height: 3rem;
-            max-width:  33rem;
-            margin-bottom: 1.5rem; margin-left: 1.5rem;
-            text-shadow: 0 0 25px black;
         }
 
         button {
-            font-size: 1.6rem;
-            // background: $red-grad;
-            padding: .5rem 3rem;
-            border-radius: .5rem;
-            display: inline-flex;
-            color: white;
-            box-shadow: inset 6px 0px 22px #000000eb, 6px 0 18px #000000f7;
 
             background: linear-gradient(-45deg, rgb(162, 0, 0), rgb(75, 0, 0), rgb(170, 73, 73), rgb(162, 0, 0));
             background-size: 400% 400%;

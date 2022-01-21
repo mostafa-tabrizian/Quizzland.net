@@ -53,7 +53,7 @@ const Tools = (props) => {
                 </button>
                 <div className={showToolsNumberOfResults ? 'fadeIn' : 'fadeOut'}>
                     <ul className='tools__numberOfResult__options'>
-                        <button onClick={() => {changeNumberOfResults(2)}} className={`btn`} type='button'>2</button>
+                        <button onClick={() => {changeNumberOfResults(16)}} className={`btn`} type='button'>16</button>
                         <button onClick={() => {changeNumberOfResults(32)}} className={`btn`} type='button'>32</button>
                         <button onClick={() => {changeNumberOfResults(48)}} className={`btn`} type='button'>48</button>
                     </ul>

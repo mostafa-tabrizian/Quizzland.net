@@ -1,10 +1,12 @@
 import React, {useState, useRef, useEffect} from 'react';
-import { Link } from 'next/link'
+import Link from 'next/link'
+import Image from 'next/image'
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 
 import { log, replaceFunction, isItMobile } from './base'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const Search = (props) => {
     const [categoriesList, setCategoriesList] = useState([])
@@ -55,40 +57,40 @@ const Search = (props) => {
                 let matchedCategories = []
     
                 // Search Quiz
-                const search_new_quiz_title = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=3`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
+                const search_quiz_new_title = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=3`)
+                Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
                 
-                if (search_new_quiz_title.data.results !== 3) {
-                    const search_new_quiz_subCategory = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=5`)
-                    Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
+                if (search_quiz_new_title.data.results !== 3) {
+                    const search_quiz_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=5`)
+                    Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
                     
-                    if (search_new_quiz_subCategory.length !== 5) {
-                        const search_new_quiz_tag = await axiosLimited.get(`http://localhost:8000/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=5`)
-                        Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+                    if (search_quiz_new_subCategory.length !== 5) {
+                        const search_quiz_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=5`)
+                        Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
                     }
                 }
                 
                 // Search Pointy Quiz
-                const search_new_pointy_quiz_title = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=1`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_title.data.results)
+                const search_pointy_new_title = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=1`)
+                Array.prototype.push.apply(matchedQuizzes, search_pointy_new_title.data.results)
                 
-                if (search_new_pointy_quiz_title.legnth !== 1) {
-                    const search_new_pointy_quiz_subCategory = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=23`)
-                    Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_subCategory.data.results)
+                if (search_pointy_new_title.legnth !== 1) {
+                    const search_pointy_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=23`)
+                    Array.prototype.push.apply(matchedQuizzes, search_pointy_new_subCategory.data.results)
 
-                    if (search_new_pointy_quiz_subCategory.length !== 3) {
-                        const search_new_pointy_quiz_tag = await axiosLimited.get(`http://localhost:8000/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=2`)
-                        Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_tag.data.results)
+                    if (search_pointy_new_subCategory.length !== 3) {
+                        const search_pointy_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=2`)
+                        Array.prototype.push.apply(matchedQuizzes, search_pointy_new_tag.data.results)
                     }
                 }
     
                 // Search Category
-                const search_new_category_title = await axiosLimited.get(`http://localhost:8000/dbAPI/new_category/?title__icontains=${searchValue}&limit=1`)
-                Array.prototype.push.apply(matchedCategories, search_new_category_title.data.results)
+                const search_category_new_title = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?title__icontains=${searchValue}&limit=1`)
+                Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
 
-                if (search_new_category_title.length !== 1) {
-                    const search_new_category_subCategory = await axiosLimited.get(`http://localhost:8000/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
-                    Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
+                if (search_category_new_title.length !== 1) {
+                    const search_category_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=1`)
+                    Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
                 }
 
                 // Remove duplicated quizzes
@@ -155,7 +157,7 @@ const Search = (props) => {
                     try {
                         const category = matchedCategories[0]
                         return (
-                            <div className={`header__search__result__category__item`}>
+                            <div className={`header__search__result__category__item mt-5`}>
                                 <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
                                     <a>
                                         <Image
@@ -196,7 +198,7 @@ const Search = (props) => {
     }
 
     const searchSuggester = async () => {
-        const grabAllSubCategories = await axiosLimited.get(`http://localhost:8000/dbAPI/new_category`)
+        const grabAllSubCategories = await axiosLimited.get(`${API_URL}/dbAPI/category_new/`) // 'cause of being a components the axios not acceptable
         const numberOfCategories = grabAllSubCategories.data.length
         const randomCategoryIndex = Math.floor(Math.random() * numberOfCategories);
         setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)
@@ -230,7 +232,7 @@ const Search = (props) => {
                 </div>
             </div>
 
-            <button onClick={searchMobileFocusChangedHideOrShow} className='header__search__opener header__btn hideForDesktop flex flex-ai-c' type="button"></button>
+            <button onClick={searchMobileFocusChangedHideOrShow} className='header__search__opener header__btn md:hidden flex flex-ai-c' type="button"></button>
             <div className={`header__search__opener__bg pos-fix darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
                 <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Search Bar"></button>
                 <input

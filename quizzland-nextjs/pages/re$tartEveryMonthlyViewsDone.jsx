@@ -6,7 +6,7 @@ import Layout from '../components/layout'
 
 const pathRed = '../images/bubbles.png'
 
-const restartEveryMonthlyViews = () => {
+const RestartEveryMonthlyViews = () => {
 
     useEffect(() => {
         document.querySelector('html').style=`url('${pathRed}') center center scroll !important`
@@ -33,4 +33,4 @@ const restartEveryMonthlyViews = () => {
     );
 }
  
-export default restartEveryMonthlyViews;
+export default RestartEveryMonthlyViews;

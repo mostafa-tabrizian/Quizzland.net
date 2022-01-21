@@ -7,6 +7,7 @@ import { sha256 } from 'js-sha256'
 import { log } from '../components/base'
 import Layout from '../components/layout'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const QuizMonthlyRecord = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -14,22 +15,22 @@ const QuizMonthlyRecord = () => {
     const passwordInput = useRef(null)
 
     const getAllQuizzes = async () => {
-        const quizzes = await axios.get('http://localhost:8000/dbAPI/new_quiz/')
+        const quizzes = await axios.get(`${API_URL}/dbAPI/quiz_new/`)
         quizDataSaveInExcel(quizzes)
     }
 
     const getAllPointyQuizzes = async () => {
-        const pointyQuizzes = await axios.get('http://localhost:8000/dbAPI/new_pointy_quiz/')
+        const pointyQuizzes = await axios.get(`${API_URL}/dbAPI/pointy_new/`)
         pointyQuizDataSaveInExcel(pointyQuizzes)
     }
     
     const getAllCategories = async () => {
-        const categories = await axios.get('http://localhost:8000/dbAPI/new_category/')
+        const categories = await axios.get(`${API_URL}/dbAPI/category_new/`)
         categoryDataSaveInExcel(categories)
     }
 
     const getAllBlogs = async () => {
-        const blogs = await axios.get('http://localhost:8000/dbAPI/new_blog/')
+        const blogs = await axios.get(`${API_URL}/dbAPI/new_blog/`)
         blogDataSaveInExcel(blogs)
     }
 
@@ -208,7 +209,7 @@ const QuizMonthlyRecord = () => {
 
                 <h3 className='tx-al-c'>💜 Enter The Password Fucker</h3>
                 <div className="flex flex-jc-c">
-                    <input type="text" type={showPassword ? 'string' : 'password'} style={{fontSize: '1.5rem', padding: '1rem', background: 'transparent', border: '1px solid gray', borderRadius: '15px', boxShadow: '0 0 15px #8080803d'}}
+                    <input type={showPassword ? 'string' : 'password'} style={{fontSize: '1.5rem', padding: '1rem', background: 'transparent', border: '1px solid gray', borderRadius: '15px', boxShadow: '0 0 15px #8080803d'}}
                     ref={passwordInput} onChange={adminCheckerForStartRecord} />
                     <button onClick={() => showPassword ? setShowPassword(false) : setShowPassword(true)} style={{marginLeft: '1rem', background: 'transparent', border: 'none'}}>Show Input</button>
                 </div>

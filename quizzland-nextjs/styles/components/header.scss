@@ -69,15 +69,15 @@
     }
 
     &__menu {
-        z-index: 3;
-        top: 0; left: 0;
-        background: rgba(148, 148, 148, 0.3);
+        // z-index: 3;
+        // top: 0; left: 0;
+        // background: rgba(148, 148, 148, 0.3);
         box-shadow: 0 7px 20px black;
         backdrop-filter: blur(20px);
         border: 2px solid transparent;
-        height: 21rem;
-        width: 100%;
-        border-radius: 0 0 55px 55px;
+        // height: 21rem;
+        // width: 100%;
+        // border-radius: 0 0 55px 55px;
         transition: all .3s ease-in-out;
 
         &__openBtn {
@@ -105,59 +105,59 @@
             background: url('/images/close-btn.svg') center center no-repeat;
             width: 1.75rem;
             height: 1.75rem;
-            top: 1rem;
-            right: 1.5rem;
+            // top: 1rem;
+            // right: 1.5rem;
         }
 
-        &__inner {
-            color: black;
-            font-size: 1.180rem - .28;
-            z-index: 2;
-            grid-template-columns: auto auto auto;
-            grid-gap: 1rem;
-            margin-top: 2rem;
+        // &__inner {
+        //     color: black;
+        //     font-size: 1.180rem - .28;
+        //     z-index: 2;
+        //     grid-template-columns: auto auto auto;
+        //     grid-gap: 1rem;
+        //     margin-top: 2rem;
 
-            h4 {
-                margin-bottom: 1rem;
-            }
+        //     h4 {
+        //         margin-bottom: 1rem;
+        //     }
 
-            ul > li {
-                margin-bottom: .6rem;
+        //     ul > li {
+        //         margin-bottom: .6rem;
 
-                & > a:hover {
-                    color: inherit !important;
-                }
-            }
+        //         & > a:hover {
+        //             color: inherit !important;
+        //         }
+        //     }
 
-            &__quizzes {
-                margin-bottom: 0.5rem;
-            }
+        //     &__quizzes {
+        //         margin-bottom: 0.5rem;
+        //     }
 
-            &__other {
-                margin-top: 2.5rem;
-            }
-        }
+        //     &__other {
+        //         margin-top: 2.5rem;
+        //     }
+        // }
     }
 
     &__btn {
-        background: none;
-        border: none;
-        margin-left: 2rem;
-        font-family: inherit;
-        font-size: inherit;
-        color: black;
+        // background: none;
+        // border: none;
+        // margin-left: 2rem;
+        // font-family: inherit;
+        // font-size: inherit;
+        // color: black;
 
-        &:hover {
-            cursor: pointer;
-        }
+        // &:hover {
+        //     cursor: pointer;
+        // }
 
-        &-bg {
-            border: none;
+        // &-bg {
+        //     border: none;
 
-            &:hover {
-                cursor: pointer;
-            }
-        }
+        //     &:hover {
+        //         cursor: pointer;
+        //     }
+        // }
     }
     
     .subHeader {

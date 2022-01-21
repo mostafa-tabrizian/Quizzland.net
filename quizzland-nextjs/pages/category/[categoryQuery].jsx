@@ -25,6 +25,8 @@ const Category = () => {
     const [sortType, setSortType] = useState('bestest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
+
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
     
     const categoryDefinitionInFarsi = {
         'celebrity': 'سلبریتی',
@@ -46,12 +48,12 @@ const Category = () => {
 
     const getCategories = async () => {
         const sortTypeDefinitionForDb = {
-            'newest': 'new_category',
-            'bestest': 'best_category',
-            'alphabet': 'alphabet_category'
+            'newest': 'category_new',
+            'bestest': 'category_best',
+            'alphabet': 'category_alphabet'
         }
 
-        const pageTravelAndCategories = await axiosLimited.get(`http://localhost:8000/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryQuery}&limit=${numberOfResult}&offset=${offset}`)
+        const pageTravelAndCategories = await axiosLimited.get(`${API_URL}/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryQuery}&limit=${numberOfResult}&offset=${offset}`)
         setPageTravel(pageTravelAndCategories.data)
         setCategories(pageTravelAndCategories.data.results)
         setContentLoaded(true)
