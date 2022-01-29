@@ -208,8 +208,8 @@ const QuizMonthlyRecord = () => {
                 <meta name="robots" content="noindex" />
             </Helmet>
 
-            <h3 className='tx-al-c'>💜 Enter The Password Fucker</h3>
-            <div className="flex flex-jc-c">
+            <h3 className='text-center'>💜 Enter The Password Fucker</h3>
+            <div className="flex justify-center">
                 <input type="text" type={showPassword ? 'string' : 'password'} style={{fontSize: '1.5rem', padding: '1rem', background: 'transparent', border: '1px solid gray', borderRadius: '15px', boxShadow: '0 0 15px #8080803d'}}
                 ref={passwordInput} onChange={adminCheckerForStartRecord} />
                 <button onClick={() => showPassword ? setShowPassword(false) : setShowPassword(true)} style={{marginLeft: '1rem', background: 'transparent', border: 'none'}}>Show Input</button>
@@ -219,7 +219,7 @@ const QuizMonthlyRecord = () => {
                 <button onClick={adminCheckerForRestartMonthlyViews}>Restart Monthly Views</button>
             </div>
 
-            <div className='basicPage wrapper-med'>
+            <div className='basicPage container mx-auto px-20'>
                 {message}
             </div>
 

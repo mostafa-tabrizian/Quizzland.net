@@ -166,7 +166,7 @@ const Quiz = () => {
 
     const questionShowIfNotNull = (question) => {
         if (question !== null) {
-            return <p className='quiz__question tx-al-c'> { question } </p>
+            return <p className='quiz__question text-center'> { question } </p>
         }
     }
 
@@ -175,7 +175,7 @@ const Quiz = () => {
         questionCounterForId += 1
         if (question.option_1st) {
             return (
-                <div className="flex flex-jc-c">
+                <div className="flex justify-center">
                     <form className='quiz__options quiz__options__text' action="">
                         { question.option_1st !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-1`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> { question.option_1st } </label> </> }
                         { question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-2`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> { question.option_2nd } </label> </> }
@@ -192,8 +192,8 @@ const Quiz = () => {
             )
         } else {
             return (
-                <div className="flex flex-jc-c">
-                    <form className='quiz__options quiz__options__img grid flex-jc-c pos-rel' data={question.answer} action="">
+                <div className="flex justify-center">
+                    <form className='quiz__options quiz__options__img grid justify-center relative' data={question.answer} action="">
                         { !(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-1`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <Image src={question.option_img_1st} blurDataURL={question.option_img_1st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
                         { !(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-2`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <Image src={question.option_img_2st} blurDataURL={question.option_img_2st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
                         { !(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-3`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <Image src={question.option_img_3st} blurDataURL={question.option_img_3st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
@@ -216,7 +216,7 @@ const Quiz = () => {
         return (
             questions && questions.map(question => {
                 return (
-                    <div key={question.id} style={{transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container pos-rel darkGls">
+                    <div key={question.id} style={{transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container relative darkGls">
 
                         { questionShowIfNotNull(question.question) }
 
@@ -245,15 +245,15 @@ const Quiz = () => {
         return (
             questions.map(question => {
                 return (
-                    <div key={question.id} style={{left: `${currentMoveOfQuestions}rem`}} className="quiz__container pos-rel darkGls">
+                    <div key={question.id} style={{left: `${currentMoveOfQuestions}rem`}} className="quiz__container relative darkGls">
 
                         { questionShowIfNotNull(question.question) }
 
                         { !question.question_img.includes('NotExist') &&
                             <Image
                                     src={question.question_img}
-                                    width='625'
-                                    height='352'
+                                    width='1366'
+                                    height='768'
                                     className='quiz__imgQuestion'    
                                     alt={question.title}
                                     title={question.title}     
@@ -464,8 +464,8 @@ const Quiz = () => {
                 } */}
 
                 <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
-                    <div className={'loadingScreen pos-fix flex flex-jc-c flex-ai-c'}></div>
-                    <div className='countingResult loadingScreen pos-fix flex flex-jc-c flex-ai-c'>
+                    <div className={'loadingScreen fixed flex justify-center flex-ai-c'}></div>
+                    <div className='countingResult loadingScreen fixed flex justify-center flex-ai-c'>
                         ___ در حال محاسبه نتیجه کوییز___
                     </div>  
                 </div>
@@ -475,7 +475,7 @@ const Quiz = () => {
 
                 </div>
 
-                <div className='SFXController pos-abs' onClick={() => {SFXController()}} >
+                <div className='SFXController absolute' onClick={() => {SFXController()}} >
                     <button type="button">
                         <Image
                             src={SFXAllowed === 'true' ? speakerIconOn : speakerIconOff}
@@ -486,24 +486,24 @@ const Quiz = () => {
                     </button>
                 </div>
 
-                <div className="quiz__head pos-rel tx-al-r" id="quiz__head">
+                <div className="quiz__head relative text-right" id="quiz__head">
                     {
                         !(contentLoaded) &&
-                        <div className='flex flex-jc-c flex-ai-c'>
-                            <div className={`skeletonLoading skeletonLoading__testTitle tx-al-c wrapper-sm`}></div>
+                        <div className='flex justify-center flex-ai-c'>
+                            <div className={`skeletonLoading skeletonLoading__testTitle text-center wrapper-sm`}></div>
                         </div>
                     }
                     
-                    <div className="tx-al-c">
+                    <div className="text-center">
                         <h1>{ quiz && quiz.title }</h1>
                     </div>
 
-                    <div className="quiz__detail flex flex-jc-c flex-ai-c">
+                    <div className="quiz__detail flex justify-center flex-ai-c">
                         {
                             !(contentLoaded) &&
                             <div className={`flex`} style={{height: '8rem'}}>
-                                <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
-                                <div className='skeletonLoading skeletonLoading__quizInfo tx-al-c'></div>
+                                <div className='skeletonLoading skeletonLoading__quizInfo text-center'></div>
+                                <div className='skeletonLoading skeletonLoading__quizInfo text-center'></div>
                             </div>
                         }
                         {
@@ -516,10 +516,10 @@ const Quiz = () => {
                     </div>
                     {
                         contentLoaded &&
-                        <div onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className={`quiz__autoQuestionChangerSwitch pos-rel center flex flex-jc-c flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
+                        <div onClick={() => {setAutoQuestionChanger(autoQuestionChanger ? false : true)}} className={`quiz__autoQuestionChangerSwitch relative center flex justify-center flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
                             <h6>تغییر خودکار</h6>
                             <button className="quiz__autoQuestionChangerSwitch__btn btn">
-                                <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : '' } pos-rel`}></div>
+                                <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : '' } relative`}></div>
                             </button>
                         </div>
                     }
@@ -532,21 +532,21 @@ const Quiz = () => {
 
                 {
                     contentLoaded &&
-                    <div className={`quiz__questionCounter pos-rel flex flex-jc-c flex-ai-c`}>
+                    <div className={`quiz__questionCounter relative flex justify-center flex-ai-c`}>
                         <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
                         سوال شماره
                     </div>
                 }
 
-                <div className={`tx-al-c ${showQuestionChangingHelper === true ? 'fadeIn' : 'fadeOut'}`}>
+                <div className={`text-center ${showQuestionChangingHelper === true ? 'fadeIn' : 'fadeOut'}`}>
                     <h5>برای رفتن به سوال بعدی از راست به چپ بکشید!</h5>
                 </div>
 
-                <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions pos-rel flex flex-jc-c tx-al-c`} tag="quiz">
-                    <div className={`quiz__hider flex pos-rel`}>
+                <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions relative flex justify-center text-center`} tag="quiz">
+                    <div className={`quiz__hider flex relative`}>
                         {
                             !(contentLoaded) &&
-                            <div className={`skeletonLoading skeletonLoading__quizQuestion tx-al-c wrapper-sm`}></div>
+                            <div className={`skeletonLoading skeletonLoading__quizQuestion text-center wrapper-sm`}></div>
                         }
                         
                         {
@@ -555,27 +555,27 @@ const Quiz = () => {
                         
                         {
                             contentLoaded && isItDesktop() &&
-                            <div className={`quiz__questionChanger__container pos-abs`}>
-                                <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger pos-abs quiz__questionChanger__next btn ${ableToGoNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
-                                <button onClick={goLastQuestion} className={`quiz__questionChanger pos-abs quiz__questionChanger__last btn`} aria-label='Next Question'></button>
+                            <div className={`quiz__questionChanger__container absolute`}>
+                                <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger absolute quiz__questionChanger__next btn ${ableToGoNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
+                                <button onClick={goLastQuestion} className={`quiz__questionChanger absolute quiz__questionChanger__last btn`} aria-label='Next Question'></button>
                             </div>
                         }
                     </div>
                 </div>
 
                 <div>
-                    <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
-                    <ul className='quiz__tags flex flex-jc-c flex-ai-c'>
+                    <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
+                    <ul className='quiz__tags flex justify-center flex-ai-c'>
                         { quiz && showTheTagsIfNotNull() }
                     </ul>
                 </div>
 
                 <div className='space-med'>
-                    <h7 className='quiz__tags__title flex flex-jc-c flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
+                    <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
 
                     {/* {SkeletonLoading(contentLoaded)} */}
                     
-                    <ul className="quizContainer flex wrapper-med">
+                    <ul className="quizContainer flex container mx-auto px-20">
                         {
                             suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                         }

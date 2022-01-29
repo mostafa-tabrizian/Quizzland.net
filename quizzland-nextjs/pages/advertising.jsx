@@ -26,7 +26,7 @@ const Ads = () => {
                     <h3>برای تبلیغ در بنر های کوییزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>
                     <Link href="mailto:support@quizzland.net"><a>support@quizzland.net</a></Link>
                     <div>
-                        <ul className="contact__socialMedia flex flex-jc-c flex-ai-c">
+                        <ul className="contact__socialMedia flex justify-center flex-ai-c">
                             {/* <li><Link href="#"><a>انستگرام</a></Link></li> */}
                             {/* <li><Link href="#"><a>تلگرام</a></Link></li> */}
                             <li><Link href="mailto:support@quizzland.net"><a>ایمیل</a></Link></li>

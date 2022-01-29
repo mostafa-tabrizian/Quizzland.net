@@ -34,7 +34,7 @@ const Tools = (props) => {
     }
 
     return (
-        <div className='tools wrapper-med flex flex-ai-c'>
+        <div className='tools container mx-auto px-20 flex flex-ai-c'>
             <div className='tools__sort'>
                 <button onClick={showHideToolsSort} className={`tools__sort__btn btn`}>ترتیب بر اساس: 
                     <span>  {sortTypeDefinition[props.sortType]}  </span>

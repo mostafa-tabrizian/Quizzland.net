@@ -132,11 +132,11 @@ const Result = () => {
                 </Head>
 
                 <div className="result__container">
-                    <div className="result__title flex flex-jc-c">
-                        <h5 className="tx-al-r">&quot نتیجه تست  &quot {testDetail && testDetail.title}</h5>
+                    <div className="result__title flex justify-center">
+                        <h5 className="text-right">&quot نتیجه تست  &quot {testDetail && testDetail.title}</h5>
                     </div>
-                    <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
-                        <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
+                    <div className="beforeAfterDecor flex justify-center flex-ai-c">
+                        <h1 className="result__subtitle text-center">{resultSubtitle}</h1>
                     </div>
 
                     <div className='resultPointy__img flex'>
@@ -162,8 +162,8 @@ const Result = () => {
                         </div>
                     }
 
-                    <div className='wrapper-med'>
-                        <div className="result__share space-sm tx-al-c">
+                    <div className='container mx-auto px-20'>
+                        <div className="result__share space-sm text-center">
                             <h5>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
                             {/* <InlineShareButtons
@@ -194,7 +194,7 @@ const Result = () => {
 
                         </div>
 
-                        <h2 className='flex flex-jc-c flex-ai-c space-med'>این تست چطور بود؟</h2>
+                        <h2 className='flex justify-center flex-ai-c space-med'>این تست چطور بود؟</h2>
                         
                         <div>
                             {/* <InlineReactionButtons
@@ -227,11 +227,11 @@ const Result = () => {
 
                 </div>
 
-                <h2 className='tx-al-c space-med beforeAfterDecor'>تست های مشابه</h2>
+                <h2 className='text-center space-med beforeAfterDecor'>تست های مشابه</h2>
 
                 {/* {SkeletonLoading(contentLoaded)} */}
 
-                <ul className="quizContainer flex wrapper-med">
+                <ul className="quizContainer flex container mx-auto px-20">
                     {
                         suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }
@@ -239,7 +239,7 @@ const Result = () => {
 
                 <BackBtn />
                 
-                <button onClick={tryAgainTheQuiz} className='tryAgain btn tx-al-c' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
+                <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
             
             </Layout>
         </>

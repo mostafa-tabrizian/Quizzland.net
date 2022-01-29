@@ -26,12 +26,12 @@ const SOS = () => {
                 <meta name="robots" content="noindex"></meta>
             </Helmet>
     
-            <div class="basicPage wrapper-med center pos-rel" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
+            <div class="basicPage container mx-auto px-20 center relative" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
                 <h1>🚧🔧 کوییزلند در حال حاضر در دسترس نیست 🚧🔧 </h1>
                 <div class="space-sm">
-                    <p className='tx-al-c'> تیم فنی در حال آپدیت، بررسی و تعمیر برخی مشکلات سایت است </p>
-                    <p className='tx-al-c'>لطفا در چند دقیقه آینده دوباره تلاش کنید</p>
-                    <p className='tx-al-c'>قدردان صبر شما هستیم 💗</p>
+                    <p className='text-center'> تیم فنی در حال آپدیت، بررسی و تعمیر برخی مشکلات سایت است </p>
+                    <p className='text-center'>لطفا در چند دقیقه آینده دوباره تلاش کنید</p>
+                    <p className='text-center'>قدردان صبر شما هستیم 💗</p>
                     <br />
                     <a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">support@quizzland.net</a>
                 </div>

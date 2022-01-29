@@ -180,33 +180,6 @@ html {
     }
 }
 
-.quizContainer {
-    &__header {
-        a {
-            box-shadow: none;
-            background: linear-gradient(45deg, #292929, #0c0c0c) !important;
-            border: 1px solid black !important;
-        }
-    }
-
-    article {
-        padding-bottom: 1rem !important;
-        border-radius: .65rem !important;
-        background: rgba(0, 0, 0, 0.33);
-        backdrop-filter: blur(44px) !important;
-    }
-    
-    &__views {
-        background: #181818 !important;
-        box-shadow: 0 0 5px black !important;
-    }
-
-    &__date {
-        background: #181818 !important;
-        box-shadow: 0 0 5px black !important;
-    }
-}
-
 .sortMore {
     &__container {
         a {

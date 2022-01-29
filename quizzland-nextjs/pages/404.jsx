@@ -25,7 +25,7 @@ const PageNotFound_404 = () => {
                     <meta name="robots" content="noindex"></meta>
                 </Head>
         
-                <div className="basicPage wrapper-sm center pos-rel" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
+                <div className="basicPage wrapper-sm center relative" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
                     <h1> 🤔 صفحه ی مورد نظر پیدا نشد </h1>
                     <div className="space-sm">
                         <p>💖 اگه فکر میکنی اشتباهی پیش اومدی ممنون میشیم برامون به<Link href="mailto:support@quizzland.net?subject=  در سایت کوییزلند به یه مشکلی برخوردم به کد ۴۰۴"><a> این ایمیل</a></Link> پیام بدی</p>

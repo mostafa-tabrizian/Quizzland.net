@@ -23,7 +23,7 @@ const PageNotFound_404 = () => {
                     <meta name="robots" content="noindex"></meta>
                 </Head>
         
-                <div className="basicPage wrapper-sm center pos-rel" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
+                <div className="basicPage wrapper-sm center relative" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
                     <h1>سرور های کوییزلند به مشکل برخورده  😨</h1>
                     <div className="space-sm">
                         <p>یه خورده صبر کن مشکل حتما حل میشه. <br/> ولی اگه دیدی حل نشد میتونه به<a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم به کد ۵۰۰"> این ایمیل</a> بهمون اطلاع بدی</p>

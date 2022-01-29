@@ -165,28 +165,28 @@ const Result = () => {
                 </Head>
 
                 <div className="result__container">
-                    <div className="result__title flex flex-jc-c">
-                        <h5 className="tx-al-r">&quot نتیجه  &quot {quizResult && quizResult.title}</h5>
+                    <div className="result__title flex justify-center">
+                        <h5 className="text-right">&quot نتیجه  &quot {quizResult && quizResult.title}</h5>
                     </div>
-                    <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
-                        <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
+                    <div className="beforeAfterDecor flex justify-center flex-ai-c">
+                        <h1 className="result__subtitle text-center">{resultSubtitle}</h1>
                     </div>
-                    <div className="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
-                        <div className="result__img flex flex-jc-c flex-ai-c">
+                    <div className="result container mx-auto px-20 space-sm flex flex-ai-c justify-center">
+                        <div className="result__img flex justify-center flex-ai-c">
                             {
                                 resultGif &&
                                 <Image src={resultGif} width='320' height='320' alt={quizResult && quizResult.subCategory}/>
                             }
                         </div>
                         <div className="result__score">{resultScore}</div>
-                        <div className="result__detail tx-al-r">
+                        <div className="result__detail text-right">
                             <h5>تعداد پاسخ های درست: <span className="result__detail__correctTime">{correctAnswersCounter}</span></h5>
                             <h5>تعداد پاسخ های غلط: <span className="result__detail__wrongTime">{questions && questions.length - correctAnswersCounter}</span></h5>
                         </div>
                     </div>
 
-                    <div className='wrapper-med'>
-                        <div className="result__share space-sm tx-al-c">
+                    <div className='container mx-auto px-20'>
+                        <div className="result__share space-sm text-center">
                             <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizResult && quizResult.fan_name} هستن`}</h5>
 
                             {/* <InlineShareButtons
@@ -217,7 +217,7 @@ const Result = () => {
 
                         </div>
 
-                        <h2 className='flex flex-jc-c flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
+                        <h2 className='flex justify-center flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
                         
                         <div>
                             {/* <InlineReactionButtons
@@ -250,11 +250,11 @@ const Result = () => {
 
                 </div>
 
-                <h2 className='tx-al-c space-med beforeAfterDecor'>کوییز های مشابه</h2>
+                <h2 className='text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
                 {/* {SkeletonLoading(contentLoaded)} */}
 
-                <ul className="quizContainer flex wrapper-med">
+                <ul className="quizContainer flex container mx-auto px-20">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }
@@ -262,8 +262,8 @@ const Result = () => {
 
                 {
                     suggestionQuizzes &&
-                    <div className='result__popUpQuizSuggester pos-fix popUp-hide'>
-                        <button className='result__popUpQuizSuggester__closeBtn fadeOut pos-abs' onClick={() => {
+                    <div className='result__popUpQuizSuggester fixed popUp-hide'>
+                        <button className='result__popUpQuizSuggester__closeBtn fadeOut absolute' onClick={() => {
                             closePopUpQuizSuggester();
                         }}> X </button>
 
@@ -296,7 +296,7 @@ const Result = () => {
 
                 <BackBtn />
                 
-                <button onClick={tryAgainTheQuiz} className='tryAgain btn tx-al-c' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
+                <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
             
             </Layout>
         </>

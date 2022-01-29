@@ -62,14 +62,14 @@ const Newsletter = () => {
 
     return (
         <React.Fragment>
-            <p className="tx-al-c wrapper-sm"> اگه هیجان داری کوییز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا ایمیلت رو وارد کنی که سریعتر از هر کسی خبر دارت کنیم </p>
+            <p className="text-center wrapper-sm"> اگه هیجان داری کوییز های جدید رو سریع تر از بقیه انجام بدی میتونی اینجا ایمیلت رو وارد کنی که سریعتر از هر کسی خبر دارت کنیم </p>
 
             <button onClick={openCloseNewsletter} className="btn" type="button" aria-label="Sign Up To Newsletter">🖊️ ثبت نام در خبرنامه</button>
 
             <div className={`${newsletterOpen ? 'newsletter__blurBackground' : ''}`}>
                 <form onSubmit={reCaptchaRef} className={`newsletter ${newsletterOpen ? 'fadeIn' : 'fadeOut'}`}>
                     <button ref={openCloseNewsletterRef} onClick={openCloseNewsletter} type="button" className="btn newsletter__closeBtn" aria-label="Close Newsletter Form Button"></button>
-                    <p className="tx-al-c">لطفا نام و ایمیل خود را وارد نمائيد</p>
+                    <p className="text-center">لطفا نام و ایمیل خود را وارد نمائيد</p>
                     
                     <input ref={userEmail} type='email' className='input' name='userEmail' placeholder='  ایمیل ...' max_length='100' required label='' />
                     <input ref={userUsername} type='string' className='input' name='userName' placeholder='  نام ...' max_length='20' mix_length='3' required label='' />

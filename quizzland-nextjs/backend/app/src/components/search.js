@@ -112,7 +112,7 @@ const Search = (props) => {
                             matchedQuizzes.map((quiz) => {
                                 return (
                                     <li key={quiz.id}>
-                                        <article className={`flex tx-al-r quizContainer__trans`}>
+                                        <article className={`flex text-right quizContainer__trans`}>
                                             <a href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
                                                 <div>
                                                     <img src={`${quiz.thumbnail}`} alt={`${quiz.subCategory}} | ${quiz.title}`} loading='lazy' />
@@ -142,7 +142,7 @@ const Search = (props) => {
                                 <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
                                     <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوییز های ${category.title_far}`} />
                                 </a>
-                                <h5 className='tx-al-c'>
+                                <h5 className='text-center'>
                                     <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
                                         {category.subCategory}
                                     </a>
@@ -185,13 +185,13 @@ const Search = (props) => {
             <div className={`header__search flex ${props.colorOfHeader}`}>
                 <input
                     type='text'
-                    className={`header__search__input tx-al-r`}
+                    className={`header__search__input text-right`}
                     placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
                     onChange={inputChanged}
                 />
                 <div  className={`header__search__result ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
                     <div className="header__search__result__category">
-                        <div className="header__search__result__category__container flex flex-jc-c">
+                        <div className="header__search__result__category__container flex justify-center">
                             {categoriesList}
 
                             <Link to={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
@@ -209,11 +209,11 @@ const Search = (props) => {
             </div>
 
             <button onClick={searchMobileFocusChangedHideOrShow} className='header__search__opener header__btn md:hidden flex flex-ai-c' type="button"></button>
-            <div className={`header__search__opener__bg pos-fix darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
-                <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Search Bar"></button>
+            <div className={`header__search__opener__bg fixed darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
+                <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg absolute header__menu__closeBtn" aria-label="Close Search Bar"></button>
                 <input
                     type='text'
-                    className={`header__search__input tx-al-r ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
+                    className={`header__search__input text-right ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
                     ref={mobileSearchInput}
                     placeholder='...جستجو'
                     onChange={inputChanged}

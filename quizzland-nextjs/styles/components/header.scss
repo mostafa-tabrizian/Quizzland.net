@@ -48,7 +48,7 @@
     &__links {
         padding: 1.25rem 0;
         margin-right: 1.5rem;
-        direction: rtl;
+        // direction: rtl;
         z-index: 1;
 
         a {
@@ -207,15 +207,15 @@
     }
     
     &__categories {
-        right: 12rem;
+        right: 11rem;
     }
 
     &__quizzes {
-        right: 19rem;
+        right: 16.5rem;
     }
 
     &__pointy {
-        right: 25rem;
+        right: 21rem;
     }
 
     &__white {

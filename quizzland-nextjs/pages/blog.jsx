@@ -98,14 +98,14 @@ const Blog = () => {
 
                 {
                     !(contentLoaded) &&
-                    <ul className={`quizContainer flex wrapper-med`}>
+                    <ul className={`quizContainer flex container mx-auto px-20`}>
                         <li className='skeletonLoading skeletonLoading__blog'></li>
                         <li className='skeletonLoading skeletonLoading__blog'></li>
                         <li className='skeletonLoading skeletonLoading__blog'></li>
                     </ul>
                 }
 
-                <ul className="blog quizContainer__minHeight wrapper-med">
+                <ul className="blog quizContainer__minHeight container mx-auto px-20">
                     {blogContent()}
                 </ul>
 

@@ -134,18 +134,18 @@ const SearchMoreResult = () => {
                     <meta name="robots" content="noindex, follow"></meta>
                 </Head>
 
-                <div className='flex flex-jc-c flex-ai-c'>
+                <div className='flex justify-center flex-ai-c'>
                     <h3 className='title'> <span style={{fontSize: '1rem'}}>عبارت جستجو شده : <br/></span> {searchValueButWithoutHyphen}</h3>
                 </div>
                 
                 {
                     matchedQuizzesCounter !== 0 &&
                     <>
-                        <h2 className='wrapper-med'>
+                        <h2 className='container mx-auto px-20'>
                             کوییز های {searchValueButWithoutHyphen}
                         </h2>
 
-                        <ul className='quizContainer flex wrapper-med space-sm'>
+                        <ul className='quizContainer flex container mx-auto px-20 space-sm'>
                             {quizzesList}
                         </ul>
 
@@ -162,11 +162,11 @@ const SearchMoreResult = () => {
                 {
                     matchedPointyCounter !== 0 &&
                     <>
-                        <h2 className='wrapper-med'>
+                        <h2 className='container mx-auto px-20'>
                             تست های {searchValueButWithoutHyphen}
                         </h2>
 
-                        <ul className='quizContainer flex wrapper-med space-sm'>
+                        <ul className='quizContainer flex container mx-auto px-20 space-sm'>
                             {pointyList}
                         </ul>
 

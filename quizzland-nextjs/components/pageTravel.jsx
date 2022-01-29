@@ -63,9 +63,9 @@ const PageTravel = (props) => {
     }
 
     return (
-        <div className={`pageTravel flex flex-jc-c flex-ai-c space-med`}>
+        <div className={`pageTravel flex justify-center flex-ai-c space-med`}>
             {props.pageTravel.previous && <button className='pageTravel__arwLast' onClick={goPreviousPage}></button>}
-            <div className='pageTravel__pages flex flex-jc-c flex-ai-c'>
+            <div className='pageTravel__pages flex justify-center flex-ai-c'>
                 {props.pageTravel.previous && <button onClick={goPreviousPage}>{props.currentPageNumber - 1}</button>}
                 <span className='pageTravel__pages__curr'>{props.currentPageNumber}</span>
                 {props.pageTravel.next && <button onClick={goNextPage}>{props.currentPageNumber + 1}</button>}

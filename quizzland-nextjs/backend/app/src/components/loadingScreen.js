@@ -15,7 +15,7 @@ const LoadingScreen = () => {
 
     return (
         showLoadingInDom &&
-        <div className={`loadingScreen pos-fix flex flex-jc-c flex-ai-c ${hideLoadingScreen}`}></div>
+        <div className={`loadingScreen fixed flex justify-center flex-ai-c ${hideLoadingScreen}`}></div>
     )
 }
  

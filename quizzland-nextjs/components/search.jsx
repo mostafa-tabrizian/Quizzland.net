@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 import axios from 'axios'
@@ -15,10 +15,10 @@ const Search = (props) => {
     const [searchResult, setSearchResult] = useState(false)
     const [searchValue, setSearchValue] = useState(null)
     const [searchSuggestion, setSearchSuggestion] = useState(null)
-    
+
     const searchSubmit = useRef()
     const mobileSearchInput = useRef()
-    
+
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     useEffect(() => {
@@ -52,44 +52,44 @@ const Search = (props) => {
             if (value.length >= minimumKeywordForSearch) {
                 let searchValue = replaceFunction(value, ' ', '+')
                 setSearchValue(searchValue)
-                
+
                 let matchedQuizzes = []
                 let matchedCategories = []
-    
+
                 // Search Quiz
-                const search_quiz_new_title = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=3`)
+                const search_quiz_new_title = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=10`)
                 Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
-                
-                if (search_quiz_new_title.data.results !== 3) {
-                    const search_quiz_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=5`)
+
+                if (search_quiz_new_title.data.results !== 10) {
+                    const search_quiz_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=10`)
                     Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
-                    
-                    if (search_quiz_new_subCategory.length !== 5) {
-                        const search_quiz_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=5`)
+
+                    if (search_quiz_new_subCategory.length !== 10) {
+                        const search_quiz_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=10`)
                         Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
                     }
                 }
-                
+
                 // Search Pointy Quiz
-                const search_pointy_new_title = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=1`)
+                const search_pointy_new_title = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=5`)
                 Array.prototype.push.apply(matchedQuizzes, search_pointy_new_title.data.results)
-                
-                if (search_pointy_new_title.legnth !== 1) {
-                    const search_pointy_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=23`)
+
+                if (search_pointy_new_title.length !== 5) {
+                    const search_pointy_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=5`)
                     Array.prototype.push.apply(matchedQuizzes, search_pointy_new_subCategory.data.results)
 
-                    if (search_pointy_new_subCategory.length !== 3) {
+                    if (search_pointy_new_subCategory.length !== 5) {
                         const search_pointy_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=2`)
                         Array.prototype.push.apply(matchedQuizzes, search_pointy_new_tag.data.results)
                     }
                 }
-    
+
                 // Search Category
-                const search_category_new_title = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?title__icontains=${searchValue}&limit=1`)
+                const search_category_new_title = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
                 Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
 
-                if (search_category_new_title.length !== 1) {
-                    const search_category_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=1`)
+                if (search_category_new_title.length !== 2) {
+                    const search_category_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
                     Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
                 }
 
@@ -105,12 +105,12 @@ const Search = (props) => {
                     maxQuizSearchResult = matchedQuizzes.length
                 }
 
-                for ( let i = 0; i < maxQuizSearchResult; i++ ) {
+                for (let i = 0; i < maxQuizSearchResult; i++) {
                     uniqueMatchedQuizzes[matchedQuizzes[i]['title']] = matchedQuizzes[i];
                 }
 
                 matchedQuizzes = new Array();
-                for ( let key in uniqueMatchedQuizzes ) {
+                for (let key in uniqueMatchedQuizzes) {
                     matchedQuizzes.push(uniqueMatchedQuizzes[key]);
                 }
 
@@ -121,24 +121,32 @@ const Search = (props) => {
                         return (
                             matchedQuizzes.map((quiz) => {
                                 return (
-                                    <li key={quiz.id}>
-                                        <article className={`flex tx-al-r quizContainer__trans`}>
+                                    <li key={quiz.id} className='m-2 md:mb-6'>
+                                        <article className={`flex text-right rounded-xl quizContainer__trans`}>
                                             <Link href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
-                                                <a>
-                                                    <div>
+                                                <a className='grid grid-cols-5 md:block'>
+                                                    <div className='col-span-2 w-[224px] h-[126px]'>
                                                         <Image
                                                             src={quiz.thumbnail}
                                                             alt={`${quiz.subCategory}} | ${quiz.title}`}
                                                             blurDataURL={quiz.thumbnail}
-                                                            width='224'
-                                                            height='126'
+                                                            width='1366'
+                                                            height='768'
                                                             placeholder='blur'
+                                                            className='rounded-r-xl md:rounded-xl'
                                                         />
                                                     </div>
-                                                    <div className="header__search__result__title flex">
-                                                        <span>
-                                                            { quiz.title }
-                                                        </span>
+                                                    <div className="header__search__result__title col-span-3 mt-2">
+                                                        <h2 className={`quizContainer__title quizContainer__title__noViews flex
+                                                                    text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
+                                                            {quiz.subCategory}
+                                                        </h2>
+                                                        <h2 className={`
+                                                        quizContainer__title quizContainer__title__noViews flex
+                                                        text-sm mr-5 ml-5 md:w-52 md:mr-0 md:text-base
+                                                    `}>
+                                                            {quiz.title}
+                                                        </h2>
                                                     </div>
                                                 </a>
                                             </Link>
@@ -147,44 +155,49 @@ const Search = (props) => {
                                 )
                             })
                         )
-                    } catch {e} {
+                    } catch { e } {
                         // log('no quiz found...')
                         return null
                     }
                 }
-    
+
                 const categoriesList = () => {
                     try {
-                        const category = matchedCategories[0]
                         return (
-                            <div className={`header__search__result__category__item mt-5`}>
-                                <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
-                                    <a>
-                                        <Image
-                                            src={category.thumbnail}
-                                            alt={`${category.subCategory}} | های ${category.title_far}}`}
-                                            blurDataURL={category.thumbnail}
-                                            width='336'
-                                            height='160'
-                                            placeholder='blur'
-                                        />
-                                    </a>
-                                </Link>
-                                <h5 className='tx-al-c'>
-                                    <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
-                                        <a>
-                                            {category.subCategory}
-                                        </a>
-                                    </Link>
-                                </h5>
-                            </div>
+                            matchedCategories.map((category) => {
+                                return (
+                                    <div key={category.id}>
+                                        <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                                            <a>
+                                                <Image
+                                                    src={category.thumbnail}
+                                                    alt={`${category.subCategory}} | های ${category.title_far}}`}
+                                                    blurDataURL={category.thumbnail}
+                                                    width='1366'
+                                                    height='768'
+                                                    placeholder='blur'
+                                                />
+                                            </a>
+                                        </Link>
+
+                                        <h5 className='absolute left-6 top-6 md:relative md:left-0 md:top-0 md:text-center'>
+                                            <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                                                <a>
+                                                    {category.subCategory}
+                                                </a>
+                                            </Link>
+                                        </h5>
+
+                                    </div>
+                                )
+                            })
                         )
-                    } catch (e){
+                    } catch (e) {
                         // log('no category found...')
                         return null
                     }
-                }   
-                
+                }
+
                 setQuizzesList(quizzesList)
                 setCategoriesList(categoriesList)
             }
@@ -209,23 +222,25 @@ const Search = (props) => {
             <div className={`header__search flex ${props.colorOfHeader}`}>
                 <input
                     type='text'
-                    className={`header__search__input tx-al-r`}
+                    className={`header__search__input text-right`}
                     placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
                     onChange={inputChanged}
                 />
-                <div  className={`header__search__result ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
-                    <div className="header__search__result__category">
-                        <div className="header__search__result__category__container flex flex-jc-c">
-                            {categoriesList}
+                <div className={`header__search__result overflow-scroll h-1/2 ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
+                    <div className="header__search__result__category mr-4 mt-2 rounded-lg justify-center grid overflow-hidden">
+                        <div className="header__search__result__category__container w-80 flex justify-center">
+                            <ul className='md:space-y-5'>
+                                {categoriesList}
+                            </ul>
 
                             {/* <Link href={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
                                 <a> نمایش بقیه نتایج...</a>
                             </Link> */}
                         </div>
                     </div>
-                    
-                    <div className="header__search__result__quizzes">
-                        <ul className='flex'>
+
+                    <div className="header__search__result__quizzes mr-5">
+                        <ul className='flex flex-ai-fe container mx-auto px-20 flex-wrap align-baseline m-2 justify-right md:m-auto'>
                             {quizzesList}
                         </ul>
                     </div>
@@ -233,11 +248,11 @@ const Search = (props) => {
             </div>
 
             <button onClick={searchMobileFocusChangedHideOrShow} className='header__search__opener header__btn md:hidden flex flex-ai-c' type="button"></button>
-            <div className={`header__search__opener__bg pos-fix darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
-                <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Search Bar"></button>
+            <div className={`header__search__opener__bg fixed darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
+                <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg absolute header__menu__closeBtn" aria-label="Close Search Bar"></button>
                 <input
                     type='text'
-                    className={`header__search__input tx-al-r ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
+                    className={`header__search__input text-right ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
                     ref={mobileSearchInput}
                     placeholder='...جستجو'
                     onChange={inputChanged}

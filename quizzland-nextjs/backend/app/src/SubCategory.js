@@ -55,7 +55,7 @@ log(" \n\n\
 const SubCategoryApp = () => {
     return (
         <React.Fragment>
-            <Suspense fallback={ <div className='loadingScreen pos-fix flex flex-jc-c flex-ai-c'></div> }>
+            <Suspense fallback={ <div className='loadingScreen fixed flex justify-center flex-ai-c'></div> }>
                 <Router>
                     <ScrollToTop />
 

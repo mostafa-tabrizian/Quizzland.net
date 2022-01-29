@@ -139,10 +139,10 @@ const SubCategory = () => {
                     <div>
                         {
                             !(hideQuizzesPointy) &&
-                            <h2 className={`wrapper-med`} style={{color: 'white'}}>کوییز ها</h2>
+                            <h2 className={`container mx-auto px-20`} style={{color: 'white'}}>کوییز ها</h2>
                         }
 
-                        <ul className={`quizContainer flex wrapper-med`}>
+                        <ul className={`quizContainer flex flex-ai-fe container mx-auto px-20 flex-wrap align-baseline m-2 justify-right md:m-auto`}>
                             {listQuizzes()}
                         </ul>
 
@@ -159,11 +159,11 @@ const SubCategory = () => {
                     <div>
                         {
                             !(hideQuizzes) &&
-                            <h2 className={`wrapper-med`} style={{color: 'white'}}>تست ها</h2>
+                            <h2 className={`container mx-auto px-20`} style={{color: 'white'}}>تست ها</h2>
                         }
                         
 
-                        <ul className={`quizContainer flex wrapper-med`}>
+                        <ul className={`quizContainer flex container mx-auto px-20`}>
                             {listQuizzesPointy()}
                         </ul>
 

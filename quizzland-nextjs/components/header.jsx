@@ -40,7 +40,7 @@ const Header = (props) => {
         <>
 
 
-            <header className={`header pos-rel`}>
+            <header className={`header relative`}>
 
                 {/* <Head>
                     <script type="text/javascript">
@@ -85,52 +85,53 @@ const Header = (props) => {
                         </Link>
                     </div>
 
-                    <div className={`header__links pos-rel ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
+                    <div className={`header__links md:space-x-5 relative ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
+                        <div className="hoverAnimation md:space-x-7">
+                            <button className="header__btn">
+                                <Link href="/blog"><a> وبلاگ </a></Link>
+                            </button>
+                            <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
+                            <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
+                            <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
+                        </div>
+
                         <Link href="/">
                             <a className="header__logo flex flex-jc-sb flex-ai-c">
-                                <span>uizzland</span>
                                 <Image
                                     src='/images/Q-small.png'
                                     alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
                                     width={24}
                                     height={35}
                                 />
+                                <span>uizzland</span>
                             </a>
                         </Link>
 
-                        <div className="hoverAnimation">
-                            <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
-                            <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
-                            <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
-                            <button className="header__btn">
-                                <Link href="/blog"><a> وبلاگ </a></Link>
-                            </button>
-                        </div>
 
                     </div>
 
                     <Search />
 
-                    <ul className={`header__categories ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${categoryNavigationOpen ? 'subHeader__open' : ''}`}>
+                    <ul className={`header__categories ${props.colorOfHeader} subHeader absolute pointerOff text-right ${categoryNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><Link href="/category/movie-series"><a>🎬 فیلم و سریال</a></Link></li>
                         <li><Link href="/category/celebrity"><a>✨ سلبریتی</a></Link></li>
                         <li><Link href="/category/psychology"><a>🧠 روانشناسی</a></Link></li>
                     </ul>
 
-                    <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
+                    <ul className={`header__quizzes ${props.colorOfHeader} subHeader absolute pointerOff text-right ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><Link href="/sort?st=newest"><a> ⏳ جدیدترین ها </a></Link></li>
                         <li><Link href="/sort?st=monthlyBestest"><a> 👑 بهترین های ماه </a></Link></li>
                         <li><Link href="/sort?st=bestest"><a> 👑 بهترین ها </a></Link></li>
                     </ul>
 
-                    <ul className={`header__pointy ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${pointyNavigationOpen ? 'subHeader__open' : ''}`}>
+                    <ul className={`header__pointy ${props.colorOfHeader} subHeader absolute pointerOff text-right ${pointyNavigationOpen ? 'subHeader__open' : ''}`}>
                         <li><Link href="/sort?st=newest_test"><a> ⏳ جدیدترین ها </a></Link></li>
                         <li><Link href="/sort?st=monthlyBestest_test"><a> 👑 بهترین های ماه </a></Link></li>
                         <li><Link href="/sort?st=bestest_test"><a> 👑 بهترین ها </a></Link></li>
                     </ul>
 
                     {/* Menu */}
-                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn pos-abs ${props.colorOfHeader} md:hidden`} aria-label="Menu Button">
+                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn absolute ${props.colorOfHeader} md:hidden`} aria-label="Menu Button">
                         <span></span>
                         <span></span>
                         <span></span>

@@ -16,7 +16,7 @@ const Footer = (props) => {
     return (
         <div className='footer'>
             
-            <div className='footer__container flex-jc-c'>
+            <div className='footer__container justify-center'>
 
                 <div>
                     <h3>کوییز ها</h3>
@@ -60,7 +60,7 @@ const Footer = (props) => {
 
                 {/* <div>
                     <h3>با ما همراه باشید</h3>
-                    <ul className='flex flex-ai-c flex-jc-c'>
+                    <ul className='flex flex-ai-c justify-center'>
                         <li><a href='#'>
                             <img src={instagramIcon} alt='quizzlnad instagram' />
                         </a></li>
@@ -69,7 +69,7 @@ const Footer = (props) => {
 
             </div>
 
-            <div className="footer__copyRight flex flex-jc-c flex-ai-c">
+            <div className="footer__copyRight flex justify-center flex-ai-c">
                 <p>
                     {copyRightDate()} © تمام حقوق به کوییزلند تعلق دارد
                 </p>

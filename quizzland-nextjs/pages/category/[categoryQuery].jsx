@@ -27,7 +27,7 @@ const Category = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
 
     const API_URL = process.env.NEXT_PUBLIC_API_URL
-    
+
     const categoryDefinitionInFarsi = {
         'celebrity': 'سلبریتی',
         'movie-series': 'فیلم و سریال',
@@ -38,10 +38,10 @@ const Category = () => {
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     useEffect(() => {
-        document.querySelector('html').style=`background: None`
+        document.querySelector('html').style = `background: None`
         setLoadState(true)
     }, [])
-    
+
     useEffect(() => {
         getCategories()
     }, [categoryQuery, sortType, numberOfResult, offset])
@@ -63,25 +63,35 @@ const Category = () => {
         return (
             categories.map((category) => {
                 return (
-                    <li key={category.id}>
-                        <article className={`flex tx-al-r quizContainer__trans`}>
+
+                    <li key={category.id} className='mr-7 md:mx-4 md:mb-4'>
+                        <article className={`
+                            flex text-right h-full
+                            rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                            quizContainer__trans w-[40rem] md:w-full
+                        `}
+                        >  {/* bg or trans */}
+
                             <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
-                                <a>
-                                    <div>
+                                <a className='flex md:block md:grid-cols-5 w-full'>
+                                    <div className='md:col-span-2 w-[224px] md:h-[126px]'>
                                         <Image
                                             src={category.thumbnail}
-                                            width='224'
-                                            height='126'
-                                            alt={`${category.subCategory} | ${category.title}`}    
+                                            width='1366'
+                                            height='768'
+                                            alt={`${category.subCategory} | ${category.title}`}
                                             blurDataURL={category.thumbnail}
                                             placeholder='blur'
+                                            className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
                                         />
                                     </div>
-                                    <div className="quizContainer__views">{viewsFormat(category.views * 10)}</div>
-                                    {/* <div className="quizContainer__date tx-al-c">{datePublishHandler(category.publish)}</div> */}
-                                    <span className="quizContainer__title quizContainer__title__noViews flex">
-                                        { category.title }
-                                    </span>
+                                    <div className='md:col-span-3 pt-1 md:mt-2 w-full pb-3 pr-1'>
+                                        <h2 className={`quizContainer__title quizContainer__title__noViews
+                                                        text-sm mr-5 md:w-52 md:mr-0 md:text-base md:grid md:grid-cols-2`}>
+                                            <span>{category.title}</span>
+                                            <span className='text-right md:text-left block'>{category.subCategory}</span>
+                                        </h2>
+                                    </div>
                                 </a>
                             </Link>
                         </article>
@@ -105,7 +115,7 @@ const Category = () => {
                 <div className='adverts adverts__left'>
                     <div id="pos-article-display-28434"></div>
                 </div>
-                
+
                 <h3 className='lowTitle'>{categoryQuery}</h3>
                 <h3 className='title'>کتگوری {categoryDefinitionInFarsi[categoryQuery]}</h3>
 
@@ -116,8 +126,8 @@ const Category = () => {
 
                 {/* {SkeletonLoading(contentLoaded)} */}
 
-                <ul className="quizContainer quizContainer__minHeight flex wrapper-med">
-                    
+                <ul className="quizContainer quizContainer__minHeight flex md:flex-ai-fe m-4 md:container md:px-20 flex-wrap align-baseline md:justify-right">
+
                     {listCategories()}
 
                 </ul>
@@ -131,5 +141,5 @@ const Category = () => {
         </>
     );
 }
- 
+
 export default Category;

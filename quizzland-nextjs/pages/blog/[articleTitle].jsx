@@ -94,7 +94,7 @@ const Article = () => {
                     </script>
                 </Head>
 
-                <div className='article wrapper-med tx-al-c'>
+                <div className='article container mx-auto px-20 text-center'>
                     <h1>
                         {articleTitle && replaceFunction(articleTitle, '+' , ' ')}
                     </h1>
