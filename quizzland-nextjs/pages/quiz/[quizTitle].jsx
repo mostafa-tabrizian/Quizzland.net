@@ -394,7 +394,7 @@ const Quiz = () => {
                 return (
                     <div key={question.id}
                         style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }}
-                        className={`quiz__container relative darkGls`}>
+                        className={`quiz__container relative darkGls md:bg-[#0000007c] backdrop-blur-xl md:pt-3`}>
 
                         <span className='block right-2 top-[-.5rem] z-10 absolute text-[3rem] text-red-900'>
                             {questionCounterForId}
@@ -528,7 +528,7 @@ const Quiz = () => {
                 {/* <LoadingScreen loadState={loadState} /> */}
 
                 <Head>
-                    <title>{`کوییزلند | کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
+                    <title>{quizTitle && `کوییزلند | کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
 
                     <link rel="canonical" href={quizTitle && currentUrl()} />
 

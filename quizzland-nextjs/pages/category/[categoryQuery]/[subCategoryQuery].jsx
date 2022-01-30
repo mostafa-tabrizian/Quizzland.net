@@ -115,7 +115,7 @@ const SubCategory = () => {
                 {/* <LoadingScreen loadState={loadState} /> */}
 
                 <Head>
-                    <title>{`کوییزلند | کوییز های ${sc && replaceFunction(sc, '-', ' ')}`}</title>
+                    <title>{sc && `کوییزلند | کوییز های ${replaceFunction(sc, '-', ' ')}`}</title>
                     <meta name="description" content={`کوییزلند - کوییز های ${sc && replaceFunction(sc, '-', ' ')} `} />
                     <meta name="keywords" content={`بهترین کوییز های ${sc && replaceFunction(sc, '-', ' ')} , کوییز های ${sc && replaceFunction(sc, '-', ' ')}`} />
                 </Head>

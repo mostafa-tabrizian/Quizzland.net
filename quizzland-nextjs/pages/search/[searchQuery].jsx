@@ -128,7 +128,7 @@ const SearchMoreResult = () => {
             <Layout>
 
                 <Head>
-                    <title>{`کوییزلند | ${searchValueButWithoutHyphen} جستجو عبارت `}</title>
+                    <title>{searchValueButWithoutHyphen && `کوییزلند | ${searchValueButWithoutHyphen} جستجو عبارت `}</title>
                     <meta name="description" content="صفحه جستجو کوییزلند" />
                     <meta name="keywords" content="جستجو, کوییز, کوییزلند" />
                     <meta name="robots" content="noindex, follow"></meta>

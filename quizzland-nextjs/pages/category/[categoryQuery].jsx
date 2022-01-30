@@ -107,7 +107,7 @@ const Category = () => {
                 {/* <LoadingScreen loadState={loadState} /> */}
 
                 <Head>
-                    <title>{`کوییزلند | کوییز های ${currentCategory} `}</title>
+                    <title>{currentCategory && `کوییزلند | کوییز های ${currentCategory} `}</title>
                     <meta name="description" content={`کوییزلند کوییز های ${currentCategory}`} />
                     <meta name="keywords" content={`بهترین کوییز های ${currentCategory} ,کوییز های ${currentCategory}`} />
                 </Head>

@@ -407,7 +407,7 @@ const Quiz = () => {
                 {/* <LoadingScreen loadState={loadState} /> */}
 
                 <Head>
-                    <title>{`کوییزلند | تست ${replaceFunction(decodeURI(testTitle), '+', ' ')}`}</title>
+                    <title>{testTitle && `کوییزلند | تست ${replaceFunction(decodeURI(testTitle), '+', ' ')}`}</title>
                     <meta name="description" content={`با ${questions && questions.length} سوال، ببین چی در میای | ${quiz && quiz.title} ${quiz && quiz.subCategory} تست با موضوع`} />
                     <meta name="keywords" content="کوییز, تست, کوییزلند" />
                     <meta name="msapplication-TileImage" content={quiz && quiz && quiz.thumbnail} />

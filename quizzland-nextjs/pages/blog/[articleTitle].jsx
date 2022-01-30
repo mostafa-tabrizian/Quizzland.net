@@ -51,7 +51,7 @@ const Article = () => {
                 <Head>
                     <link rel="canonical" href={article && currentUrl()} />
                     
-                    <title>{`کوییزلند | ${article && article.title}`}</title>
+                    <title>{`کوییزلند | ${article?.title}`}</title>
                     <meta name="description" content={article && description()} />
                     <meta name="keywords" content="کوییزلند" />
                     <meta name="msapplication-TileImage" content={article && article.thumbnail} />
