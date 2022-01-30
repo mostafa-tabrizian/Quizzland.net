@@ -87,9 +87,9 @@ const Header = (props) => {
 
                     <div className={`header__links md:space-x-5 relative ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
                         <div className="hoverAnimation md:space-x-7">
-                            <button className="header__btn">
+                            {/* <button className="header__btn">
                                 <Link href="/blog"><a> وبلاگ </a></Link>
-                            </button>
+                            </button> */}
                             <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
                             <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
                             <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>

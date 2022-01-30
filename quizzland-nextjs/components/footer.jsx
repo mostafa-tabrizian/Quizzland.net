@@ -49,7 +49,7 @@ const Footer = (props) => {
                     <h3>دسترسی سریع</h3>
                     <ul>
                         <li><Link href='/'><a>صفحه اصلی</a></Link></li>
-                        <li><Link href='/blog'><a>وبلاگ</a></Link></li>
+                        {/* <li><Link href='/blog'><a>وبلاگ</a></Link></li> */}
                         <li><Link href='/guide'><a>راهنما</a></Link></li>
                         <li><Link href='/contact'><a>تماس با ما</a></Link></li>
                         <li><Link href='/advertising'><a>تبلیغات</a></Link></li>

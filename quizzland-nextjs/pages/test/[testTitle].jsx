@@ -170,23 +170,23 @@ const Quiz = () => {
         }
     }
 
-    let questionCounterForId = 0
+    let questionCounterForId = 1
     const questionOptionsCheckBetweenStringOrImg = (question) => {
         questionCounterForId += 1
         if (question.option_1st) {
             return (
-                <div className="flex justify-center">
-                    <form className='quiz__options quiz__options__text' action="">
-                        { question.option_1st !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-1`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> { question.option_1st } </label> </> }
-                        { question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-2`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> { question.option_2nd } </label> </> }
-                        { question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-3`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> { question.option_3rd } </label> </> }
-                        { question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-4`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> { question.option_4th } </label> </> }
-                        { question.option_5th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-5`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-5`} htmlFor={`${questionCounterForId}-5`}> { question.option_5th } </label> </> }
-                        { question.option_6th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-6`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-6`} htmlFor={`${questionCounterForId}-6`}> { question.option_6th } </label> </> }
-                        { question.option_7th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-7`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-7`} htmlFor={`${questionCounterForId}-7`}> { question.option_7th } </label> </> }
-                        { question.option_8th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-8`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-8`} htmlFor={`${questionCounterForId}-8`}> { question.option_8th } </label> </> }
-                        { question.option_9th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-9`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-9`} htmlFor={`${questionCounterForId}-9`}> { question.option_9th } </label> </> }
-                        { question.option_10th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-10`} /> <label className={'quiz__options__textLabel'} id={`inputLabel ${questionCounterForId}-10`} htmlFor={`${questionCounterForId}-10`}> { question.option_10th } </label> </> }
+                <div className="flex justify-center w-[20rem] md:w-[30rem]">
+                    <form className='quiz__options p-4 md:p-0 w-[100%] md:grid md:grid-cols-2 space-y-3 text-[5vw] md:text-[1.6vw] justify-center' action="">
+                        { question.option_1st !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-1`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> { question.option_1st } </label> </> }
+                        { question.option_2nd !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> { question.option_2nd } </label> </> }
+                        { question.option_3rd !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> { question.option_3rd } </label> </> }
+                        { question.option_4th !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> { question.option_4th } </label> </> }
+                        { question.option_5th !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-5`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-5`} htmlFor={`${questionCounterForId}-5`}> { question.option_5th } </label> </> }
+                        { question.option_6th !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-6`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-6`} htmlFor={`${questionCounterForId}-6`}> { question.option_6th } </label> </> }
+                        { question.option_7th !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-7`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-7`} htmlFor={`${questionCounterForId}-7`}> { question.option_7th } </label> </> }
+                        { question.option_8th !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-8`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-8`} htmlFor={`${questionCounterForId}-8`}> { question.option_8th } </label> </> }
+                        { question.option_9th !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-9`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-9`} htmlFor={`${questionCounterForId}-9`}> { question.option_9th } </label> </> }
+                        { question.option_10th !== ('') && <> <input onClick={selectedOption} className='opacity-0 absolute' type="radio" name="answer" id={`${questionCounterForId}-10`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-10`} htmlFor={`${questionCounterForId}-10`}> { question.option_10th } </label> </> }
                     </form>
                 </div>
             )
@@ -194,16 +194,16 @@ const Quiz = () => {
             return (
                 <div className="flex justify-center">
                     <form className='quiz__options quiz__options__img grid justify-center relative' data={question.answer} action="">
-                        { !(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-1`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <Image src={question.option_img_1st} blurDataURL={question.option_img_1st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-2`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <Image src={question.option_img_2st} blurDataURL={question.option_img_2st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-3`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <Image src={question.option_img_3st} blurDataURL={question.option_img_3st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-4`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <Image src={question.option_img_4st} blurDataURL={question.option_img_4st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_5th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-5`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-5`} htmlFor={`${questionCounterForId}-5`}> <Image src={question.option_img_5st} blurDataURL={question.option_img_5st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_6th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-6`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-6`} htmlFor={`${questionCounterForId}-6`}> <Image src={question.option_img_6st} blurDataURL={question.option_img_6st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_7th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-7`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-7`} htmlFor={`${questionCounterForId}-7`}> <Image src={question.option_img_7st} blurDataURL={question.option_img_7st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_8th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-8`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-8`} htmlFor={`${questionCounterForId}-8`}> <Image src={question.option_img_8st} blurDataURL={question.option_img_8st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_9th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-9`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-9`} htmlFor={`${questionCounterForId}-9`}> <Image src={question.option_img_9st} blurDataURL={question.option_img_9st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
-                        { !(question.option_img_10th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" id={`${questionCounterForId}-10`} /> <label className={'quiz__options__imgLabel'} id={`inputLabel ${questionCounterForId}-10`} htmlFor={`${questionCounterForId}-10`}> <Image src={question.option_img_10st} blurDataURL={question.option_img_10st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption" /> </label> </> }
+                        { !(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <Image src={question.option_img_1st} blurDataURL={question.option_img_1st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <Image src={question.option_img_2st} blurDataURL={question.option_img_2st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <Image src={question.option_img_3st} blurDataURL={question.option_img_3st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <Image src={question.option_img_4st} blurDataURL={question.option_img_4st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_5th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-5`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-5`} htmlFor={`${questionCounterForId}-5`}> <Image src={question.option_img_5st} blurDataURL={question.option_img_5st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_6th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-6`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-6`} htmlFor={`${questionCounterForId}-6`}> <Image src={question.option_img_6st} blurDataURL={question.option_img_6st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_7th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-7`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-7`} htmlFor={`${questionCounterForId}-7`}> <Image src={question.option_img_7st} blurDataURL={question.option_img_7st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_8th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-8`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-8`} htmlFor={`${questionCounterForId}-8`}> <Image src={question.option_img_8st} blurDataURL={question.option_img_8st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_9th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-9`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-9`} htmlFor={`${questionCounterForId}-9`}> <Image src={question.option_img_9st} blurDataURL={question.option_img_9st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
+                        { !(question.option_img_10th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-10`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-10`} htmlFor={`${questionCounterForId}-10`}> <Image src={question.option_img_10st} blurDataURL={question.option_img_10st} placeholder='blur' width='512' height='288' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </> }
             </form>                                                                                                                                                                                                                                                                                             
                 </div>
             )
@@ -218,17 +218,21 @@ const Quiz = () => {
                 return (
                     <div key={question.id} style={{transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)`}} className="quiz__container relative darkGls">
 
+                        <span className='block right-2 top-[-.5rem] z-10 absolute text-[3rem] text-red-900'>
+                            {questionCounterForId}
+                        </span>
+
                         { questionShowIfNotNull(question.question) }
 
                         { !question.question_img.includes('NotExist') && 
                             <Image
                                 src={question.question_img}
-                                width={29 * 16}
-                                height={16 * 16}
+                                width='1366'
+                                height='768'
+                                className='rounded-xl object-contain object-top'
                                 alt={question.title}
-                                className='quiz__imgQuestion'
                                 title={question.title}
-                                blurDataURL={question.question_img}
+                                blurDataURL='/images/Q-512.png'
                                 placeholder='blur'
                             />
                         }
@@ -245,7 +249,11 @@ const Quiz = () => {
         return (
             questions.map(question => {
                 return (
-                    <div key={question.id} style={{left: `${currentMoveOfQuestions}rem`}} className="quiz__container relative darkGls">
+                    <div key={question.id} style={{left: `${currentMoveOfQuestions}rem`}} className={`quiz__container relative darkGls`}>
+
+                        <span className='block right-2 top-[-.5rem] z-10 absolute text-[3rem] text-red-900'>
+                            {questionCounterForId}
+                        </span>
 
                         { questionShowIfNotNull(question.question) }
 
@@ -254,10 +262,10 @@ const Quiz = () => {
                                     src={question.question_img}
                                     width='1366'
                                     height='768'
-                                    className='quiz__imgQuestion'    
+                                    className='rounded-xl object-contain object-top'
                                     alt={question.title}
                                     title={question.title}     
-                                    blurDataURL={question.question_img}
+                                    blurDataURL='/images/Q-512.png'
                                     placeholder='blur' 
                             />
                         }
@@ -280,10 +288,10 @@ const Quiz = () => {
     
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
     if (typeof(window) !== 'undefined' && window.navigator.userAgent.includes('Windows') || typeof(window) !== 'undefined' && window.navigator.userAgent.includes('iPad')) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 48
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46.20
     } 
     else if (typeof(window) !== 'undefined' && window.navigator.userAgent.includes('Mobile')) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 23.5
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 22.8
     }
 
     const calculateThePoints = () => {
@@ -342,9 +350,19 @@ const Quiz = () => {
 
     const showTheTagsIfNotNull = () => {
         const splittedTags = quiz.tags.split('،')
-        return (    
+        return (
             splittedTags.map(tag => {
-                return <li key={tag}><h2><Link href={`/search?s=r${replaceFunction(tag, ' ', '+')}`} ><a rel='tag'> {tag} </a></Link></h2></li>
+                return (
+                    <li key={tag} className='px-3 py-1 rounded-lg text-sm'>
+                        <h2>
+                            <Link href={`/search?s=${replaceFunction(tag, ' ', '+')}`} >
+                                <a rel='tag'>
+                                    {tag}
+                                </a>
+                            </Link>
+                        </h2>
+                    </li>
+                )
             })
         )
     }
@@ -530,13 +548,13 @@ const Quiz = () => {
                     <hr className='divider'></hr>
                 } */}
 
-                {
+                {/* {
                     contentLoaded &&
                     <div className={`quiz__questionCounter relative flex justify-center flex-ai-c`}>
                         <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
                         سوال شماره
                     </div>
-                }
+                } */}
 
                 <div className={`text-center ${showQuestionChangingHelper === true ? 'fadeIn' : 'fadeOut'}`}>
                     <h5>برای رفتن به سوال بعدی از راست به چپ بکشید!</h5>
@@ -555,7 +573,9 @@ const Quiz = () => {
                         
                         {
                             contentLoaded && isItDesktop() &&
-                            <div className={`quiz__questionChanger__container absolute`}>
+                            <div className={`quiz__questionChanger__container absolute
+                                            top-40 right-[5%]
+                            `}>
                                 <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger absolute quiz__questionChanger__next btn ${ableToGoNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
                                 <button onClick={goLastQuestion} className={`quiz__questionChanger absolute quiz__questionChanger__last btn`} aria-label='Next Question'></button>
                             </div>
@@ -565,7 +585,7 @@ const Quiz = () => {
 
                 <div>
                     <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
-                    <ul className='quiz__tags flex justify-center flex-ai-c'>
+                    <ul className='quiz__tags flex justify-center space-x-3 space-x-reverse mt-5'>
                         { quiz && showTheTagsIfNotNull() }
                     </ul>
                 </div>
@@ -575,7 +595,7 @@ const Quiz = () => {
 
                     {/* {SkeletonLoading(contentLoaded)} */}
                     
-                    <ul className="quizContainer flex container mx-auto px-20">
+                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
                         {
                             suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                         }

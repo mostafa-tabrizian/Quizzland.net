@@ -292,7 +292,7 @@ const Quiz = () => {
         if (question.option_1st) {
             return (
                 <div className="flex justify-center w-[20rem] md:w-[30rem]">
-                    <form className='quiz__options p-4 w-[100%] md:grid text-[5vw] md:text-[1.6vw] justify-center' action="">
+                    <form className='quiz__options p-4 md:p-0 w-[100%] md:grid md:grid-cols-2 space-y-3 text-[5vw] md:text-[1.6vw] justify-center' action="">
                         {question.option_1st !== ('') &&
                             <> <input
                                 onClick={selectedOption}
@@ -476,7 +476,17 @@ const Quiz = () => {
         const splittedTags = quiz.tags.split('،')
         return (
             splittedTags.map(tag => {
-                return <li key={tag}><h2><Link href={`/search?s=${replaceFunction(tag, ' ', '+')}`} ><a rel='tag'>{tag}</a></Link></h2></li>
+                return (
+                    <li key={tag} className='px-3 py-1 rounded-lg text-sm'>
+                        <h2>
+                            <Link href={`/search?s=${replaceFunction(tag, ' ', '+')}`} >
+                                <a rel='tag'>
+                                    {tag}
+                                </a>
+                            </Link>
+                        </h2>
+                    </li>
+                )
             })
         )
     }
@@ -702,7 +712,7 @@ const Quiz = () => {
 
                 <div>
                     <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
-                    <ul className='quiz__tags flex justify-center flex-ai-c'>
+                    <ul className='quiz__tags flex justify-center space-x-3 space-x-reverse mt-5'>
                         {quiz && showTheTagsIfNotNull()}
                     </ul>
                 </div>
