@@ -558,6 +558,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 5%;
 }
 
+.top-1\/2 {
+  top: 50%;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -988,6 +996,28 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 3rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+.text-\[10rem\] {
+  font-size: 10rem;
+}
+
+.text-\[15rem\] {
+  font-size: 15rem;
+}
+
+.text-\[20rem\] {
+  font-size: 20rem;
+}
+
 .text-red-900 {
   --tw-text-opacity: 1;
   color: rgb(127 29 29 / var(--tw-text-opacity));
@@ -1277,6 +1307,31 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:text-\[1\.6vw\] {
     font-size: 1.6vw;
+  }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .md\:text-\[10rem\] {
+    font-size: 10rem;
+  }
+
+  .md\:text-\[25rem\] {
+    font-size: 25rem;
+  }
+
+  .md\:text-\[56rem\] {
+    font-size: 56rem;
+  }
+
+  .md\:text-\[50rem\] {
+    font-size: 50rem;
+  }
+
+  .md\:text-inherit {
+    color: inherit;
   }
 }
 

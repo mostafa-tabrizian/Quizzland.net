@@ -33,7 +33,7 @@ const PageNotFound_404 = () => {
                     </div>
                 </div>
 
-                <span className="pageNotFound">404</span>
+                <span className="pageNotFound text-[20rem] absolute top-1/2 left-1/2 md:text-[50rem]">404</span>
         
                 <BackBtn />
             </Layout>

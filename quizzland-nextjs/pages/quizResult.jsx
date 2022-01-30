@@ -263,7 +263,7 @@ const Result = () => {
                 {
                     suggestionQuizzes &&
                     <div className='result__popUpQuizSuggester fixed popUp-hide'>
-                        <button className='result__popUpQuizSuggester__closeBtn fadeOut absolute' onClick={() => {
+                        <button className='result__popUpQuizSuggester__closeBtn fadeOut absolute z-300' onClick={() => {
                             closePopUpQuizSuggester();
                         }}> X </button>
 
