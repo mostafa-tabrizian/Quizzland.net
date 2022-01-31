@@ -11,6 +11,7 @@ import { log, replaceFunction } from '../../../components/base'
 import QuizContainer from '../../../components/quizContainer'
 import QuizPointyContainer from '../../../components/quizPointyContainer'
 import Layout from '../../../components/layout'
+import SkeletonLoading from '../../../components/SkeletonLoading';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -132,7 +133,7 @@ const SubCategory = () => {
                     sortType={sortType} setSortType={setSortType}
                 />
 
-                {/* {SkeletonLoading(contentLoaded)} */}
+                {SkeletonLoading(contentLoaded)}
 
                 {
                     !(hideQuizzes) &&

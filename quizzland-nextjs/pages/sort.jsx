@@ -10,7 +10,7 @@ import PageTravel from '../components/pageTravel'
 import QuizContainer from '../components/quizContainer'
 import QuizPointyContainer from '../components/quizPointyContainer'
 import Layout from '../components/layout'
-// import SkeletonLoading from '../components/skeletonLoading'
+import SkeletonLoading from '../components/skeletonLoading'
 
 import { log } from '../components/base'
 
@@ -129,9 +129,9 @@ const Sort = () => {
 
                 <h3 className='title'>{sortTitle}</h3>
 
-                {/* {SkeletonLoading(contentLoaded)} */}
+                {SkeletonLoading(contentLoaded)}
                 
-                <ul className="quizContainer flex container mx-auto px-20">
+                <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
                     
                     {
                         quizzes.length !== 0 && <QuizContainer quizzes={quizzes} bgStyle='trans' />

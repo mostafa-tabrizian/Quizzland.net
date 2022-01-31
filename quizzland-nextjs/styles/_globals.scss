@@ -494,14 +494,14 @@ input {
 }
 
 .skeletonLoading {
-    width: 14rem; 
-    border-radius: 15px;
-    box-shadow: 0 10px 22px 1px #0000005c;
-    background: #828282b9;
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-    margin: 1rem;
+    backdrop-filter: blur(20px);
+    // width: 14rem; 
+    // border-radius: 15px;
+    // box-shadow: 0 10px 22px 1px #0000005c;
+    // background: #828282b9;
+    // position: relative;
+    // overflow: hidden;
+    // margin: 1rem;
     
     &::before {
         content: '';
@@ -538,7 +538,7 @@ input {
         width: 30rem; height: 25rem !important;
 
         @include breakpoints-up(small) {
-            transform: translate(7.5rem);
+            transform: translate(8.5rem);
         }
     }
 

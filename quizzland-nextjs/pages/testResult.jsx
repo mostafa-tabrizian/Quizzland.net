@@ -10,7 +10,7 @@ import { log, replaceFunction } from '../components/base'
 import BackBtn from '../components/backBtn'
 // import LoadingScreen from '../components/loadingScreen'
 import QuizPointyContainer from '../components/quizPointyContainer'
-// import SkeletonLoading from '../components/skeletonLoading'
+import SkeletonLoading from '../components/skeletonLoading'
 import Layout from '../components/layout'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -229,7 +229,7 @@ const Result = () => {
 
                 <h2 className='text-center space-med beforeAfterDecor'>تست های مشابه</h2>
 
-                {/* {SkeletonLoading(contentLoaded)} */}
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex container mx-auto px-20">
                     {

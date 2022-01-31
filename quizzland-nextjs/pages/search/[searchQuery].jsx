@@ -8,7 +8,7 @@ import QuizContainer from '../../components/quizContainer';
 import QuizPointyContainer from '../../components/quizPointyContainer';
 import { log, takeParameterFromUrl, replaceFunction } from '../../components/base'
 import PageTravel from '../../components/pageTravel';
-// import SkeletonLoading from '../../components/skeletonLoading'
+import SkeletonLoading from '../../components/skeletonLoading'
 import Layout from '../../components/layout';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -145,11 +145,11 @@ const SearchMoreResult = () => {
                             کوییز های {searchValueButWithoutHyphen}
                         </h2>
 
-                        <ul className='quizContainer flex container mx-auto px-20 space-sm'>
+                        <ul className='quizContainer flex md:flex-ai-fe m-4 md:container md:px-20 flex-wrap align-baseline md:justify-right'>
                             {quizzesList}
                         </ul>
 
-                        {/* {SkeletonLoading(contentLoaded)} */}
+                        {SkeletonLoading(contentLoaded)}
 
                         <PageTravel
                             pageTravel={pageTravelQuizzes} setPageTravel={setPageTravelQuizzes}
@@ -166,11 +166,11 @@ const SearchMoreResult = () => {
                             تست های {searchValueButWithoutHyphen}
                         </h2>
 
-                        <ul className='quizContainer flex container mx-auto px-20 space-sm'>
+                        <ul className='quizContainer flex md:flex-ai-fe m-4 md:container md:px-20 flex-wrap align-baseline md:justify-right'>
                             {pointyList}
                         </ul>
 
-                        {/* {SkeletonLoading(contentLoaded)} */}
+                        {SkeletonLoading(contentLoaded)}
 
                         <PageTravel
                             pageTravel={pageTravelPointy} setPageTravel={setPageTravelPointy}

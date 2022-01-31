@@ -11,7 +11,7 @@ import Layout from '../../components/layout'
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from '../../components/base'
 // import LoadingScreen from '../../components/loadingScreen'
 import QuizContainer from '../../components/quizContainer'
-// import SkeletonLoading from '../../components/'
+import SkeletonLoading from '../../components/skeletonLoading'
 
 const logo = '../images/Q-small.png'
 const speakerIconOn = '/images/speakerOn.png'
@@ -612,7 +612,7 @@ const Quiz = () => {
                     </div>
                 </div>
 
-                <div className='SFXController absolute' onClick={() => { SFXController() }} >
+                <div className='absolute top-28 ml-10 z-10' onClick={() => { SFXController() }} >
                     <button type="button">
                         <Image
                             src={SFXAllowed === 'true' ? speakerIconOn : speakerIconOff}
@@ -624,25 +624,25 @@ const Quiz = () => {
                 </div>
 
                 <div className="quiz__head relative text-right" id="quiz__head">
-                    {/* {
+                    {
                         !(contentLoaded) &&
                         <div className='flex justify-center flex-ai-c'>
-                            <div className={`skeletonLoading skeletonLoading__quizTitle text-center wrapper-sm`}></div>
+                            <div className='skeletonLoading skeletonLoading__quizTitle mb-5 shadow-xl m-2 overflow-hidden rounded-lg'></div>
                         </div>
-                    } */}
+                    }
 
                     <div className="text-center">
                         <h1>{quiz && quiz.title}</h1>
                     </div>
 
                     <div className="quiz__detail flex justify-center flex-ai-c">
-                        {/* {
+                        {
                             !(contentLoaded) &&
-                            <div className={`flex`} style={{height: '8rem'}}>
-                                <div className='skeletonLoading skeletonLoading__quizInfo text-center'></div>
-                                <div className='skeletonLoading skeletonLoading__quizInfo text-center'></div>
+                            <div className='flex space-x-5'>
+                                <div className='skeletonLoading skeletonLoading__quizInfo mb-5 shadow-xl m-2 overflow-hidden rounded-lg'></div>
+                                <div className='skeletonLoading skeletonLoading__quizInfo mb-5 shadow-xl m-2 overflow-hidden rounded-lg'></div>
                             </div>
-                        } */}
+                        }
                         {
                             contentLoaded &&
                             <>
@@ -682,10 +682,10 @@ const Quiz = () => {
 
                 <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions relative flex justify-center text-center`} tag="quiz">
                     <div className={`quiz__hider flex relative`}>
-                        {/* {
+                        {
                             !(contentLoaded) &&
-                            <div className={`skeletonLoading skeletonLoading__quizQuestion text-center wrapper-sm`}></div>
-                        } */}
+                            <div className='skeletonLoading skeletonLoading__quizQuestion shadow-lg shadow-zinc-800 overflow-hidden rounded-xl'></div>
+                        }
 
                         {
                             isSafari ? quizQuestionsForSafari() : quizQuestions()
@@ -723,7 +723,7 @@ const Quiz = () => {
                 <div className='space-med'>
                     <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
 
-                    {/* {SkeletonLoading(contentLoaded)} */}
+                    {SkeletonLoading(contentLoaded)}
 
                     <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
                         {

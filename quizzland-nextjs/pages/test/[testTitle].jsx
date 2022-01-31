@@ -10,7 +10,7 @@ import rateLimit from 'axios-rate-limit';
 import { log, replaceFunction, isItDesktop, isItMobile, makeDatePublishFormatForQuizDetail } from '../../components/base'
 // import LoadingScreen from '../../components/loadingScreen'
 import QuizPointyContainer from '../../components/quizPointyContainer'
-// import SkeletonLoading from '../../components/skeletonLoading'
+import SkeletonLoading from '../../components/skeletonLoading'
 import Layout from '../../components/layout'
 
 const logo = '../images/Q-small.png'
@@ -484,7 +484,7 @@ const Quiz = () => {
                 <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
                     <div className={'loadingScreen fixed flex justify-center flex-ai-c'}></div>
                     <div className='countingResult loadingScreen fixed flex justify-center flex-ai-c'>
-                        ___ در حال محاسبه نتیجه کوییز___
+                        ___ در حال محاسبه نتیجه تست
                     </div>  
                 </div>
                 
@@ -493,7 +493,7 @@ const Quiz = () => {
 
                 </div>
 
-                <div className='SFXController absolute' onClick={() => {SFXController()}} >
+                <div className='absolute top-28 ml-10 z-10' onClick={() => {SFXController()}} >
                     <button type="button">
                         <Image
                             src={SFXAllowed === 'true' ? speakerIconOn : speakerIconOff}
@@ -508,7 +508,7 @@ const Quiz = () => {
                     {
                         !(contentLoaded) &&
                         <div className='flex justify-center flex-ai-c'>
-                            <div className={`skeletonLoading skeletonLoading__testTitle text-center wrapper-sm`}></div>
+                            <div className={`skeletonLoading skeletonLoading__testTitle mb-5 shadow-xl m-2 overflow-hidden rounded-lg`}></div>
                         </div>
                     }
                     
@@ -519,9 +519,9 @@ const Quiz = () => {
                     <div className="quiz__detail flex justify-center flex-ai-c">
                         {
                             !(contentLoaded) &&
-                            <div className={`flex`} style={{height: '8rem'}}>
-                                <div className='skeletonLoading skeletonLoading__quizInfo text-center'></div>
-                                <div className='skeletonLoading skeletonLoading__quizInfo text-center'></div>
+                            <div className='flex space-x-5'>
+                                <div className='skeletonLoading skeletonLoading__quizInfo mb-5 shadow-xl m-2 overflow-hidden rounded-lg'></div>
+                                <div className='skeletonLoading skeletonLoading__quizInfo mb-5 shadow-xl m-2 overflow-hidden rounded-lg'></div>
                             </div>
                         }
                         {
@@ -564,7 +564,7 @@ const Quiz = () => {
                     <div className={`quiz__hider flex relative`}>
                         {
                             !(contentLoaded) &&
-                            <div className={`skeletonLoading skeletonLoading__quizQuestion text-center wrapper-sm`}></div>
+                            <div className='skeletonLoading skeletonLoading__quizQuestion shadow-lg shadow-zinc-800 overflow-hidden rounded-xl'></div>
                         }
                         
                         {
@@ -593,7 +593,7 @@ const Quiz = () => {
                 <div className='space-med'>
                     <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
 
-                    {/* {SkeletonLoading(contentLoaded)} */}
+                    {SkeletonLoading(contentLoaded)}
                     
                     <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
                         {

@@ -10,7 +10,7 @@ import Tools from '../../components/tools'
 import PageTravel from '../../components/pageTravel'
 import Layout from '../../components/layout'
 // import LoadingScreen from './loadingScreen'
-// import SkeletonLoading from './skeletonLoading';
+import SkeletonLoading from '../../components/SkeletonLoading';
 
 import { log, replaceFunction, viewsFormat, datePublishHandler } from '../../components/base'
 
@@ -124,7 +124,7 @@ const Category = () => {
                     sortType={sortType} setSortType={setSortType}
                 />
 
-                {/* {SkeletonLoading(contentLoaded)} */}
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer quizContainer__minHeight flex md:flex-ai-fe m-4 md:container md:px-20 flex-wrap align-baseline md:justify-right">
 

@@ -11,7 +11,7 @@ import BackBtn from '../components/backBtn'
 import Layout from '../components/layout'
 // import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-// import SkeletonLoading from '../components/skeletonLoading'
+import SkeletonLoading from '../components/skeletonLoading'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -252,7 +252,7 @@ const Result = () => {
 
                 <h2 className='text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
-                {/* {SkeletonLoading(contentLoaded)} */}
+                {SkeletonLoading(contentLoaded)}
 
                 <ul className="quizContainer flex container mx-auto px-20">
                     {
