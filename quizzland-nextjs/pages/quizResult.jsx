@@ -28,16 +28,14 @@ const Result = () => {
     const [quizResult, setQuizResult] = useState(null)
 
     useEffect(() => {
-        async () => {
+        if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
+            window.location.href = "/404";
+        } else {
             document.querySelector('html').style=`background: None`
             setLoadState(true)
             setQuestions(JSON.parse(localStorage.getItem('resultQuestions')))
             setCorrectAnswersCounter(localStorage.getItem('resultCorrectAnswersCounter'))
-            setQuizResult(JSON.parse(localStorage.getItem('quizResult')))
-            
-            if(JSON.parse(localStorage.getItem('quizResult')) === null) {
-                window.location.href = "/404";
-            }
+            setQuizResult(JSON.parse(localStorage.getItem('resultQuiz')))
         }
     }, [])
 
@@ -68,27 +66,27 @@ const Result = () => {
         if (score > 80){
             setResultScore(`😎 ${score}%`)
             setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
-            setResultGif(quizResult && quizResult.GIF100)
+            setResultGif(quizResult?.GIF100)
         }
         else if (score > 60){
             setResultScore(`😎 ${score}%`)
-            setResultSubtitle(`😎 ایول\n! تو یک ${quizResult && quizResult.fan_name} واقعی هستی `)
-            setResultGif(quizResult && quizResult.GIF80)
+            setResultSubtitle(`😎 ایول\n! تو یک ${quizResult?.fan_name} واقعی هستی `)
+            setResultGif(quizResult?.GIF80)
         }
         else if (score > 40){
             setResultScore(`🙂 ${score}%`)
             setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
-            setResultGif(quizResult && quizResult.GIF60)
+            setResultGif(quizResult?.GIF60)
         }
         else if (score > 20){
             setResultScore(`😉 ${score}%`)
             setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
-            setResultGif(quizResult && quizResult.GIF40)
+            setResultGif(quizResult?.GIF40)
         }
         else if (score >= 0){
             setResultScore(`😭 ${score}%`)
             setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
-            setResultGif(quizResult && quizResult.GIF20)
+            setResultGif(quizResult?.GIF20)
         }
         else {
             setResultScore(`👀`)
@@ -137,7 +135,7 @@ const Result = () => {
     }
 
     const chooseUniqueQuizToSuggest = () => {
-        if (suggestionQuizzes[0].title === quizResult && quizResult.title) {
+        if (suggestionQuizzes[0].title === quizResult?.title) {
             if (suggestionQuizzes[1]) {
                 return suggestionQuizzes[1]
             }
@@ -166,7 +164,7 @@ const Result = () => {
 
                 <div className="result__container">
                     <div className="result__title flex justify-center">
-                        <h5 className="text-right">&quot نتیجه  &quot {quizResult && quizResult.title}</h5>
+                        <h5 className="text-right">نتیجه  {quizResult?.title}</h5>
                     </div>
                     <div className="beforeAfterDecor flex justify-center flex-ai-c">
                         <h1 className="result__subtitle text-center">{resultSubtitle}</h1>
@@ -175,19 +173,23 @@ const Result = () => {
                         <div className="result__img flex justify-center flex-ai-c">
                             {
                                 resultGif &&
-                                <Image src={resultGif} width='320' height='320' alt={quizResult && quizResult.subCategory}/>
+                                <Image src={resultGif} width='320' height='320' alt={quizResult?.subCategory}/>
                             }
                         </div>
-                        <div className="result__score">{resultScore}</div>
+                        <div className="result__score">
+                            <h5>
+                                {resultScore}
+                            </h5>
+                        </div>
                         <div className="result__detail text-right">
-                            <h5>تعداد پاسخ های درست: <span className="result__detail__correctTime">{correctAnswersCounter}</span></h5>
-                            <h5>تعداد پاسخ های غلط: <span className="result__detail__wrongTime">{questions && questions.length - correctAnswersCounter}</span></h5>
+                            <h5>تعداد پاسخ های درست: <span className='int'>{correctAnswersCounter}</span></h5>
+                            <h5>تعداد پاسخ های غلط: <span className='int'>{questions && questions.length - correctAnswersCounter}</span></h5>
                         </div>
                     </div>
 
                     <div className='container mx-auto px-20'>
                         <div className="result__share space-sm text-center">
-                            <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizResult && quizResult.fan_name} هستن`}</h5>
+                            <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizResult?.fan_name} هستن`}</h5>
 
                             {/* <InlineShareButtons
                                 config={{
@@ -209,9 +211,9 @@ const Result = () => {
                                     size: 45,             // the size of each button (INTEGER)
 
                                     // OPTIONAL PARAMETERS
-                                    url: `https://www.quizzland.net/quiz/${replaceFunction(quizResult && quizResult.title, ' ', '-')}`,
-                                    image: quizResult && quizResult.thumbnail,  // (defaults to og:image or twitter:image)
-                                    title: quizResult && quizResult.title,            // (defaults to og:title or twitter:title)
+                                    url: `https://www.quizzland.net/quiz/${replaceFunction(quizResult?.title, ' ', '-')}`,
+                                    image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
+                                    title: quizResult?.title,            // (defaults to og:title or twitter:title)
                                 }}
                             /> */}
 
@@ -239,9 +241,9 @@ const Result = () => {
                                     spacing: 8,           // the spacing between buttons (INTEGER)
 
                                 // OPTIONAL PARAMETERS
-                                url: `https://www.quizzland.net/quiz/${replaceFunction(quizResult && quizResult.title, ' ', '-')}`,
-                                image: quizResult && quizResult.thumbnail,  // (defaults to og:image or twitter:image)
-                                title: quizResult && quizResult.title,            // (defaults to og:title or twitter:title)
+                                url: `https://www.quizzland.net/quiz/${replaceFunction(quizResult?.title, ' ', '-')}`,
+                                image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
+                                title: quizResult?.title,            // (defaults to og:title or twitter:title)
                                 }}
                             /> */}
                         </div>
@@ -262,16 +264,16 @@ const Result = () => {
 
                 {
                     suggestionQuizzes &&
-                    <div className='result__popUpQuizSuggester fixed popUp-hide'>
-                        <button className='result__popUpQuizSuggester__closeBtn fadeOut absolute z-300' onClick={() => {
+                    <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-auto'>
+                        <button className='result__popUpQuizSuggester__closeBtn fadeOut absolute left-4 top-4 text-3xl' onClick={() => {
                             closePopUpQuizSuggester();
                         }}> X </button>
 
                         <div>
-                            <h3 className='result__popUpQuizSuggester__headline'>پیشنهاد برای کوییز بعدیت :</h3>
+                            <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
                             <Link href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
                                 <a>
-                                    <h3 className="result__popUpQuizSuggester__title flex">
+                                    <h3 className="result__popUpQuizSuggester__title flex text-lg">
                                         {chooseUniqueQuizToSuggest().title}
                                     </h3>
                                 </a>
@@ -279,13 +281,14 @@ const Result = () => {
                         </div>
                         <Link href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
                             <a>
-                                <div className='result__popUpQuizSuggester__thumbnail'>
+                                <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
                                     <Image
                                         src={chooseUniqueQuizToSuggest().thumbnail}
                                         alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
                                         blurDataURL={chooseUniqueQuizToSuggest().thumbnail}
-                                        width='500'
-                                        height='500'
+                                        width='1920'
+                                        height='1080'
+                                        className='object-cover h-[19rem]'
                                         placeholder='blur'
                                     />
                                 </div>

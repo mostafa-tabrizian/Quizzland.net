@@ -39,8 +39,8 @@
     }
 
     &__score {
-        font-size: $font-xl; font-weight: 600;
-        order: 1;
+        // font-size: $font-xl; font-weight: 600;
+        // order: 1;
 
         @include breakpoints-down(large){
             text-align: center;
@@ -71,58 +71,58 @@
     }
 
     &__popUpQuizSuggester {
-        pointer-events: all;
+        // pointer-events: all;
         left: calc(50% - 2rem); top: 50%;
-        background: #8b0000f2;
+        // background: #8b0000f2;
         backdrop-filter: blur(10px);
-        padding: 2rem;
-        height: 30rem; min-width: 45rem;
-        margin-left: 2rem; margin-right: 2rem;
-        border-radius: 15px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        // padding: 2rem;
+        // height: 30rem; min-width: 45rem;
+        // margin-left: 2rem; margin-right: 2rem;
+        // border-radius: 15px;
+        // display: grid;
+        // grid-template-columns: 1fr 1fr;
         direction: rtl;
 
         @include breakpoints-down(large) {
-            grid-template-columns: 1fr;
-            min-width: inherit;
-            width: calc(100% - 1rem);
-            height: 27rem;
+            // grid-template-columns: 1fr;
+            // min-width: inherit;
+            // width: calc(100% - 1rem);
+            // height: 27rem;
         }
 
         &__headline {
-            font-size: 1.125rem;
-            color: #ffb3b3;
+            // font-size: 1.125rem;
+            // color: #ffb3b3;
         }
 
         &__thumbnail {
-            width: 20rem;
-            height: 26rem;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 0 10px black;
+            // width: 20rem;
+            // height: 26rem;
+            // overflow: hidden;
+            // border-radius: 15px;
+            // box-shadow: 0 0 10px black;
 
             @include breakpoints-down(large) {
-                width: 18rem;
-                height: 12rem;
+                // width: 18rem;
+                // height: 12rem;
             }
 
             img {
-                width: 47rem;
+                // width: 47rem;
                 /* position: relative; */
-                right: 50%;
-                transform: translate(50%);
-                position: relative;
+                // right: 50%;
+                // transform: translate(50%);
+                // position: relative;
                 transition: width .3s ease-in-out;
 
                 @include breakpoints-down(large) {
-                    top: 50%;
-                    transform: translate(50%, -50%);
+                    // top: 50%;
+                    // transform: translate(50%, -50%);
                 }
 
-                &:hover {
-                    width: 48.5rem;
-                }
+                // &:hover {
+                //     width: 48.5rem;
+                // }
             }
         }
 
@@ -141,17 +141,17 @@
         }
 
         &__closeBtn {
-            top: -1.4rem; right: -0.7rem;
-            font-size: 2rem;
-            background: none;
-            border: none;
-            cursor: pointer;
+            // top: -1.4rem; right: -0.7rem;
+            // font-size: 2rem;
+            // background: none;
+            // border: none;
+            // cursor: pointer;
             font-family: cursive, 'myHarmattan';
-            color: whitesmoke !important;
+            // color: whitesmoke !important;
 
-            @include breakpoints-down(large) {
-                right: .5rem;
-            }
+            // @include breakpoints-down(large) {
+            //     right: .5rem;
+            // }
         }
     }
 }
