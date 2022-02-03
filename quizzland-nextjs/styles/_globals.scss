@@ -504,17 +504,18 @@ input {
     // box-shadow: 0 10px 22px 1px #0000005c;
     // background: #828282b9;
     // position: relative;
-    // overflow: hidden;
     // margin: 1rem;
     
-    &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        background: linear-gradient(to right, transparent 0%, #E8E8E8 50%, transparent 100%);
-        left: 0; top: -32rem;
-        height: 75rem; width: 24rem;
-        animation: load 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
+    @supports not( -moz-appearance:none ){
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0; top: -32rem;
+            height: 75rem; width: 24rem;
+            background: linear-gradient(to right, transparent 0%, #E8E8E8 50%, transparent 100%);
+            animation: load 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
+        }
     }
 
     &__quizContainer {

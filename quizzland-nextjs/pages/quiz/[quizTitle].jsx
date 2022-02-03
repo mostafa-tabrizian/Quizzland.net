@@ -128,18 +128,18 @@ const Quiz = () => {
     const ImGifTextAnswerShowOrHide = (questionId, hideOrShow) => {
         const question = document.querySelectorAll('.quiz__container')[questionId - 1]
         if (hideOrShow == 'block') {
-            question.querySelector('.quiz__answerText').classList.remove('answerHide')
-            question.querySelector('.quiz__answerText').classList.add('answerShow')
+            question.querySelector('.quiz__answerText')?.classList.remove('answerHide')
+            question.querySelector('.quiz__answerText')?.classList.add('answerShow')
 
-            question.querySelector('.quiz__answerImGif').classList.remove('answerHide')
-            question.querySelector('.quiz__answerImGif').classList.add('answerShow')
+            question.querySelector('.quiz__answerImGif')?.classList.remove('answerHide')
+            question.querySelector('.quiz__answerImGif')?.classList.add('answerShow')
         }
         else if (hideOrShow == 'none') {
-            question.querySelector('.quiz__answerText').classList.remove('answerShow')
-            question.querySelector('.quiz__answerText').classList.add('answerHide')
+            question.querySelector('.quiz__answerText')?.classList.remove('answerShow')
+            question.querySelector('.quiz__answerText')?.classList.add('answerHide')
 
-            question.querySelector('.quiz__answerImGif').classList.remove('answerShow')
-            question.querySelector('.quiz__answerImGif').classList.add('answerHide')
+            question.querySelector('.quiz__answerImGif')?.classList.remove('answerShow')
+            question.querySelector('.quiz__answerImGif')?.classList.add('answerHide')
         }
     }
 
@@ -226,7 +226,7 @@ const Quiz = () => {
 
     const questionShowIfNotNull = (question) => {
         if (question !== null) {
-            return <p className='quiz__question text-center'> {question} </p>
+            return <p className='quiz__question text-center bg-[#0000007c] backdrop-blur-xl rounded-lg'> {question} </p>
         }
     }
 
@@ -338,30 +338,26 @@ const Quiz = () => {
     }
 
     const answerOfQuestionIfExistShow = (question) => {
-        if (question.answer_text) {
-            return (
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: question.answer_text
-                    }}>
-                </div>
-            )
-        }
+        return (
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: question.answer_text
+                }}>
+            </div>
+        )
     }
 
     const gifAnswerOfQuestionIfExistShow = (question) => {
-        if (!(question.answer_imGif.includes('NotExist.jpg'))) {
-            return <Image
-                src={question.answer_imGif}
-                width='1366'
-                height='768'
-                className='object-contain'
-                alt={question.title}
-                title={question.title}
-                blurDataURL='/images/Q-512.png'
-                placeholder='blur'
-            />
-        }
+        return <Image
+            src={question.answer_imGif}
+            width='1366'
+            height='768'
+            className='object-contain object-top'
+            alt={question.title}
+            title={question.title}
+            blurDataURL='/images/Q-512.png'
+            placeholder='blur'
+        />
     }
 
     const isSafari = typeof (window) !== 'undefined' && navigator.userAgent.indexOf("Chrome") != -1 === false && navigator.userAgent.indexOf("Chrome") != -1
@@ -394,37 +390,45 @@ const Quiz = () => {
                 return (
                     <div key={question.id}
                         style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }}
-                        className={`quiz__container relative darkGls md:bg-[#0000007c] backdrop-blur-xl md:pt-3`}>
+                        className={`quiz__container relative md:pt-3`}>
 
                         <span className='block right-2 top-[-.5rem] z-10 absolute text-[3rem] text-red-900'>
                             {questionCounterForId}
                         </span>
 
-                        {questionShowIfNotNull(question.question)}
-
                         <div>
-                            {!question.question_img.includes('NotExist') &&
-                                <Image
-                                    src={question.question_img}
-                                    width='1366'
-                                    height='768'
-                                    alt={question.title}
-                                    className='rounded-xl object-contain object-top'
-                                    title={question.title}
-                                    blurDataURL='/images/Q-512.png'
-                                    placeholder='blur'
-                                />}
+                            {questionShowIfNotNull(question.question)}
+
+                            <div>
+                                {!question.question_img.includes('NotExist') &&
+                                    <Image
+                                        src={question.question_img}
+                                        width='1366'
+                                        height='768'
+                                        alt={question.title}
+                                        className='rounded-xl object-contain object-top'
+                                        title={question.title}
+                                        blurDataURL='/images/Q-512.png'
+                                        placeholder='blur'
+                                    />}
+                            </div>
                         </div>
 
                         {questionOptionsCheckBetweenStringOrImg(question)}
 
-                        <div className={`quiz__answerText answerHide text-right`}>
-                            {answerOfQuestionIfExistShow(question)}
-                        </div>
+                        {
+                            question?.answer_text &&
+                            <div className={`quiz__answerText answerHide text-right bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg`}>
+                                {answerOfQuestionIfExistShow(question)}
+                            </div>
+                        }
 
-                        <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif'>
-                            {gifAnswerOfQuestionIfExistShow(question)}
-                        </div>
+                        {
+                            !(question.answer_imGif.includes('NotExist.jpg')) &&
+                            <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg'>
+                                {gifAnswerOfQuestionIfExistShow(question)}
+                            </div>
+                        }
                     </div>
                 )
                 // }
@@ -695,7 +699,7 @@ const Quiz = () => {
                             contentLoaded && isItDesktop() &&
                             <div className={`
                                     quiz__questionChanger__container absolute
-                                    top-40 right-[5%]
+                                    top-12 right-[5%]
                                      ${ableToGoNext ? 'fadeIn' : 'fadeOut'}`
                             }>
                                 <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}

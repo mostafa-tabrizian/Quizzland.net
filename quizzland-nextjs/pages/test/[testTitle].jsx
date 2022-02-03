@@ -320,7 +320,7 @@ const Quiz = () => {
     const goNextQuestionOrEndTheQuiz = () => {
         if (ableToGoNext || autoQuestionChanger) {
             setShowQuestionChangingHelper('never')
-            // setAbleToGoNext(false)
+            setAbleToGoNext(false)
             if (currentQuestionNumber !== questions.length) {
                 plusOneToTotalAnsweredQuestions()
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
@@ -574,9 +574,9 @@ const Quiz = () => {
                         {
                             contentLoaded && isItDesktop() &&
                             <div className={`quiz__questionChanger__container absolute
-                                            top-40 right-[5%]
+                                            top-12 w-full
                             `}>
-                                <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger absolute quiz__questionChanger__next btn ${ableToGoNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
+                                <button onClick={goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger quiz__questionChanger__next btn absolute left-[95%] ${ableToGoNext ? 'fadeIn' : 'fadeOut'} `} aria-label='Next Question'></button>
                                 <button onClick={goLastQuestion} className={`quiz__questionChanger absolute quiz__questionChanger__last btn`} aria-label='Next Question'></button>
                             </div>
                         }

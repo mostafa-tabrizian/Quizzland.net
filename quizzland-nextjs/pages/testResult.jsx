@@ -28,14 +28,12 @@ const Result = () => {
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
     
     useEffect(() => {
-        async () => {
+        if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
+            window.location.href = "/404";
+        } else {
             setLoadState(true)
             setTestResult(JSON.parse(localStorage.getItem('testResult')))
             setTestDetail(JSON.parse(localStorage.getItem('resultQuiz')))
-    
-            if(JSON.parse(localStorage.getItem('resultQuiz')) === null) {
-                window.location.href = "/404";
-            }
         }
     }, [])
 
@@ -133,7 +131,7 @@ const Result = () => {
 
                 <div className="result__container">
                     <div className="result__title flex justify-center">
-                        <h5 className="text-right">&quot نتیجه تست  &quot {testDetail && testDetail.title}</h5>
+                        <h5 className="text-right text-lg">نتیجه {testDetail?.title}</h5>
                     </div>
                     <div className="beforeAfterDecor flex justify-center flex-ai-c">
                         <h1 className="result__subtitle text-center">{resultSubtitle}</h1>
@@ -146,7 +144,7 @@ const Result = () => {
                                 src={resultImg}
                                 width='730'
                                 height='410'
-                                alt={testDetail && testDetail.subCategory}
+                                alt={testDetail?.subCategory}
                                 blurDataURL={resultImg}
                                 placeholder='blur'
                             />
@@ -164,7 +162,7 @@ const Result = () => {
 
                     <div className='container mx-auto px-20'>
                         <div className="result__share space-sm text-center">
-                            <h5>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
+                            <h5 className='text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
                             {/* <InlineShareButtons
                                 config={{
@@ -186,15 +184,15 @@ const Result = () => {
                                     size: 45,             // the size of each button (INTEGER)
 
                                     // OPTIONAL PARAMETERS
-                                    url: `https://www.quizzland.net/test/${replaceFunction(testDetail && testDetail.title, ' ', '-')}`,
+                                    url: `https://www.quizzland.net/test/${replaceFunction(testDetail?.title, ' ', '-')}`,
                                     image: testDetail.thumbnail,  // (defaults to og:image or twitter:image)
-                                    title: testDetail && testDetail.title,            // (defaults to og:title or twitter:title)
+                                    title: testDetail?.title,            // (defaults to og:title or twitter:title)
                                 }}
                             /> */}
 
                         </div>
 
-                        <h2 className='flex justify-center flex-ai-c space-med'>این تست چطور بود؟</h2>
+                        <h2 className='flex justify-center flex-ai-c space-med text-lg'>این تست چطور بود؟</h2>
                         
                         <div>
                             {/* <InlineReactionButtons
@@ -216,9 +214,9 @@ const Result = () => {
                                     spacing: 8,           // the spacing between buttons (INTEGER)
 
                                 // OPTIONAL PARAMETERS
-                                url: `https://www.quizzland.net/test/${replaceFunction(testDetail && testDetail.title, ' ', '-')}`,
+                                url: `https://www.quizzland.net/test/${replaceFunction(testDetail?.title, ' ', '-')}`,
                                 image: testDetail.thumbnail,  // (defaults to og:image or twitter:image)
-                                title: testDetail && testDetail.title,            // (defaults to og:title or twitter:title)
+                                title: testDetail?.title,            // (defaults to og:title or twitter:title)
                                 }}
                             /> */}
                         </div>
@@ -231,7 +229,7 @@ const Result = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="quizContainer flex container mx-auto px-20">
+                <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
                     {
                         suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }

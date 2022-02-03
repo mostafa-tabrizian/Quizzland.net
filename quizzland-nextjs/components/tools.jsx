@@ -34,28 +34,28 @@ const Tools = (props) => {
     }
 
     return (
-        <div className='tools container mx-auto px-20 flex flex-ai-c'>
-            <div className='tools__sort'>
-                <button onClick={showHideToolsSort} className={`tools__sort__btn btn`}>ترتیب بر اساس: 
-                    <span>  {sortTypeDefinition[props.sortType]}  </span>
+        <div className='tools container justify-center md:justify-end mx-auto md:px-20 flex relative mt-5 text-lg z-10 space-x-2'>
+            <div className='tools__numberOfResult'>
+                <button onClick={showHideToolsNumberOfResult} className={`tools__numberOfResult__btn w-full tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`}>تعداد نمایش: 
+                    <span> {props.numberOfResult} </span>
                 </button>
-                <div className={showToolsSort ? 'fadeIn' : 'fadeOut'}>
-                    <ul className='tools__sort__options'>
-                        <button onClick={() => {changeSortType('newest')}} className={`btn`} type='button'>جدیدترین</button>
-                        <button onClick={() => {changeSortType('bestest')}} className={`btn`} type='button'>بهترین</button>
-                        <button onClick={() => {changeSortType('alphabet')}} className={`btn`} type='button'>الفبا</button>
+                <div className={` ${showToolsNumberOfResults ? 'fadeIn' : 'fadeOut'} my-2`}>
+                    <ul className='tools__numberOfResult__options space-x-1 space-x-reverse'>
+                        <button onClick={() => {changeNumberOfResults(16)}} className={`tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`} type='button'>16</button>
+                        <button onClick={() => {changeNumberOfResults(32)}} className={`tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`} type='button'>32</button>
+                        <button onClick={() => {changeNumberOfResults(48)}} className={`tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`} type='button'>48</button>
                     </ul>
                 </div>
             </div>
-            <div className='tools__numberOfResult'>
-                <button onClick={showHideToolsNumberOfResult} className={`tools__numberOfResult__btn btn`}>تعداد نمایش: 
-                    <span> {props.numberOfResult} </span>
+            <div>
+                <button onClick={showHideToolsSort} className={`bg-gray-300 text-black tools_btn px-2 py-1 w-full rounded-lg`}>ترتیب بر اساس: 
+                    <span>  {sortTypeDefinition[props.sortType]}  </span>
                 </button>
-                <div className={showToolsNumberOfResults ? 'fadeIn' : 'fadeOut'}>
-                    <ul className='tools__numberOfResult__options'>
-                        <button onClick={() => {changeNumberOfResults(16)}} className={`btn`} type='button'>16</button>
-                        <button onClick={() => {changeNumberOfResults(32)}} className={`btn`} type='button'>32</button>
-                        <button onClick={() => {changeNumberOfResults(48)}} className={`btn`} type='button'>48</button>
+                <div className={`${showToolsSort ? 'fadeIn' : 'fadeOut'} my-2`}>
+                    <ul className='space-x-1 space-x-reverse'>
+                        <button onClick={() => {changeSortType('newest')}} className={`tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`} type='button'>جدیدترین</button>
+                        <button onClick={() => {changeSortType('bestest')}} className={`tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`} type='button'>بهترین</button>
+                        <button onClick={() => {changeSortType('alphabet')}} className={`tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`} type='button'>الفبا</button>
                     </ul>
                 </div>
             </div>

@@ -143,7 +143,7 @@ const SubCategory = () => {
                             <h2 className={`container mx-auto px-20`} style={{color: 'white'}}>کوییز ها</h2>
                         }
 
-                        <ul className={`quizContainer flex flex-ai-fe container mx-auto px-20 flex-wrap align-baseline m-2 justify-right md:m-auto`}>
+                        <ul className={`quizContainer flex flex-ai-fe container mx-auto md:px-20 ml-3 px-2 flex-wrap align-baseline m-2 justify-right md:m-auto`}>
                             {listQuizzes()}
                         </ul>
 

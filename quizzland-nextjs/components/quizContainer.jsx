@@ -7,10 +7,10 @@ const QuizContainerWithoutViews = (props) => {
     return (
         props.quizzes.map((quiz) => {
             return (
-                <li key={quiz.id} className='mr-7 md:m-2 md:mb-6'>
+                <li key={quiz.id} className='mr-7 md:m-2 md:mb-6 ml-1'>
                     <article className={`
                         flex text-right h-full
-                        rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                        rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
                         ${props.bgStyle == 'bg' ? 'quizContainer__bg' : 'quizContainer__trans'}`}
                     >  {/* bg or trans */}
 
