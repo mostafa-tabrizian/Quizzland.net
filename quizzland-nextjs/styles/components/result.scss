@@ -3,12 +3,12 @@
     display: grid;
     grid-template-columns: 17rem 19rem 18rem;
 
-    @include breakpoints-down(large){
-        display: block;
-        margin-left: 50%;
-        transform: translate(-50%);
-        width: 20rem;
-    }
+    // @include breakpoints-down(large){
+    //     display: block;
+    //     margin-left: 50%;
+    //     transform: translate(-50%);
+    //     width: 20rem;
+    // }
 
     &__container {
         min-height: 40vh;
@@ -42,28 +42,28 @@
         // font-size: $font-xl; font-weight: 600;
         // order: 1;
 
-        @include breakpoints-down(large){
-            text-align: center;
-            margin-top: 3rem; margin-bottom: 1.125rem;
-        }
+        // @include breakpoints-down(large){
+        //     text-align: center;
+        //     margin-top: 3rem; margin-bottom: 1.125rem;
+        // }
     }
 
     &__img {
         order: 2;
-        margin-left: 4rem; margin-right: 4rem;
+    //     margin-left: 4rem; margin-right: 4rem;
     }
 
     &__detail {
         order: 3;
         
-        @include breakpoints-down(large) {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
+        // @include breakpoints-down(large) {
+        //     text-align: center;
+        //     margin-bottom: 4rem;
+        // }
 
-        > h5 {
-            margin-bottom: .7rem; margin-top: 0;
-        }
+        // > h5 {
+        //     margin-bottom: .7rem; margin-top: 0;
+        // }
 
         &__wrongTime {
             margin-right: 1rem;

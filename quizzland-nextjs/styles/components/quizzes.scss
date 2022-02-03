@@ -14,6 +14,13 @@ body {
     }
 }
 
+.questionId {
+    background: radial-gradient(0deg, #dc1d1d, #7c0f0f);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 // .SFXController {
 //     z-index: 4;
 //     margin-left: 1.5rem;
@@ -183,14 +190,14 @@ body {
             //     right: 0; top: 9.5rem;
             // }
 
-            button {
-                background: url('/images/arw.svg') no-repeat center center;
-                height: 2rem; width: 2rem;
-            }
+            // button {
+            //     background: url('/images/arw.svg') no-repeat center center;
+            //     height: 2rem; width: 2rem;
+            // }
         }
 
         &__next {
-            transform: rotate(-90deg);
+            transform: rotate();
             // top: 2.1rem;
 
             // @include breakpoints-down(large) {
@@ -200,7 +207,7 @@ body {
         }
 
         &__last {
-            transform: rotate(90deg);
+            transform: rotate(180deg);
             // position: relative;
             
             // @include breakpoints-down(large) {

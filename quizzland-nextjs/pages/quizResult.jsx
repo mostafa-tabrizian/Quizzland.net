@@ -169,26 +169,26 @@ const Result = () => {
                     <div className="beforeAfterDecor flex justify-center flex-ai-c">
                         <h1 className="result__subtitle text-center">{resultSubtitle}</h1>
                     </div>
-                    <div className="result container mx-auto px-20 space-sm flex flex-ai-c justify-center">
-                        <div className="result__img flex justify-center flex-ai-c">
+                    <div className="result md:container mx-auto w-full space-sm block md:flex flex-ai-c justify-center">
+                        <div className="result__img flex justify-center md:mx-16 flex-ai-c">
                             {
                                 resultGif &&
-                                <Image src={resultGif} width='320' height='320' alt={quizResult?.subCategory}/>
+                                <Image className='object-contain' src={resultGif} width='336' height='336' alt={quizResult?.subCategory}/>
                             }
                         </div>
-                        <div className="result__score">
+                        <div className="result__score text-center text-[2rem]">
                             <h5>
                                 {resultScore}
                             </h5>
                         </div>
-                        <div className="result__detail text-right">
-                            <h5>تعداد پاسخ های درست: <span className='int'>{correctAnswersCounter}</span></h5>
-                            <h5>تعداد پاسخ های غلط: <span className='int'>{questions && questions.length - correctAnswersCounter}</span></h5>
+                        <div className="result__detail text-center mt-5 mb-16 text-lg">
+                            <h5>پاسخ 🟢: <span>{correctAnswersCounter}</span></h5>
+                            <h5>پاسخ 🔴: <span>{questions && questions.length - correctAnswersCounter}</span></h5>
                         </div>
                     </div>
 
                     <div className='container mx-auto px-20'>
-                        <div className="result__share space-sm text-center">
+                        <div className="result__share space-sm text-center text-lg">
                             <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizResult?.fan_name} هستن`}</h5>
 
                             {/* <InlineShareButtons
@@ -219,7 +219,7 @@ const Result = () => {
 
                         </div>
 
-                        <h2 className='flex justify-center flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
+                        <h2 className='flex justify-center flex-ai-c space-sm text-lg'>این کوییز چطور بود؟</h2>
                         
                         <div>
                             {/* <InlineReactionButtons
@@ -252,7 +252,7 @@ const Result = () => {
 
                 </div>
 
-                <h2 className='text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
+                <h2 className='text-center space-med beforeAfterDecor text-lg'>کوییز های مشابه</h2>
 
                 {SkeletonLoading(contentLoaded)}
 

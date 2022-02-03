@@ -14,8 +14,6 @@ import QuizContainer from '../../components/quizContainer'
 import SkeletonLoading from '../../components/skeletonLoading'
 
 const logo = '../images/Q-small.png'
-const speakerIconOn = '/images/speakerOn.png'
-const speakerIconOff = '/images/speakerOff.png'
 
 let quiz = 'null'
 let advertPos = 0
@@ -232,7 +230,7 @@ const Quiz = () => {
 
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        // setAbleToGoNext(false)
+        setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
         makeEveryOptionLowOpacity('high')
@@ -248,7 +246,7 @@ const Quiz = () => {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46.20
     }
     else if (isItMobile()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 22.8
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 22.7
     }
 
 
@@ -297,7 +295,7 @@ const Quiz = () => {
                             <> <input
                                 onClick={selectedOption}
                                 type="radio"
-                                name="answer" className='opacity-0 absolute'
+                                name="answer" className='absolute opacity-0'
                                 id={`${questionCounterForId}-1`}
                             />
                                 <label
@@ -317,20 +315,20 @@ const Quiz = () => {
                                 </label>
                             </>
                         }
-                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
-                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
-                        {question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
+                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
+                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
+                        {question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
                     </form>
                 </div>
             )
         } else {
             return (
                 <div className="flex justify-center">
-                    <form className='quiz_options pt-4 grid grid-cols-2 md:flex md:space-x-3 justify-center relative' data={question.answer} action="">
-                        {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <Image src={question.option_img_1st} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </>}
-                        {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <Image src={question.option_img_2nd} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </>}
-                        {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <Image src={question.option_img_3rd} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </>}
-                        {!(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='opacity-0 absolute' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <Image src={question.option_img_4th} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="quiz__imgOption rounded-xl object-contain object-top" /> </label> </>}
+                    <form className='relative grid justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3' data={question.answer} action="">
+                        {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <Image src={question.option_img_1st} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <Image src={question.option_img_2nd} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <Image src={question.option_img_3rd} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <Image src={question.option_img_4th} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
                     </form>
                 </div>
             )
@@ -376,7 +374,7 @@ const Quiz = () => {
 
                 //     return (
                 //         <>
-                //             <div className='adverts_between flex justify-center' id='mediaad-cpLp'></div>
+                //             <div className='flex justify-center adverts_between' id='mediaad-cpLp'></div>
 
                 //             <div className={`quiz__questionChanger__container absolute ${currentQuestionNumber == 2 ? 'fadeIn' : 'fadeOut'}`}>
                 //                 <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz} className={`quiz__questionChanger absolute quiz__questionChanger__next btn ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}`} aria-label='Next Question'></button>
@@ -392,7 +390,7 @@ const Quiz = () => {
                         style={{ transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }}
                         className={`quiz__container relative md:pt-3`}>
 
-                        <span className='block right-2 top-[-.5rem] z-10 absolute text-[3rem] text-red-900'>
+                        <span className='questionId block right-4 top-2 z-10 absolute text-[3rem]'>
                             {questionCounterForId}
                         </span>
 
@@ -406,7 +404,7 @@ const Quiz = () => {
                                         width='1366'
                                         height='768'
                                         alt={question.title}
-                                        className='rounded-xl object-contain object-top'
+                                        className='object-contain object-top rounded-xl'
                                         title={question.title}
                                         blurDataURL='/images/Q-512.png'
                                         placeholder='blur'
@@ -440,7 +438,7 @@ const Quiz = () => {
         return (
             questions && questions.map(question => {
                 return (
-                    <div key={question.id} style={{ left: `${currentMoveOfQuestions}rem` }} className="quiz__container relative darkGls">
+                    <div key={question.id} style={{ left: `${currentMoveOfQuestions}rem` }} className="relative quiz__container darkGls">
                         {questionShowIfNotNull(question.question)}
 
                         {
@@ -449,7 +447,7 @@ const Quiz = () => {
                                 src={question.question_img}
                                 width='1366'
                                 height='768'
-                                className='rounded-xl object-contain object-top'
+                                className='object-contain object-top rounded-xl'
                                 alt={question.title}
                                 title={question.title}
                                 blurDataURL='/images/Q-512.png'
@@ -481,7 +479,7 @@ const Quiz = () => {
         return (
             splittedTags.map(tag => {
                 return (
-                    <li key={tag} className='px-3 py-1 rounded-lg text-sm'>
+                    <li key={tag} className='px-3 py-1 text-sm rounded-lg'>
                         <h2>
                             <Link href={`/search?s=${replaceFunction(tag, ' ', '+')}`} >
                                 <a rel='tag'>
@@ -611,27 +609,26 @@ const Quiz = () => {
 
                 <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
                     <div className={'loadingScreen fixed flex justify-center flex-ai-c'}></div>
-                    <div className='countingResult loadingScreen fixed flex justify-center flex-ai-c'>
+                    <div className='fixed flex justify-center countingResult loadingScreen flex-ai-c'>
                         ___ در حال محاسبه نتیجه کوییز___
                     </div>
                 </div>
 
-                <div className='absolute top-28 ml-10 z-10' onClick={() => { SFXController() }} >
+                <div className='absolute z-10 ml-10 top-28' onClick={() => { SFXController() }} >
                     <button type="button">
-                        <Image
-                            src={SFXAllowed === 'true' ? speakerIconOn : speakerIconOff}
-                            width='24'
-                            height='24'
-                            alt='کوییزلند | Quizzland'
-                        />
+                        {SFXAllowed === 'true' ? 
+                            <svg className="w-6 h-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/> </svg>
+                            :
+                            <svg className="w-6 h-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd"/> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/> </svg>
+                         }
                     </button>
                 </div>
 
-                <div className="quiz__head relative text-right" id="quiz__head">
+                <div className="relative text-right quiz__head" id="quiz__head">
                     {
                         !(contentLoaded) &&
                         <div className='flex justify-center flex-ai-c'>
-                            <div className='skeletonLoading skeletonLoading__quizTitle mb-5 shadow-xl m-2 overflow-hidden rounded-lg'></div>
+                            <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizTitle'></div>
                         </div>
                     }
 
@@ -639,12 +636,12 @@ const Quiz = () => {
                         <h1>{quiz && quiz.title}</h1>
                     </div>
 
-                    <div className="quiz__detail flex justify-center flex-ai-c">
+                    <div className="flex justify-center quiz__detail flex-ai-c">
                         {
                             !(contentLoaded) &&
                             <div className='flex space-x-5'>
-                                <div className='skeletonLoading skeletonLoading__quizInfo mb-5 shadow-xl m-2 overflow-hidden rounded-lg'></div>
-                                <div className='skeletonLoading skeletonLoading__quizInfo mb-5 shadow-xl m-2 overflow-hidden rounded-lg'></div>
+                                <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
+                                <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
                             </div>
                         }
                         {
@@ -688,7 +685,7 @@ const Quiz = () => {
                     <div className={`quiz__hider flex relative`}>
                         {
                             !(contentLoaded) &&
-                            <div className='skeletonLoading skeletonLoading__quizQuestion shadow-lg shadow-zinc-800 overflow-hidden rounded-xl'></div>
+                            <div className='overflow-hidden shadow-lg skeletonLoading skeletonLoading__quizQuestion shadow-zinc-800 rounded-xl'></div>
                         }
 
                         {
@@ -698,25 +695,29 @@ const Quiz = () => {
                         {
                             contentLoaded && isItDesktop() &&
                             <div className={`
-                                    quiz__questionChanger__container absolute
-                                    top-12 right-[5%]
-                                     ${ableToGoNext ? 'fadeIn' : 'fadeOut'}`
-                            }>
+                                quiz__questionChanger__container absolute
+                                top-4 right-[15%]
+                                ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
+                            `}>
                                 <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
+                                    aria-label='Next Question'
                                     className={`
-                                            quiz__questionChanger absolute
-                                            quiz__questionChanger__next btn
-                                            ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
-                                        `}
-                                    aria-label='Next Question'></button>
+                                        quiz__questionChanger absolute
+                                        quiz__questionChanger__next btn
+                                        ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
+                                    `}>
+                                    
+                                    <svg className="w-8 h-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>    
+                                    
+                                </button>
                             </div>
                         }
                     </div>
                 </div>
 
                 <div>
-                    <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
-                    <ul className='quiz__tags flex justify-center space-x-3 space-x-reverse mt-5'>
+                    <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
+                    <ul className='flex justify-center mt-5 space-x-3 space-x-reverse quiz__tags'>
                         {quiz && showTheTagsIfNotNull()}
                     </ul>
                 </div>
@@ -725,11 +726,11 @@ const Quiz = () => {
                 <div className='adverts_center' id='mediaad-bNpr'></div>
 
                 <div className='space-med'>
-                    <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
+                    <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
                         {
                             suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                         }
@@ -737,7 +738,7 @@ const Quiz = () => {
                 </div>
 
 
-                <h7 className='quiz__tags__title flex justify-center flex-ai-c beforeAfterDecor'>مطالب پیشنهادی</h7>
+                <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>مطالب پیشنهادی</h7>
 
                 {/* Adverts */}
                 <div className='adverts_center' id='mediaad-dESu'></div>

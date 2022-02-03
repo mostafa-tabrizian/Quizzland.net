@@ -73,7 +73,7 @@ const Header = (props) => {
                 <nav className="flex flex-ai-c flex-jc-sb">
                     <div>
                         <Link href="/">
-                            <a className='header__logo flex-jc-sb flex-ai-c flex md:hidden'>
+                            <a className='flex header__logo flex-jc-sb flex-ai-c md:hidden'>
                                 <Image
                                     src='/images/Q-small.png'
                                     alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
@@ -96,7 +96,7 @@ const Header = (props) => {
                         </div>
 
                         <Link href="/">
-                            <a className="header__logo flex flex-jc-sb flex-ai-c">
+                            <a className="flex header__logo flex-jc-sb flex-ai-c">
                                 <Image
                                     src='/images/Q-small.png'
                                     alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
@@ -132,16 +132,16 @@ const Header = (props) => {
 
                     {/* Menu */}
                     <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn absolute ${props.colorOfHeader} md:hidden`} aria-label="Menu Button">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <svg className="w-8 h-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
                     </button>
 
                     <div className={`header__menu fixed text-right z-10 h-[25rem] w-[100%]
                                     bg-[rgba(148, 148, 148, 0.3)] top-0 right-0
                                     rounded-b-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
                                     pr-8 pt-5 absolute top-0 right-0`}>
-                        <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button"></button>
+                        <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
+                            <svg className="w-8 h-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        </button>
                         
                         <div className='mt-5'>
                             <h4 className='text-xl'>کتگوری ها</h4>

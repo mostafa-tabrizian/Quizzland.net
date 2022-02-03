@@ -136,7 +136,7 @@ const Search = (props) => {
                                                             className='rounded-r-xl md:rounded-xl'
                                                         />
                                                     </div>
-                                                    <div className="header__search__result__title col-span-3 mt-2">
+                                                    <div className="col-span-3 mt-2 header__search__result__title">
                                                         <h2 className={`quizContainer__title quizContainer__title__noViews flex
                                                                     text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
                                                             {quiz.subCategory}
@@ -227,8 +227,8 @@ const Search = (props) => {
                     onChange={inputChanged}
                 />
                 <div className={`header__search__result overflow-scroll h-1/2 ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
-                    <div className="header__search__result__category mr-4 mt-2 rounded-lg justify-center grid overflow-hidden">
-                        <div className="header__search__result__category__container w-80 flex justify-center">
+                    <div className="grid justify-center mt-2 mr-4 overflow-hidden rounded-lg header__search__result__category">
+                        <div className="flex justify-center header__search__result__category__container w-80">
                             <ul className='md:space-y-5'>
                                 {categoriesList}
                             </ul>
@@ -239,17 +239,22 @@ const Search = (props) => {
                         </div>
                     </div>
 
-                    <div className="header__search__result__quizzes mr-5">
-                        <ul className='flex flex-ai-fe container mx-auto px-20 flex-wrap align-baseline m-2 justify-right md:m-auto'>
+                    <div className="mr-5 header__search__result__quizzes">
+                        <ul className='container flex flex-wrap px-20 m-2 mx-auto align-baseline flex-ai-fe justify-right md:m-auto'>
                             {quizzesList}
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <button onClick={searchMobileFocusChangedHideOrShow} className='header__search__opener header__btn md:hidden flex flex-ai-c' type="button"></button>
+            <button onClick={searchMobileFocusChangedHideOrShow} className='flex header__search__opener header__btn md:hidden flex-ai-c' type="button">
+                <svg className="w-8 h-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </button>
+
             <div className={`header__search__opener__bg fixed darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
-                <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg absolute header__menu__closeBtn" aria-label="Close Search Bar"></button>
+                <button onClick={searchMobileFocusChangedHideOrShow} className="absolute header__search__closeBtn header__btn-bg header__menu__closeBtn" aria-label="Close Search Bar"></button>
                 <input
                     type='text'
                     className={`header__search__input text-right ${searchMobile ? 'fadeIn' : 'fadeOut'}`}

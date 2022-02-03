@@ -26,9 +26,9 @@ const SOS = () => {
                 <meta name="robots" content="noindex"></meta>
             </Helmet>
     
-            <div class="basicPage container mx-auto px-20 center relative" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
+            <div className="basicPage container mx-auto px-20 center relative" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
                 <h1>🚧🔧 کوییزلند در حال حاضر در دسترس نیست 🚧🔧 </h1>
-                <div class="space-sm">
+                <div className="space-sm">
                     <p className='text-center'> تیم فنی در حال آپدیت، بررسی و تعمیر برخی مشکلات سایت است </p>
                     <p className='text-center'>لطفا در چند دقیقه آینده دوباره تلاش کنید</p>
                     <p className='text-center'>قدردان صبر شما هستیم 💗</p>
