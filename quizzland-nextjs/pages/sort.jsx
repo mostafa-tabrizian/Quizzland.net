@@ -24,7 +24,6 @@ const Sort = () => {
     const [quizzes, setQuizzes] = useState([])
     const [pointy, setPointy] = useState([])
     const [sortTitle, setSortTitle] = useState()
-    // const [sortType, setSortType] = useState('newest')
     const [pageTravel, setPageTravel] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
@@ -131,7 +130,7 @@ const Sort = () => {
 
                 {SkeletonLoading(contentLoaded)}
                 
-                <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
+                <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
                     
                     {
                         quizzes.length !== 0 && <QuizContainer quizzes={quizzes} bgStyle='trans' />

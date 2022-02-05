@@ -116,12 +116,12 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
                     matchedQuizzes.length >= 4 &&
                     <div className="mb-8">
     
-                        <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c md:container md:px-20">
+                        <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                             <h3 className=''>پیشنهادی های کوییزلند به شما</h3>
                         </div>
                         
                         <div>
-                            <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
+                            <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
                                 <QuizContainerWithoutViews quizzes={matchedQuizzes} bgStyle='trans' />
                             </ul>
                         </div>
@@ -202,7 +202,7 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
                                 priority   
                             />
                         </div>
-                        <div className='hero_bubbles pointer-events-none absolute top-0 left-0'>
+                        <div className='absolute top-0 left-0 pointer-events-none hero_bubbles'>
                             <Image
                                 src='/images/QBubbles.png'
                                 width='350'
@@ -239,12 +239,12 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
                 <div className="mb-8">
                     <tag id='scroll' />
 
-                    <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c  md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>جدیدترین کوییز ها</h3>
                         <Link href="/sort?st=newest"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
                     </div>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={quiz_new_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={quiz_new_ref}>
                         {
                             quiz_new_inView &&
                             <QuizContainerWithoutViews quizzes={quiz_new} bgStyle={'trans'} />
@@ -266,12 +266,12 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
 
                 <div className="mb-8">
 
-                    <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c  md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>بهترین کوییز های این ماه</h3>
                         <Link href="/sort?st=monthlyBestest"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
                     </div>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={quiz_monthlyBest_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={quiz_monthlyBest_ref}>
                         {
                             quiz_monthlyBest_inView &&
                             <QuizContainerWithoutViews quizzes={quiz_monthlyBest} bgStyle={'trans'} />
@@ -282,12 +282,12 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
 
                 <div className="mb-8">
 
-                    <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c  md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>جدیدترین تست ها</h3>
                         <Link href="/sort?st=newest_test"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
                     </div>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={new_pointy_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={new_pointy_ref}>
                         {
                             new_pointy_inView &&
                             <QuizPointyContainer quizzes={new_pointy} bgStyle='trans' />
@@ -309,12 +309,12 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
 
                 <div className="mb-8">
 
-                    <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c  md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>بهترین تست های این ماه</h3>
                         <Link href="/sort?st=monthlyBestest_test"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
                     </div>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={monthlyBest_pointy_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={monthlyBest_pointy_ref}>
                         {
                             monthlyBest_pointy_inView &&
                             <QuizPointyContainer quizzes={monthlyBest_pointy} bgStyle='trans' />
@@ -325,12 +325,12 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
 
                 <div className="mb-8">
 
-                    <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c  md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>کوییز سلبریتی</h3>
                         <Link href="/sort?st=newest&c=celebrity"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
                     </div>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={quiz_new_celebrity_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={quiz_new_celebrity_ref}>
                         {
                             quiz_new_celebrity_inView &&
                             <QuizContainerWithoutViews quizzes={quiz_new_celebrity} bgStyle='trans' />
@@ -352,12 +352,12 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
 
                 <div className="mb-8">
 
-                    <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c  md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>کوییز فیلم و سریال</h3>
                         <Link href="/sort?st=newest&c=movie-series"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
                     </div>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={quiz_new_movieSeries_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={quiz_new_movieSeries_ref}>
                         {
                             quiz_new_movieSeries_inView &&
                             <QuizContainerWithoutViews quizzes={quiz_new_movieSeries} bgStyle='trans' />
@@ -368,12 +368,12 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
 
                 <div className="mb-8">
 
-                    <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c  md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>تست روانشناسی</h3>
                         <Link href="/sort?st=newest&c=psychology"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
                     </div>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={new_pointy_psychology_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={new_pointy_psychology_ref}>
                         {
                             new_pointy_psychology_inView &&
                             <QuizPointyContainer quizzes={new_pointy_psychology} bgStyle='trans' />
@@ -394,26 +394,26 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
                 }
 
                 <div className="mt-8 mb-8">
-                    <div className="quizContainer__header grid grid-cols-2 md:m-auto mr-4 mb-8 md:w-4/5 flex-ai-c  md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>کوییز های بیشتر</h3>
                         <Link href="/sort?st=newest"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
                     </div>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={loadInfinitePart1_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={loadInfinitePart1_ref}>
                         {
                             loadInfinitePart1_inView &&
                             <QuizContainerWithoutViews quizzes={loadInfinitePart1} bgStyle='trans' />
                         }
                     </ul>
                     
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={loadInfinitePart2_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={loadInfinitePart2_ref}>
                         {
                             loadInfinitePart2_inView &&
                             <QuizContainerWithoutViews quizzes={loadInfinitePart2} bgStyle='trans' />
                         }
                     </ul>
 
-                    <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right" ref={loadInfinitePart3_ref}>
+                    <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right" ref={loadInfinitePart3_ref}>
                         {
                             loadInfinitePart3_inView &&
                             <QuizContainerWithoutViews quizzes={loadInfinitePart3} bgStyle='trans' />

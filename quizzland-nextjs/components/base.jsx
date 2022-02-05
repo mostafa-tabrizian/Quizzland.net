@@ -13,7 +13,7 @@ export const viewsFormat = (views) => {
         const separateThousands = Math.ceil((stringedLength / 2)) - 1
         let newViewsFormat = ''
         for (let i = 0; i < separateThousands; i++) {
-            if (i + 1 === separateThousands) {  // some fake fucking views for amaze the user for more popularity
+            if (i + 1 === separateThousands) {  // increased view
                 newViewsFormat = newViewsFormat + stringed[i] + '.' + (parseInt(stringed[1]) + 1) + 'k'
             } else {
                 newViewsFormat = newViewsFormat + stringed[i]

@@ -7,7 +7,7 @@ const QuizContainerWithoutViews = (props) => {
     return (
         props.quizzes.map((quiz) => {
             return (
-                <li key={quiz.id} className='mr-7 md:m-2 md:mb-6 ml-1'>
+                <li key={quiz.id} className='ml-1 mr-7 md:m-2 md:mb-6'>
                     <article className={`
                         flex text-right h-full
                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
@@ -28,7 +28,7 @@ const QuizContainerWithoutViews = (props) => {
                                     className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
                                 />
                             </div>
-                            <div className='md:col-span-3 pt-1 md:mt-2 w-full pb-3 pr-1'>
+                            <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
                                 <h2 className={`quizContainer__title quizContainer__title__noViews flex
                                                 text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
                                     {quiz.subCategory}
@@ -40,7 +40,7 @@ const QuizContainerWithoutViews = (props) => {
                                     {quiz.title}
                                 </h2>
                                 {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
-                                {/* <span className="quizContainer__date text-center">
+                                {/* <span className="text-center quizContainer__date">
                                     {datePublishHandler(quiz.publish)}
                                 </span> */}
                             </div>

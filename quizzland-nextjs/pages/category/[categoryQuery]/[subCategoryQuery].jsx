@@ -18,6 +18,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL
 const SubCategory = () => {
     const router = useRouter()
     const { subCategoryQuery, sc } = router.query  // sc for subCategory which in persian
+    
     const [pageTravelQuiz, setPageTravelQuiz] = useState([])
     const [pageTravelQuizPointy, setPageTravelQuizPointy] = useState([])
 
@@ -27,7 +28,9 @@ const SubCategory = () => {
     const [hideQuizzes, setHideQuizzes] = useState(false)
     const [hideQuizzesPointy, setHideQuizzesPointy] = useState(false)
 
-    const [numberOfResult, setNumberOfResult] = useState(16)
+    const [numberOfResult, setNumberOfResult] = useState(2)
+    const [currentPageNumberQuiz, setCurrentPageNumberQuiz] = useState(1)
+    const [currentPageNumberPointy, setCurrentPageNumberPointy] = useState(1)
     
     const [offsetQuiz, setOffsetQuiz] = useState(0)
     const [offsetQuizPointy, setOffsetQuizPointy] = useState(0)
@@ -151,6 +154,7 @@ const SubCategory = () => {
                             pageTravel={pageTravelQuiz} setPageTravelQuiz={setPageTravelQuiz}
                             numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                             offset={offsetQuiz} setOffset={setOffsetQuiz}
+                            currentPageNumber={currentPageNumberQuiz} setCurrentPageNumber={setCurrentPageNumberQuiz}
                         />
                     </div>
                 }
@@ -172,6 +176,7 @@ const SubCategory = () => {
                             pageTravel={pageTravelQuizPointy} setPageTravelQuiz={setPageTravelQuizPointy}
                             numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                             offset={offsetQuizPointy} setOffset={setOffsetQuizPointy}
+                            currentPageNumber={currentPageNumberPointy} setCurrentPageNumber={setCurrentPageNumberPointy}
                         />
                     </div>
                 }

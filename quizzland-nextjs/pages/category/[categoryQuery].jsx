@@ -22,6 +22,7 @@ const Category = () => {
     const [categories, setCategories] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
+    const [currentPageNumber, setCurrentPageNumber] = useState(1)
     const [sortType, setSortType] = useState('bestest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -73,7 +74,7 @@ const Category = () => {
                         >  {/* bg or trans */}
 
                             <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
-                                <a className='flex md:block md:grid-cols-5 w-full'>
+                                <a className='flex w-full md:block md:grid-cols-5'>
                                     <div className='md:col-span-2 w-[224px] md:h-[126px]'>
                                         <Image
                                             src={category.thumbnail}
@@ -85,11 +86,11 @@ const Category = () => {
                                             className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
                                         />
                                     </div>
-                                    <div className='md:col-span-3 pt-1 md:mt-2 w-full pb-3 pr-1'>
+                                    <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
                                         <h2 className={`quizContainer__title quizContainer__title__noViews
                                                         text-sm mr-5 md:w-52 md:mr-0 md:text-base md:grid md:grid-cols-2`}>
                                             <span>{category.title}</span>
-                                            <span className='text-right md:text-left block'>{category.subCategory}</span>
+                                            <span className='block text-right md:text-left'>{category.subCategory}</span>
                                         </h2>
                                     </div>
                                 </a>
@@ -126,7 +127,7 @@ const Category = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="quizContainer quizContainer__minHeight flex md:flex-ai-fe m-4 md:container md:px-20 flex-wrap align-baseline md:justify-right">
+                <ul className="flex flex-wrap m-4 align-baseline quizContainer quizContainer__minHeight md:flex-ai-fe md:container md:px-20 md:justify-right">
 
                     {listCategories()}
 
@@ -136,6 +137,7 @@ const Category = () => {
                     pageTravel={pageTravel} setPageTravel={setPageTravel}
                     numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                     offset={offset} setOffset={setOffset}
+                    currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
                 />
             </Layout>
         </>

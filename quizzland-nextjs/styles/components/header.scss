@@ -164,27 +164,30 @@
         top: 8rem;
         border: 1px solid transparent; border-radius: 15px;
         backdrop-filter: blur(10px);
-        box-shadow: 0 0 25px 1px rgba(0, 0, 0, 0.178);
+
+        background: rgb(150 72 72 / 32%);
+        box-shadow: inset 0 0 10px #e98080, 0 0 10px black;
+
         border-radius: 20px;
         padding: 1.875rem 1.625rem;
-        opacity: 0;
+        // opacity: 0;
         transition: all .3s ease;
         z-index: 5;
         line-height: 2rem;;
         
-        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-            background: rgba(255, 255, 255, 0.178);
-        }
+        // @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        //     background: rgba(255, 255, 255, 0.178);
+        // }
 
         @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
             background: rgba(255, 255, 255, 0.952);
         }
 
-        &__open {
-            opacity: 1;
+        // &__open {
+        //     opacity: 1;
             // top: 5.5rem;
             // pointer-events: visibleFill;
-        }
+        // }
 
         a {
             color: white;

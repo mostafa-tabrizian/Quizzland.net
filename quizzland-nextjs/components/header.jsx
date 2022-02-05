@@ -17,21 +17,18 @@ const Header = (props) => {
 
     const openCloseCategoryNavigation = () => {
         setCategoryNavigationOpen(categoryNavigationOpen ? false : true)
-        // close every other panel
         setQuizNavigationOpen(false)
         setPointyNavigationOpen(false)
     }
 
     const openCloseQuizNavigation = () => {
         setQuizNavigationOpen(quizNavigationOpen ? false : true)
-        // close every other panel
         setCategoryNavigationOpen(false)
         setPointyNavigationOpen(false)
     }
 
     const openClosePointyNavigation = () => {
         setPointyNavigationOpen(pointyNavigationOpen ? false : true)
-        // close every other panel
         setCategoryNavigationOpen(false)
         setQuizNavigationOpen(false)
     }
@@ -112,19 +109,19 @@ const Header = (props) => {
 
                     <Search />
 
-                    <ul className={`header__categories ${props.colorOfHeader} subHeader absolute pointerOff text-right ${categoryNavigationOpen ? 'subHeader__open' : ''}`}>
+                    <ul className={`header__categories ${props.colorOfHeader} subHeader absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
                         <li><Link href="/category/movie-series"><a>🎬 فیلم و سریال</a></Link></li>
                         <li><Link href="/category/celebrity"><a>✨ سلبریتی</a></Link></li>
                         <li><Link href="/category/psychology"><a>🧠 روانشناسی</a></Link></li>
                     </ul>
 
-                    <ul className={`header__quizzes ${props.colorOfHeader} subHeader absolute pointerOff text-right ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
+                    <ul className={`header__quizzes ${props.colorOfHeader} subHeader absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
                         <li><Link href="/sort?st=newest"><a> ⏳ جدیدترین ها </a></Link></li>
                         <li><Link href="/sort?st=monthlyBestest"><a> 👑 بهترین های ماه </a></Link></li>
                         <li><Link href="/sort?st=bestest"><a> 👑 بهترین ها </a></Link></li>
                     </ul>
 
-                    <ul className={`header__pointy ${props.colorOfHeader} subHeader absolute pointerOff text-right ${pointyNavigationOpen ? 'subHeader__open' : ''}`}>
+                    <ul className={`header__pointy ${props.colorOfHeader} subHeader absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
                         <li><Link href="/sort?st=newest_test"><a> ⏳ جدیدترین ها </a></Link></li>
                         <li><Link href="/sort?st=monthlyBestest_test"><a> 👑 بهترین های ماه </a></Link></li>
                         <li><Link href="/sort?st=bestest_test"><a> 👑 بهترین ها </a></Link></li>
@@ -132,7 +129,7 @@ const Header = (props) => {
 
                     {/* Menu */}
                     <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn absolute ${props.colorOfHeader} md:hidden`} aria-label="Menu Button">
-                        <svg className="w-8 h-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
+                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
                     </button>
 
                     <div className={`header__menu fixed text-right z-10 h-[25rem] w-[100%]
@@ -140,9 +137,9 @@ const Header = (props) => {
                                     rounded-b-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
                                     pr-8 pt-5 absolute top-0 right-0`}>
                         <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
-                            <svg className="w-8 h-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                            <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                         </button>
-                        
+
                         <div className='mt-5'>
                             <h4 className='text-xl'>کتگوری ها</h4>
                             <ul className='flex space-x-6 space-x-reverse'>

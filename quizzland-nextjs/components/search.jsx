@@ -36,14 +36,14 @@ const Search = (props) => {
             document.body.style.overflow = 'overlay'
         }
         setSearchMobile(searchMobile ? false : true)
-
-        if (typeof window !== 'undefined') {
-            document.body.addEventListener(("click"), (e) => {
-                if (!e.target.className.includes('header__search__result__quizzes') && !e.target.className.includes('header__search__input')) {
-                    setSearchResult(false)
-                }
-            })
-        }
+        
+        // if (typeof window !== 'undefined') {
+        //     document.body.addEventListener(("click"), (e) => {
+        //         if (!e.target.className.includes('header__search__result__quizzes') && !e.target.className.includes('header__search__input')) {
+        //             setSearchResult(false)
+        //         }
+        //     })
+        // }
     }
 
     const searchHandler = async (value) => {
@@ -115,16 +115,20 @@ const Search = (props) => {
                 }
 
                 const quizzesList = () => {
-                    matchedQuizzes.length >= 1 && setSearchResult(true)  // show result if there quizzes
+                    matchedQuizzes.length >= 1 && setSearchResult(true)  // show search result if there quizzes
 
                     try {
                         return (
                             matchedQuizzes.map((quiz) => {
                                 return (
-                                    <li key={quiz.id} className='m-2 md:mb-6'>
-                                        <article className={`flex text-right rounded-xl quizContainer__trans`}>
+                                    <li key={quiz.id} className='ml-1 mr-7 md:m-2 md:mb-6'>
+                                        <article className={`
+                                            flex text-right h-full
+                                            rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                                            quizContainer__trans`}
+                                        >
                                             <Link href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
-                                                <a className='grid grid-cols-5 md:block'>
+                                                <a className='flex md:block md:grid-cols-5'>
                                                     <div className='col-span-2 w-[224px] h-[126px]'>
                                                         <Image
                                                             src={quiz.thumbnail}
@@ -133,7 +137,7 @@ const Search = (props) => {
                                                             width='1366'
                                                             height='768'
                                                             placeholder='blur'
-                                                            className='rounded-r-xl md:rounded-xl'
+                                                            className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
                                                         />
                                                     </div>
                                                     <div className="col-span-3 mt-2 header__search__result__title">
@@ -211,7 +215,7 @@ const Search = (props) => {
     }
 
     const searchSuggester = async () => {
-        const grabAllSubCategories = await axiosLimited.get(`${API_URL}/dbAPI/category_new/`) // 'cause of being a components the axios not acceptable
+        const grabAllSubCategories = await axiosLimited.get(`${API_URL}/dbAPI/category_new/`)
         const numberOfCategories = grabAllSubCategories.data.length
         const randomCategoryIndex = Math.floor(Math.random() * numberOfCategories);
         setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)
@@ -220,6 +224,16 @@ const Search = (props) => {
     return (
         <>
             <div className={`header__search flex ${props.colorOfHeader}`}>
+                <button
+                    className={`
+                        absolute right-[-1rem] top-1.5
+                        ${searchResult ? 'fadeIn' : 'fadeOut'}
+                    `}
+                    onClick={() => {setSearchResult(false)}}
+                >
+                        
+                    <svg className="w-6 h-6 text-white"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                </button>
                 <input
                     type='text'
                     className={`header__search__input text-right`}
@@ -254,6 +268,7 @@ const Search = (props) => {
             </button>
 
             <div className={`header__search__opener__bg fixed darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
+
                 <button onClick={searchMobileFocusChangedHideOrShow} className="absolute header__search__closeBtn header__btn-bg header__menu__closeBtn" aria-label="Close Search Bar"></button>
                 <input
                     type='text'
