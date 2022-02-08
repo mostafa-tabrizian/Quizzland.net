@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import rateLimit from 'axios-rate-limit';
 import Head from 'next/head'
@@ -8,7 +8,7 @@ import QuizContainer from '../../components/quizContainer';
 import QuizPointyContainer from '../../components/quizPointyContainer';
 import { log, takeParameterFromUrl, replaceFunction } from '../../components/base'
 import PageTravel from '../../components/pageTravel';
-import SkeletonLoading from '../../components/skeletonLoading'
+import SkeletonLoading from '../../components/skeleton'
 import Layout from '../../components/layout';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -30,7 +30,7 @@ const SearchMoreResult = () => {
 
     useEffect(() => {
         document.body.style.overflow = 'overlay'
-        document.querySelector('html').style=`background: None`
+        document.querySelector('html').style = `background: None`
     }, [])
 
     useEffect(() => {
@@ -62,18 +62,18 @@ const SearchMoreResult = () => {
             // Remove duplicated quizzes
             let uniqueMatchedQuizzes = {};
 
-            for ( let i = 0; i < matchedQuizzes.length; i++ )
+            for (let i = 0; i < matchedQuizzes.length; i++)
                 uniqueMatchedQuizzes[matchedQuizzes[i]['title']] = matchedQuizzes[i];
 
             matchedQuizzes = new Array();
-            for ( let key in uniqueMatchedQuizzes )
+            for (let key in uniqueMatchedQuizzes)
                 matchedQuizzes.push(uniqueMatchedQuizzes[key]);
-            
+
             setPageTravelQuizzes(search_quiz_new_title.data)
-    
+
             const quizzesList = () => {
                 return (
-                    <QuizContainer quizzes={matchedQuizzes}/>
+                    <QuizContainer quizzes={matchedQuizzes} />
                 )
             }
             setMatchedQuizzesCounter(matchedQuizzes.length)
@@ -87,7 +87,7 @@ const SearchMoreResult = () => {
             if (search_pointy_new_title.length !== numberOfResult) {
                 const search_pointy_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
                 Array.prototype.push.apply(matchedPointy, search_pointy_new_subCategory.data.results)
-                
+
                 if (search_pointy_new_subCategory !== numberOfResult * 2) {
                     const search_pointy_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?tags__icontains=${searchQuery}&limit=${numberOfResult * 2}&offset=${offset}`)
                     Array.prototype.push.apply(matchedPointy, search_pointy_new_tag.data.results)
@@ -98,18 +98,18 @@ const SearchMoreResult = () => {
             // Remove duplicated pointyQuizzes
             let uniqueMatchedPointy = {};
 
-            for ( let i = 0; i < matchedPointy.length; i++ )
+            for (let i = 0; i < matchedPointy.length; i++)
                 uniqueMatchedPointy[matchedPointy[i]['title']] = matchedPointy[i];
 
             matchedPointy = new Array();
-            for ( let key in uniqueMatchedPointy )
+            for (let key in uniqueMatchedPointy)
                 matchedPointy.push(uniqueMatchedPointy[key]);
-            
+
             setPageTravelPointy(search_quiz_new_title.data)
-    
+
             const pointyList = () => {
                 return (
-                    <QuizPointyContainer quizzes={matchedPointy}/>
+                    <QuizPointyContainer quizzes={matchedPointy} />
                 )
             }
 
@@ -135,9 +135,9 @@ const SearchMoreResult = () => {
                 </Head>
 
                 <div className='flex justify-center flex-ai-c'>
-                    <h3 className='title'> <span style={{fontSize: '1rem'}}>عبارت جستجو شده : <br/></span> {searchValueButWithoutHyphen}</h3>
+                    <h3 className='title'> <span style={{ fontSize: '1rem' }}>عبارت جستجو شده : <br /></span> {searchValueButWithoutHyphen}</h3>
                 </div>
-                
+
                 {
                     matchedQuizzesCounter !== 0 &&
                     <>
@@ -184,5 +184,5 @@ const SearchMoreResult = () => {
         </>
     );
 }
- 
+
 export default SearchMoreResult;

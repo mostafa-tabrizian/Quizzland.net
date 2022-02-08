@@ -470,8 +470,6 @@ input {
     font-weight: 300;
     font-size: 2rem;
     margin-top: -3rem;
-    position: relative;
-    z-index: 1;
 
     @include breakpoints-down(large) {
         max-width: 16rem;
@@ -485,9 +483,8 @@ input {
     opacity: .15;
     font-family: myLalezar, serif;
     font-weight: 300;
-    z-index: 1;
     width: 100%;
-    top: 6.5rem;
+    top: 3.5rem;
     justify-content: center;
     display: flex;
 

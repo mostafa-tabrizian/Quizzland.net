@@ -11,7 +11,7 @@ import Layout from '../../components/layout'
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from '../../components/base'
 // import LoadingScreen from '../../components/loadingScreen'
 import QuizContainer from '../../components/quizContainer'
-import SkeletonLoading from '../../components/skeletonLoading'
+import SkeletonLoading from '../../components/skeleton'
 
 const logo = '../images/Q-small.png'
 
@@ -214,9 +214,15 @@ const Quiz = () => {
                 }, amountOfPauseCalculator())
             } else {
                 setTimeout(() => {
-                    if (showQuestionChangingHelper !== 'never' && !(isItDesktop())) {
-                        setShowQuestionChangingHelper(true)
-                    }
+                    try {
+                        const stillFirstQuestion = document.querySelector('.quiz__container').style.transform.slice(-5, -3) == '0r'
+                        
+                        if (!(isItDesktop()) && stillFirstQuestion) {
+                            setShowQuestionChangingHelper(true)
+                        } else {
+                            setShowQuestionChangingHelper(false)
+                        }
+                    } catch {log('error: helper')}
                 }, 5000)
             }
         }
@@ -243,17 +249,15 @@ const Quiz = () => {
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
 
     if (isItDesktop() || isItIPad()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46.20
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46.962  // quiz__hider width - margin/padding around the quiz__container + .62
     }
     else if (isItMobile()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 22.7
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 23.362 // desktop - 23.600
     }
 
 
     const goNextQuestionOrEndTheQuiz = () => {
         if (ableToGoNext || autoQuestionChanger || showingAdverts) {
-            setShowQuestionChangingHelper('never')
-
             if (currentQuestionNumber !== questions.length) {
                 restartTheStateOfQuestion()
                 plusOneToTotalAnsweredQuestions()
@@ -363,9 +367,9 @@ const Quiz = () => {
                     <div key={question.id}
                         style={
                             browser == 'safari' ?
-                            {  left: `${currentMoveOfQuestions}rem` }
-                            :
-                            { transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }
+                                { left: `${currentMoveOfQuestions}rem` }
+                                :
+                                { transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }
                         }
                         className={`quiz__container relative md:pt-3`}
                     >
@@ -461,7 +465,7 @@ const Quiz = () => {
                 return (
                     <li key={tag} className='px-3 py-1 text-sm rounded-lg'>
                         <h2>
-                            <Link href={`/search?s=${replaceFunction(tag, ' ', '+')}`} >
+                            <Link href={`/search?q=${replaceFunction(tag, ' ', '+')}`} >
                                 <a rel='tag'>
                                     {tag}
                                 </a>
@@ -596,11 +600,11 @@ const Quiz = () => {
 
                 <div className='absolute z-10 ml-10 top-28' onClick={() => { SFXController() }} >
                     <button type="button">
-                        {SFXAllowed === 'true' ? 
-                            <svg className="w-6 h-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/> </svg>
+                        {SFXAllowed === 'true' ?
+                            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /> </svg>
                             :
-                            <svg className="w-6 h-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd"/> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/> </svg>
-                         }
+                            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /> </svg>
+                        }
                     </button>
                 </div>
 
@@ -657,7 +661,7 @@ const Quiz = () => {
                     </div>
                 } */}
 
-                <div className={`text-center ${showQuestionChangingHelper === true ? 'fadeIn' : 'fadeOut'}`}>
+                <div className={`text-center mt-4 ${showQuestionChangingHelper ? 'fadeIn' : 'fadeOut'}`}>
                     <h5>برای رفتن به سوال بعدی از راست به چپ بکشید!</h5>
                 </div>
 
@@ -686,9 +690,9 @@ const Quiz = () => {
                                         quiz__questionChanger__next btn
                                         ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
                                     `}>
-                                    
-                                    <svg className="w-8 h-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>    
-                                    
+
+                                    <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+
                                 </button>
                             </div>
                         }
@@ -697,7 +701,7 @@ const Quiz = () => {
 
                 <div>
                     <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
-                    <ul className='flex justify-center mt-5 space-x-3 space-x-reverse quiz__tags'>
+                    <ul className='flex flex-wrap justify-center mt-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
                         {quiz && showTheTagsIfNotNull()}
                     </ul>
                 </div>

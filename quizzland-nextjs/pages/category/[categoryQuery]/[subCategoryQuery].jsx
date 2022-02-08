@@ -11,14 +11,14 @@ import { log, replaceFunction } from '../../../components/base'
 import QuizContainer from '../../../components/quizContainer'
 import QuizPointyContainer from '../../../components/quizPointyContainer'
 import Layout from '../../../components/layout'
-import SkeletonLoading from '../../../components/SkeletonLoading';
+import SkeletonLoading from '../../../components/skeleton';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const SubCategory = () => {
     const router = useRouter()
     const { subCategoryQuery, sc } = router.query  // sc for subCategory which in persian
-    
+
     const [pageTravelQuiz, setPageTravelQuiz] = useState([])
     const [pageTravelQuizPointy, setPageTravelQuizPointy] = useState([])
 
@@ -28,17 +28,17 @@ const SubCategory = () => {
     const [hideQuizzes, setHideQuizzes] = useState(false)
     const [hideQuizzesPointy, setHideQuizzesPointy] = useState(false)
 
-    const [numberOfResult, setNumberOfResult] = useState(2)
+    const [numberOfResult, setNumberOfResult] = useState(16)
     const [currentPageNumberQuiz, setCurrentPageNumberQuiz] = useState(1)
     const [currentPageNumberPointy, setCurrentPageNumberPointy] = useState(1)
-    
+
     const [offsetQuiz, setOffsetQuiz] = useState(0)
     const [offsetQuizPointy, setOffsetQuizPointy] = useState(0)
-    
+
     const [sortType, setSortType] = useState('newest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-    
+
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     const sortTypeDefinitionForQuizDb = {
@@ -46,7 +46,7 @@ const SubCategory = () => {
         'bestest': 'quiz_best',
         'alphabet': 'quiz_alphabet'
     }
-    
+
     const sortTypeDefinitionForPointyQuizDb = {
         'newest': "pointy_new",
         'bestest': "pointy_best",
@@ -67,12 +67,12 @@ const SubCategory = () => {
 
     const getQuizzes = async () => {
         const Quizzes = await axiosLimited.get(
-          `${API_URL}/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${subCategoryQuery && replaceFunction(subCategoryQuery, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
+            `${API_URL}/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${subCategoryQuery && replaceFunction(subCategoryQuery, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
         );
         const QuizzesPointy = await axiosLimited.get(
-          `${API_URL}/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${subCategoryQuery && replaceFunction(subCategoryQuery, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
+            `${API_URL}/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${subCategoryQuery && replaceFunction(subCategoryQuery, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
         );
-        
+
         if (Quizzes.data.count !== 0) {
             setQuizzes(Quizzes.data.results)
             setPageTravelQuiz(Quizzes.data)
@@ -128,10 +128,10 @@ const SubCategory = () => {
                     Banner
                 </div> */}
 
-                <h3 className='lowTitle' style={{color: 'white'}}>{subCategoryQuery && replaceFunction(subCategoryQuery, '-', ' ')}</h3>
-                <h3 className='title' style={{color: 'white'}}>{sc && replaceFunction(sc, '-', ' ')}</h3>
+                <h3 className='lowTitle' style={{ color: 'white' }}>{subCategoryQuery && replaceFunction(subCategoryQuery, '-', ' ')}</h3>
+                <h3 className='title' style={{ color: 'white' }}>{sc && replaceFunction(sc, '-', ' ')}</h3>
 
-                <Tools 
+                <Tools
                     numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                     sortType={sortType} setSortType={setSortType}
                 />
@@ -143,7 +143,7 @@ const SubCategory = () => {
                     <div>
                         {
                             !(hideQuizzesPointy) &&
-                            <h2 className={`container mx-auto px-20`} style={{color: 'white'}}>کوییز ها</h2>
+                            <h2 className={`container mx-auto px-20`} style={{ color: 'white' }}>کوییز ها</h2>
                         }
 
                         <ul className={`quizContainer flex flex-ai-fe container mx-auto md:px-20 ml-3 px-2 flex-wrap align-baseline m-2 justify-right md:m-auto`}>
@@ -164,9 +164,9 @@ const SubCategory = () => {
                     <div>
                         {
                             !(hideQuizzes) &&
-                            <h2 className={`container mx-auto px-20`} style={{color: 'white'}}>تست ها</h2>
+                            <h2 className={`container mx-auto px-20`} style={{ color: 'white' }}>تست ها</h2>
                         }
-                        
+
 
                         <ul className={`quizContainer flex container mx-auto px-20`}>
                             {listQuizzesPointy()}
@@ -184,5 +184,5 @@ const SubCategory = () => {
         </>
     );
 }
- 
+
 export default SubCategory;

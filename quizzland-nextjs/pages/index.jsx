@@ -181,7 +181,7 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
                             "url": "https://quizzland.net",
                             "potentialAction": {
                                 "@type": "SearchAction",
-                                "target": "https://www.quizzland.net/search?s={search_term_string}",
+                                "target": "https://www.quizzland.net/search?q={search_term_string}",
                                 "query-input": "required name=search_term_string"
                             }
                         }
@@ -228,8 +228,13 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
                                 radius-[5rem] inline-flex shadow-[inset_6px_0_22px_black]
                                 relative z-1
                         '>
-                            <span></span>
+                            <span>
+                                <svg className="w-6 h-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </span>
                             بزن بریم
+                            
                         </button>
                     </div>
                 </div>

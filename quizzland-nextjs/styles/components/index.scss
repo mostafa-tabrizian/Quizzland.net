@@ -53,9 +53,7 @@
             }
 
             span {
-                background: url('/images/arw.svg');
-                width: 2.5rem; height: 2.2rem;
-                transform: rotate(90deg);
+                width: 2.5rem; height: 2rem;
                 transition: transform .15s ease-in-out;
             }
 
@@ -63,7 +61,7 @@
                 color: white;
 
                 span {
-                    transform: rotate(90deg) translateY(.5rem);
+                    transform: translateX(-.5rem);
                 }
             }
         }

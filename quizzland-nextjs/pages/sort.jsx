@@ -10,7 +10,7 @@ import PageTravel from '../components/pageTravel'
 import QuizContainer from '../components/quizContainer'
 import QuizPointyContainer from '../components/quizPointyContainer'
 import Layout from '../components/layout'
-import SkeletonLoading from '../components/skeletonLoading'
+import SkeletonLoading from '../components/skeleton'
 
 import { log } from '../components/base'
 
@@ -45,9 +45,9 @@ const Sort = () => {
     }, [st])
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
-    
+
     const checkWhatSort = async () => {
-        document.querySelector('html').style=`background: None`
+        document.querySelector('html').style = `background: None`
     }
 
     const getQuizzes = async () => {
@@ -104,6 +104,8 @@ const Sort = () => {
                 break
 
             default:
+                setSortTitle('این بخش موجود نمی باشد !')
+                setContentLoaded(true)
                 break
         }
     }
@@ -129,9 +131,9 @@ const Sort = () => {
                 <h3 className='title'>{sortTitle}</h3>
 
                 {SkeletonLoading(contentLoaded)}
-                
+
                 <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
-                    
+
                     {
                         quizzes.length !== 0 && <QuizContainer quizzes={quizzes} bgStyle='trans' />
                     }
@@ -144,7 +146,7 @@ const Sort = () => {
 
                 {/* Adverts */}
 
-                <PageTravel 
+                <PageTravel
                     pageTravel={pageTravel} setPageTravel={setPageTravel}
                     numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                     offset={offset} setOffset={setOffset}
@@ -152,10 +154,10 @@ const Sort = () => {
                 />
 
                 {/* Adverts */}
-                <div className='adverts_center' id='mediaad-DLgb'></div>    
+                <div className='adverts_center' id='mediaad-DLgb'></div>
             </Layout>
         </>
     );
 }
- 
+
 export default Sort;

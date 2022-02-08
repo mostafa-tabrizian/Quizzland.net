@@ -11,7 +11,7 @@ import BackBtn from '../components/backBtn'
 import Layout from '../components/layout'
 // import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import SkeletonLoading from '../components/skeletonLoading'
+import SkeletonLoading from '../components/skeleton'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -50,7 +50,7 @@ const Result = () => {
             suggestionQuizzes &&
             showPopUpSuggestion()
         }
-    }, suggestionQuizzes)
+    }, [suggestionQuizzes])
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
@@ -92,10 +92,6 @@ const Result = () => {
             setResultScore(`👀`)
             setResultSubtitle('😰 خطا در محاسبه امتیاز\n.لطفا بعدا امتحان کنید و یا در غیر اینصورت به پشتیبانی اطلاع دهید')
         }
-    }
-
-    const tryAgainTheQuiz = () => {
-        window.history.go(-1)
     }
 
     const getSuggestionsQuiz = () => {
@@ -163,14 +159,14 @@ const Result = () => {
                 </Head>
 
                 <div className="result__container">
-                    <div className="result__title flex justify-center">
+                    <div className="flex justify-center result__title">
                         <h5 className="text-right">نتیجه  {quizResult?.title}</h5>
                     </div>
-                    <div className="beforeAfterDecor flex justify-center flex-ai-c">
-                        <h1 className="result__subtitle text-center">{resultSubtitle}</h1>
+                    <div className="flex justify-center beforeAfterDecor flex-ai-c">
+                        <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                     </div>
-                    <div className="result md:container mx-auto w-full space-sm block md:flex flex-ai-c justify-center">
-                        <div className="result__img flex justify-center md:mx-16 flex-ai-c">
+                    <div className="justify-center block w-full mx-auto result md:container space-sm md:flex flex-ai-c">
+                        <div className="flex justify-center result__img md:mx-16 flex-ai-c">
                             {
                                 resultGif &&
                                 <Image className='object-contain' src={resultGif} width='336' height='336' alt={quizResult?.subCategory}/>
@@ -181,14 +177,14 @@ const Result = () => {
                                 {resultScore}
                             </h5>
                         </div>
-                        <div className="result__detail text-center mt-5 mb-16 text-lg">
+                        <div className="mt-5 mb-16 text-lg text-center result__detail">
                             <h5>پاسخ 🟢: <span>{correctAnswersCounter}</span></h5>
                             <h5>پاسخ 🔴: <span>{questions && questions.length - correctAnswersCounter}</span></h5>
                         </div>
                     </div>
 
-                    <div className='container mx-auto px-20'>
-                        <div className="result__share space-sm text-center text-lg">
+                    <div className='container px-20 mx-auto'>
+                        <div className="text-lg text-center result__share space-sm">
                             <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizResult?.fan_name} هستن`}</h5>
 
                             {/* <InlineShareButtons
@@ -219,7 +215,7 @@ const Result = () => {
 
                         </div>
 
-                        <h2 className='flex justify-center flex-ai-c space-sm text-lg'>این کوییز چطور بود؟</h2>
+                        <h2 className='flex justify-center text-lg flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
                         
                         <div>
                             {/* <InlineReactionButtons
@@ -252,11 +248,11 @@ const Result = () => {
 
                 </div>
 
-                <h2 className='text-center space-med beforeAfterDecor text-lg'>کوییز های مشابه</h2>
+                <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
+                <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }
@@ -265,42 +261,37 @@ const Result = () => {
                 {
                     suggestionQuizzes &&
                     <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-auto'>
-                        <button className='result__popUpQuizSuggester__closeBtn fadeOut absolute left-4 top-4 text-3xl' onClick={() => {
+                        <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn fadeOut left-4 top-4' onClick={() => {
                             closePopUpQuizSuggester();
                         }}> X </button>
 
                         <div>
                             <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
-                            <Link href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
-                                <a>
-                                    <h3 className="result__popUpQuizSuggester__title flex text-lg">
-                                        {chooseUniqueQuizToSuggest().title}
-                                    </h3>
-                                </a>
-                            </Link>
-                        </div>
-                        <Link href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
-                            <a>
-                                <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
-                                    <Image
-                                        src={chooseUniqueQuizToSuggest().thumbnail}
-                                        alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
-                                        blurDataURL={chooseUniqueQuizToSuggest().thumbnail}
-                                        width='1920'
-                                        height='1080'
-                                        className='object-cover h-[19rem]'
-                                        placeholder='blur'
-                                    />
-                                </div>
+
+                            <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
+                                <h3 className="flex text-lg result__popUpQuizSuggester__title">
+                                    {chooseUniqueQuizToSuggest().title}
+                                </h3>
                             </a>
-                        </Link>
+                        </div>
+                        <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
+                            <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
+                                <Image
+                                    src={chooseUniqueQuizToSuggest().thumbnail}
+                                    alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
+                                    blurDataURL={chooseUniqueQuizToSuggest().thumbnail}
+                                    width='1920'
+                                    height='1080'
+                                    className='object-cover h-[19rem]'
+                                    placeholder='blur'
+                                />
+                            </div>
+                        </a>
                     </div>
                 }
 
                 <BackBtn />
-                
-                <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
-            
+                            
             </Layout>
         </>
     );

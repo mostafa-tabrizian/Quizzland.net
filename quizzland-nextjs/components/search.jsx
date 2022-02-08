@@ -13,7 +13,6 @@ const Search = (props) => {
     const [quizzesList, setQuizzesList] = useState([])
     const [searchMobile, setSearchMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
-    const [searchValue, setSearchValue] = useState(null)
     const [searchSuggestion, setSearchSuggestion] = useState(null)
 
     const searchSubmit = useRef()
@@ -51,7 +50,6 @@ const Search = (props) => {
             const minimumKeywordForSearch = 3
             if (value.length >= minimumKeywordForSearch) {
                 let searchValue = replaceFunction(value, ' ', '+')
-                setSearchValue(searchValue)
 
                 let matchedQuizzes = []
                 let matchedCategories = []
@@ -239,6 +237,7 @@ const Search = (props) => {
                     className={`header__search__input text-right`}
                     placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
                     onChange={inputChanged}
+                    onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
                 />
                 <div className={`header__search__result overflow-scroll h-1/2 ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
                     <div className="grid justify-center mt-2 mr-4 overflow-hidden rounded-lg header__search__result__category">
@@ -246,10 +245,6 @@ const Search = (props) => {
                             <ul className='md:space-y-5'>
                                 {categoriesList}
                             </ul>
-
-                            {/* <Link href={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
-                                <a> نمایش بقیه نتایج...</a>
-                            </Link> */}
                         </div>
                     </div>
 
@@ -276,6 +271,7 @@ const Search = (props) => {
                     ref={mobileSearchInput}
                     placeholder='...جستجو'
                     onChange={inputChanged}
+                    onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
                 />
             </div>
         </>

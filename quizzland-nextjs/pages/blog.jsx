@@ -11,7 +11,7 @@ import Layout from '../components/layout'
 // import Tools from './tools'
 // import PageTravel from './pageTravel'
 // import LoadingScreen from './loadingScreen'
-// import SkeletonLoading from './skeletonLoading';
+// import SkeletonLoading from './skeleton';
 
 const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
@@ -69,7 +69,7 @@ const Blog = () => {
                                 </Link>
                             </article>
                         </li>
-                        
+
                         <hr />
                     </div>
                 )
@@ -77,7 +77,7 @@ const Blog = () => {
         )
     }
 
-    
+
     return (
         <>
             <Layout>
@@ -87,7 +87,7 @@ const Blog = () => {
                     <meta name="description" content={`وبلاگ کوییزلند`} />
                     <meta name="keywords" content={`وبلاگ`} />
                 </Head>
-                
+
                 <h3 className='lowTitle'>Quizzland Blog</h3>
                 <h3 className='title'>وبلاگ کوییزلند</h3>
 
@@ -105,7 +105,7 @@ const Blog = () => {
                     </ul>
                 }
 
-                <ul className="blog quizContainer__minHeight container mx-auto px-20">
+                <ul className="container px-20 mx-auto blog quizContainer__minHeight">
                     {blogContent()}
                 </ul>
 
@@ -120,5 +120,5 @@ const Blog = () => {
         </>
     );
 }
- 
+
 export default Blog;

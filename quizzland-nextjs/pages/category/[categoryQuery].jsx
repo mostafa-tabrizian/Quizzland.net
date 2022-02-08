@@ -10,7 +10,7 @@ import Tools from '../../components/tools'
 import PageTravel from '../../components/pageTravel'
 import Layout from '../../components/layout'
 // import LoadingScreen from './loadingScreen'
-import SkeletonLoading from '../../components/SkeletonLoading';
+import SkeletonLoading from '../../components/skeleton';
 
 import { log, replaceFunction, viewsFormat, datePublishHandler } from '../../components/base'
 

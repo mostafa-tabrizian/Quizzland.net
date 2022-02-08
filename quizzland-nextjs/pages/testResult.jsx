@@ -10,7 +10,7 @@ import { log, replaceFunction } from '../components/base'
 import BackBtn from '../components/backBtn'
 // import LoadingScreen from '../components/loadingScreen'
 import QuizPointyContainer from '../components/quizPointyContainer'
-import SkeletonLoading from '../components/skeletonLoading'
+import SkeletonLoading from '../components/skeleton'
 import Layout from '../components/layout'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -26,7 +26,7 @@ const Result = () => {
     const [testDetail, setTestDetail] = useState(null)
 
     const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
-    
+
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
             window.location.href = "/404";
@@ -52,7 +52,7 @@ const Result = () => {
 
     const detailOfResult = () => {
         if (testDetail !== null) {
-            if (testResult > testDetail.result_upTo_2nd){
+            if (testResult > testDetail.result_upTo_2nd) {
                 setResultImg(testDetail.result_img_1st)
                 setResultSubtitle(testDetail.result_title_1st)
                 setResultText(testDetail.result_text_1st)
@@ -105,14 +105,10 @@ const Result = () => {
         }
     }
 
-    const tryAgainTheQuiz = () => {
-        window.history.go(-1)
-    }
-
     const getSuggestionsQuiz = () => {
         testResult &&
-        axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4`)
-            .then((res) => {setSuggestionQuizzes(res.data.results)})
+            axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4`)
+                .then((res) => { setSuggestionQuizzes(res.data.results) })
         setContentLoaded(true)
     }
 
@@ -120,7 +116,7 @@ const Result = () => {
         <>
             <Layout>
 
-                
+
                 {/* <LoadingScreen loadState={loadState} /> */}
 
                 <Head>
@@ -130,14 +126,14 @@ const Result = () => {
                 </Head>
 
                 <div className="result__container">
-                    <div className="result__title flex justify-center">
-                        <h5 className="text-right text-lg">نتیجه {testDetail?.title}</h5>
+                    <div className="flex justify-center result__title">
+                        <h5 className="text-lg text-right">نتیجه {testDetail?.title}</h5>
                     </div>
-                    <div className="beforeAfterDecor flex justify-center flex-ai-c">
-                        <h1 className="result__subtitle text-center">{resultSubtitle}</h1>
+                    <div className="flex justify-center beforeAfterDecor flex-ai-c">
+                        <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                     </div>
 
-                    <div className='resultPointy__img flex'>
+                    <div className='flex resultPointy__img'>
                         {
                             resultImg &&
                             <Image
@@ -160,8 +156,8 @@ const Result = () => {
                         </div>
                     }
 
-                    <div className='container mx-auto px-20'>
-                        <div className="result__share space-sm text-center">
+                    <div className='container px-20 mx-auto'>
+                        <div className="text-center result__share space-sm">
                             <h5 className='text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
                             {/* <InlineShareButtons
@@ -192,8 +188,8 @@ const Result = () => {
 
                         </div>
 
-                        <h2 className='flex justify-center flex-ai-c space-med text-lg'>این تست چطور بود؟</h2>
-                        
+                        <h2 className='flex justify-center text-lg flex-ai-c space-med'>این تست چطور بود؟</h2>
+
                         <div>
                             {/* <InlineReactionButtons
                                 config={{
@@ -220,7 +216,7 @@ const Result = () => {
                                 }}
                             /> */}
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -229,19 +225,17 @@ const Result = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="quizContainer flex flex-ai-fe m-4 container md:px-20 flex-wrap align-baseline justify-right">
+                <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
                     {
                         suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }
                 </ul>
 
                 <BackBtn />
-                
-                <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
-            
+
             </Layout>
         </>
     );
 }
- 
+
 export default Result;
