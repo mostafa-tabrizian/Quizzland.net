@@ -242,7 +242,7 @@ const Index = ({ quiz_new, new_pointy, quiz_monthlyBest,
                 {recommendedQuizzes}
 
                 <div className="mb-8">
-                    <tag id='scroll' />
+                    <span id='scroll' />
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>جدیدترین کوییز ها</h3>

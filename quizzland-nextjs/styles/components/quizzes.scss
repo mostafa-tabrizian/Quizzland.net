@@ -85,15 +85,15 @@ body {
 
     &__container {
         z-index: -1;
-        max-width: 21rem;
-        margin: auto 1.25rem; margin-top: 5rem;
+        // max-width: 21rem;
+        // margin: auto 1.25rem; margin-top: 5rem;
         padding: 0.1rem;
         border-radius: 24px;
         transition: all 1.3s ease-in-out;
 
         @include breakpoints-up(small) {
-            max-width: 32rem;
-            margin: 0 8rem;
+            // max-width: 32rem;
+            // margin: 0 8rem;
             background: none;
             border: none;
             box-shadow: none;
@@ -110,13 +110,13 @@ body {
         border-radius: 23px 25px 0 0;
         // background: #00000065;
         // backdrop-filter: blur(165px);
-        width: 20.9rem;
+        // width: 20.9rem;
 
         @include breakpoints-up(small) {
             background: none;
             backdrop-filter: none;
             text-align: right;
-            width: 31rem;
+            // width: 31rem;
             font-size: 1.85rem;
         }
     }
@@ -176,7 +176,8 @@ body {
 
         &__container {
             z-index: 2;
-            position: absolute;
+            // position: absolute;
+            direction: rtl;
 
             // @include breakpoints-down(large) {
             //     right: 4rem; top: 6rem;
@@ -197,7 +198,9 @@ body {
         }
 
         &__next {
-            transform: rotate();
+            // transform: rotate();
+            right: calc(50% - 19rem);
+
             // top: 2.1rem;
 
             // @include breakpoints-down(large) {
@@ -208,6 +211,7 @@ body {
 
         &__last {
             transform: rotate(180deg);
+            right: calc(50% + 19rem);
             // position: relative;
             
             // @include breakpoints-down(large) {
@@ -256,7 +260,8 @@ body {
 
     &__hider {
         @include breakpoints-up(small) {
-            width: 47rem;
+            // width: 47rem;
+            width: 29rem;
             bottom: auto;
             margin-bottom: 3rem;
         }

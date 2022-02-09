@@ -171,8 +171,11 @@ const Quiz = () => {
 
 
     const questionShowIfNotNull = (question) => {
+        // if (question !== null) {
+        //     return <p className='text-center quiz__question'> {question} </p>
+        // }
         if (question !== null) {
-            return <p className='text-center quiz__question'> {question} </p>
+            return <p className='quiz__question text-center bg-[#0000007c] backdrop-blur-xl rounded-2xl'> {question} </p>
         }
     }
 
@@ -181,7 +184,7 @@ const Quiz = () => {
         questionCounterForId += 1
         if (question.option_1st) {
             return (
-                <div className="flex justify-center w-[20rem] md:w-[30rem]">
+                <div className="flex justify-center">
                     <form className='quiz__options p-4 md:p-0 w-[100%] md:grid md:grid-cols-2 space-y-3 text-[5vw] md:text-[1.6vw] justify-center' action="">
                         {question.option_1st !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-1`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> {question.option_1st} </label> </>}
                         {question.option_2nd !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
@@ -229,7 +232,7 @@ const Quiz = () => {
                                 :
                                 { transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }
                         }
-                        className={`quiz__container relative md:pt-3`}
+                        className={`quiz__container relative mr-20 md:pt-3`}
                     >
 
                         {/* <span className='questionId block right-[-2rem] top-2 z-10 absolute text-[3rem]'>
@@ -239,14 +242,14 @@ const Quiz = () => {
                         <div>
                             {questionShowIfNotNull(question.question)}
 
-                            <div className='mt-3'>
+                            <div className='mt-3 w-[29rem]'>
                                 {!question.question_img.includes('NotExist') &&
                                     <Image
                                         src={question.question_img}
                                         width='1366'
                                         height='768'
                                         alt={question.title}
-                                        className='object-contain object-top rounded-xl'
+                                        className='object-cover object-top rounded-xl'
                                         title={question.title}
                                         blurDataURL='/images/Q-512.png'
                                         placeholder='blur'
@@ -306,7 +309,7 @@ const Quiz = () => {
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
 
     if (isItDesktop() || isItIPad()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 46.2  // quiz__hider width - margin/padding around the quiz__container + .62
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34.2  // quiz__hider width - margin/padding around the quiz__container + .62
     }
     else if (isItMobile()) {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 22.7 // desktop - 23.6
@@ -561,6 +564,37 @@ const Quiz = () => {
 
                 </div>
 
+                {
+                    contentLoaded && isItDesktop() &&
+                    <div className={`
+                        quiz__questionChanger__container absolute
+                        top-4 right-[15%]
+                    `}>
+                        <button
+                            onClick={goNextQuestionOrEndTheQuiz}
+                            aria-label='Next Question'
+                            className={`
+                                quiz__questionChanger quiz__questionChanger__next
+                                btn absolute
+                                ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
+                        `}>
+
+                            <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+
+                        </button>
+                        <button
+                            onClick={goLastQuestion}
+                            aria-label='Next Question'
+                            className={`
+                                quiz__questionChanger absolute quiz__questionChanger__last
+                                btn right-[34rem]
+                            `}
+                        >
+                            <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+                        </button>
+                    </div>
+                }
+
                 {/* { isItDesktop() &&
                     <hr className='divider'></hr>
                 } */}
@@ -588,36 +622,6 @@ const Quiz = () => {
                             isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
                         }
 
-                        {
-                            contentLoaded && isItDesktop() &&
-                            <div className={`
-                                quiz__questionChanger__container absolute
-                                top-4 right-[15%]
-                            `}>
-                                <button
-                                    onClick={goNextQuestionOrEndTheQuiz}
-                                    aria-label='Next Question'
-                                    className={`
-                                        quiz__questionChanger quiz__questionChanger__next
-                                        btn absolute
-                                        ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
-                                `}>
-
-                                    <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
-
-                                </button>
-                                <button
-                                    onClick={goLastQuestion}
-                                    aria-label='Next Question'
-                                    className={`
-                                        quiz__questionChanger absolute quiz__questionChanger__last
-                                        btn right-[34rem]
-                                    `}
-                                >
-                                    <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
-                                </button>
-                            </div>
-                        }
                     </div>
                 </div>
 
