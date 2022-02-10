@@ -14,16 +14,20 @@ const copyRightDate = () => {
 
 const Footer = (props) => {
     return (
-        <div className='footer'>
+        <div className='footer w-full py-12'>
             
-            <div className='footer__container justify-center'>
+            <div className='footer__container justify-center md:flex grid grid-cols-2 mr-10'>
 
                 <div>
-                    <h3>کوییز ها</h3>
+                    <h3>دسترسی سریع</h3>
                     <ul>
-                        <li><Link href="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
-                        <li><Link href="/sort?st=monthlyBestest"><a> بهترین های ماه </a></Link></li>
-                        <li><Link href="/sort?st=bestest"><a> بهترین ها </a></Link></li>
+                        <li><Link href='/'><a>صفحه اصلی</a></Link></li>
+                        {/* <li><Link href='/blog'><a>وبلاگ</a></Link></li> */}
+                        <li><Link href='/guide'><a>راهنما</a></Link></li>
+                        <li><Link href='/contact'><a>تماس با ما</a></Link></li>
+                        <li><Link href='/advertising'><a>تبلیغات</a></Link></li>
+                        <li><Link href='/privacy-policy'><a>حریم خصوصی</a></Link></li>
+                        <li><Link href='/supportUs'><a>حمایت</a></Link></li>
                     </ul>
                 </div>
 
@@ -46,15 +50,11 @@ const Footer = (props) => {
                 </div>
 
                 <div>
-                    <h3>دسترسی سریع</h3>
+                    <h3>کوییز ها</h3>
                     <ul>
-                        <li><Link href='/'><a>صفحه اصلی</a></Link></li>
-                        {/* <li><Link href='/blog'><a>وبلاگ</a></Link></li> */}
-                        <li><Link href='/guide'><a>راهنما</a></Link></li>
-                        <li><Link href='/contact'><a>تماس با ما</a></Link></li>
-                        <li><Link href='/advertising'><a>تبلیغات</a></Link></li>
-                        <li><Link href='/privacy-policy'><a>حریم خصوصی</a></Link></li>
-                        <li><Link href='/supportUs'><a>حمایت</a></Link></li>
+                        <li><Link href="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
+                        <li><Link href="/sort?st=monthlyBestest"><a> بهترین های ماه </a></Link></li>
+                        <li><Link href="/sort?st=bestest"><a> بهترین ها </a></Link></li>
                     </ul>
                 </div>
 
@@ -69,8 +69,8 @@ const Footer = (props) => {
 
             </div>
 
-            <div className="footer__copyRight flex justify-center flex-ai-c">
-                <p>
+            <div className="flex justify-center flex-ai-c opacity-50">
+                <p className='text-sm'>
                     {copyRightDate()} © تمام حقوق به کوییزلند تعلق دارد
                 </p>
             </div>

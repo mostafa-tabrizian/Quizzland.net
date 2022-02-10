@@ -12,10 +12,9 @@ function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
 
   useEffect(() => {
-
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 100)
+    console.log("hello scroll")
+    const top = document.getElementById('__next')
+    top.scrollIntoView()
   }, [pathname]);
 
   return (

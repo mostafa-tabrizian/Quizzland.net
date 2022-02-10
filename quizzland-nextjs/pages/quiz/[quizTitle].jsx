@@ -252,7 +252,7 @@ const Quiz = () => {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34.2  // quiz__hider width - margin/padding around the quiz__container + .62
     }
     else if (isItMobile()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 23.362 // desktop - 23.600
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7 // desktop - 23.600
     }
 
 
@@ -323,7 +323,7 @@ const Quiz = () => {
         } else {
             return (
                 <div className="flex justify-center">
-                    <form className='relative grid justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3' data={question.answer} action="">
+                    <form className='relative grid justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3 flex-wrap' data={question.answer} action="">
                         {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <Image src={question.option_img_1st} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
                         {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <Image src={question.option_img_2nd} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
                         {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <Image src={question.option_img_3rd} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
@@ -371,7 +371,7 @@ const Quiz = () => {
                                 :
                                 { transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }
                         }
-                        className={`quiz__container relative mr-20 md:pt-3`}
+                        className={`quiz__container relative mr-20 ml-2 md:ml-0 md:pt-3`}
                     >
 
                         {/* <span className='questionId block right-[-2rem] top-2 z-10 absolute text-[3rem]'>
@@ -381,7 +381,7 @@ const Quiz = () => {
                         <div>
                             {questionShowIfNotNull(question.question)}
 
-                            <div className='mt-3 w-[29rem]'>
+                            <div className='mt-3 w-[22rem] md:w-[29rem]'>
                                 {!question.question_img.includes('NotExist') &&
                                     <Image
                                         src={question.question_img}
@@ -686,7 +686,7 @@ const Quiz = () => {
                     <h5>برای رفتن به سوال بعدی از راست به چپ بکشید!</h5>
                 </div>
 
-                <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions relative flex justify-center text-center`} tag="quiz">
+                <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                     <div className={`quiz__hider flex relative`}>
                         {
                             !(contentLoaded) &&

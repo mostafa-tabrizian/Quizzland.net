@@ -37,7 +37,7 @@ const Header = (props) => {
         <>
 
 
-            <header className={`header relative`}>
+            <header className={`header text-xl p-4 relative`}>
 
                 {/* <Head>
                     <script type="text/javascript">
@@ -82,7 +82,7 @@ const Header = (props) => {
                         </Link>
                     </div>
 
-                    <div className={`header__links md:space-x-5 relative ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
+                    <div className={`md:space-x-5 py-5 mr-6 z-10 relative ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
                         <div className="hoverAnimation md:space-x-7">
                             {/* <button className="header__btn">
                                 <Link href="/blog"><a> وبلاگ </a></Link>
@@ -109,19 +109,19 @@ const Header = (props) => {
 
                     <Search />
 
-                    <ul className={`header__categories ${props.colorOfHeader} subHeader absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                    <ul className={`right-[11rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
                         <li><Link href="/category/movie-series"><a>🎬 فیلم و سریال</a></Link></li>
                         <li><Link href="/category/celebrity"><a>✨ سلبریتی</a></Link></li>
                         <li><Link href="/category/psychology"><a>🧠 روانشناسی</a></Link></li>
                     </ul>
 
-                    <ul className={`header__quizzes ${props.colorOfHeader} subHeader absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                    <ul className={`right-[16.5rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
                         <li><Link href="/sort?st=newest"><a> ⏳ جدیدترین ها </a></Link></li>
                         <li><Link href="/sort?st=monthlyBestest"><a> 👑 بهترین های ماه </a></Link></li>
                         <li><Link href="/sort?st=bestest"><a> 👑 بهترین ها </a></Link></li>
                     </ul>
 
-                    <ul className={`header__pointy ${props.colorOfHeader} subHeader absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                    <ul className={`right-[21rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
                         <li><Link href="/sort?st=newest_test"><a> ⏳ جدیدترین ها </a></Link></li>
                         <li><Link href="/sort?st=monthlyBestest_test"><a> 👑 بهترین های ماه </a></Link></li>
                         <li><Link href="/sort?st=bestest_test"><a> 👑 بهترین ها </a></Link></li>
