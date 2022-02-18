@@ -1,0 +1,170 @@
+.hero{
+    @include breakpoints-down(large) {
+        margin-bottom: 20rem;
+    }
+
+    &__path {
+        z-index: -1;
+        height: 115%; width: 100%;
+        top: -16rem;; left: 0;
+    }
+
+    &__logo {
+        margin-right: 5rem; margin-left: 5rem;
+        filter: drop-shadow(10px 15px 10px black);
+
+        .Q {
+            width: 25rem;
+            height: 100%;
+            pointer-events: none;
+
+            &__Bubbles {
+                position: absolute;
+                width: 26rem;
+                left: 1rem;
+                pointer-events: none;
+                animation: dancingBubbles 5s infinite linear;
+            }
+
+            @keyframes dancingBubbles {
+                0%{
+                    transform:rotate(0deg)
+                            translate(-10px)
+                            rotate(0deg);
+                }
+                50%{
+                    transform:rotate(180deg)
+                            translate(0px)
+                            rotate(-180deg);
+                }
+                100%{
+                    transform:rotate(360deg)
+                            translate(-10px)
+                            rotate(-360deg);
+                }
+            }
+        }
+    }
+
+    &__start {
+        margin-right: 3rem;
+
+        @include breakpoints-down(large) {
+            margin-right: 2rem;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-family: myLalezar, myHarmattan, serif;
+            font-weight: 100;
+            letter-spacing: 0;
+            line-height: 3rem;
+            max-width:  33rem;
+            margin-bottom: 1.5rem; margin-left: 1.5rem;
+            text-shadow: 0 0 25px black;
+        }
+
+        button {
+            font-size: 1.6rem;
+            // background: $red-grad;
+            padding: .5rem 3rem;
+            border-radius: .5rem;
+            display: inline-flex;
+            color: white;
+            box-shadow: inset 6px 0px 22px #000000eb, 6px 0 18px #000000f7;
+
+            background: linear-gradient(-45deg, rgb(162, 0, 0), rgb(75, 0, 0), rgb(170, 73, 73), rgb(162, 0, 0));
+            background-size: 400% 400%;
+            animation: heroButton 10s ease infinite alternate;
+            
+            @keyframes heroButton {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            span {
+                background: url('/images/arw.svg');
+                width: 2.5rem; height: 2.2rem;
+                transform: rotate(90deg);
+                transition: transform .15s ease-in-out;
+            }
+
+            &:hover {
+                color: white;
+
+                span {
+                    transform: rotate(90deg) translateY(.5rem);
+                }
+            }
+        }
+    }
+}
+
+// .category {
+//     flex-wrap: wrap;
+//     margin: 0 auto;
+
+//     a {
+//         margin-right: 1rem;
+//     }
+
+//     @include breakpoints-down(large) {
+//         a {
+//             text-align: center;
+//         }
+//     }
+
+//     &__title {
+//         padding-top: 13rem;
+//         padding-right: 1.125rem;
+
+//         @include breakpoints-down(large) {
+//             padding-top: 5rem;
+//         }
+//     }
+    
+//     img {
+//         width: 14.6875rem; height: 14.6875rem;
+//         border-radius: 20px;
+//         box-shadow: 5px 10px 16px #000000d9;
+//         margin: 1.4375rem; margin-bottom: .5rem;
+//         transition: all .3s ease-in-out;
+        
+//         &:hover {
+//             box-shadow: 5px 10px 22px rgba(65, 0, 0, 0.645);
+//             transform: translateY(-.625rem);
+//         }
+
+//         @include breakpoints-down(large) {
+//                     width: 9rem;
+//                     height: 9rem;
+//                     margin: .5rem;
+//                     margin-bottom: 0;
+//         }
+//     }
+
+//     h3 {
+//         margin-top: 0;
+//         display: block;
+//         font-family: myLalezar, myHarmattan, sans-serif;
+//         font-weight: 100;
+//         transform: translate(1rem);
+//         font-size: 1.5rem;
+
+//         @include breakpoints-down(large) {
+//             font-size: 1.3rem; 
+//         }
+//     }
+// }

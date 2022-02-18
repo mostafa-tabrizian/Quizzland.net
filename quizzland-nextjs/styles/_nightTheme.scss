@@ -1,0 +1,311 @@
+:root {
+    color-scheme: light dark; /* both supported */
+    color: white !important;
+  }
+
+html {
+    background: linear-gradient(45deg, #0a0d13, #040203) !important;
+    background-attachment: fixed !important;
+}
+
+.hoverAnimation {
+    display: flex;
+
+    a, li, button {
+
+        &::after{
+            border-bottom: 2px solid white; 
+        }
+    }
+}
+
+.header {
+    &__links {
+        a {
+            color: white !important;
+        }
+
+        button {
+            color: white !important;
+        }
+    }
+
+    .subHeader {
+        > li > a {
+            color: white !important;
+
+            @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+                color: black !important;
+            }
+            
+            &:hover {
+                color: rgba(255, 0, 0, 0.692) !important;
+            }
+        }
+    }
+
+    &__categories &__quizzes {
+
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: rgba(255, 255, 255, 0.18) !important;
+            box-shadow: 2px 2px 15px black !important;
+        }
+    
+        @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: rgba(0, 0, 0, 0.939) !important;
+            box-shadow: 0 0 15px 1px rgba(104, 104, 104, 0.192) !important;
+        }
+    }
+
+    &__menu {
+        background:rgba(29, 29, 29, 0.624) !important;
+        
+        &__openBtn {
+            span {
+                background: white !important;
+            }
+        }
+
+        &__inner {
+            color: white !important;
+        }
+    }
+
+    &__search {
+        // &__opener {
+        //     background: url('/images/srch-white.svg') no-repeat center !important;
+        // }
+
+        &__input {
+            color: white !important;
+            border-radius: 15px !important;
+            box-shadow: 0 15px 20px #ffffff07 !important;
+            border: None;
+
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.775) !important;
+            }
+
+            @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+                background: #00000094 !important; 
+            }
+
+            @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+                background: #000000ee !important;
+            }
+        }
+    
+        &__result {
+            box-shadow: 0 0 40px #87878733 !important;
+
+            @include breakpoints-down(large) {
+                box-shadow: inherit !important;
+            }
+
+            &__category {
+                &__item {
+                    a > img {
+                        box-shadow: 0 0 15px 5px black !important;
+                    }
+                }
+            }
+        
+            &__quizzes {
+                &__item {
+                    &::before {
+                        content: '◽' !important;
+                    }
+                }
+            }
+
+            @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+                background: #00000094 !important;
+            }
+
+            @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+                background: #000000ee !important;
+            }
+        }
+    }
+}
+
+.hero-inner {
+    padding: 1.5rem;
+    color: white;
+    border-radius: 40px;
+    box-shadow: 2px 2px 8px #0000005e, 0 0 15px #3f3f3f5e !important;
+    backdrop-filter: blur(15px) !important;
+    background: rgba(0, 0, 0, 0.54) !important;
+    border: solid 1px transparent !important;
+    background-clip: padding-box !important;
+
+
+    button {
+        background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216)) !important;
+        color: black !important;
+
+        &:hover {
+            color: #af282f !important;
+        }
+    }
+}
+
+.hero__start {
+    a {
+        animation: shining 2s linear infinite alternate-reverse;
+    }
+
+    @keyframes shining {
+        from {
+            box-shadow: 6px 0px 22px #ffffff14, inset 6px 0 18px black;
+        }
+        to {
+            box-shadow: -6px -5px 22px #ffffff14, inset -6px 5px 18px black;
+    }
+    }
+}
+
+.lowBrightnessBackground {
+    &::before {
+        background: #00000086;
+    }
+}
+
+.quizzes {
+    &__item {
+        a > img {
+            filter: brightness(60%) !important;
+            box-shadow: 0 15px 15px black !important;
+        }
+    }
+}
+
+.sortMore {
+    &__container {
+        a {
+            &::after {
+                background: #121212 !important;
+                box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px #00000081 !important;
+            }
+
+            &:hover {
+                box-shadow: 0 0 10px #252424 !important;
+
+                &::after {
+                    box-shadow: inset 0 0 10px #000000, 0 6px 10px #000000bb !important;
+                }
+            }
+        }
+
+        &__views {
+            background: #181818 !important;
+        }
+    }
+}
+
+.sort {
+    &-views, &-monthlyViews {
+        h2 {
+            color: white !important;
+
+            &::after {
+                color: #f3f3f308 !important;
+
+            }
+        }
+    }
+
+    &__style {
+        li {
+            &:nth-child(even) {
+                color: rgb(196, 196, 196);
+            }
+        }
+    }
+
+    &__container {
+        > div {
+            box-shadow: inset 0 0 25px #3131313b, 0 0 30px black;
+            background: linear-gradient(4deg, #080808, #80808036)
+        }
+    }
+
+    &__controller {
+        &__btn {
+            box-shadow: none;
+            background: linear-gradient(45deg, #292929, #0c0c0c);
+            border: 1px solid black;
+
+            @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+                color: white !important;
+            }
+        }
+    }
+
+    &More {
+        &__item {
+            &::after {
+                content: '◽'
+            }
+        }
+    }
+}
+
+.newsletter {
+    &__submit {
+        color: white !important;
+    }
+
+    &__show {
+        background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
+        color: black !important;
+
+        &:hover {
+            color: #af282f !important;
+        }
+    }
+}
+
+.quizzes {
+    &__item {
+        a > img {
+            box-shadow: 0 0 15px #828282;
+        }
+    }
+}
+
+.backBtn {
+    background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216));
+    color: black !important;
+}
+
+.tryAgain {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.4;
+    background: none;
+    transform: translate(-2rem);
+
+    &:hover {
+        border: solid 1px darkRed !important;
+    }
+}
+
+.basicPage {
+    box-shadow:  0 0 15px 0 rgba(255, 255, 255, 0.25)
+}
+
+.pageTravel {
+    background: rgba(0, 0, 0, 0.638) !important;
+    box-shadow: 0 15px 22px rgba(255, 255, 255, 0.027) !important;
+    border-radius: 5px !important;
+}
+
+.skeletonLoading {
+    background: #111111b9;
+    box-shadow: 0 10px 22px 1px #7272725c;
+    
+    &::before {
+        background: linear-gradient(to right, transparent 0%, #262626 50%, transparent 100%);
+    }
+}
