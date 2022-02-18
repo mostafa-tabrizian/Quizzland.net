@@ -2,31 +2,31 @@
 @font-face {
   font-family: "myHarmattan";
   font-display: swap;
-  src: url("../fonts/Harmattan-Regular.woff2") format("woff2"), url("../fonts/Harmattan-Regular.woff") format("woff"), url("../fonts/Harmattan-Regular.ttf") format("truetype");
+  src: url("/static/fonts/Harmattan-Regular.woff2") format("woff2"), url("/static/fonts/Harmattan-Regular.woff") format("woff"), url("/static/fonts/Harmattan-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "myChanga";
   font-display: swap;
-  src: url("../fonts/Changa-ExtraLight.woff2") format("woff2"), url("../fonts/Changa-ExtraLight.woff") format("woff"), url("../fonts/Changa-ExtraLight.ttf") format("truetype");
+  src: url("/static/fonts/Changa-ExtraLight.woff2") format("woff2"), url("/static/fonts/Changa-ExtraLight.woff") format("woff"), url("/static/fonts/Changa-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
   font-family: 'myLalezar';
   font-display: swap;
-  src: url("../fonts/Lalezar-Regular.woff2") format("woff2"), url("../fonts/Lalezar-Regular.woff") format("woff"), url("../fonts/Lalezar-Regular.ttf") format("truetype");
+  src: url("/static/fonts/Lalezar-Regular.woff2") format("woff2"), url("/static/fonts/Lalezar-Regular.woff") format("woff"), url("/static/fonts/Lalezar-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "changeForNotChrome";
   font-display: swap;
-  src: url("../fonts/Changa-Light.woff2") format("woff2"), url("../fonts/Changa-Light.woff") format("woff"), url("../fonts/Changa-Light.ttf") format("truetype");
+  src: url("/static/fonts/Changa-Light.woff2") format("woff2"), url("/static/fonts/Changa-Light.woff") format("woff"), url("/static/fonts/Changa-Light.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "myVermin";
   font-display: swap;
-  src: url("../fonts/Vermin-Vibes-2-Soft.woff2") format("woff2"), url("../fonts/Vermin-Vibes-2-Soft.woff") format("woff"), url("../fonts/Vermin-Vibes-2-Soft.ttf") format("truetype");
+  src: url("/static/fonts/Vermin-Vibes-2-Soft.woff2") format("woff2"), url("/static/fonts/Vermin-Vibes-2-Soft.woff") format("woff"), url("/static/fonts/Vermin-Vibes-2-Soft.ttf") format("truetype");
 }
 
 .wrapper-sm {
@@ -617,7 +617,7 @@ input {
 .pageTravel__arwLast {
   width: 1.25rem;
   height: 1.25rem;
-  background: url("/images/arw-travelPage.svg") no-repeat;
+  background: url("/static/img/arw-travelPage.svg") no-repeat;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
 }
@@ -625,7 +625,7 @@ input {
 .pageTravel__arwNext {
   width: 1.25rem;
   height: 1.25rem;
-  background: url("/images/arw-travelPage.svg") no-repeat;
+  background: url("/static/img/arw-travelPage.svg") no-repeat;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }
@@ -668,7 +668,7 @@ input {
 }
 
 .nightMode {
-  background: url("/images/nightMode.png") no-repeat center center;
+  background: url("/static/img/nightMode.png") no-repeat center center;
   -webkit-filter: drop-shadow(0px 0px 4px white);
           filter: drop-shadow(0px 0px 4px white);
   -webkit-transform: translate(0.54rem, -0.43rem);
@@ -982,7 +982,7 @@ input {
 }
 
 .header__menu__closeBtn {
-  background: url("../images/close-btn.svg") center center no-repeat;
+  background: url("/static/img/close-btn.svg") center center no-repeat;
   width: 1.75rem;
   height: 1.75rem;
   top: 1rem;
@@ -1177,7 +1177,7 @@ input {
 }
 
 .header__search__opener {
-  background: url("../images/srch-black.svg") no-repeat center center;
+  background: url("/static/img/srch-black.svg") no-repeat center center;
   width: 1.5rem;
   height: 2rem;
   position: absolute;
@@ -1737,7 +1737,7 @@ input {
 }
 
 .hero__start button span {
-  background: url("../images/arw.svg");
+  background: url("/static/img/arw.svg");
   width: 2.5rem;
   height: 2.2rem;
   -webkit-transform: rotate(90deg);
@@ -2012,7 +2012,7 @@ body {
 }
 
 .quiz__questionChanger__container button {
-  background: url("../images/arw.svg") no-repeat center center;
+  background: url("/static/img/arw.svg") no-repeat center center;
   height: 2rem;
   width: 2rem;
 }
@@ -2055,7 +2055,7 @@ body {
 }
 
 .quiz__bottomQuestionChanger {
-  background: url("../images/arw-submit.svg") no-repeat center center;
+  background: url("/static/img/arw-submit.svg") no-repeat center center;
   height: 2rem;
   width: 2rem;
   -webkit-transform: rotate(90deg);
@@ -2485,7 +2485,7 @@ body {
 }
 
 .quizContainer__views::before {
-  content: url("../images/eyeEmoji.png");
+  content: url("/static/img/eyeEmoji.png");
   position: relative;
   top: 0.2rem;
   margin-right: 0.2rem;

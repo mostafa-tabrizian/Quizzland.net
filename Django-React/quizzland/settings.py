@@ -54,7 +54,7 @@ REST_FRAMEWORK = {
 ALLOWED_HOSTS = [
     'www.quizzland.net', 'quizzland.net', 
     'www.quizzland.ir', 'quizzland.ir',
-    'localhost'
+    'localhost',
 ]
 
 INSTALLED_APPS = [

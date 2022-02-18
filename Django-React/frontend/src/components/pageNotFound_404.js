@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Helmet } from "react-helmet";
-import Header from './header'
 
 import BackBtn from './backBtn'
+import Header from './header'
 
 const pathRed = '/static/img/bubbles.png'
 
-const SOS = () => {
+const PageNotFound_404 = () => {
 
     useEffect(() => {
         if (document.getElementById('html')) {
@@ -20,26 +20,25 @@ const SOS = () => {
             <Header linkType='Hot'/>
 
             <Helmet>
-                <title>کوییزلند تحت تیم فنی است</title>
-                <meta name="description" content="کوییزلند تحت تیم فنی است" />
+                <title>صفحه مورد نظر پیدا نشد |‌ کوییزلند</title>
+                <meta name="description" content="صفحه مورد نظر پیدا نشد" />
                 <meta name="keywords" content="کوییزلند" />
                 <meta name="robots" content="noindex"></meta>
             </Helmet>
     
-            <div class="basicPage wrapper-med center pos-rel" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
-                <h1>🚧🔧 کوییزلند در حال حاضر در دسترس نیست 🚧🔧 </h1>
+            <div class="basicPage wrapper-sm center pos-rel" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
+                <h1> 🤔 صفحه‌ی مورد نظر پیدا نشد </h1>
                 <div class="space-sm">
-                    <p className='tx-al-c'> تیم فنی در حال آپدیت، بررسی و تعمیر برخی مشکلات سایت است </p>
-                    <p className='tx-al-c'>لطفا در چند دقیقه آینده دوباره تلاش کنید</p>
-                    <p className='tx-al-c'>قدردان صبر شما هستیم 💗</p>
-                    <br />
+                    <p>💖 اگه فکر میکنی اشتباهی پیش اومدی ممنون میشیم برامون به<a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم"> این ایمیل</a> پیام بدی</p>
                     <a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">support@quizzland.net</a>
                 </div>
             </div>
+
+            <span className="pageNotFound">404</span>
     
             <BackBtn />
         </React.Fragment>
     );
 }
  
-export default SOS;
+export default PageNotFound_404;

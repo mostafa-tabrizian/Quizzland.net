@@ -192,7 +192,7 @@ body {
             }
 
             button {
-                background: url('/images/arw.svg') no-repeat center center;
+                background: url('/static/img/arw.svg') no-repeat center center;
                 height: 2rem; width: 2rem;
             }
         }
@@ -226,7 +226,7 @@ body {
     }
 
     &__bottomQuestionChanger {
-        background: url('/images/arw-submit.svg') no-repeat center center;
+        background: url('/static/img/arw-submit.svg') no-repeat center center;
         height: 2rem;
         width: 2rem;
         transform: rotate(90deg);

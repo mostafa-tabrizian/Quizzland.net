@@ -63,19 +63,19 @@ def addViewToSubCategories(title):
     except:
         pass
 
-def articles(request):
-    return render(request, "frontend/articles.html")
+def blog(request):
+    return render(request, "frontend/blog.html")
 
 def article(request, title):
     addViewToArticle(title)
-    return render(request, "frontend/articles.html")
+    return render(request, "frontend/blog.html")
 
 def addViewToArticle(title):
     titleWithOutHyphens = title.replace("+", " ")
     finalTitle = unquote(titleWithOutHyphens)
     
     try:
-        article = Articles.objects.get(title=finalTitle)
+        article = Blog.objects.get(title=finalTitle)
         article.views += 1
         article.monthly_views += 1
         article.save()
@@ -101,7 +101,7 @@ def restartEveryMonthlyViews(request):
             subCategory.monthly_views = 0
             subCategory.save()
 
-        articles = Articles.objects.all()
+        articles = Blog.objects.all()
         for article in articles:
             article.monthly_views = 0
             article.save()
@@ -196,10 +196,10 @@ class pointyQuestions(viewsets.ReadOnlyModelViewSet):
 
 # --------------------------------------------------------
 
-class new_article(viewsets.ReadOnlyModelViewSet):
-    queryset = Articles.objects.all()
-    serializer_class = ArticleSerializer
-    filterset_class = ArticleFilter
+class new_blog(viewsets.ReadOnlyModelViewSet):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+    filterset_class = BlogFilter
 
 # --------------------------------------------------------
 
