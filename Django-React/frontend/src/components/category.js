@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
-import rateLimit from 'axios-rate-limit';
+import axiosInstance from './axiosApi'
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
@@ -28,7 +28,7 @@ const Category = (props) => {
     }
     const currentCategory = categoryDefinitionInFarsi[categoryTarget]
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+    
 
     useEffect(() => {
         searchChangeDetector()
@@ -53,12 +53,12 @@ const Category = (props) => {
 
     const getCategories = async () => {
         const sortTypeDefinitionForDb = {
-            'newest': 'new_category',
-            'bestest': 'best_category',
-            'alphabet': 'alphabet_category'
+            'newest': 'category_new',
+            'bestest': 'category_best',
+            'alphabet': 'category_alphabet'
         }
 
-        const pageTravelAndCategories = await axiosLimited.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryTarget}&limit=${numberOfResult}&offset=${offset}`)
+        const pageTravelAndCategories = await axiosInstance.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryTarget}&limit=${numberOfResult}&offset=${offset}`)
         setPageTravel(pageTravelAndCategories.data)
         setCategories(pageTravelAndCategories.data.results)
         setContentLoaded(true)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
-import rateLimit from 'axios-rate-limit';
+import axiosInstance from './axiosApi'
 import { Link } from 'react-router-dom'
 
 import { log, replaceFunction, datePublishHandler } from './base'
@@ -12,14 +12,14 @@ import LoadingScreen from './loadingScreen'
 import SkeletonLoading from './skeletonLoading';
 import Header from './header'
 
-const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+
 
 const Blog = (props) => {
     const [blogContentData, setBlogContentData] = useState([])
     const [contentLoaded, setContentLoaded] = useState(false)
 
     const getBlogsFromDb = async () => {
-        const contentData = await axiosLimited.get('/dbAPI/new_blog/')
+        const contentData = await axiosInstance.get('/dbAPI/new_blog/')
         setBlogContentData(contentData.data)
     }
 

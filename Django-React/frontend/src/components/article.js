@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
-import rateLimit from 'axios-rate-limit';
+import axiosInstance from './axiosApi'
 import {InlineReactionButtons, InlineShareButtons, StickyShareButtons} from 'sharethis-reactjs';
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
@@ -11,7 +11,7 @@ import Header from './header'
 
 const logo = '/static/img/Q-small.png'
 
-const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+
 
 const Article = (props) => {
     const [article, setArticle] = useState([])
@@ -19,7 +19,7 @@ const Article = (props) => {
 
     const getBlogContentFromDb = async () => {
         const contentTitle = props.match.params.title
-        const contentData = await axiosLimited.get(`/dbAPI/new_blog/?title__iexact=${contentTitle}&limit=1`)
+        const contentData = await axiosInstance.get(`/dbAPI/new_blog/?title__iexact=${contentTitle}&limit=1`)
         setArticle(contentData.data.results[0])
         setLoadState(true)
     }

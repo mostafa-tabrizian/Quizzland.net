@@ -14,91 +14,54 @@ const copyRightDate = () => {
 
 const Footer = (props) => {
     return (
-        <div className='footer'>
+        <div className='footer w-full py-12'>
             
-            <div className='footer__container flex-jc-c'>
+            <div className='footer__container justify-center md:flex grid grid-cols-2 mr-10'>
 
                 <div>
-                    <h3>کوییز ها</h3>
-                    {
-                        props.linkType == 'Link' &&
-                        <ul>
-                            <li><Link to="/sort?q=newest">جدیدترین ها</Link></li>
-                            <li><Link to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
-                            <li><Link to="/sort?q=bestest">بهترین ها</Link></li>
-                        </ul>
-                    }
-                    {
-                        props.linkType == 'Hot' &&
-                        <ul>
-                            <li><a href="/sort?q=newest">جدیدترین ها</a></li>
-                            <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
-                            <li><a href="/sort?q=bestest">بهترین ها</a></li>
-                        </ul>
-                    }
+                    <h3>دسترسی سریع</h3>
+                    <ul>
+                        <li><Link to='/'><a>صفحه اصلی</a></Link></li>
+                        {/* <li><Link to='/blog'><a>وبلاگ</a></Link></li> */}
+                        <li><Link to='/guide'><a>راهنما</a></Link></li>
+                        <li><Link to='/contact'><a>تماس با ما</a></Link></li>
+                        <li><Link to='/advertising'><a>تبلیغات</a></Link></li>
+                        <li><Link to='/privacy-policy'><a>حریم خصوصی</a></Link></li>
+                        <li><Link to='/supportUs'><a>حمایت</a></Link></li>
+                    </ul>
                 </div>
 
                 <div>
                     <h3>تست ها</h3>
-                    {
-                        props.linkType == 'Link' &&
-                        <ul>
-                            <li><Link to="/sort?q=newest_test">جدیدترین ها</Link></li>
-                            <li><Link to="/sort?q=monthlyBestest_test">بهترین های ماه</Link></li>
-                            <li><Link to="/sort?q=bestest_test">بهترین ها</Link></li>
-                        </ul>
-                    }
-                    {
-                        props.linkType == 'Hot' &&
-                        <ul>
-                            <li><a href="/sort?q=newest_test">جدیدترین ها</a></li>
-                            <li><a href="/sort?q=monthlyBestest_test">بهترین های ماه</a></li>
-                            <li><a href="/sort?q=bestest_test">بهترین ها</a></li>
-                        </ul>
-                    }
+                    <ul>
+                        <li><Link to="/sort?st=newest_test"><a> جدیدترین ها </a></Link></li>
+                        <li><Link to="/sort?st=monthly_test"><a> بهترین های ماه </a></Link></li>
+                        <li><Link to="/sort?st=bestest_test"><a> بهترین ها </a></Link></li>
+                    </ul>
                 </div>
 
                 <div>
                     <h3>کتگوری ها</h3>
                     <ul>
-                        <li><a href="/category/movieSeries">فیلم و سریال</a></li>
-                        <li><a href="/category/celebrity">سلبریتی</a></li>
-                        <li><a href="/category/psychology">روانشناسی</a></li>
+                        <li><Link to="/category/movieSeries"><a>فیلم و سریال</a></Link></li>
+                        <li><Link to="/category/celebrity"><a>سلبریتی</a></Link></li>
+                        <li><Link to="/category/psychology"><a>روانشناسی</a></Link></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3>دسترسی سریع</h3>
-                    {
-                        props.linkType == 'Link' &&
-                        <ul>
-                            <li><Link to='/'>صفحه اصلی</Link></li>
-                            <li><Link to='/blog'>وبلاگ</Link></li>
-                            <li><Link to='/guide'>راهنما</Link></li>
-                            <li><Link to='/contact'>تماس با ما</Link></li>
-                            <li><Link to="/ads">تبلیغات</Link></li>
-                            <li><Link to="/privacy-policy">حریم خصوصی</Link></li>
-                            <li><Link to="/support">حمایت</Link></li>
-                        </ul>
-                    }
-                    {
-                        props.linkType == 'Hot' &&
-                        <ul>
-                            <li><a href='/'>صفحه اصلی</a></li>
-                            <li><a href='/blog'>وبلاگ</a></li>
-                            <li><a href='/guide'>راهنما</a></li>
-                            <li><a href='/contact'>تماس با ما</a></li>
-                            <li><a href="/ads">تبلیغات</a></li>
-                            <li><a href="/privacy-policy">حریم خصوصی</a></li>
-                            <li><a href="/support">حمایت</a></li>
-                        </ul>
-                    }
+                    <h3>کوییز ها</h3>
+                    <ul>
+                        <li><Link to="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
+                        <li><Link to="/sort?st=monthly"><a> بهترین های ماه </a></Link></li>
+                        <li><Link to="/sort?st=bestest"><a> بهترین ها </a></Link></li>
+                    </ul>
                 </div>
 
                 {/* <div>
                     <h3>با ما همراه باشید</h3>
-                    <ul className='flex flex-ai-c flex-jc-c'>
-                        <li><a href='#'>
+                    <ul className='flex flex-ai-c justify-center'>
+                        <li><a to='#'>
                             <img src={instagramIcon} alt='quizzlnad instagram' />
                         </a></li>
                     </ul>
@@ -106,8 +69,8 @@ const Footer = (props) => {
 
             </div>
 
-            <div className="footer__copyRight flex flex-jc-c flex-ai-c">
-                <p>
+            <div className="flex justify-center flex-ai-c opacity-50">
+                <p className='text-sm'>
                     {copyRightDate()} © تمام حقوق به کوییزلند تعلق دارد
                 </p>
             </div>

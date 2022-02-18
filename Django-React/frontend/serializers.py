@@ -1,6 +1,15 @@
 from rest_framework import serializers
 from .models import *
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super(MyTokenObtainPairSerializer, cls).get_token(user)
+
+        # Add custom claims
+        # token['fav_color'] = user.fav_color
+        return token
 
 class QuizzesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -126,7 +135,7 @@ class QuestionsSerializer(serializers.ModelSerializer):
             'answer_text'
         )
 
-class PointyQuestionsSerializer(serializers.ModelSerializer):
+class questions_pointySerializer(serializers.ModelSerializer):
     class Meta:
         model = Pointy_Questions
         fields = (

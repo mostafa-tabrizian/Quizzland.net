@@ -13,24 +13,24 @@ sitemaps = {
 
 router = routers.DefaultRouter()
 
-router.register(r'new_quiz', views.new_quiz)
-router.register(r'monthlyBest_quiz', views.monthlyBest_quiz)
-router.register(r'best_quiz', views.best_quiz)
-router.register(r'alphabet_quiz', views.alphabet_quiz)
+router.register(r'quiz_new', views.quiz_new)
+router.register(r'quiz_monthly', views.quiz_monthly)
+router.register(r'quiz_best', views.quiz_best)
+router.register(r'quiz_alphabet', views.quiz_alphabet)
 
-router.register(r'new_pointy_quiz', views.new_pointy_quiz)
-router.register(r'monthlyBest_pointy_quiz', views.monthlyBest_pointy_quiz)
+router.register(r'pointy_new', views.pointy_new)
+router.register(r'pointy_monthly', views.pointy_monthly)
 router.register(r'best_pointy_quiz', views.best_pointy_quiz)
-router.register(r'alphabet_pointy_quiz', views.alphabet_pointy_quiz)
+router.register(r'pointy_alphabet', views.pointy_alphabet)
 
-router.register(r'new_category', views.new_category)
-router.register(r'best_category', views.best_category)
-router.register(r'alphabet_category', views.alphabet_category)
+router.register(r'category_new', views.category_new)
+router.register(r'category_best', views.category_best)
+router.register(r'category_alphabet', views.category_alphabet)
 
 router.register(r'questions', views.questions)
-router.register(r'pointyQuestions', views.pointyQuestions)
+router.register(r'questions_pointy', views.questions_pointy)
 
-router.register(r'new_blog', views.new_blog)
+# router.register(r'new_blog', views.new_blog)
 
 # router.register(r'newsletter_users', views.newsletter_users)
 

@@ -1,33 +1,43 @@
 {
-    "short_name": "کوییزلند",
-    "name": "کوییزلند: بهترین وب سایت کوییز، تست و تریویا",
-    "icons": [
-      {
-        "src": "/static/img/Q-192.png",
-        "type": "image/png",
-        "sizes": "192x192"
-      }
-    ],
-    "start_url": "/",
-    "background_color": "#050b21",
-    "display": "minimal-ui",
-    "scope": "/",
-    "theme_color": "#a8222e",
-    "shortcuts": [
-      {
-        "name": "جدیدترین کوییز ها",
-        "short_name": "جدیدترین ها",
-        "description": "جدیدترین کوییز ها با موضوع های متفاوت کوییزلند رو ببین",
-        "url": "/sort?q=newest",
-        "icons": [{ "src": "/static/img/Q-192.png", "sizes": "192x192" }]
-      },
-      {
-        "name": "بهترین کوییز های این ماه",
-        "short_name": "بهترین های ماه",
-        "description": "بهترین کوییز های این ماه با موضوع های متفاوت کوییزلند رو ببین",
-        "url": "/sort?q=monthlyBestest",
-        "icons": [{ "src": "/static/img/Q-192.png", "sizes": "192x192" }]
-      }
-    ],
-    "description": "جدیدترین و بهترین کوییز های کوییزلند"
+  "short_name": "کوییزلند",
+  "name": "کوییزلند: بهترین وب سایت کوییز، تست و تریویا",
+  "icons": [
+    {
+      "src": "/static/img/Q-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#050b21",
+  "display": "minimal-ui",
+  "scope": "/",
+  "theme_color": "#a8222e",
+  "shortcuts": [
+    {
+      "name": "جدیدترین کوییز ها",
+      "short_name": "جدیدترین ها",
+      "description": "جدیدترین کوییز ها با موضوع های متفاوت کوییزلند رو ببین",
+      "url": "/sort?q=newest",
+      "icons": [
+        {
+          "src": "/static/img/Q-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "بهترین کوییز های این ماه",
+      "short_name": "بهترین های ماه",
+      "description": "بهترین کوییز های این ماه با موضوع های متفاوت کوییزلند رو ببین",
+      "url": "/sort?q=monthly",
+      "icons": [
+        {
+          "src": "/static/img/Q-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "description": "جدیدترین و بهترین کوییز های کوییزلند"
 }

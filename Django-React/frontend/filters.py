@@ -37,7 +37,7 @@ class QuestionsFilter(filters.FilterSet):
             'title': ['iexact', 'icontains']
         }
 
-class PointyQuestionsFilter(filters.FilterSet):
+class questions_pointyFilter(filters.FilterSet):
     class Meta:
         model = Pointy_Questions
         fields = {

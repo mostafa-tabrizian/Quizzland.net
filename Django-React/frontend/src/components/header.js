@@ -5,37 +5,15 @@ import { Helmet } from "react-helmet";
 import { log } from './base'
 import Search from './search'
 
-import '/static/css/style.css'
-
-const logo = '/static/img/Q-small.png'
-const nightModeIcon = '/static/img/lightMode.png'
-
 const Header = (props) => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)
     const [quizNavigationOpen, setQuizNavigationOpen] = useState(false)
     const [pointyNavigationOpen, setPointyNavigationOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
-    const [nightMode, setNightMode] = useState(true)
 
     useEffect(() => {
         componentChangeDetector()
     })
-
-    useEffect(() => {
-
-        if (nightMode) {
-            if (localStorage.getItem('lightMode') !== 'true') {
-                require('/static/css/nightTheme.css')
-            }
-        }
-    }, [nightMode])
-    
-    // if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
-    //     if (localStorage.getItem('alertUFHB') !== 'true') {
-    //         alert('لطفا از مرورگر کروم یا غیره استفاده کنید \n در مرورگر شما (فایرفاکس) برخی دیزاین ها قابل اجرا نیست')
-    //         localStorage.setItem('alertUFHB', 'True')
-    //     }
-    // }
 
     const componentChangeDetector = () => {
         (function(history){
@@ -45,39 +23,7 @@ const Header = (props) => {
                 pushState.apply(history, arguments);
             };
 
-            checkIfShouldShowNightModeBtn()
-
         })(window.history);
-    }
-
-    const checkIfShouldShowNightModeBtn = () => {
-        const pageUrl = window.location.pathname.split('/')
-
-        if (pageUrl.includes('quiz')) {
-            setNightMode(false)
-        } else {
-            setNightMode(true)
-        }
-    }
-
-    const nightModeTurnOnOff = () => {
-
-        if (localStorage.getItem('lightMode') === 'true') {
-            localStorage.setItem('lightMode', false)
-            window.location.reload();
-        } else {
-            require('/static/css/nightTheme.css')
-            localStorage.setItem('lightMode', true)
-            window.location.reload();
-        }
-    }
-
-    const nightModeIconChanger = () => {
-        if (localStorage.getItem('lightMode') === 'true') {
-            return {
-                background: `url('${nightModeIcon}') no-repeat center center`
-            }
-        }
     }
 
     const openCloseMenu = () => {
@@ -109,7 +55,7 @@ const Header = (props) => {
         <React.Fragment>
         
 
-            <header className="header pos-rel">
+            <header className="header text-xl p-4 relative">
             
                 <Helmet>
                     <script type="text/javascript">
@@ -141,187 +87,107 @@ const Header = (props) => {
 
                 <nav className="flex flex-ai-c flex-jc-sb">
                     <div>
-                        {
-                            props.linkType == 'Link' &&
-                            <Link to="/" className='header__logo flex flex-jc-sb flex-ai-c hideForDesktop'>
-                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
-                                <span>uizzland</span>
-                            </Link>
-                        }
-                        {
-                            props.linkType == 'Hot' &&
-                            <a className="header__logo flex flex-jc-sb flex-ai-c hideForDesktop" href="/">
-                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
+                        <Link to="/">
+                            <a className='flex header__logo flex-jc-sb flex-ai-c md:hidden'>
+                                <img
+                                    src='/static/img/Q-small.png'
+                                    alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
+                                    width={24}
+                                    height={35}
+                                />
                                 <span>uizzland</span>
                             </a>
-                        }
+                        </Link>
                     </div>
 
-                    <div className={`header__links pos-rel ${props.colorOfHeader} hideForMobile hoverAnimation flex flex-ai-c`}>
-                        {
-                            props.linkType == 'Link' &&
-                            <Link className="header__logo flex flex-jc-sb flex-ai-c" to="/">
-                                <span>uizzland</span>
-                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
-                            </Link>
-                        }
+                    <div className={`md:space-x-5 py-5 mr-6 z-10 relative ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
+                        <div className="hoverAnimation md:space-x-7">
+                            {/* <button className="header__btn">
+                                <Link to="/blog"><a> وبلاگ </a></Link>
+                            </button> */}
+                            <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
+                            <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
+                            <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
+                        </div>
 
-                        {
-                            props.linkType == 'Hot' &&
-                            <a className="header__logo flex flex-jc-sb flex-ai-c" href="/">
+                        <Link to="/">
+                            <a className="flex header__logo flex-jc-sb flex-ai-c">
+                                <img
+                                    src='/static/img/Q-small.png'
+                                    alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
+                                    width={24}
+                                    height={35}
+                                />
                                 <span>uizzland</span>
-                                <img src={logo} alt="کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی" />
                             </a>
-                        }
+                        </Link>
 
-                        <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری‌ ها</button>
-                        <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
-                        <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
-                        {
-                            props.linkType == 'Link' &&
-                            <Link to="/blog">وبلاگ</Link>
-                        }
-                        {
-                            props.linkType == 'Hot' &&
-                            <a href="/blog">وبلاگ</a>
-                        }
-                        {
-                            nightMode &&
-                            <div className="nightMode__container" title="تبدیل به حالت شب/روز">
-                                <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
-                            </div>
-                        }
+
                     </div>
 
-                    <Search/>
+                    <Search />
 
-                    <ul className={`header__categories ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${categoryNavigationOpen ? 'subHeader__open' : ''}`}>
-                        <li><a href="/category/movie-series">🎬 فیلم و سریال</a></li>
-                        <li><a href="/category/celebrity">✨ سلبریتی</a></li>
-                        <li><a href="/category/psychology">🧠 روانشناسی</a></li>
+                    <ul className={`right-[11rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                        <li><Link to="/category/movie-series"><a>🎬 فیلم و سریال</a></Link></li>
+                        <li><Link to="/category/celebrity"><a>✨ سلبریتی</a></Link></li>
+                        <li><Link to="/category/psychology"><a>🧠 روانشناسی</a></Link></li>
                     </ul>
-                    {
-                        props.linkType == 'Link' &&
-                        <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
-                            <li><Link to="/sort?q=newest">⏳ جدیدترین ها</Link></li>
-                            <li><Link to="/sort?q=monthlyBestest">👑 بهترین های ماه</Link></li>
-                            <li><Link to="/sort?q=bestest">👑 بهترین ها</Link></li>
-                        </ul>
-                    }
-                    {
-                        props.linkType == 'Hot' &&
-                        <ul className={`header__quizzes ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${quizNavigationOpen ? 'subHeader__open' : ''}`}>
-                            <li><a href="/sort?q=newest">⏳ جدیدترین ها</a></li>
-                            <li><a href="/sort?q=monthlyBestest">👑 بهترین های ماه</a></li>
-                            <li><a href="/sort?q=bestest">👑 بهترین ها</a></li> 
-                        </ul> 
-                    }
-                    {
-                        props.linkType == 'Link' &&
-                        <ul className={`header__pointy ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${pointyNavigationOpen ? 'subHeader__open' : ''}`}>
-                            <li><Link to="/sort?q=newest_test">⏳ جدیدترین ها</Link></li>
-                            <li><Link to="/sort?q=monthlyBestest_test">👑 بهترین های ماه</Link></li>
-                            <li><Link to="/sort?q=bestest_test">👑 بهترین ها</Link></li>
-                        </ul>
-                    }
-                    {
-                        props.linkType == 'Hot' &&
-                        <ul className={`header__pointy ${props.colorOfHeader} subHeader pos-abs pointerOff tx-al-r ${pointyNavigationOpen ? 'subHeader__open' : ''}`}>
-                            <li><a href="/sort?q=newest_test">⏳ جدیدترین ها</a></li>
-                            <li><a href="/sort?q=monthlyBestest_test">👑 بهترین های ماه</a></li>
-                            <li><a href="/sort?q=bestest_test">👑 بهترین ها</a></li>
-                        </ul>
-                    }
+
+                    <ul className={`right-[16.5rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                        <li><Link to="/sort?st=newest"><a> ⏳ جدیدترین ها </a></Link></li>
+                        <li><Link to="/sort?st=monthly"><a> 👑 بهترین های ماه </a></Link></li>
+                        <li><Link to="/sort?st=bestest"><a> 👑 بهترین ها </a></Link></li>
+                    </ul>
+
+                    <ul className={`right-[21rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                        <li><Link to="/sort?st=newest_test"><a> ⏳ جدیدترین ها </a></Link></li>
+                        <li><Link to="/sort?st=monthly_test"><a> 👑 بهترین های ماه </a></Link></li>
+                        <li><Link to="/sort?st=bestest_test"><a> 👑 بهترین ها </a></Link></li>
+                    </ul>
 
                     {/* Menu */}
-                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn pos-abs ${props.colorOfHeader} hideForDesktop`} aria-label="Menu Button">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn absolute ${props.colorOfHeader} md:hidden`} aria-label="Menu Button">
+                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
                     </button>
-                    
-                    <div className={`header__menu pos-fix tx-al-r hideForDesktop ${menuOpen ? '' : 'slideMenu-hide'}`}>
-                        <button onClick={openCloseMenu} className="header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Menu Button"></button>
-                        <div className="header__menu__inner grid grid-jc-c">
-                            <div className="header__menu__inner__category">
-                                <h4>کتگوری ها</h4>
-                                <ul>
-                                    <li><a href="/category/movie-series">فیلم و سریال 🎬</a></li>
-                                    <li><a href="/category/celebrity">سلبریتی ✨</a></li>
-                                    <li><a href="/category/psychology">روانشناسی 🧠</a></li>
-                                </ul>
-                            </div>
-                            <div className="header__menu__inner__nav">
-                                <h4>کویز ها</h4>
-                                {
-                                    props.linkType == 'Link' &&
-                                    <ul className="header__menu__inner__quizzes tx-al-r">
-                                        <li><Link onClick={openCloseMenu} to="/sort?q=newest">جدیدترین ها</Link></li>
-                                        <li><Link onClick={openCloseMenu} to="/sort?q=monthlyBestest">بهترین های ماه</Link></li>
-                                        <li><Link onClick={openCloseMenu} to="/sort?q=bestest">بهترین ها</Link></li>
-                                    </ul>
-                                }
-                                {
-                                    props.linkType == 'Hot' &&
-                                    <ul className={`header__menu__inner__quizzes tx-al-r`}>
-                                        <li><a onClick={openCloseMenu} href="/sort?q=newest">جدیدترین ها</a></li>
-                                        <li><a onClick={openCloseMenu} href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
-                                        <li><a onClick={openCloseMenu} href="/sort?q=bestest">بهترین ها</a></li>
-                                    </ul>
 
-                                }
-                                <h4 className='space-med'>تست ها</h4>
-                                {
-                                    props.linkType == 'Link' &&
-                                    <ul className="header__menu__inner__quizzes tx-al-r">
-                                        <li><Link onClick={openCloseMenu} to="/sort?q=newest_test">جدیدترین ها</Link></li>
-                                        <li><Link onClick={openCloseMenu} to="/sort?q=monthlyBestest_test">بهترین های ماه</Link></li>
-                                        <li><Link onClick={openCloseMenu} to="/sort?q=bestest_test">بهترین ها</Link></li>
-                                    </ul>
-                                }
-                                {
-                                    props.linkType == 'Hot' &&
-                                    <ul className={`header__menu__inner__quizzes tx-al-r`}>
-                                        <li><a href="/sort?q=newest">جدیدترین ها</a></li>
-                                        <li><a href="/sort?q=monthlyBestest">بهترین های ماه</a></li>
-                                        <li><a href="/sort?q=bestest">بهترین ها</a></li>
-                                    </ul>
+                    <div className={`header__menu fixed text-right z-10 h-[25rem] w-[100%]
+                                    bg-[rgba(148, 148, 148, 0.3)] top-0 right-0
+                                    rounded-b-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
+                                    pr-8 pt-5 absolute top-0 right-0`}>
+                        <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
+                            <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        </button>
 
-                                }
-                            </div>
-                            <div className="header__menu__inner__other">
-                                {
-                                    props.linkType == 'Link' &&
-                                    <ul>
-                                        <li><Link onClick={openCloseMenu} to="/blog">وبلاگ</Link></li>
-                                        <li><Link onClick={openCloseMenu} to="/guide">راهنما</Link></li>
-                                        <li><Link onClick={openCloseMenu} to="/contact">تماس با ما</Link></li>
-
-                                        {/* Night Mode */}
-                                        {nightMode &&
-                                            <div className="nightMode__container" title="تبدیل به حالت شب و بالعکس">
-                                                <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
-                                            </div>
-                                        }   
-                                    </ul>
-                                }
-                                {
-                                    props.linkType == 'Hot' &&
-                                    <ul>
-                                        <li><a onClick={openCloseMenu} href="/blog">وبلاگ</a></li>
-                                        <li><a onClick={openCloseMenu} href="/guide">راهنما</a></li>
-                                        <li><a onClick={openCloseMenu} href="/contact">تماس با ما</a></li>
-
-                                        {/* Night Mode */}
-                                        {nightMode &&
-                                            <div className="nightMode__container" title="تبدیل به حالت شب و بالعکس">
-                                                <button onClick={nightModeTurnOnOff} className='nightMode' style={nightModeIconChanger()} type="button" aria-label="Night Mode De-Activator"></button>
-                                            </div>
-                                        }   
-                                    </ul>
-                                }
-
-                            </div>
+                        <div className='mt-5'>
+                            <h4 className='text-xl'>کتگوری ها</h4>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg'><Link to="/category/movie-series"><a >فیلم و سریال 🎬</a></Link></li>
+                                <li className='text-lg'><Link to="/category/celebrity"><a>سلبریتی ✨</a></Link></li>
+                                <li className='text-lg'><Link to="/category/psychology"><a>روانشناسی 🧠</a></Link></li>
+                            </ul>
+                        </div>
+                        <div className='mt-5'>
+                            <h4 className='text-xl'>کویز ها</h4>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=monthly"><a> بهترین های ماه </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=bestest"><a> بهترین ها </a></Link></li>
+                            </ul>
+                        </div>
+                        <div className='mt-5'>
+                            <h4 className='text-xl'>تست ها</h4>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=newest_test"><a> جدیدترین ها </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=monthly_test"><a> بهترین های ماه </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=bestest_test"><a> بهترین ها </a></Link></li>
+                            </ul>
+                        </div>
+                        <div className='mt-5'>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/blog"><a> وبلاگ </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/guide"><a> راهنما </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/contact"><a> تماس با ما </a></Link></li>
+                            </ul>
                         </div>
                     </div>
 

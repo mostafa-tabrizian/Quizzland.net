@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios'
-import rateLimit from 'axios-rate-limit';
+import axiosInstance from './axiosApi'
 import { Helmet } from "react-helmet";
 import Header from './header'
 
@@ -59,16 +58,16 @@ const SearchMoreResult = () => {
             let matchedPointy = []
 
             // Search Quiz
-            const search_new_quiz_title = await axiosLimited.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
-            Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
+            const search_quiz_new_title = await axiosInstance.get(`/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
+            Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
 
-            if (search_new_quiz_title.length !== numberOfResult) {
-                const search_new_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
+            if (search_quiz_new_title.length !== numberOfResult) {
+                const search_quiz_new_subCategory = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
+                Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
 
-                if (search_new_quiz_subCategory.length !== numberOfResult * 2) {
-                    const search_new_quiz_tag = await axiosLimited.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
-                    Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+                if (search_quiz_new_subCategory.length !== numberOfResult * 2) {
+                    const search_quiz_new_tag = await axiosInstance.get(`/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
+                    Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
                 }
             }
 
@@ -82,7 +81,7 @@ const SearchMoreResult = () => {
             for ( let key in uniqueMatchedQuizzes )
                 matchedQuizzes.push(uniqueMatchedQuizzes[key]);
             
-            setPageTravelQuizzes(search_new_quiz_title.data)
+            setPageTravelQuizzes(search_quiz_new_title.data)
     
             const quizzesList = () => {
                 return (
@@ -94,16 +93,16 @@ const SearchMoreResult = () => {
             setQuizzesList(quizzesList)
 
             // Search Pointy Quiz
-            const search_new_pointy_quiz_title = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
-            Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_title.data.results)
+            const search_pointy_new_title = await axiosInstance.get(`/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
+            Array.prototype.push.apply(matchedPointy, search_pointy_new_title.data.results)
 
-            if (search_new_pointy_quiz_title.length !== numberOfResult) {
-                const search_new_pointy_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
-                Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_subCategory.data.results)
+            if (search_pointy_new_title.length !== numberOfResult) {
+                const search_pointy_new_subCategory = await axiosInstance.get(`/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
+                Array.prototype.push.apply(matchedPointy, search_pointy_new_subCategory.data.results)
                 
-                if (search_new_pointy_quiz_subCategory !== numberOfResult * 2) {
-                    const search_new_pointy_quiz_tag = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
-                    Array.prototype.push.apply(matchedPointy, search_new_pointy_quiz_tag.data.results)
+                if (search_pointy_new_subCategory !== numberOfResult * 2) {
+                    const search_pointy_new_tag = await axiosInstance.get(`/dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
+                    Array.prototype.push.apply(matchedPointy, search_pointy_new_tag.data.results)
                 }
             }
             setContentLoaded(true)
@@ -118,7 +117,7 @@ const SearchMoreResult = () => {
             for ( let key in uniqueMatchedPointy )
                 matchedPointy.push(uniqueMatchedPointy[key]);
             
-            setPageTravelPointy(search_new_quiz_title.data)
+            setPageTravelPointy(search_quiz_new_title.data)
     
             const pointyList = () => {
                 return (

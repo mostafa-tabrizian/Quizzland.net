@@ -9,6 +9,28 @@ from rest_framework import viewsets
 from .serializers import *
 from .filters import *
 
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import viewsets, permissions, status
+from rest_framework.views import APIView 
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.response import Response
+
+class ObtainTokenPairWithColorView(TokenObtainPairView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
+
+class LogoutAndBlacklistRefreshTokenForUserView(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 def index(request):
     return render(request, "frontend/index.html")
@@ -123,34 +145,34 @@ def SOS(request, SOS):
 def SOS_landpage(request):
     return render(request, 'frontend/SOS.html')
 
-class new_quiz(viewsets.ReadOnlyModelViewSet):
+class quiz_new(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes.objects.order_by('-publish').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-class monthlyBest_quiz(viewsets.ReadOnlyModelViewSet):
+class quiz_monthly(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes.objects.order_by('-monthly_views').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-class best_quiz(viewsets.ReadOnlyModelViewSet):
+class quiz_best(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes.objects.order_by('-views').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-class alphabet_quiz(viewsets.ReadOnlyModelViewSet):
+class quiz_alphabet(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes.objects.order_by('-subCategory').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
 # --------------------------------------------------------
 
-class new_pointy_quiz(viewsets.ReadOnlyModelViewSet):
+class pointy_new(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes_Pointy.objects.order_by('-publish').all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
-class monthlyBest_pointy_quiz(viewsets.ReadOnlyModelViewSet):
+class pointy_monthly(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes_Pointy.objects.order_by('-monthly_views').all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
@@ -160,24 +182,24 @@ class best_pointy_quiz(viewsets.ReadOnlyModelViewSet):
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
-class alphabet_pointy_quiz(viewsets.ReadOnlyModelViewSet):
+class pointy_alphabet(viewsets.ReadOnlyModelViewSet):
     queryset = Quizzes_Pointy.objects.order_by('-subCategory').all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
 # --------------------------------------------------------
 
-class new_category(viewsets.ReadOnlyModelViewSet):
+class category_new(viewsets.ReadOnlyModelViewSet):
     queryset = SubCategories.objects.order_by('-publish').all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
-class best_category(viewsets.ReadOnlyModelViewSet):
+class category_best(viewsets.ReadOnlyModelViewSet):
     queryset = SubCategories.objects.order_by('-views').all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
-class alphabet_category(viewsets.ReadOnlyModelViewSet):
+class category_alphabet(viewsets.ReadOnlyModelViewSet):
     queryset = SubCategories.objects.order_by('-subCategory').all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
@@ -189,10 +211,10 @@ class questions(viewsets.ReadOnlyModelViewSet):
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter    
 
-class pointyQuestions(viewsets.ReadOnlyModelViewSet):
+class questions_pointy(viewsets.ReadOnlyModelViewSet):
     queryset = Pointy_Questions.objects.all()
-    serializer_class = PointyQuestionsSerializer
-    filterset_class = PointyQuestionsFilter  
+    serializer_class = questions_pointySerializer
+    filterset_class = questions_pointyFilter  
 
 # --------------------------------------------------------
 

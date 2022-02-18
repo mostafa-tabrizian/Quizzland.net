@@ -1,7 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import rateLimit from 'axios-rate-limit';
+import axiosInstance from './axiosApi'
 
 import { log, replaceFunction, isItMobile } from './base'
 
@@ -11,13 +10,10 @@ const Search = (props) => {
     const [quizzesList, setQuizzesList] = useState([])
     const [searchMobile, setSearchMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
-    const [searchValue, setSearchValue] = useState(null)
     const [searchSuggestion, setSearchSuggestion] = useState(null)
     
     const searchSubmit = useRef()
     const mobileSearchInput = useRef()
-    
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
 
     useEffect(() => {
         searchSuggester()
@@ -41,46 +37,45 @@ const Search = (props) => {
             const minimumKeywordForSearch = 3
             if (value.length >= minimumKeywordForSearch) {
                 let searchValue = replaceFunction(value, ' ', '+')
-                setSearchValue(searchValue)
-                
+
                 let matchedQuizzes = []
                 let matchedCategories = []
-    
+
                 // Search Quiz
-                const search_new_quiz_title = await axiosLimited.get(`/dbAPI/new_quiz/?title__icontains=${searchValue}&limit=3`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_quiz_title.data.results)
-                
-                if (search_new_quiz_title.data.results !== 3) {
-                    const search_new_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_quiz/?subCategory__icontains=${searchValue}&limit=5`)
-                    Array.prototype.push.apply(matchedQuizzes, search_new_quiz_subCategory.data.results)
-                    
-                    if (search_new_quiz_subCategory.length !== 5) {
-                        const search_new_quiz_tag = await axiosLimited.get(`/dbAPI/new_quiz/?tags__icontains=${searchValue}&limit=5`)
-                        Array.prototype.push.apply(matchedQuizzes, search_new_quiz_tag.data.results)
+                const search_quiz_new_title = await axiosInstance.get(`dbAPI/quiz_new/?title__icontains=${searchValue}&limit=10`)
+                Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
+
+                if (search_quiz_new_title.data.results !== 10) {
+                    const search_quiz_new_subCategory = await axiosInstance.get(`dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=10`)
+                    Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
+
+                    if (search_quiz_new_subCategory.length !== 10) {
+                        const search_quiz_new_tag = await axiosInstance.get(`dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=10`)
+                        Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
                     }
                 }
-                
+
                 // Search Pointy Quiz
-                const search_new_pointy_quiz_title = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?title__icontains=${searchValue}&limit=1`)
-                Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_title.data.results)
-                
-                if (search_new_pointy_quiz_title.legnth !== 1) {
-                    const search_new_pointy_quiz_subCategory = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${searchValue}&limit=23`)
-                    Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_subCategory.data.results)
+                const search_pointy_new_title = await axiosInstance.get(`dbAPI/pointy_new/?title__icontains=${searchValue}&limit=5`)
+                Array.prototype.push.apply(matchedQuizzes, search_pointy_new_title.data.results)
 
-                    if (search_new_pointy_quiz_subCategory.length !== 3) {
-                        const search_new_pointy_quiz_tag = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?tags__icontains=${searchValue}&limit=2`)
-                        Array.prototype.push.apply(matchedQuizzes, search_new_pointy_quiz_tag.data.results)
+                if (search_pointy_new_title.length !== 5) {
+                    const search_pointy_new_subCategory = await axiosInstance.get(`dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=5`)
+                    Array.prototype.push.apply(matchedQuizzes, search_pointy_new_subCategory.data.results)
+
+                    if (search_pointy_new_subCategory.length !== 5) {
+                        const search_pointy_new_tag = await axiosInstance.get(`dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=2`)
+                        Array.prototype.push.apply(matchedQuizzes, search_pointy_new_tag.data.results)
                     }
                 }
-    
-                // Search Category
-                const search_new_category_title = await axiosLimited.get(`/dbAPI/new_category/?title__icontains=${searchValue}&limit=1`)
-                Array.prototype.push.apply(matchedCategories, search_new_category_title.data.results)
 
-                if (search_new_category_title.length !== 1) {
-                    const search_new_category_subCategory = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${searchValue}&limit=1`)
-                    Array.prototype.push.apply(matchedCategories, search_new_category_subCategory.data.results)
+                // Search Category
+                const search_category_new_title = await axiosInstance.get(`dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
+                Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
+
+                if (search_category_new_title.length !== 2) {
+                    const search_category_new_subCategory = await axiosInstance.get(`dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
+                    Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
                 }
 
                 // Remove duplicated quizzes
@@ -95,66 +90,99 @@ const Search = (props) => {
                     maxQuizSearchResult = matchedQuizzes.length
                 }
 
-                for ( let i = 0; i < maxQuizSearchResult; i++ ) {
+                for (let i = 0; i < maxQuizSearchResult; i++) {
                     uniqueMatchedQuizzes[matchedQuizzes[i]['title']] = matchedQuizzes[i];
                 }
 
                 matchedQuizzes = new Array();
-                for ( let key in uniqueMatchedQuizzes ) {
+                for (let key in uniqueMatchedQuizzes) {
                     matchedQuizzes.push(uniqueMatchedQuizzes[key]);
                 }
 
                 const quizzesList = () => {
-                    matchedQuizzes.length >= 1 && setSearchResult(true)  // show result if there quizzes
+                    matchedQuizzes.length >= 1 && setSearchResult(true)  // show search result if there quizzes
 
                     try {
                         return (
                             matchedQuizzes.map((quiz) => {
                                 return (
-                                    <li key={quiz.id}>
-                                        <article className={`flex tx-al-r quizContainer__trans`}>
-                                            <a href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
-                                                <div>
-                                                    <img src={`${quiz.thumbnail}`} alt={`${quiz.subCategory}} | ${quiz.title}`} loading='lazy' />
-                                                </div>
-                                                <div className="header__search__result__title flex">
-                                                    <span>
-                                                        { quiz.title }
-                                                    </span>
-                                                </div>
-                                            </a>
+                                    <li key={quiz.id} className='ml-1 mr-7 md:m-2 md:mb-6'>
+                                        <article className={`
+                                            flex text-right h-full
+                                            rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                                            quizContainer__trans`}
+                                        >
+                                            <Link to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
+                                                <a className='flex md:block md:grid-cols-5'>
+                                                    <div className='col-span-2 w-[224px] h-[126px]'>
+                                                        <img
+                                                            src={quiz.thumbnail}
+                                                            alt={`${quiz.subCategory}} | ${quiz.title}`}
+                                                            width={1366}
+                                                            height={768}
+                                                            className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                                        />
+                                                    </div>
+                                                    <div className="col-span-3 mt-2 header__search__result__title">
+                                                        <h2 className={`quizContainer__title quizContainer__title__noViews flex
+                                                                    text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
+                                                            {quiz.subCategory}
+                                                        </h2>
+                                                        <h2 className={`
+                                                        quizContainer__title quizContainer__title__noViews flex
+                                                        text-sm mr-5 ml-5 md:w-52 md:mr-0 md:text-base
+                                                    `}>
+                                                            {quiz.title}
+                                                        </h2>
+                                                    </div>
+                                                </a>
+                                            </Link>
                                         </article>
                                     </li>
                                 )
                             })
                         )
-                    } catch {e} {
+                    } catch { e } {
                         // log('no quiz found...')
                         return null
                     }
                 }
-    
+
                 const categoriesList = () => {
                     try {
-                        const category = matchedCategories[0]
                         return (
-                            <div className={`header__search__result__category__item`}>
-                                <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
-                                    <img src={`${category.thumbnail}`} alt={`${category.subCategory} | کوییز های ${category.title_far}`} />
-                                </a>
-                                <h5 className='tx-al-c'>
-                                    <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}>
-                                        {category.subCategory}
-                                    </a>
-                                </h5>
-                            </div>
+                            matchedCategories.map((category) => {
+                                return (
+                                    <div key={category.id}>
+                                        <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                                            <a>
+                                                <img
+                                                    src={category.thumbnail}
+                                                    alt={`${category.subCategory}} | های ${category.title_far}}`}
+                                                    width={1366}
+                                                    height={768}
+                                                />
+                                            </a>
+                                        </Link>
+
+                                        <h5 className='absolute left-6 top-6 md:relative md:left-0 md:top-0 md:text-center'>
+                                            <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                                                <a>
+                                                    {category.subCategory}
+                                                </a>
+                                            </Link>
+                                        </h5>
+
+                                    </div>
+                                )
+                            })
                         )
-                    } catch (e){
+                    } catch (e) {
                         // log('no category found...')
                         return null
                     }
-                }   
-                
+                }
+
                 setQuizzesList(quizzesList)
                 setCategoriesList(categoriesList)
             }
@@ -174,7 +202,7 @@ const Search = (props) => {
     })
 
     const searchSuggester = async () => {
-        const grabAllSubCategories = await axiosLimited.get(`/dbAPI/new_category`)
+        const grabAllSubCategories = await axiosInstance.get(`/dbAPI/category_new`)
         const numberOfCategories = grabAllSubCategories.data.length
         const randomCategoryIndex = Math.floor(Math.random() * numberOfCategories);
         setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)
@@ -183,40 +211,56 @@ const Search = (props) => {
     return (
         <React.Fragment>
             <div className={`header__search flex ${props.colorOfHeader}`}>
+                <button
+                    className={`
+                        absolute right-[-1rem] top-1.5
+                        ${searchResult ? 'fadeIn' : 'fadeOut'}
+                    `}
+                    onClick={() => {setSearchResult(false)}}
+                >
+                        
+                    <svg className="w-6 h-6 text-white"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                </button>
                 <input
                     type='text'
-                    className={`header__search__input tx-al-r`}
+                    className={`header__search__input text-right`}
                     placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
                     onChange={inputChanged}
+                    onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
                 />
-                <div  className={`header__search__result ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
-                    <div className="header__search__result__category">
-                        <div className="header__search__result__category__container flex flex-jc-c">
-                            {categoriesList}
-
-                            <Link to={`/search?s=${searchValue}`} className='header__search__result__seeMore' ref={searchSubmit}>
-                                نمایش بقیه نتایج...
-                            </Link>
+                <div className={`header__search__result overflow-scroll h-1/2 ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
+                    <div className="grid justify-center mt-2 mr-4 overflow-hidden rounded-lg header__search__result__category">
+                        <div className="flex justify-center header__search__result__category__container w-80">
+                            <ul className='md:space-y-5'>
+                                {categoriesList}
+                            </ul>
                         </div>
                     </div>
-                    
-                    <div className="header__search__result__quizzes">
-                        <ul className='flex'>
+
+                    <div className="mr-5 header__search__result__quizzes">
+                        <ul className='container flex flex-wrap px-20 m-2 mx-auto align-baseline flex-ai-fe justify-right md:m-auto'>
                             {quizzesList}
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <button onClick={searchMobileFocusChangedHideOrShow} className='header__search__opener header__btn hideForDesktop flex flex-ai-c' type="button"></button>
-            <div className={`header__search__opener__bg pos-fix darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
-                <button onClick={searchMobileFocusChangedHideOrShow} className="header__search__closeBtn header__btn-bg pos-abs header__menu__closeBtn" aria-label="Close Search Bar"></button>
+            <button onClick={searchMobileFocusChangedHideOrShow} className='flex header__search__opener header__btn md:hidden flex-ai-c' type="button">
+                <svg className="w-8 h-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </button>
+
+            <div className={`header__search__opener__bg fixed darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
+
+                <button onClick={searchMobileFocusChangedHideOrShow} className="absolute header__search__closeBtn header__btn-bg header__menu__closeBtn" aria-label="Close Search Bar"></button>
                 <input
                     type='text'
-                    className={`header__search__input tx-al-r ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
+                    className={`header__search__input text-right ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
                     ref={mobileSearchInput}
                     placeholder='...جستجو'
                     onChange={inputChanged}
+                    onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
                 />
             </div>
         </React.Fragment>

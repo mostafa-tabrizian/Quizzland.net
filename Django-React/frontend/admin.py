@@ -6,6 +6,7 @@ from .models import *
 
 admin.site.site_header = "Quizzland Admin Panel"
 
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Document, Document_Admin)
 admin.site.register(SubCategories, SubCategories_Admin)
 admin.site.register(Quizzes, Quizzes_Admin)

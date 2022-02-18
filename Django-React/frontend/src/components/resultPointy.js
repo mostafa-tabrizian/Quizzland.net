@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
-import rateLimit from 'axios-rate-limit';
+import axiosInstance from './axiosApi'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
 import Header from './header'
 
@@ -26,7 +26,7 @@ const Result = (props) => {
         // setBackground()
     }, [])
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+    
 
     const testResult = localStorage.getItem('testResult')
     const resultQuiz = JSON.parse(localStorage.getItem('resultQuiz'))
@@ -97,7 +97,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = () => {
-        axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(resultQuiz.subCategory, ' ', '+')}&limit=4`)
+        axiosLimited.get(`/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(resultQuiz.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
         setContentLoaded(true)
     }

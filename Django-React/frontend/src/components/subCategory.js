@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
-import rateLimit from 'axios-rate-limit';
+import axiosInstance from './axiosApi'
 import { Helmet } from "react-helmet";
 import Header from './header'
 
@@ -32,20 +31,20 @@ const SubCategory = (props) => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+    
     
     const subCategory = props.match.params.subCategory
 
     const sortTypeDefinitionForQuizDb = {
-        'newest': 'new_quiz',
-        'bestest': 'best_quiz',
-        'alphabet': 'alphabet_quiz'
+        'newest': 'quiz_new',
+        'bestest': 'quiz_best',
+        'alphabet': 'quiz_alphabet'
     }
     
     const sortTypeDefinitionForPointyQuizDb = {
-        'newest': "new_pointy_quiz",
+        'newest': "pointy_new",
         'bestest': "best_pointy_quiz",
-        'alphabet': "alphabet_pointy_quiz"
+        'alphabet': "pointy_alphabet"
     };
 
     useEffect(() => {
@@ -58,10 +57,10 @@ const SubCategory = (props) => {
     }, [])
 
     const getQuizzes = async () => {
-        const Quizzes = await axiosLimited.get(
+        const Quizzes = await axiosInstance.get(
           `/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
         );
-        const QuizzesPointy = await axiosLimited.get(
+        const QuizzesPointy = await axiosInstance.get(
           `/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
         );
         
@@ -95,8 +94,8 @@ const SubCategory = (props) => {
     }
 
     const backgroundOfSubCategory = async () => {
-        const new_category = await axiosLimited.get(`/dbAPI/new_category/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
-        const background = new_category.data.results[0].background
+        const category_new = await axiosInstance.get(`/dbAPI/category_new/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
+        const background = category_new.data.results[0].background
         document.getElementById('html').style = `
             background: url('${background}') center/cover fixed no-repeat !important;
         `

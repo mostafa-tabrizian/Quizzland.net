@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db import models
 from ckeditor.fields import RichTextField
 import datetime
+from django.contrib.auth.models import AbstractUser
 
 
 categoryList = [
@@ -10,6 +11,12 @@ categoryList = [
     ('psychology', 'psychology'),
     ('gaming', 'gaming'),
 ]
+
+class CustomUser(AbstractUser):
+    fav_color = models.CharField(blank=True, max_length=120)
+    
+class CustomUserAdmin(admin.ModelAdmin):
+    model = CustomUser
 
 class Document(models.Model):
     id = models.AutoField(primary_key=True)

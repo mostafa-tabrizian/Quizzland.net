@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
-import rateLimit from 'axios-rate-limit';
+import axiosInstance from './axiosApi'
 import Header from './header'
 
 import { log, replaceFunction, isItDesktop, isItMobile } from './base'
@@ -48,7 +48,7 @@ const Quiz = () => {
         quizChangeDetector()
     })
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 8, perMilliseconds: 1000, maxRPS: 150 })
+    
 
     const SFXLocalStorage = () => {
         if (localStorage.getItem('SFXAllowed')) {
@@ -79,13 +79,13 @@ const Quiz = () => {
     const grabData = () => {
         
         const grabQuiz = async () => {
-            const quizDB = await axiosLimited.get(`/dbAPI/new_pointy_quiz/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
+            const quizDB = await axiosInstance.get(`/dbAPI/pointy_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`)
             quiz = quizDB.data.results[0]
             return quiz
         }
         
         const grabQuestions = async () => {
-            return await axiosLimited.get(`/dbAPI/pointyQuestions/?title__iexact=${quizTitleReplacedWithHyphen}`)
+            return await axiosInstance.get(`/dbAPI/questions_pointy/?title__iexact=${quizTitleReplacedWithHyphen}`)
         }
         
         grabQuiz().then((quiz) => {
@@ -377,7 +377,7 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = (subCategory) => {
-        axiosLimited.get(`/dbAPI/new_pointy_quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        axiosLimited.get(`/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
         .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
