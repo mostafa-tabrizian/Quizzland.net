@@ -8,7 +8,7 @@ import {
 
 import { log } from './components/base'
 
-const PageNotFound_404  = lazy(() => import ('./components/pageNotFound_404'))
+const E404  = lazy(() => import ('./components/404'))
 const Footer  = lazy(() => import ('./components/footer'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 
@@ -20,7 +20,7 @@ const PageNotFound404App = () => {
                     <ScrollToTop />
 
                     <Switch>
-                        <Route component={PageNotFound_404} />
+                        <Route component={E404} />
                     </Switch>
                     
                     <Footer linkType='Hot'/>

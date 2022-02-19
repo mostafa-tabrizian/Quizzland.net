@@ -22,6 +22,7 @@ const Sort = () => {
     const [pageTravel, setPageTravel] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
+    const [currentPageNumber, setCurrentPageNumber] = useState(1)
     const [contentLoaded, setContentLoaded] = useState(false)
 
     useEffect(() => {
@@ -29,12 +30,18 @@ const Sort = () => {
     })
 
     useEffect(() => {
+        setPointy([])  // restart list
+        setQuizzes([])  // restart list
         checkWhatSort()
         getQuizzes()
         setLoadState(true)
-    }, [sortType])
+    }, [sortType, numberOfResult, offset])
 
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
+    useEffect(() => {
+        setOffset(0)
+        setCurrentPageNumber(1)
+        setNumberOfResult(16)
+    }, [sortType])
 
     const componentChangeDetector = () => {
         (function(history){
@@ -54,7 +61,7 @@ const Sort = () => {
         if (document.getElementById('html')) {
             document.getElementById('html').style=`background: None`
         }
-        setSortType(takeParameterFromUrl('q'))
+        setSortType(takeParameterFromUrl('s'))
         setSortCategory(takeParameterFromUrl('c'))
     }
 
@@ -66,36 +73,36 @@ const Sort = () => {
         
         switch (sortType) {
             case 'newest':
-                setSortTitle('جدیدترین کوییز ها')
                 if (sortCategory) {
                     quizzes = await axiosInstance.get(`/dbAPI/quiz_new/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
                     quizzes = await axiosInstance.get(`/dbAPI/quiz_new/?limit=${numberOfResult}&offset=${offset}`)
                 }
+                setSortTitle('جدیدترین کوییز ها')
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
                 break
 
             case 'bestest':
-                setSortTitle('بهترین کوییز ها')
                 if (sortCategory) {
                     quizzes = await axiosInstance.get(`/dbAPI/quiz_best/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
                     quizzes = await axiosInstance.get(`/dbAPI/quiz_best/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 }
+                setSortTitle('بهترین کوییز ها')
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
                 break
 
             case 'monthly':
-                setSortTitle('بهترین کوییز های این ماه')
                 if (sortCategory) {
                     quizzes = await axiosInstance.get(`/dbAPI/quiz_monthly/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
                     quizzes = await axiosInstance.get(`/dbAPI/quiz_monthly/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 }
+                setSortTitle('بهترین کوییز های این ماه')
                 setQuizzes(quizzes.data.results)
                 setPageTravel(quizzes.data)
                 setContentLoaded(true)
@@ -129,6 +136,8 @@ const Sort = () => {
                 break
 
             default:
+                setSortTitle('این بخش موجود نمی باشد !')
+                setContentLoaded(true)
                 break
         }
     }
@@ -155,9 +164,9 @@ const Sort = () => {
             <h3 className='title'>{sortTitle}</h3>
 
             {SkeletonLoading(contentLoaded)}
-            
-            <ul className="quizContainer flex wrapper-med">
-                
+
+            <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
+
                 {
                     quizzes.length !== 0 && <QuizContainer quizzes={quizzes} bgStyle='trans' />
                 }
@@ -170,10 +179,11 @@ const Sort = () => {
 
             {/* Adverts */}
 
-            <PageTravel 
+            <PageTravel
                 pageTravel={pageTravel} setPageTravel={setPageTravel}
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                 offset={offset} setOffset={setOffset}
+                currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
             />
 
             {/* Adverts */}

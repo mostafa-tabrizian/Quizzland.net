@@ -10,35 +10,22 @@ import PageTravel from './pageTravel';
 import SkeletonLoading from './skeletonLoading'
 
 const SearchMoreResult = () => {
-    const [pageTravelQuizzes, setPageTravelQuizzes] = useState([])
-    const [pageTravelPointy, setPageTravelPointy] = useState([])
-    const [quizzesList, setQuizzesList] = useState([])
-    const [pointyList, setPointyList] = useState([])
-    const [numberOfResult, setNumberOfResult] = useState(16)
-    const [offset, setOffset] = useState(0)
-    const [searchValue, setSearchValue] = useState('')
-    const [searchValueButWithoutHyphen, setSearchValueButWithoutHyphen] = useState()
-    const [matchedQuizzesCounter, setMatchedQuizzesCounter] = useState()
-    const [matchedPointyCounter, setMatchedPointyCounter] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
 
-    useEffect(() => {
-        searchChangeDetector()
-    })
+    const [searchValue, setSearchValue] =useState(null)
+
+    const [categories, setCategories] = useState([])
+    const [quizzes, setQuizzes] = useState([])
+    const [pointies, setPointies] = useState([])
 
     useEffect(() => {
-        document.body.style.overflow = 'overlay'
-        if (document.getElementById('html')) {
-            document.getElementById('html').style=`background: None`
-        }
-    }, [])
-
-    useEffect(() => {
-        getQuizzes()
-        setSearchValueButWithoutHyphen(replaceFunction(searchValue, '+', ' '))
-    }, [searchValue, offset])
-
-    const axiosLimited = rateLimit(axios.create(), { maxRequests: 15, perMilliseconds: 1000, maxRPS: 150 })
+        setQuizzes([])  // restart list
+        setPointies([])  // restart list
+        setCategories([])  // restart list
+        searchValue && searchHandler(searchValue)
+        setLoadState(true)
+        setContentLoaded(true)
+    }, [searchValue])
 
     const searchChangeDetector = () => {
         (function(history){
@@ -52,24 +39,37 @@ const SearchMoreResult = () => {
         })(window.history);
     }
 
-    const getQuizzes = async () => {
-        if (searchValue !== '') {
+    const searchHandler = async () => {
+        try {
             let matchedQuizzes = []
             let matchedPointy = []
 
             // Search Quiz
-            const search_quiz_new_title = await axiosInstance.get(`/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
+            const search_quiz_new_title = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=50`)
             Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
 
-            if (search_quiz_new_title.length !== numberOfResult) {
-                const search_quiz_new_subCategory = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
-                Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
+            const search_quiz_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=50`)
+            Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
 
-                if (search_quiz_new_subCategory.length !== numberOfResult * 2) {
-                    const search_quiz_new_tag = await axiosInstance.get(`/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
-                    Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
-                }
-            }
+            const search_quiz_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=50`)
+            Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
+
+            // Search Pointy Quiz
+            const search_pointy_new_title = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=50`)
+            Array.prototype.push.apply(matchedPointies, search_pointy_new_title.data.results)
+
+            const search_pointy_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=50`)
+            Array.prototype.push.apply(matchedPointies, search_pointy_new_subCategory.data.results)
+
+            const search_pointy_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=50`)
+            Array.prototype.push.apply(matchedPointies, search_pointy_new_tag.data.results)
+
+            // Search Category
+            const search_category_new_title = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
+            Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
+
+            const search_category_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
+            Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
 
             // Remove duplicated quizzes
             let uniqueMatchedQuizzes = {};
@@ -80,58 +80,24 @@ const SearchMoreResult = () => {
             matchedQuizzes = new Array();
             for ( let key in uniqueMatchedQuizzes )
                 matchedQuizzes.push(uniqueMatchedQuizzes[key]);
-            
-            setPageTravelQuizzes(search_quiz_new_title.data)
+
+            let uniqueMatchedPointies = {};
+
+            for (let i = 0; i < matchedPointies.length; i++) {
+                uniqueMatchedPointies[matchedPointies[i]['title']] = matchedPointies[i];
+            }
+
+            matchedPointies = new Array();
+            for (let key in uniqueMatchedPointies) {
+                matchedPointies.push(uniqueMatchedPointies[key]);
+            }
     
-            const quizzesList = () => {
-                return (
-                    <QuizContainer quizzes={matchedQuizzes}/>
-                )
-            }
-            setMatchedQuizzesCounter(matchedQuizzes.length)
-            setQuizzesList([])
-            setQuizzesList(quizzesList)
+            setQuizzes(matchedQuizzes)
+            setPointies(matchedPointies)
+            setCategories(matchedCategories)
 
-            // Search Pointy Quiz
-            const search_pointy_new_title = await axiosInstance.get(`/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=${numberOfResult}&offset=${offset}`)
-            Array.prototype.push.apply(matchedPointy, search_pointy_new_title.data.results)
-
-            if (search_pointy_new_title.length !== numberOfResult) {
-                const search_pointy_new_subCategory = await axiosInstance.get(`/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
-                Array.prototype.push.apply(matchedPointy, search_pointy_new_subCategory.data.results)
-                
-                if (search_pointy_new_subCategory !== numberOfResult * 2) {
-                    const search_pointy_new_tag = await axiosInstance.get(`/dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=${numberOfResult * 2}&offset=${offset}`)
-                    Array.prototype.push.apply(matchedPointy, search_pointy_new_tag.data.results)
-                }
-            }
-            setContentLoaded(true)
-
-            // Remove duplicated pointyQuizzes
-            let uniqueMatchedPointy = {};
-
-            for ( let i = 0; i < matchedPointy.length; i++ )
-                uniqueMatchedPointy[matchedPointy[i]['title']] = matchedPointy[i];
-
-            matchedPointy = new Array();
-            for ( let key in uniqueMatchedPointy )
-                matchedPointy.push(uniqueMatchedPointy[key]);
-            
-            setPageTravelPointy(search_quiz_new_title.data)
-    
-            const pointyList = () => {
-                return (
-                    <QuizPointyContainer quizzes={matchedPointy}/>
-                )
-            }
-
-            setMatchedPointyCounter(matchedPointy.length)
-            setPointyList([])
-            setPointyList(pointyList)
-        }
-
-        else {
-            setMatchedQuizzesCounter(0)
+        } catch (e) {
+            return log('error: search function')
         }
     }
 
@@ -147,52 +113,93 @@ const SearchMoreResult = () => {
                 <meta name="robots" content="noindex, follow"></meta>
             </Helmet>
 
-            <div className='flex flex-jc-c flex-ai-c'>
-                ‌<h3 className='title'> ‌ <span style={{fontSize: '1rem'}}>عبارت جستجو شده : <br/></span> {searchValueButWithoutHyphen}</h3>‌
-            </div>
-            
-            {
-                matchedQuizzesCounter !== 0 &&
-                <React.Fragment>
-                    <h2 className='wrapper-med'>
-                        کوییز های {searchValueButWithoutHyphen}
-                    </h2>
+            <div className='adverts adverts__left'>
+                    <div id='mediaad-DLgb'></div>
+                    <div id="pos-article-display-26094"></div>
+                </div>
 
-                    <ul className='quizContainer flex wrapper-med space-sm'>
-                        {quizzesList}
-                    </ul>
+                <h3 className='title'>{q}</h3>
 
-                    {SkeletonLoading(contentLoaded)}
+                {SkeletonLoading(contentLoaded)}
 
-                    <PageTravel
-                        pageTravel={pageTravelQuizzes} setPageTravel={setPageTravelQuizzes}
-                        numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                        offset={offset} setOffset={setOffset}
-                    />
-                </React.Fragment>
-            }‌‌
+                <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
 
-            {
-                matchedPointyCounter !== 0 &&
-                <React.Fragment>
-                    <h2 className='wrapper-med'>
-                        تست های {searchValueButWithoutHyphen}
-                    </h2>
+                    {
+                        categories.map((quiz) => {
+                            return (
+                                <li key={quiz.id} className='ml-1 mr-7 md:m-2 md:mb-6'>
+                                    <article className={`
+                                        flex text-right h-full
+                                        rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                                        quizContainer__trans`}
+                                    >
 
-                    <ul className='quizContainer flex wrapper-med space-sm'>
-                        {pointyList}
-                    </ul>
+                                        <a href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}
+                                            className='flex md:block md:grid-cols-5'
+                                        >
+                                            <div className='md:col-span-2 w-[224px] md:h-[126px]'>
+                                                <Image
+                                                    src={quiz.thumbnail}
+                                                    width='1366'
+                                                    height='768'
+                                                    alt={`${quiz.subCategory} | ${quiz.title}`}
+                                                    blurDataURL={quiz.thumbnail}
+                                                    placeholder='blur'
+                                                    className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                                />
+                                            </div>
+                                            <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
+                                                <h2 className={`quizContainer__title quizContainer__title__noViews flex
+                                                                text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
+                                                    {quiz.subCategory}
+                                                </h2>
+                                                <h2 className={`
+                                                    quizContainer__title quizContainer__title__noViews flex
+                                                    text-sm mr-5 md:w-52 md:mr-0 md:text-base
+                                                `}>
+                                                    {quiz.title}
+                                                </h2>
+                                                {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
+                                                {/* <span className="text-center quizContainer__date">
+                                                    {datePublishHandler(quiz.publish)}
+                                                </span> */}
+                                            </div>
+                                        </a>
+                                    </article>
+                                </li>
+                            )
+                        })
+                    }
 
-                    {SkeletonLoading(contentLoaded)}
+                </ul>
 
-                    <PageTravel
-                        pageTravel={pageTravelPointy} setPageTravel={setPageTravelPointy}
-                        numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                        offset={offset} setOffset={setOffset}
-                    />
-                </React.Fragment>
-            }
+                <div className='grid justify-center mb-10'>
+                    <hr className="w-[20vw]" />
+                </div>
 
+                <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
+
+
+                    {
+                        <QuizContainer quizzes={quizzes} bgStyle='trans' />
+                    }
+
+
+                    {
+                        <QuizPointyContainer quizzes={pointies} bgStyle='trans' />
+                    }
+
+                    {
+                        quizzes.length == 0 &&
+                        pointies.length == 0 &&
+                        <h1 className='w-11/12 text-3xl text-center'>
+                            متاسفانه هیچ چیزی پیدا نشد 😥
+                        </h1>
+                    }
+
+                </ul>
+
+                <div className='adverts_center' id='mediaad-DLgb'></div>
 
         </React.Fragment>
     );

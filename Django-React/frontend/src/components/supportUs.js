@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 
-import BackBtn from '../components/backBtn'
+import BackBtn from './backBtn'
 import Header from './header'
 
 const pathRed = '/static/img/bubbles.png'
@@ -27,7 +27,7 @@ const Support = () => {
 
             <div className="basicPage wrapper-sm center">
                 <h2>از این که تصمیم به حمایت از کوییزلند کردید خیلی قدردانیم</h2>
-                <p>اما لازم نیست به ما حمایت پولی کنید. همین که ما رو به <bold>دوستاتون و خانوادتون معرفی کنید</bold> برای ما خیلی با ارزشه</p>
+                <p>اما لازم نیست به ما حمایت پولی کنید. همین که ما رو به <b>دوستاتون و خانوادتون معرفی کنید</b> برای ما خیلی با ارزشه</p>
                 <h5> 💗 قدردان شما کوییزلندی عزیز هستیم 💗 </h5>
             </div>
 

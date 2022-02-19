@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 
-import BackBtn from '../components/backBtn'
+import BackBtn from './backBtn'
 import Header from './header'
 
 const pathRed = '/static/img/bubbles.png'
@@ -27,12 +27,12 @@ const Ads = () => {
                 
             <div className="basicPage center wrapper-sm">
                 <h3>برای تبلیغ در بنر های کوییزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>
-                <a href="mailto:support@quizzland.net">support@quizzland.net</a>
+                <Link href="mailto:support@quizzland.net"><a>support@quizzland.net</a></Link>
                 <div>
-                    <ul className="contact__socialMedia flex flex-jc-c flex-ai-c">
-                        <li><a href="#">انستگرام</a></li>
-                        <li><a href="#">تلگرام</a></li>
-                        <li><a href="mailto:support@quizzland.net">ایمیل</a></li>
+                    <ul className="text-red-600 font-bold flex justify-center flex-ai-c">
+                        {/* <li><Link href="#"><a>انستگرام</a></Link></li> */}
+                        {/* <li><Link href="#"><a>تلگرام</a></Link></li> */}
+                        <li><Link href="mailto:support@quizzland.net"><a>ایمیل</a></Link></li>
                     </ul>
                 </div>
                 <h5>💗کوییزلند</h5>

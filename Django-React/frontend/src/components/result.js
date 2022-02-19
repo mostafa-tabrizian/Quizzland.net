@@ -19,34 +19,34 @@ const Result = () => {
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
+    const [questions, setQuestions] = useState(null)
+    const [correctAnswersCounter, setCorrectAnswersCounter] = useState(null)
+    const [quizResult, setQuizResult] = useState(null)
 
-    useEffect(async () => {
-        calculateTheResultScore()
-        setLoadState(true)
-        getSuggestionsQuiz()
-        {
-            suggestionQuizzes &&
-            showPopUpSuggestion()
-        }
-
-        if (document.getElementById('html')) {
-            document.getElementById('html').style=`background: None`
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
+            window.location.href = "/404";
+        } else {
+            document.querySelector('html').style=`background: None`
+            setLoadState(true)
+            setQuestions(JSON.parse(localStorage.getItem('resultQuestions')))
+            setCorrectAnswersCounter(localStorage.getItem('resultCorrectAnswersCounter'))
+            setQuizResult(JSON.parse(localStorage.getItem('resultQuiz')))
         }
     }, [])
 
     useEffect(() => {
         detailOfResult()
-    }, [score])
+        calculateTheResultScore()
+        getSuggestionsQuiz()
+    }, [score, quizResult])
 
-    
-
-    const questions = JSON.parse(localStorage.getItem('resultQuestions'))
-    const correctAnswersCounter = localStorage.getItem('resultCorrectAnswersCounter')
-    const resultQuiz = JSON.parse(localStorage.getItem('resultQuiz'))
-
-    if(resultQuiz === null) {
-        window.location.href = "/404";
-    }
+    useEffect(() => {
+        {
+            suggestionQuizzes &&
+            showPopUpSuggestion()
+        }
+    }, [suggestionQuizzes])
 
     const calculateTheResultScore = () => {
         const questionsCounter = questions.length
@@ -156,120 +156,136 @@ const Result = () => {
             </Helmet>
 
             <div className="result__container">
-                <div className="result__title flex flex-jc-c">
-                    <h5 className="tx-al-r">"نتیجه  "{resultQuiz.title}</h5>
-                </div>
-                <div className="beforeAfterDecor flex flex-jc-c flex-ai-c">
-                    <h1 className="result__subtitle tx-al-c">{resultSubtitle}</h1>
-                </div>
-                <div className="result wrapper-med space-sm flex flex-ai-c flex-jc-c">
-                    <div className="result__img flex flex-jc-c flex-ai-c">
-                        {resultGif}
+                    <div className="flex justify-center result__title">
+                        <h5 className="text-right">نتیجه  {quizResult?.title}</h5>
                     </div>
-                    <div className="result__score">{resultScore}</div>
-                    <div className="result__detail tx-al-r">
-                        <h5>تعداد پاسخ های درست:‌ <span className="result__detail__correctTime">{correctAnswersCounter}</span></h5>
-                        <h5>تعداد پاسخ های غلط: <span className="result__detail__wrongTime">{questions.length - correctAnswersCounter}</span></h5>
+                    <div className="flex justify-center beforeAfterDecor flex-ai-c">
+                        <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                     </div>
-                </div>
+                    <div className="justify-center block w-full mx-auto result md:container space-sm md:flex flex-ai-c">
+                        <div className="flex justify-center result__img md:mx-16 flex-ai-c">
+                            {
+                                resultGif &&
+                                <Image className='object-contain' src={resultGif} width='336' height='336' alt={quizResult?.subCategory}/>
+                            }
+                        </div>
+                        <div className="result__score text-center text-[2rem]">
+                            <h5>
+                                {resultScore}
+                            </h5>
+                        </div>
+                        <div className="mt-5 mb-16 text-lg text-center result__detail">
+                            <h5>پاسخ 🟢: <span>{correctAnswersCounter}</span></h5>
+                            <h5>پاسخ 🔴: <span>{questions && questions.length - correctAnswersCounter}</span></h5>
+                        </div>
+                    </div>
 
-                <div className='wrapper-med'>
-                    <div className="result__share space-sm tx-al-c">
-                        <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${resultQuiz.fan_name} هستن`}</h5>
+                    <div className='container px-20 mx-auto'>
+                        <div className="text-lg text-center result__share space-sm">
+                            <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizResult?.fan_name} هستن`}</h5>
 
-                        <InlineShareButtons
-                            config={{
-                                alignment: 'center',  // alignment of buttons (left, center, right)
-                                color: 'social',      // set the color of buttons (social, white)
-                                enabled: true,        // show/hide buttons (true, false)
-                                font_size: 16,        // font size for the buttons
-                                labels: 'null',        // button labels (cta, counts, null)
-                                language: 'en',       // which language to use (see LANGUAGES)
-                                networks: [           // which networks to include (see SHARING NETWORKS)
-                                    'whatsapp',
-                                    'telegram',
-                                    'twitter',
-                                    'sharethis',
-                                ],
-                                padding: 10,          // padding within buttons (INTEGER)
-                                radius: 10,            // the corner radius on each button (INTEGER)
-                                show_total: false,
-                                size: 45,             // the size of each button (INTEGER)
+                            {/* <InlineShareButtons
+                                config={{
+                                    alignment: 'center',  // alignment of buttons (left, center, right)
+                                    color: 'social',      // set the color of buttons (social, white)
+                                    enabled: true,        // show/hide buttons (true, false)
+                                    font_size: 16,        // font size for the buttons
+                                    labels: 'null',        // button labels (cta, counts, null)
+                                    language: 'en',       // which language to use (see LANGUAGES)
+                                    networks: [           // which networks to include (see SHARING NETWORKS)
+                                        'whatsapp',
+                                        'telegram',
+                                        'twitter',
+                                        'sharethis',
+                                    ],
+                                    padding: 10,          // padding within buttons (INTEGER)
+                                    radius: 10,            // the corner radius on each button (INTEGER)
+                                    show_total: false,
+                                    size: 45,             // the size of each button (INTEGER)
+
+                                    // OPTIONAL PARAMETERS
+                                    url: `https://www.quizzland.net/quiz/${replaceFunction(quizResult?.title, ' ', '-')}`,
+                                    image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
+                                    title: quizResult?.title,            // (defaults to og:title or twitter:title)
+                                }}
+                            /> */}
+
+                        </div>
+
+                        <h2 className='flex justify-center text-lg flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
+                        
+                        <div>
+                            {/* <InlineReactionButtons
+                                config={{
+                                    alignment: 'center',  // alignment of buttons (left, center, right)
+                                    enabled: true,        // show/hide buttons (true, false)
+                                    language: 'en',       // which language to use (see LANGUAGES)
+                                    min_count: 0,         // hide react counts less than min_count (INTEGER)
+                                    padding: 12,          // padding within buttons (INTEGER)
+                                    reactions: [          // which reactions to include (see REACTIONS)
+                                        'slight_smile',
+                                        'heart_eyes',
+                                        'laughing',
+                                        'astonished',
+                                        'sob',
+                                        'rage'
+                                    ],
+                                    size: 45,             // the size of each button (INTEGER)
+                                    spacing: 8,           // the spacing between buttons (INTEGER)
 
                                 // OPTIONAL PARAMETERS
-                                url: `https://www.quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`,
-                                image: resultQuiz.thumbnail,  // (defaults to og:image or twitter:image)
-                                title: resultQuiz.title,            // (defaults to og:title or twitter:title)
-                            }}
-                        />
-
+                                url: `https://www.quizzland.net/quiz/${replaceFunction(quizResult?.title, ' ', '-')}`,
+                                image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
+                                title: quizResult?.title,            // (defaults to og:title or twitter:title)
+                                }}
+                            /> */}
+                        </div>
+                        
                     </div>
 
-                    <h2 className='flex flex-jc-c flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
-                    
-                    <div>
-                        <InlineReactionButtons
-                            config={{
-                                alignment: 'center',  // alignment of buttons (left, center, right)
-                                enabled: true,        // show/hide buttons (true, false)
-                                language: 'en',       // which language to use (see LANGUAGES)
-                                min_count: 0,         // hide react counts less than min_count (INTEGER)
-                                padding: 12,          // padding within buttons (INTEGER)
-                                reactions: [          // which reactions to include (see REACTIONS)
-                                    'slight_smile',
-                                    'heart_eyes',
-                                    'laughing',
-                                    'astonished',
-                                    'sob',
-                                    'rage'
-                                ],
-                                size: 45,             // the size of each button (INTEGER)
-                                spacing: 8,           // the spacing between buttons (INTEGER)
-
-                               // OPTIONAL PARAMETERS
-                               url: `https://www.quizzland.net/quiz/${replaceFunction(resultQuiz.title, ' ', '-')}`,
-                               image: resultQuiz.thumbnail,  // (defaults to og:image or twitter:image)
-                               title: resultQuiz.title,            // (defaults to og:title or twitter:title)
-                            }}
-                        />
-                    </div>
-                    
                 </div>
 
-            </div>
+                <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
-            <h2 className='tx-al-c space-med beforeAfterDecor'>کوییز های مشابه</h2>
+                {SkeletonLoading(contentLoaded)}
 
-            {SkeletonLoading(contentLoaded)}
+                <ul className="container flex flex-wrap m-4 align-baseline quizContainer flex-ai-fe md:px-20 justify-right">
+                    {
+                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                    }
+                </ul>
 
-            <ul className="quizContainer flex wrapper-med">
                 {
-                    suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
-                }
-            </ul>
+                    suggestionQuizzes &&
+                    <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-auto'>
+                        <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn fadeOut left-4 top-4' onClick={() => {
+                            closePopUpQuizSuggester();
+                        }}> X </button>
 
-            {
-                suggestionQuizzes &&
-                <div className='result__popUpQuizSuggester pos-fix popUp-hide'>
-                    <button className='result__popUpQuizSuggester__closeBtn fadeOut pos-abs' onClick={() => {
-                        closePopUpQuizSuggester();
-                    }}> X </button>
+                        <div>
+                            <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
 
-                    <div>
-                        <h3 className='result__popUpQuizSuggester__headline'>پیشنهاد برای کوییز بعدیت :</h3>
+                            <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
+                                <h3 className="flex text-lg result__popUpQuizSuggester__title">
+                                    {chooseUniqueQuizToSuggest().title}
+                                </h3>
+                            </a>
+                        </div>
                         <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
-                            <h3 className="result__popUpQuizSuggester__title flex">
-                                {chooseUniqueQuizToSuggest().title}
-                            </h3>
+                            <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
+                                <Image
+                                    src={chooseUniqueQuizToSuggest().thumbnail}
+                                    alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
+                                    blurDataURL={chooseUniqueQuizToSuggest().thumbnail}
+                                    width='1920'
+                                    height='1080'
+                                    className='object-cover h-[19rem]'
+                                    placeholder='blur'
+                                />
+                            </div>
                         </a>
                     </div>
-                    <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
-                        <div className='result__popUpQuizSuggester__thumbnail'>
-                            <img src={chooseUniqueQuizToSuggest().thumbnail} alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`} loading='lazy' />
-                        </div>
-                    </a>
-                </div>
-            }
+                }
 
             <BackBtn />
             
