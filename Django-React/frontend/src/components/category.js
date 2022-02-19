@@ -12,11 +12,12 @@ import Header from './header'
 import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
 const Category = (props) => {
+    const [categoryTarget, setCategoryTarget] = useState(props.match.params.category)
     const [pageTravel, setPageTravel] = useState([])
     const [categories, setCategories] = useState([])
-    const [categoryTarget, setCategoryTarget] = useState(props.match.params.category)
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [offset, setOffset] = useState(0)
+    const [currentPageNumber, setCurrentPageNumber] = useState(1)
     const [sortType, setSortType] = useState('bestest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -28,26 +29,23 @@ const Category = (props) => {
     }
     const currentCategory = categoryDefinitionInFarsi[categoryTarget]
 
-    
-
     useEffect(() => {
         searchChangeDetector()
+        document.querySelector('html').style = `background: None`
+        setLoadState(true)
     })
 
     useEffect(() => {
         getCategories()
-    }, [categoryTarget])
+    }, [categoryTarget, sortType, numberOfResult, offset])
 
     const searchChangeDetector = () => {
         (function(history){
-
             let pushState = history.pushState;
             history.pushState = function() {
                 pushState.apply(history, arguments);
                 setCategoryTarget(window.location.pathname.split('/')[2]);
             };
-
-
         })(window.history);
     }
 
@@ -68,18 +66,36 @@ const Category = (props) => {
         return (
             categories.map((category) => {
                 return (
-                    <li key={category.id}>
-                        <article className={`flex tx-al-r quizContainer__trans`}>
-                            <a href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?t=${replaceFunction(category.title, ' ', '-')}`}  >
-                                <div>
-                                    <img src={`${category.thumbnail}`} alt={`${category.subCategory}} | ${category.title}`} loading='lazy' />
-                                </div>
-                                {/* <div className="quizContainer__views">{viewsFormat(category.views)}</div> */}
-                                {/* <div className="quizContainer__date tx-al-c">{datePublishHandler(category.publish)}</div> */}
-                                <span className="quizContainer__title quizContainer__title__noViews flex">
-                                    { category.title }
-                                </span>
-                            </a>
+                    <li key={category.id} className='mr-7 md:mx-4 md:mb-4'>
+                        <article className={`
+                            flex text-right h-full
+                            rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                            quizContainer__trans w-[40rem] md:w-full
+                        `}
+                        >  {/* bg or trans */}
+
+                            <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                                <a className='flex w-full md:block md:grid-cols-5'>
+                                    <div className='md:col-span-2 w-[224px] md:h-[126px]'>
+                                        <Image
+                                            src={category.thumbnail}
+                                            width='1366'
+                                            height='768'
+                                            alt={`${category.subCategory} | ${category.title}`}
+                                            blurDataURL={category.thumbnail}
+                                            placeholder='blur'
+                                            className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                        />
+                                    </div>
+                                    <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
+                                        <h2 className={`quizContainer__title quizContainer__title__noViews
+                                                        text-sm mr-5 md:w-52 md:mr-0 md:text-base md:grid md:grid-cols-2`}>
+                                            <span>{category.title}</span>
+                                            <span className='block text-right md:text-left'>{category.subCategory}</span>
+                                        </h2>
+                                    </div>
+                                </a>
+                            </Link>
                         </article>
                     </li>
                 )
@@ -115,9 +131,9 @@ const Category = (props) => {
             <div className='adverts adverts__left'>
                 <div id="pos-article-display-28434"></div>
             </div>
-            
-            <h3 className='lowTitle'>{categoryTarget}</h3>
-            <h3 className='title'>کتگوری {categoryDefinitionInFarsi[categoryTarget]}</h3>
+
+            <h3 className='lowTitle'>{categoryQuery}</h3>
+            <h3 className='title'>کتگوری {categoryDefinitionInFarsi[categoryQuery]}</h3>
 
             <Tools
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
@@ -126,8 +142,8 @@ const Category = (props) => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="quizContainer quizContainer__minHeight flex wrapper-med">
-                
+            <ul className="flex flex-wrap m-4 align-baseline quizContainer quizContainer__minHeight md:flex-ai-fe md:container md:px-20 md:justify-right">
+
                 {listCategories()}
 
             </ul>
@@ -136,6 +152,7 @@ const Category = (props) => {
                 pageTravel={pageTravel} setPageTravel={setPageTravel}
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                 offset={offset} setOffset={setOffset}
+                currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
             />
 
         </React.Fragment>

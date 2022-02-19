@@ -23,7 +23,9 @@ const SubCategory = (props) => {
     const [hideQuizzesPointy, setHideQuizzesPointy] = useState(false)
 
     const [numberOfResult, setNumberOfResult] = useState(16)
-    
+    const [currentPageNumberQuiz, setCurrentPageNumberQuiz] = useState(1)
+    const [currentPageNumberPointy, setCurrentPageNumberPointy] = useState(1)
+
     const [offsetQuiz, setOffsetQuiz] = useState(0)
     const [offsetQuizPointy, setOffsetQuizPointy] = useState(0)
     
@@ -31,9 +33,8 @@ const SubCategory = (props) => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     
-    
-    
     const subCategory = props.match.params.subCategory
+    const persianSubCategory = takeParameterFromUrl('t')
 
     const sortTypeDefinitionForQuizDb = {
         'newest': 'quiz_new',
@@ -48,13 +49,15 @@ const SubCategory = (props) => {
     };
 
     useEffect(() => {
-        getQuizzes()
-    }, [sortType, numberOfResult, offsetQuiz, offsetQuizPointy])
+        if (persianSubCategory) {
+            getQuizzes()
+        }
+    }, [persianSubCategory, sortType, numberOfResult, offsetQuiz, offsetQuizPointy])
 
     useEffect(() => {
         backgroundOfSubCategory()
         setLoadState(true)
-    }, [])
+    }, [persianSubCategory])
 
     const getQuizzes = async () => {
         const Quizzes = await axiosInstance.get(
@@ -112,9 +115,9 @@ const SubCategory = (props) => {
             />
 
             <Helmet>
-                <title>{`کوییزلند | کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')}`}</title>
-                <meta name="description" content={`کوییزلند - کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')} `} />
-                <meta name="keywords" content={`بهترین کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')} , کوییز های ${replaceFunction(takeParameterFromUrl('t'), '-', ' ')}`} />
+                <title>{`کوییزلند | کوییز های ${replaceFunction(persianSubCategory, '-', ' ')}`}</title>
+                <meta name="description" content={`کوییزلند - کوییز های ${replaceFunction(persianSubCategory, '-', ' ')} `} />
+                <meta name="keywords" content={`بهترین کوییز های ${replaceFunction(persianSubCategory, '-', ' ')} , کوییز های ${replaceFunction(persianSubCategory, '-', ' ')}`} />
             </Helmet>
 
             {/* <div className='adverts adverts__left'>
@@ -122,7 +125,7 @@ const SubCategory = (props) => {
             </div> */}
 
             <h3 className='lowTitle' style={{color: 'white'}}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>
-            <h3 className='title' style={{color: 'white'}}>{replaceFunction(takeParameterFromUrl('t'), '-', ' ')}</h3>
+            <h3 className='title' style={{color: 'white'}}>{replaceFunction(persianSubCategory, '-', ' ')}</h3>
 
             <Tools 
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
@@ -136,10 +139,10 @@ const SubCategory = (props) => {
                 <div>
                     {
                         !(hideQuizzesPointy) &&
-                        <h2 className={`wrapper-med`} style={{color: 'white'}}>کوییز ها</h2>
+                        <h2 className={`container mx-auto px-20`} style={{ color: 'white' }}>کوییز ها</h2>
                     }
 
-                    <ul className={`quizContainer flex wrapper-med`}>
+                    <ul className={`quizContainer flex flex-ai-fe container mx-auto md:px-20 ml-3 px-2 flex-wrap align-baseline m-2 justify-right md:m-auto`}>
                         {listQuizzes()}
                     </ul>
 
@@ -147,6 +150,7 @@ const SubCategory = (props) => {
                         pageTravel={pageTravelQuiz} setPageTravelQuiz={setPageTravelQuiz}
                         numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                         offset={offsetQuiz} setOffset={setOffsetQuiz}
+                        currentPageNumber={currentPageNumberQuiz} setCurrentPageNumber={setCurrentPageNumberQuiz}
                     />
                 </div>
             }
@@ -156,11 +160,11 @@ const SubCategory = (props) => {
                 <div>
                     {
                         !(hideQuizzes) &&
-                        <h2 className={`wrapper-med`} style={{color: 'white'}}>تست ها</h2>
+                        <h2 className={`container mx-auto px-20`} style={{ color: 'white' }}>تست ها</h2>
                     }
-                    
 
-                    <ul className={`quizContainer flex wrapper-med`}>
+
+                    <ul className={`quizContainer flex container mx-auto px-20`}>
                         {listQuizzesPointy()}
                     </ul>
 
@@ -168,6 +172,7 @@ const SubCategory = (props) => {
                         pageTravel={pageTravelQuizPointy} setPageTravelQuiz={setPageTravelQuizPointy}
                         numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
                         offset={offsetQuizPointy} setOffset={setOffsetQuizPointy}
+                        currentPageNumber={currentPageNumberPointy} setCurrentPageNumber={setCurrentPageNumberPointy}
                     />
                 </div>
             }

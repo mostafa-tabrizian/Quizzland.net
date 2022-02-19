@@ -343,13 +343,7 @@ input {
 }
 
 .loadingScreen {
-  top: 0;
-  left: 0;
   background: linear-gradient(-45deg, #6a0d11, #ac272e);
-  width: 100%;
-  height: 100%;
-  z-index: 9500;
-  color: white;
 }
 
 .loadingScreen:after {
