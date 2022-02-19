@@ -101,7 +101,7 @@ const Header = (props) => {
                     </div>
 
                     <div className={`md:space-x-5 py-5 mr-6 z-10 relative ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
-                        <div className="hoverAnimation md:space-x-7">
+                        <div className="hoverAnimation md:space-x-7 mr-4">
                             {/* <button className="header__btn">
                                 <Link to="/blog"><a> وبلاگ </a></Link>
                             </button> */}

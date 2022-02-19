@@ -6,7 +6,7 @@ const BackBtn = () => {
     } 
 
     return (
-        <button onClick={goBack} type='button' className='backBtn btn'>بازگشت</button>
+        <button onClick={goBack} type='button' className='backBtn bg-zinc-500 rounded-lg px-5'>بازگشت</button>
     );
 }
  

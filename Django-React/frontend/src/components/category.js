@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 import axiosInstance from './axiosApi'
 
 import Tools from './tools'
@@ -12,7 +13,7 @@ import Header from './header'
 import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
 const Category = (props) => {
-    const [categoryTarget, setCategoryTarget] = useState(props.match.params.category)
+    const [categoryQuery, setCategoryQuery] = useState(props.match.params.category)
     const [pageTravel, setPageTravel] = useState([])
     const [categories, setCategories] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(16)
@@ -27,7 +28,7 @@ const Category = (props) => {
         'movie-series': 'فیلم و سریال',
         'psychology': 'روانشناسی'
     }
-    const currentCategory = categoryDefinitionInFarsi[categoryTarget]
+    const currentCategory = categoryDefinitionInFarsi[categoryQuery]
 
     useEffect(() => {
         searchChangeDetector()
@@ -37,14 +38,14 @@ const Category = (props) => {
 
     useEffect(() => {
         getCategories()
-    }, [categoryTarget, sortType, numberOfResult, offset])
+    }, [categoryQuery, sortType, numberOfResult, offset])
 
     const searchChangeDetector = () => {
         (function(history){
             let pushState = history.pushState;
             history.pushState = function() {
                 pushState.apply(history, arguments);
-                setCategoryTarget(window.location.pathname.split('/')[2]);
+                setCategoryQuery(window.location.pathname.split('/')[2]);
             };
         })(window.history);
     }
@@ -56,7 +57,7 @@ const Category = (props) => {
             'alphabet': 'category_alphabet'
         }
 
-        const pageTravelAndCategories = await axiosInstance.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryTarget}&limit=${numberOfResult}&offset=${offset}`)
+        const pageTravelAndCategories = await axiosInstance.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryQuery}&limit=${numberOfResult}&offset=${offset}`)
         setPageTravel(pageTravelAndCategories.data)
         setCategories(pageTravelAndCategories.data.results)
         setContentLoaded(true)
@@ -74,16 +75,14 @@ const Category = (props) => {
                         `}
                         >  {/* bg or trans */}
 
-                            <Link href={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                            <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
                                 <a className='flex w-full md:block md:grid-cols-5'>
                                     <div className='md:col-span-2 w-[224px] md:h-[126px]'>
-                                        <Image
+                                        <img
                                             src={category.thumbnail}
-                                            width='1366'
-                                            height='768'
+                                            width={1366}
+                                            height={768}
                                             alt={`${category.subCategory} | ${category.title}`}
-                                            blurDataURL={category.thumbnail}
-                                            placeholder='blur'
                                             className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
                                         />
                                     </div>
@@ -142,7 +141,7 @@ const Category = (props) => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="flex flex-wrap m-4 align-baseline quizContainer quizContainer__minHeight md:flex-ai-fe md:container md:px-20 md:justify-right">
+            <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
 
                 {listCategories()}
 

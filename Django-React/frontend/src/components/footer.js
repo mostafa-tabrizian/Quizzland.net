@@ -25,7 +25,7 @@ const Footer = (props) => {
                         {/* <li><Link to='/blog'><a>وبلاگ</a></Link></li> */}
                         <li><Link to='/guide'><a>راهنما</a></Link></li>
                         <li><Link to='/contact'><a>تماس با ما</a></Link></li>
-                        <li><Link to='/advertising'><a>تبلیغات</a></Link></li>
+                        {/* <li><Link to='/advertiseContact'><a>تبلیغات</a></Link></li> */}
                         <li><Link to='/privacy-policy'><a>حریم خصوصی</a></Link></li>
                         <li><Link to='/supportUs'><a>حمایت</a></Link></li>
                     </ul>

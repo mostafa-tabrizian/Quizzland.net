@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 
 import BackBtn from './backBtn'
 import Header from './header'
 
 const pathRed = '/static/img/bubbles.png'
 
-const Ads = () => {
+const AdvertiseContact = () => {
     
     useEffect(() => {
         if (document.getElementById('html')) {
@@ -27,12 +28,12 @@ const Ads = () => {
                 
             <div className="basicPage center wrapper-sm">
                 <h3>برای تبلیغ در بنر های کوییزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>
-                <Link href="mailto:support@quizzland.net"><a>support@quizzland.net</a></Link>
+                <Link to="mailto:support@quizzland.net">support@quizzland.net</Link>
                 <div>
                     <ul className="text-red-600 font-bold flex justify-center flex-ai-c">
-                        {/* <li><Link href="#"><a>انستگرام</a></Link></li> */}
-                        {/* <li><Link href="#"><a>تلگرام</a></Link></li> */}
-                        <li><Link href="mailto:support@quizzland.net"><a>ایمیل</a></Link></li>
+                        {/* <li><Link to="#"><a>انستگرام</a></Link></li> */}
+                        {/* <li><Link to="#"><a>تلگرام</a></Link></li> */}
+                        <li><Link to="mailto:support@quizzland.net">ایمیل</Link></li>
                     </ul>
                 </div>
                 <h5>💗کوییزلند</h5>
@@ -44,4 +45,4 @@ const Ads = () => {
     );
 }
  
-export default Ads;
+export default AdvertiseContact;

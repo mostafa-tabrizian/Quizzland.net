@@ -32,7 +32,7 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-def index(request):
+def index(request, *args, **kwargs):
     return render(request, "frontend/index.html")
 
 @never_cache
@@ -64,9 +64,6 @@ def addViewToQuizzes(title):
             quizPointy.save()
         except Exception as e:
             pass
-
-def category(request, category):
-    return render(request, "frontend/category.html")
 
 @never_cache
 def subCategory(request, category, subCategory):

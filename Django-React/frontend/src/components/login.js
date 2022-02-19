@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import axios from 'axios';
+;
 import { log } from './base'
 
 class Login extends Component {

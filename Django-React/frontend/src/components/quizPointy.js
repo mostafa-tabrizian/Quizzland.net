@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
-import axios from 'axios';
+;
 import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
 import axiosInstance from './axiosApi'
@@ -366,7 +366,7 @@ const Quiz = () => {
                 return (
                     <li key={tag} className='px-3 py-1 text-sm rounded-lg'>
                         <h2>
-                            <Link href={`/search?q=${replaceFunction(tag, ' ', '+')}`} >
+                            <Link to={`/search?q=${replaceFunction(tag, ' ', '+')}`} >
                                 <a rel='tag'>
                                     {tag}
                                 </a>
@@ -639,7 +639,7 @@ const Quiz = () => {
                 </ul>
             </div>
 
-            <Link href='/testResult'><a ref={result} className='noVis'></a></Link>
+            <Link to='/testResult'><a ref={result} className='noVis'></a></Link>
 
         </React.Fragment>
     );

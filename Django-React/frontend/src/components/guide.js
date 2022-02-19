@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 
 import Header from './header'
 
@@ -97,9 +98,9 @@ const Guide = () => {
                 </p> */}
 
                 <h5 className="space-med text-center">
-                    اگر به کمک بیشتری هستید میتوانید از <Link href="/contact"><a style={{textDecoration: 'underline'}}>اینجا</a></Link> با ما در تماس باشید
+                    اگر به کمک بیشتری هستید میتوانید از <Link to="/contact"><a style={{textDecoration: 'underline'}}>اینجا</a></Link> با ما در تماس باشید
                 </h5>
-                <h5 className="tx-al-l"><Link href="/welcomeOwl"><a>💗</a></Link> کوییزلند</h5>
+                <h5 className="tx-al-l"><Link to="/welcomeOwl"><a>💗</a></Link> کوییزلند</h5>
                 
             </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
+
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
 import axiosInstance from './axiosApi'
 import Header from './header'

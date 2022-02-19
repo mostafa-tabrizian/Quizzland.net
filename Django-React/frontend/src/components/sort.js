@@ -1,7 +1,8 @@
-import axios from 'axios';
+;
 import React, { useEffect, useState } from 'react'
 import axiosInstance from './axiosApi'
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 
 import LoadingScreen from './loadingScreen'
 import PageTravel from './pageTravel'

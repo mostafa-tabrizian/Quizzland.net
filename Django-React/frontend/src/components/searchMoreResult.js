@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axiosInstance from './axiosApi'
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 import Header from './header'
 
 import QuizContainer from './quizContainer';

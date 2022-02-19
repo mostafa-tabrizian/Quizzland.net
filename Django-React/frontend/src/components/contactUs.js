@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 
 import BackBtn from './backBtn'
 import Header from './header'
@@ -32,10 +33,10 @@ const Contact = () => {
                         {/* <li className="hoverAnimation"><a href="#">انستگرام</a></li> */}
                         {/* <li className="hoverAnimation"><a href="#">تلگرام</a></li> */}
                         <li className="hoverAnimation">
-                            <Link href="mailto:support@quizzland.net"><a>ایمیل</a></Link>
+                            <Link to="mailto:support@quizzland.net"><a>ایمیل</a></Link>
                         </li>
                     </ul>
-                    <Link href="mailto:support@quizzland.net"><a>support@quizzland.net</a></Link>
+                    <Link to="mailto:support@quizzland.net"><a>support@quizzland.net</a></Link>
                 </div>
                 <p>
                     میتونی تمام نظرات و پیشنهادات خودت رو برامون بفرستی <br/> اینطوری کمکمون میکنی و باعث میشی سریعتر پیشرفت کنیم .💖

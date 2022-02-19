@@ -11,10 +11,11 @@ import { log } from './components/base'
 
 const Footer            = lazy(() => import('./components/footer'))
 const ScrollToTop       = lazy(() => import('./components/scrollToTop'))
+const Category          = lazy(() => import ('./components/category'))
 const Index             = lazy(() => import('./components/landPage'))
 const Guide             = lazy(() => import('./components/guide'))
 const Contact           = lazy(() => import('./components/contactUs'))
-const Ads               = lazy(() => import('./components/advertsContact'))
+const AdvertiseContact  = lazy(() => import('./components/advertiseContact'))
 const Support           = lazy(() => import('./components/supportUs'))
 const PrivacyPolicy     = lazy(() => import('./components/privacyPolicy'))
 const Search            = lazy(() => import('./components/searchMoreResult'))
@@ -75,8 +76,9 @@ const App = () => {
                     <Switch>
                         <Route path='/' exact component={Index} />
                         <Route path='/guide' component={Guide} />
+                        <Route path='/category/:category' exact component={Category} />
                         <Route path='/contact' component={Contact} />
-                        <Route path='/ads' component={Ads} />
+                        <Route path='/advertiseContact' component={AdvertiseContact} />
                         <Route path='/support' component={Support} />
                         <Route path='/privacy-policy' component={PrivacyPolicy} />
                         <Route path='/search' component={Search} />
