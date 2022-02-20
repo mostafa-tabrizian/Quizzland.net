@@ -34,7 +34,7 @@ const Tools = (props) => {
     }
 
     return (
-        <div className='tools container justify-center md:justify-end mx-auto md:px-20 flex relative mt-5 text-lg z-10 space-x-2'>
+        <div className='tools container justify-center md:justify-end mx-auto md:px-20 flex relative mt-5 text-lg space-x-2'>
             <div className='tools__numberOfResult'>
                 <button onClick={showHideToolsNumberOfResult} className={`tools__numberOfResult__btn w-full tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`}>تعداد نمایش: 
                     <span> {props.numberOfResult} </span>

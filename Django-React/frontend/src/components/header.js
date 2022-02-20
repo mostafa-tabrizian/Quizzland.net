@@ -87,39 +87,35 @@ const Header = (props) => {
 
                 <nav className="flex flex-ai-c flex-jc-sb">
                     <div>
-                        <Link to="/">
-                            <a className='flex header__logo flex-jc-sb flex-ai-c md:hidden'>
-                                <img
-                                    src='/static/img/Q-small.png'
-                                    alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
-                                    width={24}
-                                    height={35}
-                                />
-                                <span>uizzland</span>
-                            </a>
+                        <Link to="/" className='flex header__logo flex-jc-sb flex-ai-c md:hidden'>
+                            <img
+                                src='/static/img/Q-small.png'
+                                alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
+                                width={24}
+                                height={35}
+                            />
+                            <span>uizzland</span>
                         </Link>
                     </div>
 
                     <div className={`md:space-x-5 py-5 mr-6 z-10 relative ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
                         <div className="hoverAnimation md:space-x-7 mr-4">
                             {/* <button className="header__btn">
-                                <Link to="/blog"><a> وبلاگ </a></Link>
+                                <Link to="/blog"> وبلاگ </Link>
                             </button> */}
                             <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
                             <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
                             <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
                         </div>
 
-                        <Link to="/">
-                            <a className="flex header__logo flex-jc-sb flex-ai-c">
-                                <img
-                                    src='/static/img/Q-small.png'
-                                    alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
-                                    width={24}
-                                    height={35}
-                                />
-                                <span>uizzland</span>
-                            </a>
+                        <Link to="/" className="flex header__logo flex-jc-sb flex-ai-c">
+                            <img
+                                src='/static/img/Q-small.png'
+                                alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
+                                width={24}
+                                height={35}
+                            />
+                            <span>uizzland</span>
                         </Link>
 
 
@@ -128,21 +124,21 @@ const Header = (props) => {
                     <Search />
 
                     <ul className={`right-[11rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
-                        <li><Link to="/category/movie-series"><a>🎬 فیلم و سریال</a></Link></li>
-                        <li><Link to="/category/celebrity"><a>✨ سلبریتی</a></Link></li>
-                        <li><Link to="/category/psychology"><a>🧠 روانشناسی</a></Link></li>
+                        <li><Link to="/category/movie-series">🎬 فیلم و سریال</Link></li>
+                        <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
+                        <li><Link to="/category/psychology">🧠 روانشناسی</Link></li>
                     </ul>
 
                     <ul className={`right-[16.5rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
-                        <li><Link to="/sort?st=newest"><a> ⏳ جدیدترین ها </a></Link></li>
-                        <li><Link to="/sort?st=monthly"><a> 👑 بهترین های ماه </a></Link></li>
-                        <li><Link to="/sort?st=bestest"><a> 👑 بهترین ها </a></Link></li>
+                        <li><Link to="/sort?s=newest"> ⏳ جدیدترین ها </Link></li>
+                        <li><Link to="/sort?s=monthly"> 👑 بهترین های ماه </Link></li>
+                        <li><Link to="/sort?s=bestest"> 👑 بهترین ها </Link></li>
                     </ul>
 
                     <ul className={`right-[21rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
-                        <li><Link to="/sort?st=newest_test"><a> ⏳ جدیدترین ها </a></Link></li>
-                        <li><Link to="/sort?st=monthly_test"><a> 👑 بهترین های ماه </a></Link></li>
-                        <li><Link to="/sort?st=bestest_test"><a> 👑 بهترین ها </a></Link></li>
+                        <li><Link to="/sort?s=newest_test"> ⏳ جدیدترین ها </Link></li>
+                        <li><Link to="/sort?s=monthly_test"> 👑 بهترین های ماه </Link></li>
+                        <li><Link to="/sort?s=bestest_test"> 👑 بهترین ها </Link></li>
                     </ul>
 
                     {/* Menu */}
@@ -161,32 +157,32 @@ const Header = (props) => {
                         <div className='mt-5'>
                             <h4 className='text-xl'>کتگوری ها</h4>
                             <ul className='flex space-x-6 space-x-reverse'>
-                                <li className='text-lg'><Link to="/category/movie-series"><a >فیلم و سریال 🎬</a></Link></li>
-                                <li className='text-lg'><Link to="/category/celebrity"><a>سلبریتی ✨</a></Link></li>
-                                <li className='text-lg'><Link to="/category/psychology"><a>روانشناسی 🧠</a></Link></li>
+                                <li className='text-lg'><Link to="/category/movie-series">فیلم و سریال 🎬</Link></li>
+                                <li className='text-lg'><Link to="/category/celebrity">سلبریتی ✨</Link></li>
+                                <li className='text-lg'><Link to="/category/psychology">روانشناسی 🧠</Link></li>
                             </ul>
                         </div>
                         <div className='mt-5'>
                             <h4 className='text-xl'>کویز ها</h4>
                             <ul className='flex space-x-6 space-x-reverse'>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=monthly"><a> بهترین های ماه </a></Link></li>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=bestest"><a> بهترین ها </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest"> جدیدترین ها </Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=monthly"> بهترین های ماه </Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=bestest"> بهترین ها </Link></li>
                             </ul>
                         </div>
                         <div className='mt-5'>
                             <h4 className='text-xl'>تست ها</h4>
                             <ul className='flex space-x-6 space-x-reverse'>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=newest_test"><a> جدیدترین ها </a></Link></li>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=monthly_test"><a> بهترین های ماه </a></Link></li>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?st=bestest_test"><a> بهترین ها </a></Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest_test"> جدیدترین ها </Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=monthly_test"> بهترین های ماه </Link></li>
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=bestest_test"> بهترین ها </Link></li>
                             </ul>
                         </div>
                         <div className='mt-5'>
                             <ul className='flex space-x-6 space-x-reverse'>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/blog"><a> وبلاگ </a></Link></li>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/guide"><a> راهنما </a></Link></li>
-                                <li className='text-lg' onClick={openCloseMenu}><Link to="/contact"><a> تماس با ما </a></Link></li>
+                                {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/blog"> وبلاگ </Link></li> */}
+                                {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/guide"> راهنما </Link></li> */}
+                                <li className='text-lg' onClick={openCloseMenu}><Link to="/contact"> تماس با ما </Link></li>
                             </ul>
                         </div>
                     </div>

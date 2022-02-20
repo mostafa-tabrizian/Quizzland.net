@@ -21,7 +21,7 @@ const QuizContainer = (props) => {
     return (
         props.quizzes.map((quiz) => {
             return (
-                <li key={quiz.id} className='mr-7 md:m-2 md:mb-6'>
+                <li key={quiz.id} className='mr-7 md:m-2 mb-4 md:mb-6'>
                     <article className={`
                         flex text-right h-full
                         rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl

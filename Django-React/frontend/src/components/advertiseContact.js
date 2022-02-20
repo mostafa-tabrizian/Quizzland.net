@@ -28,12 +28,12 @@ const AdvertiseContact = () => {
                 
             <div className="basicPage center wrapper-sm">
                 <h3>برای تبلیغ در بنر های کوییزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>
-                <Link to="mailto:support@quizzland.net">support@quizzland.net</Link>
+                <a href="mailto:support@quizzland.net">support@quizzland.net</a>
                 <div>
                     <ul className="text-red-600 font-bold flex justify-center flex-ai-c">
-                        {/* <li><Link to="#"><a>انستگرام</a></Link></li> */}
-                        {/* <li><Link to="#"><a>تلگرام</a></Link></li> */}
-                        <li><Link to="mailto:support@quizzland.net">ایمیل</Link></li>
+                        {/* <li><a href="#"><a>انستگرام</a></a></li> */}
+                        {/* <li><a href="#"><a>تلگرام</a></a></li> */}
+                        <li><a href="mailto:support@quizzland.net">ایمیل</a></li>
                     </ul>
                 </div>
                 <h5>💗کوییزلند</h5>

@@ -9,7 +9,7 @@ export const takeParameterFromUrl = (parameter) => {
 }
 
 export const replaceFunction = (string, oldValue, newValue) => {
-    return string.replaceAll(oldValue, newValue)
+    return decodeURI(string.replaceAll(oldValue, newValue))
 }
 
 export const viewsFormat = (views) => {

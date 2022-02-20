@@ -1786,7 +1786,7 @@ body::before {
 .quiz__questionChanger__last {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
-  right: calc(50% + 19rem);
+  right: calc(50% + 15rem);
 }
 
 .quiz__bottomQuestionChanger {

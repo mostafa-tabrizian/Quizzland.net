@@ -75,25 +75,26 @@ const Category = (props) => {
                         `}
                         >  {/* bg or trans */}
 
-                            <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
-                                <a className='flex w-full md:block md:grid-cols-5'>
-                                    <div className='md:col-span-2 w-[224px] md:h-[126px]'>
-                                        <img
-                                            src={category.thumbnail}
-                                            width={1366}
-                                            height={768}
-                                            alt={`${category.subCategory} | ${category.title}`}
-                                            className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
-                                        />
-                                    </div>
-                                    <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
-                                        <h2 className={`quizContainer__title quizContainer__title__noViews
-                                                        text-sm mr-5 md:w-52 md:mr-0 md:text-base md:grid md:grid-cols-2`}>
-                                            <span>{category.title}</span>
-                                            <span className='block text-right md:text-left'>{category.subCategory}</span>
-                                        </h2>
-                                    </div>
-                                </a>
+                            <Link
+                                to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}
+                                className='flex w-full md:block md:grid-cols-5 mb-4'
+                            >
+                                <div className='md:col-span-2 w-[224px] md:h-[126px]'>
+                                    <img
+                                        src={category.thumbnail}
+                                        width={1366}
+                                        height={768}
+                                        alt={`${category.subCategory} | ${category.title}`}
+                                        className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                    />
+                                </div>
+                                <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
+                                    <h2 className={`quizContainer__title quizContainer__title__noViews
+                                                    text-lg mr-5 md:w-52 md:mr-0 md:text-base md:grid md:grid-cols-2`}>
+                                        <span>{category.title}</span>
+                                        <span className='block text-right md:text-left'>{category.subCategory}</span>
+                                    </h2>
+                                </div>
                             </Link>
                         </article>
                     </li>
@@ -141,7 +142,7 @@ const Category = (props) => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
+            <ul className="w-[90vw] md:w-4/5 ml-auto mr-0 md:ml-auto md:mr-[15%] flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
 
                 {listCategories()}
 

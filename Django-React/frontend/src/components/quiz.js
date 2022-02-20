@@ -39,17 +39,16 @@ const Quiz = () => {
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
     const [quiz, setQuiz] = useState(null)
+    const [quizTitleReplacedWithHyphen, setQuizTitleReplacedWithHyphen] = useState(replaceFunction(quizTitle, '-', '+'))
 
     const result = useRef(null)
-
-    const quizTitleReplacedWithHyphen = replaceFunction(quizTitle, '-', '+')
 
     useEffect(() => {
         grabData()
         setLoadState(true)
         SFXLocalStorage()
-        setSFXCorrect(new Audio('/static/sounds/SFXCorrect.mp3'))
-        setSFXWrong(new Audio('/static/sounds/SFXWrong.mp3'))
+        setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
+        setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
     }, [quizTitle])
 
     useEffect(() => {
@@ -65,6 +64,10 @@ const Quiz = () => {
         }
     }
 
+    const applyBackground = (background) => {
+        document.querySelector('html').style = `background: url('${background}') center/cover no-repeat fixed !important`
+    }
+
     const quizChangeDetector = () => {
         (function (history) {
             let pushState = history.pushState;
@@ -75,27 +78,23 @@ const Quiz = () => {
         })(window.history);
     }
 
-    const setBackground = () => {
-        document.getElementById('html').style = `background: url('${quiz.background}') center/cover no-repeat fixed !important`
-    }
-
     const grabData = () => {
         if (quizTitle != undefined) {
             const grabQuiz = async () => {
-                return await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen()}&limit=1`).then((res) => res.data.results[0])
+                return await axiosInstance.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
             }
 
             const grabQuestions = async () => {
-                return await axiosLimited.get(`${API_URL}/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen()}`)
+                return await axiosInstance.get(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
             }
 
             grabQuiz().then((quiz) => {
                 try {
-                    sendCategoryAsInterest(quiz.subCategory)
-                    applyBackground(quiz.background)
+                    sendCategoryAsInterest(quiz?.subCategory)
+                    applyBackground(quiz?.background)
                     setQuiz(quiz)
                 }
-                catch {
+                catch (e) {
                     window.location.href = "/404";
                 }
             })
@@ -131,18 +130,18 @@ const Quiz = () => {
     const ImGifTextAnswerShowOrHide = (questionId, hideOrShow) => {
         const question = document.querySelectorAll('.quiz__container')[questionId - 1]
         if (hideOrShow == 'block') {
-            question.querySelector('.quiz__answerText').classList.remove('answerHide')
-            question.querySelector('.quiz__answerText').classList.add('answerShow')
+            question.querySelector('.quiz__answerText')?.classList.remove('answerHide')
+            question.querySelector('.quiz__answerText')?.classList.add('answerShow')
 
-            question.querySelector('.quiz__answerImGif').classList.remove('answerHide')
-            question.querySelector('.quiz__answerImGif').classList.add('answerShow')
+            question.querySelector('.quiz__answerImGif')?.classList.remove('answerHide')
+            question.querySelector('.quiz__answerImGif')?.classList.add('answerShow')
         }
         else if (hideOrShow == 'none') {
-            question.querySelector('.quiz__answerText').classList.remove('answerShow')
-            question.querySelector('.quiz__answerText').classList.add('answerHide')
+            question.querySelector('.quiz__answerText')?.classList.remove('answerShow')
+            question.querySelector('.quiz__answerText')?.classList.add('answerHide')
 
-            question.querySelector('.quiz__answerImGif').classList.remove('answerShow')
-            question.querySelector('.quiz__answerImGif').classList.add('answerHide')
+            question.querySelector('.quiz__answerImGif')?.classList.remove('answerShow')
+            question.querySelector('.quiz__answerImGif')?.classList.add('answerHide')
         }
     }
 
@@ -235,7 +234,7 @@ const Quiz = () => {
 
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        setAbleToGoNext(false)
+        // setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
         makeEveryOptionLowOpacity('high')
@@ -256,8 +255,8 @@ const Quiz = () => {
 
 
     const goNextQuestionOrEndTheQuiz = () => {
-        if (ableToGoNext || autoQuestionChanger || showingAdverts) {
-            if (currentQuestionNumber !== questions.length) {
+        if (ableToGoNext || autoQuestionChanger) {
+            if (currentQuestionNumber !== questions?.length) {
                 restartTheStateOfQuestion()
                 plusOneToTotalAnsweredQuestions()
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
@@ -323,10 +322,10 @@ const Quiz = () => {
             return (
                 <div className="flex justify-center">
                     <form className='relative grid justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3 flex-wrap' data={question.answer} action="">
-                        {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <Image src={question.option_img_1st} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <Image src={question.option_img_2nd} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <Image src={question.option_img_3rd} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <Image src={question.option_img_4th} blurDataURL='/images/Q-512.png' placeholder='blur' width='520' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <img src={question.option_img_1st} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <img src={question.option_img_2nd} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <img src={question.option_img_3rd} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <img src={question.option_img_4th} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
                     </form>
                 </div>
             )
@@ -361,7 +360,7 @@ const Quiz = () => {
     const quizQuestions = (browser) => {
 
         return (
-            questions && questions.map(question => {
+            questions?.map(question => {
                 return (
                     <div key={question.id}
                         style={
@@ -382,15 +381,13 @@ const Quiz = () => {
 
                             <div className='mt-3 w-[22rem] md:w-[29rem]'>
                                 {!question.question_img.includes('NotExist') &&
-                                    <Image
+                                    <img
                                         src={question.question_img}
-                                        width='1366'
-                                        height='768'
+                                        width={1366}
+                                        height={768}
                                         alt={question.title}
                                         className='object-cover object-top rounded-xl'
                                         title={question.title}
-                                        blurDataURL='/images/Q-512.png'
-                                        placeholder='blur'
                                     />}
                             </div>
                         </div>
@@ -452,10 +449,11 @@ const Quiz = () => {
                 return (
                     <li key={tag} className='px-3 py-1 text-sm rounded-lg'>
                         <h2>
-                            <Link to={`/search?q=${replaceFunction(tag, ' ', '+')}`} >
-                                <a rel='tag'>
+                            <Link
+                                to={`/search?q=${replaceFunction(tag, ' ', '+')}`}
+                                rel='tag'
+                            >
                                     {tag}
-                                </a>
                             </Link>
                         </h2>
                     </li>
@@ -464,8 +462,8 @@ const Quiz = () => {
         )
     }
 
-    const getSuggestionsQuiz = (subCategory) => {
-        axiosLimited.get(`/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+    const getSuggestionsQuiz = async (subCategory) => {
+        await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => { setSuggestionQuizzes(res.data.results) })
     }
 
@@ -509,12 +507,12 @@ const Quiz = () => {
 
                 <link rel="canonical" href={currentUrl()} />
 
-                <meta name="description" content={`با ${questions.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz.title} ${quiz.subCategory} کوییز از`} />
+                <meta name="description" content={`با ${questions?.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz?.title} ${quiz?.subCategory} کوییز از`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quizThumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
-                <meta property="og:title" content={quiz.title} />
-                <meta property="og:description" content={`با ${questions.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz.title} ${quiz.subCategory} کوییز از`} />
+                <meta property="og:title" content={quiz?.title} />
+                <meta property="og:description" content={`با ${questions?.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz?.title} ${quiz?.subCategory} کوییز از`} />
                 <meta property="og:image" content={quizThumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
@@ -527,13 +525,13 @@ const Quiz = () => {
                     {
                         "@context": "https://schema.org",
                         "@type": "Article",
-                        "headline": "${quiz.title}",
+                        "headline": "${quiz?.title}",
                         "image": [
                             "${quizThumbnail}",
-                            "${quiz.background}"
+                            "${quiz?.background}"
                          ],
-                        "datePublished": "${quiz.publish}",
-                        "dateModified": "${quiz.publish}",
+                        "datePublished": "${quiz?.publish}",
+                        "dateModified": "${quiz?.publish}",
                         "author": {
                             "@type": "Person",
                             "name": "مصطفی تبریزیان",
@@ -552,7 +550,7 @@ const Quiz = () => {
                 </script>
             </Helmet>
 
-            {quiz.title &&
+            {quiz?.title &&
                 <StickyShareButtons
                     config={{
                         alignment: 'left',    // alignment of buttons (left, right)
@@ -608,7 +606,7 @@ const Quiz = () => {
                 }
 
                 <div className="text-center">
-                    <h1>{quiz && quiz.title}</h1>
+                    <h1>{quiz?.title}</h1>
                 </div>
 
                 <div className="flex justify-center quiz__detail flex-ai-c">
@@ -622,8 +620,8 @@ const Quiz = () => {
                     {
                         contentLoaded &&
                         <>
-                            <h5>تعداد سوال ها: {questions && questions.length}</h5>
-                            <h5>{quiz && makeDatePublishFormatForQuizDetail(quiz.publish)}</h5>
+                            <h5>تعداد سوال ها: {questions?.length}</h5>
+                            <h5>{makeDatePublishFormatForQuizDetail(quiz?.publish)}</h5>
                         </>
                     }
                 </div>
@@ -653,7 +651,8 @@ const Quiz = () => {
                             quiz__questionChanger absolute
                             quiz__questionChanger__next btn
                             ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
-                        `}>
+                        `}
+                    >
 
                         <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
 
@@ -692,7 +691,7 @@ const Quiz = () => {
 
             <div>
                 <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
-                <ul className='flex flex-wrap justify-center mt-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
+                <ul className='flex flex-wrap justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
                     {quiz && showTheTagsIfNotNull()}
                 </ul>
             </div>
@@ -701,11 +700,11 @@ const Quiz = () => {
             <div className='adverts_center' id='mediaad-bNpr'></div>
 
             <div className='space-med'>
-                <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
+                <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor mb-5'>کوییز های مشابه</h7>
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="w-4/5 mx-auto flex flex-wrap align-baselinw-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-righte quizContainer flex-ai-fe justify-right">
+                <ul className="w-[90vw] md:w-4/5 ml-auto mr-0 md:ml-auto md:mr-[15%] flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
@@ -718,7 +717,12 @@ const Quiz = () => {
             {/* Adverts */}
             <div className='adverts_center' id='mediaad-dESu'></div>
 
-            <Link to='/quizResult' ><a ref={result} className='noVis'></a></Link>
+            <Link
+                to='/quizResult'
+                ref={result}
+                className='noVis'
+            >
+            </Link>
 
         </React.Fragment>
     );

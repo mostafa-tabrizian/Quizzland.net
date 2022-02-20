@@ -6,7 +6,7 @@ import {StickyShareButtons} from 'sharethis-reactjs';
 import axiosInstance from './axiosApi'
 import Header from './header'
 
-import { log, replaceFunction, isItDesktop, isItMobile } from './base'
+import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from './base'
 import LoadingScreen from './loadingScreen'
 import QuizPointyContainer from './quizPointyContainer'
 import SkeletonLoading from './skeletonLoading'
@@ -20,28 +20,27 @@ const Quiz = () => {
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
-    const [quizEnded, setQuizEnded] = useState(false)
+    const [pointyEnded, setPointyEnded] = useState(false)
     const [loadState, setLoadState] = useState()
-    const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
+    const [pointyTitle, setPointyTitle] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
-    const [quizThumbnail, setQuizThumbnail] = useState()
+    const [pointyThumbnail, setPointyThumbnail] = useState()
     const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [SFXAllowed, setSFXAllowed] = useState()
     const [showQuestionChangingHelper, setShowQuestionChangingHelper] = useState(false)
     const [SFXClick, setSFXClick] = useState(null)
     const [quiz, setQuiz] = useState(null)
+    const [pointyTitleReplacedWithHyphen, setPointyTitleReplacedWithHyphen] = useState(replaceFunction(pointyTitle, '-', '+'))
 
     const result = useRef(null)
-
-    const quizTitleReplacedWithHyphen = replaceFunction(quizTitle, '-', '+')
 
     useEffect(() => {
         grabData()
         setLoadState(true)
         SFXLocalStorage()
-        setSFXClick(new Audio('/static/sounds/SFXClick.mp3'))
-    }, [testTitle,])
+        setSFXClick(new Audio('/static/sound/SFXClick.mp3'))
+    }, [pointyTitle,])
 
     useEffect(() => {
         quizChangeDetector()
@@ -55,6 +54,10 @@ const Quiz = () => {
             setSFXAllowed('true')
         }
     }
+    
+    const applyBackground = (background) => {
+        document.querySelector('html').style = `background: url('${background}') center/cover no-repeat fixed !important`
+    }
 
     const quizChangeDetector = () => {
         (function(history){
@@ -62,28 +65,24 @@ const Quiz = () => {
             history.pushState = function() {
                 pushState.apply(history, arguments);
             };
-            setQuizTitle(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
+            setPointyTitle(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
         })(window.history);
-    }
-
-    const setBackground = () => {
-        document.getElementById('html').style=`background: url('${quiz.background}') center/cover no-repeat fixed !important`
     }
     
     const grabData = () => {
-        if (testTitle != undefined) {
+        if (pointyTitle != undefined) {
             const grabQuiz = async () => {
-                return await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?title__iexact=${testTitleReplacedWithHyphen()}&limit=1`).then((res) => res.data.results[0])
+                return await axiosInstance.get(`/dbAPI/pointy_new/?title__iexact=${pointyTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
             }
 
             const grabQuestions = async () => {
-                return await axiosLimited.get(`${API_URL}/dbAPI/questions_pointy/?title__iexact=${testTitleReplacedWithHyphen()}`)
+                return await axiosInstance.get(`/dbAPI/questions_pointy/?title__iexact=${pointyTitleReplacedWithHyphen}`)
             }
 
             grabQuiz().then((quiz) => {
                 try {
-                    sendCategoryAsInterest(quiz.subCategory)
-                    applyBackground(quiz.background)
+                    sendCategoryAsInterest(quiz?.subCategory)
+                    applyBackground(quiz?.background)
                     setQuiz(quiz)
                 }
                 catch (e) {
@@ -136,18 +135,10 @@ const Quiz = () => {
         } else {
             setAbleToGoNext(true)
 
-
             setTimeout(() => {
-                try {
-
-                    const stillFirstQuestion = document.querySelector('.quiz__container').style.transform.slice(-5, -3) == '0r'
-
-                    if (!(isItDesktop()) && stillFirstQuestion) {
-                        setShowQuestionChangingHelper(true)
-                    } else {
-                        setShowQuestionChangingHelper(false)
-                    }
-                } catch {log('error: helper')}
+                if (showQuestionChangingHelper !== 'never' && !(isItDesktop())) {
+                    setShowQuestionChangingHelper(true)
+                }
             }, 5000)
         }
     }
@@ -228,7 +219,7 @@ const Quiz = () => {
 
     const quizQuestions = (browser) => {
         return (
-            questions && questions.map(question => {
+            questions?.map(question => {
                 return (
                     <div key={question.id}
                         style={
@@ -249,15 +240,13 @@ const Quiz = () => {
 
                             <div className='mt-3 w-[22rem] md:w-[29rem]'>
                                 {!question.question_img.includes('NotExist') &&
-                                    <Image
-                                        src={question.question_img}
-                                        width='1366'
-                                        height='768'
+                                    <img
+                                        src={question?.question_img}
+                                        width={1366}
+                                        height={768}
                                         alt={question.title}
                                         className='object-cover object-top rounded-xl'
                                         title={question.title}
-                                        blurDataURL='/images/Q-512.png'
-                                        placeholder='blur'
                                     />}
                             </div>
                         </div>
@@ -278,7 +267,7 @@ const Quiz = () => {
 
     //                     { questionShowIfNotNull(question.question) }
 
-    //                     { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question.question_img} alt={question.title}/> } {/* loading='lazy' */}
+    //                     { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question?.question_img} alt={question.title}/> } {/* loading='lazy' */}
                     
     //                     { questionOptionsCheckBetweenStringOrImg(question) }
                         
@@ -330,14 +319,14 @@ const Quiz = () => {
 
     const goNextQuestionOrEndTheQuiz = () => {
         if (ableToGoNext || autoQuestionChanger) {
-            setShowQuestionChangingHelper('never')
-            setAbleToGoNext(false)
+            // setAbleToGoNext(false)
+
             if (currentQuestionNumber !== questions.length) {
                 plusOneToTotalAnsweredQuestions()
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
 
             } else {
-                setQuizEnded(true)
+                setPointyEnded(true)
                 setTimeout(() => {
                     try {
                         localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
@@ -366,10 +355,11 @@ const Quiz = () => {
                 return (
                     <li key={tag} className='px-3 py-1 text-sm rounded-lg'>
                         <h2>
-                            <Link to={`/search?q=${replaceFunction(tag, ' ', '+')}`} >
-                                <a rel='tag'>
-                                    {tag}
-                                </a>
+                            <Link
+                                to={`/search?q=${replaceFunction(tag, ' ', '+')}`}
+                                rel='tag'
+                            >
+                                {tag}
                             </Link>
                         </h2>
                     </li>
@@ -378,9 +368,9 @@ const Quiz = () => {
         )
     }
 
-    const getSuggestionsQuiz = (subCategory) => {
-        axiosLimited.get(`/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
-        .then((res) => {setSuggestionQuizzes(res.data.results)})
+    const getSuggestionsQuiz = async (subCategory) => {
+        await axiosInstance.get(`/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+            .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
     const SFXController = () => {
@@ -390,7 +380,7 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/test/${replaceFunction(testTitle, ' ', '-')}`
+        return `https://www.quizzland.net/test/${replaceFunction(pointyTitle, ' ', '-')}`
     }
 
     let firstTouch
@@ -422,14 +412,14 @@ const Quiz = () => {
             />
 
             <Helmet>
-                <title>{`کوییزلند | تست ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
-                <meta name="description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz.title} ${quiz.subCategory} تست با موضوع`} />
+                <title>{`کوییزلند | تست ${replaceFunction(decodeURI(pointyTitle), '+', ' ')}`}</title>
+                <meta name="description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
                 <meta name="keywords" content="کوییز, تست, کوییزلند" />
-                <meta name="msapplication-TileImage" content={quizThumbnail} />
+                <meta name="msapplication-TileImage" content={pointyThumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
-                <meta property="og:title" content={quiz.title} />
-                <meta property="og:description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz.title} ${quiz.subCategory} تست با موضوع`} />
-                <meta property="og:image" content={quizThumbnail} />
+                <meta property="og:title" content={quiz?.title} />
+                <meta property="og:description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
+                <meta property="og:image" content={pointyThumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
                 <meta property="og:image:height" content="300" />
@@ -441,13 +431,13 @@ const Quiz = () => {
                     {
                         "@context": "https://schema.org",
                         "@type": "Article",
-                        "headline": "${quiz.title}",
+                        "headline": "${quiz?.title}",
                         "image": [
-                            "${quizThumbnail}",
-                            "${quiz.background}"
+                            "${pointyThumbnail}",
+                            "${quiz?.background}"
                          ],
-                        "datePublished": "${quiz.publish}",
-                        "dateModified": "${quiz.publish}",
+                        "datePublished": "${quiz?.publish}",
+                        "dateModified": "${quiz?.publish}",
                         "author": {
                             "@type": "Person",
                             "name": "مصطفی تبریزیان",
@@ -466,7 +456,7 @@ const Quiz = () => {
                 </script>
             </Helmet>
 
-            {quiz.title &&
+            {quiz?.title &&
                 <StickyShareButtons
                     config={{
                         alignment: 'left',    // alignment of buttons (left, right)
@@ -496,7 +486,7 @@ const Quiz = () => {
                 />
             }
 
-            <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
+            <div className={`${pointyEnded ? 'fadeIn' : 'fadeOut'}`}>
                 <div className={'loadingScreen fixed flex justify-center flex-ai-c'}></div>
                 <div className='fixed flex justify-center countingResult loadingScreen flex-ai-c'>
                     ___ در حال محاسبه نتیجه تست
@@ -522,12 +512,12 @@ const Quiz = () => {
                 {
                     !(contentLoaded) &&
                     <div className='flex justify-center flex-ai-c'>
-                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizTitle'></div>
+                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__pointyTitle'></div>
                     </div>
                 }
 
                 <div className="text-center">
-                    <h1>{quiz && quiz.title}</h1>
+                    <h1>{quiz && quiz?.title}</h1>
                 </div>
 
                 <div className="flex justify-center quiz__detail flex-ai-c">
@@ -541,8 +531,8 @@ const Quiz = () => {
                     {
                         contentLoaded &&
                         <>
-                            <h5>تعداد سوال ها: {questions && questions.length}</h5>
-                            <h5>{quiz && makeDatePublishFormatForQuizDetail(quiz.publish)}</h5>
+                            <h5>تعداد سوال ها: {questions?.length}</h5>
+                            <h5>{makeDatePublishFormatForQuizDetail(quiz?.publish)}</h5>
                         </>
                     }
                 </div>
@@ -562,17 +552,18 @@ const Quiz = () => {
             {
                 contentLoaded && isItDesktop() &&
                 <div className={`
-                    quiz__questionChanger__container absolute
-                    top-4 right-[15%]
+                    quiz__questionChanger__container relative
+                    top-24
                 `}>
                     <button
                         onClick={goNextQuestionOrEndTheQuiz}
                         aria-label='Next Question'
                         className={`
-                            quiz__questionChanger quiz__questionChanger__next
-                            btn absolute
-                            ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
-                    `}>
+                            quiz__questionChanger absolute
+                            quiz__questionChanger__next btn
+                            ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
+                        `}
+                    >
 
                         <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
 
@@ -582,7 +573,7 @@ const Quiz = () => {
                         aria-label='Next Question'
                         className={`
                             quiz__questionChanger absolute quiz__questionChanger__last
-                            btn right-[34rem]
+                            btn
                         `}
                     >
                         <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
@@ -622,7 +613,7 @@ const Quiz = () => {
 
             <div>
                 <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
-                <ul className='flex flex-wrap justify-center mt-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
+                <ul className='flex flex-wrap justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
                     {quiz && showTheTagsIfNotNull()}
                 </ul>
             </div>
@@ -632,14 +623,19 @@ const Quiz = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="w-4/5 mx-auto flex flex-wrap align-baselinw-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-righte quizContainer flex-ai-fe justify-right">
+                <ul className="w-[90vw] md:w-4/5 ml-auto mr-0 md:ml-auto md:mr-[15%] flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
                     {
                         suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
                 </ul>
             </div>
 
-            <Link to='/testResult'><a ref={result} className='noVis'></a></Link>
+            <Link
+                to='/testResult'
+                ref={result}
+                className='noVis'
+            >    
+            </Link>
 
         </React.Fragment>
     );

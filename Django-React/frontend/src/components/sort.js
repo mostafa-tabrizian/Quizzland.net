@@ -166,7 +166,7 @@ const Sort = () => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="w-4/5 mx-auto flex flex-wrap align-baselinw-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-righte quizContainer flex-ai-fe justify-right">
+            <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
 
                 {
                     quizzes.length !== 0 && <QuizContainer quizzes={quizzes} bgStyle='trans' />

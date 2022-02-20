@@ -77,13 +77,13 @@ const Index = () => {
     
             let matchedQuizzes = []
     
-            const search_top_1st_category = await axiosInstance.get(`dbAPI/quiz_new/?subCategory__icontains=${top1stUserCategory}&limit=4`)
+            const search_top_1st_category = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${top1stUserCategory}&limit=4`)
             Array.prototype.push.apply(matchedQuizzes, search_top_1st_category.data.results)
             
-            const search_top_2nd_category = await axiosInstance.get(`dbAPI/quiz_new/?subCategory__icontains=${top2ndUserCategory}&limit=2`)
+            const search_top_2nd_category = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${top2ndUserCategory}&limit=2`)
             Array.prototype.push.apply(matchedQuizzes, search_top_2nd_category.data.results)
             
-            const search_top_3rd_category = await axiosInstance.get(`dbAPI/quiz_new/?subCategory__icontains=${top3rdUserCategory}&limit=2`)
+            const search_top_3rd_category = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${top3rdUserCategory}&limit=2`)
             Array.prototype.push.apply(matchedQuizzes, search_top_3rd_category.data.results)
     
             const recommendedQuizzesList = () => {
@@ -112,32 +112,32 @@ const Index = () => {
     }
 
     const grabData = async () => {
-        const pointy_new_psychology = await axiosInstance.get(`dbAPI/pointy_new/?category__icontains=psychology&limit=8`)
+        const pointy_new_psychology = await axiosInstance.get(`/dbAPI/pointy_new/?category__icontains=psychology&limit=8`)
         setPointy_new_psychology(pointy_new_psychology.data.results)
 
-        const quiz_new_movieSeries = await axiosInstance.get(`dbAPI/quiz_new/?category__icontains=movie-series&limit=8`)
+        const quiz_new_movieSeries = await axiosInstance.get(`/dbAPI/quiz_new/?category__icontains=movie-series&limit=8`)
         setQuiz_new_movieSeries(quiz_new_movieSeries.data.results)
 
-        const quiz_new_celebrity = await axiosInstance.get(`dbAPI/quiz_new/?category__icontains=celebrity&limit=8`)
+        const quiz_new_celebrity = await axiosInstance.get(`/dbAPI/quiz_new/?category__icontains=celebrity&limit=8`)
         setQuiz_new_celebrity(quiz_new_celebrity.data.results)
         
-        const monthly_pointy = await axiosInstance.get(`dbAPI/pointy_monthly/?limit=8`)
+        const monthly_pointy = await axiosInstance.get(`/dbAPI/pointy_monthly/?limit=8`)
         setQuiz_monthly(monthly_pointy.data.results)
         
-        const quiz_new = await axiosInstance.get(`dbAPI/quiz_new/?limit=8`)
+        const quiz_new = await axiosInstance.get(`/dbAPI/quiz_new/?limit=8`)
         setQuiz_new(quiz_new.data.results)
 
-        const new_pointy = await axiosInstance.get(`dbAPI/pointy_new/?limit=8`)
+        const new_pointy = await axiosInstance.get(`/dbAPI/pointy_new/?limit=8`)
         setPointy_new(new_pointy.data.results)
 
-        const quiz_monthly = await axiosInstance.get(`dbAPI/quiz_monthly/?limit=8`)
+        const quiz_monthly = await axiosInstance.get(`/dbAPI/quiz_monthly/?limit=8`)
         setPointy_monthly(quiz_monthly.data.results)
         
-        const loadInfinite1 =  await axiosInstance.get(`dbAPI/quiz_new/?limit=8&offset=8`)
+        const loadInfinite1 =  await axiosInstance.get(`/dbAPI/quiz_new/?limit=8&offset=8`)
         setLoadInfinite1(loadInfinite1.data.results)
-        const loadInfinite2 =  await axiosInstance.get(`dbAPI/quiz_new/?limit=8&offset=24`)
+        const loadInfinite2 =  await axiosInstance.get(`/dbAPI/quiz_new/?limit=8&offset=24`)
         setLoadInfinite2(loadInfinite2.data.results)
-        const loadInfinite3 =  await axiosInstance.get(`dbAPI/quiz_new/?limit=8&offset=36`)
+        const loadInfinite3 =  await axiosInstance.get(`/dbAPI/quiz_new/?limit=8&offset=36`)
         setLoadInfinite3(loadInfinite3.data.results)
 
         setContentLoaded(true)
@@ -249,7 +249,7 @@ const Index = () => {
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>جدیدترین کوییز ها</h3>
-                        <Link to="/sort?st=newest"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
+                        <Link to="/sort?s=newest" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_ref}>
@@ -276,7 +276,7 @@ const Index = () => {
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>بهترین کوییز های این ماه</h3>
-                        <Link to="/sort?st=monthly"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
+                        <Link to="/sort?s=monthly" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_monthly_ref}>
@@ -292,7 +292,7 @@ const Index = () => {
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>جدیدترین تست ها</h3>
-                        <Link to="/sort?st=newest_test"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
+                        <Link to="/sort?s=newest_test" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_new_ref}>
@@ -319,7 +319,7 @@ const Index = () => {
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>بهترین تست های این ماه</h3>
-                        <Link to="/sort?st=monthly_test"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
+                        <Link to="/sort?s=monthly_test" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_monthly_ref}>
@@ -335,7 +335,7 @@ const Index = () => {
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>کوییز سلبریتی</h3>
-                        <Link to="/sort?st=newest&c=celebrity"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
+                        <Link to="/sort?s=newest&c=celebrity" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_celebrity_ref}>
@@ -362,7 +362,7 @@ const Index = () => {
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>کوییز فیلم و سریال</h3>
-                        <Link to="/sort?st=newest&c=movie-series"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
+                        <Link to="/sort?s=newest&c=movie-series" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_movieSeries_ref}>
@@ -378,7 +378,7 @@ const Index = () => {
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>تست روانشناسی</h3>
-                        <Link to="/sort?st=newest&c=psychology"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
+                        <Link to="/sort?s=newest&c=psychology" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_new_psychology_ref}>
@@ -404,7 +404,7 @@ const Index = () => {
                 <div className="mt-8 mb-8">
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>کوییز های بیشتر</h3>
-                        <Link to="/sort?st=newest"><a className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></a></Link>
+                        <Link to="/sort?s=newest" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={loadInfinite1_ref}>

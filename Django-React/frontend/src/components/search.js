@@ -42,39 +42,39 @@ const Search = (props) => {
                 let matchedCategories = []
 
                 // Search Quiz
-                const search_quiz_new_title = await axiosInstance.get(`dbAPI/quiz_new/?title__icontains=${searchValue}&limit=10`)
+                const search_quiz_new_title = await axiosInstance.get(`/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=10`)
                 Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
 
                 if (search_quiz_new_title.data.results !== 10) {
-                    const search_quiz_new_subCategory = await axiosInstance.get(`dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=10`)
+                    const search_quiz_new_subCategory = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=10`)
                     Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
 
                     if (search_quiz_new_subCategory.length !== 10) {
-                        const search_quiz_new_tag = await axiosInstance.get(`dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=10`)
+                        const search_quiz_new_tag = await axiosInstance.get(`/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=10`)
                         Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
                     }
                 }
 
                 // Search Pointy Quiz
-                const search_pointy_new_title = await axiosInstance.get(`dbAPI/pointy_new/?title__icontains=${searchValue}&limit=5`)
+                const search_pointy_new_title = await axiosInstance.get(`/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=5`)
                 Array.prototype.push.apply(matchedQuizzes, search_pointy_new_title.data.results)
 
                 if (search_pointy_new_title.length !== 5) {
-                    const search_pointy_new_subCategory = await axiosInstance.get(`dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=5`)
+                    const search_pointy_new_subCategory = await axiosInstance.get(`/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=5`)
                     Array.prototype.push.apply(matchedQuizzes, search_pointy_new_subCategory.data.results)
 
                     if (search_pointy_new_subCategory.length !== 5) {
-                        const search_pointy_new_tag = await axiosInstance.get(`dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=2`)
+                        const search_pointy_new_tag = await axiosInstance.get(`/dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=2`)
                         Array.prototype.push.apply(matchedQuizzes, search_pointy_new_tag.data.results)
                     }
                 }
 
                 // Search Category
-                const search_category_new_title = await axiosInstance.get(`dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
+                const search_category_new_title = await axiosInstance.get(`/dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
                 Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
 
                 if (search_category_new_title.length !== 2) {
-                    const search_category_new_subCategory = await axiosInstance.get(`dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
+                    const search_category_new_subCategory = await axiosInstance.get(`/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
                     Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
                 }
 
@@ -112,30 +112,28 @@ const Search = (props) => {
                                             rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
                                             quizContainer__trans`}
                                         >
-                                            <Link to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}>
-                                                <a className='flex md:block md:grid-cols-5'>
-                                                    <div className='col-span-2 w-[224px] h-[126px]'>
-                                                        <img
-                                                            src={quiz.thumbnail}
-                                                            alt={`${quiz.subCategory}} | ${quiz.title}`}
-                                                            width={1366}
-                                                            height={768}
-                                                            className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
-                                                        />
-                                                    </div>
-                                                    <div className="col-span-3 mt-2 header__search__result__title">
-                                                        <h2 className={`quizContainer__title quizContainer__title__noViews flex
-                                                                    text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
-                                                            {quiz.subCategory}
-                                                        </h2>
-                                                        <h2 className={`
-                                                        quizContainer__title quizContainer__title__noViews flex
-                                                        text-sm mr-5 ml-5 md:w-52 md:mr-0 md:text-base
-                                                    `}>
-                                                            {quiz.title}
-                                                        </h2>
-                                                    </div>
-                                                </a>
+                                            <Link to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`} className='flex md:block md:grid-cols-5'>
+                                                <div className='col-span-2 w-[224px] h-[126px]'>
+                                                    <img
+                                                        src={quiz.thumbnail}
+                                                        alt={`${quiz.subCategory}} | ${quiz.title}`}
+                                                        width={1366}
+                                                        height={768}
+                                                        className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                                    />
+                                                </div>
+                                                <div className="col-span-3 mt-2 header__search__result__title">
+                                                    <h2 className={`quizContainer__title quizContainer__title__noViews flex
+                                                                text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
+                                                        {quiz.subCategory}
+                                                    </h2>
+                                                    <h2 className={`
+                                                    quizContainer__title quizContainer__title__noViews flex
+                                                    text-sm mr-5 ml-5 md:w-52 md:mr-0 md:text-base
+                                                `}>
+                                                        {quiz.title}
+                                                    </h2>
+                                                </div>
                                             </Link>
                                         </article>
                                     </li>
@@ -196,7 +194,7 @@ const Search = (props) => {
     }
 
     document.body.addEventListener(("click"), (e) => {
-        if (!e.target.className.includes('header__search__result__quizzes') && !e.target.className.includes('header__search__input')) {
+        if (!e.target.classList.contains('header__search__result__quizzes') && !e.target.classList.contains('header__search__input')) {
             setSearchResult(false)
         }
     })

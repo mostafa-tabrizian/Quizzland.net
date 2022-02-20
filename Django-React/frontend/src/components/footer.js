@@ -21,40 +21,40 @@ const Footer = (props) => {
                 <div>
                     <h3>دسترسی سریع</h3>
                     <ul>
-                        <li><Link to='/'><a>صفحه اصلی</a></Link></li>
-                        {/* <li><Link to='/blog'><a>وبلاگ</a></Link></li> */}
-                        <li><Link to='/guide'><a>راهنما</a></Link></li>
-                        <li><Link to='/contact'><a>تماس با ما</a></Link></li>
-                        {/* <li><Link to='/advertiseContact'><a>تبلیغات</a></Link></li> */}
-                        <li><Link to='/privacy-policy'><a>حریم خصوصی</a></Link></li>
-                        <li><Link to='/supportUs'><a>حمایت</a></Link></li>
+                        <li><Link to='/'>صفحه اصلی</Link></li>
+                        {/* <li><Link to='/blog'>وبلاگ</Link></li> */}
+                        {/* <li><Link to='/guide'>راهنما</Link></li> */}
+                        <li><Link to='/contact'>تماس با ما</Link></li>
+                        {/* <li><Link to='/advertiseContact'>تبلیغات</Link></li> */}
+                        {/* <li><Link to='/privacy-policy'>حریم خصوصی</Link></li> */}
+                        {/* <li><Link to='/supportUs'>حمایت</Link></li> */}
                     </ul>
                 </div>
 
                 <div>
                     <h3>تست ها</h3>
                     <ul>
-                        <li><Link to="/sort?st=newest_test"><a> جدیدترین ها </a></Link></li>
-                        <li><Link to="/sort?st=monthly_test"><a> بهترین های ماه </a></Link></li>
-                        <li><Link to="/sort?st=bestest_test"><a> بهترین ها </a></Link></li>
+                        <li><Link to="/sort?s=newest_test"> جدیدترین ها </Link></li>
+                        <li><Link to="/sort?s=monthly_test"> بهترین های ماه </Link></li>
+                        <li><Link to="/sort?s=bestest_test"> بهترین ها </Link></li>
                     </ul>
                 </div>
 
                 <div>
                     <h3>کتگوری ها</h3>
                     <ul>
-                        <li><Link to="/category/movieSeries"><a>فیلم و سریال</a></Link></li>
-                        <li><Link to="/category/celebrity"><a>سلبریتی</a></Link></li>
-                        <li><Link to="/category/psychology"><a>روانشناسی</a></Link></li>
+                        <li><Link to="/category/movieSeries">فیلم و سریال</Link></li>
+                        <li><Link to="/category/celebrity">سلبریتی</Link></li>
+                        <li><Link to="/category/psychology">روانشناسی</Link></li>
                     </ul>
                 </div>
 
                 <div>
                     <h3>کوییز ها</h3>
                     <ul>
-                        <li><Link to="/sort?st=newest"><a> جدیدترین ها </a></Link></li>
-                        <li><Link to="/sort?st=monthly"><a> بهترین های ماه </a></Link></li>
-                        <li><Link to="/sort?st=bestest"><a> بهترین ها </a></Link></li>
+                        <li><Link to="/sort?s=newest"> جدیدترین ها </Link></li>
+                        <li><Link to="/sort?s=monthly"> بهترین های ماه </Link></li>
+                        <li><Link to="/sort?s=bestest"> بهترین ها </Link></li>
                     </ul>
                 </div>
 
@@ -63,7 +63,7 @@ const Footer = (props) => {
                     <ul className='flex flex-ai-c justify-center'>
                         <li><a to='#'>
                             <img src={instagramIcon} alt='quizzlnad instagram' />
-                        </a></li>
+                        </li>
                     </ul>
                 </div> */}
 
