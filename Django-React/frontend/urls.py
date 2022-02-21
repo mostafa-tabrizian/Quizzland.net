@@ -16,12 +16,15 @@ urlpatterns = [
     # path('advertiseContact', index),
     path('support', index),
     path('privacy-policy', index),
+    
     path('category/<category>', index),
-    path('category/<category>/<subCategory>', subCategory),
+    path('category/<category>/<subCategory>', index),
+    
     path('quiz/<title>', index),
     path('test/<title>', index),
     path('result_quiz', index),
     path('result_test', index),
+    
     path('search', index),
     path('sort', index),
     path('blog/<title>', article),

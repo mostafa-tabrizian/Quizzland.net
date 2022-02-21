@@ -19,8 +19,8 @@ const Result = (props) => {
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [testResult, setTestResult] = useState(null)
-    const [testDetail, setTestDetail] = useState(null)
+    const [testResult, setTestResult] = useState()
+    const [testDetail, setTestDetail] = useState()
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
@@ -46,7 +46,7 @@ const Result = (props) => {
     // }
 
     const detailOfResult = () => {
-        if (testDetail !== null) {
+        if (testDetail) {
             if (testResult > testDetail.result_upTo_2nd) {
                 setResultImg(testDetail.result_img_1st)
                 setResultSubtitle(testDetail.result_title_1st)
@@ -105,9 +105,11 @@ const Result = (props) => {
         window.history.go(-1)
     }
 
-    const getSuggestionsQuiz = () => {
-        axiosLimited.get(`/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(resultQuiz.subCategory, ' ', '+')}&limit=4`)
-            .then((res) => {setSuggestionQuizzes(res.data.results)})
+    const getSuggestionsQuiz = async () => {
+        await axiosInstance.get(`/dbAPI/pointy_new/?subCategory__icontains=${testResult && replaceFunction(testResult.subCategory, ' ', '+')}&limit=4`)
+            .then((res) => {
+                setSuggestionQuizzes(res.data.results)
+            })
         setContentLoaded(true)
     }
 
@@ -135,13 +137,10 @@ const Result = (props) => {
                     <div className='flex resultPointy__img'>
                         {
                             resultImg &&
-                            <Image
+                            <img
                                 src={resultImg}
-                                width='730'
-                                height='410'
+                                width={690}
                                 alt={testDetail?.subCategory}
-                                blurDataURL={resultImg}
-                                placeholder='blur'
                             />
                         }
                     </div>
@@ -224,7 +223,7 @@ const Result = (props) => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="w-4/5 mx-auto flex flex-wrap align-baselinw-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-righte quizContainer flex-ai-fe justify-right">
+                <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
                     {
                         suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }

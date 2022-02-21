@@ -11,7 +11,9 @@ import { log } from './components/base'
 
 const Footer            = lazy(() => import('./components/footer'))
 const ScrollToTop       = lazy(() => import('./components/scrollToTop'))
+
 const Category          = lazy(() => import ('./components/category'))
+const SubCategory       = lazy(() => import ('./components/subCategory'))
 
 const Quiz              = lazy(() => import ('./components/quiz'))
 const QuizPointy        = lazy(() => import ('./components/quizPointy'))
@@ -89,6 +91,8 @@ const App = () => {
                         <Route path='/result_test' component={ResultPointy} />
 
                         <Route path='/category/:category' exact component={Category} />
+                        <Route path='/category/:category/:subCategory' component={SubCategory} />
+
                         <Route path='/contact' component={Contact} />
                         <Route path='/advertiseContact' component={AdvertiseContact} />
                         <Route path='/support' component={Support} />

@@ -12,12 +12,17 @@ import SkeletonLoading from './skeletonLoading'
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
+    const [loadState, setLoadState] = useState()
 
-    const [searchValue, setSearchValue] =useState(null)
+    const [searchValue, setSearchValue] =useState()
 
     const [categories, setCategories] = useState([])
     const [quizzes, setQuizzes] = useState([])
     const [pointies, setPointies] = useState([])
+
+    useEffect(() => {
+        searchChangeDetector()
+    });
 
     useEffect(() => {
         setQuizzes([])  // restart list
@@ -36,40 +41,43 @@ const SearchMoreResult = () => {
                 pushState.apply(history, arguments);
             };
 
-            setSearchValue(replaceFunction(takeParameterFromUrl('s'), ' ', '+'))
+            setSearchValue(replaceFunction(takeParameterFromUrl('q'), ' ', '+'))
         })(window.history);
     }
+
+    const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')
 
     const searchHandler = async () => {
         try {
             let matchedQuizzes = []
-            let matchedPointy = []
+            let matchedPointies = []
+            let matchedCategories = []
 
             // Search Quiz
-            const search_quiz_new_title = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=50`)
+            const search_quiz_new_title = await axiosInstance.get(`/dbAPI/quiz_new/?title__icontains=${searchValue}&limit=50`)
             Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
 
-            const search_quiz_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=50`)
+            const search_quiz_new_subCategory = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${searchValue}&limit=50`)
             Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
 
-            const search_quiz_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=50`)
+            const search_quiz_new_tag = await axiosInstance.get(`/dbAPI/quiz_new/?tags__icontains=${searchValue}&limit=50`)
             Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
 
             // Search Pointy Quiz
-            const search_pointy_new_title = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=50`)
+            const search_pointy_new_title = await axiosInstance.get(`/dbAPI/pointy_new/?title__icontains=${searchValue}&limit=50`)
             Array.prototype.push.apply(matchedPointies, search_pointy_new_title.data.results)
 
-            const search_pointy_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=50`)
+            const search_pointy_new_subCategory = await axiosInstance.get(`/dbAPI/pointy_new/?subCategory__icontains=${searchValue}&limit=50`)
             Array.prototype.push.apply(matchedPointies, search_pointy_new_subCategory.data.results)
 
-            const search_pointy_new_tag = await axiosLimited.get(`${API_URL}/dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=50`)
+            const search_pointy_new_tag = await axiosInstance.get(`/dbAPI/pointy_new/?tags__icontains=${searchValue}&limit=50`)
             Array.prototype.push.apply(matchedPointies, search_pointy_new_tag.data.results)
 
             // Search Category
-            const search_category_new_title = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
+            const search_category_new_title = await axiosInstance.get(`/dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
             Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
 
-            const search_category_new_subCategory = await axiosLimited.get(`${API_URL}/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
+            const search_category_new_subCategory = await axiosInstance.get(`/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
             Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
 
             // Remove duplicated quizzes
@@ -98,6 +106,7 @@ const SearchMoreResult = () => {
             setCategories(matchedCategories)
 
         } catch (e) {
+            log(e)
             return log('error: search function')
         }
     }
@@ -108,99 +117,98 @@ const SearchMoreResult = () => {
             <Header linkType='Hot'/>
 
             <Helmet>
-                <title>{`کوییزلند | ${searchValueButWithoutHyphen} جستجو عبارت `}</title>
+                <title>{`کوییزلند | ${searchValueWithOutSign} جستجو عبارت `}</title>
                 <meta name="description" content="صفحه جستجو کوییزلند" />
                 <meta name="keywords" content="جستجو, کوییز, کوییزلند" />
                 <meta name="robots" content="noindex, follow"></meta>
             </Helmet>
 
             <div className='adverts adverts__left'>
-                    <div id='mediaad-DLgb'></div>
-                    <div id="pos-article-display-26094"></div>
-                </div>
+                <div id='mediaad-DLgb'></div>
+                <div id="pos-article-display-26094"></div>
+            </div>
 
-                <h3 className='title'>{q}</h3>
+            <h3 className='title'>{searchValueWithOutSign}</h3>
 
-                {SkeletonLoading(contentLoaded)}
+            {SkeletonLoading(contentLoaded)}
 
-                <ul className="w-4/5 mx-auto flex flex-wrap align-baselinw-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-righte quizContainer flex-ai-fe justify-right">
+            <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
 
-                    {
-                        categories.map((quiz) => {
-                            return (
-                                <li key={quiz.id} className='ml-1 mr-7 md:m-2 md:mb-6'>
-                                    <article className={`
-                                        flex text-right h-full
-                                        rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                                        quizContainer__trans`}
+                {
+                    categories.map((category) => {
+                        return (
+                            <li key={category.id} className='ml-1 mr-7 md:m-2 md:mb-6'>
+                                <article className={`
+                                    flex text-right h-full
+                                    rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                                    quizContainer__trans`}
+                                >
+
+                                    <Link
+                                        to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '+')}?sc=${replaceFunction(category.title, ' ', '-')}`}
+                                        className='flex md:block md:grid-cols-5'
                                     >
+                                        <div className='md:col-span-2 w-[224px] md:h-[126px]'>
+                                            <img
+                                                src={category.thumbnail}
+                                                width={1366}
+                                                height={768}
+                                                alt={`${category.subCategory} | ${category.title}`}
+                                                className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                            />
+                                        </div>
+                                        <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
+                                            <h2 className={`quizContainer__title quizContainer__title__noViews flex
+                                                            text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
+                                                {category.subCategory}
+                                            </h2>
+                                            <h2 className={`
+                                                quizContainer__title quizContainer__title__noViews flex
+                                                text-sm mr-5 md:w-52 md:mr-0 md:text-base
+                                            `}>
+                                                {category.title}
+                                            </h2>
+                                            {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
+                                            {/* <span className="text-center quizContainer__date">
+                                                {datePublishHandler(quiz.publish)}
+                                            </span> */}
+                                        </div>
+                                    </Link>
+                                </article>
+                            </li>
+                        )
+                    })
+                }
 
-                                        <a href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}
-                                            className='flex md:block md:grid-cols-5'
-                                        >
-                                            <div className='md:col-span-2 w-[224px] md:h-[126px]'>
-                                                <Image
-                                                    src={quiz.thumbnail}
-                                                    width='1366'
-                                                    height='768'
-                                                    alt={`${quiz.subCategory} | ${quiz.title}`}
-                                                    blurDataURL={quiz.thumbnail}
-                                                    placeholder='blur'
-                                                    className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
-                                                />
-                                            </div>
-                                            <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
-                                                <h2 className={`quizContainer__title quizContainer__title__noViews flex
-                                                                text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
-                                                    {quiz.subCategory}
-                                                </h2>
-                                                <h2 className={`
-                                                    quizContainer__title quizContainer__title__noViews flex
-                                                    text-sm mr-5 md:w-52 md:mr-0 md:text-base
-                                                `}>
-                                                    {quiz.title}
-                                                </h2>
-                                                {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
-                                                {/* <span className="text-center quizContainer__date">
-                                                    {datePublishHandler(quiz.publish)}
-                                                </span> */}
-                                            </div>
-                                        </a>
-                                    </article>
-                                </li>
-                            )
-                        })
-                    }
+            </ul>
 
-                </ul>
+            <div className='grid justify-center mb-10'>
+                <hr className="w-[20vw]" />
+            </div>
 
-                <div className='grid justify-center mb-10'>
-                    <hr className="w-[20vw]" />
-                </div>
-
-                <ul className="w-4/5 mx-auto flex flex-wrap align-baselinw-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-righte quizContainer flex-ai-fe justify-right">
+            <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
 
 
-                    {
-                        <QuizContainer quizzes={quizzes} bgStyle='trans' />
-                    }
+                {
+                    <QuizContainer quizzes={quizzes} bgStyle='trans' />
+                }
 
 
-                    {
-                        <QuizPointyContainer quizzes={pointies} bgStyle='trans' />
-                    }
+                {
+                    <QuizPointyContainer quizzes={pointies} bgStyle='trans' />
+                }
 
-                    {
-                        quizzes.length == 0 &&
-                        pointies.length == 0 &&
-                        <h1 className='w-11/12 text-3xl text-center'>
-                            متاسفانه هیچ چیزی پیدا نشد 😥
-                        </h1>
-                    }
+                {
+                    quizzes.length == 0 &&
+                    pointies.length == 0 &&
+                    <h1 className='w-11/12 text-3xl text-center mb-[50vh] '>
+                        متاسفانه هیچ چیزی پیدا نشد 😥
+                    </h1>
+                }
 
-                </ul>
+            </ul>
 
-                <div className='adverts_center' id='mediaad-DLgb'></div>
+            <div className='adverts_center' id='mediaad-DLgb'></div>
 
         </React.Fragment>
     );

@@ -263,13 +263,13 @@ const Result = () => {
                         <div>
                             <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
 
-                            <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
+                            <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
                                 <h3 className="flex text-lg result__popUpQuizSuggester__title">
                                     {chooseUniqueQuizToSuggest().title}
                                 </h3>
-                            </a>
+                            </Link>
                         </div>
-                        <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
+                        <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
                             <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
                                 <img
                                     src={chooseUniqueQuizToSuggest().thumbnail}
@@ -279,7 +279,7 @@ const Result = () => {
                                     className='object-cover'
                                 />
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 }
 

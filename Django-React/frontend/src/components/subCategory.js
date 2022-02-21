@@ -35,7 +35,7 @@ const SubCategory = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
     
     const subCategory = props.match.params.subCategory
-    const persianSubCategory = takeParameterFromUrl('t')
+    const persianSubCategory = takeParameterFromUrl('sc')
 
     const sortTypeDefinitionForQuizDb = {
         'newest': 'quiz_new',
@@ -59,6 +59,8 @@ const SubCategory = (props) => {
         backgroundOfSubCategory()
         setLoadState(true)
     }, [persianSubCategory])
+
+    const persianSubCategoryWithoutSign = replaceFunction(persianSubCategory, '-', ' ')
 
     const getQuizzes = async () => {
         const Quizzes = await axiosInstance.get(
@@ -116,9 +118,9 @@ const SubCategory = (props) => {
             />
 
             <Helmet>
-                <title>{`کوییزلند | کوییز های ${replaceFunction(persianSubCategory, '-', ' ')}`}</title>
-                <meta name="description" content={`کوییزلند - کوییز های ${replaceFunction(persianSubCategory, '-', ' ')} `} />
-                <meta name="keywords" content={`بهترین کوییز های ${replaceFunction(persianSubCategory, '-', ' ')} , کوییز های ${replaceFunction(persianSubCategory, '-', ' ')}`} />
+                <title>{`کوییزلند | کوییز های ${persianSubCategoryWithoutSign}`}</title>
+                <meta name="description" content={`کوییزلند - کوییز های ${persianSubCategoryWithoutSign} `} />
+                <meta name="keywords" content={`بهترین کوییز های ${persianSubCategoryWithoutSign} , کوییز های ${persianSubCategoryWithoutSign}`} />
             </Helmet>
 
             {/* <div className='adverts adverts__left'>
@@ -126,7 +128,7 @@ const SubCategory = (props) => {
             </div> */}
 
             <h3 className='lowTitle' style={{color: 'white'}}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>
-            <h3 className='title' style={{color: 'white'}}>{replaceFunction(persianSubCategory, '-', ' ')}</h3>
+            <h3 className='title' style={{color: 'white'}}>{persianSubCategoryWithoutSign}</h3>
 
             <Tools 
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}

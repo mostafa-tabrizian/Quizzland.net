@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { log, replaceFunction, viewsFormat, datePublishHandler, isItMobile } from './base'
 
@@ -28,7 +29,8 @@ const QuizContainer = (props) => {
                     ${bgStyle == 'bg' ? 'quizContainer__bg' : 'quizContainer__trans'}`}
                 >  {/* bg or trans */}
 
-                    <a href={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}
+                    <Link
+                        to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}
                         className='flex md:block md:grid-cols-5'
                     >
                         <div className='md:col-span-2 w-[224px] md:h-[126px]'>
@@ -56,7 +58,7 @@ const QuizContainer = (props) => {
                                 {datePublishHandler(quiz.publish)}
                             </span> */}
                         </div>
-                    </a>
+                    </Link>
                 </article>
             </li>
         )
