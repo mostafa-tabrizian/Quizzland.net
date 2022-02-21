@@ -486,11 +486,14 @@ const Quiz = () => {
                 />
             }
 
-            <div className={`${pointyEnded ? 'fadeIn' : 'fadeOut'}`}>
-                <div className={'loadingScreen fixed flex justify-center flex-ai-c'}></div>
-                <div className='fixed flex justify-center countingResult loadingScreen flex-ai-c'>
-                    ___ در حال محاسبه نتیجه تست
-                </div>
+            <div
+                className={`
+                    countingResult loadingScreen fixed left-0
+                    top-0 w-screen h-screen z-20
+                    flex items-center justify-center
+                    ${pointyEnded ? 'fadeIn' : 'fadeOut'}
+                `}>
+                ___ در حال محاسبه نتیجه تست
             </div>
 
 
@@ -631,7 +634,7 @@ const Quiz = () => {
             </div>
 
             <Link
-                to='/testResult'
+                to='/result_test'
                 ref={result}
                 className='noVis'
             >    

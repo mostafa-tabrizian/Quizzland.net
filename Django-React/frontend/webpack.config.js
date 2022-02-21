@@ -4,7 +4,6 @@ const webpack = require("webpack");
 module.exports = {
   entry: {
     App: "./src/App.js",
-    Quiz: "./src/Quiz.js",
     SubCategory: "./src/SubCategory.js",
     Blog: "./src/Blog.js",
     404: "./src/404.js",

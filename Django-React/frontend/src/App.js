@@ -12,6 +12,12 @@ import { log } from './components/base'
 const Footer            = lazy(() => import('./components/footer'))
 const ScrollToTop       = lazy(() => import('./components/scrollToTop'))
 const Category          = lazy(() => import ('./components/category'))
+
+const Quiz              = lazy(() => import ('./components/quiz'))
+const QuizPointy        = lazy(() => import ('./components/quizPointy'))
+const Result            = lazy(() => import ('./components/result'))
+const ResultPointy      = lazy(() => import ('./components/resultPointy'))
+
 const Index             = lazy(() => import('./components/landPage'))
 const Guide             = lazy(() => import('./components/guide'))
 const Contact           = lazy(() => import('./components/contactUs'))
@@ -76,6 +82,12 @@ const App = () => {
                     <Switch>
                         <Route path='/' exact component={Index} />
                         <Route path='/guide' component={Guide} />
+
+                        <Route path='/quiz/:title' component={Quiz} />
+                        <Route path='/test/:title' component={QuizPointy} />
+                        <Route path='/result_quiz' component={Result} />
+                        <Route path='/result_test' component={ResultPointy} />
+
                         <Route path='/category/:category' exact component={Category} />
                         <Route path='/contact' component={Contact} />
                         <Route path='/advertiseContact' component={AdvertiseContact} />

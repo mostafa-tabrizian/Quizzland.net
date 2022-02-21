@@ -102,12 +102,12 @@ body {
     }
 
     &__question {
-        font-family: $font-pr; font-weight: 300; font-size: $font-med;
-        min-height: 4rem;
-        color: white;
-        padding: 1.1875rem;
-        margin: -.125rem;
-        border-radius: 23px 25px 0 0;
+        // font-family: $font-pr; font-weight: 300; font-size: $font-med;
+        // min-height: 4rem;
+        // color: white;
+        // padding: 1.1875rem;
+        // margin: -.125rem;
+        // border-radius: 23px 25px 0 0;
         // background: #00000065;
         // backdrop-filter: blur(165px);
         // width: 20.9rem;
@@ -335,21 +335,17 @@ body {
             }
 
 
-            @include breakpoints-up(small) {
+            // @include breakpoints-up(small) {
             //     max-width: 14rem;
             //     height: auto;
             //     border: 1.7px solid #adadad;
             //     padding: .6rem 1rem;
             //     margin: .5rem;
-                transition: all .1s ease-in-out;
-                backdrop-filter: blur(20px);
-                background: #00000094;
-            }
-
-            &:hover {
-                background: black;
-            }
-
+                // transition: all .1s ease-in-out;
+                // backdrop-filter: blur(20px);
+                // background: #00000094;
+            // }
+            
             // &::before {
             //     content: '';
             //     height: .0625rem; width: 1.25rem;
@@ -385,13 +381,13 @@ body {
     }
 
     &__correctAnswer {
-        border: 3px solid green !important;
+        border: 2px solid green !important;
         background: #0019007d !important;
         opacity: 1 !important;
     }
 
     &__wrongAnswer {
-        border: 2px solid #a2000090 !important;
+        border: 1px solid #a2000090 !important;
         background: #1f000052 !important;
         opacity: 1 !important;
     }
@@ -491,9 +487,7 @@ body {
 }
 
 .countingResult {
-    z-index: 95000;
     font-size: $font-med;
-    color: white;
     font-family: $font-sec;
     background: $red-grad;
 

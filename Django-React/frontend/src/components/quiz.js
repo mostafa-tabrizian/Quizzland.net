@@ -228,7 +228,7 @@ const Quiz = () => {
 
     const questionShowIfNotNull = (question) => {
         if (question !== null) {
-            return <p className='quiz__question tx-al-c'> {question} </p>
+            return <p className='text-center p-3 backdrop-blur-2xl rounded-xl text-lg md:text-[1.5rem]'> {question} </p>
         }
     }
 
@@ -296,11 +296,12 @@ const Quiz = () => {
                                 id={`${questionCounterForId}-1`}
                             />
                                 <label
-                                    className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl
-                                            border-2 border-solid border-[#adadad]
-                                            p-1 block max-w-[100%] md:max-width-[14rem]
-                                            md:h-[auto] md:pr-4 md:m-2 rounded-xl
-                                            cursor-pointer
+                                    className={`quiz__options__textLabel backdrop-blur-xl
+                                            border border-[#ffffff30]
+                                            p-2 block max-w-[100%] md:max-width-[14rem]
+                                            md:h-[auto] md:pr-4 md:m-2 rounded-lg
+                                            cursor-pointer text-lg md:text-[1.5rem]
+                                            hover:border-red-300
                                             ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''}
                                             ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''}
                                             ${!ableToSelectOption ? 'pointerOff' : ''}
@@ -312,9 +313,9 @@ const Quiz = () => {
                                 </label>
                             </>
                         }
-                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
-                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
-                        {question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
+                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.5rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
+                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.5rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
+                        {question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.5rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointerOff' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
                     </form>
                 </div>
             )
@@ -580,11 +581,14 @@ const Quiz = () => {
                 />
             }
 
-            <div className={`${quizEnded ? 'fadeIn' : 'fadeOut'}`}>
-                <div className={'loadingScreen fixed flex justify-center flex-ai-c'}></div>
-                <div className='fixed flex justify-center countingResult loadingScreen flex-ai-c'>
-                    ___ در حال محاسبه نتیجه کوییز___
-                </div>
+            <div
+                className={`
+                    countingResult loadingScreen fixed left-0
+                    top-0 w-screen h-screen z-20
+                    flex items-center justify-center
+                    ${quizEnded ? 'fadeIn' : 'fadeOut'}
+                `}>
+                ___ در حال محاسبه نتیجه کوییز___
             </div>
 
             <div className='absolute z-10 ml-10 top-28' onClick={() => { SFXController() }} >
@@ -718,7 +722,7 @@ const Quiz = () => {
             <div className='adverts_center' id='mediaad-dESu'></div>
 
             <Link
-                to='/quizResult'
+                to='/result_quiz'
                 ref={result}
                 className='noVis'
             >

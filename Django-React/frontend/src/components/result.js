@@ -50,7 +50,7 @@ const Result = () => {
     }, [suggestionQuizzes])
 
     const calculateTheResultScore = () => {
-        const questionsCounter = questions.length
+        const questionsCounter = questions?.length
         if (questionsCounter && correctAnswersCounter) {
             const score = ((correctAnswersCounter / questionsCounter) * 100).toFixed(0)
             setScore(score)
@@ -61,27 +61,27 @@ const Result = () => {
         if (score > 80){
             setResultScore(`😎 ${score}%`)
             setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
-            setResultGif(<img src={`${resultQuiz.GIF100}`} alt={resultQuiz.GIF2} />)
+            setResultGif(quizResult?.GIF100)
         }
         else if (score > 60){
             setResultScore(`😎 ${score}%`)
-            setResultSubtitle(`😎 ایول\n! تو یک ${resultQuiz.fan_name} واقعی هستی `)
-            setResultGif(<img src={`${resultQuiz.GIF80}`}  alt={resultQuiz.GIF4} />)
+            setResultSubtitle(`😎 ایول\n! تو یک ${quizResult?.fan_name} واقعی هستی `)
+            setResultGif(quizResult?.GIF80)
         }
         else if (score > 40){
             setResultScore(`🙂 ${score}%`)
             setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
-            setResultGif(<img src={`${resultQuiz.GIF60}`}  alt={resultQuiz.GIF6} />)
+            setResultGif(quizResult?.GIF60)
         }
         else if (score > 20){
             setResultScore(`😉 ${score}%`)
             setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
-            setResultGif(<img src={`${resultQuiz.GIF40}`}  alt={resultQuiz.GIF8} />)
+            setResultGif(quizResult?.GIF40)
         }
         else if (score >= 0){
             setResultScore(`😭 ${score}%`)
             setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
-            setResultGif(<img src={`${resultQuiz.GIF20}`}  alt={resultQuiz.GIF10} />)
+            setResultGif(quizResult?.GIF20)
         }
         else {
             setResultScore(`👀`)
@@ -94,7 +94,7 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = () => {
-        axiosLimited.get(`/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(resultQuiz.subCategory, ' ', '+')}&limit=4`)
+        axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${quizResult && replaceFunction(quizResult.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
         setContentLoaded(true)
     }
@@ -129,7 +129,7 @@ const Result = () => {
     }
 
     const chooseUniqueQuizToSuggest = () => {
-        if (suggestionQuizzes[0].title === resultQuiz.title) {
+        if (suggestionQuizzes[0]?.title === quizResult?.title) {
             if (suggestionQuizzes[1]) {
                 return suggestionQuizzes[1]
             }
@@ -165,19 +165,16 @@ const Result = () => {
                     </div>
                     <div className="justify-center block w-full mx-auto result md:container space-sm md:flex flex-ai-c">
                         <div className="flex justify-center result__img md:mx-16 flex-ai-c">
-                            {
-                                resultGif &&
-                                <Image className='object-contain' src={resultGif} width='336' height='336' alt={quizResult?.subCategory}/>
-                            }
+                            {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
                         </div>
-                        <div className="result__score text-center text-[2rem]">
+                        <div className="result__score mt-5 text-center text-[2rem]">
                             <h5>
                                 {resultScore}
                             </h5>
                         </div>
                         <div className="mt-5 mb-16 text-lg text-center result__detail">
                             <h5>پاسخ 🟢: <span>{correctAnswersCounter}</span></h5>
-                            <h5>پاسخ 🔴: <span>{questions && questions.length - correctAnswersCounter}</span></h5>
+                            <h5>پاسخ 🔴: <span>{questions?.length - correctAnswersCounter}</span></h5>
                         </div>
                     </div>
 
@@ -205,7 +202,7 @@ const Result = () => {
                                     size: 45,             // the size of each button (INTEGER)
 
                                     // OPTIONAL PARAMETERS
-                                    url: `https://www.quizzland.net/quiz/${replaceFunction(quizResult?.title, ' ', '-')}`,
+                                    url: `https://www.quizzland.net/quiz/${quizResult && replaceFunction(quizResult.title, ' ', '-')}`,
                                     image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
                                     title: quizResult?.title,            // (defaults to og:title or twitter:title)
                                 }}
@@ -235,7 +232,7 @@ const Result = () => {
                                     spacing: 8,           // the spacing between buttons (INTEGER)
 
                                 // OPTIONAL PARAMETERS
-                                url: `https://www.quizzland.net/quiz/${replaceFunction(quizResult?.title, ' ', '-')}`,
+                                url: `https://www.quizzland.net/quiz/${quizResult && replaceFunction(quizResult.title, ' ', '-')}`,
                                 image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
                                 title: quizResult?.title,            // (defaults to og:title or twitter:title)
                                 }}
@@ -250,16 +247,16 @@ const Result = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="w-4/5 mx-auto flex flex-wrap align-baselinw-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-righte quizContainer flex-ai-fe justify-right">
+                <ul className="w-4/5 mx-auto first-letter:w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }
                 </ul>
 
                 {
-                    suggestionQuizzes &&
+                    suggestionQuizzes && chooseUniqueQuizToSuggest() && 
                     <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-auto'>
-                        <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn fadeOut left-4 top-4' onClick={() => {
+                        <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
                             closePopUpQuizSuggester();
                         }}> X </button>
 
@@ -274,14 +271,12 @@ const Result = () => {
                         </div>
                         <a href={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().title, ' ', '-')}`}>
                             <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
-                                <Image
+                                <img
                                     src={chooseUniqueQuizToSuggest().thumbnail}
                                     alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
-                                    blurDataURL={chooseUniqueQuizToSuggest().thumbnail}
-                                    width='1920'
-                                    height='1080'
-                                    className='object-cover h-[19rem]'
-                                    placeholder='blur'
+                                    width={1920}
+                                    height={1080}
+                                    className='object-cover'
                                 />
                             </div>
                         </a>
