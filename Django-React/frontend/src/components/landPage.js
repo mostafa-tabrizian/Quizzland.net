@@ -197,7 +197,7 @@ const Index = () => {
             </Helmet>
 
             <div className={`hero flex justify-center flex-ai-c`}>
-                    <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[115%] w-[100%]"></div>
+                    <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div>
 
                     <div className='relative mr-5 ml-5 drop-shadow-[10px_15px_10px_black] hidden md:block'>
                         <div className='pointer-events-none'>

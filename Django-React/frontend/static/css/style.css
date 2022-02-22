@@ -1598,99 +1598,10 @@ body::before {
   z-index: 0;
 }
 
-body {
-  background-position: center center;
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100vh;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #0000009e;
-  z-index: -1;
-}
-
-.questionId {
-  background: radial-gradient(0deg, #dc1d1d, #7c0f0f);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
 .at4-share-title {
   font-size: 0.8rem;
   color: white;
   margin-bottom: 0.3rem;
-}
-
-.quiz__head {
-  font-family: myLalezar, myHarmattan, sans-serif;
-  z-index: 2;
-}
-
-.quiz__head h1, .quiz__head h2, .quiz__head h3, .quiz__head h4, .quiz__head h5, .quiz__head h6, .quiz__head p {
-  line-height: 2rem;
-  color: #f0f0f0;
-  font-weight: 100;
-  margin: auto;
-}
-
-.quiz__head h1 {
-  font-size: 1.225rem;
-  max-width: 21rem;
-}
-
-@media (max-width: 70em) {
-  .quiz__head h1 {
-    max-width: 15rem;
-  }
-}
-
-.quiz__head h5 {
-  font-size: 0.98rem;
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
-}
-
-.quiz__head h5:nth-child(2) {
-  -webkit-box-ordinal-group: 0;
-      -ms-flex-order: -1;
-          order: -1;
-}
-
-.quiz__head h6 {
-  font-size: 0.78rem;
-}
-
-.quiz__questions {
-  margin-bottom: 1rem;
-}
-
-.quiz__container {
-  z-index: -1;
-  padding: 0.1rem;
-  border-radius: 24px;
-  -webkit-transition: all 1.3s ease-in-out;
-  transition: all 1.3s ease-in-out;
-}
-
-@media (min-width: 40em) {
-  .quiz__container {
-    background: none;
-    border: none;
-    -webkit-box-shadow: none;
-            box-shadow: none;
-    -webkit-backdrop-filter: none;
-            backdrop-filter: none;
-  }
 }
 
 @media (min-width: 40em) {
@@ -1706,18 +1617,6 @@ body::before {
 .quiz__imgOption {
   width: 9.9rem;
   border-radius: .9rem;
-}
-
-.quiz__autoQuestionChangerSwitch {
-  top: .5rem;
-  width: 7rem;
-  height: 2rem;
-  z-index: 2;
-  cursor: pointer;
-}
-
-.quiz__autoQuestionChangerSwitch > h5 {
-  font-size: .77rem;
 }
 
 .quiz__autoQuestionChangerSwitch__btn {

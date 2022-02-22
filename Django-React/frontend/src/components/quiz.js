@@ -37,7 +37,6 @@ const Quiz = () => {
     const [quizThumbnail, setQuizThumbnail] = useState()
     const [SFXAllowed, setSFXAllowed] = useState()
     const [showQuestionChangingHelper, setShowQuestionChangingHelper] = useState(false)
-    const [showingAdverts, setShowingAdverts] = useState(false)
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
     const [quiz, setQuiz] = useState(null)
@@ -236,7 +235,7 @@ const Quiz = () => {
 
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        // setAbleToGoNext(false)
+        setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
         makeEveryOptionLowOpacity('high')
@@ -372,7 +371,10 @@ const Quiz = () => {
                                 :
                                 { transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }
                         }
-                        className={`quiz__container relative mr-20 ml-2 md:ml-0 md:pt-3`}
+                        className={`
+                            quiz__container relative mr-20 ml-2 md:ml-0 md:pt-3
+                            p-[0.1rem] transition-all duration-1000 ease-in-out
+                        `}
                     >
 
                         {/* <span className='questionId block right-[-2rem] top-2 z-10 absolute text-[3rem]'>
@@ -593,7 +595,7 @@ const Quiz = () => {
                 ___ در حال محاسبه نتیجه کوییز___
             </div>
 
-            <div className='absolute z-10 ml-10 top-28' onClick={() => { SFXController() }} >
+            <div className='absolute z-10 md:ml-10 ml-4 top-28' onClick={() => { SFXController() }} >
                 <button type="button">
                     {SFXAllowed === 'true' ?
                         <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /> </svg>
@@ -603,7 +605,7 @@ const Quiz = () => {
                 </button>
             </div>
 
-            <div className="relative text-right quiz__head" id="quiz__head">
+            <div className="relative text-right quiz__head backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
                 {
                     !(contentLoaded) &&
                     <div className='flex justify-center flex-ai-c'>
@@ -611,8 +613,10 @@ const Quiz = () => {
                     </div>
                 }
 
-                <div className="text-center">
-                    <h1>{quiz?.title}</h1>
+                <div className="text-center flex justify-center mb-4">
+                    <h1 className='md:max-w-[21rem] max-w-[19rem]'>
+                        {quiz?.title}
+                    </h1>
                 </div>
 
                 <div className="flex justify-center quiz__detail flex-ai-c">
@@ -625,17 +629,19 @@ const Quiz = () => {
                     }
                     {
                         contentLoaded &&
-                        <>
-                            <h5>تعداد سوال ها: {questions?.length}</h5>
+                        <div className='flex space-x-6 text-lg'>
                             <h5>{makeDatePublishFormatForQuizDetail(quiz?.publish)}</h5>
-                        </>
+                            <h5>تعداد سوال ها: {questions?.length}</h5>
+                        </div>
                     }
                 </div>
 
                 {
                     contentLoaded &&
-                    <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch relative center flex justify-center flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
-                        <h6>تغییر خودکار</h6>
+                    <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
+                        <span className='text-sm'>
+                            تغییر خودکار
+                        </span>
                         <button className="quiz__autoQuestionChangerSwitch__btn btn">
                             <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} relative`}></div>
                         </button>
@@ -682,7 +688,7 @@ const Quiz = () => {
                 <h5>برای رفتن به سوال بعدی از راست به چپ بکشید!</h5>
             </div>
 
-            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
+            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                 <div className={`quiz__hider flex relative`}>
                     {
                         !(contentLoaded) &&
