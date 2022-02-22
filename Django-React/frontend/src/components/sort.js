@@ -164,7 +164,7 @@ const Sort = () => {
                 <div id="pos-article-display-26094"></div>
             </div>
 
-            <h3 className='title'>{sortTitle}</h3>
+            <h3 className='title mt-5'>{sortTitle}</h3>
 
             {SkeletonLoading(contentLoaded)}
 

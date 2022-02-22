@@ -1163,6 +1163,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: #0000001a;
 }
 
+.bg-\[\#ffffff12\] {
+  background-color: #ffffff12;
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
