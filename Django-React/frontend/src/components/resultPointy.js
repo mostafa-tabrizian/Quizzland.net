@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import axiosInstance from './axiosApi'
+// import axiosInstance from './axiosApi'
+
+import axios from 'axios'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
 import Header from './header'
 
@@ -106,7 +108,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = async () => {
-        await axiosInstance.get(`/dbAPI/pointy_new/?subCategory__icontains=${testResult && replaceFunction(testResult.subCategory, ' ', '+')}&limit=4`)
+        await axios.get(`/dbAPI/pointy_new/?subCategory__icontains=${testResult && replaceFunction(testResult.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {
                 setSuggestionQuizzes(res.data.results)
             })

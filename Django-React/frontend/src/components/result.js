@@ -3,7 +3,9 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
-import axiosInstance from './axiosApi'
+// import axiosInstance from './axiosApi'
+
+import axios from 'axios'
 import Header from './header'
 
 import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from './base'
@@ -94,7 +96,7 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = () => {
-        axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${quizResult && replaceFunction(quizResult.subCategory, ' ', '+')}&limit=4`)
+        axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${quizResult && replaceFunction(quizResult.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
         setContentLoaded(true)
     }

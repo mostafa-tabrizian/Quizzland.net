@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 ;
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
-import axiosInstance from './axiosApi'
+// import axiosInstance from './axiosApi'
+
+import axios from 'axios'
 import Header from './header'
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from './base'
@@ -81,11 +83,11 @@ const Quiz = () => {
     const grabData = () => {
         if (quizTitle != undefined) {
             const grabQuiz = async () => {
-                return await axiosInstance.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
+                return await axios.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
             }
 
             const grabQuestions = async () => {
-                return await axiosInstance.get(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
+                return await axios.get(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
             }
 
             grabQuiz().then((quiz) => {
@@ -464,7 +466,7 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        await axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => { setSuggestionQuizzes(res.data.results) })
     }
 

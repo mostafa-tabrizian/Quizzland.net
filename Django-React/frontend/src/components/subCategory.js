@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from './axiosApi'
+// import axiosInstance from './axiosApi'
+
+import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import Header from './header'
@@ -63,10 +65,10 @@ const SubCategory = (props) => {
     const persianSubCategoryWithoutSign = replaceFunction(persianSubCategory, '-', ' ')
 
     const getQuizzes = async () => {
-        const Quizzes = await axiosInstance.get(
+        const Quizzes = await axios.get(
           `/dbAPI/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
         );
-        const QuizzesPointy = await axiosInstance.get(
+        const QuizzesPointy = await axios.get(
           `/dbAPI/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
         );
         
@@ -100,7 +102,7 @@ const SubCategory = (props) => {
     }
 
     const backgroundOfSubCategory = async () => {
-        const category_new = await axiosInstance.get(`/dbAPI/category_new/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
+        const category_new = await axios.get(`/dbAPI/category_new/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
         const background = category_new.data.results[0].background
         document.getElementById('html').style = `
             background: url('${background}') center/cover fixed no-repeat !important;

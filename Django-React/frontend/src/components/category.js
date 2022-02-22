@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import axiosInstance from './axiosApi'
+// import axiosInstance from './axiosApi'
+
+import axios from 'axios'
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
@@ -57,7 +59,7 @@ const Category = (props) => {
             'alphabet': 'category_alphabet'
         }
 
-        const pageTravelAndCategories = await axiosInstance.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryQuery}&limit=${numberOfResult}&offset=${offset}`)
+        const pageTravelAndCategories = await axios.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryQuery}&limit=${numberOfResult}&offset=${offset}`)
         setPageTravel(pageTravelAndCategories.data)
         setCategories(pageTravelAndCategories.data.results)
         setContentLoaded(true)

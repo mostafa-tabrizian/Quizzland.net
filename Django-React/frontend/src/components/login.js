@@ -40,12 +40,12 @@ class Login extends Component {
 
     async handleLogout() {
         try {
-            const response = await axiosInstance.post('api/blacklist/', {
+            const response = await axios.post('api/blacklist/', {
                 "refresh_token": localStorage.getItem("refresh_token")
             });
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
-            axiosInstance.defaults.headers['Authorization'] = null;
+            axios.defaults.headers['Authorization'] = null;
             return response;
         }
         catch (e) {

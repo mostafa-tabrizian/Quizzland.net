@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import axiosInstance from './axiosApi'
+// import axiosInstance from './axiosApi'
+
+import axios from 'axios'
 import { log, replaceFunction, datePublishHandler } from './base'
 
 // import Tools from './tools'
@@ -19,7 +21,7 @@ const Blog = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
 
     const getBlogsFromDb = async () => {
-        const contentData = await axiosInstance.get('/dbAPI/new_blog/')
+        const contentData = await axios.get('/dbAPI/new_blog/')
         setBlogContentData(contentData.data)
     }
 

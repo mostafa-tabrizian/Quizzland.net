@@ -1,6 +1,8 @@
 ;
 import React, { useEffect, useState } from 'react'
-import axiosInstance from './axiosApi'
+// import axiosInstance from './axiosApi'
+
+import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
@@ -75,9 +77,9 @@ const Sort = () => {
         switch (sortType) {
             case 'newest':
                 if (sortCategory) {
-                    quizzes = await axiosInstance.get(`/dbAPI/quiz_new/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/quiz_new/?limit=${numberOfResult}&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axiosInstance.get(`/dbAPI/quiz_new/?limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/quiz_new/?limit=${numberOfResult}&offset=${offset}`)
                 }
                 setSortTitle('جدیدترین کوییز ها')
                 setQuizzes(quizzes.data.results)
@@ -87,9 +89,9 @@ const Sort = () => {
 
             case 'bestest':
                 if (sortCategory) {
-                    quizzes = await axiosInstance.get(`/dbAPI/quiz_best/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/quiz_best/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axiosInstance.get(`/dbAPI/quiz_best/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/quiz_best/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 }
                 setSortTitle('بهترین کوییز ها')
                 setQuizzes(quizzes.data.results)
@@ -99,9 +101,9 @@ const Sort = () => {
 
             case 'monthly':
                 if (sortCategory) {
-                    quizzes = await axiosInstance.get(`/dbAPI/quiz_monthly/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/quiz_monthly/?limit=21&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
-                    quizzes = await axiosInstance.get(`/dbAPI/quiz_monthly/?limit=21&limit=${numberOfResult}&offset=${offset}`)
+                    quizzes = await axios.get(`/dbAPI/quiz_monthly/?limit=21&limit=${numberOfResult}&offset=${offset}`)
                 }
                 setSortTitle('بهترین کوییز های این ماه')
                 setQuizzes(quizzes.data.results)
@@ -110,7 +112,7 @@ const Sort = () => {
                 break
 
             case 'newest_test':
-                quizzes = await axiosInstance.get(`/dbAPI/pointy_new/?limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axios.get(`/dbAPI/pointy_new/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setSortTitle('جدیدترین تست ها')
                 setPointy(quizzes.data.results)
@@ -119,7 +121,7 @@ const Sort = () => {
                 break
 
             case 'bestest_test':
-                quizzes = await axiosInstance.get(`/dbAPI/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axios.get(`/dbAPI/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setSortTitle('بهترین تست ها')
                 setPointy(quizzes.data.results)
@@ -128,7 +130,7 @@ const Sort = () => {
                 break
 
             case 'monthly_test':
-                quizzes = await axiosInstance.get(`/dbAPI/pointy_monthly/?limit=${numberOfResult}&offset=${offset}`)
+                quizzes = await axios.get(`/dbAPI/pointy_monthly/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setSortTitle('بهترین تست های این ماه')
                 setPointy(quizzes.data.results)

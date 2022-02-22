@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import axiosInstance from './axiosApi'
+import axios from 'axios'
+// import axiosInstance from './axiosApi'
+
 import {InlineReactionButtons, InlineShareButtons, StickyShareButtons} from 'sharethis-reactjs';
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
@@ -20,7 +22,7 @@ const Article = (props) => {
 
     const getBlogContentFromDb = async () => {
         const contentTitle = props.match.params.title
-        const contentData = await axiosInstance.get(`/dbAPI/new_blog/?title__iexact=${contentTitle}&limit=1`)
+        const contentData = await axios.get(`/dbAPI/new_blog/?title__iexact=${contentTitle}&limit=1`)
         setArticle(contentData.data.results[0])
         setLoadState(true)
     }

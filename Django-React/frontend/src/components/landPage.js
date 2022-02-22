@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import axiosInstance from './axiosApi'
+// import axiosInstance from './axiosApi'
+
+import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
@@ -77,13 +79,13 @@ const Index = () => {
     
             let matchedQuizzes = []
     
-            const search_top_1st_category = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${top1stUserCategory}&limit=4`)
+            const search_top_1st_category = await axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${top1stUserCategory}&limit=4`)
             Array.prototype.push.apply(matchedQuizzes, search_top_1st_category.data.results)
             
-            const search_top_2nd_category = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${top2ndUserCategory}&limit=2`)
+            const search_top_2nd_category = await axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${top2ndUserCategory}&limit=2`)
             Array.prototype.push.apply(matchedQuizzes, search_top_2nd_category.data.results)
             
-            const search_top_3rd_category = await axiosInstance.get(`/dbAPI/quiz_new/?subCategory__icontains=${top3rdUserCategory}&limit=2`)
+            const search_top_3rd_category = await axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${top3rdUserCategory}&limit=2`)
             Array.prototype.push.apply(matchedQuizzes, search_top_3rd_category.data.results)
     
             const recommendedQuizzesList = () => {
@@ -112,32 +114,32 @@ const Index = () => {
     }
 
     const grabData = async () => {
-        const pointy_new_psychology = await axiosInstance.get(`/dbAPI/pointy_new/?category__icontains=psychology&limit=8`)
+        const pointy_new_psychology = await axios.get(`/dbAPI/pointy_new/?category__icontains=psychology&limit=8`)
         setPointy_new_psychology(pointy_new_psychology.data.results)
 
-        const quiz_new_movieSeries = await axiosInstance.get(`/dbAPI/quiz_new/?category__icontains=movie-series&limit=8`)
+        const quiz_new_movieSeries = await axios.get(`/dbAPI/quiz_new/?category__icontains=movie-series&limit=8`)
         setQuiz_new_movieSeries(quiz_new_movieSeries.data.results)
 
-        const quiz_new_celebrity = await axiosInstance.get(`/dbAPI/quiz_new/?category__icontains=celebrity&limit=8`)
+        const quiz_new_celebrity = await axios.get(`/dbAPI/quiz_new/?category__icontains=celebrity&limit=8`)
         setQuiz_new_celebrity(quiz_new_celebrity.data.results)
         
-        const monthly_pointy = await axiosInstance.get(`/dbAPI/pointy_monthly/?limit=8`)
+        const monthly_pointy = await axios.get(`/dbAPI/pointy_monthly/?limit=8`)
         setQuiz_monthly(monthly_pointy.data.results)
         
-        const quiz_new = await axiosInstance.get(`/dbAPI/quiz_new/?limit=8`)
+        const quiz_new = await axios.get(`/dbAPI/quiz_new/?limit=8`)
         setQuiz_new(quiz_new.data.results)
 
-        const new_pointy = await axiosInstance.get(`/dbAPI/pointy_new/?limit=8`)
+        const new_pointy = await axios.get(`/dbAPI/pointy_new/?limit=8`)
         setPointy_new(new_pointy.data.results)
 
-        const quiz_monthly = await axiosInstance.get(`/dbAPI/quiz_monthly/?limit=8`)
+        const quiz_monthly = await axios.get(`/dbAPI/quiz_monthly/?limit=8`)
         setPointy_monthly(quiz_monthly.data.results)
         
-        const loadInfinite1 =  await axiosInstance.get(`/dbAPI/quiz_new/?limit=8&offset=8`)
+        const loadInfinite1 =  await axios.get(`/dbAPI/quiz_new/?limit=8&offset=8`)
         setLoadInfinite1(loadInfinite1.data.results)
-        const loadInfinite2 =  await axiosInstance.get(`/dbAPI/quiz_new/?limit=8&offset=24`)
+        const loadInfinite2 =  await axios.get(`/dbAPI/quiz_new/?limit=8&offset=24`)
         setLoadInfinite2(loadInfinite2.data.results)
-        const loadInfinite3 =  await axiosInstance.get(`/dbAPI/quiz_new/?limit=8&offset=36`)
+        const loadInfinite3 =  await axios.get(`/dbAPI/quiz_new/?limit=8&offset=36`)
         setLoadInfinite3(loadInfinite3.data.results)
 
         setContentLoaded(true)

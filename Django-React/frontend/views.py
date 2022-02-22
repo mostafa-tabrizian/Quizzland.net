@@ -5,22 +5,22 @@ from urllib.parse import unquote
 
 from .models import *
 from .functions import *
-from rest_framework import viewsets
 from .serializers import *
 from .filters import *
 
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, status
 from rest_framework.views import APIView 
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (AllowAny,)
     serializer_class = MyTokenObtainPairSerializer
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (AllowAny,)
     authentication_classes = ()
 
     def post(self, request):
@@ -142,87 +142,101 @@ def SOS(request, SOS):
 def SOS_landpage(request):
     return render(request, 'frontend/SOS.html')
 
-class quiz_new(viewsets.ReadOnlyModelViewSet):
+class quiz_new(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes.objects.order_by('-publish').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-class quiz_monthly(viewsets.ReadOnlyModelViewSet):
+class quiz_monthly(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes.objects.order_by('-monthly_views').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-class quiz_best(viewsets.ReadOnlyModelViewSet):
+class quiz_best(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes.objects.order_by('-views').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-class quiz_alphabet(viewsets.ReadOnlyModelViewSet):
+class quiz_alphabet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes.objects.order_by('-subCategory').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
 # --------------------------------------------------------
 
-class pointy_new(viewsets.ReadOnlyModelViewSet):
+class pointy_new(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes_Pointy.objects.order_by('-publish').all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
-class pointy_monthly(viewsets.ReadOnlyModelViewSet):
+class pointy_monthly(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes_Pointy.objects.order_by('-monthly_views').all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
-class best_pointy_quiz(viewsets.ReadOnlyModelViewSet):
+class best_pointy_quiz(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes_Pointy.objects.order_by('-views').all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
-class pointy_alphabet(viewsets.ReadOnlyModelViewSet):
+class pointy_alphabet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes_Pointy.objects.order_by('-subCategory').all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
 # --------------------------------------------------------
 
-class category_new(viewsets.ReadOnlyModelViewSet):
+class category_new(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = SubCategories.objects.order_by('-publish').all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
-class category_best(viewsets.ReadOnlyModelViewSet):
+class category_best(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = SubCategories.objects.order_by('-views').all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
-class category_alphabet(viewsets.ReadOnlyModelViewSet):
+class category_alphabet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = SubCategories.objects.order_by('-subCategory').all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
 # --------------------------------------------------------
 
-class questions(viewsets.ReadOnlyModelViewSet):
+class questions(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Questions.objects.all()
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter    
 
-class questions_pointy(viewsets.ReadOnlyModelViewSet):
+class questions_pointy(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Pointy_Questions.objects.all()
     serializer_class = questions_pointySerializer
     filterset_class = questions_pointyFilter  
 
 # --------------------------------------------------------
 
-class new_blog(viewsets.ReadOnlyModelViewSet):
+class new_blog(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
     filterset_class = BlogFilter
 
 # --------------------------------------------------------
 
-# class newsletter_users(viewsets.ReadOnlyModelViewSet):
+# class newsletter_users(viewsets.ModelViewSet):
 #     queryset = Newsletter_Users.objects.all()
 #     serializer_class = NewsletterUsersSerializer
 #     filterset_class = NewsletterUserFilter
