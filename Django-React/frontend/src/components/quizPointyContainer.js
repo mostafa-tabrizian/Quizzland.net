@@ -22,7 +22,7 @@ const QuizContainer = (props) => {
     return (
         props.quizzes.map((quiz) => {
             return (
-                <li key={quiz.id} className='mr-7 md:m-2 mb-4 md:mb-6'>
+                <li key={quiz.id} className='mr-5 mb-4 md:mb-7 md:mt-5'>
                     <article className={`
                         flex text-right h-full
                         rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
@@ -33,13 +33,13 @@ const QuizContainer = (props) => {
                             to={`/test/${replaceFunction(quiz.title, ' ', '-')}`}
                             className='flex md:block md:grid-cols-5'
                         >
-                            <div className='md:col-span-2 w-[224px] md:h-[126px]'>
+                            <div className='md:col-span-2 w-[360px] md:w-[260px] h-[120px] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                 <img
                                     src={quiz.thumbnail}
                                     width={1366}
                                     height={768}
                                     alt={`${quiz.subCategory} | ${quiz.title}`}
-                                    className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                    className=' h-full max-w-fit '
                                 />
                             </div>
                             <div className='md:col-span-3 md:mt-2 w-full pb-3 pr-1'>

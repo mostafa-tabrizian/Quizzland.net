@@ -69,7 +69,7 @@ const Category = (props) => {
         return (
             categories.map((category) => {
                 return (
-                    <li key={category.id} className='mr-7 md:mx-4 md:mb-4'>
+                    <li key={category.id} className='mr-5 mb-4 md:mb-7 md:mt-5'>
                         <article className={`
                             flex text-right h-full
                             rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
@@ -81,13 +81,13 @@ const Category = (props) => {
                                 to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}
                                 className='flex w-full md:block md:grid-cols-5 mb-4'
                             >
-                                <div className='md:col-span-2 w-[224px] md:h-[126px]'>
+                                <div className='md:col-span-2 w-[360px] md:w-[260px] h-[120px] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                     <img
                                         src={category.thumbnail}
                                         width={1366}
                                         height={768}
                                         alt={`${category.subCategory} | ${category.title}`}
-                                        className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                        className=' h-full max-w-fit '
                                     />
                                 </div>
                                 <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>

@@ -782,6 +782,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 50vh;
 }
 
+.mb-7 {
+  margin-bottom: 1.75rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
 .block {
   display: block;
 }
@@ -846,6 +854,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 50%;
 }
 
+.h-\[\] {
+  height: ;
+}
+
+.h-\[120px\] {
+  height: 120px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -872,6 +888,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-\[100\%\] {
   width: 100%;
+}
+
+.w-\[104\%\] {
+  width: 104%;
 }
 
 .w-6 {
@@ -902,6 +922,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 21rem;
 }
 
+.w-\[260px\] {
+  width: 260px;
+}
+
 .w-4\/5 {
   width: 80%;
 }
@@ -918,6 +942,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 20vw;
 }
 
+.w-\[\] {
+  width: ;
+}
+
+.w-\[360px\] {
+  width: 360px;
+}
+
+.max-w-\[104\%\] {
+  max-width: 104%;
+}
+
 .max-w-\[33rem\] {
   max-width: 33rem;
 }
@@ -928,6 +964,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .max-w-\[19rem\] {
   max-width: 19rem;
+}
+
+.max-w-fit {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
 }
 
 .translate-x-\[-50\%\] {
@@ -1564,6 +1606,18 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-bottom: 1.5rem;
   }
 
+  .md\:mt-5 {
+    margin-top: 1.25rem;
+  }
+
+  .md\:mb-7 {
+    margin-bottom: 1.75rem;
+  }
+
+  .md\:mb-3 {
+    margin-bottom: 0.75rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -1600,6 +1654,14 @@ Ensure the default browser behavior of the `hidden` attribute.
     height: 21rem;
   }
 
+  .md\:h-\[160px\] {
+    height: 160px;
+  }
+
+  .md\:h-\[150px\] {
+    height: 150px;
+  }
+
   .md\:w-full {
     width: 100%;
   }
@@ -1626,6 +1688,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:w-\[42rem\] {
     width: 42rem;
+  }
+
+  .md\:w-\[260px\] {
+    width: 260px;
   }
 
   .md\:max-w-\[21rem\] {

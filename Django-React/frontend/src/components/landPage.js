@@ -214,6 +214,7 @@ const Index = () => {
                                 width={350}
                                 height={500}
                                 alt='لوگوی کوییزلند'
+                                className='max-w-[104%] w-[104%]'
                             />
                         </div>
                     </div>
@@ -224,7 +225,7 @@ const Index = () => {
                         </h1>
                         <h2 className='text-[1.6rem] max-w-[33rem]
                                         mb-20 ml-3 drop-shadow-[0_0_25px_black]'>
-                            جایی که میتونی خودت رو به عنوان فن واقعی به بقیه ثابت کنی پس اگر آماده ای 😎 
+                            جایی که میتونی خودت رو به عنوان یه فن به بقیه ثابت کنی پس اگر آماده ای 😎 
                         </h2>
                         <button
                             onClick={() => {document.getElementById('scroll').scrollIntoView()}}

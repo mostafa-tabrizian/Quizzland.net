@@ -108,20 +108,20 @@ const Search = (props) => {
                         return (
                             matchedQuizzes.map((quiz) => {
                                 return (
-                                    <li key={quiz.id} className='ml-1 mr-7 md:m-2 md:mb-6'>
+                                    <li key={quiz.id} className='mr-5 mb-4 md:mb-7 md:mt-5'>
                                         <article className={`
                                             flex text-right h-full
                                             rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
                                             quizContainer__trans`}
                                         >
                                             <Link to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`} className='flex md:block md:grid-cols-5'>
-                                                <div className='col-span-2 w-[224px] h-[126px]'>
+                                                <div className='md:col-span-2 w-[360px] md:w-[260px] h-[120px] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                                     <img
                                                         src={quiz.thumbnail}
                                                         alt={`${quiz.subCategory}} | ${quiz.title}`}
                                                         width={1366}
                                                         height={768}
-                                                        className='rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'
+                                                        className=' h-full max-w-fit '
                                                     />
                                                 </div>
                                                 <div className="col-span-3 mt-2 header__search__result__title">
