@@ -40,7 +40,7 @@ const Quiz = () => {
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
     const [quiz, setQuiz] = useState(null)
-    const [quizTitleReplacedWithHyphen, setQuizTitleReplacedWithHyphen] = useState(replaceFunction(quizTitle, '-', '+'))
+    const [quizTitleReplacedWithHyphen, setQuizTitleReplacedWithHyphen] = useState()
 
     const result = useRef(null)
 
@@ -75,36 +75,33 @@ const Quiz = () => {
             history.pushState = function () {
                 pushState.apply(history, arguments);
             };
-            setQuizTitle(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
+
+            const title = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
+            setQuizTitle(title)
+            setQuizTitleReplacedWithHyphen(title)
         })(window.history);
     }
 
-    const grabData = () => {
+    const grabData = async () => {
         if (quizTitle != undefined) {
-            const grabQuiz = async () => {
-                return await axios.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
-            }
+            await axios.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
+                .then((quiz) => {
+                    try {
+                        sendCategoryAsInterest(quiz?.subCategory)
+                        getSuggestionsQuiz(quiz?.subCategory)
+                        applyBackground(quiz?.background)
+                        setQuiz(quiz)
+                    }
+                    catch (e) {
+                        window.location.href = "/404";
+                    }
+                })
 
-            const grabQuestions = async () => {
-                return await axios.get(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
-            }
-
-            grabQuiz().then((quiz) => {
-                try {
-                    sendCategoryAsInterest(quiz?.subCategory)
-                    applyBackground(quiz?.background)
-                    setQuiz(quiz)
-                }
-                catch (e) {
-                    window.location.href = "/404";
-                }
-            })
-
-            grabQuestions().then((question) => {
-                setQuestions(question.data)
-                getSuggestionsQuiz(question.data[0].subCategory)
-                setContentLoaded(true)
-            })
+            await axios.get(`/dbAPI/questions/?title__iexact=${quizTitleReplacedWithHyphen}`)
+                .then((question) => {
+                    setQuestions(question?.data)
+                    setContentLoaded(true)
+                })
         }
     }
 
@@ -468,7 +465,7 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        await axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        await axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => { setSuggestionQuizzes(res.data.results) })
     }
 

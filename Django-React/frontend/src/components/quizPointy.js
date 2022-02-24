@@ -22,18 +22,18 @@ const Quiz = () => {
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
-    const [pointyEnded, setPointyEnded] = useState(false)
+    const [quizEnded, setQuizEnded] = useState(false)
     const [loadState, setLoadState] = useState()
-    const [pointyTitle, setPointyTitle] = useState(window.document.URL.split('/')[4])
+    const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
-    const [pointyThumbnail, setPointyThumbnail] = useState()
+    const [quizThumbnail, setQuizThumbnail] = useState()
     const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [SFXAllowed, setSFXAllowed] = useState()
     const [showQuestionChangingHelper, setShowQuestionChangingHelper] = useState(false)
     const [SFXClick, setSFXClick] = useState(null)
     const [quiz, setQuiz] = useState(null)
-    const [pointyTitleReplacedWithHyphen, setPointyTitleReplacedWithHyphen] = useState(replaceFunction(pointyTitle, '-', '+'))
+    const [quizTitleReplacedWithHyphen, setQuizTitleReplacedWithHyphen] = useState()
 
     const result = useRef(null)
 
@@ -42,7 +42,7 @@ const Quiz = () => {
         setLoadState(true)
         SFXLocalStorage()
         setSFXClick(new Audio('/static/sound/SFXClick.mp3'))
-    }, [pointyTitle,])
+    }, [quizTitle,])
 
     useEffect(() => {
         quizChangeDetector()
@@ -67,36 +67,33 @@ const Quiz = () => {
             history.pushState = function() {
                 pushState.apply(history, arguments);
             };
-            setPointyTitle(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
+
+            const title = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
+            setQuizTitle(title)
+            setQuizTitleReplacedWithHyphen(title)
         })(window.history);
     }
     
-    const grabData = () => {
-        if (pointyTitle != undefined) {
-            const grabQuiz = async () => {
-                return await axios.get(`/dbAPI/pointy_new/?title__iexact=${pointyTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
-            }
+    const grabData = async () => {
+        if (quizTitle != undefined) {
+            await axios.get(`/dbAPI/pointy_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
+                .then((quiz) => {
+                    try {
+                        sendCategoryAsInterest(quiz?.subCategory)
+                        getSuggestionsQuiz(quiz?.subCategory)
+                        applyBackground(quiz?.background)
+                        setQuiz(quiz)
+                    }
+                    catch (e) {
+                        window.location.href = "/404";
+                    }
+                })
 
-            const grabQuestions = async () => {
-                return await axios.get(`/dbAPI/questions_pointy/?title__iexact=${pointyTitleReplacedWithHyphen}`)
-            }
-
-            grabQuiz().then((quiz) => {
-                try {
-                    sendCategoryAsInterest(quiz?.subCategory)
-                    applyBackground(quiz?.background)
-                    setQuiz(quiz)
-                }
-                catch (e) {
-                    window.location.href = "/404";
-                }
-            })
-
-            grabQuestions().then((question) => {
-                setQuestions(question.data)
-                getSuggestionsQuiz(question.data[0].subCategory)
-                setContentLoaded(true)
-            })
+            await axios.get(`/dbAPI/questions_pointy/?title__iexact=${quizTitleReplacedWithHyphen}`)
+                .then((question) => {
+                    setQuestions(question?.data)
+                    setContentLoaded(true)
+                })
         }
     }
 
@@ -331,7 +328,7 @@ const Quiz = () => {
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
 
             } else {
-                setPointyEnded(true)
+                setQuizEnded(true)
                 setTimeout(() => {
                     try {
                         localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
@@ -374,7 +371,7 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        await axios.get(`/dbAPI/pointy_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        await axios.get(`/dbAPI/pointy_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
@@ -385,7 +382,7 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/test/${replaceFunction(pointyTitle, ' ', '-')}`
+        return `https://www.quizzland.net/test/${replaceFunction(quizTitle, ' ', '-')}`
     }
 
     let firstTouch
@@ -417,14 +414,14 @@ const Quiz = () => {
             />
 
             <Helmet>
-                <title>{`کوییزلند | تست ${replaceFunction(decodeURI(pointyTitle), '+', ' ')}`}</title>
+                <title>{`کوییزلند | تست ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
                 <meta name="description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
                 <meta name="keywords" content="کوییز, تست, کوییزلند" />
-                <meta name="msapplication-TileImage" content={pointyThumbnail} />
+                <meta name="msapplication-TileImage" content={quizThumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
                 <meta property="og:title" content={quiz?.title} />
                 <meta property="og:description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
-                <meta property="og:image" content={pointyThumbnail} />
+                <meta property="og:image" content={quizThumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
                 <meta property="og:image:height" content="300" />
@@ -438,7 +435,7 @@ const Quiz = () => {
                         "@type": "Article",
                         "headline": "${quiz?.title}",
                         "image": [
-                            "${pointyThumbnail}",
+                            "${quizThumbnail}",
                             "${quiz?.background}"
                          ],
                         "datePublished": "${quiz?.publish}",
@@ -496,7 +493,7 @@ const Quiz = () => {
                     countingResult loadingScreen fixed left-0
                     top-0 w-screen h-screen z-20
                     flex items-center justify-center
-                    ${pointyEnded ? 'fadeIn' : 'fadeOut'}
+                    ${quizEnded ? 'fadeIn' : 'fadeOut'}
                 `}>
                 ___ در حال محاسبه نتیجه تست
             </div>
@@ -520,7 +517,7 @@ const Quiz = () => {
                 {
                     !(contentLoaded) &&
                     <div className='flex justify-center flex-ai-c'>
-                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__pointyTitle'></div>
+                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizTitle'></div>
                     </div>
                 }
 

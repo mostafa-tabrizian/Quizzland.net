@@ -49,7 +49,7 @@ const Index = () => {
         recommendationQuiz()
         setLoadState(true)
         if (document.getElementById('html')) {
-            document.getElementById('html').style='background: None'
+            document.getElementById('html').style='background: linear-gradient(135deg, #000000, #390e10) fixed;'
         }
     }, [])
 
