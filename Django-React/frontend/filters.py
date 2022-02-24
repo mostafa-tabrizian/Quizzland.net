@@ -5,8 +5,8 @@ class QuizzesFilter(filters.FilterSet):
     class Meta:
         model= Quizzes
         fields= {
-            'category': ['icontains'],
-            'subCategory': ['icontains'],
+            'category': ['exact'],
+            'subCategory': ['exact'],
             'title': ['iexact', 'icontains'],
             'tags': ['iexact', 'icontains']
         }
@@ -15,8 +15,8 @@ class PointyQuizzesFilter(filters.FilterSet):
     class Meta:
         model= Quizzes_Pointy
         fields= {
-            'category': ['icontains'],
-            'subCategory': ['icontains'],
+            'category': ['exact'],
+            'subCategory': ['exact'],
             'title': ['iexact', 'icontains'],
             'tags': ['iexact', 'icontains']
         }
@@ -25,8 +25,8 @@ class CategoriesFilter(filters.FilterSet):
     class Meta:
         model= SubCategories
         fields= {
-            'category': ['icontains'],
-            'subCategory': ['icontains'],
+            'category': ['exact'],
+            'subCategory': ['exact'],
             'title': ['iexact', 'icontains']
         }
 

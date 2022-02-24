@@ -12,9 +12,18 @@ categoryList = [
     ('gaming', 'gaming'),
 ]
 
+class Categories(models.Model):
+    id = models.AutoField(primary_key=True)
+    title_english = models.CharField(max_length=80, null=False, blank=False, default=None)
+    title_persian = models.CharField(max_length=80, null=False, blank=False, default=None)
+    date_published = models.DateField(default=datetime.date.today)
+    
+    def __str__(self):
+        return self.title_english
+
 class CustomUser(AbstractUser):
     fav_color = models.CharField(blank=True, max_length=120)
-    
+
 class CustomUserAdmin(admin.ModelAdmin):
     model = CustomUser
 
@@ -31,8 +40,8 @@ class Document_Admin(admin.ModelAdmin):
     search_fields = ['id', 'title', 'note']
 
 class SubCategories(models.Model):
-    id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=200, choices=categoryList, null=False, blank=False, default=None)
+    id = models.AutoField(primary_key=True)  
+    category = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
     thumbnail =  models.ImageField(upload_to='Thn-Category', null=True, blank=True, default='NotExist.jpg')
@@ -40,19 +49,15 @@ class SubCategories(models.Model):
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     publish = models.DateTimeField(default=datetime.datetime.now)
-
+    
     def __str__(self):
         return self.subCategory
 
-class SubCategories_Admin(admin.ModelAdmin):
-    list_display = ('subCategory', 'title', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('subCategory', 'category', 'publish')
-    search_fields = ['id', 'title']
-
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
+    category = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
+    # newSubCategory = models.ForeignKey(SubCategories, on_delete=models.PROTECT, blank=True, null=True)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
     tags = models.CharField(max_length=100, null=False, blank=False, default='کوییز')
     monthly_views = models.IntegerField(default=0)
@@ -73,14 +78,9 @@ class Quizzes(models.Model):
     def __unicode__(self):
         return 'test'
 
-class Quizzes_Admin(admin.ModelAdmin):
-    list_display = ('title', 'subCategory', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('subCategory', 'category', 'publish')
-    search_fields = ['id', 'title']
-
 class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=100, choices=categoryList, null=False, blank=False, default=None)
+    category = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
     tags = models.CharField(max_length=100, null=False, blank=False, default='کوییز')
@@ -136,11 +136,6 @@ class Quizzes_Pointy(models.Model):
 
     def __str__(self):
         return self.subCategory
-
-class Quizzes_Pointy_Admin(admin.ModelAdmin):
-    list_display = ('title', 'subCategory', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('subCategory', 'category', 'publish')
-    search_fields = ['id', 'title']
 
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
