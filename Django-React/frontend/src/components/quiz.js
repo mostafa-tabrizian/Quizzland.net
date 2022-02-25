@@ -7,6 +7,7 @@ import { StickyShareButtons } from 'sharethis-reactjs';
 
 import axios from 'axios'
 import Header from './header'
+import AddView from './addView';
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from './base'
 import LoadingScreen from './loadingScreen'
@@ -87,6 +88,7 @@ const Quiz = () => {
             await axios.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
                 .then(async (quiz) => {
                     try {
+                        AddView(quiz?.id)
                         sendCategoryAsInterest(quiz?.subCategory)
                         getSuggestionsQuiz(quiz?.subCategory)
                         applyBackground(quiz?.background)

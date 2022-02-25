@@ -61,7 +61,9 @@ module.exports = {
 
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("production"),  // development production
+        'NODE_ENV': JSON.stringify("production"),  // development production
+        'ADMINUSERNAME': JSON.stringify("MostafaT19"),
+        'ADMINPASSWORD': JSON.stringify("M19931506")
       },
     }),
 
