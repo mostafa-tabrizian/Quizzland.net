@@ -38,7 +38,7 @@ class SubCategorySitemap(Sitemap):
 
 categoryTitle = {
     'کوییز هایی درمورد سلبریتی ها':'celebrity',
-    'کوییز هایی درمورد فیلم و سریال':'movie-series'
+    'کوییز هایی درمورد فیلم و سریال':'movie-&-series'
 }
 
 class CategorySitemap(Sitemap):

@@ -16,10 +16,10 @@ const Header = (props) => {
     })
 
     const componentChangeDetector = () => {
-        (function(history){
+        (function (history) {
 
             let pushState = history.pushState;
-            history.pushState = function() {
+            history.pushState = function () {
                 pushState.apply(history, arguments);
             };
 
@@ -36,7 +36,7 @@ const Header = (props) => {
         setQuizNavigationOpen(false)
         setPointyNavigationOpen(false)
     }
-    
+
     const openCloseQuizNavigation = () => {
         setQuizNavigationOpen(quizNavigationOpen ? false : true)
         // close every other panel
@@ -53,10 +53,10 @@ const Header = (props) => {
 
     return (
         <React.Fragment>
-        
+
 
             <header className="header text-xl p-4 relative">
-            
+
                 <Helmet>
                     <script type="text/javascript">
                         {`
@@ -124,7 +124,7 @@ const Header = (props) => {
                     <Search />
 
                     <ul className={`right-[11rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
-                        <li><Link to="/category/movie-series">🎬 فیلم و سریال</Link></li>
+                        <li><Link to="/category/movie-&-series">🎬 فیلم و سریال</Link></li>
                         <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
                         <li><Link to="/category/psychology">🧠 روانشناسی</Link></li>
                     </ul>
@@ -157,7 +157,7 @@ const Header = (props) => {
                         <div className='mt-5'>
                             <h4 className='text-xl'>کتگوری ها</h4>
                             <ul className='flex space-x-6 space-x-reverse'>
-                                <li className='text-lg'><Link to="/category/movie-series">فیلم و سریال 🎬</Link></li>
+                                <li className='text-lg'><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
                                 <li className='text-lg'><Link to="/category/celebrity">سلبریتی ✨</Link></li>
                                 <li className='text-lg'><Link to="/category/psychology">روانشناسی 🧠</Link></li>
                             </ul>
@@ -195,5 +195,5 @@ const Header = (props) => {
         </React.Fragment>
     );
 }
- 
+
 export default Header;

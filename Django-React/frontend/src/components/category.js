@@ -15,7 +15,8 @@ import Header from './header'
 import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
 const Category = (props) => {
-    const [categoryQuery, setCategoryQuery] = useState(props.match.params.category)
+    const [categoryQuery, setCategoryQuery] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', ' '))
+    const [categoryQueryID, setCategoryQueryID] = useState()
     const [categoryTitle, setCategoryTitle] = useState()
     const [pageTravel, setPageTravel] = useState([])
     const [categories, setCategories] = useState([])
@@ -35,21 +36,24 @@ const Category = (props) => {
     useEffect(() => {
         getCategories()
         defineCategoryTitle()
-    }, [categoryQuery, sortType, numberOfResult, offset])
+    }, [categoryQuery, categoryQueryID, categoryTitle, sortType, numberOfResult, offset])
 
     const searchChangeDetector = () => {
         (function(history){
             let pushState = history.pushState;
             history.pushState = function() {
                 pushState.apply(history, arguments);
-                setCategoryQuery(window.location.pathname.split('/')[2]);
+                setCategoryQuery(window.location.pathname.split('/')[2], '-', ' ');
             };
         })(window.history);
     }
 
     const defineCategoryTitle = async () => {
-        await axios.get(`/dbAPI/categories/?title_english__icontains=${categoryQuery}`)
-            .then((response) => setCategoryTitle(response.data[0].title_persian))
+        await axios.get(`/dbAPI/categories/?title_english__icontains=${replaceFunction(categoryQuery)}`)
+            .then((response) => {
+                setCategoryTitle(response.data[0].title_persian)
+                setCategoryQueryID(response.data[0].id)
+            })
     }
 
     const getCategories = async () => {
@@ -59,9 +63,12 @@ const Category = (props) => {
             'alphabet': 'subcategory_alphabet'
         }
 
-        const pageTravelAndCategories = await axios.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryQuery}&limit=${numberOfResult}&offset=${offset}`)
-        setPageTravel(pageTravelAndCategories.data)
-        setCategories(pageTravelAndCategories.data.results)
+        categoryQueryID &&
+        await axios.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?categoryKey=${categoryQueryID}&limit=${numberOfResult}&offset=${offset}`)
+            .then((response => {
+                setPageTravel(response.data)
+                setCategories(response.data.results)
+            }))
         setContentLoaded(true)
     }
 
@@ -105,18 +112,6 @@ const Category = (props) => {
         )
     }
 
-    useEffect(() => {
-        getCategories()
-    }, [sortType, numberOfResult, offset])
-
-    useEffect(() => {
-
-        if (document.getElementById('html')) {
-            document.getElementById('html').style='background: linear-gradient(135deg, #000000, #390e10) fixed;'
-        }
-        setLoadState(true)
-    }, [])
-
     return (
         <React.Fragment>
             
@@ -134,7 +129,7 @@ const Category = (props) => {
                 <div id="pos-article-display-28434"></div>
             </div>
 
-            <h3 className='lowTitle'>{categoryQuery}</h3>
+            <h3 className='lowTitle'>{replaceFunction(categoryQuery)}</h3>
             <h3 className='title'>کتگوری {categoryTitle}</h3>
 
             <Tools

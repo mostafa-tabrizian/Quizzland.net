@@ -117,7 +117,7 @@ const Index = () => {
         const pointy_new_psychology = await axios.get(`/dbAPI/pointy_new/?category__icontains=psychology&limit=8`)
         setPointy_new_psychology(pointy_new_psychology.data.results)
 
-        const quiz_new_movieSeries = await axios.get(`/dbAPI/quiz_new/?category__icontains=movie-series&limit=8`)
+        const quiz_new_movieSeries = await axios.get(`/dbAPI/quiz_new/?category__icontains=movie-&-series&limit=8`)
         setQuiz_new_movieSeries(quiz_new_movieSeries.data.results)
 
         const quiz_new_celebrity = await axios.get(`/dbAPI/quiz_new/?category__icontains=celebrity&limit=8`)
@@ -365,7 +365,7 @@ const Index = () => {
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                         <h3 className=''>کوییز فیلم و سریال</h3>
-                        <Link to="/sort?s=newest&c=movie-series" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
+                        <Link to="/sort?s=newest&c=movie-&-series" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_movieSeries_ref}>
