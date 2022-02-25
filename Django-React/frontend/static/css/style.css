@@ -203,9 +203,11 @@ body::-webkit-scrollbar-thumb {
   border-radius: 25px;
 }
 
-h1, h2, h3, h4, h5, h6, p, ul, li {
+h1, h2, h3, h4, h5, h6, p, ul, li, a {
   direction: rtl;
   margin: 0;
+  -webkit-transition: color 150ms ease-out;
+  transition: color 150ms ease-out;
 }
 
 h1 {
@@ -750,22 +752,11 @@ input {
 .skeletonLoading {
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
-}
-
-@supports not (-moz-appearance: none) {
-  .skeletonLoading::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: -32rem;
-    height: 75rem;
-    width: 24rem;
-    background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(50%, #E8E8E8), to(transparent));
-    background: linear-gradient(to right, transparent 0%, #E8E8E8 50%, transparent 100%);
-    -webkit-animation: load 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
-            animation: load 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
-  }
+  background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
+  background: linear-gradient(to right, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
+  background-size: 400% 100%;
+  -webkit-animation: loadingFrame 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
+          animation: loadingFrame 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
 }
 
 .skeletonLoading__quizContainer {
@@ -821,20 +812,20 @@ input {
         filter: blur(1px);
     }
 } */
-@-webkit-keyframes load {
-  from {
-    left: -450px;
+@-webkit-keyframes loadingFrame {
+  0% {
+    background-position: 100% 50%;
   }
-  to {
-    left: 100%;
+  100% {
+    background-position: 0 50%;
   }
 }
-@keyframes load {
-  from {
-    left: -450px;
+@keyframes loadingFrame {
+  0% {
+    background-position: 100% 50%;
   }
-  to {
-    left: 100%;
+  100% {
+    background-position: 0 50%;
   }
 }
 
@@ -1146,17 +1137,6 @@ input {
   -webkit-box-shadow: 0 15px 22px rgba(255, 255, 255, 0.027) !important;
           box-shadow: 0 15px 22px rgba(255, 255, 255, 0.027) !important;
   border-radius: 5px !important;
-}
-
-.skeletonLoading {
-  background: #111111b9;
-  -webkit-box-shadow: 0 10px 22px 1px #7272725c;
-          box-shadow: 0 10px 22px 1px #7272725c;
-}
-
-.skeletonLoading::before {
-  background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(50%, #262626), to(transparent));
-  background: linear-gradient(to right, transparent 0%, #262626 50%, transparent 100%);
 }
 
 .header__logo span {

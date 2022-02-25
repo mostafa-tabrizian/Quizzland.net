@@ -296,11 +296,11 @@
     border-radius: 5px !important;
 }
 
-.skeletonLoading {
-    background: #111111b9;
-    box-shadow: 0 10px 22px 1px #7272725c;
+// .skeletonLoading {
+    // background: #111111b9;
+    // box-shadow: 0 10px 22px 1px #7272725c;
     
-    &::before {
-        background: linear-gradient(to right, transparent 0%, #262626 50%, transparent 100%);
-    }
-}
+    // &::before {
+    //     background: linear-gradient(to right, transparent 0%, #262626 50%, transparent 100%);
+    // }
+// }

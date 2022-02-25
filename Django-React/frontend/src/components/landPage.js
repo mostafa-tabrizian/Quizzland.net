@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // import axiosInstance from './axiosApi'
+import SkeletonLoading from './skeletonLoading'
 
 import axios from 'axios'
 import { Helmet } from "react-helmet";
@@ -255,6 +256,8 @@ const Index = () => {
                         <Link to="/sort?s=newest" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
+                    {SkeletonLoading(contentLoaded)}
+
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_ref}>
                         {
                             quiz_new_inView &&
@@ -282,6 +285,8 @@ const Index = () => {
                         <Link to="/sort?s=monthly" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
+                    {SkeletonLoading(contentLoaded)}
+                    
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_monthly_ref}>
                         {
                             quiz_monthly_inView &&
@@ -298,6 +303,8 @@ const Index = () => {
                         <Link to="/sort?s=newest_test" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
+                    {SkeletonLoading(contentLoaded)}
+                    
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_new_ref}>
                         {
                             pointy_new_inView &&
@@ -325,6 +332,8 @@ const Index = () => {
                         <Link to="/sort?s=monthly_test" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
+                    {SkeletonLoading(contentLoaded)}
+                    
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_monthly_ref}>
                         {
                             pointy_monthly_inView &&
@@ -341,6 +350,8 @@ const Index = () => {
                         <Link to="/sort?s=newest&c=celebrity" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
+                    {SkeletonLoading(contentLoaded)}
+                    
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_celebrity_ref}>
                         {
                             quiz_new_celebrity_inView &&
@@ -368,6 +379,8 @@ const Index = () => {
                         <Link to="/sort?s=newest&c=movie-&-series" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
+                    {SkeletonLoading(contentLoaded)}
+                    
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_movieSeries_ref}>
                         {
                             quiz_new_movieSeries_inView &&
@@ -384,6 +397,8 @@ const Index = () => {
                         <Link to="/sort?s=newest&c=psychology" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
+                    {SkeletonLoading(contentLoaded)}
+                    
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_new_psychology_ref}>
                         {
                             pointy_new_psychology_inView &&
@@ -410,6 +425,8 @@ const Index = () => {
                         <Link to="/sort?s=newest" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
+                    {SkeletonLoading(contentLoaded)}
+                    
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={loadInfinite1_ref}>
                         {
                             loadInfinite1_inView &&
@@ -423,7 +440,7 @@ const Index = () => {
                             <QuizContainer quizzes={loadInfinite2} bgStyle='trans' />
                         }
                     </ul>
-
+                    
                     <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={loadInfinite3_ref}>
                         {
                             loadInfinite3_inView &&

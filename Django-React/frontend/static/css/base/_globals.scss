@@ -66,9 +66,10 @@ body {
     }
 }
 
-h1, h2, h3, h4, h5, h6, p, ul, li {
+h1, h2, h3, h4, h5, h6, p, ul, li, a {
     direction: rtl;
     margin: 0;
+    transition: color 150ms ease-out;
 }
 
 h1 {
@@ -515,18 +516,10 @@ input {
     // background: #828282b9;
     // position: relative;
     // margin: 1rem;
-    
-    @supports not( -moz-appearance:none ){
-        &::before {
-            content: '';
-            display: block;
-            position: absolute;
-            left: 0; top: -32rem;
-            height: 75rem; width: 24rem;
-            background: linear-gradient(to right, transparent 0%, #E8E8E8 50%, transparent 100%);
-            animation: load 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
-        }
-    }
+
+    background: linear-gradient(to right, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
+    background-size: 400% 100%;
+    animation: loadingFrame 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
 
     &__quizContainer {
         width: 14rem; height: 8rem !important;
@@ -577,14 +570,14 @@ input {
     }
 } */
 
-@keyframes load {
-    from {
-        left: -450px;
+@keyframes loadingFrame {
+    0% {
+      background-position: 100% 50%;
     }
-    to   {
-        left: 100%;
+    100% {
+      background-position: 0 50%;
     }
-}
+  }
 
 /* Visibility */
 .hideForMobile {

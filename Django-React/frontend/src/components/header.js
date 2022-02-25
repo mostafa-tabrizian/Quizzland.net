@@ -88,13 +88,13 @@ const Header = (props) => {
                 <nav className="flex flex-ai-c flex-jc-sb">
                     <div>
                         <Link to="/" className='flex header__logo flex-jc-sb flex-ai-c md:hidden'>
+                            <span>uizzland</span>
                             <img
                                 src='/static/img/Q-small.png'
                                 alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
                                 width={24}
                                 height={35}
                             />
-                            <span>uizzland</span>
                         </Link>
                     </div>
 
@@ -109,13 +109,13 @@ const Header = (props) => {
                         </div>
 
                         <Link to="/" className="flex header__logo flex-jc-sb flex-ai-c">
+                            <span>uizzland</span>
                             <img
                                 src='/static/img/Q-small.png'
                                 alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
                                 width={24}
                                 height={35}
                             />
-                            <span>uizzland</span>
                         </Link>
 
 
