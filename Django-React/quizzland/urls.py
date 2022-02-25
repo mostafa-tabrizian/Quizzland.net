@@ -23,9 +23,11 @@ router.register(r'pointy_monthly', views.pointy_monthly)
 router.register(r'best_pointy_quiz', views.best_pointy_quiz)
 router.register(r'pointy_alphabet', views.pointy_alphabet)
 
-router.register(r'category_new', views.category_new)
-router.register(r'category_best', views.category_best)
-router.register(r'category_alphabet', views.category_alphabet)
+router.register(r'categories', views.Categories)
+
+router.register(r'subcategory_new', views.SubCategory_new)
+router.register(r'subcategory_best', views.SubCategory_best)
+router.register(r'subcategory_alphabet', views.SubCategory_alphabet)
 
 router.register(r'questions', views.questions)
 router.register(r'questions_pointy', views.questions_pointy)

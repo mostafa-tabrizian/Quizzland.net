@@ -23,6 +23,14 @@ class PointyQuizzesFilter(filters.FilterSet):
 
 class CategoriesFilter(filters.FilterSet):
     class Meta:
+        model= Categories
+        fields= {
+            'title_english': ['icontains'],
+            'title_persian': ['icontains'],
+        }
+
+class SubCategoriesFilter(filters.FilterSet):
+    class Meta:
         model= SubCategories
         fields= {
             'categoryKey': ['exact'],

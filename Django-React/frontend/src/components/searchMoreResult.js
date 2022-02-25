@@ -76,10 +76,10 @@ const SearchMoreResult = () => {
             Array.prototype.push.apply(matchedPointies, search_pointy_new_tag.data.results)
 
             // Search Category
-            const search_category_new_title = await axios.get(`/dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
+            const search_category_new_title = await axios.get(`/dbAPI/subcategory_new/?title__icontains=${searchValue}&limit=2`)
             Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
 
-            const search_category_new_subCategory = await axios.get(`/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
+            const search_category_new_subCategory = await axios.get(`/dbAPI/subcategory_new/?subCategory__icontains=${searchValue}&limit=2`)
             Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
 
             // Remove duplicated quizzes

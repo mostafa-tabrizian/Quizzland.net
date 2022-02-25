@@ -26,7 +26,7 @@ const QuizMonthlyRecord = () => {
     }
     
     const getAllCategories = async () => {
-        const categories = await axios.get('/dbAPI/category_new/')
+        const categories = await axios.get('/dbAPI/subcategory_new/')
         categoryDataSaveInExcel(categories)
     }
 

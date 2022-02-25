@@ -160,6 +160,12 @@ def SOS(request, SOS):
 def SOS_landpage(request):
     return render(request, 'frontend/SOS.html')
 
+class Categories(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Categories.objects.all()
+    serializer_class = CategoriesSerializer
+    filterset_class = CategoriesFilter
+
 class quiz_new(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes.objects.order_by('-publish').all()
@@ -212,23 +218,23 @@ class pointy_alphabet(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
-class category_new(viewsets.ModelViewSet):
+class SubCategory_new(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = SubCategories.objects.order_by('-publish').all()
-    serializer_class = CategoriesSerializer
-    filterset_class = CategoriesFilter
+    serializer_class = SubCategoriesSerializer
+    filterset_class = SubCategoriesFilter
 
-class category_best(viewsets.ModelViewSet):
+class SubCategory_best(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = SubCategories.objects.order_by('-views').all()
-    serializer_class = CategoriesSerializer
-    filterset_class = CategoriesFilter
+    serializer_class = SubCategoriesSerializer
+    filterset_class = SubCategoriesFilter
 
-class category_alphabet(viewsets.ModelViewSet):
+class SubCategory_alphabet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = SubCategories.objects.order_by('-subCategory').all()
-    serializer_class = CategoriesSerializer
-    filterset_class = CategoriesFilter
+    serializer_class = SubCategoriesSerializer
+    filterset_class = SubCategoriesFilter
 
 # --------------------------------------------------------
 

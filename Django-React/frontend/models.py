@@ -5,13 +5,6 @@ import datetime
 from django.contrib.auth.models import AbstractUser
 
 
-categoryList = [
-    ('celebrity', 'celebrity'),
-    ('movie-series', 'movie-series'),
-    ('psychology', 'psychology'),
-    ('gaming', 'gaming'),
-]
-
 class Categories(models.Model):
     id = models.AutoField(primary_key=True)
     title_english = models.CharField(max_length=80, null=False, blank=False, default=None)

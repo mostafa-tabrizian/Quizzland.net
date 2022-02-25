@@ -72,11 +72,11 @@ const Search = (props) => {
                 }
 
                 // Search Category
-                const search_category_new_title = await axios.get(`/dbAPI/category_new/?title__icontains=${searchValue}&limit=2`)
+                const search_category_new_title = await axios.get(`/dbAPI/subcategory_new/?title__icontains=${searchValue}&limit=2`)
                 Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
 
                 if (search_category_new_title.length !== 2) {
-                    const search_category_new_subCategory = await axios.get(`/dbAPI/category_new/?subCategory__icontains=${searchValue}&limit=2`)
+                    const search_category_new_subCategory = await axios.get(`/dbAPI/subcategory_new/?subCategory__icontains=${searchValue}&limit=2`)
                     Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
                 }
 
@@ -202,7 +202,7 @@ const Search = (props) => {
     })
 
     const searchSuggester = async () => {
-        const grabAllSubCategories = await axios.get(`/dbAPI/category_new`)
+        const grabAllSubCategories = await axios.get(`/dbAPI/subcategory_new`)
         const numberOfCategories = grabAllSubCategories.data.length
         const randomCategoryIndex = Math.floor(Math.random() * numberOfCategories);
         setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)

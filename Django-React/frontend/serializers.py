@@ -100,6 +100,16 @@ class PointyQuizzesSerializer(serializers.ModelSerializer):
 
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
+        model = Categories
+        fields = (
+            'id',
+            'title_english',
+            'title_persian',
+            'date_published',
+        )
+
+class SubCategoriesSerializer(serializers.ModelSerializer):
+    class Meta:
         model = SubCategories
         fields = (
             'id',

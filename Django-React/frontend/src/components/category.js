@@ -16,6 +16,7 @@ import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
 const Category = (props) => {
     const [categoryQuery, setCategoryQuery] = useState(props.match.params.category)
+    const [categoryTitle, setCategoryTitle] = useState()
     const [pageTravel, setPageTravel] = useState([])
     const [categories, setCategories] = useState([])
     const [numberOfResult, setNumberOfResult] = useState(16)
@@ -24,13 +25,6 @@ const Category = (props) => {
     const [sortType, setSortType] = useState('bestest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-    
-    const categoryDefinitionInFarsi = {
-        'celebrity': 'سلبریتی',
-        'movie-series': 'فیلم و سریال',
-        'psychology': 'روانشناسی'
-    }
-    const currentCategory = categoryDefinitionInFarsi[categoryQuery]
 
     useEffect(() => {
         searchChangeDetector()
@@ -40,6 +34,7 @@ const Category = (props) => {
 
     useEffect(() => {
         getCategories()
+        defineCategoryTitle()
     }, [categoryQuery, sortType, numberOfResult, offset])
 
     const searchChangeDetector = () => {
@@ -52,11 +47,16 @@ const Category = (props) => {
         })(window.history);
     }
 
+    const defineCategoryTitle = async () => {
+        await axios.get(`/dbAPI/categories/?title_english__icontains=${categoryQuery}`)
+            .then((response) => setCategoryTitle(response.data[0].title_persian))
+    }
+
     const getCategories = async () => {
         const sortTypeDefinitionForDb = {
-            'newest': 'category_new',
-            'bestest': 'category_best',
-            'alphabet': 'category_alphabet'
+            'newest': 'subcategory_new',
+            'bestest': 'subcategory_best',
+            'alphabet': 'subcategory_alphabet'
         }
 
         const pageTravelAndCategories = await axios.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?category__icontains=${categoryQuery}&limit=${numberOfResult}&offset=${offset}`)
@@ -125,9 +125,9 @@ const Category = (props) => {
             <Header linkType='Hot'/>
 
             <Helmet>
-                <title>{`کوییزلند | کوییز های ${currentCategory} `}</title>
-                <meta name="description" content={`کوییزلند کوییز های ${currentCategory}`} />
-                <meta name="keywords" content={`بهترین کوییز های ${currentCategory} ,کوییز های ${currentCategory}`} />
+                <title>{`کوییزلند | کوییز های ${categoryTitle} `}</title>
+                <meta name="description" content={`کوییزلند کوییز های ${categoryTitle}`} />
+                <meta name="keywords" content={`بهترین کوییز های ${categoryTitle} ,کوییز های ${categoryTitle}`} />
             </Helmet>
 
             <div className='adverts adverts__left'>
@@ -135,7 +135,7 @@ const Category = (props) => {
             </div>
 
             <h3 className='lowTitle'>{categoryQuery}</h3>
-            <h3 className='title'>کتگوری {categoryDefinitionInFarsi[categoryQuery]}</h3>
+            <h3 className='title'>کتگوری {categoryTitle}</h3>
 
             <Tools
                 numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
