@@ -133,6 +133,24 @@ def restartEveryMonthlyViews(request):
 
     return render(request, "frontend/index.html")
 
+# def renameQuestions(request):
+#     questions = Pointy_Questions.objects.all()
+    
+#     for question in questions:
+#         try:
+#             print('------------------------')
+#             qtitle = Quizzes_Pointy.objects.get(title=question.title)
+            
+#             question.quizKey_id = qtitle.id
+#             question.save()
+            
+#             print(question.quizKey)  
+#         except Exception as e:
+#             print(question.title)
+    
+#     return render(request, "frontend/index.html")
+        
+
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 

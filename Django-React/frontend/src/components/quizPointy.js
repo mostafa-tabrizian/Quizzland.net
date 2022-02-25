@@ -77,22 +77,23 @@ const Quiz = () => {
     const grabData = async () => {
         if (quizTitle != undefined) {
             await axios.get(`/dbAPI/pointy_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
-                .then((quiz) => {
+                .then(async (quiz) => {
                     try {
                         sendCategoryAsInterest(quiz?.subCategory)
                         getSuggestionsQuiz(quiz?.subCategory)
                         applyBackground(quiz?.background)
                         setQuiz(quiz)
+
+                        quiz !== undefined && 
+                        await axios.get(`/dbAPI/questions_pointy/?quizKey=${quiz.id}`)
+                            .then((question) => {
+                                setQuestions(question?.data)
+                                setContentLoaded(true)
+                            })
                     }
                     catch (e) {
                         window.location.href = "/404";
                     }
-                })
-
-            await axios.get(`/dbAPI/questions_pointy/?title__iexact=${quizTitleReplacedWithHyphen}`)
-                .then((question) => {
-                    setQuestions(question?.data)
-                    setContentLoaded(true)
                 })
         }
     }

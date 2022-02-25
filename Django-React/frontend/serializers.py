@@ -16,7 +16,7 @@ class QuizzesSerializer(serializers.ModelSerializer):
         model = Quizzes
         fields = (
             'id',
-            'category',
+            'categoryKey',
             'subCategory',
             'title',
             'tags',
@@ -38,7 +38,7 @@ class PointyQuizzesSerializer(serializers.ModelSerializer):
         model = Quizzes_Pointy
         fields = (
             'id',
-            'category',
+            'categoryKey',
             'subCategory',
             'title',
             'tags',
@@ -103,7 +103,7 @@ class CategoriesSerializer(serializers.ModelSerializer):
         model = SubCategories
         fields = (
             'id',
-            'category',
+            'categoryKey',
             'subCategory',
             'title',
             'thumbnail',
@@ -118,8 +118,7 @@ class QuestionsSerializer(serializers.ModelSerializer):
         model = Questions
         fields = (
             'id',
-            'subCategory' ,
-            'title',
+            'quizKey',
             'question',
             'question_img',
             'option_1st',
@@ -140,8 +139,7 @@ class questions_pointySerializer(serializers.ModelSerializer):
         model = Pointy_Questions
         fields = (
             'id',
-            'subCategory',
-            'title',
+            'quizKey',
             'question',
             'question_img',
             'option_1st',

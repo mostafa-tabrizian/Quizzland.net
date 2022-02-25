@@ -31,6 +31,9 @@ urlpatterns = [
     path('blog', blog),
     path('makeMonthlyRecord', index),
     path('restartEveryMonthlyViews', restartEveryMonthlyViews),
+    
+    # path('renameQuestions', renameQuestions),
+    
     path('welcomeOwl', index),
     path('welcomeZeynab', index),
 ]

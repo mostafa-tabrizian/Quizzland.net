@@ -20,10 +20,10 @@ class Categories(models.Model):
     
     def __str__(self):
         return self.title_english
-
+    
 class CustomUser(AbstractUser):
     fav_color = models.CharField(blank=True, max_length=120)
-
+    
 class CustomUserAdmin(admin.ModelAdmin):
     model = CustomUser
 
@@ -40,8 +40,8 @@ class Document_Admin(admin.ModelAdmin):
     search_fields = ['id', 'title', 'note']
 
 class SubCategories(models.Model):
-    id = models.AutoField(primary_key=True)  
-    category = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
+    id = models.AutoField(primary_key=True)
+    categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
     thumbnail =  models.ImageField(upload_to='Thn-Category', null=True, blank=True, default='NotExist.jpg')
@@ -49,17 +49,16 @@ class SubCategories(models.Model):
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     publish = models.DateTimeField(default=datetime.datetime.now)
-    
+
     def __str__(self):
         return self.subCategory
 
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
+    categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    # newSubCategory = models.ForeignKey(SubCategories, on_delete=models.PROTECT, blank=True, null=True)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
-    tags = models.CharField(max_length=100, null=False, blank=False, default='کوییز')
+    tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
@@ -73,17 +72,17 @@ class Quizzes(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.subCategory
+        return self.title
 
     def __unicode__(self):
         return 'test'
 
 class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
+    categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
-    tags = models.CharField(max_length=100, null=False, blank=False, default='کوییز')
+    tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
@@ -135,12 +134,11 @@ class Quizzes_Pointy(models.Model):
     result_img_10th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
 
     def __str__(self):
-        return self.subCategory
+        return self.title
 
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    subCategory = models.CharField(max_length=100, blank=False, default=None)
-    title = models.CharField(max_length=80, blank=False, default=None, help_text='same quiz title')
+    quizKey = models.ForeignKey(Quizzes, on_delete=models.CASCADE, blank=True, null=True)
     question = models.CharField(max_length=150, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_1st = models.CharField(max_length=100, blank=True, default=None)
@@ -156,20 +154,15 @@ class Questions(models.Model):
     answer_text = RichTextField(blank=True, default=None)
 
     def __str__(self):
-        return self.subCategory
+        return self.quizKey
 
     def __unicode__(self):
         return 'test'
 
-class Questions_Admin(admin.ModelAdmin):
-    list_display = ('title', 'question', 'answer_text', 'subCategory')
-    list_filter = ('subCategory', )
-    search_fields = ['title', 'question']
-
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None, help_text='same quiz title')
+    quizKey = models.ForeignKey(Quizzes_Pointy, on_delete=models.CASCADE, blank=True, null=True)
     question = models.CharField(max_length=150, null=True, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
 
@@ -207,19 +200,14 @@ class Pointy_Questions(models.Model):
     option_point_10th = models.IntegerField(blank=True, default=10)
 
     def __str__(self):
-        return self.subCategory
-
-class Pointy_Questions_Admin(admin.ModelAdmin):
-    list_display = ('title', 'question', 'subCategory')
-    list_filter = ('subCategory',)
-    search_fields = ['title', 'question']
+        return self.quizKey
 
 class Blog(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg')
     content = RichTextField(blank=False, null=False, default=None)
-    tags = models.CharField(max_length=100, null=False, blank=False, default=None)
+    tags = models.CharField(max_length=200, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     publish = models.DateTimeField(default=datetime.datetime.now)

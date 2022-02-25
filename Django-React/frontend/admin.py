@@ -6,35 +6,43 @@ from .models import *
 
 admin.site.site_header = "Quizzland Admin Panel"
 
+@admin.register(Categories)
 class Categories_Admin(admin.ModelAdmin):
     list_display = ('title_english', 'title_persian', 'date_published')
-admin.site.register(Categories, Categories_Admin)
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Document, Document_Admin)
 
+
+@admin.register(SubCategories)
 class SubCategories_Admin(admin.ModelAdmin):
-    list_display = ('subCategory', 'title', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('subCategory','publish')
+    list_display = ('subCategory', 'title', 'categoryKey', 'monthly_views', 'views', 'publish')
+    list_filter = ('subCategory', 'categoryKey', 'publish')
     search_fields = ['id', 'title']
-admin.site.register(SubCategories, SubCategories_Admin)
 
 
+@admin.register(Quizzes)
 class Quizzes_Admin(admin.ModelAdmin):
-    list_display = ('title', 'subCategory', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('category', 'publish')
+    list_display = ('title', 'subCategory', 'categoryKey', 'monthly_views', 'views', 'publish')
+    list_filter = ('subCategory', 'categoryKey', 'publish')
     search_fields = ['id', 'title']
-admin.site.register(Quizzes, Quizzes_Admin)
 
-
+@admin.register(Quizzes_Pointy)
 class Quizzes_Pointy_Admin(admin.ModelAdmin):
-    list_display = ('title', 'subCategory', 'category', 'monthly_views', 'views', 'publish')
-    list_filter = ('subCategory', 'category', 'publish')
+    list_display = ('title', 'subCategory', 'categoryKey', 'monthly_views', 'views', 'publish')
+    list_filter = ('subCategory', 'categoryKey', 'publish')
     search_fields = ['id', 'title']
-admin.site.register(Quizzes_Pointy, Quizzes_Pointy_Admin)
 
-admin.site.register(Questions, Questions_Admin)
-admin.site.register(Pointy_Questions, Pointy_Questions_Admin)
+@admin.register(Questions)
+class Questions_Admin(admin.ModelAdmin):
+    list_display = ('quizKey', 'question', 'answer_text')
+    search_fields = ['question']
+
+@admin.register(Pointy_Questions)
+class Pointy_Questions_Admin(admin.ModelAdmin):
+    list_display = ('quizKey', 'question')
+    search_fields = ['question']
+
 admin.site.register(Blog, Blog_Admin)
 # admin.site.register(Newsletter_Users, Newsletter_Users_Admin)
 
