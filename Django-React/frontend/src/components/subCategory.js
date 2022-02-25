@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import Header from './header'
+import AddView from './addView';
 
 import Tools from './tools'
 import PageTravel from './pageTravel'
@@ -102,11 +103,14 @@ const SubCategory = (props) => {
     }
 
     const backgroundOfSubCategory = async () => {
-        const category_new = await axios.get(`/dbAPI/category_new/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&limit=1`)
-        const background = category_new.data.results[0].background
-        document.getElementById('html').style = `
-            background: url('${background}') center/cover fixed no-repeat !important;
-        `
+        await axios.get(`/dbAPI/category_new/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}`)
+            .then((categoryData) => {
+                AddView('category_new', categoryData.data[0].id)
+                const background = categoryData.data[0].background
+                document.getElementById('html').style = `
+                    background: url('${background}') center/cover fixed no-repeat !important;
+                `
+            })
     }
 
     return (

@@ -86,23 +86,23 @@ const Quiz = () => {
     const grabData = async () => {
         if (quizTitle != undefined) {
             await axios.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
-                .then(async (quiz) => {
+                .then(async (quizData) => {
                     try {
-                        AddView(quiz?.id)
-                        sendCategoryAsInterest(quiz?.subCategory)
-                        getSuggestionsQuiz(quiz?.subCategory)
-                        applyBackground(quiz?.background)
-                        setQuiz(quiz)
+                        AddView('quiz_new', quizData.id)
+                        sendCategoryAsInterest(quizData.subCategory)
+                        getSuggestionsQuiz(quizData.subCategory)
+                        applyBackground(quizData.background)
+                        setQuiz(quizData)
 
-                        quiz !== undefined && 
-                        await axios.get(`/dbAPI/questions/?quizKey=${quiz.id}`)
-                            .then((question) => {
-                                setQuestions(question?.data)
+                        await axios.get(`/dbAPI/questions/?quizKey=${quizData.id}`)
+                            .then((questionData) => {
+                                setQuestions(questionData.data)
                                 setContentLoaded(true)
                             })
                     }
                     catch (e) {
-                        window.location.href = "/404";
+                        // log(e)
+                        // window.location.href = "/404";
                     }
                 })
         }

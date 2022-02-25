@@ -7,6 +7,7 @@ import {StickyShareButtons} from 'sharethis-reactjs';
 
 import axios from 'axios'
 import Header from './header'
+import AddView from './addView';
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from './base'
 import LoadingScreen from './loadingScreen'
@@ -77,22 +78,23 @@ const Quiz = () => {
     const grabData = async () => {
         if (quizTitle != undefined) {
             await axios.get(`/dbAPI/pointy_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
-                .then(async (quiz) => {
+                .then(async (quizData) => {
                     try {
-                        sendCategoryAsInterest(quiz?.subCategory)
-                        getSuggestionsQuiz(quiz?.subCategory)
-                        applyBackground(quiz?.background)
-                        setQuiz(quiz)
+                        AddView('pointy_new', quizData.id)
+                        sendCategoryAsInterest(quizData.subCategory)
+                        getSuggestionsQuiz(quizData.subCategory)
+                        applyBackground(quizData.background)
+                        setQuiz(quizData)
 
-                        quiz !== undefined && 
-                        await axios.get(`/dbAPI/questions_pointy/?quizKey=${quiz.id}`)
-                            .then((question) => {
-                                setQuestions(question?.data)
+                        await axios.get(`/dbAPI/questions_pointy/?quizKey=${quizData.id}`)
+                            .then((questionData) => {
+                                setQuestions(questionData?.data)
                                 setContentLoaded(true)
                             })
                     }
                     catch (e) {
-                        window.location.href = "/404";
+                        // log(e)
+                        // window.location.href = "/404";
                     }
                 })
         }

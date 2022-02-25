@@ -3,7 +3,8 @@ import { log } from './base'
 
 // require('dotenv').config();
 
-const AddView = (contentID) => {
+const AddView = (content, contentID) => {
+    log('addView')
 
     const adminDetail = {
         username: process.env.ADMINUSERNAME,
@@ -19,14 +20,11 @@ const AddView = (contentID) => {
             .then((req) => {
                 authToken = req.data.access
             })
-            .catch((err) => {
-                log(err)
-            })
     }
 
     const getLastViewCount = async () => {
         const now = new Date().getTime()
-        await axios.get(`/dbAPI/quiz_new/${contentID}/?&timestamp=${now}`)
+        await axios.get(`/dbAPI/${content}/${contentID}/?&timestamp=${now}`)
             .then((req) => {
                 lastMonthly = req.data.monthly_views
                 lastView = req.data.views
@@ -45,7 +43,8 @@ const AddView = (contentID) => {
             'accept': 'application/json'
         }
     
-        await axios.put(`/dbAPI/quiz_new/${contentID}/`, view, { headers})
+        await axios.put(`/dbAPI/${content}/${contentID}/`, view, { headers})
+            .then((res) => log(res))
     }
 
     getAuthToken()
