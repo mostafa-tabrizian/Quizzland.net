@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { Link } from 'react-router-dom'
-// import axiosInstance from './axiosApi'
+
 
 import axios from 'axios'
 
@@ -143,7 +143,6 @@ const Search = (props) => {
                             })
                         )
                     } catch { e } {
-                        // log('no quiz found...')
                         return null
                     }
                 }

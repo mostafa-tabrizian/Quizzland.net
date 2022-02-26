@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-// import axiosInstance from './axiosApi'
+
 
 import axios from 'axios'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
@@ -38,14 +38,6 @@ const Result = (props) => {
         detailOfResult()
         getSuggestionsQuiz()
     }, [testResult])
-
-    // const setBackground = (backgroundUrl) => {
-    //     if (backgroundUrl !== undefined) {
-    //         document.getElementById('html').style = `
-    //             background: url('${backgroundUrl}') center/cover fixed no-repeat !important;
-    //         `
-    //     }
-    // }
 
     const detailOfResult = () => {
         if (testDetail) {

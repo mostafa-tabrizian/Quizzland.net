@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
-// import axiosInstance from './axiosApi'
+
 
 import axios from 'axios'
 import Header from './header'

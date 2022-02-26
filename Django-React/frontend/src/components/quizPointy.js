@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 ;
 import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
-// import axiosInstance from './axiosApi'
+
 
 import axios from 'axios'
 import Header from './header'
@@ -169,9 +169,6 @@ const Quiz = () => {
 
 
     const questionShowIfNotNull = (question) => {
-        // if (question !== null) {
-        //     return <p className='text-center quiz__question'> {question} </p>
-        // }
         if (question !== null) {
             return <p className='quiz__question text-center bg-[#0000007c] backdrop-blur-xl rounded-2xl'> {question} </p>
         }
@@ -264,24 +261,6 @@ const Quiz = () => {
         )
     }
 
-    // const quizQuestionsForSafari = () => {
-    //     return (
-    //         questions.map(question => {
-    //             return (
-    //                 <div style={{left: `${currentMoveOfQuestions}rem`}} className="quiz__container pos-rel darkGls">
-
-    //                     { questionShowIfNotNull(question.question) }
-
-    //                     { !question.question_img.includes('NotExist') && <img className="quiz__imgQuestion" src={question?.question_img} alt={question.title}/> } {/* loading='lazy' */}
-                    
-    //                     { questionOptionsCheckBetweenStringOrImg(question) }
-                        
-    //                 </div>
-    //             )
-    //         })
-    //     )
-    // }
-
     const plusOneToTotalAnsweredQuestions = () => {
         setCurrentQuestionNumber(prev => prev + 1)
     }
@@ -293,10 +272,10 @@ const Quiz = () => {
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
 
     if (isItDesktop() || isItIPad()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34.2  // quiz__hider width - margin/padding around the quiz__container + .62
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34.2
     }
     else if (isItMobile()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7 // desktop - 23.6
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7
     }
 
     const calculateThePoints = () => {
@@ -464,28 +443,28 @@ const Quiz = () => {
             {quiz?.title &&
                 <StickyShareButtons
                     config={{
-                        alignment: 'left',    // alignment of buttons (left, right)
-                        color: 'social',      // set the color of buttons (social, white)
-                        enabled: true,        // show/hide buttons (true, false)
-                        font_size: 16,        // font size for the buttons
-                        hide_desktop: false,  // hide buttons on desktop (true, false)
-                        labels: 'counts',     // button labels (cta, counts, null)
-                        language: 'en',       // which language to use (see LANGUAGES)
-                        min_count: 10,         // hide react counts less than min_count (INTEGER)
-                        networks: [           // which networks to include (see SHARING NETWORKS)
+                        alignment: 'left',  
+                        color: 'social',    
+                        enabled: true,      
+                        font_size: 16,      
+                        hide_desktop: false,
+                        labels: 'counts',   
+                        language: 'en',     
+                        min_count: 10,       
+                        networks: [         
                             'whatsapp',
                             'telegram',
                             'twitter',
                             'sms',
                             'sharethis',
                         ],
-                        padding: 9,          // padding within buttons (INTEGER)
-                        radius: 15,            // the corner radius on each button (INTEGER)
-                        show_total: true,     // show/hide the total share count (true, false)
-                        show_mobile: true,    // show/hide the buttons on mobile (true, false)
-                        show_toggle: false,    // show/hide the toggle buttons (true, false)
-                        size: 38,             // the size of each button (INTEGER)
-                        top: 450,             // offset in pixels from the top of the page
+                        padding: 9,        
+                        radius: 15,          
+                        show_total: true,   
+                        show_mobile: true,  
+                        show_toggle: false,  
+                        size: 38,           
+                        top: 450,           
                         url: currentUrl()
                     }}
                 />

@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { log } from './base'
 
-// require('dotenv').config();
-
 const AddView = (content, contentID) => {
     log('addView')
 

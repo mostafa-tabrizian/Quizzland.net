@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import axiosInstance from './axiosApi'
+
 import SkeletonLoading from './skeletonLoading'
 
 import axios from 'axios'

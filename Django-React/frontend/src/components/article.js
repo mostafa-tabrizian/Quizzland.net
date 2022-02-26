@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-// import axiosInstance from './axiosApi'
 
 import {InlineReactionButtons, InlineShareButtons, StickyShareButtons} from 'sharethis-reactjs';
 
@@ -123,27 +122,27 @@ const Article = (props) => {
                         <div>
                             <InlineShareButtons
                                 config={{
-                                    alignment: 'center',  // alignment of buttons (left, center, right)
-                                    color: 'social',      // set the color of buttons (social, white)
-                                    enabled: true,        // show/hide buttons (true, false)
-                                    font_size: 16,        // font size for the buttons
-                                    labels: 'null',        // button labels (cta, counts, null)
-                                    language: 'en',       // which language to use (see LANGUAGES)
-                                    networks: [           // which networks to include (see SHARING NETWORKS)
+                                    alignment: 'center', 
+                                    color: 'social',     
+                                    enabled: true,       
+                                    font_size: 16,       
+                                    labels: 'null',       
+                                    language: 'en',      
+                                    networks: [          
                                         'whatsapp',
                                         'telegram',
                                         'twitter',
                                         'sharethis',
                                     ],
-                                    padding: 10,          // padding within buttons (INTEGER)
-                                    radius: 10,            // the corner radius on each button (INTEGER)
+                                    padding: 10,         
+                                    radius: 10,           
                                     show_total: false,
-                                    size: 45,             // the size of each button (INTEGER)
+                                    size: 45,            
 
-                                    // OPTIONAL PARAMETERS
+                                
                                     url: currentUrl(),
-                                    image: article.thumbnail,  // (defaults to og:image or twitter:image)
-                                    title: article.title,            // (defaults to og:title or twitter:title)
+                                    image: article.thumbnail, 
+                                    title: article.title,           
                                 }}
                             />
                         </div>
@@ -155,12 +154,12 @@ const Article = (props) => {
                         <div>
                             <InlineReactionButtons
                                 config={{
-                                    alignment: 'center',  // alignment of buttons (left, center, right)
-                                    enabled: true,        // show/hide buttons (true, false)
-                                    language: 'en',       // which language to use (see LANGUAGES)
-                                    min_count: 0,         // hide react counts less than min_count (INTEGER)
-                                    padding: 12,          // padding within buttons (INTEGER)
-                                    reactions: [          // which reactions to include (see REACTIONS)
+                                    alignment: 'center', 
+                                    enabled: true,       
+                                    language: 'en',      
+                                    min_count: 0,        
+                                    padding: 12,         
+                                    reactions: [         
                                         'slight_smile',
                                         'heart_eyes',
                                         'laughing',
@@ -168,13 +167,13 @@ const Article = (props) => {
                                         'sob',
                                         'rage'
                                     ],
-                                    size: 45,             // the size of each button (INTEGER)
-                                    spacing: 8,           // the spacing between buttons (INTEGER)
+                                    size: 45,            
+                                    spacing: 8,          
 
-                                // OPTIONAL PARAMETERS
+                            
                                 url: currentUrl(),
-                                image: article.thumbnail,  // (defaults to og:image or twitter:image)
-                                title: article.title,            // (defaults to og:title or twitter:title)
+                                image: article.thumbnail, 
+                                title: article.title,           
                                 }}
                             />
                         </div>
@@ -182,28 +181,28 @@ const Article = (props) => {
                         <div>
                             <StickyShareButtons
                                 config={{
-                                    alignment: 'left',    // alignment of buttons (left, right)
-                                    color: 'social',      // set the color of buttons (social, white)
-                                    enabled: true,        // show/hide buttons (true, false)
-                                    font_size: 16,        // font size for the buttons
-                                    hide_desktop: false,  // hide buttons on desktop (true, false)
-                                    labels: 'counts',     // button labels (cta, counts, null)
-                                    language: 'en',       // which language to use (see LANGUAGES)
-                                    min_count: 10,         // hide react counts less than min_count (INTEGER)
-                                    networks: [           // which networks to include (see SHARING NETWORKS)
+                                    alignment: 'left',   
+                                    color: 'social',     
+                                    enabled: true,       
+                                    font_size: 16,       
+                                    hide_desktop: false, 
+                                    labels: 'counts',    
+                                    language: 'en',      
+                                    min_count: 10,        
+                                    networks: [          
                                         'whatsapp',
                                         'telegram',
                                         'twitter',
                                         'sms',
                                         'sharethis',
                                     ],
-                                    padding: 12,          // padding within buttons (INTEGER)
-                                    radius: 15,            // the corner radius on each button (INTEGER)
-                                    show_total: true,     // show/hide the total share count (true, false)
-                                    show_mobile: true,    // show/hide the buttons on mobile (true, false)
-                                    show_toggle: false,    // show/hide the toggle buttons (true, false)
-                                    size: 48,             // the size of each button (INTEGER)
-                                    top: 250,             // offset in pixels from the top of the page
+                                    padding: 12,         
+                                    radius: 15,           
+                                    show_total: true,    
+                                    show_mobile: true,   
+                                    show_toggle: false,   
+                                    size: 48,            
+                                    top: 250,            
                                     url: currentUrl()
                                 }}
                             />
