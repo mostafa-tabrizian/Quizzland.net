@@ -2,8 +2,6 @@ import axios from 'axios'
 import { log } from './base'
 
 const AddView = (content, contentID) => {
-    log('addView')
-
     const adminDetail = {
         username: process.env.ADMINUSERNAME,
         password: process.env.ADMINPASSWORD,
@@ -42,7 +40,7 @@ const AddView = (content, contentID) => {
         }
     
         await axios.put(`/dbAPI/${content}/${contentID}/`, view, { headers})
-            .then((res) => log(res))
+            // .then((res) => log(res))
     }
 
     getAuthToken()

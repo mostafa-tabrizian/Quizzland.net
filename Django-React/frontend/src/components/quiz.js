@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
-;
+import { notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 
@@ -37,7 +37,6 @@ const Quiz = () => {
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [quizThumbnail, setQuizThumbnail] = useState()
     const [SFXAllowed, setSFXAllowed] = useState()
-    const [showQuestionChangingHelper, setShowQuestionChangingHelper] = useState(false)
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
     const [quiz, setQuiz] = useState(null)
@@ -66,6 +65,23 @@ const Quiz = () => {
         }
     }
 
+    const openNotification = () => {
+        notification.open({
+            message: 'راهنمایی برای تغییر سؤال',
+            description:
+            'برای تغییر سوال و رفتن به سوال بعدی صفحه را به سمت چپ بکشید.',
+            duration: 0,
+            style: {
+                'font-size': '25px',
+                'font-weight': '600',
+                'box-shadow': '0 0 20px #b52633',
+                'direction': 'rtl',
+                'padding-right': '4rem',
+            },
+            className: 'rounded-lg'
+        });
+    };
+
     const applyBackground = (background) => {
         document.querySelector('html').style = `background: url('${background}') center/cover no-repeat fixed !important`
     }
@@ -84,28 +100,26 @@ const Quiz = () => {
     }
 
     const grabData = async () => {
-        if (quizTitle != undefined) {
-            await axios.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
-                .then(async (quizData) => {
-                    try {
-                        AddView('quiz_new', quizData.id)
-                        sendCategoryAsInterest(quizData.subCategory)
-                        getSuggestionsQuiz(quizData.subCategory)
-                        applyBackground(quizData.background)
-                        setQuiz(quizData)
-
-                        await axios.get(`/dbAPI/questions/?quizKey=${quizData.id}`)
-                            .then((questionData) => {
-                                setQuestions(questionData.data)
-                                setContentLoaded(true)
-                            })
-                    }
-                    catch (e) {
-                    
-                    
-                    }
-                })
-        }
+        quizTitleReplacedWithHyphen && 
+        await axios.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
+            .then(async (quizData) => {
+                try {
+                    AddView('quiz_new', quizData.id)
+                    sendCategoryAsInterest(quizData.subCategory)
+                    getSuggestionsQuiz(quizData.subCategory)
+                    applyBackground(quizData.background)
+                    setQuiz(quizData)
+    
+                    await axios.get(`/dbAPI/questions/?quizKey=${quizData.id}`)
+                        .then((questionData) => {
+                            setQuestions(questionData.data)
+                            setContentLoaded(true)
+                        })
+                }
+                catch (e) {
+                    window.location.href = '/404'
+                }
+            })
     }
 
     const sendCategoryAsInterest = (category) => {
@@ -219,8 +233,8 @@ const Quiz = () => {
                 }, amountOfPauseCalculator())
             } else {
                 setTimeout(() => {
-                    if (showQuestionChangingHelper !== 'never' && !(isItDesktop())) {
-                        setShowQuestionChangingHelper(true)
+                    if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
+                        openNotification()
                     }
                 }, 5000)
             }
@@ -658,10 +672,6 @@ const Quiz = () => {
                     سوال شماره
                 </div>
             } */}
-
-            <div className={`text-center mt-4 ${showQuestionChangingHelper ? 'fadeIn' : 'fadeOut'}`}>
-                <h5>برای رفتن به سوال بعدی از راست به چپ بکشید!</h5>
-            </div>
 
             <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                 <div className={`quiz__hider flex relative`}>

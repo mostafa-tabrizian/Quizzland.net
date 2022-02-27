@@ -105,7 +105,7 @@ const SubCategory = (props) => {
     const backgroundOfSubCategory = async () => {
         await axios.get(`/dbAPI/subcategory_new/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}`)
             .then((categoryData) => {
-                AddView('category_new', categoryData.data[0].id)
+                AddView('subcategory_new', categoryData.data[0].id)
                 const background = categoryData.data[0].background
                 document.getElementById('html').style = `
                     background: url('${background}') center/cover fixed no-repeat !important;
