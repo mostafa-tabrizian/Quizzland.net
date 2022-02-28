@@ -171,7 +171,7 @@
             // }
         // }
     
-        // &__quizzes {
+        &__quizzes {
             // @include breakpoints-down(large) {
             //     display: grid;
             //     justify-content: center;
@@ -224,7 +224,12 @@
             //     }
             // }
             
-            // &__item {
+            &__item {
+                a > img {
+                    filter: brightness(60%) !important;
+                    box-shadow: 0 15px 15px black !important;
+                }
+
             //     display: block;
             //     margin-bottom: 1rem;
     
@@ -238,8 +243,8 @@
             //         top: 0.2rem;
             //         margin-left: 1rem;
             //     }
-            // }
-        // }
+            }
+        }
 
         &__seeMore {
             margin-right: 2rem;

@@ -1,3 +1,24 @@
+.hero-inner {
+    padding: 1.5rem;
+    color: white;
+    border-radius: 40px;
+    box-shadow: 2px 2px 8px #0000005e, 0 0 15px #3f3f3f5e !important;
+    backdrop-filter: blur(15px) !important;
+    background: rgba(0, 0, 0, 0.54) !important;
+    border: solid 1px transparent !important;
+    background-clip: padding-box !important;
+
+
+    button {
+        background-image: linear-gradient(-45deg, #6e6e6e, rgb(216, 216, 216)) !important;
+        color: black !important;
+
+        &:hover {
+            color: #af282f !important;
+        }
+    }
+}
+
 .hero{
     &_bubbles {
         animation: dancingBubbles 5s infinite linear;
@@ -32,6 +53,19 @@
 
         h2 {
             font-family: myLalezar, myHarmattan, serif;
+        }
+
+        a {
+            animation: shining 2s linear infinite alternate-reverse;
+        }
+
+        @keyframes shining {
+            from {
+                box-shadow: 6px 0px 22px #ffffff14, inset 6px 0 18px black;
+            }
+            to {
+                box-shadow: -6px -5px 22px #ffffff14, inset -6px 5px 18px black;
+            }
         }
 
         button {

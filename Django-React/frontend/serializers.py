@@ -11,6 +11,31 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # token['fav_color'] = user.fav_color
         return token
 
+class CategoriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categories
+        fields = (
+            'id',
+            'title_english',
+            'title_persian',
+            'date_published',
+        )
+
+class SubCategoriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategories
+        fields = (
+            'id',
+            'categoryKey',
+            'subCategory',
+            'title',
+            'thumbnail',
+            'background',
+            'monthly_views',
+            'views',
+            'publish'
+        )
+
 class QuizzesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quizzes
@@ -32,6 +57,8 @@ class QuizzesSerializer(serializers.ModelSerializer):
             'GIF100', 
             'publish',
         )
+        
+    categoryKey = CategoriesSerializer(many=False)
 
 class PointyQuizzesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -97,31 +124,8 @@ class PointyQuizzesSerializer(serializers.ModelSerializer):
             'result_title_10th',
             'result_text_10th',
         )
-
-class CategoriesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Categories
-        fields = (
-            'id',
-            'title_english',
-            'title_persian',
-            'date_published',
-        )
-
-class SubCategoriesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SubCategories
-        fields = (
-            'id',
-            'categoryKey',
-            'subCategory',
-            'title',
-            'thumbnail',
-            'background',
-            'monthly_views',
-            'views',
-            'publish'
-        )
+              
+    categoryKey = CategoriesSerializer(many=False)
 
 class QuestionsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -143,6 +147,8 @@ class QuestionsSerializer(serializers.ModelSerializer):
             'answer_imGif',
             'answer_text'
         )
+        
+        quizKey = QuizzesSerializer(many=False)
 
 class questions_pointySerializer(serializers.ModelSerializer):
     class Meta:
@@ -192,6 +198,9 @@ class questions_pointySerializer(serializers.ModelSerializer):
             'option_img_10th',
             'option_point_10th',
         )
+        
+    quizKey = QuizzesSerializer(many=False)
+
 
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
