@@ -658,6 +658,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 .mr-5 {
   margin-right: 1.25rem;
 }
@@ -764,6 +769,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mb-\[50vh\] {
   margin-bottom: 50vh;
+}
+
+.mt-\[10rem\] {
+  margin-top: 10rem;
 }
 
 .block {
@@ -1547,6 +1556,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:mt-0 {
     margin-top: 0px;
+  }
+
+  .md\:mt-\[10rem\] {
+    margin-top: 10rem;
   }
 
   .md\:block {

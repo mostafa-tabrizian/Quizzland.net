@@ -43,6 +43,8 @@ class QuizzesSerializer(serializers.ModelSerializer):
             'id',
             'categoryKey',
             'subCategory',
+            'rate',
+            'rate_count',
             'title',
             'tags',
             'monthly_views',
@@ -58,7 +60,7 @@ class QuizzesSerializer(serializers.ModelSerializer):
             'publish',
         )
         
-    categoryKey = CategoriesSerializer(many=False)
+    categoryKey = CategoriesSerializer(many=False, read_only=True)
 
 class PointyQuizzesSerializer(serializers.ModelSerializer):
     class Meta:

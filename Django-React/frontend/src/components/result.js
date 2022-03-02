@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
-
+import { Rate } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
-
+import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
 import axios from 'axios'
 import Header from './header'
+import axiosInstance from './axiosApi'
 
 import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from './base'
 import BackBtn from './backBtn'
@@ -25,6 +26,7 @@ const Result = () => {
     const [questions, setQuestions] = useState(null)
     const [correctAnswersCounter, setCorrectAnswersCounter] = useState(null)
     const [quizResult, setQuizResult] = useState(null)
+    const [rateChangeable, setRateChangeable] = useState(true)
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
@@ -58,6 +60,14 @@ const Result = () => {
             setScore(score)
         }
     }
+
+    const customIcons = {
+        1: <FrownOutlined />,
+        2: <FrownOutlined />,
+        3: <MehOutlined />,
+        4: <SmileOutlined />,
+        5: <SmileOutlined />,
+    };
 
     const detailOfResult = () => {
         if (score > 80){
@@ -213,6 +223,55 @@ const Result = () => {
                         </div>
 
                         <h2 className='flex justify-center text-lg flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
+
+                        <Rate
+                            character={({ index }) => customIcons[index + 1]}
+                            allowClear={true}
+                            disabled={rateChangeable ? false : true}
+                            className='flex justify-center my-3 biggerRate'
+                            onChange={async (value) => {
+                                setRateChangeable(false)
+
+                                const adminDetail = {
+                                    username: process.env.ADMINUSERNAME,
+                                    password: process.env.ADMINPASSWORD,
+                                }
+
+                                let authToken   
+
+                                await axios.post('/api/token/obtain/', adminDetail)
+                                    .then((req) => {
+                                        authToken = req.data.access
+                                    })
+
+                                const now = new Date().getTime()
+
+                                let lastRate
+                                let RateCount
+
+                                await axiosInstance.get(`/dbAPI/quiz_new/${quizResult.id}/?&timestamp=${now}`)
+                                    .then((req) => {
+                                        lastRate = req.data.rate
+                                        RateCount = req.data.rate_count
+                                    })
+                                    .catch((err) => {
+                                        log(err)
+                                    })
+                                    
+                                await axiosInstance.put(
+                                    `/dbAPI/quiz_new/${quizResult.id}/`,
+                                    {
+                                        rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
+                                        rate_count: RateCount + 1
+                                    },
+                                    { 
+                                        'Authorization': "JWT " + authToken,
+                                        'Content-Type': 'application/json',
+                                        'accept': 'application/json'
+                                     }
+                                )
+                            }}
+                        />
                         
                         <div>
                             {/* <InlineReactionButtons

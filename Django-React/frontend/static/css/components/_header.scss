@@ -255,13 +255,13 @@
     a, button {
         color: $white;
 
-        &:hover {
-            color: white !important;
-        }
+        // &:hover {
+        //     color: white !important;
+        // }
         
-        &::after{
-            border-bottom: 2px solid $white !important;
-        }
+        // &::after{
+        //     border-bottom: 2px solid $white !important;
+        // }
     }
 
     li > a {

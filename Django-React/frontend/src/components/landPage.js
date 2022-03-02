@@ -231,7 +231,7 @@ const Index = () => {
                         <button
                             onClick={() => {document.getElementById('scroll').scrollIntoView()}}
                             className='
-                                alignment-center btn text-[1.6rem] py-[.5rem] px-[3rem]
+                                items-center btn text-[1.6rem] py-[.5rem] px-[3rem]
                                 radius-[5rem] inline-flex shadow-[inset_6px_0_22px_black]
                                 relative z-1
                         '>
@@ -248,7 +248,7 @@ const Index = () => {
 
                 {recommendedQuizzes}
 
-                <div className="mb-8">
+                <div className="mb-8 md:mt-[10rem]">
                     <span id='scroll' />
 
                     <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">

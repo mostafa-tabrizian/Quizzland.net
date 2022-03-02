@@ -52,6 +52,8 @@ class Quizzes(models.Model):
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
     tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
+    rate = models.FloatField(null=False, default=0)
+    rate_count = models.IntegerField(default=0)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
