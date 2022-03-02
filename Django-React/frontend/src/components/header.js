@@ -55,7 +55,7 @@ const Header = (props) => {
         <React.Fragment>
 
 
-            <header className="header text-xl p-4 relative">
+            <header className="header text-xl p-4 z-10 relative">
 
                 <Helmet>
                     <script type="text/javascript">

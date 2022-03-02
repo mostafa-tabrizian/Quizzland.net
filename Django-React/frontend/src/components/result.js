@@ -16,35 +16,42 @@ import QuizContainer from './quizContainer'
 import SkeletonLoading from './skeletonLoading'
 
 const Result = () => {
-    const [score, setScore] = useState(0)
     const [resultScore, setResultScore] = useState(0)
     const [resultSubtitle, setResultSubtitle] = useState()
-    const [resultGif, setResultGif] = useState()
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [questions, setQuestions] = useState(null)
-    const [correctAnswersCounter, setCorrectAnswersCounter] = useState(null)
+    const [questionCount, setQuestionCount] = useState(null)
+    const [correctAnswersCount, setCorrectAnswersCount] = useState(null)
     const [quizResult, setQuizResult] = useState(null)
     const [rateChangeable, setRateChangeable] = useState(true)
+    const [resultGif, setResultGif] = useState()
+    const [fanName, setFanName] = useState()
+    const [title, setTitle] = useState()
+    const [id, setId] = useState()
 
     useEffect(() => {
+        const params = new URLSearchParams(window.location.search)
+        // setScore(params.get('s'))
+        setQuestionCount(params.get('qc'))
+        setCorrectAnswersCount(params.get('cc'))
+        setResultGif(params.get('rg'))
+        setFanName(params.get('fn'))
+        setTitle(params.get('qt'))
+        setId(params.get('id'))
+        
+        detailOfResult(params.get('s'))
+        getSuggestionsQuiz(params.get('sc'))
+
         if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
             window.location.href = "/404";
         } else {
             document.querySelector('html').style=`background: None`
             setLoadState(true)
-            setQuestions(JSON.parse(localStorage.getItem('resultQuestions')))
-            setCorrectAnswersCounter(localStorage.getItem('resultCorrectAnswersCounter'))
-            setQuizResult(JSON.parse(localStorage.getItem('resultQuiz')))
+            // setCorrectAnswersCount(window.location.search.ca)  // correct answer count
+            // setQuizResult(JSON.parse(localStorage.getItem('resultQuiz')))
         }
     }, [])
-
-    useEffect(() => {
-        detailOfResult()
-        calculateTheResultScore()
-        getSuggestionsQuiz()
-    }, [score, quizResult])
 
     useEffect(() => {
         {
@@ -52,14 +59,6 @@ const Result = () => {
             showPopUpSuggestion()
         }
     }, [suggestionQuizzes])
-
-    const calculateTheResultScore = () => {
-        const questionsCounter = questions?.length
-        if (questionsCounter && correctAnswersCounter) {
-            const score = ((correctAnswersCounter / questionsCounter) * 100).toFixed(0)
-            setScore(score)
-        }
-    }
 
     const customIcons = {
         1: <FrownOutlined />,
@@ -69,31 +68,26 @@ const Result = () => {
         5: <SmileOutlined />,
     };
 
-    const detailOfResult = () => {
+    const detailOfResult = (score) => {
         if (score > 80){
             setResultScore(`😎 ${score}%`)
             setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
-            setResultGif(quizResult?.GIF100)
         }
         else if (score > 60){
             setResultScore(`😎 ${score}%`)
-            setResultSubtitle(`😎 ایول\n! تو یک ${quizResult?.fan_name} واقعی هستی `)
-            setResultGif(quizResult?.GIF80)
+            setResultSubtitle(`😎 ایول\n! تو یک ${fanName} واقعی هستی `)
         }
         else if (score > 40){
             setResultScore(`🙂 ${score}%`)
             setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
-            setResultGif(quizResult?.GIF60)
         }
         else if (score > 20){
             setResultScore(`😉 ${score}%`)
             setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
-            setResultGif(quizResult?.GIF40)
         }
         else if (score >= 0){
             setResultScore(`😭 ${score}%`)
             setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
-            setResultGif(quizResult?.GIF20)
         }
         else {
             setResultScore(`👀`)
@@ -105,8 +99,8 @@ const Result = () => {
         window.history.go(-1)
     }
 
-    const getSuggestionsQuiz = () => {
-        axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${quizResult && replaceFunction(quizResult.subCategory, ' ', '+')}&limit=4`)
+    const getSuggestionsQuiz = (subCategory) => {
+        axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
         setContentLoaded(true)
     }
@@ -116,8 +110,8 @@ const Result = () => {
             popUpShow(document.querySelector('.result__popUpQuizSuggester'))
 
             document.querySelector('body').style.overflow = 'hidden'
-            document.querySelector('#quizLand').style.pointerEvents = 'none'
-            document.querySelector('#quizLand').style.overflow = 'none'
+            document.querySelector('#land').style.pointerEvents = 'none'
+            document.querySelector('#land').style.overflow = 'none'
             document.querySelector('.header').style.filter = 'blur(7px)'
             document.querySelector('.result__container').style.filter = 'blur(7px)'
             document.querySelector('h2').style.filter = 'blur(7px)'
@@ -133,7 +127,7 @@ const Result = () => {
         popUpHide(document.querySelector('.result__popUpQuizSuggester'))
 
         document.querySelector('body').style.overflow = 'auto'
-        document.querySelector('#quizLand').style.pointerEvents = 'all'
+        document.querySelector('#land').style.pointerEvents = 'all'
         document.querySelector('.header').style.filter = 'blur(0)'
         document.querySelector('.result__container').style.filter = 'blur(0)'
         document.querySelector('h2').style.filter = 'blur(0)'
@@ -141,7 +135,7 @@ const Result = () => {
     }
 
     const chooseUniqueQuizToSuggest = () => {
-        if (suggestionQuizzes[0]?.title === quizResult?.title) {
+        if (suggestionQuizzes[0]?.title === title) {
             if (suggestionQuizzes[1]) {
                 return suggestionQuizzes[1]
             }
@@ -170,7 +164,7 @@ const Result = () => {
 
             <div className="result__container">
                     <div className="flex justify-center result__title">
-                        <h5 className="text-right">نتیجه  {quizResult?.title}</h5>
+                        <h5 className="text-right">نتیجه  {title}</h5>
                     </div>
                     <div className="flex justify-center beforeAfterDecor flex-ai-c">
                         <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
@@ -185,14 +179,14 @@ const Result = () => {
                             </h5>
                         </div>
                         <div className="mt-5 mb-16 text-lg text-center result__detail">
-                            <h5>پاسخ 🟢: <span>{correctAnswersCounter}</span></h5>
-                            <h5>پاسخ 🔴: <span>{questions?.length - correctAnswersCounter}</span></h5>
+                            <h5>پاسخ 🟢: <span>{correctAnswersCount}</span></h5>
+                            <h5>پاسخ 🔴: <span>{questionCount - correctAnswersCount}</span></h5>
                         </div>
                     </div>
 
                     <div className='container px-20 mx-auto'>
                         <div className="text-lg text-center result__share space-sm">
-                            <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizResult?.fan_name} هستن`}</h5>
+                            <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${fanName} هستن`}</h5>
 
                             {/* <InlineShareButtons
                                 config={{
@@ -249,7 +243,7 @@ const Result = () => {
                                 let lastRate
                                 let RateCount
 
-                                await axiosInstance.get(`/dbAPI/quiz_new/${quizResult.id}/?&timestamp=${now}`)
+                                await axiosInstance.get(`/dbAPI/quiz_new/${id}/?&timestamp=${now}`)
                                     .then((req) => {
                                         lastRate = req.data.rate
                                         RateCount = req.data.rate_count
@@ -259,7 +253,7 @@ const Result = () => {
                                     })
                                     
                                 await axiosInstance.put(
-                                    `/dbAPI/quiz_new/${quizResult.id}/`,
+                                    `/dbAPI/quiz_new/${id}/`,
                                     {
                                         rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
                                         rate_count: RateCount + 1

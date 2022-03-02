@@ -22,7 +22,7 @@ let quizCounter = 0
 
 const Quiz = () => {
     const [questions, setQuestions] = useState([])
-    const [correctAnswersCounter, setCorrectAnswersCounter] = useState(0)
+    const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [correctAnswerOption, setCorrectAnswerOption] = useState(0)
@@ -41,6 +41,13 @@ const Quiz = () => {
     const [SFXWrong, setSFXWrong] = useState(null)
     const [quiz, setQuiz] = useState(null)
     const [quizTitleReplacedWithHyphen, setQuizTitleReplacedWithHyphen] = useState()
+
+    const [score, setScore] = useState(0)
+    const [resultGif, setResultGif] = useState()
+    const [fanName, setFanName] = useState()
+    const [subCategory, setSubCategory] = useState()
+    const [title, setTitle] = useState()
+    const [id, setId] = useState()
 
     const result = useRef(null)
 
@@ -122,6 +129,15 @@ const Quiz = () => {
             })
     }
 
+    const calculateTheResultScore = () => {
+        const questionsCounter = questions?.length
+        if (questionsCounter && correctAnswersCount) {
+            const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
+            log(score)
+            setScore(score)
+        }
+    }
+
     const sendCategoryAsInterest = (category) => {
         const interest = JSON.parse(localStorage.getItem('interest'))
 
@@ -172,7 +188,7 @@ const Quiz = () => {
                 SFXWrong.play()
             }
         } else {
-            setCorrectAnswersCounter(prev => prev + 1)
+            setCorrectAnswersCount(prev => prev + 1)
             if (SFXAllowed === 'true') {
                 SFXCorrect.volume = .5
                 SFXCorrect.play()
@@ -249,7 +265,7 @@ const Quiz = () => {
 
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        setAbleToGoNext(false)
+        // setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
         makeEveryOptionLowOpacity('high')
@@ -268,6 +284,24 @@ const Quiz = () => {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7
     }
 
+    const detailOfResult = () => {
+        if (score > 80){
+            setResultGif(quiz?.GIF100)
+        }
+        else if (score > 60){
+            setResultGif(quiz?.GIF80)
+        }
+        else if (score > 40){
+            setResultGif(quiz?.GIF60)
+        }
+        else if (score > 20){
+            setResultGif(quiz?.GIF40)
+        }
+        else if (score >= 0){
+            setResultGif(quiz?.GIF20)
+        }
+    }
+
 
     const goNextQuestionOrEndTheQuiz = () => {
         if (ableToGoNext || autoQuestionChanger) {
@@ -284,11 +318,19 @@ const Quiz = () => {
                 setQuizEnded(true)
                 setTimeout(() => {
                     try {
-                        localStorage.setItem('resultQuiz', JSON.stringify(quiz))
-                        localStorage.setItem('resultQuestions', JSON.stringify(questions))
-                        localStorage.setItem('resultCorrectAnswersCounter', correctAnswersCounter)
+                        // localStorage.setItem('resultQuiz', JSON.stringify(quiz))
+                        // localStorage.setItem('resultQuestions', JSON.stringify(questions))
+                        // localStorage.setItem('resultCorrectAnswersCount', correctAnswersCount)
+                        calculateTheResultScore()
+                        detailOfResult()
+                        setFanName(quiz?.fan_name)
+                        setSubCategory(quiz?.subCategory)
+                        setTitle(quiz?.title)
+                        setId(quiz?.id)
+
                         result.current.click()
-                    } catch {
+                    } catch (err) {
+                        log(err)
                         log("Can't show the result from localStorage!")
                     }
                 }, 3500)
@@ -715,7 +757,7 @@ const Quiz = () => {
             <div className='adverts_center' id='mediaad-dESu'></div>
 
             <Link
-                to='/result_quiz'
+                to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&rg=${resultGif}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}`}
                 ref={result}
                 className='noVis'
             >

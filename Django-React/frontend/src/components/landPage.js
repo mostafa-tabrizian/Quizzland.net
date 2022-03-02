@@ -92,7 +92,7 @@ const Index = () => {
             const recommendedQuizzesList = () => {
                 return (
                     matchedQuizzes.length >= 4 &&
-                    <div className="mb-8">
+                    <div className="mb-8 mt-[5rem]">
     
                         <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
                             <h3 className=''>پیشنهادی های کوییزلند به شما</h3>
