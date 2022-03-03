@@ -11,6 +11,7 @@ import PageTravel from './pageTravel'
 import LoadingScreen from './loadingScreen'
 import SkeletonLoading from './skeletonLoading';
 import Header from './header'
+import AddView from './addView';
 
 import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
@@ -36,6 +37,10 @@ const Category = (props) => {
     useEffect(() => {
         getCategories()
         defineCategoryTitle()
+
+        log(categoryQueryID)
+        AddView('categories', categoryQueryID)
+
     }, [categoryQuery, categoryQueryID, categoryTitle, sortType, numberOfResult, offset])
 
     const searchChangeDetector = () => {

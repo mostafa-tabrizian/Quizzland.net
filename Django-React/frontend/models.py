@@ -9,6 +9,8 @@ class Categories(models.Model):
     id = models.AutoField(primary_key=True)
     title_english = models.CharField(max_length=80, null=False, blank=False, default=None)
     title_persian = models.CharField(max_length=80, null=False, blank=False, default=None)
+    monthly_views = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
     date_published = models.DateField(default=datetime.date.today)
     
     def __str__(self):

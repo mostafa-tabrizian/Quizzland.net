@@ -18,6 +18,8 @@ class CategoriesSerializer(serializers.ModelSerializer):
             'id',
             'title_english',
             'title_persian',
+            'monthly_views',
+            'views',
             'date_published',
         )
 
