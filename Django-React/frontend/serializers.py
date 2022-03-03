@@ -69,6 +69,8 @@ class PointyQuizzesSerializer(serializers.ModelSerializer):
             'id',
             'categoryKey',
             'subCategory',
+            'rate',
+            'rate_count',
             'title',
             'tags',
             'monthly_views',
@@ -127,7 +129,7 @@ class PointyQuizzesSerializer(serializers.ModelSerializer):
             'result_text_10th',
         )
               
-    categoryKey = CategoriesSerializer(many=False)
+    categoryKey = CategoriesSerializer(many=False, read_only=True)
 
 class QuestionsSerializer(serializers.ModelSerializer):
     class Meta:

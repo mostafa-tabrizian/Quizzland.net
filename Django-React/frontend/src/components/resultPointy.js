@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-
-
+import { Rate } from 'antd';
+import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
-import Header from './header'
 
+import Header from './header'
+import axiosInstance from './axiosApi'
 import { log, replaceFunction } from './base'
 import BackBtn from './backBtn'
 import LoadingScreen from './loadingScreen'
@@ -23,6 +24,8 @@ const Result = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [testResult, setTestResult] = useState()
     const [testDetail, setTestDetail] = useState()
+    const [rateChangeable, setRateChangeable] = useState(true)
+    const [id, setId] = useState()
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
@@ -38,6 +41,14 @@ const Result = (props) => {
         detailOfResult()
         getSuggestionsQuiz()
     }, [testResult])
+    
+    const customIcons = {
+        1: <FrownOutlined />,
+        2: <FrownOutlined />,
+        3: <MehOutlined />,
+        4: <SmileOutlined />,
+        5: <SmileOutlined />,
+    };
 
     const detailOfResult = () => {
         if (testDetail) {
@@ -100,7 +111,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = async () => {
-        await axios.get(`/dbAPI/pointy_new/?subCategory__icontains=${testResult && replaceFunction(testResult.subCategory, ' ', '+')}&limit=4`)
+        await axios.get(`/dbAPI/pointy_new/?subCategory__icontains=${testResult && replaceFunction(testResult?.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {
                 setSuggestionQuizzes(res.data.results)
             })
@@ -182,32 +193,55 @@ const Result = (props) => {
 
                         <h2 className='flex justify-center text-lg flex-ai-c space-med'>این تست چطور بود؟</h2>
 
-                        <div>
-                            {/* <InlineReactionButtons
-                                config={{
-                                    alignment: 'center',  // alignment of buttons (left, center, right)
-                                    enabled: true,        // show/hide buttons (true, false)
-                                    language: 'en',       // which language to use (see LANGUAGES)
-                                    min_count: 0,         // hide react counts less than min_count (INTEGER)
-                                    padding: 12,          // padding within buttons (INTEGER)
-                                    reactions: [          // which reactions to include (see REACTIONS)
-                                        'slight_smile',
-                                        'heart_eyes',
-                                        'laughing',
-                                        'astonished',
-                                        'sob',
-                                        'rage'
-                                    ],
-                                    size: 45,             // the size of each button (INTEGER)
-                                    spacing: 8,           // the spacing between buttons (INTEGER)
+                        <Rate
+                            character={({ index }) => customIcons[index + 1]}
+                            allowClear={true}
+                            disabled={rateChangeable ? false : true}
+                            className='flex justify-center my-3 biggerRate'
+                            onChange={async (value) => {
+                                setRateChangeable(false)
 
-                                // OPTIONAL PARAMETERS
-                                url: `https://www.quizzland.net/test/${replaceFunction(testDetail?.title, ' ', '-')}`,
-                                image: testDetail.thumbnail,  // (defaults to og:image or twitter:image)
-                                title: testDetail?.title,            // (defaults to og:title or twitter:title)
-                                }}
-                            /> */}
-                        </div>
+                                const adminDetail = {
+                                    username: process.env.ADMINUSERNAME,
+                                    password: process.env.ADMINPASSWORD,
+                                }
+
+                                let authToken   
+
+                                await axios.post('/api/token/obtain/', adminDetail)
+                                    .then((req) => {
+                                        authToken = req.data.access
+                                    })
+
+                                const now = new Date().getTime()
+
+                                let lastRate
+                                let RateCount
+
+                                await axiosInstance.get(`/dbAPI/pointy_new/${testDetail?.id}/?&timestamp=${now}`)
+                                    .then((req) => {
+                                        lastRate = req.data.rate
+                                        RateCount = req.data.rate_count
+                                    })
+                                    .catch((err) => {
+                                        log(err)
+                                    })
+
+                                    
+                                await axiosInstance.put(
+                                    `/dbAPI/pointy_new/${testDetail?.id}/`,
+                                    {
+                                        rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
+                                        rate_count: RateCount + 1
+                                    },
+                                    { 
+                                        'Authorization': "JWT " + authToken,
+                                        'Content-Type': 'application/json',
+                                        'accept': 'application/json'
+                                     }
+                                )
+                            }}
+                        />
 
                     </div>
 

@@ -108,14 +108,14 @@ const Search = (props) => {
                         return (
                             matchedQuizzes.map((quiz) => {
                                 return (
-                                    <li key={quiz.id} className='mr-5 mb-4 md:mb-7 md:mt-5'>
+                                    <li key={quiz.id} className='mr-2 md:mr-5 mb-4 md:mb-7 md:mt-5'>
                                         <article className={`
                                             flex text-right h-full
                                             rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
                                             quizContainer__trans`}
                                         >
                                             <Link to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`} className='flex md:block md:grid-cols-5'>
-                                                <div className='md:col-span-2 w-[360px] md:w-[260px] h-[120px] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
+                                                <div className='md:col-span-2 ml-4 md:ml-0 w-[310px] md:w-[235px] h-[100px] md:h-[133px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                                     <img
                                                         src={quiz.thumbnail}
                                                         alt={`${quiz.subCategory}} | ${quiz.title}`}
@@ -237,7 +237,7 @@ const Search = (props) => {
                     </div>
 
                     <div className="mr-5 header__search__result__quizzes">
-                        <ul className='container flex flex-wrap px-20 m-2 mx-auto align-baseline flex-ai-fe justify-right md:m-auto'>
+                        <ul className='container flex flex-wrap pl-4 pr-0 md:px-20 m-2 mx-auto align-baseline flex-ai-fe justify-right md:m-auto'>
                             {quizzesList}
                         </ul>
                     </div>

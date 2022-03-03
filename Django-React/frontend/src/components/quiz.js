@@ -265,7 +265,7 @@ const Quiz = () => {
 
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        // setAbleToGoNext(false)
+        setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
         makeEveryOptionLowOpacity('high')
