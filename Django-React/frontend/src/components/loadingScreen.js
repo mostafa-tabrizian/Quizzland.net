@@ -19,7 +19,8 @@ const LoadingScreen = () => {
             loadingScreen fixed left-0
             top-0 w-screen h-screen z-20
             flex items-center justify-center
-            ${hideLoadingScreen}`}>
+            ${hideLoadingScreen}
+        `}>
         </div>
     )
 }

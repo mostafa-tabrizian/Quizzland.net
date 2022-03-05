@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { Link } from 'react-router-dom'
-
+import { AutoComplete } from 'antd';
 
 import axios from 'axios'
 
@@ -13,12 +13,15 @@ const Search = (props) => {
     const [searchMobile, setSearchMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
     const [searchSuggestion, setSearchSuggestion] = useState(null)
+    const [autoCompleteOptions, setAutoCompleteOptions] = useState(null)
+    const [autoCompleteDropdown, setAutoCompleteDropdown] = useState(false)
     
     const searchSubmit = useRef()
     const mobileSearchInput = useRef()
 
     useEffect(() => {
         searchSuggester()
+        // getAutoCompleteOption()
     }, [])
 
     const searchMobileFocusChangedHideOrShow = () => {
@@ -33,6 +36,30 @@ const Search = (props) => {
         }
         setSearchMobile(searchMobile ? false : true)
     }
+
+    // const getAutoCompleteOption = async () => {
+    //     await axios.get('/dbAPI/subcategory_new/')
+    //         .then(res => {
+    //             setAutoCompleteOptions(res.data)
+    //         })
+    // }
+
+    // const returnAutoCompleteOptions = () => {
+    //     let values = []
+    //     let final = []
+
+    //     autoCompleteOptions?.map(option => {
+    //         values.push(option.subCategory)
+    //         values.push(option.title)
+    //     })
+        
+    //     values.length &&
+    //     values.forEach((eachValue) => {
+    //         final.push({value: eachValue})
+    //     })
+    //     return final
+
+    // }
 
     const searchHandler = async (value) => {
         try {
@@ -220,6 +247,7 @@ const Search = (props) => {
                         
                     <svg className="w-6 h-6 text-white"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </button>
+
                 <input
                     type='text'
                     className={`header__search__input text-right`}
@@ -227,6 +255,29 @@ const Search = (props) => {
                     onChange={inputChanged}
                     onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
                 />
+
+                {/* <AutoComplete
+                    style={{ width: '20rem', }}
+                    className='header__search__input text-right'
+                    open={autoCompleteDropdown}
+
+                    onChange={
+                        (inputValue) => {
+                            inputChanged(inputValue)
+                            inputValue.length >= 1 ?
+                                setAutoCompleteDropdown(true)
+                                :
+                                setAutoCompleteDropdown(false)
+                        }
+                    }
+                    
+                    options={returnAutoCompleteOptions()}
+                    placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
+                    filterOption={(inputValue, option) =>
+                        option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                      }
+                /> */}
+
                 <div className={`header__search__result overflow-scroll h-1/2 ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
                     <div className="grid justify-center mt-2 mr-4 overflow-hidden rounded-lg header__search__result__category">
                         <div className="flex justify-center header__search__result__category__container w-80">

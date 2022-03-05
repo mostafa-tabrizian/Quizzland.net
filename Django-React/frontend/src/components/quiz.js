@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
-
+import { Switch } from 'antd';
 
 import axios from 'axios'
 import Header from './header'
@@ -670,12 +670,18 @@ const Quiz = () => {
                 {
                     contentLoaded &&
                     <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
-                        <span className='text-sm'>
-                            تغییر خودکار
-                        </span>
-                        <button className="quiz__autoQuestionChangerSwitch__btn btn">
+                        {/* <button className="quiz__autoQuestionChangerSwitch__btn btn">
                             <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} relative`}></div>
-                        </button>
+                        </button> */}
+                        <div className='flex justify-center mt-3'>
+                            <Switch
+                                checkedChildren='خودکار'
+                                unCheckedChildren='دستی'
+                                className={`${autoQuestionChanger ? 'bg-red-800' : 'bg-zinc-500'}`}
+                                onChange={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }}
+                                title='تغییر سوال: با انتخاب گزینه، در صورت خودکار بودن، پس از حداقل 1.5 حداکثر 5.5 ثانیه به سوال بعدی منتقل می شوید'
+                            />
+                        </div>
                     </div>
                 }
 

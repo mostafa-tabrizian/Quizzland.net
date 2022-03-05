@@ -146,6 +146,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 html {
   font-size: 100%;
+  min-height: 100vh;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   scroll-behavior: smooth;

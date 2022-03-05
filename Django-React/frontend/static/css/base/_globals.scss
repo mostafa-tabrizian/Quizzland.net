@@ -14,6 +14,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 html {
     font-size: 100%;
+    min-height: 100vh;
     box-sizing: border-box;
     scroll-behavior: smooth;
     overflow-x: hidden;
