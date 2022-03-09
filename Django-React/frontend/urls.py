@@ -35,5 +35,5 @@ urlpatterns = [
     # path('renameQuestions', renameQuestions),
     
     path('welcomeOwl', index),
-    path('welcomeZeynab', index),
+    path('welcomeZeynab', index)
 ]

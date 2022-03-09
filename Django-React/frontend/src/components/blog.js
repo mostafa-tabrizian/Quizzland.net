@@ -21,7 +21,7 @@ const Blog = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
 
     const getBlogsFromDb = async () => {
-        const contentData = await axios.get('/dbAPI/new_blog/')
+        const contentData = await axios.get('/api/new_blog/')
         setBlogContentData(contentData.data)
     }
 

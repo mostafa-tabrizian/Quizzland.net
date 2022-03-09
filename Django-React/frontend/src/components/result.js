@@ -100,7 +100,7 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = (subCategory) => {
-        axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=4`)
+        axios.get(`/api/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=4`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
         setContentLoaded(true)
     }
@@ -243,7 +243,7 @@ const Result = () => {
                                 let lastRate
                                 let RateCount
 
-                                await axiosInstance.get(`/dbAPI/quiz_new/${id}/?&timestamp=${now}`)
+                                await axiosInstance.get(`/api/quiz_new/${id}/?&timestamp=${now}`)
                                     .then((req) => {
                                         lastRate = req.data.rate
                                         RateCount = req.data.rate_count
@@ -253,7 +253,7 @@ const Result = () => {
                                     })
                                     
                                 await axiosInstance.put(
-                                    `/dbAPI/quiz_new/${id}/`,
+                                    `/api/quiz_new/${id}/`,
                                     {
                                         rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
                                         rate_count: RateCount + 1

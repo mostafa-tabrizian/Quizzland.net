@@ -108,7 +108,7 @@ const Quiz = () => {
 
     const grabData = async () => {
         quizTitleReplacedWithHyphen && 
-        await axios.get(`/dbAPI/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
+        await axios.get(`/api/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
             .then(async (quizData) => {
                 try {
                     AddView('quiz_new', quizData.id)
@@ -117,7 +117,7 @@ const Quiz = () => {
                     applyBackground(quizData.background)
                     setQuiz(quizData)
     
-                    await axios.get(`/dbAPI/questions/?quizKey=${quizData.id}`)
+                    await axios.get(`/api/questions/?quizKey=${quizData.id}`)
                         .then((questionData) => {
                             setQuestions(questionData.data)
                             setContentLoaded(true)
@@ -499,7 +499,7 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        await axios.get(`/dbAPI/quiz_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        await axios.get(`/api/quiz_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8`)
             .then((res) => { setSuggestionQuizzes(res.data.results) })
     }
 

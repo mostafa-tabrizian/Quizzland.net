@@ -20,7 +20,7 @@ const AddView = (content, contentID) => {
 
     const getLastViewCount = async () => {
         const now = new Date().getTime()
-        await axios.get(`/dbAPI/${content}/${contentID}/?&timestamp=${now}`)
+        await axios.get(`/api/${content}/${contentID}/?&timestamp=${now}`)
             .then((req) => {
                 lastMonthly = req.data.monthly_views
                 lastView = req.data.views
@@ -39,7 +39,7 @@ const AddView = (content, contentID) => {
             'accept': 'application/json'
         }
     
-        await axios.put(`/dbAPI/${content}/${contentID}/`, view, { headers})
+        await axios.put(`/api/${content}/${contentID}/`, view, { headers})
             // .then((res) => log(res))
     }
 

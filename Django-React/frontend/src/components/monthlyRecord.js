@@ -16,22 +16,22 @@ const QuizMonthlyRecord = () => {
     const passwordInput = useRef(null)
 
     const getAllQuizzes = async () => {
-        const quizzes = await axios.get('/dbAPI/quiz_new/')
+        const quizzes = await axios.get('/api/quiz_new/')
         quizDataSaveInExcel(quizzes)
     }
 
     const getAllPointyQuizzes = async () => {
-        const pointyQuizzes = await axios.get('/dbAPI/pointy_new/')
+        const pointyQuizzes = await axios.get('/api/pointy_new/')
         pointyQuizDataSaveInExcel(pointyQuizzes)
     }
     
     const getAllCategories = async () => {
-        const categories = await axios.get('/dbAPI/subcategory_new/')
+        const categories = await axios.get('/api/subcategory_new/')
         categoryDataSaveInExcel(categories)
     }
 
     const getAllBlogs = async () => {
-        const blogs = await axios.get('/dbAPI/new_blog/')
+        const blogs = await axios.get('/api/new_blog/')
         blogDataSaveInExcel(blogs)
     }
 

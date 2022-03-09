@@ -23,7 +23,7 @@ const Newsletter = () => {
             "signedUp_On": new Date()
         }
 
-        await axios.post(`/dbAPI/newsletter_users/`, detail)
+        await axios.post(`/api/newsletter_users/`, detail)
         alert('شما با موفقیت در خبرنامه ثبت نام کردید')
         openCloseNewsletterRef.current.click()
     }
@@ -33,7 +33,7 @@ const Newsletter = () => {
     }
 
     const checkIfTheUserExists = async (userEmail) => {
-        const resultOfCheck = await axios.get(`/dbAPI/newsletter_users/?email__iexact=${userEmail}`)
+        const resultOfCheck = await axios.get(`/api/newsletter_users/?email__iexact=${userEmail}`)
         if (resultOfCheck.data.length === 0) {
             addNewUserToNewsletter()
         } else {

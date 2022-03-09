@@ -9,6 +9,8 @@ module.exports = {
     SOS: "./src/SOS.js",
   },
 
+  // cache: false,
+
   output: {
     path: path.resolve(__dirname, "./static/build/"),
     filename: "[name].js",

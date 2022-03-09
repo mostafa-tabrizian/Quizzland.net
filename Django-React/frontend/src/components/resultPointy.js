@@ -111,7 +111,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = async () => {
-        await axios.get(`/dbAPI/pointy_new/?subCategory__icontains=${testResult && replaceFunction(testResult?.subCategory, ' ', '+')}&limit=4`)
+        await axios.get(`/api/pointy_new/?subCategory__icontains=${testResult && replaceFunction(testResult?.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {
                 setSuggestionQuizzes(res.data.results)
             })
@@ -218,7 +218,7 @@ const Result = (props) => {
                                 let lastRate
                                 let RateCount
 
-                                await axiosInstance.get(`/dbAPI/pointy_new/${testDetail?.id}/?&timestamp=${now}`)
+                                await axiosInstance.get(`/api/pointy_new/${testDetail?.id}/?&timestamp=${now}`)
                                     .then((req) => {
                                         lastRate = req.data.rate
                                         RateCount = req.data.rate_count
@@ -229,7 +229,7 @@ const Result = (props) => {
 
                                     
                                 await axiosInstance.put(
-                                    `/dbAPI/pointy_new/${testDetail?.id}/`,
+                                    `/api/pointy_new/${testDetail?.id}/`,
                                     {
                                         rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
                                         rate_count: RateCount + 1

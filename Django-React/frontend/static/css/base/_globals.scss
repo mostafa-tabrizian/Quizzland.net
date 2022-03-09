@@ -343,7 +343,8 @@ input {
 }
 
 .center {
-    margin-left: 50%;
+    left: 50%;
+    position: relative;
     transform: translate(-50%)
 }
 
@@ -544,7 +545,7 @@ input {
     animation: loadingFrame 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
 
     &__quizContainer {
-        width: 14rem; height: 8rem !important;
+        width: 260px; height: 150px !important;
         box-shadow:  0 0 15px #6d6d6d5c !important;
 
         &::before {
@@ -612,4 +613,10 @@ input {
     @include breakpoints-up(large) {
         display: none !important;
     }
+}
+
+#land {
+    overflow: auto;
+    height: 100%;
+    padding: 1rem;
 }

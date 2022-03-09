@@ -54,7 +54,7 @@ const Category = (props) => {
     }
 
     const defineCategoryTitle = async () => {
-        await axios.get(`/dbAPI/categories/?title_english__icontains=${replaceFunction(categoryQuery)}`)
+        await axios.get(`/api/categories/?title_english__icontains=${replaceFunction(categoryQuery)}`)
             .then((response) => {
                 setCategoryTitle(response.data[0].title_persian)
                 setCategoryQueryID(response.data[0].id)
@@ -69,7 +69,7 @@ const Category = (props) => {
         }
 
         categoryQueryID &&
-        await axios.get(`/dbAPI/${sortTypeDefinitionForDb[sortType]}/?categoryKey=${categoryQueryID}&limit=${numberOfResult}&offset=${offset}`)
+        await axios.get(`/api/${sortTypeDefinitionForDb[sortType]}/?categoryKey=${categoryQueryID}&limit=${numberOfResult}&offset=${offset}`)
             .then((response => {
                 setPageTravel(response.data)
                 setCategories(response.data.results)

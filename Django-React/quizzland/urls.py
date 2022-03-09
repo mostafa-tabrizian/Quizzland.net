@@ -38,7 +38,7 @@ router.register(r'questions_pointy', views.questions_pointy)
 
 urlpatterns = [
     path('adminTheKingAlexanderJosef/', admin.site.urls),
-    path('dbAPI/', include(router.urls)),
+    path('api/', include(router.urls)),
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('', include('frontend.urls')),   
 ]
