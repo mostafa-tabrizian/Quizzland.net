@@ -20892,8 +20892,9 @@ textarea.ant-mentions {
   margin: 0;
   padding: 0;
   color: rgba(0, 0, 0, 0.85);
-  font-size: 14px;
+  font-size: 18px;
   font-variant: tabular-nums;
+  align-items: center;
   line-height: 1.5715;
   list-style: none;
   font-feature-settings: 'tnum';
@@ -20924,6 +20925,8 @@ textarea.ant-mentions {
 }
 .ant-message-warning .anticon {
   color: #faad14;
+  display: inline-flex;
+  align-items: baseline;
 }
 .ant-message-info .anticon,
 .ant-message-loading .anticon {
@@ -20932,7 +20935,7 @@ textarea.ant-mentions {
   position: relative;
   top: 1px;
   margin-right: 8px;
-  font-size: 16px;
+  font-size: 22px;
 }
 .ant-message-notice.ant-move-up-leave.ant-move-up-leave-active {
   -webkit-animation-name: MessageMoveOut;
@@ -21050,6 +21053,8 @@ textarea.ant-mentions {
   border-radius: 2px;
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   pointer-events: auto;
+  align-items: center;
+  display: flex;
 }
 .ant-modal-close {
   position: absolute;

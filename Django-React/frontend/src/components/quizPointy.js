@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { notification } from 'antd';
 import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
-import { Switch } from 'antd';
+import { Switch, message } from 'antd';
 
 import axios from 'axios'
 import Header from './header'
@@ -110,7 +110,6 @@ const Quiz = () => {
                 }
                 catch (e) {
                     window.location.href = '/404'
-
                 }
             })
     }
@@ -336,6 +335,8 @@ const Quiz = () => {
                     }
                 }, 3500)
             }
+        } else {
+            message.warning('لطفا یک گزینه را انتخاب کنید');
         }
     }
 
@@ -344,6 +345,8 @@ const Quiz = () => {
             minusOneToTotalAnsweredQuestions()
             setCurrentMoveOfQuestions(prev => prev + sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
 
+        } else {
+            message.warning('شما سوال اول هستید');
         }
     }
 

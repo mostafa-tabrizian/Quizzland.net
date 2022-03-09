@@ -115,6 +115,18 @@ const Index = () => {
     }
 
     const grabData = async () => {
+        const quiz_new = await axios.get(`/api/quiz_new/?limit=8`)
+        setQuiz_new(quiz_new.data.results)
+        
+        const quiz_monthly = await axios.get(`/api/quiz_monthly/?limit=8`)
+        setQuiz_monthly(quiz_monthly.data.results)
+
+        const pointy_new = await axios.get(`/api/pointy_new/?limit=8`)
+        setPointy_new(pointy_new.data.results)
+        
+        const pointy_monthly = await axios.get(`/api/pointy_monthly/?limit=8`)
+        setPointy_monthly(pointy_monthly.data.results)
+
         const pointy_new_psychology = await axios.get(`/api/pointy_new/?category__icontains=psychology&limit=8`)
         setPointy_new_psychology(pointy_new_psychology.data.results)
 
@@ -123,18 +135,6 @@ const Index = () => {
 
         const quiz_new_celebrity = await axios.get(`/api/quiz_new/?category__icontains=celebrity&limit=8`)
         setQuiz_new_celebrity(quiz_new_celebrity.data.results)
-        
-        const monthly_pointy = await axios.get(`/api/pointy_monthly/?limit=8`)
-        setQuiz_monthly(monthly_pointy.data.results)
-        
-        const quiz_new = await axios.get(`/api/quiz_new/?limit=8`)
-        setQuiz_new(quiz_new.data.results)
-
-        const new_pointy = await axios.get(`/api/pointy_new/?limit=8`)
-        setPointy_new(new_pointy.data.results)
-
-        const quiz_monthly = await axios.get(`/api/quiz_monthly/?limit=8`)
-        setPointy_monthly(quiz_monthly.data.results)
         
         const loadInfinite1 =  await axios.get(`/api/quiz_new/?limit=8&offset=8`)
         setLoadInfinite1(loadInfinite1.data.results)
