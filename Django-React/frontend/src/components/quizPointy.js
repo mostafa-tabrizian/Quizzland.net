@@ -499,11 +499,11 @@ const Quiz = () => {
             </div>
 
 
-            <div className='adverts adverts__left'>
+            {/* <div className='adverts adverts__left'>
 
-            </div>
+            </div> */}
 
-            <div className='absolute md:ml-10 ml-4 top-28' onClick={() => { SFXController() }} >
+            {/* <div className='absolute md:ml-10 ml-4 top-28' onClick={() => { SFXController() }} >
                 <button type="button">
                     {SFXAllowed === 'true' ?
                         <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /> </svg>
@@ -511,7 +511,7 @@ const Quiz = () => {
                         <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /> </svg>
                     }
                 </button>
-            </div>
+            </div> */}
 
             <div className="relative text-right quiz__head backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
                 {
@@ -546,20 +546,33 @@ const Quiz = () => {
 
                 {
                     contentLoaded &&
-                    <React.Fragment>
-                        <div className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center flex-ai-c`}>
-                            <div className='flex justify-center mt-3'>
+                    <div className='flex space-x-5 translate-x-[-3rem]'>
+                        <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
+                            {/* <button className="quiz__autoQuestionChangerSwitch__btn btn">
+                                <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} relative`}></div>
+                            </button> */}
+                            <div className='mt-3'>
                                 <Switch
                                     checkedChildren='خودکار'
                                     unCheckedChildren='دستی'
                                     className={`${autoQuestionChanger ? 'bg-red-800' : 'bg-zinc-500'}`}
                                     onChange={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }}
                                     title='تغییر سوال: با انتخاب گزینه، در صورت خودکار بودن، پس از حداقل 1.5 حداکثر 5.5 ثانیه به سوال بعدی منتقل می شوید'
-                                    // defaultChecked
                                 />
                             </div>
                         </div>
-                    </React.Fragment>
+                        <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center flex-ai-c`} title='فرض صدا های پس از پاسخ به سوال'>
+                            <div className='mt-3'>
+                                <Switch
+                                    checkedChildren='صدا دار'
+                                    unCheckedChildren='بی صدا'
+                                    className={`${SFXAllowed ? 'bg-zinc-500' : 'bg-red-800'}`}
+                                    onChange={() => {SFXController()}}
+                                    title='فرض صدا های پس از پاسخ به سوال'
+                                />
+                            </div>
+                        </div>
+                    </div>
                 }
 
             </div>
@@ -634,7 +647,7 @@ const Quiz = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="w-[90vw] md:w-4/5 ml-auto mr-0 md:ml-auto md:mr-[15%] flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
+                <ul className="w-[90vw] md:w-4/5 mr-[-1.5rem] ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
                     {
                         suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
