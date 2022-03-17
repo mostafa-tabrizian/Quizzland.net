@@ -29,7 +29,7 @@ const Contact = () => {
             <div className="basicPage center wrapper-sm">
                 <h3>برای تماس با ما میتونید از روش های زیر استفاده کنید </h3>
                 <div>
-                    <ul className="text-red-600 font-bold flex justify-center flex-ai-c">
+                    <ul className="text-red-600 font-bold flex justify-center items-center">
                         {/* <li className="hoverAnimation"><a href="#">انستگرام</a></li> */}
                         {/* <li className="hoverAnimation"><a href="#">تلگرام</a></li> */}
                         <li className="hoverAnimation">

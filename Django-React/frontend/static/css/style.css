@@ -161,18 +161,6 @@ html {
           box-sizing: inherit;
 }
 
-.tx-al-l {
-  text-align: left;
-}
-
-.tx-al-c {
-  text-align: center;
-}
-
-.tx-al-r {
-  text-align: right;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -283,40 +271,6 @@ li {
 hr {
   border: 1px solid #8080802e;
   width: 50%;
-}
-
-.int {
-  font-family: -webkit-pictograph;
-}
-
-.btn {
-  border: 0;
-  border-radius: 5px;
-  padding: 0 1rem;
-  outline: none;
-  font-family: myHarmattan, sans-serif, serif;
-  font-size: 1.18rem;
-  -webkit-transition: all .1s ease-in-out;
-  transition: all .1s ease-in-out;
-  cursor: pointer;
-}
-
-.btn__grad {
-  background-image: linear-gradient(-45deg, #6a0d11, #ac272e);
-  border: 0;
-  border-radius: 33px;
-  padding: .4rem 1.54375rem;
-  color: #f0f0f0 !important;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.295);
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.295);
-}
-
-bold {
-  font-weight: 600;
-}
-
-input {
-  outline: none;
 }
 
 .input {
@@ -514,57 +468,6 @@ input {
   display: none;
   height: 0;
   width: 0;
-}
-
-.pointerOff {
-  pointer-events: none;
-}
-
-.flex-jc-sb {
-  -webkit-box-pack: justify !important;
-      -ms-flex-pack: justify !important;
-          justify-content: space-between !important;
-}
-
-.flex-jc-c {
-  -webkit-box-pack: center !important;
-      -ms-flex-pack: center !important;
-          justify-content: center !important;
-}
-
-.flex-jc-fe {
-  -webkit-box-pack: end !important;
-      -ms-flex-pack: end !important;
-          justify-content: flex-end !important;
-}
-
-.flex-jc-fs {
-  -webkit-box-pack: start !important;
-      -ms-flex-pack: start !important;
-          justify-content: flex-start !important;
-}
-
-.flex-ai-fs {
-  -webkit-box-align: start !important;
-      -ms-flex-align: start !important;
-          align-items: flex-start !important;
-}
-
-.flex-ai-c {
-  -webkit-box-align: center !important;
-      -ms-flex-align: center !important;
-          align-items: center !important;
-}
-
-.grid {
-  display: -ms-grid;
-  display: grid;
-}
-
-.grid-jc-c {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 
 .center {

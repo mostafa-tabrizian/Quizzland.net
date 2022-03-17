@@ -94,7 +94,7 @@ const Index = () => {
                     matchedQuizzes.length >= 4 &&
                     <div className="mb-8 mt-[5rem]">
     
-                        <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                        <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                             <h3 className=''>پیشنهادی های کوییزلند به شما</h3>
                         </div>
                         
@@ -197,7 +197,7 @@ const Index = () => {
 
             </Helmet>
 
-            <div className={`hero flex justify-center flex-ai-c`}>
+            <div className={`hero flex justify-center items-center`}>
                     <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div>
 
                     <div className='relative mr-5 ml-5 drop-shadow-[10px_15px_10px_black] hidden md:block'>
@@ -251,7 +251,7 @@ const Index = () => {
                 <div className="mb-8 md:mt-[10rem]">
                     <span id='scroll' />
 
-                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                         <h3 className=''>جدیدترین کوییز ها</h3>
                         <Link to="/sort?s=newest" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
@@ -280,7 +280,7 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                         <h3 className=''>بهترین کوییز های این ماه</h3>
                         <Link to="/sort?s=monthly" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
@@ -298,7 +298,7 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                         <h3 className=''>جدیدترین تست ها</h3>
                         <Link to="/sort?s=newest_test" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
@@ -327,7 +327,7 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                         <h3 className=''>بهترین تست های این ماه</h3>
                         <Link to="/sort?s=monthly_test" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
@@ -345,7 +345,7 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                         <h3 className=''>کوییز سلبریتی</h3>
                         <Link to="/sort?s=newest&c=celebrity" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
@@ -374,7 +374,7 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                         <h3 className=''>کوییز فیلم و سریال</h3>
                         <Link to="/sort?s=newest&c=movie-&-series" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
@@ -392,7 +392,7 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                         <h3 className=''>تست روانشناسی</h3>
                         <Link to="/sort?s=newest&c=psychology" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>
@@ -420,7 +420,7 @@ const Index = () => {
                 }
 
                 <div className="mt-8 mb-8">
-                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 flex-ai-c md:container md:px-20">
+                    <div className="grid grid-cols-2 mb-8 mr-4 quizContainer__header md:m-auto md:w-4/5 items-center md:container md:px-20">
                         <h3 className=''>کوییز های بیشتر</h3>
                         <Link to="/sort?s=newest" className="ml-8 text-[1rem] text-left"><h4>نتایج بیشتر</h4></Link>
                     </div>

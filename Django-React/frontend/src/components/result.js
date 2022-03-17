@@ -166,11 +166,11 @@ const Result = () => {
                     <div className="flex justify-center result__title">
                         <h5 className="text-right">نتیجه  {title}</h5>
                     </div>
-                    <div className="flex justify-center beforeAfterDecor flex-ai-c">
+                    <div className="flex justify-center beforeAfterDecor items-center">
                         <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                     </div>
-                    <div className="justify-center block w-full mx-auto result md:container space-sm md:flex flex-ai-c">
-                        <div className="flex justify-center result__img md:mx-16 flex-ai-c">
+                    <div className="justify-center block w-full mx-auto result md:container space-sm md:flex items-center">
+                        <div className="flex justify-center result__img md:mx-16 items-center">
                             {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
                         </div>
                         <div className="result__score mt-5 text-center text-[2rem]">
@@ -216,7 +216,7 @@ const Result = () => {
 
                         </div>
 
-                        <h2 className='flex justify-center text-lg flex-ai-c space-sm'>این کوییز چطور بود؟</h2>
+                        <h2 className='flex justify-center text-lg items-center space-sm'>این کوییز چطور بود؟</h2>
 
                         <Rate
                             character={({ index }) => customIcons[index + 1]}
@@ -340,7 +340,7 @@ const Result = () => {
 
             <BackBtn />
             
-            <button onClick={tryAgainTheQuiz} className='tryAgain btn tx-al-c' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
+            <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
 
         </React.Fragment>
     );

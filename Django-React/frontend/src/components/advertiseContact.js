@@ -30,7 +30,7 @@ const AdvertiseContact = () => {
                 <h3>برای تبلیغ در بنر های کوییزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>
                 <a href="mailto:support@quizzland.net">support@quizzland.net</a>
                 <div>
-                    <ul className="text-red-600 font-bold flex justify-center flex-ai-c">
+                    <ul className="text-red-600 font-bold flex justify-center items-center">
                         {/* <li><a href="#"><a>انستگرام</a></a></li> */}
                         {/* <li><a href="#"><a>تلگرام</a></a></li> */}
                         <li><a href="mailto:support@quizzland.net">ایمیل</a></li>

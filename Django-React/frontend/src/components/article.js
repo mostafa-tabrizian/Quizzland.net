@@ -97,7 +97,7 @@ const Article = (props) => {
                 </Helmet>
             }
 
-            <div className='article wrapper-med tx-al-c'>
+            <div className='article wrapper-med text-center'>
                 <h1>
                     {article.title}
                 </h1>

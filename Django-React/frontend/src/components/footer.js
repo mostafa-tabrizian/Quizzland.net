@@ -60,7 +60,7 @@ const Footer = (props) => {
 
                 {/* <div>
                     <h3>با ما همراه باشید</h3>
-                    <ul className='flex flex-ai-c justify-center'>
+                    <ul className='flex items-center justify-center'>
                         <li><a to='#'>
                             <img src={instagramIcon} alt='quizzlnad instagram' />
                         </li>
@@ -69,7 +69,7 @@ const Footer = (props) => {
 
             </div>
 
-            <div className="flex justify-center flex-ai-c opacity-50">
+            <div className="flex justify-center items-center opacity-50">
                 <p className='text-sm'>
                     {copyRightDate()} © تمام حقوق به کوییزلند تعلق دارد
                 </p>

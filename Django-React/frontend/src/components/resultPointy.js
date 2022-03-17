@@ -135,7 +135,7 @@ const Result = (props) => {
                     <div className="flex justify-center result__title">
                         <h5 className="text-lg text-right">نتیجه {testDetail?.title}</h5>
                     </div>
-                    <div className="flex justify-center beforeAfterDecor flex-ai-c">
+                    <div className="flex justify-center beforeAfterDecor items-center">
                         <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                     </div>
 
@@ -191,7 +191,7 @@ const Result = (props) => {
 
                         </div>
 
-                        <h2 className='flex justify-center text-lg flex-ai-c space-med'>این تست چطور بود؟</h2>
+                        <h2 className='flex justify-center text-lg items-center space-med'>این تست چطور بود؟</h2>
 
                         <Rate
                             character={({ index }) => customIcons[index + 1]}
@@ -259,7 +259,7 @@ const Result = (props) => {
 
             <BackBtn />
             
-            <button onClick={tryAgainTheQuiz} className='tryAgain btn tx-al-c' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
+            <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
 
         </React.Fragment>
     );

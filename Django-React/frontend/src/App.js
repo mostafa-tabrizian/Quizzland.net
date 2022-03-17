@@ -64,7 +64,7 @@ log("                              \n\
 const App = () => {
     return (
         <React.Fragment>
-            <Suspense fallback={ <div className='loadingScreen pos-fix flex flex-jc-c flex-ai-c'></div> }>
+            <Suspense fallback={ <div className='loadingScreen pos-fix flex justify-center items-center'></div> }>
                 <Router>
                     <ScrollToTop />
 

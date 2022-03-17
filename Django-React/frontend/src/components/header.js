@@ -85,9 +85,9 @@ const Header = (props) => {
                 </Helmet>
 
 
-                <nav className="flex flex-ai-c flex-jc-sb">
+                <nav className="flex items-center justify-between">
                     <div>
-                        <Link to="/" className='flex header__logo flex-jc-sb flex-ai-c md:hidden'>
+                        <Link to="/" className='flex header__logo justify-between items-center md:hidden'>
                             <span>uizzland</span>
                             <img
                                 src='/static/img/Q-small.png'
@@ -98,7 +98,7 @@ const Header = (props) => {
                         </Link>
                     </div>
 
-                    <div className={`md:space-x-5 py-5 mr-6 z-10 relative ${props.colorOfHeader} hidden md:flex flex-ai-c`}>
+                    <div className={`md:space-x-5 py-5 mr-6 z-10 relative ${props.colorOfHeader} hidden md:flex items-center`}>
                         <div className="hoverAnimation md:space-x-7 mr-4">
                             {/* <button className="header__btn">
                                 <Link to="/blog"> وبلاگ </Link>
@@ -108,7 +108,7 @@ const Header = (props) => {
                             <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
                         </div>
 
-                        <Link to="/" className="flex header__logo flex-jc-sb flex-ai-c">
+                        <Link to="/" className="flex header__logo justify-between items-center">
                             <span>uizzland</span>
                             <img
                                 src='/static/img/Q-small.png'
@@ -122,19 +122,19 @@ const Header = (props) => {
 
                     <Search />
 
-                    <ul className={`right-[11rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                    <ul className={`right-[11rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-auto'}`}>
                         <li><Link to="/category/movie-&-series">🎬 فیلم و سریال</Link></li>
                         <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
                         <li><Link to="/category/psychology">🧠 روانشناسی</Link></li>
                     </ul>
 
-                    <ul className={`right-[16.5rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                    <ul className={`right-[16.5rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-auto'}`}>
                         <li><Link to="/sort?s=newest"> ⏳ جدیدترین ها </Link></li>
                         <li><Link to="/sort?s=monthly"> 👑 بهترین های ماه </Link></li>
                         <li><Link to="/sort?s=bestest"> 👑 بهترین ها </Link></li>
                     </ul>
 
-                    <ul className={`right-[21rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointerOff'}`}>
+                    <ul className={`right-[21rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-auto'}`}>
                         <li><Link to="/sort?s=newest_test"> ⏳ جدیدترین ها </Link></li>
                         <li><Link to="/sort?s=monthly_test"> 👑 بهترین های ماه </Link></li>
                         <li><Link to="/sort?s=bestest_test"> 👑 بهترین ها </Link></li>

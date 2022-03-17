@@ -516,7 +516,7 @@ const Quiz = () => {
             <div className="relative text-right quiz__head backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
                 {
                     !(contentLoaded) &&
-                    <div className='flex justify-center flex-ai-c'>
+                    <div className='flex justify-center items-center'>
                         <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizTitle'></div>
                     </div>
                 }
@@ -527,7 +527,7 @@ const Quiz = () => {
                     </h1>
                 </div>
 
-                <div className="flex justify-center quiz__detail flex-ai-c">
+                <div className="flex justify-center quiz__detail items-center">
                     {
                         !(contentLoaded) &&
                         <div className='flex space-x-5'>
@@ -547,7 +547,7 @@ const Quiz = () => {
                 {
                     contentLoaded &&
                     <div className='flex space-x-5 translate-x-[-3rem]'>
-                        <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center flex-ai-c`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
+                        <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
                             {/* <button className="quiz__autoQuestionChangerSwitch__btn btn">
                                 <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} relative`}></div>
                             </button> */}
@@ -561,7 +561,7 @@ const Quiz = () => {
                                 />
                             </div>
                         </div>
-                        <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center flex-ai-c`} title='فرض صدا های پس از پاسخ به سوال'>
+                        <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
                             <div className='mt-3'>
                                 <Switch
                                     checkedChildren='صدا دار'
@@ -615,7 +615,7 @@ const Quiz = () => {
 
             {/* {
                 contentLoaded &&
-                <div className={`quiz__questionCounter relative flex justify-center flex-ai-c`}>
+                <div className={`quiz__questionCounter relative flex justify-center items-center`}>
                     <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
                     سوال شماره
                 </div>
@@ -636,14 +636,14 @@ const Quiz = () => {
             </div>
 
             <div>
-                <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>تگ های کوییز</h7>
+                <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>تگ های کوییز</h7>
                 <ul className='flex flex-wrap justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
                     {quiz && showTheTagsIfNotNull()}
                 </ul>
             </div>
 
             <div className='space-med'>
-                <h7 className='flex justify-center quiz__tags__title flex-ai-c beforeAfterDecor'>کوییز های مشابه</h7>
+                <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>کوییز های مشابه</h7>
 
                 {SkeletonLoading(contentLoaded)}
 
