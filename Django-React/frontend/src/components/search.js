@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { Link } from 'react-router-dom'
-import { AutoComplete } from 'antd';
+import { Popover } from 'antd';
 
 import axios from 'axios'
 
@@ -234,6 +234,15 @@ const Search = (props) => {
         setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)
     }
 
+    const searchInputMobile = (
+        <input
+            type='text'
+            className={`text-right bg-transparent text-lg text-black`}
+            ref={mobileSearchInput}
+            onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
+        />
+    )
+
     return (
         <React.Fragment>
             <div className={`header__search flex ${props.colorOfHeader}`}>
@@ -295,24 +304,15 @@ const Search = (props) => {
                 </div>
             </div>
 
-            <button onClick={searchMobileFocusChangedHideOrShow} className='flex header__search__opener header__btn md:hidden flex-ai-c' type="button">
-                <svg className="w-8 h-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-            </button>
 
-            <div className={`header__search__opener__bg fixed darkGls ${searchMobile ? 'fadeIn' : 'fadeOut'}`}>
+            <Popover placement="bottomRight" title='' content={searchInputMobile} trigger="click">
+                <button  className='flex header__search__opener header__btn md:hidden flex-ai-c' type="button">
+                    <svg className="w-8 h-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </button>
+            </Popover>
 
-                <button onClick={searchMobileFocusChangedHideOrShow} className="absolute header__search__closeBtn header__btn-bg header__menu__closeBtn" aria-label="Close Search Bar"></button>
-                <input
-                    type='text'
-                    className={`header__search__input text-right ${searchMobile ? 'fadeIn' : 'fadeOut'}`}
-                    ref={mobileSearchInput}
-                    placeholder='...جستجو'
-                    onChange={inputChanged}
-                    onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
-                />
-            </div>
         </React.Fragment>
     )
 }

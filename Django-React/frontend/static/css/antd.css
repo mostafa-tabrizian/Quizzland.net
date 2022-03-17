@@ -2947,11 +2947,11 @@ html {
   padding-right: 10px;
 }
 .ant-popover-inner {
-  background-color: #fff;
+  background-color: #ffffffaa;
+  backdrop-filter: blur(5px);
   background-clip: padding-box;
-  border-radius: 2px;
-  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15) \9;
+  border-radius: 10px;
+  box-shadow: 0 0 15px black;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .ant-popover {

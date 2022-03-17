@@ -1,7 +1,7 @@
 .header__search {
     position: absolute;
     left: 2rem;
-    z-index: 4;
+    // z-index: 4;
 
     &__opener {
         // background: url('/static/img/srch-black.svg') no-repeat center center;
@@ -33,12 +33,12 @@
         
         @include breakpoints-down(medium) {
             opacity: 0; visibility: hidden;
-            position: fixed;
-            transform: translate(-50%);
-            left: 50%; top: 10%;
-            height: 4.125rem;
-            font-size: $font-l;
-            background:rgba(0, 0, 0, 0.35);
+            // position: fixed;
+            // transform: translate(-50%);
+            // left: 50%; top: 10%;
+            // height: 4.125rem;
+            // font-size: $font-l;
+            // background:rgba(0, 0, 0, 0.35);
         }
 
         @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {

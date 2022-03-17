@@ -118,7 +118,6 @@ const Header = (props) => {
                             />
                         </Link>
 
-
                     </div>
 
                     <Search />
