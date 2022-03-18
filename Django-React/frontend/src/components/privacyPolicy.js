@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
     return (
         <React.Fragment>
             
-            <Header linkType='Link'/>
+            <Header />
 
             <Helmet>
                 <title>حریم خصوصی | کوییزلند</title>

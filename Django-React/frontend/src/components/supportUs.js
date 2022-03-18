@@ -18,7 +18,7 @@ const Support = () => {
     return (
         <React.Fragment>
 
-            <Header linkType='Link'/>
+            <Header />
 
             <Helmet>
                 <title>حمایت |‌کوییزلند</title>

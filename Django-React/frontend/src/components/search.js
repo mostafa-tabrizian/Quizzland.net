@@ -245,7 +245,7 @@ const Search = (props) => {
 
     return (
         <React.Fragment>
-            <div className={`header__search flex ${props.colorOfHeader}`}>
+            <div className={`header__search flex header__white`}>
                 <button
                     className={`
                         absolute right-[-1rem] top-1.5

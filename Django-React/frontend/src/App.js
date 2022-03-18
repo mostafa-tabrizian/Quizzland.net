@@ -95,7 +95,7 @@ const App = () => {
                         <Route component={pageNotFound_404} />
                     </Switch>
                     
-                    <Footer linkType='Link'/>
+                    <Footer />
                 </Router>
             </Suspense>
         </React.Fragment>

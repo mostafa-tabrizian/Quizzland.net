@@ -23,7 +23,7 @@ const SOSLandApp = () => {
                         <Route component={SOS} />
                     </Switch>
                     
-                    <Footer linkType='Hot'/>
+                    <Footer />
                 </Router>
             </Suspense>
         </React.Fragment>

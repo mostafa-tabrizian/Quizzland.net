@@ -171,7 +171,7 @@ const Index = () => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header linkType='Link'/>
+            <Header />
 
             <Helmet>
                 <title>کوییزلند | بهترین و جدیدترین کوییز، تست و تریویا ها</title>

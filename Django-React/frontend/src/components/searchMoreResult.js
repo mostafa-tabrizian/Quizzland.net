@@ -116,7 +116,7 @@ const SearchMoreResult = () => {
     return (
         <React.Fragment>
 
-            <Header linkType='Hot'/>
+            <Header />
 
             <Helmet>
                 <title>{`کوییزلند | ${searchValueWithOutSign} جستجو عبارت `}</title>

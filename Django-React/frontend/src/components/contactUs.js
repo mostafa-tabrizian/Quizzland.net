@@ -18,7 +18,7 @@ const Contact = () => {
     return (
         <React.Fragment>
 
-            <Header linkType='Link'/>
+            <Header />
 
             <Helmet>
                 <title>تماس با ما | ‌کوییزلند</title>

@@ -65,7 +65,7 @@ const BlogApp = () => {
                         <Route path='/blog/:title' component={Article} />
                     </Switch>
                     
-                    <Footer linkType='Hot'/>
+                    <Footer />
                 </Router>
             </Suspense>
         </React.Fragment>

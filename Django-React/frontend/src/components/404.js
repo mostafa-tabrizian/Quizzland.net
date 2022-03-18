@@ -18,7 +18,7 @@ const PageNotFound_404 = () => {
     return (
         <React.Fragment>
             
-            <Header linkType='Hot'/>
+            <Header />
 
             <Helmet>
                 <title>صفحه مورد نظر پیدا نشد |‌ کوییزلند</title>

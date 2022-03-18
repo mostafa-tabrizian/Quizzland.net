@@ -71,7 +71,7 @@ const Blog = (props) => {
     return (
         <React.Fragment>
 
-            <Header linkType='Hot'/>
+            <Header />
 
             <Helmet>
                 <title>{`وبلاگ | ‌کوییزلند`}</title>

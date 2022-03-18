@@ -123,7 +123,7 @@ const Result = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <Header linkType='Link'/>
+            <Header />
 
             <Helmet>
                 <title>نتیجه تست | کوییزلند </title>

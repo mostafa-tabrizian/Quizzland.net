@@ -12,7 +12,7 @@ const copyRightDate = () => {
     return `${westYear}-${eastYear}`
 }
 
-const Footer = (props) => {
+const Footer = () => {
     return (
         <div className='footer w-full py-12'>
             

@@ -18,7 +18,7 @@ const restartEveryMonthlyViews = () => {
     return (
         <React.Fragment>
 
-            <Header linkType='Link'/>
+            <Header />
 
             <Helmet>
                 <title>Restarting Monthly Views</title>

@@ -1055,6 +1055,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-space-x-reverse: 1;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }

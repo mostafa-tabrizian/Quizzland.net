@@ -18,7 +18,7 @@ const SOS = () => {
     return (
         <React.Fragment>
             
-            <Header linkType='Hot'/>
+            <Header />
 
             <Helmet>
                 <title>کوییزلند تحت تیم فنی است</title>

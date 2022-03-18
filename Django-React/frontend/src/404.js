@@ -23,7 +23,7 @@ const PageNotFound404App = () => {
                         <Route component={E404} />
                     </Switch>
                     
-                    <Footer linkType='Hot'/>
+                    <Footer />
                 </Router>
             </Suspense>
         </React.Fragment>

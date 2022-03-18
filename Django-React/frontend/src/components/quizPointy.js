@@ -408,10 +408,7 @@ const Quiz = () => {
 
             <LoadingScreen loadState={loadState} />
         
-            <Header
-                colorOfHeader='header__white'
-                linkType='Hot'
-            />
+            <Header/>
 
             <Helmet>
                 <title>{`کوییزلند | تست ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>

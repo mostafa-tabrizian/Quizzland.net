@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { log } from './base'
 import Search from './search'
 
-const Header = (props) => {
+const Header = () => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)
     const [quizNavigationOpen, setQuizNavigationOpen] = useState(false)
     const [pointyNavigationOpen, setPointyNavigationOpen] = useState(false)
@@ -98,7 +98,7 @@ const Header = (props) => {
                         </Link>
                     </div>
 
-                    <div className={`md:space-x-5 py-5 mr-6 z-10 relative ${props.colorOfHeader} hidden md:flex items-center`}>
+                    <div className={`md:space-x-5 py-5 mr-6 z-10 relative header__white hidden md:flex items-center`}>
                         <div className="hoverAnimation md:space-x-7 mr-4">
                             {/* <button className="header__btn">
                                 <Link to="/blog"> وبلاگ </Link>
@@ -122,26 +122,26 @@ const Header = (props) => {
 
                     <Search />
 
-                    <ul className={`right-[11rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-auto'}`}>
+                    <ul className={`right-[11rem] header__white subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                         <li><Link to="/category/movie-&-series">🎬 فیلم و سریال</Link></li>
                         <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
                         <li><Link to="/category/psychology">🧠 روانشناسی</Link></li>
                     </ul>
 
-                    <ul className={`right-[16.5rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-auto'}`}>
+                    <ul className={`right-[16.5rem] header__white subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                         <li><Link to="/sort?s=newest"> ⏳ جدیدترین ها </Link></li>
                         <li><Link to="/sort?s=monthly"> 👑 بهترین های ماه </Link></li>
                         <li><Link to="/sort?s=bestest"> 👑 بهترین ها </Link></li>
                     </ul>
 
-                    <ul className={`right-[21rem] ${props.colorOfHeader} subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-auto'}`}>
+                    <ul className={`right-[21rem] header__white subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                         <li><Link to="/sort?s=newest_test"> ⏳ جدیدترین ها </Link></li>
                         <li><Link to="/sort?s=monthly_test"> 👑 بهترین های ماه </Link></li>
                         <li><Link to="/sort?s=bestest_test"> 👑 بهترین ها </Link></li>
                     </ul>
 
                     {/* Menu */}
-                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn absolute ${props.colorOfHeader} md:hidden`} aria-label="Menu Button">
+                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn absolute header__white md:hidden`} aria-label="Menu Button">
                         <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
                     </button>
 

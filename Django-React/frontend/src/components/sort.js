@@ -35,6 +35,7 @@ const Sort = () => {
         checkWhatSort()
         getMoreQuiz()
         setLoadState(true)
+        document.querySelector('#land').classList.add('overflow-auto')  // make content load on scroll
     }, [sortType, numberOfResult])
 
     useEffect(() => {
@@ -179,7 +180,7 @@ const Sort = () => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header linkType='Link'/>
+            <Header />
 
             <Helmet>
                 <title>{`${sortTitle} | کوییزلند`}</title>
@@ -210,7 +211,7 @@ const Sort = () => {
                 dataLength={quizzes.length}
                 next={getMoreQuiz}
                 hasMore={quizzes.length % numberOfResult == 0}
-                loader={SkeletonLoading(loading)}
+                loader={'Loading...'}
                 // endMessage={'Im Done 😒'}
                 scrollableTarget="land"
             >

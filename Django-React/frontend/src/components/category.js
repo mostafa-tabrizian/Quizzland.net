@@ -122,7 +122,7 @@ const Category = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <Header linkType='Hot'/>
+            <Header />
 
             <Helmet>
                 <title>{`کوییزلند | کوییز های ${categoryTitle} `}</title>

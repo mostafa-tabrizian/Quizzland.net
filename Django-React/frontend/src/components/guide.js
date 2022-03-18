@@ -19,7 +19,7 @@ const Guide = () => {
     return (
         <React.Fragment>
 
-            <Header linkType='Link'/>
+            <Header />
 
             <Helmet>
                 <title>راهنما | کوییزلند</title>

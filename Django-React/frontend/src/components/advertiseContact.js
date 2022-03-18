@@ -18,7 +18,7 @@ const AdvertiseContact = () => {
     return (
         <React.Fragment>
 
-            <Header linkType='Link'/>
+            <Header />
                 
             <Helmet>
                 <title>تبلیغات |‌ کوییزلند</title>

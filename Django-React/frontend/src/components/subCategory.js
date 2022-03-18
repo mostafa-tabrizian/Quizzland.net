@@ -118,10 +118,7 @@ const SubCategory = (props) => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header
-                colorOfHeader='header__white'
-                linkType='Hot'
-            />
+            <Header/>
 
             <Helmet>
                 <title>{`کوییزلند | کوییز های ${persianSubCategoryWithoutSign}`}</title>

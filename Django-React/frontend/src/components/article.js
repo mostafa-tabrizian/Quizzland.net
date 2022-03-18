@@ -47,7 +47,7 @@ const Article = (props) => {
             
             <LoadingScreen loadState={loadState} />
 
-            <Header linkType='Hot'/>
+            <Header />
 
             {article &&
                 <Helmet>
