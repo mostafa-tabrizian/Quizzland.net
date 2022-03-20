@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 
-import Header from './header'
-import BackBtn from './backBtn'
+import Header from '../components/header'
+import BackBtn from '../components/backBtn'
 
 const pathRed = '/static/img/bubbles.png'
 

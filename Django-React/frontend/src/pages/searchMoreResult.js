@@ -4,13 +4,13 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import Header from './header'
+import Header from '../components/header'
 
-import QuizContainer from './quizContainer';
-import QuizPointyContainer from './quizPointyContainer';
-import { log, takeParameterFromUrl, replaceFunction } from './base'
-import PageTravel from './pageTravel';
-import SkeletonLoading from './skeletonLoading'
+import QuizContainer from '../components/quizContainer';
+import QuizPointyContainer from '../components/quizPointyContainer';
+import { log, takeParameterFromUrl, replaceFunction } from '../components/base'
+import PageTravel from '../components/pageTravel';
+import SkeletonLoading from '../components/skeletonLoading';
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)

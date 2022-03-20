@@ -215,6 +215,7 @@ h1 {
 
 h2 {
   font-size: 1.6rem;
+  font-family: myLalezar, myHarmattan;
   font-weight: 300;
   position: relative;
 }
@@ -230,7 +231,6 @@ h3 {
   padding: 0 0 1rem 0;
   font-weight: 300;
   position: relative;
-  font-family: myLalezar, myHarmattan;
 }
 
 @media (max-width: 70em) {
@@ -445,6 +445,41 @@ hr {
   opacity: 1 !important;
   -webkit-transition: all .53s ease-in-out !important;
   transition: all .53s ease-in-out !important;
+}
+
+.bloodRiver {
+  background: linear-gradient(45deg, #a20000, #aa4949, #4b0000);
+  background-size: 400% 400%;
+  -webkit-animation: river 5s ease infinite alternate;
+          animation: river 5s ease infinite alternate;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+@-webkit-keyframes river {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes river {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .answerShow {
@@ -782,40 +817,6 @@ hr {
 
 .header__logo span {
   font-family: myLalezar, serif;
-  background: linear-gradient(45deg, #a20000, #aa4949, #4b0000);
-  background-size: 400% 400%;
-  -webkit-animation: logo 5s ease infinite alternate;
-          animation: logo 5s ease infinite alternate;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-background-clip: text;
-  -moz-text-fill-color: transparent;
-  margin-left: .2rem;
-  font-size: 1.6rem;
-}
-
-@-webkit-keyframes logo {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes logo {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 .header__links a {
@@ -1238,127 +1239,6 @@ hr {
 
 .hero-inner button:hover {
   color: #af282f !important;
-}
-
-.hero_bubbles {
-  -webkit-animation: dancingBubbles 5s infinite linear;
-          animation: dancingBubbles 5s infinite linear;
-}
-
-@-webkit-keyframes dancingBubbles {
-  0% {
-    -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
-            transform: rotate(0deg) translate(-10px) rotate(0deg);
-  }
-  50% {
-    -webkit-transform: rotate(180deg) translate(0px) rotate(-180deg);
-            transform: rotate(180deg) translate(0px) rotate(-180deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
-            transform: rotate(360deg) translate(-10px) rotate(-360deg);
-  }
-}
-
-@keyframes dancingBubbles {
-  0% {
-    -webkit-transform: rotate(0deg) translate(-10px) rotate(0deg);
-            transform: rotate(0deg) translate(-10px) rotate(0deg);
-  }
-  50% {
-    -webkit-transform: rotate(180deg) translate(0px) rotate(-180deg);
-            transform: rotate(180deg) translate(0px) rotate(-180deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
-            transform: rotate(360deg) translate(-10px) rotate(-360deg);
-  }
-}
-
-.hero_path {
-  background: url("/static/img/landPage-path.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center bottom;
-}
-
-.hero__start h2 {
-  font-family: myLalezar, myHarmattan, serif;
-}
-
-.hero__start a {
-  animation: shining 2s linear infinite alternate-reverse;
-}
-
-@-webkit-keyframes shining {
-  from {
-    -webkit-box-shadow: 6px 0px 22px #ffffff14, inset 6px 0 18px black;
-            box-shadow: 6px 0px 22px #ffffff14, inset 6px 0 18px black;
-  }
-  to {
-    -webkit-box-shadow: -6px -5px 22px #ffffff14, inset -6px 5px 18px black;
-            box-shadow: -6px -5px 22px #ffffff14, inset -6px 5px 18px black;
-  }
-}
-
-@keyframes shining {
-  from {
-    -webkit-box-shadow: 6px 0px 22px #ffffff14, inset 6px 0 18px black;
-            box-shadow: 6px 0px 22px #ffffff14, inset 6px 0 18px black;
-  }
-  to {
-    -webkit-box-shadow: -6px -5px 22px #ffffff14, inset -6px 5px 18px black;
-            box-shadow: -6px -5px 22px #ffffff14, inset -6px 5px 18px black;
-  }
-}
-
-.hero__start button {
-  background: linear-gradient(-45deg, #a20000, #4b0000, #aa4949, #a20000);
-  background-size: 400% 400%;
-  -webkit-animation: heroButton 10s ease infinite alternate;
-          animation: heroButton 10s ease infinite alternate;
-}
-
-@-webkit-keyframes heroButton {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes heroButton {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.hero__start button span {
-  width: 2.5rem;
-  height: 2rem;
-  -webkit-transition: -webkit-transform .15s ease-in-out;
-  transition: -webkit-transform .15s ease-in-out;
-  transition: transform .15s ease-in-out;
-  transition: transform .15s ease-in-out, -webkit-transform .15s ease-in-out;
-}
-
-.hero__start button:hover {
-  color: white;
-}
-
-.hero__start button:hover span {
-  -webkit-transform: translateX(-0.5rem);
-          transform: translateX(-0.5rem);
 }
 
 .lowBrightnessBackground::before {

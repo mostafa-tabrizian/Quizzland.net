@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom'
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import LoadingScreen from './loadingScreen'
-import QuizContainer from './quizContainer'
-import QuizPointyContainer from './quizPointyContainer'
-import Header from './header'
-import SkeletonLoading from './skeletonLoading'
+import LoadingScreen from '../components/loadingScreen'
+import QuizContainer from '../components/quizContainer'
+import QuizPointyContainer from '../components/quizPointyContainer'
+import Header from '../components/header'
+import SkeletonLoading from '../components/skeletonLoading';
 
-import { log, takeParameterFromUrl } from './base'
+import { log, takeParameterFromUrl } from '../components/base'
 
 const Sort = () => {
     const [loadState, setLoadState] = useState()

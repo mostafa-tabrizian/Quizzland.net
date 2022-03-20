@@ -20,86 +20,86 @@
 }
 
 .hero{
-    &_bubbles {
-        animation: dancingBubbles 5s infinite linear;
+    // &_bubbles {
+    //     animation: dancingBubbles 5s infinite linear;
 
-        @keyframes dancingBubbles {
-            0%{
-                transform:rotate(0deg)
-                        translate(-10px)
-                        rotate(0deg);
-            }
-            50%{
-                transform:rotate(180deg)
-                        translate(0px)
-                        rotate(-180deg);
-            }
-            100%{
-                transform:rotate(360deg)
-                        translate(-10px)
-                        rotate(-360deg);
-            }
-        }
-    }
+    //     @keyframes dancingBubbles {
+    //         0%{
+    //             transform:rotate(0deg)
+    //                     translate(-10px)
+    //                     rotate(0deg);
+    //         }
+    //         50%{
+    //             transform:rotate(180deg)
+    //                     translate(0px)
+    //                     rotate(-180deg);
+    //         }
+    //         100%{
+    //             transform:rotate(360deg)
+    //                     translate(-10px)
+    //                     rotate(-360deg);
+    //         }
+    //     }
+    // }
 
-    &_path {
-        background: url("/static/img/landPage-path.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center bottom;
-    }
+    // &_path {
+    //     background: url("/static/img/landPage-path.png");
+    //     background-repeat: no-repeat;
+    //     background-size: cover;
+    //     background-position: center bottom;
+    // }
 
-    &__start {
+    // &__start {
 
-        h2 {
-            font-family: myLalezar, myHarmattan, serif;
-        }
+    //     h2 {
+    //         font-family: myLalezar, myHarmattan, serif;
+    //     }
 
-        a {
-            animation: shining 2s linear infinite alternate-reverse;
-        }
+    //     a {
+    //         animation: shining 2s linear infinite alternate-reverse;
+    //     }
 
-        @keyframes shining {
-            from {
-                box-shadow: 6px 0px 22px #ffffff14, inset 6px 0 18px black;
-            }
-            to {
-                box-shadow: -6px -5px 22px #ffffff14, inset -6px 5px 18px black;
-            }
-        }
+    //     @keyframes shining {
+    //         from {
+    //             box-shadow: 6px 0px 22px #ffffff14, inset 6px 0 18px black;
+    //         }
+    //         to {
+    //             box-shadow: -6px -5px 22px #ffffff14, inset -6px 5px 18px black;
+    //         }
+    //     }
 
-        button {
+    //     button {
 
-            background: linear-gradient(-45deg, rgb(162, 0, 0), rgb(75, 0, 0), rgb(170, 73, 73), rgb(162, 0, 0));
-            background-size: 400% 400%;
-            animation: heroButton 10s ease infinite alternate;
+    //         background: linear-gradient(-45deg, rgb(162, 0, 0), rgb(75, 0, 0), rgb(170, 73, 73), rgb(162, 0, 0));
+    //         background-size: 400% 400%;
+    //         animation: heroButton 10s ease infinite alternate;
             
-            @keyframes heroButton {
-                0% {
-                    background-position: 0% 50%;
-                }
-                50% {
-                    background-position: 100% 50%;
-                }
-                100% {
-                    background-position: 0% 50%;
-                }
-            }
+    //         @keyframes heroButton {
+    //             0% {
+    //                 background-position: 0% 50%;
+    //             }
+    //             50% {
+    //                 background-position: 100% 50%;
+    //             }
+    //             100% {
+    //                 background-position: 0% 50%;
+    //             }
+    //         }
 
-            span {
-                width: 2.5rem; height: 2rem;
-                transition: transform .15s ease-in-out;
-            }
+    //         span {
+    //             width: 2.5rem; height: 2rem;
+    //             transition: transform .15s ease-in-out;
+    //         }
 
-            &:hover {
-                color: white;
+    //         &:hover {
+    //             color: white;
 
-                span {
-                    transform: translateX(-.5rem);
-                }
-            }
-        }
-    }
+    //             span {
+    //                 transform: translateX(-.5rem);
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 // .category {

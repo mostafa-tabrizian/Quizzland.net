@@ -8,7 +8,7 @@ import {
 
 import { log } from './components/base'
 
-const E404  = lazy(() => import ('./components/404'))
+const E404  = lazy(() => import ('./pages/404'))
 const Footer  = lazy(() => import ('./components/footer'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))
 

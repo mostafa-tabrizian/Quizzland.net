@@ -7,13 +7,13 @@ import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
 
-import Header from './header'
-import axiosInstance from './axiosApi'
-import { log, replaceFunction } from './base'
-import BackBtn from './backBtn'
-import LoadingScreen from './loadingScreen'
-import QuizPointyContainer from './quizPointyContainer'
-import SkeletonLoading from './skeletonLoading'
+import Header from '../components/header'
+import axiosInstance from '../components/axiosApi'
+import { log, replaceFunction } from '../components/base'
+import BackBtn from '../components/backBtn'
+import LoadingScreen from '../components/loadingScreen'
+import QuizPointyContainer from '../components/quizPointyContainer'
+import SkeletonLoading from '../components/skeletonLoading';
 
 const Result = (props) => {
     const [resultSubtitle, setResultSubtitle] = useState()

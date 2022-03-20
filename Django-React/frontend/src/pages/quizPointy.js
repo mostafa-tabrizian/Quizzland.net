@@ -2,52 +2,38 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import { notification } from 'antd';
 import { Helmet } from "react-helmet";
-import { StickyShareButtons } from 'sharethis-reactjs';
-import { Switch } from 'antd';
+import {StickyShareButtons} from 'sharethis-reactjs';
+import { Switch, message } from 'antd';
 
 import axios from 'axios'
-import Header from './header'
-import AddView from './addView';
+import Header from '../components/header'
+import AddView from '../components/addView';
 
-import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from './base'
-import LoadingScreen from './loadingScreen'
-import QuizContainer from './quizContainer'
-import SkeletonLoading from './skeletonLoading'
+import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from '../components/base'
+import LoadingScreen from '../components/loadingScreen'
+import QuizPointyContainer from '../components/quizPointyContainer'
+import SkeletonLoading from '../components/skeletonLoading';
 
 const logo = '/static/img/Q-small.png'
 
 let quiz = 'null'
-let advertPos = 0
-let quizCounter = 0
 
 const Quiz = () => {
     const [questions, setQuestions] = useState([])
-    const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
-    const [correctAnswerOption, setCorrectAnswerOption] = useState(0)
-    const [wrongAnswerOption, setWrongAnswerOption] = useState(0)
     const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
-    const [ableToGoNext, setAbleToGoNext] = useState(false)
-    const [ableToSelectOption, setAbleToSelectOption] = useState(true)
     const [quizEnded, setQuizEnded] = useState(false)
     const [loadState, setLoadState] = useState()
     const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [quizThumbnail, setQuizThumbnail] = useState()
+    const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [SFXAllowed, setSFXAllowed] = useState()
-    const [SFXCorrect, setSFXCorrect] = useState(null)
-    const [SFXWrong, setSFXWrong] = useState(null)
+    const [SFXClick, setSFXClick] = useState(null)
     const [quiz, setQuiz] = useState(null)
     const [quizTitleReplacedWithHyphen, setQuizTitleReplacedWithHyphen] = useState()
-
-    const [score, setScore] = useState(0)
-    const [resultGif, setResultGif] = useState()
-    const [fanName, setFanName] = useState()
-    const [subCategory, setSubCategory] = useState()
-    const [title, setTitle] = useState()
-    const [id, setId] = useState()
 
     const result = useRef(null)
 
@@ -55,9 +41,8 @@ const Quiz = () => {
         grabData()
         setLoadState(true)
         SFXLocalStorage()
-        setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
-        setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
-    }, [quizTitle])
+        setSFXClick(new Audio('/static/sound/SFXClick.mp3'))
+    }, [quizTitle,])
 
     useEffect(() => {
         quizChangeDetector()
@@ -88,15 +73,15 @@ const Quiz = () => {
             className: 'rounded-lg'
         });
     };
-
+    
     const applyBackground = (background) => {
         document.querySelector('html').style = `background: url('${background}') center/cover no-repeat fixed !important`
     }
 
     const quizChangeDetector = () => {
-        (function (history) {
+        (function(history){
             let pushState = history.pushState;
-            history.pushState = function () {
+            history.pushState = function() {
                 pushState.apply(history, arguments);
             };
 
@@ -105,21 +90,21 @@ const Quiz = () => {
             setQuizTitleReplacedWithHyphen(title)
         })(window.history);
     }
-
+    
     const grabData = async () => {
-        quizTitleReplacedWithHyphen && 
-        await axios.get(`/api/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
+        quizTitleReplacedWithHyphen &&
+        await axios.get(`/api/pointy_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
             .then(async (quizData) => {
                 try {
-                    AddView('quiz_new', quizData.id)
+                    AddView('pointy_new', quizData.id)
                     sendCategoryAsInterest(quizData.subCategory)
                     getSuggestionsQuiz(quizData.subCategory)
                     applyBackground(quizData.background)
                     setQuiz(quizData)
-    
-                    await axios.get(`/api/questions/?quizKey=${quizData.id}`)
+
+                    await axios.get(`/api/questions_pointy/?quizKey=${quizData.id}`)
                         .then((questionData) => {
-                            setQuestions(questionData.data)
+                            setQuestions(questionData?.data)
                             setContentLoaded(true)
                         })
                 }
@@ -127,15 +112,6 @@ const Quiz = () => {
                     window.location.href = '/404'
                 }
             })
-    }
-
-    const calculateTheResultScore = () => {
-        const questionsCounter = questions?.length
-        if (questionsCounter && correctAnswersCount) {
-            const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
-            log(score)
-            setScore(score)
-        }
     }
 
     const sendCategoryAsInterest = (category) => {
@@ -158,183 +134,57 @@ const Quiz = () => {
         }
     }
 
-    const ImGifTextAnswerShowOrHide = (questionId, hideOrShow) => {
-        const question = document.querySelectorAll('.quiz__container')[questionId - 1]
-        if (hideOrShow == 'block') {
-            question.querySelector('.quiz__answerText')?.classList.remove('answerHide')
-            question.querySelector('.quiz__answerText')?.classList.add('answerShow')
-
-            question.querySelector('.quiz__answerImGif')?.classList.remove('answerHide')
-            question.querySelector('.quiz__answerImGif')?.classList.add('answerShow')
-        }
-        else if (hideOrShow == 'none') {
-            question.querySelector('.quiz__answerText')?.classList.remove('answerShow')
-            question.querySelector('.quiz__answerText')?.classList.add('answerHide')
-
-            question.querySelector('.quiz__answerImGif')?.classList.remove('answerShow')
-            question.querySelector('.quiz__answerImGif')?.classList.add('answerHide')
-        }
-    }
-
-    const playSFX = (userSelection) => {
-        let userChose = parseInt(userSelection.id.slice(-1))
-        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
-
+    const playSFX = () => {
         const SFXAllowed = localStorage.getItem('SFXAllowed')
-        if (userChose !== correctAnswer) {
-            setWrongAnswerOption(parseInt(userChose))
-            if (SFXAllowed === 'true') {
-                SFXWrong.volume = .5
-                SFXWrong.play()
-            }
-        } else {
-            setCorrectAnswersCount(prev => prev + 1)
-            if (SFXAllowed === 'true') {
-                SFXCorrect.volume = .5
-                SFXCorrect.play()
-            }
-        }
-    }
-
-    const checkTheSelectedOption = (userSelection) => {
-        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
-
-        playSFX(userSelection)
-        setCorrectAnswerOption(correctAnswer)
-        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
-    }
-
-    const amountOfPauseCalculator = () => {
-        let amountOfPause = 1500
-        const currentQuestions = questions[currentQuestionNumber - 1]
-        if (currentQuestions.answer_text !== '') {
-            amountOfPause += 2000
-        }
-        if (!(currentQuestions.answer_imGif.includes('NotExist'))) {
-            amountOfPause += 2000
-        }
-        return amountOfPause
-    }
-
-    const makeEveryOptionLowOpacity = (type) => {
-        const allOptions = document.querySelectorAll('.quiz__options__textLabel')
-
-        if (type === 'low') {
-            for (let i = 0; i < allOptions.length; i++) {
-                allOptions[i].style.opacity = .5
-            }
-        }
-
-        else if (type === 'high') {
-            for (let i = 0; i < allOptions.length; i++) {
-                allOptions[i].style.opacity = 1
-            }
+        if (SFXAllowed === 'true') {
+            SFXClick.volume = .5
+            SFXClick.play()
         }
     }
 
     const selectedOption = (props) => {
-        if (ableToSelectOption) {
-            setTimeout(() => {
-                document.querySelector('.quiz__questions').scrollIntoView()
-            }, 300)
+        playSFX()
+        takeSelectedOptionValue(props.target)
 
-            setAbleToSelectOption(false)
+        if (autoQuestionChanger) {
+            automaticallyGoNextQuestionOrEndTheQuiz()
+        } else {
             setAbleToGoNext(true)
-            makeEveryOptionLowOpacity('low')
-            checkTheSelectedOption(props.target)
 
-            if (autoQuestionChanger) {
-                setTimeout(() => {
-                    goNextQuestionOrEndTheQuiz()
-                }, amountOfPauseCalculator())
-            } else {
-                setTimeout(() => {
-                    if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
-                        openNotification()
-                    }
-                }, 5000)
-            }
+            setTimeout(() => {
+                if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
+                    openNotification()
+                }
+            }, 5000)
         }
     }
+
+    const takeSelectedOptionValue = (userSelection) => {
+        let userChose = userSelection.id
+        const currentQuestionNumber = parseInt(userChose.split('-')[0])
+
+        for (let i = 1; i <= 10; i++) {
+            if (document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`)) {
+                document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`).style.opacity = .5
+                document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`).style.borderColor = 'white'
+            }
+        }
+
+        document.getElementById(`inputLabel ${userChose}`).style.opacity = 1
+        document.getElementById(`inputLabel ${userChose}`).style.background = '#000000bf'
+        document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
+    }
+
+    const automaticallyGoNextQuestionOrEndTheQuiz = () => {
+        setTimeout(() => {
+            goNextQuestionOrEndTheQuiz()
+        }, 1500);
+    }
+
 
     const questionShowIfNotNull = (question) => {
         if (question !== null) {
-            return <p className='text-center p-3 backdrop-blur-2xl rounded-xl text-lg md:text-[1.5rem]'> {question} </p>
-        }
-    }
-
-    const restartTheStateOfQuestion = () => {
-        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        setAbleToGoNext(false)
-        setCorrectAnswerOption(0)
-        setWrongAnswerOption(0)
-        makeEveryOptionLowOpacity('high')
-
-        setTimeout(() => {
-            setAbleToSelectOption(true)
-        }, 1300)
-    }
-
-    let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
-
-    if (isItDesktop() || isItIPad()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34.2
-    }
-    else if (isItMobile()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7
-    }
-
-    const detailOfResult = () => {
-        if (score > 80){
-            setResultGif(quiz?.GIF100)
-        }
-        else if (score > 60){
-            setResultGif(quiz?.GIF80)
-        }
-        else if (score > 40){
-            setResultGif(quiz?.GIF60)
-        }
-        else if (score > 20){
-            setResultGif(quiz?.GIF40)
-        }
-        else if (score >= 0){
-            setResultGif(quiz?.GIF20)
-        }
-    }
-
-
-    const goNextQuestionOrEndTheQuiz = () => {
-        if (ableToGoNext || autoQuestionChanger) {
-            if (currentQuestionNumber !== questions?.length) {
-                restartTheStateOfQuestion()
-                plusOneToTotalAnsweredQuestions()
-                setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
-
-                if (typeof (window) !== 'undefined' && !(window.navigator.userAgent.includes('Windows'))) {
-                    window.scrollTo(0, 0);
-                }
-
-            } else {
-                setQuizEnded(true)
-                setTimeout(() => {
-                    try {
-                        // localStorage.setItem('resultQuiz', JSON.stringify(quiz))
-                        // localStorage.setItem('resultQuestions', JSON.stringify(questions))
-                        // localStorage.setItem('resultCorrectAnswersCount', correctAnswersCount)
-                        calculateTheResultScore()
-                        detailOfResult()
-                        setFanName(quiz?.fan_name)
-                        setSubCategory(quiz?.subCategory)
-                        setTitle(quiz?.title)
-                        setId(quiz?.id)
-
-                        result.current.click()
-                    } catch (err) {
-                        log(err)
-                        log("Can't show the result from localStorage!")
-                    }
-                }, 3500)
-            }
+            return <p className='quiz__question text-center bg-[#0000007c] backdrop-blur-xl rounded-2xl'> {question} </p>
         }
     }
 
@@ -344,35 +194,17 @@ const Quiz = () => {
         if (question.option_1st) {
             return (
                 <div className="flex justify-center">
-                    <form className='quiz__options w-[100%] md:grid md:grid-cols-2 space-y-3 text-[5vw] md:text-[1.6vw] justify-center' action="">
-                        {question.option_1st !== ('') &&
-                            <> <input
-                                onClick={selectedOption}
-                                type="radio"
-                                name="answer" className='absolute opacity-0'
-                                id={`${questionCounterForId}-1`}
-                            />
-                                <label
-                                    className={`quiz__options__textLabel backdrop-blur-xl
-                                            border border-[#ffffff30]
-                                            p-2 block max-w-[100%] md:max-width-[14rem]
-                                            md:h-[auto] md:pr-4 md:m-2 rounded-lg
-                                            cursor-pointer text-lg md:text-[1.5rem]
-                                            hover:border-red-300
-                                            ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''}
-                                            ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''}
-                                            ${!ableToSelectOption ? 'pointer-events-none' : ''}
-                                        `}
-                                    id={`${questionCounterForId}-1`}
-                                    htmlFor={`${questionCounterForId}-1`}
-                                >
-                                    {question.option_1st}
-                                </label>
-                            </>
-                        }
-                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.5rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
-                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.5rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
-                        {question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.5rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
+                    <form className='quiz__options p-4 md:p-0 w-[100%] md:grid md:grid-cols-2 space-y-3 text-[5vw] md:text-[1.6vw] justify-center' action="">
+                        {question.option_1st !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-1`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> {question.option_1st} </label> </>}
+                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
+                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
+                        {question.option_4th !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
+                        {question.option_5th !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-5`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-5`} htmlFor={`${questionCounterForId}-5`}> {question.option_5th} </label> </>}
+                        {question.option_6th !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-6`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-6`} htmlFor={`${questionCounterForId}-6`}> {question.option_6th} </label> </>}
+                        {question.option_7th !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-7`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-7`} htmlFor={`${questionCounterForId}-7`}> {question.option_7th} </label> </>}
+                        {question.option_8th !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-8`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-8`} htmlFor={`${questionCounterForId}-8`}> {question.option_8th} </label> </>}
+                        {question.option_9th !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-9`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-9`} htmlFor={`${questionCounterForId}-9`}> {question.option_9th} </label> </>}
+                        {question.option_10th !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-10`} /> <label className={`quiz__options__textLabel bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-10`} htmlFor={`${questionCounterForId}-10`}> {question.option_10th} </label> </>}
                     </form>
                 </div>
             )
@@ -380,43 +212,25 @@ const Quiz = () => {
             return (
                 <div className="flex justify-center">
                     <form className='relative grid justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3 flex-wrap' data={question.answer} action="">
-                        {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <img src={question.option_img_1st} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <img src={question.option_img_2nd} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <img src={question.option_img_3rd} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <img src={question.option_img_4th} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <Image src={question.option_img_1st} blurDataURL={question.option_img_1st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <Image src={question.option_img_2st} blurDataURL={question.option_img_2st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <Image src={question.option_img_3st} blurDataURL={question.option_img_3st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <Image src={question.option_img_4st} blurDataURL={question.option_img_4st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_5th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-5`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-5`} htmlFor={`${questionCounterForId}-5`}> <Image src={question.option_img_5st} blurDataURL={question.option_img_5st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_6th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-6`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-6`} htmlFor={`${questionCounterForId}-6`}> <Image src={question.option_img_6st} blurDataURL={question.option_img_6st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_7th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-7`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-7`} htmlFor={`${questionCounterForId}-7`}> <Image src={question.option_img_7st} blurDataURL={question.option_img_7st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_8th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-8`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-8`} htmlFor={`${questionCounterForId}-8`}> <Image src={question.option_img_8st} blurDataURL={question.option_img_8st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_9th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-9`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-9`} htmlFor={`${questionCounterForId}-9`}> <Image src={question.option_img_9st} blurDataURL={question.option_img_9st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_10th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-10`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-10`} htmlFor={`${questionCounterForId}-10`}> <Image src={question.option_img_10st} blurDataURL={question.option_img_10st} placeholder='blur' width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
                     </form>
                 </div>
             )
         }
     }
 
-    const answerOfQuestionIfExistShow = (question) => {
-        if (question.answer_text) {
-            return (
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: question.answer_text
-                    }}>
-                </div>
-            )
-        }
-    }
-
-    const gifAnswerOfQuestionIfExistShow = (question) => {
-        return <img
-            src={question.answer_imGif}
-            width={1366}
-            height={768}
-            className='object-contain object-top'
-            alt={question.title}
-            title={question.title}
-        />
-    }
-
     const isSafari = typeof (window) !== 'undefined' && navigator.userAgent.indexOf("Chrome") != -1 === false && navigator.userAgent.indexOf("Chrome") != -1
-    
-    const quizQuestions = (browser) => {
 
+    const quizQuestions = (browser) => {
         return (
             questions?.map(question => {
                 return (
@@ -443,7 +257,7 @@ const Quiz = () => {
                             <div className='mt-3 w-[22rem] md:w-[29rem]'>
                                 {!question.question_img.includes('NotExist') &&
                                     <img
-                                        src={question.question_img}
+                                        src={question?.question_img}
                                         width={1366}
                                         height={768}
                                         alt={question.title}
@@ -455,19 +269,6 @@ const Quiz = () => {
 
                         {questionOptionsCheckBetweenStringOrImg(question)}
 
-                        {
-                            question?.answer_text &&
-                            <div className={`quiz__answerText answerHide text-right bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg`}>
-                                {answerOfQuestionIfExistShow(question)}
-                            </div>
-                        }
-
-                        {
-                            !(question.answer_imGif.includes('NotExist.jpg')) &&
-                            <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg'>
-                                {gifAnswerOfQuestionIfExistShow(question)}
-                            </div>
-                        }
                     </div>
                 )
             })
@@ -476,6 +277,77 @@ const Quiz = () => {
 
     const plusOneToTotalAnsweredQuestions = () => {
         setCurrentQuestionNumber(prev => prev + 1)
+    }
+
+    const minusOneToTotalAnsweredQuestions = () => {
+        setCurrentQuestionNumber(prev => prev - 1)
+    }
+    
+    let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
+
+    if (isItDesktop() || isItIPad()) {
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34.2
+    }
+    else if (isItMobile()) {
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7
+    }
+
+    const calculateThePoints = () => {
+        const allOptions = document.querySelectorAll('input[type=radio]')
+        const optionPoints = ['option_point_1st', 'option_point_2nd', 'option_point_3rd', 'option_point_4th', 'option_point_5th', 'option_point_6th', 'option_point_7th', 'option_point_8th', 'option_point_9th', 'option_point_10th']
+        
+        const firstQuestionId = allOptions[0].getAttribute('id')
+        const firstQuestionIndex = parseInt(firstQuestionId.split('-')[0])
+        
+        let totalPoints = 0
+        for (let i = 0; i < allOptions.length; i++) {
+            const questionId = allOptions[i].getAttribute('id')
+            const currentQuestionId = parseInt(questionId.split('-')[0])
+            const currentQuestionNumber = currentQuestionId - firstQuestionIndex
+            const OptionSelected = parseInt(questionId.split('-')[1]) - 1
+            
+            if (allOptions[i].checked) {
+                const pointOfOptions = questions[currentQuestionNumber][optionPoints[OptionSelected]]
+                totalPoints += pointOfOptions
+            }
+        }
+        
+        return totalPoints
+    }
+
+    const goNextQuestionOrEndTheQuiz = () => {
+        if (ableToGoNext || autoQuestionChanger) {
+            setAbleToGoNext(false)
+
+            if (currentQuestionNumber !== questions.length) {
+                plusOneToTotalAnsweredQuestions()
+                setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+
+            } else {
+                setQuizEnded(true)
+                setTimeout(() => {
+                    try {
+                        localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
+                        localStorage.setItem('testResult', calculateThePoints())
+                        result.current.click()
+                    } catch{
+                        log("Can't show the result from localStorage!")
+                    }
+                }, 3500)
+            }
+        } else {
+            message.warning('لطفا یک گزینه را انتخاب کنید');
+        }
+    }
+
+    const goLastQuestion = () => {
+        if (currentQuestionNumber !== 1) {
+            minusOneToTotalAnsweredQuestions()
+            setCurrentMoveOfQuestions(prev => prev + sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+
+        } else {
+            message.warning('شما سوال اول هستید');
+        }
     }
 
     const showTheTagsIfNotNull = () => {
@@ -489,7 +361,7 @@ const Quiz = () => {
                                 to={`/search?q=${replaceFunction(tag, ' ', '+')}`}
                                 rel='tag'
                             >
-                                    {tag}
+                                {tag}
                             </Link>
                         </h2>
                     </li>
@@ -499,8 +371,8 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        await axios.get(`/api/quiz_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8`)
-            .then((res) => { setSuggestionQuizzes(res.data.results) })
+        await axios.get(`/api/pointy_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8`)
+            .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 
     const SFXController = () => {
@@ -510,7 +382,7 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/quiz/${replaceFunction(quizTitle, ' ', '-')}`
+        return `https://www.quizzland.net/test/${replaceFunction(quizTitle, ' ', '-')}`
     }
 
     let firstTouch
@@ -526,26 +398,26 @@ const Quiz = () => {
                 goNextQuestionOrEndTheQuiz()
             }
         }
+        else if (positionOfEndTouch - firstTouch >= 100) {
+            goLastQuestion()
+        }
     }
-
+    
     return (
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
-
+        
             <Header/>
 
             <Helmet>
-                <title>{`کوییزلند | کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
-
-                <link rel="canonical" href={currentUrl()} />
-
-                <meta name="description" content={`با ${questions?.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz?.title} ${quiz?.subCategory} کوییز از`} />
-                <meta name="keywords" content="کوییز, کوییزلند" />
+                <title>{`کوییزلند | تست ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
+                <meta name="description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
+                <meta name="keywords" content="کوییز, تست, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quizThumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
                 <meta property="og:title" content={quiz?.title} />
-                <meta property="og:description" content={`با ${questions?.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz?.title} ${quiz?.subCategory} کوییز از`} />
+                <meta property="og:description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
                 <meta property="og:image" content={quizThumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
@@ -554,7 +426,7 @@ const Quiz = () => {
                 <meta property="og:url" content={currentUrl()} />
 
                 <script type="application/ld+json">
-                    {`
+                {`
                     {
                         "@context": "https://schema.org",
                         "@type": "Article",
@@ -620,8 +492,13 @@ const Quiz = () => {
                     flex items-center justify-center
                     ${quizEnded ? 'fadeIn' : 'fadeOut'}
                 `}>
-                ___ در حال محاسبه نتیجه کوییز___
+                ___ در حال محاسبه نتیجه تست
             </div>
+
+
+            {/* <div className='adverts adverts__left'>
+
+            </div> */}
 
             {/* <div className='absolute md:ml-10 ml-4 top-28' onClick={() => { SFXController() }} >
                 <button type="button">
@@ -702,9 +579,9 @@ const Quiz = () => {
                 <div className={`
                     quiz__questionChanger__container relative
                     top-24
-                    ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
                 `}>
-                    <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
+                    <button
+                        onClick={goNextQuestionOrEndTheQuiz}
                         aria-label='Next Question'
                         className={`
                             quiz__questionChanger absolute
@@ -716,10 +593,20 @@ const Quiz = () => {
                         <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
 
                     </button>
+                    <button
+                        onClick={goLastQuestion}
+                        aria-label='Next Question'
+                        className={`
+                            quiz__questionChanger absolute quiz__questionChanger__last
+                            btn
+                        `}
+                    >
+                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+                    </button>
                 </div>
             }
 
-            {/* {isItDesktop() &&
+            {/* { isItDesktop() &&
                 <hr className='divider'></hr>
             } */}
 
@@ -741,6 +628,7 @@ const Quiz = () => {
                     {
                         isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
                     }
+
                 </div>
             </div>
 
@@ -751,36 +639,27 @@ const Quiz = () => {
                 </ul>
             </div>
 
-            {/* Adverts */}
-            <div className='adverts_center' id='mediaad-bNpr'></div>
-
             <div className='space-med'>
-                <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor mb-5'>کوییز های مشابه</h7>
+                <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>کوییز های مشابه</h7>
 
                 {SkeletonLoading(contentLoaded)}
 
                 <ul className="w-[90vw] md:w-4/5 mr-[-1.5rem] ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
                     {
-                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
+                        suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
                 </ul>
             </div>
 
-
-            <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>مطالب پیشنهادی</h7>
-
-            {/* Adverts */}
-            <div className='adverts_center' id='mediaad-dESu'></div>
-
             <Link
-                to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&rg=${resultGif}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}`}
+                to='/result_test'
                 ref={result}
                 className='noVis'
-            >
+            >    
             </Link>
 
         </React.Fragment>
     );
 }
-
+ 
 export default Quiz;

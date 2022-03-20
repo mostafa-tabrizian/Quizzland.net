@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom'
 
 
 import axios from 'axios'
-import { log, replaceFunction, datePublishHandler } from './base'
+import { log, replaceFunction, datePublishHandler } from '../components/base'
 
-// import Tools from './tools'
-// import PageTravel from './pageTravel'
-import LoadingScreen from './loadingScreen'
-import SkeletonLoading from './skeletonLoading';
-import Header from './header'
+// import Tools from '../components/tools'
+// import PageTravel from '../components/pageTravel'
+import LoadingScreen from '../components/loadingScreen'
+import SkeletonLoading from '../components/skeletonLoading';
+import Header from '../components/header'
 
 
 

@@ -4,16 +4,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import Header from './header'
-import AddView from './addView';
+import Header from '../components/header'
+import AddView from '../components/addView';
 
-import Tools from './tools'
-import PageTravel from './pageTravel'
-import { log, replaceFunction, takeParameterFromUrl } from './base'
-import LoadingScreen from './loadingScreen'
-import QuizContainer from './quizContainer'
-import QuizPointyContainer from './quizPointyContainer'
-import SkeletonLoading from './skeletonLoading'
+import Tools from '../components/tools'
+import PageTravel from '../components/pageTravel'
+import { log, replaceFunction, takeParameterFromUrl } from '../components/base'
+import LoadingScreen from '../components/loadingScreen'
+import QuizContainer from '../components/quizContainer'
+import QuizPointyContainer from '../components/quizPointyContainer'
+import SkeletonLoading from '../components/skeletonLoading';
 
 const SubCategory = (props) => {
 

@@ -4,9 +4,9 @@ import { saveAs } from 'file-saver'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import Header from './header'
+import Header from '../components/header'
 
-import { log } from './base'
+import { log } from '../components/base'
 
 let sha256 = require('js-sha256');
 

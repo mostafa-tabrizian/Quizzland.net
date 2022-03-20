@@ -8,8 +8,8 @@ import {InlineReactionButtons, InlineShareButtons, StickyShareButtons} from 'sha
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
 
-import LoadingScreen from './loadingScreen'
-import Header from './header'
+import LoadingScreen from '../components/loadingScreen'
+import Header from '../components/header'
 
 const logo = '/static/img/Q-small.png'
 

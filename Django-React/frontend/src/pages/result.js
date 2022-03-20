@@ -6,14 +6,14 @@ import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
 import axios from 'axios'
-import Header from './header'
-import axiosInstance from './axiosApi'
+import Header from '../components/header'
+import axiosInstance from '../components/axiosApi'
 
-import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from './base'
-import BackBtn from './backBtn'
-import LoadingScreen from './loadingScreen'
-import QuizContainer from './quizContainer'
-import SkeletonLoading from './skeletonLoading'
+import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from '../components/base'
+import BackBtn from '../components/backBtn'
+import LoadingScreen from '../components/loadingScreen'
+import QuizContainer from '../components/quizContainer'
+import SkeletonLoading from '../components/skeletonLoading';
 
 const Result = () => {
     const [resultScore, setResultScore] = useState(0)

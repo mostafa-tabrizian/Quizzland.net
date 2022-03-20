@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom'
 
 import axios from 'axios'
 
-import Tools from './tools'
-import PageTravel from './pageTravel'
-import LoadingScreen from './loadingScreen'
-import SkeletonLoading from './skeletonLoading';
-import Header from './header'
-import AddView from './addView';
+import Tools from '../components/tools'
+import PageTravel from '../components/pageTravel'
+import LoadingScreen from '../components/loadingScreen'
+import SkeletonLoading from '../components/skeletonLoading';
+import Header from '../components/header'
+import AddView from '../components/addView';
 
-import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
+import { log, replaceFunction, viewsFormat, datePublishHandler } from '../components/base'
 
 const Category = (props) => {
     const [categoryQuery, setCategoryQuery] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', ' '))

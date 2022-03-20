@@ -9,7 +9,7 @@ import {
 
 import { log } from './components/base'
 
-const Blog = lazy(() => import ('./components/blog'))
+const Blog = lazy(() => import ('./pages/blog'))
 const Article = lazy(() => import ('./components/article'))
 const Footer = lazy(() => import ('./components/footer'))
 const ScrollToTop = lazy(() => import ('./components/scrollToTop'))

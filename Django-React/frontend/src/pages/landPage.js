@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
-import SkeletonLoading from './skeletonLoading'
+import SkeletonLoading from '../components/skeletonLoading';
 
 import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
-import Header from './header'
+import Header from '../components/header'
 
-import { log, isItMobile, isItDesktop, isItIPad } from './base'
-import QuizContainer from './quizContainer'
-import QuizPointyContainer from './quizPointyContainer'
-import LoadingScreen from './loadingScreen'
+import { log, isItMobile, isItDesktop, isItIPad } from '../components/base'
+import QuizContainer from '../components/quizContainer'
+import QuizPointyContainer from '../components/quizPointyContainer'
+import LoadingScreen from '../components/loadingScreen'
 
 const Index = () => {
     const [recommendedQuizzes, setRecommendedQuizzes] = useState([])
@@ -197,38 +197,28 @@ const Index = () => {
 
             </Helmet>
 
-            <div className={`hero flex justify-center items-center`}>
-                    <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div>
+            <div className={`hero hidden md:flex justify-center items-center w-[90vw] md:w-4/5 bg-gradient-to-t from-[#3d191a] via-transparent p-3 rounded-lg m-auto`}>
+                    {/* <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div> */}
 
-                    <div className='relative mr-5 ml-5 drop-shadow-[10px_15px_10px_black] hidden md:block'>
+                    <div className='relative mr-5 mb-[-3rem] drop-shadow-[10px_15px_10px_black] hidden md:block'>
                         <div className='pointer-events-none'>
                             <img
                                 src='/static/img/Q.png'
-                                width={350}
-                                height={500}
+                                width={175}
+                                height={252}
                                 alt='لوگوی کوییزلند'
-                            />
-                        </div>
-                        <div className='absolute top-0 left-0 pointer-events-none hero_bubbles'>
-                            <img
-                                src='/static/img/QBubbles.png'
-                                width={350}
-                                height={500}
-                                alt='لوگوی کوییزلند'
-                                className='max-w-[104%] w-[104%]'
                             />
                         </div>
                     </div>
 
-                    <div className='hero__start text-right mr-6 mb-[50%] lg:mb-0 lg:mr-4'>
-                        <h1 className='relative text-[4.5rem] mb-2'>
-                            اینجا کوییزلندِ
+                    <div className='hero__start text-right mr-9 mb-[50%] lg:mb-0 lg:mr-4'>
+                        <h1 className='relative text-[3rem] mb-2'>
+                            اینجا <span className='bloodRiver'>کوییزلندِ</span>
                         </h1>
-                        <h2 className='text-[1.6rem] max-w-[33rem]
-                                        mb-20 ml-3 drop-shadow-[0_0_25px_black]'>
+                        <h2 className='text-[1.3rem] max-w-[26rem] drop-shadow-[0_0_25px_black]'>
                             جایی که میتونی خودت رو به عنوان یه فن به بقیه ثابت کنی پس اگر آماده ای 😎 
                         </h2>
-                        <button
+                        {/* <button
                             onClick={() => {document.getElementById('scroll').scrollIntoView()}}
                             className='
                                 items-center btn text-[1.6rem] py-[.5rem] px-[3rem]
@@ -242,7 +232,7 @@ const Index = () => {
                             </span>
                             بزن بریم
                             
-                        </button>
+                        </button> */}
                     </div>
                 </div>
 

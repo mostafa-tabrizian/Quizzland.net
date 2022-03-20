@@ -13,30 +13,30 @@
             font-family: myLalezar, serif;
 
             // background: linear-gradient(#b52633, #791118);
-            background: linear-gradient(45deg, rgb(162, 0, 0), rgb(170, 73, 73), rgb(75, 0, 0));
-            background-size: 400% 400%;
-            animation: logo 5s ease infinite alternate;
+            // background: linear-gradient(45deg, rgb(162, 0, 0), rgb(170, 73, 73), rgb(75, 0, 0));
+            // background-size: 400% 400%;
+            // animation: logo 5s ease infinite alternate;
 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; 
-            -moz-background-clip: text;
-            -moz-text-fill-color: transparent;
-            // margin: 0;
-            margin-left: .2rem;
-            font-size: 1.6rem;
+            // -webkit-background-clip: text;
+            // -webkit-text-fill-color: transparent; 
+            // -moz-background-clip: text;
+            // -moz-text-fill-color: transparent;
+            // // margin: 0;
+            // margin-left: .2rem;
+            // font-size: 1.6rem;
 
             
-            @keyframes logo {
-                0% {
-                    background-position: 0% 50%;
-                }
-                50% {
-                    background-position: 100% 50%;
-                }
-                100% {
-                    background-position: 0% 50%;
-                }
-            }
+            // @keyframes logo {
+            //     0% {
+            //         background-position: 0% 50%;
+            //     }
+            //     50% {
+            //         background-position: 100% 50%;
+            //     }
+            //     100% {
+            //         background-position: 0% 50%;
+            //     }
+            // }
         }
 
         // img {

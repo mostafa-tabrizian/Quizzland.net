@@ -88,7 +88,7 @@ const Header = () => {
                 <nav className="flex items-center justify-between">
                     <div>
                         <Link to="/" className='flex header__logo justify-between items-center md:hidden'>
-                            <span>uizzland</span>
+                            <span className='bloodRiver ml-1 text-[1.6rem]'>uizzland</span>
                             <img
                                 src='/static/img/Q-small.png'
                                 alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
@@ -109,7 +109,7 @@ const Header = () => {
                         </div>
 
                         <Link to="/" className="flex header__logo justify-between items-center">
-                            <span>uizzland</span>
+                            <span className='bloodRiver ml-1 text-[1.6rem]'>uizzland</span>
                             <img
                                 src='/static/img/Q-small.png'
                                 alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
