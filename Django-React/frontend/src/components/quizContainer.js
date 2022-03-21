@@ -47,12 +47,12 @@ const QuizContainer = (props) => {
                                             text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
                                 {quiz.subCategory}
                             </h2>
-                            <h2 className={`
+                            <h3 className={`
                                 quizContainer__title quizContainer__title__noViews flex
                                 text-sm mr-5 md:w-52 md:mr-0 md:text-base
                             `}>
                                 {quiz.title}
-                            </h2>
+                            </h3>
                             {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
                             {/* <span className="text-center quizContainer__date">
                                 {datePublishHandler(quiz.publish)}

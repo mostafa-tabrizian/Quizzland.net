@@ -245,7 +245,7 @@ const Search = (props) => {
 
     return (
         <React.Fragment>
-            <div className={`header__search flex header__white`}>
+            <div className={`header__search flex`}>
                 <button
                     className={`
                         absolute right-[-1rem] top-1.5
@@ -259,7 +259,7 @@ const Search = (props) => {
 
                 <input
                     type='text'
-                    className={`header__search__input text-right`}
+                    className={`header__search__input text-right border border-white px-2 py-1 placeholder:text-white text-white rounded-full bg-transparent`}
                     placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
                     onChange={inputChanged}
                     onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}

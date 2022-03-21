@@ -20,16 +20,16 @@
     }
     
     &__input {
-        border: None;
-        font-family: $font-pr;
-        font-size: 1.180rem;
-        backdrop-filter: blur(5px);
-        height: 2.125rem;
-        padding-right: 1.3125rem;
-        width: 95%;
-        z-index: 4;
-        border-radius: 15px;
-        box-shadow: 0 15px 22px #0000002a;
+        // border: None;
+        // font-family: $font-pr;
+        // font-size: 1.180rem;
+        // backdrop-filter: blur(5px);
+        // height: 2.125rem;
+        // padding-right: 1.3125rem;
+        // width: 95%;
+        // z-index: 4;
+        // border-radius: 15px;
+        // box-shadow: 0 15px 22px #0000002a;
         
         @include breakpoints-down(medium) {
             opacity: 0; visibility: hidden;

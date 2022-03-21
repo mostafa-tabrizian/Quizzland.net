@@ -945,41 +945,6 @@ hr {
   color: #f0f0f0 !important;
 }
 
-.header__search__input {
-  border-radius: 15px !important;
-  -webkit-box-shadow: 0 15px 20px #ffffff07 !important;
-          box-shadow: 0 15px 20px #ffffff07 !important;
-  border: None;
-}
-
-.header__search__input::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.775) !important;
-}
-
-.header__search__input:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.775) !important;
-}
-
-.header__search__input::-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.775) !important;
-}
-
-.header__search__input::placeholder {
-  color: rgba(255, 255, 255, 0.775) !important;
-}
-
-@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .header__search__input {
-    background: #00000094 !important;
-  }
-}
-
-@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .header__search__input {
-    background: #000000ee !important;
-  }
-}
-
 .header__search__result {
   -webkit-box-shadow: 0 0 40px #87878733 !important;
           box-shadow: 0 0 40px #87878733 !important;
@@ -1047,21 +1012,6 @@ hr {
   position: absolute;
   z-index: 3;
   background: rgba(0, 0, 0, 0.75);
-}
-
-.header__search__input {
-  border: None;
-  font-family: myHarmattan, sans-serif, serif;
-  font-size: 1.180rem;
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
-  height: 2.125rem;
-  padding-right: 1.3125rem;
-  width: 95%;
-  z-index: 4;
-  border-radius: 15px;
-  -webkit-box-shadow: 0 15px 22px #0000002a;
-          box-shadow: 0 15px 22px #0000002a;
 }
 
 @media (max-width: 49.9375em) {

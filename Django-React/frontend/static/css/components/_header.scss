@@ -295,23 +295,23 @@
         //     background: url('/static/img/srch-white.svg') no-repeat center !important;
         // }
 
-        &__input {
-            border-radius: 15px !important;
-            box-shadow: 0 15px 20px #ffffff07 !important;
-            border: None;
+        // &__input {
+        //     border-radius: 15px !important;
+        //     box-shadow: 0 15px 20px #ffffff07 !important;
+        //     border: None;
 
-            &::placeholder {
-                color: rgba(255, 255, 255, 0.775) !important;
-            }
+        //     &::placeholder {
+        //         color: rgba(255, 255, 255, 0.775) !important;
+        //     }
 
-            @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-                background: #00000094 !important; 
-            }
+        //     @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        //         background: #00000094 !important; 
+        //     }
 
-            @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-                background: #000000ee !important;
-            }
-        }
+        //     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        //         background: #000000ee !important;
+        //     }
+        // }
     
         &__result {
             box-shadow: 0 0 40px #87878733 !important;
