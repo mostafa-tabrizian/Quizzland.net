@@ -43,13 +43,13 @@ const QuizContainer = (props) => {
                             />
                         </div>
                         <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
-                            <h2 className={`quizContainer__title quizContainer__title__noViews flex
-                                            text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
+                            <h2 className={`quizContainer__title quizContainer__title__noViews flex m-auto
+                                            text-sm md:w-52 md:text-base`}>
                                 {quiz.subCategory}
                             </h2>
                             <h3 className={`
-                                quizContainer__title quizContainer__title__noViews flex
-                                text-sm mr-5 md:w-52 md:mr-0 md:text-base
+                                quizContainer__title quizContainer__title__noViews flex m-auto
+                                text-sm md:w-52 md:text-base
                             `}>
                                 {quiz.title}
                             </h3>

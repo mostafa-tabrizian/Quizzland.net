@@ -151,8 +151,7 @@ html {
           box-sizing: border-box;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  background: -webkit-gradient(linear, left top, right top, from(#000000), color-stop(#0a0101), to(#260101));
-  background: linear-gradient(90deg, #000000, #0a0101, #260101);
+  background: #121212;
   background-attachment: fixed;
 }
 

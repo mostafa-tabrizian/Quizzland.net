@@ -59,7 +59,7 @@ const Sort = () => {
     
     const checkWhatSort = async () => {
         if (document.getElementById('html')) {
-            document.getElementById('html').style='background: linear-gradient(135deg, #000000, #390e10) fixed;'
+            document.getElementById('html').style='background: #121212'
         }
         setSortType(takeParameterFromUrl('s'))
         setSortCategory(takeParameterFromUrl('c'))

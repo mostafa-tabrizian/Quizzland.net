@@ -610,6 +610,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: 1rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -871,6 +875,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 11rem;
 }
 
+.h-\[21rem\] {
+  height: 21rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -980,6 +988,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .translate-x-\[-3rem\] {
   --tw-translate-x: -3rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-y-\[4px\] {
+  --tw-translate-y: 4px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1101,12 +1114,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 1.5rem;
 }
 
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-
 .rounded-full {
   border-radius: 9999px;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
 }
 
 .rounded-b-\[40px\] {
@@ -1136,6 +1149,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-style: solid;
 }
 
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
 .border-\[\#ffffff30\] {
   border-color: #ffffff30;
 }
@@ -1150,9 +1168,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(173 173 173 / var(--tw-border-opacity));
 }
 
-.border-white {
+.border-red-900 {
   --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+  border-color: rgb(127 29 29 / var(--tw-border-opacity));
+}
+
+.border-zinc-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(63 63 70 / var(--tw-border-opacity));
 }
 
 .bg-zinc-500 {
@@ -1313,6 +1336,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-20 {
   padding-left: 5rem;
   padding-right: 5rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .pr-8 {
