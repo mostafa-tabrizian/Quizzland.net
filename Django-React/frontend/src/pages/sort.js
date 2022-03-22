@@ -17,7 +17,6 @@ import { log, takeParameterFromUrl } from '../components/base'
 const Sort = () => {
     const [loadState, setLoadState] = useState()
     const [quizzes, setQuizzes] = useState([])
-    const [pointy, setPointy] = useState([])
     const [sortTitle, setSortTitle] = useState()
     const [sortType, setSortType] = useState()
     const [sortCategory, setSortCategory] = useState()
@@ -32,8 +31,6 @@ const Sort = () => {
     useEffect(() => {
         setOffset(0)
         setNumberOfResult(16)
-
-        setPointy([])  // restart list
         setQuizzes([])  // restart list
         checkWhatSort()
         getMoreQuiz()
@@ -70,7 +67,6 @@ const Sort = () => {
         }
 
         // setQuizzes([])  // restart list
-        // setPointy([])  // restart list
         let quizzesData
         
         switch (sortType) {
@@ -142,7 +138,7 @@ const Sort = () => {
                 quizzesData = await axios.get(`/api/pointy_new/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setSortTitle('جدیدترین تست ها')
-                setPointy([...quizzes, ...quizzesData.data.results]);
+                setQuizzes([...quizzes, ...quizzesData.data.results]);
                 setOffset(offset + numberOfResult)
                 setLoading(false);
                 break
@@ -151,7 +147,7 @@ const Sort = () => {
                 setLoading(true);
                 quizzesData = await axios.get(`/api/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 
-                setPointy([...quizzes, ...quizzesData.data.results]);
+                setQuizzes([...quizzes, ...quizzesData.data.results]);
                 setSortTitle('بهترین تست ها')
                 setOffset(offset + numberOfResult)
                 setLoading(false);
@@ -161,7 +157,7 @@ const Sort = () => {
                 setLoading(true);
                 quizzesData = await axios.get(`/api/pointy_monthly/?limit=${numberOfResult}&offset=${offset}`)
                 
-                setPointy([...quizzes, ...quizzesData.data.results]);
+                setQuizzes([...quizzes, ...quizzesData.data.results]);
                 setSortTitle('بهترین تست های این ماه')
                 setOffset(offset + numberOfResult)
                 setLoading(false);
@@ -209,9 +205,9 @@ const Sort = () => {
             <InfiniteScroll
                 dataLength={quizzes.length}
                 next={getMoreQuiz}
-                hasMore={quizzes.length % numberOfResult == 0}
+                hasMore={quizzes.length % 16 == 0}
                 loader={'Loading...'}
-                // endMessage={'Im Done 😒'}
+                endMessage={'Im Done 😒'}
                 scrollableTarget="land"
             >
                 <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">

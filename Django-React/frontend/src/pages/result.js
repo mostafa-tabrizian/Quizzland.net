@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Rate } from 'antd';
+import { message, Rate } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
@@ -7,9 +7,8 @@ import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
 import axios from 'axios'
 import Header from '../components/header'
-import axiosInstance from '../components/axiosApi'
 
-import { log, replaceFunction, fadeIn, popUpShow, popUpHide } from '../components/base'
+import { log, replaceFunction, fadeIn, popUpShow, popUpHide, takeParameterFromUrl } from '../components/base'
 import BackBtn from '../components/backBtn'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
@@ -144,6 +143,50 @@ const Result = () => {
         }
     }
 
+    const pushRate = async (value) => {
+        setRateChangeable(false)
+
+        const adminDetail = {
+            username: process.env.ADMINUSERNAME,
+            password: process.env.ADMINPASSWORD,
+        }
+
+        let authToken   
+
+        await axios.post('/api/token/obtain/', adminDetail)
+            .then((req) => {
+                authToken = req.data.access
+            }) 
+
+        const now = new Date().getTime()
+
+        let lastRate
+        let RateCount
+
+        await axios.get(`/api/quiz_new/${id}/?&timestamp=${now}`)
+            .then((req) => {
+                lastRate = req.data.rate
+                RateCount = req.data.rate_count
+            })
+            
+        const view = {
+            rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
+            rate_count: RateCount + 1
+        }
+
+        const headers = { 
+            'Authorization': "JWT " + authToken,
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        }
+
+        await axios.put(`/api/quiz_new/${id}/`, view, { headers })
+            .then(res => {
+                res.status == 200 &&
+                message.success('از نظر شما بسیار سپاس گذاریم')
+            })
+    }
+
     return (
         <React.Fragment>
             
@@ -218,47 +261,17 @@ const Result = () => {
                             allowClear={true}
                             disabled={rateChangeable ? false : true}
                             className='flex justify-center my-3 biggerRate'
-                            onChange={async (value) => {
-                                setRateChangeable(false)
+                            onChange={value => {
+                                const currentQuiz = takeParameterFromUrl('qt')
+                                const lastRatedQuiz = localStorage.getItem('lastRatedQuiz')
 
-                                const adminDetail = {
-                                    username: process.env.ADMINUSERNAME,
-                                    password: process.env.ADMINPASSWORD,
+                                // check if rated before (last time)
+                                if (lastRatedQuiz == currentQuiz) {
+                                    message.warning('! شما قبلا به این کوییز امتیاز داده اید')
+                                } else {
+                                    localStorage.setItem('lastRatedQuiz', currentQuiz)
+                                    pushRate(value)
                                 }
-
-                                let authToken   
-
-                                await axios.post('/api/token/obtain/', adminDetail)
-                                    .then((req) => {
-                                        authToken = req.data.access
-                                    })
-
-                                const now = new Date().getTime()
-
-                                let lastRate
-                                let RateCount
-
-                                await axiosInstance.get(`/api/quiz_new/${id}/?&timestamp=${now}`)
-                                    .then((req) => {
-                                        lastRate = req.data.rate
-                                        RateCount = req.data.rate_count
-                                    })
-                                    .catch((err) => {
-                                        log(err)
-                                    })
-                                    
-                                await axiosInstance.put(
-                                    `/api/quiz_new/${id}/`,
-                                    {
-                                        rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
-                                        rate_count: RateCount + 1
-                                    },
-                                    { 
-                                        'Authorization': "JWT " + authToken,
-                                        'Content-Type': 'application/json',
-                                        'accept': 'application/json'
-                                     }
-                                )
                             }}
                         />
                         
