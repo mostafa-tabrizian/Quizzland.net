@@ -38,6 +38,8 @@ class SubCategoriesSerializer(serializers.ModelSerializer):
             'publish'
         )
 
+    categoryKey = CategoriesSerializer(many=False, read_only=True)
+
 class QuizzesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quizzes

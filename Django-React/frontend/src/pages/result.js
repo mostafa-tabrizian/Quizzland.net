@@ -32,7 +32,6 @@ const Result = () => {
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
-        // setScore(params.get('s'))
         setQuestionCount(params.get('qc'))
         setCorrectAnswersCount(params.get('cc'))
         setResultGif(params.get('rg'))
@@ -43,14 +42,8 @@ const Result = () => {
         detailOfResult(params.get('s'))
         getSuggestionsQuiz(params.get('sc'))
 
-        if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
-            window.location.href = "/404";
-        } else {
-            document.querySelector('html').style=`background: None`
-            setLoadState(true)
-            // setCorrectAnswersCount(window.location.search.ca)  // correct answer count
-            // setQuizResult(JSON.parse(localStorage.getItem('resultQuiz')))
-        }
+        document.querySelector('html').style=`background: None`
+        setLoadState(true)
     }, [])
 
     useEffect(() => {
@@ -109,6 +102,7 @@ const Result = () => {
         setTimeout(() => {
             popUpShow(document.querySelector('.result__popUpQuizSuggester'))
 
+            document.querySelector('.result__popUpQuizSuggester').style.pointerEvents = 'all'
             document.querySelector('body').style.overflow = 'hidden'
             document.querySelector('#land').style.pointerEvents = 'none'
             document.querySelector('#land').style.overflow = 'none'
@@ -126,6 +120,7 @@ const Result = () => {
     const closePopUpQuizSuggester = () => {
         popUpHide(document.querySelector('.result__popUpQuizSuggester'))
 
+        document.querySelector('.result__popUpQuizSuggester').style.pointerEvents = 'none'
         document.querySelector('body').style.overflow = 'auto'
         document.querySelector('#land').style.pointerEvents = 'all'
         document.querySelector('.header').style.filter = 'blur(0)'

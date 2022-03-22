@@ -30,17 +30,16 @@ const Sort = () => {
     })
 
     useEffect(() => {
+        setOffset(0)
+        setNumberOfResult(16)
+
         setPointy([])  // restart list
         setQuizzes([])  // restart list
         checkWhatSort()
         getMoreQuiz()
         setLoadState(true)
         document.querySelector('#land').classList.add('overflow-auto')  // make content load on scroll
-    }, [sortType, numberOfResult])
-
-    useEffect(() => {
-        setOffset(0)
-        setNumberOfResult(16)
+        
     }, [sortType])
 
     const componentChangeDetector = () => {

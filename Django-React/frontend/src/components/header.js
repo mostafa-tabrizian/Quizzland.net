@@ -122,22 +122,22 @@ const Header = () => {
 
                     <Search />
 
-                    <ul className={`right-[11rem] header__white subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                    <ul className={`right-[11rem] header__white subHeader top-20 backdrop-blur-lg bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                         <li><Link to="/category/movie-&-series">🎬 فیلم و سریال</Link></li>
                         <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
                         <li><Link to="/category/psychology">🧠 روانشناسی</Link></li>
                     </ul>
 
-                    <ul className={`right-[16.5rem] header__white subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                        <li><Link to="/sort?s=newest"> ⏳ جدیدترین ها </Link></li>
-                        <li><Link to="/sort?s=monthly"> 👑 بهترین های ماه </Link></li>
-                        <li><Link to="/sort?s=bestest"> 👑 بهترین ها </Link></li>
+                    <ul className={`right-[16.5rem] header__white subHeader top-20 backdrop-blur-lg bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                        <li><a href="/sort?s=newest"> ⏳ جدیدترین ها </a></li>
+                        <li><a href="/sort?s=monthly"> 👑 بهترین های ماه </a></li>
+                        <li><a href="/sort?s=bestest"> 👑 بهترین ها </a></li>
                     </ul>
 
-                    <ul className={`right-[21rem] header__white subHeader top-20 backdrop-blur-lg bg-[#96484852] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                        <li><Link to="/sort?s=newest_test"> ⏳ جدیدترین ها </Link></li>
-                        <li><Link to="/sort?s=monthly_test"> 👑 بهترین های ماه </Link></li>
-                        <li><Link to="/sort?s=bestest_test"> 👑 بهترین ها </Link></li>
+                    <ul className={`right-[21rem] header__white subHeader top-20 backdrop-blur-lg bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                        <li><a href="/sort?s=newest_test"> ⏳ جدیدترین ها </a></li>
+                        <li><a href="/sort?s=monthly_test"> 👑 بهترین های ماه </a></li>
+                        <li><a href="/sort?s=bestest_test"> 👑 بهترین ها </a></li>
                     </ul>
 
                     {/* Menu */}

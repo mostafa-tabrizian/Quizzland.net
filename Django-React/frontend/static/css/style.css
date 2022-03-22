@@ -1439,14 +1439,6 @@ hr {
           backdrop-filter: blur(44px) !important;
 }
 
-.quizContainer__trans {
-  background: transparent;
-}
-
-.quizContainer__bg {
-  background: #0000006c;
-}
-
 .result {
   font-family: myChanga, sans-serif, serif;
   display: -ms-grid;

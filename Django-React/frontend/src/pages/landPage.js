@@ -280,7 +280,7 @@ const Index = () => {
 
                 {recommendedQuizzes}
 
-                <div className="mb-8 md:mt-[10rem]">
+                <div className="mb-8 md:mt-[10rem]"> 
                     <span id='scroll' />
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">

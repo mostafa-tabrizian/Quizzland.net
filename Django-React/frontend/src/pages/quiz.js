@@ -681,12 +681,13 @@ const Quiz = () => {
                                 />
                             </div>
                         </div>
+                        {log(localStorage.getItem('SFXAllowed'))}
                         <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
                             <div className='mt-3'>
                                 <Switch
-                                    checkedChildren='صدا دار'
-                                    unCheckedChildren='بی صدا'
-                                    className={`${SFXAllowed ? 'bg-zinc-500' : 'bg-red-800'}`}
+                                    checkedChildren='فرض صدا'
+                                    uncheckedChildren='فرض صدا'
+                                    className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
                                     onChange={() => {SFXController()}}
                                     title='فرض صدا های پس از پاسخ به سوال'
                                 />

@@ -85,7 +85,7 @@ const Category = (props) => {
                         <article className={`
                             flex text-right h-full
                             rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                            quizContainer__trans w-[40rem] md:w-full
+                             w-[40rem] md:w-full
                         `}
                         >  {/* bg or trans */}
 

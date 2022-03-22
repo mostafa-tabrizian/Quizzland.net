@@ -6,7 +6,7 @@ def titleConverterWithSpilt(title, oldValue, newValue):
     return updatedTitle
 
 class QuizSitemap(Sitemap):
-    changefreq = "yearly"
+    changefreq = "weekly"
     priority = 1
     protocol = 'https'
 
@@ -21,7 +21,7 @@ class QuizSitemap(Sitemap):
         return f'/quiz/{title}'
 
 class SubCategorySitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "monthly"
     priority = 0.9
     protocol = 'https'
 
@@ -34,7 +34,7 @@ class SubCategorySitemap(Sitemap):
     def location(self, item):
         subCategory = titleConverterWithSpilt(item.subCategory, ' ', '-')
         title = titleConverterWithSpilt(item.title, ' ', '-')
-        return f'/category/{item.category}/{subCategory}?t={title}'
+        return f'/category/{item.categoryKey.title_english}/{subCategory}?sc={title}'
 
 categoryTitle = {
     'کوییز هایی درمورد سلبریتی ها':'celebrity',
@@ -42,7 +42,7 @@ categoryTitle = {
 }
 
 class CategorySitemap(Sitemap):
-    changefreq = "weekly"
+    changefreq = "monthly"
     priority = 0.9
     protocol = 'https'
 
@@ -52,17 +52,17 @@ class CategorySitemap(Sitemap):
     def location(self, item):
         return f'/category/{categoryTitle[item]}'
 
-class BlogSitemap(Sitemap):
-    changefreq = "weekly"
-    priority = 0.8
-    protocol = 'https'
+# class BlogSitemap(Sitemap):
+#     changefreq = "weekly"
+#     priority = 0.8
+#     protocol = 'https'
 
-    def items(self):
-        return Blog.objects.all()
+#     def items(self):
+#         return Blog.objects.all()
 
-    def lastmod(self, item):
-        return item.publish
+#     def lastmod(self, item):
+#         return item.publish
 
-    def location(self, item):
-        title = titleConverterWithSpilt(item.title, ' ', '+')
-        return f'/blog/{title}'
+#     def location(self, item):
+#         title = titleConverterWithSpilt(item.title, ' ', '+')
+#         return f'/blog/{title}'

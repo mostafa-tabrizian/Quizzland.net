@@ -4,21 +4,6 @@ import { Link } from 'react-router-dom'
 import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
 const QuizContainer = (props) => {
-    const [bgStyle, setBgStyle] = useState()
-
-    useEffect(() => {
-        switch (props.bgStyle){
-            case 'bg':
-                setBgStyle('quizContainer__bg')
-                break
-            case 'trans':
-                setBgStyle('quizContainer__trans')
-                break
-            default:
-                break
-        }
-    }, [])
-
     return (
         props.quizzes.map((quiz) => {
             return (
@@ -26,7 +11,7 @@ const QuizContainer = (props) => {
                     <article className={`
                         flex text-right h-full
                         rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                        ${props.bgStyle == 'bg' ? 'quizContainer__bg' : 'quizContainer__trans'}`}
+                        ${props.bgStyle == 'bg' ? 'quizContainer__bg' : ''}`}
                     >  {/* bg or trans */}
 
                         <Link

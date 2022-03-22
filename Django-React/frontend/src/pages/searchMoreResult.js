@@ -143,7 +143,7 @@ const SearchMoreResult = () => {
                                 <article className={`
                                     flex text-right h-full
                                     rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                                    quizContainer__trans`}
+                                    `}
                                 >
 
                                     <Link

@@ -34,9 +34,9 @@ const Footer = () => {
                 <div>
                     <h3>تست ها</h3>
                     <ul>
-                        <li><Link to="/sort?s=newest_test"> جدیدترین ها </Link></li>
-                        <li><Link to="/sort?s=monthly_test"> بهترین های ماه </Link></li>
-                        <li><Link to="/sort?s=bestest_test"> بهترین ها </Link></li>
+                        <li><a href="/sort?s=newest_test"> جدیدترین ها </a></li>
+                        <li><a href="/sort?s=monthly_test"> بهترین های ماه </a></li>
+                        <li><a href="/sort?s=bestest_test"> بهترین ها </a></li>
                     </ul>
                 </div>
 
@@ -52,9 +52,9 @@ const Footer = () => {
                 <div>
                     <h3>کوییز ها</h3>
                     <ul>
-                        <li><Link to="/sort?s=newest"> جدیدترین ها </Link></li>
-                        <li><Link to="/sort?s=monthly"> بهترین های ماه </Link></li>
-                        <li><Link to="/sort?s=bestest"> بهترین ها </Link></li>
+                        <li><a href="/sort?s=newest"> جدیدترین ها </a></li>
+                        <li><a href="/sort?s=monthly"> بهترین های ماه </a></li>
+                        <li><a href="/sort?s=bestest"> بهترین ها </a></li>
                     </ul>
                 </div>
 
