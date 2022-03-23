@@ -85,14 +85,6 @@
             left: -2rem;
         }
 
-        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-            background: #ffffff94;
-        }
-
-        @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-            background: #fffffff6;
-        }
-
         &__title {
             span {
                 white-space: pre-wrap;

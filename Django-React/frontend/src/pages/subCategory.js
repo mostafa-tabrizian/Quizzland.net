@@ -126,7 +126,7 @@ const SubCategory = (props) => {
                 <meta name="keywords" content={`بهترین کوییز های ${persianSubCategoryWithoutSign} , کوییز های ${persianSubCategoryWithoutSign}`} />
             </Helmet>
 
-            <div className="md:w-4/5 m-auto md:mt-20" >
+            <div className="md:w-4/5 m-auto" >
                 {/* <div className='adverts adverts__left'>
                     Banner
                 </div> */}

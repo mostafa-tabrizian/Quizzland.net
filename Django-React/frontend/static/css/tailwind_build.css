@@ -859,6 +859,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.25rem;
 }
 
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mt-28 {
+  margin-top: 7rem;
+}
+
 .block {
   display: block;
 }
@@ -1386,6 +1394,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-\[\#000000e5\] {
   background-color: #000000e5;
+}
+
+.bg-\[\#000000e3\] {
+  background-color: #000000e3;
 }
 
 .bg-gradient-to-tr {
@@ -1921,6 +1933,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:mt-20 {
     margin-top: 5rem;
+  }
+
+  .md\:mt-24 {
+    margin-top: 6rem;
+  }
+
+  .md\:mt-28 {
+    margin-top: 7rem;
   }
 
   .md\:block {

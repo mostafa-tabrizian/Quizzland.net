@@ -29,9 +29,7 @@ const Index = () => {
     const [pointy_new, setPointy_new] = useState([])
     const [pointy_monthly, setPointy_monthly] = useState([])
 
-    const [loadInfinite1, setLoadInfinite1] = useState([])
-    const [loadInfinite2, setLoadInfinite2] = useState([])
-    const [loadInfinite3, setLoadInfinite3] = useState([])
+    const [loadMoreQuiz, setLoadMoreQuiz] = useState([])
 
     const [quiz_new_ref, quiz_new_inView] = useInView({ threshold: 0, triggerOnce: true, });
     const [pointy_new_ref, pointy_new_inView] = useInView({ threshold: 0, triggerOnce: true, });
@@ -41,9 +39,7 @@ const Index = () => {
     const [quiz_new_movieSeries_ref, quiz_new_movieSeries_inView] = useInView({ threshold: 0, triggerOnce: true, });
     const [pointy_new_psychology_ref, pointy_new_psychology_inView] = useInView({ threshold: 0, triggerOnce: true, });
 
-    const [loadInfinite1_ref, loadInfinite1_inView] = useInView({ threshold: 0, triggerOnce: true, })
-    const [loadInfinite2_ref, loadInfinite2_inView] = useInView({ threshold: 0, triggerOnce: true, })
-    const [loadInfinite3_ref, loadInfinite3_inView] = useInView({ threshold: 0, triggerOnce: true, })
+    const [loadMoreQuiz_ref, loadMoreQuiz_inView] = useInView({ threshold: 0, triggerOnce: true, })
 
     useEffect(() => {
         landPagePathSelector()
@@ -128,21 +124,17 @@ const Index = () => {
         const pointy_monthly = await axios.get(`/api/pointy_monthly/?limit=8`)
         setPointy_monthly(pointy_monthly.data.results)
 
-        const pointy_new_psychology = await axios.get(`/api/pointy_new/?category__icontains=psychology&limit=8`)
+        const pointy_new_psychology = await axios.get(`/api/pointy_new/?categoryKey=3&limit=8`)
         setPointy_new_psychology(pointy_new_psychology.data.results)
 
-        const quiz_new_movieSeries = await axios.get(`/api/quiz_new/?category__icontains=movie-&-series&limit=8`)
+        const quiz_new_movieSeries = await axios.get(`/api/quiz_new/?categoryKey=1&limit=8`)
         setQuiz_new_movieSeries(quiz_new_movieSeries.data.results)
 
-        const quiz_new_celebrity = await axios.get(`/api/quiz_new/?category__icontains=celebrity&limit=8`)
+        const quiz_new_celebrity = await axios.get(`/api/quiz_new/?categoryKey=2&limit=8`)
         setQuiz_new_celebrity(quiz_new_celebrity.data.results)
 
-        const loadInfinite1 = await axios.get(`/api/quiz_new/?limit=8&offset=8`)
-        setLoadInfinite1(loadInfinite1.data.results)
-        const loadInfinite2 = await axios.get(`/api/quiz_new/?limit=8&offset=24`)
-        setLoadInfinite2(loadInfinite2.data.results)
-        const loadInfinite3 = await axios.get(`/api/quiz_new/?limit=8&offset=36`)
-        setLoadInfinite3(loadInfinite3.data.results)
+        const loadMoreQuiz = await axios.get(`/api/quiz_new/?limit=36&offset=8`)
+        setLoadMoreQuiz(loadMoreQuiz.data.results)
 
         setContentLoaded(true)
     }
@@ -198,7 +190,7 @@ const Index = () => {
 
             </Helmet>
 
-            <div className='md:w-4/5 m-auto mt-20 md:mt-0 md:mt-20'>
+            <div className='md:w-4/5 m-auto'>
 
                 <div className={`hero hidden md:flex justify-center items-center bg-gradient-to-t from-[#3d191a] via-transparent p-3 rounded-lg m-auto`}>
                     {/* <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div> */}
@@ -499,24 +491,10 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={loadInfinite1_ref}>
+                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={loadMoreQuiz_ref}>
                         {
-                            loadInfinite1_inView &&
-                            <QuizContainer quizzes={loadInfinite1} bgStyle='trans' />
-                        }
-                    </ul>
-
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={loadInfinite2_ref}>
-                        {
-                            loadInfinite2_inView &&
-                            <QuizContainer quizzes={loadInfinite2} bgStyle='trans' />
-                        }
-                    </ul>
-
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={loadInfinite3_ref}>
-                        {
-                            loadInfinite3_inView &&
-                            <QuizContainer quizzes={loadInfinite3} bgStyle='trans' />
+                            loadMoreQuiz_inView &&
+                            <QuizContainer quizzes={loadMoreQuiz} bgStyle='trans' />
                         }
                     </ul>
 

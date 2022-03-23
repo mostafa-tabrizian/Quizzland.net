@@ -239,7 +239,7 @@ const Search = (props) => {
             type='text'
             className={`text-right bg-transparent text-lg text-black`}
             ref={mobileSearchInput}
-            onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
+            onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') }}}
         />
     )
 
@@ -248,7 +248,7 @@ const Search = (props) => {
             <div className={`header__search flex`}>
                 <button
                     className={`
-                        absolute right-[-1rem] top-1.5
+                        absolute right-[-2rem] top-1.5
                         ${searchResult ? 'fadeIn' : 'fadeOut'}
                     `}
                     onClick={() => {setSearchResult(false)}}
@@ -262,7 +262,7 @@ const Search = (props) => {
                     className={`header__search__input text-right border border-zinc-500 px-2 py-1 placeholder:text-white text-white rounded-full bg-transparent`}
                     placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
                     onChange={inputChanged}
-                    onKeyPress={e => {if (e.key == 'Enter') { window.location.href = `/search?q=${e.target.value}` } }}
+                    onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') }}}
                 />
 
                 {/* <AutoComplete
@@ -287,7 +287,7 @@ const Search = (props) => {
                       }
                 /> */}
 
-                <div className={`header__search__result overflow-scroll h-1/2 ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
+                <div className={`header__search__result z-20 overflow-scroll h-1/2 ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
                     <div className="grid justify-center mt-2 mr-4 overflow-hidden rounded-lg header__search__result__category">
                         <div className="flex justify-center header__search__result__category__container w-80">
                             <ul className='md:space-y-5'>

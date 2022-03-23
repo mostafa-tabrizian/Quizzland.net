@@ -55,7 +55,7 @@ const Header = () => {
         <React.Fragment>
 
 
-            <header className="header text-xl p-4 z-10 fixed top-0 right-0 w-screen bg-[#00000085] backdrop-blur-lg">
+            <header className="header text-xl z-10 mb-10">
 
                 <Helmet>
                     <script type="text/javascript">

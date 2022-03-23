@@ -488,7 +488,7 @@ const Quiz = () => {
             <div className={`
                 fixed left-0 backdrop-blur-3xl backdrop-brightness-75
                 top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
-                flex flex-col items-center justify-center 
+                flex flex-col items-center justify-center
             `}>
                 <div>
                     <div className='bg-red-800 w-10 h-10 rounded-full absolute animate-ping'></div>
@@ -516,7 +516,7 @@ const Quiz = () => {
                 </button>
             </div> */}
 
-            <div className="relative text-right quiz__head backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
+            <div className="relative text-right quiz__head backdrop-blur-2xl w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
                 {
                     !(contentLoaded) &&
                     <div className='flex justify-center items-center'>

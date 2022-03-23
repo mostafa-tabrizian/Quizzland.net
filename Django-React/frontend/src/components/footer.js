@@ -69,7 +69,7 @@ const Footer = () => {
 
             </div>
 
-            <div className="flex justify-center items-center opacity-50">
+            <div className="flex justify-center mt-10 items-center opacity-50">
                 <p className='text-sm'>
                     {copyRightDate()} © تمام حقوق به کوییزلند تعلق دارد
                 </p>

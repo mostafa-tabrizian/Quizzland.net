@@ -125,7 +125,7 @@ const SearchMoreResult = () => {
                 <meta name="robots" content="noindex, follow"></meta>
             </Helmet>
 
-            <div className='md:w-4/5 m-auto md:mt-20'>
+            <div className='md:w-4/5 m-auto'>
 
                 {/* <div className='adverts adverts__left'>
                     <div id='mediaad-DLgb'></div>

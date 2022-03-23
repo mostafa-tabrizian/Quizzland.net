@@ -292,7 +292,6 @@ hr {
   overflow: hidden;
   -webkit-transition: color .3s ease-out;
   transition: color .3s ease-out;
-  border-radius: 10px;
 }
 
 .hoverAnimation button::after {
@@ -1037,18 +1036,6 @@ hr {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     left: -2rem;
-  }
-}
-
-@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .header__search__result {
-    background: #ffffff94;
-  }
-}
-
-@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .header__search__result {
-    background: #fffffff6;
   }
 }
 
