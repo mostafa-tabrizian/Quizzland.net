@@ -683,36 +683,26 @@ hr {
   font-family: myLalezar, serif;
   font-weight: 300;
   font-size: 2rem;
-  margin-top: -3rem;
-}
-
-@media (max-width: 70em) {
-  .title {
-    max-width: 16rem;
-    margin: 0 auto 0 auto;
-  }
 }
 
 .lowTitle {
-  position: absolute;
   font-size: 3.5rem;
   opacity: .15;
   font-family: myLalezar, serif;
   font-weight: 300;
   width: 100%;
-  top: 3.5rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-bottom: -4rem;
 }
 
 @media (max-width: 70em) {
   .lowTitle {
     font-size: 2.5rem;
-    top: 5rem;
   }
 }
 
@@ -831,27 +821,8 @@ hr {
 }
 
 .header__menu {
-  background: rgba(29, 29, 29, 0.624) !important;
-  -webkit-box-shadow: 0 7px 20px black;
-          box-shadow: 0 7px 20px black;
-  -webkit-backdrop-filter: blur(20px);
-          backdrop-filter: blur(20px);
-  border: 2px solid transparent;
   -webkit-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
-}
-
-.header__menu__openBtn {
-  right: 1rem;
-  z-index: 1;
-}
-
-.header__menu__openBtn span {
-  background: white !important;
-}
-
-.header__menu__openBtn__inner {
-  color: white !important;
 }
 
 .header .subHeader {
@@ -862,34 +833,8 @@ hr {
   line-height: 2rem;
 }
 
-@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .header .subHeader {
-    background: rgba(255, 255, 255, 0.952);
-  }
-}
-
 .header .subHeader a:hover {
   color: rgba(255, 207, 207, 0.692) !important;
-}
-
-@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .header .subHeader a:hover {
-    color: darkRed !important;
-  }
-}
-
-.header .subHeader > li > a {
-  color: white !important;
-}
-
-@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .header .subHeader > li > a {
-    color: black !important;
-  }
-}
-
-.header .subHeader > li > a:hover {
-  color: rgba(255, 0, 0, 0.692) !important;
 }
 
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {

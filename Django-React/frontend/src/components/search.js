@@ -156,12 +156,12 @@ const Search = (props) => {
                                                                 text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
                                                         {quiz.subCategory}
                                                     </h2>
-                                                    <h2 className={`
+                                                    <h3 className={`
                                                     quizContainer__title quizContainer__title__noViews flex
                                                     text-sm mr-5 ml-5 md:w-52 md:mr-0 md:text-base
                                                 `}>
                                                         {quiz.title}
-                                                    </h2>
+                                                    </h3>
                                                 </div>
                                             </Link>
                                         </article>
@@ -191,13 +191,13 @@ const Search = (props) => {
                                             </a>
                                         </Link>
 
-                                        <h5 className='absolute left-6 top-6 md:relative md:left-0 md:top-0 md:text-center'>
+                                        <h2 className='absolute left-6 top-6 md:relative md:left-0 md:top-0 md:mt-3 md:text-center'>
                                             <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
                                                 <a>
                                                     {category.subCategory}
                                                 </a>
                                             </Link>
-                                        </h5>
+                                        </h2>
 
                                     </div>
                                 )

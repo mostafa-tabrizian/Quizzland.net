@@ -15156,7 +15156,6 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: rgba(0, 0, 0, 0.85);
   font-size: 14px;
   font-variant: tabular-nums;
   line-height: 1.5715;
@@ -15165,7 +15164,6 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
 }
 .ant-carousel .slick-slider {
   position: relative;
-  display: block;
   box-sizing: border-box;
   touch-action: pan-y;
   -webkit-touch-callout: none;
@@ -15303,7 +15301,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 15;
+  /* z-index: 15; */
   display: flex !important;
   justify-content: center;
   margin-right: 15%;

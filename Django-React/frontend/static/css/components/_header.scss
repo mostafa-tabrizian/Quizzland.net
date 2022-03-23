@@ -63,28 +63,28 @@
         // z-index: 3;
         // top: 0; left: 0;
         // background: rgba(148, 148, 148, 0.3);
-        background:rgba(29, 29, 29, 0.624) !important;
-        box-shadow: 0 7px 20px black;
-        backdrop-filter: blur(20px);
-        border: 2px solid transparent;
+        // background:rgba(29, 29, 29, 0.624) !important;
+        // box-shadow: 0 7px 20px black;
+        // backdrop-filter: blur(20px);
+        // border: 2px solid transparent;
         // height: 21rem;
         // width: 100%;
         // border-radius: 0 0 55px 55px;
         transition: all .3s ease-in-out;
 
-        &__openBtn {
+        // &__openBtn {
             // background: inherit;
             // top: 1rem;
-            right: 1rem;
-            z-index: 1;
+            // right: 1rem;
+            // z-index: 1;
 
-            span {
-                background: white !important;
-            }
+            // span {
+            //     background: white !important;
+            // }
 
-            &__inner {
-                color: white !important;
-            }
+            // &__inner {
+            //     color: white !important;
+            // }
 
             // @include breakpoints-down(large) {
             //     top: 1.7rem;
@@ -99,7 +99,7 @@
             //         margin-bottom: .25rem;
             //     }
             // }
-        }
+        // }
 
         // &__closeBtn {
         //     background: url('/static/img/close-btn.svg') center center no-repeat;
@@ -179,9 +179,9 @@
         //     background: rgba(255, 255, 255, 0.178);
         // }
 
-        @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-            background: rgba(255, 255, 255, 0.952);
-        }
+        // @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        //     background: rgba(255, 255, 255, 0.952);
+        // }
 
         // &__open {
         //     opacity: 1;
@@ -196,22 +196,6 @@
         //     }
             &:hover {
                 color: rgba(255, 207, 207, 0.692) !important;
-
-                @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-                    color: darkRed !important;
-                }
-            }
-        }
-
-        > li > a {
-            color: white !important;
-
-            @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-                color: black !important;
-            }
-            
-            &:hover {
-                color: rgba(255, 0, 0, 0.692) !important;
             }
         }
     }

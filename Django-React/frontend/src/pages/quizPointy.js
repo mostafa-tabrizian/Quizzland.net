@@ -485,14 +485,20 @@ const Quiz = () => {
                 />
             }
 
-            <div
-                className={`
-                    countingResult loadingScreen fixed left-0
-                    top-0 w-screen h-screen z-20
-                    flex items-center justify-center
-                    ${quizEnded ? 'fadeIn' : 'fadeOut'}
-                `}>
-                ___ در حال محاسبه نتیجه تست
+            <div className={`
+                fixed left-0 backdrop-blur-3xl backdrop-brightness-75
+                top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
+                flex flex-col items-center justify-center 
+            `}>
+                <div>
+                    <div className='bg-red-800 w-10 h-10 rounded-full absolute animate-ping'></div>
+                    <div className='bg-red-800 w-10 h-10 rounded-full'></div>
+                </div>
+                <div className='mt-5'>
+                    <h2>
+                        در حال محاسبه نتیجه کوییز
+                    </h2>
+                </div>
             </div>
 
 
@@ -561,9 +567,9 @@ const Quiz = () => {
                         <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
                             <div className='mt-3'>
                                 <Switch
-                                    checkedChildren='صدا دار'
-                                    unCheckedChildren='بی صدا'
-                                    className={`${SFXAllowed ? 'bg-zinc-500' : 'bg-red-800'}`}
+                                    checkedChildren='فرض صدا'
+                                    uncheckedChildren='فرض صدا'
+                                    className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
                                     onChange={() => {SFXController()}}
                                     title='فرض صدا های پس از پاسخ به سوال'
                                 />

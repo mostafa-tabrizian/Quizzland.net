@@ -133,7 +133,6 @@ const Quiz = () => {
         const questionsCounter = questions?.length
         if (questionsCounter && correctAnswersCount) {
             const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
-            log(score)
             setScore(score)
         }
     }
@@ -613,25 +612,21 @@ const Quiz = () => {
                 />
             }
 
-            <div
-                className={`
-                    countingResult loadingScreen fixed left-0
-                    top-0 w-screen h-screen z-20
-                    flex items-center justify-center
-                    ${quizEnded ? 'fadeIn' : 'fadeOut'}
-                `}>
-                ___ در حال محاسبه نتیجه کوییز___
+            <div className={`
+                fixed left-0 backdrop-blur-3xl backdrop-brightness-75
+                top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
+                flex flex-col items-center justify-center 
+            `}>
+                <div>
+                    <div className='bg-red-800 w-10 h-10 rounded-full absolute animate-ping'></div>
+                    <div className='bg-red-800 w-10 h-10 rounded-full'></div>
+                </div>
+                <div className='mt-5'>
+                    <h2>
+                        در حال محاسبه نتیجه کوییز
+                    </h2>
+                </div>
             </div>
-
-            {/* <div className='absolute md:ml-10 ml-4 top-28' onClick={() => { SFXController() }} >
-                <button type="button">
-                    {SFXAllowed === 'true' ?
-                        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /> </svg>
-                        :
-                        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" /> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /> </svg>
-                    }
-                </button>
-            </div> */}
 
             <div className="relative text-right quiz__head backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
                 {
@@ -681,7 +676,6 @@ const Quiz = () => {
                                 />
                             </div>
                         </div>
-                        {log(localStorage.getItem('SFXAllowed'))}
                         <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
                             <div className='mt-3'>
                                 <Switch

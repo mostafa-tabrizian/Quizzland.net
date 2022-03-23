@@ -460,28 +460,20 @@ hr {
     font-family: myLalezar, serif;
     font-weight: 300;
     font-size: 2rem;
-    margin-top: -3rem;
-
-    @include breakpoints-down(large) {
-        max-width: 16rem;
-        margin: 0 auto 0 auto;
-    }
 }
 
 .lowTitle {
-    position: absolute;
     font-size: 3.5rem;
     opacity: .15;
     font-family: myLalezar, serif;
     font-weight: 300;
     width: 100%;
-    top: 3.5rem;
     justify-content: center;
     display: flex;
+    margin-bottom: -4rem;
 
     @include breakpoints-down(large) {
         font-size: 2.5rem;
-        top: 5rem;
     }
 }
 

@@ -38,7 +38,6 @@ const Category = (props) => {
         getCategories()
         defineCategoryTitle()
 
-        log(categoryQueryID)
         AddView('categories', categoryQueryID)
 
     }, [categoryQuery, categoryQueryID, categoryTitle, sortType, numberOfResult, offset])
@@ -54,8 +53,9 @@ const Category = (props) => {
     }
 
     const defineCategoryTitle = async () => {
-        await axios.get(`/api/categories/?title_english__icontains=${replaceFunction(categoryQuery)}`)
+        await axios.get(`/api/categories/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}`)
             .then((response) => {
+                log(response);
                 setCategoryTitle(response.data[0].title_persian)
                 setCategoryQueryID(response.data[0].id)
             })
@@ -85,7 +85,7 @@ const Category = (props) => {
                         <article className={`
                             flex text-right h-full
                             rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                             w-[40rem] md:w-full
+                            w-[33rem] md:w-full md:max-w-[16rem]
                         `}
                         >  {/* bg or trans */}
 
@@ -104,7 +104,7 @@ const Category = (props) => {
                                 </div>
                                 <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
                                     <h2 className={`quizContainer__title quizContainer__title__noViews
-                                                    text-lg mr-5 md:w-52 md:mr-0 md:text-base md:grid md:grid-cols-2`}>
+                                                    text-lg mr-5 md:w-full md:mr-0 md:text-base md:grid md:grid-cols-2`}>
                                         <span>{category.title}</span>
                                         <span className='block text-right md:text-left'>{category.subCategory}</span>
                                     </h2>
@@ -130,32 +130,34 @@ const Category = (props) => {
                 <meta name="keywords" content={`بهترین کوییز های ${categoryTitle} ,کوییز های ${categoryTitle}`} />
             </Helmet>
 
-            <div className='adverts adverts__left'>
-                <div id="pos-article-display-28434"></div>
+            <div className='md:w-4/5 m-auto md:mt-20'>
+                <div className='adverts adverts__left'>
+                    <div id="pos-article-display-28434"></div>
+                </div>
+
+                <h3 className='lowTitle'>{replaceFunction(categoryQuery, '-', ' ')}</h3>
+                <h3 className='title'>کتگوری {categoryTitle}</h3>
+
+                <Tools
+                    numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                    sortType={sortType} setSortType={setSortType}
+                />
+
+                {SkeletonLoading(contentLoaded)}
+
+                <ul className="flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
+
+                    {listCategories()}
+
+                </ul>
+
+                <PageTravel
+                    pageTravel={pageTravel} setPageTravel={setPageTravel}
+                    numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                    offset={offset} setOffset={setOffset}
+                    currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
+                />
             </div>
-
-            <h3 className='lowTitle'>{replaceFunction(categoryQuery)}</h3>
-            <h3 className='title'>کتگوری {categoryTitle}</h3>
-
-            <Tools
-                numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                sortType={sortType} setSortType={setSortType}
-            />
-
-            {SkeletonLoading(contentLoaded)}
-
-            <ul className="w-[90vw] md:w-4/5 ml-auto mr-0 md:ml-auto md:mr-[15%] flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
-
-                {listCategories()}
-
-            </ul>
-
-            <PageTravel
-                pageTravel={pageTravel} setPageTravel={setPageTravel}
-                numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
-                offset={offset} setOffset={setOffset}
-                currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
-            />
 
         </React.Fragment>
     );

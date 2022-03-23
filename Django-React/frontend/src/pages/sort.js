@@ -23,6 +23,7 @@ const Sort = () => {
     const [numberOfResult, setNumberOfResult] = useState(16)
     const [loading, setLoading] = useState(false);
     const [offset, setOffset] = useState(0);
+    const [quizOrTest, chooseQuizOrTest] = useState();
 
     useEffect(() => {
         componentChangeDetector()
@@ -35,7 +36,7 @@ const Sort = () => {
         checkWhatSort()
         getMoreQuiz()
         setLoadState(true)
-        document.querySelector('#land').classList.add('overflow-auto')  // make content load on scroll
+        document.querySelector('#land').classList.add('overflow-y-auto')  // make content load on scroll
         
     }, [sortType])
 
@@ -95,7 +96,8 @@ const Sort = () => {
             //     break
 
             case 'newest':
-                setLoading(true);
+                setLoading(true)
+                chooseQuizOrTest('quiz');
                 if (sortCategory) {
                     quizzesData = await axios.get(`/api/quiz_new/?limit=${numberOfResult}&offset=${offset}&category__icontains=${sortCategory}`)
                 } else {
@@ -109,6 +111,7 @@ const Sort = () => {
 
             case 'bestest':
                 setLoading(true);
+                chooseQuizOrTest('quiz')
                 if (sortCategory) {
                     quizzesData = await axios.get(`/api/quiz_best/?&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
@@ -122,6 +125,7 @@ const Sort = () => {
 
             case 'monthly':
                 setLoading(true);
+                chooseQuizOrTest('quiz')
                 if (sortCategory) {
                     quizzesData = await axios.get(`/api/quiz_monthly/?&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
                 } else {
@@ -134,7 +138,8 @@ const Sort = () => {
                 break
 
             case 'newest_test':
-                setLoading(true);
+                setLoading(true)
+                chooseQuizOrTest('test');
                 quizzesData = await axios.get(`/api/pointy_new/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setSortTitle('جدیدترین تست ها')
@@ -145,6 +150,7 @@ const Sort = () => {
 
             case 'bestest_test':
                 setLoading(true);
+                chooseQuizOrTest('test')
                 quizzesData = await axios.get(`/api/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setQuizzes([...quizzes, ...quizzesData.data.results]);
@@ -155,6 +161,7 @@ const Sort = () => {
 
             case 'monthly_test':
                 setLoading(true);
+                chooseQuizOrTest('test')
                 quizzesData = await axios.get(`/api/pointy_monthly/?limit=${numberOfResult}&offset=${offset}`)
                 
                 setQuizzes([...quizzes, ...quizzesData.data.results]);
@@ -206,12 +213,34 @@ const Sort = () => {
                 dataLength={quizzes.length}
                 next={getMoreQuiz}
                 hasMore={quizzes.length % 16 == 0}
-                loader={'Loading...'}
-                endMessage={'Im Done 😒'}
+                loader={
+                    <div className={`
+                        flex justify-center w-full
+                    `}>
+                        <div>
+                            <svg class="animate-spin h-10 w-10 m-10 text-red-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>    
+                        </div>
+                    </div>
+                }
+                endMessage={
+                    <div className='flex justify-center w-full mb-16'>
+                        <h2>
+                            این داستان ادامه دارد . . .
+                        </h2>
+                    </div>
+                }
                 scrollableTarget="land"
             >
                 <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
-                    <QuizContainer quizzes={quizzes} bgStyle='trans' />
+                    {
+                        quizOrTest == 'quiz' ?
+                            <QuizContainer quizzes={quizzes} bgStyle='trans' />
+                            :
+                            <QuizPointyContainer quizzes={quizzes} bgStyle='trans' />
+                    }
                 </ul>   
             </InfiniteScroll>
 

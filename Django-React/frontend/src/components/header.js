@@ -55,7 +55,7 @@ const Header = () => {
         <React.Fragment>
 
 
-            <header className="header text-xl p-4 z-10 relative">
+            <header className="header text-xl p-4 z-10 fixed top-0 right-0 w-screen bg-[#00000085] backdrop-blur-lg">
 
                 <Helmet>
                     <script type="text/javascript">
@@ -122,32 +122,32 @@ const Header = () => {
 
                     <Search />
 
-                    <ul className={`right-[11rem] header__white subHeader top-20 backdrop-blur-lg bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                    <ul className={`right-[12rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                         <li><Link to="/category/movie-&-series">🎬 فیلم و سریال</Link></li>
                         <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
                         <li><Link to="/category/psychology">🧠 روانشناسی</Link></li>
                     </ul>
 
-                    <ul className={`right-[16.5rem] header__white subHeader top-20 backdrop-blur-lg bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                    <ul className={`right-[19rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                         <li><a href="/sort?s=newest"> ⏳ جدیدترین ها </a></li>
                         <li><a href="/sort?s=monthly"> 👑 بهترین های ماه </a></li>
                         <li><a href="/sort?s=bestest"> 👑 بهترین ها </a></li>
                     </ul>
 
-                    <ul className={`right-[21rem] header__white subHeader top-20 backdrop-blur-lg bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                    <ul className={`right-[25rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                         <li><a href="/sort?s=newest_test"> ⏳ جدیدترین ها </a></li>
                         <li><a href="/sort?s=monthly_test"> 👑 بهترین های ماه </a></li>
                         <li><a href="/sort?s=bestest_test"> 👑 بهترین ها </a></li>
                     </ul>
 
                     {/* Menu */}
-                    <button type="button" onClick={openCloseMenu} className={`header__menu__openBtn header__btn absolute header__white md:hidden`} aria-label="Menu Button">
+                    <button type="button" onClick={openCloseMenu} className={`header__btn mr-5 header__white md:hidden`} aria-label="Menu Button">
                         <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
                     </button>
 
-                    <div className={`header__menu fixed text-right z-10 h-[25rem] w-[100%]
-                                    bg-[rgba(148, 148, 148, 0.3)] top-0 right-0
-                                    rounded-b-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
+                    <div className={`header__menu fixed text-right z-20 h-[25rem] w-[100%]
+                                    bg-[#000000e5] top-0 right-0 mr-4
+                                    rounded-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
                                     pr-8 pt-5 absolute top-0 right-0`}>
                         <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
                             <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>

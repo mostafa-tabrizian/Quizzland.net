@@ -6,8 +6,9 @@ import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
-import Header from '../components/header'
+import { Carousel } from 'antd';
 
+import Header from '../components/header'
 import { log, replaceFunction, isItMobile, isItDesktop } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import QuizPointyContainer from '../components/quizPointyContainer'
@@ -197,7 +198,7 @@ const Index = () => {
 
             </Helmet>
 
-            <div className='w-4/5 m-auto'>
+            <div className='md:w-4/5 m-auto mt-20 md:mt-0 md:mt-20'>
 
                 <div className={`hero hidden md:flex justify-center items-center bg-gradient-to-t from-[#3d191a] via-transparent p-3 rounded-lg m-auto`}>
                     {/* <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div> */}
@@ -239,7 +240,7 @@ const Index = () => {
                 </div>
 
                 {/* sliders */}
-                <div className='flex mt-20 justify-center w-full space-x-10'>
+                <div className='hidden md:flex mt-20 justify-center w-full space-x-10'>
                     <div className='w-7/12 mr-5 relative'>
                         <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3'>
                             <h4>
@@ -277,6 +278,45 @@ const Index = () => {
                         </div>
                     </div>
                 </div>
+
+                <Carousel autoplay dotPosition='top' className='md:hidden block mb-20'>
+                    <div className='w-7/12 mr-5 relative'>
+                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3'>
+                            <h4>
+                                کوییزلند 🔥
+                            </h4>
+                            <h4>
+                                #1
+                            </h4>
+                        </div>
+                        <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].title, ' ', '-')}`}>
+                            <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_monthly[0]?.thumbnail} alt="" />
+                        </Link>
+                        <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
+                            <h4>
+                                {quiz_monthly[0] && quiz_monthly[0].title}
+                            </h4>
+                        </div>
+                    </div>
+                    <div className='w-5/12 relative'>
+                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3'>
+                            <h4 className='translate-y-[4px]'>
+                                🕚
+                            </h4>
+                            <h4>
+                                جدیدترینِ کوییزلند
+                            </h4>
+                        </div>
+                        <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].title, ' ', '-')}`}>
+                            <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_new[0]?.thumbnail} alt="" />
+                        </Link>
+                        <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
+                            <h4>
+                                {quiz_new[0] && quiz_new[0].title}
+                            </h4>
+                        </div>
+                    </div>
+                </Carousel>
 
                 {recommendedQuizzes}
 
