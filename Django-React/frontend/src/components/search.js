@@ -141,7 +141,7 @@ const Search = (props) => {
                                             rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
                                             `}
                                         >
-                                            <Link to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`} className='flex md:block md:grid-cols-5'>
+                                            <Link to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`} className='flex md:block md:grid-cols-5' target='_blank'>
                                                 <div className='md:col-span-2 ml-4 md:ml-0 w-[310px] md:w-[235px] h-[100px] md:h-[133px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                                     <img
                                                         src={quiz.thumbnail}
@@ -237,7 +237,7 @@ const Search = (props) => {
     const searchInputMobile = (
         <input
             type='text'
-            className={`text-right bg-transparent text-lg text-black`}
+            className={`text-right bg-transparent text-lg outline-none text-black`}
             ref={mobileSearchInput}
             onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') }}}
         />

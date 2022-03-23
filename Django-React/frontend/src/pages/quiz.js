@@ -233,9 +233,9 @@ const Quiz = () => {
 
     const selectedOption = (props) => {
         if (ableToSelectOption) {
-            setTimeout(() => {
-                document.querySelector('.quiz__questions').scrollIntoView()
-            }, 300)
+            // setTimeout(() => {
+            //     document.querySelector('.quiz__questions').scrollIntoView()
+            // }, 300)
 
             setAbleToSelectOption(false)
             setAbleToGoNext(true)
@@ -264,7 +264,7 @@ const Quiz = () => {
 
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        setAbleToGoNext(false)
+        // setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
         makeEveryOptionLowOpacity('high')
@@ -309,9 +309,9 @@ const Quiz = () => {
                 plusOneToTotalAnsweredQuestions()
                 setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
 
-                if (typeof (window) !== 'undefined' && !(window.navigator.userAgent.includes('Windows'))) {
-                    window.scrollTo(0, 0);
-                }
+                // if (typeof (window) !== 'undefined' && !(window.navigator.userAgent.includes('Windows'))) {
+                //     window.scrollTo(0, 0);
+                // }
 
             } else {
                 setQuizEnded(true)
@@ -483,14 +483,14 @@ const Quiz = () => {
             splittedTags.map(tag => {
                 return (
                     <li key={tag} className='px-3 py-1 text-sm rounded-lg'>
-                        <h2>
+                        <h4>
                             <Link
                                 to={`/search?q=${replaceFunction(tag, ' ', '+')}`}
                                 rel='tag'
                             >
                                     {tag}
                             </Link>
-                        </h2>
+                        </h4>
                     </li>
                 )
             })
@@ -741,7 +741,7 @@ const Quiz = () => {
 
             <div>
                 <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>تگ های کوییز</h7>
-                <ul className='flex flex-wrap justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
+                <ul className='flex flex-wrap justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags items-baseline'>
                     {quiz && showTheTagsIfNotNull()}
                 </ul>
             </div>
@@ -762,10 +762,10 @@ const Quiz = () => {
             </div>
 
 
-            <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>مطالب پیشنهادی</h7>
+            {/* <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>مطالب پیشنهادی</h7> */}
 
             {/* Adverts */}
-            <div className='adverts_center' id='mediaad-dESu'></div>
+            {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
 
             <Link
                 to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&rg=${resultGif}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}`}

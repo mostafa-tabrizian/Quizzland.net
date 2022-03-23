@@ -206,7 +206,7 @@ const Result = (props) => {
                         <div className="text-center result__share space-sm">
                             <h5 className='text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
-                            {/* <InlineShareButtons
+                            <InlineShareButtons
                                 config={{
                                     alignment: 'center',  // alignment of buttons (left, center, right)
                                     color: 'social',      // set the color of buttons (social, white)
@@ -230,7 +230,7 @@ const Result = (props) => {
                                     image: testDetail.thumbnail,  // (defaults to og:image or twitter:image)
                                     title: testDetail?.title,            // (defaults to og:title or twitter:title)
                                 }}
-                            /> */}
+                            />
 
                         </div>
 
@@ -271,7 +271,7 @@ const Result = (props) => {
 
             <BackBtn />
             
-            <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
+            <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center px-2 py-1 rounded-lg' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
 
         </React.Fragment>
     );

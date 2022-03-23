@@ -43,7 +43,7 @@ const Footer = () => {
                 <div>
                     <h3>کتگوری ها</h3>
                     <ul>
-                        <li><Link to="/category/movieSeries">فیلم و سریال</Link></li>
+                        <li><Link to="/category/movie-&-Series">فیلم و سریال</Link></li>
                         <li><Link to="/category/celebrity">سلبریتی</Link></li>
                         <li><Link to="/category/psychology">روانشناسی</Link></li>
                     </ul>

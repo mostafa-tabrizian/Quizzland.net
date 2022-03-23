@@ -226,7 +226,7 @@ const Result = () => {
                         <div className="text-lg text-center result__share space-sm">
                             <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${fanName} هستن`}</h5>
 
-                            {/* <InlineShareButtons
+                            <InlineShareButtons
                                 config={{
                                     alignment: 'center',  // alignment of buttons (left, center, right)
                                     color: 'social',      // set the color of buttons (social, white)
@@ -250,7 +250,7 @@ const Result = () => {
                                     image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
                                     title: quizResult?.title,            // (defaults to og:title or twitter:title)
                                 }}
-                            /> */}
+                            />
 
                         </div>
 
@@ -348,7 +348,7 @@ const Result = () => {
 
             <BackBtn />
             
-            <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
+            <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center px-2 py-1 rounded-lg' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
 
         </React.Fragment>
     );

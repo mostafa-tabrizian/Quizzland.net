@@ -356,14 +356,14 @@ const Quiz = () => {
             splittedTags.map(tag => {
                 return (
                     <li key={tag} className='px-3 py-1 text-sm rounded-lg'>
-                        <h2>
+                        <h4>
                             <Link
                                 to={`/search?q=${replaceFunction(tag, ' ', '+')}`}
                                 rel='tag'
                             >
                                 {tag}
                             </Link>
-                        </h2>
+                        </h4>
                     </li>
                 )
             })
@@ -640,7 +640,7 @@ const Quiz = () => {
 
             <div>
                 <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>تگ های کوییز</h7>
-                <ul className='flex flex-wrap justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
+                <ul className='flex flex-wrap justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags items-baseline'>
                     {quiz && showTheTagsIfNotNull()}
                 </ul>
             </div>
