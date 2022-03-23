@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
-
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
-import { Rate } from 'antd';
+import { Rate, message } from 'antd';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios'
-import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
+import {InlineShareButtons} from 'sharethis-reactjs';
 
 import Header from '../components/header'
 import { log, replaceFunction } from '../components/base'
@@ -24,7 +22,6 @@ const Result = (props) => {
     const [testResult, setTestResult] = useState()
     const [testDetail, setTestDetail] = useState()
     const [rateChangeable, setRateChangeable] = useState(true)
-    const [id, setId] = useState()
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
@@ -110,7 +107,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = async () => {
-        await axios.get(`/api/pointy_new/?subCategory__icontains=${testResult && replaceFunction(testResult?.subCategory, ' ', '+')}&limit=4`)
+        await axios.get(`/api/pointy_new/?subCategory__icontains=${testDetail && replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4`)
             .then((res) => {
                 setSuggestionQuizzes(res.data.results)
             })
@@ -137,7 +134,7 @@ const Result = (props) => {
         let lastRate
         let RateCount
 
-        await axios.get(`/api/pointy_new/${id}/?&timestamp=${now}`)
+        await axios.get(`/api/pointy_new/${testDetail?.id}/?&timestamp=${now}`)
             .then((req) => {
                 lastRate = req.data.rate
                 RateCount = req.data.rate_count
@@ -154,7 +151,7 @@ const Result = (props) => {
             'accept': 'application/json'
         }
 
-        await axios.put(`/api/pointy_new/${id}/`, view, { headers })
+        await axios.put(`/api/pointy_new/${testDetail?.id}/`, view, { headers })
             .then(res => {
                 res.status == 200 &&
                 message.success('از نظر شما بسیار سپاس گذاریم')
@@ -226,8 +223,8 @@ const Result = (props) => {
                                     size: 45,             // the size of each button (INTEGER)
 
                                     // OPTIONAL PARAMETERS
-                                    url: `https://www.quizzland.net/test/${replaceFunction(testDetail?.title, ' ', '-')}`,
-                                    image: testDetail.thumbnail,  // (defaults to og:image or twitter:image)
+                                    url: `https://www.quizzland.net/test/${testDetail && replaceFunction(testDetail.title, ' ', '-')}`,
+                                    image: testDetail?.thumbnail,  // (defaults to og:image or twitter:image)
                                     title: testDetail?.title,            // (defaults to og:title or twitter:title)
                                 }}
                             />
@@ -242,7 +239,8 @@ const Result = (props) => {
                             disabled={rateChangeable ? false : true}
                             className='flex justify-center my-3 biggerRate'
                             onChange={value => {
-                                const currentQuiz = takeParameterFromUrl('qt')
+                                log(testDetail.title)
+                                const currentQuiz = testDetail.title
                                 const lastRatedQuiz = localStorage.getItem('lastRatedQuiz')
 
                                 // check if rated before (last time)
@@ -263,7 +261,7 @@ const Result = (props) => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
+                <ul className="md:w-4/5 m-auto flex flex-wrap align-baseline justify-center">
                     {
                         suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }

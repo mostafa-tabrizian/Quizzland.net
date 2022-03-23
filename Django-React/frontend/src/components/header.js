@@ -146,7 +146,7 @@ const Header = () => {
                     </button>
 
                     <div className={`header__menu fixed text-right z-20 h-[25rem] w-[100%]
-                                    bg-[#000000e5] top-0 right-0 mr-4
+                                    bg-[#00000096] backdrop-blur-xl top-0 right-0 mr-4
                                     rounded-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
                                     pr-8 pt-5 absolute top-0 right-0`}>
                         <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">

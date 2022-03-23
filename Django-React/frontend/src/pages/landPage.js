@@ -92,11 +92,11 @@ const Index = () => {
                     <div className="mb-8 mt-[5rem]">
 
                         <div className="mb-8 quizContainer__header">
-                            <h3 className=''>پیشنهادی های کوییزلند به شما</h3>
+                            <h2 className=''>پیشنهادی های کوییزلند به شما</h2>
                         </div>
 
                         <div>
-                            <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
+                            <ul className="flex flex-wrap align-baseline">
                                 <QuizContainer quizzes={matchedQuizzes} bgStyle='trans' />
                             </ul>
                         </div>
@@ -234,13 +234,13 @@ const Index = () => {
                 {/* sliders */}
                 <div className='hidden md:flex mt-20 justify-center w-full space-x-10'>
                     <div className='w-7/12 mr-5 relative'>
-                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3'>
-                            <h4>
+                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                            <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
-                            </h4>
-                            <h4>
+                            </h2>
+                            <h2>
                                 #1
-                            </h4>
+                            </h2>
                         </div>
                         <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].title, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_monthly[0]?.thumbnail} alt="" />
@@ -252,13 +252,13 @@ const Index = () => {
                         </div>
                     </div>
                     <div className='w-5/12 relative'>
-                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3'>
+                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h4 className='translate-y-[4px]'>
                                 🕚
                             </h4>
-                            <h4>
+                            <h2 className='text-[1rem]'>
                                 جدیدترینِ کوییزلند
-                            </h4>
+                            </h2>
                         </div>
                         <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].title, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_new[0]?.thumbnail} alt="" />
@@ -273,13 +273,13 @@ const Index = () => {
 
                 <Carousel autoplay dotPosition='top' className='md:hidden block mb-20'>
                     <div className='w-7/12 mr-5 relative'>
-                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3'>
-                            <h4>
+                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                            <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
-                            </h4>
-                            <h4>
+                            </h2>
+                            <h2>
                                 #1
-                            </h4>
+                            </h2>
                         </div>
                         <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].title, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_monthly[0]?.thumbnail} alt="" />
@@ -291,13 +291,13 @@ const Index = () => {
                         </div>
                     </div>
                     <div className='w-5/12 relative'>
-                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3'>
+                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h4 className='translate-y-[4px]'>
                                 🕚
                             </h4>
-                            <h4>
+                            <h2 className='text-[1rem]'>
                                 جدیدترینِ کوییزلند
-                            </h4>
+                            </h2>
                         </div>
                         <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].title, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_new[0]?.thumbnail} alt="" />
@@ -322,7 +322,7 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={quiz_new_ref}>
                         {
                             quiz_new_inView &&
                             <QuizContainer quizzes={quiz_new} bgStyle={'trans'} />
@@ -351,7 +351,7 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_monthly_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={quiz_monthly_ref}>
                         {
                             quiz_monthly_inView &&
                             <QuizContainer quizzes={quiz_monthly} bgStyle={'trans'} />
@@ -369,7 +369,7 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_new_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={pointy_new_ref}>
                         {
                             pointy_new_inView &&
                             <QuizPointyContainer quizzes={pointy_new} bgStyle='trans' />
@@ -398,7 +398,7 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_monthly_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={pointy_monthly_ref}>
                         {
                             pointy_monthly_inView &&
                             <QuizPointyContainer quizzes={pointy_monthly} bgStyle='trans' />
@@ -416,7 +416,7 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_celebrity_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={quiz_new_celebrity_ref}>
                         {
                             quiz_new_celebrity_inView &&
                             <QuizContainer quizzes={quiz_new_celebrity} bgStyle='trans' />
@@ -445,7 +445,7 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={quiz_new_movieSeries_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={quiz_new_movieSeries_ref}>
                         {
                             quiz_new_movieSeries_inView &&
                             <QuizContainer quizzes={quiz_new_movieSeries} bgStyle='trans' />
@@ -463,7 +463,7 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={pointy_new_psychology_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={pointy_new_psychology_ref}>
                         {
                             pointy_new_psychology_inView &&
                             <QuizPointyContainer quizzes={pointy_new_psychology} bgStyle='trans' />
@@ -484,14 +484,14 @@ const Index = () => {
                 }
 
                 <div className="mt-8 mb-8">
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
+                    <div className="flex justify-between mb-8  mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-rightContainer__header items-center">
                         <h2>کوییز های بیشتر</h2>
                         <Link to="/sort?s=newest" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className=" mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right" ref={loadMoreQuiz_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={loadMoreQuiz_ref}>
                         {
                             loadMoreQuiz_inView &&
                             <QuizContainer quizzes={loadMoreQuiz} bgStyle='trans' />

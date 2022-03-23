@@ -245,7 +245,7 @@ const Search = (props) => {
 
     return (
         <React.Fragment>
-            <div className={`header__search flex`}>
+            <div className={`header__search hidden md:flex`}>
                 <button
                     className={`
                         absolute right-[-2rem] top-1.5

@@ -212,7 +212,7 @@ const SearchMoreResult = () => {
 
                 </ul>
 
-                <div className='adverts_center' id='mediaad-DLgb'></div>
+                {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
             
             </div>
 

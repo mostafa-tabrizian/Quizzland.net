@@ -15226,6 +15226,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   float: left;
   height: 100%;
   min-height: 1px;
+  padding-right: 1rem;
 }
 .ant-carousel .slick-slide img {
   display: block;
