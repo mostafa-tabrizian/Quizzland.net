@@ -33,11 +33,13 @@ const Result = () => {
         const params = new URLSearchParams(window.location.search)
         setQuestionCount(params.get('qc'))
         setCorrectAnswersCount(params.get('cc'))
-        setResultGif(params.get('rg'))
         setFanName(params.get('fn'))
         setTitle(params.get('qt'))
         setId(params.get('id'))
         
+        const resultGifIndexInUrl = (window.location.search).indexOf('rg=') + 3
+        setResultGif((window.location.search).slice(resultGifIndexInUrl, ))
+
         detailOfResult(params.get('s'))
         getSuggestionsQuiz(params.get('sc'))
 
