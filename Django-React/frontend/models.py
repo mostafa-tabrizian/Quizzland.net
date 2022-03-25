@@ -14,7 +14,7 @@ class Categories(models.Model):
     date_published = models.DateField(default=datetime.date.today)
     
     def __str__(self):
-        return self.title_english
+        return str(self.title_english)
     
 class CustomUser(AbstractUser):
     fav_color = models.CharField(blank=True, max_length=120)
@@ -28,7 +28,7 @@ class Document(models.Model):
     note = models.TextField(blank=True, null=True, default=None)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
         
 class Document_Admin(admin.ModelAdmin):
     list_display = ('title', 'note')
@@ -46,7 +46,7 @@ class SubCategories(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.subCategory
+        return str(self.subCategory)
 
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
@@ -69,7 +69,7 @@ class Quizzes(models.Model):
     publish = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
     def __unicode__(self):
         return 'test'
@@ -133,7 +133,7 @@ class Quizzes_Pointy(models.Model):
     result_img_10th =  models.ImageField(upload_to='Pointy-Quiz-Result', null=True, blank=True, default='NotExist.jpg')
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
@@ -153,14 +153,13 @@ class Questions(models.Model):
     answer_text = RichTextField(blank=True, default=None)
 
     def __str__(self):
-        return self.quizKey
+        return str(self.quizKey)
 
     def __unicode__(self):
         return 'test'
 
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=80, null=False, blank=False, default=None, help_text='same quiz title')
     quizKey = models.ForeignKey(Quizzes_Pointy, on_delete=models.CASCADE, blank=True, null=True)
     question = models.CharField(max_length=150, null=True, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
@@ -199,7 +198,7 @@ class Pointy_Questions(models.Model):
     option_point_10th = models.IntegerField(blank=True, default=10)
 
     def __str__(self):
-        return self.quizKey
+        return str(self.quizKey)
 
 class Blog(models.Model):
     id = models.AutoField(primary_key=True)

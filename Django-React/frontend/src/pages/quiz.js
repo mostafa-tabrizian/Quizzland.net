@@ -124,7 +124,10 @@ const Quiz = () => {
                         })
                 }
                 catch (e) {
-                    window.location.href = '/404'
+                    log(e)
+                    setTimeout(() => {
+                        window.location.href = '/404'
+                    }, 5000)
                 }
             })
     }
