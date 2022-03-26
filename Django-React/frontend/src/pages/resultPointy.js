@@ -48,47 +48,47 @@ const Result = (props) => {
 
     const detailOfResult = () => {
         if (testDetail) {
-            if (testResult > testDetail.result_upTo_2nd) {
+            if (testResult <= testDetail.result_upTo_1st) {
                 setResultImg(testDetail.result_img_1st)
                 setResultSubtitle(testDetail.result_title_1st)
                 setResultText(testDetail.result_text_1st)
             }
-            else if (testResult >= testDetail.result_upTo_3rd) {
+            else if (testResult <= testDetail.result_upTo_2nd) {
                 setResultImg(testDetail.result_img_2nd)
                 setResultSubtitle(testDetail.result_title_2nd)
                 setResultText(testDetail.result_text_2nd)
             }
-            else if (testResult > testDetail.result_upTo_4th) {
+            else if (testResult <= testDetail.result_upTo_3rd) {
                 setResultImg(testDetail.result_img_3rd)
                 setResultSubtitle(testDetail.result_title_3rd)
                 setResultText(testDetail.result_text_3rd)
             }
-            else if (testResult > testDetail.result_upTo_5th) {
+            else if (testResult <= testDetail.result_upTo_4th) {
                 setResultImg(testDetail.result_img_4th)
                 setResultSubtitle(testDetail.result_title_4th)
                 setResultText(testDetail.result_text_4th)
             }
-            else if (testResult > testDetail.result_upTo_6th) {
+            else if (testResult <= testDetail.result_upTo_5th) {
                 setResultImg(testDetail.result_img_5th)
                 setResultSubtitle(testDetail.result_title_5th)
                 setResultText(testDetail.result_text_5th)
             }
-            else if (testResult > testDetail.result_upTo_7th) {
+            else if (testResult <= testDetail.result_upTo_6th) {
                 setResultImg(testDetail.result_img_6th)
                 setResultSubtitle(testDetail.result_title_6th)
                 setResultText(testDetail.result_text_6th)
             }
-            else if (testResult > testDetail.result_upTo_8th) {
+            else if (testResult <= testDetail.result_upTo_7th) {
                 setResultImg(testDetail.result_img_7th)
                 setResultSubtitle(testDetail.result_title_7th)
                 setResultText(testDetail.result_text_7th)
             }
-            else if (testResult > testDetail.result_upTo_9th) {
+            else if (testResult <= testDetail.result_upTo_8th) {
                 setResultImg(testDetail.result_img_8th)
                 setResultSubtitle(testDetail.result_title_8th)
                 setResultText(testDetail.result_text_8th)
             }
-            else if (testResult > testDetail.result_upTo_10th) {
+            else if (testResult <= testDetail.result_upTo_9th) {
                 setResultImg(testDetail.result_img_9th)
                 setResultSubtitle(testDetail.result_title_9th)
                 setResultText(testDetail.result_text_9th)

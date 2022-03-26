@@ -136,7 +136,8 @@ const Quiz = () => {
         const questionsCounter = questions?.length
         if (questionsCounter && correctAnswersCount) {
             const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
-            setScore(score)
+            setScore(parseInt(score))
+            return score
         }
     }
 
@@ -286,7 +287,7 @@ const Quiz = () => {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7
     }
 
-    const detailOfResult = () => {
+    const detailOfResult = (score) => {
         if (score > 80){
             setResultGif(quiz?.GIF100)
         }
@@ -302,8 +303,10 @@ const Quiz = () => {
         else if (score >= 0){
             setResultGif(quiz?.GIF20)
         }
+        else {
+            setResultGif(undefined)
+        }
     }
-
 
     const goNextQuestionOrEndTheQuiz = () => {
         if (ableToGoNext || autoQuestionChanger) {
@@ -320,11 +323,8 @@ const Quiz = () => {
                 setQuizEnded(true)
                 setTimeout(() => {
                     try {
-                        // localStorage.setItem('resultQuiz', JSON.stringify(quiz))
-                        // localStorage.setItem('resultQuestions', JSON.stringify(questions))
-                        // localStorage.setItem('resultCorrectAnswersCount', correctAnswersCount)
-                        calculateTheResultScore()
-                        detailOfResult()
+                        const score = calculateTheResultScore()
+                        detailOfResult(score)
                         setFanName(quiz?.fan_name)
                         setSubCategory(quiz?.subCategory)
                         setTitle(quiz?.title)
@@ -771,7 +771,7 @@ const Quiz = () => {
             {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
 
             <Link
-                to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&rg=${resultGif}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}`}
+                to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}&rg=${resultGif}`}
                 ref={result}
                 className='noVis'
             >
