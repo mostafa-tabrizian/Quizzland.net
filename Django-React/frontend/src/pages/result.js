@@ -202,7 +202,7 @@ const Result = () => {
                 <meta name="keywords" content="کوییز, کوییزلند" />
             </Helmet>
 
-            <div className="result__container">
+            <div className="result__container relative z-[-1]">
                     <div className="flex justify-center result__title">
                         <h5 className="text-right">نتیجه  {title}</h5>
                     </div>
