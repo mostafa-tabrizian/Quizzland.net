@@ -937,16 +937,6 @@ hr {
   color: white;
 }
 
-.header__search {
-  position: absolute;
-  left: 2rem;
-}
-
-.header__search__opener {
-  position: absolute;
-  right: 5rem;
-}
-
 .header__search__opener__bg {
   width: 100vw;
   height: 100vh;

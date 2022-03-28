@@ -6,7 +6,7 @@ def titleConverterWithSpilt(title, oldValue, newValue):
     return updatedTitle
 
 class QuizSitemap(Sitemap):
-    changefreq = "weekly"
+    changefreq = "daily"
     priority = 1
     protocol = 'https'
 
