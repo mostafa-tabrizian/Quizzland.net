@@ -107,7 +107,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = async () => {
-        await axios.get(`/api/pointy_new/?subCategory__icontains=${testDetail && replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4`)
+        await axios.get(`/api/pointy_new/?subCategory__icontains=${testDetail && replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4&public=true`)
             .then((res) => {
                 setSuggestionQuizzes(res.data.results)
             })
@@ -134,7 +134,7 @@ const Result = (props) => {
         let lastRate
         let RateCount
 
-        await axios.get(`/api/pointy_new/${testDetail?.id}/?&timestamp=${now}`)
+        await axios.get(`/api/pointy_new/${testDetail?.id}/?&timestamp=${now}&public=true`)
             .then((req) => {
                 lastRate = req.data.rate
                 RateCount = req.data.rate_count

@@ -56,30 +56,30 @@ const SearchMoreResult = () => {
             let matchedCategories = []
 
             // Search Quiz
-            const search_quiz_new_title = await axios.get(`/api/quiz_new/?title__icontains=${searchValue}&limit=50`)
+            const search_quiz_new_title = await axios.get(`/api/quiz_new/?title__icontains=${searchValue}&limit=50&public=true`)
             Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
 
-            const search_quiz_new_subCategory = await axios.get(`/api/quiz_new/?subCategory__icontains=${searchValue}&limit=50`)
+            const search_quiz_new_subCategory = await axios.get(`/api/quiz_new/?subCategory__icontains=${searchValue}&limit=50&public=true`)
             Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
 
-            const search_quiz_new_tag = await axios.get(`/api/quiz_new/?tags__icontains=${searchValue}&limit=50`)
+            const search_quiz_new_tag = await axios.get(`/api/quiz_new/?tags__icontains=${searchValue}&limit=50&public=true`)
             Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
 
             // Search Pointy Quiz
-            const search_pointy_new_title = await axios.get(`/api/pointy_new/?title__icontains=${searchValue}&limit=50`)
+            const search_pointy_new_title = await axios.get(`/api/pointy_new/?title__icontains=${searchValue}&limit=50&public=true`)
             Array.prototype.push.apply(matchedPointies, search_pointy_new_title.data.results)
 
-            const search_pointy_new_subCategory = await axios.get(`/api/pointy_new/?subCategory__icontains=${searchValue}&limit=50`)
+            const search_pointy_new_subCategory = await axios.get(`/api/pointy_new/?subCategory__icontains=${searchValue}&limit=50&public=true`)
             Array.prototype.push.apply(matchedPointies, search_pointy_new_subCategory.data.results)
 
-            const search_pointy_new_tag = await axios.get(`/api/pointy_new/?tags__icontains=${searchValue}&limit=50`)
+            const search_pointy_new_tag = await axios.get(`/api/pointy_new/?tags__icontains=${searchValue}&limit=50&public=true`)
             Array.prototype.push.apply(matchedPointies, search_pointy_new_tag.data.results)
 
             // Search Category
-            const search_category_new_title = await axios.get(`/api/subcategory_new/?title__icontains=${searchValue}&limit=2`)
+            const search_category_new_title = await axios.get(`/api/subcategory_new/?title__icontains=${searchValue}&limit=2&public=true`)
             Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
 
-            const search_category_new_subCategory = await axios.get(`/api/subcategory_new/?subCategory__icontains=${searchValue}&limit=2`)
+            const search_category_new_subCategory = await axios.get(`/api/subcategory_new/?subCategory__icontains=${searchValue}&limit=2&public=true`)
             Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
 
             // Remove duplicated quizzes

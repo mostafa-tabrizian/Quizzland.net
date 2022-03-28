@@ -36,6 +36,7 @@ class Document_Admin(admin.ModelAdmin):
 
 class SubCategories(models.Model):
     id = models.AutoField(primary_key=True)
+    public = models.BooleanField(default=True)
     categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
@@ -50,6 +51,7 @@ class SubCategories(models.Model):
 
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
+    public = models.BooleanField(default=True)
     categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
@@ -76,6 +78,7 @@ class Quizzes(models.Model):
 
 class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)
+    public = models.BooleanField(default=True)
     categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)

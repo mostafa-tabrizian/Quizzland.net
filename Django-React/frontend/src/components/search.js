@@ -70,39 +70,39 @@ const Search = (props) => {
                 let matchedCategories = []
 
                 // Search Quiz
-                const search_quiz_new_title = await axios.get(`/api/quiz_new/?title__icontains=${searchValue}&limit=10`)
+                const search_quiz_new_title = await axios.get(`/api/quiz_new/?title__icontains=${searchValue}&limit=10&public=true`)
                 Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
 
                 if (search_quiz_new_title.data.results !== 10) {
-                    const search_quiz_new_subCategory = await axios.get(`/api/quiz_new/?subCategory__icontains=${searchValue}&limit=10`)
+                    const search_quiz_new_subCategory = await axios.get(`/api/quiz_new/?subCategory__icontains=${searchValue}&limit=10&public=true`)
                     Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
 
                     if (search_quiz_new_subCategory.length !== 10) {
-                        const search_quiz_new_tag = await axios.get(`/api/quiz_new/?tags__icontains=${searchValue}&limit=10`)
+                        const search_quiz_new_tag = await axios.get(`/api/quiz_new/?tags__icontains=${searchValue}&limit=10&public=true`)
                         Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
                     }
                 }
 
                 // Search Pointy Quiz
-                const search_pointy_new_title = await axios.get(`/api/pointy_new/?title__icontains=${searchValue}&limit=5`)
+                const search_pointy_new_title = await axios.get(`/api/pointy_new/?title__icontains=${searchValue}&limit=5&public=true`)
                 Array.prototype.push.apply(matchedQuizzes, search_pointy_new_title.data.results)
 
                 if (search_pointy_new_title.length !== 5) {
-                    const search_pointy_new_subCategory = await axios.get(`/api/pointy_new/?subCategory__icontains=${searchValue}&limit=5`)
+                    const search_pointy_new_subCategory = await axios.get(`/api/pointy_new/?subCategory__icontains=${searchValue}&limit=5&public=true`)
                     Array.prototype.push.apply(matchedQuizzes, search_pointy_new_subCategory.data.results)
 
                     if (search_pointy_new_subCategory.length !== 5) {
-                        const search_pointy_new_tag = await axios.get(`/api/pointy_new/?tags__icontains=${searchValue}&limit=2`)
+                        const search_pointy_new_tag = await axios.get(`/api/pointy_new/?tags__icontains=${searchValue}&limit=2&public=true`)
                         Array.prototype.push.apply(matchedQuizzes, search_pointy_new_tag.data.results)
                     }
                 }
 
                 // Search Category
-                const search_category_new_title = await axios.get(`/api/subcategory_new/?title__icontains=${searchValue}&limit=2`)
+                const search_category_new_title = await axios.get(`/api/subcategory_new/?title__icontains=${searchValue}&limit=2&public=true`)
                 Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
 
                 if (search_category_new_title.length !== 2) {
-                    const search_category_new_subCategory = await axios.get(`/api/subcategory_new/?subCategory__icontains=${searchValue}&limit=2`)
+                    const search_category_new_subCategory = await axios.get(`/api/subcategory_new/?subCategory__icontains=${searchValue}&limit=2&public=true`)
                     Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
                 }
 
@@ -227,7 +227,7 @@ const Search = (props) => {
     })
 
     const searchSuggester = async () => {
-        const grabAllSubCategories = await axios.get(`/api/subcategory_new`)
+        const grabAllSubCategories = await axios.get(`/api/subcategory_new/?available=true`)
         const numberOfCategories = grabAllSubCategories.data.length
         const randomCategoryIndex = Math.floor(Math.random() * numberOfCategories);
         setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)

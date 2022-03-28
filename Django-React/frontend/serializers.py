@@ -28,6 +28,7 @@ class SubCategoriesSerializer(serializers.ModelSerializer):
         model = SubCategories
         fields = (
             'id',
+            'public',
             'categoryKey',
             'subCategory',
             'title',
@@ -45,6 +46,7 @@ class QuizzesSerializer(serializers.ModelSerializer):
         model = Quizzes
         fields = (
             'id',
+            'public',
             'categoryKey',
             'subCategory',
             'rate',
@@ -71,6 +73,7 @@ class PointyQuizzesSerializer(serializers.ModelSerializer):
         model = Quizzes_Pointy
         fields = (
             'id',
+            'public',
             'categoryKey',
             'subCategory',
             'rate',

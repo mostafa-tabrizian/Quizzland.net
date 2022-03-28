@@ -5,6 +5,7 @@ class QuizzesFilter(filters.FilterSet):
     class Meta:
         model= Quizzes
         fields= {
+            'public': ['exact'],
             'categoryKey': ['exact'],
             'subCategory': ['icontains'],
             'title': ['iexact', 'icontains'],
@@ -15,6 +16,7 @@ class PointyQuizzesFilter(filters.FilterSet):
     class Meta:
         model= Quizzes_Pointy
         fields= {
+            'public': ['exact'],
             'categoryKey': ['exact'],
             'subCategory': ['icontains'],
             'title': ['iexact', 'icontains'],
@@ -33,6 +35,7 @@ class SubCategoriesFilter(filters.FilterSet):
     class Meta:
         model= SubCategories
         fields= {
+            'public': ['exact'],
             'categoryKey': ['exact'],
             'subCategory': ['icontains'],
             'title': ['iexact', 'icontains']

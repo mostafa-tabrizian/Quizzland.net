@@ -72,7 +72,7 @@ const Sort = () => {
         
         switch (sortType) {
             // case 'newestCategory':
-            //     quizzesData = await axios.get(`/api/categories/?limit=${numberOfResult}&offset=${offset}`)
+            //     quizzesData = await axios.get(`/api/categories/?limit=${numberOfResult}&offset=${offset}&public=true`)
             //     setSortTitle('جدیدترین کتگوری ها')
                 //    setQuizzes([...quizzes, ...quizzesData.data.results]);
                 // setOffset(offset + numberOfResult)
@@ -80,7 +80,7 @@ const Sort = () => {
             //     break
 
             // case 'bestestCategory':
-            //     quizzesData = await axios.get(`/api/categories/?&limit=${numberOfResult}&offset=${offset}`)
+            //     quizzesData = await axios.get(`/api/categories/?&limit=${numberOfResult}&offset=${offset}&public=true`)
             //     setSortTitle('بهترین کتگوری ها')
                 //    setQuizzes([...quizzes, ...quizzesData.data.results]);
                 // setOffset(offset + numberOfResult)
@@ -88,7 +88,7 @@ const Sort = () => {
             //     break
 
             // case 'monthlyCategory':
-            //     quizzesData = await axios.get(`/api/categories/?&limit=${numberOfResult}&offset=${offset}`)
+            //     quizzesData = await axios.get(`/api/categories/?&limit=${numberOfResult}&offset=${offset}&public=true`)
             //     setSortTitle('بهترین کتگوری های این ماه')
                 //    setQuizzes([...quizzes, ...quizzesData.data.results]);
                 // setOffset(offset + numberOfResult)
@@ -99,9 +99,9 @@ const Sort = () => {
                 setLoading(true)
                 chooseQuizOrTest('quiz');
                 if (sortCategory) {
-                    quizzesData = await axios.get(`/api/quiz_new/?limit=${numberOfResult}&offset=${offset}&category__icontains=${sortCategory}`)
+                    quizzesData = await axios.get(`/api/quiz_new/?limit=${numberOfResult}&offset=${offset}&category__icontains=${sortCategory}&public=true`)
                 } else {
-                    quizzesData = await axios.get(`/api/quiz_new/?limit=${numberOfResult}&offset=${offset}`)
+                    quizzesData = await axios.get(`/api/quiz_new/?limit=${numberOfResult}&offset=${offset}&public=true`)
                 }
                 setSortTitle('جدیدترین کوییز ها')
                 setQuizzes([...quizzes, ...quizzesData.data.results]);
@@ -113,9 +113,9 @@ const Sort = () => {
                 setLoading(true);
                 chooseQuizOrTest('quiz')
                 if (sortCategory) {
-                    quizzesData = await axios.get(`/api/quiz_best/?&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzesData = await axios.get(`/api/quiz_best/?&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}&public=true`)
                 } else {
-                    quizzesData = await axios.get(`/api/quiz_best/?&limit=${numberOfResult}&offset=${offset}`)
+                    quizzesData = await axios.get(`/api/quiz_best/?&limit=${numberOfResult}&offset=${offset}&public=true`)
                 }
                 setSortTitle('بهترین کوییز ها')
                 setQuizzes([...quizzes, ...quizzesData.data.results]);
@@ -127,9 +127,9 @@ const Sort = () => {
                 setLoading(true);
                 chooseQuizOrTest('quiz')
                 if (sortCategory) {
-                    quizzesData = await axios.get(`/api/quiz_monthly/?&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}`)
+                    quizzesData = await axios.get(`/api/quiz_monthly/?&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}&public=true`)
                 } else {
-                    quizzesData = await axios.get(`/api/quiz_monthly/?&limit=${numberOfResult}&offset=${offset}`)
+                    quizzesData = await axios.get(`/api/quiz_monthly/?&limit=${numberOfResult}&offset=${offset}&public=true`)
                 }
                 setSortTitle('بهترین کوییز های این ماه')
                 setQuizzes([...quizzes, ...quizzesData.data.results]);
@@ -140,7 +140,7 @@ const Sort = () => {
             case 'newest_test':
                 setLoading(true)
                 chooseQuizOrTest('test');
-                quizzesData = await axios.get(`/api/pointy_new/?limit=${numberOfResult}&offset=${offset}`)
+                quizzesData = await axios.get(`/api/pointy_new/?limit=${numberOfResult}&offset=${offset}&public=true`)
                 
                 setSortTitle('جدیدترین تست ها')
                 setQuizzes([...quizzes, ...quizzesData.data.results]);
@@ -151,7 +151,7 @@ const Sort = () => {
             case 'bestest_test':
                 setLoading(true);
                 chooseQuizOrTest('test')
-                quizzesData = await axios.get(`/api/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}`)
+                quizzesData = await axios.get(`/api/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}&public=true`)
                 
                 setQuizzes([...quizzes, ...quizzesData.data.results]);
                 setSortTitle('بهترین تست ها')
@@ -162,7 +162,7 @@ const Sort = () => {
             case 'monthly_test':
                 setLoading(true);
                 chooseQuizOrTest('test')
-                quizzesData = await axios.get(`/api/pointy_monthly/?limit=${numberOfResult}&offset=${offset}`)
+                quizzesData = await axios.get(`/api/pointy_monthly/?limit=${numberOfResult}&offset=${offset}&public=true`)
                 
                 setQuizzes([...quizzes, ...quizzesData.data.results]);
                 setSortTitle('بهترین تست های این ماه')

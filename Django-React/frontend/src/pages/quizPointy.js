@@ -93,7 +93,7 @@ const Quiz = () => {
     
     const grabData = async () => {
         quizTitleReplacedWithHyphen &&
-        await axios.get(`/api/pointy_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1`).then((res) => res.data.results[0])
+        await axios.get(`/api/pointy_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
             .then(async (quizData) => {
                 try {
                     AddView('pointy_new', quizData.id)
@@ -102,7 +102,7 @@ const Quiz = () => {
                     applyBackground(quizData.background)
                     setQuiz(quizData)
 
-                    await axios.get(`/api/questions_pointy/?quizKey=${quizData.id}`)
+                    await axios.get(`/api/questions_pointy/?quizKey=${quizData.id}&public=true`)
                         .then((questionData) => {
                             setQuestions(questionData?.data)
                             setContentLoaded(true)
@@ -374,7 +374,7 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        await axios.get(`/api/pointy_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8`)
+        await axios.get(`/api/pointy_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
             .then((res) => {setSuggestionQuizzes(res.data.results)})
     }
 

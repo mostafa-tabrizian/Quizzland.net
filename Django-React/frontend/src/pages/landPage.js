@@ -77,13 +77,13 @@ const Index = () => {
 
             let matchedQuizzes = []
 
-            const search_top_1st_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top1stUserCategory}&limit=4`)
+            const search_top_1st_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top1stUserCategory}&limit=4&public=true`)
             Array.prototype.push.apply(matchedQuizzes, search_top_1st_category.data.results)
 
-            const search_top_2nd_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top2ndUserCategory}&limit=2`)
+            const search_top_2nd_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top2ndUserCategory}&limit=2&public=true`)
             Array.prototype.push.apply(matchedQuizzes, search_top_2nd_category.data.results)
 
-            const search_top_3rd_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top3rdUserCategory}&limit=2`)
+            const search_top_3rd_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top3rdUserCategory}&limit=2&public=true`)
             Array.prototype.push.apply(matchedQuizzes, search_top_3rd_category.data.results)
 
             const recommendedQuizzesList = () => {
@@ -112,28 +112,28 @@ const Index = () => {
     }
 
     const grabData = async () => {
-        const quiz_new = await axios.get(`/api/quiz_new/?limit=8`)
+        const quiz_new = await axios.get(`/api/quiz_new/?limit=8&public=true`)
         setQuiz_new(quiz_new.data.results)
 
-        const quiz_monthly = await axios.get(`/api/quiz_monthly/?limit=8`)
+        const quiz_monthly = await axios.get(`/api/quiz_monthly/?limit=8&public=true`)
         setQuiz_monthly(quiz_monthly.data.results)
 
-        const pointy_new = await axios.get(`/api/pointy_new/?limit=8`)
+        const pointy_new = await axios.get(`/api/pointy_new/?limit=8&public=true`)
         setPointy_new(pointy_new.data.results)
 
-        const pointy_monthly = await axios.get(`/api/pointy_monthly/?limit=8`)
+        const pointy_monthly = await axios.get(`/api/pointy_monthly/?limit=8&public=true`)
         setPointy_monthly(pointy_monthly.data.results)
 
-        const pointy_new_psychology = await axios.get(`/api/pointy_new/?categoryKey=3&limit=8`)
+        const pointy_new_psychology = await axios.get(`/api/pointy_new/?categoryKey=3&limit=8&public=true`)
         setPointy_new_psychology(pointy_new_psychology.data.results)
 
-        const quiz_new_movieSeries = await axios.get(`/api/quiz_new/?categoryKey=1&limit=8`)
+        const quiz_new_movieSeries = await axios.get(`/api/quiz_new/?categoryKey=1&limit=8&public=true`)
         setQuiz_new_movieSeries(quiz_new_movieSeries.data.results)
 
-        const quiz_new_celebrity = await axios.get(`/api/quiz_new/?categoryKey=2&limit=8`)
+        const quiz_new_celebrity = await axios.get(`/api/quiz_new/?categoryKey=2&limit=8&public=true`)
         setQuiz_new_celebrity(quiz_new_celebrity.data.results)
 
-        const loadMoreQuiz = await axios.get(`/api/quiz_new/?limit=36&offset=8`)
+        const loadMoreQuiz = await axios.get(`/api/quiz_new/?limit=36&offset=8&public=true`)
         setLoadMoreQuiz(loadMoreQuiz.data.results)
 
         setContentLoaded(true)

@@ -67,10 +67,10 @@ const SubCategory = (props) => {
 
     const getQuizzes = async () => {
         const Quizzes = await axios.get(
-          `/api/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}`
+          `/api/${sortTypeDefinitionForQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuiz}&public=true`
         );
         const QuizzesPointy = await axios.get(
-          `/api/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}`
+          `/api/${sortTypeDefinitionForPointyQuizDb[sortType]}/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberOfResult}&offset=${offsetQuizPointy}&public=true`
         );
         
         if (Quizzes.data.count !== 0) {
@@ -103,7 +103,7 @@ const SubCategory = (props) => {
     }
 
     const backgroundOfSubCategory = async () => {
-        await axios.get(`/api/subcategory_new/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}`)
+        await axios.get(`/api/subcategory_new/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&public=true`)
             .then((categoryData) => {
                 AddView('subcategory_new', categoryData.data[0].id)
                 const background = categoryData.data[0].background
