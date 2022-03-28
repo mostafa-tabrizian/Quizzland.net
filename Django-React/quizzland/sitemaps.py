@@ -20,6 +20,21 @@ class QuizSitemap(Sitemap):
         title = titleConverterWithSpilt(item.title, ' ', '-')
         return f'/quiz/{title}'
 
+class PointySitemap(Sitemap):
+    changefreq = "daily"
+    priority = 1
+    protocol = 'https'
+
+    def items(self):
+        return Quizzes_Pointy.objects.all()
+
+    def lastmod(self, item):
+        return item.publish
+
+    def location(self, item):
+        title = titleConverterWithSpilt(item.title, ' ', '-')
+        return f'/test/{title}'
+
 class SubCategorySitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.9

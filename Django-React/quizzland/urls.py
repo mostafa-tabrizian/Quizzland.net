@@ -7,6 +7,7 @@ from .sitemaps import *
 
 sitemaps = {
     'quiz':QuizSitemap,
+    'test': PointySitemap,
     'subCategory':SubCategorySitemap,
     'category':CategorySitemap
 }
