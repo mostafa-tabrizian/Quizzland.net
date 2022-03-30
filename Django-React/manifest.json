@@ -3,7 +3,7 @@
   "name": "کوییزلند: بهترین وب سایت کوییز، تست و تریویا",
   "icons": [
     {
-      "src": "/static/img/Q-192.png",
+      "src": "/static/img/Q-192.jpg",
       "type": "image/png",
       "sizes": "192x192"
     }
@@ -21,7 +21,7 @@
       "url": "/sort?q=newest",
       "icons": [
         {
-          "src": "/static/img/Q-192.png",
+          "src": "/static/img/Q-192.jpg",
           "sizes": "192x192"
         }
       ]
@@ -33,7 +33,7 @@
       "url": "/sort?q=monthly",
       "icons": [
         {
-          "src": "/static/img/Q-192.png",
+          "src": "/static/img/Q-192.jpg",
           "sizes": "192x192"
         }
       ]

@@ -4,6 +4,7 @@ import { notification } from 'antd';
 import { Helmet } from "react-helmet";
 import {StickyShareButtons} from 'sharethis-reactjs';
 import { Switch, message } from 'antd';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import axios from 'axios'
 import Header from '../components/header'
@@ -28,7 +29,6 @@ const Quiz = () => {
     const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
-    const [quizThumbnail, setQuizThumbnail] = useState()
     const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [SFXAllowed, setSFXAllowed] = useState()
     const [SFXClick, setSFXClick] = useState(null)
@@ -215,16 +215,16 @@ const Quiz = () => {
             return (
                 <div className="flex justify-center">
                     <form className='relative grid justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3 flex-wrap' data={question.answer} action="">
-                        {!(question.option_img_1st?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <img src={question.option_img_1st} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_2nd?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <img src={question.option_img_2st} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_3rd?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <img src={question.option_img_3rd} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_4th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <img src={question.option_img_4th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_5th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-5`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-5`} htmlFor={`${questionCounterForId}-5`}> <img src={question.option_img_5th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_6th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-6`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-6`} htmlFor={`${questionCounterForId}-6`}> <img src={question.option_img_6th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_7th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-7`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-7`} htmlFor={`${questionCounterForId}-7`}> <img src={question.option_img_7th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_8th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-8`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-8`} htmlFor={`${questionCounterForId}-8`}> <img src={question.option_img_8th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_9th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-9`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-9`} htmlFor={`${questionCounterForId}-9`}> <img src={question.option_img_9th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_10th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-10`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-10`} htmlFor={`${questionCounterForId}-10`}> <img src={question.option_img_10th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_1st?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <LazyLoadImage src={question.option_img_1st} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_2nd?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <LazyLoadImage src={question.option_img_2st} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_3rd?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <LazyLoadImage src={question.option_img_3rd} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_4th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <LazyLoadImage src={question.option_img_4th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_5th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-5`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-5`} htmlFor={`${questionCounterForId}-5`}> <LazyLoadImage src={question.option_img_5th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_6th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-6`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-6`} htmlFor={`${questionCounterForId}-6`}> <LazyLoadImage src={question.option_img_6th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_7th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-7`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-7`} htmlFor={`${questionCounterForId}-7`}> <LazyLoadImage src={question.option_img_7th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_8th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-8`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-8`} htmlFor={`${questionCounterForId}-8`}> <LazyLoadImage src={question.option_img_8th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_9th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-9`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-9`} htmlFor={`${questionCounterForId}-9`}> <LazyLoadImage src={question.option_img_9th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
+                        {!(question.option_img_10th?.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-10`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl `} id={`inputLabel ${questionCounterForId}-10`} htmlFor={`${questionCounterForId}-10`}> <LazyLoadImage src={question.option_img_10th} width='512' height='624' alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
                     </form>
                 </div>
             )
@@ -259,7 +259,7 @@ const Quiz = () => {
 
                             <div className='mt-3 w-[22rem] md:w-[29rem]'>
                                 {!question.question_img?.includes('NotExist') &&
-                                    <img
+                                    <LazyLoadImage
                                         src={question?.question_img}
                                         width={1366}
                                         height={768}
@@ -417,11 +417,11 @@ const Quiz = () => {
                 <title>{`کوییزلند | تست ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
                 <meta name="description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
                 <meta name="keywords" content="کوییز, تست, کوییزلند" />
-                <meta name="msapplication-TileImage" content={quizThumbnail} />
+                <meta name="msapplication-TileImage" content={quiz?.thumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
                 <meta property="og:title" content={quiz?.title} />
                 <meta property="og:description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
-                <meta property="og:image" content={quizThumbnail} />
+                <meta property="og:image" content={quiz?.thumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
                 <meta property="og:image:height" content="300" />
@@ -435,7 +435,7 @@ const Quiz = () => {
                         "@type": "Article",
                         "headline": "${quiz?.title}",
                         "image": [
-                            "${quizThumbnail}",
+                            "${quiz?.thumbnail}",
                             "${quiz?.background}"
                          ],
                         "datePublished": "${quiz?.publish}",
@@ -627,7 +627,7 @@ const Quiz = () => {
                 </div>
             } */}
 
-            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
+            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions h-full mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                 <div className={`quiz__hider mt-5 flex relative`}>
                     {
                         !(contentLoaded) &&

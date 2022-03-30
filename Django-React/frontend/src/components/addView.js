@@ -16,6 +16,9 @@ const AddView = (content, contentID) => {
             .then((req) => {
                 authToken = req.data.access
             })
+            .catch((err) => {
+                log(err)
+            })
     }
 
     const getLastViewCount = async () => {
