@@ -37,7 +37,7 @@ DEBUG = config('DEBUG', cast=bool)
 # Rest framework setup
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.BasePermission',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         # 'rest_framework.permissions.IsAuthenticated',
     ),
     

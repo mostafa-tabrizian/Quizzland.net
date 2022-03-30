@@ -562,7 +562,7 @@ const Quiz = () => {
                         "@type": "Article",
                         "headline": "${quiz?.title}",
                         "image": [
-                            "${quiz?.thumbnail} />}",
+                            "${quiz?.thumbnail}",
                             "${quiz?.background}"
                          ],
                         "datePublished": "${quiz?.publish}",

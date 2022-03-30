@@ -40,7 +40,7 @@ const Result = () => {
         const resultGifIndexInUrl = (window.location.search).indexOf('rg=') + 3
         setResultGif((window.location.search).slice(resultGifIndexInUrl, ))
 
-        detailOfResult(params.get('s'))
+        detailOfResult(params.get('s'), params.get('fn'))
         getSuggestionsQuiz(params.get('sc'))
 
         document.querySelector('html').style=`background: None`
@@ -62,7 +62,7 @@ const Result = () => {
         5: <SmileOutlined />,
     };
 
-    const detailOfResult = (score) => {
+    const detailOfResult = (score, fanName) => {
         if (score > 80){
             setResultScore(`😎 ${score}%`)
             setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
@@ -202,7 +202,7 @@ const Result = () => {
                 <meta name="keywords" content="کوییز, کوییزلند" />
             </Helmet>
 
-            <div className="result__container relative z-[-1]">
+            <div className="result__container relative">
                     <div className="flex justify-center result__title">
                         <h5 className="text-right">نتیجه  {title}</h5>
                     </div>

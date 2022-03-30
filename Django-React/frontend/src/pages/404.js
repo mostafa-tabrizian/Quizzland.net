@@ -27,12 +27,12 @@ const PageNotFound_404 = () => {
                 <meta name="robots" content="noindex"></meta>
             </Helmet>
     
-            <div class="basicPage wrapper-sm center pos-rel" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
+            <div class="basicPage wrapper-sm relative" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
                 <h1> 🤔 صفحه‌ی مورد نظر پیدا نشد </h1>
-                <div class="space-sm">
+                {/* <div class="space-sm">
                     <p>💖 اگه فکر میکنی اشتباهی پیش اومدی ممنون میشیم برامون به<a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم"> این ایمیل</a> پیام بدی</p>
                     <a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">support@quizzland.net</a>
-                </div>
+                </div> */}
             </div>
 
             <span className="pageNotFound text-[20rem] absolute top-1/2 left-1/2 md:text-[50rem]">404</span>
