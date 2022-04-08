@@ -76,7 +76,7 @@ const Quiz = () => {
         notification.open({
             message: 'راهنمایی برای تغییر سؤال',
             description:
-            'برای تغییر سوال و رفتن به سوال بعدی صفحه را به سمت چپ بکشید.',
+            'برای تغییر سوال، صفحه را بکشید.',
             duration: 0,
             style: {
                 'font-size': '25px',

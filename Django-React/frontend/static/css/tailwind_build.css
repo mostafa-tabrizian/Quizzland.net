@@ -618,6 +618,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 1rem;
 }
 
+.top-\[1\.7rem\] {
+  top: 1.7rem;
+}
+
+.right-\[1\.5rem\] {
+  right: 1.5rem;
+}
+
+.right-\[1\.rem\] {
+  right: 1.rem;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -677,6 +693,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mx-8 {
   margin-left: 2rem;
   margin-right: 2rem;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .mr-10 {
@@ -811,6 +832,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 4rem;
 }
 
+.mt-auto {
+  margin-top: auto;
+}
+
 .block {
   display: block;
 }
@@ -889,6 +914,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-\[11rem\] {
   height: 11rem;
+}
+
+.h-5 {
+  height: 1.25rem;
 }
 
 .min-h-screen {
@@ -977,6 +1006,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-\[90vw\] {
   width: 90vw;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .max-w-\[110rem\] {
@@ -1227,6 +1260,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(173 173 173 / var(--tw-border-opacity));
 }
 
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
+.border-\[\#8C939D\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(140 147 157 / var(--tw-border-opacity));
+}
+
 .bg-zinc-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(113 113 122 / var(--tw-bg-opacity));
@@ -1278,6 +1321,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-\[\#8b0000f2\] {
   background-color: #8b0000f2;
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-tr {
@@ -1400,6 +1448,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 5rem;
 }
 
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .pr-8 {
   padding-right: 2rem;
 }
@@ -1434,6 +1487,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pr-10 {
+  padding-right: 2.5rem;
+}
+
+.pl-1 {
+  padding-left: 0.25rem;
+}
+
+.pr-9 {
+  padding-right: 2.25rem;
+}
+
+.pr-12 {
+  padding-right: 3rem;
 }
 
 .text-left {
@@ -1506,6 +1575,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .font-semibold {
@@ -1595,6 +1669,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: var(--tw-shadow-colored);
 }
 
+.shadow-black {
+  --tw-shadow-color: #000;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1655,6 +1734,42 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.placeholder\:pr-10::-moz-placeholder {
+  padding-right: 2.5rem;
+}
+
+.placeholder\:pr-10:-ms-input-placeholder {
+  padding-right: 2.5rem;
+}
+
+.placeholder\:pr-10::placeholder {
+  padding-right: 2.5rem;
+}
+
+.placeholder\:pr-8::-moz-placeholder {
+  padding-right: 2rem;
+}
+
+.placeholder\:pr-8:-ms-input-placeholder {
+  padding-right: 2rem;
+}
+
+.placeholder\:pr-8::placeholder {
+  padding-right: 2rem;
+}
+
+.placeholder\:text-right::-moz-placeholder {
+  text-align: right;
+}
+
+.placeholder\:text-right:-ms-input-placeholder {
+  text-align: right;
+}
+
+.placeholder\:text-right::placeholder {
+  text-align: right;
 }
 
 .placeholder\:text-white::-moz-placeholder {

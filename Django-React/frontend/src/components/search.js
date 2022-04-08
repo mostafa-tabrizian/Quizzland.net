@@ -9,56 +9,7 @@ import { log, replaceFunction, isItMobile } from './base'
 const Search = (props) => {
     const [categoriesList, setCategoriesList] = useState([])
     const [quizzesList, setQuizzesList] = useState([])
-    const [searchMobile, setSearchMobile] = useState(false)
     const [searchResult, setSearchResult] = useState(false)
-    const [searchSuggestion, setSearchSuggestion] = useState(null)
-    const [autoCompleteOptions, setAutoCompleteOptions] = useState(null)
-    const [autoCompleteDropdown, setAutoCompleteDropdown] = useState(false)
-    
-    const searchSubmit = useRef()
-    const mobileSearchInput = useRef()
-
-    useEffect(() => {
-        searchSuggester()
-        // getAutoCompleteOption()
-    }, [])
-
-    // const searchMobileFocusChangedHideOrShow = () => {
-    //     const menuIsOpened = !(searchMobile)
-    //     if (menuIsOpened) {
-    //         document.body.style.overflow = 'hidden'
-    //         setTimeout(() => {
-    //             mobileSearchInput.current.focus()
-    //         }, 18)
-    //     } else {
-    //         document.body.style.overflow = 'overlay'
-    //     }
-    //     setSearchMobile(searchMobile ? false : true)
-    // }
-
-    // const getAutoCompleteOption = async () => {
-    //     await axios.get('/api/subcategory_new/')
-    //         .then(res => {
-    //             setAutoCompleteOptions(res.data)
-    //         })
-    // }
-
-    // const returnAutoCompleteOptions = () => {
-    //     let values = []
-    //     let final = []
-
-    //     autoCompleteOptions?.map(option => {
-    //         values.push(option.subCategory)
-    //         values.push(option.title)
-    //     })
-        
-    //     values.length &&
-    //     values.forEach((eachValue) => {
-    //         final.push({value: eachValue})
-    //     })
-    //     return final
-
-    // }
 
     const searchHandler = async (value) => {
         try {
@@ -226,13 +177,6 @@ const Search = (props) => {
         }
     })
 
-    const searchSuggester = async () => {
-        const grabAllSubCategories = await axios.get(`/api/subcategory_new/?available=true`)
-        const numberOfCategories = grabAllSubCategories.data.length
-        const randomCategoryIndex = Math.floor(Math.random() * numberOfCategories);
-        setSearchSuggestion(grabAllSubCategories.data[randomCategoryIndex].title)
-    }
-
     return (
         <React.Fragment>
             <div className={`header__search hidden md:flex absolute left-8 top-4 items-center`}>
@@ -247,35 +191,19 @@ const Search = (props) => {
                     <svg className="w-6 h-6 text-white"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </button>
 
-                <input
-                    type='text'
-                    className={`header__search__input text-right border border-zinc-500 px-2 py-1 placeholder:text-white text-white rounded-full bg-transparent`}
-                    placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
-                    onChange={inputChanged}
-                    onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') }}}
-                />
-
-                {/* <AutoComplete
-                    style={{ width: '20rem', }}
-                    className='header__search__input text-right'
-                    open={autoCompleteDropdown}
-
-                    onChange={
-                        (inputValue) => {
-                            inputChanged(inputValue)
-                            inputValue.length >= 1 ?
-                                setAutoCompleteDropdown(true)
-                                :
-                                setAutoCompleteDropdown(false)
-                        }
-                    }
-                    
-                    options={returnAutoCompleteOptions()}
-                    placeholder={`جستجو...    مثال: ${searchSuggestion !== null ? searchSuggestion : ''}`}
-                    filterOption={(inputValue, option) =>
-                        option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                      }
-                /> */}
+                <div>
+                    <input
+                        type='text'
+                        className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-base my-auto'
+                        placeholder={`کوییزت رو سریع تر پیدا کن`}
+                        onChange={inputChanged}
+                        onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') }}}
+                    />
+                    <svg className='w-5 h-5 absolute top-2 right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+                        <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+                        <path data-name="layer1" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round"/>
+                    </svg>
+                </div>
 
                 <div className={`header__search__result z-20 overflow-scroll h-1/2 ${searchResult ? 'fadeIn' : 'fadeOut'} `}>
                     <div className="grid justify-center mt-2 mr-4 overflow-hidden rounded-lg header__search__result__category">

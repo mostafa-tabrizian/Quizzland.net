@@ -137,7 +137,7 @@ const Header = () => {
                 <Search />
 
                 <div className={`md:space-x-5 py-5 mr-6 z-10 relative header__white hidden md:flex items-center`}>
-                    <div className="hoverAnimation md:space-x-7 mr-4">
+                    <div className="md:space-x-7 mr-4">
                         {/* <button className="header__btn">
                             <Link to="/blog"> وبلاگ </Link>
                         </button> */}

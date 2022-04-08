@@ -601,6 +601,11 @@ hr {
           box-shadow: 0 0 20px #b52633;
 }
 
+.shadow-black {
+  -webkit-box-shadow: 0 0 10px black;
+          box-shadow: 0 0 10px black;
+}
+
 .darkGls {
   padding: .4rem;
   color: white;
