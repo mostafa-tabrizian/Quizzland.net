@@ -47,37 +47,37 @@
     // font-family: myLalezar, myHarmattan, sans-serif;
 
     // &__head {
-        // z-index: 2;
+    // z-index: 2;
 
-        // h1, h2, h3, h4, h5, h6, p {
-        //     line-height: 2rem;
-        //     color: $white;
-        //     font-weight: 100;
-        //     margin: auto;
-        // }
+    // h1, h2, h3, h4, h5, h6, p {
+    //     line-height: 2rem;
+    //     color: $white;
+    //     font-weight: 100;
+    //     margin: auto;
+    // }
 
-        // h1 {
-        //     font-size: $font-med - .1rem;
-        //     max-width: 21rem;
+    // h1 {
+    //     font-size: $font-med - .1rem;
+    //     max-width: 21rem;
 
-        //     @include breakpoints-down(large) {
-        //         max-width: 15rem;
-        //     }
-        // }
+    //     @include breakpoints-down(large) {
+    //         max-width: 15rem;
+    //     }
+    // }
 
-        // h5 {
-        //     font-size: 1.180rem - .2rem;
-        //     margin-right: 1.5rem;
-        //     margin-left: 1.5rem;
+    // h5 {
+    //     font-size: 1.180rem - .2rem;
+    //     margin-right: 1.5rem;
+    //     margin-left: 1.5rem;
 
-        //     &:nth-child(2) {
-        //         order: -1;
-        //     }
-        // }
+    //     &:nth-child(2) {
+    //         order: -1;
+    //     }
+    // }
 
-        // h6 {
-        //     font-size: 1.180rem - .4rem;
-        // }
+    // h6 {
+    //     font-size: 1.180rem - .4rem;
+    // }
     // }
 
     // &__questions {
@@ -85,25 +85,25 @@
     // }
 
     // &__container {
-        // z-index: -1;
-        // max-width: 21rem;
-        // margin: auto 1.25rem; margin-top: 5rem;
-        // padding: 0.1rem;
-        // border-radius: 24px;
-        // transition: all 1.3s ease-in-out;
+    // z-index: -1;
+    // max-width: 21rem;
+    // margin: auto 1.25rem; margin-top: 5rem;
+    // padding: 0.1rem;
+    // border-radius: 24px;
+    // transition: all 1.3s ease-in-out;
 
-        // @include breakpoints-up(small) {
-            // max-width: 32rem;
-            // margin: 0 8rem;
-        //     background: none;
-        //     border: none;
-        //     box-shadow: none;
-        //     backdrop-filter: none;
-        // }
+    // @include breakpoints-up(small) {
+    // max-width: 32rem;
+    // margin: 0 8rem;
+    //     background: none;
+    //     border: none;
+    //     box-shadow: none;
+    //     backdrop-filter: none;
+    // }
     // }
 
     &__question {
-        // font-family: $font-pr; font-weight: 300; font-size: $font-med;
+        // font-family: myHarmattan; font-weight: 300; font-size: $font-med;
         // min-height: 4rem;
         // color: white;
         // padding: 1.1875rem;
@@ -132,14 +132,14 @@
     }
 
     // &__autoQuestionChangerSwitch{
-        // top: .5rem;
-        // width: 7rem; height: 2rem;
-        // z-index: 2;
-        // cursor: pointer;
+    // top: .5rem;
+    // width: 7rem; height: 2rem;
+    // z-index: 2;
+    // cursor: pointer;
 
-        // & > h5 {
-        //     font-size: .77rem;
-        // }
+    // & > h5 {
+    //     font-size: .77rem;
+    // }
 
     //     &__btn {
     //         width: 2rem; height: 1rem;
@@ -183,11 +183,11 @@
             // @include breakpoints-down(large) {
             //     right: 4rem; top: 6rem;
             // }
-    
+
             // @include breakpoints-up(medium) {
             //     right: 22rem; top: 6rem;
             // }
-            
+
             // @include breakpoints-up(large) {
             //     right: 0; top: 9.5rem;
             // }
@@ -214,11 +214,11 @@
             transform: rotate(180deg);
             right: calc(50% + 15rem);
             // position: relative;
-            
+
             // @include breakpoints-down(large) {
             //     right: 14rem;
             // }
-            
+
             // @include breakpoints-down(xLarge) {
             //     right: 16rem;
             // }
@@ -246,7 +246,8 @@
     }
 
     &__questionCounter {
-        margin-top: 1rem; margin-bottom: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
         z-index: 1;
         color: $white;
 
@@ -266,7 +267,7 @@
             bottom: auto;
             margin-bottom: 3rem;
         }
-        
+
         width: 23rem;
         overflow: hidden;
         bottom: 3.5rem;
@@ -278,8 +279,8 @@
         // grid-template-columns: 1fr 1fr;
 
         // &__img {
-            // grid-template-columns: auto auto;
-            // padding-top: 1rem;
+        // grid-template-columns: auto auto;
+        // padding-top: 1rem;
         // }
 
         // &__text {
@@ -298,16 +299,15 @@
             // cursor: pointer;
 
             // @include breakpoints-up(small) {
-                // border-radius: 20px;
-                // font-size: 1.7rem;
-                // text-align: right;
+            // border-radius: 20px;
+            // font-size: 1.7rem;
+            // text-align: right;
             // }
 
             &:hover {
                 transform: translate(3px, -3px);
                 box-shadow: -3px 3px 0 darkRed;
-                cursor: pointer
-                // box-shadow: 0 3px 10px darkRed;
+                cursor: pointer // box-shadow: 0 3px 10px darkRed;
             }
         }
 
@@ -342,11 +342,11 @@
             //     border: 1.7px solid #adadad;
             //     padding: .6rem 1rem;
             //     margin: .5rem;
-                // transition: all .1s ease-in-out;
-                // backdrop-filter: blur(20px);
-                // background: #00000094;
+            // transition: all .1s ease-in-out;
+            // backdrop-filter: blur(20px);
+            // background: #00000094;
             // }
-            
+
             // &::before {
             //     content: '';
             //     height: .0625rem; width: 1.25rem;
@@ -394,46 +394,48 @@
     }
 
     &__tags {
-    //     margin: auto;
-    //     margin-bottom: 3rem;
-    //     max-width: 25rem;
-    //     flex-wrap: wrap;
+        //     margin: auto;
+        //     margin-bottom: 3rem;
+        //     max-width: 25rem;
+        //     flex-wrap: wrap;
 
-    //     li {
-    //         margin-bottom: .5rem;
-    //     }
+        //     li {
+        //         margin-bottom: .5rem;
+        //     }
 
-    //     &__title {
-    //         color: white;
-    //         z-index: 1;
-    //         position: relative;
-    //         width: 16rem;
-    //         margin: auto;
-    //         margin-bottom: .6rem;
-    //     }
-        
+        //     &__title {
+        //         color: white;
+        //         z-index: 1;
+        //         position: relative;
+        //         width: 16rem;
+        //         margin: auto;
+        //         margin-bottom: .6rem;
+        //     }
+
         li {
-    //         font-size: .9rem;
-    //         font-family: myHarmattan, sans-serif;
-    //         color: white;
+            //         font-size: .9rem;
+            //         font-family: myHarmattan, sans-serif;
+            //         color: white;
             background: linear-gradient(-45deg, darkRed, transparent);
-    //         z-index: 1;
-    //         position: relative;
-    //         border: none;
+            //         z-index: 1;
+            //         position: relative;
+            //         border: none;
             // border-bottom: .5px solid rgba(255, 255, 255, 0.46) !important;
             // border-right: .5px solid rgba(255, 255, 255, 0.46) !important;
-    //         border-radius: 20px;
-    //         padding-right: 0.8rem; padding-left: 0.8rem;
-    //         padding-top: 0.2rem; padding-bottom: 0.2rem;
-    //         margin-right: .6rem;
-    //         margin-left: .6rem;
+            //         border-radius: 20px;
+            //         padding-right: 0.8rem; padding-left: 0.8rem;
+            //         padding-top: 0.2rem; padding-bottom: 0.2rem;
+            //         margin-right: .6rem;
+            //         margin-left: .6rem;
         }
     }
 
     &__answerImGif {
         padding-bottom: 0;
+
         img {
-            width: 90%; height: 100%;
+            width: 90%;
+            height: 100%;
             border-radius: 15px;
             transform: translateY(.6rem);
 
@@ -456,7 +458,7 @@
     // .lowHighContainer {
     //     margin: 0 15rem !important; margin-top: 5rem !important;
     // }
-    
+
     // &__lowHigh {
     //     margin-top: 2.5625rem;
 
@@ -489,13 +491,13 @@
 
 .countingResult {
     font-size: $font-med;
-    font-family: $font-sec;
+    font-family: myHarmattan;
     background: $red-grad;
 
     @include breakpoints-down(large) {
         font-size: $font-med - .3rem;
     }
-    
+
     &::after {
         position: absolute;
         top: 55%;

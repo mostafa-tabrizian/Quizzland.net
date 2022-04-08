@@ -626,10 +626,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: 20;
 }
 
-.z-\[-1\] {
-  z-index: -1;
-}
-
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
@@ -803,12 +799,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 3rem;
 }
 
-.mb-16 {
-  margin-bottom: 4rem;
+.mb-14 {
+  margin-bottom: 3.5rem;
 }
 
 .mb-\[50vh\] {
   margin-bottom: 50vh;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
 }
 
 .block {
@@ -1497,6 +1497,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-\[2rem\] {
   font-size: 2rem;
+}
+
+.text-\[1\.5rem\] {
+  font-size: 1.5rem;
 }
 
 .text-3xl {

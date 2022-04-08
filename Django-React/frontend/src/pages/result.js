@@ -218,7 +218,7 @@ const Result = () => {
                                 {resultScore}
                             </h5>
                         </div>
-                        <div className="mt-5 mb-16 text-lg text-center result__detail">
+                        <div className="mt-5 mb-14 text-[1.5rem] text-center result__detail">
                             <h5>پاسخ 🟢: <span>{correctAnswersCount}</span></h5>
                             <h5>پاسخ 🔴: <span>{questionCount - correctAnswersCount}</span></h5>
                         </div>

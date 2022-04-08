@@ -2,44 +2,19 @@
 @font-face {
     font-family: "myHarmattan";
     font-display: swap;
-    src: url('/static/fonts/Harmattan-Regular.woff2') format('woff2'),
-         url('/static/fonts/Harmattan-Regular.woff') format('woff'),
-         url('/static/fonts/Harmattan-Regular.ttf') format('truetype')   
-}
-
-@font-face {
-    font-family: "myChanga";
-    font-display: swap;
-    src: url('/static/fonts/Changa-ExtraLight.woff2') format('woff2'),
-         url('/static/fonts/Changa-ExtraLight.woff') format('woff'),
-         url('/static/fonts/Changa-ExtraLight.ttf') format('truetype')  
+    src: url('/static/fonts/Harmattan-Regular.ttf') format('truetype'),  
+            url('/static/fonts/Harmattan-Regular.woff2') format('woff2'),
+            url('/static/fonts/Harmattan-Regular.woff') format('woff');
 }
 @font-face {
     font-family: 'myLalezar';
     font-display: swap;
-    src: url('/static/fonts/Lalezar-Regular.woff2') format('woff2'),
-         url('/static/fonts/Lalezar-Regular.woff') format('woff'),
-         url('/static/fonts/Lalezar-Regular.ttf') format('truetype');
-}
-@font-face {
-    font-family: "changeForNotChrome";
-    font-display: swap;
-    src: url('/static/fonts/Changa-Light.woff2') format('woff2'),
-         url('/static/fonts/Changa-Light.woff') format('woff'),
-         url('/static/fonts/Changa-Light.ttf') format('truetype')  
-}
-@font-face {
-    font-family: "myVermin";
-    font-display: swap;
-    src: url('/static/fonts/Vermin-Vibes-2-Soft.woff2') format('woff2'),
-         url('/static/fonts/Vermin-Vibes-2-Soft.woff') format('woff'),
-         url('/static/fonts/Vermin-Vibes-2-Soft.ttf') format('truetype')
+    src: url('/static/fonts/Lalezar-Regular.ttf') format('truetype'),
+            url('/static/fonts/Lalezar-Regular.woff2') format('woff2'),
+            url('/static/fonts/Lalezar-Regular.woff') format('woff');
 }
 
 $font-pr: myHarmattan, sans-serif, serif;
-$font-sec: myChanga, sans-serif, serif;
-$font-notChrome: changeForNotChrome, sans-serif, serif;
-$number: Vermin-Vibes-2-Soft, myChanga, sans-serif;
 
 // Fort Size
 $font-sm: 1.180rem;  // 18.8

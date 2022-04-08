@@ -1,6 +1,6 @@
 .header {
     // font-size: 1.180rem;
-    // font-family: $font-pr;
+    // font-family: myHarmattan;
     // margin-bottom: 2rem;
     // padding: 1rem;
     // z-index: 99;
@@ -25,7 +25,7 @@
             // margin-left: .2rem;
             // font-size: 1.6rem;
 
-            
+
             // @keyframes logo {
             //     0% {
             //         background-position: 0% 50%;
@@ -40,8 +40,8 @@
         }
 
         // img {
-            // width: 1.67rem;
-            // height: 2.4rem;
+        // width: 1.67rem;
+        // height: 2.4rem;
         // }
     }
 
@@ -73,40 +73,40 @@
         transition: all .3s ease-in-out;
 
         // &__openBtn {
-            // background: inherit;
-            // top: 1rem;
-            // right: 1rem;
-            // z-index: 1;
+        // background: inherit;
+        // top: 1rem;
+        // right: 1rem;
+        // z-index: 1;
 
-            // span {
-            //     background: white !important;
-            // }
+        // span {
+        //     background: white !important;
+        // }
 
-            // &__inner {
-            //     color: white !important;
-            // }
+        // &__inner {
+        //     color: white !important;
+        // }
 
-            // @include breakpoints-down(large) {
-            //     top: 1.7rem;
-            // }
-            
-            // > span {
-            //     display: block;
-            //     width: 1.625rem;
-            //     height: 0.18rem;
-                
-            //     &:not(:last-child) {
-            //         margin-bottom: .25rem;
-            //     }
-            // }
+        // @include breakpoints-down(large) {
+        //     top: 1.7rem;
+        // }
+
+        // > span {
+        //     display: block;
+        //     width: 1.625rem;
+        //     height: 0.18rem;
+
+        //     &:not(:last-child) {
+        //         margin-bottom: .25rem;
+        //     }
+        // }
         // }
 
         // &__closeBtn {
         //     background: url('/static/img/close-btn.svg') center center no-repeat;
         //     width: 1.75rem;
         //     height: 1.75rem;
-            // top: 1rem;
-            // right: 1.5rem;
+        // top: 1rem;
+        // right: 1.5rem;
         // }
 
         // &__inner {
@@ -159,7 +159,7 @@
         //     }
         // }
     }
-    
+
     .subHeader {
         // top: 5rem;
         // border: 1px solid transparent; border-radius: 15px;
@@ -173,8 +173,9 @@
         // opacity: 0;
         transition: all .3s ease;
         // z-index: 5;
-        line-height: 2rem;;
-        
+        line-height: 2rem;
+        ;
+
         // @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
         //     background: rgba(255, 255, 255, 0.178);
         // }
@@ -185,15 +186,16 @@
 
         // &__open {
         //     opacity: 1;
-            // top: 5.5rem;
-            // pointer-events: visibleFill;
+        // top: 5.5rem;
+        // pointer-events: visibleFill;
         // }
 
         a {
-        //     color: white;
-        //     &:not(:last-child){
-        //         margin-bottom: 1.25rem
-        //     }
+
+            //     color: white;
+            //     &:not(:last-child){
+            //         margin-bottom: 1.25rem
+            //     }
             &:hover {
                 color: rgba(255, 207, 207, 0.692) !important;
             }
@@ -204,7 +206,7 @@
     //     line-height: 1.5rem;
     //     z-index: 3;
     // }
-    
+
     // &__categories {
     //     right: 11rem;
     // }
@@ -223,7 +225,7 @@
             background: rgba(255, 255, 255, 0.18) !important;
             box-shadow: 2px 2px 15px black !important;
         }
-    
+
         @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
             background: rgba(0, 0, 0, 0.939) !important;
             box-shadow: 0 0 15px 1px rgba(104, 104, 104, 0.192) !important;
@@ -235,20 +237,21 @@
             background-color: $white !important;
         }
     }
-    
-    a, button {
+
+    a,
+    button {
         color: $white;
 
         // &:hover {
         //     color: white !important;
         // }
-        
+
         // &::after{
         //     border-bottom: 2px solid $white !important;
         // }
     }
 
-    li > a {
+    li>a {
         @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
             color: black !important;
         }
@@ -260,8 +263,8 @@
         &:hover {
             color: white !important;
         }
-        
-        &::after{
+
+        &::after {
             border-bottom: 2px solid $white !important;
         }
     }
@@ -269,7 +272,7 @@
     input {
         color: $white !important;
     }
-    
+
     .input {
         color: $white !important;
     }
@@ -296,7 +299,7 @@
         //         background: #000000ee !important;
         //     }
         // }
-    
+
         &__result {
             box-shadow: 0 0 40px #87878733 !important;
 
@@ -306,12 +309,12 @@
 
             &__category {
                 &__item {
-                    a > img {
+                    a>img {
                         box-shadow: 0 0 15px 5px black !important;
                     }
                 }
             }
-        
+
             &__quizzes {
                 &__item {
                     &::before {

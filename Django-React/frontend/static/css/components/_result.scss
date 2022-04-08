@@ -1,5 +1,5 @@
 .result {
-    font-family: $font-sec;
+    font-family: myHarmattan;
     display: grid;
     grid-template-columns: 17rem 19rem 18rem;
 
@@ -14,7 +14,7 @@
         min-height: 40vh;
     }
 
-    &__title > h5 {
+    &__title>h5 {
         opacity: .5;
         margin-right: 2.5rem;
         margin-left: 2.5rem;
@@ -50,12 +50,12 @@
 
     &__img {
         order: 2;
-    //     margin-left: 4rem; margin-right: 4rem;
+        //     margin-left: 4rem; margin-right: 4rem;
     }
 
     &__detail {
         order: 3;
-        
+
         // @include breakpoints-down(large) {
         //     text-align: center;
         //     margin-bottom: 4rem;
@@ -72,7 +72,8 @@
 
     &__popUpQuizSuggester {
         // pointer-events: all;
-        left: calc(50% - 2rem); top: 50%;
+        left: calc(50% - 2rem);
+        top: 50%;
         // background: #8b0000f2;
         backdrop-filter: blur(10px);
         // padding: 2rem;
@@ -182,7 +183,7 @@
         justify-content: center;
         padding: 1rem;
         margin: 2rem;
-        
+
         img {
             border-radius: 15px;
         }
@@ -191,8 +192,8 @@
 
 .biggerRate {
     direction: ltr;
-    
-    > li {
+
+    >li {
         font-size: 2.3rem;
         margin-right: 0 !important;
         margin-left: 1rem;
