@@ -27,8 +27,8 @@ urlpatterns = [
     
     path('search', index),
     path('sort', index),
-    path('blog/<title>', article),
-    path('blog', blog),
+    # path('blog/<title>', article),
+    # path('blog', blog),
     path('makeMonthlyRecord', index),
     path('restartEveryMonthlyViews', restartEveryMonthlyViews),
     

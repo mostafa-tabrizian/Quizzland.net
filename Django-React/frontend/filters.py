@@ -8,6 +8,7 @@ class QuizzesFilter(filters.FilterSet):
             'public': ['exact'],
             'categoryKey': ['exact'],
             'subCategory': ['icontains'],
+            'slug': ['iexact', 'icontains'],
             'title': ['iexact', 'icontains'],
             'tags': ['iexact', 'icontains']
         }
@@ -19,6 +20,7 @@ class PointyQuizzesFilter(filters.FilterSet):
             'public': ['exact'],
             'categoryKey': ['exact'],
             'subCategory': ['icontains'],
+            'slug': ['iexact', 'icontains'],
             'title': ['iexact', 'icontains'],
             'tags': ['iexact', 'icontains']
         }

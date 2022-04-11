@@ -256,7 +256,7 @@ const Index = () => {
                                 #1
                             </h2>
                         </div>
-                        <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].title, ' ', '-')}`}>
+                        <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_monthly[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
@@ -274,7 +274,7 @@ const Index = () => {
                                 جدیدترینِ کوییزلند
                             </h2>
                         </div>
-                        <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].title, ' ', '-')}`}>
+                        <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_new[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
@@ -295,7 +295,7 @@ const Index = () => {
                                 #1
                             </h2>
                         </div>
-                        <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].title, ' ', '-')}`}>
+                        <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_monthly[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
@@ -313,7 +313,7 @@ const Index = () => {
                                 جدیدترینِ کوییزلند
                             </h2>
                         </div>
-                        <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].title, ' ', '-')}`}>
+                        <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_new[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
@@ -498,7 +498,7 @@ const Index = () => {
                 }
 
                 <div className="mt-8 mb-8">
-                    <div className="flex justify-between mb-8  mr-0 ml-auto md:mx-auto flex flex-wrap align-baseline quizContainer flex-ai-fe justify-rightContainer__header items-center">
+                    <div className="flex justify-between mb-8 quizContainer__header items-center">
                         <h2>کوییز های بیشتر</h2>
                         <Link to="/sort?s=newest" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>

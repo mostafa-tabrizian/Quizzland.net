@@ -24,9 +24,9 @@ const restartEveryMonthlyViews = () => {
                 <title>Restarting Monthly Views</title>
             </Helmet>
 
-            <div className="basicPage wrapper-sm center">
+            <div className="basicPage wrapper-sm mx-auto">
                 <h2 className='text-center'>Restarting Every Monthly Views Done Successfully</h2>
-                <p className='text-center'>Quizzes - Categories - SubCategories - Blogs</p>
+                <p className='text-center'>Quizzes - Categories - SubCategories</p>
                 <p className='text-center'>Good Job AssH*le 💗</p>
             </div>
 

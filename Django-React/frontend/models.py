@@ -54,7 +54,8 @@ class Quizzes(models.Model):
     public = models.BooleanField(default=True)
     categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title = models.CharField(max_length=80, null=False, blank=False, default=None)
+    slug = models.CharField(max_length=80, null=False, blank=False, default=None)  # unique=True
+    title = models.CharField(max_length=200, null=False, blank=False, default=None)
     tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
     rate = models.FloatField(null=False, default=0)
     rate_count = models.IntegerField(default=0)
@@ -81,7 +82,8 @@ class Quizzes_Pointy(models.Model):
     public = models.BooleanField(default=True)
     categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
-    title = models.CharField(max_length=80, null=False, blank=False, default=None)
+    slug = models.CharField(max_length=80, null=False, blank=False, default=None)  # unique=True
+    title = models.CharField(max_length=200, null=False, blank=False, default=None)
     tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
     rate = models.FloatField(null=False, default=0)
     rate_count = models.IntegerField(default=0)

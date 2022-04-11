@@ -25,13 +25,13 @@ class SubCategories_Admin(admin.ModelAdmin):
 class Quizzes_Admin(admin.ModelAdmin):
     list_display = ('title', 'subCategory', 'categoryKey', 'rate', 'rate_count', 'monthly_views', 'views', 'publish')
     list_filter = ('subCategory', 'categoryKey', 'publish')
-    search_fields = ['id', 'title']
+    search_fields = ['id', 'title', 'slug']
 
 @admin.register(Quizzes_Pointy)
 class Quizzes_Pointy_Admin(admin.ModelAdmin):
     list_display = ('title', 'subCategory', 'categoryKey', 'rate', 'rate_count', 'monthly_views', 'views', 'publish')
     list_filter = ('subCategory', 'categoryKey', 'publish')
-    search_fields = ['id', 'title']
+    search_fields = ['id', 'title', 'slug']
 
 @admin.register(Questions)
 class Questions_Admin(admin.ModelAdmin):

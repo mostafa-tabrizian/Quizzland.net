@@ -108,7 +108,7 @@ const Quiz = () => {
 
     const grabData = async () => {
         quizTitleReplacedWithHyphen && 
-        await axios.get(`/api/quiz_new/?title__iexact=${quizTitleReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+        await axios.get(`/api/quiz_new/?slug__iexact=${quizTitleReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
             .then(async (quizData) => {
                 try {
                     AddView('quiz_new', quizData.id)

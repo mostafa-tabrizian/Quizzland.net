@@ -15,7 +15,7 @@ const QuizContainer = (props) => {
                 `}>
 
                     <Link
-                        to={`/quiz/${replaceFunction(quiz.title, ' ', '-')}`}
+                        to={`/quiz/${replaceFunction(quiz.slug, ' ', '-')}`}
                         className='flex md:block md:grid-cols-5'
                     >
                         <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>

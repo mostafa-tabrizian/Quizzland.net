@@ -17,7 +17,7 @@ class QuizSitemap(Sitemap):
         return item.publish
 
     def location(self, item):
-        title = titleConverterWithSpilt(item.title, ' ', '-')
+        title = titleConverterWithSpilt(item.slug, ' ', '-')
         return f'/quiz/{title}'
 
 class PointySitemap(Sitemap):
@@ -32,7 +32,7 @@ class PointySitemap(Sitemap):
         return item.publish
 
     def location(self, item):
-        title = titleConverterWithSpilt(item.title, ' ', '-')
+        title = titleConverterWithSpilt(item.slug, ' ', '-')
         return f'/test/{title}'
 
 class SubCategorySitemap(Sitemap):

@@ -3,10 +3,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    App: "./src/App.js",
-    Blog: "./src/Blog.js",
-    404: "./src/404.js",
-    SOS: "./src/SOS.js",
+    App: "./src/App.js"
   },
 
   // cache: false,

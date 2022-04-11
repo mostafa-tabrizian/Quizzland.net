@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { saveAs } from 'file-saver'
-;
+import axios from 'axios';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
@@ -211,8 +211,8 @@ const QuizMonthlyRecord = () => {
 
             <h3 className='text-center'>💜 Enter The Password Fucker</h3>
             <div className="flex justify-center">
-                <input type="text" type={showPassword ? 'string' : 'password'} style={{fontSize: '1.5rem', padding: '1rem', background: 'transparent', border: '1px solid gray', borderRadius: '15px', boxShadow: '0 0 15px #8080803d'}}
-                ref={passwordInput} onChange={adminCheckerForStartRecord} />
+                <input type={showPassword ? 'string' : 'password'} style={{fontSize: '1.5rem', padding: '1rem', background: 'transparent', border: '1px solid gray', borderRadius: '15px', boxShadow: '0 0 15px #8080803d'}}
+                    ref={passwordInput} onChange={adminCheckerForStartRecord} />
                 <button onClick={() => showPassword ? setShowPassword(false) : setShowPassword(true)} style={{marginLeft: '1rem', background: 'transparent', border: 'none'}}>Show Input</button>
             </div>
 

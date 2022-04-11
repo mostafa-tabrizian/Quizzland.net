@@ -33,75 +33,8 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 def index(request, *args, **kwargs):
+    # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
-
-@never_cache
-def quiz(request, title):
-    addViewToQuizzes(title)
-    return render(request, "frontend/quiz.html")
-
-def addViewToQuizzes(title):
-    titleWithOutHyphens = title.replace("-", " ")
-    finalTitle = unquote(titleWithOutHyphens)
-    
-    shouldTryPointy = True
-    try:
-        quiz = Quizzes.objects.get(title=finalTitle)
-        quiz.views += 1
-        quiz.monthly_views += 1
-        quiz.save()
-        shouldTryPointy = False
-    except Exception as e:
-        # print(f'{datetime.datetime.now()}:{e}:{finalTitle} Not in Quizzes database')
-        # print('----------------------------------')
-        pass
-
-    if shouldTryPointy:
-        try:
-            quizPointy = Quizzes_Pointy.objects.get(title=finalTitle)
-            quizPointy.views += 1
-            quizPointy.monthly_views += 1
-            quizPointy.save()
-        except Exception as e:
-            pass
-
-@never_cache
-def subCategory(request, category, subCategory):
-    addViewToSubCategories(subCategory)
-    return render(request, "frontend/subCategory.html")
-
-def addViewToSubCategories(title):
-    titleWithOutHyphens = title.replace("-", " ")
-    finalTitle = unquote(titleWithOutHyphens)
-
-    try:
-        subCategory = SubCategories.objects.get(subCategory=finalTitle)
-        subCategory.views += 1
-        subCategory.monthly_views += 1
-        subCategory.save()
-    except:
-        pass
-
-def blog(request):
-    return render(request, "frontend/blog.html")
-
-def article(request, title):
-    addViewToArticle(title)
-    return render(request, "frontend/blog.html")
-
-def addViewToArticle(title):
-    titleWithOutHyphens = title.replace("+", " ")
-    finalTitle = unquote(titleWithOutHyphens)
-    
-    try:
-        article = Blog.objects.get(title=finalTitle)
-        article.views += 1
-        article.monthly_views += 1
-        article.save()
-    except Exception as e:
-        # print(f'{datetime.datetime.now()}:{e}:{finalTitle} Not in Quizzes database')
-        # print('----------------------------------')
-        pass
 
 def restartEveryMonthlyViews(request):
     try:
@@ -133,32 +66,26 @@ def restartEveryMonthlyViews(request):
 
     return render(request, "frontend/index.html")
 
-# def renameQuestions(request):
-#     questions = Pointy_Questions.objects.all()
+def FastFunctionForDB(request):
+    quizzes = Quizzes.objects.all()
     
-#     for question in questions:
-#         try:
-#             print('------------------------')
-#             qtitle = Quizzes_Pointy.objects.get(title=question.title)
+    for item in quizzes:
+        try:
+            print('------------------------')
+            targetQuiz = Quizzes.objects.get(title=item.title)
             
-#             question.quizKey_id = qtitle.id
-#             question.save()
+            item.slug = targetQuiz.title
+            item.save()
             
-#             print(question.quizKey)  
-#         except Exception as e:
-#             print(question.title)
-    
-#     return render(request, "frontend/index.html")
+            print(item.title)  
+        except Exception as e:
+            raise Exception(f'Error: {item.title} : {e}')
         
-
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 
-def SOS(request, SOS):
-    return render(request, 'frontend/SOS.html')
 
-def SOS_landpage(request):
-    return render(request, 'frontend/SOS.html')
+
 
 class Categories(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
