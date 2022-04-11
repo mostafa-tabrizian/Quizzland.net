@@ -230,27 +230,27 @@ const Result = () => {
 
                             <InlineShareButtons
                                 config={{
-                                    alignment: 'center',  // alignment of buttons (left, center, right)
-                                    color: 'social',      // set the color of buttons (social, white)
-                                    enabled: true,        // show/hide buttons (true, false)
-                                    font_size: 16,        // font size for the buttons
-                                    labels: 'null',        // button labels (cta, counts, null)
-                                    language: 'en',       // which language to use (see LANGUAGES)
-                                    networks: [           // which networks to include (see SHARING NETWORKS)
+                                    alignment: 'center',  
+                                    color: 'social',      
+                                    enabled: true,        
+                                    font_size: 16,        
+                                    labels: 'null',        
+                                    language: 'en',       
+                                    networks: [           
                                         'whatsapp',
                                         'telegram',
                                         'twitter',
                                         'sharethis',
                                     ],
-                                    padding: 10,          // padding within buttons (INTEGER)
-                                    radius: 10,            // the corner radius on each button (INTEGER)
+                                    padding: 10,          
+                                    radius: 10,            
                                     show_total: false,
-                                    size: 45,             // the size of each button (INTEGER)
+                                    size: 45,             
 
-                                    // OPTIONAL PARAMETERS
-                                    url: `https://www.quizzland.net/quiz/${quizResult && replaceFunction(quizResult.title, ' ', '-')}`,
-                                    image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
-                                    title: quizResult?.title,            // (defaults to og:title or twitter:title)
+                                    
+                                    url: `https://www.quizzland.net/quiz/${quizResult && replaceFunction(quizResult.slug, ' ', '-')}`,
+                                    image: quizResult?.thumbnail,
+                                    title: quizResult?.title,        
                                 }}
                             />
 
@@ -276,33 +276,6 @@ const Result = () => {
                                 }
                             }}
                         />
-                        
-                        <div>
-                            {/* <InlineReactionButtons
-                                config={{
-                                    alignment: 'center',  // alignment of buttons (left, center, right)
-                                    enabled: true,        // show/hide buttons (true, false)
-                                    language: 'en',       // which language to use (see LANGUAGES)
-                                    min_count: 0,         // hide react counts less than min_count (INTEGER)
-                                    padding: 12,          // padding within buttons (INTEGER)
-                                    reactions: [          // which reactions to include (see REACTIONS)
-                                        'slight_smile',
-                                        'heart_eyes',
-                                        'laughing',
-                                        'astonished',
-                                        'sob',
-                                        'rage'
-                                    ],
-                                    size: 45,             // the size of each button (INTEGER)
-                                    spacing: 8,           // the spacing between buttons (INTEGER)
-
-                                // OPTIONAL PARAMETERS
-                                url: `https://www.quizzland.net/quiz/${quizResult && replaceFunction(quizResult.title, ' ', '-')}`,
-                                image: quizResult?.thumbnail,  // (defaults to og:image or twitter:image)
-                                title: quizResult?.title,            // (defaults to og:title or twitter:title)
-                                }}
-                            /> */}
-                        </div>
                         
                     </div>
 

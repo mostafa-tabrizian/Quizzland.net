@@ -34,7 +34,7 @@ const Search = (props) => {
                     }
                 }
 
-                // Search Pointy Quiz
+                // Search Test
                 const search_pointy_new_title = await axios.get(`/api/pointy_new/?title__icontains=${searchValue}&limit=5&public=true`)
                 Array.prototype.push.apply(matchedQuizzes, search_pointy_new_title.data.results)
 
@@ -79,7 +79,7 @@ const Search = (props) => {
                 }
 
                 const quizzesList = () => {
-                    matchedQuizzes.length >= 1 && setSearchResult(true)  // show search result if there quizzes
+                    matchedQuizzes.length >= 1 && setSearchResult(true)
 
                     try {
                         return (

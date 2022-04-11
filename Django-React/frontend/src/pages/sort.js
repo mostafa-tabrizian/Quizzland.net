@@ -67,7 +67,6 @@ const Sort = () => {
             return;
         }
 
-        // setQuizzes([])  // restart list
         let quizzesData
         
         switch (sortType) {

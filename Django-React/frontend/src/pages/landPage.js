@@ -43,7 +43,6 @@ const Index = () => {
     const [loadMoreQuiz_ref, loadMoreQuiz_inView] = useInView({ threshold: 0, triggerOnce: true, })
 
     useEffect(() => {
-        landPagePathSelector()
         grabData()
         recommendationQuiz()
         setLoadState(true)
@@ -138,26 +137,6 @@ const Index = () => {
         setLoadMoreQuiz(loadMoreQuiz.data.results)
 
         setContentLoaded(true)
-    }
-
-    const landPagePathSelector = () => {
-        if (isItDesktop()) {
-            return {
-                background: `url('/static/img/landPage-path.png')`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'bottom center',
-                backgroundSize: 'cover'
-            }
-        }
-        else {  // mobile or tablet path
-            return {
-                background: `url('/static/img/landPage-path-mobile.png')`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'Bottom center',
-                backgroundSize: 'cover'
-
-            }
-        }
     }
 
     return (

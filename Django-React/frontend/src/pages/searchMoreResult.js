@@ -28,8 +28,8 @@ const SearchMoreResult = () => {
 
     useEffect(() => {
         setQuizzes([])  // restart list
-        setPointies([])  // restart list
-        setCategories([])  // restart list
+        setPointies([])
+        setCategories([])
         searchValue && searchHandler(searchValue)
         setLoadState(true)
         setContentLoaded(true)

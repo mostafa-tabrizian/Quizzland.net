@@ -26,14 +26,14 @@ const Quiz = () => {
     const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
     const [quizEnded, setQuizEnded] = useState(false)
     const [loadState, setLoadState] = useState()
-    const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
+    const [quizSlug, setQuizSlug] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [SFXAllowed, setSFXAllowed] = useState()
     const [SFXClick, setSFXClick] = useState(null)
     const [quiz, setQuiz] = useState(null)
-    const [quizTitleReplacedWithHyphen, setQuizTitleReplacedWithHyphen] = useState()
+    const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
 
     const result = useRef(null)
 
@@ -42,7 +42,7 @@ const Quiz = () => {
         setLoadState(true)
         SFXLocalStorage()
         setSFXClick(new Audio('/static/sound/SFXClick.mp3'))
-    }, [quizTitle,])
+    }, [quizSlug,])
 
     useEffect(() => {
         quizChangeDetector()
@@ -85,15 +85,15 @@ const Quiz = () => {
                 pushState.apply(history, arguments);
             };
 
-            const title = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
-            setQuizTitle(title)
-            setQuizTitleReplacedWithHyphen(title)
+            const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
+            setQuizSlug(slug)
+            setQuizSlugReplacedWithHyphen(slug)
         })(window.history);
     }
     
     const grabData = async () => {
-        quizTitleReplacedWithHyphen &&
-        await axios.get(`/api/pointy_new/?slug__iexact=${quizTitleReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+        quizSlugReplacedWithHyphen &&
+        await axios.get(`/api/pointy_new/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
             .then(async (quizData) => {
                 try {
                     AddView('pointy_new', quizData.id)
@@ -385,7 +385,7 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/test/${replaceFunction(quizTitle, ' ', '-')}`
+        return `https://www.quizzland.net/test/${replaceFunction(quizSlug, ' ', '-')}`
     }
 
     let firstTouch
@@ -414,7 +414,7 @@ const Quiz = () => {
             <Header/>
 
             <Helmet>
-                <title>{`کوییزلند | تست ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
+                <title>{`کوییزلند | تست ${quiz && replaceFunction(decodeURI(quiz.title), '+', ' ')}`}</title>
                 <meta name="description" content={`با ${questions.length} سوال، ببین چی در میای | ${quiz?.title} ${quiz?.subCategory} تست با موضوع`} />
                 <meta name="keywords" content="کوییز, تست, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quiz?.thumbnail} />

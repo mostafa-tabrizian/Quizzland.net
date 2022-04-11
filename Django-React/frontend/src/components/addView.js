@@ -43,7 +43,6 @@ const AddView = (content, contentID) => {
         }
     
         await axios.put(`/api/${content}/${contentID}/`, view, { headers})
-            // .then((res) => log(res))
     }
 
     getAuthToken()

@@ -205,27 +205,27 @@ const Result = (props) => {
 
                             <InlineShareButtons
                                 config={{
-                                    alignment: 'center',  // alignment of buttons (left, center, right)
-                                    color: 'social',      // set the color of buttons (social, white)
-                                    enabled: true,        // show/hide buttons (true, false)
-                                    font_size: 16,        // font size for the buttons
-                                    labels: 'null',        // button labels (cta, counts, null)
-                                    language: 'en',       // which language to use (see LANGUAGES)
-                                    networks: [           // which networks to include (see SHARING NETWORKS)
+                                    alignment: 'center',
+                                    color: 'social',      
+                                    enabled: true,        
+                                    font_size: 16,        
+                                    labels: 'null',        
+                                    language: 'en',       
+                                    networks: [           
                                         'whatsapp',
                                         'telegram',
                                         'twitter',
                                         'sharethis',
                                     ],
-                                    padding: 10,          // padding within buttons (INTEGER)
-                                    radius: 10,            // the corner radius on each button (INTEGER)
+                                    padding: 10,          
+                                    radius: 10,            
                                     show_total: false,
-                                    size: 45,             // the size of each button (INTEGER)
+                                    size: 45,             
 
-                                    // OPTIONAL PARAMETERS
-                                    url: `https://www.quizzland.net/test/${testDetail && replaceFunction(testDetail.title, ' ', '-')}`,
-                                    image: testDetail?.thumbnail,  // (defaults to og:image or twitter:image)
-                                    title: testDetail?.title,            // (defaults to og:title or twitter:title)
+                                    
+                                    url: `https://www.quizzland.net/test/${testDetail && replaceFunction(testDetail.slug, ' ', '-')}`,
+                                    image: testDetail?.thumbnail,
+                                    title: testDetail?.title,       
                                 }}
                             />
 

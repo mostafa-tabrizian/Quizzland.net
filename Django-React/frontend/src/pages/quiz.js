@@ -33,14 +33,14 @@ const Quiz = () => {
     const [ableToSelectOption, setAbleToSelectOption] = useState(true)
     const [quizEnded, setQuizEnded] = useState(false)
     const [loadState, setLoadState] = useState()
-    const [quizTitle, setQuizTitle] = useState(window.document.URL.split('/')[4])
+    const [quizSlug, setQuizSlug] = useState(window.document.URL.split('/')[4])
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [SFXAllowed, setSFXAllowed] = useState()
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
     const [quiz, setQuiz] = useState(null)
-    const [quizTitleReplacedWithHyphen, setQuizTitleReplacedWithHyphen] = useState()
+    const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
 
     const [score, setScore] = useState(0)
     const [resultGif, setResultGif] = useState()
@@ -57,7 +57,7 @@ const Quiz = () => {
         SFXLocalStorage()
         setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
         setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
-    }, [quizTitle])
+    }, [quizSlug])
 
     useEffect(() => {
         quizChangeDetector()
@@ -100,15 +100,15 @@ const Quiz = () => {
                 pushState.apply(history, arguments);
             };
 
-            const title = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
-            setQuizTitle(title)
-            setQuizTitleReplacedWithHyphen(title)
+            const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
+            setQuizSlug(slug)
+            setQuizSlugReplacedWithHyphen(slug)
         })(window.history);
     }
 
     const grabData = async () => {
-        quizTitleReplacedWithHyphen && 
-        await axios.get(`/api/quiz_new/?slug__iexact=${quizTitleReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+        quizSlugReplacedWithHyphen && 
+        await axios.get(`/api/quiz_new/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
             .then(async (quizData) => {
                 try {
                     AddView('quiz_new', quizData.id)
@@ -512,7 +512,7 @@ const Quiz = () => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/quiz/${replaceFunction(quizTitle, ' ', '-')}`
+        return `https://www.quizzland.net/quiz/${replaceFunction(quizSlug, ' ', '-')}`
     }
 
     let firstTouch
@@ -538,7 +538,7 @@ const Quiz = () => {
             <Header/>
 
             <Helmet>
-                <title>{`کوییزلند | کوییز ${replaceFunction(decodeURI(quizTitle), '+', ' ')}`}</title>
+                <title>{`کوییزلند | کوییز ${quiz && replaceFunction(decodeURI(quiz.title), '+', ' ')}`}</title>
 
                 <link rel="canonical" href={currentUrl()} />
 

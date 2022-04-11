@@ -6,8 +6,6 @@ module.exports = {
     App: "./src/App.js"
   },
 
-  // cache: false,
-
   output: {
     path: path.resolve(__dirname, "./static/build/"),
     filename: "[name].js",
@@ -31,19 +29,7 @@ module.exports = {
         options: {
           name: '[path][name].[ext]',
         },
-      },
-      // {
-      //   test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-      //   use: [
-      //     {
-      //       loader: 'file-loader',
-      //       options: {
-      //         name: '[name].[ext]',
-      //         outputPath: 'fonts/'
-      //       }
-      //     }
-      //   ]
-      // }
+      }
     ],
   },
 
