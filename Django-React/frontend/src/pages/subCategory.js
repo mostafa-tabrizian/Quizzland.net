@@ -12,7 +12,6 @@ import PageTravel from '../components/pageTravel'
 import { log, replaceFunction, takeParameterFromUrl } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import QuizPointyContainer from '../components/quizPointyContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 
 const SubCategory = (props) => {
@@ -98,7 +97,7 @@ const SubCategory = (props) => {
 
     const listQuizzesPointy = () => {
         return (
-            <QuizPointyContainer quizzes={quizzesPointy} bgStyle='bg' />
+            <QuizContainer quizzes={quizzesPointy} bgStyle='bg' />
         )
     }
 

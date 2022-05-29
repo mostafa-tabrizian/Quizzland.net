@@ -93,53 +93,17 @@ class Categories(viewsets.ModelViewSet):
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
-class quiz_new(viewsets.ModelViewSet):
+class quiz(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes.objects.order_by('-publish').all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-class quiz_monthly(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Quizzes.objects.order_by('-monthly_views').all()
-    serializer_class = QuizzesSerializer
-    filterset_class = QuizzesFilter
-
-class quiz_best(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Quizzes.objects.order_by('-views').all()
-    serializer_class = QuizzesSerializer
-    filterset_class = QuizzesFilter
-
-class quiz_alphabet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Quizzes.objects.order_by('-subCategory').all()
-    serializer_class = QuizzesSerializer
-    filterset_class = QuizzesFilter
-
 # --------------------------------------------------------
 
-class pointy_new(viewsets.ModelViewSet):
+class pointy(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes_Pointy.objects.order_by('-publish').all()
-    serializer_class = PointyQuizzesSerializer
-    filterset_class = PointyQuizzesFilter
-
-class pointy_monthly(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Quizzes_Pointy.objects.order_by('-monthly_views').all()
-    serializer_class = PointyQuizzesSerializer
-    filterset_class = PointyQuizzesFilter
-
-class best_pointy_quiz(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Quizzes_Pointy.objects.order_by('-views').all()
-    serializer_class = PointyQuizzesSerializer
-    filterset_class = PointyQuizzesFilter
-
-class pointy_alphabet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Quizzes_Pointy.objects.order_by('-subCategory').all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 

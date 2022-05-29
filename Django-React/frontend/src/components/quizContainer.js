@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { log, replaceFunction, viewsFormat, datePublishHandler, isItMobile } from './base'
+import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
 
 const QuizContainer = (props) => {
 
     return (
         props.quizzes.map((quiz) => {
+            
         return (
             <li key={quiz.id} className='md:mr-5 mb-4 md:mb-7 md:mt-5'>
                 <article className={`
@@ -15,7 +16,7 @@ const QuizContainer = (props) => {
                 `}>
 
                     <Link
-                        to={`/quiz/${replaceFunction(quiz.slug, ' ', '-')}`}
+                        to={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
                         className='flex md:block md:grid-cols-5'
                     >
                         <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>

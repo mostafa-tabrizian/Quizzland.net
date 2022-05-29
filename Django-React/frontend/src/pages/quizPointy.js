@@ -12,7 +12,6 @@ import AddView from '../components/addView';
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
-import QuizPointyContainer from '../components/quizPointyContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 
 const logo = '/static/img/Q-small.png'
@@ -110,9 +109,9 @@ const Quiz = () => {
                 }
                 catch (e) {
                     log(e)
-                    setTimeout(() => {
-                        window.location.href = '/404'
-                    }, 5000)
+                    // setTimeout(() => {
+                    //     window.location.href = '/404'
+                    // }, 5000)
                 }
             })
     }
@@ -655,7 +654,7 @@ const Quiz = () => {
 
                 <ul className="flex flex-wrap align-baseline">
                     {
-                        suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='bg' />
+                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
                 </ul>
             </div>

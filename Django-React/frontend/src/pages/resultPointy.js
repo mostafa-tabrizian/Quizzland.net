@@ -9,7 +9,6 @@ import Header from '../components/header'
 import { log, replaceFunction } from '../components/base'
 import BackBtn from '../components/backBtn'
 import LoadingScreen from '../components/loadingScreen'
-import QuizPointyContainer from '../components/quizPointyContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 
 const Result = (props) => {
@@ -263,7 +262,7 @@ const Result = (props) => {
 
                 <ul className="md:w-4/5 m-auto flex flex-wrap align-baseline justify-center">
                     {
-                        suggestionQuizzes && <QuizPointyContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                     }
                 </ul>
 

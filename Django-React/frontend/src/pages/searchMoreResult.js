@@ -6,8 +6,7 @@ import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import Header from '../components/header'
 
-import QuizContainer from '../components/quizContainer';
-import QuizPointyContainer from '../components/quizPointyContainer';
+import QuizContainer from '../components/quizContainer';;
 import { log, takeParameterFromUrl, replaceFunction } from '../components/base'
 import PageTravel from '../components/pageTravel';
 import SkeletonLoading from '../components/skeletonLoading';
@@ -199,7 +198,7 @@ const SearchMoreResult = () => {
 
 
                     {
-                        <QuizPointyContainer quizzes={pointies} bgStyle='trans' />
+                        <QuizContainer quizzes={pointies} bgStyle='trans' />
                     }
 
                     {

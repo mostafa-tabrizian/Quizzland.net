@@ -11,40 +11,35 @@ import { Carousel } from 'antd';
 import Header from '../components/header'
 import { log, replaceFunction, isItMobile, isItDesktop } from '../components/base'
 import QuizContainer from '../components/quizContainer'
-import QuizPointyContainer from '../components/quizPointyContainer'
 import LoadingScreen from '../components/loadingScreen'
 
 
 const Index = () => {
-    const [recommendedQuizzes, setRecommendedQuizzes] = useState([])
+    const [contentSuggestion, setContentSuggestion] = useState([])
 
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
 
-    const [quiz_new_celebrity, setQuiz_new_celebrity] = useState([])
-    const [quiz_new_movieSeries, setQuiz_new_movieSeries] = useState([])
-    const [quiz_new, setQuiz_new] = useState([])
-    const [quiz_monthly, setQuiz_monthly] = useState([])
+    const [content_new, setContent_new] = useState([])
+    const [content_monthly, setContent_monthly] = useState([])
 
-    const [pointy_new_psychology, setPointy_new_psychology] = useState([])
-    const [pointy_new, setPointy_new] = useState([])
-    const [pointy_monthly, setPointy_monthly] = useState([])
+    const [content_new_celebrity, setContent_new_celebrity] = useState([])
+    const [content_new_movieSeries, setContent_new_movieSeries] = useState([])
+    const [content_new_psychology, setContent_new_psychology] = useState([])
 
     const [loadMoreQuiz, setLoadMoreQuiz] = useState([])
 
-    const [quiz_new_ref, quiz_new_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [pointy_new_ref, pointy_new_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [quiz_monthly_ref, quiz_monthly_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [pointy_monthly_ref, pointy_monthly_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [quiz_new_celebrity_ref, quiz_new_celebrity_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [quiz_new_movieSeries_ref, quiz_new_movieSeries_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [pointy_new_psychology_ref, pointy_new_psychology_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    const [content_new_ref, content_new_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    const [content_monthly_ref, content_monthly_inView] = useInView({ threshold: 0, triggerOnce: true, });
+
+    const [content_new_celebrity_ref, content_new_celebrity_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    const [content_new_movieSeries_ref, content_new_movieSeries_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    const [content_new_psychology_ref, pointy_new_psychology_inView] = useInView({ threshold: 0, triggerOnce: true, });
 
     const [loadMoreQuiz_ref, loadMoreQuiz_inView] = useInView({ threshold: 0, triggerOnce: true, })
 
     useEffect(() => {
         grabData()
-        recommendationQuiz()
         setLoadState(true)
         if (document.getElementById('html')) {
             document.getElementById('html').style = 'background: #121212'
@@ -67,7 +62,7 @@ const Index = () => {
         }
     }
 
-    const recommendationQuiz = async () => {
+    const recommendContentToUserByTopClickedCategory = async (content) => {
         try {
             const interest = JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']
             const hightestVisitedCategory = grabAndSortMostVisitedCategories(interest)
@@ -75,67 +70,43 @@ const Index = () => {
             const top2ndUserCategory = hightestVisitedCategory[1][0]
             const top3rdUserCategory = hightestVisitedCategory[2][0]
 
-            let matchedQuizzes = []
+            let SelectedContent = content.filter(quiz => quiz.subCategory == top1stUserCategory)
+            SelectedContent = SelectedContent.concat(content.filter(quiz => quiz.subCategory == top2ndUserCategory))
+            SelectedContent = SelectedContent.concat(content.filter(quiz => quiz.subcategory == top3rdUserCategory))
 
-            const search_top_1st_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top1stUserCategory}&limit=4&public=true`)
-            Array.prototype.push.apply(matchedQuizzes, search_top_1st_category.data.results)
-
-            const search_top_2nd_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top2ndUserCategory}&limit=2&public=true`)
-            Array.prototype.push.apply(matchedQuizzes, search_top_2nd_category.data.results)
-
-            const search_top_3rd_category = await axios.get(`/api/quiz_new/?subCategory__icontains=${top3rdUserCategory}&limit=2&public=true`)
-            Array.prototype.push.apply(matchedQuizzes, search_top_3rd_category.data.results)
-
-            const recommendedQuizzesList = () => {
-                return (
-                    matchedQuizzes.length >= 4 &&
-                    <div className="mb-8 mt-[5rem]">
-
-                        <div className="mb-8 quizContainer__header">
-                            <h2 className=''>پیشنهادی های کوییزلند به شما</h2>
-                        </div>
-
-                        <div>
-                            <ul className="flex flex-wrap align-baseline">
-                                <QuizContainer quizzes={matchedQuizzes} bgStyle='trans' />
-                            </ul>
-                        </div>
-                    </div>
-                )
-            }
-
-            setRecommendedQuizzes([])
-            setRecommendedQuizzes(recommendedQuizzesList)
+            setContentSuggestion(SelectedContent)
         } catch (e) {
             return log('No Recommending -- New User')
         }
     }
 
+    const sortByNewest = ( a, b ) => {
+        return new Date(b.publish) - new Date(a.publish);
+    }
+
+    const sortByMonthlyView = (a, b) => {
+        return b.monthly_view  - a.monthly_view;
+    }
+
     const grabData = async () => {
-        const quiz_new = await axios.get(`/api/quiz_new/?limit=8&public=true`)
-        setQuiz_new(quiz_new.data.results)
+        const quiz = await axios.get(`/api/quiz/?limit=8&public=true`)
+        const pointy_new = await axios.get(`/api/pointy/?limit=8&public=true`)
+        const content_new = quiz.data.results.concat(pointy_new.data.results).sort(sortByNewest)
+        
+        const quiz_monthly = await axios.get(`/api/quiz/?limit=8&public=true`)
+        const pointy_monthly = await axios.get(`/api/pointy/?limit=8&public=true`)
+        const content_monthly = quiz_monthly.data.results.concat(pointy_monthly.data.results).sort(sortByMonthlyView)
 
-        const quiz_monthly = await axios.get(`/api/quiz_monthly/?limit=8&public=true`)
-        setQuiz_monthly(quiz_monthly.data.results)
+        const loadMoreQuiz = await axios.get(`/api/quiz/?limit=36&offset=8&public=true`)
 
-        const pointy_new = await axios.get(`/api/pointy_new/?limit=8&public=true`)
-        setPointy_new(pointy_new.data.results)
-
-        const pointy_monthly = await axios.get(`/api/pointy_monthly/?limit=8&public=true`)
-        setPointy_monthly(pointy_monthly.data.results)
-
-        const pointy_new_psychology = await axios.get(`/api/pointy_new/?categoryKey=3&limit=8&public=true`)
-        setPointy_new_psychology(pointy_new_psychology.data.results)
-
-        const quiz_new_movieSeries = await axios.get(`/api/quiz_new/?categoryKey=1&limit=8&public=true`)
-        setQuiz_new_movieSeries(quiz_new_movieSeries.data.results)
-
-        const quiz_new_celebrity = await axios.get(`/api/quiz_new/?categoryKey=2&limit=8&public=true`)
-        setQuiz_new_celebrity(quiz_new_celebrity.data.results)
-
-        const loadMoreQuiz = await axios.get(`/api/quiz_new/?limit=36&offset=8&public=true`)
+        setContent_new(content_new)
+        setContent_monthly(content_monthly)
+        setContent_new_movieSeries(content_new.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series'))
+        setContent_new_celebrity(content_new.filter(quiz => quiz.categoryKey.title_english == 'Celebrity'))
+        setContent_new_psychology(content_new.filter(quiz => quiz.categoryKey.title_english == 'Psychology'))
         setLoadMoreQuiz(loadMoreQuiz.data.results)
 
+        recommendContentToUserByTopClickedCategory(content_new)
         setContentLoaded(true)
     }
 
@@ -235,12 +206,12 @@ const Index = () => {
                                 #1
                             </h2>
                         </div>
-                        <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].slug, ' ', '-')}`}>
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_monthly[0]?.thumbnail} alt="" />
+                        <Link to={`/quiz/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
+                            <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
                             <h4>
-                                {quiz_monthly[0] && quiz_monthly[0].title}
+                                {content_monthly[0] && content_monthly[0].title}
                             </h4>
                         </div>
                     </div>
@@ -253,12 +224,12 @@ const Index = () => {
                                 جدیدترینِ کوییزلند
                             </h2>
                         </div>
-                        <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].slug, ' ', '-')}`}>
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_new[0]?.thumbnail} alt="" />
+                        <Link to={`/quiz/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
+                            <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
                             <h4>
-                                {quiz_new[0] && quiz_new[0].title}
+                                {content_new[0] && content_new[0].title}
                             </h4>
                         </div>
                     </div>
@@ -274,12 +245,12 @@ const Index = () => {
                                 #1
                             </h2>
                         </div>
-                        <Link to={`/quiz/${quiz_monthly[0] && replaceFunction(quiz_monthly[0].slug, ' ', '-')}`}>
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_monthly[0]?.thumbnail} alt="" />
+                        <Link to={`/quiz/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
+                            <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
                             <h4>
-                                {quiz_monthly[0] && quiz_monthly[0].title}
+                                {content_monthly[0] && content_monthly[0].title}
                             </h4>
                         </div>
                     </div>
@@ -292,18 +263,32 @@ const Index = () => {
                                 جدیدترینِ کوییزلند
                             </h2>
                         </div>
-                        <Link to={`/quiz/${quiz_new[0] && replaceFunction(quiz_new[0].slug, ' ', '-')}`}>
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={quiz_new[0]?.thumbnail} alt="" />
+                        <Link to={`/quiz/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
+                            <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
                             <h4>
-                                {quiz_new[0] && quiz_new[0].title}
+                                {content_new[0] && content_new[0].title}
                             </h4>
                         </div>
                     </div>
                 </Carousel>
 
-                {recommendedQuizzes}
+                {
+                    contentSuggestion.length >= 4 &&
+                    <div className="mb-8 mt-[5rem]">
+
+                        <div className="mb-8 quizContainer__header">
+                            <h2 className=''>پیشنهادی های کوییزلند به شما</h2>
+                        </div>
+
+                        <div>
+                            <ul className="flex flex-wrap align-baseline">
+                                <QuizContainer quizzes={contentSuggestion} bgStyle='trans' />
+                            </ul>
+                        </div>
+                    </div>
+                }
 
                 <div className="mb-8 md:mt-[10rem]"> 
                     <span id='scroll' />
@@ -315,10 +300,10 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={quiz_new_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={content_new_ref}>
                         {
-                            quiz_new_inView &&
-                            <QuizContainer quizzes={quiz_new} bgStyle={'trans'} />
+                            content_new_inView &&
+                            <QuizContainer quizzes={content_new} bgStyle={'trans'} />
                         }
                     </ul>
 
@@ -344,28 +329,10 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={quiz_monthly_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={content_monthly_ref}>
                         {
-                            quiz_monthly_inView &&
-                            <QuizContainer quizzes={quiz_monthly} bgStyle={'trans'} />
-                        }
-                    </ul>
-
-                </div>
-
-                <div className="mb-8">
-
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>جدیدترین تست ها</h2>
-                        <Link to="/sort?s=newest_test" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
-                    </div>
-
-                    {SkeletonLoading(contentLoaded)}
-
-                    <ul className="flex flex-wrap align-baseline" ref={pointy_new_ref}>
-                        {
-                            pointy_new_inView &&
-                            <QuizPointyContainer quizzes={pointy_new} bgStyle='trans' />
+                            content_monthly_inView &&
+                            <QuizContainer quizzes={content_monthly} bgStyle={'trans'} />
                         }
                     </ul>
 
@@ -385,34 +352,16 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>بهترین تست های این ماه</h2>
-                        <Link to="/sort?s=monthly_test" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
-                    </div>
-
-                    {SkeletonLoading(contentLoaded)}
-
-                    <ul className="flex flex-wrap align-baseline" ref={pointy_monthly_ref}>
-                        {
-                            pointy_monthly_inView &&
-                            <QuizPointyContainer quizzes={pointy_monthly} bgStyle='trans' />
-                        }
-                    </ul>
-
-                </div>
-
-                <div className="mb-8">
-
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
                         <h2>کوییز سلبریتی</h2>
                         <Link to="/sort?s=newest&c=celebrity" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={quiz_new_celebrity_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={content_new_celebrity_ref}>
                         {
-                            quiz_new_celebrity_inView &&
-                            <QuizContainer quizzes={quiz_new_celebrity} bgStyle='trans' />
+                            content_new_celebrity_inView &&
+                            <QuizContainer quizzes={content_new_celebrity} bgStyle='trans' />
                         }
                     </ul>
 
@@ -438,10 +387,10 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={quiz_new_movieSeries_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={content_new_movieSeries_ref}>
                         {
-                            quiz_new_movieSeries_inView &&
-                            <QuizContainer quizzes={quiz_new_movieSeries} bgStyle='trans' />
+                            content_new_movieSeries_inView &&
+                            <QuizContainer quizzes={content_new_movieSeries} bgStyle='trans' />
                         }
                     </ul>
 
@@ -456,10 +405,10 @@ const Index = () => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={pointy_new_psychology_ref}>
+                    <ul className="flex flex-wrap align-baseline" ref={content_new_psychology_ref}>
                         {
                             pointy_new_psychology_inView &&
-                            <QuizPointyContainer quizzes={pointy_new_psychology} bgStyle='trans' />
+                            <QuizContainer quizzes={content_new_psychology} bgStyle='trans' />
                         }
                     </ul>
 

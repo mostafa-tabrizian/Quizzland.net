@@ -8,7 +8,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import QuizPointyContainer from '../components/quizPointyContainer'
 import Header from '../components/header'
 import SkeletonLoading from '../components/skeletonLoading';
 
@@ -203,7 +202,7 @@ const Sort = () => {
                 }
 
                 {
-                    pointy.length !== 0 && <QuizPointyContainer quizzes={pointy} bgStyle='trans' />
+                    pointy.length !== 0 && <QuizContainer quizzes={pointy} bgStyle='trans' />
                 }
 
             </ul> */}
@@ -238,7 +237,7 @@ const Sort = () => {
                         quizOrTest == 'quiz' ?
                             <QuizContainer quizzes={quizzes} bgStyle='trans' />
                             :
-                            <QuizPointyContainer quizzes={quizzes} bgStyle='trans' />
+                            <QuizContainer quizzes={quizzes} bgStyle='trans' />
                     }
                 </ul>   
             </InfiniteScroll>

@@ -14,15 +14,9 @@ sitemaps = {
 
 router = routers.DefaultRouter()
 
-router.register(r'quiz_new', views.quiz_new)
-router.register(r'quiz_monthly', views.quiz_monthly)
-router.register(r'quiz_best', views.quiz_best)
-router.register(r'quiz_alphabet', views.quiz_alphabet)
+router.register(r'quiz', views.quiz)
 
-router.register(r'pointy_new', views.pointy_new)
-router.register(r'pointy_monthly', views.pointy_monthly)
-router.register(r'best_pointy_quiz', views.best_pointy_quiz)
-router.register(r'pointy_alphabet', views.pointy_alphabet)
+router.register(r'pointy', views.pointy)
 
 router.register(r'categories', views.Categories)
 
