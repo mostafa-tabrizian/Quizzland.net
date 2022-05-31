@@ -2,6 +2,14 @@ export const log = (code) => {
     console.log(code)
 }
 
+export const sortByNewest = ( a, b ) => {
+    return new Date(b.publish) - new Date(a.publish);
+}
+
+export const sortByMonthlyView = (a, b) => {
+    return b.monthly_view  - a.monthly_view;
+}
+
 export const takeParameterFromUrl = (parameter) => {
     const urlParams = new URLSearchParams(window.location.search);
     const parameterValue = urlParams.get(parameter)

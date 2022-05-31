@@ -9,7 +9,7 @@ import { useInView } from 'react-intersection-observer';
 import { Carousel } from 'antd';
 
 import Header from '../components/header'
-import { log, replaceFunction, isItMobile, isItDesktop } from '../components/base'
+import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyView } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import LoadingScreen from '../components/loadingScreen'
 
@@ -80,14 +80,6 @@ const Index = () => {
         }
     }
 
-    const sortByNewest = ( a, b ) => {
-        return new Date(b.publish) - new Date(a.publish);
-    }
-
-    const sortByMonthlyView = (a, b) => {
-        return b.monthly_view  - a.monthly_view;
-    }
-
     const grabData = async () => {
         const quiz = await axios.get(`/api/quiz/?limit=8&public=true`)
         const pointy_new = await axios.get(`/api/pointy/?limit=8&public=true`)
@@ -118,27 +110,26 @@ const Index = () => {
             <Header />
 
             <Helmet>
-                <title>کوییزلند | Quizzland</title>
-                <meta name="description" content="سایت کوییزلند وب‌ سایت کوییز و تست برای کتگوری های متنوع همچون سلبریتی , فیلم و سریال و تست های روانشناسی معتبر از سایت های رسمی و کوییزهای باحال دیگه" />
-                <meta name="keywords" content="کوییز, سایت بازی کوییز, بازی کوییز, بازی کوییز, کوییزلند, کوییزلند, کوییز, کوییز های فیلم و سریال, کوییز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوییز های تست های روانشناسی معتبر, کوییز های باحال, کوییز های فان, بهترین وب سایت کوییز, بهترین وب سایت تست، کوییز تیلور سویفت، کوییز فرندز، کوییز مارول" />
-                <link rel='canonical' href='https://www.quizzland.net/' />
+							<title>کوییزلند | Quizzland</title>
+							<meta name="description" content="سایت کوییزلند وب‌ سایت کوییز و تست برای کتگوری های متنوع همچون سلبریتی , فیلم و سریال و تست های روانشناسی معتبر از سایت های رسمی و کوییزهای باحال دیگه" />
+							<meta name="keywords" content="کوییز, سایت بازی کوییز, بازی کوییز, بازی کوییز, کوییزلند, کوییزلند, کوییز, کوییز های فیلم و سریال, کوییز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوییز های تست های روانشناسی معتبر, کوییز های باحال, کوییز های فان, بهترین وب سایت کوییز, بهترین وب سایت تست، کوییز تیلور سویفت، کوییز فرندز، کوییز مارول" />
+							<link rel='canonical' href='https://www.quizzland.net/' />
 
-                <script type='application/ld+json'>
-                    {`
-                    {
-                        "@context": "https://schema.org/",
-                        "@type": "WebSite",
-                        "name": "کوییزلند",
-                        "url": "https://quizzland.net",
-                        "potentialAction": {
-                            "@type": "SearchAction",
-                            "target": "https://www.quizzland.net/search?s={search_term_string}",
-                            "query-input": "required name=search_term_string"
-                        }
-                    }
-                `}
-                </script>
-
+							<script type='application/ld+json'>
+								{`
+									{
+										"@context": "https://schema.org/",
+										"@type": "WebSite",
+										"name": "کوییزلند",
+										"url": "https://quizzland.net",
+										"potentialAction": {
+												"@type": "SearchAction",
+												"target": "https://www.quizzland.net/search?s={search_term_string}",
+												"query-input": "required name=search_term_string"
+										}
+									}
+								`}
+							</script>
             </Helmet>
 
             <div className='md:w-4/5 m-auto'>
@@ -147,14 +138,14 @@ const Index = () => {
                     {/* <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div> */}
 
                     <div className='relative mr-5 mb-[-3rem] drop-shadow-[10px_15px_10px_black] hidden md:block'>
-                        <div className='pointer-events-none'>
-                            <img
-                                src='/static/img/Q.png'
-                                width={175}
-                                height={252}
-                                alt='لوگوی کوییزلند'
-                            />
-                        </div>
+								<div className='pointer-events-none'>
+									<img
+											src='/static/img/Q.png'
+											width={175}
+											height={252}
+											alt='لوگوی کوییزلند'
+									/>
+								</div>
                     </div>
 
                     <div className='hero__start text-right mr-9 mb-[50%] lg:mb-0 lg:mr-4'>
