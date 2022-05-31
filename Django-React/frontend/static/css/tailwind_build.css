@@ -558,14 +558,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 9.7rem;
 }
 
-.left-6 {
-  left: 1.5rem;
-}
-
-.top-6 {
-  top: 1.5rem;
-}
-
 .left-8 {
   left: 2rem;
 }
@@ -592,6 +584,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .right-4 {
   right: 1rem;
+}
+
+.left-6 {
+  left: 1.5rem;
+}
+
+.top-6 {
+  top: 1.5rem;
 }
 
 .top-1\/2 {
@@ -728,16 +728,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1rem;
 }
 
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
 
 .ml-4 {
   margin-left: 1rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
 }
 
 .ml-5 {
@@ -872,10 +872,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 7rem;
 }
 
-.h-\[100px\] {
-  height: 100px;
-}
-
 .h-6 {
   height: 1.5rem;
 }
@@ -886,6 +882,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-1\/2 {
   height: 50%;
+}
+
+.h-\[100px\] {
+  height: 100px;
 }
 
 .h-\[120px\] {
@@ -944,10 +944,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 10rem;
 }
 
-.w-\[310px\] {
-  width: 310px;
-}
-
 .w-6 {
   width: 1.5rem;
 }
@@ -958,6 +954,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-80 {
   width: 20rem;
+}
+
+.w-\[310px\] {
+  width: 310px;
 }
 
 .w-\[33rem\] {
@@ -1808,16 +1808,16 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-top: 0.5rem;
   }
 
+  .md\:mt-3 {
+    margin-top: 0.75rem;
+  }
+
   .md\:ml-0 {
     margin-left: 0px;
   }
 
   .md\:mr-0 {
     margin-right: 0px;
-  }
-
-  .md\:mt-3 {
-    margin-top: 0.75rem;
   }
 
   .md\:mt-\[10rem\] {

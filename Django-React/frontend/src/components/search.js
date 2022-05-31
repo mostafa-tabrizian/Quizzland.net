@@ -13,7 +13,7 @@ const Search = (props) => {
 
     const searchedHandler = async (value) => {
         try {
-            const minimumKeywordForSearched = 3
+            const minimumKeywordForSearched = 2
             const searchedValue = value.toLowerCase()
 
             if (value.length <= minimumKeywordForSearched) {
@@ -69,7 +69,7 @@ const Search = (props) => {
             set_searched_category(searched_category_noDuplicates.slice(0, 30))
             setSearchedResult(true)
         } catch (e) {
-            log('Error in searched | cause : database')
+            log('Error in search | cause : database')
         }
     }
 
@@ -103,7 +103,7 @@ const Search = (props) => {
                         className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-base my-auto'
                         placeholder={`کوییزت رو سریع تر پیدا کن`}
                         onChange={inputChanged}
-                        onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') }}}
+                        onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${replaceFunction(e.target.value, ' ', '+')}`, '_blank') }}}
                     />
                     <svg className='w-5 h-5 absolute top-2 right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
                         <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>

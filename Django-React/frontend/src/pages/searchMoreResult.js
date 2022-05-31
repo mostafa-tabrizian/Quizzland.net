@@ -7,30 +7,26 @@ import { Link } from 'react-router-dom'
 import Header from '../components/header'
 
 import QuizContainer from '../components/quizContainer';;
-import { log, takeParameterFromUrl, replaceFunction } from '../components/base'
+import { log, takeParameterFromUrl, replaceFunction, sortByNewest } from '../components/base'
 import PageTravel from '../components/pageTravel';
 import SkeletonLoading from '../components/skeletonLoading';
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [loadState, setLoadState] = useState()
 
     const [searchValue, setSearchValue] =useState()
 
-    const [categories, setCategories] = useState([])
-    const [quizzes, setQuizzes] = useState([])
-    const [pointies, setPointies] = useState([])
+    const [searched_content, set_searched_content] = useState([])
+    const [searched_category, set_searched_category] = useState([])
 
     useEffect(() => {
         searchChangeDetector()
     });
 
     useEffect(() => {
-        setQuizzes([])  // restart list
-        setPointies([])
-        setCategories([])
-        searchValue && searchHandler(searchValue)
-        setLoadState(true)
+        set_searched_content([])  // restart list
+        set_searched_category([])
+        searchHandler(searchValue)
         setContentLoaded(true)
     }, [searchValue])
 
@@ -42,73 +38,65 @@ const SearchMoreResult = () => {
                 pushState.apply(history, arguments);
             };
 
-            setSearchValue(replaceFunction(takeParameterFromUrl('q'), ' ', '+'))
+            setSearchValue(takeParameterFromUrl('q'))
         })(window.history);
     }
-
+    
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')
 
-    const searchHandler = async () => {
+    const searchHandler = async (value) => {
         try {
-            let matchedQuizzes = []
-            let matchedPointies = []
-            let matchedCategories = []
+            const searchedValue = value?.toLowerCase()
 
-            // Search Quiz
-            const search_quiz_new_title = await axios.get(`/api/quiz_new/?title__icontains=${searchValue}&limit=50&public=true`)
-            Array.prototype.push.apply(matchedQuizzes, search_quiz_new_title.data.results)
+            const searched_quiz = await axios.get(`/api/quiz/?public=true`)
+            const searched_pointy = await axios.get(`/api/pointy/?public=true`)
+            
+            const searched_quiz_title = searched_quiz.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
+            const searched_quiz_subCategory = searched_quiz.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
+            const searched_quiz_tags = searched_quiz.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
 
-            const search_quiz_new_subCategory = await axios.get(`/api/quiz_new/?subCategory__icontains=${searchValue}&limit=50&public=true`)
-            Array.prototype.push.apply(matchedQuizzes, search_quiz_new_subCategory.data.results)
+            const searched_pointy_title = searched_pointy.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
+            const searched_pointy_subCategory = searched_pointy.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
+            const searched_pointy_tags = searched_pointy.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
 
-            const search_quiz_new_tag = await axios.get(`/api/quiz_new/?tags__icontains=${searchValue}&limit=50&public=true`)
-            Array.prototype.push.apply(matchedQuizzes, search_quiz_new_tag.data.results)
 
-            // Search Pointy Quiz
-            const search_pointy_new_title = await axios.get(`/api/pointy_new/?title__icontains=${searchValue}&limit=50&public=true`)
-            Array.prototype.push.apply(matchedPointies, search_pointy_new_title.data.results)
+            const searched_content = 
+                searched_quiz_title
+                .concat(searched_quiz_subCategory)
+                .concat(searched_quiz_tags)
+                .concat(searched_pointy_title)
+                .concat(searched_pointy_subCategory)
+                .concat(searched_pointy_tags)
+                    .sort(sortByNewest)
 
-            const search_pointy_new_subCategory = await axios.get(`/api/pointy_new/?subCategory__icontains=${searchValue}&limit=50&public=true`)
-            Array.prototype.push.apply(matchedPointies, search_pointy_new_subCategory.data.results)
+            const searched_content_noDuplicates = searched_content.filter((content, index, self) =>
+                index === self.findIndex((index) => (
+                    index.title === content.title
+                ))
+            )
 
-            const search_pointy_new_tag = await axios.get(`/api/pointy_new/?tags__icontains=${searchValue}&limit=50&public=true`)
-            Array.prototype.push.apply(matchedPointies, search_pointy_new_tag.data.results)
+            // Searched Category
 
-            // Search Category
-            const search_category_new_title = await axios.get(`/api/subcategory_new/?title__icontains=${searchValue}&limit=2&public=true`)
-            Array.prototype.push.apply(matchedCategories, search_category_new_title.data.results)
+            const searched_category = await axios.get(`/api/subcategory_new/?public=true`)
+            
+            const searched_category_title = searched_category.data.filter(category => category.title.toLowerCase().includes(searchedValue))
+            const searched_category_subCategory = searched_category.data.filter(category => category.subCategory.toLowerCase().includes(searchedValue))
+            
+            const searched_all_category = 
+                searched_category_title
+                    .concat(searched_category_subCategory)
+                        .sort(sortByNewest)
 
-            const search_category_new_subCategory = await axios.get(`/api/subcategory_new/?subCategory__icontains=${searchValue}&limit=2&public=true`)
-            Array.prototype.push.apply(matchedCategories, search_category_new_subCategory.data.results)
+            const searched_category_noDuplicates = searched_all_category.filter((content, index, self) =>
+                index === self.findIndex((index) => (
+                    index.subCategory === content.subCategory
+                ))
+            )
 
-            // Remove duplicated quizzes
-            let uniqueMatchedQuizzes = {};
-
-            for ( let i = 0; i < matchedQuizzes.length; i++ )
-                uniqueMatchedQuizzes[matchedQuizzes[i]['title']] = matchedQuizzes[i];
-
-            matchedQuizzes = new Array();
-            for ( let key in uniqueMatchedQuizzes )
-                matchedQuizzes.push(uniqueMatchedQuizzes[key]);
-
-            let uniqueMatchedPointies = {};
-
-            for (let i = 0; i < matchedPointies.length; i++) {
-                uniqueMatchedPointies[matchedPointies[i]['title']] = matchedPointies[i];
-            }
-
-            matchedPointies = new Array();
-            for (let key in uniqueMatchedPointies) {
-                matchedPointies.push(uniqueMatchedPointies[key]);
-            }
-    
-            setQuizzes(matchedQuizzes)
-            setPointies(matchedPointies)
-            setCategories(matchedCategories)
-
+            set_searched_content(searched_content_noDuplicates.slice(0, 200))
+            set_searched_category(searched_category_noDuplicates.slice(0, 200))
         } catch (e) {
-            log(e)
-            return log('error: search function')
+            log('Error in search | cause : database')
         }
     }
 
@@ -138,7 +126,7 @@ const SearchMoreResult = () => {
                 <ul className="flex flex-wrap">
 
                     {
-                        categories.map((category) => {
+                        searched_category.map((category) => {
                             return (
                                 <li key={category.id} className='mr-5 mb-4 md:mb-7 md:mt-5'>
                                     <article className={`
@@ -193,17 +181,11 @@ const SearchMoreResult = () => {
 
 
                     {
-                        <QuizContainer quizzes={quizzes} bgStyle='trans' />
-                    }
-
-
-                    {
-                        <QuizContainer quizzes={pointies} bgStyle='trans' />
+                        <QuizContainer quizzes={searched_content} bgStyle='trans' />
                     }
 
                     {
-                        quizzes.length == 0 &&
-                        pointies.length == 0 &&
+                        searched_content.length == 0 && !contentLoaded &&
                         <h1 className='w-11/12 text-3xl text-center mb-[50vh] '>
                             متاسفانه هیچ چیزی پیدا نشد 😥
                         </h1>
