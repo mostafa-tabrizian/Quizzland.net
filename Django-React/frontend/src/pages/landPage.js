@@ -9,7 +9,7 @@ import { useInView } from 'react-intersection-observer';
 import { Carousel } from 'antd';
 
 import Header from '../components/header'
-import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyView } from '../components/base'
+import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import LoadingScreen from '../components/loadingScreen'
 
@@ -82,12 +82,12 @@ const Index = () => {
 
     const grabData = async () => {
         const quiz = await axios.get(`/api/quiz/?limit=8&public=true`)
-        const pointy_new = await axios.get(`/api/pointy/?limit=8&public=true`)
-        const content_new = quiz.data.results.concat(pointy_new.data.results).sort(sortByNewest)
-        
+        const pointy = await axios.get(`/api/pointy/?limit=8&public=true`)
+        const content_new = quiz.data.results.concat(pointy.data.results).sort(sortByNewest)
+
         const quiz_monthly = await axios.get(`/api/quiz/?limit=8&public=true`)
         const pointy_monthly = await axios.get(`/api/pointy/?limit=8&public=true`)
-        const content_monthly = quiz_monthly.data.results.concat(pointy_monthly.data.results).sort(sortByMonthlyView)
+        const content_monthly = quiz_monthly.data.results.concat(pointy_monthly.data.results).sort(sortByMonthlyViews)
 
         const loadMoreQuiz = await axios.get(`/api/quiz/?limit=36&offset=8&public=true`)
 
@@ -110,13 +110,13 @@ const Index = () => {
             <Header />
 
             <Helmet>
-							<title>کوییزلند | Quizzland</title>
-							<meta name="description" content="سایت کوییزلند وب‌ سایت کوییز و تست برای کتگوری های متنوع همچون سلبریتی , فیلم و سریال و تست های روانشناسی معتبر از سایت های رسمی و کوییزهای باحال دیگه" />
-							<meta name="keywords" content="کوییز, سایت بازی کوییز, بازی کوییز, بازی کوییز, کوییزلند, کوییزلند, کوییز, کوییز های فیلم و سریال, کوییز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوییز های تست های روانشناسی معتبر, کوییز های باحال, کوییز های فان, بهترین وب سایت کوییز, بهترین وب سایت تست، کوییز تیلور سویفت، کوییز فرندز، کوییز مارول" />
-							<link rel='canonical' href='https://www.quizzland.net/' />
+                <title>کوییزلند | Quizzland</title>
+                <meta name="description" content="سایت کوییزلند وب‌ سایت کوییز و تست برای کتگوری های متنوع همچون سلبریتی , فیلم و سریال و تست های روانشناسی معتبر از سایت های رسمی و کوییزهای باحال دیگه" />
+                <meta name="keywords" content="کوییز, سایت بازی کوییز, بازی کوییز, بازی کوییز, کوییزلند, کوییزلند, کوییز, کوییز های فیلم و سریال, کوییز های سلبریتی و آدم های معروف, خواننده, بازیگر, کوییز های تست های روانشناسی معتبر, کوییز های باحال, کوییز های فان, بهترین وب سایت کوییز, بهترین وب سایت تست، کوییز تیلور سویفت، کوییز فرندز، کوییز مارول" />
+                <link rel='canonical' href='https://www.quizzland.net/' />
 
-							<script type='application/ld+json'>
-								{`
+                <script type='application/ld+json'>
+                    {`
 									{
 										"@context": "https://schema.org/",
 										"@type": "WebSite",
@@ -129,7 +129,7 @@ const Index = () => {
 										}
 									}
 								`}
-							</script>
+                </script>
             </Helmet>
 
             <div className='md:w-4/5 m-auto'>
@@ -138,14 +138,14 @@ const Index = () => {
                     {/* <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div> */}
 
                     <div className='relative mr-5 mb-[-3rem] drop-shadow-[10px_15px_10px_black] hidden md:block'>
-								<div className='pointer-events-none'>
-									<img
-											src='/static/img/Q.png'
-											width={175}
-											height={252}
-											alt='لوگوی کوییزلند'
-									/>
-								</div>
+                        <div className='pointer-events-none'>
+                            <img
+                                src='/static/img/Q.png'
+                                width={175}
+                                height={252}
+                                alt='لوگوی کوییزلند'
+                            />
+                        </div>
                     </div>
 
                     <div className='hero__start text-right mr-9 mb-[50%] lg:mb-0 lg:mr-4'>
@@ -161,11 +161,11 @@ const Index = () => {
                                 type='text'
                                 className='pl-4 pr-12 py-1 rounded-full text-right bg-black shadow-black text-base mt-5 mb-5'
                                 placeholder={`کوییزت رو سریع تر پیدا کن`}
-                                onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') }}}
+                                onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
                             />
                             <svg className='w-5 h-5 absolute top-[1.7rem] right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
-                                <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
-                                <path data-name="layer1" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round"/>
+                                <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+                                <path data-name="layer1" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round" />
                             </svg>
                         </div>
                         {/* <button
@@ -281,7 +281,7 @@ const Index = () => {
                     </div>
                 }
 
-                <div className="mb-8 md:mt-[10rem]"> 
+                <div className="mb-8 md:mt-[10rem]">
                     <span id='scroll' />
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">

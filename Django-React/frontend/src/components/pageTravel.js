@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { log, nightMode} from './base'
+import { log, nightMode } from './base'
 
 const PageTravel = (props) => {
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
@@ -10,16 +10,16 @@ const PageTravel = (props) => {
     }
 
     const goNextPage = () => {
-        props.setOffset(props.offset + props.numberOfResult)
+        props.setOffset(props.offset + props.numberResult)
         setCurrentPageNumber(prev => prev + 1)
         scrollToTop()
     }
 
     const goDoubleNextPage = () => {
         if (props.offset === 0) {
-            props.setOffset(props.numberOfResult * 2)
+            props.setOffset(props.numberResult * 2)
         } else {
-            props.setOffset(props.numberOfResult * 2 + props.offset)
+            props.setOffset(props.numberResult * 2 + props.offset)
         }
 
         setCurrentPageNumber(prev => prev + 2)
@@ -27,7 +27,7 @@ const PageTravel = (props) => {
     }
 
     const goPreviousPage = () => {
-        props.setOffset(props.offset - props.numberOfResult)
+        props.setOffset(props.offset - props.numberResult)
         setCurrentPageNumber(prev => prev - 1)
         scrollToTop()
     }
@@ -35,7 +35,7 @@ const PageTravel = (props) => {
     const goLastPage = () => {
         if (props.pageTravel != '') {
             const totalDataCount = props.pageTravel.count
-            const resultToShow = props.numberOfResult
+            const resultToShow = props.numberResult
             props.setOffset(totalDataCount - totalDataCount % resultToShow)
             setCurrentPageNumber(Math.ceil(totalDataCount / resultToShow))
             scrollToTop()
@@ -45,7 +45,7 @@ const PageTravel = (props) => {
     const whatIsTheLastPageNumber = () => {
         if (props.pageTravel != '') {
             const totalDataCount = props.pageTravel.count
-            const resultToShow = props.numberOfResult
+            const resultToShow = props.numberResult
             return Math.ceil(totalDataCount / resultToShow)
         }
     }
@@ -54,7 +54,7 @@ const PageTravel = (props) => {
         if (props.pageTravel != '') {
             const totalDataCount = props.pageTravel.count
             const offset = props.offset
-            const resultToShow = props.numberOfResult
+            const resultToShow = props.numberResult
             if (offset + (resultToShow * 2) < totalDataCount) {
                 return true
             } else {
@@ -78,5 +78,5 @@ const PageTravel = (props) => {
         </div>
     );
 }
- 
+
 export default PageTravel;

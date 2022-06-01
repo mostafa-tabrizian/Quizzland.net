@@ -2,12 +2,20 @@ export const log = (code) => {
     console.log(code)
 }
 
-export const sortByNewest = ( a, b ) => {
+export const sortByNewest = (a, b) => {
     return new Date(b.publish) - new Date(a.publish);
 }
 
-export const sortByMonthlyView = (a, b) => {
-    return b.monthly_view  - a.monthly_view;
+export const sortByMonthlyViews = (a, b) => {
+    return b.monthly_views - a.monthly_views;
+}
+
+export const sortByViews = (a, b) => {
+    return b.views - a.views;
+}
+
+export const sortByAlphabet = (a, b) => {
+    return b.title - a.title;
 }
 
 export const takeParameterFromUrl = (parameter) => {
@@ -75,14 +83,14 @@ export const datePublishHandler = (publishFullDate) => {
     const convertToHour = (time) => time / 1000 / 60 / 60
 
     const yearsPast = Math.floor(convertToYear(currentUnixTime - publishUnixTime))
-    const monthsPast =  Math.floor(convertToMonth(currentUnixTime - publishUnixTime))
-    const daysPast =  Math.floor(convertToDay(currentUnixTime - publishUnixTime))
-    const hoursPast =  Math.floor(convertToHour(currentUnixTime - publishUnixTime))
+    const monthsPast = Math.floor(convertToMonth(currentUnixTime - publishUnixTime))
+    const daysPast = Math.floor(convertToDay(currentUnixTime - publishUnixTime))
+    const hoursPast = Math.floor(convertToHour(currentUnixTime - publishUnixTime))
 
     if (yearsPast >= 1) {
         return `${yearsPast} سال پیش`
 
-    } else if (monthsPast >= 1){
+    } else if (monthsPast >= 1) {
         return `${monthsPast} ماه پیش`
 
     } else if (daysPast >= 1) {
@@ -93,7 +101,7 @@ export const datePublishHandler = (publishFullDate) => {
 
     } else {
         return 'چند دقیقه پیش'
-    } 
+    }
 }
 
 export const makeDatePublishFormatForQuizDetail = (fullDate) => {
@@ -107,7 +115,7 @@ export const makeDatePublishFormatForQuizDetail = (fullDate) => {
 
         const newDate = new Date(year, month, day, hour, minute, second)
         const persianDate = newDate.toLocaleDateString('fa-IR').split('/')
-        
+
         let monthsInPersian
 
         switch (persianDate[1]) {
@@ -162,5 +170,5 @@ export const isItMobile = () => {
 }
 
 export const isItIPad = () => {
-    return window.navigator.userAgent.includes('Mobile' ) && window.navigator.userAgent.includes('iPad')
+    return window.navigator.userAgent.includes('Mobile') && window.navigator.userAgent.includes('iPad')
 }
