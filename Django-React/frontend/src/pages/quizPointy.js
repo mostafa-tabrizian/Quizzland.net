@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import { notification } from 'antd';
 import { Helmet } from "react-helmet";
-import {StickyShareButtons} from 'sharethis-reactjs';
+import { StickyShareButtons } from 'sharethis-reactjs';
 import { Switch, message } from 'antd';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -60,7 +60,7 @@ const Quiz = () => {
         notification.open({
             message: 'راهنمایی برای تغییر سؤال',
             description:
-            'برای تغییر سوال، صفحه را بکشید.',
+                'برای تغییر سوال، صفحه را بکشید.',
             duration: 0,
             style: {
                 'font-size': '25px',
@@ -72,15 +72,15 @@ const Quiz = () => {
             className: 'rounded-lg'
         });
     };
-    
+
     const applyBackground = (background) => {
         document.querySelector('html').style = `background: url('${background}') center/cover no-repeat fixed !important`
     }
 
     const quizChangeDetector = () => {
-        (function(history){
+        (function (history) {
             let pushState = history.pushState;
-            history.pushState = function() {
+            history.pushState = function () {
                 pushState.apply(history, arguments);
             };
 
@@ -89,31 +89,31 @@ const Quiz = () => {
             setQuizSlugReplacedWithHyphen(slug)
         })(window.history);
     }
-    
+
     const grabData = async () => {
         quizSlugReplacedWithHyphen &&
-        await axios.get(`/api/pointy_new/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
-            .then(async (quizData) => {
-                try {
-                    AddView('pointy_new', quizData.id)
-                    sendCategoryAsInterest(quizData.subCategory)
-                    getSuggestionsQuiz(quizData.subCategory)
-                    applyBackground(quizData.background)
-                    setQuiz(quizData)
+            await axios.get(`/api/pointy/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+                .then(async (quizData) => {
+                    try {
+                        AddView('pointy', quizData.id)
+                        sendCategoryAsInterest(quizData.subCategory)
+                        getSuggestionsQuiz(quizData.subCategory)
+                        applyBackground(quizData.background)
+                        setQuiz(quizData)
 
-                    await axios.get(`/api/questions_pointy/?quizKey=${quizData.id}&public=true`)
-                        .then((questionData) => {
-                            setQuestions(questionData?.data)
-                            setContentLoaded(true)
-                        })
-                }
-                catch (e) {
-                    log(e)
-                    // setTimeout(() => {
-                    //     window.location.href = '/404'
-                    // }, 5000)
-                }
-            })
+                        await axios.get(`/api/questions_pointy/?quizKey=${quizData.id}&public=true`)
+                            .then((questionData) => {
+                                setQuestions(questionData?.data)
+                                setContentLoaded(true)
+                            })
+                    }
+                    catch (e) {
+                        log(e)
+                        // setTimeout(() => {
+                        //     window.location.href = '/404'
+                        // }, 5000)
+                    }
+                })
     }
 
     const sendCategoryAsInterest = (category) => {
@@ -284,7 +284,7 @@ const Quiz = () => {
     const minusOneToTotalAnsweredQuestions = () => {
         setCurrentQuestionNumber(prev => prev - 1)
     }
-    
+
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
 
     if (isItDesktop() || isItIPad()) {
@@ -297,23 +297,23 @@ const Quiz = () => {
     const calculateThePoints = () => {
         const allOptions = document.querySelectorAll('input[type=radio]')
         const optionPoints = ['option_point_1st', 'option_point_2nd', 'option_point_3rd', 'option_point_4th', 'option_point_5th', 'option_point_6th', 'option_point_7th', 'option_point_8th', 'option_point_9th', 'option_point_10th']
-        
+
         const firstQuestionId = allOptions[0].getAttribute('id')
         const firstQuestionIndex = parseInt(firstQuestionId.split('-')[0])
-        
+
         let totalPoints = 0
         for (let i = 0; i < allOptions.length; i++) {
             const questionId = allOptions[i].getAttribute('id')
             const currentQuestionId = parseInt(questionId.split('-')[0])
             const currentQuestionNumber = currentQuestionId - firstQuestionIndex
             const OptionSelected = parseInt(questionId.split('-')[1]) - 1
-            
+
             if (allOptions[i].checked) {
                 const pointOfOptions = questions[currentQuestionNumber][optionPoints[OptionSelected]]
                 totalPoints += pointOfOptions
             }
         }
-        
+
         return totalPoints
     }
 
@@ -329,10 +329,10 @@ const Quiz = () => {
                 setQuizEnded(true)
                 setTimeout(() => {
                     try {
-                        localStorage.setItem('resultQuiz',  JSON.stringify(quiz))
+                        localStorage.setItem('resultQuiz', JSON.stringify(quiz))
                         localStorage.setItem('testResult', calculateThePoints())
                         result.current.click()
-                    } catch{
+                    } catch {
                         log("Can't show the result from localStorage!")
                     }
                 }, 3500)
@@ -373,8 +373,8 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        await axios.get(`/api/pointy_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-            .then((res) => {setSuggestionQuizzes(res.data.results)})
+        await axios.get(`/api/pointy/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+            .then((res) => { setSuggestionQuizzes(res.data.results) })
     }
 
     const SFXController = () => {
@@ -404,13 +404,13 @@ const Quiz = () => {
             goLastQuestion()
         }
     }
-    
+
     return (
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
-        
-            <Header/>
+
+            <Header />
 
             <Helmet>
                 <title>{`کوییزلند | تست ${quiz && replaceFunction(decodeURI(quiz.title), '+', ' ')}`}</title>
@@ -428,7 +428,7 @@ const Quiz = () => {
                 <meta property="og:url" content={currentUrl()} />
 
                 <script type="application/ld+json">
-                {`
+                    {`
                     {
                         "@context": "https://schema.org",
                         "@type": "Article",
@@ -460,28 +460,28 @@ const Quiz = () => {
             {quiz?.title &&
                 <StickyShareButtons
                     config={{
-                        alignment: 'left',  
-                        color: 'social',    
-                        enabled: true,      
-                        font_size: 16,      
+                        alignment: 'left',
+                        color: 'social',
+                        enabled: true,
+                        font_size: 16,
                         hide_desktop: false,
-                        labels: 'counts',   
-                        language: 'en',     
-                        min_count: 10,       
-                        networks: [         
+                        labels: 'counts',
+                        language: 'en',
+                        min_count: 10,
+                        networks: [
                             'whatsapp',
                             'telegram',
                             'twitter',
                             'sms',
                             'sharethis',
                         ],
-                        padding: 9,        
-                        radius: 15,          
-                        show_total: true,   
-                        show_mobile: true,  
-                        show_toggle: false,  
-                        size: 38,           
-                        top: 450,           
+                        padding: 9,
+                        radius: 15,
+                        show_total: true,
+                        show_mobile: true,
+                        show_toggle: false,
+                        size: 38,
+                        top: 450,
                         url: currentUrl()
                     }}
                 />
@@ -572,7 +572,7 @@ const Quiz = () => {
                                     checkedChildren='فرض صدا'
                                     uncheckedChildren='فرض صدا'
                                     className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                    onChange={() => {SFXController()}}
+                                    onChange={() => { SFXController() }}
                                     title='فرض صدا های پس از پاسخ به سوال'
                                 />
                             </div>
@@ -663,11 +663,11 @@ const Quiz = () => {
                 to='/result_test'
                 ref={result}
                 className='noVis'
-            >    
+            >
             </Link>
 
         </React.Fragment>
     );
 }
- 
+
 export default Quiz;

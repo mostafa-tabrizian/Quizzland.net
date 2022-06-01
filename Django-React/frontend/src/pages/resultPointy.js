@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { Rate, message } from 'antd';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios'
-import {InlineShareButtons} from 'sharethis-reactjs';
+import { InlineShareButtons } from 'sharethis-reactjs';
 
 import Header from '../components/header'
 import { log, replaceFunction } from '../components/base'
@@ -36,7 +36,7 @@ const Result = (props) => {
         detailOfResult()
         getSuggestionsQuiz()
     }, [testResult])
-    
+
     const customIcons = {
         1: <FrownOutlined />,
         2: <FrownOutlined />,
@@ -106,7 +106,7 @@ const Result = (props) => {
     }
 
     const getSuggestionsQuiz = async () => {
-        await axios.get(`/api/pointy_new/?subCategory__icontains=${testDetail && replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4&public=true`)
+        await axios.get(`/api/pointy/?subCategory__icontains=${testDetail && replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4&public=true`)
             .then((res) => {
                 setSuggestionQuizzes(res.data.results)
             })
@@ -121,45 +121,45 @@ const Result = (props) => {
             password: process.env.ADMINPASSWORD,
         }
 
-        let authToken   
+        let authToken
 
         await axios.post('/api/token/obtain/', adminDetail)
             .then((req) => {
                 authToken = req.data.access
-            }) 
+            })
 
         const now = new Date().getTime()
 
         let lastRate
         let RateCount
 
-        await axios.get(`/api/pointy_new/${testDetail?.id}/?&timestamp=${now}&public=true`)
+        await axios.get(`/api/pointy/${testDetail?.id}/?&timestamp=${now}&public=true`)
             .then((req) => {
                 lastRate = req.data.rate
                 RateCount = req.data.rate_count
             })
-            
+
         const view = {
             rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
             rate_count: RateCount + 1
         }
 
-        const headers = { 
+        const headers = {
             'Authorization': "JWT " + authToken,
             'Content-Type': 'application/json',
             'accept': 'application/json'
         }
 
-        await axios.put(`/api/pointy_new/${testDetail?.id}/`, view, { headers })
+        await axios.put(`/api/pointy/${testDetail?.id}/`, view, { headers })
             .then(res => {
                 res.status == 200 &&
-                message.success('از نظر شما بسیار سپاس گذاریم')
+                    message.success('از نظر شما بسیار سپاس گذاریم')
             })
     }
 
     return (
         <React.Fragment>
-            
+
             <LoadingScreen loadState={loadState} />
 
             <Header />
@@ -171,107 +171,107 @@ const Result = (props) => {
             </Helmet>
 
             <div className="result__container relative">
-                    <div className="flex justify-center result__title">
-                        <h5 className="text-lg text-right">نتیجه {testDetail?.title}</h5>
-                    </div>
-                    <div className="flex justify-center beforeAfterDecor items-center">
-                        <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
-                    </div>
+                <div className="flex justify-center result__title">
+                    <h5 className="text-lg text-right">نتیجه {testDetail?.title}</h5>
+                </div>
+                <div className="flex justify-center beforeAfterDecor items-center">
+                    <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
+                </div>
 
-                    <div className='flex resultPointy__img'>
-                        {
-                            resultImg &&
-                            <img
-                                src={resultImg}
-                                width={690}
-                                alt={testDetail?.subCategory}
-                            />
-                        }
-                    </div>
-
+                <div className='flex resultPointy__img'>
                     {
-                        resultText &&
-                        <div className="resultPointy wrapper-p darkGls"
-                            dangerouslySetInnerHTML={{
-                                __html: resultText
-                            }}>
-                        </div>
+                        resultImg &&
+                        <img
+                            src={resultImg}
+                            width={690}
+                            alt={testDetail?.subCategory}
+                        />
                     }
+                </div>
 
-                    <div className='container px-20 mx-auto'>
-                        <div className="text-center result__share space-sm">
-                            <h5 className='text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
+                {
+                    resultText &&
+                    <div className="resultPointy wrapper-p darkGls"
+                        dangerouslySetInnerHTML={{
+                            __html: resultText
+                        }}>
+                    </div>
+                }
 
-                            <InlineShareButtons
-                                config={{
-                                    alignment: 'center',
-                                    color: 'social',      
-                                    enabled: true,        
-                                    font_size: 16,        
-                                    labels: 'null',        
-                                    language: 'en',       
-                                    networks: [           
-                                        'whatsapp',
-                                        'telegram',
-                                        'twitter',
-                                        'sharethis',
-                                    ],
-                                    padding: 10,          
-                                    radius: 10,            
-                                    show_total: false,
-                                    size: 45,             
+                <div className='container px-20 mx-auto'>
+                    <div className="text-center result__share space-sm">
+                        <h5 className='text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
-                                    
-                                    url: `https://www.quizzland.net/test/${testDetail && replaceFunction(testDetail.slug, ' ', '-')}`,
-                                    image: testDetail?.thumbnail,
-                                    title: testDetail?.title,       
-                                }}
-                            />
+                        <InlineShareButtons
+                            config={{
+                                alignment: 'center',
+                                color: 'social',
+                                enabled: true,
+                                font_size: 16,
+                                labels: 'null',
+                                language: 'en',
+                                networks: [
+                                    'whatsapp',
+                                    'telegram',
+                                    'twitter',
+                                    'sharethis',
+                                ],
+                                padding: 10,
+                                radius: 10,
+                                show_total: false,
+                                size: 45,
 
-                        </div>
 
-                        <h2 className='flex justify-center text-lg items-center space-med'>این تست چطور بود؟</h2>
-
-                        <Rate
-                            character={({ index }) => customIcons[index + 1]}
-                            allowClear={true}
-                            disabled={rateChangeable ? false : true}
-                            className='flex justify-center my-3 biggerRate'
-                            onChange={value => {
-                                log(testDetail.title)
-                                const currentQuiz = testDetail.title
-                                const lastRatedQuiz = localStorage.getItem('lastRatedQuiz')
-
-                                // check if rated before (last time)
-                                if (lastRatedQuiz == currentQuiz) {
-                                    message.warning('! شما قبلا به این تست امتیاز داده اید')
-                                } else {
-                                    localStorage.setItem('lastRatedQuiz', currentQuiz)
-                                    pushRate(value)
-                                }
+                                url: `https://www.quizzland.net/test/${testDetail && replaceFunction(testDetail.slug, ' ', '-')}`,
+                                image: testDetail?.thumbnail,
+                                title: testDetail?.title,
                             }}
                         />
 
                     </div>
 
+                    <h2 className='flex justify-center text-lg items-center space-med'>این تست چطور بود؟</h2>
+
+                    <Rate
+                        character={({ index }) => customIcons[index + 1]}
+                        allowClear={true}
+                        disabled={rateChangeable ? false : true}
+                        className='flex justify-center my-3 biggerRate'
+                        onChange={value => {
+                            log(testDetail.title)
+                            const currentQuiz = testDetail.title
+                            const lastRatedQuiz = localStorage.getItem('lastRatedQuiz')
+
+                            // check if rated before (last time)
+                            if (lastRatedQuiz == currentQuiz) {
+                                message.warning('! شما قبلا به این تست امتیاز داده اید')
+                            } else {
+                                localStorage.setItem('lastRatedQuiz', currentQuiz)
+                                pushRate(value)
+                            }
+                        }}
+                    />
+
                 </div>
 
-                <h2 className='text-center space-med beforeAfterDecor'>تست های مشابه</h2>
+            </div>
 
-                {SkeletonLoading(contentLoaded)}
+            <h2 className='text-center space-med beforeAfterDecor'>تست های مشابه</h2>
 
-                <ul className="md:w-4/5 m-auto flex flex-wrap align-baseline justify-center">
-                    {
-                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
-                    }
-                </ul>
+            {SkeletonLoading(contentLoaded)}
+
+            <ul className="md:w-4/5 m-auto flex flex-wrap align-baseline justify-center">
+                {
+                    suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                }
+            </ul>
 
             <BackBtn />
-            
+
             <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center px-2 py-1 rounded-lg' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
 
         </React.Fragment>
     );
 }
- 
+
 export default Result;

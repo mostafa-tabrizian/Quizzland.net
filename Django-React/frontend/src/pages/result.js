@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { message, Rate } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import {InlineReactionButtons, InlineShareButtons} from 'sharethis-reactjs';
+import { InlineReactionButtons, InlineShareButtons } from 'sharethis-reactjs';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
 import axios from 'axios'
@@ -36,21 +36,21 @@ const Result = () => {
         setFanName(params.get('fn'))
         setTitle(params.get('qt'))
         setId(params.get('id'))
-        
+
         const resultGifIndexInUrl = (window.location.search).indexOf('rg=') + 3
-        setResultGif((window.location.search).slice(resultGifIndexInUrl, ))
+        setResultGif((window.location.search).slice(resultGifIndexInUrl,))
 
         detailOfResult(params.get('s'), params.get('fn'))
         getSuggestionsQuiz(params.get('sc'))
 
-        document.querySelector('html').style=`background: None`
+        document.querySelector('html').style = `background: None`
         setLoadState(true)
     }, [])
 
     useEffect(() => {
         {
             suggestionQuizzes &&
-            showPopUpSuggestion()
+                showPopUpSuggestion()
         }
     }, [suggestionQuizzes])
 
@@ -63,23 +63,23 @@ const Result = () => {
     };
 
     const detailOfResult = (score, fanName) => {
-        if (score > 80){
+        if (score > 80) {
             setResultScore(`😎 ${score}%`)
             setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
         }
-        else if (score > 60){
+        else if (score > 60) {
             setResultScore(`😎 ${score}%`)
             setResultSubtitle(`😎 ایول\n! تو یک ${fanName} واقعی هستی `)
         }
-        else if (score > 40){
+        else if (score > 40) {
             setResultScore(`🙂 ${score}%`)
             setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
         }
-        else if (score > 20){
+        else if (score > 20) {
             setResultScore(`😉 ${score}%`)
             setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
         }
-        else if (score >= 0){
+        else if (score >= 0) {
             setResultScore(`😭 ${score}%`)
             setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
         }
@@ -94,8 +94,8 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = (subCategory) => {
-        axios.get(`/api/quiz_new/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=4&public=true`)
-            .then((res) => {setSuggestionQuizzes(res.data.results)})
+        axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=4&public=true`)
+            .then((res) => { setSuggestionQuizzes(res.data.results) })
         setContentLoaded(true)
     }
 
@@ -153,45 +153,45 @@ const Result = () => {
             password: process.env.ADMINPASSWORD,
         }
 
-        let authToken   
+        let authToken
 
         await axios.post('/api/token/obtain/', adminDetail)
             .then((req) => {
                 authToken = req.data.access
-            }) 
+            })
 
         const now = new Date().getTime()
 
         let lastRate
         let RateCount
 
-        await axios.get(`/api/quiz_new/${id}/?&timestamp=${now}&public=true`)
+        await axios.get(`/api/quiz/${id}/?&timestamp=${now}&public=true`)
             .then((req) => {
                 lastRate = req.data.rate
                 RateCount = req.data.rate_count
             })
-            
+
         const view = {
             rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
             rate_count: RateCount + 1
         }
 
-        const headers = { 
+        const headers = {
             'Authorization': "JWT " + authToken,
             'Content-Type': 'application/json',
             'accept': 'application/json'
         }
 
-        await axios.put(`/api/quiz_new/${id}/`, view, { headers })
+        await axios.put(`/api/quiz/${id}/`, view, { headers })
             .then(res => {
                 res.status == 200 &&
-                message.success('از نظر شما بسیار سپاس گذاریم')
+                    message.success('از نظر شما بسیار سپاس گذاریم')
             })
     }
 
     return (
         <React.Fragment>
-            
+
             <LoadingScreen loadState={loadState} />
 
             <Header />
@@ -203,130 +203,130 @@ const Result = () => {
             </Helmet>
 
             <div className="result__container relative">
-                    <div className="flex justify-center result__title">
-                        <h5 className="text-right">نتیجه  {title}</h5>
+                <div className="flex justify-center result__title">
+                    <h5 className="text-right">نتیجه  {title}</h5>
+                </div>
+                <div className="flex justify-center beforeAfterDecor items-center">
+                    <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
+                </div>
+                <div className="justify-center block w-full mx-auto result md:container space-sm md:flex items-center">
+                    <div className="flex justify-center result__img md:mx-16 items-center">
+                        {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
                     </div>
-                    <div className="flex justify-center beforeAfterDecor items-center">
-                        <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
+                    <div className="result__score mt-5 text-center text-[2rem]">
+                        <h5>
+                            {resultScore}
+                        </h5>
                     </div>
-                    <div className="justify-center block w-full mx-auto result md:container space-sm md:flex items-center">
-                        <div className="flex justify-center result__img md:mx-16 items-center">
-                            {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
-                        </div>
-                        <div className="result__score mt-5 text-center text-[2rem]">
-                            <h5>
-                                {resultScore}
-                            </h5>
-                        </div>
-                        <div className="mt-5 mb-14 text-[1.5rem] text-center result__detail">
-                            <h5>پاسخ 🟢: <span>{correctAnswersCount}</span></h5>
-                            <h5>پاسخ 🔴: <span>{questionCount - correctAnswersCount}</span></h5>
-                        </div>
+                    <div className="mt-5 mb-14 text-[1.5rem] text-center result__detail">
+                        <h5>پاسخ 🟢: <span>{correctAnswersCount}</span></h5>
+                        <h5>پاسخ 🔴: <span>{questionCount - correctAnswersCount}</span></h5>
                     </div>
+                </div>
 
-                    <div className='container px-20 mx-auto'>
-                        <div className="text-lg text-center result__share space-sm">
-                            <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${fanName} هستن`}</h5>
+                <div className='container px-20 mx-auto'>
+                    <div className="text-lg text-center result__share space-sm">
+                        <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${fanName} هستن`}</h5>
 
-                            <InlineShareButtons
-                                config={{
-                                    alignment: 'center',  
-                                    color: 'social',      
-                                    enabled: true,        
-                                    font_size: 16,        
-                                    labels: 'null',        
-                                    language: 'en',       
-                                    networks: [           
-                                        'whatsapp',
-                                        'telegram',
-                                        'twitter',
-                                        'sharethis',
-                                    ],
-                                    padding: 10,          
-                                    radius: 10,            
-                                    show_total: false,
-                                    size: 45,             
+                        <InlineShareButtons
+                            config={{
+                                alignment: 'center',
+                                color: 'social',
+                                enabled: true,
+                                font_size: 16,
+                                labels: 'null',
+                                language: 'en',
+                                networks: [
+                                    'whatsapp',
+                                    'telegram',
+                                    'twitter',
+                                    'sharethis',
+                                ],
+                                padding: 10,
+                                radius: 10,
+                                show_total: false,
+                                size: 45,
 
-                                    
-                                    url: `https://www.quizzland.net/quiz/${quizResult && replaceFunction(quizResult.slug, ' ', '-')}`,
-                                    image: quizResult?.thumbnail,
-                                    title: quizResult?.title,        
-                                }}
-                            />
 
-                        </div>
-
-                        <h2 className='flex justify-center text-lg items-center space-sm'>این کوییز چطور بود؟</h2>
-
-                        <Rate
-                            character={({ index }) => customIcons[index + 1]}
-                            allowClear={true}
-                            disabled={rateChangeable ? false : true}
-                            className='flex justify-center my-3 biggerRate'
-                            onChange={value => {
-                                const currentQuiz = takeParameterFromUrl('qt')
-                                const lastRatedQuiz = localStorage.getItem('lastRatedQuiz')
-
-                                // check if rated before (last time)
-                                if (lastRatedQuiz == currentQuiz) {
-                                    message.warning('! شما قبلا به این کوییز امتیاز داده اید')
-                                } else {
-                                    localStorage.setItem('lastRatedQuiz', currentQuiz)
-                                    pushRate(value)
-                                }
+                                url: `https://www.quizzland.net/quiz/${quizResult && replaceFunction(quizResult.slug, ' ', '-')}`,
+                                image: quizResult?.thumbnail,
+                                title: quizResult?.title,
                             }}
                         />
-                        
+
                     </div>
+
+                    <h2 className='flex justify-center text-lg items-center space-sm'>این کوییز چطور بود؟</h2>
+
+                    <Rate
+                        character={({ index }) => customIcons[index + 1]}
+                        allowClear={true}
+                        disabled={rateChangeable ? false : true}
+                        className='flex justify-center my-3 biggerRate'
+                        onChange={value => {
+                            const currentQuiz = takeParameterFromUrl('qt')
+                            const lastRatedQuiz = localStorage.getItem('lastRatedQuiz')
+
+                            // check if rated before (last time)
+                            if (lastRatedQuiz == currentQuiz) {
+                                message.warning('! شما قبلا به این کوییز امتیاز داده اید')
+                            } else {
+                                localStorage.setItem('lastRatedQuiz', currentQuiz)
+                                pushRate(value)
+                            }
+                        }}
+                    />
 
                 </div>
 
-                <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
+            </div>
 
-                {SkeletonLoading(contentLoaded)}
+            <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
-                <ul className="md:w-4/5 m-auto flex flex-wrap align-baseline justify-center">
-                    {
-                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
-                    }
-                </ul>
+            {SkeletonLoading(contentLoaded)}
 
+            <ul className="md:w-4/5 m-auto flex flex-wrap align-baseline justify-center">
                 {
-                    suggestionQuizzes && chooseUniqueQuizToSuggest() && 
-                    <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
-                        <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
-                            closePopUpQuizSuggester();
-                        }}> X </button>
+                    suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                }
+            </ul>
 
-                        <div>
-                            <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
+            {
+                suggestionQuizzes && chooseUniqueQuizToSuggest() &&
+                <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
+                    <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
+                        closePopUpQuizSuggester();
+                    }}> X </button>
 
-                            <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                                <h3 className="flex text-lg result__popUpQuizSuggester__title">
-                                    {chooseUniqueQuizToSuggest().title}
-                                </h3>
-                            </Link>
-                        </div>
+                    <div>
+                        <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
+
                         <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                            <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
-                                <img
-                                    src={chooseUniqueQuizToSuggest().thumbnail}
-                                    alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
-                                    width={1920}
-                                    height={1080}
-                                    className='object-cover'
-                                />
-                            </div>
+                            <h3 className="flex text-lg result__popUpQuizSuggester__title">
+                                {chooseUniqueQuizToSuggest().title}
+                            </h3>
                         </Link>
                     </div>
-                }
+                    <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
+                        <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
+                            <img
+                                src={chooseUniqueQuizToSuggest().thumbnail}
+                                alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
+                                width={1920}
+                                height={1080}
+                                className='object-cover'
+                            />
+                        </div>
+                    </Link>
+                </div>
+            }
 
             <BackBtn />
-            
+
             <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center px-2 py-1 rounded-lg' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
 
         </React.Fragment>
     );
 }
- 
+
 export default Result;

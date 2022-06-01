@@ -34,7 +34,7 @@ const Index = () => {
 
     const [content_new_celebrity_ref, content_new_celebrity_inView] = useInView({ threshold: 0, triggerOnce: true, });
     const [content_new_movieSeries_ref, content_new_movieSeries_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [content_new_psychology_ref, pointy_new_psychology_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    const [content_new_psychology_ref, content_new_psychology_inView] = useInView({ threshold: 0, triggerOnce: true, });
 
     const [loadMoreQuiz_ref, loadMoreQuiz_inView] = useInView({ threshold: 0, triggerOnce: true, })
 
@@ -83,22 +83,17 @@ const Index = () => {
     const grabData = async () => {
         const quiz = await axios.get(`/api/quiz/?limit=8&public=true`)
         const pointy = await axios.get(`/api/pointy/?limit=8&public=true`)
-        const content_new = quiz.data.results.concat(pointy.data.results).sort(sortByNewest)
+        const content = quiz.data.results.concat(pointy.data.results)
+        const loadMoreQuiz = await axios.get(`/api/quiz/?limit=36&offset=8&public=true`).sortByNewest()
 
-        const quiz_monthly = await axios.get(`/api/quiz/?limit=8&public=true`)
-        const pointy_monthly = await axios.get(`/api/pointy/?limit=8&public=true`)
-        const content_monthly = quiz_monthly.data.results.concat(pointy_monthly.data.results).sort(sortByMonthlyViews)
-
-        const loadMoreQuiz = await axios.get(`/api/quiz/?limit=36&offset=8&public=true`)
-
-        setContent_new(content_new)
-        setContent_monthly(content_monthly)
-        setContent_new_movieSeries(content_new.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series'))
-        setContent_new_celebrity(content_new.filter(quiz => quiz.categoryKey.title_english == 'Celebrity'))
-        setContent_new_psychology(content_new.filter(quiz => quiz.categoryKey.title_english == 'Psychology'))
+        setContent_new(content.sortByNewest())
+        setContent_monthly(content.sortByMonthlyViews())
+        setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sortByNewest())
+        setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sortByNewest())
+        setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sortByNewest())
         setLoadMoreQuiz(loadMoreQuiz.data.results)
 
-        recommendContentToUserByTopClickedCategory(content_new)
+        recommendContentToUserByTopClickedCategory(content.sortByNewest())
         setContentLoaded(true)
     }
 
@@ -398,7 +393,7 @@ const Index = () => {
 
                     <ul className="flex flex-wrap align-baseline" ref={content_new_psychology_ref}>
                         {
-                            pointy_new_psychology_inView &&
+                            content_new_psychology_inView &&
                             <QuizContainer quizzes={content_new_psychology} bgStyle='trans' />
                         }
                     </ul>

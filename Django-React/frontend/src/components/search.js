@@ -49,7 +49,7 @@ const Search = (props) => {
 
             // Searched Category
 
-            const searched_category = await axios.get(`/api/subcategory_new/?public=true`)
+            const searched_category = await axios.get(`/api/subcategory/?public=true`)
             
             const searched_category_title = searched_category.data.filter(category => category.title.toLowerCase().includes(searchedValue))
             const searched_category_subCategory = searched_category.data.filter(category => category.subCategory.toLowerCase().includes(searchedValue))

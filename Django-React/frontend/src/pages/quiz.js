@@ -76,7 +76,7 @@ const Quiz = () => {
         notification.open({
             message: 'راهنمایی برای تغییر سؤال',
             description:
-            'برای تغییر سوال، صفحه را بکشید.',
+                'برای تغییر سوال، صفحه را بکشید.',
             duration: 0,
             style: {
                 'font-size': '25px',
@@ -107,29 +107,29 @@ const Quiz = () => {
     }
 
     const grabData = async () => {
-        quizSlugReplacedWithHyphen && 
-        await axios.get(`/api/quiz_new/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
-            .then(async (quizData) => {
-                try {
-                    AddView('quiz_new', quizData.id)
-                    sendCategoryAsInterest(quizData.subCategory)
-                    getSuggestionsQuiz(quizData.subCategory)
-                    applyBackground(quizData.background)
-                    setQuiz(quizData)
-    
-                    await axios.get(`/api/questions/?quizKey=${quizData.id}&public=true`)
-                        .then((questionData) => {
-                            setQuestions(questionData.data)
-                            setContentLoaded(true)
-                        })
-                }
-                catch (e) {
-                    log(e)
-                    setTimeout(() => {
-                        window.location.href = '/404'
-                    }, 5000)
-                }
-            })
+        quizSlugReplacedWithHyphen &&
+            await axios.get(`/api/quiz/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+                .then(async (quizData) => {
+                    try {
+                        AddView('quiz', quizData.id)
+                        sendCategoryAsInterest(quizData.subCategory)
+                        getSuggestionsQuiz(quizData.subCategory)
+                        applyBackground(quizData.background)
+                        setQuiz(quizData)
+
+                        await axios.get(`/api/questions/?quizKey=${quizData.id}&public=true`)
+                            .then((questionData) => {
+                                setQuestions(questionData.data)
+                                setContentLoaded(true)
+                            })
+                    }
+                    catch (e) {
+                        log(e)
+                        setTimeout(() => {
+                            window.location.href = '/404'
+                        }, 5000)
+                    }
+                })
     }
 
     const calculateTheResultScore = () => {
@@ -288,19 +288,19 @@ const Quiz = () => {
     }
 
     const detailOfResult = (score) => {
-        if (score > 80){
+        if (score > 80) {
             setResultGif(quiz?.GIF100)
         }
-        else if (score > 60){
+        else if (score > 60) {
             setResultGif(quiz?.GIF80)
         }
-        else if (score > 40){
+        else if (score > 40) {
             setResultGif(quiz?.GIF60)
         }
-        else if (score > 20){
+        else if (score > 20) {
             setResultGif(quiz?.GIF40)
         }
-        else if (score >= 0){
+        else if (score >= 0) {
             setResultGif(quiz?.GIF20)
         }
         else {
@@ -416,7 +416,7 @@ const Quiz = () => {
     }
 
     const isSafari = typeof (window) !== 'undefined' && navigator.userAgent.indexOf("Chrome") != -1 === false && navigator.userAgent.indexOf("Chrome") != -1
-    
+
     const quizQuestions = (browser) => {
 
         return (
@@ -491,7 +491,7 @@ const Quiz = () => {
                                 to={`/search?q=${replaceFunction(tag, ' ', '+')}`}
                                 rel='tag'
                             >
-                                    {tag}
+                                {tag}
                             </Link>
                         </h4>
                     </li>
@@ -501,7 +501,7 @@ const Quiz = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        await axios.get(`/api/quiz_new/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        await axios.get(`/api/quiz/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
             .then((res) => { setSuggestionQuizzes(res.data.results) })
     }
 
@@ -535,7 +535,7 @@ const Quiz = () => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header/>
+            <Header />
 
             <Helmet>
                 <title>{`کوییزلند | کوییز ${quiz && replaceFunction(decodeURI(quiz.title), '+', ' ')}`}</title>
@@ -588,28 +588,28 @@ const Quiz = () => {
             {quiz?.title &&
                 <StickyShareButtons
                     config={{
-                        alignment: 'left',  
-                        color: 'social',    
-                        enabled: true,      
-                        font_size: 16,      
+                        alignment: 'left',
+                        color: 'social',
+                        enabled: true,
+                        font_size: 16,
                         hide_desktop: false,
-                        labels: 'counts',   
-                        language: 'en',     
-                        min_count: 10,       
-                        networks: [         
+                        labels: 'counts',
+                        language: 'en',
+                        min_count: 10,
+                        networks: [
                             'whatsapp',
                             'telegram',
                             'twitter',
                             'sms',
                             'sharethis',
                         ],
-                        padding: 9,        
-                        radius: 15,          
-                        show_total: true,   
-                        show_mobile: true,  
-                        show_toggle: false,  
-                        size: 38,           
-                        top: 450,           
+                        padding: 9,
+                        radius: 15,
+                        show_total: true,
+                        show_mobile: true,
+                        show_toggle: false,
+                        size: 38,
+                        top: 450,
                         url: currentUrl()
                     }}
                 />
@@ -685,7 +685,7 @@ const Quiz = () => {
                                     checkedChildren='فرض صدا'
                                     uncheckedChildren='فرض صدا'
                                     className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                    onChange={() => {SFXController()}}
+                                    onChange={() => { SFXController() }}
                                     title='فرض صدا های پس از پاسخ به سوال'
                                 />
                             </div>
