@@ -8,7 +8,7 @@ admin.site.site_header = "Quizzland Admin Panel"
 
 @admin.register(Categories)
 class Categories_Admin(admin.ModelAdmin):
-    list_display = ('title_english', 'monthly_views', 'views', 'title_persian', 'date_published')
+    list_display = ('title_english', 'monthly_views', 'views', 'title_persian', 'publish')
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Document, Document_Admin)

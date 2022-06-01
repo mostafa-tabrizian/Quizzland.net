@@ -22,7 +22,7 @@ const SubCategory = (props) => {
 
     const [hide_content, set_hide_content] = useState(false)
 
-    const [numberResult, setNumberResult] = useState(16)
+    const [countResult, setCountResult] = useState(16)
     const [currentPageNumberQuiz, setCurrentPageNumberQuiz] = useState(1)
 
     const [offset_content, setOffset_content] = useState(0)
@@ -38,7 +38,7 @@ const SubCategory = (props) => {
         if (persianSubCategory) {
             fetchContent()
         }
-    }, [persianSubCategory, numberResult, offset_content])
+    }, [persianSubCategory, countResult, offset_content])
 
     useEffect(() => {
         sortContent()
@@ -69,8 +69,8 @@ const SubCategory = (props) => {
     }
 
     const fetchContent = async () => {
-        const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberResult}&offset=${offset_content}&public=true`);
-        const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${numberResult}&offset=${offset_content}&public=true`);
+        const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+        const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
         const content = quiz.data.results.concat(pointy.data.results)
 
         if (content.count !== 0) {
@@ -116,7 +116,7 @@ const SubCategory = (props) => {
                 <h3 className='title' style={{ color: 'white' }}>{persianSubCategoryWithoutSign}</h3>
 
                 <Tools
-                    numberResult={numberResult} setNumberResult={setNumberResult}
+                    countResult={countResult} setCountResult={setCountResult}
                     sortType={sortType} setSortType={setSortType}
                 />
 
@@ -136,7 +136,7 @@ const SubCategory = (props) => {
 
                             <PageTravel
                                 pageTravel={pageTravel} set_PageTravel={set_PageTravel}
-                                numberResult={numberResult} setNumberResult={setNumberResult}
+                                countResult={countResult} setCountResult={setCountResult}
                                 offset={offset_content} setOffset={setOffset_content}
                                 currentPageNumber={currentPageNumberQuiz} setCurrentPageNumber={setCurrentPageNumberQuiz}
                             />

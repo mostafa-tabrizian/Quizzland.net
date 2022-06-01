@@ -18,11 +18,9 @@ router.register(r'quiz', views.quiz)
 
 router.register(r'pointy', views.pointy)
 
-router.register(r'categories', views.Categories)
+router.register(r'category', views.Categories)
 
-router.register(r'subcategory_new', views.SubCategory_new)
-router.register(r'subcategory_best', views.SubCategory_best)
-router.register(r'subcategory_alphabet', views.SubCategory_alphabet)
+router.register(r'subcategory', views.SubCategory)
 
 router.register(r'questions', views.questions)
 router.register(r'questions_pointy', views.questions_pointy)

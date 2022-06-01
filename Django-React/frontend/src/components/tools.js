@@ -32,7 +32,7 @@ const Tools = (props) => {
     }
 
     const changeNumberOfResults = (number) => {
-        props.setNumberResult(number)
+        props.setCountResult(number)
         showHideToolsNumberOfResult()
     }
 
@@ -40,7 +40,7 @@ const Tools = (props) => {
         <div className='tools container justify-center md:justify-end flex relative mt-5 text-lg space-x-2'>
             <div className='tools__numberOfResult'>
                 <button onClick={showHideToolsNumberOfResult} className={`tools__numberOfResult__btn w-full tools_btn px-2 py-1 rounded-lg bg-gray-300 text-black`}>تعداد نمایش:
-                    <span> {props.numberResult} </span>
+                    <span> {props.countResult} </span>
                 </button>
                 <div className={` ${showToolsNumberOfResults ? 'fadeIn' : 'fadeOut'} my-2`}>
                     <ul className='tools__numberOfResult__options space-x-1 space-x-reverse'>

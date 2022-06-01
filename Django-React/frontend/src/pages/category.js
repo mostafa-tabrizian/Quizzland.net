@@ -13,7 +13,7 @@ import SkeletonLoading from '../components/skeletonLoading';
 import Header from '../components/header'
 import AddView from '../components/addView';
 
-import { log, replaceFunction, viewsFormat, datePublishHandler } from '../components/base'
+import { log, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
 
 const Category = (props) => {
     const [categoryQuery, setCategoryQuery] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', ' '))
@@ -21,10 +21,11 @@ const Category = (props) => {
     const [categoryTitle, setCategoryTitle] = useState()
     const [pageTravel, setPageTravel] = useState([])
     const [categories, setCategories] = useState([])
-    const [numberOfResult, setNumberOfResult] = useState(16)
+    const [sortedCategories, setSortedCategories] = useState([])
+    const [countResult, setCountResult] = useState(16)
     const [offset, setOffset] = useState(0)
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
-    const [sortType, setSortType] = useState('bestest')
+    const [sortType, setSortType] = useState('views')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
 
@@ -37,10 +38,16 @@ const Category = (props) => {
     useEffect(() => {
         getCategories()
         defineCategoryTitle()
+    }, [categoryQuery, categoryQueryID, categoryTitle, countResult, offset])
 
-        AddView('categories', categoryQueryID)
+    useEffect(() => {
+        categoryQueryID && AddView('category', categoryQueryID)
+    }, [categoryQueryID])
 
-    }, [categoryQuery, categoryQueryID, categoryTitle, sortType, numberOfResult, offset])
+    useEffect(() => {
+        sortContent()
+        returnCategories()
+    }, [categories, sortType])
 
     const searchChangeDetector = () => {
         (function(history){
@@ -52,24 +59,34 @@ const Category = (props) => {
         })(window.history);
     }
 
+    const sortContent = () => {
+        switch (sortType) {
+            case 'newest':
+                setSortedCategories(categories.sort(sortByNewest))
+                break
+            case 'views':
+                setSortedCategories(categories.sort(sortByViews))
+                break
+            case 'monthlyViews':
+                setSortedCategories(categories.sort(sortByMonthlyViews))
+                break
+            case 'alphabet':
+                setSortedCategories(categories.sort(sortByAlphabet))
+                break
+        }
+    }
+
     const defineCategoryTitle = async () => {
-        await axios.get(`/api/categories/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
+        await axios.get(`/api/category/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
             .then((response) => {
-                log(response);
                 setCategoryTitle(response.data[0].title_persian)
                 setCategoryQueryID(response.data[0].id)
             })
     }
 
     const getCategories = async () => {
-        const sortTypeDefinitionForDb = {
-            'newest': 'subcategory_new',
-            'bestest': 'subcategory_best',
-            'alphabet': 'subcategory_alphabet'
-        }
-
         categoryQueryID &&
-        await axios.get(`/api/${sortTypeDefinitionForDb[sortType]}/?categoryKey=${categoryQueryID}&limit=${numberOfResult}&offset=${offset}&public=true`)
+        await axios.get(`/api/subcategory/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
             .then((response => {
                 setPageTravel(response.data)
                 setCategories(response.data.results)
@@ -77,9 +94,9 @@ const Category = (props) => {
         setContentLoaded(true)
     }
 
-    const listCategories = () => {
+    const returnCategories = () => {
         return (
-            categories.map((category) => {
+            sortedCategories.map((category) => {
                 return (
                     <li key={category.id} className='mr-5 mb-4 md:mb-7 md:mt-5'>
                         <article className={`
@@ -139,7 +156,7 @@ const Category = (props) => {
                 <h3 className='title'>کتگوری {categoryTitle}</h3>
 
                 <Tools
-                    numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                    countResult={countResult} setCountResult={setCountResult}
                     sortType={sortType} setSortType={setSortType}
                 />
 
@@ -147,13 +164,15 @@ const Category = (props) => {
 
                 <ul className="flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
 
-                    {listCategories()}
+                    {
+                        returnCategories()
+                    }
 
                 </ul>
 
                 <PageTravel
                     pageTravel={pageTravel} setPageTravel={setPageTravel}
-                    numberOfResult={numberOfResult} setNumberOfResult={setNumberOfResult}
+                    countResult={countResult} setCountResult={setCountResult}
                     offset={offset} setOffset={setOffset}
                     currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
                 />

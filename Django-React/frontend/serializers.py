@@ -20,7 +20,7 @@ class CategoriesSerializer(serializers.ModelSerializer):
             'title_persian',
             'monthly_views',
             'views',
-            'date_published',
+            'publish',
         )
 
 class SubCategoriesSerializer(serializers.ModelSerializer):

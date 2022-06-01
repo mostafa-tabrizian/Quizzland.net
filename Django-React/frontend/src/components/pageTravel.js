@@ -10,16 +10,16 @@ const PageTravel = (props) => {
     }
 
     const goNextPage = () => {
-        props.setOffset(props.offset + props.numberResult)
+        props.setOffset(props.offset + props.countResult)
         setCurrentPageNumber(prev => prev + 1)
         scrollToTop()
     }
 
     const goDoubleNextPage = () => {
         if (props.offset === 0) {
-            props.setOffset(props.numberResult * 2)
+            props.setOffset(props.countResult * 2)
         } else {
-            props.setOffset(props.numberResult * 2 + props.offset)
+            props.setOffset(props.countResult * 2 + props.offset)
         }
 
         setCurrentPageNumber(prev => prev + 2)
@@ -27,7 +27,7 @@ const PageTravel = (props) => {
     }
 
     const goPreviousPage = () => {
-        props.setOffset(props.offset - props.numberResult)
+        props.setOffset(props.offset - props.countResult)
         setCurrentPageNumber(prev => prev - 1)
         scrollToTop()
     }
@@ -35,7 +35,7 @@ const PageTravel = (props) => {
     const goLastPage = () => {
         if (props.pageTravel != '') {
             const totalDataCount = props.pageTravel.count
-            const resultToShow = props.numberResult
+            const resultToShow = props.countResult
             props.setOffset(totalDataCount - totalDataCount % resultToShow)
             setCurrentPageNumber(Math.ceil(totalDataCount / resultToShow))
             scrollToTop()
@@ -45,7 +45,7 @@ const PageTravel = (props) => {
     const whatIsTheLastPageNumber = () => {
         if (props.pageTravel != '') {
             const totalDataCount = props.pageTravel.count
-            const resultToShow = props.numberResult
+            const resultToShow = props.countResult
             return Math.ceil(totalDataCount / resultToShow)
         }
     }
@@ -54,7 +54,7 @@ const PageTravel = (props) => {
         if (props.pageTravel != '') {
             const totalDataCount = props.pageTravel.count
             const offset = props.offset
-            const resultToShow = props.numberResult
+            const resultToShow = props.countResult
             if (offset + (resultToShow * 2) < totalDataCount) {
                 return true
             } else {

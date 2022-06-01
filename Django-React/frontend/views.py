@@ -95,7 +95,7 @@ class Categories(viewsets.ModelViewSet):
 
 class quiz(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Quizzes.objects.order_by('-publish').all()
+    queryset = Quizzes.objects.all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
@@ -103,27 +103,15 @@ class quiz(viewsets.ModelViewSet):
 
 class pointy(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Quizzes_Pointy.objects.order_by('-publish').all()
+    queryset = Quizzes_Pointy.objects.all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
 # --------------------------------------------------------
 
-class SubCategory_new(viewsets.ModelViewSet):
+class SubCategory(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = SubCategories.objects.order_by('-publish').all()
-    serializer_class = SubCategoriesSerializer
-    filterset_class = SubCategoriesFilter
-
-class SubCategory_best(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = SubCategories.objects.order_by('-views').all()
-    serializer_class = SubCategoriesSerializer
-    filterset_class = SubCategoriesFilter
-
-class SubCategory_alphabet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = SubCategories.objects.order_by('-subCategory').all()
+    queryset = SubCategories.objects.all()
     serializer_class = SubCategoriesSerializer
     filterset_class = SubCategoriesFilter
 

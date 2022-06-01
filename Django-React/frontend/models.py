@@ -11,7 +11,7 @@ class Categories(models.Model):
     title_persian = models.CharField(max_length=80, null=False, blank=False, default=None)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
-    date_published = models.DateField(default=datetime.date.today)
+    publish = models.DateField(default=datetime.date.today)
     
     def __str__(self):
         return str(self.title_english)
