@@ -10,19 +10,21 @@ import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import Header from '../components/header'
 import SkeletonLoading from '../components/skeletonLoading';
+import Tools from '../components/tools';
 
-import { log, takeParameterFromUrl } from '../components/base'
+import { log, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
 
 const Sort = () => {
     const [loadState, setLoadState] = useState()
-    const [quizzes, setQuizzes] = useState([])
+    const [content, setContent] = useState([])
+    const [sortedContent, setSortedContent] = useState([])
     const [sortTitle, setSortTitle] = useState()
     const [sortType, setSortType] = useState()
     const [sortCategory, setSortCategory] = useState()
-    const [numberOfResult, setNumberOfResult] = useState(16)
+    const [countNewFetched, setCountNewFetched] = useState()
+    const [countResult, setCountResult] = useState(100)
     const [loading, setLoading] = useState(false);
     const [offset, setOffset] = useState(0);
-    const [quizOrTest, chooseQuizOrTest] = useState();
 
     useEffect(() => {
         componentChangeDetector()
@@ -30,14 +32,18 @@ const Sort = () => {
 
     useEffect(() => {
         setOffset(0)
-        setNumberOfResult(16)
-        setQuizzes([])  // restart list
+        setCountResult(100)
+        setContent([])  // restart list
         checkWhatSort()
-        getMoreQuiz()
+        fetchContent()
+        setTitle()
         setLoadState(true)
         document.querySelector('#land').classList.add('overflow-y-auto')  // make content load on scroll
-        
     }, [sortType])
+
+    useEffect(() => {
+        sortContent()
+    }, [content])
 
     const componentChangeDetector = () => {
         (function(history){
@@ -61,117 +67,58 @@ const Sort = () => {
         setSortCategory(takeParameterFromUrl('c'))
     }
 
-    const getMoreQuiz = async () => {
+    const sortContent = () => {
+        switch (sortType) {
+            case 'newest':
+                setSortedContent(content.sort(sortByNewest))
+                break
+            case 'bestest':
+                setSortedContent(content.sort(sortByViews))
+                break
+            case 'trend':
+                setSortedContent(content.sort(sortByMonthlyViews))
+                break
+            case 'alphabet':
+                setSortedContent(content.sort(sortByAlphabet))
+                break
+        }
+    }
+
+    const setTitle = () => {
+        switch (sortType) {
+            case 'newest':
+                setSortTitle('جدیدترین')
+                break
+            case 'bestest':
+                setSortTitle('پربازدیدترین')
+                break
+            case 'trend':
+                setSortTitle('محبوب ترین')
+                break
+        }
+
+    }
+
+    const fetchContent = async () => {
         if (loading) {
             return;
         }
-
-        let quizzesData
         
-        switch (sortType) {
-            // case 'newestCategory':
-            //     quizzesData = await axios.get(`/api/categories/?limit=${numberOfResult}&offset=${offset}&public=true`)
-            //     setSortTitle('جدیدترین کتگوری ها')
-                //    setQuizzes([...quizzes, ...quizzesData.data.results]);
-                // setOffset(offset + numberOfResult)
-                // setLoading(false);
-            //     break
+        setLoading(true)
 
-            // case 'bestestCategory':
-            //     quizzesData = await axios.get(`/api/categories/?&limit=${numberOfResult}&offset=${offset}&public=true`)
-            //     setSortTitle('بهترین کتگوری ها')
-                //    setQuizzes([...quizzes, ...quizzesData.data.results]);
-                // setOffset(offset + numberOfResult)
-                // setLoading(false);
-            //     break
+        const quiz = await axios.get(`/api/quiz/?limit=${countResult}&offset=${offset}&public=true`)
+        const pointy = await axios.get(`/api/pointy/?limit=${countResult}&offset=${offset}&public=true`)
+        const content_new = quiz.data.results.concat(pointy.data.results)
+        
+        setCountNewFetched(content_new.length)
 
-            // case 'monthlyCategory':
-            //     quizzesData = await axios.get(`/api/categories/?&limit=${numberOfResult}&offset=${offset}&public=true`)
-            //     setSortTitle('بهترین کتگوری های این ماه')
-                //    setQuizzes([...quizzes, ...quizzesData.data.results]);
-                // setOffset(offset + numberOfResult)
-                // setLoading(false);
-            //     break
-
-            case 'newest':
-                setLoading(true)
-                chooseQuizOrTest('quiz');
-                if (sortCategory) {
-                    quizzesData = await axios.get(`/api/quiz_new/?limit=${numberOfResult}&offset=${offset}&category__icontains=${sortCategory}&public=true`)
-                } else {
-                    quizzesData = await axios.get(`/api/quiz_new/?limit=${numberOfResult}&offset=${offset}&public=true`)
-                }
-                setSortTitle('جدیدترین کوییز ها')
-                setQuizzes([...quizzes, ...quizzesData.data.results]);
-                setOffset(offset + numberOfResult)
-                setLoading(false);
-                break
-
-            case 'bestest':
-                setLoading(true);
-                chooseQuizOrTest('quiz')
-                if (sortCategory) {
-                    quizzesData = await axios.get(`/api/quiz_best/?&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}&public=true`)
-                } else {
-                    quizzesData = await axios.get(`/api/quiz_best/?&limit=${numberOfResult}&offset=${offset}&public=true`)
-                }
-                setSortTitle('بهترین کوییز ها')
-                setQuizzes([...quizzes, ...quizzesData.data.results]);
-                setOffset(offset + numberOfResult)
-                setLoading(false);
-                break
-
-            case 'monthly':
-                setLoading(true);
-                chooseQuizOrTest('quiz')
-                if (sortCategory) {
-                    quizzesData = await axios.get(`/api/quiz_monthly/?&category__icontains=${sortCategory}&limit=${numberOfResult}&offset=${offset}&public=true`)
-                } else {
-                    quizzesData = await axios.get(`/api/quiz_monthly/?&limit=${numberOfResult}&offset=${offset}&public=true`)
-                }
-                setSortTitle('بهترین کوییز های این ماه')
-                setQuizzes([...quizzes, ...quizzesData.data.results]);
-                setOffset(offset + numberOfResult)
-                setLoading(false);
-                break
-
-            case 'newest_test':
-                setLoading(true)
-                chooseQuizOrTest('test');
-                quizzesData = await axios.get(`/api/pointy_new/?limit=${numberOfResult}&offset=${offset}&public=true`)
-                
-                setSortTitle('جدیدترین تست ها')
-                setQuizzes([...quizzes, ...quizzesData.data.results]);
-                setOffset(offset + numberOfResult)
-                setLoading(false);
-                break
-
-            case 'bestest_test':
-                setLoading(true);
-                chooseQuizOrTest('test')
-                quizzesData = await axios.get(`/api/best_pointy_quiz/?limit=${numberOfResult}&offset=${offset}&public=true`)
-                
-                setQuizzes([...quizzes, ...quizzesData.data.results]);
-                setSortTitle('بهترین تست ها')
-                setOffset(offset + numberOfResult)
-                setLoading(false);
-                break
-
-            case 'monthly_test':
-                setLoading(true);
-                chooseQuizOrTest('test')
-                quizzesData = await axios.get(`/api/pointy_monthly/?limit=${numberOfResult}&offset=${offset}&public=true`)
-                
-                setQuizzes([...quizzes, ...quizzesData.data.results]);
-                setSortTitle('بهترین تست های این ماه')
-                setOffset(offset + numberOfResult)
-                setLoading(false);
-                break
-
-            default:
-                setSortTitle('این بخش موجود نمی باشد !')
-                break
+        if (sortCategory) {
+            content_new.filter(quiz => quiz.subCategory == sortCategory)
         }
+
+        setContent([...content, ...content_new]);
+        setOffset(offset + countResult)
+        setLoading(false);
     }
 
     return (
@@ -195,22 +142,10 @@ const Sort = () => {
 
             <h3 className='title mt-5'>{sortTitle}</h3>
 
-            {/* <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
-
-                {
-                    quizzes.length !== 0 && <QuizContainer quizzes={quizzes} bgStyle='trans' />
-                }
-
-                {
-                    pointy.length !== 0 && <QuizContainer quizzes={pointy} bgStyle='trans' />
-                }
-
-            </ul> */}
-
             <InfiniteScroll
-                dataLength={quizzes.length}
-                next={getMoreQuiz}
-                hasMore={quizzes.length % 16 == 0}
+                dataLength={sortedContent.length}
+                next={fetchContent}
+                hasMore={countNewFetched >= 100}
                 loader={
                     <div className={`
                         flex justify-center w-full
@@ -224,7 +159,7 @@ const Sort = () => {
                     </div>
                 }
                 endMessage={
-                    <div className='flex justify-center w-full mb-16'>
+                    <div className='flex justify-center w-full mb-100'>
                         <h2>
                             این داستان ادامه دارد . . .
                         </h2>
@@ -233,12 +168,7 @@ const Sort = () => {
                 scrollableTarget="land"
             >
                 <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
-                    {
-                        quizOrTest == 'quiz' ?
-                            <QuizContainer quizzes={quizzes} bgStyle='trans' />
-                            :
-                            <QuizContainer quizzes={quizzes} bgStyle='trans' />
-                    }
+                    <QuizContainer quizzes={sortedContent} bgStyle='trans' />
                 </ul>   
             </InfiniteScroll>
 

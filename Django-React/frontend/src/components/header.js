@@ -141,8 +141,9 @@ const Header = () => {
                         {/* <button className="header__btn">
                             <Link to="/blog"> وبلاگ </Link>
                         </button> */}
-                        <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
-                        <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button>
+                        {/* <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
+                        <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button> */}
+                        <Link to='/sort?s=newest' className='text-xl'>کوییز و تست ها</Link>
                         <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
                     </div>
 
