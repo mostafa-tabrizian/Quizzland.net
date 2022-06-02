@@ -18,7 +18,6 @@ const Sort = () => {
     const [loadState, setLoadState] = useState()
     const [content, setContent] = useState([])
     const [sortedContent, setSortedContent] = useState([])
-    const [sortTitle, setSortTitle] = useState()
     const [sortType, setSortType] = useState()
     const [sortCategory, setSortCategory] = useState()
     const [countNewFetched, setCountNewFetched] = useState()
@@ -36,7 +35,6 @@ const Sort = () => {
         setContent([])  // restart list
         checkWhatSort()
         fetchContent()
-        setTitle()
         setLoadState(true)
         document.querySelector('#land').classList.add('overflow-y-auto')  // make content load on scroll
     }, [sortType])
@@ -84,21 +82,6 @@ const Sort = () => {
         }
     }
 
-    const setTitle = () => {
-        switch (sortType) {
-            case 'newest':
-                setSortTitle('جدیدترین')
-                break
-            case 'bestest':
-                setSortTitle('پربازدیدترین')
-                break
-            case 'trend':
-                setSortTitle('محبوب ترین')
-                break
-        }
-
-    }
-
     const fetchContent = async () => {
         if (loading) {
             return;
@@ -130,7 +113,7 @@ const Sort = () => {
             <Header />
 
             <Helmet>
-                <title>{`${sortTitle} | کوییزلند`}</title>
+                <title>{`کوییز و تست ها | کوییزلند`}</title>
                 <meta name="description" content="بهترین و جدید ترین کوییز و تست های کوییزلند" />
                 <meta name="keywords" content="کوییز, بهترین کوییز ها, جدیدترین کوییز ها, بهترین تست ها, جدیدترین تست ها, کوییزلند" />
             </Helmet>
@@ -140,12 +123,16 @@ const Sort = () => {
                 <div id="pos-article-display-26094"></div>
             </div> */}
 
-            <h3 className='title mt-5'>{sortTitle}</h3>
+            <div className='flex space-x-24 mb-10 justify-center'>
+                <Link to='/sort?s=trend'><button className={`title ${sortType == 'trend' ? 'bloodRiver' : 'hover:text-red-200'}`}>محبوب ترین</button></Link>
+                <Link to='/sort?s=bestest'><button className={`title ${sortType == 'bestest' ? 'bloodRiver' : 'hover:text-red-200'}`}>بهترین</button></Link>
+                <Link to='/sort?s=newest'><button className={`title ${sortType == 'newest' ? 'bloodRiver' : 'hover:text-red-200'}`}>جدیدترین</button></Link>
+            </div>
 
             <InfiniteScroll
                 dataLength={sortedContent.length}
                 next={fetchContent}
-                hasMore={countNewFetched >= 100}
+                hasMore={countNewFetched >= 100 || countNewFetched!=0}
                 loader={
                     <div className={`
                         flex justify-center w-full
@@ -159,7 +146,7 @@ const Sort = () => {
                     </div>
                 }
                 endMessage={
-                    <div className='flex justify-center w-full mb-100'>
+                    <div className='flex justify-center w-full mb-10'>
                         <h2>
                             این داستان ادامه دارد . . .
                         </h2>
