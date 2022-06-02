@@ -21,7 +21,7 @@ let quiz = 'null'
 let advertPos = 0
 let quizCounter = 0
 
-const Quiz = () => {
+const Quiz = (props) => {
     const [questions, setQuestions] = useState([])
     const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
@@ -538,16 +538,16 @@ const Quiz = () => {
             <Header />
 
             <Helmet>
-                <title>{`کوییزلند | کوییز ${quiz && replaceFunction(decodeURI(quiz.title), '+', ' ')}`}</title>
+                <title>{`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
 
                 <link rel="canonical" href={currentUrl()} />
 
-                <meta name="description" content={`با ${questions?.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz?.title} ${quiz?.subCategory} کوییز از`} />
+                <meta name="description" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quiz?.thumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
-                <meta property="og:title" content={quiz?.title} />
-                <meta property="og:description" content={`با ${questions?.length} سوال جذاب و فان. ببین میتونی بالای 80% بزنی | ${quiz?.title} ${quiz?.subCategory} کوییز از`} />
+                <meta property="og:title" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta property="og:description" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
                 <meta property="og:image" content={quiz?.thumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
@@ -557,31 +557,31 @@ const Quiz = () => {
 
                 <script type="application/ld+json">
                     {`
-                    {
-                        "@context": "https://schema.org",
-                        "@type": "Article",
-                        "headline": "${quiz?.title}",
-                        "image": [
-                            "${quiz?.thumbnail}",
-                            "${quiz?.background}"
-                         ],
-                        "datePublished": "${quiz?.publish}",
-                        "dateModified": "${quiz?.publish}",
-                        "author": {
-                            "@type": "Person",
-                            "name": "مصطفی تبریزیان",
-                            "url": "https://www.quizzland.net/contact"
-                        },
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "کوییزلند",
-                            "logo": {
-                                "@type": "ImageObject",
-                                "url": "https://www.quizzland.net${logo}"
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "Article",
+                            "headline": "${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند",
+                            "image": [
+                                "${quiz?.thumbnail}",
+                                "${quiz?.background}"
+                            ],
+                            "datePublished": "${quiz?.publish}",
+                            "dateModified": "${quiz?.publish}",
+                            "author": {
+                                "@type": "Person",
+                                "name": "مصطفی تبریزیان",
+                                "url": "https://www.quizzland.net/contact"
+                            },
+                            "publisher": {
+                                "@type": "Organization",
+                                "name": "کوییزلند",
+                                "logo": {
+                                    "@type": "ImageObject",
+                                    "url": "https://www.quizzland.net${logo}"
+                                }
                             }
                         }
-                    }
-                `}
+                    `}
                 </script>
             </Helmet>
 
@@ -757,7 +757,7 @@ const Quiz = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="flex flex-wrap align-baseline">
+                <ul className="flex flex-wrap w-[70rem] mx-auto mb-10">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }

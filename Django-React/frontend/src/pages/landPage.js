@@ -84,16 +84,16 @@ const Index = () => {
         const quiz = await axios.get(`/api/quiz/?limit=8&public=true`)
         const pointy = await axios.get(`/api/pointy/?limit=8&public=true`)
         const content = quiz.data.results.concat(pointy.data.results)
-        const loadMoreQuiz = await axios.get(`/api/quiz/?limit=36&offset=8&public=true`).sortByNewest()
+        const loadMoreQuiz = await axios.get(`/api/quiz/?limit=36&offset=8&public=true`)
 
-        setContent_new(content.sortByNewest())
-        setContent_monthly(content.sortByMonthlyViews())
-        setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sortByNewest())
-        setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sortByNewest())
-        setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sortByNewest())
-        setLoadMoreQuiz(loadMoreQuiz.data.results)
+        setContent_new(content.sort(sortByNewest))
+        setContent_monthly(content.sort(sortByMonthlyViews))
+        setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sort(sortByNewest))
+        setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest))
+        setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest))
+        setLoadMoreQuiz(loadMoreQuiz.data.results.sort(sortByNewest))
 
-        recommendContentToUserByTopClickedCategory(content.sortByNewest())
+        recommendContentToUserByTopClickedCategory(content.sort(sortByNewest))
         setContentLoaded(true)
     }
 
@@ -112,18 +112,18 @@ const Index = () => {
 
                 <script type='application/ld+json'>
                     {`
-									{
-										"@context": "https://schema.org/",
-										"@type": "WebSite",
-										"name": "کوییزلند",
-										"url": "https://quizzland.net",
-										"potentialAction": {
-												"@type": "SearchAction",
-												"target": "https://www.quizzland.net/search?s={search_term_string}",
-												"query-input": "required name=search_term_string"
-										}
-									}
-								`}
+                        {
+                            "@context": "https://schema.org/",
+                            "@type": "WebSite",
+                            "name": "کوییزلند",
+                            "url": "https://quizzland.net",
+                            "potentialAction": {
+                                    "@type": "SearchAction",
+                                    "target": "https://www.quizzland.net/search?s={search_term_string}",
+                                    "query-input": "required name=search_term_string"
+                            }
+                        }
+                    `}
                 </script>
             </Helmet>
 

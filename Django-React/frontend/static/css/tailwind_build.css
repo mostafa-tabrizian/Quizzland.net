@@ -1000,6 +1000,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 90vw;
 }
 
+.w-\[70rem\] {
+  width: 70rem;
+}
+
 .max-w-\[110rem\] {
   max-width: 110rem;
 }
