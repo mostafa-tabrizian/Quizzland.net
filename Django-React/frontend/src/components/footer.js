@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom'
-import { HashLink } from 'react-router-hash-link'
 
 import { log } from './base'
-
-const instagramIcon = '/static/img/instagram-icon.svg'
 
 const copyRightDate = () => {
     const date = new Date();
@@ -32,15 +29,6 @@ const Footer = () => {
                 </div>
 
                 <div>
-                    <h3>تست ها</h3>
-                    <ul>
-                        <li><a href="/sort?s=newest_test"> جدیدترین ها </a></li>
-                        <li><a href="/sort?s=monthly_test"> بهترین های ماه </a></li>
-                        <li><a href="/sort?s=bestest_test"> بهترین ها </a></li>
-                    </ul>
-                </div>
-
-                <div>
                     <h3>کتگوری ها</h3>
                     <ul>
                         <li><Link to="/category/movie-&-Series">فیلم و سریال</Link></li>
@@ -50,11 +38,11 @@ const Footer = () => {
                 </div>
 
                 <div>
-                    <h3>کوییز ها</h3>
+                    <h3>کوییز و تست ها</h3>
                     <ul>
-                        <li><a href="/sort?s=newest"> جدیدترین ها </a></li>
-                        <li><a href="/sort?s=monthly"> بهترین های ماه </a></li>
-                        <li><a href="/sort?s=bestest"> بهترین ها </a></li>
+                        <li><a href="/sort?s=newest"> جدیدترین </a></li>
+                        <li><a href="/sort?s=trend"> محبوب ترین </a></li>
+                        <li><a href="/sort?s=bestest"> پربازدیدترین </a></li>
                     </ul>
                 </div>
 

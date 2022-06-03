@@ -413,22 +413,22 @@ const Quiz = (props) => {
             <Header />
 
             <Helmet>
-            <title>{`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
+                <title>{`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
 
-            <link rel="canonical" href={currentUrl()} />
+                <link rel="canonical" href={currentUrl()} />
 
-            <meta name="description" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
-            <meta name="keywords" content="کوییز, کوییزلند" />
-            <meta name="msapplication-TileImage" content={quiz?.thumbnail} />
-            <meta property="og:site_name" content="کوییزلند" />
-            <meta property="og:title" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
-            <meta property="og:description" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
-            <meta property="og:image" content={quiz?.thumbnail} />
-            <meta property="og:image:type" content="image/jpeg" />
-            <meta property="og:image:width" content="300" />
-            <meta property="og:image:height" content="300" />
-            <meta property="og:type" content="article" />
-            <meta property="og:url" content={currentUrl()} />
+                <meta name="description" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta name="keywords" content="کوییز, کوییزلند" />
+                <meta name="msapplication-TileImage" content={quiz?.thumbnail} />
+                <meta property="og:site_name" content="کوییزلند" />
+                <meta property="og:title" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta property="og:description" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta property="og:image" content={quiz?.thumbnail} />
+                <meta property="og:image:type" content="image/jpeg" />
+                <meta property="og:image:width" content="300" />
+                <meta property="og:image:height" content="300" />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={currentUrl()} />
 
                 <script type="application/ld+json">
                     {`
@@ -629,7 +629,7 @@ const Quiz = (props) => {
                 </div>
             } */}
 
-            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions h-full mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
+            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                 <div className={`quiz__hider mt-5 flex relative`}>
                     {
                         !(contentLoaded) &&
@@ -655,7 +655,7 @@ const Quiz = (props) => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="flex flex-wrap w-[70rem] mx-auto mb-10">
+                <ul className="flex flex-wrap mw-[70rem] mx-auto mb-10">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }

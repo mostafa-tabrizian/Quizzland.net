@@ -149,7 +149,7 @@ const Search = (props) => {
                             {
                                 searched_content.map((quiz) => {
                                     return (
-                                        <li key={quiz.id} className='mr-2 md:mr-5 mb-4 md:mb-7 md:mt-5'>
+                                        <li key={quiz.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
                                             <article className={`
                                                 flex text-right h-full
                                                 rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl

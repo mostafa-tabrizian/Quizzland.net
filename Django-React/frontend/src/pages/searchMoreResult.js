@@ -106,7 +106,7 @@ const SearchMoreResult = () => {
             <Header />
 
             <Helmet>
-                <title>{`کوییزلند | ${searchValueWithOutSign} جستجو عبارت `}</title>
+                <title>{`جستجو | کوییزلند`}</title>
                 <meta name="description" content="صفحه جستجو کوییزلند" />
                 <meta name="keywords" content="جستجو, کوییز, کوییزلند" />
                 <meta name="robots" content="noindex, follow"></meta>
@@ -128,7 +128,7 @@ const SearchMoreResult = () => {
                     {
                         searched_category.map((category) => {
                             return (
-                                <li key={category.id} className='mr-5 mb-4 md:mb-7 md:mt-5'>
+                                <li key={category.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
                                     <article className={`
                                         flex text-right h-full
                                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl

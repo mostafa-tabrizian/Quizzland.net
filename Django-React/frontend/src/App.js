@@ -83,32 +83,34 @@ const App = () => {
                 <Router>
                     <ScrollToTop />
 
-                    <Switch>
-                        <Route path='/' exact component={Index} />
-                        <Route path='/guide' component={Guide} />
+                    <div className='p-4'>
+                        <Switch>
+                            <Route path='/' exact component={Index} />
+                            <Route path='/guide' component={Guide} />
 
-                        <Route path='/quiz/:title' component={Quiz} />
-                        <Route path='/test/:title' component={QuizPointy} />
-                        <Route path='/result_quiz' component={Result} />
-                        <Route path='/result_test' component={ResultPointy} />
+                            <Route path='/quiz/:title' component={Quiz} />
+                            <Route path='/test/:title' component={QuizPointy} />
+                            <Route path='/result_quiz' component={Result} />
+                            <Route path='/result_test' component={ResultPointy} />
 
-                        <Route path='/category/:category' exact component={Category} />
-                        <Route path='/category/:category/:subCategory' component={SubCategory} />
+                            <Route path='/category/:category' exact component={Category} />
+                            <Route path='/category/:category/:subCategory' component={SubCategory} />
 
-                        <Route path='/contact' component={Contact} />
-                        <Route path='/advertiseContact' component={AdvertiseContact} />
-                        <Route path='/support' component={Support} />
-                        <Route path='/privacy-policy' component={PrivacyPolicy} />
-                        <Route path='/search' component={Search} />
-                        <Route path='/sort' component={Sort} />
-                        <Route path='/blog' component={Blog} />
-                        <Route path='/makeMonthlyRecord' component={monthlyRecord} />
-                        <Route path='/restartEveryMonthlyViews' component={restartEveryMonthlyViews} />
-                        <Route path='/welcomeOwl' component={welcomeOwl} />
-                        <Route path='/welcomeZeynab' component={welcomeZeynab} />
+                            <Route path='/contact' component={Contact} />
+                            <Route path='/advertiseContact' component={AdvertiseContact} />
+                            <Route path='/support' component={Support} />
+                            <Route path='/privacy-policy' component={PrivacyPolicy} />
+                            <Route path='/search' component={Search} />
+                            <Route path='/sort' component={Sort} />
+                            <Route path='/blog' component={Blog} />
+                            <Route path='/makeMonthlyRecord' component={monthlyRecord} />
+                            <Route path='/restartEveryMonthlyViews' component={restartEveryMonthlyViews} />
+                            <Route path='/welcomeOwl' component={welcomeOwl} />
+                            <Route path='/welcomeZeynab' component={welcomeZeynab} />
 
-                        <Route component={pageNotFound_404} />
-                    </Switch>
+                            <Route component={pageNotFound_404} />
+                        </Switch>
+                    </div>
                     
                     <Footer />
                 </Router>

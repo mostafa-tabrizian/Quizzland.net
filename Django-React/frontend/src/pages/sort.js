@@ -123,10 +123,10 @@ const Sort = () => {
                 <div id="pos-article-display-26094"></div>
             </div> */}
 
-            <div className='flex space-x-24 mb-10 justify-center'>
-                <Link to='/sort?s=trend'><button className={`title ${sortType == 'trend' ? 'bloodRiver' : 'hover:text-red-200'}`}>محبوب ترین</button></Link>
-                <Link to='/sort?s=bestest'><button className={`title ${sortType == 'bestest' ? 'bloodRiver' : 'hover:text-red-200'}`}>بهترین</button></Link>
-                <Link to='/sort?s=newest'><button className={`title ${sortType == 'newest' ? 'bloodRiver' : 'hover:text-red-200'}`}>جدیدترین</button></Link>
+            <div className='flex space-x-12 md:space-x-24 mb-10 justify-center'>
+                <Link to='/sort?s=trend'><button className={`title text-xl ${sortType == 'trend' ? 'bloodRiver' : 'hover:text-red-200'}`}>محبوب ترین</button></Link>
+                <Link to='/sort?s=bestest'><button className={`title text-xl ${sortType == 'bestest' ? 'bloodRiver' : 'hover:text-red-200'}`}>پربازدیدترین</button></Link>
+                <Link to='/sort?s=newest'><button className={`title text-xl ${sortType == 'newest' ? 'bloodRiver' : 'hover:text-red-200'}`}>جدیدترین</button></Link>
             </div>
 
             <InfiniteScroll

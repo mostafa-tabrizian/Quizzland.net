@@ -106,7 +106,7 @@ const Header = () => {
                 </script>
             </Helmet>
 
-            <header className="header text-xl z-10 mb-10 flex md:justify-between max-w-[110rem] relative md:m-auto">
+            <header className="header text-xl z-10 mb-10 flex md:justify-between max-w-[110rem] relative md:m-auto p-4">
 
                 <div>
                     <Link to="/" className='flex header__logo justify-between items-center md:hidden'>
@@ -160,29 +160,23 @@ const Header = () => {
                 </div>
 
                 <ul className={`right-[12rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                    <li><Link to="/category/movie-&-series">🎬 فیلم و سریال</Link></li>
-                    <li><Link to="/category/celebrity">✨ سلبریتی</Link></li>
-                    <li><Link to="/category/psychology">🧠 روانشناسی</Link></li>
+                    <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
+                    <li><Link to="/category/celebrity">سلبریتی ✨</Link></li>
+                    <li><Link to="/category/psychology">روانشناسی 🧠</Link></li>
                 </ul>
 
                 <ul className={`right-[19rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                    <li><a href="/sort?s=newest"> ⏳ جدیدترین ها </a></li>
-                    <li><a href="/sort?s=monthly"> 👑 بهترین های ماه </a></li>
-                    <li><a href="/sort?s=bestest"> 👑 بهترین ها </a></li>
-                </ul>
-
-                <ul className={`right-[25rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${pointyNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                    <li><a href="/sort?s=newest_test"> ⏳ جدیدترین ها </a></li>
-                    <li><a href="/sort?s=monthly_test"> 👑 بهترین های ماه </a></li>
-                    <li><a href="/sort?s=bestest_test"> 👑 بهترین ها </a></li>
+                    <li><a href="/sort?s=newest"> ⏳ جدیدترین </a></li>
+                    <li><a href="/sort?s=monthly"> 👑 محبوب ترین </a></li>
+                    <li><a href="/sort?s=bestest"> 👑 پربازدیدترین </a></li>
                 </ul>
 
                 {/* Menu */}
 
-                <div className={`header__menu fixed text-right z-20 h-[25rem] w-[100%]
+                <div className={`header__menu fixed text-right z-20 h-[20rem] w-[100%]
                                 bg-[#000000b0] backdrop-blur-xl top-0 right-0
                                 rounded-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
-                                pr-8 pt-5 absolute top-0 right-0`}>
+                                pr-8 pt-5`}>
                     <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
                         <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                     </button>
@@ -190,25 +184,17 @@ const Header = () => {
                     <div className='mt-5'>
                         <h4 className='text-xl'>کتگوری ها</h4>
                         <ul className='flex space-x-6 space-x-reverse'>
-                            <li className='text-lg'><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
-                            <li className='text-lg'><Link to="/category/celebrity">سلبریتی ✨</Link></li>
-                            <li className='text-lg'><Link to="/category/psychology">روانشناسی 🧠</Link></li>
+                            <li className='text-lg'><Link to="/category/movie-&-series" params={{title: 'فیلم و سریال'}}>فیلم و سریال 🎬</Link></li>
+                            <li className='text-lg'><Link to="/category/celebrity" params={{title: 'سلبریتی'}}>سلبریتی ✨</Link></li>
+                            <li className='text-lg'><Link to="/category/psychology" params={{title: 'روانشناسی'}}>روانشناسی 🧠</Link></li>
                         </ul>
                     </div>
                     <div className='mt-5'>
-                        <h4 className='text-xl'>کویز ها</h4>
+                        <h4 className='text-xl'>کوییز و تست ها</h4>
                         <ul className='flex space-x-6 space-x-reverse'>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest"> جدیدترین ها </Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=monthly"> بهترین های ماه </Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=bestest"> بهترین ها </Link></li>
-                        </ul>
-                    </div>
-                    <div className='mt-5'>
-                        <h4 className='text-xl'>تست ها</h4>
-                        <ul className='flex space-x-6 space-x-reverse'>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest_test"> جدیدترین ها </Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=monthly_test"> بهترین های ماه </Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=bestest_test"> بهترین ها </Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest"> جدیدترین </Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=trend"> محبوب ترین </Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=bestest"> پربازدیدترین </Link></li>
                         </ul>
                     </div>
                     <div className='mt-5'>

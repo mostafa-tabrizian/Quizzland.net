@@ -22,10 +22,10 @@ const Category = (props) => {
     const [pageTravel, setPageTravel] = useState([])
     const [categories, setCategories] = useState([])
     const [sortedCategories, setSortedCategories] = useState([])
-    const [countResult, setCountResult] = useState(16)
+    const [countResult, setCountResult] = useState(25)
     const [offset, setOffset] = useState(0)
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
-    const [sortType, setSortType] = useState('views')
+    const [sortType, setSortType] = useState('monthlyViews')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
 
@@ -57,6 +57,12 @@ const Category = (props) => {
                 setCategoryQuery(window.location.pathname.split('/')[2], '-', ' ');
             };
         })(window.history);
+    }
+
+    const categoryTitleToPersian = {
+        'celebrity': 'سلبریتی',
+        'movie-&-series': 'فیلم و سریال',
+        'psychology': 'روانشناسی'
     }
 
     const sortContent = () => {
@@ -98,33 +104,38 @@ const Category = (props) => {
         return (
             sortedCategories.map((category) => {
                 return (
-                    <li key={category.id} className='mr-5 mb-4 md:mb-7 md:mt-5'>
+                    <li key={category.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
                         <article className={`
                             flex text-right h-full
-                            rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                            w-[33rem] md:w-full md:max-w-[16rem]
-                        `}
-                        >  {/* bg or trans */}
+                            rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                        `}>
 
                             <Link
                                 to={`/category/${categoryQuery}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}
-                                className='flex w-full md:block md:grid-cols-5 mb-4'
+                                className='flex md:block md:grid-cols-5'
                             >
-                                <div className='md:col-span-2 w-[360px] md:w-[260px] h-[120px] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
+                                <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                     <img
                                         src={category.thumbnail}
                                         width={1366}
                                         height={768}
                                         alt={`${category.subCategory} | ${category.title}`}
-                                        className=' h-full max-w-fit '
+                                        className='h-full object-cover'
                                     />
                                 </div>
-                                <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
-                                    <h2 className={`quizContainer__title quizContainer__title__noViews
-                                                    text-lg mr-5 md:w-full md:mr-0 md:text-base md:grid md:grid-cols-2`}>
-                                        <span>{category.title}</span>
-                                        <span className='block text-right md:text-left'>{category.subCategory}</span>
+                                <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
+                                    <h2 className={`
+                                        quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
+                                        text-xl md:w-52 md:text-base
+                                    `}>
+                                        {category.title}
                                     </h2>
+                                    <h3 className={`
+                                        quizContainer__title quizContainer__title__noViews flex
+                                        text-lg w-[10rem] md:w-52 md:text-base
+                                    `}>
+                                        {category.subCategory}
+                                    </h3>
                                 </div>
                             </Link>
                         </article>
@@ -142,7 +153,7 @@ const Category = (props) => {
             <Header />
 
             <Helmet>
-                <title>{`کوییزلند | کوییز های ${categoryTitle} `}</title>
+                <title>{`کوییز های ${categoryTitleToPersian[props.match.params.category]} | کوییزلند`}</title>
                 <meta name="description" content={`کوییزلند کوییز های ${categoryTitle}`} />
                 <meta name="keywords" content={`بهترین کوییز های ${categoryTitle} ,کوییز های ${categoryTitle}`} />
             </Helmet>
@@ -156,7 +167,6 @@ const Category = (props) => {
                 <h3 className='title'>کتگوری {categoryTitle}</h3>
 
                 <Tools
-                    countResult={countResult} setCountResult={setCountResult}
                     sortType={sortType} setSortType={setSortType}
                 />
 

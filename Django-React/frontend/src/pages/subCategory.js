@@ -102,7 +102,7 @@ const SubCategory = (props) => {
             <Header />
 
             <Helmet>
-                <title>{`کوییزلند | کوییز های ${persianSubCategoryWithoutSign}`}</title>
+                <title>{`کوییز های ${persianSubCategoryWithoutSign} | کوییزلند`}</title>
                 <meta name="description" content={`کوییزلند - کوییز های ${persianSubCategoryWithoutSign} `} />
                 <meta name="keywords" content={`بهترین کوییز های ${persianSubCategoryWithoutSign} , کوییز های ${persianSubCategoryWithoutSign}`} />
             </Helmet>
@@ -116,7 +116,6 @@ const SubCategory = (props) => {
                 <h3 className='title' style={{ color: 'white' }}>{persianSubCategoryWithoutSign}</h3>
 
                 <Tools
-                    countResult={countResult} setCountResult={setCountResult}
                     sortType={sortType} setSortType={setSortType}
                 />
 

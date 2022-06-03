@@ -803,7 +803,6 @@ hr {
 
 #land {
   height: 100%;
-  padding: 1rem;
 }
 
 .header__logo span {
@@ -1326,12 +1325,6 @@ hr {
 
 .quizContainer__header {
   direction: rtl;
-}
-
-.quizContainer article {
-  background: rgba(0, 0, 0, 0.33);
-  -webkit-backdrop-filter: blur(44px) !important;
-          backdrop-filter: blur(44px) !important;
 }
 
 .result {

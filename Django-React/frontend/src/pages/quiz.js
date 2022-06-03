@@ -729,7 +729,7 @@ const Quiz = (props) => {
                 </div>
             } */}
 
-            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions h-full mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
+            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                 <div className={`quiz__hider mt-5 flex relative`}>
                     {
                         !(contentLoaded) &&
@@ -757,7 +757,7 @@ const Quiz = (props) => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="flex flex-wrap w-[70rem] mx-auto mb-10">
+                <ul className="flex flex-wrap md:w-[70rem] mx-auto mb-10">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }
