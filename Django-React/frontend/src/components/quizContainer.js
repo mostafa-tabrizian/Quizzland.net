@@ -8,7 +8,7 @@ const QuizContainer = (props) => {
     return (
         props.quizzes.map((quiz) => {
             return (
-                <li key={quiz.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
+                <li key={quiz.id} className='md:mr-4 md:mb-4 mb-5 flex-auto'>
                     <article className={`
                         flex text-right h-full
                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl

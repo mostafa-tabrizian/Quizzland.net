@@ -16,6 +16,7 @@ import { log, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyView
 
 const Sort = () => {
     const [loadState, setLoadState] = useState()
+    const [contentLoaded, setContentLoaded] = useState(false)
     const [content, setContent] = useState([])
     const [sortedContent, setSortedContent] = useState([])
     const [sortType, setSortType] = useState(takeParameterFromUrl('s'))
@@ -88,17 +89,15 @@ const Sort = () => {
         
         setCountNewFetched(content_new.length)
 
-        log(content_new)
-
         const sortCategory = takeParameterFromUrl('c')
         if (sortCategory) {
             content_new = content_new.filter(quiz => quiz.categoryKey.id == sortCategory)
-            log(content_new)
         }
 
         setContent([...content, ...content_new]);
         setOffset(offset + countResult)
         setLoading(false);
+        setContentLoaded(true)
     }
 
     return (
@@ -123,6 +122,8 @@ const Sort = () => {
             <Tools
                 sortType={sortType} setSortType={setSortType}
             />
+
+            {SkeletonLoading(contentLoaded)}
 
             <InfiniteScroll
                 dataLength={sortedContent.length}

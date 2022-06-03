@@ -621,8 +621,8 @@ hr {
         }
 
         @include breakpoints-down(large) {
-            width: 10rem;
-            height: 5.625rem !important;
+            width: 12rem;
+            height: 6.5rem !important;
         }
     }
 

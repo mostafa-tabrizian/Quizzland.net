@@ -26,8 +26,13 @@ const QuizMonthlyRecord = () => {
     }
     
     const getAllCategories = async () => {
-        const categories = await axios.get('/api/subcategory/')
+        const categories = await axios.get('/api/category/')
         categoryDataSaveInExcel(categories)
+    }
+
+    const getAllSubCategories = async () => {
+        const subcategories = await axios.get('/api/subcategory/')
+        subcategoryDataSaveInExcel(subcategories)
     }
 
     const getAllBlogs = async () => {
@@ -109,8 +114,7 @@ const QuizMonthlyRecord = () => {
 
         worksheet.columns = [
             {header: 'Id', key: 'id', width: 5},
-            {header: 'Title', key: 'title', width: 30}, 
-            {header: 'subCategory', key: 'subCategory', width: 30}, 
+            {header: 'Title', key: 'title_english', width: 30}, 
             {header: 'Views', key: 'views', width: 10},
             {header: 'Monthly_views', key: 'monthly_views', width: 10},
             {header: 'Publish', key: 'publish', width: 35}
@@ -120,6 +124,42 @@ const QuizMonthlyRecord = () => {
             if (category.monthly_views !== 0) {
                 return worksheet.addRow({
                     id: category.id,
+                    title_english: category.title_english,
+                    views: category.views,
+                    monthly_views: category.monthly_views,
+                    publish: category.publish
+                });
+            }
+        })
+        
+        const date = new Date();
+        const xls64 = await workbook.xlsx.writeBuffer({ base64: true })
+        saveAs(
+            new Blob([xls64], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+            `${date.getMonth()}-${date.getFullYear()}-category`
+        )
+    }
+
+    const subcategoryDataSaveInExcel = async (subcategories) => {
+        const Excel = require('exceljs')
+        const workbook = new Excel.Workbook();
+        const worksheet = workbook.addWorksheet("Quizzland-Record(SubCategories)");
+
+        worksheet.columns = [
+            {header: 'Id', key: 'id', width: 5},
+            {header: 'Title', key: 'title', width: 30},
+            {header: 'Category', key: 'Category', width: 30}, 
+            {header: 'subCategory', key: 'subCategory', width: 30}, 
+            {header: 'Views', key: 'views', width: 10},
+            {header: 'Monthly_views', key: 'monthly_views', width: 10},
+            {header: 'Publish', key: 'publish', width: 35}
+        ];
+        
+        subcategories.data.forEach(category => {
+            if (category.monthly_views !== 0) {
+                return worksheet.addRow({
+                    id: category.id,
+                    Category: category.categoryKey.title_english,
                     subCategory: category.subCategory,
                     title: category.title,
                     views: category.views,
@@ -133,7 +173,7 @@ const QuizMonthlyRecord = () => {
         const xls64 = await workbook.xlsx.writeBuffer({ base64: true })
         saveAs(
             new Blob([xls64], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
-            `${date.getMonth()}-${date.getFullYear()}-category`
+            `${date.getMonth()}-${date.getFullYear()}-subcategory`
         )
     }
 
@@ -184,7 +224,8 @@ const QuizMonthlyRecord = () => {
         getAllQuizzes()
         getAllPointyQuizzes()
         getAllCategories()
-        getAllBlogs()
+        getAllSubCategories()
+        // gsubetAllBlogs()
     }
 
     const adminCheckerForRestartMonthlyViews = () => {

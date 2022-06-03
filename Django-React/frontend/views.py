@@ -48,6 +48,11 @@ def restartEveryMonthlyViews(request):
             quizPointy.monthly_views = 0
             quizPointy.save()
 
+        categories = SubCategories.objects.all()
+        for category in categories:
+            category.monthly_views = 0
+            category.save()
+
         subCategories = SubCategories.objects.all()
         for subCategory in subCategories:
             subCategory.monthly_views = 0
