@@ -24,6 +24,7 @@ urlpatterns = [
     path('test/<title>', index),
     path('result_quiz', index),
     path('result_test', index),
+    path('quiz-not-found', index),
     
     path('search', index),
     path('sort', index),

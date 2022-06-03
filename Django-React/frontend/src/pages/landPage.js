@@ -310,7 +310,7 @@ const Index = () => {
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
                         <h2>بهترین کوییز های این ماه</h2>
-                        <Link to="/sort?s=monthly" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <Link to="/sort?s=trend" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}

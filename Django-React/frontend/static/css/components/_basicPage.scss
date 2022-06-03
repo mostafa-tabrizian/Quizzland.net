@@ -9,7 +9,9 @@
 
 
     @include breakpoints-down(large) {
+        width: 100%;
         margin-bottom: 60vh;
+        padding: 2rem;
     }
 
     h3 {
@@ -31,10 +33,14 @@
     // position: absolute;
     // left: 50%;
     // top: 50%;
-    transform: translate(-50%, -53%);
+    // transform: translate(-50%, -53%);
     background: linear-gradient(#b52633, #46080c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
+
+    @include breakpoints-up(large) {
+        transform: translate(-50%, -53%);
+    }
 }

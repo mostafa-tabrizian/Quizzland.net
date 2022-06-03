@@ -59,7 +59,7 @@ const Header = () => {
             type='text'
             className={`text-right bg-transparent text-lg outline-none text-black`}
             ref={mobileSearchInput}
-            onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') }}}
+            onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
         />
     )
 
@@ -126,9 +126,9 @@ const Header = () => {
                     </button>
 
                     <Popover placement="bottomRight" title='' content={searchInputMobile} trigger="click">
-                        <button  className='flex header__btn md:hidden items-center' type="button">
-                            <svg className="w-8 h-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        <button className='flex header__btn md:hidden items-center' type="button">
+                            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
                     </Popover>
@@ -167,7 +167,7 @@ const Header = () => {
 
                 <ul className={`right-[19rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                     <li><a href="/sort?s=newest"> ⏳ جدیدترین </a></li>
-                    <li><a href="/sort?s=monthly"> 👑 محبوب ترین </a></li>
+                    <li><a href="/sort?s=trend"> 👑 محبوب ترین </a></li>
                     <li><a href="/sort?s=bestest"> 👑 پربازدیدترین </a></li>
                 </ul>
 
@@ -184,9 +184,9 @@ const Header = () => {
                     <div className='mt-5'>
                         <h4 className='text-xl'>کتگوری ها</h4>
                         <ul className='flex space-x-6 space-x-reverse'>
-                            <li className='text-lg'><Link to="/category/movie-&-series" params={{title: 'فیلم و سریال'}}>فیلم و سریال 🎬</Link></li>
-                            <li className='text-lg'><Link to="/category/celebrity" params={{title: 'سلبریتی'}}>سلبریتی ✨</Link></li>
-                            <li className='text-lg'><Link to="/category/psychology" params={{title: 'روانشناسی'}}>روانشناسی 🧠</Link></li>
+                            <li className='text-lg'><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
+                            <li className='text-lg'><Link to="/category/celebrity">سلبریتی ✨</Link></li>
+                            <li className='text-lg'><Link to="/category/psychology">روانشناسی 🧠</Link></li>
                         </ul>
                     </div>
                     <div className='mt-5'>

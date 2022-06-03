@@ -33,7 +33,7 @@ const Quiz = (props) => {
     const [ableToSelectOption, setAbleToSelectOption] = useState(true)
     const [quizEnded, setQuizEnded] = useState(false)
     const [loadState, setLoadState] = useState()
-    const [quizSlug, setQuizSlug] = useState(window.document.URL.split('/')[4])
+    const [quizSlug, setQuizSlug] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [SFXAllowed, setSFXAllowed] = useState()
@@ -52,12 +52,15 @@ const Quiz = (props) => {
     const result = useRef(null)
 
     useEffect(() => {
-        grabData()
         setLoadState(true)
         SFXLocalStorage()
         setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
         setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
     }, [quizSlug])
+
+    useEffect(() => {
+        grabData()
+    }, quizSlugReplacedWithHyphen)
 
     useEffect(() => {
         quizChangeDetector()
@@ -126,7 +129,7 @@ const Quiz = (props) => {
                     catch (e) {
                         log(e)
                         setTimeout(() => {
-                            window.location.href = '/404'
+                            window.location.href = '/quiz-not-found'
                         }, 5000)
                     }
                 })

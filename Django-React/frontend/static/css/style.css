@@ -1471,7 +1471,9 @@ hr {
 
 @media (max-width: 70em) {
   .basicPage {
+    width: 100%;
     margin-bottom: 60vh;
+    padding: 2rem;
   }
 }
 
@@ -1489,14 +1491,19 @@ hr {
 }
 
 .pageNotFound {
-  -webkit-transform: translate(-50%, -53%);
-          transform: translate(-50%, -53%);
   background: -webkit-gradient(linear, left top, left bottom, from(#b52633), to(#46080c));
   background: linear-gradient(#b52633, #46080c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
+}
+
+@media (min-width: 69em) {
+  .pageNotFound {
+    -webkit-transform: translate(-50%, -53%);
+            transform: translate(-50%, -53%);
+  }
 }
 
 .sortMore {
