@@ -584,17 +584,17 @@ hr {
 }
 
 .lowTitle {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     opacity: .15;
     font-family: myLalezar, serif;
     font-weight: 300;
     width: 100%;
     justify-content: center;
     display: flex;
-    margin-bottom: -4rem;
+    margin-bottom: -3rem;
 
     @include breakpoints-down(large) {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 }
 

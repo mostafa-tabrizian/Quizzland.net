@@ -9,6 +9,7 @@ import Header from '../components/header'
 import { log, replaceFunction } from '../components/base'
 import BackBtn from '../components/backBtn'
 import LoadingScreen from '../components/loadingScreen'
+import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 
 const Result = (props) => {
@@ -178,20 +179,20 @@ const Result = (props) => {
                     <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                 </div>
 
-                <div className='flex resultPointy__img'>
-                    {
-                        resultImg &&
-                        <img
-                            src={resultImg}
-                            width={690}
-                            alt={testDetail?.subCategory}
-                        />
-                    }
-                </div>
+                {
+                    resultImg &&
+                    <div className='flex resultPointy__img'>
+                            <img
+                                src={resultImg}
+                                width={690}
+                                alt={testDetail?.subCategory}
+                            />
+                    </div>
+                }
 
                 {
                     resultText &&
-                    <div className="resultPointy wrapper-p darkGls"
+                    <div className="mb-16 px-4 mt-5 wrapper-p darkGls"
                         dangerouslySetInnerHTML={{
                             __html: resultText
                         }}>
@@ -199,7 +200,7 @@ const Result = (props) => {
                 }
 
                 <div className='container px-20 mx-auto'>
-                    <div className="text-center result__share space-sm">
+                    <div className="text-center mb-4 space-sm">
                         <h5 className='text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
                         <InlineShareButtons
@@ -260,7 +261,7 @@ const Result = (props) => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="md:w-4/5 m-auto flex flex-wrap align-baseline justify-center">
+            <ul className="md:w-4/5 m-auto mt-5 flex flex-wrap align-baseline justify-center">
                 {
                     suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 }

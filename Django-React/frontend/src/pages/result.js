@@ -225,7 +225,7 @@ const Result = () => {
                 </div>
 
                 <div className='container px-20 mx-auto'>
-                    <div className="text-lg text-center result__share space-sm">
+                    <div className="text-lg text-center mb-4 space-sm">
                         <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${fanName} هستن`}</h5>
 
                         <InlineShareButtons
@@ -285,7 +285,7 @@ const Result = () => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="md:w-4/5 m-auto flex flex-wrap align-baseline justify-center">
+            <ul className="md:w-4/5 m-auto mt-5 flex flex-wrap align-baseline justify-center">
                 {
                     suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 }

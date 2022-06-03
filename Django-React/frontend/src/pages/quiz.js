@@ -421,7 +421,6 @@ const Quiz = (props) => {
     const isSafari = typeof (window) !== 'undefined' && navigator.userAgent.indexOf("Chrome") != -1 === false && navigator.userAgent.indexOf("Chrome") != -1
 
     const quizQuestions = (browser) => {
-
         return (
             questions?.map(question => {
                 return (
@@ -445,10 +444,10 @@ const Quiz = (props) => {
                         <div>
                             {questionShowIfNotNull(question.question)}
 
-                            <div className='mt-3 w-[22rem] md:w-[29rem]'>
-                                {!question.question_img.includes('NotExist') &&
+                            <div className='mt-3 w-[22rem] md:w-[29rem] h-[14rem] md:h-[18rem]'>
+                                {!question.question_img?.includes('NotExist') &&
                                     <LazyLoadImage
-                                        src={question.question_img}
+                                        src={question?.question_img}
                                         width={1366}
                                         height={768}
                                         alt={question.title}
@@ -755,7 +754,7 @@ const Quiz = (props) => {
             {/* Adverts */}
             <div className='adverts_center' id='mediaad-bNpr'></div>
 
-            <div className='space-med'>
+            <div className='mt-10'>
                 <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor mb-5'>کوییز های مشابه</h7>
 
                 {SkeletonLoading(contentLoaded)}

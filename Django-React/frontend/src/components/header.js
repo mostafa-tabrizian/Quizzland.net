@@ -121,10 +121,6 @@ const Header = () => {
                 </div>
 
                 <div className='absolute right-6 flex items-center'>
-                    <button type="button" onClick={openCloseMenu} className={`header__btn mr-5 header__white md:hidden`} aria-label="Menu Button">
-                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
-                    </button>
-
                     <Popover placement="bottomRight" title='' content={searchInputMobile} trigger="click">
                         <button className='flex header__btn md:hidden items-center' type="button">
                             <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -132,6 +128,10 @@ const Header = () => {
                             </svg>
                         </button>
                     </Popover>
+
+                    <button type="button" onClick={openCloseMenu} className={`header__btn ml-5 header__white md:hidden`} aria-label="Menu Button">
+                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
+                    </button>
                 </div>
 
                 <Search />

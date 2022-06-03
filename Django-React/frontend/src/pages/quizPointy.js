@@ -12,6 +12,7 @@ import AddView from '../components/addView';
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
+import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 
 const logo = '/static/img/Q-small.png'
@@ -199,7 +200,7 @@ const Quiz = (props) => {
         if (question.option_1st) {
             return (
                 <div className="flex justify-center">
-                    <form className='quiz__options p-4 md:p-0 w-[100%] md:grid md:grid-cols-2 space-y-3 text-[5vw] md:text-[1.6vw] justify-center' action="">
+                    <form className='quiz__options w-[100%] md:grid md:grid-cols-2 space-y-3 text-[5vw] md:text-[1.6vw] justify-center' action="">
                         {question.option_1st !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-1`} /> <label className={`quiz__options__textLabel text-[1.3rem] bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> {question.option_1st} </label> </>}
                         {question.option_2nd !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel text-[1.3rem] bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
                         {question.option_3rd !== ('') && <> <input onClick={selectedOption} className='absolute opacity-0' type="radio" name="answer" id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel text-[1.3rem] bg-[#0000003c] backdrop-blur-xl border-2 border-solid border-[#adadad] p-1 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-xl cursor-pointer`} id={`inputLabel ${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
@@ -259,7 +260,7 @@ const Quiz = (props) => {
                         <div>
                             {questionShowIfNotNull(question.question)}
 
-                            <div className='mt-3 w-[22rem] md:w-[29rem]'>
+                            <div className='mt-3 w-[22rem] md:w-[29rem] h-[14rem] md:h-[18rem]'>
                                 {!question.question_img?.includes('NotExist') &&
                                     <LazyLoadImage
                                         src={question?.question_img}
@@ -653,12 +654,12 @@ const Quiz = (props) => {
                 </ul>
             </div>
 
-            <div className='space-med'>
-                <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>کوییز های مشابه</h7>
+            <div className='mt-10'>
+                <h7 className='flex justify-center quiz__tags__title items-center mb-5 beforeAfterDecor'>کوییز های مشابه</h7>
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="flex flex-wrap mw-[70rem] mx-auto mb-10">
+                <ul className="flex flex-wrap md:w-[70rem] mx-auto mb-10">
                     {
                         suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                     }

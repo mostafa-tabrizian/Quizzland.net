@@ -932,6 +932,30 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 13rem;
 }
 
+.h-\[14rem\] {
+  height: 14rem;
+}
+
+.max-h-\[32rem\] {
+  max-height: 32rem;
+}
+
+.max-h-\[\] {
+  max-height: ;
+}
+
+.max-h-\[47re\] {
+  max-height: 47re;
+}
+
+.max-h-\[47rem\] {
+  max-height: 47rem;
+}
+
+.max-h-\[21rem\] {
+  max-height: 21rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1943,6 +1967,18 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-bottom: 1.25rem;
   }
 
+  .md\:mt-6 {
+    margin-top: 1.5rem;
+  }
+
+  .md\:mt-7 {
+    margin-top: 1.75rem;
+  }
+
+  .md\:mt-12 {
+    margin-top: 3rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -1985,6 +2021,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:h-\[34rem\] {
     height: 34rem;
+  }
+
+  .md\:h-\[18rem\] {
+    height: 18rem;
+  }
+
+  .md\:max-h-\[18rem\] {
+    max-height: 18rem;
   }
 
   .md\:w-\[260px\] {

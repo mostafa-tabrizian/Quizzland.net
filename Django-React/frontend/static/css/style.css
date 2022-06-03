@@ -688,7 +688,7 @@ hr {
 }
 
 .lowTitle {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   opacity: .15;
   font-family: myLalezar, serif;
   font-weight: 300;
@@ -699,12 +699,12 @@ hr {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: -4rem;
+  margin-bottom: -3rem;
 }
 
 @media (max-width: 70em) {
   .lowTitle {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -1358,11 +1358,6 @@ hr {
   }
 }
 
-.result__share h5 {
-  margin-bottom: 1rem;
-  white-space: pre-line;
-}
-
 .result__img {
   -webkit-box-ordinal-group: 3;
       -ms-flex-order: 2;
@@ -1424,11 +1419,6 @@ hr {
 
 .tryAgain:hover {
   border: solid 1px darkRed !important;
-}
-
-.resultPointy {
-  margin-bottom: 4rem;
-  padding: 1rem;
 }
 
 .resultPointy p {
