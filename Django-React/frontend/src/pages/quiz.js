@@ -335,7 +335,6 @@ const Quiz = (props) => {
                         result.current.click()
                     } catch (err) {
                         log(err)
-                        log("Can't show the result from localStorage!")
                     }
                 }, 3500)
             }

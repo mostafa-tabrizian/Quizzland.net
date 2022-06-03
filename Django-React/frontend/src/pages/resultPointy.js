@@ -239,7 +239,6 @@ const Result = (props) => {
                         disabled={rateChangeable ? false : true}
                         className='flex justify-center my-3 biggerRate'
                         onChange={value => {
-                            log(testDetail.title)
                             const currentQuiz = testDetail.title
                             const lastRatedQuiz = localStorage.getItem('lastRatedQuiz')
 
