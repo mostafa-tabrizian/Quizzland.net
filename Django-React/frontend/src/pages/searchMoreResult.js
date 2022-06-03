@@ -77,7 +77,7 @@ const SearchMoreResult = () => {
 
             // Searched Category
 
-            const searched_category = await axios.get(`/api/subcategory_new/?public=true`)
+            const searched_category = await axios.get(`/api/subcategory/?public=true`)
             
             const searched_category_title = searched_category.data.filter(category => category.title.toLowerCase().includes(searchedValue))
             const searched_category_subCategory = searched_category.data.filter(category => category.subCategory.toLowerCase().includes(searchedValue))
@@ -96,6 +96,7 @@ const SearchMoreResult = () => {
             set_searched_content(searched_content_noDuplicates.slice(0, 200))
             set_searched_category(searched_category_noDuplicates.slice(0, 200))
         } catch (e) {
+            log(e)
             log('Error in search | cause : database')
         }
     }
@@ -123,12 +124,12 @@ const SearchMoreResult = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="flex flex-wrap">
+                <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
 
                     {
                         searched_category.map((category) => {
                             return (
-                                <li key={category.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
+                                <li key={category.id} className='md:mr-4 md:mb-4 mb-5 flex-auto'>
                                     <article className={`
                                         flex text-right h-full
                                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
@@ -177,7 +178,7 @@ const SearchMoreResult = () => {
                     <hr className="w-[20vw]" />
                 </div>
 
-                <ul className="flex flex-wrap">
+                <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
 
 
                     {

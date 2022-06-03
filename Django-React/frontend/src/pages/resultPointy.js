@@ -106,12 +106,18 @@ const Result = (props) => {
         window.history.go(-1)
     }
 
-    const getSuggestionsQuiz = async () => {
-        await axios.get(`/api/pointy/?subCategory__icontains=${testDetail && replaceFunction(testDetail.subCategory, ' ', '+')}&limit=4&public=true`)
-            .then((res) => {
-                setSuggestionQuizzes(res.data.results)
-            })
-        setContentLoaded(true)
+    const getSuggestionsQuiz = async (category, subCategory) => {
+        const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        let content = quiz.data.results.concat(pointy.data.results)
+        
+        if (content.length != 8) {
+            const quizByCategory = await axios.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
+            const pointyByCategory = await axios.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
+            content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
+        }
+            
+        setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
     }
 
     const pushRate = async (value) => {

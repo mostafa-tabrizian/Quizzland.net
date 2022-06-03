@@ -25,7 +25,7 @@ const Category = (props) => {
     const [countResult, setCountResult] = useState(25)
     const [offset, setOffset] = useState(0)
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
-    const [sortType, setSortType] = useState('monthlyViews')
+    const [sortType, setSortType] = useState('trend')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
@@ -75,7 +75,7 @@ const Category = (props) => {
                 whenChangeThisIDKWhyTheSortAffect('sort2')
                 setSortedCategories(categories.sort(sortByViews))
                 break
-            case 'monthlyViews':
+            case 'trend':
                 whenChangeThisIDKWhyTheSortAffect('sort3')
                 setSortedCategories(categories.sort(sortByMonthlyViews))
                 break
@@ -95,7 +95,7 @@ const Category = (props) => {
         await axios.get(`/api/subcategory/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
             .then((response => {
                 setPageTravel(response.data)
-                setCategories(response.data.results)
+                setCategories(response.data.results.sort(sortByMonthlyViews))
             }))
         setContentLoaded(true)
     }

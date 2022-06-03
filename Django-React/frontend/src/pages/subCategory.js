@@ -9,7 +9,7 @@ import AddView from '../components/addView';
 
 import Tools from '../components/tools'
 import PageTravel from '../components/pageTravel'
-import { log, replaceFunction, takeParameterFromUrl, sortByNewest, sortByMonthlyViews, sortByViews, sortByAlphabet } from '../components/base'
+import { log, replaceFunction, takeParameterFromUrl, sortByNewest, sortByMonthlyViews, sortByViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
@@ -22,7 +22,7 @@ const SubCategory = (props) => {
     const [countResult, setCountResult] = useState(16)
     const [currentPageNumberQuiz, setCurrentPageNumberQuiz] = useState(1)
     const [offset_content, setOffset_content] = useState(0)
-    const [sortType, setSortType] = useState('newest')
+    const [sortType, setSortType] = useState('trend')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     const subCategory = props.match.params.subCategory
@@ -56,7 +56,7 @@ const SubCategory = (props) => {
                 whenChangeThisIDKWhyTheSortAffect('sort2')
                 set_content(content.sort(sortByViews))
                 break
-            case 'monthlyViews':
+            case 'trend':
                 whenChangeThisIDKWhyTheSortAffect('sort3')
                 set_content(content.sort(sortByMonthlyViews))
                 break
@@ -66,7 +66,7 @@ const SubCategory = (props) => {
     const fetchContent = async () => {
         const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
         const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
-        const content = quiz.data.results.concat(pointy.data.results)
+        const content = quiz.data.results.concat(pointy.data.results).sort(sortByMonthlyViews);
 
         if (content.count !== 0) {
             set_content(content)
