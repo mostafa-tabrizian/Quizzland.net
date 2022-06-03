@@ -223,7 +223,7 @@ const Result = (props) => {
                                 size: 45,
 
 
-                                url: `https://www.quizzland.net/test/${testDetail && replaceFunction(testDetail.slug, ' ', '-')}`,
+                                url: window.location.href,
                                 image: testDetail?.thumbnail,
                                 title: testDetail?.title,
                             }}

@@ -42,7 +42,7 @@ const Footer = () => {
                     <ul>
                         <li><a href="/sort?s=newest"> جدیدترین </a></li>
                         <li><a href="/sort?s=trend"> محبوب ترین </a></li>
-                        <li><a href="/sort?s=bestest"> پربازدیدترین </a></li>
+                        <li><a href="/sort?s=views"> پربازدیدترین </a></li>
                     </ul>
                 </div>
 

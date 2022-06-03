@@ -10,7 +10,7 @@ import axios from 'axios'
 import Header from '../components/header'
 import AddView from '../components/addView';
 
-import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad } from '../components/base'
+import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
@@ -121,7 +121,7 @@ const Quiz = (props) => {
                     try {
                         AddView('quiz', quizData.id)
                         sendCategoryAsInterest(quizData.subCategory)
-                        getSuggestionsQuiz(quizData.subCategory)
+                        getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
                         applyBackground(quizData.background)
                         setQuiz(quizData)
 
@@ -506,9 +506,18 @@ const Quiz = (props) => {
         )
     }
 
-    const getSuggestionsQuiz = async (subCategory) => {
-        await axios.get(`/api/quiz/?subCategory__icontains=${subCategory && replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-            .then((res) => { setSuggestionQuizzes(res.data.results) })
+    const getSuggestionsQuiz = async (category, subCategory) => {
+        const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        let content = quiz.data.results.concat(pointy.data.results)
+        
+        if (content.length != 8) {
+            const quizByCategory = await axios.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
+            const pointyByCategory = await axios.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
+            content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
+        }
+            
+        setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
     }
 
     const SFXController = () => {

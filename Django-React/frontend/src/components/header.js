@@ -168,7 +168,7 @@ const Header = () => {
                 <ul className={`right-[19rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${quizNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                     <li><a href="/sort?s=newest"> ⏳ جدیدترین </a></li>
                     <li><a href="/sort?s=trend"> 👑 محبوب ترین </a></li>
-                    <li><a href="/sort?s=bestest"> 👑 پربازدیدترین </a></li>
+                    <li><a href="/sort?s=views"> 👑 پربازدیدترین </a></li>
                 </ul>
 
                 {/* Menu */}
@@ -184,9 +184,9 @@ const Header = () => {
                     <div className='mt-5'>
                         <h4 className='text-xl'>کتگوری ها</h4>
                         <ul className='flex space-x-6 space-x-reverse'>
-                            <li className='text-lg'><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
-                            <li className='text-lg'><Link to="/category/celebrity">سلبریتی ✨</Link></li>
-                            <li className='text-lg'><Link to="/category/psychology">روانشناسی 🧠</Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/celebrity">سلبریتی ✨</Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/psychology">روانشناسی 🧠</Link></li>
                         </ul>
                     </div>
                     <div className='mt-5'>
@@ -194,7 +194,7 @@ const Header = () => {
                         <ul className='flex space-x-6 space-x-reverse'>
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest"> جدیدترین </Link></li>
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=trend"> محبوب ترین </Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=bestest"> پربازدیدترین </Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=views"> پربازدیدترین </Link></li>
                         </ul>
                     </div>
                     <div className='mt-5'>

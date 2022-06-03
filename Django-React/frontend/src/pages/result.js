@@ -22,7 +22,6 @@ const Result = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [questionCount, setQuestionCount] = useState(null)
     const [correctAnswersCount, setCorrectAnswersCount] = useState(null)
-    const [quizResult, setQuizResult] = useState(null)
     const [rateChangeable, setRateChangeable] = useState(true)
     const [resultGif, setResultGif] = useState()
     const [fanName, setFanName] = useState()
@@ -248,9 +247,9 @@ const Result = () => {
                                 size: 45,
 
 
-                                url: `https://www.quizzland.net/quiz/${quizResult && replaceFunction(quizResult.slug, ' ', '-')}`,
-                                image: quizResult?.thumbnail,
-                                title: quizResult?.title,
+                                url: window.location.href,
+                                // image: quizResult?.thumbnail,
+                                title: quizTitle,
                             }}
                         />
 

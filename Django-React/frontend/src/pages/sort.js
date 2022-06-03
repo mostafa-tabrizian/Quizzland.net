@@ -19,7 +19,6 @@ const Sort = () => {
     const [content, setContent] = useState([])
     const [sortedContent, setSortedContent] = useState([])
     const [sortType, setSortType] = useState(takeParameterFromUrl('s'))
-    const [sortCategory, setSortCategory] = useState(takeParameterFromUrl('c'))
     const [countNewFetched, setCountNewFetched] = useState()
     const [countResult, setCountResult] = useState(100)
     const [loading, setLoading] = useState(false);
@@ -69,7 +68,7 @@ const Sort = () => {
                 whenChangeThisIDKWhyTheSortAffect('sort2')
                 setSortedContent(content.sort(sortByViews))
                 break
-            case 'monthlyViews':
+            case 'trend':
                 whenChangeThisIDKWhyTheSortAffect('sort3')
                 setSortedContent(content.sort(sortByMonthlyViews))
                 break
@@ -91,6 +90,7 @@ const Sort = () => {
 
         log(content_new)
 
+        const sortCategory = takeParameterFromUrl('c')
         if (sortCategory) {
             content_new = content_new.filter(quiz => quiz.categoryKey.id == sortCategory)
             log(content_new)

@@ -279,7 +279,7 @@ const Index = () => {
                     <span id='scroll' />
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>جدیدترین کوییز ها</h2>
+                        <h2>جدیدترین ها</h2>
                         <Link to="/sort?s=newest" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
@@ -308,7 +308,7 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>بهترین کوییز های این ماه</h2>
+                        <h2>محبوب ترین ها</h2>
                         <Link to="/sort?s=trend" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
