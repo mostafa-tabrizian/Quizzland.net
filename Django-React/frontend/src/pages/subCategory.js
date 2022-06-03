@@ -17,22 +17,17 @@ import SkeletonLoading from '../components/skeletonLoading';
 const SubCategory = (props) => {
 
     const [pageTravel, set_PageTravel] = useState([])
-
     const [content, set_content] = useState([])
-
     const [hide_content, set_hide_content] = useState(false)
-
     const [countResult, setCountResult] = useState(16)
     const [currentPageNumberQuiz, setCurrentPageNumberQuiz] = useState(1)
-
     const [offset_content, setOffset_content] = useState(0)
-
     const [sortType, setSortType] = useState('newest')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-
     const subCategory = props.match.params.subCategory
     const persianSubCategory = takeParameterFromUrl('sc')
+    const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
 
     useEffect(() => {
         if (persianSubCategory) {
@@ -54,16 +49,16 @@ const SubCategory = (props) => {
     const sortContent = () => {
         switch (sortType) {
             case 'newest':
+                whenChangeThisIDKWhyTheSortAffect('sort1')
                 set_content(content.sort(sortByNewest))
                 break
             case 'views':
+                whenChangeThisIDKWhyTheSortAffect('sort2')
                 set_content(content.sort(sortByViews))
                 break
             case 'monthlyViews':
+                whenChangeThisIDKWhyTheSortAffect('sort3')
                 set_content(content.sort(sortByMonthlyViews))
-                break
-            case 'alphabet':
-                set_content(content.sort(sortByAlphabet))
                 break
         }
     }

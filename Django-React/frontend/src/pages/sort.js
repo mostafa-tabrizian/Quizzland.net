@@ -18,12 +18,13 @@ const Sort = () => {
     const [loadState, setLoadState] = useState()
     const [content, setContent] = useState([])
     const [sortedContent, setSortedContent] = useState([])
-    const [sortType, setSortType] = useState()
-    const [sortCategory, setSortCategory] = useState()
+    const [sortType, setSortType] = useState(takeParameterFromUrl('s'))
+    const [sortCategory, setSortCategory] = useState(takeParameterFromUrl('c'))
     const [countNewFetched, setCountNewFetched] = useState()
     const [countResult, setCountResult] = useState(100)
     const [loading, setLoading] = useState(false);
     const [offset, setOffset] = useState(0);
+    const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
 
     useEffect(() => {
         componentChangeDetector()
@@ -32,16 +33,14 @@ const Sort = () => {
     useEffect(() => {
         setOffset(0)
         setCountResult(100)
-        setContent([])  // restart list
-        checkWhatSort()
         fetchContent()
         setLoadState(true)
         document.querySelector('#land').classList.add('overflow-y-auto')  // make content load on scroll
-    }, [sortType])
+    }, [])
 
     useEffect(() => {
         sortContent()
-    }, [content])
+    }, [sortType, content])
 
     const componentChangeDetector = () => {
         (function(history){
@@ -51,33 +50,28 @@ const Sort = () => {
                 pushState.apply(history, arguments);
             };
 
-            checkWhatSort()
+            if (document.getElementById('html')) {
+                document.getElementById('html').style='background: #121212'
+            }
+            
             document.getElementById('land').scrollIntoView()
 
         })(window.history);
-    }
-    
-    const checkWhatSort = async () => {
-        if (document.getElementById('html')) {
-            document.getElementById('html').style='background: #121212'
-        }
-        setSortType(takeParameterFromUrl('s'))
-        setSortCategory(takeParameterFromUrl('c'))
     }
 
     const sortContent = () => {
         switch (sortType) {
             case 'newest':
+                whenChangeThisIDKWhyTheSortAffect('sort1')
                 setSortedContent(content.sort(sortByNewest))
                 break
-            case 'bestest':
+            case 'views':
+                whenChangeThisIDKWhyTheSortAffect('sort2')
                 setSortedContent(content.sort(sortByViews))
                 break
-            case 'trend':
+            case 'monthlyViews':
+                whenChangeThisIDKWhyTheSortAffect('sort3')
                 setSortedContent(content.sort(sortByMonthlyViews))
-                break
-            case 'alphabet':
-                setSortedContent(content.sort(sortByAlphabet))
                 break
         }
     }
@@ -91,12 +85,15 @@ const Sort = () => {
 
         const quiz = await axios.get(`/api/quiz/?limit=${countResult}&offset=${offset}&public=true`)
         const pointy = await axios.get(`/api/pointy/?limit=${countResult}&offset=${offset}&public=true`)
-        const content_new = quiz.data.results.concat(pointy.data.results)
+        let content_new = quiz.data.results.concat(pointy.data.results)
         
         setCountNewFetched(content_new.length)
 
+        log(content_new)
+
         if (sortCategory) {
-            content_new.filter(quiz => quiz.subCategory == sortCategory)
+            content_new = content_new.filter(quiz => quiz.categoryKey.id == sortCategory)
+            log(content_new)
         }
 
         setContent([...content, ...content_new]);
@@ -123,11 +120,9 @@ const Sort = () => {
                 <div id="pos-article-display-26094"></div>
             </div> */}
 
-            <div className='flex space-x-12 md:space-x-24 mb-10 justify-center'>
-                <Link to='/sort?s=trend'><button className={`title text-xl ${sortType == 'trend' ? 'bloodRiver' : 'hover:text-red-200'}`}>محبوب ترین</button></Link>
-                <Link to='/sort?s=bestest'><button className={`title text-xl ${sortType == 'bestest' ? 'bloodRiver' : 'hover:text-red-200'}`}>پربازدیدترین</button></Link>
-                <Link to='/sort?s=newest'><button className={`title text-xl ${sortType == 'newest' ? 'bloodRiver' : 'hover:text-red-200'}`}>جدیدترین</button></Link>
-            </div>
+            <Tools
+                sortType={sortType} setSortType={setSortType}
+            />
 
             <InfiniteScroll
                 dataLength={sortedContent.length}

@@ -81,17 +81,16 @@ const Index = () => {
     }
 
     const grabData = async () => {
-        const quiz = await axios.get(`/api/quiz/?limit=8&public=true`)
-        const pointy = await axios.get(`/api/pointy/?limit=8&public=true`)
+        const quiz = await axios.get(`/api/quiz/?limit=70&public=true`)
+        const pointy = await axios.get(`/api/pointy/?limit=70&public=true`)
         const content = quiz.data.results.concat(pointy.data.results)
-        const loadMoreQuiz = await axios.get(`/api/quiz/?limit=36&offset=8&public=true`)
 
-        setContent_new(content.sort(sortByNewest))
-        setContent_monthly(content.sort(sortByMonthlyViews))
-        setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sort(sortByNewest))
-        setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest))
-        setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest))
-        setLoadMoreQuiz(loadMoreQuiz.data.results.sort(sortByNewest))
+        setContent_new(content.sort(sortByNewest).slice(0, 20))
+        setContent_monthly(content.sort(sortByMonthlyViews).slice(0, 20))
+        setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sort(sortByNewest).slice(0, 20))
+        setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest).slice(0, 20))
+        setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest).slice(0, 20))
+        setLoadMoreQuiz(content.sort(sortByNewest).slice(21, 69))
 
         recommendContentToUserByTopClickedCategory(content.sort(sortByNewest))
         setContentLoaded(true)
@@ -339,7 +338,7 @@ const Index = () => {
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
                         <h2>کوییز سلبریتی</h2>
-                        <Link to="/sort?s=newest&c=celebrity" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <Link to="/sort?s=newest&c=2" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -368,7 +367,7 @@ const Index = () => {
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
                         <h2>کوییز فیلم و سریال</h2>
-                        <Link to="/sort?s=newest&c=movie-&-series" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <Link to="/sort?s=newest&c=1" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -386,7 +385,7 @@ const Index = () => {
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
                         <h2>تست روانشناسی</h2>
-                        <Link to="/sort?s=newest&c=psychology" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <Link to="/sort?s=newest&c=3" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}

@@ -38,10 +38,11 @@ const Quiz = (props) => {
     const result = useRef(null)
 
     useEffect(() => {
+        scrollToTop()
         setLoadState(true)
         SFXLocalStorage()
         setSFXClick(new Audio('/static/sound/SFXClick.mp3'))
-    }, [quizSlug,])
+    }, [quizSlug])
 
     useEffect(() => {
         grabData()
@@ -50,6 +51,10 @@ const Quiz = (props) => {
     useEffect(() => {
         quizChangeDetector()
     })
+
+    const scrollToTop = () => {
+        document.querySelector("body").scrollTo(0,0)
+    }
 
     const SFXLocalStorage = () => {
         if (localStorage.getItem('SFXAllowed')) {
@@ -187,13 +192,6 @@ const Quiz = (props) => {
         }, 1500);
     }
 
-
-    const questionShowIfNotNull = (question) => {
-        if (question !== null) {
-            return <p className='quiz__question text-center bg-[#0000007c] backdrop-blur-xl rounded-2xl'> {question} </p>
-        }
-    }
-
     let questionCounterForId = 1
     const questionOptionsCheckBetweenStringOrImg = (question) => {
         questionCounterForId += 1
@@ -258,10 +256,14 @@ const Quiz = (props) => {
                         </span> */}
 
                         <div>
-                            {questionShowIfNotNull(question.question)}
+                            {
+                                question.question !== null &&
+                                <p className='quiz__question text-center bg-[#0000007c] backdrop-blur-xl rounded-2xl'> {question.question} </p>
+                            }
 
-                            <div className='mt-3 w-[22rem] md:w-[29rem] h-[14rem] md:h-[18rem]'>
-                                {!question.question_img?.includes('NotExist') &&
+                            {
+                                !question.question_img?.includes('NotExist') &&
+                                <div className='mt-3 w-[22rem] md:w-[29rem] h-[14rem] md:h-[18rem]'>
                                     <LazyLoadImage
                                         src={question?.question_img}
                                         width={1366}
@@ -269,8 +271,9 @@ const Quiz = (props) => {
                                         alt={question.title}
                                         className='object-cover object-top rounded-xl'
                                         title={question.title}
-                                    />}
-                            </div>
+                                    />
+                                </div>
+                            }
                         </div>
 
                         {questionOptionsCheckBetweenStringOrImg(question)}

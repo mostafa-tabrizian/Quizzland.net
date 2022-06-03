@@ -4,8 +4,16 @@ import { Link } from 'react-router-dom'
 
 import Header from '../components/header'
 
+const pathRed = '/static/img/bubbles.png'
+
 const NotFound_404 = () => {
 
+    useEffect(() => {
+        if (document.getElementById('html')) {
+            document.getElementById('html').style=`background: #0a0d13 url('${pathRed}') center center scroll !important`
+        }
+    }, [])
+    
     return (
         <React.Fragment>
 

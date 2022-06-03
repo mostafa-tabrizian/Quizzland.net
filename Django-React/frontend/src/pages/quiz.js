@@ -52,6 +52,7 @@ const Quiz = (props) => {
     const result = useRef(null)
 
     useEffect(() => {
+        scrollToTop()
         setLoadState(true)
         SFXLocalStorage()
         setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
@@ -65,6 +66,10 @@ const Quiz = (props) => {
     useEffect(() => {
         quizChangeDetector()
     })
+
+    const scrollToTop = () => {
+        document.querySelector("body").scrollTo(0,0)
+    }
 
     const SFXLocalStorage = () => {
         if (localStorage.getItem('SFXAllowed')) {
@@ -263,12 +268,6 @@ const Quiz = (props) => {
         }
     }
 
-    const questionShowIfNotNull = (question) => {
-        if (question !== null) {
-            return <p className='text-center p-3 backdrop-blur-2xl rounded-xl text-lg md:text-[1.5rem]'> {question} </p>
-        }
-    }
-
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
         setAbleToGoNext(false)
@@ -441,20 +440,25 @@ const Quiz = (props) => {
                             {questionCounterForId}
                         </span> */}
 
-                        <div>
-                            {questionShowIfNotNull(question.question)}
+                        <div className='mt-3 w-[22rem] md:w-[29rem]'>
+                            {
+                                question.question !== null &&
+                                <p className='text-center p-3 backdrop-blur-2xl rounded-xl text-lg md:text-[1.5rem]'> {question.question} </p>
+                            }
 
-                            <div className='mt-3 w-[22rem] md:w-[29rem] h-[14rem] md:h-[18rem]'>
-                                {!question.question_img?.includes('NotExist') &&
-                                    <LazyLoadImage
-                                        src={question?.question_img}
-                                        width={1366}
-                                        height={768}
-                                        alt={question.title}
-                                        className='object-cover object-top rounded-xl'
-                                        title={question.title}
-                                    />}
-                            </div>
+                            {
+                                !question.question_img?.includes('NotExist') &&
+                                <div className='mt-3 h-[14rem] md:h-[18rem]'>
+                                        <LazyLoadImage
+                                            src={question?.question_img}
+                                            width={1366}
+                                            height={768}
+                                            alt={question.title}
+                                            className='object-cover object-top rounded-xl'
+                                            title={question.title}
+                                        />
+                                </div>
+                            }
                         </div>
 
                         {questionOptionsCheckBetweenStringOrImg(question)}

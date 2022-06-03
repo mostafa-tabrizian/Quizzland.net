@@ -28,6 +28,7 @@ const Category = (props) => {
     const [sortType, setSortType] = useState('monthlyViews')
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
+    const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
 
     useEffect(() => {
         searchChangeDetector()
@@ -46,7 +47,6 @@ const Category = (props) => {
 
     useEffect(() => {
         sortContent()
-        returnCategories()
     }, [categories, sortType])
 
     const searchChangeDetector = () => {
@@ -68,16 +68,16 @@ const Category = (props) => {
     const sortContent = () => {
         switch (sortType) {
             case 'newest':
+                whenChangeThisIDKWhyTheSortAffect('sort1')
                 setSortedCategories(categories.sort(sortByNewest))
                 break
             case 'views':
+                whenChangeThisIDKWhyTheSortAffect('sort2')
                 setSortedCategories(categories.sort(sortByViews))
                 break
             case 'monthlyViews':
+                whenChangeThisIDKWhyTheSortAffect('sort3')
                 setSortedCategories(categories.sort(sortByMonthlyViews))
-                break
-            case 'alphabet':
-                setSortedCategories(categories.sort(sortByAlphabet))
                 break
         }
     }
@@ -98,51 +98,6 @@ const Category = (props) => {
                 setCategories(response.data.results)
             }))
         setContentLoaded(true)
-    }
-
-    const returnCategories = () => {
-        return (
-            sortedCategories.map((category) => {
-                return (
-                    <li key={category.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
-                        <article className={`
-                            flex text-right h-full
-                            rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                        `}>
-
-                            <Link
-                                to={`/category/${categoryQuery}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}
-                                className='flex md:block md:grid-cols-5'
-                            >
-                                <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
-                                    <img
-                                        src={category.thumbnail}
-                                        width={1366}
-                                        height={768}
-                                        alt={`${category.subCategory} | ${category.title}`}
-                                        className='h-full object-cover'
-                                    />
-                                </div>
-                                <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
-                                    <h2 className={`
-                                        quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
-                                        text-xl md:w-52 md:text-base
-                                    `}>
-                                        {category.title}
-                                    </h2>
-                                    <h3 className={`
-                                        quizContainer__title quizContainer__title__noViews flex
-                                        text-lg w-[10rem] md:w-52 md:text-base
-                                    `}>
-                                        {category.subCategory}
-                                    </h3>
-                                </div>
-                            </Link>
-                        </article>
-                    </li>
-                )
-            })
-        )
     }
 
     return (
@@ -175,7 +130,46 @@ const Category = (props) => {
                 <ul className="flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
 
                     {
-                        returnCategories()
+                        sortedCategories.map((category) => {
+                            return (
+                                <li key={category.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
+                                    <article className={`
+                                        flex text-right h-full
+                                        rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                                    `}>
+            
+                                        <Link
+                                            to={`/category/${categoryQuery}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}
+                                            className='flex md:block md:grid-cols-5'
+                                        >
+                                            <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
+                                                <img
+                                                    src={category.thumbnail}
+                                                    width={1366}
+                                                    height={768}
+                                                    alt={`${category.subCategory} | ${category.title}`}
+                                                    className='h-full object-cover'
+                                                />
+                                            </div>
+                                            <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
+                                                <h2 className={`
+                                                    quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
+                                                    text-xl md:w-52 md:text-base
+                                                `}>
+                                                    {category.title}
+                                                </h2>
+                                                <h3 className={`
+                                                    quizContainer__title quizContainer__title__noViews flex
+                                                    text-lg w-[10rem] md:w-52 md:text-base
+                                                `}>
+                                                    {category.subCategory}
+                                                </h3>
+                                            </div>
+                                        </Link>
+                                    </article>
+                                </li>
+                            )
+                        })
                     }
 
                 </ul>
