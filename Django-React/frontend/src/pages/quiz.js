@@ -441,7 +441,7 @@ const Quiz = (props) => {
 
                         <div className='mt-3 w-[22rem] md:w-[29rem]'>
                             {
-                                question.question !== null &&
+                                (question.question !== null && question.question !== '') &&
                                 <p className='text-center p-3 backdrop-blur-2xl rounded-xl text-lg md:text-[1.5rem]'> {question.question} </p>
                             }
 

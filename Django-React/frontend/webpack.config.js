@@ -48,7 +48,7 @@ module.exports = {
       "process.env": {
         'NODE_ENV': JSON.stringify("production"),  // development production
         'ADMINUSERNAME': JSON.stringify("MostafaT19"),
-        'ADMINPASSWORD': JSON.stringify("M19931506")
+        'ADMINPASSWORD': JSON.stringify("$Qu!zzland19931506")  // $Qu!zzland19931506  M19931506
       },
     }),
 

@@ -257,7 +257,7 @@ const Quiz = (props) => {
 
                         <div>
                             {
-                                question.question !== null &&
+                                (question.question !== null && question.question !== '') &&
                                 <p className='quiz__question text-center bg-[#0000007c] backdrop-blur-xl rounded-2xl'> {question.question} </p>
                             }
 
