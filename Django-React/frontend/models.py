@@ -17,7 +17,7 @@ class Categories(models.Model):
         return str(self.title_english)
     
 class CustomUser(AbstractUser):
-    fav_color = models.CharField(blank=True, max_length=120)
+    refresh_token = models.CharField(blank=True, max_length=120)
     
 class CustomUserAdmin(admin.ModelAdmin):
     model = CustomUser
