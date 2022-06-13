@@ -11,6 +11,21 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # token['fav_color'] = user.fav_color
         return token
 
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = (
+            'id',
+            'username',
+            'refresh_token',
+            'first_name',
+            'last_name',
+            'email',
+            'is_active',
+            'date_joined',
+            'last_login',
+        )
+
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categories

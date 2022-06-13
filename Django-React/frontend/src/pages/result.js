@@ -7,6 +7,7 @@ import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
 import axios from 'axios'
 import Header from '../components/header'
+import Footer from '../components/footer'
 
 import { log, replaceFunction, fadeIn, popUpShow, popUpHide, takeParameterFromUrl, sortByMonthlyViews } from '../components/base'
 import BackBtn from '../components/backBtn'
@@ -96,13 +97,13 @@ const Result = () => {
         const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
-        
+
         // if (content.length != 8) {
         //     const quizByCategory = await axios.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
         //     const pointyByCategory = await axios.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
         //     content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         // }
-            
+
         setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
         setContentLoaded(true)
     }
@@ -332,6 +333,8 @@ const Result = () => {
             <BackBtn />
 
             <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center px-2 py-1 rounded-lg' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
+
+            <Footer />
 
         </React.Fragment>
     );

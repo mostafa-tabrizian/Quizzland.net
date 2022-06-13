@@ -3,16 +3,17 @@ import React, { useState, useEffect } from 'react'
 import SkeletonLoading from '../components/skeletonLoading';
 
 import axios from 'axios'
+import axiosApi from '../components/axiosApi'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
 import { Carousel } from 'antd';
 
 import Header from '../components/header'
+import Footer from '../components/footer'
 import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import LoadingScreen from '../components/loadingScreen'
-
 
 const Index = () => {
     const [contentSuggestion, setContentSuggestion] = useState([])
@@ -427,6 +428,8 @@ const Index = () => {
 
                 </div>
             </div>
+
+            <Footer />
 
         </React.Fragment>
     );

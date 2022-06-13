@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import BackBtn from '../components/backBtn'
 import Header from '../components/header'
+import Footer from '../components/footer'
 
 const pathRed = '/static/img/bubbles.png'
 
@@ -11,7 +12,7 @@ const Support = () => {
 
     useEffect(() => {
         if (document.getElementById('html')) {
-            document.getElementById('html').style=`background: #0a0d13 url('${pathRed}') center center scroll !important`
+            document.getElementById('html').style = `background: #0a0d13 url('${pathRed}') center center scroll !important`
         }
     }, [])
 
@@ -37,5 +38,5 @@ const Support = () => {
         </React.Fragment>
     );
 }
- 
+
 export default Support;

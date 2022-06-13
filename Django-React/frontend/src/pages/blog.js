@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-
-
 import axios from 'axios'
 import { log, replaceFunction, datePublishHandler } from '../components/base'
 
@@ -59,7 +57,7 @@ const Blog = (props) => {
                                 </a>
                             </article>
                         </li>
-                        
+
                         <hr />
                     </div>
                 )
@@ -67,7 +65,7 @@ const Blog = (props) => {
         )
     }
 
-    
+
     return (
         <React.Fragment>
 
@@ -78,7 +76,7 @@ const Blog = (props) => {
                 <meta name="description" content={`وبلاگ کوییزلند`} />
                 <meta name="keywords" content={`وبلاگ`} />
             </Helmet>
-            
+
             <h3 className='lowTitle'>Quizzland Blog</h3>
             <h3 className='title'>وبلاگ کوییزلند</h3>
 
@@ -109,5 +107,5 @@ const Blog = (props) => {
         </React.Fragment>
     );
 }
- 
+
 export default Blog;

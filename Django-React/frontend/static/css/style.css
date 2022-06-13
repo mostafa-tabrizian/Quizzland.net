@@ -1452,8 +1452,8 @@ hr {
   margin-bottom: 30vh;
   width: 85%;
   text-align: center;
-  -webkit-box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.25);
-          box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.25);
+  -webkit-box-shadow: 0 0 15px 0 #ac272e;
+          box-shadow: 0 0 15px 0 #ac272e;
   padding: 3rem;
   border-radius: 15px;
   line-height: 2rem;

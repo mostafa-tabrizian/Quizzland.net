@@ -1,16 +1,34 @@
 from django.contrib import admin
-import django.contrib.auth.admin
-import django.contrib.auth.models
-from django.contrib import auth
+from django.contrib.auth.admin import UserAdmin
 from .models import *
+from django.contrib.auth.models import User
 
 admin.site.site_header = "Quizzland Admin Panel"
+
+class CustomUserAdmin(UserAdmin):
+    list_display = ('username', 'first_name', 'last_name')
+    # list_filter = (, )
+    search_fields = ['username', 'first_name', 'last_name']
+    
+    fieldsets = (
+        *UserAdmin.fieldsets,  # original form fieldsets, expanded
+        (                      # new fieldset added on to the bottom
+            'More',  # group heading of your choice; set to None for a blank space instead of a header
+            {
+                'fields': (
+                    'refresh_token',
+                ),
+            },
+        ),
+    )
+    
+admin.site.register(CustomUser, CustomUserAdmin)
+    
 
 @admin.register(Categories)
 class Categories_Admin(admin.ModelAdmin):
     list_display = ('title_english', 'monthly_views', 'views', 'title_persian', 'publish')
 
-admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Document, Document_Admin)
 
 
@@ -45,5 +63,3 @@ class Pointy_Questions_Admin(admin.ModelAdmin):
 
 admin.site.register(Blog, Blog_Admin)
 # admin.site.register(Newsletter_Users, Newsletter_Users_Admin)
-
-admin.site.unregister(auth.models.Group)

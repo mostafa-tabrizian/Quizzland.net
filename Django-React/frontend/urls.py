@@ -20,6 +20,8 @@ urlpatterns = [
     path('category/<category>', index),
     path('category/<category>/<subCategory>', index),
     
+    path('login', index),
+    
     path('quiz/<title>', index),
     path('test/<title>', index),
     path('result_quiz', index),

@@ -8,6 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import axios from 'axios'
 import Header from '../components/header'
+import Footer from '../components/footer'
 import AddView from '../components/addView';
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
@@ -53,7 +54,7 @@ const Quiz = (props) => {
     })
 
     const scrollToTop = () => {
-        document.querySelector("body").scrollTo(0,0)
+        document.querySelector("body").scrollTo(0, 0)
     }
 
     const SFXLocalStorage = () => {
@@ -383,13 +384,13 @@ const Quiz = (props) => {
         const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
-        
+
         if (content.length != 8) {
             const quizByCategory = await axios.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
             const pointyByCategory = await axios.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
-            
+
         setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
     }
 
@@ -537,7 +538,7 @@ const Quiz = (props) => {
                 </button>
             </div> */}
 
-            <div className="relative text-right quiz__head p-4 backdrop-blur-2xl w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
+            <div className="relative text-right quiz__head z-[-1] p-4 backdrop-blur-2xl w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
                 {
                     !(contentLoaded) &&
                     <div className='flex justify-center items-center'>
@@ -684,6 +685,8 @@ const Quiz = (props) => {
                 className='noVis'
             >
             </Link>
+
+            <Footer />
 
         </React.Fragment>
     );

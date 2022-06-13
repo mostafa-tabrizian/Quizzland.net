@@ -17,11 +17,11 @@ class Categories(models.Model):
         return str(self.title_english)
     
 class CustomUser(AbstractUser):
-    refresh_token = models.CharField(blank=True, max_length=120)
-    
-class CustomUserAdmin(admin.ModelAdmin):
-    model = CustomUser
+    refresh_token = models.CharField(blank=True, max_length=229)
 
+    def __str__(self):
+        return str(self.username)
+    
 class Document(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)

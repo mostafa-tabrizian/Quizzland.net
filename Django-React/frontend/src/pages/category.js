@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-
 import axios from 'axios'
 
 import Tools from '../components/tools'
@@ -11,6 +10,7 @@ import PageTravel from '../components/pageTravel'
 import LoadingScreen from '../components/loadingScreen'
 import SkeletonLoading from '../components/skeletonLoading';
 import Header from '../components/header'
+import Footer from '../components/footer'
 import AddView from '../components/addView';
 
 import { log, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
@@ -32,7 +32,7 @@ const Category = (props) => {
 
     useEffect(() => {
         searchChangeDetector()
-        document.getElementById('html').style='background: #121212'
+        document.getElementById('html').style = 'background: #121212'
         setLoadState(true)
     })
 
@@ -50,9 +50,9 @@ const Category = (props) => {
     }, [categories, sortType])
 
     const searchChangeDetector = () => {
-        (function(history){
+        (function (history) {
             let pushState = history.pushState;
-            history.pushState = function() {
+            history.pushState = function () {
                 pushState.apply(history, arguments);
                 setCategoryQuery(window.location.pathname.split('/')[2], '-', ' ');
             };
@@ -92,17 +92,17 @@ const Category = (props) => {
 
     const getCategories = async () => {
         categoryQueryID &&
-        await axios.get(`/api/subcategory/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
-            .then((response => {
-                setPageTravel(response.data)
-                setCategories(response.data.results.sort(sortByMonthlyViews))
-            }))
+            await axios.get(`/api/subcategory/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
+                .then((response => {
+                    setPageTravel(response.data)
+                    setCategories(response.data.results.sort(sortByMonthlyViews))
+                }))
         setContentLoaded(true)
     }
 
     return (
         <React.Fragment>
-            
+
             <LoadingScreen loadState={loadState} />
 
             <Header />
@@ -137,7 +137,7 @@ const Category = (props) => {
                                         flex text-right h-full
                                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
                                     `}>
-            
+
                                         <Link
                                             to={`/category/${categoryQuery}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}
                                             className='flex md:block md:grid-cols-5'
@@ -182,8 +182,9 @@ const Category = (props) => {
                 />
             </div>
 
+            <Footer />
         </React.Fragment>
     );
 }
- 
+
 export default Category;

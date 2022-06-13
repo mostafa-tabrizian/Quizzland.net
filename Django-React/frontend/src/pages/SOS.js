@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import Header from '../components/header'
+import Footer from '../components/footer'
 
 import BackBtn from '../components/backBtn'
 
@@ -11,13 +12,13 @@ const SOS = () => {
 
     useEffect(() => {
         if (document.getElementById('html')) {
-            document.getElementById('html').style=`background: #0a0d13 url(${pathRed})) center center scroll !important`
+            document.getElementById('html').style = `background: #0a0d13 url(${pathRed})) center center scroll !important`
         }
     }, [])
-    
+
     return (
         <React.Fragment>
-            
+
             <Header />
 
             <Helmet>
@@ -26,8 +27,8 @@ const SOS = () => {
                 <meta name="keywords" content="کوییزلند" />
                 <meta name="robots" content="noindex"></meta>
             </Helmet>
-    
-            <div class="basicPage wrapper-med center pos-rel" style={{background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1'}}>
+
+            <div class="basicPage wrapper-med center pos-rel" style={{ background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
                 <h1>🚧🔧 کوییزلند در حال حاضر در دسترس نیست 🚧🔧 </h1>
                 <div class="space-sm">
                     <p className='text-center'> تیم فنی در حال آپدیت، بررسی و تعمیر برخی مشکلات سایت است </p>
@@ -37,10 +38,13 @@ const SOS = () => {
                     <a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">support@quizzland.net</a>
                 </div>
             </div>
-    
+
             <BackBtn />
+
+            <Footer />
+
         </React.Fragment>
     );
 }
- 
+
 export default SOS;

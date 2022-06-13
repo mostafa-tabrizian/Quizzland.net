@@ -4,12 +4,13 @@ import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-import {InlineReactionButtons, InlineShareButtons, StickyShareButtons} from 'sharethis-reactjs';
+import { InlineReactionButtons, InlineShareButtons, StickyShareButtons } from 'sharethis-reactjs';
 
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
 
 import LoadingScreen from '../components/loadingScreen'
 import Header from '../components/header'
+import Footer from '../components/footer'
 
 const logo = '/static/img/Q-small.png'
 
@@ -44,7 +45,7 @@ const Article = (props) => {
 
     return (
         <React.Fragment>
-            
+
             <LoadingScreen loadState={loadState} />
 
             <Header />
@@ -52,7 +53,7 @@ const Article = (props) => {
             {article &&
                 <Helmet>
                     <link rel="canonical" href={currentUrl()} />
-                    
+
                     <title>{`کوییزلند | ${article.title}`}</title>
                     <meta name="description" content={description()} />
                     <meta name="keywords" content="کوییزلند" />
@@ -68,7 +69,7 @@ const Article = (props) => {
                     <meta property="og:url" content={currentUrl()} />
 
                     <script type="application/ld+json">
-                    {`
+                        {`
                         {
                             "@context": "https://schema.org",
                             "@type": "Article",
@@ -122,27 +123,27 @@ const Article = (props) => {
                         <div>
                             <InlineShareButtons
                                 config={{
-                                    alignment: 'center', 
-                                    color: 'social',     
-                                    enabled: true,       
-                                    font_size: 16,       
-                                    labels: 'null',       
-                                    language: 'en',      
-                                    networks: [          
+                                    alignment: 'center',
+                                    color: 'social',
+                                    enabled: true,
+                                    font_size: 16,
+                                    labels: 'null',
+                                    language: 'en',
+                                    networks: [
                                         'whatsapp',
                                         'telegram',
                                         'twitter',
                                         'sharethis',
                                     ],
-                                    padding: 10,         
-                                    radius: 10,           
+                                    padding: 10,
+                                    radius: 10,
                                     show_total: false,
-                                    size: 45,            
+                                    size: 45,
 
-                                
+
                                     url: currentUrl(),
-                                    image: article.thumbnail, 
-                                    title: article.title,           
+                                    image: article.thumbnail,
+                                    title: article.title,
                                 }}
                             />
                         </div>
@@ -154,12 +155,12 @@ const Article = (props) => {
                         <div>
                             <InlineReactionButtons
                                 config={{
-                                    alignment: 'center', 
-                                    enabled: true,       
-                                    language: 'en',      
-                                    min_count: 0,        
-                                    padding: 12,         
-                                    reactions: [         
+                                    alignment: 'center',
+                                    enabled: true,
+                                    language: 'en',
+                                    min_count: 0,
+                                    padding: 12,
+                                    reactions: [
                                         'slight_smile',
                                         'heart_eyes',
                                         'laughing',
@@ -167,42 +168,42 @@ const Article = (props) => {
                                         'sob',
                                         'rage'
                                     ],
-                                    size: 45,            
-                                    spacing: 8,          
+                                    size: 45,
+                                    spacing: 8,
 
-                            
-                                url: currentUrl(),
-                                image: article.thumbnail, 
-                                title: article.title,           
+
+                                    url: currentUrl(),
+                                    image: article.thumbnail,
+                                    title: article.title,
                                 }}
                             />
                         </div>
-                            
+
                         <div>
                             <StickyShareButtons
                                 config={{
-                                    alignment: 'left',   
-                                    color: 'social',     
-                                    enabled: true,       
-                                    font_size: 16,       
-                                    hide_desktop: false, 
-                                    labels: 'counts',    
-                                    language: 'en',      
-                                    min_count: 10,        
-                                    networks: [          
+                                    alignment: 'left',
+                                    color: 'social',
+                                    enabled: true,
+                                    font_size: 16,
+                                    hide_desktop: false,
+                                    labels: 'counts',
+                                    language: 'en',
+                                    min_count: 10,
+                                    networks: [
                                         'whatsapp',
                                         'telegram',
                                         'twitter',
                                         'sms',
                                         'sharethis',
                                     ],
-                                    padding: 12,         
-                                    radius: 15,           
-                                    show_total: true,    
-                                    show_mobile: true,   
-                                    show_toggle: false,   
-                                    size: 48,            
-                                    top: 250,            
+                                    padding: 12,
+                                    radius: 15,
+                                    show_total: true,
+                                    show_mobile: true,
+                                    show_toggle: false,
+                                    size: 48,
+                                    top: 250,
                                     url: currentUrl()
                                 }}
                             />
@@ -214,10 +215,10 @@ const Article = (props) => {
                     Suggestions
                 </div> */}
             </div>
-            
+
 
         </React.Fragment>
     );
 }
- 
+
 export default Article;

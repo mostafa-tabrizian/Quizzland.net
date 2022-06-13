@@ -89,30 +89,33 @@ def FastFunctionForDB(request):
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 
+class CustomUser(viewsets.ModelViewSet):
+    permissions_classes = (IsAuthenticatedOrReadOnly)
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    filterset_class = CustomUserFilter
 
+# --------------------------------------------------------
 
-
-class Categories(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Categories.objects.all()
-    serializer_class = CategoriesSerializer
-    filterset_class = CategoriesFilter
-
-class quiz(viewsets.ModelViewSet):
+class Quiz(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes.objects.all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-# --------------------------------------------------------
-
-class pointy(viewsets.ModelViewSet):
+class Pointy(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes_Pointy.objects.all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
 
 # --------------------------------------------------------
+
+class Categories(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Categories.objects.all()
+    serializer_class = CategoriesSerializer
+    filterset_class = CategoriesFilter
 
 class SubCategory(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -122,13 +125,13 @@ class SubCategory(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
-class questions(viewsets.ModelViewSet):
+class Questions(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Questions.objects.all()
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter    
 
-class questions_pointy(viewsets.ModelViewSet):
+class Questions_pointy(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Pointy_Questions.objects.all()
     serializer_class = questions_pointySerializer

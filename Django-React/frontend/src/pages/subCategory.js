@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import Header from '../components/header'
+import Footer from '../components/footer'
 import AddView from '../components/addView';
 
 import Tools from '../components/tools'
@@ -138,6 +139,8 @@ const SubCategory = (props) => {
                 }
 
             </div>
+
+            <Footer />
 
         </React.Fragment>
     );

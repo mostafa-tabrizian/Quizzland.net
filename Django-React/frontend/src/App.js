@@ -9,7 +9,6 @@ import {
 
 import { log } from './components/base'
 
-const Footer            = lazy(() => import('./components/footer'))
 const ScrollToTop       = lazy(() => import('./components/scrollToTop'))
 
 const Category          = lazy(() => import ('./pages/category'))
@@ -21,6 +20,7 @@ const Result            = lazy(() => import ('./pages/result'))
 const ResultPointy      = lazy(() => import ('./pages/resultPointy'))
 const Quiz404      = lazy(() => import ('./pages/404quiz'))
 
+const Login             = lazy(() => import('./pages/login'))
 const Index             = lazy(() => import('./pages/landPage'))
 const Guide             = lazy(() => import('./pages/guide'))
 const Contact           = lazy(() => import('./pages/contactUs'))
@@ -87,6 +87,8 @@ const App = () => {
                     <div className='p-4'>
                         <Switch>
                             <Route path='/' exact component={Index} />
+                            <Route path='/login' component={Login} />
+
                             <Route path='/guide' component={Guide} />
 
                             <Route path='/quiz/:title' component={Quiz} />
@@ -114,7 +116,6 @@ const App = () => {
                         </Switch>
                     </div>
                     
-                    <Footer />
                 </Router>
             </Suspense>
         </React.Fragment>

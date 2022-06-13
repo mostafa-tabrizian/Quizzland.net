@@ -1,5 +1,15 @@
+from pyexpat import model
 from django_filters import rest_framework as filters
 from .models import *
+
+class CustomUserFilter(filters.FilterSet):
+    class Meta:
+        model = CustomUser
+        fields = {
+            'refresh_token': ['exact'],
+            'username': ['exact'],
+            'email': ['exact']
+        }
 
 class QuizzesFilter(filters.FilterSet):
     class Meta:

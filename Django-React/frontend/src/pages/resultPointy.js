@@ -6,6 +6,7 @@ import axios from 'axios'
 import { InlineShareButtons } from 'sharethis-reactjs';
 
 import Header from '../components/header'
+import Footer from '../components/footer'
 import { log, replaceFunction } from '../components/base'
 import BackBtn from '../components/backBtn'
 import LoadingScreen from '../components/loadingScreen'
@@ -110,13 +111,13 @@ const Result = (props) => {
         const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
-        
+
         if (content.length != 8) {
             const quizByCategory = await axios.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
             const pointyByCategory = await axios.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
-            
+
         setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
     }
 
@@ -188,11 +189,11 @@ const Result = (props) => {
                 {
                     resultImg &&
                     <div className='flex resultPointy__img'>
-                            <img
-                                src={resultImg}
-                                width={690}
-                                alt={testDetail?.subCategory}
-                            />
+                        <img
+                            src={resultImg}
+                            width={690}
+                            alt={testDetail?.subCategory}
+                        />
                     </div>
                 }
 
@@ -275,6 +276,8 @@ const Result = (props) => {
             <BackBtn />
 
             <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center px-2 py-1 rounded-lg' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
+
+            <Footer />
 
         </React.Fragment>
     );
