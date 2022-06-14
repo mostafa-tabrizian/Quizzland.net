@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import axiosInstance from '../components/axiosApi';
 
 import { InlineReactionButtons, InlineShareButtons, StickyShareButtons } from 'sharethis-reactjs';
 
@@ -22,7 +22,7 @@ const Article = (props) => {
 
     const getBlogContentFromDb = async () => {
         const contentTitle = props.match.params.title
-        const contentData = await axios.get(`/api/new_blog/?title__iexact=${contentTitle}&limit=1`)
+        const contentData = await axiosInstance.get(`/api/new_blog/?title__iexact=${contentTitle}&limit=1`)
         setArticle(contentData.data.results[0])
         setLoadState(true)
     }

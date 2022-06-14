@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
-import axios from 'axios'
+import axiosInstance from '../components/axiosApi';
 
 import { log, replaceFunction, sortByNewest } from './base'
 
@@ -20,9 +20,9 @@ const Search = (props) => {
                 return false
             }
 
-            const searched_quiz = await axios.get(`/api/quiz/?public=true`)
-            const searched_pointy = await axios.get(`/api/pointy/?public=true`)
-            
+            const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)
+            const searched_pointy = await axiosInstance.get(`/api/pointy/?public=true`)
+
             const searched_quiz_title = searched_quiz.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
             const searched_quiz_subCategory = searched_quiz.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
             const searched_quiz_tags = searched_quiz.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
@@ -32,13 +32,13 @@ const Search = (props) => {
             const searched_pointy_tags = searched_pointy.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
 
 
-            const searched_content = 
+            const searched_content =
                 searched_quiz_title
-                .concat(searched_quiz_subCategory)
-                .concat(searched_quiz_tags)
-                .concat(searched_pointy_title)
-                .concat(searched_pointy_subCategory)
-                .concat(searched_pointy_tags)
+                    .concat(searched_quiz_subCategory)
+                    .concat(searched_quiz_tags)
+                    .concat(searched_pointy_title)
+                    .concat(searched_pointy_subCategory)
+                    .concat(searched_pointy_tags)
                     .sort(sortByNewest)
 
             const searched_content_noDuplicates = searched_content.filter((content, index, self) =>
@@ -49,15 +49,15 @@ const Search = (props) => {
 
             // Searched Category
 
-            const searched_category = await axios.get(`/api/subcategory/?public=true`)
-            
+            const searched_category = await axiosInstance.get(`/api/subcategory/?public=true`)
+
             const searched_category_title = searched_category.data.filter(category => category.title.toLowerCase().includes(searchedValue))
             const searched_category_subCategory = searched_category.data.filter(category => category.subCategory.toLowerCase().includes(searchedValue))
-            
-            const searched_all_category = 
+
+            const searched_all_category =
                 searched_category_title
                     .concat(searched_category_subCategory)
-                        .sort(sortByNewest)
+                    .sort(sortByNewest)
 
             const searched_category_noDuplicates = searched_all_category.filter((content, index, self) =>
                 index === self.findIndex((index) => (
@@ -91,10 +91,10 @@ const Search = (props) => {
                         absolute right-[-2rem] top-1.5
                         ${searchedResult ? 'fadeIn' : 'fadeOut'}
                     `}
-                    onClick={() => {setSearchedResult(false)}}
+                    onClick={() => { setSearchedResult(false) }}
                 >
-                        
-                    <svg className="w-6 h-6 text-white"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+
+                    <svg className="w-6 h-6 text-white" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </button>
 
                 <div>
@@ -103,15 +103,15 @@ const Search = (props) => {
                         className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-base my-auto'
                         placeholder={`کوییزت رو سریع تر پیدا کن`}
                         onChange={inputChanged}
-                        onKeyPress={e => {if (e.key == 'Enter') { window.open(`/search?q=${replaceFunction(e.target.value, ' ', '+')}`, '_blank') }}}
+                        onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${replaceFunction(e.target.value, ' ', '+')}`, '_blank') } }}
                     />
                     <svg className='w-5 h-5 absolute top-2 right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
-                        <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
-                        <path data-name="layer1" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round"/>
+                        <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+                        <path data-name="layer1" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round" />
                     </svg>
                 </div>
 
-                <div class={`header__search__result z-20 overflow-scroll h-1/2 ${searchedResult ? 'fadeIn' : 'fadeOut'}`}>
+                <div class={`header__search__result overflow-scroll h-1/2 ${searchedResult ? 'fadeIn' : 'fadeOut'}`}>
                     <div class="grid justify-center mt-2 mr-4 overflow-hidden rounded-lg header__search__result__category">
                         <div class="flex justify-center header__search__result__category__container w-80">
                             <ul class="md:space-y-5">
@@ -129,7 +129,7 @@ const Search = (props) => {
                                                         />
                                                     </a>
                                                 </Link>
-            
+
                                                 <h2 className='absolute left-6 top-6 md:relative md:left-0 md:top-0 md:mt-3 md:text-center'>
                                                     <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
                                                         <a>

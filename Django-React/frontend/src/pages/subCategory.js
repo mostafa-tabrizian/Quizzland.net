@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-import axios from 'axios'
+import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import Header from '../components/header'
@@ -65,8 +65,8 @@ const SubCategory = (props) => {
     }
 
     const fetchContent = async () => {
-        const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
-        const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+        const pointy = await axiosInstance.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
         const content = quiz.data.results.concat(pointy.data.results).sort(sortByMonthlyViews);
 
         if (content.count !== 0) {
@@ -80,7 +80,7 @@ const SubCategory = (props) => {
     }
 
     const backgroundOfSubCategory = async () => {
-        await axios.get(`/api/subcategory/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&public=true`)
+        await axiosInstance.get(`/api/subcategory/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&public=true`)
             .then((categoryData) => {
                 AddView('subcategory', categoryData.data[0].id)
                 const background = categoryData.data[0].background

@@ -6,7 +6,7 @@ import { StickyShareButtons } from 'sharethis-reactjs';
 import { Switch } from 'antd';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import axios from 'axios'
+import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
 import AddView from '../components/addView';
@@ -117,7 +117,7 @@ const Quiz = (props) => {
 
     const grabData = async () => {
         quizSlugReplacedWithHyphen &&
-            await axios.get(`/api/quiz/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+            await axiosInstance.get(`/api/quiz/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
                     try {
                         AddView('quiz', quizData.id)
@@ -126,7 +126,7 @@ const Quiz = (props) => {
                         applyBackground(quizData.background)
                         setQuiz(quizData)
 
-                        await axios.get(`/api/questions/?quizKey=${quizData.id}&public=true`)
+                        await axiosInstance.get(`/api/questions/?quizKey=${quizData.id}&public=true`)
                             .then((questionData) => {
                                 setQuestions(questionData.data)
                                 setContentLoaded(true)
@@ -507,13 +507,13 @@ const Quiz = (props) => {
     }
 
     const getSuggestionsQuiz = async (category, subCategory) => {
-        const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         if (content.length != 8) {
-            const quizByCategory = await axios.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
-            const pointyByCategory = await axios.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
+            const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
+            const pointyByCategory = await axiosInstance.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
 

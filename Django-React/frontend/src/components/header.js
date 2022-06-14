@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from "react-helmet";
 import { Popover } from 'antd';
-import axios from 'axios';
 
 import { log } from './base'
 import Search from './search'
-// import axios from '../components/axiosApi'
+import axiosInstance from '../components/axiosApi'
 
 const Header = () => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)
@@ -26,17 +25,27 @@ const Header = () => {
     const fetchUserProfile = async () => {
         const now = new Date().getTime()
         const username = localStorage.getItem('username')
-        const refresh_token = localStorage.getItem('refresh_token')
-
-        if (username && refresh_token) {
-            await axios.get(`/api/user/?username=${username}&timestamp=${now}`)
-                .then(res => {
+        const localRefreshToken = localStorage.getItem('refresh_token')
+        
+        if (username !== 'default' && localRefreshToken) {
+            await axiosInstance.get(`/api/user/?username=${username}&timestamp=${now}`)
+                .then( async res => {
                     const user = res.data[0]
 
-                    if (refresh_token == user.refresh_token) {
-                        setUserProfile(user)
+                    log(localRefreshToken == user.refreshToken)
+                    
+                    if (localRefreshToken !== user.refreshToken) {
+                        await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
+                            .then(res => {
+                                log(res.res)
+                                localStorage.setItem('access_token', res.data.access);
+                                localStorage.setItem('refresh_token', res.data.refresh);
+                                axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
+                                originalRequest.headers['Authorization'] = "JWT " + res.data.access;
+                            })
                     } else {
-                        window.location.href = '/login'
+                        log(user)
+                        setUserProfile(user)
                     }
                 })
         }
@@ -113,7 +122,7 @@ const Header = () => {
                 </script>
             </Helmet>
 
-            <header className='mb-10 bg-[#0000008f] p-4 rounded-md backdrop-blur-md'>
+            <header className='mb-10 relative z-10 bg-[#0000008f] p-4 rounded-md backdrop-blur-md'>
                 <div>
                     <div className='hidden md:flex justify-center items-center'>
                         <Link to="/" className="flex header__logo justify-between items-center">
@@ -127,7 +136,7 @@ const Header = () => {
                         </Link>
                     </div>
 
-                    <div className="header text-xl z-10 flex md:grid md:grid-cols-3 justify-between md:max-w-[85%] relative md:mx-auto md:p-4 py-4">
+                    <div className="header text-xl flex md:grid md:grid-cols-3 justify-between md:max-w-[85%] relative md:mx-auto md:p-4 py-4">
                         <div>
                             <Link to="/" className='flex header__logo justify-between items-center md:hidden'>
                                 <span className='bloodRiver ml-1 text-[1.6rem]'>uizzland</span>
@@ -140,16 +149,16 @@ const Header = () => {
                             </Link>
                         </div>
 
-                        <div className='flex items-center'>
+                        <div className='flex items-center md:hidden'>
                             <Popover placement="bottomRight" title='' content={searchInputMobile} trigger="click">
-                                <button className='flex header__btn md:hidden items-center' type="button">
+                                <button className='flex header__btn items-center' type="button">
                                     <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                     </svg>
                                 </button>
                             </Popover>
 
-                            <button type="button" onClick={openCloseMenu} className={`header__btn ml-5 header__white md:hidden`} aria-label="Menu Button">
+                            <button type="button" onClick={openCloseMenu} className={`header__btn ml-5 header__white`} aria-label="Menu Button">
                                 <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
                             </button>
                         </div>
@@ -194,7 +203,7 @@ const Header = () => {
                             }
                         </div>
 
-                        <ul className={`right-[12rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 z-10 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                        <ul className={`right-[12rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                             <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
                             <li><Link to="/category/celebrity">سلبریتی ✨</Link></li>
                             <li><Link to="/category/psychology">روانشناسی 🧠</Link></li>
@@ -202,7 +211,7 @@ const Header = () => {
 
                         {/* Menu */}
 
-                        <div className={`header__menu fixed text-right z-20 h-[20rem] w-[100%]
+                        <div className={`header__menu fixed text-right h-[20rem] w-[100%]
                                         bg-[#000000b0] backdrop-blur-xl top-0 right-0
                                         rounded-[40px] md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
                                         pr-8 pt-5`}>

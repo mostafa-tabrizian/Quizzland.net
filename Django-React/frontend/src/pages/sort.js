@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import axios from 'axios'
+import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
@@ -84,8 +84,8 @@ const Sort = () => {
 
         setLoading(true)
 
-        const quiz = await axios.get(`/api/quiz/?limit=${countResult}&offset=${offset}&public=true`)
-        const pointy = await axios.get(`/api/pointy/?limit=${countResult}&offset=${offset}&public=true`)
+        const quiz = await axiosInstance.get(`/api/quiz/?limit=${countResult}&offset=${offset}&public=true`)
+        const pointy = await axiosInstance.get(`/api/pointy/?limit=${countResult}&offset=${offset}&public=true`)
         let content_new = quiz.data.results.concat(pointy.data.results)
 
         setCountNewFetched(content_new.length)

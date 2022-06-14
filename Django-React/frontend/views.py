@@ -10,7 +10,7 @@ from .filters import *
 
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -90,7 +90,7 @@ def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 
 class CustomUser(viewsets.ModelViewSet):
-    permissions_classes = (IsAuthenticatedOrReadOnly)
+    permissions_classes = (IsAuthenticated,)
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     filterset_class = CustomUserFilter
@@ -98,13 +98,13 @@ class CustomUser(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class Quiz(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = Quizzes.objects.all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
 class Pointy(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = Quizzes_Pointy.objects.all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
@@ -112,13 +112,13 @@ class Pointy(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class Categories(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = Categories.objects.all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
 class SubCategory(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = SubCategories.objects.all()
     serializer_class = SubCategoriesSerializer
     filterset_class = SubCategoriesFilter
@@ -126,13 +126,13 @@ class SubCategory(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class Questions(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = Questions.objects.all()
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter    
 
 class Questions_pointy(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = Pointy_Questions.objects.all()
     serializer_class = questions_pointySerializer
     filterset_class = questions_pointyFilter  
@@ -140,7 +140,7 @@ class Questions_pointy(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class new_blog(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
     filterset_class = BlogFilter

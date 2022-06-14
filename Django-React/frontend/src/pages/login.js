@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axiosInstance from '../components/axiosApi';;
 import { message, Select } from 'antd';
 import { Helmet } from "react-helmet";
 
@@ -10,20 +10,19 @@ const pathRed = '/static/img/bubbles.png'
 const Login = () => {
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
-    
+
     useEffect(() => {
         checkIfLoggedIn()
-
         if (document.getElementById('html')) {
-            document.getElementById('html').style=`background: #0a0d13 url(${pathRed}) center center scroll !important`
+            document.getElementById('html').style = `background: #0a0d13 url(${pathRed}) center center scroll !important`
         }
     }, [])
-    
+
     const checkIfLoggedIn = () => {
         if (
             localStorage.getItem('access_token') &&
             localStorage.getItem('refresh_token') &&
-            localStorage.getItem('username')
+            localStorage.getItem('username') !== 'default'
         ) {
             window.location.href = '/'
         }
@@ -31,14 +30,14 @@ const Login = () => {
 
     const handleSubmit = async () => {
         try {
-            const data = await axios.post('api/token/obtain/', {
+            const data = await axiosInstance.post('api/token/obtain/', {
                 username: username,
                 password: password
             });
-            
-            updateUserRefreshToken(username, data.data.access, data.data.refresh)
 
-            axios.defaults.headers['Authorization'] = "JWT " + data.access;
+            await updateUserRefreshToken(username, data.data.refresh)
+
+            axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
             localStorage.setItem('username', username);
             localStorage.setItem('access_token', data.data.access);
             localStorage.setItem('refresh_token', data.data.refresh);
@@ -52,27 +51,15 @@ const Login = () => {
     }
 
     const getUserId = async (username) => {
-        return await axios.get(`/api/user/?username=${username}`)
+        return await axiosInstance.get(`/api/user/?username=${username}`)
             .then(res => {
                 return res.data[0].id
             })
     }
 
-    const updateUserRefreshToken = async (username, accessToken, newRefreshToken) => {
-        const view = {
-            refresh_token: newRefreshToken
-        }
-
-        const headers = {
-            'Authorization': "JWT " + accessToken,
-            'Content-Type': 'application/json',
-            'accept': 'application/json'
-        }
-
-
+    const updateUserRefreshToken = async (username, newRefreshToken) => {
         const userId = await getUserId(username)
-
-        await axios.patch(`/api/user/${userId}/`, view, { headers })
+        await axiosInstance.patch(`/api/user/${userId}/`, {refresh_token: newRefreshToken})
     }
 
     const keyboardClicked = (event) => {
@@ -112,5 +99,5 @@ const Login = () => {
         </React.Fragment>
     );
 }
- 
+
 export default Login;

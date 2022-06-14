@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axiosInstance from '../components/axiosApi';
 import { log } from './base'
 
 const AddView = (content, contentID) => {
@@ -6,13 +6,13 @@ const AddView = (content, contentID) => {
         username: process.env.ADMINUSERNAME,
         password: process.env.ADMINPASSWORD,
     }
-    
+
     let authToken
     let lastView
     let lastMonthly
-    
+
     const getAuthToken = async () => {
-        await axios.post('/api/token/obtain/', adminDetail)
+        await axiosInstance.post('/api/token/obtain/', adminDetail)
             .then((req) => {
                 authToken = req.data.access
             })
@@ -23,7 +23,7 @@ const AddView = (content, contentID) => {
 
     const getLastViewCount = async () => {
         const now = new Date().getTime()
-        await axios.get(`/api/${content}/${contentID}/?&timestamp=${now}`)
+        await axiosInstance.get(`/api/${content}/${contentID}/?&timestamp=${now}`)
             .then((req) => {
                 lastMonthly = req.data.monthly_views
                 lastView = req.data.views
@@ -35,14 +35,14 @@ const AddView = (content, contentID) => {
             monthly_views: lastMonthly + 1,
             views: lastView + 1
         }
-    
-        const headers = {
-            'Authorization': "JWT " + authToken,
-            'Content-Type': 'application/json',
-            'accept': 'application/json'
-        }
-    
-        await axios.put(`/api/${content}/${contentID}/`, view, { headers})
+
+        // const headers = {
+        //     'Authorization': "JWT " + authToken,
+        //     'Content-Type': 'application/json',
+        //     'accept': 'application/json'
+        // }
+
+        await axiosInstance.put(`/api/${content}/${contentID}/`, view)
     }
 
     getAuthToken()
@@ -53,5 +53,5 @@ const AddView = (content, contentID) => {
                 })
         })
 }
- 
+
 export default AddView;

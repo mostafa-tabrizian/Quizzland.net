@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-import axios from 'axios'
+import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import Header from '../components/header'
@@ -49,8 +49,8 @@ const SearchMoreResult = () => {
         try {
             const searchedValue = value?.toLowerCase()
 
-            const searched_quiz = await axios.get(`/api/quiz/?public=true`)
-            const searched_pointy = await axios.get(`/api/pointy/?public=true`)
+            const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)
+            const searched_pointy = await axiosInstance.get(`/api/pointy/?public=true`)
 
             const searched_quiz_title = searched_quiz.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
             const searched_quiz_subCategory = searched_quiz.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
@@ -78,7 +78,7 @@ const SearchMoreResult = () => {
 
             // Searched Category
 
-            const searched_category = await axios.get(`/api/subcategory/?public=true`)
+            const searched_category = await axiosInstance.get(`/api/subcategory/?public=true`)
 
             const searched_category_title = searched_category.data.filter(category => category.title.toLowerCase().includes(searchedValue))
             const searched_category_subCategory = searched_category.data.filter(category => category.subCategory.toLowerCase().includes(searchedValue))

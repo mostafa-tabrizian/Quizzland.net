@@ -1,6 +1,29 @@
 import axios from 'axios'
 import { log } from './base'
 
+const accessToken = async () => {
+    if (localStorage.getItem('access_token') && localStorage.getItem('refresh_token') && localStorage.getItem('username') !== 'default') {
+        return
+    }
+    
+    const adminDetail = {
+        username: process.env.ADMINUSERNAME,
+        password: process.env.ADMINPASSWORD,
+    }
+
+    await axios.post('/api/token/obtain/', adminDetail)
+        .then((req) => {
+            localStorage.setItem('username', 'default')
+            localStorage.setItem('access_token', req.data.access)
+            localStorage.setItem('refresh_token', req.data.refresh)
+        })
+        .catch((err) => {
+            log(err)
+        })
+}
+
+accessToken()
+
 const axiosInstance = axios.create({
     timeout: 5000,
     headers: {

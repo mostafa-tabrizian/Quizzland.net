@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 ;
 
 import { log } from './base'
@@ -33,7 +33,7 @@ const Newsletter = () => {
     }
 
     const checkIfTheUserExists = async (userEmail) => {
-        const resultOfCheck = await axios.get(`/api/newsletter_users/?email__iexact=${userEmail}`)
+        const resultOfCheck = await axiosInstance.get(`/api/newsletter_users/?email__iexact=${userEmail}`)
         if (resultOfCheck.data.length === 0) {
             addNewUserToNewsletter()
         } else {
@@ -45,11 +45,11 @@ const Newsletter = () => {
         e.preventDefault()
 
         // if (reCaptcha) {
-            if(userEmail.current.value.length >= 3) {
-                checkIfTheUserExists(userEmail.current.value)
-            } else {
-                alert('حداقل ۳ کارکتر وارد کنید')
-            }
+        if (userEmail.current.value.length >= 3) {
+            checkIfTheUserExists(userEmail.current.value)
+        } else {
+            alert('حداقل ۳ کارکتر وارد کنید')
+        }
         // } else {
         //     alert('!لطفا تایید کنید که ربات نیستید')
         // }
@@ -70,7 +70,7 @@ const Newsletter = () => {
                 <form onSubmit={reCaptchaRef} className={`newsletter ${newsletterOpen ? 'fadeIn' : 'fadeOut'}`}>
                     <button ref={openCloseNewsletterRef} onClick={openCloseNewsletter} type="button" className="btn newsletter__closeBtn" aria-label="Close Newsletter Form Button"></button>
                     <p className="text-center">لطفا نام و ایمیل خود را وارد نمائيد</p>
-                    
+
                     <input ref={userEmail} type='email' className='input' name='userEmail' placeholder='  ایمیل ...' max_length='100' required label='' />
                     <input ref={userUsername} type='string' className='input' name='userName' placeholder='  نام ...' max_length='20' mix_length='3' required label='' />
 
@@ -80,5 +80,5 @@ const Newsletter = () => {
         </React.Fragment>
     );
 }
- 
+
 export default Newsletter;

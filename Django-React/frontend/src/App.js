@@ -18,7 +18,7 @@ const Quiz              = lazy(() => import ('./pages/quiz'))
 const QuizPointy        = lazy(() => import ('./pages/quizPointy'))
 const Result            = lazy(() => import ('./pages/result'))
 const ResultPointy      = lazy(() => import ('./pages/resultPointy'))
-const Quiz404      = lazy(() => import ('./pages/404quiz'))
+const Quiz404           = lazy(() => import ('./pages/404quiz'))
 
 const Login             = lazy(() => import('./pages/login'))
 const Index             = lazy(() => import('./pages/landPage'))

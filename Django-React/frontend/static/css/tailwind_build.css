@@ -634,6 +634,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: -1;
 }
 
+.z-0 {
+  z-index: 0;
+}
+
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
@@ -1592,6 +1596,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-\[4rem\] {
+  font-size: 4rem;
 }
 
 .font-semibold {

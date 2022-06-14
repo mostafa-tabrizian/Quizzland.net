@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import axios from 'axios'
+// import axiosInstance from '../components/axiosApi';
 
 import Tools from '../components/tools'
 import PageTravel from '../components/pageTravel'
@@ -12,6 +12,7 @@ import SkeletonLoading from '../components/skeletonLoading';
 import Header from '../components/header'
 import Footer from '../components/footer'
 import AddView from '../components/addView';
+import axiosInstance from '../components/axiosApi';
 
 import { log, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
 
@@ -83,7 +84,7 @@ const Category = (props) => {
     }
 
     const defineCategoryTitle = async () => {
-        await axios.get(`/api/category/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
+        await axiosInstance.get(`/api/category/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
             .then((response) => {
                 setCategoryTitle(response.data[0].title_persian)
                 setCategoryQueryID(response.data[0].id)
@@ -92,7 +93,7 @@ const Category = (props) => {
 
     const getCategories = async () => {
         categoryQueryID &&
-            await axios.get(`/api/subcategory/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
+            await axiosInstance.get(`/api/subcategory/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
                 .then((response => {
                     setPageTravel(response.data)
                     setCategories(response.data.results.sort(sortByMonthlyViews))

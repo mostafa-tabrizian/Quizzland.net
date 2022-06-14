@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { InlineReactionButtons, InlineShareButtons } from 'sharethis-reactjs';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
-import axios from 'axios'
+import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
 
@@ -94,13 +94,13 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        const quiz = await axios.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axios.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         // if (content.length != 8) {
-        //     const quizByCategory = await axios.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
-        //     const pointyByCategory = await axios.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
+        //     const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
+        //     const pointyByCategory = await axiosInstance.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
         //     content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         // }
 
@@ -174,7 +174,7 @@ const Result = () => {
         let lastRate
         let RateCount
 
-        await axios.get(`/api/quiz/${id}/?&timestamp=${now}&public=true`)
+        await axiosInstance.get(`/api/quiz/${id}/?&timestamp=${now}&public=true`)
             .then((req) => {
                 lastRate = req.data.rate
                 RateCount = req.data.rate_count
