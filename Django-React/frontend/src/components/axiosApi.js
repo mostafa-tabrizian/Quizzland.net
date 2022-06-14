@@ -2,7 +2,7 @@ import axios from 'axios'
 import { log } from './base'
 
 const accessToken = async () => {
-    if (localStorage.getItem('access_token') && localStorage.getItem('refresh_token') && localStorage.getItem('username') !== 'default') {
+    if (localStorage.getItem('access_token') && localStorage.getItem('refresh_token') && localStorage.getItem('username') !== null) {
         return
     }
     
@@ -13,10 +13,10 @@ const accessToken = async () => {
 
     await axios.post('/api/token/obtain/', adminDetail)
         .then((req) => {
-            localStorage.setItem('username', 'default')
+            localStorage.setItem('username', null)
             localStorage.setItem('access_token', req.data.access)
             localStorage.setItem('refresh_token', req.data.refresh)
-            localStorage.setItem('pass_token', 'default')
+            localStorage.setItem('pass_token', null)
         })
         .catch((err) => {
             log(err)
@@ -49,27 +49,29 @@ axiosInstance.interceptors.response.use(
             {
                 const refreshToken = localStorage.getItem('refresh_token');
 
-                if (refreshToken){
+                if (refreshToken) {
                     const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
 
                     const now = Math.ceil(Date.now() / 1000);
 
                     if (tokenParts.exp > now) {
                         return axiosInstance
-                        .post('/api/token/refresh/', {refresh: refreshToken})
-                        .then((response) => {
-            
-                            localStorage.setItem('access_token', response.data.access);
-                            localStorage.setItem('refresh_token', response.data.refresh);
-            
-                            axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
-                            originalRequest.headers['Authorization'] = "JWT " + response.data.access;
-            
-                            return axiosInstance(originalRequest);
-                        })
-                        .catch(err => {
-                            console.log(err)
-                        });
+                            .post('/api/token/refresh/', {refresh: refreshToken})
+                                .then((response) => {
+                    
+                                    localStorage.setItem('access_token', response.data.access);
+                                    localStorage.setItem('refresh_token', response.data.refresh);
+                    
+                                    axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
+                                    originalRequest.headers['Authorization'] = "JWT " + response.data.access;
+                    
+                                    return axiosInstance(originalRequest);
+                                })
+                                .catch(err => {
+                                    localStorage.removeItem('access_token')
+                                    localStorage.removeItem('refresh_token')
+                                    window.location.href = '/login';
+                                });
                     }else{
                         window.location.href = '/login';
                     }

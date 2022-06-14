@@ -4,6 +4,7 @@ import { message, Select } from 'antd';
 import { Helmet } from "react-helmet";
 
 import { log } from '../components/base'
+import userProfileDetail from "../components/userProfileDetail";
 
 const pathRed = '/static/img/bubbles.png'
 
@@ -18,16 +19,10 @@ const Login = () => {
         }
     }, [])
 
-    const checkIfLoggedIn = () => {
-        const localAT = localStorage.getItem('access_token')
-        const localRT = localStorage.getItem('refresh_token')
-        const localPT = localStorage.getItem('pass_token')
-        if (
-            localAT && localRT && localPT &&
-            localAT.length == 228 &&
-            localRT.length == 229 &&
-            localStorage.getItem('username') !== 'default'
-        ) {
+    const checkIfLoggedIn = async () => {
+        const local_username = localStorage.getItem('username')
+        const userProfile = await userProfileDetail()
+        if (userProfile !== null && userProfile.username == local_username) {
             window.location.href = '/'
         }
     }
