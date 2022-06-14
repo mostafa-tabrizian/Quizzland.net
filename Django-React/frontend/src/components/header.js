@@ -5,7 +5,7 @@ import { Popover } from 'antd';
 
 import { log } from './base'
 import Search from './search'
-import axiosInstance from '../components/axiosApi'
+import userProfileDetail from '../components/userProfileDetail'
 
 const Header = () => {
     const [categoryNavigationOpen, setCategoryNavigationOpen] = useState(false)
@@ -18,38 +18,9 @@ const Header = () => {
         componentChangeDetector()
     })
 
-    useEffect(() => {
-        fetchUserProfile()
+    useEffect(async() => {
+        setUserProfile(await userProfileDetail())
     }, [])
-
-    const fetchUserProfile = async () => {
-        const now = new Date().getTime()
-        const username = localStorage.getItem('username')
-        const localRefreshToken = localStorage.getItem('refresh_token')
-        
-        if (username !== 'default' && localRefreshToken) {
-            await axiosInstance.get(`/api/user/?username=${username}&timestamp=${now}`)
-                .then( async res => {
-                    const user = res.data[0]
-
-                    log(localRefreshToken == user.refreshToken)
-                    
-                    if (localRefreshToken !== user.refreshToken) {
-                        await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
-                            .then(res => {
-                                log(res.res)
-                                localStorage.setItem('access_token', res.data.access);
-                                localStorage.setItem('refresh_token', res.data.refresh);
-                                axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
-                                originalRequest.headers['Authorization'] = "JWT " + res.data.access;
-                            })
-                    } else {
-                        log(user)
-                        setUserProfile(user)
-                    }
-                })
-        }
-    }
 
     const componentChangeDetector = () => {
         (function (history) {

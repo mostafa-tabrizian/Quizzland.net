@@ -17,7 +17,7 @@ class Categories(models.Model):
         return str(self.title_english)
     
 class CustomUser(AbstractUser):
-    refresh_token = models.CharField(blank=True, max_length=229)
+    pass_token = models.CharField(blank=True, max_length=229)
 
     def __str__(self):
         return str(self.username)

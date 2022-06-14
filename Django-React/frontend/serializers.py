@@ -17,7 +17,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'username',
-            'refresh_token',
+            'pass_token',
             'first_name',
             'last_name',
             'email',

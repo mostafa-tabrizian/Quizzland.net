@@ -16,7 +16,7 @@ class CustomUserAdmin(UserAdmin):
             'More',  # group heading of your choice; set to None for a blank space instead of a header
             {
                 'fields': (
-                    'refresh_token',
+                    'pass_token',
                 ),
             },
         ),

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import SkeletonLoading from '../components/skeletonLoading';
 
-// import axiosInstance from '../components/axiosApi';
-import axiosApi from '../components/axiosApi'
+import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
@@ -82,11 +81,11 @@ const Index = () => {
     }
 
     const grabData = async () => {
-        const quiz = await axiosApi.get(`/api/quiz/?limit=70&public=true`)
+        const quiz = await axiosInstance.get(`/api/quiz/?limit=70&public=true`)
             .catch(err => {
                 log(err.response)
             })
-        const pointy = await axiosApi.get(`/api/pointy/?limit=70&public=true`)
+        const pointy = await axiosInstance.get(`/api/pointy/?limit=70&public=true`)
         const content = quiz.data.results.concat(pointy.data.results)
 
         setContent_new(content.sort(sortByNewest).slice(0, 20))

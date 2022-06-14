@@ -16,6 +16,7 @@ const accessToken = async () => {
             localStorage.setItem('username', 'default')
             localStorage.setItem('access_token', req.data.access)
             localStorage.setItem('refresh_token', req.data.refresh)
+            localStorage.setItem('pass_token', 'default')
         })
         .catch((err) => {
             log(err)

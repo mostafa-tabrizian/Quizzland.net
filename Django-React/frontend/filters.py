@@ -6,7 +6,7 @@ class CustomUserFilter(filters.FilterSet):
     class Meta:
         model = CustomUser
         fields = {
-            'refresh_token': ['exact'],
+            'pass_token': ['exact'],
             'username': ['exact'],
             'email': ['exact']
         }

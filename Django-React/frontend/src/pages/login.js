@@ -19,9 +19,13 @@ const Login = () => {
     }, [])
 
     const checkIfLoggedIn = () => {
+        const localAT = localStorage.getItem('access_token')
+        const localRT = localStorage.getItem('refresh_token')
+        const localPT = localStorage.getItem('pass_token')
         if (
-            localStorage.getItem('access_token') &&
-            localStorage.getItem('refresh_token') &&
+            localAT && localRT && localPT &&
+            localAT.length == 228 &&
+            localRT.length == 229 &&
             localStorage.getItem('username') !== 'default'
         ) {
             window.location.href = '/'
@@ -35,10 +39,12 @@ const Login = () => {
                 password: password
             });
 
-            await updateUserRefreshToken(username, data.data.refresh)
+            const passToken = `${new Date().getTime() * 85}${username}${(new Date().getTime() * 69) % 85}`
+            await setUserPassToken(username, passToken)
 
             axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
             localStorage.setItem('username', username);
+            localStorage.setItem('pass_token', passToken);
             localStorage.setItem('access_token', data.data.access);
             localStorage.setItem('refresh_token', data.data.refresh);
 
@@ -57,9 +63,9 @@ const Login = () => {
             })
     }
 
-    const updateUserRefreshToken = async (username, newRefreshToken) => {
+    const setUserPassToken = async (username, newPassToken) => {
         const userId = await getUserId(username)
-        await axiosInstance.patch(`/api/user/${userId}/`, {refresh_token: newRefreshToken})
+        await axiosInstance.patch(`/api/user/${userId}/`, {pass_token: newPassToken})
     }
 
     const keyboardClicked = (event) => {
