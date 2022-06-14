@@ -24,6 +24,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'is_active',
             'date_joined',
             'last_login',
+            'pass_token',
+            'birthday_date',
+            'gender',
+            'avatar',
+            'most_played_categories'
         )
 
 class CategoriesSerializer(serializers.ModelSerializer):

@@ -8,7 +8,9 @@ class CustomUserFilter(filters.FilterSet):
         fields = {
             'pass_token': ['exact'],
             'username': ['exact'],
-            'email': ['exact']
+            'email': ['exact'],
+            'birthday_date': ['lte', 'gte'],
+            'gender': ['exact'],
         }
 
 class QuizzesFilter(filters.FilterSet):
