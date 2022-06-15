@@ -21,6 +21,8 @@ const ResultPointy      = lazy(() => import ('./pages/resultPointy'))
 const Quiz404           = lazy(() => import ('./pages/404quiz'))
 
 const Login             = lazy(() => import('./pages/login'))
+const Profile           = lazy(() => import('./pages/profile'))
+
 const Index             = lazy(() => import('./pages/landPage'))
 const Guide             = lazy(() => import('./pages/guide'))
 const Contact           = lazy(() => import('./pages/contactUs'))
@@ -87,7 +89,9 @@ const App = () => {
                     <div className='p-4'>
                         <Switch>
                             <Route path='/' exact component={Index} />
+
                             <Route path='/login' component={Login} />
+                            <Route path='/profile/:user' component={Profile} />
 
                             <Route path='/guide' component={Guide} />
 

@@ -23,9 +23,10 @@ Gender = (
 
 class CustomUser(AbstractUser):
     pass_token = models.CharField(blank=True, max_length=229)
+    avatar = models.ImageField(blank=True, null=True, upload_to='user_avatar')
+    bio = models.CharField(blank=True, null=True, max_length=255)
     birthday_date = models.DateField(blank=True, null=True)
     gender = models.CharField(blank=True, null=True, max_length=7, choices=Gender)
-    avatar = models.ImageField(blank=True, null=True, upload_to='user_avatar')
     # played_quizzes = models.JSONField(blank=True, null=True, max_length=9000)  # mean 3000 play
     most_played_categories = models.JSONField(blank=True, null=True)
 

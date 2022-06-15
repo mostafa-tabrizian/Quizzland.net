@@ -25,9 +25,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'date_joined',
             'last_login',
             'pass_token',
+            'avatar',
+            'bio',
             'birthday_date',
             'gender',
-            'avatar',
             'most_played_categories'
         )
 

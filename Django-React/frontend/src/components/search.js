@@ -85,7 +85,7 @@ const Search = (props) => {
 
     return (
         <React.Fragment>
-            <div className={`header__searched hidden md:flex absolute left-8 top-4 items-center`}>
+            <div className={`header__searched hidden md:flex items-center`}>
                 <button
                     className={`
                         absolute right-[-2rem] top-1.5
@@ -97,7 +97,7 @@ const Search = (props) => {
                     <svg className="w-6 h-6 text-white" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </button>
 
-                <div>
+                <div className='relative'>
                     <input
                         type='text'
                         className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-base my-auto'

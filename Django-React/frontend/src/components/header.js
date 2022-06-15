@@ -18,7 +18,7 @@ const Header = () => {
         componentChangeDetector()
     })
 
-    useEffect(async() => {
+    useEffect(async () => {
         setUserProfile(await userProfileDetail())
     }, [])
 
@@ -93,7 +93,7 @@ const Header = () => {
                 </script>
             </Helmet>
 
-            <header className='mb-10 relative z-10 bg-[#0000008f] p-4 rounded-md backdrop-blur-md'>
+            <header className='mb-10 relative z-10 bg-[#121212] p-4 rounded-md backdrop-blur-md'>
                 <div>
                     <div className='hidden md:flex justify-center items-center'>
                         <Link to="/" className="flex header__logo justify-between items-center">
@@ -108,6 +108,62 @@ const Header = () => {
                     </div>
 
                     <div className="header text-xl flex md:grid md:grid-cols-3 justify-between md:max-w-[85%] relative md:mx-auto md:p-4 py-4">
+
+                        <div className='flex items-center md:hidden'>
+                            <Popover placement="bottomRight" title='' content={searchInputMobile} trigger="click">
+                                <button className='flex header__btn items-center' type="button">
+                                    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                            </Popover>
+
+                            <button type="button" onClick={openCloseMenu} className={`header__btn mr-5 `} aria-label="Menu Button">
+                                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
+                            </button>
+                        </div>
+
+                        <div className='space-x-5 md:justify-center md:flex hidden'>
+                            {
+                                userProfile ?
+                                    <Link to={`/profile/${userProfile.username}`}>
+                                        <div className='flex items-center'>
+                                            <svg class="h-10 w-10 ml-3 text-[#ac272e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <div className='flex space-x-1 space-x-reverse'>
+                                                <div>
+                                                    {userProfile.first_name}
+                                                </div>
+                                                <div>
+                                                    {userProfile.last_name}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                    :
+                                    <React.Fragment>
+                                        <Link to='/login'>ورود</Link>
+                                        <Link to='/register'>ثبت نام</Link>
+                                    </React.Fragment>
+                            }
+                        </div>
+
+                        <div className={`hidden md:flex md:justify-center items-center`}>
+                            <div className="space-x-7 space-x-reverse">
+                                {/* <button className="header__btn">
+                                    <Link to="/blog"> وبلاگ </Link>
+                                </button> */}
+                                {/* <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
+                                <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button> */}
+                                <Link to='/sort?s=newest' className='text-xl'>کوییز و تست ها</Link>
+                                <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
+                            </div>
+                        </div>
+
+                        <Search />
+
+                        
                         <div>
                             <Link to="/" className='flex header__logo justify-between items-center md:hidden'>
                                 <span className='bloodRiver ml-1 text-[1.6rem]'>uizzland</span>
@@ -120,61 +176,7 @@ const Header = () => {
                             </Link>
                         </div>
 
-                        <div className='flex items-center md:hidden'>
-                            <Popover placement="bottomRight" title='' content={searchInputMobile} trigger="click">
-                                <button className='flex header__btn items-center' type="button">
-                                    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                </button>
-                            </Popover>
-
-                            <button type="button" onClick={openCloseMenu} className={`header__btn ml-5 header__white`} aria-label="Menu Button">
-                                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
-                            </button>
-                        </div>
-
-                        <Search />
-
-                        <div className={`hidden md:flex md:justify-center items-center`}>
-                            <div className="md:space-x-7">
-                                {/* <button className="header__btn">
-                                    <Link to="/blog"> وبلاگ </Link>
-                                </button> */}
-                                {/* <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
-                                <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button> */}
-                                <Link to='/sort?s=newest' className='text-xl'>کوییز و تست ها</Link>
-                                <button className='header__btn' onClick={openCloseCategoryNavigation}>کتگوری ها</button>
-                            </div>
-                        </div>
-
-                        <div className='space-x-5 md:justify-center md:flex hidden'>
-                            {
-                                userProfile ?
-                                    <Link to='/profile'>
-                                        <div className='flex items-center'>
-                                            <svg class="h-10 w-10 ml-3 text-[#ac272e]"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                            </svg>
-                                            <div className='flex space-x-1 space-x-reverse'>
-                                                <div>
-                                                    {userProfile.first_name}
-                                                </div>
-                                                <div>
-                                                    {userProfile.last_name}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                :
-                                <React.Fragment>
-                                    <Link to='/login'>ورود</Link>
-                                    <Link to='/register'>ثبت نام</Link>
-                                </React.Fragment>
-                            }
-                        </div>
-
-                        <ul className={`right-[12rem] header__white subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                        <ul className={`right-[12rem] subHeader top-20 bg-gradient-to-tr from-[#6d0f12] to-[#b82633] rounded-2xl px-5 py-7 line absolute text-right ${categoryNavigationOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                             <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
                             <li><Link to="/category/celebrity">سلبریتی ✨</Link></li>
                             <li><Link to="/category/psychology">روانشناسی 🧠</Link></li>
@@ -216,14 +218,14 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className='block md:hidden'>
                     {
                         userProfile ?
-                            <Link to='/profile'>
+                            <Link to={`/profile/${userProfile.username}`}>
                                 <div className='flex items-center'>
-                                    <svg class="h-10 w-10 ml-3 text-[#ac272e]"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    <svg class="h-10 w-10 ml-3 text-[#ac272e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     <div className='flex space-x-1 space-x-reverse'>
                                         <div>
@@ -235,11 +237,11 @@ const Header = () => {
                                     </div>
                                 </div>
                             </Link>
-                        :
-                        <React.Fragment>
-                            <Link to='/login'>ورود</Link>
-                            <Link to='/register'>ثبت نام</Link>
-                        </React.Fragment>
+                            :
+                            <React.Fragment>
+                                <Link to='/login'>ورود</Link>
+                                <Link to='/register'>ثبت نام</Link>
+                            </React.Fragment>
                     }
                 </div>
 

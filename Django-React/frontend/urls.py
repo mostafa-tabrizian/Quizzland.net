@@ -21,6 +21,7 @@ urlpatterns = [
     path('category/<category>/<subCategory>', index),
     
     path('login', index),
+    path('profile/<user>', index),
     
     path('quiz/<title>', index),
     path('test/<title>', index),

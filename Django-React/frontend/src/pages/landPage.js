@@ -134,7 +134,7 @@ const Index = () => {
                 <div className={`hero hidden md:flex justify-center items-center bg-gradient-to-t from-[#3d191a] via-transparent p-3 rounded-lg m-auto`}>
                     {/* <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div> */}
 
-                    <div className='relative mr-5 mb-[-3rem] drop-shadow-[10px_15px_10px_black] hidden md:block'>
+                    <div className='relative ml-5 mb-[-3rem] drop-shadow-[10px_15px_10px_black] hidden md:block'>
                         <div className='pointer-events-none'>
                             <img
                                 src='/static/img/Q.png'
@@ -156,7 +156,7 @@ const Index = () => {
                         <div className='relative'>
                             <input
                                 type='text'
-                                className='pl-4 pr-12 py-1 rounded-full text-right bg-black shadow-black text-base mt-5 mb-5'
+                                className='pl-4 pr-12 py-1 rounded-full text-right bg-[#121212]  text-base mt-5 mb-5'
                                 placeholder={`کوییزت رو سریع تر پیدا کن`}
                                 onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
                             />
@@ -185,7 +185,7 @@ const Index = () => {
 
                 {/* sliders */}
                 <div className='hidden md:flex mt-20 justify-center w-full space-x-10'>
-                    <div className='w-7/12 mr-5 relative'>
+                    <div className='w-7/12 ml-5 relative'>
                         <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h2 className='text-[1rem]'>
                                 کوییزلند 🔥

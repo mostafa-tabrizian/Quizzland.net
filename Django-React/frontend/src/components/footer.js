@@ -11,9 +11,27 @@ const copyRightDate = () => {
 
 const Footer = () => {
     return (
-        <div className='footer w-full py-12'>
+        <div className='footer w-full py-12 mt-10'>
             
-            <div className='footer__container justify-center md:flex grid grid-cols-2 mr-10'>
+            <div className='footer__container justify-center grid grid-cols-2 md:flex md:space-x-20 md:space-x-reverse mr-10'>
+
+                <div>
+                    <h3>کوییز و تست ها</h3>
+                    <ul>
+                        <li><a href="/sort?s=newest"> جدیدترین </a></li>
+                        <li><a href="/sort?s=trend"> محبوب ترین </a></li>
+                        <li><a href="/sort?s=views"> پربازدیدترین </a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>کتگوری ها</h3>
+                    <ul>
+                        <li><Link to="/category/movie-&-Series">فیلم و سریال</Link></li>
+                        <li><Link to="/category/celebrity">سلبریتی</Link></li>
+                        <li><Link to="/category/psychology">روانشناسی</Link></li>
+                    </ul>
+                </div>
 
                 <div>
                     <h3>دسترسی سریع</h3>
@@ -28,23 +46,6 @@ const Footer = () => {
                     </ul>
                 </div>
 
-                <div>
-                    <h3>کتگوری ها</h3>
-                    <ul>
-                        <li><Link to="/category/movie-&-Series">فیلم و سریال</Link></li>
-                        <li><Link to="/category/celebrity">سلبریتی</Link></li>
-                        <li><Link to="/category/psychology">روانشناسی</Link></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3>کوییز و تست ها</h3>
-                    <ul>
-                        <li><a href="/sort?s=newest"> جدیدترین </a></li>
-                        <li><a href="/sort?s=trend"> محبوب ترین </a></li>
-                        <li><a href="/sort?s=views"> پربازدیدترین </a></li>
-                    </ul>
-                </div>
 
                 {/* <div>
                     <h3>با ما همراه باشید</h3>

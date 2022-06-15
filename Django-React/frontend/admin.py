@@ -17,10 +17,11 @@ class CustomUserAdmin(UserAdmin):
             {
                 'fields': (
                     'pass_token',
+                    'avatar',
+                    'bio',
                     'birthday_date',
                     'gender',
-                    'avatar',
-                    'most_played_categories'
+                    'most_played_categories',
                 ),
             },
         ),

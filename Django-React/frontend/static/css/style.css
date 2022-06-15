@@ -133,6 +133,7 @@ html {
           box-sizing: border-box;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  direction: rtl;
   background: #121212;
   background-attachment: fixed;
 }
@@ -165,7 +166,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #00000098;
+  background: #121212;
   -webkit-backdrop-filter: blur(0.2rem);
           backdrop-filter: blur(0.2rem);
   z-index: -1;
@@ -463,6 +464,25 @@ hr {
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes river {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bloodRiver_bg {
+  background: linear-gradient(45deg, #a20000, #9b3232, #4b0000);
+  background-size: 400% 400%;
+  -webkit-animation: river 5s ease infinite alternate;
+          animation: river 5s ease infinite alternate;
 }
 
 @keyframes river {
