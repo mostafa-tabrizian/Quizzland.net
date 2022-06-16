@@ -1,24 +1,41 @@
 // Font Family
+// @font-face {
+//     font-family: "myHarmattan";
+//     font-display: swap;
+//     src: url('/static/fonts/Harmattan-Regular.ttf') format('truetype'),  
+//             url('/static/fonts/Harmattan-Regular.woff2') format('woff2'),
+//             url('/static/fonts/Harmattan-Regular.woff') format('woff');
+// }
 @font-face {
-    font-family: "myHarmattan";
+    font-family: 'IRANYekanRegular';
     font-display: swap;
-    src: url('/static/fonts/Harmattan-Regular.ttf') format('truetype'),  
-            url('/static/fonts/Harmattan-Regular.woff2') format('woff2'),
-            url('/static/fonts/Harmattan-Regular.woff') format('woff');
+    src: url('/static/fonts/IRANYekanRegular.woff2') format('woff2'),
+         url('/static/fonts/IRANYekanRegular.woff') format('woff');
 }
 @font-face {
-    font-family: 'myLalezar';
+    font-family: 'IRANYekanBold';
     font-display: swap;
-    src: url('/static/fonts/Lalezar-Regular.ttf') format('truetype'),
-            url('/static/fonts/Lalezar-Regular.woff2') format('woff2'),
-            url('/static/fonts/Lalezar-Regular.woff') format('woff');
+    src: url('/static/fonts/IRANYekanBold.woff2') format('woff2'),
+         url('/static/fonts/IRANYekanBold.woff') format('woff');
+}
+@font-face {
+    font-family: 'IRANYekanBlack';
+    font-display: swap;
+    src: url('/static/fonts/IRANYekanBlack.woff2') format('woff2'),
+         url('/static/fonts/IRANYekanBlack.woff') format('woff');
+}
+@font-face {
+    font-family: 'LalezarRegular';
+    font-display: swap;
+    src: url('/static/fonts/LalezarRegular.woff2') format('woff2'),
+         url('/static/fonts/LalezarRegular.woff') format('woff');
 }
 
 $font-pr: myHarmattan, sans-serif, serif;
 
 // Fort Size
 $font-sm: 1.180rem;  // 18.8
-$font-med: 1.325rem;
+$font-med: 1.125rem;
 $font-l: 1.6rem;
 $font-xl: 2rem;
 

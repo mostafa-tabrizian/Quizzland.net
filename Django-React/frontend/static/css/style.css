@@ -1,14 +1,26 @@
 @charset "UTF-8";
 @font-face {
-  font-family: "myHarmattan";
+  font-family: 'IRANYekanRegular';
   font-display: swap;
-  src: url("/static/fonts/Harmattan-Regular.ttf") format("truetype"), url("/static/fonts/Harmattan-Regular.woff2") format("woff2"), url("/static/fonts/Harmattan-Regular.woff") format("woff");
+  src: url("/static/fonts/IRANYekanRegular.woff2") format("woff2"), url("/static/fonts/IRANYekanRegular.woff") format("woff");
 }
 
 @font-face {
-  font-family: 'myLalezar';
+  font-family: 'IRANYekanBold';
   font-display: swap;
-  src: url("/static/fonts/Lalezar-Regular.ttf") format("truetype"), url("/static/fonts/Lalezar-Regular.woff2") format("woff2"), url("/static/fonts/Lalezar-Regular.woff") format("woff");
+  src: url("/static/fonts/IRANYekanBold.woff2") format("woff2"), url("/static/fonts/IRANYekanBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'IRANYekanBlack';
+  font-display: swap;
+  src: url("/static/fonts/IRANYekanBlack.woff2") format("woff2"), url("/static/fonts/IRANYekanBlack.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'LalezarRegular';
+  font-display: swap;
+  src: url("/static/fonts/LalezarRegular.woff2") format("woff2"), url("/static/fonts/LalezarRegular.woff") format("woff");
 }
 
 .wrapper-sm {
@@ -127,7 +139,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 html {
-  font-size: 100%;
+  font-size: 100% !important;
   min-height: 100vh;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -148,9 +160,6 @@ html {
 body {
   margin: 0;
   padding: 0;
-  line-height: 1.3;
-  font-family: myHarmattan;
-  font-size: 1.325rem;
   position: relative;
   max-width: 100%;
   overflow-x: hidden;
@@ -199,47 +208,54 @@ a {
 }
 
 h1 {
-  font-size: 2rem;
-  padding-bottom: 1.25rem;
-  padding: 0;
-  font-family: myLalezar, myHarmattan;
-  font-weight: 300;
+  font-family: IRANYekanBlack, sans-serif, serif !important;
 }
 
-h2 {
-  font-size: 1.6rem;
-  font-family: myLalezar, myHarmattan;
-  font-weight: 300;
+h2,
+a,
+button {
+  font-size: 1rem !important;
+  font-family: IRANYekanBold, sans-serif, serif !important;
   position: relative;
 }
 
 @media (max-width: 70em) {
-  h2 {
+  h2,
+  a,
+  button {
     text-align: right;
   }
 }
 
 h3 {
-  font-size: 1.6rem;
-  padding: 0 0 1rem 0;
-  font-weight: 300;
-  position: relative;
+  font-family: IRANYekanBlack, sans-serif, serif !important;
+  font-size: .8rem !important;
+}
+
+h4 {
+  font-family: IRANYekanBold, sans-serif, serif !important;
+  font-size: 1.2rem !important;
 }
 
 @media (max-width: 70em) {
-  h3 {
-    text-align: right;
+  h4 {
+    font-size: inherit !important;
   }
 }
 
-h5 {
-  font-weight: 300;
+p, input {
+  font-family: IRANYekanRegular, sans-serif, serif !important;
+  text-align: right;
+  color: darkGray;
 }
 
-p {
-  font-size: 1.18rem;
-  text-align: right;
-  line-height: 2.1rem;
+dt {
+  font-family: IRANYekanBold, sans-serif, serif !important;
+  margin-bottom: 1.125rem;
+}
+
+dd {
+  font-family: IRANYekanRegular, sans-serif, serif !important;
 }
 
 a,
@@ -262,7 +278,7 @@ ul {
 
 li {
   list-style: none;
-  font-size: 1.325rem;
+  font-size: 1.125rem !important;
 }
 
 hr {
@@ -278,7 +294,7 @@ hr {
   padding-right: 1rem;
   padding-left: 1rem;
   font-family: myHarmattan;
-  font-size: 1.18rem;
+  font-size: 1.18rem !important;
   color: #161616;
   margin: 0;
   direction: rtl;
@@ -342,7 +358,7 @@ hr {
   -webkit-animation: changeContent .8s linear infinite;
           animation: changeContent .8s linear infinite;
   content: "⠋";
-  font-size: 5rem;
+  font-size: 5rem !important;
 }
 
 @keyframes changeContent {
@@ -445,7 +461,7 @@ hr {
 
 .bloodRiver {
   background: linear-gradient(45deg, #a20000, #aa4949, #4b0000);
-  background-size: 400% 400%;
+  background-size: 400% 400% !important;
   -webkit-animation: river 5s ease infinite alternate;
           animation: river 5s ease infinite alternate;
   -webkit-background-clip: text;
@@ -480,7 +496,7 @@ hr {
 
 .bloodRiver_bg {
   background: linear-gradient(45deg, #a20000, #9b3232, #4b0000);
-  background-size: 400% 400%;
+  background-size: 400% 400% !important;
   -webkit-animation: river 5s ease infinite alternate;
           animation: river 5s ease infinite alternate;
 }
@@ -702,15 +718,15 @@ hr {
 
 .title {
   text-align: center;
-  font-family: myLalezar, serif;
+  font-family: LalezarRegular, sans-serif, serif !important;
   font-weight: 300;
-  font-size: 2rem;
+  font-size: 2rem !important;
 }
 
 .lowTitle {
-  font-size: 2.5rem;
+  font-size: 2.5rem !important;
   opacity: .15;
-  font-family: myLalezar, serif;
+  font-family: LalezarRegular, sans-serif, serif !important;
   font-weight: 300;
   width: 100%;
   -webkit-box-pack: center;
@@ -719,12 +735,12 @@ hr {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: -3rem;
+  margin-bottom: -2rem;
 }
 
 @media (max-width: 70em) {
   .lowTitle {
-    font-size: 2rem;
+    font-size: 2rem !important;
   }
 }
 
@@ -733,7 +749,7 @@ hr {
           backdrop-filter: blur(20px);
   background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
   background: linear-gradient(to right, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
-  background-size: 400% 100%;
+  background-size: 400% 100% !important;
   -webkit-animation: loadingFrame 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
           animation: loadingFrame 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
 }
@@ -826,7 +842,7 @@ hr {
 }
 
 .header__logo span {
-  font-family: myLalezar, serif;
+  font-family: LalezarRegular, sans-serif, serif;
 }
 
 .header__links a {
@@ -1086,22 +1102,6 @@ hr {
   background-size: cover;
 }
 
-.footer__container div:not(:first-child) {
-  margin-left: 5rem;
-}
-
-@media (max-width: 70em) {
-  .footer__container div:not(:first-child) {
-    margin-left: 3.25rem;
-  }
-}
-
-@media (max-width: 70em) {
-  .footer__container div {
-    margin-left: 3.25rem;
-  }
-}
-
 .footer a:hover {
   color: white !important;
 }
@@ -1317,14 +1317,14 @@ hr {
 }
 
 .countingResult {
-  font-size: 1.325rem;
+  font-size: 1.125rem;
   font-family: myHarmattan;
   background: linear-gradient(-45deg, #6a0d11, #ac272e);
 }
 
 @media (max-width: 70em) {
   .countingResult {
-    font-size: 1.025rem;
+    font-size: 0.825rem;
   }
 }
 
@@ -1488,7 +1488,7 @@ hr {
 }
 
 .basicPage h3 {
-  font-family: myLalezar, serif;
+  font-family: LalezarRegular, sans-serif, serif;
   font-weight: 300;
 }
 
@@ -1617,7 +1617,7 @@ hr {
 }
 
 .blog-title {
-  font-family: 'myLalezar';
+  font-family: 'LalezarRegular';
   font-size: 1.4rem;
 }
 

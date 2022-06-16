@@ -10,7 +10,7 @@
         // z-index: 1;
 
         span {
-            font-family: myLalezar, serif;
+            font-family: LalezarRegular, sans-serif, serif;
 
             // background: linear-gradient(#b52633, #791118);
             // background: linear-gradient(45deg, rgb(162, 0, 0), rgb(170, 73, 73), rgb(75, 0, 0));
@@ -234,7 +234,7 @@
 
     @include breakpoints-down(large) {
         span {
-            background-color: $white !important;
+            background-color: $white  !important;
         }
     }
 
@@ -265,16 +265,16 @@
         }
 
         &::after {
-            border-bottom: 2px solid $white !important;
+            border-bottom: 2px solid $white  !important;
         }
     }
 
     input {
-        color: $white !important;
+        color: $white  !important;
     }
 
     .input {
-        color: $white !important;
+        color: $white  !important;
     }
 
     &__search {

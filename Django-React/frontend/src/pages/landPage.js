@@ -156,7 +156,7 @@ const Index = () => {
                         <div className='relative'>
                             <input
                                 type='text'
-                                className='pl-4 pr-12 py-1 rounded-full text-right bg-[#121212]  text-base mt-5 mb-5'
+                                className='pl-4 pr-12 py-1 rounded-full text-right bg-[#121212] text-base w-[20rem] mt-5 mb-5'
                                 placeholder={`کوییزت رو سریع تر پیدا کن`}
                                 onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
                             />
@@ -186,7 +186,7 @@ const Index = () => {
                 {/* sliders */}
                 <div className='hidden md:flex mt-20 justify-center w-full space-x-10'>
                     <div className='w-7/12 ml-5 relative'>
-                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                        <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
                             </h2>
@@ -198,16 +198,16 @@ const Index = () => {
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
-                            <h4>
+                            <h2>
                                 {content_monthly[0] && content_monthly[0].title}
-                            </h4>
+                            </h2>
                         </div>
                     </div>
                     <div className='w-5/12 relative'>
-                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
-                            <h4 className='translate-y-[4px]'>
+                        <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                            <h2 className='translate-y-[4px]'>
                                 🕚
-                            </h4>
+                            </h2>
                             <h2 className='text-[1rem]'>
                                 جدیدترینِ کوییزلند
                             </h2>
@@ -216,16 +216,16 @@ const Index = () => {
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
                         </Link>
                         <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
-                            <h4>
+                            <h2>
                                 {content_new[0] && content_new[0].title}
-                            </h4>
+                            </h2>
                         </div>
                     </div>
                 </div>
 
                 <Carousel autoplay dotPosition='top' className='md:hidden block mb-20'>
                     <div className='w-7/12 mr-5 relative'>
-                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                        <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
                             </h2>
@@ -243,7 +243,7 @@ const Index = () => {
                         </div>
                     </div>
                     <div className='w-5/12 relative'>
-                        <div className='absolute left-0 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                        <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h4 className='translate-y-[4px]'>
                                 🕚
                             </h4>
@@ -282,8 +282,8 @@ const Index = () => {
                     <span id='scroll' />
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>جدیدترین ها</h2>
-                        <Link to="/sort?s=newest" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <h4>جدیدترین ها</h4>
+                        <Link to="/sort?s=newest" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -311,8 +311,8 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>محبوب ترین ها</h2>
-                        <Link to="/sort?s=trend" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <h4>محبوب ترین ها</h4>
+                        <Link to="/sort?s=trend" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -340,8 +340,8 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>کوییز سلبریتی</h2>
-                        <Link to="/sort?s=newest&c=2" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <h4>کوییز سلبریتی</h4>
+                        <Link to="/sort?s=newest&c=2" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -369,8 +369,8 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>کوییز فیلم و سریال</h2>
-                        <Link to="/sort?s=newest&c=1" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <h4>کوییز فیلم و سریال</h4>
+                        <Link to="/sort?s=newest&c=1" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -387,8 +387,8 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>تست روانشناسی</h2>
-                        <Link to="/sort?s=newest&c=3" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <h4>تست روانشناسی</h4>
+                        <Link to="/sort?s=newest&c=3" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -415,8 +415,8 @@ const Index = () => {
 
                 <div className="mt-8 mb-8">
                     <div className="flex justify-between mb-8 quizContainer__header items-center">
-                        <h2>کوییز های بیشتر</h2>
-                        <Link to="/sort?s=newest" className="text-[1rem] text-left px-3 py-1 rounded-lg border-2 border-red-900"><h4>نتایج بیشتر</h4></Link>
+                        <h4>کوییز های بیشتر</h4>
+                        <Link to="/sort?s=newest" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}

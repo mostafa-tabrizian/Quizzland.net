@@ -695,6 +695,21 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 2rem;
 }
 
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.my-16 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
 .mr-10 {
   margin-right: 2.5rem;
 }
@@ -1043,6 +1058,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 1rem;
 }
 
+.w-\[20rem\] {
+  width: 20rem;
+}
+
+.w-\[2\] {
+  width: 2;
+}
+
 .max-w-\[110rem\] {
   max-width: 110rem;
 }
@@ -1142,6 +1165,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1575,6 +1602,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 2rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .pr-8 {
   padding-right: 2rem;
 }
@@ -1694,6 +1726,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-\[4rem\] {
   font-size: 4rem;
+}
+
+.text-\[\.8rem\] {
+  font-size: .8rem;
 }
 
 .font-semibold {

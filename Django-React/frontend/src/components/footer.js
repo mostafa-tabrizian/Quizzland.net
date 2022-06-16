@@ -13,37 +13,37 @@ const Footer = () => {
     return (
         <div className='footer w-full py-12 mt-10'>
             
-            <div className='footer__container justify-center grid grid-cols-2 md:flex md:space-x-20 md:space-x-reverse mr-10'>
+            <div className='justify-center grid grid-cols-2 md:flex md:space-x-20 md:space-x-reverse mr-10'>
 
                 <div>
-                    <h3>کوییز و تست ها</h3>
-                    <ul>
-                        <li><a href="/sort?s=newest"> جدیدترین </a></li>
-                        <li><a href="/sort?s=trend"> محبوب ترین </a></li>
-                        <li><a href="/sort?s=views"> پربازدیدترین </a></li>
-                    </ul>
+                    <dl>
+                        <dt>کوییز و تست ها</dt>
+                        <a href="/sort?s=newest"><dd>جدیدترین</dd></a>
+                        <a href="/sort?s=trend"><dd>محبوب ترین</dd></a>
+                        <a href="/sort?s=views"><dd>پربازدیدترین</dd></a>
+                    </dl>
                 </div>
 
                 <div>
-                    <h3>کتگوری ها</h3>
-                    <ul>
-                        <li><Link to="/category/movie-&-Series">فیلم و سریال</Link></li>
-                        <li><Link to="/category/celebrity">سلبریتی</Link></li>
-                        <li><Link to="/category/psychology">روانشناسی</Link></li>
-                    </ul>
+                    <dl>
+                        <dt>کتگوری ها</dt>
+                        <Link to="/category/movie-&-Series"><dd>فیلم و سریال</dd></Link>
+                        <Link to="/category/celebrity"><dd>سلبریتی</dd></Link>
+                        <Link to="/category/psychology"><dd>روانشناسی</dd></Link>
+                    </dl>
                 </div>
 
                 <div>
-                    <h3>دسترسی سریع</h3>
-                    <ul>
-                        <li><Link to='/'>صفحه اصلی</Link></li>
-                        {/* <li><Link to='/blog'>وبلاگ</Link></li> */}
-                        {/* <li><Link to='/guide'>راهنما</Link></li> */}
-                        <li><Link to='/contact'>تماس با ما</Link></li>
-                        {/* <li><Link to='/advertiseContact'>تبلیغات</Link></li> */}
-                        {/* <li><Link to='/privacy-policy'>حریم خصوصی</Link></li> */}
-                        {/* <li><Link to='/supportUs'>حمایت</Link></li> */}
-                    </ul>
+                    <dl>
+                        <dt>دسترسی سریع</dt>
+                        <Link to='/'><dd>صفحه اصلی</dd></Link>
+                        {/* <Link to='/blog'><dd>وبلاگ</dd></Link> */}
+                        {/* <Link to='/guide'><dd>راهنما</dd></Link> */}
+                        <Link to='/contact'><dd>تماس با ما</dd></Link>
+                        {/* <Link to='/advertiseContact'><dd>تبلیغات</dd></Link> */}
+                        {/* <Link to='/privacy-policy'><dd>حریم خصوصی</dd></Link> */}
+                        {/* <Link to='/supportUs'><dd>حمایت</dd></Link> */}
+                    </dl>
                 </div>
 
 

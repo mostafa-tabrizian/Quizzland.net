@@ -28,7 +28,7 @@ const Contact = () => {
             </Helmet>
 
             <div className="basicPage wrapper-sm m-auto">
-                <h3>برای تماس با ما میتونید از روش های زیر استفاده کنید </h3>
+                <h1>برای تماس با ما میتونید از روش های زیر استفاده کنید </h1>
                 <div>
                     <ul className="text-red-600 font-bold flex justify-center items-center">
                         {/* <li className="hoverAnimation"><a href="#">انستگرام</a></li> */}

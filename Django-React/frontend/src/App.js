@@ -22,6 +22,7 @@ const Quiz404           = lazy(() => import ('./pages/404quiz'))
 
 const Login             = lazy(() => import('./pages/login'))
 const Profile           = lazy(() => import('./pages/profile'))
+const Setting           = lazy(() => import('./pages/profileSetting'))
 
 const Index             = lazy(() => import('./pages/landPage'))
 const Guide             = lazy(() => import('./pages/guide'))
@@ -92,6 +93,7 @@ const App = () => {
 
                             <Route path='/login' component={Login} />
                             <Route path='/profile/:user' component={Profile} />
+                            <Route path='/setting' component={Setting} />
 
                             <Route path='/guide' component={Guide} />
 

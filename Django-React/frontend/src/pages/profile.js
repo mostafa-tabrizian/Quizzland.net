@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
@@ -22,14 +21,14 @@ const Profile = () => {
 
             <Helmet>
                 <title>کوییزلند | پروفایل</title>
-                <link rel='canonical' to='https://www.quizzland.net/profile' />
+                <link rel='canonical' to={`https://www.quizzland.net/profile/${user?.username}`} />
             </Helmet>
 
             <div className='space-y-10 md:w-4/5 mx-auto'>
 
                 <div className='space-y-5 py-8 px-4 shadow-[0_4px_10px_#690D11] border-4 border-[#690D11] rounded-lg'>
                     <div className="">
-                        <div className="flex space-x-2 space-x-reverse items-center">
+                        <div className="flex space-x-2 space-x-reverse mb-5 items-center">
                             {
                                 user?.avatar ?
                                 <img className="" src={user?.avatar} alt={user?.username} />
@@ -39,7 +38,7 @@ const Profile = () => {
                                 </svg>
                             }
 
-                            <h1 className="" id="buzz-content">{user?.first_name }&nbsp;{user?.last_name}</h1>
+                            <h2 className="" id="buzz-content">{user?.first_name }&nbsp;{user?.last_name}</h2>
                         </div>
                         <p className="">{user?.bio}</p>
                     </div>

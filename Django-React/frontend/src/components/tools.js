@@ -4,10 +4,10 @@ import { log } from './base'
 
 const Tools = (props) => {
     return (
-        <div className='flex space-x-12 md:space-x-24 mb-10 justify-center'>
-            <h3 className={`title text-xl ${props.sortType == 'trend' ? 'bloodRiver' : 'hover:text-red-200'}`}><button onClick={() => { props.setSortType('trend') }} type='button'>محبوب‌ ترین</button></h3>
-            <h3 className={`title text-xl ${props.sortType == 'views' ? 'bloodRiver' : 'hover:text-red-200'}`}><button onClick={() => { props.setSortType('views') }} type='button'>پربازدیدترین</button></h3>
-            <h3 className={`title text-xl ${props.sortType == 'newest' ? 'bloodRiver' : 'hover:text-red-200'}`}><button onClick={() => { props.setSortType('newest') }} type='button'>جدیدترین</button></h3>
+        <div className='grid grid-cols-3 w-[22rem] mx-auto my-12 justify-center'>
+            <h3 className={`${props.sortType == 'trend' ? 'bloodRiver_bg' : 'hover:text-red-200'} text-center rounded`}><button onClick={() => { props.setSortType('trend') }} type='button'>محبوب‌ ترین</button></h3>
+            <h3 className={`${props.sortType == 'views' ? 'bloodRiver_bg' : 'hover:text-red-200'} text-center rounded`}><button onClick={() => { props.setSortType('views') }} type='button'>پربازدیدترین</button></h3>
+            <h3 className={`${props.sortType == 'newest' ? 'bloodRiver_bg' : 'hover:text-red-200'} text-center rounded`}><button onClick={() => { props.setSortType('newest') }} type='button'>جدیدترین</button></h3>
         </div>
     );
 }

@@ -17,7 +17,7 @@
         // height: 33rem;
     // }
 
-    &__container{
+    // &__container{
         // direction: rtl;
         // display: flex;
         // 
@@ -29,20 +29,20 @@
         //     margin-right: 0;
         // }
         
-        div {
-            &:not(:first-child) {
-                margin-left: 5rem;
+    //     div {
+    //         &:not(:first-child) {
+    //             margin-left: 5rem;
 
-                @include breakpoints-down(large) {
-                    margin-left: 3.25rem;
-                }
-            }
+    //             @include breakpoints-down(large) {
+    //                 margin-left: 3.25rem;
+    //             }
+    //         }
 
-            @include breakpoints-down(large) {
-                margin-left: 3.25rem;
-            }
-        }
-    }
+    //         @include breakpoints-down(large) {
+    //             margin-left: 3.25rem;
+    //         }
+    //     }
+    // }
 
     a {
     //     color: white;

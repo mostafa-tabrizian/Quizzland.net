@@ -28,16 +28,16 @@ const QuizContainer = (props) => {
                                 />
                             </div>
                             <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
-                                <h2 className={`quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
-                                                text-sm md:w-52 md:text-base`}>
+                                <h3 className={`quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
+                                                md:w-52 md:text-base`}>
                                     {quiz.subCategory}
-                                </h2>
-                                <h3 className={`
+                                </h3>
+                                <h2 className={`
                                     quizContainer__title quizContainer__title__noViews flex
-                                    text-sm w-[10rem] md:w-52 md:text-base
+                                    w-[10rem] md:w-52 md:text-base
                                 `}>
                                     {quiz.title}
-                                </h3>
+                                </h2>
                                 {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
                                 {/* <span className="text-center quizContainer__date">
                                     {datePublishHandler(quiz.publish)}

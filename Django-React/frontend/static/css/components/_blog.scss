@@ -29,7 +29,7 @@
     }
 
     &-title {
-        font-family: 'myLalezar';
+        font-family: 'LalezarRegular';
         font-size: 1.4rem;
     }
 
@@ -41,7 +41,8 @@
     &-brief {
         line-height: 1.5rem;
         margin-top: 1rem;
-        height: 4rem; width: 39rem;
+        height: 4rem;
+        width: 39rem;
         overflow: hidden;
 
         @include breakpoints-down(large) {
@@ -55,8 +56,9 @@
 }
 
 .article {
-    p > img {
-        width: 100% !important; height: auto !important;
+    p>img {
+        width: 100% !important;
+        height: auto !important;
     }
 
     h5 {
