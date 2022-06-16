@@ -44,14 +44,14 @@ const ProfileSetting = () => {
 
             <div className='md:w-4/5'>
                 <div>
-                    <h1>
+                    <h1 className='mb-3'>
                         اطلاعات پروفایل        
                     </h1>
-                    <div className='py-2 px-2 border-[#690D11] border-4 rounded'>
+                    <div className='py-2 px-2 border-[#690D11] space-y-5 border-4 rounded'>
                         <div>
                             <h3>تصویر پروفایل و نام کاربری</h3>
                             <div>
-                                <div className='flex space-x-5 space-x-reverse'>
+                                <div className='flex space-x-5 space-x-reverse justify-around md:justify-start'>
                                     {
                                         user?.avatar ?
                                         <img className="" src={user?.avatar} alt={user?.username} />
@@ -61,18 +61,18 @@ const ProfileSetting = () => {
                                         </svg>
                                     }
 
-                                    <div className='text-center'>
+                                    <div className='text-center items-center flex flex-col m-auto'>
                                         <button className='border px-3 py-1 rounded'>آپلود عکس جدید</button>
                                         <button className='text-xm'>حذف تصویر</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className='flex space-x-5 space-x-reverse items-center'>
                             <h3>نام کاربری</h3>
                             <div>{user?.username}</div>
                         </div>
-                        <div className='grid grid-cols-2'>
+                        <div className='md:grid md:grid-cols-2 space-y-5'>
                             <div>
                                 <h3>نام</h3>
                                 <input type="text" placeholder={user?.first_name} />
@@ -83,7 +83,7 @@ const ProfileSetting = () => {
                             </div>
                             <div>
                                 <h3>درباره من</h3>
-                                <input type="text" placeholder={user?.bio} />
+                                <textarea type="text" cols="40" rows='5' placeholder={user?.bio} />
                             </div>
                             <div>
                                 <h3>تاریخ تولد</h3>
@@ -101,8 +101,9 @@ const ProfileSetting = () => {
                                 <div>
                                     <figure>
                                         <select name="genders">
-                                            <options value='male'>مذکر</options>
-                                            <options value='female'>مونث</options>
+                                            <option value='null' selected>انتخاب کنید</option>
+                                            <option value='male'>مذکر</option>
+                                            <option value='female'>مونث</option>
                                         </select>
                                         <figcaption>
                                             جنسیت شما به هیچ کس نمایان نخواهد بود.

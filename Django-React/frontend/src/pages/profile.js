@@ -26,7 +26,7 @@ const Profile = () => {
 
             <div className='space-y-10 md:w-4/5 mx-auto'>
 
-                <div className='space-y-5 py-8 px-4 shadow-[0_4px_10px_#690D11] border-4 border-[#690D11] rounded-lg'>
+                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#1d1313] border-[#690D11] rounded-lg'>
                     <div className="">
                         <div className="flex space-x-2 space-x-reverse mb-5 items-center">
                             {
@@ -88,7 +88,7 @@ const Profile = () => {
                         </div>
                     </dl>
                 </div>
-                <div className='space-y-5 py-8 px-4 shadow-[0_4px_10px_#690D11] border-4 border-[#690D11] rounded-lg'>
+                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#1d1313] border-[#690D11] rounded-lg'>
                     <div className="flex justify-between">
                         <h2 className="">کوییز های منتشرشده</h2>
                         <Link aria-label="کوییز های منتشرشده" to={`/post/${user?.uesrname}`}>
@@ -96,7 +96,7 @@ const Profile = () => {
                         </Link>
                     </div>
                 </div>
-                <div className='space-y-5 py-8 px-4 shadow-[0_4px_10px_#690D11] border-4 border-[#690D11] rounded-lg'>
+                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#1d1313] border-[#690D11] rounded-lg'>
                     <div className="flex justify-between">
                         <h2 className="">جوایز</h2>
                         <Link aria-label="دیدن تمام جوایز" to={`/trophies/${user?.uesrname}`}>

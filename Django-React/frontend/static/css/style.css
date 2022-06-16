@@ -146,7 +146,6 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   direction: rtl;
-  background: #121212;
   background-attachment: fixed;
 }
 
@@ -166,19 +165,7 @@ body {
   overflow-y: overlay;
   scroll-behavior: smooth;
   scrollbar-color: #b52633 transparent;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #121212;
-  -webkit-backdrop-filter: blur(0.2rem);
-          backdrop-filter: blur(0.2rem);
-  z-index: -1;
+  background: #060101;
 }
 
 body::-webkit-scrollbar {
@@ -227,6 +214,12 @@ button {
   }
 }
 
+@media (max-width: 70em) {
+  h2 {
+    font-size: .8rem !important;
+  }
+}
+
 h3 {
   font-family: IRANYekanBlack, sans-serif, serif !important;
   font-size: .8rem !important;
@@ -243,6 +236,11 @@ h4 {
   }
 }
 
+input, textarea {
+  background: #1d1313;
+  border-bottom: 1px solid #707070;
+}
+
 p, input {
   font-family: IRANYekanRegular, sans-serif, serif !important;
   text-align: right;
@@ -251,11 +249,21 @@ p, input {
 
 dt {
   font-family: IRANYekanBold, sans-serif, serif !important;
-  margin-bottom: 1.125rem;
 }
 
 dd {
   font-family: IRANYekanRegular, sans-serif, serif !important;
+}
+
+figcaption {
+  font-family: IRANYekanRegular, sans-serif, serif !important;
+  font-size: .7rem;
+  color: darkGray;
+  margin-top: .5rem;
+}
+
+select {
+  text-align: left;
 }
 
 a,
@@ -284,6 +292,8 @@ li {
 hr {
   border: 1px solid #8080802e;
   width: 50%;
+  margin-top: 1.125rem !important;
+  margin-bottom: 1.125rem !important;
 }
 
 .input {
@@ -854,7 +864,7 @@ hr {
 }
 
 .header .slideMenu-hide {
-  top: -27rem !important;
+  right: -100vw !important;
 }
 
 .header__menu {
