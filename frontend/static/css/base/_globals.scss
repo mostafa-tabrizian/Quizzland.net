@@ -95,11 +95,12 @@ h1 {
 h2,
 a,
 button {
-    font-size: 1rem !important;
+    font-size: .9rem !important;
     font-family: IRANYekanBold, sans-serif, serif !important;
     position: relative;
 
     @include breakpoints-down(large) {
+        font-size: 1rem !important;
         text-align: right;
     }
 }
@@ -122,6 +123,11 @@ h4 {
     @include breakpoints-down(large) {
         font-size: inherit !important;
     }
+}
+
+h5 {
+    font-family: IRANRegular, sans-serif, serif !important;
+    font-size: 9rem !important;
 }
 
 input, textarea {

@@ -42,7 +42,7 @@ const ProfileSetting = () => {
 
             <Header />
 
-            <div className='md:w-4/5'>
+            <div className='mx-auto md:w-4/5'>
                 <div>
                     <h1 className='mb-3'>
                         اطلاعات پروفایل        
@@ -51,7 +51,7 @@ const ProfileSetting = () => {
                         <div>
                             <h3>تصویر پروفایل و نام کاربری</h3>
                             <div>
-                                <div className='flex space-x-5 space-x-reverse justify-around md:justify-start'>
+                                <div className='flex justify-around space-x-5 space-x-reverse md:justify-start'>
                                     {
                                         user?.avatar ?
                                         <img className="" src={user?.avatar} alt={user?.username} />
@@ -61,18 +61,25 @@ const ProfileSetting = () => {
                                         </svg>
                                     }
 
-                                    <div className='text-center items-center flex flex-col m-auto'>
-                                        <button className='border px-3 py-1 rounded'>آپلود عکس جدید</button>
+                                    <div className='flex flex-col items-center m-auto text-center'>
+                                        <button className='px-3 py-1 border rounded'>آپلود عکس جدید</button>
                                         <button className='text-xm'>حذف تصویر</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className='flex space-x-5 space-x-reverse items-center'>
-                            <h3>نام کاربری</h3>
-                            <div>{user?.username}</div>
+                        <div className=''>
+                            <figure>
+                                <div className='flex space-x-5 space-x-reverse'>
+                                    <h3>نام کاربری</h3>
+                                    <h2>{user?.username}</h2>
+                                </div>
+                                <figcaption>
+                                    نام کاربری قابل تغییر نمی‌باشد.
+                                </figcaption>
+                            </figure>
                         </div>
-                        <div className='md:grid md:grid-cols-2 space-y-5'>
+                        <div className='space-y-5 md:grid md:grid-cols-2'>
                             <div>
                                 <h3>نام</h3>
                                 <input type="text" placeholder={user?.first_name} />
@@ -111,6 +118,9 @@ const ProfileSetting = () => {
                                     </figure>
                                 </div>
                             </div>
+                        </div>
+                        <div className='flex justify-end w-full mt-5'>
+                            <button className='px-6 py-2 border-2 border-green-600 rounded-xl'>‌ذخیره</button>
                         </div>
                     </div>
                 </div>

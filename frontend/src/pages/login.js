@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from '../components/axiosApi';;
 import { message, Select } from 'antd';
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 import { log } from '../components/base'
 import userProfileDetail from "../components/userProfileDetail";
@@ -78,22 +79,28 @@ const Login = () => {
             </Helmet>
 
             <div className="center">
-                <div className="basicPage wrapper-sm m-auto absolute center top-20">
+                <div className="absolute m-auto basicPage wrapper-sm center top-20">
                     <h1 className="text-[3rem] mb-5 text-center text-[#ac272e] ">
                         ورود به کوییزلند
                     </h1>
 
-                    <form className='grid justify-center space-y-5 p-8 w-[24rem] text-[20px] rounded-lg center'>
-                        <label>
-                            <input name="username" className='rounded-lg p-2 w-full' type="string" placeholder="نام کاربری" value={username} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setUsername(input.target.value)} />
+                    <form className='grid justify-center space-y-5 p-8 text-[20px] rounded-lg center'>
+                        <label className='w-[18rem]'>
+                            <input name="username" className='w-full p-2 text-base rounded-lg' type="string" placeholder="نام کاربری" value={username} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setUsername(input.target.value)} />
                         </label>
-                        <label>
-                            <input name="password" className='rounded-lg p-2 w-full' type="password" placeholder="رمز عبور" value={password} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setPassword(input.target.value)} />
+                        <label className='w-[18rem]'>
+                            <input name="password" className='w-full p-2 text-base rounded-lg' type="password" placeholder="رمز عبور" value={password} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setPassword(input.target.value)} />
                         </label>
                         <button onClick={() => handleSubmit()} className='bg-[#ac272e] p-2 rounded-lg text-white font-semibold' type="button">
                             تایید
                         </button>
                     </form>
+
+                    <div>
+                        <h2>
+                            یا اگر اکانت ندارید اینجا <Link to='/register' className="text-[#d8545a]">ثبت نام</Link> کنید
+                        </h2>
+                    </div>
                 </div>
             </div>
 

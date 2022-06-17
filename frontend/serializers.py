@@ -8,7 +8,21 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
 
         # Add custom claims
-        # token['fav_color'] = user.fav_color
+        # token['id'] = user.id
+        # token['username'] = user.username
+        # token['pass_token'] = user.pass_token
+        # token['first_name'] = user.first_name
+        # token['last_name'] = user.last_name
+        # token['email'] = user.email
+        # token['is_active'] = user.is_active
+        # token['date_joined'] = user.date_joined
+        # token['last_login'] = user.last_login
+        # token['pass_token'] = user.pass_token
+        # token['avatar'] = user.avatar
+        # token['bio'] = user.bio
+        # token['birthday_date'] = user.birthday_date
+        # token['gender'] = user.gender
+        # token['most_played_categories'] = user.most_played_categorie
         return token
 
 class CustomUserSerializer(serializers.ModelSerializer):

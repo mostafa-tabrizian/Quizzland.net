@@ -129,7 +129,7 @@ const Index = () => {
                 </script>
             </Helmet>
 
-            <div className='md:w-4/5 relative m-auto z-0'>
+            <div className='relative z-0 m-auto md:w-4/5'>
 
                 <div className={`hero hidden md:flex justify-center items-center bg-gradient-to-t from-[#3d191a] via-transparent p-3 rounded-lg m-auto`}>
                     {/* <div className="hero_path absolute right-0 top-[-12rem] md:top-[-16rem] h-[45rem] md:h-[60rem] w-[100%]"></div> */}
@@ -156,7 +156,7 @@ const Index = () => {
                         <div className='relative'>
                             <input
                                 type='text'
-                                className='pl-4 pr-12 py-1 rounded-full text-right bg-[#121212] text-base w-[20rem] mt-5 mb-5'
+                                className='pl-4 pr-12 py-1 rounded-full text-right bg-[#161616] text-base w-[20rem] mt-5 mb-5'
                                 placeholder={`کوییزت رو سریع تر پیدا کن`}
                                 onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
                             />
@@ -184,8 +184,8 @@ const Index = () => {
                 </div>
 
                 {/* sliders */}
-                <div className='hidden md:flex mt-20 justify-center w-full space-x-10'>
-                    <div className='w-7/12 ml-5 relative'>
+                <div className='justify-center hidden w-full mt-20 space-x-10 md:flex'>
+                    <div className='relative w-7/12 ml-5'>
                         <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
@@ -203,7 +203,7 @@ const Index = () => {
                             </h2>
                         </div>
                     </div>
-                    <div className='w-5/12 relative'>
+                    <div className='relative w-5/12'>
                         <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h2 className='translate-y-[4px]'>
                                 🕚
@@ -223,8 +223,8 @@ const Index = () => {
                     </div>
                 </div>
 
-                <Carousel autoplay dotPosition='top' className='md:hidden block mb-20'>
-                    <div className='w-7/12 mr-5 relative'>
+                <Carousel autoplay dotPosition='top' className='block mb-20 md:hidden'>
+                    <div className='relative w-7/12 mr-5'>
                         <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
@@ -242,7 +242,7 @@ const Index = () => {
                             </h4>
                         </div>
                     </div>
-                    <div className='w-5/12 relative'>
+                    <div className='relative w-5/12'>
                         <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
                             <h4 className='translate-y-[4px]'>
                                 🕚
@@ -281,9 +281,9 @@ const Index = () => {
                 <div className="mb-8 md:mt-[10rem]">
                     <span id='scroll' />
 
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
+                    <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>جدیدترین ها</h4>
-                        <Link to="/sort?s=newest" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -310,9 +310,9 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
+                    <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>محبوب ترین ها</h4>
-                        <Link to="/sort?s=trend" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -339,9 +339,9 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
+                    <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>کوییز سلبریتی</h4>
-                        <Link to="/sort?s=newest&c=2" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -368,9 +368,9 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
+                    <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>کوییز فیلم و سریال</h4>
-                        <Link to="/sort?s=newest&c=1" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -386,9 +386,9 @@ const Index = () => {
 
                 <div className="mb-8">
 
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
+                    <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>تست روانشناسی</h4>
-                        <Link to="/sort?s=newest&c=3" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}
@@ -414,9 +414,9 @@ const Index = () => {
                 }
 
                 <div className="mt-8 mb-8">
-                    <div className="flex justify-between mb-8 quizContainer__header items-center">
+                    <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>کوییز های بیشتر</h4>
-                        <Link to="/sort?s=newest" className="text-left px-3 py-1 rounded-lg border-2 border-red-900"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
                     {SkeletonLoading(contentLoaded)}

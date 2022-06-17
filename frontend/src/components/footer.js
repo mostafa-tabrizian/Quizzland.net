@@ -13,11 +13,11 @@ const Footer = () => {
     return (
         <div className='footer w-[110vw] mr-[-1rem] py-12 mt-10'>
             
-            <div className='justify-center grid grid-cols-2 md:flex md:space-x-20 md:space-x-reverse mr-10'>
+            <div className='grid justify-center grid-cols-2 mr-10 md:flex md:space-x-20 md:space-x-reverse'>
 
                 <div>
                     <dl>
-                        <dt>کوییز و تست ها</dt>
+                        <dt className='mb-3'>کوییز و تست ها</dt>
                         <a href="/sort?s=newest"><dd>جدیدترین</dd></a>
                         <a href="/sort?s=trend"><dd>محبوب ترین</dd></a>
                         <a href="/sort?s=views"><dd>پربازدیدترین</dd></a>
@@ -26,7 +26,7 @@ const Footer = () => {
 
                 <div>
                     <dl>
-                        <dt>کتگوری ها</dt>
+                        <dt className='mb-3'>کتگوری ها</dt>
                         <Link to="/category/movie-&-Series"><dd>فیلم و سریال</dd></Link>
                         <Link to="/category/celebrity"><dd>سلبریتی</dd></Link>
                         <Link to="/category/psychology"><dd>روانشناسی</dd></Link>
@@ -35,7 +35,7 @@ const Footer = () => {
 
                 <div>
                     <dl>
-                        <dt>دسترسی سریع</dt>
+                        <dt className='mb-3'>دسترسی سریع</dt>
                         <Link to='/'><dd>صفحه اصلی</dd></Link>
                         {/* <Link to='/blog'><dd>وبلاگ</dd></Link> */}
                         {/* <Link to='/guide'><dd>راهنما</dd></Link> */}
@@ -58,7 +58,7 @@ const Footer = () => {
 
             </div>
 
-            <div className="flex justify-center mt-10 items-center opacity-50">
+            <div className="flex items-center justify-center mt-10 opacity-50">
                 <p className='text-sm'>
                     {copyRightDate()} © تمام حقوق به کوییزلند تعلق دارد
                 </p>

@@ -32,16 +32,17 @@ const NotFound_404 = () => {
             <div class="basicPage wrapper-sm relative" style={{ background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
                 <h1> 🤔 صفحه مورد نظر پیدا نشد </h1>
                 <div class="mt-5">
-                    این صفحه موجود نمی‌باشد یا در حال حاضر غیر فعال شده است
+                    <h2>
+                        این صفحه موجود نمی‌باشد یا در حال حاضر غیر فعال شده است
+                    </h2>
                 </div>
-                <div className='mt-10 space-y-3'>
-                    <div>
-                        اینجا رو کلیک کنید و بهترین کوییز/تست های این ماه رو ببینید
-                    </div>
-                    <div className='border-2 border-red-900 rounded-xl px-4 py-2'>
-                        <Link to='/sort?s=trend'>
-                            مشاهده بهترین کوییز/تست های این ماه
-                        </Link>
+                <div className='mt-10'>
+                    <div className='px-4 py-2 border-2 border-red-900 rounded-xl'>
+                        <h2>
+                            <Link to='/sort?s=trend'>
+                                مشاهده بهترین کوییز/تست های این ماه
+                            </Link>
+                        </h2>
                     </div>
                 </div>
             </div>
