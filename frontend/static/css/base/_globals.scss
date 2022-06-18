@@ -53,6 +53,7 @@ body {
     scroll-behavior: smooth;
     scrollbar-color: #b52633 transparent;
     background: #060101;
+    z-index: 0;
 
     // &::before {
     //     content: "";
@@ -127,7 +128,7 @@ h4 {
 
 h5 {
     font-family: IRANRegular, sans-serif, serif !important;
-    font-size: 9rem !important;
+    font-size: .9rem !important;
 }
 
 input, textarea {
@@ -382,6 +383,14 @@ hr {
         opacity: 1 !important;
         transition: all .53s ease-in-out !important;
     }
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.rtl {
+    direction: rtl;
 }
 
 .bloodRiver {

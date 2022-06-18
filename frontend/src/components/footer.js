@@ -11,7 +11,7 @@ const copyRightDate = () => {
 
 const Footer = () => {
     return (
-        <div className='footer w-[110vw] mr-[-1rem] py-12 mt-10'>
+        <div className='footer w-[110vw] mr-[-1rem] py-12 mt-10 rtl'>
             
             <div className='grid justify-center grid-cols-2 mr-10 md:flex md:space-x-20 md:space-x-reverse'>
 

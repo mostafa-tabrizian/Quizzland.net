@@ -158,7 +158,7 @@ const Index = () => {
                                 type='text'
                                 className='pl-4 pr-12 py-1 rounded-full text-right bg-[#161616] text-base w-[20rem] mt-5 mb-5'
                                 placeholder={`کوییزت رو سریع تر پیدا کن`}
-                                onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
+                                    onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
                             />
                             <svg className='w-5 h-5 absolute top-[1.7rem] right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
                                 <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />

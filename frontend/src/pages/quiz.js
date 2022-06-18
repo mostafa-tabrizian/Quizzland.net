@@ -348,7 +348,7 @@ const Quiz = (props) => {
         if (question.option_1st) {
             return (
                 <div className="flex justify-center">
-                    <form className='quiz__options w-[100%] md:grid md:grid-cols-2 space-y-3 text-[5vw] md:text-[1.6vw] justify-center' action="">
+                    <form className='quiz__options w-[100%] md:grid md:grid-cols-2 space-y-3 justify-center' action="">
                         {question.option_1st !== ('') &&
                             <> <input
                                 onClick={selectedOption}
@@ -361,7 +361,7 @@ const Quiz = (props) => {
                                             border border-[#ffffff30]
                                             p-2 block max-w-[100%] md:max-width-[14rem]
                                             md:h-[auto] md:pr-4 md:m-2 rounded-lg
-                                            cursor-pointer text-lg md:text-[1.3rem]
+                                            cursor-pointer
                                             hover:border-red-300
                                             ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''}
                                             ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''}
@@ -374,16 +374,16 @@ const Quiz = (props) => {
                                 </label>
                             </>
                         }
-                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.3rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
-                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.3rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
-                        {question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel text-lg md:text-[1.3rem] backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
+                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
+                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
+                        {question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
                     </form>
                 </div>
             )
         } else {
             return (
                 <div className="flex justify-center">
-                    <form className='relative grid justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3 flex-wrap' data={question.answer} action="">
+                    <form className='relative grid flex-wrap justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3' data={question.answer} action="">
                         {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <LazyLoadImage src={question.option_img_1st} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
                         {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <LazyLoadImage src={question.option_img_2nd} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
                         {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <LazyLoadImage src={question.option_img_3rd} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
@@ -443,7 +443,7 @@ const Quiz = (props) => {
                         <div className='mt-3 w-[22rem] md:w-[29rem]'>
                             {
                                 (question.question !== null && question.question !== '') &&
-                                <p className='text-center p-3 backdrop-blur-2xl rounded-xl text-lg md:text-[1.5rem]'> {question.question} </p>
+                                <p className='p-3 text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
                             }
 
                             {
@@ -491,7 +491,7 @@ const Quiz = (props) => {
         return (
             splittedTags.map(tag => {
                 return (
-                    <li key={tag} className='px-3 py-1 text-sm rounded-lg'>
+                    <li key={tag} className='px-3 py-1 rounded-lg'>
                         <h4>
                             <Link
                                 to={`/search?q=${replaceFunction(tag, ' ', '+')}`}
@@ -630,169 +630,171 @@ const Quiz = (props) => {
                 />
             }
 
-            <div className={`
-                fixed left-0 backdrop-blur-3xl backdrop-brightness-75
-                top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
-                flex flex-col items-center justify-center 
-            `}>
-                <div>
-                    <div className='bg-red-800 w-10 h-10 rounded-full absolute animate-ping'></div>
-                    <div className='bg-red-800 w-10 h-10 rounded-full'></div>
-                </div>
-                <div className='mt-5'>
-                    <h2>
-                        در حال محاسبه نتیجه کوییز
-                    </h2>
-                </div>
-            </div>
-
-            <div className="relative text-right quiz__head z-[-1] backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
-                {
-                    !(contentLoaded) &&
-                    <div className='flex justify-center items-center'>
-                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizTitle'></div>
+            <div className="ltr">
+                <div className={`
+                    fixed left-0 backdrop-blur-3xl backdrop-brightness-75
+                    top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
+                    flex flex-col items-center justify-center 
+                `}>
+                    <div>
+                        <div className='absolute w-10 h-10 bg-red-800 rounded-full animate-ping'></div>
+                        <div className='w-10 h-10 bg-red-800 rounded-full'></div>
                     </div>
-                }
-
-                <div className="text-center flex justify-center mb-4">
-                    <h1 className='md:max-w-[21rem] max-w-[19rem]'>
-                        {quiz?.title}
-                    </h1>
+                    <div className='mt-5'>
+                        <h2>
+                            در حال محاسبه نتیجه کوییز
+                        </h2>
+                    </div>
                 </div>
 
-                <div className="flex justify-center quiz__detail items-center">
+                <div className="relative text-right quiz__head z-[-1] backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
                     {
                         !(contentLoaded) &&
-                        <div className='flex space-x-5'>
-                            <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
-                            <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
+                        <div className='flex items-center justify-center'>
+                            <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizTitle'></div>
                         </div>
                     }
+
+                    <div className="flex justify-center mb-4 text-center">
+                        <h1 className='md:max-w-[21rem] max-w-[19rem]'>
+                            {quiz?.title}
+                        </h1>
+                    </div>
+
+                    <div className="flex items-center justify-center quiz__detail">
+                        {
+                            !(contentLoaded) &&
+                            <div className='flex space-x-5'>
+                                <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
+                                <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
+                            </div>
+                        }
+                        {
+                            contentLoaded &&
+                            <div className='flex space-x-6'>
+                                <h5>{makeDatePublishFormatForQuizDetail(quiz?.publish)}</h5>
+                                <h5>تعداد سوال ها: {questions?.length}</h5>
+                            </div>
+                        }
+                    </div>
+
                     {
                         contentLoaded &&
-                        <div className='flex space-x-6 text-lg'>
-                            <h5>{makeDatePublishFormatForQuizDetail(quiz?.publish)}</h5>
-                            <h5>تعداد سوال ها: {questions?.length}</h5>
+                        <div className='flex space-x-5 translate-x-[-3rem]'>
+                            <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
+                                {/* <button className="quiz__autoQuestionChangerSwitch__btn btn">
+                                    <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} relative`}></div>
+                                </button> */}
+                                <div className='mt-3'>
+                                    <Switch
+                                        checkedChildren='خودکار'
+                                        unCheckedChildren='دستی'
+                                        className={`${autoQuestionChanger ? 'bg-red-800' : 'bg-zinc-500'}`}
+                                        onChange={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }}
+                                        title='تغییر سوال: با انتخاب گزینه، در صورت خودکار بودن، پس از حداقل 1.5 حداکثر 5.5 ثانیه به سوال بعدی منتقل می شوید'
+                                    />
+                                </div>
+                            </div>
+                            <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
+                                <div className='mt-3'>
+                                    <Switch
+                                        checkedChildren='فرض صدا'
+                                        uncheckedChildren='فرض صدا'
+                                        className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
+                                        onChange={() => { SFXController() }}
+                                        title='فرض صدا های پس از پاسخ به سوال'
+                                    />
+                                </div>
+                            </div>
                         </div>
                     }
+
                 </div>
 
                 {
-                    contentLoaded &&
-                    <div className='flex space-x-5 translate-x-[-3rem]'>
-                        <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
-                            {/* <button className="quiz__autoQuestionChangerSwitch__btn btn">
-                                <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} relative`}></div>
-                            </button> */}
-                            <div className='mt-3'>
-                                <Switch
-                                    checkedChildren='خودکار'
-                                    unCheckedChildren='دستی'
-                                    className={`${autoQuestionChanger ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                    onChange={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }}
-                                    title='تغییر سوال: با انتخاب گزینه، در صورت خودکار بودن، پس از حداقل 1.5 حداکثر 5.5 ثانیه به سوال بعدی منتقل می شوید'
-                                />
-                            </div>
-                        </div>
-                        <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
-                            <div className='mt-3'>
-                                <Switch
-                                    checkedChildren='فرض صدا'
-                                    uncheckedChildren='فرض صدا'
-                                    className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                    onChange={() => { SFXController() }}
-                                    title='فرض صدا های پس از پاسخ به سوال'
-                                />
-                            </div>
-                        </div>
+                    contentLoaded && isItDesktop() &&
+                    <div className={`
+                        quiz__questionChanger__container relative
+                        top-24
+                        ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
+                    `}>
+                        <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
+                            aria-label='Next Question'
+                            className={`
+                                quiz__questionChanger absolute
+                                quiz__questionChanger__next btn
+                                ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
+                            `}
+                        >
+
+                            <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+
+                        </button>
                     </div>
                 }
 
-            </div>
+                {/* {isItDesktop() &&
+                    <hr className='divider'></hr>
+                } */}
 
-            {
-                contentLoaded && isItDesktop() &&
-                <div className={`
-                    quiz__questionChanger__container relative
-                    top-24
-                    ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
-                `}>
-                    <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
-                        aria-label='Next Question'
-                        className={`
-                            quiz__questionChanger absolute
-                            quiz__questionChanger__next btn
-                            ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
-                        `}
-                    >
+                {/* {
+                    contentLoaded &&
+                    <div className={`quiz__questionCounter relative flex justify-center items-center`}>
+                        <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
+                        سوال شماره
+                    </div>
+                } */}
 
-                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+                <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
+                    <div className={`quiz__hider mt-5 flex relative`}>
+                        {
+                            !(contentLoaded) &&
+                            <div className='mt-5 overflow-hidden shadow-lg skeletonLoading skeletonLoading__quizQuestion shadow-zinc-800 rounded-xl'></div>
+                        }
 
-                    </button>
+                        {
+                            isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
+                        }
+                    </div>
                 </div>
-            }
 
-            {/* {isItDesktop() &&
-                <hr className='divider'></hr>
-            } */}
-
-            {/* {
-                contentLoaded &&
-                <div className={`quiz__questionCounter relative flex justify-center items-center`}>
-                    <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
-                    سوال شماره
+                <div>
+                    <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>تگ های کوییز</h7>
+                    <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
+                        {quiz && showTheTagsIfNotNull()}
+                    </ul>
                 </div>
-            } */}
 
-            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
-                <div className={`quiz__hider mt-5 flex relative`}>
-                    {
-                        !(contentLoaded) &&
-                        <div className='mt-5 overflow-hidden shadow-lg skeletonLoading skeletonLoading__quizQuestion shadow-zinc-800 rounded-xl'></div>
-                    }
+                {/* Adverts */}
+                <div className='adverts_center' id='mediaad-bNpr'></div>
 
-                    {
-                        isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
-                    }
+                <div className='mt-10'>
+                    <h7 className='flex items-center justify-center mb-5 quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h7>
+
+                    {SkeletonLoading(contentLoaded)}
+
+                    <ul className="flex flex-wrap md:w-[70rem] mx-auto mb-10">
+                        {
+                            suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
+                        }
+                    </ul>
                 </div>
+
+
+                {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}
+
+                {/* Adverts */}
+                {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
+
+                <Link
+                    to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}&rg=${resultGif}`}
+                    ref={result}
+                    className='noVis'
+                >
+                </Link>
+
+                <Footer />
             </div>
-
-            <div>
-                <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>تگ های کوییز</h7>
-                <ul className='flex flex-wrap justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags items-baseline'>
-                    {quiz && showTheTagsIfNotNull()}
-                </ul>
-            </div>
-
-            {/* Adverts */}
-            <div className='adverts_center' id='mediaad-bNpr'></div>
-
-            <div className='mt-10'>
-                <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor mb-5'>کوییز های مشابه</h7>
-
-                {SkeletonLoading(contentLoaded)}
-
-                <ul className="flex flex-wrap md:w-[70rem] mx-auto mb-10">
-                    {
-                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
-                    }
-                </ul>
-            </div>
-
-
-            {/* <h7 className='flex justify-center quiz__tags__title items-center beforeAfterDecor'>مطالب پیشنهادی</h7> */}
-
-            {/* Adverts */}
-            {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
-
-            <Link
-                to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}&rg=${resultGif}`}
-                ref={result}
-                className='noVis'
-            >
-            </Link>
-
-            <Footer />
 
         </React.Fragment>
     );
