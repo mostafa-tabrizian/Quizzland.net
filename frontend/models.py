@@ -60,6 +60,7 @@ class SubCategories(models.Model):
     def __str__(self):
         return str(self.subCategory)
 
+
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
     public = models.BooleanField(default=True)
@@ -151,6 +152,15 @@ class Quizzes_Pointy(models.Model):
     def __str__(self):
         return str(self.title)
 
+class Comments(models.Model):
+    id = models.AutoField(primary_key=True)
+    comment_text = models.CharField(blank=False, null=False, max_length=255)
+    quiz_related = models.ForeignKey(Quizzes, blank=True, null=True, on_delete=models.CASCADE)
+    pointy_related = models.ForeignKey(Quizzes_Pointy, blank=True, null=True, on_delete=models.CASCADE)
+    submitter_related = models.ForeignKey(CustomUser, blank=False, null=True, on_delete=models.SET_NULL)
+    date_submitted = models.DateTimeField(blank=True, null=True, auto_now=True)
+    # liked
+    
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
     quizKey = models.ForeignKey(Quizzes, on_delete=models.CASCADE, blank=True, null=True)

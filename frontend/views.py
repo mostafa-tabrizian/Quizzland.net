@@ -111,6 +111,14 @@ class Pointy(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
+class Comment(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = Comments.objects.all()
+    serializer_class = CommentsSerializer
+    filterset_class = CommentsFilter
+
+# --------------------------------------------------------
+
 class Categories(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Categories.objects.all()

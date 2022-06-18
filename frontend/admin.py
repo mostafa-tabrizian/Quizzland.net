@@ -56,6 +56,12 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
     list_filter = ('subCategory', 'categoryKey', 'publish')
     search_fields = ['id', 'title', 'slug']
 
+@admin.register(Comments)
+class Comments_Admin(admin.ModelAdmin):
+    list_display = ('submitter_related', 'date_submitted')
+    list_filter = ('date_submitted', )
+    search_fields = ('comment_text', 'quiz_related', 'pointy_related', 'submitter_related')
+
 @admin.register(Questions)
 class Questions_Admin(admin.ModelAdmin):
     list_display = ('quizKey', 'question', 'answer_text')

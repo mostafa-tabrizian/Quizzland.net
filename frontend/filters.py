@@ -37,6 +37,17 @@ class PointyQuizzesFilter(filters.FilterSet):
             'tags': ['iexact', 'icontains']
         }
 
+class CommentsFilter(filters.FilterSet):
+    class Meta:
+        model = Comments
+        fields = {
+            'comment_text': ['icontains'],
+            'quiz_related': ['exact'],
+            'pointy_related': ['exact'], 
+            'submitter_related': ['exact'],
+            'date_submitted': ['lte', 'gte']
+        }
+
 class CategoriesFilter(filters.FilterSet):
     class Meta:
         model= Categories

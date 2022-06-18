@@ -19,6 +19,8 @@ router.register(r'user', views.CustomUser)
 router.register(r'quiz', views.Quiz)
 router.register(r'pointy', views.Pointy)
 
+router.register(r'comment', views.Comment)
+
 router.register(r'category', views.Categories)
 router.register(r'subcategory', views.SubCategory)
 

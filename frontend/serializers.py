@@ -175,6 +175,17 @@ class PointyQuizzesSerializer(serializers.ModelSerializer):
               
     categoryKey = CategoriesSerializer(many=False, read_only=True)
 
+class CommentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = (
+            'comment_text',
+            'quiz_related',
+            'pointy_related',
+            'submitter_related',
+            'date_submitted'
+        )
+
 class QuestionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Questions
