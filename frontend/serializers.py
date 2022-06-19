@@ -185,6 +185,20 @@ class CommentsSerializer(serializers.ModelSerializer):
             'submitter_related',
             'date_submitted'
         )
+        
+    submitter_related = CustomUserSerializer(many=False)
+    
+    def create(self, request):
+        CommentData = request
+        
+        newComment = Comments.objects.create(
+            comment_text=CommentData['comment_text'],
+            quiz_related=CommentData['quiz_related'],
+            pointy_related=CommentData['pointy_related'],
+            submitter_related=CustomUser.objects.get(id=CommentData['submitter_related']['username']),
+        )
+        
+        return newComment
 
 class QuestionsSerializer(serializers.ModelSerializer):
     class Meta:

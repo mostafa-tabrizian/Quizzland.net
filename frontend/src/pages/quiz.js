@@ -10,7 +10,7 @@ import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
 import AddView from '../components/addView';
-
+import Comments from '../components/comments'
 import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
@@ -67,7 +67,7 @@ const Quiz = (props) => {
     useEffect(() => {
         quizChangeDetector()
     })
-
+    
     const scrollToTop = () => {
         document.querySelector("body").scrollTo(0, 0)
     }
@@ -133,7 +133,7 @@ const Quiz = (props) => {
                             })
                     }
                     catch (e) {
-                        log(e)
+                        log(e.message)
                         setTimeout(() => {
                             window.location.href = '/quiz-not-found'
                         }, 5000)
@@ -759,7 +759,7 @@ const Quiz = (props) => {
                 </div>
 
                 <div>
-                    <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>تگ های کوییز</h7>
+                    <h3 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
                     <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
                         {quiz && showTheTagsIfNotNull()}
                     </ul>
@@ -768,8 +768,10 @@ const Quiz = (props) => {
                 {/* Adverts */}
                 <div className='adverts_center' id='mediaad-bNpr'></div>
 
+                { quiz && <Comments quizId={quiz?.id} /> }
+
                 <div className='mt-10'>
-                    <h7 className='flex items-center justify-center mb-5 quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h7>
+                    <h3 className='flex items-center justify-center mb-5 quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
 
                     {SkeletonLoading(contentLoaded)}
 

@@ -1,33 +1,35 @@
-
 @font-face {
     font-family: 'IRANYekanRegular';
     font-display: swap;
     src: url('/static/fonts/IRANYekanRegular.woff2') format('woff2'),
-         url('/static/fonts/IRANYekanRegular.woff') format('woff');
+        url('/static/fonts/IRANYekanRegular.woff') format('woff');
 }
+
 @font-face {
     font-family: 'IRANYekanBold';
     font-display: swap;
     src: url('/static/fonts/IRANYekanBold.woff2') format('woff2'),
-         url('/static/fonts/IRANYekanBold.woff') format('woff');
+        url('/static/fonts/IRANYekanBold.woff') format('woff');
 }
+
 @font-face {
     font-family: 'IRANYekanBlack';
     font-display: swap;
     src: url('/static/fonts/IRANYekanBlack.woff2') format('woff2'),
-         url('/static/fonts/IRANYekanBlack.woff') format('woff');
+        url('/static/fonts/IRANYekanBlack.woff') format('woff');
 }
+
 @font-face {
     font-family: 'LalezarRegular';
     font-display: swap;
     src: url('/static/fonts/LalezarRegular.woff2') format('woff2'),
-         url('/static/fonts/LalezarRegular.woff') format('woff');
+        url('/static/fonts/LalezarRegular.woff') format('woff');
 }
 
 $font-pr: myHarmattan, sans-serif, serif;
 
 // Fort Size
-$font-sm: 1.180rem;  // 18.8
+$font-sm: 1.180rem; // 18.8
 $font-med: 1.125rem;
 $font-l: 1.6rem;
 $font-xl: 2rem;
@@ -47,9 +49,9 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
 
 .wrapper {
     &-sm {
-        max-width:30rem;
+        max-width: 30rem;
         margin: 1.125rem auto;
-        
+
         @include breakpoints-down(large) {
             max-width: inherit;
         }
@@ -60,17 +62,17 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
     }
 
     &-med {
-        
+
         @include breakpoints-down(large) {
             max-width: 45.75rem;
             margin: 1.125rem 1rem;
         }
-        
+
         @include breakpoints-up(small) {
             max-width: 50rem;
             margin: 1.125rem auto;
         }
-        
+
         @include breakpoints-up(medium) {
             max-width: 67.5rem;
             margin: 1.125rem auto;
@@ -110,7 +112,7 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
         }
     }
 
-    &-l{
+    &-l {
         margin-top: 8rem;
 
         @include breakpoints-down(large) {
@@ -118,7 +120,7 @@ $red-tb-grad: linear-gradient(180deg, #6a0d11, #ac272e);
         }
     }
 
-    &-xl{
+    &-xl {
         margin-top: 12rem;
 
         @include breakpoints-down(large) {
