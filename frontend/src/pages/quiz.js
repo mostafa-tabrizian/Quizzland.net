@@ -99,7 +99,7 @@ const Quiz = (props) => {
     };
 
     const applyBackground = (background) => {
-        document.querySelector('html').style = `background: url('${background}') center/cover no-repeat fixed !important`
+        document.querySelector('body').style = `background: url('${background}') center/cover no-repeat fixed !important`
     }
 
     const quizChangeDetector = () => {

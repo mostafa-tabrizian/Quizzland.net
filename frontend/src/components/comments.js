@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
-import { Helmet } from "react-helmet";
+import { message } from 'antd';
 
 import axiosInstance from '../components/axiosApi';
 import userProfileDetail from './userProfileDetail';
@@ -17,7 +17,21 @@ const Comments = (props) => {
         setUserProfile(await userProfileDetail())
     }, []);
 
+    const checkIfCommentValid = (comment) => {
+        return comment.trim().length !== 0 && comment.length < 255 ? true : false
+    }
+
     const postComment = async () => {
+        const comment = commentTextRef.current.value
+        
+        if (!checkIfCommentValid(comment)) {
+            comment.trim().length == 0 ?
+                message.error('شما هیچ کامنتی ننوشته‌اید!')
+                :
+                message.error('کامنت شما بیش از حد مجاز بلند است!')
+            return  // not valid
+        }
+        
         await axiosInstance.post('/api/comment/', {
             comment_text: commentTextRef.current.value,
             quiz_related: props.quizId,
@@ -27,7 +41,10 @@ const Comments = (props) => {
             }
         })
             .then(res => {
-                log(res)
+                // log(res)
+                if (res.status == 201) {
+                    message.success('کامنت با موفقیت ثبت شد.')
+                }
             })
             .catch(err => {
                 log(err.response)
@@ -76,7 +93,7 @@ const Comments = (props) => {
                                     </div>
                                 </div>
                             </Link>
-                            <p className='mt-5'>{comment.comment_text}</p>
+                            <p className='mt-5 break-words'>{comment.comment_text}</p>
                         </div>
                         
                         <hr className='m-auto'/>
