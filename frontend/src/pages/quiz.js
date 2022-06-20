@@ -99,7 +99,7 @@ const Quiz = (props) => {
     };
 
     const applyBackground = (background) => {
-        document.querySelector('body').style = `background: url('${background}') center/cover no-repeat fixed !important`
+        document.querySelector('#quizBg').style = `background: url('${background}') center/cover no-repeat fixed !important`
     }
 
     const quizChangeDetector = () => {
@@ -630,6 +630,8 @@ const Quiz = (props) => {
                 />
             }
 
+            <div id='quizBg'></div>
+
             <div className="ltr">
                 <div className={`
                     fixed left-0 backdrop-blur-3xl backdrop-brightness-75
@@ -770,7 +772,7 @@ const Quiz = (props) => {
 
                 { quiz && <Comments quizId={quiz?.id} /> }
 
-                <div className='mt-10'>
+                <div className='mx-4 mt-10'>
                     <h3 className='flex items-center justify-center mb-5 quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
 
                     {SkeletonLoading(contentLoaded)}

@@ -654,6 +654,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 0.25rem;
 }
 
+.m-4 {
+  margin: 1rem;
+}
+
+.m-5 {
+  margin: 1.25rem;
+}
+
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
@@ -687,6 +695,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .mr-\[-1rem\] {
@@ -823,6 +836,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mb-\[50vh\] {
   margin-bottom: 50vh;
+}
+
+.mr-auto {
+  margin-right: auto;
 }
 
 .block {
@@ -1025,6 +1042,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-\[2rem\] {
   width: 2rem;
+}
+
+.w-4\/5 {
+  width: 80%;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .max-w-fit {
@@ -1410,6 +1435,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(6 1 1 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#0e0202d4\] {
+  background-color: #0e0202d4;
+}
+
+.bg-\[\#0e0202e4\] {
+  background-color: #0e0202e4;
+}
+
+.bg-\[\#0e0202f3\] {
+  background-color: #0e0202f3;
+}
+
 .bg-gradient-to-t {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
@@ -1460,6 +1497,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-1 {
   padding: 0.25rem;
+}
+
+.p-12 {
+  padding: 3rem;
 }
 
 .px-5 {
@@ -1574,6 +1615,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pr-3 {
   padding-right: 0.75rem;
+}
+
+.pr-10 {
+  padding-right: 2.5rem;
 }
 
 .text-left {
@@ -2046,6 +2091,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-left: 2.5rem;
   }
 
+  .md\:ml-auto {
+    margin-left: auto;
+  }
+
   .md\:block {
     display: block;
   }
@@ -2128,6 +2177,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:w-\[42rem\] {
     width: 42rem;
+  }
+
+  .md\:w-full {
+    width: 100%;
+  }
+
+  .md\:w-\[25rem\] {
+    width: 25rem;
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
   }
 
   .md\:max-w-\[85\%\] {

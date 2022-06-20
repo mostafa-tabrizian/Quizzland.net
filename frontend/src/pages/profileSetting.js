@@ -42,7 +42,7 @@ const ProfileSetting = () => {
 
             <Header />
 
-            <div className='mx-auto md:w-4/5'>
+            <div className='mx-auto md:w-4/5 mx-4'>
                 <div>
                     <h1 className='mb-3'>
                         اطلاعات پروفایل        

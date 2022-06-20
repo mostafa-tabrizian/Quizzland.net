@@ -24,11 +24,11 @@ const Profile = () => {
                 <link rel='canonical' to={`https://www.quizzland.net/profile/${user?.username}`} />
             </Helmet>
 
-            <div className='space-y-10 md:w-4/5 mx-auto'>
+            <div className='mx-4 space-y-10 md:mx-auto md:w-4/5'>
 
-                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#1d1313] border-[#690D11] rounded-lg'>
+                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#0e0202d4] border-[#690D11] rounded-lg'>
                     <div className="">
-                        <div className="flex space-x-2 space-x-reverse mb-5 items-center">
+                        <div className="flex items-center mb-5 space-x-2 space-x-reverse">
                             {
                                 user?.avatar ?
                                 <img className="" src={user?.avatar} alt={user?.username} />
@@ -43,12 +43,12 @@ const Profile = () => {
                         <p className="">{user?.bio}</p>
                     </div>
                     <dl className="space-y-5">
-                        <div className="flex justify-between md:justify-start md:space-x-16 md:space-x-reverse items-center">
+                        <div className="flex items-center justify-between md:justify-start md:space-x-16 md:space-x-reverse">
                             <div className="md:flex md:space-x-3 md:space-x-reverse">
                                 <dt>عضویت</dt>
                                 <dd>شهریور 1399</dd>
                             </div>
-                            <div className='md:flex md:space-x-10 md:space-x-reverse hidden'>
+                            <div className='hidden md:flex md:space-x-10 md:space-x-reverse'>
                                 <div className="flex space-x-3 space-x-reverse">
                                     <dt>جوایز</dt>
                                     <dd>1</dd>
@@ -63,7 +63,7 @@ const Profile = () => {
                                 </div>
                             </div>
                             <div className="">
-                                <Link to='/points-guide' className='flex space-x-2 space-x-reverse bloodRiver_bg px-4 py-2 rounded-xl'>
+                                <Link to='/points-guide' className='flex px-4 py-2 space-x-2 space-x-reverse bloodRiver_bg rounded-xl'>
                                     <dt className="">امتیاز ها</dt>
                                     <dd className='flex'>
                                         <span className="">100</span>
@@ -88,7 +88,7 @@ const Profile = () => {
                         </div>
                     </dl>
                 </div>
-                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#1d1313] border-[#690D11] rounded-lg'>
+                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#0e0202d4] border-[#690D11] rounded-lg'>
                     <div className="flex justify-between">
                         <h2 className="">کوییز های منتشرشده</h2>
                         <Link aria-label="کوییز های منتشرشده" to={`/post/${user?.uesrname}`}>
@@ -96,7 +96,7 @@ const Profile = () => {
                         </Link>
                     </div>
                 </div>
-                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#1d1313] border-[#690D11] rounded-lg'>
+                <div className='space-y-5 py-8 px-4 shadow-[0_1px_10px_#690D11] border-4 bg-[#0e0202d4] border-[#690D11] rounded-lg'>
                     <div className="flex justify-between">
                         <h2 className="">جوایز</h2>
                         <Link aria-label="دیدن تمام جوایز" to={`/trophies/${user?.uesrname}`}>

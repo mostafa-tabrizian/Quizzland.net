@@ -107,7 +107,7 @@ const Header = () => {
                 </script>
             </Helmet>
 
-            <header className='mb-10 relative z-10 bg-[#0601017c] p-4 rounded-md backdrop-blur-md'>
+            <header className='relative z-10 bg-[#0601017c] rounded-md backdrop-blur-md p-4 m-5'>
                 <div>
                     <div className='items-center justify-center hidden md:flex'>
                         <Link to="/" className="flex items-center justify-between header__logo">
@@ -166,7 +166,7 @@ const Header = () => {
                                 }
                             </div>
 
-                            <div className={`absolute top-14 border-2 bg-[#1d1313] border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-14 border-2 bg-[#0e0202f3] border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4'>
                                     <div>
                                         <ul className='flex flex-col'>
@@ -202,7 +202,7 @@ const Header = () => {
                                 <button className='header__btn' onClick={() => setCategorySubMenu(!categorySubMenu)}>کتگوری ها</button>
                             </div>
                             
-                            <div className={`absolute top-14 left-4 border-2 bg-[#1d1313] border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-14 left-4 border-2 bg-[#0e0202d4] border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4'>
                                     <ul className='flex flex-col'>
                                         <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
@@ -226,61 +226,6 @@ const Header = () => {
                                     height={35}
                                 />
                             </Link>
-                        </div>
-
-                        {/* Menu */}
-
-                        <div className={`header__menu fixed text-right h-screen m-[-1rem] z-10 w-[100vw]
-                                        bg-[#1d1313] top-0 right-0
-                                        md:hidden ${menuOpen ? '' : 'slideMenu-hide'}
-                                        pr-8 pt-5`}>
-                            <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
-                                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
-                            </button>
-
-                            <div className='mt-5'>
-                            {
-                                userProfile ?
-                                <React.Fragment>
-                                    <h4 className='text-xl'>اطلاعات اکانت</h4>
-                                    <ul className='flex space-x-6 space-x-reverse'>
-                                        <li className='text-lg'><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
-                                        <li className='text-lg'><Link to='/setting'>تنظیمات اکانت</Link></li>
-                                        <li className='text-lg'><Link to='/logout'>خروج</Link></li>
-                                    </ul>
-                                </React.Fragment>
-                                :
-                                <React.Fragment>
-                                    <Link to='/login'>ورود</Link>
-                                    <Link to='/register'>ثبت نام</Link>
-                                </React.Fragment>
-                            }
-                                
-                            </div>
-
-                            <div className='mt-5'>
-                                <h4 className='text-xl'>کتگوری ها</h4>
-                                <ul className='flex space-x-3 space-x-reverse'>
-                                    <li className='text-lg' onClick={openCloseMenu}><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
-                                    <li className='text-lg' onClick={openCloseMenu}><Link to="/category/celebrity">سلبریتی ✨</Link></li>
-                                    <li className='text-lg' onClick={openCloseMenu}><Link to="/category/psychology">روانشناسی 🧠</Link></li>
-                                </ul>
-                            </div>
-                            <div className='mt-5'>
-                                <h4 className='text-xl'>کوییز و تست ها</h4>
-                                <ul className='flex space-x-6 space-x-reverse'>
-                                    <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest"> جدیدترین </Link></li>
-                                    <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=trend"> محبوب ترین </Link></li>
-                                    <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=views"> پربازدیدترین </Link></li>
-                                </ul>
-                            </div>
-                            <div className='mt-5'>
-                                <ul className='flex space-x-6 space-x-reverse'>
-                                    {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/blog"> وبلاگ </Link></li> */}
-                                    {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/guide"> راهنما </Link></li> */}
-                                    <li className='text-lg' onClick={openCloseMenu}><Link to="/contact"> تماس با ما </Link></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -312,6 +257,61 @@ const Header = () => {
                 </div>
 
             </header>
+
+            <div className='relative md:hidden'>
+                <div className={`header__menu fixed text-right z-10
+                                top-0 right-0
+                                ${menuOpen ? '' : 'slideMenu-hide'}
+                                pr-8 pt-5`}>
+                    <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
+                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+
+                    <div className='mt-5'>
+                    {
+                        userProfile ?
+                        <React.Fragment>
+                            <h4 className='text-xl'>اطلاعات اکانت</h4>
+                            <ul className='flex space-x-6 space-x-reverse'>
+                                <li className='text-lg'><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
+                                <li className='text-lg'><Link to='/setting'>تنظیمات اکانت</Link></li>
+                                <li className='text-lg'><Link to='/logout'>خروج</Link></li>
+                            </ul>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                            <Link to='/login'>ورود</Link>
+                            <Link to='/register'>ثبت نام</Link>
+                        </React.Fragment>
+                    }
+                        
+                    </div>
+
+                    <div className='mt-5'>
+                        <h4 className='text-xl'>کتگوری ها</h4>
+                        <ul className='flex space-x-3 space-x-reverse'>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/celebrity">سلبریتی ✨</Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/psychology">روانشناسی 🧠</Link></li>
+                        </ul>
+                    </div>
+                    <div className='mt-5'>
+                        <h4 className='text-xl'>کوییز و تست ها</h4>
+                        <ul className='flex space-x-6 space-x-reverse'>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest"> جدیدترین </Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=trend"> محبوب ترین </Link></li>
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=views"> پربازدیدترین </Link></li>
+                        </ul>
+                    </div>
+                    <div className='mt-5'>
+                        <ul className='flex space-x-6 space-x-reverse'>
+                            {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/blog"> وبلاگ </Link></li> */}
+                            {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/guide"> راهنما </Link></li> */}
+                            <li className='text-lg' onClick={openCloseMenu}><Link to="/contact"> تماس با ما </Link></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
         </React.Fragment>
     );

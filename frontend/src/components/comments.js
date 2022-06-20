@@ -96,7 +96,7 @@ const Comments = (props) => {
                             <p className='mt-5 break-words'>{comment.comment_text}</p>
                         </div>
                         
-                        <hr className='m-auto'/>
+                        <hr className='md:ml-auto md:mr-0'/>
                     </div>
                 )
             })
@@ -106,14 +106,18 @@ const Comments = (props) => {
     return (
         <div>
             <h3 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>کامنت ها</h3>
-            <div className='relative my-10'>
-                <input ref={commentTextRef} className='w-full px-4 py-2 text-white bg-transparent placeholder:text-gray-300 border-b-[#ac272e]' type="text" placeholder='.کامنت تان را اینجا بنویسید' />
-                <button className='absolute flex space-x-1 bottom-2 left-2 pr-3 bg-[#060101]' onClick={() => postComment()}>
-                    <svg class="h-6 w-6 text-[#ac272e]"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="10" y1="14" x2="21" y2="3" />  <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" /></svg>
-                    <span>ارسال</span>
-                </button>
+            <div className='flex justify-center w-full mx-auto'>
+                <div className='relative my-10'>
+                    <input ref={commentTextRef} className='w-[22rem] bg-[#0e0202d4] md:w-[25rem] px-4 py-2 text-white placeholder:text-gray-300 border-b-[#ac272e]' type="text" placeholder='.کامنت تان را اینجا بنویسید' />
+                    <button className='absolute flex space-x-1 bottom-2 left-2 pr-3 bg-[#060101]' onClick={() => postComment()}>
+                        <svg class="h-6 w-6 text-[#ac272e]"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="10" y1="14" x2="21" y2="3" />  <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" /></svg>
+                        <span>ارسال</span>
+                    </button>
+                </div>
             </div>
-            {returnComments()}
+            <div className='md:w-1/2 p-4 mx-4 md:mx-auto bg-[#0e0202d4] rounded-lg'>
+                {returnComments()}
+            </div>
         </div>
     );
 }

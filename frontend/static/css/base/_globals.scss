@@ -106,12 +106,6 @@ button {
     }
 }
 
-h2 {
-    @include breakpoints-down(large) {
-        font-size: .8rem !important;
-    }
-}
-
 h3 {
     font-family: IRANYekanBlack, sans-serif, serif !important;
     font-size: 1rem !important;
@@ -119,10 +113,10 @@ h3 {
 
 h4 {
     font-family: IRANYekanBold, sans-serif, serif !important;
-    font-size: 1.2rem !important;
+    font-size: .9rem !important;
 
     @include breakpoints-down(large) {
-        font-size: inherit !important;
+        font-size: .9rem !important;
     }
 }
 
@@ -140,6 +134,10 @@ p, input {
     font-family: IRANYekanRegular, sans-serif, serif !important;
     text-align: right;
     color: darkGray
+}
+
+label  {
+    font-family: IRANYekanBold, sans-serif, serif !important;
 }
 
 dt {
@@ -241,6 +239,16 @@ hr {
             transition: transform .25s ease-out;
         }
     }
+}
+
+#quizBg {
+    filter: blur(5px);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
 }
 
 .backBtn {

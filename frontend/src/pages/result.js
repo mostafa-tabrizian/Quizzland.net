@@ -294,7 +294,7 @@ const Result = () => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="md:w-4/5 m-auto mt-5 flex flex-wrap align-baseline justify-center">
+            <ul className="md:w-4/5 mx-4 md:m-auto mt-5 flex flex-wrap align-baseline justify-center">
                 {
                     suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 }

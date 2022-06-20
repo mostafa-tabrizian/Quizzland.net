@@ -87,7 +87,7 @@ const App = () => {
                 <Router>
                     <ScrollToTop />
 
-                    <div className='p-4'>
+                    <div>
                         <Switch>
                             <Route path='/' exact component={Index} />
 

@@ -8,7 +8,7 @@ const QuizContainer = (props) => {
     return (
         props.quizzes.map((quiz) => {
             return (
-                <li key={quiz.id} className='md:mr-4 md:mb-4 mb-5 flex-auto'>
+                <li key={quiz.id} className='flex-auto mb-5 md:mr-4 md:mb-4'>
                     <article className={`
                         flex text-right h-full
                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
@@ -24,7 +24,7 @@ const QuizContainer = (props) => {
                                     width={1366}
                                     height={768}
                                     alt={`${quiz.subCategory} | ${quiz.title}`}
-                                    className='h-full object-cover'
+                                    className='object-cover h-full'
                                 />
                             </div>
                             <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
@@ -32,12 +32,12 @@ const QuizContainer = (props) => {
                                                 md:w-52 md:text-base`}>
                                     {quiz.subCategory}
                                 </h3>
-                                <h2 className={`
+                                <h4 className={`
                                     quizContainer__title quizContainer__title__noViews flex
                                     w-[10rem] md:w-52 md:text-base
                                 `}>
                                     {quiz.title}
-                                </h2>
+                                </h4>
                                 {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
                                 {/* <span className="text-center quizContainer__date">
                                     {datePublishHandler(quiz.publish)}
