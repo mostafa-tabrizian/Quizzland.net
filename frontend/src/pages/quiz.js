@@ -494,7 +494,7 @@ const Quiz = (props) => {
                     <li key={tag} className='px-3 py-1 rounded-lg'>
                         <h4>
                             <Link
-                                to={`/search?q=${replaceFunction(tag, ' ', '+')}`}
+                                to={`/tags/${replaceFunction(tag, ' ', '+')}`}
                                 rel='tag'
                             >
                                 {tag}

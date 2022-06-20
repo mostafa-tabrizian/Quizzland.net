@@ -66,6 +66,10 @@ body {
 
     &::-webkit-scrollbar {
         width: .625rem;
+
+        @include breakpoints-down(large) {
+            width: 0;
+        }
     }
 
     &::-webkit-scrollbar-thumb {

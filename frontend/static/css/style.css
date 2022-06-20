@@ -173,6 +173,12 @@ body::-webkit-scrollbar {
   width: .625rem;
 }
 
+@media (max-width: 70em) {
+  body::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
 body::-webkit-scrollbar-thumb {
   background: -webkit-gradient(linear, left top, left bottom, from(#b52633), to(#791118));
   background: linear-gradient(#b52633, #791118);
@@ -238,7 +244,7 @@ h5 {
 }
 
 input, textarea {
-  background: #0e0202d4;
+  background: #la;
   border-bottom: 1px solid #707070;
 }
 

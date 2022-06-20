@@ -70,9 +70,9 @@ const Index = () => {
             const top2ndUserCategory = hightestVisitedCategory[1][0]
             const top3rdUserCategory = hightestVisitedCategory[2][0]
 
-            let SelectedContent = content.filter(quiz => quiz.subCategory == top1stUserCategory)
-            SelectedContent = SelectedContent.concat(content.filter(quiz => quiz.subCategory == top2ndUserCategory))
-            SelectedContent = SelectedContent.concat(content.filter(quiz => quiz.subcategory == top3rdUserCategory))
+            let SelectedContent = content.filter(quiz => quiz.subCategory == top1stUserCategory).slice(0, 4)
+            SelectedContent = SelectedContent.concat(content.filter(quiz => quiz.subCategory == top2ndUserCategory).slice(0, 4))
+            SelectedContent = SelectedContent.concat(content.filter(quiz => quiz.subcategory == top3rdUserCategory).slice(0, 4))
 
             setContentSuggestion(SelectedContent)
         } catch (e) {

@@ -31,6 +31,7 @@ const AdvertiseContact  = lazy(() => import('./pages/advertiseContact'))
 const Support           = lazy(() => import('./pages/supportUs'))
 const PrivacyPolicy     = lazy(() => import('./pages/privacyPolicy'))
 const Search            = lazy(() => import('./pages/searchMoreResult'))
+const Tags            = lazy(() => import('./pages/tags'))
 const Sort              = lazy(() => import('./pages/sort'))
 const Blog              = lazy(() => import('./pages/blog'))
 const pageNotFound_404  = lazy(() => import('./pages/404'))
@@ -111,6 +112,7 @@ const App = () => {
                             <Route path='/support' component={Support} />
                             <Route path='/privacy-policy' component={PrivacyPolicy} />
                             <Route path='/search' component={Search} />
+                            <Route path='/tags/:tag' component={Tags} />
                             <Route path='/sort' component={Sort} />
                             <Route path='/blog' component={Blog} />
                             <Route path='/makeMonthlyRecord' component={monthlyRecord} />

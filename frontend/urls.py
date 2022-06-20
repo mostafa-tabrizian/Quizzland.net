@@ -31,6 +31,7 @@ urlpatterns = [
     path('quiz-not-found', index),
     
     path('search', index),
+    path('tags/<tag>', index),
     path('sort', index),
     # path('blog/<title>', article),
     # path('blog', blog),
