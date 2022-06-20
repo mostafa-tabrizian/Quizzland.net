@@ -9,16 +9,10 @@ import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } fr
 import userProfileDetail from '../components/userProfileDetail'
 import { DatePicker } from 'antd';
 
-const pathRed = '/static/img/bubbles.png'
-
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)
     useEffect(() => {
         checkIfLoggedIn_setUser()
-
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = `background: #0a0d13 url(${pathRed}) center center scroll !important`
-        }
     }, [])
 
     const checkIfLoggedIn_setUser = async () => {
@@ -42,7 +36,7 @@ const ProfileSetting = () => {
 
             <Header />
 
-            <div className='mx-auto md:w-4/5 mx-4'>
+            <div className='mx-4 md:mx-auto md:w-4/5'>
                 <div>
                     <h1 className='mb-3'>
                         اطلاعات پروفایل        

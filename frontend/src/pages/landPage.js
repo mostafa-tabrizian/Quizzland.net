@@ -137,7 +137,7 @@ const Index = () => {
                     <div className='relative ml-5 mb-[-3rem] drop-shadow-[10px_15px_10px_black] hidden md:block'>
                         <div className='pointer-events-none'>
                             <img
-                                src='/static/img/Q.png'
+                                src='/static/img/Q.webp'
                                 width={175}
                                 height={252}
                                 alt='لوگوی کوییزلند'

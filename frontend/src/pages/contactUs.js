@@ -6,13 +6,13 @@ import BackBtn from '../components/backBtn'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
-const pathRed = '/static/img/bubbles.png'
+const pathRed = '/static/img/bubbles.webp'
 
 const Contact = () => {
 
     useEffect(() => {
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = `background: #0a0d13 url(${pathRed}) center center scroll !important`
+        if (document.querySelector('body')) {
+            document.querySelector('body').style = `background: #060101 url(${pathRed}) center center scroll !important`
         }
     }, [])
 
@@ -27,10 +27,10 @@ const Contact = () => {
                 <meta name="keywords" content="پشتیبانی کوییزلند" />
             </Helmet>
 
-            <div className="basicPage wrapper-sm m-auto">
+            <div className="m-auto basicPage wrapper-sm">
                 <h1>برای تماس با ما میتونید از روش های زیر استفاده کنید </h1>
                 <div>
-                    <ul className="text-red-600 font-bold flex justify-center items-center">
+                    <ul className="flex items-center justify-center font-bold text-red-600">
                         {/* <li className="hoverAnimation"><a href="#">انستگرام</a></li> */}
                         {/* <li className="hoverAnimation"><a href="#">تلگرام</a></li> */}
                         <li className="hoverAnimation">

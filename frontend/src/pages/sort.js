@@ -151,7 +151,7 @@ const Sort = () => {
                 }
                 scrollableTarget="land"
             >
-                <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mx-4 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
+                <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
                     <QuizContainer quizzes={sortedContent} bgStyle='trans' />
                 </ul>
             </InfiniteScroll>

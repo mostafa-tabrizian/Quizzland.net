@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { log } from '../components/base'
 import userProfileDetail from "../components/userProfileDetail";
 
-const pathRed = '/static/img/bubbles.png'
+const pathRed = '/static/img/bubbles.webp'
 
 const Login = () => {
     const [username, setUsername] = useState(null)
@@ -15,8 +15,8 @@ const Login = () => {
 
     useEffect(() => {
         checkIfLoggedIn()
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = `background: #0a0d13 url(${pathRed}) center center scroll !important`
+        if (document.querySelector('body')) {
+            document.querySelector('body').style = `background: #060101 url(${pathRed}) center center scroll !important`
         }
     }, [])
 

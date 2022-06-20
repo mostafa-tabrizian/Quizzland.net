@@ -6,7 +6,7 @@ import Footer from '../components/footer'
 
 import BackBtn from '../components/backBtn'
 
-const pathRed = '/static/img/bubbles.png'
+const pathRed = '/static/img/bubbles.webp'
 
 const SOS = () => {
 

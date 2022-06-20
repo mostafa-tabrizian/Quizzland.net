@@ -230,7 +230,7 @@ const Header = () => {
                     </div>
                 </div>
 
-                <div className='block md:hidden'>
+                <div className='block mt-4 md:hidden'>
                     {
                         userProfile ?
                             <Link to={`/profile/${userProfile.username}`}>

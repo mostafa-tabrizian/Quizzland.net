@@ -6,7 +6,7 @@ import BackBtn from '../components/backBtn'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
-const pathRed = '/static/img/bubbles.png'
+const pathRed = '/static/img/bubbles.webp'
 
 const restartEveryMonthlyViews = () => {
 

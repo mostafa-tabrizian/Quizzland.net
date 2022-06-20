@@ -7,7 +7,7 @@ import Footer from '../components/footer'
 
 const lightMode = '/static/img/lightMode.png'
 const nightMode = '/static/img/nightMode.png'
-const pathRed = '/static/img/bubbles.png'
+const pathRed = '/static/img/bubbles.webp'
 
 const Guide = () => {
 
