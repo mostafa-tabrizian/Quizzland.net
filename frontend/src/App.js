@@ -15,7 +15,6 @@ const Category          = lazy(() => import ('./pages/category'))
 const SubCategory       = lazy(() => import ('./pages/subCategory'))
 
 const Quiz              = lazy(() => import ('./pages/quiz'))
-const QuizPointy        = lazy(() => import ('./pages/quizPointy'))
 const Result            = lazy(() => import ('./pages/result'))
 const ResultPointy      = lazy(() => import ('./pages/resultPointy'))
 const Quiz404           = lazy(() => import ('./pages/404quiz'))
@@ -99,7 +98,7 @@ const App = () => {
                             <Route path='/guide' component={Guide} />
 
                             <Route path='/quiz/:title' component={Quiz} />
-                            <Route path='/test/:title' component={QuizPointy} />
+                            <Route path='/test/:title' component={Quiz} />
                             <Route path='/result_quiz' component={Result} />
                             <Route path='/result_test' component={ResultPointy} />
                             <Route path='/quiz-not-found' component={Quiz404} />

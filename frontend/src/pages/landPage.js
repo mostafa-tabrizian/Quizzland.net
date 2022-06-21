@@ -85,7 +85,7 @@ const Index = () => {
             .catch(err => {
                 log(err.response)
             })
-        const pointy = await axiosInstance.get(`/api/pointy/?limit=70&public=true`)
+        const pointy = await axiosInstance.get(`/api/test/?limit=70&public=true`)
         const content = quiz.data.results.concat(pointy.data.results)
 
         setContent_new(content.sort(sortByNewest).slice(0, 20))

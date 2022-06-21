@@ -66,7 +66,7 @@ const SubCategory = (props) => {
 
     const fetchContent = async () => {
         const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
-        const pointy = await axiosInstance.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+        const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
         const content = quiz.data.results.concat(pointy.data.results).sort(sortByMonthlyViews);
 
         if (content.count !== 0) {

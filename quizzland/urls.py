@@ -17,7 +17,7 @@ router = routers.DefaultRouter()
 router.register(r'user', views.CustomUser)
 
 router.register(r'quiz', views.Quiz)
-router.register(r'pointy', views.Pointy)
+router.register(r'test', views.Pointy)
 
 router.register(r'comment', views.Comment)
 

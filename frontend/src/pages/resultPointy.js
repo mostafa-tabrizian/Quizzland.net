@@ -26,7 +26,7 @@ const Result = (props) => {
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
-            window.location.href = "/404";
+            // window.location.href = "/404";
         } else {
             setLoadState(true)
             setTestResult(JSON.parse(localStorage.getItem('testResult')))
@@ -109,12 +109,12 @@ const Result = (props) => {
 
     const getSuggestionsQuiz = async (category, subCategory) => {
         const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         if (content.length != 8) {
             const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
-            const pointyByCategory = await axiosInstance.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
+            const pointyByCategory = await axiosInstance.get(`/api/test/?category__exact=${category}&limit=8&public=true`)
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
 
@@ -141,7 +141,7 @@ const Result = (props) => {
         let lastRate
         let RateCount
 
-        await axiosInstance.get(`/api/pointy/${testDetail?.id}/?&timestamp=${now}&public=true`)
+        await axiosInstance.get(`/api/test/${testDetail?.id}/?timestamp=${now}&public=true`)
             .then((req) => {
                 lastRate = req.data.rate
                 RateCount = req.data.rate_count
@@ -158,7 +158,7 @@ const Result = (props) => {
             'accept': 'application/json'
         }
 
-        await axios.put(`/api/pointy/${testDetail?.id}/`, view, { headers })
+        await axios.put(`/api/test/${testDetail?.id}/`, view, { headers })
             .then(res => {
                 res.status == 200 &&
                     message.success('از نظر شما بسیار سپاس گذاریم')
@@ -178,11 +178,11 @@ const Result = (props) => {
                 <meta name="keywords" content="کوییز, تست, کوییزلند" />
             </Helmet>
 
-            <div className="result__container relative">
+            <div className="relative result__container">
                 <div className="flex justify-center result__title">
                     <h5 className="text-lg text-right">نتیجه {testDetail?.title}</h5>
                 </div>
-                <div className="flex justify-center beforeAfterDecor items-center">
+                <div className="flex items-center justify-center beforeAfterDecor">
                     <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                 </div>
 
@@ -199,7 +199,7 @@ const Result = (props) => {
 
                 {
                     resultText &&
-                    <div className="mb-16 px-4 mt-5 wrapper-p darkGls"
+                    <div className="px-4 mt-5 mb-16 wrapper-p darkGls"
                         dangerouslySetInnerHTML={{
                             __html: resultText
                         }}>
@@ -207,7 +207,7 @@ const Result = (props) => {
                 }
 
                 <div className='container px-20 mx-auto'>
-                    <div className="text-center mb-4 space-sm">
+                    <div className="mb-4 text-center space-sm">
                         <h5 className='text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
                         <InlineShareButtons
@@ -238,7 +238,7 @@ const Result = (props) => {
 
                     </div>
 
-                    <h2 className='flex justify-center text-lg items-center space-med'>این تست چطور بود؟</h2>
+                    <h2 className='flex items-center justify-center text-lg space-med'>این تست چطور بود؟</h2>
 
                     <Rate
                         character={({ index }) => customIcons[index + 1]}
@@ -267,7 +267,7 @@ const Result = (props) => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="md:w-4/5 mx-4 md:m-auto mt-5 flex flex-wrap align-baseline justify-center">
+            <ul className="flex flex-wrap justify-center mx-4 mt-5 align-baseline md:w-4/5 md:m-auto">
                 {
                     suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 }
@@ -275,7 +275,7 @@ const Result = (props) => {
 
             <BackBtn />
 
-            <button onClick={tryAgainTheQuiz} className='tryAgain btn text-center px-2 py-1 rounded-lg' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
+            <button onClick={tryAgainTheQuiz} className='px-2 py-1 text-center rounded-lg tryAgain btn' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
 
             <Footer />
 

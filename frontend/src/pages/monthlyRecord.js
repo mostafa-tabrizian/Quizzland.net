@@ -22,7 +22,7 @@ const QuizMonthlyRecord = () => {
     }
 
     const getAllPointyQuizzes = async () => {
-        const pointyQuizzes = await axiosInstance.get('/api/pointy/')
+        const pointyQuizzes = await axiosInstance.get('/api/test/')
         pointyQuizDataSaveInExcel(pointyQuizzes)
     }
 

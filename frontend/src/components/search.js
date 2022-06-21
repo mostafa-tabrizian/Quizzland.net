@@ -21,7 +21,7 @@ const Search = (props) => {
             }
 
             const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)
-            const searched_pointy = await axiosInstance.get(`/api/pointy/?public=true`)
+            const searched_pointy = await axiosInstance.get(`/api/test/?public=true`)
 
             const searched_quiz_title = searched_quiz.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
             const searched_quiz_subCategory = searched_quiz.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))

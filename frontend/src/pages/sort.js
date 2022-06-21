@@ -85,7 +85,7 @@ const Sort = () => {
         setLoading(true)
 
         const quiz = await axiosInstance.get(`/api/quiz/?limit=${countResult}&offset=${offset}&public=true`)
-        const pointy = await axiosInstance.get(`/api/pointy/?limit=${countResult}&offset=${offset}&public=true`)
+        const pointy = await axiosInstance.get(`/api/test/?limit=${countResult}&offset=${offset}&public=true`)
         let content_new = quiz.data.results.concat(pointy.data.results)
 
         setCountNewFetched(content_new.length)

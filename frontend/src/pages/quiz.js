@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
-import { Switch } from 'antd';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import axiosInstance from '../components/axiosApi';
@@ -11,10 +10,13 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import AddView from '../components/addView';
 import Comments from '../components/comments'
-import { log, replaceFunction, makeDatePublishFormatForQuizDetail, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
+import { log, replaceFunction, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
+import QuizHeader from '../components/quiz/quizHeader'
+import Trivia from '../components/quiz/trivia'
+import Test from '../components/quiz/test'
 
 const logo = '/static/img/Q-small.png'
 
@@ -23,6 +25,7 @@ let advertPos = 0
 let quizCounter = 0
 
 const Quiz = (props) => {
+    const [quizType, setQuizType] = useState(window.location.pathname.split('/')[1])
     const [questions, setQuestions] = useState([])
     const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
@@ -42,7 +45,7 @@ const Quiz = (props) => {
     const [SFXWrong, setSFXWrong] = useState(null)
     const [quiz, setQuiz] = useState(null)
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
-
+    const [questionCounterForId, setQuestionCounterForId] = useState(1)
     const [score, setScore] = useState(0)
     const [resultGif, setResultGif] = useState()
     const [fanName, setFanName] = useState()
@@ -51,6 +54,7 @@ const Quiz = (props) => {
     const [id, setId] = useState()
 
     const result = useRef(null)
+
 
     useEffect(() => {
         scrollToTop()
@@ -61,7 +65,7 @@ const Quiz = (props) => {
     }, [quizSlug])
 
     useEffect(() => {
-        grabData()
+        fetchQuiz()
     }, quizSlugReplacedWithHyphen)
 
     useEffect(() => {
@@ -115,27 +119,40 @@ const Quiz = (props) => {
         })(window.history);
     }
 
-    const grabData = async () => {
+    const fetchQuiz = async () => {
         quizSlugReplacedWithHyphen &&
-            await axiosInstance.get(`/api/quiz/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+            await axiosInstance.get(`/api/${quizType}/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
                     try {
-                        AddView('quiz', quizData.id)
+                        AddView(quizType, quizData.id)
                         sendCategoryAsInterest(quizData.subCategory)
                         getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
                         applyBackground(quizData.background)
                         setQuiz(quizData)
 
-                        await axiosInstance.get(`/api/questions/?quizKey=${quizData.id}&public=true`)
+                        let questionSource
+                        switch (quizType) {
+                            case 'quiz':
+                                questionSource = 'questions'
+                                break
+                            case 'test':
+                                questionSource = 'questions_pointy'
+                                break
+                        }
+
+                        await axiosInstance.get(`/api/${questionSource}/?quizKey=${quizData.id}&public=true`)
                             .then((questionData) => {
                                 setQuestions(questionData.data)
                                 setContentLoaded(true)
+                            })
+                            .catch(err => {
+                                log(err.response)
                             })
                     }
                     catch (e) {
                         log(e.message)
                         setTimeout(() => {
-                            window.location.href = '/quiz-not-found'
+                            // window.location.href = '/quiz-not-found'
                         }, 5000)
                     }
                 })
@@ -186,6 +203,10 @@ const Quiz = (props) => {
             question.querySelector('.quiz__answerImGif')?.classList.remove('answerShow')
             question.querySelector('.quiz__answerImGif')?.classList.add('answerHide')
         }
+    }
+
+    const playSFX_click = () => {
+        return
     }
 
     const playSFX = (userSelection) => {
@@ -244,28 +265,64 @@ const Quiz = (props) => {
         }
     }
 
-    const selectedOption = (props) => {
-        if (ableToSelectOption) {
-            // setTimeout(() => {
-            //     document.querySelector('.quiz__questions').scrollIntoView()
-            // }, 300)
+    const takeSelectedOptionValue = (userSelection) => {
+        let userChose = userSelection.id
+        const currentQuestionNumber = parseInt(userChose.split('-')[0])
+        log(userChose)
+        log(currentQuestionNumber)
 
-            setAbleToSelectOption(false)
-            setAbleToGoNext(true)
-            makeEveryOptionLowOpacity('low')
-            checkTheSelectedOption(props.target)
-
-            if (autoQuestionChanger) {
-                setTimeout(() => {
-                    goNextQuestionOrEndTheQuiz()
-                }, amountOfPauseCalculator())
-            } else {
-                setTimeout(() => {
-                    if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
-                        openNotification()
-                    }
-                }, 5000)
+        for (let i = 1; i <= 10; i++) {
+            if (document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`)) {
+                document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`).style.opacity = .5
+                document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`).style.borderColor = 'white'
             }
+        }
+
+        document.getElementById(`inputLabel ${userChose}`).style.opacity = 1
+        document.getElementById(`inputLabel ${userChose}`).style.background = '#000000bf'
+        document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
+    }
+
+    const selectedOption = (props) => {
+        switch(quizType) {
+            case 'quiz':
+                if (ableToSelectOption) {
+                    // setTimeout(() => {
+                    //     document.querySelector('.quiz__questions').scrollIntoView()
+                    // }, 300)
+        
+                    setAbleToSelectOption(false)
+                    setAbleToGoNext(true)
+                    makeEveryOptionLowOpacity('low')
+                    checkTheSelectedOption(props.target)
+        
+                    if (autoQuestionChanger) {
+                        setTimeout(() => {
+                            goNextQuestionOrEndTheQuiz()
+                        }, amountOfPauseCalculator())
+                    } else {
+                        setTimeout(() => {
+                            if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
+                                openNotification()
+                            }
+                        }, 5000)
+                    }
+                }
+            case 'test':
+                playSFX_click()
+                takeSelectedOptionValue(props.target)
+
+                if (autoQuestionChanger) {
+                    automaticallyGoNextQuestionOrEndTheQuiz()
+                } else {
+                    setAbleToGoNext(true)
+
+                    setTimeout(() => {
+                        if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
+                            openNotification()
+                        }
+                    }, 5000)
+                }
         }
     }
 
@@ -326,12 +383,18 @@ const Quiz = (props) => {
                 setQuizEnded(true)
                 setTimeout(() => {
                     try {
-                        const score = calculateTheResultScore()
-                        detailOfResult(score)
-                        setFanName(quiz?.fan_name)
-                        setSubCategory(quiz?.subCategory)
-                        setTitle(quiz?.title)
-                        setId(quiz?.id)
+                        switch(quizType) {
+                            case 'quiz':
+                                const score = calculateTheResultScore()
+                                detailOfResult(score)
+                                setFanName(quiz?.fan_name)
+                                setSubCategory(quiz?.subCategory)
+                                setTitle(quiz?.title)
+                                setId(quiz?.id)
+                            case 'test':
+                                localStorage.setItem('resultQuiz', JSON.stringify(quiz))
+                                localStorage.setItem('testResult', calculateThePoints())
+                        }
 
                         result.current.click()
                     } catch (err) {
@@ -342,55 +405,22 @@ const Quiz = (props) => {
         }
     }
 
-    let questionCounterForId = 1
-    const questionOptionsCheckBetweenStringOrImg = (question) => {
-        questionCounterForId += 1
-        if (question.option_1st) {
-            return (
-                <div className="flex justify-center">
-                    <form className='quiz__options w-[100%] md:grid md:grid-cols-2 space-y-3 justify-center' action="">
-                        {question.option_1st !== ('') &&
-                            <> <input
-                                onClick={selectedOption}
-                                type="radio"
-                                name="answer" className='absolute opacity-0'
-                                id={`${questionCounterForId}-1`}
-                            />
-                                <label
-                                    className={`quiz__options__textLabel backdrop-blur-xl
-                                            border border-[#ffffff30]
-                                            p-2 block max-w-[100%] md:max-width-[14rem]
-                                            md:h-[auto] md:pr-4 md:m-2 rounded-lg
-                                            cursor-pointer
-                                            hover:border-red-300
-                                            ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''}
-                                            ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''}
-                                            ${!ableToSelectOption ? 'pointer-events-none' : ''}
-                                        `}
-                                    id={`${questionCounterForId}-1`}
-                                    htmlFor={`${questionCounterForId}-1`}
-                                >
-                                    {question.option_1st}
-                                </label>
-                            </>
-                        }
-                        {question.option_2nd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> {question.option_2nd} </label> </>}
-                        {question.option_3rd !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> {question.option_3rd} </label> </>}
-                        {question.option_4th !== ('') && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> {question.option_4th} </label> </>}
-                    </form>
-                </div>
-            )
-        } else {
-            return (
-                <div className="flex justify-center">
-                    <form className='relative grid flex-wrap justify-center grid-cols-2 pt-4 quiz_options md:flex md:space-x-3' data={question.answer} action="">
-                        {!(question.option_img_1st.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-1`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 1 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 1 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-1`} htmlFor={`${questionCounterForId}-1`}> <LazyLoadImage src={question.option_img_1st} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_2nd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-2`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-2`} htmlFor={`${questionCounterForId}-2`}> <LazyLoadImage src={question.option_img_2nd} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_3rd.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-3`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-3`} htmlFor={`${questionCounterForId}-3`}> <LazyLoadImage src={question.option_img_3rd} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                        {!(question.option_img_4th.includes('NotExist')) && <> <input onClick={selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${questionCounterForId}-4`} /> <label className={`w-32 md:w-40 m-1.5 h-[9.6rem] md:h-[12rem] border-2 border-zinc-500 rounded-xl ${correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${questionCounterForId}-4`} htmlFor={`${questionCounterForId}-4`}> <LazyLoadImage src={question.option_img_4th} width={520} height={624} alt={question.title} title={question.title} className="object-contain object-top quiz__imgOption rounded-xl" /> </label> </>}
-                    </form>
-                </div>
-            )
+    const returnQuiz = (question) => {
+        switch(quizType) {
+            case 'quiz':
+                return <Trivia 
+                    question={question}
+                    selectedOption={selectedOption}
+                    questionCounterForId={questionCounterForId}
+                    ableToSelectOption={ableToSelectOption}
+                    wrongAnswerOption={wrongAnswerOption}
+                    correctAnswerOption={correctAnswerOption}
+                />
+            case 'test':
+                return <Test 
+                    question={question}
+                    selectedOption={selectedOption}
+                />
         }
     }
 
@@ -447,7 +477,7 @@ const Quiz = (props) => {
                             }
 
                             {
-                                !question.question_img?.includes('NotExist') &&
+                                !question?.question_img?.includes('NotExist') &&
                                 <div className='mt-3 h-[14rem] md:h-[18rem]'>
                                     <LazyLoadImage
                                         src={question?.question_img}
@@ -461,17 +491,17 @@ const Quiz = (props) => {
                             }
                         </div>
 
-                        {questionOptionsCheckBetweenStringOrImg(question)}
+                        {returnQuiz(question)}
 
                         {
-                            question?.answer_text &&
+                            quizType == 'quiz' && question?.answer_text &&
                             <div className={`quiz__answerText answerHide text-right bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg`}>
                                 {answerOfQuestionIfExistShow(question)}
                             </div>
                         }
 
                         {
-                            !(question.answer_imGif.includes('NotExist.jpg')) &&
+                            quizType == 'quiz' && !(question.answer_imGif.includes('NotExist.jpg')) &&
                             <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg'>
                                 {gifAnswerOfQuestionIfExistShow(question)}
                             </div>
@@ -484,6 +514,64 @@ const Quiz = (props) => {
 
     const plusOneToTotalAnsweredQuestions = () => {
         setCurrentQuestionNumber(prev => prev + 1)
+    }
+
+    const minusOneToTotalAnsweredQuestions = () => {
+        setCurrentQuestionNumber(prev => prev - 1)
+    }
+
+    const goLastQuestion = () => {
+        if (currentQuestionNumber !== 1) {
+            minusOneToTotalAnsweredQuestions()
+            setCurrentMoveOfQuestions(prev => prev + sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+
+        } else {
+            message.warning('شما سوال اول هستید');
+        }
+    }
+
+    const calculateThePoints = () => {
+        const allOptions = document.querySelectorAll('input[type=radio]')
+        const optionPoints = ['option_point_1st', 'option_point_2nd', 'option_point_3rd', 'option_point_4th', 'option_point_5th', 'option_point_6th', 'option_point_7th', 'option_point_8th', 'option_point_9th', 'option_point_10th']
+
+        const firstQuestionId = allOptions[0].getAttribute('id')
+        const firstQuestionIndex = parseInt(firstQuestionId.split('-')[0])
+
+        let totalPoints = 0
+        for (let i = 0; i < allOptions.length; i++) {
+            const questionId = allOptions[i].getAttribute('id')
+            const currentQuestionId = parseInt(questionId.split('-')[0])
+            const currentQuestionNumber = currentQuestionId - firstQuestionIndex
+            const OptionSelected = parseInt(questionId.split('-')[1]) - 1
+
+            if (allOptions[i].checked) {
+                const pointOfOptions = questions[currentQuestionNumber][optionPoints[OptionSelected]]
+                totalPoints += pointOfOptions
+            }
+        }
+
+        return totalPoints
+    }
+
+    const resultUrl = () => {
+        switch(quizType) {
+            case 'quiz':
+                return (
+                    <Link
+                        to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}&rg=${resultGif}`}
+                        ref={result}
+                        className='noVis'
+                    ></Link>
+                )
+            case 'test':
+                return (
+                    <Link
+                        to='/result_test'
+                        ref={result}
+                        className='noVis'
+                    ></Link>
+                )
+        }
     }
 
     const showTheTagsIfNotNull = () => {
@@ -508,12 +596,12 @@ const Quiz = (props) => {
 
     const getSuggestionsQuiz = async (category, subCategory) => {
         const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/pointy/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         if (content.length != 8) {
             const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
-            const pointyByCategory = await axiosInstance.get(`/api/pointy/?category__exact=${category}&limit=8&public=true`)
+            const pointyByCategory = await axiosInstance.get(`/api/test/?category__exact=${category}&limit=8&public=true`)
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
 
@@ -527,7 +615,7 @@ const Quiz = (props) => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/quiz/${replaceFunction(quizSlug, ' ', '-')}`
+        return `https://www.quizzland.net/${quizType}/${replaceFunction(quizSlug, ' ', '-')}`
     }
 
     let firstTouch
@@ -649,69 +737,7 @@ const Quiz = (props) => {
                     </div>
                 </div>
 
-                <div className="relative text-right quiz__head z-[-1] backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
-                    {
-                        !(contentLoaded) &&
-                        <div className='flex items-center justify-center'>
-                            <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizTitle'></div>
-                        </div>
-                    }
-
-                    <div className="flex justify-center mb-4 text-center">
-                        <h1 className='md:max-w-[21rem] max-w-[19rem]'>
-                            {quiz?.title}
-                        </h1>
-                    </div>
-
-                    <div className="flex items-center justify-center quiz__detail">
-                        {
-                            !(contentLoaded) &&
-                            <div className='flex space-x-5'>
-                                <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
-                                <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
-                            </div>
-                        }
-                        {
-                            contentLoaded &&
-                            <div className='flex space-x-6'>
-                                <h5>{makeDatePublishFormatForQuizDetail(quiz?.publish)}</h5>
-                                <h5>تعداد سوال ها: {questions?.length}</h5>
-                            </div>
-                        }
-                    </div>
-
-                    {
-                        contentLoaded &&
-                        <div className='flex space-x-5 translate-x-[-3rem]'>
-                            <div onClick={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
-                                {/* <button className="quiz__autoQuestionChangerSwitch__btn btn">
-                                    <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} relative`}></div>
-                                </button> */}
-                                <div className='mt-3'>
-                                    <Switch
-                                        checkedChildren='خودکار'
-                                        unCheckedChildren='دستی'
-                                        className={`${autoQuestionChanger ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                        onChange={() => { setAutoQuestionChanger(autoQuestionChanger ? false : true) }}
-                                        title='تغییر سوال: با انتخاب گزینه، در صورت خودکار بودن، پس از حداقل 1.5 حداکثر 5.5 ثانیه به سوال بعدی منتقل می شوید'
-                                    />
-                                </div>
-                            </div>
-                            <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
-                                <div className='mt-3'>
-                                    <Switch
-                                        checkedChildren='فرض صدا'
-                                        uncheckedChildren='فرض صدا'
-                                        className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                        onChange={() => { SFXController() }}
-                                        title='فرض صدا های پس از پاسخ به سوال'
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                </div>
+                <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} />
 
                 {
                     contentLoaded && isItDesktop() &&
@@ -732,6 +758,19 @@ const Quiz = (props) => {
                             <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
 
                         </button>
+                        {
+                            quizType == 'test' &&
+                            <button
+                                onClick={goLastQuestion}
+                                aria-label='Next Question'
+                                className={`
+                                    quiz__questionChanger absolute quiz__questionChanger__last
+                                    btn
+                                `}
+                            >
+                                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+                            </button>
+                        }
                     </div>
                 }
 
@@ -790,12 +829,9 @@ const Quiz = (props) => {
                 {/* Adverts */}
                 {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
 
-                <Link
-                    to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}&rg=${resultGif}`}
-                    ref={result}
-                    className='noVis'
-                >
-                </Link>
+                
+                {resultUrl()}
+                
 
                 <Footer />
             </div>
