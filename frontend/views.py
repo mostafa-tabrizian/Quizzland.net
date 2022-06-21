@@ -79,7 +79,7 @@ def FastFunctionForDB(request):
             print('------------------------')
             targetQuiz = Quizzes.objects.get(title=item.title)
             
-            item.slug = targetQuiz.title
+            item.question_background = '#911a1a'
             item.save()
             
             print(item.title)  

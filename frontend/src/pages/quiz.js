@@ -70,6 +70,9 @@ const Quiz = (props) => {
 
     useEffect(() => {
         quizChangeDetector()
+        
+        const question_background = document.querySelector('#question_background')
+        question_background && (document.querySelectorAll('#question_background').forEach((q) => q.style = `background: ${quiz?.question_background}`))
     })
     
     const scrollToTop = () => {
@@ -473,7 +476,9 @@ const Quiz = (props) => {
                         <div className='mt-3 w-[22rem] md:w-[29rem]'>
                             {
                                 (question.question !== null && question.question !== '') &&
-                                <p className='p-3 text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
+                                <div id='question_background' className='py-1 rounded-xl flex overflow-auto items-center h-[17rem]' >
+                                    <p className='p-3 text-[2rem] quiz_question mix-blend-color-dodge text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
+                                </div>
                             }
 
                             {

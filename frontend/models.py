@@ -82,6 +82,7 @@ class Quizzes(models.Model):
     GIF80 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
     GIF100 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
     publish = models.DateTimeField(default=datetime.datetime.now)
+    question_background = models.CharField(max_length=7, default="#911a1a")
 
     def __str__(self):
         return str(self.title)
