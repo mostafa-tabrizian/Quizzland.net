@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import BackBtn from '../components/backBtn'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
@@ -32,8 +31,6 @@ const Support = () => {
                 <p>اما لازم نیست به ما حمایت پولی کنید. همین که ما رو به <b>دوستاتون و خانوادتون معرفی کنید</b> برای ما خیلی با ارزشه</p>
                 <h5> 💗 قدردان شما کوییزلندی عزیز هستیم 💗 </h5>
             </div>
-
-            <BackBtn />
 
         </React.Fragment>
     );

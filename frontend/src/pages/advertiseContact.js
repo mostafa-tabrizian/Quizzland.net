@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import BackBtn from '../components/backBtn'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
@@ -31,7 +30,7 @@ const AdvertiseContact = () => {
                 <h3>برای تبلیغ در بنر های کوییزلند میتونید با پشتیبانی بابت هماهنگی در تماس باشید</h3>
                 <a href="mailto:support@quizzland.net">support@quizzland.net</a>
                 <div>
-                    <ul className="text-red-600 font-bold flex justify-center items-center">
+                    <ul className="flex items-center justify-center font-bold text-red-600">
                         {/* <li><a href="#"><a>انستگرام</a></a></li> */}
                         {/* <li><a href="#"><a>تلگرام</a></a></li> */}
                         <li><a href="mailto:support@quizzland.net">ایمیل</a></li>
@@ -39,8 +38,6 @@ const AdvertiseContact = () => {
                 </div>
                 <h5>💗کوییزلند</h5>
             </div>
-
-            <BackBtn />
 
         </React.Fragment>
     );

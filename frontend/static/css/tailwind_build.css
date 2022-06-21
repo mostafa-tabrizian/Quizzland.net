@@ -1657,6 +1657,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-weight: 600;
 }
 
+.leading-10 {
+  line-height: 2.5rem;
+}
+
 .text-\[\#ac272e\] {
   --tw-text-opacity: 1;
   color: rgb(172 39 46 / var(--tw-text-opacity));

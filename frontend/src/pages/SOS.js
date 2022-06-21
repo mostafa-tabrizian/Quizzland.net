@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
-import BackBtn from '../components/backBtn'
 
 const pathRed = '/static/img/bubbles.webp'
 
@@ -38,8 +37,6 @@ const SOS = () => {
                     <a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">support@quizzland.net</a>
                 </div>
             </div>
-
-            <BackBtn />
 
             <Footer />
 

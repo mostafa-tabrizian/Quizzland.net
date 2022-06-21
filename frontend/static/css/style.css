@@ -1429,19 +1429,27 @@ hr {
   }
 }
 
+.result_score {
+  font-size: 2.5rem !important;
+}
+
 .result__img {
   -webkit-box-ordinal-group: 3;
       -ms-flex-order: 2;
           order: 2;
 }
 
-.result__detail {
+.result_detail {
   -webkit-box-ordinal-group: 4;
       -ms-flex-order: 3;
           order: 3;
 }
 
-.result__detail__wrongTime {
+.result_detail > h5 {
+  font-size: 1.5rem !important;
+}
+
+.result_detail__wrongTime {
   margin-right: 1rem;
 }
 

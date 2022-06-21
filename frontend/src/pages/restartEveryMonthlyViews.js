@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import BackBtn from '../components/backBtn'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
@@ -30,8 +29,6 @@ const restartEveryMonthlyViews = () => {
                 <p className='text-center'>Quizzes - Categories - SubCategories</p>
                 <p className='text-center'>Good Job AssH*le 💗</p>
             </div>
-
-            <BackBtn />
 
         </React.Fragment>
     );

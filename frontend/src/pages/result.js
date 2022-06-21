@@ -10,7 +10,6 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 
 import { log, replaceFunction, fadeIn, popUpShow, popUpHide, takeParameterFromUrl, sortByMonthlyViews } from '../components/base'
-import BackBtn from '../components/backBtn'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
@@ -50,7 +49,7 @@ const Result = () => {
     useEffect(() => {
         {
             suggestionQuizzes &&
-                showPopUpSuggestion()
+            showPopUpSuggestion()
         }
     }, [suggestionQuizzes])
 
@@ -94,12 +93,12 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        const quiz = await axiosInstance.get(`/api/${quizType}/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         // if (content.length != 8) {
-        //     const quizByCategory = await axiosInstance.get(`/api/${quizType}/?category__exact=${category}&limit=8&public=true`)
+        //     const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
         //     const pointyByCategory = await axiosInstance.get(`/api/test/?category__exact=${category}&limit=8&public=true`)
         //     content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         // }
@@ -174,7 +173,7 @@ const Result = () => {
         let lastRate
         let RateCount
 
-        await axiosInstance.get(`/api/${quizType}/${id}/?timestamp=${now}&public=true`)
+        await axiosInstance.get(`/api/quiz/${id}/?timestamp=${now}&public=true`)
             .then((req) => {
                 lastRate = req.data.rate
                 RateCount = req.data.rate_count
@@ -191,7 +190,7 @@ const Result = () => {
             'accept': 'application/json'
         }
 
-        await axios.put(`/api/${quizType}/${id}/`, view, { headers })
+        await axios.put(`/api/quiz/${id}/`, view, { headers })
             .then(res => {
                 res.status == 200 &&
                     message.success('از نظر شما بسیار سپاس گذاریم')
@@ -222,12 +221,12 @@ const Result = () => {
                     <div className="flex items-center justify-center result__img md:mx-16">
                         {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
                     </div>
-                    <div className="result__score mt-5 text-center text-[2rem]">
-                        <h5>
+                    <div className="mt-5">
+                        <h5 className='result_score'>
                             {resultScore}
                         </h5>
                     </div>
-                    <div className="mt-5 mb-14 text-[1.5rem] text-center result__detail">
+                    <div className="mt-5 result_detail">
                         <h5>پاسخ 🟢: <span>{correctAnswersCount}</span></h5>
                         <h5>پاسخ 🔴: <span>{questionCount - correctAnswersCount}</span></h5>
                     </div>
@@ -294,7 +293,7 @@ const Result = () => {
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="flex flex-wrap justify-center mx-4 mt-5 align-baseline md:w-4/5 md:m-auto">
+            <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
                 {
                     suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 }
@@ -329,10 +328,6 @@ const Result = () => {
                     </Link>
                 </div>
             }
-
-            <BackBtn />
-
-            <button onClick={tryAgainTheQuiz} className='px-2 py-1 text-center rounded-lg tryAgain btn' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره کوییز</button>
 
             <Footer />
 

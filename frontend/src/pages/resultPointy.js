@@ -7,8 +7,7 @@ import { InlineShareButtons } from 'sharethis-reactjs';
 
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { log, replaceFunction } from '../components/base'
-import BackBtn from '../components/backBtn'
+import { log, replaceFunction, sortByMonthlyViews  } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
@@ -17,7 +16,6 @@ const Result = (props) => {
     const [resultSubtitle, setResultSubtitle] = useState()
     const [resultImg, setResultImg] = useState()
     const [resultText, setResultText] = useState()
-    const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     const [testResult, setTestResult] = useState()
@@ -26,11 +24,11 @@ const Result = (props) => {
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('resultQuiz')) === null) {
-            // window.location.href = "/404";
+            window.location.href = "/404";
         } else {
-            setLoadState(true)
             setTestResult(JSON.parse(localStorage.getItem('testResult')))
             setTestDetail(JSON.parse(localStorage.getItem('resultQuiz')))
+            setContentLoaded(true)
         }
     }, [])
 
@@ -102,19 +100,15 @@ const Result = (props) => {
         }
     }
 
-
-    const tryAgainTheQuiz = () => {
-        window.history.go(-1)
-    }
-
-    const getSuggestionsQuiz = async (category, subCategory) => {
-        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+    const getSuggestionsQuiz = async () => {
+        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${testDetail && replaceFunction(testDetail?.subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${testDetail && replaceFunction(testDetail?.subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
+        log(testDetail?.categoryKey)
         if (content.length != 8) {
-            const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
-            const pointyByCategory = await axiosInstance.get(`/api/test/?category__exact=${category}&limit=8&public=true`)
+            const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${testDetail && testDetail?.categoryKey.title_english}&limit=8&public=true`)
+            const pointyByCategory = await axiosInstance.get(`/api/test/?category__exact=${testDetail && testDetail?.categoryKey.title_english}&limit=8&public=true`)
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
 
@@ -168,7 +162,7 @@ const Result = (props) => {
     return (
         <React.Fragment>
 
-            <LoadingScreen loadState={loadState} />
+            <LoadingScreen contentLoaded={contentLoaded} />
 
             <Header />
 
@@ -199,7 +193,7 @@ const Result = (props) => {
 
                 {
                     resultText &&
-                    <div className="px-4 mt-5 mb-16 wrapper-p darkGls"
+                    <div className="px-4 mt-5 mb-16 leading-10 wrapper-p darkGls"
                         dangerouslySetInnerHTML={{
                             __html: resultText
                         }}>
@@ -207,8 +201,8 @@ const Result = (props) => {
                 }
 
                 <div className='container px-20 mx-auto'>
-                    <div className="mb-4 text-center space-sm">
-                        <h5 className='text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
+                    <div className="text-center">
+                        <h5 className='mb-5 text-lg'>{'ببین نتیجه ی تست دوستات چی در میاد  \n ببین شبیه هستید یا فرق دارید'}</h5>
 
                         <InlineShareButtons
                             config={{
@@ -263,19 +257,15 @@ const Result = (props) => {
 
             </div>
 
-            <h2 className='text-center space-med beforeAfterDecor'>تست های مشابه</h2>
+            <h3 className='text-center space-med beforeAfterDecor'>تست های مشابه</h3>
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="flex flex-wrap justify-center mx-4 mt-5 align-baseline md:w-4/5 md:m-auto">
+            <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
                 {
                     suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 }
             </ul>
-
-            <BackBtn />
-
-            <button onClick={tryAgainTheQuiz} className='px-2 py-1 text-center rounded-lg tryAgain btn' aria-label="Try Again The Quiz" type="button">انجام دادن دوباره تست</button>
 
             <Footer />
 

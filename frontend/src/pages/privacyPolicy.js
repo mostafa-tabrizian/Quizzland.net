@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 
 import Header from '../components/header'
 import Footer from '../components/footer'
-import BackBtn from '../components/backBtn'
 
 const pathRed = '/static/img/bubbles.webp'
 
@@ -35,8 +34,6 @@ const PrivacyPolicy = () => {
 
                 <h5>💗کوییزلند</h5>
             </div>
-
-            <BackBtn />
 
             <Footer />
 
