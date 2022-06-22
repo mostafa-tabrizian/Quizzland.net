@@ -9,20 +9,18 @@ import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
 import AddView from '../components/addView';
-import Comments from '../components/comments'
 import { log, replaceFunction, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 import QuizHeader from '../components/quiz/quizHeader'
 import Trivia from '../components/quiz/trivia'
+import LikeCommentButton from '../components/likeCommentButton';
 import Test from '../components/quiz/test'
 
 const logo = '/static/img/Q-small.png'
 
 let quiz = 'null'
-let advertPos = 0
-let quizCounter = 0
 
 const Quiz = (props) => {
     const [quizType, setQuizType] = useState(window.location.pathname.split('/')[1])
@@ -46,12 +44,6 @@ const Quiz = (props) => {
     const [quiz, setQuiz] = useState(null)
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
     const [questionCounterForId, setQuestionCounterForId] = useState(1)
-    const [score, setScore] = useState(0)
-    const [resultGif, setResultGif] = useState()
-    const [fanName, setFanName] = useState()
-    const [subCategory, setSubCategory] = useState()
-    const [title, setTitle] = useState()
-    const [id, setId] = useState()
 
     const result = useRef(null)
 
@@ -712,6 +704,8 @@ const Quiz = (props) => {
 
                 <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} />
 
+                <LikeCommentButton quizId={quiz?.id} quizType={quizType} />
+
                 {
                     contentLoaded && isItDesktop() &&
                     <div className={`
@@ -782,14 +776,12 @@ const Quiz = (props) => {
                 {/* Adverts */}
                 <div className='adverts_center' id='mediaad-bNpr'></div>
 
-                { quiz && <Comments quizId={quiz?.id} /> }
-
                 <div className='mx-4 mt-10'>
                     <h3 className='flex items-center justify-center mb-5 quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className="">
+                    <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
                         {
                             suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                         }

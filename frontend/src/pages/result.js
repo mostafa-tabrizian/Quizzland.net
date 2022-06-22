@@ -105,7 +105,6 @@ const Result = () => {
                     </h5>,
                 duration: 0,
                 style: {
-
                     background: '#ac272e',
                     color: 'white',
                     borderRadius: '15px'
@@ -292,31 +291,6 @@ const Result = () => {
         else {
             return suggestionQuizzes[0]
         }
-    }
-
-    const pushRate = async (value) => {
-        setRateChangeable(false)
-
-        const now = new Date().getTime()
-        let lastRate
-        let RateCount
-
-        await axiosInstance.get(`/api/quiz/${id}/?timestamp=${now}&public=true`)
-            .then((req) => {
-                lastRate = req.data.rate
-                RateCount = req.data.rate_count
-            })
-
-        const view = {
-            rate: lastRate == 0 ? 5 : (lastRate + value) / 2,
-            rate_count: RateCount + 1
-        }
-
-        await axios.put(`/api/quiz/${id}/`, view)
-            .then(res => {
-                res.status == 200 &&
-                    message.success('از نظر شما بسیار سپاس گذاریم')
-            })
     }
 
     const returnQuizResult = () => {

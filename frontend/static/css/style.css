@@ -1193,6 +1193,10 @@ hr {
   z-index: 0;
 }
 
+.likeCommentButton {
+  font-size: 1.5rem !important;
+}
+
 .at4-share-title {
   font-size: 0.8rem;
   color: white;

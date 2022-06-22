@@ -29,8 +29,9 @@ class CustomUser(AbstractUser):
     gender = models.CharField(blank=True, null=True, max_length=7, choices=Gender)
     points = models.IntegerField(default=0)
     # played_quizzes = models.JSONField(blank=True, null=True, max_length=9000)  # mean 3000 play
-    most_played_categories = models.JSONField(blank=True, null=True)
-    played_history = models.TextField(blank=False, null=True, default='0_', max_length=9000)
+    most_played_categories = models.TextField(blank=True, null=True, max_length=9000)
+    played_history = models.TextField(blank=True, null=True, default='0_', max_length=9000)
+    liked_quizzes = models.TextField(blank=True, null=True, default='0_', max_length=9000)
 
     def __str__(self):
         return str(self.username)
@@ -71,8 +72,7 @@ class Quizzes(models.Model):
     slug = models.CharField(max_length=80, null=False, blank=False, default=None)  # unique=True
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
     tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
-    rate = models.FloatField(null=False, default=0)
-    rate_count = models.IntegerField(default=0)
+    like = models.IntegerField(default=0)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
@@ -100,8 +100,7 @@ class Quizzes_Pointy(models.Model):
     slug = models.CharField(max_length=80, null=False, blank=False, default=None)  # unique=True
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
     tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
-    rate = models.FloatField(null=False, default=0)
-    rate_count = models.IntegerField(default=0)
+    like = models.IntegerField(default=0)
     monthly_views = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')

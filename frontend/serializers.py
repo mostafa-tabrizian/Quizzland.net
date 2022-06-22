@@ -46,6 +46,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'gender',
             'most_played_categories',
             'played_history',
+            'liked_quizzes',
             'points'
         )
 
