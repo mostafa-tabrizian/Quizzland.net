@@ -16,7 +16,6 @@ const SubCategory       = lazy(() => import ('./pages/subCategory'))
 
 const Quiz              = lazy(() => import ('./pages/quiz'))
 const Result            = lazy(() => import ('./pages/result'))
-const ResultPointy      = lazy(() => import ('./pages/resultPointy'))
 const Quiz404           = lazy(() => import ('./pages/404quiz'))
 
 const Login             = lazy(() => import('./pages/login'))
@@ -99,8 +98,7 @@ const App = () => {
 
                             <Route path='/quiz/:title' component={Quiz} />
                             <Route path='/test/:title' component={Quiz} />
-                            <Route path='/result_quiz' component={Result} />
-                            <Route path='/result_test' component={ResultPointy} />
+                            <Route path='/result' component={Result} />
                             <Route path='/quiz-not-found' component={Quiz404} />
 
                             <Route path='/category/:category' exact component={Category} />

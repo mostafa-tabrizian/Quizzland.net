@@ -163,11 +163,8 @@ const Quiz = (props) => {
 
     const calculateTheResultScore = () => {
         const questionsCounter = questions?.length
-        if (questionsCounter && correctAnswersCount) {
-            const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
-            setScore(parseInt(score))
-            return score
-        }
+        const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
+        return score
     }
 
     const sendCategoryAsInterest = (category) => {
@@ -384,26 +381,18 @@ const Quiz = (props) => {
 
             } else {
                 setQuizEnded(true)
-                setTimeout(() => {
-                    try {
-                        switch(quizType) {
-                            case 'quiz':
-                                const score = calculateTheResultScore()
-                                detailOfResult(score)
-                                setFanName(quiz?.fan_name)
-                                setSubCategory(quiz?.subCategory)
-                                setTitle(quiz?.title)
-                                setId(quiz?.id)
-                            case 'test':
-                                localStorage.setItem('resultQuiz', JSON.stringify(quiz))
-                                localStorage.setItem('testResult', calculateThePoints())
-                        }
-
-                        result.current.click()
-                    } catch (err) {
-                        log(err)
-                    }
-                }, 3500)
+                localStorage.setItem('qd', JSON.stringify(quiz))
+                switch(quizType) {
+                    case 'quiz':
+                        localStorage.setItem('qt', 'quiz')
+                        localStorage.setItem('qr', JSON.stringify({ql: questions?.length, qc: correctAnswersCount}))
+                        break
+                    case 'test':
+                        localStorage.setItem('qt', 'test')
+                        localStorage.setItem('qr', calculateThePoints())
+                        break
+                }
+                result.current.click()
             }
         }
     }
@@ -556,27 +545,6 @@ const Quiz = (props) => {
         }
 
         return totalPoints
-    }
-
-    const resultUrl = () => {
-        switch(quizType) {
-            case 'quiz':
-                return (
-                    <Link
-                        to={`/result_quiz?s=${score}&qc=${questions.length}&cc=${correctAnswersCount}&fn=${fanName}&sc=${subCategory}&qt=${title}&id=${id}&rg=${resultGif}`}
-                        ref={result}
-                        className='noVis'
-                    ></Link>
-                )
-            case 'test':
-                return (
-                    <Link
-                        to='/result_test'
-                        ref={result}
-                        className='noVis'
-                    ></Link>
-                )
-        }
     }
 
     const showTheTagsIfNotNull = () => {
@@ -821,7 +789,7 @@ const Quiz = (props) => {
 
                     {SkeletonLoading(contentLoaded)}
 
-                    <ul className="flex flex-wrap md:w-[70rem] mx-auto mb-10">
+                    <ul className="">
                         {
                             suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
                         }
@@ -835,7 +803,11 @@ const Quiz = (props) => {
                 {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
 
                 
-                {resultUrl()}
+                <Link
+                    to={`/result`}
+                    ref={result}
+                    className='noVis'
+                ></Link>
                 
 
                 <Footer />

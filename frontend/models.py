@@ -27,8 +27,10 @@ class CustomUser(AbstractUser):
     bio = models.CharField(blank=True, null=True, max_length=255)
     birthday_date = models.DateField(blank=True, null=True)
     gender = models.CharField(blank=True, null=True, max_length=7, choices=Gender)
+    points = models.IntegerField(default=0)
     # played_quizzes = models.JSONField(blank=True, null=True, max_length=9000)  # mean 3000 play
     most_played_categories = models.JSONField(blank=True, null=True)
+    played_history = models.TextField(blank=False, null=True, default='0_', max_length=9000)
 
     def __str__(self):
         return str(self.username)

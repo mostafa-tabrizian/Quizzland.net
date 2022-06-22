@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { message, Rate } from 'antd';
+import { message, Rate, notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import { InlineReactionButtons, InlineShareButtons } from 'sharethis-reactjs';
+import { InlineShareButtons } from 'sharethis-reactjs';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
 import axiosInstance from '../components/axiosApi';
@@ -13,35 +13,51 @@ import { log, replaceFunction, fadeIn, popUpShow, popUpHide, takeParameterFromUr
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
+import userProfileDetail from '../components/userProfileDetail';
 
 const Result = () => {
     const [resultScore, setResultScore] = useState(0)
     const [resultSubtitle, setResultSubtitle] = useState()
+    const [resultImg, setResultImg] = useState()
+    const [resultText, setResultText] = useState()
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     const [questionCount, setQuestionCount] = useState(null)
     const [correctAnswersCount, setCorrectAnswersCount] = useState(null)
     const [rateChangeable, setRateChangeable] = useState(true)
-    const [resultGif, setResultGif] = useState()
-    const [fanName, setFanName] = useState()
-    const [title, setTitle] = useState()
-    const [id, setId] = useState()
+    const [resultGif, setResultGif] = useState(null)
+    const [quizType, setQuizType] = useState(null)
 
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search)
-        setQuestionCount(params.get('qc'))
-        setCorrectAnswersCount(params.get('cc'))
-        setFanName(params.get('fn'))
-        setTitle(params.get('qt'))
-        setId(params.get('id'))
+    const [quizResult, setQuizResult] = useState()
+    const [quizDetail, setQuizDetail] = useState()
 
-        const resultGifIndexInUrl = (window.location.search).indexOf('rg=') + 3
-        setResultGif((window.location.search).slice(resultGifIndexInUrl,))
+    let userDetail
 
-        detailOfResult(params.get('s'), params.get('fn'))
-        getSuggestionsQuiz(params.get('sc'))
+    useEffect(async () => {
+        if (JSON.parse(localStorage.getItem('qd')) === null) {
+            window.location.href = "/404";
+        }
 
+        const quizResult = JSON.parse(localStorage.getItem('qr'))
+        const quizDetail = JSON.parse(localStorage.getItem('qd'))
+        const quizType = localStorage.getItem('qt')
+            
+        setQuizType(quizType)
+        setQuizResult(quizResult)
+        setQuizDetail(quizDetail)
+        detailOfResult(quizResult, quizDetail, quizType)
+        setQuestionCount(quizResult.ql)
+        setCorrectAnswersCount(quizResult.qc)
+        setContentLoaded(true)
+
+        userDetail = await userProfileDetail()
+        if (userDetail != null && !userPlayedThisQuizBefore(quizDetail?.id)) {
+            giveScorePoint(calculateTheResultScore(quizResult))
+            postToUserHistory(quizDetail?.id)
+        }
+
+        getSuggestionsQuiz(quizDetail?.subCategory)
         document.querySelector('html').style = `background: None`
         setLoadState(true)
     }, [])
@@ -49,7 +65,7 @@ const Result = () => {
     useEffect(() => {
         {
             suggestionQuizzes &&
-            showPopUpSuggestion()
+                showPopUpSuggestion()
         }
     }, [suggestionQuizzes])
 
@@ -61,35 +77,160 @@ const Result = () => {
         5: <SmileOutlined />,
     };
 
-    const detailOfResult = (score, fanName) => {
-        if (score > 80) {
-            setResultScore(`😎 ${score}%`)
-            setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
-        }
-        else if (score > 60) {
-            setResultScore(`😎 ${score}%`)
-            setResultSubtitle(`😎 ایول\n! تو یک ${fanName} واقعی هستی `)
-        }
-        else if (score > 40) {
-            setResultScore(`🙂 ${score}%`)
-            setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
-        }
-        else if (score > 20) {
-            setResultScore(`😉 ${score}%`)
-            setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
-        }
-        else if (score >= 0) {
-            setResultScore(`😭 ${score}%`)
-            setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
-        }
-        else {
-            setResultScore(`👀`)
-            setResultSubtitle('😰 خطا در محاسبه امتیاز\n.لطفا بعدا امتحان کنید و یا در غیر اینصورت به پشتیبانی اطلاع دهید')
-        }
+    const userPlayedThisQuizBefore = (quizId) => {
+        return userDetail.played_history.split('_').includes(String(quizId))
     }
 
-    const tryAgainTheQuiz = () => {
-        window.history.go(-1)
+    const giveScorePoint = async (score) => {
+        if (userDetail == null) {
+            const key = `open${Date.now()}`;
+            const btn = (
+                <div className='flex space-x-5 space-x-reverse'>
+                    <button className='px-4 py-2 border rounded-xl'>
+                        <a href='/login'>
+                            دریافت امتیاز
+                        </a>
+                    </button>
+                    <button onClick={() => notification.close(key)}>
+                        بی خیال
+                    </button>
+                </div>
+            );
+            notification.open({
+                message: '',
+                description:
+
+                    <h5>
+                        {quizResult} امتیاز به شما تعلق گرفت. برای گرفتن آن حتما باید وارد حساب کاربریتان شوید!
+                    </h5>,
+                duration: 0,
+                style: {
+
+                    background: '#ac272e',
+                    color: 'white',
+                    borderRadius: '15px'
+                },
+                btn,
+                key,
+                onClose: close,
+            });
+        }
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { points: userDetail.points + parseInt(score) })
+            .then(res => {
+                res.status == 200 &&
+                    message.success(`${quizResult} امتیاز به شما تعلق گرفت 🎉`)
+            })
+            .catch(err => {
+                log(err.response)
+            })
+    }
+
+    const postToUserHistory = async (id) => {
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `${id}_` })
+            .then(res => {
+                log(res)
+            })
+            .catch(err => {
+                log(err.response)
+            })
+    }
+
+    const calculateTheResultScore = (resultDetail) => {
+        const questionsCounter = resultDetail.ql
+        const correctAnswersCount = resultDetail.qc
+
+        const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
+        return score
+    }
+
+    const detailOfResult = (resultDetail, quizDetail, quizType) => {
+        switch (quizType) {
+            case 'quiz':
+                const quizScore = calculateTheResultScore(resultDetail)
+                if (quizScore > 80) {
+                    setResultScore(`😎 ${quizScore}%`)
+                    setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
+                    setResultGif(quizDetail.GIF100)
+                }
+                else if (quizScore > 60) {
+                    setResultScore(`😎 ${quizScore}%`)
+                    setResultSubtitle(`😎 ایول\n! تو یک ${quizDetail.fanName} واقعی هستی `)
+                    setResultGif(quizDetail.GIF80)
+                }
+                else if (quizScore > 40) {
+                    setResultScore(`🙂 ${quizScore}%`)
+                    setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
+                    setResultGif(quizDetail.GIF60)
+                }
+                else if (quizScore > 20) {
+                    setResultScore(`😉 ${quizScore}%`)
+                    setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
+                    setResultGif(quizDetail.GIF40)
+                }
+                else if (quizScore >= 0) {
+                    setResultScore(`😭 ${quizScore}%`)
+                    setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
+                    setResultGif(quizDetail.GIF20)
+                }
+                else {
+                    setResultScore(`👀`)
+                    setResultSubtitle('😰 خطا در محاسبه امتیاز\n.لطفا بعدا امتحان کنید و یا در غیر اینصورت به پشتیبانی اطلاع دهید')
+                    setResultGif(quizDetail.GIF20)
+                }
+                break
+            case 'test':
+                if (resultDetail <= quizDetail.result_upTo_1st) {
+                    setResultImg(quizDetail.result_img_1st)
+                    setResultSubtitle(quizDetail.result_title_1st)
+                    setResultText(quizDetail.result_text_1st)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_2nd) {
+                    setResultImg(quizDetail.result_img_2nd)
+                    setResultSubtitle(quizDetail.result_title_2nd)
+                    setResultText(quizDetail.result_text_2nd)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_3rd) {
+                    setResultImg(quizDetail.result_img_3rd)
+                    setResultSubtitle(quizDetail.result_title_3rd)
+                    setResultText(quizDetail.result_text_3rd)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_4th) {
+                    setResultImg(quizDetail.result_img_4th)
+                    setResultSubtitle(quizDetail.result_title_4th)
+                    setResultText(quizDetail.result_text_4th)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_5th) {
+                    setResultImg(quizDetail.result_img_5th)
+                    setResultSubtitle(quizDetail.result_title_5th)
+                    setResultText(quizDetail.result_text_5th)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_6th) {
+                    setResultImg(quizDetail.result_img_6th)
+                    setResultSubtitle(quizDetail.result_title_6th)
+                    setResultText(quizDetail.result_text_6th)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_7th) {
+                    setResultImg(quizDetail.result_img_7th)
+                    setResultSubtitle(quizDetail.result_title_7th)
+                    setResultText(quizDetail.result_text_7th)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_8th) {
+                    setResultImg(quizDetail.result_img_8th)
+                    setResultSubtitle(quizDetail.result_title_8th)
+                    setResultText(quizDetail.result_text_8th)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_9th) {
+                    setResultImg(quizDetail.result_img_9th)
+                    setResultSubtitle(quizDetail.result_title_9th)
+                    setResultText(quizDetail.result_text_9th)
+                }
+                else if (resultDetail <= quizDetail.result_upTo_10th) {
+                    setResultImg(quizDetail.result_img_10t)
+                    setResultSubtitle(quizDetail.result_title_10th)
+                    setResultText(quizDetail.result_text_10th)
+                }
+                break
+        }
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
@@ -139,7 +280,7 @@ const Result = () => {
     }
 
     const chooseUniqueQuizToSuggest = () => {
-        if (suggestionQuizzes[0]?.title === title) {
+        if (suggestionQuizzes[0]?.title === quizDetail?.title) {
             if (suggestionQuizzes[1]) {
                 return suggestionQuizzes[1]
             }
@@ -156,20 +297,7 @@ const Result = () => {
     const pushRate = async (value) => {
         setRateChangeable(false)
 
-        const adminDetail = {
-            username: process.env.ADMINUSERNAME,
-            password: process.env.ADMINPASSWORD,
-        }
-
-        let authToken
-
-        await axios.post('/api/token/obtain/', adminDetail)
-            .then((req) => {
-                authToken = req.data.access
-            })
-
         const now = new Date().getTime()
-
         let lastRate
         let RateCount
 
@@ -184,17 +312,52 @@ const Result = () => {
             rate_count: RateCount + 1
         }
 
-        const headers = {
-            'Authorization': "JWT " + authToken,
-            'Content-Type': 'application/json',
-            'accept': 'application/json'
-        }
-
-        await axios.put(`/api/quiz/${id}/`, view, { headers })
+        await axios.put(`/api/quiz/${id}/`, view)
             .then(res => {
                 res.status == 200 &&
                     message.success('از نظر شما بسیار سپاس گذاریم')
             })
+    }
+
+    const returnQuizResult = () => {
+        switch (quizType) {
+            case 'quiz':
+                return <div className="items-center justify-center block w-full mx-auto result md:container space-sm md:flex">
+                            <div className="flex items-center justify-center result__img md:mx-16">
+                                {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
+                            </div>
+                            <div className="mt-5">
+                                <h5 className='result_score'>
+                                    {resultScore}
+                                </h5>
+                            </div>
+                            <div className="mt-5 result_detail">
+                                <h5>پاسخ 🟢: <span>{correctAnswersCount}</span></h5>
+                                <h5>پاسخ 🔴: <span>{questionCount - correctAnswersCount}</span></h5>
+                            </div>
+                        </div>
+            case 'test':
+                return <div>
+                            {
+                                resultImg &&
+                                <div className='flex resultPointy__img'>
+                                    <img
+                                        src={resultImg}
+                                        width={690}
+                                        alt={quizDetail?.subCategory}
+                                    />
+                                </div>
+                            }
+                            {
+                                resultText &&
+                                <div className="px-4 mt-5 mb-16 leading-10 wrapper-p darkGls"
+                                    dangerouslySetInnerHTML={{
+                                        __html: resultText
+                                    }}>
+                                </div>
+                            }
+                        </div>
+        }
     }
 
     return (
@@ -212,29 +375,17 @@ const Result = () => {
 
             <div className="relative result__container">
                 <div className="flex justify-center result__title">
-                    <h5 className="text-right">نتیجه  {title}</h5>
+                    <h5 className="text-right">نتیجه  {quizDetail?.title}</h5>
                 </div>
                 <div className="flex items-center justify-center beforeAfterDecor">
                     <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                 </div>
-                <div className="items-center justify-center block w-full mx-auto result md:container space-sm md:flex">
-                    <div className="flex items-center justify-center result__img md:mx-16">
-                        {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
-                    </div>
-                    <div className="mt-5">
-                        <h5 className='result_score'>
-                            {resultScore}
-                        </h5>
-                    </div>
-                    <div className="mt-5 result_detail">
-                        <h5>پاسخ 🟢: <span>{correctAnswersCount}</span></h5>
-                        <h5>پاسخ 🔴: <span>{questionCount - correctAnswersCount}</span></h5>
-                    </div>
-                </div>
+
+                {returnQuizResult()}
 
                 <div className='container px-20 mx-auto'>
                     <div className="mb-4 text-lg text-center space-sm">
-                        <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${fanName} هستن`}</h5>
+                        {/* <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizDetail.fanName} هستن`}</h5> */}
 
                         <InlineShareButtons
                             config={{
@@ -257,8 +408,8 @@ const Result = () => {
 
 
                                 url: window.location.href,
-                                // image: quizResult?.thumbnail,
-                                title: title,
+                                image: quizDetail?.thumbnail,
+                                title: quizDetail?.title1,
                             }}
                         />
 
