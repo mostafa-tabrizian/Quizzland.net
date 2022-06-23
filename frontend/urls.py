@@ -21,6 +21,8 @@ urlpatterns = [
     path('category/<category>/<subCategory>', index),
     
     path('login', index),
+    path('register', index),
+    path('setPassword', setPassword),
     path('profile/<user>', index),
     path('setting', index),
     path('quiz-history', index),

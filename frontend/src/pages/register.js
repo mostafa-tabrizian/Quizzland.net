@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from '../../components/axiosApi';;
+import axiosInstance from '../components/axiosApi';;
 import { message } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
-import { log } from '../../components/base'
-import userProfileDetail from "../../components/userProfileDetail";
+import { log } from '../components/base'
+import userProfileDetail from "../components/userProfileDetail";
 
 const pathRed = '/static/img/bubbles.webp'
 
-const Login = () => {
+const Register = () => {
     const [username, setUsername] = useState(null)
+    const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
 
     useEffect(() => {
@@ -23,34 +24,54 @@ const Login = () => {
     const checkIfLoggedIn = async () => {
         const local_username = localStorage.getItem('username')
         const userProfile = await userProfileDetail()
-        
         if (userProfile !== null && userProfile.username == local_username) {
             window.location.href = '/'
         }
     }
 
+    const postUserInformations = async () => {
+        await axiosInstance.post('api/user/')
+    }
+
+    // const loginAndRedirect = async () => {
+    //     const data = await axiosInstance.post('api/token/obtain/', {
+    //         username: username,
+    //         password: password
+    //     });
+
+    //     const passToken = `${new Date().getTime() * 85}${username}${(new Date().getTime() * 69) % 85}`
+    //     await setUserPassToken(username, passToken)
+
+    //     axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
+    //     localStorage.setItem('username', username);
+    //     localStorage.setItem('pass_token', passToken);
+    //     localStorage.setItem('access_token', data.data.access);
+    //     localStorage.setItem('refresh_token', data.data.refresh);
+
+    //     window.location.href = `/profile/${username}`
+    // }
+
     const handleSubmit = async () => {
-        try {
-            const data = await axiosInstance.post('api/token/obtain/', {
-                username: username,
-                password: password
-            });
-
-            const passToken = `${new Date().getTime() * 85}${username}${(new Date().getTime() * 69) % 85}`
-            await setUserPassToken(username, passToken)
-
-            axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
-            localStorage.setItem('username', username);
-            localStorage.setItem('pass_token', passToken);
-            localStorage.setItem('access_token', data.data.access);
-            localStorage.setItem('refresh_token', data.data.refresh);
-
-            window.location.href = '/'
-
-        } catch (error) {
-            message.error('نام کاربری یا رمز عبور اشتباه می‌باشد');
-            throw error;
-        }
+        await axiosInstance.post('api/user/', {
+            username: username,
+            email: email,
+            password: password
+        })
+        .then(res => {
+            switch(res.status) {
+                case 201:
+                    // loginAndRedirect()
+                    window.location.href = `/setPassword?u=${username}&p=${password}`
+            }
+        })
+        .catch(err => {
+            if (err.response.data.email) {
+                message.error('ایمیل شما معتبر نمی‌باشد!')
+            }
+            else if (err.response.data.username) {
+                message.error('نام کاربری از قبل وجود دارد. لطفا نام کاربری دیگری انتخاب کنید.')
+            }
+        })
     }
 
     const getUserId = async (username) => {
@@ -74,15 +95,15 @@ const Login = () => {
     return (
         <React.Fragment>
             <Helmet>
-                <title>ورود | ‌کوییزلند</title>
+                <title>ثبت نام | ‌کوییزلند</title>
                 {/* <meta name="description" content="تماس با پشتیبانی کوییزلند" />
                 <meta name="keywords" content="پشتیبانی کوییزلند" /> */}
             </Helmet>
 
             <div className="center">
-                <div className="absolute m-auto basicPage wrapper-sm center top-20">
+                <div className="absolute m-auto basicPage max-w-[33rem] center top-20">
                     <h1 className="text-[3rem] mb-5 text-center text-[#ac272e] ">
-                        ورود به کوییزلند
+                        ثبت نام در کوییزلند
                     </h1>
 
                     <form className='grid justify-center space-y-5 p-8 text-[20px] rounded-lg center'>
@@ -90,16 +111,19 @@ const Login = () => {
                             <input name="username" className='w-full p-2 text-base rounded-lg' type="string" placeholder="نام کاربری" value={username} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setUsername(input.target.value)} />
                         </label>
                         <label className='w-[18rem]'>
+                            <input name="email" className='w-full p-2 text-base rounded-lg' type="email" placeholder="ایمیل" value={email} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setEmail(input.target.value)} />
+                        </label>
+                        <label className='w-[18rem]'>
                             <input name="password" className='w-full p-2 text-base rounded-lg' type="password" placeholder="رمز عبور" value={password} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setPassword(input.target.value)} />
                         </label>
                         <button onClick={() => handleSubmit()} className='bg-[#ac272e] p-2 rounded-lg text-white font-semibold' type="button">
-                            تایید
+                            ثبت نام
                         </button>
                     </form>
 
                     <div>
                         <h2>
-                            یا اگر اکانت ندارید اینجا <Link to='/register' className="text-[#d8545a]">ثبت نام</Link> کنید
+                            یا اگر اکانت دارید اینجا <Link to='/login' className="text-[#d8545a] border-b">وارد</Link> شوید
                         </h2>
                     </div>
                 </div>
@@ -109,4 +133,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Register;

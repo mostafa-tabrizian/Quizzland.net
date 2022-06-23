@@ -18,10 +18,17 @@ const Quiz              = lazy(() => import ('./pages/quiz'))
 const Result            = lazy(() => import ('./pages/result'))
 const Quiz404           = lazy(() => import ('./pages/404quiz'))
 
+<<<<<<< HEAD
 const Login             = lazy(() => import('./pages/user/login'))
 const Profile           = lazy(() => import('./pages/user/profile'))
 const Setting           = lazy(() => import('./pages/user/profileSetting'))
 const QuizHistory           = lazy(() => import('./pages/user/quizHistory'))
+=======
+const Login             = lazy(() => import('./pages/login'))
+const Register             = lazy(() => import('./pages/register'))
+const Profile           = lazy(() => import('./pages/profile'))
+const Setting           = lazy(() => import('./pages/profileSetting'))
+>>>>>>> f95ae668 (working on register and password hashing)
 
 const Index             = lazy(() => import('./pages/landPage'))
 const Guide             = lazy(() => import('./pages/guide'))
@@ -92,6 +99,7 @@ const App = () => {
                             <Route path='/' exact component={Index} />
 
                             <Route path='/login' component={Login} />
+                            <Route path='/register' component={Register} />
                             <Route path='/profile/:user' component={Profile} />
                             <Route path='/setting' component={Setting} />
                             <Route path='/quiz-history' component={QuizHistory} />

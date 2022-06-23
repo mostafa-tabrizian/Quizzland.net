@@ -36,6 +36,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
+            'password',
             'is_active',
             'date_joined',
             'last_login',
@@ -49,6 +50,17 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'liked_quizzes',
             'points'
         )
+        
+    def create(self, request):
+        userData = request
+        
+        newComment = CustomUser.objects.create(
+            username=userData['username'],
+            email=userData['email'],
+            password=userData['password']
+        )
+        
+        return newComment
 
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:

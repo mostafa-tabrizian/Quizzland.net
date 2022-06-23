@@ -58,6 +58,7 @@ const LikeCommentButton = (props) => {
 
     const likeButtonClicked = async () => {
         const userDetail = await userProfileDetail()
+        log(userDetail)
         
         if (userLikedThisQuizBefore(userDetail)) {
             removeLike()

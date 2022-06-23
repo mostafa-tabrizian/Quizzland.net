@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import never_cache
 import datetime
 from urllib.parse import unquote
+from django.contrib.auth import get_user_model
 
 from .models import *
 from .functions import *
@@ -35,6 +36,14 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
 def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
+
+def setPassword(request, *args, **kwargs):
+    username = request.GET.get('u')
+    password = request.GET.get('p')
+    
+    # user = CustomUser.objects.get(username=username)
+    # print(user)
+    # return render(request, "frontend/index.html")
 
 def restartEveryMonthlyViews(request):
     try:
