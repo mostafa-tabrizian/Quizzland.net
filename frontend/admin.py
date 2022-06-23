@@ -63,7 +63,7 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
 class Comments_Admin(admin.ModelAdmin):
     list_display = ('submitter_related', 'comment_text', 'date_submitted')
     list_filter = ('date_submitted', )
-    search_fields = ('comment_text', 'quiz_related', 'pointy_related', 'submitter_related')
+    search_fields = ('comment_text', 'quiz_related', 'test_related', 'submitter_related')
 
 @admin.register(Questions)
 class Questions_Admin(admin.ModelAdmin):

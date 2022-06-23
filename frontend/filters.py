@@ -43,7 +43,7 @@ class CommentsFilter(filters.FilterSet):
         fields = {
             'comment_text': ['icontains'],
             'quiz_related': ['exact'],
-            'pointy_related': ['exact'], 
+            'test_related': ['exact'], 
             'submitter_related': ['exact'],
             'date_submitted': ['lte', 'gte']
         }

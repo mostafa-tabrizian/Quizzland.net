@@ -99,7 +99,7 @@ class CommentsSerializer(serializers.ModelSerializer):
         newComment = Comments.objects.create(
             comment_text=CommentData['comment_text'],
             quiz_related=CommentData['quiz_related'],
-            pointy_related=CommentData['pointy_related'],
+            test_related=CommentData['test_related'],
             submitter_related=CustomUser.objects.get(id=CommentData['submitter_related']['username']),
         )
         

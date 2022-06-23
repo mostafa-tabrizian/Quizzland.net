@@ -3,7 +3,6 @@ import { message, Rate, notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
-import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
 import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
@@ -14,6 +13,7 @@ import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 import userProfileDetail from '../components/userProfileDetail';
+import LikeCommentButton from '../components/likeCommentButton';
 
 const Result = () => {
     const [resultScore, setResultScore] = useState(0)
@@ -25,7 +25,6 @@ const Result = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [questionCount, setQuestionCount] = useState(null)
     const [correctAnswersCount, setCorrectAnswersCount] = useState(null)
-    const [rateChangeable, setRateChangeable] = useState(true)
     const [resultGif, setResultGif] = useState(null)
     const [quizType, setQuizType] = useState(null)
 
@@ -68,14 +67,6 @@ const Result = () => {
                 showPopUpSuggestion()
         }
     }, [suggestionQuizzes])
-
-    const customIcons = {
-        1: <FrownOutlined />,
-        2: <FrownOutlined />,
-        3: <MehOutlined />,
-        4: <SmileOutlined />,
-        5: <SmileOutlined />,
-    };
 
     const userPlayedThisQuizBefore = (quizId) => {
         return userDetail.played_history.split('_').includes(String(quizId))
@@ -347,113 +338,94 @@ const Result = () => {
                 <meta name="keywords" content="کوییز, کوییزلند" />
             </Helmet>
 
-            <div className="relative result__container">
-                <div className="flex justify-center result__title">
-                    <h5 className="text-right">نتیجه  {quizDetail?.title}</h5>
-                </div>
-                <div className="flex items-center justify-center beforeAfterDecor">
-                    <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
-                </div>
-
-                {returnQuizResult()}
-
-                <div className='container px-20 mx-auto'>
-                    <div className="mb-4 text-lg text-center space-sm">
-                        {/* <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizDetail.fanName} هستن`}</h5> */}
-
-                        <InlineShareButtons
-                            config={{
-                                alignment: 'center',
-                                color: 'social',
-                                enabled: true,
-                                font_size: 16,
-                                labels: 'null',
-                                language: 'en',
-                                networks: [
-                                    'whatsapp',
-                                    'telegram',
-                                    'twitter',
-                                    'sharethis',
-                                ],
-                                padding: 10,
-                                radius: 10,
-                                show_total: false,
-                                size: 45,
-
-
-                                url: window.location.href,
-                                image: quizDetail?.thumbnail,
-                                title: quizDetail?.title1,
-                            }}
-                        />
-
+            <div className='ltr'>
+                <div className="relative result__container">
+                    <div className="flex justify-center result__title">
+                        <h5 className="text-right">نتیجه  {quizDetail?.title}</h5>
+                    </div>
+                    <div className="flex items-center justify-center beforeAfterDecor">
+                        <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
                     </div>
 
-                    <h2 className='flex items-center justify-center text-lg space-sm'>این کوییز چطور بود؟</h2>
+                    {returnQuizResult()}
 
-                    <Rate
-                        character={({ index }) => customIcons[index + 1]}
-                        allowClear={true}
-                        disabled={rateChangeable ? false : true}
-                        className='flex justify-center my-3 biggerRate'
-                        onChange={value => {
-                            const currentQuiz = takeParameterFromUrl('qt')
-                            const lastRatedQuiz = localStorage.getItem('lastRatedQuiz')
+                    <div className='container px-20 mx-auto'>
+                        <div className="mb-4 text-lg text-center space-sm">
+                            {/* <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizDetail.fanName} هستن`}</h5> */}
 
-                            // check if rated before (last time)
-                            if (lastRatedQuiz == currentQuiz) {
-                                message.warning('! شما قبلا به این کوییز امتیاز داده اید')
-                            } else {
-                                localStorage.setItem('lastRatedQuiz', currentQuiz)
-                                pushRate(value)
-                            }
-                        }}
-                    />
+                            <InlineShareButtons
+                                config={{
+                                    alignment: 'center',
+                                    color: 'social',
+                                    enabled: true,
+                                    font_size: 16,
+                                    labels: 'null',
+                                    language: 'en',
+                                    networks: [
+                                        'whatsapp',
+                                        'telegram',
+                                        'twitter',
+                                        'sharethis',
+                                    ],
+                                    padding: 10,
+                                    radius: 10,
+                                    show_total: false,
+                                    size: 45,
 
+
+                                    url: window.location.href,
+                                    image: quizDetail?.thumbnail,
+                                    title: quizDetail?.title1,
+                                }}
+                            />
+
+                        </div>
+                    </div>
                 </div>
 
-            </div>
+                <LikeCommentButton quizId={quizDetail?.id} quizType={quizType} />
 
-            <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
+                <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
-            {SkeletonLoading(contentLoaded)}
+                {SkeletonLoading(contentLoaded)}
 
-            <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
+                <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
+                    {
+                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                    }
+                </ul>
+
                 {
-                    suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
-                }
-            </ul>
+                    suggestionQuizzes && chooseUniqueQuizToSuggest() &&
+                    <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
+                        <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
+                            closePopUpQuizSuggester();
+                        }}> X </button>
 
-            {
-                suggestionQuizzes && chooseUniqueQuizToSuggest() &&
-                <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
-                    <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
-                        closePopUpQuizSuggester();
-                    }}> X </button>
+                        <div>
+                            <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
 
-                    <div>
-                        <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
-
+                            <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
+                                <h3 className="flex text-lg result__popUpQuizSuggester__title">
+                                    {chooseUniqueQuizToSuggest().title}
+                                </h3>
+                            </Link>
+                        </div>
                         <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                            <h3 className="flex text-lg result__popUpQuizSuggester__title">
-                                {chooseUniqueQuizToSuggest().title}
-                            </h3>
+                            <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
+                                <img
+                                    src={chooseUniqueQuizToSuggest().thumbnail}
+                                    alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
+                                    width={1920}
+                                    height={1080}
+                                    className='object-cover'
+                                />
+                            </div>
                         </Link>
                     </div>
-                    <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                        <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
-                            <img
-                                src={chooseUniqueQuizToSuggest().thumbnail}
-                                alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
-                                width={1920}
-                                height={1080}
-                                className='object-cover'
-                            />
-                        </div>
-                    </Link>
-                </div>
-            }
-
+                }
+            </div>
+            
             <Footer />
 
         </React.Fragment>

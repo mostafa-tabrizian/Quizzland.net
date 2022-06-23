@@ -17,8 +17,10 @@ const LikeCommentButton = (props) => {
         const previousLikeCountValue = await previousLikeCount()
 
         await axiosInstance.put(`/api/${props.quizType}/${props.quizId}/`, {like: previousLikeCountValue - 1})
-            .then(res => {
-                // res.status == 200 &&
+            // .then(res => {
+            // })
+            .catch(err => {
+                log(err)
             })
     }
 
@@ -29,10 +31,8 @@ const LikeCommentButton = (props) => {
         updatedUserLikedQuizzes = userLikedQuizzes.join('_')
         
         await axiosInstance.patch(`/api/user/${userDetail.id}/`, { liked_quizzes: updatedUserLikedQuizzes})
-            .then(res => {
-                // res.status == 200 &&
-                // message.error('like removed')
-            })
+            // .then(res => {
+            // })
             .catch(err => {
                 log(err.response)
             })
@@ -40,9 +40,8 @@ const LikeCommentButton = (props) => {
     
     const submitUserLikedTheQuiz = async (userDetail) => {
         await axiosInstance.patch(`/api/user/${userDetail.id}/`, { liked_quizzes: userDetail.liked_quizzes + `${props.quizId}_` })
-        .then(res => {
-            log(res)
-        })
+        // .then(res => {
+        // })
         .catch(err => {
             log(err.response)
         })
@@ -75,8 +74,10 @@ const LikeCommentButton = (props) => {
         const previousLikeCountValue = await previousLikeCount()
 
         await axiosInstance.put(`/api/${props.quizType}/${props.quizId}/`, {like: previousLikeCountValue + 1})
-            .then(res => {
-                // res.status == 200 &&
+            // .then(res => {
+            // })
+            .catch(err => {
+                log(err.response)
             })
     }
     
@@ -104,7 +105,7 @@ const LikeCommentButton = (props) => {
                     padding: 0,
                 }}
             >
-                <Comments quizId={props.quizId} />
+                <Comments quizId={props.quizId} quizType={props.quizType} />
             </Drawer>
         </React.Fragment>
     );

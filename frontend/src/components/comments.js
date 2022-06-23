@@ -34,8 +34,8 @@ const Comments = (props) => {
         
         await axiosInstance.post('/api/comment/', {
             comment_text: commentTextRef.current.value,
-            quiz_related: props.quizId,
-            pointy_related: null,
+            quiz_related: props.quizType == 'quiz' ? props.quizId : null,
+            test_related: props.quizType == 'test' ? props.quizId : null,
             submitter_related: {
                 username: userProfile.id
             }
@@ -58,9 +58,12 @@ const Comments = (props) => {
     const fetchComments = async () => {
         const now = new Date().getTime()
         
-        await axiosInstance.get(`/api/comment/?quiz_related=${props.quizId}&timestamp=${now}`)
+        await axiosInstance.get(`/api/comment/?${props.quizType == 'quiz' ? `quiz_related=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_related=${props.quizId}&` : ''}timestamp=${now}`)
             .then(res => {
                 setComments(res.data.sort(sortCommentsByNewest))
+            })
+            .catch(err => {
+                log(err.response)
             })
     }
 

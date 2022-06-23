@@ -158,7 +158,7 @@ class Comments(models.Model):
     id = models.AutoField(primary_key=True)
     comment_text = models.CharField(blank=False, null=False, max_length=255)
     quiz_related = models.ForeignKey(Quizzes, blank=True, null=True, on_delete=models.CASCADE)
-    pointy_related = models.ForeignKey(Quizzes_Pointy, blank=True, null=True, on_delete=models.CASCADE)
+    test_related = models.ForeignKey(Quizzes_Pointy, blank=True, null=True, on_delete=models.CASCADE)
     submitter_related = models.ForeignKey(CustomUser, blank=False, null=True, on_delete=models.SET_NULL)
     date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
     # liked
