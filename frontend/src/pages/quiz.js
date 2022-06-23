@@ -118,39 +118,39 @@ const Quiz = (props) => {
         quizSlugReplacedWithHyphen &&
             await axiosInstance.get(`/api/${quizType}/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
-                    try {
-                        AddView(quizType, quizData.id)
-                        sendCategoryAsInterest(quizData.subCategory)
-                        getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
-                        applyBackground(quizData.background)
-                        setQuiz(quizData)
+                    log(quizData)
+                    AddView(quizType, quizData.id)
+                    sendCategoryAsInterest(quizData.subCategory)
+                    getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
+                    applyBackground(quizData.background)
+                    setQuiz(quizData)
 
-                        let questionSource
-                        switch (quizType) {
-                            case 'quiz':
-                                questionSource = 'questions'
-                                break
-                            case 'test':
-                                questionSource = 'questions_pointy'
-                                break
-                        }
+                    let questionSource
+                    switch (quizType) {
+                        case 'quiz':
+                            questionSource = 'questions'
+                            break
+                        case 'test':
+                            questionSource = 'questions_pointy'
+                            break
+                    }
 
-                        await axiosInstance.get(`/api/${questionSource}/?quizKey=${quizData.id}&public=true`)
-                            .then((questionData) => {
-                                setQuestions(questionData.data)
-                                setContentLoaded(true)
-                            })
-                            .catch(err => {
-                                log(err.response)
-                            })
-                    }
-                    catch (e) {
-                        log(e.message)
-                        setTimeout(() => {
-                            // window.location.href = '/quiz-not-found'
-                        }, 5000)
-                    }
+                    await axiosInstance.get(`/api/${questionSource}/?quizKey=${quizData.id}&public=true`)
+                        .then((questionData) => {
+                            setQuestions(questionData.data)
+                            setContentLoaded(true)
+                        })
+                        .catch(err => {
+                            log(1)
+                            log(err)
+                            log(err.response)
+                        })
                 })
+            .catch((err) => {
+                log(2)
+                log(err)
+                log(err.response)
+            })
     }
 
     const calculateTheResultScore = () => {
@@ -783,7 +783,49 @@ const Quiz = (props) => {
 
                     <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
                         {
-                            suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='bg' />
+                            suggestionQuizzes &&
+                            suggestionQuizzes.map((quiz) => {
+                                return (
+                                    <li key={quiz.id} className='flex-auto mb-5 md:mr-4 md:mb-4'>
+                                        <article className={`
+                                            flex text-right h-full
+                                            rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                                        `}>
+                    
+                                            <a
+                                                href={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
+                                                className='flex md:block md:grid-cols-5'
+                                            >
+                                                <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
+                                                    <img
+                                                        src={quiz.thumbnail}
+                                                        width={1366}
+                                                        height={768}
+                                                        alt={`${quiz.subCategory} | ${quiz.title}`}
+                                                        className='object-cover h-full'
+                                                    />
+                                                </div>
+                                                <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
+                                                    <h3 className={`quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
+                                                                    md:w-52 md:text-base`}>
+                                                        {quiz.subCategory}
+                                                    </h3>
+                                                    <h4 className={`
+                                                        quizContainer__title quizContainer__title__noViews flex
+                                                        w-[10rem] md:w-52 md:text-base
+                                                    `}>
+                                                        {quiz.title}
+                                                    </h4>
+                                                    {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
+                                                    {/* <span className="text-center quizContainer__date">
+                                                        {datePublishHandler(quiz.publish)}
+                                                    </span> */}
+                                                </div>
+                                            </a>
+                                        </article>
+                                    </li>
+                                )
+                            })
                         }
                     </ul>
                 </div>
