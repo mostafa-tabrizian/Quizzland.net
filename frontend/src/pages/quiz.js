@@ -17,6 +17,7 @@ import QuizHeader from '../components/quiz/quizHeader'
 import Trivia from '../components/quiz/trivia'
 import LikeCommentButton from '../components/likeCommentButton';
 import Test from '../components/quiz/test'
+import userProfileDetail from '../components/userProfileDetail';
 
 const logo = '/static/img/Q-small.png'
 
@@ -55,7 +56,7 @@ const Quiz = (props) => {
         setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
         setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
     }, [quizSlug])
-
+    
     useEffect(() => {
         fetchQuiz()
     }, quizSlugReplacedWithHyphen)
@@ -124,6 +125,7 @@ const Quiz = (props) => {
                     getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
                     applyBackground(quizData.background)
                     setQuiz(quizData)
+                    postToHistoryAsPlayedQuiz(quizData.id)
 
                     let questionSource
                     switch (quizType) {
@@ -141,14 +143,10 @@ const Quiz = (props) => {
                             setContentLoaded(true)
                         })
                         .catch(err => {
-                            log(1)
-                            log(err)
                             log(err.response)
                         })
                 })
             .catch((err) => {
-                log(2)
-                log(err)
                 log(err.response)
             })
     }
@@ -557,6 +555,16 @@ const Quiz = (props) => {
                 )
             })
         )
+    }
+
+    const postToHistoryAsPlayedQuiz = async (quizId) => {
+        const userDetail = await userProfileDetail()
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `${quizId}_` })
+        // .then(res => {
+        // })
+        .catch(err => {
+            log(err.response)
+        })
     }
 
     const getSuggestionsQuiz = async (category, subCategory) => {

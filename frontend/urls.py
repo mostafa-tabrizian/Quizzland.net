@@ -22,7 +22,8 @@ urlpatterns = [
     
     path('login', index),
     path('profile/<user>', index),
-    path('setting/', index),
+    path('setting', index),
+    path('quiz-history', index),
     
     path('quiz/<title>', index),
     path('test/<title>', index),

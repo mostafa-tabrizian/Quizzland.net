@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from '../components/axiosApi';;
+import axiosInstance from '../../components/axiosApi';;
 import { message } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
-import { log } from '../components/base'
-import userProfileDetail from "../components/userProfileDetail";
+import { log } from '../../components/base'
+import userProfileDetail from "../../components/userProfileDetail";
 
 const pathRed = '/static/img/bubbles.webp'
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 

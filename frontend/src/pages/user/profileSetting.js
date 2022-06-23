@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import axiosInstance from '../components/axiosApi';
+import axiosInstance from '../../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import Header from '../components/header'
-import Footer from '../components/footer'
-import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
-import userProfileDetail from '../components/userProfileDetail'
+import Header from '../../components/header'
+import Footer from '../../components/footer'
+import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../../components/base'
+import userProfileDetail from '../../components/userProfileDetail'
 import { DatePicker } from 'antd';
 
 const ProfileSetting = () => {

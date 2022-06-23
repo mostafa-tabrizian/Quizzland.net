@@ -18,9 +18,10 @@ const Quiz              = lazy(() => import ('./pages/quiz'))
 const Result            = lazy(() => import ('./pages/result'))
 const Quiz404           = lazy(() => import ('./pages/404quiz'))
 
-const Login             = lazy(() => import('./pages/login'))
-const Profile           = lazy(() => import('./pages/profile'))
-const Setting           = lazy(() => import('./pages/profileSetting'))
+const Login             = lazy(() => import('./pages/user/login'))
+const Profile           = lazy(() => import('./pages/user/profile'))
+const Setting           = lazy(() => import('./pages/user/profileSetting'))
+const QuizHistory           = lazy(() => import('./pages/user/quizHistory'))
 
 const Index             = lazy(() => import('./pages/landPage'))
 const Guide             = lazy(() => import('./pages/guide'))
@@ -93,6 +94,7 @@ const App = () => {
                             <Route path='/login' component={Login} />
                             <Route path='/profile/:user' component={Profile} />
                             <Route path='/setting' component={Setting} />
+                            <Route path='/quiz-history' component={QuizHistory} />
 
                             <Route path='/guide' component={Guide} />
 

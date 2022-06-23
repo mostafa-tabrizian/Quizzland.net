@@ -172,6 +172,7 @@ const Header = () => {
                                         <ul className='flex flex-col'>
                                             <li><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
                                             <li><Link to='/setting'>تنظیمات اکانت</Link></li>
+                                            <li><Link to='/quiz-history'>تاریخچه کوییز های انجام شده</Link></li>
                                             <li><button onClick={() => handleLogout()}>خروج</button></li>
                                         </ul>
                                     </div>
@@ -275,6 +276,7 @@ const Header = () => {
                             <ul className='flex space-x-6 space-x-reverse'>
                                 <li className='text-lg'><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
                                 <li className='text-lg'><Link to='/setting'>تنظیمات اکانت</Link></li>
+                                <li className='text-lg'><Link to='/quiz-history'>تاریخچه کوییز های انجام شده</Link></li>
                                 <li className='text-lg'><Link to='/logout'>خروج</Link></li>
                             </ul>
                         </React.Fragment>
