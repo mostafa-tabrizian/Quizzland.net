@@ -271,6 +271,7 @@ figcaption {
   font-size: .7rem;
   color: darkGray;
   margin-top: .5rem;
+  text-align: right;
 }
 
 select {

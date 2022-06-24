@@ -1,3 +1,4 @@
+from pkg_resources import require
 from rest_framework import serializers
 from .models import *
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -54,13 +55,15 @@ class CustomUserSerializer(serializers.ModelSerializer):
     def create(self, request):
         userData = request
         
-        newComment = CustomUser.objects.create(
+        newUser = CustomUser.objects.create(
             username=userData['username'],
-            email=userData['email'],
-            password=userData['password']
+            email=userData['email']
         )
         
-        return newComment
+        newUser.set_password(userData['password'])
+        newUser.save()
+        
+        return newUser
 
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:

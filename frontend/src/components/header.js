@@ -37,14 +37,13 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await axiosInstance.post('api/blacklist/', {
+            await axiosInstance.post('api/blacklist/', {
                 "refresh_token": localStorage.getItem("refresh_token")
             });
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             axiosInstance.defaults.headers['Authorization'] = null;
-            window.location.reload()
-            return response;
+            window.location.href = '/'
         }
         catch (e) {
             console.log(e);
@@ -151,14 +150,21 @@ const Header = () => {
                                     userProfile ?
                                     <h2 onClick={() => setProfileSubMenu(!profileSubMenu)} className='hover:cursor-pointer'>
                                         <div className='flex items-center'>
-                                            <div className='flex space-x-1 space-x-reverse'>
+                                            {
+                                                (userProfile.first_name == '' && userProfile.last_name == '') ?
                                                 <div>
-                                                    {userProfile.first_name}
+                                                    {userProfile.username}
                                                 </div>
-                                                <div>
-                                                    {userProfile.last_name}
+                                                :
+                                                <div className='flex space-x-1 space-x-reverse'>
+                                                    <div>
+                                                        {userProfile.first_name}
+                                                    </div>
+                                                    <div>
+                                                        {userProfile.last_name}
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            }
                                         </div>
                                     </h2>
                                     :

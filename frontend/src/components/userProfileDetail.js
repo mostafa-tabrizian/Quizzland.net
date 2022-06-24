@@ -8,14 +8,13 @@ const userProfileDetail = async () => {
     const localRefreshToken = localStorage.getItem('refresh_token')
     const localPassToken = localStorage.getItem('pass_token')
     
-    if (username !== null  && localPassToken && localAccessToken && localAccessToken.length == 228) {
+    if (username !== null  && localPassToken && localAccessToken && localAccessToken?.length >= 228) {
         return await axiosInstance.get(`/api/user/?username=${username}&timestamp=${now}`)
             .then( async res => {
                 if (res.data.length == 0) {
                     return null
                 } else {
                     const user = res.data[0]
-    
                     if (localPassToken == user.pass_token) {
                         return await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
                             .then(res => {
