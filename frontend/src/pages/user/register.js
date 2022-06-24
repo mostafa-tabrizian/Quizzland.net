@@ -3,6 +3,7 @@ import axiosInstance from '../../components/axiosApi';;
 import { message } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import { log } from '../../components/base'
 import userProfileDetail from "../../components/userProfileDetail";
@@ -14,6 +15,7 @@ const Register = () => {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [rePassword, setRePassword] = useState(null)
+    const [reCaptchaResponse, setReCaptchaResponse] = useState(null)
 
     useEffect(() => {
         checkIfLoggedIn()
@@ -80,8 +82,8 @@ const Register = () => {
 
     const handleSubmit = async () => {
         if (!checkAllInputEntered()) { return }
-        if (await emailExists() || (validatePassword() !== 'valid')) { return }
-        
+        if (await emailExists() || (validatePassword() !== 'valid') || !validateReCaptcha()) { return }
+
         await axiosInstance.post('api/user/', {
             username: username,
             email: email,
@@ -121,6 +123,15 @@ const Register = () => {
         }
     }
 
+    const validateReCaptcha = () => {
+        if (reCaptchaResponse?.length !== 462) {
+            message.error('ربات نبودن شما تایید نشد!')
+            return false
+        } else {
+            return true
+        }
+    }
+
     return (
         <React.Fragment>
             <Helmet>
@@ -149,6 +160,11 @@ const Register = () => {
                         <label className='w-[18rem]'>
                             <input name="rePassword" className='w-full p-2 text-base rounded-lg' type="password" placeholder="تکرار رمز عبور" value={rePassword} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setRePassword(input.target.value)} />
                         </label>
+                        <ReCAPTCHA
+                            sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
+                            theme='dark'
+                            onChange={res => setReCaptchaResponse(res)}
+                        />
                         <button onClick={() => handleSubmit()} className='bg-[#ac272e] p-2 rounded-lg text-white font-semibold' type="button">
                             ثبت نام
                         </button>
