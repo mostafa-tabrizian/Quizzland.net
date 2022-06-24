@@ -72,7 +72,32 @@ const Result = () => {
         return userDetail.played_history.split('_').includes(String(quizId))
     }
 
+    const decideHowMucHPointToGive = (score) => {
+        const integerScore = parseInt(score)
+        let giveAmountPoint = 0
+        
+        if (integerScore <= 20) {
+            giveAmountPoint = 0
+        }
+        else if (integerScore <= 40){
+            giveAmountPoint = 50
+        }
+        else if (integerScore <= 60){
+            giveAmountPoint = 100
+        }
+        else if (integerScore <= 80){
+            giveAmountPoint = 200
+        }
+        else if (integerScore <= 100){
+            giveAmountPoint = 300
+        }
+        
+        return giveAmountPoint
+    }
+    
     const giveScorePoint = async (score) => {
+        const giveAmountPoint = decideHowMucHPointToGive(score)
+
         if (userDetail == null) {
             const key = `open${Date.now()}`;
             const btn = (
@@ -105,14 +130,16 @@ const Result = () => {
                 onClose: close,
             });
         }
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { points: userDetail.points + parseInt(score) })
-            .then(res => {
-                res.status == 200 &&
-                    message.success(`${quizResult} امتیاز به شما تعلق گرفت 🎉`)
-            })
-            .catch(err => {
-                log(err.response)
-            })
+        else if (giveAmountPoint !== 0) {
+            await axiosInstance.patch(`/api/user/${userDetail.id}/`, { points: userDetail.points + parseInt(giveAmountPoint) })
+                .then(res => {
+                    res.status == 200 &&
+                        message.success(`${giveAmountPoint} امتیاز به شما تعلق گرفت 🎉`)
+                })
+                .catch(err => {
+                    log(err.response)
+                })
+        }
     }
 
     const postToUserHistory = async (id) => {
@@ -249,7 +276,6 @@ const Result = () => {
             document.querySelector('.header').style.filter = 'blur(7px)'
             document.querySelector('.result__container').style.filter = 'blur(7px)'
             document.querySelector('h2').style.filter = 'blur(7px)'
-            document.querySelector('.quizContainer').style.filter = 'blur(7px)'
 
             setTimeout(() => {
                 fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))

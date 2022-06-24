@@ -53,7 +53,7 @@ const Register = () => {
     
     const validatePassword = () => {
         if (password.length < 8) { message.error('رمز عبور باید بیشتر از 8 کارکتر باشد')}
-        else if (!isNaN(parseInt(password))) { message.error('رمز عبور باید حداقل حاوی یک کارکتر انگلیسی باشد')}
+        else if (password == parseInt(password)) { message.error('رمز عبور باید حداقل حاوی یک کارکتر انگلیسی باشد')}
         else if (password !== rePassword) { message.error('رمز عبور و تکرار آن یکسان نمی‌باشد')}
         else { return 'valid'}
     }
