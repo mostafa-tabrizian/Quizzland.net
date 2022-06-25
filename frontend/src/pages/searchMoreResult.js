@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
-
 import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
@@ -9,8 +7,9 @@ import Footer from '../components/footer'
 
 import QuizContainer from '../components/quizContainer';;
 import { log, takeParameterFromUrl, replaceFunction, sortByNewest } from '../components/base'
-import PageTravel from '../components/pageTravel';
 import SkeletonLoading from '../components/skeletonLoading';
+import SearchFetchCategory from '../components/searchFetchCategory'
+import SearchFetchQuiz from '../components/searchFetchQuiz'
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -46,60 +45,8 @@ const SearchMoreResult = () => {
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')
 
     const searchHandler = async (value) => {
-        try {
-            const searchedValue = value?.toLowerCase()
-
-            const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)
-            const searched_pointy = await axiosInstance.get(`/api/test/?public=true`)
-
-            const searched_quiz_title = searched_quiz.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
-            const searched_quiz_subCategory = searched_quiz.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
-            const searched_quiz_tags = searched_quiz.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
-
-            const searched_pointy_title = searched_pointy.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
-            const searched_pointy_subCategory = searched_pointy.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
-            const searched_pointy_tags = searched_pointy.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
-
-
-            const searched_content =
-                searched_quiz_title
-                    .concat(searched_quiz_subCategory)
-                    .concat(searched_quiz_tags)
-                    .concat(searched_pointy_title)
-                    .concat(searched_pointy_subCategory)
-                    .concat(searched_pointy_tags)
-                    .sort(sortByNewest)
-
-            const searched_content_noDuplicates = searched_content.filter((content, index, self) =>
-                index === self.findIndex((index) => (
-                    index.title === content.title
-                ))
-            )
-
-            // Searched Category
-
-            const searched_category = await axiosInstance.get(`/api/subcategory/?public=true`)
-
-            const searched_category_title = searched_category.data.filter(category => category.title.toLowerCase().includes(searchedValue))
-            const searched_category_subCategory = searched_category.data.filter(category => category.subCategory.toLowerCase().includes(searchedValue))
-
-            const searched_all_category =
-                searched_category_title
-                    .concat(searched_category_subCategory)
-                    .sort(sortByNewest)
-
-            const searched_category_noDuplicates = searched_all_category.filter((content, index, self) =>
-                index === self.findIndex((index) => (
-                    index.subCategory === content.subCategory
-                ))
-            )
-
-            set_searched_content(searched_content_noDuplicates.slice(0, 200))
-            set_searched_category(searched_category_noDuplicates.slice(0, 200))
-        } catch (e) {
-            log(e)
-            log('Error in search | cause : database')
-        }
+        set_searched_content(await SearchFetchQuiz(value))
+        set_searched_category(await SearchFetchCategory(value))
     }
 
     return (
@@ -114,7 +61,7 @@ const SearchMoreResult = () => {
                 <meta name="robots" content="noindex, follow"></meta>
             </Helmet>
 
-            <div className='md:w-4/5 mx-4 md:m-auto'>
+            <div className='mx-4 md:w-4/5 md:m-auto'>
 
                 {/* <div className='adverts adverts__left'>
                     <div id='mediaad-DLgb'></div>
@@ -125,12 +72,12 @@ const SearchMoreResult = () => {
 
                 {SkeletonLoading(contentLoaded)}
 
-                <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mx-4 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
+                <ul className="flex flex-wrap mt-10">
 
                     {
                         searched_category.map((category) => {
                             return (
-                                <li key={category.id} className='md:mr-4 md:mb-4 mb-5 flex-auto'>
+                                <li key={category.id} className='mb-5 md:mr-5 md:mb-5'>
                                     <article className={`
                                         flex text-right h-full
                                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
@@ -147,7 +94,7 @@ const SearchMoreResult = () => {
                                                     width={1366}
                                                     height={768}
                                                     alt={`${category.subCategory} | ${category.title}`}
-                                                    className=' h-full max-w-fit '
+                                                    className='h-full max-w-fit'
                                                 />
                                             </div>
                                             <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
@@ -176,10 +123,10 @@ const SearchMoreResult = () => {
                 </ul>
 
                 <div className='grid justify-center mb-10'>
-                    <hr className="w-[20vw]" />
+                    <hr className='w-[20rem]' />
                 </div>
 
-                <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 mx-4 mr-0 ml-auto md:mx-auto quizContainer flex-ai-fe justify-right">
+                <ul className="flex flex-wrap align-baseline">
 
 
                     {

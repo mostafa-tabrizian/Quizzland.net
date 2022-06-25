@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { message, Rate, notification } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { message, notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
@@ -53,7 +53,6 @@ const Result = () => {
         userDetail = await userProfileDetail()
         if (userDetail != null && !userPlayedThisQuizBefore(quizDetail?.id)) {
             giveScorePoint(calculateTheResultScore(quizResult))
-            postToUserHistory(quizDetail?.id)
         }
 
         getSuggestionsQuiz(quizDetail?.subCategory)
@@ -140,16 +139,6 @@ const Result = () => {
                     log(err.response)
                 })
         }
-    }
-
-    const postToUserHistory = async (id) => {
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `${id}_` })
-            .then(res => {
-                log(res)
-            })
-            .catch(err => {
-                log(err.response)
-            })
     }
 
     const calculateTheResultScore = (resultDetail) => {

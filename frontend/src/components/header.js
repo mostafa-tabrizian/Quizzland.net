@@ -10,6 +10,7 @@ import axiosInstance from './axiosApi';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
+    const [searchMobileOpen, setSearchMobileOpen] = useState(false)
     const [profileSubMenu, setProfileSubMenu] = useState(false)
     const [userProfile, setUserProfile] = useState(null)
     const [categorySubMenu, setCategorySubMenu] = useState(null)
@@ -54,14 +55,9 @@ const Header = () => {
         setMenuOpen(menuOpen ? false : true)
     }
 
-    const searchInputMobile = (
-        <input
-            type='text'
-            className={`text-right bg-transparent text-lg outline-none text-black`}
-            ref={mobileSearchInput}
-            onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
-        />
-    )
+    const openCloseSearchMobile = () => {
+        setSearchMobileOpen(searchMobileOpen ? false : true)
+    }
 
     return (
         <React.Fragment>
@@ -123,13 +119,11 @@ const Header = () => {
                     <div className="header text-xl flex md:grid md:grid-cols-3 justify-between md:max-w-[85%] relative md:mx-auto md:p-4">
 
                         <div className='flex items-center md:hidden'>
-                            <Popover placement="bottomRight" title='' content={searchInputMobile} trigger="click">
-                                <button className='flex items-center header__btn' type="button">
-                                    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                </button>
-                            </Popover>
+                            <button onClick={openCloseSearchMobile} className='flex items-center header__btn' type="button">
+                                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </button>
 
                             <button type="button" onClick={openCloseMenu} className={`header__btn mr-5 `} aria-label="Menu Button">
                                 <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
@@ -178,7 +172,9 @@ const Header = () => {
                                         <ul className='flex flex-col'>
                                             <li><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
                                             <li><Link to='/setting'>تنظیمات اکانت</Link></li>
-                                            <li><Link to='/quiz-history'>تاریخچه کوییز های انجام شده</Link></li>
+                                            <li><Link to='/playlist?list=like'>کوییز های لایک شده</Link></li>
+                                            <li><Link to='/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
+                                            <li><Link to='/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
                                             <li><button onClick={() => handleLogout()}>خروج</button></li>
                                         </ul>
                                     </div>
@@ -221,7 +217,6 @@ const Header = () => {
                         </div>
 
                         <Search />
-
                         
                         <div>
                             <Link to="/" className='flex items-center justify-between header__logo md:hidden'>
@@ -246,12 +241,21 @@ const Header = () => {
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     <div className='flex space-x-1 space-x-reverse'>
+                                    {
+                                        (userProfile.first_name == '' && userProfile.last_name == '') ?
                                         <div>
-                                            {userProfile.first_name}
+                                            {userProfile.username}
                                         </div>
-                                        <div>
-                                            {userProfile.last_name}
+                                        :
+                                        <div className='flex space-x-1 space-x-reverse'>
+                                            <div>
+                                                {userProfile.first_name}
+                                            </div>
+                                            <div>
+                                                {userProfile.last_name}
+                                            </div>
                                         </div>
+                                    }
                                     </div>
                                 </div>
                             </Link>
@@ -266,6 +270,26 @@ const Header = () => {
             </header>
 
             <div className='relative md:hidden'>
+                <div className={`header__menu w-screen h-screen fixed text-right z-10
+                                top-0 right-0
+                                ${searchMobileOpen ? '' : 'slideMenu-hide'}
+                                pr-8 pt-5`
+                }>
+                    <button onClick={openCloseSearchMobile} className="header__menu__closeBtn" aria-label="Close Menu Button">
+                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+
+                    <input
+                        type='text'
+                        className={`text-center absolute top-1/4 w-[70%] bg-transparent border-b-2 border-[#690D11] text-[1.5rem] outline-none text-white`}
+                        ref={mobileSearchInput}
+                        placeholder='کوییزت رو سریع تر پیدا کن'
+                        onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
+                    />
+                </div>
+            </div>
+
+            <div className='relative md:hidden'>
                 <div className={`header__menu fixed text-right z-10
                                 top-0 right-0
                                 ${menuOpen ? '' : 'slideMenu-hide'}
@@ -274,15 +298,18 @@ const Header = () => {
                         <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                     </button>
 
-                    <div className='mt-5'>
+                    <div className='relative mt-5'>
                     {
                         userProfile ?
                         <React.Fragment>
-                            <h4 className='text-xl'>اطلاعات اکانت</h4>
-                            <ul className='flex space-x-6 space-x-reverse'>
+                            <hr className='border-[#690D11] '/>
+                            <h3 className='text-xl'>اطلاعات اکانت</h3>
+                            <ul className='flex flex-col mt-5 space-y-5'>
                                 <li className='text-lg'><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
                                 <li className='text-lg'><Link to='/setting'>تنظیمات اکانت</Link></li>
-                                <li className='text-lg'><Link to='/quiz-history'>تاریخچه کوییز های انجام شده</Link></li>
+                                <li className='text-lg'><Link to='/playlist?list=like'>کوییز های لایک شده</Link></li>
+                                <li className='text-lg'><Link to='/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
+                                <li className='text-lg'><Link to='/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
                                 <li className='text-lg'><Link to='/logout'>خروج</Link></li>
                             </ul>
                         </React.Fragment>
@@ -295,24 +322,27 @@ const Header = () => {
                         
                     </div>
 
-                    <div className='mt-5'>
-                        <h4 className='text-xl'>کتگوری ها</h4>
-                        <ul className='flex space-x-3 space-x-reverse'>
+                    <div className='relative mt-5'>
+                        <hr className='border-[#690D11] '/>
+                        <h3 className='text-xl'>کتگوری ها</h3>
+                        <ul className='flex mt-3 space-x-3 space-x-reverse'>
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/category/celebrity">سلبریتی ✨</Link></li>
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/category/psychology">روانشناسی 🧠</Link></li>
                         </ul>
                     </div>
-                    <div className='mt-5'>
-                        <h4 className='text-xl'>کوییز و تست ها</h4>
-                        <ul className='flex space-x-6 space-x-reverse'>
+                    <div className='relative mt-5'>
+                        <hr className='border-[#690D11] '/>
+                        <h3 className='text-xl'>کوییز و تست ها</h3>
+                        <ul className='flex mt-3 space-x-6 space-x-reverse'>
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest"> جدیدترین </Link></li>
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=trend"> محبوب ترین </Link></li>
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=views"> پربازدیدترین </Link></li>
                         </ul>
                     </div>
-                    <div className='mt-5'>
-                        <ul className='flex space-x-6 space-x-reverse'>
+                    <div className='relative mt-5'>
+                        <hr className='border-[#690D11] '/>
+                        <ul className='flex mt-3 space-x-6 space-x-reverse'>
                             {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/blog"> وبلاگ </Link></li> */}
                             {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/guide"> راهنما </Link></li> */}
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/contact"> تماس با ما </Link></li>

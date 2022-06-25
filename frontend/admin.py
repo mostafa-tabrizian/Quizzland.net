@@ -24,6 +24,7 @@ class CustomUserAdmin(UserAdmin):
                     'most_played_categories',
                     'played_history',
                     'liked_quizzes',
+                    'watch_list',
                     'points',
                 ),
             },

@@ -559,7 +559,7 @@ const Quiz = (props) => {
 
     const postToHistoryAsPlayedQuiz = async (quizId) => {
         const userDetail = await userProfileDetail()
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `${quizId}_` })
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `_${quizId}` })
         // .then(res => {
         // })
         .catch(err => {

@@ -30,8 +30,9 @@ class CustomUser(AbstractUser):
     points = models.IntegerField(default=0)
     # played_quizzes = models.JSONField(blank=True, null=True, max_length=9000)  # mean 3000 play
     most_played_categories = models.TextField(blank=True, null=True, max_length=9000)
-    played_history = models.TextField(blank=True, null=True, default='0_', max_length=9000)
-    liked_quizzes = models.TextField(blank=True, null=True, default='0_', max_length=9000)
+    played_history = models.TextField(blank=True, null=True, default='_0', max_length=9000)
+    liked_quizzes = models.TextField(blank=True, null=True, default='_0', max_length=9000)
+    watch_list = models.TextField(blank=True, null=True, default='_0', max_length=9000)
 
     def __str__(self):
         return str(self.username)

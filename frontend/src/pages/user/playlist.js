@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
-import InfiniteScroll from 'react-infinite-scroll-component';
-
+import { useLocation } from "react-router-dom";
 
 import axiosInstance from '../../components/axiosApi';
 import LoadingScreen from '../../components/loadingScreen'
@@ -9,7 +8,6 @@ import QuizContainer from '../../components/quizContainer'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import SkeletonLoading from '../../components/skeletonLoading';
-import Tools from '../../components/tools';
 
 import { log, takeParameterFromUrl } from '../../components/base'
 import userProfileDetail from '../../components/userProfileDetail';
@@ -18,50 +16,42 @@ const QuizHistory = () => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     const [content, setContent] = useState([])
-    const [countNewFetched, setCountNewFetched] = useState()
-    const [countResult, setCountResult] = useState(100)
-    const [loading, setLoading] = useState(false);
-    const [offset, setOffset] = useState(0);
-    const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
+    const [title, setTitle] = useState(null)
+    const [lowTitle, setLowTitle] = useState(null)
+
+    const location = useLocation();
 
     useEffect(() => {
-        componentChangeDetector()
-    })
-
-    useEffect(() => {
-        setOffset(0)
-        setCountResult(100)
         fetchContent()
         setLoadState(true)
-        document.querySelector('#land').classList.add('overflow-y-auto')  // make content load on scroll
-    }, [])
-
-    const componentChangeDetector = () => {
-        (function (history) {
-
-            let pushState = history.pushState;
-            history.pushState = function () {
-                pushState.apply(history, arguments);
-            };
-
-            if (document.getElementById('html')) {
-                document.getElementById('html').style = 'background: #121212'
-            }
-
-            document.getElementById('land').scrollIntoView()
-
-        })(window.history);
-    }
-
-    const fetchContent = async () => {
-        if (loading) {
-            return;
+        if (document.getElementById('html')) {
+            document.getElementById('html').style = 'background: #121212'
         }
 
-        setLoading(true)
+        document.getElementById('land').scrollIntoView()
+    }, [location])
 
+    const fetchContent = async () => {
         const userDetail = await userProfileDetail()
-        const quiz_history = userDetail.played_history.split('_')
+        
+        let playlist
+        const playlistType = takeParameterFromUrl('list')
+        switch(playlistType) {
+            case 'like':
+                playlist = userDetail.liked_quizzes.split('_')
+                setTitle('کوییز های لایک شده')
+                setLowTitle('Your Liked Quizzes')
+                break
+            case 'history':
+                playlist = userDetail.played_history.split('_')
+                setTitle('تاریخچه کوییزهای شما')
+                setLowTitle('Your History')
+                break
+            case 'watch':
+                playlist = userDetail.watch_list.split('_')
+                setTitle('کوییز های پلی لیست شما')
+                setLowTitle('Your Playlist')
+        }
         
         const now = new Date().getTime()
         const quiz = await axiosInstance.get(`/api/quiz/?public=true&timestamp=${now}`)
@@ -69,7 +59,7 @@ const QuizHistory = () => {
         let mergeContent = quiz.data.concat(pointy.data)
         
         let finalList = []
-        quiz_history.map(quizId => {
+        playlist.map(quizId => {
             const historyItem = mergeContent.filter(elem => elem.id == quizId)
             
             historyItem[0] && 
@@ -88,7 +78,7 @@ const QuizHistory = () => {
             <Header />
 
             <Helmet>
-                <title>{`تاریخجه کوییز های انجام شده | کوییزلند`}</title>
+                <title>{`${title} | کوییزلند`}</title>
                 <meta name="description" content="بهترین و جدید ترین کوییز و تست های کوییزلند" />
                 <meta name="keywords" content="کوییز, بهترین کوییز ها, جدیدترین کوییز ها, بهترین تست ها, جدیدترین تست ها, کوییزلند" />
             </Helmet>
@@ -99,15 +89,20 @@ const QuizHistory = () => {
             </div> */}
 
             <div className='mb-10'>
-                <h3 className='lowTitle'>You Quizzes History</h3>
-                <h3 className='title'>تاریخچه کوییزهای شما</h3>
+                <h3 className='lowTitle'>{lowTitle}</h3>
+                <h3 className='title'>{title}</h3>
             </div>
 
             {SkeletonLoading(contentLoaded)}
 
-            <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
-                <QuizContainer quizzes={content} bgStyle='trans' />
-            </ul>
+            {
+                (!content.length  && document.readyState === 'complete') ?
+                <h1 className='mt-10 mb-[25rem] text-center'>هیچ کوییزی پیدا نشد <span className='text-[2.5rem]'>😕</span></h1>
+                :
+                <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
+                    <QuizContainer quizzes={content} bgStyle='trans' />
+                </ul>    
+            }
 
             {/* Adverts */}
 

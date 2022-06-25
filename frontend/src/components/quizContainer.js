@@ -1,14 +1,61 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { message } from 'antd'
 
-import { log, replaceFunction, viewsFormat, datePublishHandler } from './base'
+import { log, replaceFunction } from './base'
+import userProfileDetail from '../components/userProfileDetail'
+import axiosInstance from '../components/axiosApi'
 
 const QuizContainer = (props) => {
+    const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
+
+    const checkIfExistsThenRemove = async (userDetail, quizId) => {
+        const userWatchList = userDetail.watch_list.split('_')
+        const findCurrentQuizInWatchList = userWatchList.indexOf(String(quizId))
+        
+        if (findCurrentQuizInWatchList == -1) {  // mean not exist
+            return false
+        }
+        
+        let updatedUserWatchList = userWatchList.splice(findCurrentQuizInWatchList, findCurrentQuizInWatchList - 1)
+        updatedUserWatchList = userWatchList.join('_')
+        
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: updatedUserWatchList})
+            .then(res => {
+                setWatchListButtonUnClickable(true)
+                message.success('با موفقیت از پلی لیست حذف گردید.')
+            })
+            .catch(err => {
+                log(err.response)
+            })
+        return true
+    }
+    
+    const checkWatchList = async (quizId) => {
+        setWatchListButtonUnClickable(false)
+        const userDetail = await userProfileDetail()
+        
+        if (await checkIfExistsThenRemove(userDetail, quizId)) { return }
+        
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: userDetail.watch_list + `_${quizId}` })
+        .then(res => {
+            setWatchListButtonUnClickable(true)
+            message.success('با موفقیت به پلی لیست اضافه گردید.')
+        })
+        .catch(err => {
+            log(err.response)
+        })
+    }
 
     return (
         props.quizzes.map((quiz) => {
             return (
-                <li key={quiz.id} className='flex-auto mb-5 md:mr-4 md:mb-4'>
+                <li key={quiz.id} className='relative flex-auto mb-5 md:mr-4 md:mb-4'>
+                    <button onClick={() => checkWatchList(quiz.id)} className={`${watchListButtonUnClickable?'':'pointer-events-none'} absolute top-[-0.5rem] right-[-.5rem] z-10`}>
+                        <svg class="h-7 w-7 text-[#ac272e]"  fill="#1e0809" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
                     <article className={`
                         flex text-right h-full
                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
