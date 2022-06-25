@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
-
 import QuizContainer from '../components/quizContainer';;
 import { log, replaceFunction, sortByNewest } from '../components/base'
 import SkeletonLoading from '../components/skeletonLoading';
+import SearchFetchQuiz from '../components/searchFetchQuiz';
+import SearchFetchCategory from '../components/searchFetchCategory'
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
-
     const [searchValue, setSearchValue] = useState()
-
     const [searched_content, set_searched_content] = useState([])
     const [searched_category, set_searched_category] = useState([])
 
-    useEffect(() => {
-        searchChangeDetector()
-    });
+    const location = useLocation();
 
     useEffect(() => {
         set_searched_content([])  // restart list
@@ -29,71 +26,16 @@ const SearchMoreResult = () => {
         setContentLoaded(true)
     }, [searchValue])
 
-    const searchChangeDetector = () => {
-        (function (history) {
-
-            let pushState = history.pushState;
-            history.pushState = function () {
-                pushState.apply(history, arguments);
-            };
-
-            setSearchValue(window.location.pathname.split('/')[2])
-        })(window.history);
-    }
+    useEffect(() => {
+        setSearchValue(window.location.pathname.split('/')[2])
+    }, [location]);
 
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')
 
     const searchHandler = async (value) => {
         try {
-            const searchedValue = value?.toLowerCase()
-
-            const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)
-            const searched_pointy = await axiosInstance.get(`/api/test/?public=true`)
-
-            const searched_quiz_title = searched_quiz.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
-            const searched_quiz_subCategory = searched_quiz.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
-            const searched_quiz_tags = searched_quiz.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
-
-            const searched_pointy_title = searched_pointy.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
-            const searched_pointy_subCategory = searched_pointy.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
-            const searched_pointy_tags = searched_pointy.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
-
-
-            const searched_content =
-                searched_quiz_title
-                    .concat(searched_quiz_subCategory)
-                    .concat(searched_quiz_tags)
-                    .concat(searched_pointy_title)
-                    .concat(searched_pointy_subCategory)
-                    .concat(searched_pointy_tags)
-                    .sort(sortByNewest)
-
-            const searched_content_noDuplicates = searched_content.filter((content, index, self) =>
-                index === self.findIndex((index) => (
-                    index.title === content.title
-                ))
-            )
-
-            // Searched Category
-
-            const searched_category = await axiosInstance.get(`/api/subcategory/?public=true`)
-
-            const searched_category_title = searched_category.data.filter(category => category.title.toLowerCase().includes(searchedValue))
-            const searched_category_subCategory = searched_category.data.filter(category => category.subCategory.toLowerCase().includes(searchedValue))
-
-            const searched_all_category =
-                searched_category_title
-                    .concat(searched_category_subCategory)
-                    .sort(sortByNewest)
-
-            const searched_category_noDuplicates = searched_all_category.filter((content, index, self) =>
-                index === self.findIndex((index) => (
-                    index.subCategory === content.subCategory
-                ))
-            )
-
-            set_searched_content(searched_content_noDuplicates.slice(0, 200))
-            set_searched_category(searched_category_noDuplicates.slice(0, 200))
+            set_searched_content(await SearchFetchQuiz(value))
+            set_searched_category(await SearchFetchCategory(value))
         } catch (e) {
             log(e)
             log('Error in search | cause : database')

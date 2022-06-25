@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
@@ -11,7 +11,6 @@ import Footer from '../components/footer'
 import AddView from '../components/addView';
 import { log, replaceFunction, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
-import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 import QuizHeader from '../components/quiz/quizHeader'
 import Trivia from '../components/quiz/trivia'
@@ -46,8 +45,9 @@ const Quiz = (props) => {
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
     const [questionCounterForId, setQuestionCounterForId] = useState(1)
 
-    const result = useRef(null)
+    const location = useLocation();
 
+    const result = useRef(null)
 
     useEffect(() => {
         scrollToTop()
@@ -62,11 +62,15 @@ const Quiz = (props) => {
     }, quizSlugReplacedWithHyphen)
 
     useEffect(() => {
-        quizChangeDetector()
-        
         const question_background = document.querySelector('#question_background')
         question_background && (document.querySelectorAll('#question_background').forEach((q) => q.style = `background: ${quiz?.question_background}`))
     })
+
+    useEffect(() => {
+        const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
+        setQuizSlug(slug)
+        setQuizSlugReplacedWithHyphen(slug)
+    }, [location]);
     
     const scrollToTop = () => {
         document.querySelector("body").scrollTo(0, 0)
@@ -100,19 +104,6 @@ const Quiz = (props) => {
 
     const applyBackground = (background) => {
         document.querySelector('#quizBg').style = `background: url('${background}') center/cover no-repeat fixed !important`
-    }
-
-    const quizChangeDetector = () => {
-        (function (history) {
-            let pushState = history.pushState;
-            history.pushState = function () {
-                pushState.apply(history, arguments);
-            };
-
-            const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
-            setQuizSlug(slug)
-            setQuizSlugReplacedWithHyphen(slug)
-        })(window.history);
     }
 
     const fetchQuiz = async () => {

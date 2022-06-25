@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-
 import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
-
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useLocation } from "react-router-dom";
 
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
@@ -26,9 +25,7 @@ const Sort = () => {
     const [offset, setOffset] = useState(0);
     const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
 
-    useEffect(() => {
-        componentChangeDetector()
-    })
+    const location = useLocation();
 
     useEffect(() => {
         setOffset(0)
@@ -42,22 +39,11 @@ const Sort = () => {
         sortContent()
     }, [sortType, content])
 
-    const componentChangeDetector = () => {
-        (function (history) {
-
-            let pushState = history.pushState;
-            history.pushState = function () {
-                pushState.apply(history, arguments);
-            };
-
-            if (document.getElementById('html')) {
-                document.getElementById('html').style = 'background: #121212'
-            }
-
-            document.getElementById('land').scrollIntoView()
-
-        })(window.history);
-    }
+    useEffect(() => {
+        if (document.getElementById('html')) {
+            document.getElementById('html').style = 'background: #121212'
+        }
+    }, [location])
 
     const sortContent = () => {
         switch (sortType) {

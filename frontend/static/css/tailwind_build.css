@@ -877,6 +877,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 25rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
 .block {
   display: block;
 }

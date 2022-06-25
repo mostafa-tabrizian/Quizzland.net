@@ -312,11 +312,8 @@
         // }
 
         &__result {
-            box-shadow: 0 0 40px #87878733 !important;
-
-            @include breakpoints-down(large) {
-                box-shadow: inherit !important;
-            }
+            box-shadow: 0 0 30px #7b1a1a !important;
+            background: #000000d2 !important;
 
             &__category {
                 &__item {
@@ -334,13 +331,6 @@
                 }
             }
 
-            @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-                background: #00000094 !important;
-            }
-
-            @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-                background: #000000ee !important;
-            }
         }
 
         .header__searchInput {

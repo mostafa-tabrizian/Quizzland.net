@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 import axiosInstance from '../components/axiosApi';
+import SearchFetchCategory from '../components/searchFetchCategory'
+import SearchFetchQuiz from '../components/searchFetchQuiz'
 
 import { log, replaceFunction, sortByNewest } from './base'
 
 
-const Search = (props) => {
+const Search = () => {
     const [searched_content, set_searched_content] = useState([])
     const [searched_category, set_searched_category] = useState([])
     const [searchedResult, setSearchedResult] = useState(false)
@@ -20,53 +22,8 @@ const Search = (props) => {
                 return false
             }
 
-            const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)
-            const searched_pointy = await axiosInstance.get(`/api/test/?public=true`)
-
-            const searched_quiz_title = searched_quiz.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
-            const searched_quiz_subCategory = searched_quiz.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
-            const searched_quiz_tags = searched_quiz.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
-
-            const searched_pointy_title = searched_pointy.data.filter(quiz => quiz.title.toLowerCase().includes(searchedValue))
-            const searched_pointy_subCategory = searched_pointy.data.filter(quiz => quiz.subCategory.toLowerCase().includes(searchedValue))
-            const searched_pointy_tags = searched_pointy.data.filter(quiz => quiz.tags.toLowerCase().includes(searchedValue))
-
-
-            const searched_content =
-                searched_quiz_title
-                    .concat(searched_quiz_subCategory)
-                    .concat(searched_quiz_tags)
-                    .concat(searched_pointy_title)
-                    .concat(searched_pointy_subCategory)
-                    .concat(searched_pointy_tags)
-                    .sort(sortByNewest)
-
-            const searched_content_noDuplicates = searched_content.filter((content, index, self) =>
-                index === self.findIndex((index) => (
-                    index.title === content.title
-                ))
-            )
-
-            // Searched Category
-
-            const searched_category = await axiosInstance.get(`/api/subcategory/?public=true`)
-
-            const searched_category_title = searched_category.data.filter(category => category.title.toLowerCase().includes(searchedValue))
-            const searched_category_subCategory = searched_category.data.filter(category => category.subCategory.toLowerCase().includes(searchedValue))
-
-            const searched_all_category =
-                searched_category_title
-                    .concat(searched_category_subCategory)
-                    .sort(sortByNewest)
-
-            const searched_category_noDuplicates = searched_all_category.filter((content, index, self) =>
-                index === self.findIndex((index) => (
-                    index.subCategory === content.subCategory
-                ))
-            )
-
-            set_searched_content(searched_content_noDuplicates.slice(0, 30))
-            set_searched_category(searched_category_noDuplicates.slice(0, 30))
+            set_searched_content(await SearchFetchQuiz(searchedValue))
+            set_searched_category(await SearchFetchCategory(searchedValue))
             setSearchedResult(true)
         } catch (e) {
             log('Error in search | cause : database')
@@ -105,7 +62,7 @@ const Search = (props) => {
                         onChange={inputChanged}
                         onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${replaceFunction(e.target.value, ' ', '+')}`, '_blank') } }}
                     />
-                    <svg className='w-5 h-5 absolute top-2 right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+                    <svg className='absolute w-5 h-5 top-2 right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
                         <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
                         <path data-name="layer1" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round" />
                     </svg>
@@ -149,7 +106,7 @@ const Search = (props) => {
                             {
                                 searched_content.map((quiz) => {
                                     return (
-                                        <li key={quiz.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
+                                        <li key={quiz.id} className='flex-auto mb-5 md:mr-5 md:mb-5'>
                                             <article className={`
                                                 flex text-right h-full
                                                 rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
@@ -162,7 +119,7 @@ const Search = (props) => {
                                                             alt={`${quiz.subCategory}} | ${quiz.title}`}
                                                             width={1366}
                                                             height={768}
-                                                            className=' h-full max-w-fit '
+                                                            className='h-full max-w-fit'
                                                         />
                                                     </div>
                                                     <div className="col-span-3 mt-2 header__searched__result__title">

@@ -17,24 +17,9 @@ const Header = () => {
 
     const mobileSearchInput = useRef()
 
-    useEffect(() => {
-        componentChangeDetector()
-    })
-
     useEffect(async () => {
         setUserProfile(await userProfileDetail())
     }, [])
-
-    const componentChangeDetector = () => {
-        (function (history) {
-
-            let pushState = history.pushState;
-            history.pushState = function () {
-                pushState.apply(history, arguments);
-            };
-
-        })(window.history);
-    }
 
     const handleLogout = async () => {
         try {

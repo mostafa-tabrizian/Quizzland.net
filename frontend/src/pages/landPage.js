@@ -146,8 +146,8 @@ const Index = () => {
                     </div>
 
                     <div className='hero__start text-right mr-9 mb-[50%] lg:mb-0 lg:mr-4'>
-                        <h1 className='relative text-[3rem] mb-2'>
-                            اینجا <span className='bloodRiver'>کوییزلندِ</span>
+                        <h1 className='relative flex text-[3rem] mb-2'>
+                            اینجا <h1 className='mr-4 bloodRiver'>کوییزلندِ</h1>
                         </h1>
                         <h2 className='text-[1.3rem] max-w-[26rem] drop-shadow-[0_0_25px_black]'>
                             جایی که میتونی خودت رو به عنوان یه فن به بقیه ثابت کنی پس اگر آماده ای بزن بریم 😎

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+
 import Header from '../components/header'
 import Footer from '../components/footer'
-
 import QuizContainer from '../components/quizContainer';;
 import { log, takeParameterFromUrl, replaceFunction, sortByNewest } from '../components/base'
 import SkeletonLoading from '../components/skeletonLoading';
@@ -13,15 +12,11 @@ import SearchFetchQuiz from '../components/searchFetchQuiz'
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
-
     const [searchValue, setSearchValue] = useState()
-
     const [searched_content, set_searched_content] = useState([])
     const [searched_category, set_searched_category] = useState([])
 
-    useEffect(() => {
-        searchChangeDetector()
-    });
+    const location = useLocation();
 
     useEffect(() => {
         set_searched_content([])  // restart list
@@ -30,17 +25,9 @@ const SearchMoreResult = () => {
         setContentLoaded(true)
     }, [searchValue])
 
-    const searchChangeDetector = () => {
-        (function (history) {
-
-            let pushState = history.pushState;
-            history.pushState = function () {
-                pushState.apply(history, arguments);
-            };
-
-            setSearchValue(takeParameterFromUrl('q'))
-        })(window.history);
-    }
+    useEffect(() => {
+        setSearchValue(takeParameterFromUrl('q'))
+    }, [location]);
 
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')
 

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
-
-// import axiosInstance from '../components/axiosApi';
+import { Link, useLocation } from 'react-router-dom'
 
 import Tools from '../components/tools'
 import PageTravel from '../components/pageTravel'
@@ -14,7 +11,7 @@ import Footer from '../components/footer'
 import AddView from '../components/addView';
 import axiosInstance from '../components/axiosApi';
 
-import { log, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
+import { log, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
 
 const Category = (props) => {
     const [categoryQuery, setCategoryQuery] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', ' '))
@@ -30,9 +27,10 @@ const Category = (props) => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
+    
+    const location = useLocation();
 
     useEffect(() => {
-        searchChangeDetector()
         document.getElementById('html').style = 'background: #121212'
         setLoadState(true)
     })
@@ -47,18 +45,12 @@ const Category = (props) => {
     }, [categoryQueryID])
 
     useEffect(() => {
+        setCategoryQuery(window.location.pathname.split('/')[2], '-', ' ');
+    }, [location])
+    
+    useEffect(() => {
         sortContent()
     }, [categories, sortType])
-
-    const searchChangeDetector = () => {
-        (function (history) {
-            let pushState = history.pushState;
-            history.pushState = function () {
-                pushState.apply(history, arguments);
-                setCategoryQuery(window.location.pathname.split('/')[2], '-', ' ');
-            };
-        })(window.history);
-    }
 
     const categoryTitleToPersian = {
         'celebrity': 'سلبریتی',
@@ -114,7 +106,7 @@ const Category = (props) => {
                 <meta name="keywords" content={`بهترین کوییز های ${categoryTitle} ,کوییز های ${categoryTitle}`} />
             </Helmet>
 
-            <div className='md:w-4/5 mx-4 md:m-auto'>
+            <div className='mx-4 md:w-4/5 md:m-auto'>
                 <div className='adverts adverts__left'>
                     <div id="pos-article-display-28434"></div>
                 </div>
@@ -133,7 +125,7 @@ const Category = (props) => {
                     {
                         sortedCategories.map((category) => {
                             return (
-                                <li key={category.id} className='md:mr-5 md:mb-5 mb-5 flex-auto'>
+                                <li key={category.id} className='flex-auto mb-5 md:mr-5 md:mb-5'>
                                     <article className={`
                                         flex text-right h-full
                                         rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
@@ -149,7 +141,7 @@ const Category = (props) => {
                                                     width={1366}
                                                     height={768}
                                                     alt={`${category.subCategory} | ${category.title}`}
-                                                    className='h-full object-cover'
+                                                    className='object-cover h-full'
                                                 />
                                             </div>
                                             <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
