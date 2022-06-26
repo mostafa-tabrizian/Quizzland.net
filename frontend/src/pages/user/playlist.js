@@ -56,15 +56,24 @@ const QuizHistory = () => {
         const now = new Date().getTime()
         const quiz = await axiosInstance.get(`/api/quiz/?public=true&timestamp=${now}`)
         const pointy = await axiosInstance.get(`/api/test/?public=true&timestamp=${now}`)
-        let mergeContent = quiz.data.concat(pointy.data)
         
         let finalList = []
+        
         playlist.map(quizId => {
-            const historyItem = mergeContent.filter(elem => elem.id == quizId)
-            
-            historyItem[0] && 
-            finalList.push(historyItem[0])
+            if (quizId && quizId != 0) {
+                let historyItem
+
+                if (quizId.includes('q')) {
+                    historyItem = quiz.data.filter(elem => elem.id == parseInt(quizId))
+                }
+                else if (quizId.includes('t')) {
+                    historyItem = pointy.data.filter(elem => elem.id == parseInt(quizId))
+                }
+                
+                finalList.push(historyItem[0])    
+            }
         })
+        
         setContent(finalList.reverse())
         setContentLoaded(true)
     }

@@ -37,7 +37,8 @@ const Comments = (props) => {
             quiz_related: props.quizType == 'quiz' ? props.quizId : null,
             test_related: props.quizType == 'test' ? props.quizId : null,
             submitter_related: {
-                username: userProfile.id
+                username: userProfile.id,
+                password: userProfile.password
             }
         })
             .then(res => {

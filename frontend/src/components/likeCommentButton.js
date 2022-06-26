@@ -11,7 +11,7 @@ const LikeCommentButton = (props) => {
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
            
     const userLikedThisQuizBefore = (userDetail) => {
-        return userDetail.liked_quizzes.split('_').includes(String(props.quizId))
+        return userDetail.liked_quizzes.split('_').includes(String(props.quizId) + props.quizType.slice(0, 1))
     }
 
     const removeLike = async () => {
@@ -27,8 +27,8 @@ const LikeCommentButton = (props) => {
 
     const removeLikeQuizFromUser = async (userDetail) => {  
         const userLikedQuizzes = userDetail.liked_quizzes.split('_')
-        const findCurrentQuizLike = userLikedQuizzes.indexOf(String(props.quizId))
-        let updatedUserLikedQuizzes = userLikedQuizzes.splice(findCurrentQuizLike, findCurrentQuizLike - 1)
+        const findCurrentQuizLike = userLikedQuizzes.indexOf(String(props.quizId) + props.quizType.slice(0, 1))
+        let updatedUserLikedQuizzes = userLikedQuizzes.splice(findCurrentQuizLike, 1)
         updatedUserLikedQuizzes = userLikedQuizzes.join('_')
         
         await axiosInstance.patch(`/api/user/${userDetail.id}/`, { liked_quizzes: updatedUserLikedQuizzes})
@@ -40,7 +40,7 @@ const LikeCommentButton = (props) => {
     }
     
     const submitUserLikedTheQuiz = async (userDetail) => {
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { liked_quizzes: userDetail.liked_quizzes + `_${props.quizId}` })
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { liked_quizzes: userDetail.liked_quizzes + `_${props.quizId}${props.quizType.slice(0, 1)}` })
         // .then(res => {
         // })
         .catch(err => {

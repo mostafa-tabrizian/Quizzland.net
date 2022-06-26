@@ -9,15 +9,15 @@ import axiosInstance from '../components/axiosApi'
 const QuizContainer = (props) => {
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
 
-    const checkIfExistsThenRemove = async (userDetail, quizId) => {
+    const checkIfExistsThenRemove = async (userDetail, quizId, quizType) => {
         const userWatchList = userDetail.watch_list.split('_')
-        const findCurrentQuizInWatchList = userWatchList.indexOf(String(quizId))
+        const findCurrentQuizInWatchList = userWatchList.indexOf(String(quizId) + quizType)
         
         if (findCurrentQuizInWatchList == -1) {  // mean not exist
             return false
         }
         
-        let updatedUserWatchList = userWatchList.splice(findCurrentQuizInWatchList, findCurrentQuizInWatchList - 1)
+        let updatedUserWatchList = userWatchList.splice(findCurrentQuizInWatchList, 1)
         updatedUserWatchList = userWatchList.join('_')
         
         await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: updatedUserWatchList})
@@ -31,13 +31,21 @@ const QuizContainer = (props) => {
         return true
     }
     
-    const checkWatchList = async (quizId) => {
+    const checkWatchList = async (quizId, quizCheckIfQuiz) => {
         setWatchListButtonUnClickable(false)
         const userDetail = await userProfileDetail()
         
-        if (await checkIfExistsThenRemove(userDetail, quizId)) { return }
+        let quizType
+        if (quizCheckIfQuiz) {
+            quizType = 'q'
+        } else {
+            quizType = 't'
+        }
+
+        if (await checkIfExistsThenRemove(userDetail, quizId, quizType)) { return }
         
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: userDetail.watch_list + `_${quizId}` })
+        
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: userDetail.watch_list + `_${quizId}${quizType}` })
         .then(res => {
             setWatchListButtonUnClickable(true)
             message.success('با موفقیت به پلی لیست اضافه گردید.')
@@ -51,7 +59,7 @@ const QuizContainer = (props) => {
         props.quizzes.map((quiz) => {
             return (
                 <li key={quiz.id} className='relative flex-auto mb-5 md:mr-4 md:mb-4'>
-                    <button onClick={() => checkWatchList(quiz.id)} className={`${watchListButtonUnClickable?'':'pointer-events-none'} absolute top-[-0.5rem] right-[-.5rem] z-10`}>
+                    <button onClick={() => checkWatchList(quiz.id, quiz.GIF20)} className={`${watchListButtonUnClickable?'':'pointer-events-none'} absolute top-[-0.5rem] right-[-.5rem] z-10`}>
                         <svg class="h-7 w-7 text-[#ac272e]"  fill="#1e0809" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>

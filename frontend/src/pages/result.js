@@ -14,6 +14,7 @@ import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
 import userProfileDetail from '../components/userProfileDetail';
 import LikeCommentButton from '../components/likeCommentButton';
+import AddView from '../components/addView';
 
 const Result = () => {
     const [resultScore, setResultScore] = useState(0)
@@ -49,12 +50,14 @@ const Result = () => {
         setQuestionCount(quizResult.ql)
         setCorrectAnswersCount(quizResult.qc)
         setContentLoaded(true)
-
+        AddView(quizType, quizDetail.id)
+        
         userDetail = await userProfileDetail()
-        if (userDetail != null && !userPlayedThisQuizBefore(quizDetail?.id)) {
+        if (userDetail != null && !userPlayedThisQuizBefore(quizDetail?.id, quizType)) {
             giveScorePoint(calculateTheResultScore(quizResult))
         }
-
+        
+        postToHistoryAsPlayedQuiz(quizDetail.id, quizType)
         getSuggestionsQuiz(quizDetail?.subCategory)
         document.querySelector('html').style = `background: None`
         setLoadState(true)
@@ -67,8 +70,8 @@ const Result = () => {
         }
     }, [suggestionQuizzes])
 
-    const userPlayedThisQuizBefore = (quizId) => {
-        return userDetail.played_history.split('_').includes(String(quizId))
+    const userPlayedThisQuizBefore = (quizId, quizType) => {
+        return userDetail.played_history.split('_').includes(String(quizId) + quizType.slice(0, 1))
     }
 
     const decideHowMucHPointToGive = (score) => {
@@ -299,6 +302,17 @@ const Result = () => {
         }
     }
 
+    const postToHistoryAsPlayedQuiz = async (quizId, quizType) => {
+     
+        const userDetail = await userProfileDetail()
+        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `_${quizId}${quizType.slice(0, 1)}` })
+        // .then(res => {
+        // })
+        .catch(err => {
+            log(err.response)
+        })
+    }
+
     const returnQuizResult = () => {
         switch (quizType) {
             case 'quiz':
@@ -412,7 +426,7 @@ const Result = () => {
 
                 {
                     suggestionQuizzes && chooseUniqueQuizToSuggest() &&
-                    <div className='result__popUpQuizSuggester fixed popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
+                    <div className='result__popUpQuizSuggester fixed z-10 popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
                         <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
                             closePopUpQuizSuggester();
                         }}> X </button>

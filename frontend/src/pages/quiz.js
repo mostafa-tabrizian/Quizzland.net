@@ -8,7 +8,6 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
-import AddView from '../components/addView';
 import { log, replaceFunction, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import SkeletonLoading from '../components/skeletonLoading';
@@ -110,13 +109,10 @@ const Quiz = (props) => {
         quizSlugReplacedWithHyphen &&
             await axiosInstance.get(`/api/${quizType}/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
-                    log(quizData)
-                    AddView(quizType, quizData.id)
                     sendCategoryAsInterest(quizData.subCategory)
                     getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
                     applyBackground(quizData.background)
                     setQuiz(quizData)
-                    postToHistoryAsPlayedQuiz(quizData.id)
 
                     let questionSource
                     switch (quizType) {
@@ -249,8 +245,6 @@ const Quiz = (props) => {
     const takeSelectedOptionValue = (userSelection) => {
         let userChose = userSelection.id
         const currentQuestionNumber = parseInt(userChose.split('-')[0])
-        log(userChose)
-        log(currentQuestionNumber)
 
         for (let i = 1; i <= 10; i++) {
             if (document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`)) {
@@ -447,7 +441,7 @@ const Quiz = (props) => {
                             {
                                 (question.question !== null && question.question !== '') &&
                                 <div id='question_background' className='py-1 rounded-xl flex overflow-auto items-center h-[17rem]' >
-                                    <p className='p-3 text-[2rem] quiz_question mix-blend-color-dodge text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
+                                    <p className='p-3 text-[2rem] w-full quiz_question mix-blend-color-dodge text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
                                 </div>
                             }
 
@@ -546,16 +540,6 @@ const Quiz = (props) => {
                 )
             })
         )
-    }
-
-    const postToHistoryAsPlayedQuiz = async (quizId) => {
-        const userDetail = await userProfileDetail()
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `_${quizId}` })
-        // .then(res => {
-        // })
-        .catch(err => {
-            log(err.response)
-        })
     }
 
     const getSuggestionsQuiz = async (category, subCategory) => {
