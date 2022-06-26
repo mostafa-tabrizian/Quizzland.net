@@ -1,5 +1,6 @@
 import axiosInstance from './axiosApi';
-import { log, sortByNewest } from './base'
+import { log } from './base'
+import ExcludeWordsToSearch from './excludeWordsToSearch';
 
 const SearchFetch = async (value) => {
     const searched_category = await axiosInstance.get(`/api/subcategory/?public=true`)
@@ -7,16 +8,25 @@ const SearchFetch = async (value) => {
     const searchedValue = value?.toLowerCase().split(' ')
     const rankResults = []
 
+    let filteredSearchValue = []
+
+    searchedValue?.map(value => {
+        if (!ExcludeWordsToSearch().includes(value.toLowerCase())) {
+            filteredSearchValue.push(value)
+        }
+    })
+
     searched_category.data.map(category => {
         let categoryScore = 0
-        for (let word in searchedValue) {
+
+        filteredSearchValue.map(value => {
             if (
-                category.title.toLowerCase().includes(searchedValue[word])||
-                category.subCategory.toLowerCase().includes(searchedValue[word])
+                category.title.toLowerCase().includes(value)||
+                category.subCategory.toLowerCase().includes(value)
             ){
                 categoryScore += 1
             }
-        }
+        })
 
         if (categoryScore !== 0) {
             rankResults.push({categoryDetail: category, score: categoryScore})

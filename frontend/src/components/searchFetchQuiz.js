@@ -1,8 +1,8 @@
 import axiosInstance from './axiosApi';
-import { log, sortByNewest } from './base'
+import { log } from './base'
+import ExcludeWordsToSearch from './excludeWordsToSearch';
 
-const SearchFetch = async (value) => {
-    
+const SearchFetch = async (value) => {  
     const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)
     const searched_pointy = await axiosInstance.get(`/api/test/?public=true`)
     
@@ -10,17 +10,27 @@ const SearchFetch = async (value) => {
     const searchedValue = value?.toLowerCase().split(' ')
     const rankResults = []
 
+    let filteredSearchValue = []
+
+    searchedValue.map(value => {
+        if (!ExcludeWordsToSearch().includes(value.toLowerCase())) {
+            filteredSearchValue.push(value)
+        }
+    })
+
     concat.map(quiz => {
         let quizScore = 0
-        for (let word in searchedValue) {
+
+        filteredSearchValue.map(value => {
             if (
-                quiz.title.toLowerCase().includes(searchedValue[word])||
-                quiz.subCategory.toLowerCase().includes(searchedValue[word])||
-                quiz.tags.toLowerCase().includes(searchedValue[word])
+                quiz.title.toLowerCase().split(' ').includes(value)||
+                quiz.subCategory.toLowerCase().split(' ').includes(value)||
+                quiz.tags.toLowerCase().split(' ').includes(value)
             ){
                 quizScore += 1
             }
-        }
+            
+        })
 
         if (quizScore !== 0) {
             rankResults.push({quizDetail: quiz, score: quizScore})
@@ -28,7 +38,7 @@ const SearchFetch = async (value) => {
     })
 
     const sliceSortResult = rankResults.slice(0, 100).sort((a, b) => b.score - a.score)
-
+    
     return Object.keys(sliceSortResult).map(key => sliceSortResult[key].quizDetail)
 }
  

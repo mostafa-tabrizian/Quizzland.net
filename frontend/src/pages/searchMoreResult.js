@@ -19,14 +19,10 @@ const SearchMoreResult = () => {
     const location = useLocation();
 
     useEffect(() => {
-        set_searched_content([])  // restart list
-        set_searched_category([])
-        searchHandler(searchValue)
+        const query = takeParameterFromUrl('q')
+        setSearchValue(query)
+        searchHandler(query)
         setContentLoaded(true)
-    }, [searchValue])
-
-    useEffect(() => {
-        setSearchValue(takeParameterFromUrl('q'))
     }, [location]);
 
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')
