@@ -51,13 +51,13 @@ const QuizHeader = (props) => {
                             />
                         </div>
                     </div>
-                    <div onClick={() => { SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
+                    <div onClick={() => { props.SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
                         <div className='mt-3'>
                             <Switch
                                 checkedChildren='فرض صدا'
                                 uncheckedChildren='فرض صدا'
                                 className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                onChange={() => { SFXController() }}
+                                onChange={() => { props.SFXController() }}
                                 title='فرض صدا های پس از پاسخ به سوال'
                             />
                         </div>

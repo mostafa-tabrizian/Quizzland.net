@@ -15,7 +15,6 @@ import QuizHeader from '../components/quiz/quizHeader'
 import Trivia from '../components/quiz/trivia'
 import LikeCommentButton from '../components/likeCommentButton';
 import Test from '../components/quiz/test'
-import userProfileDetail from '../components/userProfileDetail';
 
 const logo = '/static/img/Q-small.png'
 
@@ -40,6 +39,7 @@ const Quiz = (props) => {
     const [SFXAllowed, setSFXAllowed] = useState()
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
+    const [SFXClick, setSFXClick] = useState(null)
     const [quiz, setQuiz] = useState(null)
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
     const [questionCounterForId, setQuestionCounterForId] = useState(1)
@@ -52,8 +52,7 @@ const Quiz = (props) => {
         scrollToTop()
         setLoadState(true)
         SFXLocalStorage()
-        setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
-        setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
+        setWhichSFXfile()
     }, [quizSlug])
     
     useEffect(() => {
@@ -71,6 +70,18 @@ const Quiz = (props) => {
         setQuizSlugReplacedWithHyphen(slug)
     }, [location]);
     
+    const setWhichSFXfile = () => {
+        switch (quizType) {
+            case 'quiz':
+                setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
+                setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
+                break
+            case 'test':
+                setSFXClick(new Audio('/static/sound/SFXClick.mp3'))
+                break
+        }
+    }
+
     const scrollToTop = () => {
         document.querySelector("body").scrollTo(0, 0)
     }
@@ -110,7 +121,7 @@ const Quiz = (props) => {
             await axiosInstance.get(`/api/${quizType}/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
                     sendCategoryAsInterest(quizData.subCategory)
-                    getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
+                    await getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
                     applyBackground(quizData.background)
                     setQuiz(quizData)
 
@@ -138,11 +149,11 @@ const Quiz = (props) => {
             })
     }
 
-    const calculateTheResultScore = () => {
-        const questionsCounter = questions?.length
-        const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
-        return score
-    }
+    // const calculateTheResultScore = () => {
+    //     const questionsCounter = questions?.length
+    //     const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
+    //     return score
+    // }
 
     const sendCategoryAsInterest = (category) => {
         const interest = JSON.parse(localStorage.getItem('interest'))
@@ -182,27 +193,34 @@ const Quiz = (props) => {
         }
     }
 
-    const playSFX_click = () => {
-        return
+    const playSFX_click = (userSelection) => {
+        const SFXAllowed = localStorage.getItem('SFXAllowed')
+        if (SFXAllowed === 'true') {
+            setWrongAnswerOption(parseInt(userSelection.id.slice(-1)))
+            if (SFXAllowed === 'true') {
+                SFXClick.volume = .5
+                SFXClick.play()
+            }
+        }
     }
 
     const playSFX = (userSelection) => {
-        let userChose = parseInt(userSelection.id.slice(-1))
-        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
-
+        
         const SFXAllowed = localStorage.getItem('SFXAllowed')
-        if (userChose !== correctAnswer) {
-            setWrongAnswerOption(parseInt(userChose))
-            if (SFXAllowed === 'true') {
+        if (SFXAllowed === 'true') {
+            let userChose = parseInt(userSelection.id.slice(-1))
+            let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
+            
+            if (userChose == correctAnswer) {
+                setCorrectAnswersCount(prev => prev + 1)
+                SFXCorrect.volume = .5
+                SFXCorrect.play()
+            } else {
+                setWrongAnswerOption(parseInt(userChose))
                 SFXWrong.volume = .5
                 SFXWrong.play()
             }
-        } else {
-            setCorrectAnswersCount(prev => prev + 1)
-            if (SFXAllowed === 'true') {
-                SFXCorrect.volume = .5
-                SFXCorrect.play()
-            }
+            
         }
     }
 
@@ -283,8 +301,9 @@ const Quiz = (props) => {
                         }, 5000)
                     }
                 }
+                break
             case 'test':
-                playSFX_click()
+                playSFX_click(props.target)
                 takeSelectedOptionValue(props.target)
 
                 if (autoQuestionChanger) {
@@ -298,6 +317,7 @@ const Quiz = (props) => {
                         }
                     }, 5000)
                 }
+                break
         }
     }
 
@@ -685,7 +705,7 @@ const Quiz = (props) => {
                     </div>
                 </div>
 
-                <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} />
+                <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} SFXController={SFXController} />
 
                 <LikeCommentButton quizId={quiz?.id} quizType={quizType} />
 
