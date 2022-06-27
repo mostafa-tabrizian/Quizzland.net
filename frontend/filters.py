@@ -6,6 +6,7 @@ class CustomUserFilter(filters.FilterSet):
     class Meta:
         model = CustomUser
         fields = {
+            'blocked': ['exact'],
             'pass_token': ['exact'],
             'username': ['exact'],
             'email': ['exact'],
@@ -45,7 +46,8 @@ class CommentsFilter(filters.FilterSet):
             'quiz_related': ['exact'],
             'test_related': ['exact'], 
             'submitter_related': ['exact'],
-            'date_submitted': ['lte', 'gte']
+            'date_submitted': ['lte', 'gte'],
+            'verified': ['exact']
         }
 
 class CategoriesFilter(filters.FilterSet):

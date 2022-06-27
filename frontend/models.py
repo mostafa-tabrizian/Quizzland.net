@@ -1,3 +1,4 @@
+from ssl import VerifyFlags
 from django.contrib import admin
 from django.db import models
 from ckeditor.fields import RichTextField
@@ -22,13 +23,13 @@ Gender = (
 )    
 
 class CustomUser(AbstractUser):
+    blocked = models.BooleanField(default=False)
     pass_token = models.CharField(blank=True, max_length=229)
     avatar = models.ImageField(blank=True, null=True, upload_to='user_avatar')
     bio = models.CharField(blank=True, null=True, max_length=255)
     birthday_date = models.DateField(blank=True, null=True)
     gender = models.CharField(blank=True, null=True, max_length=7, choices=Gender)
     points = models.IntegerField(default=0)
-    # played_quizzes = models.JSONField(blank=True, null=True, max_length=9000)  # mean 3000 play
     most_played_categories = models.TextField(blank=True, null=True, max_length=9000)
     played_history = models.TextField(blank=True, null=True, default='_0', max_length=9000)
     liked_quizzes = models.TextField(blank=True, null=True, default='_0', max_length=9000)
@@ -162,7 +163,7 @@ class Comments(models.Model):
     test_related = models.ForeignKey(Quizzes_Pointy, blank=True, null=True, on_delete=models.CASCADE)
     submitter_related = models.ForeignKey(CustomUser, blank=False, null=True, on_delete=models.SET_NULL)
     date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
-    # liked
+    verified = models.BooleanField(default=True)
     
     def __str__(self):
         return str(self.id)

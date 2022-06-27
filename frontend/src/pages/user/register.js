@@ -34,7 +34,7 @@ const Register = () => {
     }
 
     const loginAndRedirect = async () => {
-        const data = await axiosInstance.post('api/token/obtain/', {
+        const data = await axiosInstance.post('/api/token/obtain/', {
             username: username,
             password: password
         });
@@ -84,7 +84,7 @@ const Register = () => {
         if (!checkAllInputEntered()) { return }
         if (await emailExists() || (validatePassword() !== 'valid') || !validateReCaptcha()) { return }
 
-        await axiosInstance.post('api/user/', {
+        await axiosInstance.post('/api/user/', {
             username: username,
             email: email,
             password: password

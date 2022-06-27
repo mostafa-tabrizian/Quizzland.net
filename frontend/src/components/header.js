@@ -23,7 +23,7 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            await axiosInstance.post('api/blacklist/', {
+            await axiosInstance.post('/api/blacklist/', {
                 "refresh_token": localStorage.getItem("refresh_token")
             });
             localStorage.removeItem('access_token');

@@ -39,6 +39,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'email',
             'password',
             'is_active',
+            'blocked',
             'date_joined',
             'last_login',
             'pass_token',

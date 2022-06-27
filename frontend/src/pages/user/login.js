@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from '../../components/axiosApi';;
-import { message } from 'antd';
+import { message, notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
@@ -29,9 +29,38 @@ const Login = () => {
         }
     }
 
+    const checkIfBlocked = async () => {
+        const now = new Date().getTime()
+        
+        return await axiosInstance.get(`api/user/?username=${username}&timestamp=${now}`)
+            .then(res =>{
+                return res.data[0].blocked
+            })
+            // .catch(err => {
+            //     log(err.response1)
+            // })
+    }
+
     const handleSubmit = async () => {
+        if (await checkIfBlocked()) {
+            return notification.open({
+                message: 'این نام کاربری مسدود شده است',
+                description:
+                    'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
+                duration: 5,
+                style: {
+                    'font-size': '25px',
+                    'font-weight': '600',
+                    'box-shadow': '0 0 20px #b52633',
+                    'direction': 'rtl',
+                    'padding-right': '4rem',
+                },
+                className: 'rounded-lg'
+            });
+        } 
+        
         try {
-            const data = await axiosInstance.post('api/token/obtain/', {
+            const data = await axiosInstance.post('/api/token/obtain/', {
                 username: username,
                 password: password
             });

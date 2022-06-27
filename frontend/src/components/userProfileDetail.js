@@ -15,7 +15,7 @@ const userProfileDetail = async () => {
                     return null
                 } else {
                     const user = res.data[0]
-                    if (localPassToken == user.pass_token) {
+                    if (localPassToken == user.pass_token && !user.blocked) {
                         return await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
                             .then(res => {
                                 localStorage.setItem('refresh_token', res.data.refresh);

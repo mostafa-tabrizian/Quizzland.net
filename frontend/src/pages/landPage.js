@@ -156,7 +156,7 @@ const Index = () => {
                         <div className='relative'>
                             <input
                                 type='text'
-                                className='pl-4 pr-12 py-1 rounded-full text-right bg-[#161616] text-base w-[20rem] mt-5 mb-5'
+                                className='pl-4 pr-12 py-1 rounded-full text-right bg-[#161616] text-[0.9rem] w-[20rem] mt-5 mb-5'
                                 placeholder={`کوییزت رو سریع تر پیدا کن`}
                                     onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
                             />

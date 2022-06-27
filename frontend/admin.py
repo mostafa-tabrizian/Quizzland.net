@@ -7,7 +7,7 @@ admin.site.site_header = "Quizzland Admin Panel"
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'last_name', 'first_name')
-    list_filter = ('birthday_date', 'gender')
+    list_filter = ('birthday_date', 'gender', 'blocked')
     search_fields = ['username', 'last_name', 'first_name']
     
     fieldsets = (
@@ -16,6 +16,7 @@ class CustomUserAdmin(UserAdmin):
             'More',  # group heading of your choice; set to None for a blank space instead of a header
             {
                 'fields': (
+                    'blocked',
                     'pass_token',
                     'avatar',
                     'bio',
@@ -62,8 +63,8 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
 
 @admin.register(Comments)
 class Comments_Admin(admin.ModelAdmin):
-    list_display = ('submitter_related', 'comment_text', 'date_submitted')
-    list_filter = ('date_submitted', )
+    list_display = ('submitter_related', 'comment_text', 'verified', 'date_submitted')
+    list_filter = ('date_submitted', 'verified')
     search_fields = ('comment_text', 'quiz_related', 'test_related', 'submitter_related')
 
 @admin.register(Questions)

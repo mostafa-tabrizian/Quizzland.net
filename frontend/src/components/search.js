@@ -57,7 +57,7 @@ const Search = () => {
                 <div className='relative'>
                     <input
                         type='text'
-                        className='pl-4 pr-12 py-1 border border-[#8C939D] w-[20rem] rounded-full text-right bg-transparent text-base my-auto'
+                        className='pl-4 pr-12 py-1 border border-[#8C939D] w-[20rem] rounded-full text-right bg-transparent text-[0.9rem] my-auto'
                         placeholder={`کوییزت رو سریع تر پیدا کن`}
                         onChange={inputChanged}
                         onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${replaceFunction(e.target.value, ' ', '+')}`, '_blank') } }}
