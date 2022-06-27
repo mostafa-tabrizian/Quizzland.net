@@ -13,10 +13,9 @@ import Footer from '../components/footer'
 import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import LoadingScreen from '../components/loadingScreen'
+import Suggestions from '../components/suggestions';
 
 const Index = () => {
-    const [contentSuggestion, setContentSuggestion] = useState([])
-
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
 
@@ -46,46 +45,11 @@ const Index = () => {
         }
     }, [])
 
-    const grabAndSortMostVisitedCategories = (interest) => {
-        if (interest !== null) {
-            let hightestVisitedCategory = [];
-
-            for (let category in interest) {
-                hightestVisitedCategory.push([category, interest[category]]);
-            }
-
-            hightestVisitedCategory.sort(function (a, b) {
-                return b[1] - a[1];
-            });
-
-            return hightestVisitedCategory
-        }
-    }
-
-    const recommendContentToUserByTopClickedCategory = async (content) => {
-        try {
-            const interest = JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']
-            const hightestVisitedCategory = grabAndSortMostVisitedCategories(interest)
-            const top1stUserCategory = hightestVisitedCategory[0][0]
-            const top2ndUserCategory = hightestVisitedCategory[1][0]
-            const top3rdUserCategory = hightestVisitedCategory[2][0]
-
-            let SelectedContent = content.filter(quiz => quiz.subCategory == top1stUserCategory).slice(0, 4)
-            SelectedContent = SelectedContent.concat(content.filter(quiz => quiz.subCategory == top2ndUserCategory).slice(0, 4))
-            SelectedContent = SelectedContent.concat(content.filter(quiz => quiz.subcategory == top3rdUserCategory).slice(0, 4))
-
-            setContentSuggestion(SelectedContent)
-        } catch (e) {
-            return log('No Recommending -- New User')
-        }
-    }
-
     const grabData = async () => {
         const quiz = await axiosInstance.get(`/api/quiz/?limit=70&public=true`)
-            .catch(err => {
-                log(err.response)
-            })
+            // .catch(err => {log(err.response)})
         const pointy = await axiosInstance.get(`/api/test/?limit=70&public=true`)
+            // .catch(err => {log(err.response)})
         const content = quiz.data.results.concat(pointy.data.results)
 
         setContent_new(content.sort(sortByNewest).slice(0, 20))
@@ -94,8 +58,6 @@ const Index = () => {
         setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest).slice(0, 20))
         setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest).slice(0, 20))
         setLoadMoreQuiz(content.sort(sortByNewest).slice(21, 69))
-
-        recommendContentToUserByTopClickedCategory(content.sort(sortByNewest))
         setContentLoaded(true)
     }
 
@@ -262,21 +224,7 @@ const Index = () => {
                     </div>
                 </Carousel>
 
-                {
-                    contentSuggestion.length >= 4 &&
-                    <div className="mb-8 mt-[5rem]">
-
-                        <div className="mb-8 quizContainer__header">
-                            <h2 className=''>پیشنهادی های کوییزلند به شما</h2>
-                        </div>
-
-                        <div>
-                            <ul className="flex flex-wrap align-baseline">
-                                <QuizContainer quizzes={contentSuggestion} bgStyle='trans' />
-                            </ul>
-                        </div>
-                    </div>
-                }
+                <Suggestions />
 
                 <div className="mb-8 md:mt-[10rem]">
                     <span id='scroll' />

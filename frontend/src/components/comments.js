@@ -59,7 +59,7 @@ const Comments = (props) => {
     const fetchComments = async () => {
         const now = new Date().getTime()
         
-        await axiosInstance.get(`/api/comment/?verified=True&${props.quizType == 'quiz' ? `quiz_related=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_related=${props.quizId}&` : ''}timestamp=${now}`)
+        await axiosInstance.get(`/api/comment/?verified=true&${props.quizType == 'quiz' ? `quiz_related=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_related=${props.quizId}&` : ''}timestamp=${now}`)
             .then(res => {
                 setComments(res.data.sort(sortCommentsByNewest))
             })
