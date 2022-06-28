@@ -460,16 +460,20 @@ const Quiz = (props) => {
                         </span> */}
 
                         <div className='mt-3 w-[22rem] md:w-[29rem]'>
+                            
                             {
                                 (question.question !== null && question.question !== '') &&
                                 <div id='question_background' className='py-1 rounded-xl flex overflow-auto items-center h-[17rem]' >
+                                    <div className='absolute z-10 top-6 right-3 mix-blend-overlay'>
+                                        {questions.indexOf(question) + 1}
+                                    </div>
                                     <p className='p-3 text-[2rem] w-full quiz_question mix-blend-color-dodge text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
                                 </div>
                             }
 
                             {
                                 !question?.question_img?.includes('NotExist') &&
-                                <div className='mt-3 h-[14rem] md:h-[18rem]'>
+                                <div className='my-3 h-[14rem] md:h-[18rem]'>
                                     <LazyLoadImage
                                         src={question?.question_img}
                                         width={1366}
@@ -478,10 +482,11 @@ const Quiz = (props) => {
                                         className='object-cover object-top rounded-xl'
                                         title={question.title}
                                     />
+                                    <a href={question?.question_img} target='_blank'><span className='text-[.7rem]'>در صورت عدم نمایش اینجا را کلیک کنید</span></a>
                                 </div>
                             }
                         </div>
-
+                        
                         {returnQuiz(question)}
 
                         {

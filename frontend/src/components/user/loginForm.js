@@ -69,7 +69,8 @@ const LoginForm = (props) => {
             localStorage.setItem('access_token', data.data.access);
             localStorage.setItem('refresh_token', data.data.refresh);
 
-            window.location.href = '/'
+            window.location.reload()
+            window.history.go(-1)
 
         } catch (error) {
             message.error('نام کاربری یا رمز عبور اشتباه می‌باشد');

@@ -29,7 +29,7 @@ const Header = () => {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             axiosInstance.defaults.headers['Authorization'] = null;
-            window.location.href = '/'
+            window.location.reload()
         }
         catch (e) {
             console.log(e);
