@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../../components/base'
-import userProfileDetail from '../../components/userProfileDetail'
+import userProfileDetail from '../../components/user/userProfileDetail'
 import { DatePicker } from 'antd';
 
 const ProfileSetting = () => {

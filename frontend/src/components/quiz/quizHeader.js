@@ -3,7 +3,7 @@ import { Switch } from 'antd';
 
 const QuizHeader = (props) => {
     return (
-        <div className="relative text-right quiz__head backdrop-blur-2xl p-4 w-[21rem] md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
+        <div className="relative text-right quiz__head backdrop-blur-2xl p-4 w-[21rem] transition-all duration-1000 ease-in-out md:w-[33rem] left-1/2 translate-x-[-50%] bg-[#0000001a] rounded-xl" id="quiz__head">
             {
                 !(props.contentLoaded) &&
                 <div className='flex items-center justify-center'>

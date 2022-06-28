@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import axiosInstance from '../components/axiosApi';
-import userProfileDetail from '../components/userProfileDetail';
+import userProfileDetail from '../components/user/userProfileDetail';
 import { log, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer';
 

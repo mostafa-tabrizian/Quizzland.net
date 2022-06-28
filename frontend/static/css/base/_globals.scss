@@ -129,18 +129,20 @@ h5 {
     font-size: 1rem !important;
 }
 
-input, textarea {
+input,
+textarea {
     background: $second;
     border-bottom: 1px solid #707070;
 }
 
-p, input {
+p,
+input {
     font-family: IRANYekanRegular, sans-serif, serif !important;
     text-align: right;
     color: darkGray
 }
 
-label  {
+label {
     font-family: IRANYekanBold, sans-serif, serif !important;
 }
 
@@ -165,7 +167,7 @@ span {
 }
 
 select {
-    text-align: left;    
+    text-align: left;
 }
 
 a,
@@ -175,7 +177,6 @@ a:hover {
     color: unset;
 
     &:hover {
-        color: $red;
         cursor: pointer;
     }
 }
@@ -186,7 +187,7 @@ ul {
 
 li {
     list-style: none;
-    font-size: $font-med !important;
+    font-size: $font-med  !important;
 }
 
 hr {
@@ -209,6 +210,12 @@ hr {
 //     cursor: pointer;
 // }
 
+.focusBlur {
+    *:not(.noBlur) {
+        filter: blur(3px);
+    }
+}
+
 .input {
     height: 2.125rem;
     width: 17rem;
@@ -217,7 +224,7 @@ hr {
     padding-right: 1rem;
     padding-left: 1rem;
     font-family: myHarmattan;
-    font-size: $font-sm !important;
+    font-size: $font-sm  !important;
     color: $black;
     margin: 0;
     direction: rtl;

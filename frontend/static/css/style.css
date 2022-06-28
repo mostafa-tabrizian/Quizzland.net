@@ -243,12 +243,14 @@ h5 {
   font-size: 1rem !important;
 }
 
-input, textarea {
+input,
+textarea {
   background: #0e0202d4;
   border-bottom: 1px solid #707070;
 }
 
-p, input {
+p,
+input {
   font-family: IRANYekanRegular, sans-serif, serif !important;
   text-align: right;
   color: darkGray;
@@ -292,7 +294,6 @@ a:hover {
 a:hover,
 a:visited:hover,
 a:hover:hover {
-  color: #ac272e;
   cursor: pointer;
 }
 
@@ -310,6 +311,11 @@ hr {
   width: 50%;
   margin-top: 1.125rem !important;
   margin-bottom: 1.125rem !important;
+}
+
+.focusBlur *:not(.noBlur) {
+  -webkit-filter: blur(3px);
+          filter: blur(3px);
 }
 
 .input {

@@ -1,5 +1,5 @@
-import axiosInstance from '../components/axiosApi'
-import { log } from '../components/base'
+import axiosInstance from '../axiosApi'
+import { log } from '../base'
 
 const userProfileDetail = async () => {
     const now = new Date().getTime()

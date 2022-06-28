@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Drawer, message } from 'antd';
 
 import Comments from './comments'
-import axiosInstance from './axiosApi';
-import { log } from './base'
+import axiosInstance from '../axiosApi';
+import { log } from '../base'
 import userProfileDetail from './userProfileDetail';
 
 const LikeCommentButton = (props) => {
@@ -62,16 +62,21 @@ const LikeCommentButton = (props) => {
         
         const userDetail = await userProfileDetail()
         
-        if (userLikedThisQuizBefore(userDetail)) {
-            removeLike()
-            removeLikeQuizFromUser(userDetail)
-            setWatchListButtonUnClickable(true)
-            message.error('لایک شما حذف شد')
+        if (userDetail) {
+            if (userLikedThisQuizBefore(userDetail)) {
+                removeLike()
+                removeLikeQuizFromUser(userDetail)
+                setWatchListButtonUnClickable(true)
+                message.error('لایک شما حذف شد')
+            } else {
+                submitLike()
+                submitUserLikedTheQuiz(userDetail)
+                setWatchListButtonUnClickable(true)
+                message.success('لایک شما ثبت شد')
+            }
         } else {
-            submitLike()
-            submitUserLikedTheQuiz(userDetail)
+            props.setShowLoginForm(true)
             setWatchListButtonUnClickable(true)
-            message.success('لایک شما ثبت شد')
         }
     }
 
@@ -110,7 +115,7 @@ const LikeCommentButton = (props) => {
                     padding: 0,
                 }}
             >
-                <Comments quizId={props.quizId} quizType={props.quizType} />
+                <Comments quizId={props.quizId} quizType={props.quizType} setShowLoginForm={props.setShowLoginForm} setCommentsPanelState={setCommentsPanelState} />
             </Drawer>
         </React.Fragment>
     );

@@ -13,8 +13,9 @@ import LoadingScreen from '../components/loadingScreen'
 import SkeletonLoading from '../components/skeletonLoading';
 import QuizHeader from '../components/quiz/quizHeader'
 import Trivia from '../components/quiz/trivia'
-import LikeCommentButton from '../components/likeCommentButton';
+import LikeCommentButton from '../components/user/likeCommentButton';
 import Test from '../components/quiz/test'
+import LoginForm from '../components/user/loginForm';
 
 const logo = '/static/img/Q-small.png'
 
@@ -43,6 +44,7 @@ const Quiz = (props) => {
     const [quiz, setQuiz] = useState(null)
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
     const [questionCounterForId, setQuestionCounterForId] = useState(1)
+    const [showLoginForm, setShowLoginForm] = useState(false)
 
     const location = useLocation();
 
@@ -602,7 +604,7 @@ const Quiz = (props) => {
     }
 
     return (
-        <React.Fragment>
+        <div className={showLoginForm ? 'focusBlur' : ''}>
 
             <LoadingScreen loadState={loadState} />
 
@@ -686,6 +688,18 @@ const Quiz = (props) => {
                 />
             }
 
+            <div className={`noBlur top-1/4 left-1/2 translate-x-[-50%] ${showLoginForm ? 'popUp-show' : 'popUp-hide'} fixed z-20 bg-[#8b0000f2] p-8 w-11/12 md:w-[30rem] grid grid-cols-1 rounded-lg`}>
+                <button className='absolute text-3xl noBlur result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {setShowLoginForm(false)}}> X </button>
+
+                <div className="m-auto noBlur top-20">
+                    <h1 className="noBlur text-[1rem] mb-5 text-center text-white ">
+                        ورود به کوییزلند
+                    </h1>
+
+                    <LoginForm />
+                </div>
+            </div>
+
             <div id='quizBg'></div>
 
             <div className="ltr">
@@ -707,7 +721,7 @@ const Quiz = (props) => {
 
                 <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} SFXController={SFXController} />
 
-                <LikeCommentButton quizId={quiz?.id} quizType={quizType} />
+                <LikeCommentButton quizId={quiz?.id} quizType={quizType} setShowLoginForm={setShowLoginForm} />
 
                 {
                     contentLoaded && isItDesktop() &&
@@ -850,7 +864,7 @@ const Quiz = (props) => {
                 <Footer />
             </div>
 
-        </React.Fragment>
+        </div>
     );
 }
 

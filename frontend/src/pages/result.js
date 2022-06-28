@@ -12,8 +12,8 @@ import { log, replaceFunction, fadeIn, popUpShow, popUpHide, takeParameterFromUr
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import SkeletonLoading from '../components/skeletonLoading';
-import userProfileDetail from '../components/userProfileDetail';
-import LikeCommentButton from '../components/likeCommentButton';
+import userProfileDetail from '../components/user/userProfileDetail';
+import LikeCommentButton from '../components/user/likeCommentButton';
 import AddView from '../components/addView';
 
 const Result = () => {

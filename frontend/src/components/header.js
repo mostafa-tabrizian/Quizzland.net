@@ -5,7 +5,7 @@ import { Popover } from 'antd';
 
 import { log } from './base'
 import Search from './search'
-import userProfileDetail from '../components/userProfileDetail'
+import userProfileDetail from '../components/user/userProfileDetail'
 import axiosInstance from './axiosApi';
 
 const Header = () => {
@@ -87,7 +87,7 @@ const Header = () => {
                 </script>
             </Helmet>
 
-            <header className='relative z-10 bg-[#0601017c] rounded-md backdrop-blur-md p-4 m-5'>
+            <header className='relative z-10 bg-[#0601017c] rounded-md backdrop-blur-md p-5'>
                 <div>
                     <div className='items-center justify-center hidden md:flex'>
                         <Link to="/" className="flex items-center justify-between header__logo">
@@ -217,7 +217,7 @@ const Header = () => {
                     </div>
                 </div>
 
-                <div className='block mt-4 md:hidden'>
+                <div className='block mt-4 space-x-3 space-x-reverse md:hidden'>
                     {
                         userProfile ?
                             <Link to={`/profile/${userProfile.username}`}>
@@ -246,8 +246,7 @@ const Header = () => {
                             </Link>
                             :
                             <React.Fragment>
-                                <Link to='/login'>ورود</Link>
-                                <Link to='/register'>ثبت نام</Link>
+                                <Link to='/login' className='px-4 py-1 h-fit border-2 border-[#690D11] rounded-lg'>ورود</Link>
                             </React.Fragment>
                     }
                 </div>
@@ -300,8 +299,7 @@ const Header = () => {
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <Link to='/login'>ورود</Link>
-                            <Link to='/register'>ثبت نام</Link>
+                            <Link to='/login' className='px-4 py-1 h-fit border-2 border-[#690D11] rounded-lg'>ورود</Link>
                         </React.Fragment>
                     }
                         

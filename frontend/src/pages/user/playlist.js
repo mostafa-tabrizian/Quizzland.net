@@ -10,7 +10,7 @@ import Footer from '../../components/footer'
 import SkeletonLoading from '../../components/skeletonLoading';
 
 import { log, takeParameterFromUrl } from '../../components/base'
-import userProfileDetail from '../../components/userProfileDetail';
+import userProfileDetail from '../../components/user/userProfileDetail';
 
 const QuizHistory = () => {
     const [loadState, setLoadState] = useState()

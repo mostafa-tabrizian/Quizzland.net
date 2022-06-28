@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from '../../components/axiosApi';;
 import { message } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import ReCAPTCHA from 'react-google-recaptcha'
 
+import axiosInstance from '../../components/axiosApi';;
 import { log } from '../../components/base'
-import userProfileDetail from "../../components/userProfileDetail";
+import userProfileDetail from "../../components/user/userProfileDetail";
 
 const pathRed = '/static/img/bubbles.webp'
 
