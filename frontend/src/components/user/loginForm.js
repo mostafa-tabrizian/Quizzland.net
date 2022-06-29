@@ -18,9 +18,8 @@ const LoginForm = (props) => {
         const local_username = localStorage.getItem('username')
         const userProfile = await userProfileDetail()
         
-        if (userProfile !== null && userProfile.username == local_username) {
-            log('home')
-            // window.location.href = '/'
+        if (userProfile !== null && userProfile.username == local_username && window.location.pathname == '/login') {
+            window.location.href = '/'
         }
     }
 
@@ -29,30 +28,45 @@ const LoginForm = (props) => {
         
         return await axiosInstance.get(`api/user/?username=${username}&timestamp=${now}`)
             .then(res =>{
-                return res.data[0].blocked
+                if (res.data[0].blocked) {
+                    notification.open({
+                        message: 'این نام کاربری مسدود شده است',
+                        description:
+                            'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
+                        duration: 5,
+                        style: {
+                            'font-size': '25px',
+                            'font-weight': '600',
+                            'box-shadow': '0 0 20px #b52633',
+                            'direction': 'rtl',
+                            'padding-right': '4rem',
+                        },
+                        className: 'rounded-lg'
+                    });
+
+                    return false
+                } else {
+                    return true
+                }
             })
             // .catch(err => {
             //     log(err.response1)
             // })
     }
 
+    const checkAllInputEntered = () => {
+        if (username == null || password == null) {
+            message.error('لطفا فورم را کامل کنید')
+            return false
+        } else {
+            return true
+        }
+    }
+
     const handleSubmit = async () => {
-        if (await checkIfBlocked()) {
-            return notification.open({
-                message: 'این نام کاربری مسدود شده است',
-                description:
-                    'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
-                duration: 5,
-                style: {
-                    'font-size': '25px',
-                    'font-weight': '600',
-                    'box-shadow': '0 0 20px #b52633',
-                    'direction': 'rtl',
-                    'padding-right': '4rem',
-                },
-                className: 'rounded-lg'
-            });
-        } 
+        if (!checkAllInputEntered() || !(await checkIfBlocked())) {
+            return
+        }
         
         try {
             const data = await axiosInstance.post('/api/token/obtain/', {

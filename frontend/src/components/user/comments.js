@@ -5,6 +5,7 @@ import { message } from 'antd';
 import axiosInstance from '../axiosApi';
 import userProfileDetail from './userProfileDetail';
 import { log, replaceFunction, datePublishHandler } from '../base'
+import ExplicitWords from './explicitWords';
 
 const Comments = (props) => {
     const [comments, setComments] = useState([]) 
@@ -21,8 +22,9 @@ const Comments = (props) => {
         return comment.trim().length !== 0 && comment.length < 255 ? true : false
     }
 
-    const postComment = async () => {
+    const postClicked = async () => {
         const comment = commentTextRef.current.value
+        let verifyState = true
         
         if (!checkIfCommentValid(comment)) {
             comment.trim().length == 0 ?
@@ -31,11 +33,21 @@ const Comments = (props) => {
                 message.error('کامنت شما بیش از حد مجاز بلند است!')
             return  // not valid
         }
+
+        if (ExplicitWords(comment)) {
+            log('THIS COMMENT IS SUS!!!!!')
+            verifyState = false
+        }
         
+        await postComment(comment, verifyState)
+    }
+
+    const postComment = async (comment, verifyState) => {
         await axiosInstance.post('/api/comment/', {
-            comment_text: commentTextRef.current.value,
+            comment_text: comment,
             quiz_related: props.quizType == 'quiz' ? props.quizId : null,
             test_related: props.quizType == 'test' ? props.quizId : null,
+            verified: verifyState,
             submitter_related: {
                 username: userProfile.id,
                 password: userProfile.password
@@ -44,7 +56,10 @@ const Comments = (props) => {
             .then(res => {
                 // log(res)
                 if (res.status == 201) {
+                    verifyState == true ?
                     message.success('کامنت با موفقیت ثبت شد.')
+                    :
+                    message.warning('کامنت شما مشکوک به داشتن کلمات نامناسب است. پس از تایید توسط ادمین کامنت شما ثبت خواهد میشود.', 7)
                 }
             })
             .catch(err => {
@@ -120,7 +135,7 @@ const Comments = (props) => {
             <div>
                 <div className='relative my-10'>
                     <input ref={commentTextRef} onClick={checkIfUserLoggedIn} className='px-4 w-full text-white placeholder:text-gray-300 border-b-[#ac272e]' type="text" placeholder='.کامنت تان را اینجا بنویسید' />
-                    <button className='absolute flex px-4 space-x-1 bottom-2 left-2' onClick={() => postComment()}>
+                    <button className='absolute flex px-4 space-x-1 bottom-2 left-2' onClick={() => postClicked()}>
                         <svg class="h-6 w-6 text-[#ac272e]"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="10" y1="14" x2="21" y2="3" />  <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" /></svg>
                         <span>ارسال</span>
                     </button>

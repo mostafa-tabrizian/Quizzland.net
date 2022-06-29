@@ -117,6 +117,7 @@ class CommentsSerializer(serializers.ModelSerializer):
             comment_text=CommentData['comment_text'],
             quiz_related=CommentData['quiz_related'],
             test_related=CommentData['test_related'],
+            verified=CommentData['verified'],
             submitter_related=CustomUser.objects.get(id=CommentData['submitter_related']['username']),
         )
         
