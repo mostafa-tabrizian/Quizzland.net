@@ -42,6 +42,8 @@ const Profile = () => {
     const getUserCommentsLength = async (userDetails) => {
         const now = new Date().getTime()
         
+        log(userDetails)
+        
         await axiosInstance.get(`/api/comment/?submitter_related=${userDetails.id}&timestamp=${now}`)
             .then( async res => {
                 setUserCommentLength(res.data.length)

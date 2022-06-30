@@ -16,9 +16,9 @@ const LoginForm = (props) => {
 
     const checkIfLoggedIn = async () => {
         const userProfile = await userProfileDetail()
-        if (userProfile !== null && window.location.pathname == '/login') {
-            log('redirect to /')
-            // window.location.href = '/'
+        
+        if (userProfile !== undefined && window.location.pathname == '/login') {
+            window.location.href = '/'
         }
     }
 

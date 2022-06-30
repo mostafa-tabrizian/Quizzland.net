@@ -27,7 +27,7 @@ const Register = () => {
     const checkIfLoggedIn = async () => {
         const userProfile = await userProfileDetail()
         
-        if (userProfile !== null) {
+        if (userProfile !== undefined) {
             window.location.href = '/'
         }
     }

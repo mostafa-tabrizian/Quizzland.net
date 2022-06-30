@@ -42,8 +42,6 @@ def index(request, *args, **kwargs):
     return render(request, "frontend/index.html")
 
 def auth_login(request, *args, **kwargs):
-    print(request.method)
-    
     if request.method == 'GET':
         access_token = AccessToken(request.GET.get('at'))
         

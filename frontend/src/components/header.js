@@ -32,7 +32,7 @@ const Header = () => {
             window.location.reload()
         }
         catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     };
 

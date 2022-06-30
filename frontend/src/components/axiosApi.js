@@ -10,17 +10,17 @@ const accessToken = async () => {
     }
     
     const adminDetail = {
-        username: process.env.ADMINUSERNAME,
-        password: process.env.ADMINPASSWORD,
+        username: process.env.GUESTUSERNAME,
+        password: process.env.GUESTPASSWORD,
     }
 
     await axios.post('/api/token/obtain/', adminDetail)
         .then((req) => {
-            localStorage.setItem('access_token', req.data.access)
+            sessionStorage.setItem('access_token', req.data.access)
             sessionStorage.setItem('refresh_token', req.data.refresh)
         })
         .catch((err) => {
-            log(err)
+            // log(err.response)
         })
 }
 
@@ -60,7 +60,7 @@ axiosInstance.interceptors.response.use(
                             .post('/api/token/refresh/', {refresh: refreshToken})
                                 .then((response) => {
                     
-                                    localStorage.setItem('access_token', response.data.access);
+                                    sessionStorage.setItem('access_token', response.data.access);
                                     sessionStorage.setItem('refresh_token', response.data.refresh);
                     
                                     axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
