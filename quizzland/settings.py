@@ -55,6 +55,8 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = "frontend.CustomUser"
 
+CSRF_COOKIE_NAME = "csrftoken"
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
@@ -95,6 +97,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'rest_framework.authtoken',
 
     'ckeditor',
     'robots',

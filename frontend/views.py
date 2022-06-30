@@ -1,13 +1,15 @@
-from django.shortcuts import render
-from django.views.decorators.cache import never_cache
 import datetime
-from urllib.parse import unquote
-from django.contrib.auth import get_user_model
+import json
+import requests
+from decouple import config
 
 from .models import *
 from .functions import *
 from .serializers import *
 from .filters import *
+
+from django.shortcuts import render
+from django.http import HttpResponse
 
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
@@ -15,6 +17,8 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticated, AllowAn
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import AccessToken
+
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     permission_classes = (AllowAny,)
@@ -37,13 +41,82 @@ def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
 
-def setPassword(request, *args, **kwargs):
-    username = request.GET.get('u')
-    password = request.GET.get('p')
+def auth_login(request, *args, **kwargs):
+    print(request.method)
     
-    # user = CustomUser.objects.get(username=username)
-    # print(user)
-    # return render(request, "frontend/index.html")
+    if request.method == 'GET':
+        access_token = AccessToken(request.GET.get('at'))
+        
+        try:
+            user = CustomUser.objects.get(id=access_token['user_id'])
+            
+            return HttpResponse(
+                json.dumps(
+                    {
+                        'username': user.username,
+                        'first_name': user.first_name,
+                        'last_name': user.last_name,
+                        'points': user.points,
+                        'blocked': user.blocked,
+                        'avatar': str(user.avatar),
+                        'bio': user.bio,
+                        'points': user.points,
+                        'most_played_categories': user.most_played_categories,
+                        'played_history': user.played_history,
+                        'liked_quizzes': user.liked_quizzes,
+                        'watch_list': user.watch_list,
+                    }   
+                )
+            )
+        except user.DoesNotExist:
+            return HttpResponse('user does not exist!')
+    
+def checkAlreadyUserExists(username, email):
+    return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
+
+def verifyRecaptcha(response):
+    RECAPTCHA_SECRET = config('RECAPTCHA_SECRET', cast=str)
+    
+    params = {
+        'secret': RECAPTCHA_SECRET,
+        'response': response
+    }
+    
+    req = requests.post('https://www.google.com/recaptcha/api/siteverify', params)
+    return (json.loads(req.content))['success']
+    
+
+def auth_register(request, *args, **kwargs):
+    if request.method == 'POST':
+        username = request.GET.get('u')
+        email = request.GET.get('e')
+        password = request.GET.get('p')
+        reCaptcha_response = request.GET.get('rc')
+        
+        if not verifyRecaptcha(reCaptcha_response):
+            print('not verified recaptcha or duplicate')
+            return HttpResponse('not verified recaptcha or duplicate')
+        
+        elif checkAlreadyUserExists(username, email):
+            print('user already exists')
+            return HttpResponse('user already exists')
+            
+        else:
+            try:
+                newUser = CustomUser(
+                    username=username,
+                    email=email,
+                )
+                newUser.set_password(password)
+                newUser.save()
+                
+                print('regitser')
+                return HttpResponse('regitser')
+            
+            
+            except Exception as e:
+                print('exception--------------------------')
+                print(e)
 
 def restartEveryMonthlyViews(request):
     try:
@@ -98,7 +171,7 @@ def FastFunctionForDB(request):
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 
-class CustomUser(viewsets.ModelViewSet):
+class CustomUserView(viewsets.ModelViewSet):
     permissions_classes = (IsAuthenticated,)
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
@@ -106,13 +179,13 @@ class CustomUser(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
-class Quiz(viewsets.ModelViewSet):
+class QuizView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Quizzes.objects.all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
-class Pointy(viewsets.ModelViewSet):
+class PointyView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Quizzes_Pointy.objects.all()
     serializer_class = PointyQuizzesSerializer
@@ -120,7 +193,7 @@ class Pointy(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
-class Comment(viewsets.ModelViewSet):
+class CommentView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
@@ -128,13 +201,13 @@ class Comment(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
-class Categories(viewsets.ModelViewSet):
+class CategoriesView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Categories.objects.all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
-class SubCategory(viewsets.ModelViewSet):
+class SubCategoryView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = SubCategories.objects.all()
     serializer_class = SubCategoriesSerializer
@@ -142,13 +215,13 @@ class SubCategory(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
-class Questions(viewsets.ModelViewSet):
+class QuestionsView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Questions.objects.all()
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter    
 
-class Questions_pointy(viewsets.ModelViewSet):
+class Questions_pointyView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Pointy_Questions.objects.all()
     serializer_class = questions_pointySerializer
@@ -156,7 +229,7 @@ class Questions_pointy(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
-class new_blog(viewsets.ModelViewSet):
+class new_blogView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
@@ -164,7 +237,7 @@ class new_blog(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
-# class newsletter_users(viewsets.ModelViewSet):
+# class newsletter_usersView(viewsets.ModelViewSet):
 #     queryset = Newsletter_Users.objects.all()
 #     serializer_class = NewsletterUsersSerializer
 #     filterset_class = NewsletterUserFilter

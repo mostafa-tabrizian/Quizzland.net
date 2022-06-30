@@ -9,7 +9,15 @@ urlpatterns = [
     path('api/token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),  # override sjwt stock token
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
-
+    path('api/login', auth_login),
+    path('api/register', auth_register),
+    
+    path('login', index),
+    path('register', index),
+    path('profile/<user>', index),
+    path('setting', index),
+    path('playlist', index),
+    
     path('', index),
     path('guide', index),
     path('contact', index),
@@ -19,13 +27,6 @@ urlpatterns = [
     
     path('category/<category>', index),
     path('category/<category>/<subCategory>', index),
-    
-    path('login', index),
-    path('register', index),
-    path('setPassword', setPassword),
-    path('profile/<user>', index),
-    path('setting', index),
-    path('playlist', index),
     
     path('quiz/<title>', index),
     path('test/<title>', index),

@@ -10,49 +10,48 @@ const LoginForm = (props) => {
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
 
-    useEffect(() => {
+    useEffect( async () => {
         checkIfLoggedIn()
     }, [])
 
     const checkIfLoggedIn = async () => {
-        const local_username = localStorage.getItem('username')
         const userProfile = await userProfileDetail()
-        
-        if (userProfile !== null && userProfile.username == local_username && window.location.pathname == '/login') {
-            window.location.href = '/'
+        if (userProfile !== null && window.location.pathname == '/login') {
+            log('redirect to /')
+            // window.location.href = '/'
         }
     }
 
-    const checkIfBlocked = async () => {
-        const now = new Date().getTime()
+    // const checkIfBlocked = async () => {
+    //     const now = new Date().getTime()
         
-        return await axiosInstance.get(`api/user/?username=${username}&timestamp=${now}`)
-            .then(res =>{
-                if (res.data[0].blocked) {
-                    notification.open({
-                        message: 'این نام کاربری مسدود شده است',
-                        description:
-                            'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
-                        duration: 5,
-                        style: {
-                            'font-size': '25px',
-                            'font-weight': '600',
-                            'box-shadow': '0 0 20px #b52633',
-                            'direction': 'rtl',
-                            'padding-right': '4rem',
-                        },
-                        className: 'rounded-lg'
-                    });
+    //     return await axiosInstance.get(`api/user/?username=${username}&timestamp=${now}`)
+    //         .then(res =>{
+    //             if (res.data[0].blocked) {
+    //                 notification.open({
+    //                     message: 'این نام کاربری مسدود شده است',
+    //                     description:
+    //                         'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
+    //                     duration: 5,
+    //                     style: {
+    //                         'font-size': '25px',
+    //                         'font-weight': '600',
+    //                         'box-shadow': '0 0 20px #b52633',
+    //                         'direction': 'rtl',
+    //                         'padding-right': '4rem',
+    //                     },
+    //                     className: 'rounded-lg'
+    //                 });
 
-                    return false
-                } else {
-                    return true
-                }
-            })
+    //                 return false
+    //             } else {
+    //                 return true
+    //             }
+    //         })
             // .catch(err => {
             //     log(err.response1)
             // })
-    }
+    // }
 
     const checkAllInputEntered = () => {
         if (username == null || password == null) {
@@ -64,9 +63,9 @@ const LoginForm = (props) => {
     }
 
     const handleSubmit = async () => {
-        if (!checkAllInputEntered() || !(await checkIfBlocked())) {
-            return
-        }
+        // if (!checkAllInputEntered() || !(await checkIfBlocked())) {
+        //     return
+        // }
         
         try {
             const data = await axiosInstance.post('/api/token/obtain/', {
@@ -74,14 +73,9 @@ const LoginForm = (props) => {
                 password: password
             });
 
-            const passToken = `${new Date().getTime() * 85}${username}${(new Date().getTime() * 69) % 85}`
-            await setUserPassToken(username, passToken)
-
             axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
-            localStorage.setItem('username', username);
-            localStorage.setItem('pass_token', passToken);
-            localStorage.setItem('access_token', data.data.access);
-            localStorage.setItem('refresh_token', data.data.refresh);
+            sessionStorage.setItem('access_token', data.data.access);
+            sessionStorage.setItem('refresh_token', data.data.refresh);
 
             window.location.reload()
             window.history.go(-1)
@@ -90,18 +84,6 @@ const LoginForm = (props) => {
             message.error('نام کاربری یا رمز عبور اشتباه می‌باشد');
             throw error;
         }
-    }
-
-    const getUserId = async (username) => {
-        return await axiosInstance.get(`/api/user/?username=${username}`)
-            .then(res => {
-                return res.data[0].id
-            })
-    }
-
-    const setUserPassToken = async (username, newPassToken) => {
-        const userId = await getUserId(username)
-        await axiosInstance.patch(`/api/user/${userId}/`, {pass_token: newPassToken})
     }
 
     const keyboardClicked = (event) => {

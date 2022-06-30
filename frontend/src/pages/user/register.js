@@ -25,10 +25,9 @@ const Register = () => {
     }, [])
 
     const checkIfLoggedIn = async () => {
-        const local_username = localStorage.getItem('username')
         const userProfile = await userProfileDetail()
         
-        if (userProfile !== null && userProfile.username == local_username) {
+        if (userProfile !== null) {
             window.location.href = '/'
         }
     }
@@ -39,14 +38,9 @@ const Register = () => {
             password: password
         });
 
-        const passToken = `${new Date().getTime() * 85}${username}${(new Date().getTime() * 69) % 85}`
-        await setUserPassToken(username, passToken)
-
         axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
-        localStorage.setItem('username', username);
-        localStorage.setItem('pass_token', passToken);
-        localStorage.setItem('access_token', data.data.access);
-        localStorage.setItem('refresh_token', data.data.refresh);
+        sessionStorage.setItem('access_token', data.data.access);
+        sessionStorage.setItem('refresh_token', data.data.refresh);
 
         window.location.href = `/setting`
     }
@@ -58,18 +52,18 @@ const Register = () => {
         else { return 'valid'}
     }
 
-    const emailExists = async () => {
-        await axiosInstance.get(`/api/user/?email=${email}`)
-            .then(user => {
-                if (user.data.length == 0) { return false }
-                else {
-                    message.error('این ایمیل از قبل ثبت شده است!')
-                }
-            })
-            .catch(err => {
-                log(err.response)
-            })
-    }
+    // const emailExists = async () => {
+    //     await axiosInstance.get(`/api/user/?email=${email}`)
+    //         .then(user => {
+    //             if (user.data.length == 0) { return false }
+    //             else {
+    //                 message.error('این ایمیل از قبل ثبت شده است!')
+    //             }
+    //         })
+    //         .catch(err => {
+    //             log(err.response)
+    //         })
+    // }
 
     const checkAllInputEntered = () => {
         if (username == null || email == null || password == null || rePassword == null) {
@@ -82,53 +76,34 @@ const Register = () => {
 
     const handleSubmit = async () => {
         if (!checkAllInputEntered()) { return }
-        if (await emailExists() || (validatePassword() !== 'valid') || !validateReCaptcha()) { return }
+        // if (await emailExists() || (validatePassword() !== 'valid') || !validateReCaptcha()) { return }
 
-        await axiosInstance.post('/api/user/', {
-            username: username,
-            email: email,
-            password: password
-        })
-        .then(res => {
-            switch(res.status) {
-                case 201:
-                    loginAndRedirect()
-            }
-        })
-        .catch(err => {
-            if (err.response.data.email) {
-                message.error('ایمیل وارد شده معتبر نمی‌باشد!')
-            }
-            else if (err.response.data.username) {
-                message.error('نام کاربری توسط شخص دیگری ثبت شده است. لطفا نام کاربری دیگری وارد کنید.')
-            }
-        })
-    }
+        axiosInstance.post(`/api/register?u=${username}&e=${email}&p=${password}&rc=${reCaptchaResponse}`)
 
-    const getUserId = async (username) => {
-        return await axiosInstance.get(`/api/user/?username=${username}`)
-            .then(res => {
-                return res.data[0].id
-            })
-    }
-
-    const setUserPassToken = async (username, newPassToken) => {
-        const userId = await getUserId(username)
-        await axiosInstance.patch(`/api/user/${userId}/`, {pass_token: newPassToken})
+        // await axiosInstance.post('/api/user/', {
+        //     username: username,
+        //     email: email,
+        //     password: password
+        // })
+        // .then(res => {
+        //     switch(res.status) {
+        //         case 201:
+        //             loginAndRedirect()
+        //     }
+        // })
+        // .catch(err => {
+        //     if (err.response.data.email) {
+        //         message.error('ایمیل وارد شده معتبر نمی‌باشد!')
+        //     }
+        //     else if (err.response.data.username) {
+        //         message.error('نام کاربری توسط شخص دیگری ثبت شده است. لطفا نام کاربری دیگری وارد کنید.')
+        //     }
+        // })
     }
 
     const keyboardClicked = (event) => {
         if (event.key === 'Enter') {
             handleSubmit()
-        }
-    }
-
-    const validateReCaptcha = () => {
-        if (reCaptchaResponse?.length !== 462) {
-            message.error('ربات نبودن شما تایید نشد!')
-            return false
-        } else {
-            return true
         }
     }
 

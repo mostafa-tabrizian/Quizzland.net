@@ -24,10 +24,10 @@ const Header = () => {
     const handleLogout = async () => {
         try {
             await axiosInstance.post('/api/blacklist/', {
-                "refresh_token": localStorage.getItem("refresh_token")
+                "refresh_token": sessionStorage.getItem("refresh_token")
             });
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
+            sessionStorage.removeItem('access_token');
+            sessionStorage.removeItem('refresh_token');
             axiosInstance.defaults.headers['Authorization'] = null;
             window.location.reload()
         }

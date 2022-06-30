@@ -16,10 +16,9 @@ const ProfileSetting = () => {
     }, [])
 
     const checkIfLoggedIn_setUser = async () => {
-        const local_username = localStorage.getItem('username')
         const userProfile = await userProfileDetail()
 
-        if (userProfile == null && userProfile.username !== local_username) {
+        if (userProfile == null) {
             window.location.href = '/login'
         }
         

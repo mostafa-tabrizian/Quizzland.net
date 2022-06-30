@@ -14,18 +14,18 @@ sitemaps = {
 
 router = routers.DefaultRouter()
 
-router.register(r'user', views.CustomUser)
+router.register(r'user', views.CustomUserView)
 
-router.register(r'quiz', views.Quiz)
-router.register(r'test', views.Pointy)
+router.register(r'quiz', views.QuizView)
+router.register(r'test', views.PointyView)
 
-router.register(r'comment', views.Comment)
+router.register(r'comment', views.CommentView)
 
-router.register(r'category', views.Categories)
-router.register(r'subcategory', views.SubCategory)
+router.register(r'category', views.CategoriesView)
+router.register(r'subcategory', views.SubCategoryView)
 
-router.register(r'questions', views.Questions)
-router.register(r'questions_pointy', views.Questions_pointy)
+router.register(r'questions', views.QuestionsView)
+router.register(r'questions_pointy', views.Questions_pointyView)
 
 # router.register(r'new_blog', views.new_blog)
 

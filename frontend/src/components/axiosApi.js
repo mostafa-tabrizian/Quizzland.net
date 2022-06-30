@@ -1,8 +1,11 @@
 import axios from 'axios'
 import { log } from './base'
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 const accessToken = async () => {
-    if (localStorage.getItem('access_token') && localStorage.getItem('refresh_token') && localStorage.getItem('username') !== null) {
+    if (sessionStorage.getItem('access_token') && sessionStorage.getItem('refresh_token')) {
         return
     }
     
@@ -13,10 +16,8 @@ const accessToken = async () => {
 
     await axios.post('/api/token/obtain/', adminDetail)
         .then((req) => {
-            localStorage.setItem('username', null)
             localStorage.setItem('access_token', req.data.access)
-            localStorage.setItem('refresh_token', req.data.refresh)
-            localStorage.setItem('pass_token', null)
+            sessionStorage.setItem('refresh_token', req.data.refresh)
         })
         .catch((err) => {
             log(err)
@@ -28,7 +29,7 @@ accessToken()
 const axiosInstance = axios.create({
     timeout: 5000,
     headers: {
-        'Authorization': "JWT " + localStorage.getItem('access_token'),
+        'Authorization': "JWT " + sessionStorage.getItem('access_token'),
         'Content-Type': 'application/json',
         'accept': 'application/json'
     }
@@ -47,7 +48,7 @@ axiosInstance.interceptors.response.use(
             error.response.status === 401 && 
             error.response.statusText === "Unauthorized") 
             {
-                const refreshToken = localStorage.getItem('refresh_token');
+                const refreshToken = sessionStorage.getItem('refresh_token');
 
                 if (refreshToken) {
                     const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
@@ -60,7 +61,7 @@ axiosInstance.interceptors.response.use(
                                 .then((response) => {
                     
                                     localStorage.setItem('access_token', response.data.access);
-                                    localStorage.setItem('refresh_token', response.data.refresh);
+                                    sessionStorage.setItem('refresh_token', response.data.refresh);
                     
                                     axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
                                     originalRequest.headers['Authorization'] = "JWT " + response.data.access;
@@ -68,8 +69,8 @@ axiosInstance.interceptors.response.use(
                                     return axiosInstance(originalRequest);
                                 })
                                 .catch(err => {
-                                    localStorage.removeItem('access_token')
-                                    localStorage.removeItem('refresh_token')
+                                    sessionStorage.removeItem('access_token')
+                                    sessionStorage.removeItem('refresh_token')
                                     window.location.href = '/login';
                                 });
                     }else{

@@ -29,7 +29,7 @@ const Suggestions = () => {
                 userPreviousLiked = res.data[0].liked_quizzes.split('_')
                 userPreviousLiked = userPreviousLiked.concat(res.data[0].played_history.split('_'))
                 userPreviousLiked = userPreviousLiked.concat(res.data[0].watch_list.split('_'))
-            })    
+            })
 
         return userPreviousLiked
     }

@@ -1,39 +1,47 @@
 import axiosInstance from '../axiosApi'
 import { log } from '../base'
 
+
 const userProfileDetail = async () => {
-    const now = new Date().getTime()
-    const username = localStorage.getItem('username')
-    const localAccessToken = localStorage.getItem('access_token')
-    const localRefreshToken = localStorage.getItem('refresh_token')
-    const localPassToken = localStorage.getItem('pass_token')
     
-    if (username !== null  && localPassToken && localAccessToken && localAccessToken?.length >= 228) {
-        return await axiosInstance.get(`/api/user/?username=${username}&timestamp=${now}`)
-            .then( async res => {
-                if (res.data.length == 0) {
-                    return null
-                } else {
-                    const user = res.data[0]
-                    if (localPassToken == user.pass_token && !user.blocked) {
-                        return await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
-                            .then(res => {
-                                localStorage.setItem('refresh_token', res.data.refresh);
-                                return user
-                            })
-                    } else {
-                        window.location.href = '/login'
-                    }
-                }
+    const refreshToken = async () => {
+        const localRefreshToken = sessionStorage.getItem('refresh_token')
+        return await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
+            .then(res => {
+                sessionStorage.setItem('access_token', res.data.access);
+                sessionStorage.setItem('refresh_token', res.data.refresh);
+                fetchUserProfileUpdate(res.data.access)
+            })
+    }
+
+    const fetchUserProfile = async () => {
+        const localAccessToken = sessionStorage.getItem('access_token')
+        return await axiosInstance.get(`/api/login?at=${localAccessToken}`)
+            .then (res => {
+                log('return profile 1')
+                return res.data
             })
             .catch(err => {
-                if (String(err).includes("reading 'pass_token'")) {
-                    localStorage.setItem('username', null)
-                }
+                log(err)
+                log('refresh')
+                refreshToken()
             })
-    } else {
-        return null
     }
+
+    const fetchUserProfileUpdate = async (at) => {
+        return await axiosInstance.get(`/api/login?at=${at}`)
+            .then (res => {
+                log('return profile 2')
+                return res.data
+            })
+            .catch(err => {
+                log(err)
+                log('refresh again!!!!!')
+            })
+    }
+
+    return await fetchUserProfile()
 }
  
+
 export default userProfileDetail;

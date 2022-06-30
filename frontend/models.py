@@ -24,7 +24,6 @@ Gender = (
 
 class CustomUser(AbstractUser):
     blocked = models.BooleanField(default=False)
-    pass_token = models.CharField(blank=True, max_length=229)
     avatar = models.ImageField(blank=True, null=True, upload_to='user_avatar')
     bio = models.CharField(blank=True, null=True, max_length=255)
     birthday_date = models.DateField(blank=True, null=True)
@@ -34,7 +33,7 @@ class CustomUser(AbstractUser):
     played_history = models.TextField(blank=True, null=True, default='_0', max_length=9000)
     liked_quizzes = models.TextField(blank=True, null=True, default='_0', max_length=9000)
     watch_list = models.TextField(blank=True, null=True, default='_0', max_length=9000)
-
+    
     def __str__(self):
         return str(self.username)
     

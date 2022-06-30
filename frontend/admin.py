@@ -17,7 +17,6 @@ class CustomUserAdmin(UserAdmin):
             {
                 'fields': (
                     'blocked',
-                    'pass_token',
                     'avatar',
                     'bio',
                     'birthday_date',

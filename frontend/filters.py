@@ -6,12 +6,7 @@ class CustomUserFilter(filters.FilterSet):
     class Meta:
         model = CustomUser
         fields = {
-            'blocked': ['exact'],
-            'pass_token': ['exact'],
             'username': ['exact'],
-            'email': ['exact'],
-            'birthday_date': ['lte', 'gte'],
-            'gender': ['exact'],
         }
 
 class QuizzesFilter(filters.FilterSet):
