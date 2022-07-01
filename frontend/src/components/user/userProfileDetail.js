@@ -9,6 +9,7 @@ const userProfileDetail = async () => {
             .then(res => {
                 sessionStorage.setItem('access_token', res.data.access);
                 sessionStorage.setItem('refresh_token', res.data.refresh);
+                window.location.reload()
             })
             .catch(err => {
                 // log(err.response)

@@ -51,6 +51,7 @@ def auth_login(request, *args, **kwargs):
             return HttpResponse(
                 json.dumps(
                     {
+                        'id': user.id,
                         'username': user.username,
                         'first_name': user.first_name,
                         'last_name': user.last_name,

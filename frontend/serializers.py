@@ -1,9 +1,6 @@
-from dataclasses import fields
-from pkg_resources import require
 from rest_framework import serializers
 from .models import *
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from django.forms.widgets import TextInput
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -79,7 +76,7 @@ class CommentsSerializer(serializers.ModelSerializer):
             quiz_related=CommentData['quiz_related'],
             test_related=CommentData['test_related'],
             verified=CommentData['verified'],
-            submitter_related=CustomUser.objects.get(id=CommentData['submitter_related']['username']),
+            submitter_related=CustomUser.objects.get(id=(self.context['request'].data['submitter_related']['username'])),
         )
         
         return newComment
