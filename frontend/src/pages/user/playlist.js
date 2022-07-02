@@ -7,7 +7,7 @@ import LoadingScreen from '../../components/loadingScreen'
 import QuizContainer from '../../components/quizContainer'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
-import SkeletonLoading from '../../components/skeletonLoading';
+import skeletonQuiz from '../../components/skeletonQuiz';
 
 import { log, takeParameterFromUrl } from '../../components/base'
 import userProfileDetail from '../../components/user/userProfileDetail';
@@ -102,7 +102,9 @@ const QuizHistory = () => {
                 <h3 className='title'>{title}</h3>
             </div>
 
-            {SkeletonLoading(contentLoaded)}
+            <div className='w-3/4 mx-auto'>
+                {skeletonQuiz(contentLoaded)}
+            </div>
 
             {
                 (!content.length  && document.readyState === 'complete') ?

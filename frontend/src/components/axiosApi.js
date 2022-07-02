@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios from 'axios'
 import { log } from './base'
 
@@ -39,14 +40,18 @@ axiosInstance.interceptors.response.use(
     error => {
         const originalRequest = error.config;
 
-        if (error.response.status === 401 && originalRequest.url === 'http://localhost:8000' +'/token/refresh/') {
+        if (String(error).includes('timeout ')) {
+            message.error('لطفا اتصال اینترنت خود را بررسی کنید!')
+        }
+
+        if (error.response?.status === 401 && originalRequest.url === 'http://localhost:8000' +'/token/refresh/') {
             window.location.href = '/login';
             return Promise.reject(error);
         }
 
-        if (error.response.data.code === "token_not_valid" &&
-            error.response.status === 401 && 
-            error.response.statusText === "Unauthorized") 
+        if (error.response?.data.code === "token_not_valid" &&
+            error.response?.status === 401 && 
+            error.response?.statusText === "Unauthorized") 
             {
                 const refreshToken = sessionStorage.getItem('refresh_token');
 

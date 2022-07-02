@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 import Tools from '../components/tools'
 import PageTravel from '../components/pageTravel'
 import LoadingScreen from '../components/loadingScreen'
-import SkeletonLoading from '../components/skeletonLoading';
+import skeletonQuiz from '../components/skeletonQuiz';
 import Header from '../components/header'
 import Footer from '../components/footer'
 import AddView from '../components/addView';
@@ -118,7 +118,7 @@ const Category = (props) => {
                     sortType={sortType} setSortType={setSortType}
                 />
 
-                {SkeletonLoading(contentLoaded)}
+                {skeletonQuiz(contentLoaded)}
 
                 <ul className="flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
 

@@ -78,6 +78,21 @@ body {
     }
 }
 
+div {
+    &::-webkit-scrollbar {
+        width: .625rem;
+
+        @include breakpoints-down(large) {
+            width: 0;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: linear-gradient(#b52633, #791118);
+        border-radius: 25px;
+    }
+}
+
 h1,
 h2,
 h3,
@@ -682,7 +697,7 @@ hr {
     }
 }
 
-.skeletonLoading {
+.skeletonQuiz {
     backdrop-filter: blur(20px);
     // width: 14rem; 
     // border-radius: 15px;

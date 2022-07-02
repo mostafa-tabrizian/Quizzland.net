@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
 
-import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
 import QuizContainer from '../components/quizContainer';;
-import { log, replaceFunction, sortByNewest } from '../components/base'
-import SkeletonLoading from '../components/skeletonLoading';
-import SearchFetchQuiz from '../components/searchFetchQuiz';
-import SearchFetchCategory from '../components/searchFetchCategory'
+import { log, replaceFunction } from '../components/base'
+import skeletonQuiz from '../components/skeletonQuiz';
+import SearchFetchQuiz from '../components/search/searchFetchQuiz';
+import SearchFetchCategory from '../components/search/searchFetchCategory'
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -63,7 +62,7 @@ const SearchMoreResult = () => {
 
                 <h3 className='title'>{searchValueWithOutSign}</h3>
 
-                {SkeletonLoading(contentLoaded)}
+                {skeletonQuiz(contentLoaded)}
 
                 <ul className="flex flex-wrap quizContainer flex-ai-fe justify-right">
 

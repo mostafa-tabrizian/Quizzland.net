@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import SkeletonLoading from '../components/skeletonLoading';
+import skeletonQuiz from '../components/skeletonQuiz';
 
 import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
@@ -234,7 +234,7 @@ const Index = () => {
                         <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
-                    {SkeletonLoading(contentLoaded)}
+                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-wrap align-baseline" ref={content_new_ref}>
                         {
@@ -263,7 +263,7 @@ const Index = () => {
                         <Link to="/sort?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
-                    {SkeletonLoading(contentLoaded)}
+                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-wrap align-baseline" ref={content_monthly_ref}>
                         {
@@ -292,7 +292,7 @@ const Index = () => {
                         <Link to="/sort?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
-                    {SkeletonLoading(contentLoaded)}
+                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-wrap align-baseline" ref={content_new_celebrity_ref}>
                         {
@@ -321,7 +321,7 @@ const Index = () => {
                         <Link to="/sort?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
-                    {SkeletonLoading(contentLoaded)}
+                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-wrap align-baseline" ref={content_new_movieSeries_ref}>
                         {
@@ -339,7 +339,7 @@ const Index = () => {
                         <Link to="/sort?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
-                    {SkeletonLoading(contentLoaded)}
+                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-wrap align-baseline" ref={content_new_psychology_ref}>
                         {
@@ -367,7 +367,7 @@ const Index = () => {
                         <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
                     </div>
 
-                    {SkeletonLoading(contentLoaded)}
+                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-wrap align-baseline" ref={loadMoreQuiz_ref}>
                         {

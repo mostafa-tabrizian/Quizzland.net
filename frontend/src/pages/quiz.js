@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-import { notification } from 'antd';
+import { notification, message } from 'antd';
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -10,7 +10,7 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import { log, replaceFunction, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
-import SkeletonLoading from '../components/skeletonLoading';
+import skeletonQuiz from '../components/skeletonQuiz';
 import QuizHeader from '../components/quiz/quizHeader'
 import Trivia from '../components/quiz/trivia'
 import LikeCommentButton from '../components/user/likeCommentButton';
@@ -779,7 +779,7 @@ const Quiz = (props) => {
                     <div className={`quiz__hider mt-5 flex relative`}>
                         {
                             !(contentLoaded) &&
-                            <div className='mt-5 overflow-hidden shadow-lg skeletonLoading skeletonLoading__quizQuestion shadow-zinc-800 rounded-xl'></div>
+                            <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
                         }
 
                         {
@@ -801,7 +801,9 @@ const Quiz = (props) => {
                 <div className='mx-4 mt-10'>
                     <h3 className='flex items-center justify-center mb-5 quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
 
-                    {SkeletonLoading(contentLoaded)}
+                    <div className='w-3/4 mx-auto'>
+                        {skeletonQuiz(contentLoaded)}
+                    </div>
 
                     <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
                         {

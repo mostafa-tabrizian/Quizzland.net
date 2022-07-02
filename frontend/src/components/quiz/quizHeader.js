@@ -7,7 +7,7 @@ const QuizHeader = (props) => {
             {
                 !(props.contentLoaded) &&
                 <div className='flex items-center justify-center'>
-                    <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizTitle'></div>
+                    <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonQuiz skeletonQuiz__quizTitle'></div>
                 </div>
             }
 
@@ -21,8 +21,8 @@ const QuizHeader = (props) => {
                 {
                     !(props.contentLoaded) &&
                     <div className='flex space-x-5'>
-                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
-                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonLoading skeletonLoading__quizInfo'></div>
+                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonQuiz skeletonQuiz__quizInfo'></div>
+                        <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonQuiz skeletonQuiz__quizInfo'></div>
                     </div>
                 }
                 {

@@ -13,7 +13,7 @@ import PageTravel from '../components/pageTravel'
 import { log, replaceFunction, takeParameterFromUrl, sortByNewest, sortByMonthlyViews, sortByViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import SkeletonLoading from '../components/skeletonLoading';
+import skeletonQuiz from '../components/skeletonQuiz';
 
 const SubCategory = (props) => {
 
@@ -115,7 +115,7 @@ const SubCategory = (props) => {
                     sortType={sortType} setSortType={setSortType}
                 />
 
-                {SkeletonLoading(contentLoaded)}
+                {skeletonQuiz(contentLoaded)}
 
                 {
                     hide_content

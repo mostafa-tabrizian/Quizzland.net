@@ -15,56 +15,56 @@
 // }
 
 // .header {
-    // &__links {
-    //     a {
-    //         color: white !important;
-    //     }
+// &__links {
+//     a {
+//         color: white !important;
+//     }
 
-    //     button {
-    //         color: white !important;
-    //     }
-    // }
+//     button {
+//         color: white !important;
+//     }
+// }
 
-    // .subHeader {
-    //     > li > a {
-    //         color: white !important;
+// .subHeader {
+//     > li > a {
+//         color: white !important;
 
-    //         @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-    //             color: black !important;
-    //         }
-            
-    //         &:hover {
-    //             color: rgba(255, 0, 0, 0.692) !important;
-    //         }
-    //     }
-    // }
+//         @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+//             color: black !important;
+//         }
 
-    // &__categories &__quizzes {
+//         &:hover {
+//             color: rgba(255, 0, 0, 0.692) !important;
+//         }
+//     }
+// }
 
-    //     @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-    //         background: rgba(255, 255, 255, 0.18) !important;
-    //         box-shadow: 2px 2px 15px black !important;
-    //     }
-    
-    //     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-    //         background: rgba(0, 0, 0, 0.939) !important;
-    //         box-shadow: 0 0 15px 1px rgba(104, 104, 104, 0.192) !important;
-    //     }
-    // }
+// &__categories &__quizzes {
 
-    // &__menu {
-    //     background:rgba(29, 29, 29, 0.624) !important;
-        
-    //     &__openBtn {
-    //         span {
-    //             background: white !important;
-    //         }
-    //     }
+//     @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+//         background: rgba(255, 255, 255, 0.18) !important;
+//         box-shadow: 2px 2px 15px black !important;
+//     }
 
-    //     &__inner {
-    //         color: white !important;
-    //     }
-    // }
+//     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+//         background: rgba(0, 0, 0, 0.939) !important;
+//         box-shadow: 0 0 15px 1px rgba(104, 104, 104, 0.192) !important;
+//     }
+// }
+
+// &__menu {
+//     background:rgba(29, 29, 29, 0.624) !important;
+
+//     &__openBtn {
+//         span {
+//             background: white !important;
+//         }
+//     }
+
+//     &__inner {
+//         color: white !important;
+//     }
+// }
 
 //     &__search {
 //         // &__opener {
@@ -89,7 +89,7 @@
 //                 background: #000000ee !important;
 //             }
 //         }
-    
+
 //         &__result {
 //             box-shadow: 0 0 40px #87878733 !important;
 
@@ -104,7 +104,7 @@
 //                     }
 //                 }
 //             }
-        
+
 //             &__quizzes {
 //                 &__item {
 //                     &::before {
@@ -296,11 +296,11 @@
 //     border-radius: 5px !important;
 // }
 
-// .skeletonLoading {
-    // background: #111111b9;
-    // box-shadow: 0 10px 22px 1px #7272725c;
-    
-    // &::before {
-    //     background: linear-gradient(to right, transparent 0%, #262626 50%, transparent 100%);
-    // }
+// .skeletonQuiz {
+// background: #111111b9;
+// box-shadow: 0 10px 22px 1px #7272725c;
+
+// &::before {
+//     background: linear-gradient(to right, transparent 0%, #262626 50%, transparent 100%);
+// }
 // }

@@ -11,7 +11,7 @@ import Footer from '../components/footer'
 import { log, replaceFunction, fadeIn, popUpShow, popUpHide, takeParameterFromUrl, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import SkeletonLoading from '../components/skeletonLoading';
+import skeletonQuiz from '../components/skeletonQuiz';
 import userProfileDetail from '../components/user/userProfileDetail';
 import LikeCommentButton from '../components/user/likeCommentButton';
 import AddView from '../components/addView';
@@ -416,7 +416,9 @@ const Result = () => {
 
                 <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
-                {SkeletonLoading(contentLoaded)}
+                <div className='w-3/4 mx-auto'>
+                    {skeletonQuiz(contentLoaded)}
+                </div>
 
                 <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
                     {

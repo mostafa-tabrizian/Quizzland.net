@@ -1,6 +1,6 @@
-import axiosInstance from './axiosApi';
-import { log } from './base'
-import ExcludeWordsToSearch from './excludeWordsToSearch';
+import axiosInstance from '../axiosApi';
+import { log } from '../base'
+import ExcludeWordsToSearch from '../excludeWordsToSearch';
 
 const SearchFetch = async (value) => {  
     const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)

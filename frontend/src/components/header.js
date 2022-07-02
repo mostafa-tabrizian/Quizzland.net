@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { Popover } from 'antd';
 
 import { log } from './base'
-import Search from './search'
+import Search from './search/searchInput'
 import userProfileDetail from '../components/user/userProfileDetail'
 import axiosInstance from './axiosApi';
 

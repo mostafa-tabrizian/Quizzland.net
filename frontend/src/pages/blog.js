@@ -9,7 +9,7 @@ import { log, replaceFunction, datePublishHandler } from '../components/base'
 // import Tools from '../components/tools'
 // import PageTravel from '../components/pageTravel'
 import LoadingScreen from '../components/loadingScreen'
-import SkeletonLoading from '../components/skeletonLoading';
+import skeletonQuiz from '../components/skeletonQuiz';
 import Header from '../components/header'
 
 
@@ -88,9 +88,9 @@ const Blog = (props) => {
             {
                 !(contentLoaded) &&
                 <ul className={`quizContainer flex wrapper-med`}>
-                    <li className='skeletonLoading skeletonLoading__blog'></li>
-                    <li className='skeletonLoading skeletonLoading__blog'></li>
-                    <li className='skeletonLoading skeletonLoading__blog'></li>
+                    <li className='skeletonQuiz skeletonQuiz__blog'></li>
+                    <li className='skeletonQuiz skeletonQuiz__blog'></li>
+                    <li className='skeletonQuiz skeletonQuiz__blog'></li>
                 </ul>
             }
 
