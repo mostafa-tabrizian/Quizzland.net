@@ -2770,13 +2770,13 @@ html {
   fill: #fff;
 }
 .ant-empty-img-simple-ellipse {
-  fill: #f5f5f5;
+  fill: #ac272e;
 }
 .ant-empty-img-simple-g {
-  stroke: #d9d9d9;
+  stroke: #562727;
 }
 .ant-empty-img-simple-path {
-  fill: #fafafa;
+  fill: #ac272e;
 }
 .ant-empty-rtl {
   direction: rtl;
@@ -25343,6 +25343,9 @@ tr.ant-table-expanded-row .ant-descriptions-view table {
 }
 .ant-transfer-operation .ant-btn .anticon {
   font-size: 12px;
+}
+.ant-empty-description {
+  color: white;
 }
 .ant-transfer .ant-empty-image {
   max-height: -2px;

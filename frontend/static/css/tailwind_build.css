@@ -670,14 +670,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 0.75rem;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .my-12 {
@@ -1005,6 +1005,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 91.666667%;
 }
 
+.w-3\/4 {
+  width: 75%;
+}
+
+.w-\[85\%\] {
+  width: 85%;
+}
+
 .w-\[90vw\] {
   width: 90vw;
 }
@@ -1023,22 +1031,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-4 {
   width: 1rem;
-}
-
-.w-\[75\%\] {
-  width: 75%;
-}
-
-.w-3\/4 {
-  width: 75%;
-}
-
-.w-10\/12 {
-  width: 83.333333%;
-}
-
-.w-\[85\%\] {
-  width: 85%;
 }
 
 .max-w-\[19rem\] {
@@ -2106,6 +2098,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 13rem;
   }
 
+  .md\:w-\[15rem\] {
+    width: 15rem;
+  }
+
   .md\:w-\[33rem\] {
     width: 33rem;
   }
@@ -2132,18 +2128,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:w-\[42rem\] {
     width: 42rem;
-  }
-
-  .md\:w-auto {
-    width: auto;
-  }
-
-  .md\:w-\[51rem\] {
-    width: 51rem;
-  }
-
-  .md\:w-\[15rem\] {
-    width: 15rem;
   }
 
   .md\:max-w-\[85\%\] {

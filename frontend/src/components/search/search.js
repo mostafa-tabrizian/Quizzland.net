@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { Empty } from 'antd';
 
 import { log, replaceFunction, sortByNewest } from '../base'
 import axiosInstance from '../axiosApi';
@@ -44,43 +45,52 @@ const Search = (props) => {
                 <h1 className='mb-10'>کوییز ها</h1>
                 <ul class="flex flex-wrap align-baseline">
                     {
+                        searched_content.length ?
                         <QuizContainer quizzes={searched_content} bgStyle='trans' />
+                        :
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2>هیچ کوییزی پیدا نشد!</h2>} />
                     }
                 </ul>      
             </div>
             <div className='self-start order-1 p-4 pl-8 md:sticky top-4'>
                 <div>
                     <h1 className='mb-10'>کتگوری ها</h1>
-                    <ul class="flex justify-start space-x-5 space-x-reverse">
-                        {
-                            searched_category.map((category) => {
-                                return (
-                                    <div key={category.id} className='max-w-[50%]'>
-                                        <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
-                                            <img
-                                                src={category.thumbnail}
-                                                alt={`${category.subCategory}} | های ${category.title_far}}`}
-                                                width={1366}
-                                                height={768}
-                                                className='rounded-lg'
-                                            />
-                                        </Link>
-
-                                        <h2 className='mt-4 md:relative md:left-0 md:top-0'>
+                    {
+                        searched_category.length ?
+                        <ul class="flex justify-start space-x-5 space-x-reverse">
+                            {
+                                searched_category.map((category) => {
+                                    return (
+                                        <div key={category.id} className='max-w-[50%]'>
                                             <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
-                                                {category.subCategory}
+                                                <img
+                                                    src={category.thumbnail}
+                                                    alt={`${category.subCategory}} | های ${category.title_far}}`}
+                                                    width={1366}
+                                                    height={768}
+                                                    className='rounded-lg'
+                                                />
                                             </Link>
-                                        </h2>
-                                    </div>
-                                )
-                            })
-                        }
-                    </ul>
+
+                                            <h2 className='mt-4 md:relative md:left-0 md:top-0'>
+                                                <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                                                    {category.subCategory}
+                                                </Link>
+                                            </h2>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </ul>
+                        :
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2>هیچ کتگوری پیدا نشد!</h2>} />
+                    }
                 </div>
                 <div className='mt-10'>
                     <h1 className='mb-10'>کاربران</h1>
                     <ul class="flex flex-col space-y-3 justify-start">
                         {
+                            searched_user.length ?
                             searched_user.map((user) => {
                                 return (
                                     <Link to={`/profile/${user.username}`}>
@@ -110,6 +120,8 @@ const Search = (props) => {
                                     </Link>
                                 )
                             })
+                            :
+                            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2>هیچ کاربری پیدا نشد!</h2>} />
                         }
                     </ul>
                 </div>
