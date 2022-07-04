@@ -115,7 +115,9 @@ const Quiz = (props) => {
     };
 
     const applyBackground = (background) => {
-        document.querySelector('#quizBg').style = `background: url('${background}') center/cover no-repeat fixed !important`
+        const quizBg = document.querySelector('#quizBg')
+        quizBg &&
+        (quizBg.style = `background: url('${background}') center/cover no-repeat fixed !important`)
     }
 
     const fetchQuiz = async () => {
@@ -146,9 +148,12 @@ const Quiz = (props) => {
                             log(err.response)
                         })
                 })
-            .catch((err) => {
-                log(err.response)
-            })
+                .catch((err) => {
+                    log(err.response)
+                    // setTimeout(() => {
+                    window.location.href = '/404?t=q'
+                    // }, 1000);
+                })
     }
 
     // const calculateTheResultScore = () => {

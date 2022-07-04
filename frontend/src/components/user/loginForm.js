@@ -105,7 +105,7 @@ const LoginForm = (props) => {
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + data.data.access;
                 sessionStorage.setItem('access_token', data.data.access);
                 sessionStorage.setItem('refresh_token', data.data.refresh);
-    
+                
                 window.location.reload()
                 window.history.go(-1)
     
@@ -123,27 +123,28 @@ const LoginForm = (props) => {
     }
 
     const googleLoginSuccess = async (res) => {
-        log(res)
-        const accessToken = res.accessToken
-        const username = replaceFunction(res.profileObj.name, ' ', '')
-        const email = res.profileObj.email
-        const lastName = res.profileObj.familyName || ''
-        const firstName = res.profileObj.givenName || ''
-        const avatar = res.profileObj.imageUrl
-        
-        accessToken &&
-        await axiosInstance.get(`/api/google?at=${accessToken}&u=${username}&e=${email}&ln=${lastName}&fn=${firstName}&av=${avatar}`)
-            .then(res => {
-                axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access_token;
-                sessionStorage.setItem('access_token', res.data.access_token);
-                sessionStorage.setItem('refresh_token', res.data.refresh_token);
+        if (window.location.href === '/login') {
+            const accessToken = res.accessToken
+            const username = replaceFunction(res.profileObj.name, ' ', '')
+            const email = res.profileObj.email
+            const lastName = res.profileObj.familyName || ''
+            const firstName = res.profileObj.givenName || ''
+            const avatar = res.profileObj.imageUrl
 
-                window.location.reload()
-                window.history.go(-1)
-            })
-            .catch(err => {
-                log(err.response)
-            })
+            accessToken &&
+            await axiosInstance.get(`/api/google?at=${accessToken}&u=${username}&e=${email}&ln=${lastName}&fn=${firstName}&av=${avatar}`)
+                .then(res => {
+                    axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access_token;
+                    sessionStorage.setItem('access_token', res.data.access_token);
+                    sessionStorage.setItem('refresh_token', res.data.refresh_token);
+
+                    window.location.reload()
+                    window.history.go(-1)
+                })
+                .catch(err => {
+                    log(err.response)
+                })
+        }
     }
 
     const googleLoginFailure = (res) => {

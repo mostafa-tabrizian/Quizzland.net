@@ -16,7 +16,6 @@ const SubCategory       = lazy(() => import ('./pages/subCategory'))
 
 const Quiz              = lazy(() => import ('./pages/quiz'))
 const Result            = lazy(() => import ('./pages/result'))
-const Quiz404           = lazy(() => import ('./pages/404quiz'))
 
 const Login             = lazy(() => import('./pages/user/login'))
 const Register          = lazy(() => import('./pages/user/register'))
@@ -34,7 +33,7 @@ const Search            = lazy(() => import('./pages/searchPage'))
 const Tags              = lazy(() => import('./pages/tags'))
 const Sort              = lazy(() => import('./pages/sort'))
 const Blog              = lazy(() => import('./pages/blog'))
-const pageNotFound_404  = lazy(() => import('./pages/404'))
+const notFound_404  = lazy(() => import('./pages/404'))
 const monthlyRecord     = lazy(() => import('./pages/monthlyRecord'))
 const restartEveryMonthlyViews     = lazy(() => import('./pages/restartEveryMonthlyViews'))
 const welcomeOwl        = lazy(() => import('./pages/welcomeOwl'))
@@ -103,7 +102,6 @@ const App = () => {
                             <Route path='/quiz/:title' component={Quiz} />
                             <Route path='/test/:title' component={Quiz} />
                             <Route path='/result' component={Result} />
-                            <Route path='/quiz-not-found' component={Quiz404} />
 
                             <Route path='/category/:category' exact component={Category} />
                             <Route path='/category/:category/:subCategory' component={SubCategory} />
@@ -118,10 +116,13 @@ const App = () => {
                             <Route path='/blog' component={Blog} />
                             <Route path='/makeMonthlyRecord' component={monthlyRecord} />
                             <Route path='/restartEveryMonthlyViews' component={restartEveryMonthlyViews} />
+                            
+                            <Route path='/404' component={notFound_404} />
+                            
                             <Route path='/welcomeOwl' component={welcomeOwl} />
                             <Route path='/welcomeZeynab' component={welcomeZeynab} />
 
-                            <Route component={pageNotFound_404} />
+                            <Route component={notFound_404} />
                         </Switch>
                     </div>
                     

@@ -32,7 +32,6 @@ urlpatterns = [
     path('quiz/<title>', index),
     path('test/<title>', index),
     path('result', index),
-    path('quiz-not-found', index),
     
     path('search', index),
     path('tags/<tag>', index),
@@ -42,7 +41,7 @@ urlpatterns = [
     path('makeMonthlyRecord', index),
     path('restartEveryMonthlyViews', restartEveryMonthlyViews),
     
-    # path('renameQuestions', renameQuestions),
+    path('404', index),
     
     path('welcomeOwl', index),
     path('welcomeZeynab', index)
