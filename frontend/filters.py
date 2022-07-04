@@ -7,6 +7,7 @@ class CustomUserFilter(filters.FilterSet):
         model = CustomUser
         fields = {
             'username': ['exact'],
+            'email': ['exact'],
         }
 
 class QuizzesFilter(filters.FilterSet):

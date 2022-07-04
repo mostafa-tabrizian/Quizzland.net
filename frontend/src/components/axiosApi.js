@@ -16,12 +16,12 @@ const accessToken = async () => {
     }
 
     await axios.post('/api/token/obtain/', adminDetail)
-        .then((req) => {
-            sessionStorage.setItem('access_token', req.data.access)
-            sessionStorage.setItem('refresh_token', req.data.refresh)
+        .then((res) => {
+            sessionStorage.setItem('access_token', res.data.access)
+            sessionStorage.setItem('refresh_token', res.data.refresh)
         })
         .catch((err) => {
-            // log(err.response)
+            log(err.response)
         })
 }
 
@@ -44,14 +44,15 @@ axiosInstance.interceptors.response.use(
             message.error('لطفا اتصال اینترنت خود را بررسی کنید!')
         }
 
-        if (error.response?.status === 401 && originalRequest.url === 'http://localhost:8000' +'/token/refresh/') {
-            window.location.href = '/login';
+        if (error.response.status === 401 && originalRequest.url === 'http://localhost:8000' +'/token/refresh/') {
+        // log('logged from 1')    
+        window.location.href = '/login';
             return Promise.reject(error);
         }
 
-        if (error.response?.data.code === "token_not_valid" &&
-            error.response?.status === 401 && 
-            error.response?.statusText === "Unauthorized") 
+        if (error.response.data.code === "token_not_valid" &&
+            error.response.status === 401 && 
+            error.response.statusText === "Unauthorized") 
             {
                 const refreshToken = sessionStorage.getItem('refresh_token');
 
@@ -76,12 +77,15 @@ axiosInstance.interceptors.response.use(
                                 .catch(err => {
                                     sessionStorage.removeItem('access_token')
                                     sessionStorage.removeItem('refresh_token')
+                                    // log('logged from 2')
                                     window.location.href = '/login';
                                 });
                     }else{
+                        // log('logged from 3')
                         window.location.href = '/login';
                     }
                 }else{
+                    // log('logged from 4')
                     window.location.href = '/login';
                 }
         }

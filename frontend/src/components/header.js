@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from "react-helmet";
-import { Popover } from 'antd';
+
+import { gapi } from 'gapi-script'
+import { useGoogleLogout } from 'react-google-login'
 
 import { log } from './base'
 import Search from './search/searchInput'
@@ -17,11 +19,28 @@ const Header = () => {
 
     const mobileSearchInput = useRef()
 
+    const { signOut } = useGoogleLogout({
+        clientId: '590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com',
+        onLogoutSuccess: () => {log('google 1')},
+        onFailure: () => {log('google 2')},
+    })
+
     useEffect(async () => {
         setUserProfile(await userProfileDetail())
+        
+        const startGapiClient = () => {
+            gapi.client.init({
+                clientId: '590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com',
+                scope: ''
+            })
+        }
+
+        gapi.load('client:auth2', startGapiClient)
     }, [])
 
-    const handleLogout = async () => {
+    const handleLogout = async () => {  
+        signOut()
+        
         try {
             await axiosInstance.post('/api/blacklist/', {
                 "refresh_token": sessionStorage.getItem("refresh_token")
@@ -44,6 +63,14 @@ const Header = () => {
         setSearchMobileOpen(searchMobileOpen ? false : true)
     }
 
+    const logoutSuccess = () => {
+        log('loggout success')
+    }
+
+    const logoutFailure = () => {
+        log('loggout Failure')
+    }
+    
     return (
         <React.Fragment>
 
@@ -119,10 +146,10 @@ const Header = () => {
                             <div className='flex items-center space-x-3 space-x-reverse'>
                                 {
                                     userProfile?.avatar?
-                                    <img className="" src={userProfile.avatar} alt={userProfile.username} />
+                                    <img className="w-12 h-12 rounded-full" src={userProfile.avatar} alt={userProfile.username} />
                                     :
-                                    <svg className="h-10 w-10 text-[#ac272e]"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    <svg className="h-12 w-12 text-[#ac272e]"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
                                 }
                                 {
@@ -130,11 +157,7 @@ const Header = () => {
                                     <h2 onClick={() => setProfileSubMenu(!profileSubMenu)} className='hover:cursor-pointer'>
                                         <div className='flex items-center'>
                                             {
-                                                (userProfile.first_name == '' && userProfile.last_name == '') ?
-                                                <div>
-                                                    {userProfile.username}
-                                                </div>
-                                                :
+                                                userProfile.first_name !== '' || userProfile.last_name !== '' ?
                                                 <div className='flex space-x-1 space-x-reverse'>
                                                     <div>
                                                         {userProfile.first_name}
@@ -142,6 +165,10 @@ const Header = () => {
                                                     <div>
                                                         {userProfile.last_name}
                                                     </div>
+                                                </div>
+                                                :
+                                                <div>
+                                                    {userProfile.username}
                                                 </div>
                                             }
                                         </div>

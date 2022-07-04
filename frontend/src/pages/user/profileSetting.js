@@ -44,10 +44,10 @@ const ProfileSetting = () => {
                         <div>
                             <h3>تصویر پروفایل و نام کاربری</h3>
                             <div>
-                                <div className='flex justify-around space-x-5 space-x-reverse md:justify-start'>
+                                <div className='flex justify-around mt-5 space-x-5 space-x-reverse md:justify-start'>
                                     {
                                         user?.avatar ?
-                                        <img className="" src={user?.avatar} alt={user?.username} />
+                                        <img className="w-20 h-20 rounded-full" src={user?.avatar} alt={user?.username} />
                                         :
                                         <svg className="h-20 w-20 text-[#ac272e]"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>

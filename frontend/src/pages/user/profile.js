@@ -32,7 +32,6 @@ const Profile = () => {
                     return null
                 } else {
                     const userDetail = res.data[0]
-                    
                     setUser(userDetail)
                     return userDetail
                 }
@@ -41,8 +40,6 @@ const Profile = () => {
 
     const getUserCommentsLength = async (userDetails) => {
         const now = new Date().getTime()
-        
-        log(userDetails)
         
         await axiosInstance.get(`/api/comment/?submitter_related=${userDetails.id}&timestamp=${now}`)
             .then( async res => {
@@ -69,7 +66,7 @@ const Profile = () => {
                             <div className="flex items-center mb-5 space-x-2 space-x-reverse">
                                 {
                                     user?.avatar ?
-                                    <img className="" src={user?.avatar} alt={user?.username} />
+                                    <img className="w-20 h-20 rounded-full" src={'https:' + user.avatar.slice(59, )} alt={user.username} />
                                     :
                                     <svg className="h-20 w-20 text-[#ac272e]"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>

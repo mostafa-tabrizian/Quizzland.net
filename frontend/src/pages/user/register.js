@@ -32,25 +32,25 @@ const Register = () => {
         }
     }
 
-    const loginAndRedirect = async () => {
-        const data = await axiosInstance.post('/api/token/obtain/', {
-            username: username,
-            password: password
-        });
+    // const loginAndRedirect = async () => {
+    //     const data = await axiosInstance.post('/api/token/obtain/', {
+    //         username: username,
+    //         password: password
+    //     });
 
-        axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
-        sessionStorage.setItem('access_token', data.data.access);
-        sessionStorage.setItem('refresh_token', data.data.refresh);
+    //     axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
+    //     sessionStorage.setItem('access_token', data.data.access);
+    //     sessionStorage.setItem('refresh_token', data.data.refresh);
 
-        window.location.href = `/setting`
-    }
+    //     window.location.href = `/setting`
+    // }
     
-    const validatePassword = () => {
-        if (password.length < 8) { message.error('رمز عبور باید بیشتر از 8 کارکتر باشد')}
-        else if (password == parseInt(password)) { message.error('رمز عبور باید حداقل حاوی یک کارکتر انگلیسی باشد')}
-        else if (password !== rePassword) { message.error('رمز عبور و تکرار آن یکسان نمی‌باشد')}
-        else { return 'valid'}
-    }
+    // const validatePassword = () => {
+    //     if (password.length < 8) { message.error('رمز عبور باید بیشتر از 8 کارکتر باشد')}
+    //     else if (password == parseInt(password)) { message.error('رمز عبور باید حداقل حاوی یک کارکتر انگلیسی باشد')}
+    //     else if (password !== rePassword) { message.error('رمز عبور و تکرار آن یکسان نمی‌باشد')}
+    //     else { return 'valid'}
+    // }
 
     // const emailExists = async () => {
     //     await axiosInstance.get(`/api/user/?email=${email}`)
@@ -76,7 +76,6 @@ const Register = () => {
 
     const handleSubmit = async () => {
         if (!checkAllInputEntered()) { return }
-        // if (await emailExists() || (validatePassword() !== 'valid') || !validateReCaptcha()) { return }
 
         axiosInstance.post(`/api/register?u=${username}&e=${email}&p=${password}&rc=${reCaptchaResponse}`)
 

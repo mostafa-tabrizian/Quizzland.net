@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from '../axiosApi';;
-import { message, notification } from 'antd';
-import { Link } from "react-router-dom";
+import { message } from 'antd';
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script'
+import ReCAPTCHA from 'react-google-recaptcha'
 
-import { log } from '../base'
+import { log, replaceFunction } from '../base'
 import userProfileDetail from "./userProfileDetail";
 
 const LoginForm = (props) => {
-    const [username, setUsername] = useState(null)
+    const [emailUsername, setEmailUsername] = useState(null)
     const [password, setPassword] = useState(null)
+    const [reCaptchaResponse, setReCaptchaResponse] = useState(null)
 
     useEffect( async () => {
-        checkIfLoggedIn()
+        checkIfLoggedIn(false)
+
+        const startGapiClient = () => {
+            gapi.client.init({
+                clientId: '590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com',
+                scope: ''
+            })
+        }
+
+        gapi.load('client:auth2', startGapiClient)
     }, [])
 
-    const checkIfLoggedIn = async () => {
+    const checkIfLoggedIn = async (googleLoginStatus) => {
         const userProfile = await userProfileDetail()
         
-        if (userProfile !== undefined && window.location.pathname == '/login') {
+        if ((userProfile !== undefined && window.location.pathname == '/login') || googleLoginStatus) {
             window.location.href = '/'
         }
     }
@@ -25,11 +37,11 @@ const LoginForm = (props) => {
     // const checkIfBlocked = async () => {
     //     const now = new Date().getTime()
         
-    //     return await axiosInstance.get(`api/user/?username=${username}&timestamp=${now}`)
+    //     return await axiosInstance.get(`api/user/?email=${email}&timestamp=${now}`)
     //         .then(res =>{
     //             if (res.data[0].blocked) {
     //                 notification.open({
-    //                     message: 'این نام کاربری مسدود شده است',
+    //                     message: 'این کاربر مسدود شده است',
     //                     description:
     //                         'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
     //                     duration: 5,
@@ -48,41 +60,59 @@ const LoginForm = (props) => {
     //                 return true
     //             }
     //         })
-            // .catch(err => {
-            //     log(err.response1)
-            // })
+    //         .catch(err => {
+    //             log(err.response)
+    //         })
     // }
 
     const checkAllInputEntered = () => {
-        if (username == null || password == null) {
-            message.error('لطفا فورم را کامل کنید')
+        if (emailUsername == null || password == null) {
+            message.warning('لطفا فورم را کامل کنید')
             return false
         } else {
             return true
         }
     }
 
-    const handleSubmit = async () => {
-        // if (!checkAllInputEntered() || !(await checkIfBlocked())) {
-        //     return
-        // }
+    const doesUserExist = async () => {
+        const now = new Date().getTime()
         
-        try {
-            const data = await axiosInstance.post('/api/token/obtain/', {
-                username: username,
-                password: password
-            });
+        const existByEmail = await axiosInstance.get(`/api/user/?email=${emailUsername}&timestamp=${now}`)
+        const existByUsername = await axiosInstance.get(`/api/user/?username=${emailUsername}&timestamp=${now}`)
+        
+        const doesUserExist = existByUsername.data.concat(existByEmail.data).length !== 0
+        
+        if (doesUserExist) { return true}
+        else {
+            message.error('این ایمیل/نام کاربری وجود ندارد');
+            return false
+        }
+    }
 
-            axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
-            sessionStorage.setItem('access_token', data.data.access);
-            sessionStorage.setItem('refresh_token', data.data.refresh);
-
-            window.location.reload()
-            window.history.go(-1)
-
-        } catch (error) {
-            message.error('نام کاربری یا رمز عبور اشتباه می‌باشد');
-            throw error;
+    const handleSubmit = async () => {
+        if (
+            checkAllInputEntered() &&
+            await doesUserExist()
+        ){
+            // reCaptchaResponse
+              
+            try {
+                const data = await axiosInstance.post('/api/token/obtain/', {
+                    username: emailUsername,
+                    password: password
+                })
+                    
+                axiosInstance.defaults.headers['Authorization'] = "JWT " + data.data.access;
+                sessionStorage.setItem('access_token', data.data.access);
+                sessionStorage.setItem('refresh_token', data.data.refresh);
+    
+                window.location.reload()
+                window.history.go(-1)
+    
+            } catch (error) {
+                message.error('رمز عبور اشتباه می‌باشد');
+                throw error;   
+            }
         }
     }
 
@@ -92,25 +122,70 @@ const LoginForm = (props) => {
         }
     }
 
+    const googleLoginSuccess = async (res) => {
+        log(res)
+        const accessToken = res.accessToken
+        const username = replaceFunction(res.profileObj.name, ' ', '')
+        const email = res.profileObj.email
+        const lastName = res.profileObj.familyName || ''
+        const firstName = res.profileObj.givenName || ''
+        const avatar = res.profileObj.imageUrl
+        
+        accessToken &&
+        await axiosInstance.get(`/api/google?at=${accessToken}&u=${username}&e=${email}&ln=${lastName}&fn=${firstName}&av=${avatar}`)
+            .then(res => {
+                axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access_token;
+                sessionStorage.setItem('access_token', res.data.access_token);
+                sessionStorage.setItem('refresh_token', res.data.refresh_token);
+
+                window.location.reload()
+                window.history.go(-1)
+            })
+            .catch(err => {
+                log(err.response)
+            })
+    }
+
+    const googleLoginFailure = (res) => {
+        log('fail login, res: ' + res)
+    }
+
     return (
-        <div className='noBlur'>
-            <form className='grid noBlur justify-center space-y-5 p-8 text-[20px] rounded-lg center'>
+        <div className='p-8 noBlur '>
+            <form className='grid noBlur justify-center space-y-5 text-[20px] rounded-lg center'>
                 <label className='w-[18rem] noBlur'>
-                    <input name="username" className='w-full p-2 text-base rounded-lg noBlur' type="string" placeholder="نام کاربری" value={username} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setUsername(input.target.value)} />
+                    <input name="email" className='w-full p-2 text-base rounded-lg noBlur' type="string" placeholder="ایمیل یا نام کاربری" value={emailUsername} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setEmailUsername(input.target.value)} />
                 </label>
                 <label className='noBlur w-[18rem]'>
                     <input name="password" className='w-full p-2 text-base rounded-lg noBlur' type="password" placeholder="رمز عبور" value={password} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setPassword(input.target.value)} />
                 </label>
+                <ReCAPTCHA
+                    sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
+                    theme='dark'
+                    onChange={res => setReCaptchaResponse(res)}
+                />
                 <button onClick={() => handleSubmit()} className='bg-[#ac272e] noBlur p-2 rounded-lg text-white font-semibold' type="button">
-                    تایید
+                    ورود
                 </button>
             </form>
 
-            <div className='noBlur'>
+            <hr className='mx-auto' />
+
+            <GoogleLogin
+                clientId="590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com"
+                className='w-[90%] flex justify-center'
+                buttonText="ورود با حساب گوگل"
+                onSuccess={googleLoginSuccess}
+                onFailure={googleLoginFailure}
+                cookiePolicy={'single_host_origin'}
+                isSignedIn={true}
+            />
+
+            {/* <div className='noBlur'>
                 <h2 className='noBlur'>
                     یا اگر اکانت ندارید اینجا <Link to='/register' className="text-[#d8545a] noBlur">ثبت نام</Link> کنید
                 </h2>
-            </div>
+            </div> */}
         </div>
     );
 }

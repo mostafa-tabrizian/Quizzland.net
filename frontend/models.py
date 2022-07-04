@@ -5,7 +5,6 @@ from ckeditor.fields import RichTextField
 import datetime
 from django.contrib.auth.models import AbstractUser
 
-
 class Categories(models.Model):
     id = models.AutoField(primary_key=True)
     title_english = models.CharField(max_length=80, null=False, blank=False, default=None)
@@ -35,7 +34,7 @@ class CustomUser(AbstractUser):
     watch_list = models.TextField(blank=True, null=True, default='_0', max_length=9000)
     
     def __str__(self):
-        return str(self.username)
+        return str(self.email)
     
 class Document(models.Model):
     id = models.AutoField(primary_key=True)

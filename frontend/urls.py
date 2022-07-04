@@ -6,11 +6,12 @@ urlpatterns = [
     # re_path(r'^(?P<SOS>.*)/$', SOS),  # SOS Time
     # re_path('', SOS_landpage),  # SOS Time
     
-    path('api/token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),  # override sjwt stock token
+    path('api/token/obtain/', TokenObtainPairView.as_view(serializer_class=CustomJWTSerializer), name='token_create'),  # override sjwt stock token
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
     path('api/login', auth_login),
-    path('api/register', auth_register),
+    # path('api/register', auth_register),
+    path('api/google', auth_google),
     
     path('login', index),
     path('register', index),

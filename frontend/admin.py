@@ -6,9 +6,9 @@ from django.contrib.auth.models import User
 admin.site.site_header = "Quizzland Admin Panel"
 
 class CustomUserAdmin(UserAdmin):
-    list_display = ('username', 'last_name', 'first_name')
+    list_display = ('username', 'email', 'last_name', 'first_name')
     list_filter = ('birthday_date', 'gender', 'blocked')
-    search_fields = ['username', 'last_name', 'first_name']
+    search_fields = ['username', 'email', 'last_name', 'first_name']
     
     fieldsets = (
         *UserAdmin.fieldsets,  # original form fieldsets, expanded

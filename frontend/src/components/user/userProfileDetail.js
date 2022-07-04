@@ -1,19 +1,25 @@
+import { useEffect } from 'react'
+
 import axiosInstance from '../axiosApi'
 import { log } from '../base'
 
+
 const userProfileDetail = async () => {
-    
     const refreshToken = async () => {
         const localRefreshToken = sessionStorage.getItem('refresh_token')
-        return await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
-            .then(res => {
-                sessionStorage.setItem('access_token', res.data.access);
-                sessionStorage.setItem('refresh_token', res.data.refresh);
-                window.location.reload()
-            })
-            .catch(err => {
-                // log(err.response)
-            })
+        
+        return (
+            localRefreshToken&&
+            await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
+                .then(res => {
+                    sessionStorage.setItem('access_token', res.data.access);
+                    sessionStorage.setItem('refresh_token', res.data.refresh);
+                    window.location.reload()
+                })
+                .catch(err => {
+                    log(err.response)
+                })
+        )
     }
 
     const fetchUserProfile = async () => {

@@ -10,6 +10,8 @@ from .filters import *
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.hashers import make_password
 
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
@@ -116,6 +118,36 @@ def auth_register(request, *args, **kwargs):
             except Exception as e:
                 print('exception--------------------------')
                 print(e)
+
+def auth_google(request, *args, **kwargs):
+    payload = {'access_token': request.GET.get("at")}
+    r = requests.get('https://www.googleapis.com/oauth2/v2/userinfo', params=payload)
+    data = json.loads(r.text)
+
+    if 'error' in data:
+        content = {'message': 'wrong google token / this google token is already expired.'}
+        return HttpResponse(content)
+
+    # create user if not exist
+    try:
+        user = CustomUser.objects.get(email=data['email']) or CustomUser.objects.get(username=request.GET.get('u'))
+    except CustomUser.DoesNotExist:
+        user = CustomUser()
+        user.username = request.GET.get('u')
+        user.password = make_password(BaseUserManager().make_random_password())
+        user.email = data['email']
+        user.last_name = request.GET.get('ln')
+        user.first_name = request.GET.get('fn')
+        user.avatar = request.GET.get('av')
+        user.save()
+
+    token = RefreshToken.for_user(user)  # generate token without username & password
+    response = {}
+    response['username'] = user.username
+    response['access_token'] = str(token.access_token)
+    response['refresh_token'] = str(token)
+    
+    return HttpResponse(json.dumps(response))
 
 def restartEveryMonthlyViews(request):
     try:
