@@ -9,35 +9,30 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool)
 
-# # HTTPS settings
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+# COOKIE_SECURE settings
+SESSION_COOKIE_SECURE = config('SECURITY', cast=bool)
+CSRF_COOKIE_SECURE = config('SECURITY', cast=bool)
 
-# SECURE_CONTENT_TYPE_NOSNIFF = True
+# HSTS, NO_SNIFF, XSS, REFERRER
+SECURE_HSTS_SECONDS = 172_800  # 1y 86400 6m  
+SECURE_HSTS_PRELOAD = config('SECURITY', cast=bool)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = config('SECURITY', cast=bool)
 
-# # HSTS settings
-# SECURE_HSTS_SECONDS = 86400 # 6 Month
-# SECURE_HSTS_PRELOAD = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_SSL_REDIRECT = config('SECURITY', cast=bool)
+SECURE_CONTENT_TYPE_NOSNIFF = config('SECURITY', cast=bool)
+SECURE_REFERRER_POLICY = "strict-origin"
+SECURE_BROWSER_XSS_FILTER = config('SECURITY', cast=bool)
 
-# # Reffer
-# SECURE_REFERRER_POLICY = "strict-origin"
+# CSP
+CSP_DEFAULT_SRC = ("'none'",)
+CSP_STYLE_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_FONT_SRC = ("'self'",)
+CSP_IMG_SRC = ("'self'",)
 
-# # XSS
-# SECURE_BROWSER_XSS_FILTER = True
-
-# # CSP
-# CSP_DEFAULT_SRC = ("'none'",)
-# CSP_STYLE_SRC = ("'self'",)
-# CSP_SCRIPT_SRC = ("'self'",)
-# CSP_FONT_SRC = ("'self'",)
-# CSP_IMG_SRC = ("'self'",)
-
-# Rest framework setup
+# Rest framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         'rest_framework.permissions.IsAuthenticated',
     ),
     
@@ -77,6 +72,8 @@ ALLOWED_HOSTS = [
     'www.quizzland.ir', 'quizzland.ir',
     'localhost',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000'
@@ -160,8 +157,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {

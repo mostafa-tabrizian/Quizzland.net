@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import axiosInstance from '../axiosApi'
 import { log } from '../base'
 

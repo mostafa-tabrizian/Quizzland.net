@@ -48,25 +48,12 @@ class NotificationSerializer(serializers.ModelSerializer):
         fields = (
             '__all__'
         )
-        
-    user = CustomUserSerializer(many=False)
     
-    def create(self, request):
-        NotificationData = request
+    # def update(self, instance, validated_data):
+    #     instance.has_read = validated_data['has_read']
+    #     instance.save()
         
-        newNotification = Notification.objects.create(
-            user=CustomUser.objects.get(id=(self.context['request'].data['user']['username'])),
-            message=NotificationData['message'],
-            type=NotificationData['type'],
-        )
-        
-        return newNotification
-    
-    def update(self, instance, validated_data):
-        instance.has_read = validated_data['has_read']
-        instance.save()
-        
-        return instance
+    #     return instance
 
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:

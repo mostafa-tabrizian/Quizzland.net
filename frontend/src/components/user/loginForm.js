@@ -18,7 +18,7 @@ const LoginForm = (props) => {
 
         const startGapiClient = () => {
             gapi.client.init({
-                clientId: '590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com',
+                clientId: process.env.GOOGLE_LOGIN_CLIENT,
                 scope: ''
             })
         }

@@ -11,8 +11,8 @@ const accessToken = async () => {
     }
     
     const adminDetail = {
-        username: process.env.GUESTUSERNAME,
-        password: process.env.GUESTPASSWORD,
+        username: process.env.GUEST_USERNAME,
+        password: process.env.GUEST_PASSWORD,
     }
 
     await axios.post('/api/token/obtain/', adminDetail)
