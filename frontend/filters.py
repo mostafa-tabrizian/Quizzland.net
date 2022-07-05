@@ -10,6 +10,17 @@ class CustomUserFilter(filters.FilterSet):
             'email': ['exact'],
         }
 
+class NotificationFilter(filters.FilterSet):
+    class Meta:
+        model = Notification
+        fields = {
+            'user': ['exact'],
+            'message': ['icontains'],
+            'type': ['exact'],
+            'has_read': ['exact'],
+            'created_at': ['lte', 'gte'],
+        }
+
 class QuizzesFilter(filters.FilterSet):
     class Meta:
         model= Quizzes

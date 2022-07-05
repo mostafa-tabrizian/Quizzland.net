@@ -7,6 +7,7 @@ import { useGoogleLogout } from 'react-google-login'
 
 import { log } from './base'
 import Search from './search/searchInput'
+import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
 import axiosInstance from './axiosApi';
 
@@ -179,7 +180,7 @@ const Header = () => {
                             </div>
 
                             <div className={`absolute top-14 border-2 bg-[#0e0202f3] border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
-                                <div className='relative px-4 py-4'>
+                                <div className='relative px-4 py-4 max-w-[14rem]'>
                                     <div>
                                         <ul className='flex flex-col'>
                                             <li><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
@@ -194,12 +195,8 @@ const Header = () => {
                                     <hr />
 
                                     <div>
-                                        <h2>اطلاعیه ها</h2>
-                                        <div>
-                                            <ul>
-                                                <li><p className='text-sm'>هیچ اطلاعیه ای ندارید!</p></li>
-                                            </ul>
-                                        </div>
+                                        <h2>اطلاعیه برای شما</h2>
+                                            {userProfile && <Notification user={userProfile?.id} />}
                                     </div>
                                 </div>
                             </div>
@@ -314,7 +311,14 @@ const Header = () => {
                         userProfile ?
                         <React.Fragment>
                             <hr className='border-[#690D11] '/>
-                            <h3 className='text-xl'>اطلاعات اکانت</h3>
+                            
+                            <h4>اطلاعیه برای شما</h4>
+                            <div className='mt-2'>
+                                <Notification user={userProfile.id} />
+                            </div>
+
+                            <hr className='border-[#690D11] '/>
+                            
                             <ul className='flex flex-col mt-5 space-y-5'>
                                 <li className='text-lg'><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
                                 <li className='text-lg'><Link to='/setting'>تنظیمات اکانت</Link></li>

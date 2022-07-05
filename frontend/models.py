@@ -35,6 +35,22 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return str(self.email)
+
+NOTIFICATION_CHOICES = (
+    ('info', 'info'),
+    ('congrat', 'congrat'),
+    ('warning', 'warning'),
+)
+    
+class Notification(models.Model):
+    user = models.ForeignKey(CustomUser, blank=True, null=True, on_delete=models.CASCADE)
+    message = models.CharField(max_length=255, blank=False, null=True)
+    type = models.CharField(max_length=255, choices=NOTIFICATION_CHOICES, blank=False, null=True)
+    has_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return str(self.user)
     
 class Document(models.Model):
     id = models.AutoField(primary_key=True)

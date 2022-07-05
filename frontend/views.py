@@ -175,6 +175,12 @@ class CustomUserView(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
     filterset_class = CustomUserFilter
 
+class NotificationView(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated, )
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer
+    filterset_class = NotificationFilter
+
 # --------------------------------------------------------
 
 class QuizView(viewsets.ModelViewSet):
