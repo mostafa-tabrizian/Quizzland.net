@@ -12,9 +12,7 @@ const pathRed = '/static/img/bubbles.webp'
 const Guide = () => {
 
     useEffect(() => {
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = `background: #0a0d13 url(${pathRed})) center center scroll !important`
-        }
+        document.querySelector('body').style = `background: #0a0d13 url(${pathRed})) center center scroll`
     }, [])
 
     return (
@@ -98,7 +96,7 @@ const Guide = () => {
                     کوییز هایی که ارزش علمی داشته باشند، در انتهای هر نتیجه کوییز منبع ذکر خواهد شد تا از صحت کوییز و تست اطمینان یابید و حق نشر رعایت شود
                 </p> */}
 
-                    <h5 className="space-med text-center">
+                    <h5 className="text-center space-med">
                         اگر به کمک بیشتری هستید میتوانید از <Link to="/contact" style={{ textDecoration: 'underline' }}>اینجا</Link> با ما در تماس باشید
                     </h5>
                     <h5 className="text-left"><Link to="/welcomeOwl">💗</Link> کوییزلند</h5>

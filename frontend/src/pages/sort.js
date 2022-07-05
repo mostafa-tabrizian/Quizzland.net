@@ -32,18 +32,14 @@ const Sort = () => {
         setCountResult(100)
         fetchContent()
         setLoadState(true)
+        
+        document.querySelector('body').style = 'background: #060101'
         document.querySelector('#land').classList.add('overflow-y-auto')  // make content load on scroll
     }, [])
 
     useEffect(() => {
         sortContent()
     }, [sortType, content])
-
-    useEffect(() => {
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = 'background: #121212'
-        }
-    }, [location])
 
     const sortContent = () => {
         switch (sortType) {

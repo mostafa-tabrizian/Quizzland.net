@@ -18,7 +18,6 @@ const Quiz              = lazy(() => import ('./pages/quiz'))
 const Result            = lazy(() => import ('./pages/result'))
 
 const Login             = lazy(() => import('./pages/user/login'))
-const Register          = lazy(() => import('./pages/user/register'))
 const Profile           = lazy(() => import('./pages/user/profile'))
 const Setting           = lazy(() => import('./pages/user/profileSetting'))
 const Playlist       = lazy(() => import('./pages/user/playlist'))
@@ -92,7 +91,6 @@ const App = () => {
                             <Route path='/' exact component={Index} />
 
                             <Route path='/login' component={Login} />
-                            <Route path='/register' component={Register} />
                             <Route path='/profile/:user' component={Profile} />
                             <Route path='/setting' component={Setting} />
                             <Route path='/playlist' component={Playlist} />

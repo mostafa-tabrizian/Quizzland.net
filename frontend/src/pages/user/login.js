@@ -8,9 +8,7 @@ const pathRed = '/static/img/bubbles.webp'
 
 const Login = () => {
     useEffect(() => {
-        if (document.querySelector('body')) {
-            document.querySelector('body').style = `background: #060101 url(${pathRed}) center center scroll !important`
-        }
+        document.querySelector('body').style = `background: #060101 url(${pathRed}) center center scroll`
     }, [])
 
     return (

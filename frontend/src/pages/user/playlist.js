@@ -24,10 +24,8 @@ const QuizHistory = () => {
     useEffect(() => {
         fetchContent()
         setLoadState(true)
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = 'background: #121212'
-        }
-
+        
+        document.querySelector('body').style = 'background: #121212'
         document.getElementById('land').scrollIntoView()
     }, [location])
 

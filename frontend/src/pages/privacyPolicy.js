@@ -9,9 +9,7 @@ const pathRed = '/static/img/bubbles.webp'
 const PrivacyPolicy = () => {
 
     useEffect(() => {
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = `background: #0a0d13 url(${pathRed})) center center scroll !important`
-        }
+        document.querySelector('body').style = `background: #0a0d13 url(${pathRed})) center center scroll`
     }, [])
 
     return (

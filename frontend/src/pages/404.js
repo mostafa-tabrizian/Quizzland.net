@@ -13,8 +13,8 @@ const NotFound_404 = () => {
 
     useEffect(() => {
         selectMessage()
-        if (document.getElementById('html')) {
-            document.getElementById('html').style = `background: #0a0d13 url('${pathRed}') center center scroll !important`
+        if (document.querySelector('body')) {
+            document.querySelector('body').style = `background: #0a0d13 url('${pathRed}') center center scroll !important`
         }
     }, [])
 

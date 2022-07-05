@@ -123,7 +123,7 @@ const LoginForm = (props) => {
     }
 
     const googleLoginSuccess = async (res) => {
-        if (window.location.href === '/login') {
+        if (window.location.pathname === '/login') {
             const accessToken = res.accessToken
             const username = replaceFunction(res.profileObj.name, ' ', '')
             const email = res.profileObj.email
@@ -181,12 +181,7 @@ const LoginForm = (props) => {
                 cookiePolicy={'single_host_origin'}
                 isSignedIn={true}
             />
-
-            {/* <div className='noBlur'>
-                <h2 className='noBlur'>
-                    یا اگر اکانت ندارید اینجا <Link to='/register' className="text-[#d8545a] noBlur">ثبت نام</Link> کنید
-                </h2>
-            </div> */}
+            
         </div>
     );
 }

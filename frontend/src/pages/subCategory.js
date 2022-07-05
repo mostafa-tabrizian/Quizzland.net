@@ -84,7 +84,7 @@ const SubCategory = (props) => {
             .then((categoryData) => {
                 AddView('subcategory', categoryData.data[0].id)
                 const background = categoryData.data[0].background
-                document.getElementById('html').style = `
+                document.querySelector('body').style = `
                     background: url('${background}') center/cover fixed no-repeat !important;
                 `
             })

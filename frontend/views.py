@@ -86,39 +86,6 @@ def verifyRecaptcha(response):
     req = requests.post('https://www.google.com/recaptcha/api/siteverify', params)
     return (json.loads(req.content))['success']
     
-
-def auth_register(request, *args, **kwargs):
-    if request.method == 'POST':
-        username = request.GET.get('u')
-        email = request.GET.get('e')
-        password = request.GET.get('p')
-        reCaptcha_response = request.GET.get('rc')
-        
-        if not verifyRecaptcha(reCaptcha_response):
-            print('not verified recaptcha or duplicate')
-            return HttpResponse('not verified recaptcha or duplicate')
-        
-        elif checkAlreadyUserExists(username, email):
-            print('user already exists')
-            return HttpResponse('user already exists')
-            
-        else:
-            try:
-                newUser = CustomUser(
-                    username=username,
-                    email=email,
-                )
-                newUser.set_password(password)
-                newUser.save()
-                
-                print('regitser')
-                return HttpResponse('regitser')
-            
-            
-            except Exception as e:
-                print('exception--------------------------')
-                print(e)
-
 def auth_google(request, *args, **kwargs):
     payload = {'access_token': request.GET.get("at")}
     r = requests.get('https://www.googleapis.com/oauth2/v2/userinfo', params=payload)
