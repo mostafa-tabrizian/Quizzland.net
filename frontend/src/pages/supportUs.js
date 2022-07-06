@@ -8,7 +8,7 @@ const pathRed = '/static/img/bubbles.webp'
 const Support = () => {
 
     useEffect(() => {
-        document.querySelector('body').style = `background: #0a0d13 url('${pathRed}') center center scroll`
+        document.querySelector('body').style = `background: #060101 url('${pathRed}') center center scroll`
     }, [])
 
     return (

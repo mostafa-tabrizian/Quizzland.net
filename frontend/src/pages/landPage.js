@@ -40,6 +40,7 @@ const Index = () => {
     useEffect(() => {
         grabData()
         setLoadState(true)
+        document.querySelector('body').style = `background: #060101`
     }, [])
 
     const grabData = async () => {

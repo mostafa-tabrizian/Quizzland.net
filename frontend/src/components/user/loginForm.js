@@ -89,9 +89,19 @@ const LoginForm = (props) => {
         }
     }
 
+    const checkRecaptcha = () => {
+        if (reCaptchaResponse !== null && reCaptchaResponse.length == 462) {
+            return true
+        } else {
+            message.warning('لطفا تایید کنید که ربات نیستید!')
+            return false 
+        }
+    }
+
     const handleSubmit = async () => {
         if (
             checkAllInputEntered() &&
+            checkRecaptcha() &&
             await doesUserExist()
         ){
             // reCaptchaResponse
