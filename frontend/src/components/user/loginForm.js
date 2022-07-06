@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from '../axiosApi';;
-import { message } from 'antd';
+import { message, notification } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -34,36 +34,28 @@ const LoginForm = (props) => {
         }
     }
 
-    // const checkIfBlocked = async () => {
-    //     const now = new Date().getTime()
-        
-    //     return await axiosInstance.get(`api/user/?email=${email}&timestamp=${now}`)
-    //         .then(res =>{
-    //             if (res.data[0].blocked) {
-    //                 notification.open({
-    //                     message: 'این کاربر مسدود شده است',
-    //                     description:
-    //                         'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
-    //                     duration: 5,
-    //                     style: {
-    //                         'font-size': '25px',
-    //                         'font-weight': '600',
-    //                         'box-shadow': '0 0 20px #b52633',
-    //                         'direction': 'rtl',
-    //                         'padding-right': '4rem',
-    //                     },
-    //                     className: 'rounded-lg'
-    //                 });
+    const userNotActive = async (userDetail) => {
+        if (!userDetail.is_active) {
+            notification.open({
+                message: 'این کاربر مسدود شده است',
+                description:
+                    'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
+                duration: 5,
+                style: {
+                    'font-size': '25px',
+                    'font-weight': '600',
+                    'box-shadow': '0 0 20px #b52633',
+                    'direction': 'rtl',
+                    'padding-right': '4rem',
+                },
+                className: 'rounded-lg'
+            });
 
-    //                 return false
-    //             } else {
-    //                 return true
-    //             }
-    //         })
-    //         .catch(err => {
-    //             log(err.response)
-    //         })
-    // }
+            return false
+        } else {
+            return true
+        }
+    }
 
     const checkAllInputEntered = () => {
         if (emailUsername == null || password == null) {
@@ -74,22 +66,30 @@ const LoginForm = (props) => {
         }
     }
 
-    const doesUserExist = async () => {
+    const doesUserExist = (fetchedUsers) => {
+        if (fetchedUsers.length == 0) {
+            message.error('این ایمیل/نام کاربری وجود ندارد');
+            return false
+        } else {
+            return true
+        }
+    }
+
+    const checkExistenceAndActivityStatue = async () => {
         const now = new Date().getTime()
         
         const existByEmail = await axiosInstance.get(`/api/user/?email=${emailUsername}&timestamp=${now}`)
         const existByUsername = await axiosInstance.get(`/api/user/?username=${emailUsername}&timestamp=${now}`)
         
-        const doesUserExist = existByUsername.data.concat(existByEmail.data).length !== 0
+        const fetchedUser = existByUsername.data.concat(existByEmail.data)
         
-        if (doesUserExist) { return true}
-        else {
-            message.error('این ایمیل/نام کاربری وجود ندارد');
-            return false
-        }
+        if (doesUserExist(fetchedUser) && await userNotActive(fetchedUser[0])) { return true}
+        else {return false}
     }
 
     const checkRecaptcha = () => {
+        log(reCaptchaResponse)
+        log(reCaptchaResponse.length)
         if (reCaptchaResponse !== null && reCaptchaResponse.length == 462) {
             return true
         } else {
@@ -102,7 +102,7 @@ const LoginForm = (props) => {
         if (
             checkAllInputEntered() &&
             checkRecaptcha() &&
-            await doesUserExist()
+            await checkExistenceAndActivityStatue()
         ){
             // reCaptchaResponse
               

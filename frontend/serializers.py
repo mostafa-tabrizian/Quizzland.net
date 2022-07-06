@@ -39,7 +39,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'most_played_categories',
             'liked_quizzes',
             'played_history',
-            'watch_list'
+            'watch_list',
+            'is_active',
         )
     
 class NotificationSerializer(serializers.ModelSerializer):

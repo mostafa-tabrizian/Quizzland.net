@@ -26,7 +26,7 @@ const Profile = () => {
         const now = new Date().getTime()
         const username = window.location.href.split('/').slice(-1)[0]
         
-        return await axiosInstance.get(`/api/user/?username=${username}&timestamp=${now}`)
+        return await axiosInstance.get(`/api/user/?username=${username}&is_active=true&timestamp=${now}`)
             .then( async res => {
                 if (res.data.length == 0) {
                     return null
@@ -41,6 +41,7 @@ const Profile = () => {
     const getUserCommentsLength = async (userDetails) => {
         const now = new Date().getTime()
         
+        userDetails &&
         await axiosInstance.get(`/api/comment/?submitter_related=${userDetails.id}&timestamp=${now}`)
             .then( async res => {
                 setUserCommentLength(res.data.length)

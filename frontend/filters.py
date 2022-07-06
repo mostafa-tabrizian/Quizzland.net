@@ -8,6 +8,7 @@ class CustomUserFilter(filters.FilterSet):
         fields = {
             'username': ['exact'],
             'email': ['exact'],
+            'is_active': ['exact']
         }
 
 class NotificationFilter(filters.FilterSet):
