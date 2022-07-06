@@ -19,6 +19,7 @@ const ProfileSetting = () => {
         const userProfile = await userProfileDetail()
 
         if (userProfile == null) {
+            alert('profileSetting')
             window.location.href = '/login'
         }
         

@@ -45,8 +45,8 @@ axiosInstance.interceptors.response.use(
         }
 
         if (error.response.status === 401 && originalRequest.url === 'http://localhost:8000' +'/token/refresh/') {
-        // log('logged from 1')    
-        window.location.href = '/login';
+            log('logged from 1')    
+            window.location.href = '/login';
             return Promise.reject(error);
         }
 
@@ -77,15 +77,15 @@ axiosInstance.interceptors.response.use(
                                 .catch(err => {
                                     sessionStorage.removeItem('access_token')
                                     sessionStorage.removeItem('refresh_token')
-                                    // log('logged from 2')
+                                    log('logged from 2')
                                     window.location.href = '/login';
                                 });
                     }else{
-                        // log('logged from 3')
+                        log('logged from 3')
                         window.location.href = '/login';
                     }
                 }else{
-                    // log('logged from 4')
+                    log('logged from 4')
                     window.location.href = '/login';
                 }
         }

@@ -28,6 +28,7 @@ const Result = () => {
     const [correctAnswersCount, setCorrectAnswersCount] = useState(null)
     const [resultGif, setResultGif] = useState(null)
     const [quizType, setQuizType] = useState(null)
+    const [popUpQuizSuggesterState, setPopUpQuizSuggester] = useState(false)
 
     const [quizResult, setQuizResult] = useState()
     const [quizDetail, setQuizDetail] = useState()
@@ -51,27 +52,64 @@ const Result = () => {
         setCorrectAnswersCount(quizResult.qc)
         setContentLoaded(true)
         AddView(quizType, quizDetail.id)
-        
-        userDetail = await userProfileDetail()
-        if (userDetail != null && !userPlayedThisQuizBefore(quizDetail?.id, quizType)) {
-            giveScorePoint(calculateTheResultScore(quizResult))
-        }
-        
-        postToHistoryAsPlayedQuiz(quizDetail.id, quizType)
         getSuggestionsQuiz(quizDetail?.subCategory)
         document.querySelector('html').style = `background: None`
         setLoadState(true)
+        
+        userDetail = await userProfileDetail()
+        const score = calculateTheResultScore(quizResult, quizType)
+        
+        if (userDetail != undefined) {
+            postToHistoryAsPlayedQuiz(userDetail, quizDetail.id, quizType)
+            giveScorePoint(score)
+        } else {
+            displayMessageToUserAboutScore(score)
+        }
+        
     }, [])
 
     useEffect(() => {
         {
             suggestionQuizzes &&
-                showPopUpSuggestion()
+            showPopUpSuggestion()
         }
     }, [suggestionQuizzes])
 
     const userPlayedThisQuizBefore = (quizId, quizType) => {
         return userDetail.played_history.split('_').includes(String(quizId) + quizType.slice(0, 1))
+    }
+
+    const displayMessageToUserAboutScore = (score) => {
+        const key = `open${Date.now()}`;
+        const btn = (
+            <div className='flex space-x-5 space-x-reverse'>
+                <button className='px-4 py-2 border rounded-xl'>
+                    <a href='/login'>
+                        دریافت امتیاز
+                    </a>
+                </button>
+                <button onClick={() => notification.close(key)}>
+                    بی خیال
+                </button>
+            </div>
+        );
+        notification.open({
+            message: '',
+            description:
+
+                <h5>
+                    {score} امتیاز به شما تعلق گرفت. برای گرفتن آن حتما باید وارد حساب کاربریتان شوید!
+                </h5>,
+            duration: 0,
+            style: {
+                background: '#ac272e',
+                color: 'white',
+                borderRadius: '15px'
+            },
+            btn,
+            key,
+            onClose: close,
+        });
     }
 
     const decideHowMucHPointToGive = (score) => {
@@ -99,40 +137,8 @@ const Result = () => {
     
     const giveScorePoint = async (score) => {
         const giveAmountPoint = decideHowMucHPointToGive(score)
-
-        if (userDetail == null) {
-            const key = `open${Date.now()}`;
-            const btn = (
-                <div className='flex space-x-5 space-x-reverse'>
-                    <button className='px-4 py-2 border rounded-xl'>
-                        <a href='/login'>
-                            دریافت امتیاز
-                        </a>
-                    </button>
-                    <button onClick={() => notification.close(key)}>
-                        بی خیال
-                    </button>
-                </div>
-            );
-            notification.open({
-                message: '',
-                description:
-
-                    <h5>
-                        {quizResult} امتیاز به شما تعلق گرفت. برای گرفتن آن حتما باید وارد حساب کاربریتان شوید!
-                    </h5>,
-                duration: 0,
-                style: {
-                    background: '#ac272e',
-                    color: 'white',
-                    borderRadius: '15px'
-                },
-                btn,
-                key,
-                onClose: close,
-            });
-        }
-        else if (giveAmountPoint !== 0) {
+        
+        if (giveAmountPoint !== 0 && !userPlayedThisQuizBefore(quizDetail?.id, quizType)) {
             await axiosInstance.patch(`/api/user/${userDetail.id}/`, { points: userDetail.points + parseInt(giveAmountPoint) })
                 .then(res => {
                     res.status == 200 &&
@@ -144,18 +150,29 @@ const Result = () => {
         }
     }
 
-    const calculateTheResultScore = (resultDetail) => {
-        const questionsCounter = resultDetail.ql
-        const correctAnswersCount = resultDetail.qc
+    const calculateTheResultScore = (resultDetail, quizType) => {
+        let score
+        
+        switch (quizType) {
+            case 'quiz':
+                const questionsCounter = resultDetail.ql
+                const correctAnswersCount = resultDetail.qc
+        
+                score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
+                break
+            
+            case 'test':
+                score = 80
+            break
+        }
 
-        const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
         return score
     }
 
     const detailOfResult = (resultDetail, quizDetail, quizType) => {
         switch (quizType) {
             case 'quiz':
-                const quizScore = calculateTheResultScore(resultDetail)
+                const quizScore = calculateTheResultScore(resultDetail, quizType)
                 if (quizScore > 80) {
                     setResultScore(`😎 ${quizScore}%`)
                     setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
@@ -243,15 +260,9 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const quiz = await axiosInstance.get(`/api/quiz/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/test/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
-
-        // if (content.length != 8) {
-        //     const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
-        //     const pointyByCategory = await axiosInstance.get(`/api/test/?category__exact=${category}&limit=8&public=true`)
-        //     content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
-        // }
 
         setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
         setContentLoaded(true)
@@ -260,31 +271,26 @@ const Result = () => {
     const showPopUpSuggestion = () => {
         setTimeout(() => {
             popUpShow(document.querySelector('.result__popUpQuizSuggester'))
-
+            setPopUpQuizSuggester(true)
             document.querySelector('.result__popUpQuizSuggester').style.pointerEvents = 'all'
             document.querySelector('body').style.overflow = 'hidden'
             document.querySelector('#land').style.pointerEvents = 'none'
             document.querySelector('#land').style.overflow = 'none'
-            document.querySelector('.header').style.filter = 'blur(7px)'
-            document.querySelector('.result__container').style.filter = 'blur(7px)'
-            document.querySelector('h2').style.filter = 'blur(7px)'
-
+            
             setTimeout(() => {
                 fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
             }, 2000)
-        }, 10000)
+            
+        }, 10_000)  //! 10_000  
     }
 
     const closePopUpQuizSuggester = () => {
         popUpHide(document.querySelector('.result__popUpQuizSuggester'))
-
+        setPopUpQuizSuggester(false)
         document.querySelector('.result__popUpQuizSuggester').style.pointerEvents = 'none'
         document.querySelector('body').style.overflow = 'auto'
         document.querySelector('#land').style.pointerEvents = 'all'
-        document.querySelector('.header').style.filter = 'blur(0)'
-        document.querySelector('.result__container').style.filter = 'blur(0)'
-        document.querySelector('h2').style.filter = 'blur(0)'
-        document.querySelector('.quizContainer').style.filter = 'blur(0)'
+        document.querySelector('#land').style.overflow = 'all'
     }
 
     const chooseUniqueQuizToSuggest = () => {
@@ -302,9 +308,7 @@ const Result = () => {
         }
     }
 
-    const postToHistoryAsPlayedQuiz = async (quizId, quizType) => {
-     
-        const userDetail = await userProfileDetail()
+    const postToHistoryAsPlayedQuiz = async (userDetail, quizId, quizType) => {
         await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `_${quizId}${quizType.slice(0, 1)}` })
         // .then(res => {
         // })
@@ -367,7 +371,7 @@ const Result = () => {
                 <meta name="keywords" content="کوییز, کوییزلند" />
             </Helmet>
 
-            <div className='ltr'>
+            <div className={`ltr ${popUpQuizSuggesterState ? 'focusBlur' : ''}`}>
                 <div className="relative result__container">
                     <div className="flex justify-center result__title">
                         <h5 className="text-right">نتیجه  {quizDetail?.title}</h5>
@@ -428,28 +432,28 @@ const Result = () => {
 
                 {
                     suggestionQuizzes && chooseUniqueQuizToSuggest() &&
-                    <div className='result__popUpQuizSuggester fixed z-10 popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
-                        <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
+                    <div className='noBlur result__popUpQuizSuggester fixed z-10 popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
+                        <button className='absolute text-3xl noBlur result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
                             closePopUpQuizSuggester();
                         }}> X </button>
 
-                        <div>
-                            <h3 className='result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
+                        <div className='noBlur'>
+                            <h3 className='noBlur result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
 
-                            <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                                <h3 className="flex text-lg result__popUpQuizSuggester__title">
+                            <Link className='noBlur' to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
+                                <h3 className="flex text-lg noBlur result__popUpQuizSuggester__title">
                                     {chooseUniqueQuizToSuggest().title}
                                 </h3>
                             </Link>
                         </div>
-                        <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                            <div className='result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
+                        <Link className='noBlur' to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
+                            <div className='noBlur result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
                                 <img
                                     src={chooseUniqueQuizToSuggest().thumbnail}
                                     alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
                                     width={1920}
                                     height={1080}
-                                    className='object-cover'
+                                    className='object-cover noBlur'
                                 />
                             </div>
                         </Link>
