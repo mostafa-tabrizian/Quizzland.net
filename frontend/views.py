@@ -1,6 +1,4 @@
-import datetime
-import json
-import requests
+import datetime, json, requests, random
 from decouple import config
 
 from .models import *
@@ -38,7 +36,7 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
+        
 def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
@@ -96,11 +94,26 @@ def auth_google(request, *args, **kwargs):
         return HttpResponse(content)
 
     # create user if not exist
+    userByEmail = CustomUser.objects.get(email=data['email'])
+    userByUsername = CustomUser.objects.get(username=request.GET.get('u'))
+
+    def uniqueUsername():    
+        # ugly function but im too tiered to do it
+        if userByUsername:
+            selectUsername = f"{request.GET.get('u')}{random.randint(0, 9999)}"
+            
+            if CustomUser.objects.get(username=request.GET.get(selectUsername)):
+                return f"{selectUsername}_{request.GET.get('ln')}"
+            else:
+                return selectUsername
+        else:
+            return userByUsername
+    
     try:
-        user = CustomUser.objects.get(email=data['email']) or CustomUser.objects.get(username=request.GET.get('u'))
+        user = userByEmail
     except CustomUser.DoesNotExist:
         user = CustomUser()
-        user.username = request.GET.get('u')
+        user.username = uniqueUsername()
         user.password = make_password(BaseUserManager().make_random_password())
         user.email = data['email']
         user.last_name = request.GET.get('ln')
