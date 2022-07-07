@@ -10,6 +10,7 @@ import Search from './search/searchInput'
 import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
 import axiosInstance from './axiosApi';
+import { message } from 'antd';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
@@ -39,7 +40,9 @@ const Header = () => {
         gapi.load('client:auth2', startGapiClient)
     }, [])
 
-    const handleLogout = async () => {  
+    const handleLogout = async () => {
+        message.loading('در حال خارج شدن ...')
+        
         signOut()
         
         try {

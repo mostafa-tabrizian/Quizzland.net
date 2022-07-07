@@ -99,6 +99,8 @@ const LoginForm = (props) => {
     }
 
     const handleSubmit = async () => {
+        message.loading('لطفا منتظر بمانید ...', 1)
+        
         if (
             checkAllInputEntered() &&
             checkRecaptcha() &&

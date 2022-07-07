@@ -2,24 +2,8 @@ import axiosInstance from '../components/axiosApi';
 import { log } from './base'
 
 const AddView = (content, contentID) => {
-    const adminDetail = {
-        username: process.env.ADMINUSERNAME,
-        password: process.env.ADMINPASSWORD,
-    }
-
-    let authToken
     let lastView
     let lastMonthly
-
-    const getAuthToken = async () => {
-        await axiosInstance.post('/api/token/obtain/', adminDetail)
-            .then((req) => {
-                authToken = req.data.access
-            })
-            .catch((err) => {
-                log(err)
-            })
-    }
 
     const getLastViewCount = async () => {
         const now = new Date().getTime()
@@ -36,21 +20,12 @@ const AddView = (content, contentID) => {
             views: lastView + 1
         }
 
-        // const headers = {
-        //     'Authorization': "JWT " + authToken,
-        //     'Content-Type': 'application/json',
-        //     'accept': 'application/json'
-        // }
-
         await axiosInstance.put(`/api/${content}/${contentID}/`, view)
     }
 
-    getAuthToken()
+    getLastViewCount()
         .then(() => {
-            getLastViewCount()
-                .then(() => {
-                    updateView()
-                })
+            updateView()
         })
 }
 

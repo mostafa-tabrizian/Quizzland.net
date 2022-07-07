@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
-import { message } from 'antd';
+import { message, Spin } from 'antd';
 
 import axiosInstance from '../axiosApi';
 import userProfileDetail from './userProfileDetail';
@@ -43,6 +43,7 @@ const Comments = (props) => {
     }
 
     const postComment = async (comment, verifyState) => {
+        message.loading("در حال ثبت کامنت ...", 1)
         await axiosInstance.post('/api/comment/', {
             comment_text: comment,
             quiz_related: props.quizType == 'quiz' ? props.quizId : null,

@@ -59,7 +59,8 @@ const LikeCommentButton = (props) => {
 
     const likeButtonClicked = async () => {
         setWatchListButtonUnClickable(false)
-        
+        message.loading()
+
         const userDetail = await userProfileDetail()
         
         if (userDetail) {

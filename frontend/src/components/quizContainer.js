@@ -32,6 +32,8 @@ const QuizContainer = (props) => {
     }
 
     const addToWatchListClicked = async (quizId, quizCheckIfQuiz) => {
+        message.loading('', 1)
+        
         const userDetail = await userProfileDetail()
 
         if (userDetail) {
