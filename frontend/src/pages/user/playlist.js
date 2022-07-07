@@ -25,7 +25,7 @@ const QuizHistory = () => {
         fetchContent()
         setLoadState(true)
         
-        document.querySelector('body').style = 'background: #121212'
+        document.querySelector('body').style = `background: #060101`
         document.getElementById('land').scrollIntoView()
     }, [location])
 
@@ -53,8 +53,10 @@ const QuizHistory = () => {
         
         const now = new Date().getTime()
         const quiz = await axiosInstance.get(`/api/quiz/?public=true&timestamp=${now}`)
+            .catch(err => {log(err.response)})
         const pointy = await axiosInstance.get(`/api/test/?public=true&timestamp=${now}`)
-        
+            .catch(err => {log(err.response)})
+
         let finalList = []
         
         playlist.map(quizId => {
@@ -105,7 +107,7 @@ const QuizHistory = () => {
             </div>
 
             {
-                (!content.length  && document.readyState === 'complete') ?
+                (!content.length  && document.readyState !== 'loading') ?
                 <h1 className='mt-10 mb-[25rem] text-center'>هیچ کوییزی پیدا نشد <span className='text-[2.5rem]'>😕</span></h1>
                 :
                 <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">

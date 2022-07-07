@@ -31,7 +31,7 @@ const Category = (props) => {
     const location = useLocation();
 
     useEffect(() => {
-        document.querySelector('body').style = 'background: #121212'
+        document.querySelector('body').style = `background: #060101`
         setLoadState(true)
     })
 
