@@ -510,6 +510,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   visibility: visible;
 }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
@@ -1037,6 +1041,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 1rem;
 }
 
+.w-\[14rem\] {
+  width: 14rem;
+}
+
+.w-\[\] {
+  width: ;
+}
+
+.w-\[5rem\] {
+  width: 5rem;
+}
+
 .max-w-\[14rem\] {
   max-width: 14rem;
 }
@@ -1363,6 +1379,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-green-600 {
   --tw-border-opacity: 1;
   border-color: rgb(22 163 74 / var(--tw-border-opacity));
+}
+
+.border-\[\#ac272e\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(172 39 46 / var(--tw-border-opacity));
 }
 
 .border-b-\[\#ac272e\] {
@@ -1815,6 +1836,36 @@ Ensure the default browser behavior of the `hidden` attribute.
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-\[inset_0_0_15px_\#ac272e\] {
+  --tw-shadow: inset 0 0 15px #ac272e;
+  --tw-shadow-colored: inset 0 0 15px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-\[inset_0_0_15px_ac272e\] {
+  --tw-shadow: inset 0 0 15px ac272e;
+  --tw-shadow-colored: inset 0 0 15px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-\[inset_0_0_15px_0_\#ac272e\] {
+  --tw-shadow: inset 0 0 15px 0 #ac272e;
+  --tw-shadow-colored: inset 0 0 15px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-\[inset_0_0e_15px_\#ac272e\] {
+  --tw-shadow: inset 0 0e 15px #ac272e;
+  --tw-shadow-colored: inset 0 0e 15px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-zinc-800 {
   --tw-shadow-color: #27272a;
   --tw-shadow: var(--tw-shadow-colored);
@@ -1990,6 +2041,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     order: 1;
   }
 
+  .md\:order-\[0\] {
+    order: 0;
+  }
+
   .md\:col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -2138,6 +2193,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:w-\[42rem\] {
     width: 42rem;
+  }
+
+  .md\:w-\[14rem\] {
+    width: 14rem;
   }
 
   .md\:max-w-\[85\%\] {

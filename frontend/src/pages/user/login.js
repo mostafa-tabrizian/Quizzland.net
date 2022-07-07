@@ -20,12 +20,20 @@ const Login = () => {
             </Helmet>
 
             <div className="center">
-                <div className="absolute m-auto basicPage wrapper-sm center top-20">
+                <div className="absolute m-auto text-center center top-20">
                     <h1 className="text-[3rem] mb-5 text-center text-[#ac272e] ">
-                        ورود به کوییزلند
+                        به کوییزلند خوش آمدید
                     </h1>
 
-                    <LoginForm />
+                    <div className='grid md:grid-cols-2'>
+                        <div className='border rounded-lg mt-3 order-1 md:order-[0] bg-[#060101] shadow-[inset_0_0_15px_#ac272e] border-[#ac272e] px-3 py-1'>
+                            <LoginForm />
+                        </div>
+                        
+                        <div className='m-auto'>
+                            <img className='w-[5rem] md:w-[14rem]' src="/static/img/Q.webp" alt="" />
+                        </div>
+                    </div>
 
                 </div>
             </div>
