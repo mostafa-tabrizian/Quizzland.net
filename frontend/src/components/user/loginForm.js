@@ -14,7 +14,7 @@ const LoginForm = (props) => {
     const [reCaptchaResponse, setReCaptchaResponse] = useState(null)
 
     useEffect( async () => {
-        checkIfLoggedIn(false)
+        checkIfLoggedIn()
 
         const startGapiClient = () => {
             gapi.client.init({
@@ -26,10 +26,10 @@ const LoginForm = (props) => {
         gapi.load('client:auth2', startGapiClient)
     }, [])
 
-    const checkIfLoggedIn = async (googleLoginStatus) => {
+    const checkIfLoggedIn = async () => {
         const userProfile = await userProfileDetail()
         
-        if ((userProfile !== undefined && window.location.pathname == '/login') || googleLoginStatus) {
+        if (userProfile !== undefined && window.location.pathname == '/login') {
             window.location.href = '/'
         }
     }
@@ -133,23 +133,27 @@ const LoginForm = (props) => {
     }
 
     const googleLoginSuccess = async (res) => {
-        if (window.location.pathname === '/login') {
+        const userProfile = await userProfileDetail()
+        
+        if (userProfile == undefined) {
             const accessToken = res.accessToken
             const username = replaceFunction(res.profileObj.name, ' ', '')
             const email = res.profileObj.email
             const lastName = res.profileObj.familyName || ''
             const firstName = res.profileObj.givenName || ''
             const avatar = res.profileObj.imageUrl
-
+    
             accessToken &&
             await axiosInstance.get(`/api/google?at=${accessToken}&u=${username}&e=${email}&ln=${lastName}&fn=${firstName}&av=${avatar}`)
                 .then(res => {
                     axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access_token;
                     sessionStorage.setItem('access_token', res.data.access_token);
                     sessionStorage.setItem('refresh_token', res.data.refresh_token);
-
+    
                     window.location.reload()
-                    window.history.go(-1)
+                    if (window.location.pathname === '/login') {
+                        window.history.go(-1)
+                    }
                 })
                 .catch(err => {
                     log(err.response)
@@ -162,20 +166,20 @@ const LoginForm = (props) => {
     }
 
     return (
-        <div className='p-8 noBlur '>
-            <form className='grid noBlur justify-center space-y-5 text-[20px] rounded-lg center'>
-                <label className='w-[18rem] noBlur'>
-                    <input name="email" className='w-full p-2 text-base rounded-lg noBlur' type="string" placeholder="ایمیل یا نام کاربری" value={emailUsername} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setEmailUsername(input.target.value)} />
+        <div className='p-8'>
+            <form className='grid justify-center space-y-5 text-[20px] rounded-lg center'>
+                <label className='w-[18rem]'>
+                    <input name="email" className='w-full p-2 text-base rounded-lg' type="string" placeholder="ایمیل یا نام کاربری" value={emailUsername} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setEmailUsername(input.target.value)} />
                 </label>
-                <label className='noBlur w-[18rem]'>
-                    <input name="password" className='w-full p-2 text-base rounded-lg noBlur' type="password" placeholder="رمز عبور" value={password} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setPassword(input.target.value)} />
+                <label className='w-[18rem]'>
+                    <input name="password" className='w-full p-2 text-base rounded-lg' type="password" placeholder="رمز عبور" value={password} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setPassword(input.target.value)} />
                 </label>
                 <ReCAPTCHA
                     sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
                     theme='dark'
                     onChange={res => setReCaptchaResponse(res)}
                 />
-                <button onClick={() => handleSubmit()} className='bg-[#ac272e] noBlur p-2 rounded-lg text-white font-semibold' type="button">
+                <button onClick={() => handleSubmit()} className='bg-[#ac272e] p-2 rounded-lg text-white font-semibold' type="button">
                     ورود
                 </button>
             </form>

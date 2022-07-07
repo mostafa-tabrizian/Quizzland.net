@@ -614,7 +614,7 @@ const Quiz = (props) => {
     }
 
     return (
-        <div className={showLoginForm ? 'focusBlur' : ''}>
+        <div>
 
             <LoadingScreen loadState={loadState} />
 
@@ -698,11 +698,11 @@ const Quiz = (props) => {
                 />
             }
 
-            <div className={`noBlur top-1/4 left-1/2 translate-x-[-50%] ${showLoginForm ? 'popUp-show' : 'popUp-hide'} fixed z-20 bg-[#8b0000f2] p-8 w-11/12 md:w-[30rem] grid grid-cols-1 rounded-lg`}>
-                <button className='absolute text-3xl noBlur result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {setShowLoginForm(false)}}> X </button>
+            <div className={`top-1/4 left-1/2 translate-x-[-50%] ${showLoginForm ? 'popUp-show ' : 'popUp-hide'} fixed z-20 bg-gradient-to-t from-[#771118] to-[#ac272e] p-8 w-11/12 md:w-[30rem] grid grid-cols-1 rounded-lg`}>
+                <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {setShowLoginForm(false)}}> X </button>
 
-                <div className="m-auto noBlur top-20">
-                    <h1 className="noBlur text-[1rem] mb-5 text-center text-white ">
+                <div className="m-auto top-20">
+                    <h1 className="text-[1rem] mb-5 text-center text-white ">
                         ورود به کوییزلند
                     </h1>
 

@@ -432,7 +432,7 @@ const Result = () => {
 
                 {
                     suggestionQuizzes && chooseUniqueQuizToSuggest() &&
-                    <div className='noBlur result__popUpQuizSuggester fixed z-10 popUp-hide bg-[#8b0000f2] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
+                    <div className='noBlur result__popUpQuizSuggester fixed z-10 popUp-hide bg-gradient-to-t from-[#771118] to-[#ac272e] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
                         <button className='absolute text-3xl noBlur result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
                             closePopUpQuizSuggester();
                         }}> X </button>
