@@ -93,24 +93,22 @@ def auth_google(request, *args, **kwargs):
         content = {'message': 'wrong google token / this google token is already expired.'}
         return HttpResponse(content)
 
-    # create user if not exist
-    userByEmail = CustomUser.objects.get(email=data['email'])
-    userByUsername = CustomUser.objects.get(username=request.GET.get('u'))
-
     def uniqueUsername():    
         # ugly function but im too tiered to do it
-        if userByUsername:
+        try:
             selectUsername = f"{request.GET.get('u')}{random.randint(0, 9999)}"
             
-            if CustomUser.objects.get(username=request.GET.get(selectUsername)):
+            if CustomUser.objects.get(username=request.GET.get('u')):
                 return f"{selectUsername}_{request.GET.get('ln')}"
             else:
                 return selectUsername
-        else:
-            return userByUsername
+            
+        except CustomUser.DoesNotExist:
+            return request.GET.get('u')
     
     try:
-        user = userByEmail
+        user = CustomUser.objects.get(email=data['email'])
+        
     except CustomUser.DoesNotExist:
         user = CustomUser()
         user.username = uniqueUsername()
@@ -120,6 +118,11 @@ def auth_google(request, *args, **kwargs):
         user.first_name = request.GET.get('fn')
         user.avatar = request.GET.get('av')
         user.save()
+        
+        first_notif = Notification()
+        first_notif.user = user
+        first_notif.message = f"{request.GET.get('fn')} به کوییزلند خوش اومدی"
+        first_notif.save()
 
     token = RefreshToken.for_user(user)  # generate token without username & password
     response = {}

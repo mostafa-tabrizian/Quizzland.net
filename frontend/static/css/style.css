@@ -929,7 +929,7 @@ hr {
 .header__menu::before {
   content: '';
   display: block;
-  background: #0e0202ea;
+  background: #0e0202fa;
   width: 100vw;
   height: 100vh;
   position: absolute;

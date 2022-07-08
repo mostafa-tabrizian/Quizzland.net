@@ -196,7 +196,7 @@ const LoginForm = (props) => {
             <GoogleLogin
                 clientId="590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com"
                 className='w-[90%] flex justify-center'
-                buttonText="ورود با حساب گوگل"
+                buttonText="ورود/ثبت نام با حساب گوگل"
                 onSuccess={googleLoginSuccess}
                 onFailure={googleLoginFailure}
                 cookiePolicy={'single_host_origin'}
