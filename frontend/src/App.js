@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
+import { CookiesProvider } from "react-cookie";
 
 import {
     BrowserRouter as Router,
@@ -83,48 +84,48 @@ const App = () => {
                     </div>
                 }>
 
-                <Router>
-                    <ScrollToTop />
+                <CookiesProvider>
+                    <Router>
+                        <ScrollToTop />
+                        <div>
+                            <Switch>
+                                <Route path='/' exact component={Index} />
 
-                    <div>
-                        <Switch>
-                            <Route path='/' exact component={Index} />
+                                <Route path='/login' component={Login} />
+                                <Route path='/profile/:user' component={Profile} />
+                                <Route path='/setting' component={Setting} />
+                                <Route path='/playlist' component={Playlist} />
 
-                            <Route path='/login' component={Login} />
-                            <Route path='/profile/:user' component={Profile} />
-                            <Route path='/setting' component={Setting} />
-                            <Route path='/playlist' component={Playlist} />
+                                <Route path='/guide' component={Guide} />
 
-                            <Route path='/guide' component={Guide} />
+                                <Route path='/quiz/:title' component={Quiz} />
+                                <Route path='/test/:title' component={Quiz} />
+                                <Route path='/result' component={Result} />
 
-                            <Route path='/quiz/:title' component={Quiz} />
-                            <Route path='/test/:title' component={Quiz} />
-                            <Route path='/result' component={Result} />
+                                <Route path='/category/:category' exact component={Category} />
+                                <Route path='/category/:category/:subCategory' component={SubCategory} />
 
-                            <Route path='/category/:category' exact component={Category} />
-                            <Route path='/category/:category/:subCategory' component={SubCategory} />
+                                <Route path='/contact' component={Contact} />
+                                <Route path='/advertiseContact' component={AdvertiseContact} />
+                                <Route path='/support' component={Support} />
+                                <Route path='/privacy-policy' component={PrivacyPolicy} />
+                                <Route path='/search' component={Search} />
+                                <Route path='/tags/:tag' component={Tags} />
+                                <Route path='/sort' component={Sort} />
+                                <Route path='/blog' component={Blog} />
+                                <Route path='/makeMonthlyRecord' component={monthlyRecord} />
+                                <Route path='/restartEveryMonthlyViews' component={restartEveryMonthlyViews} />
+                                
+                                <Route path='/404' component={notFound_404} />
+                                
+                                <Route path='/welcomeOwl' component={welcomeOwl} />
+                                <Route path='/welcomeZeynab' component={welcomeZeynab} />
 
-                            <Route path='/contact' component={Contact} />
-                            <Route path='/advertiseContact' component={AdvertiseContact} />
-                            <Route path='/support' component={Support} />
-                            <Route path='/privacy-policy' component={PrivacyPolicy} />
-                            <Route path='/search' component={Search} />
-                            <Route path='/tags/:tag' component={Tags} />
-                            <Route path='/sort' component={Sort} />
-                            <Route path='/blog' component={Blog} />
-                            <Route path='/makeMonthlyRecord' component={monthlyRecord} />
-                            <Route path='/restartEveryMonthlyViews' component={restartEveryMonthlyViews} />
-                            
-                            <Route path='/404' component={notFound_404} />
-                            
-                            <Route path='/welcomeOwl' component={welcomeOwl} />
-                            <Route path='/welcomeZeynab' component={welcomeZeynab} />
-
-                            <Route component={notFound_404} />
-                        </Switch>
-                    </div>
-                    
-                </Router>
+                                <Route component={notFound_404} />
+                            </Switch>
+                        </div>
+                    </Router>
+                </CookiesProvider>
             </Suspense>
         </React.Fragment>
     );

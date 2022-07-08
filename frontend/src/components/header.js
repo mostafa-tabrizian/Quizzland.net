@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from "react-helmet";
-
 import { gapi } from 'gapi-script'
 import { useGoogleLogout } from 'react-google-login'
+import { useCookies } from "react-cookie";
 
 import { log } from './base'
 import Search from './search/searchInput'
@@ -20,6 +20,8 @@ const Header = () => {
     const [categorySubMenu, setCategorySubMenu] = useState(null)
 
     const mobileSearchInput = useRef()
+
+    const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
 
     const { signOut } = useGoogleLogout({
         clientId: '590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com',
@@ -47,15 +49,17 @@ const Header = () => {
         
         try {
             await axiosInstance.post('/api/blacklist/', {
-                "refresh_token": sessionStorage.getItem("refresh_token")
+                "refresh_token": cookies.USER_REFRESH_TOKEN,
             });
-            sessionStorage.removeItem('access_token');
-            sessionStorage.removeItem('refresh_token');
+            
+            removeCookie('USER_ACCESS_TOKEN')
+            removeCookie('USER_REFRESH_TOKEN')
+            
             axiosInstance.defaults.headers['Authorization'] = null;
             window.location.reload()
         }
         catch (e) {
-            // console.log(e);
+            console.log(e);
         }
     };
 

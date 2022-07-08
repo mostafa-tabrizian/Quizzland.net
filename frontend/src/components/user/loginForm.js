@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from '../axiosApi';;
 import { message, notification } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script'
 import ReCAPTCHA from 'react-google-recaptcha'
+import { useCookies } from "react-cookie";
 
+import axiosInstance from '../axiosApi';;
 import { log, replaceFunction } from '../base'
 import userProfileDetail from "./userProfileDetail";
 
@@ -12,6 +13,8 @@ const LoginForm = (props) => {
     const [emailUsername, setEmailUsername] = useState(null)
     const [password, setPassword] = useState(null)
     const [reCaptchaResponse, setReCaptchaResponse] = useState(null)
+
+    const [cookies, setCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
 
     useEffect( async () => {
         checkIfLoggedIn()
@@ -88,8 +91,6 @@ const LoginForm = (props) => {
     }
 
     const checkRecaptcha = () => {
-        log(reCaptchaResponse)
-        log(reCaptchaResponse.length)
         if (reCaptchaResponse !== null && reCaptchaResponse.length == 462) {
             return true
         } else {
@@ -115,9 +116,10 @@ const LoginForm = (props) => {
                 })
                     
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + data.data.access;
-                sessionStorage.setItem('access_token', data.data.access);
-                sessionStorage.setItem('refresh_token', data.data.refresh);
                 
+                setCookie('USER_ACCESS_TOKEN', data.data.access, { path: '/' });
+                setCookie('USER_REFRESH_TOKEN', data.data.refresh, { path: '/' });
+
                 window.location.reload()
                 window.history.go(-1)
     
@@ -138,6 +140,8 @@ const LoginForm = (props) => {
         const userProfile = await userProfileDetail()
         
         if (userProfile == undefined) {
+            message.loading('در حال ورود ...', 1)
+            
             const accessToken = res.accessToken
             const username = replaceFunction(res.profileObj.name, ' ', '')
             const email = res.profileObj.email
@@ -149,8 +153,9 @@ const LoginForm = (props) => {
             await axiosInstance.get(`/api/google?at=${accessToken}&u=${username}&e=${email}&ln=${lastName}&fn=${firstName}&av=${avatar}`)
                 .then(res => {
                     axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access_token;
-                    sessionStorage.setItem('access_token', res.data.access_token);
-                    sessionStorage.setItem('refresh_token', res.data.refresh_token);
+                    
+                    setCookie('USER_ACCESS_TOKEN', res.data.access_token, { path: '/' });
+                    setCookie('USER_REFRESH_TOKEN', res.data.refresh_token, { path: '/' });
     
                     window.location.reload()
                     if (window.location.pathname === '/login') {

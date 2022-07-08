@@ -1,17 +1,18 @@
 import axiosInstance from '../axiosApi'
-import { log } from '../base'
+import { log, getCookie } from '../base'
 
+const UserProfileDetail = async () => {
 
-const userProfileDetail = async () => {
     const refreshToken = async () => {
-        const localRefreshToken = sessionStorage.getItem('refresh_token')
-        
+        const localRefreshToken = getCookie('USER_REFRESH_TOKEN')
+            
         return (
-            localRefreshToken&&
+            localRefreshToken &&
             await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
                 .then(res => {
-                    sessionStorage.setItem('access_token', res.data.access);
-                    sessionStorage.setItem('refresh_token', res.data.refresh);
+                    document.cookie = `USER_ACCESS_TOKEN=${res.data.access}; path=/;`
+                    document.cookie = `USER_REFRESH_TOKEN=${res.data.refresh}; path=/;`
+            
                     window.location.reload()
                 })
                 .catch(err => {
@@ -21,7 +22,8 @@ const userProfileDetail = async () => {
     }
 
     const fetchUserProfile = async () => {
-        const localAccessToken = sessionStorage.getItem('access_token')
+        const localAccessToken = getCookie('USER_ACCESS_TOKEN')
+
         return await axiosInstance.get(`/api/login?at=${localAccessToken}`)
             .then (res => {
                 if (res.data.username !== 'guest') {
@@ -52,4 +54,4 @@ const userProfileDetail = async () => {
 }
  
 
-export default userProfileDetail;
+export default UserProfileDetail;
