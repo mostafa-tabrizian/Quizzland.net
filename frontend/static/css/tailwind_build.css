@@ -715,6 +715,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 2rem;
 }
 
+.my-\[9rem\] {
+  margin-top: 9rem;
+  margin-bottom: 9rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }

@@ -24,7 +24,7 @@ const Contact = () => {
                 <meta name="keywords" content="پشتیبانی کوییزلند" />
             </Helmet>
 
-            <div className="m-auto basicPage wrapper-sm">
+            <div className="mx-auto my-[9rem] basicPage wrapper-sm">
                 <h1>برای تماس با ما میتونید از روش های زیر استفاده کنید </h1>
                 <div>
                     <ul className="flex items-center justify-center font-bold text-red-600">
