@@ -8,6 +8,7 @@ const pathRed = '/static/img/bubbles.webp'
 
 const Login = () => {
     useEffect(() => {
+        log('hi')
         document.querySelector('body').style = `background: #060101 url(${pathRed}) center center scroll`
     }, [])
 
@@ -19,8 +20,8 @@ const Login = () => {
                 <meta name="keywords" content="پشتیبانی کوییزلند" /> */}
             </Helmet>
 
-            <div className="center">
-                <div className="absolute m-auto text-center center top-20">
+            <div className='w-screen h-screen'>
+                <div className="absolute m-auto text-center center top-[15%]">
                     <h1 className="text-[3rem] mb-5 text-center text-[#ac272e] ">
                         به کوییزلند خوش آمدید
                     </h1>
@@ -37,6 +38,7 @@ const Login = () => {
 
                 </div>
             </div>
+
 
         </React.Fragment>
     );

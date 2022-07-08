@@ -510,10 +510,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   visibility: visible;
 }
 
-.static {
-  position: static;
-}
-
 .fixed {
   position: fixed;
 }
@@ -612,6 +608,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .top-24 {
   top: 6rem;
+}
+
+.top-\[15\%\] {
+  top: 15%;
 }
 
 .z-10 {
@@ -1033,24 +1033,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 20vw;
 }
 
+.w-\[5rem\] {
+  width: 5rem;
+}
+
 .w-20 {
   width: 5rem;
 }
 
 .w-4 {
   width: 1rem;
-}
-
-.w-\[14rem\] {
-  width: 14rem;
-}
-
-.w-\[\] {
-  width: ;
-}
-
-.w-\[5rem\] {
-  width: 5rem;
 }
 
 .max-w-\[14rem\] {
@@ -1376,14 +1368,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(127 29 29 / var(--tw-border-opacity));
 }
 
-.border-green-600 {
-  --tw-border-opacity: 1;
-  border-color: rgb(22 163 74 / var(--tw-border-opacity));
-}
-
 .border-\[\#ac272e\] {
   --tw-border-opacity: 1;
   border-color: rgb(172 39 46 / var(--tw-border-opacity));
+}
+
+.border-green-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(22 163 74 / var(--tw-border-opacity));
 }
 
 .border-b-\[\#ac272e\] {
@@ -1449,11 +1441,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: #0000007c;
 }
 
-.bg-\[\#8b0000\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(139 0 0 / var(--tw-bg-opacity));
-}
-
 .bg-\[url\(\'\/static\/img\/bubbles\.webp\'\)\] {
   background-image: url('/static/img/bubbles.webp');
 }
@@ -1467,11 +1454,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(61 25 26 / 0));
 }
 
-.from-\[\#ac272e\] {
-  --tw-gradient-from: #ac272e;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(172 39 46 / 0));
-}
-
 .from-\[\#771118\] {
   --tw-gradient-from: #771118;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(119 17 24 / 0));
@@ -1479,10 +1461,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .via-transparent {
   --tw-gradient-stops: var(--tw-gradient-from), transparent, var(--tw-gradient-to, rgb(0 0 0 / 0));
-}
-
-.to-\[\#771118\] {
-  --tw-gradient-to: #771118;
 }
 
 .to-\[\#ac272e\] {
@@ -1830,39 +1808,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-\[0_1px_10px_\#690D11\] {
-  --tw-shadow: 0 1px 10px #690D11;
-  --tw-shadow-colored: 0 1px 10px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-\[inset_0_0_15px_\#ac272e\] {
   --tw-shadow: inset 0 0 15px #ac272e;
   --tw-shadow-colored: inset 0 0 15px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-\[inset_0_0_15px_ac272e\] {
-  --tw-shadow: inset 0 0 15px ac272e;
-  --tw-shadow-colored: inset 0 0 15px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-\[inset_0_0_15px_0_\#ac272e\] {
-  --tw-shadow: inset 0 0 15px 0 #ac272e;
-  --tw-shadow-colored: inset 0 0 15px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-\[inset_0_0e_15px_\#ac272e\] {
-  --tw-shadow: inset 0 0e 15px #ac272e;
-  --tw-shadow-colored: inset 0 0e 15px var(--tw-shadow-color);
+.shadow-\[0_1px_10px_\#690D11\] {
+  --tw-shadow: 0 1px 10px #690D11;
+  --tw-shadow-colored: 0 1px 10px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
