@@ -700,6 +700,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 1rem;
 }
 
+.my-\[9rem\] {
+  margin-top: 9rem;
+  margin-bottom: 9rem;
+}
+
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
@@ -713,11 +718,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mx-8 {
   margin-left: 2rem;
   margin-right: 2rem;
-}
-
-.my-\[9rem\] {
-  margin-top: 9rem;
-  margin-bottom: 9rem;
 }
 
 .mt-10 {
@@ -936,6 +936,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-4 {
   height: 1rem;
+}
+
+.max-h-screen {
+  max-height: 100vh;
 }
 
 .w-screen {
@@ -1275,6 +1279,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .overflow-y-auto {
   overflow-y: auto;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-x-visible {
+  overflow-x: visible;
 }
 
 .overflow-y-scroll {
