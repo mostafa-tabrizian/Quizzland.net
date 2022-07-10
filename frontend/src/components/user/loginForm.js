@@ -91,6 +91,8 @@ const LoginForm = (props) => {
     }
 
     const checkRecaptcha = () => {
+        log(reCaptchaResponse)
+        log(reCaptchaResponse.length)
         if (reCaptchaResponse !== null && reCaptchaResponse.length == 462) {
             return true
         } else {
@@ -169,7 +171,9 @@ const LoginForm = (props) => {
     }
 
     const googleLoginFailure = (res) => {
-        log('fail login, res: ' + res)
+        message.error("ورود/ثبت نام شما به مشکل برخورد. لطفا دوباره تلاش کنید")
+        log('fail login, res: ')
+        log(res)
     }
 
     return (

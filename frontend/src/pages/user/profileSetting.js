@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axiosInstance from '../../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
-import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../../components/base'
+import { log } from '../../components/base'
 import userProfileDetail from '../../components/user/userProfileDetail'
-import { DatePicker } from 'antd';
+import { DatePicker, message } from 'antd';
 
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)
@@ -15,15 +15,53 @@ const ProfileSetting = () => {
         checkIfLoggedIn_setUser()
     }, [])
 
+    const oldPassword = useRef()
+    const newPassword = useRef()
+    const re_NewPassword = useRef()
+
     const checkIfLoggedIn_setUser = async () => {
         const userProfile = await userProfileDetail()
 
         if (userProfile == null) {
-            alert('profileSetting')
             window.location.href = '/login'
         }
         
         setUser(userProfile)
+    }
+
+    const changePassword = async () => {
+        if (newPassword.current.value != re_NewPassword.current.value) {
+            return message.error('رمز جدید و تکرار آن بکسان نمی‌باشد')
+        }
+        else if (newPassword.current.value == oldPassword.current.value) {
+            return message.error('رمز قبلی و جدید شما نمی‌توانند بکسان باشد')
+        }
+        
+        else {
+            message.loading('لطفا منتظر بمانید ...', 1)
+
+            await axiosInstance.get(`/api/reset_password?u=${user.username}&op=${oldPassword.current.value}&np=${newPassword.current.value}`)
+                .then(res => {
+                    if (res.data == 'not_same') {
+                        message.error('رمز قبلی شما صحیح نمی‌باشد')
+                    }
+                    else if(res.data.includes('too short')) {
+                        message.error('رمز شما می‌بایست حداقل ۸ کارکتر باشد', 3)
+                    }
+                    else if (res.data.includes('entirely numeric')) {
+                        message.error('رمز شما می‌بایست حداقل حاوی یک حرف باشد', 3)
+                    }
+                    else if (res.data.includes('too common')) {
+                        message.error('رمز شما به راحتی قابل حدس است. می‌بایست یک مقدار پیچیده تر باشد', 3)
+                    }
+                    else if (res.data == 'success_change') {
+                        message.success('رمز شما با موفقیت تغییر یافت')
+                    }
+                })
+                .catch(err => {
+                    log(err.response)
+                })
+        }
     }
 
     return (
@@ -63,15 +101,10 @@ const ProfileSetting = () => {
                             </div>
                         </div>
                         <div className=''>
-                            <figure>
-                                <div className='flex space-x-5 space-x-reverse'>
-                                    <h3>نام کاربری</h3>
-                                    <h2>{user?.username}</h2>
-                                </div>
-                                <figcaption>
-                                    نام کاربری قابل تغییر نمی‌باشد.
-                                </figcaption>
-                            </figure>
+                            <div className=''>
+                                <h3>نام کاربری</h3>
+                                <input type="text" placeholder={user?.username} />
+                            </div>
                         </div>
                         <div className='space-y-5 md:grid md:grid-cols-2'>
                             <div>
@@ -115,6 +148,24 @@ const ProfileSetting = () => {
                         </div>
                         <div className='flex justify-end w-full mt-5'>
                             <button className='px-6 py-2 border-2 border-green-600 rounded-xl'>‌ذخیره</button>
+                        </div>
+                    </div>
+
+                    <h1 className='mt-10 mb-5'>تنظیمات امنیتی</h1>
+                    <div className='py-2 px-2 border-[#690D11] space-y-5 border-4 rounded'>
+                        <div className='space-y-5 md:grid md:grid-cols-2'>
+                            <div>
+                                <h3 className='mb-5'>تغییر رمز عبور</h3>
+
+                                <div className='flex flex-col space-y-5'>
+                                    <input type="password" ref={oldPassword} placeholder='رمز عبور قبلی خود را وارد کنید' />
+                                    <input type="password" ref={newPassword} placeholder='رمز عبور جدید' />
+                                    <input type="password" ref={re_NewPassword} placeholder='تکرار رمز عبور جدید' />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='flex justify-end w-full mt-5'>
+                            <button onClick={() => changePassword()} className='px-6 py-2 border-2 border-green-600 rounded-xl'>ذخیره</button>
                         </div>
                     </div>
                 </div>

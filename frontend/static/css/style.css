@@ -261,7 +261,7 @@ h5 {
 
 input,
 textarea {
-  background: #0e0202d4;
+  background: #ffeaeb;
   border-bottom: 1px solid #707070;
 }
 
@@ -270,7 +270,31 @@ input,
 textarea {
   font-family: IRANYekanRegular, sans-serif, serif !important;
   text-align: right;
-  color: darkGray;
+  color: black !important;
+}
+
+p::-webkit-input-placeholder,
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #5d5d5d !important;
+}
+
+p:-ms-input-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #5d5d5d !important;
+}
+
+p::-ms-input-placeholder,
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+  color: #5d5d5d !important;
+}
+
+p::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: #5d5d5d !important;
 }
 
 label {

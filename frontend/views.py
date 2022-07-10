@@ -9,8 +9,9 @@ from .filters import *
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticated, AllowAny
@@ -132,6 +133,28 @@ def auth_google(request, *args, **kwargs):
     
     return HttpResponse(json.dumps(response))
 
+def resetPassword(request, *args, **kwargs):
+    if request.method == 'GET':
+        username = request.GET.get('u')
+        old_password = request.GET.get('op')
+        new_password = request.GET.get('np')
+        user = CustomUser.objects.get(username=username)
+    
+        try:
+            validate_password(new_password, user=user, password_validators=None)
+        except ValidationError as e:
+            return HttpResponse(e)
+            
+        old_and_user_password_is_same = check_password(old_password, user.password)
+        
+        if old_and_user_password_is_same:
+            user.password = make_password(new_password)
+            user.save()
+            return HttpResponse('success_change')
+        
+        else:
+            return HttpResponse('not_same')
+        
 def restartEveryMonthlyViews(request):
     try:
         quizzes = Quizzes.objects.all()
