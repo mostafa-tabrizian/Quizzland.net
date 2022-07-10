@@ -6,13 +6,14 @@ persianDate.toLocale('fa');
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
-import { log } from '../../components/base'
+import { log, getTheme } from '../../components/base'
 import axiosInstance from '../../components/axiosApi';
 
 const Profile = () => {
     const [user, setUser] = useState(null)
     const [userCommentLength, setUserCommentLength] = useState(0)
     const [loaded, setLoaded] = useState(false)
+    const [theme, setTheme] = useState('dark')
     
     const location = useLocation()
 
@@ -20,6 +21,9 @@ const Profile = () => {
         const userDetail = await getUserDetail()
         getUserCommentsLength(userDetail)
         setLoaded(true)
+        const theme = getTheme()
+        setTheme(theme)
+        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}`
     }, [location])
 
     const getUserDetail = async () => {
@@ -62,7 +66,7 @@ const Profile = () => {
                 user && loaded ?
                 <div className='mx-4 space-y-10 md:mx-auto md:w-4/5'>
     
-                    <div className='space-y-5 py-8 px-4 mb-20 shadow-[0_1px_10px_#690D11] border-4 bg-[#0e0202d4] border-[#690D11] rounded-lg'>
+                    <div className={`space-y-5 py-8 px-4 mb-20 shadow-[0_1px_10px_#690D11] border-4 ${theme == 'dark' ? 'bg-[#0e0202d4]' : 'bg-[#f3f3f3d4]'} border-[#690D11] rounded-lg`}>
                         <div className="">
                             <div className="flex items-center mb-5 space-x-2 space-x-reverse">
                                 {

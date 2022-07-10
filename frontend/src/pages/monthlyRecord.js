@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { saveAs } from 'file-saver'
 import axiosInstance from '../components/axiosApi';;
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
 
 import Header from '../components/header'
 import Footer from '../components/footer'

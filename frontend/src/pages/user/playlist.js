@@ -9,7 +9,7 @@ import Header from '../../components/header'
 import Footer from '../../components/footer'
 import skeletonQuiz from '../../components/skeletonQuiz';
 
-import { log, takeParameterFromUrl } from '../../components/base'
+import { log, getTheme, takeParameterFromUrl } from '../../components/base'
 import userProfileDetail from '../../components/user/userProfileDetail';
 
 const QuizHistory = () => {
@@ -25,7 +25,7 @@ const QuizHistory = () => {
         fetchContent()
         setLoadState(true)
         
-        document.querySelector('body').style = `background: #060101`
+        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
         document.getElementById('land').scrollIntoView()
     }, [location])
 
@@ -110,8 +110,8 @@ const QuizHistory = () => {
                 (!content.length  && document.readyState !== 'loading') ?
                 <h1 className='mt-10 mb-[25rem] text-center'>هیچ کوییزی پیدا نشد <span className='text-[2.5rem]'>😕</span></h1>
                 :
-                <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
-                    <QuizContainer quizzes={content} bgStyle='trans' />
+            <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
+                    <QuizContainer quizzes={content} />
                 </ul>    
             }
 

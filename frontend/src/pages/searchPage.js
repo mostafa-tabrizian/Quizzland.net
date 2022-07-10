@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { log, takeParameterFromUrl, replaceFunction, sortByNewest } from '../components/base'
+import { log, takeParameterFromUrl, replaceFunction, getTheme } from '../components/base'
 import skeletonQuiz from '../components/skeletonQuiz';
 import Search from '../components/search/search'
 
@@ -17,6 +17,7 @@ const SearchMoreResult = () => {
     useEffect(() => {
         const query = takeParameterFromUrl('q')
         setSearchValue(query)
+        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
     }, [location]);
 
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')

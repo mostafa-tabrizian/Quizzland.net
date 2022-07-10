@@ -5,7 +5,7 @@ import { gapi } from 'gapi-script'
 import { useGoogleLogout } from 'react-google-login'
 import { useCookies } from "react-cookie";
 
-import { log } from './base'
+import { log, getTheme } from './base'
 import Search from './search/searchInput'
 import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
@@ -18,6 +18,7 @@ const Header = () => {
     const [profileSubMenu, setProfileSubMenu] = useState(false)
     const [userProfile, setUserProfile] = useState(null)
     const [categorySubMenu, setCategorySubMenu] = useState(null)
+    const [theme, setTheme] = useState('dark')
 
     const mobileSearchInput = useRef()
 
@@ -31,6 +32,7 @@ const Header = () => {
 
     useEffect(async () => {
         setUserProfile(await userProfileDetail())
+        setTheme(getTheme())
         
         const startGapiClient = () => {
             gapi.client.init({
@@ -71,12 +73,11 @@ const Header = () => {
         setSearchMobileOpen(searchMobileOpen ? false : true)
     }
 
-    const logoutSuccess = () => {
-        log('loggout success')
-    }
-
-    const logoutFailure = () => {
-        log('loggout Failure')
+    const changeTheme = () => {
+        const updateTheme = theme == 'dark' ? 'light' : 'dark'
+        setTheme(updateTheme)
+        localStorage.setItem('theme', updateTheme)
+        window.location.reload()
     }
     
     return (
@@ -122,7 +123,7 @@ const Header = () => {
                 </script>
             </Helmet>
 
-            <header className='relative z-10 bg-[#0601017c] rounded-md backdrop-blur-md p-5'>
+            <header className={`relative z-10 ${theme == 'dark' ? 'bg-[#0601017c]' : 'bg-[#ffffff82]' } rounded-md backdrop-blur-md p-5`}>
                 <div>
                     <div className='items-center justify-center hidden md:flex'>
                         <Link to="/" className="flex items-center justify-between header__logo">
@@ -140,13 +141,13 @@ const Header = () => {
 
                         <div className='flex items-center md:hidden'>
                             <button onClick={openCloseSearchMobile} className='flex items-center header__btn' type="button">
-                                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className={`w-8 h-8 ${theme == 'dark' ? 'text-white' : 'text-black'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </button>
 
                             <button type="button" onClick={openCloseMenu} className={`header__btn mr-5 `} aria-label="Menu Button">
-                                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
+                                <svg className={`w-8 h-8 ${theme == 'dark' ? 'text-white' : 'text-black'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
                             </button>
                         </div>
 
@@ -186,7 +187,7 @@ const Header = () => {
                                 }
                             </div>
 
-                            <div className={`absolute top-14 border-2 bg-[#0e0202f3] border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-14 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]'} border-[#690D11] shadow-[0_5px_15px_#b3b3b3] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4 max-w-[14rem]'>
                                     <div>
                                         <ul className='flex flex-col'>
@@ -211,17 +212,18 @@ const Header = () => {
 
 
                         <div className={`hidden md:flex md:justify-center items-center relative`}>
-                            <div className="space-x-reverse space-x-7">
+                            <div className="flex space-x-reverse space-x-7">
                                 {/* <button className="header__btn">
                                     <Link to="/blog"> وبلاگ </Link>
                                 </button> */}
                                 {/* <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
                                 <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button> */}
-                                <Link to='/sort?s=newest' className='text-xl'>کوییز و تست ها</Link>
+                                <Link to='/sort?s=newest'>کوییز و تست ها</Link>
                                 <button className='header__btn' onClick={() => setCategorySubMenu(!categorySubMenu)}>کتگوری ها</button>
+                                <div className='hover:cursor-pointer' onClick={changeTheme}>{theme == 'dark' ? '🌚' : '🌞'}</div>
                             </div>
                             
-                            <div className={`absolute top-14 left-4 border-2 bg-[#0e0202d4] border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-14 left-4 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]'} border-[#690D11] shadow-[0_5px_15px_#b3b3b3] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4'>
                                     <ul className='flex flex-col'>
                                         <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
@@ -291,12 +293,12 @@ const Header = () => {
                                 pr-8 pt-5`
                 }>
                     <button onClick={openCloseSearchMobile} className="header__menu__closeBtn" aria-label="Close Menu Button">
-                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        <svg className={`w-8 h-8 ${theme == 'dark' ? 'text-white' : 'text-black'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                     </button>
 
                     <input
                         type='text'
-                        className={`text-center absolute top-1/4 w-[70%] bg-transparent border-b-2 border-[#690D11] text-[1.5rem] outline-none text-white`}
+                        className={`text-center absolute top-1/4 w-[70%] bg-transparent border-b-2 border-[#690D11] text-[1.5rem] outlne-none ${theme == 'dark' ? 'text-white' : 'text-black'}`}
                         ref={mobileSearchInput}
                         placeholder='کوییزت رو سریع تر پیدا کن'
                         onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
@@ -310,7 +312,7 @@ const Header = () => {
                                 ${menuOpen ? '' : 'slideMenu-hide'}
                                 pr-8 pt-5`}>
                     <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
-                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        <svg className={`w-8 h-8 ${theme == 'dark' ? 'text-white' : 'text-black'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                     </button>
 
                     <div className='relative mt-5'>
@@ -363,10 +365,11 @@ const Header = () => {
                     </div>
                     <div className='relative mt-5'>
                         <hr className='border-[#690D11] '/>
-                        <ul className='flex mt-3 space-x-6 space-x-reverse'>
+                        <ul className='mt-3 space-y-3'>
                             {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/blog"> وبلاگ </Link></li> */}
                             {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/guide"> راهنما </Link></li> */}
                             <li className='text-lg' onClick={openCloseMenu}><Link to="/contact"> تماس با ما </Link></li>
+                            <li className='text-lg' onClick={changeTheme}>تم حالت {theme == 'dark' ? '🌚' : '🌞'}</li>
                         </ul>
                     </div>
                 </div>

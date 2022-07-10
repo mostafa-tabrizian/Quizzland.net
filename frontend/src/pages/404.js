@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom'
 
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { takeParameterFromUrl } from '../components/base';
+import { takeParameterFromUrl, getTheme, log } from '../components/base';
 
 const pathRed = '/static/img/bubbles.webp'
 
 const NotFound_404 = () => {
     const [message, setMessage] = useState(null)
+    const [theme, setTheme] = useState('dark')
 
     useEffect(() => {
         selectMessage()
-        if (document.querySelector('body')) {
-            document.querySelector('body').style = `background: #060101 url('${pathRed}') center center scroll !important`
-        }
+        const theme = getTheme()
+        setTheme(theme)
+        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'} url(${pathRed}) center center scroll`
     }, [])
 
     const selectMessage = () => {
@@ -44,7 +45,7 @@ const NotFound_404 = () => {
 
             <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
 
-            <div class="basicPage wrapper-sm relative" style={{ background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
+            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'dark' ? '#0000008c' : '#f0f0f0'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
                 <h1> {message} </h1>
                 <div class="mt-5">
                     <h2>

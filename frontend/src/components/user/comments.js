@@ -4,16 +4,20 @@ import { message, Spin } from 'antd';
 
 import axiosInstance from '../axiosApi';
 import userProfileDetail from './userProfileDetail';
-import { log, replaceFunction, datePublishHandler } from '../base'
+import { log, getTheme, replaceFunction, datePublishHandler } from '../base'
 import ExplicitWords from './explicitWords';
 
 const Comments = (props) => {
     const [comments, setComments] = useState([]) 
     const [userProfile, setUserProfile] = useState(null)
+    const [theme, setTheme] = useState('dark')
 
     const commentTextRef = useRef()
 
     useEffect(async () => {
+        const theme = getTheme()
+        setTheme(theme)
+        
         fetchComments()
         setUserProfile(await userProfileDetail())
     }, []);
@@ -86,7 +90,7 @@ const Comments = (props) => {
         return (
             comments.length == 0 ?
             <div>
-                <h4 className='text-center'>فعلا هیچ کامنتی نیست!</h4>
+                <h4 className='text-center text-black'>فعلا هیچ کامنتی نیست!</h4>
             </div>
             :
             comments?.map(comment => {
@@ -103,7 +107,7 @@ const Comments = (props) => {
 
                                     }
                                     <div>
-                                        <div className='flex space-x-2 space-x-reverse'>
+                                        <div className='flex space-x-2 space-x-reverse text-black'>
                                             <h4>{comment.submitter_related?.first_name}</h4>
                                             <h4>{comment.submitter_related?.last_name}</h4>
                                         </div>
@@ -133,8 +137,8 @@ const Comments = (props) => {
             {/* <h3 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>کامنت ها</h3> */}
             <div>
                 <div className='relative my-10'>
-                    <textarea name="text" rows="3" ref={commentTextRef} onClick={checkIfUserLoggedIn} className='px-4 w-full text-white placeholder:text-gray-300 border-b-[#ac272e]' type="text" placeholder='.کامنت تان را اینجا بنویسید'></textarea>
-                    <button className='absolute flex px-4 space-x-1 bg-[#060101] bottom-2 left-4' onClick={() => postClicked()}>
+                    <textarea name="text" rows="3" ref={commentTextRef} onClick={checkIfUserLoggedIn} className='px-4 py-2 w-full text-white placeholder:text-gray-300 border-b-[#ac272e]' type="text" placeholder='.کامنت تان را اینجا بنویسید'></textarea>
+                    <button className={`absolute flex px-4 space-x-1 ${theme == 'dark' ? 'bg-[#060101]' : 'bg-[#ffeaeb]'} bottom-2 left-4`} onClick={() => postClicked()}>
                         <svg class="h-6 w-6 text-[#ac272e]"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="10" y1="14" x2="21" y2="3" />  <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" /></svg>
                         <span>ارسال</span>
                     </button>

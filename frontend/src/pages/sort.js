@@ -10,7 +10,7 @@ import Footer from '../components/footer'
 import skeletonQuiz from '../components/skeletonQuiz';
 import Tools from '../components/tools';
 
-import { log, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
+import { log, getTheme, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
 
 const Sort = () => {
     const [loadState, setLoadState] = useState()
@@ -30,7 +30,7 @@ const Sort = () => {
         fetchContent()
         setLoadState(true)
         
-        document.querySelector('body').style = 'background: #060101'
+        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
         document.querySelector('#scrollme').classList.add('overflow-y-auto')  // make content load on scroll
     }, [])
 

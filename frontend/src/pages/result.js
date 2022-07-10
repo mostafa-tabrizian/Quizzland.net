@@ -8,7 +8,7 @@ import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
 
-import { log, replaceFunction, fadeIn, popUpShow, popUpHide, takeParameterFromUrl, sortByMonthlyViews } from '../components/base'
+import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import skeletonQuiz from '../components/skeletonQuiz';

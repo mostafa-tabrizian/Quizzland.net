@@ -73,7 +73,7 @@
         margin-top: 1rem;
         margin-bottom: 2rem;
         z-index: 1;
-        color: $white;
+        color: var(--color);
 
         @include breakpoints-down(large) {
             margin-bottom: 1rem;

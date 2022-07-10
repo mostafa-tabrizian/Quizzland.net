@@ -2,6 +2,25 @@ export const log = (code) => {
     console.log(code)
 }
 
+export const getTheme = () => {
+    const theme = localStorage.getItem('theme')
+
+    if (theme == 'dark') {
+        document.documentElement.style.setProperty('--color', '#f0f0f0')
+        document.documentElement.style.setProperty('--placeholder', '#5d5d5d')
+        document.documentElement.style.setProperty('--brightness', 'brightness(0.4)')
+        document.documentElement.style.setProperty('--background', '#0e0202fa')
+    }
+    else if (theme == 'light') {
+        document.documentElement.style.setProperty('--color', 'black')
+        document.documentElement.style.setProperty('--placeholder', 'black')
+        document.documentElement.style.setProperty('--brightness', 'brightness(1)')
+        document.documentElement.style.setProperty('--background', '#cbcbcbf5')
+    }
+
+    return theme
+}
+
 export const getCookie = (cname) => {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -71,16 +90,6 @@ export const popUpShow = (element) => {
 export const popUpHide = (element) => {
     element.classList.add('popUp-hide')
     element.classList.remove('popUp-show')
-}
-
-export const nightMode = () => {
-    const nightModeType = localStorage.getItem('lightMode')
-
-    if (nightModeType === 'true') {
-        return 'lightGls'
-    } else {
-        return 'darkGls'
-    }
 }
 
 export const datePublishHandler = (publishFullDate) => {

@@ -2,12 +2,18 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { message, notification } from 'antd'
 
-import { log, replaceFunction } from './base'
+import { log, getTheme, replaceFunction } from './base'
 import userProfileDetail from '../components/user/userProfileDetail'
 import axiosInstance from '../components/axiosApi'
 
 const QuizContainer = (props) => {
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
+    const [theme, setTheme] = useState('dark')
+
+    useEffect(() => {
+        const theme = getTheme()
+        setTheme(theme)
+    }, []);
 
     const checkIfExistsThenRemove = async (userDetail, quizId, quizType) => {
         const userWatchList = userDetail.watch_list.split('_')
@@ -111,7 +117,7 @@ const QuizContainer = (props) => {
 
                         <Link
                             to={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
-                            className='flex md:block md:grid-cols-5'
+                            className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' :  'from-white'} to-transparent`}
                         >
                             <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                 <img
@@ -122,7 +128,7 @@ const QuizContainer = (props) => {
                                     className='object-cover h-full'
                                 />
                             </div>
-                            <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
+                            <div className='w-full pt-1 pb-3 pr-4 md:pr-2 md:col-span-3 md:mt-2'>
                                 <h3 className={`quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
                                                 md:w-52 md:text-base`}>
                                     {quiz.subCategory}

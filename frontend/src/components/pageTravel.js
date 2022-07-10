@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { log, nightMode } from './base'
+import { log, getTheme } from './base'
 
 const PageTravel = (props) => {
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
@@ -64,9 +64,9 @@ const PageTravel = (props) => {
     }
 
     return (
-        <div className={`pageTravel ${nightMode()} flex justify-center items-center space-med`}>
+        <div className={`pageTravel flex justify-center items-center space-med`}>
             {props.pageTravel.previous && <button className='pageTravel__arwLast' onClick={goPreviousPage}></button>}
-            <div className='pageTravel__pages flex justify-center items-center'>
+            <div className='flex items-center justify-center pageTravel__pages'>
                 {props.pageTravel.previous && <button onClick={goPreviousPage}>{currentPageNumber - 1}</button>}
                 <span className='pageTravel__pages__curr'>{currentPageNumber}</span>
                 {props.pageTravel.next && <button onClick={goNextPage}>{currentPageNumber + 1}</button>}

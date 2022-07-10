@@ -6,7 +6,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { useCookies } from "react-cookie";
 
 import axiosInstance from '../axiosApi';;
-import { log, replaceFunction } from '../base'
+import { log, getTheme, replaceFunction } from '../base'
 import userProfileDetail from "./userProfileDetail";
 
 const LoginForm = (props) => {

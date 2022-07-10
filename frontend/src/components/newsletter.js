@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 ;
 
-import { log } from './base'
+import { log, getTheme } from './base'
 
 const Newsletter = () => {
     const [newsletterOpen, setNewsletterOpen] = useState(false)

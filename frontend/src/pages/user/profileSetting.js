@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
-import { log } from '../../components/base'
+import { log, getTheme } from '../../components/base'
 import userProfileDetail from '../../components/user/userProfileDetail'
 import { DatePicker, message } from 'antd';
 

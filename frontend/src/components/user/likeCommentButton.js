@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Drawer, message } from 'antd';
 
 import Comments from './comments'
 import axiosInstance from '../axiosApi';
-import { log } from '../base'
+import { log, getTheme } from '../base'
 import userProfileDetail from './userProfileDetail';
 
 const LikeCommentButton = (props) => {
     const [commentsPanelOpen, setCommentsPanelState] = useState(false);
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
+    const [theme, setTheme] = useState('dark')
            
+    useEffect(() => {
+        setTheme(getTheme())
+    }, []);
+
     const userLikedThisQuizBefore = (userDetail) => {
         return userDetail.liked_quizzes.split('_').includes(String(props.quizId) + props.quizType.slice(0, 1))
     }
@@ -94,7 +99,7 @@ const LikeCommentButton = (props) => {
     
     return (
         <React.Fragment>
-            <div className='fixed z-10 flex justify-center w-screen bottom-6'>
+            <div className='fixed z-10 flex justify-center w-screen md:bottom-6 bottom-14'>
                 <div className={`flex px-4 py-1 space-x-5 bg-red-800 rounded-2xl`}>
                     <button className={`${watchListButtonUnClickable?'':'pointer-events-none'} likeCommentButton`} onClick={() => likeButtonClicked()}>👍</button>
                     <span className='h-6 my-auto border border-red-700 '></span>
@@ -107,10 +112,10 @@ const LikeCommentButton = (props) => {
                 onClose={() => setCommentsPanelState(false)}
                 visible={commentsPanelOpen}
                 drawerStyle={{
-                    background: '#060101',
+                    background: `${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'}`,
                 }}
                 headerStyle={{
-                    background: '#060101',
+                    background: `${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'}`,
                 }}
                 bodyStyle={{
                     padding: 0,

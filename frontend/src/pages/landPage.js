@@ -10,7 +10,7 @@ import { Carousel } from 'antd';
 
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { log, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
+import { log, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import LoadingScreen from '../components/loadingScreen'
 import Suggestions from '../components/suggestions';
@@ -18,6 +18,7 @@ import Suggestions from '../components/suggestions';
 const Index = () => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
+    const [theme, setTheme] = useState('dark')
 
     const [content_new, setContent_new] = useState([])
     const [content_monthly, setContent_monthly] = useState([])
@@ -40,14 +41,17 @@ const Index = () => {
     useEffect(() => {
         grabData()
         setLoadState(true)
-        document.querySelector('body').style = `background: #060101`
+        
+        const theme = getTheme()
+        setTheme(theme)
+        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}`
     }, [])
 
     const grabData = async () => {
         const quiz = await axiosInstance.get(`/api/quiz/?limit=70&public=true`)
-            // .catch(err => {log(err.response)})
+        // .catch(err => {log(err.response)})
         const pointy = await axiosInstance.get(`/api/test/?limit=70&public=true`)
-            // .catch(err => {log(err.response)})
+        // .catch(err => {log(err.response)})
         const content = quiz.data.results.concat(pointy.data.results)
 
         setContent_new(content.sort(sortByNewest).slice(0, 20))
@@ -91,9 +95,9 @@ const Index = () => {
 
             <div className="bg-[url('/static/img/bubbles.webp')] bg-no-repeat bg-top hidden md:block absolute w-screen h-screen top-0"></div>
 
-            <div className='relative z-0 mx-4 md:m-auto md:w-4/5'>    
+            <div className='relative z-0 mx-4 md:m-auto md:w-4/5'>
 
-                <div className={`hero hidden md:flex justify-center items-center bg-gradient-to-t backdrop-blur-md from-[#3d191a] via-transparent p-3 rounded-lg m-auto`}>
+                <div className={`hero hidden md:flex justify-center items-center bg-gradient-to-t backdrop-blur-md from-[#8b181f] via-transparent p-3 rounded-lg m-auto`}>
 
                     <div className='relative ml-5 mb-[-3rem] drop-shadow-[10px_15px_10px_black] hidden md:block'>
                         <div className='pointer-events-none'>
@@ -117,9 +121,9 @@ const Index = () => {
                         <div className='relative'>
                             <input
                                 type='text'
-                                className='pl-4 pr-12 py-1 rounded-full text-right bg-[#161616] text-[0.9rem] w-[20rem] mt-5 mb-5'
+                                className={`pl-4 pr-12 py-1 rounded-full text-right ${theme == 'dark' ? 'bg-[#060101]' : 'bg-[#f0f0f0]' } text-[0.9rem] w-[20rem] mt-5 mb-5`}
                                 placeholder={`کوییزت رو سریع تر پیدا کن`}
-                                    onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
+                                onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
                             />
                             <svg className='w-5 h-5 absolute top-[1.7rem] right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
                                 <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
@@ -147,7 +151,7 @@ const Index = () => {
                 {/* sliders */}
                 <div className='justify-center hidden w-full mt-20 space-x-10 md:flex'>
                     <div className='relative w-7/12 ml-5'>
-                        <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
                             </h2>
@@ -158,14 +162,14 @@ const Index = () => {
                         <Link to={`/quiz/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
                         </Link>
-                        <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
+                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
                             <h2>
                                 {content_monthly[0] && content_monthly[0].title}
                             </h2>
                         </div>
                     </div>
                     <div className='relative w-5/12'>
-                        <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='translate-y-[4px]'>
                                 🕚
                             </h2>
@@ -176,7 +180,7 @@ const Index = () => {
                         <Link to={`/quiz/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
                         </Link>
-                        <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
+                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
                             <h2>
                                 {content_new[0] && content_new[0].title}
                             </h2>
@@ -186,7 +190,7 @@ const Index = () => {
 
                 <Carousel autoplay dotPosition='top' className='block mb-20 md:hidden'>
                     <div className='relative w-7/12 mr-5'>
-                        <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
                             </h2>
@@ -197,14 +201,14 @@ const Index = () => {
                         <Link to={`/quiz/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
                         </Link>
-                        <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
+                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
                             <h4>
                                 {content_monthly[0] && content_monthly[0].title}
                             </h4>
                         </div>
                     </div>
                     <div className='relative w-5/12'>
-                        <div className='absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline'>
+                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
                             <h4 className='translate-y-[4px]'>
                                 🕚
                             </h4>
@@ -215,7 +219,7 @@ const Index = () => {
                         <Link to={`/quiz/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
                         </Link>
-                        <div className='absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1'>
+                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
                             <h4>
                                 {content_new[0] && content_new[0].title}
                             </h4>

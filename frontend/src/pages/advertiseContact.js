@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
 
 import Header from '../components/header'
-import Footer from '../components/footer'
 
 const pathRed = '/static/img/bubbles.webp'
 
 const AdvertiseContact = () => {
 
     useEffect(() => {
-        document.querySelector('body').style = `background: #060101 url(${pathRed})) center center scroll`
+        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'} url(${pathRed}) center center scroll`
     }, [])
 
     return (

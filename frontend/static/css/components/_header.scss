@@ -75,7 +75,7 @@
         &::before {
             content: '';
             display: block;
-            background: #0e0202fa;
+            background: var(--background);
             width: 100vw;
             height: 100vh;
             position: absolute;
@@ -245,20 +245,20 @@
 
     @include breakpoints-down(large) {
         span {
-            background-color: $white  !important;
+            background-color: var(--color)  !important;
         }
     }
 
     a,
     button {
-        color: $white;
+        color: var(--color);
 
         // &:hover {
         //     color: white !important;
         // }
 
         // &::after{
-        //     border-bottom: 2px solid $white !important;
+        //     border-bottom: 2px solid var(--color) !important;
         // }
     }
 
@@ -269,23 +269,23 @@
     }
 
     h4 {
-        color: $white;
+        color: var(--color);
 
         &:hover {
             color: white !important;
         }
 
         &::after {
-            border-bottom: 2px solid $white  !important;
+            border-bottom: 2px solid var(--color)  !important;
         }
     }
 
     input {
-        color: $white  !important;
+        color: var(--color)  !important;
     }
 
     .input {
-        color: $white  !important;
+        color: var(--color)  !important;
     }
 
     &__search {

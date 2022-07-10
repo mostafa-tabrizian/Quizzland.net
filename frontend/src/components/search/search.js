@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { Empty } from 'antd';
 
-import { log, replaceFunction, sortByNewest } from '../base'
+import { log, replaceFunction } from '../base'
 import axiosInstance from '../axiosApi';
 import SearchFetchCategory from './searchFetchCategory'
 import SearchFetchQuiz from './searchFetchQuiz'

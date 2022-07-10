@@ -1,12 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-import { log, replaceFunction, sortByNewest } from '../base'
+import { log, getTheme, replaceFunction, sortByNewest } from '../base'
 import Search from './search'
 
 const SearchInput = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [searchValue, setSearchValue] = useState()
+    const [theme, setTheme] = useState('dark')
      
+    useEffect(() => {
+        const theme = getTheme()
+        setTheme(theme)
+    }, []);
+
     const inputChanged = (input) => {
         setSearchValue(input.target.value)
         document.querySelector('body').style = 'overflow-y: hidden'
@@ -40,7 +46,7 @@ const SearchInput = () => {
                     </svg>
                 </div>
 
-                <div class={`w-screen h-screen fixed left-0 top-[8rem] overflow-y-scroll bg-[#060101] ${contentLoaded ? 'fadeIn' : 'fadeOut'}`}>    
+                <div class={`w-screen h-screen fixed left-0 top-[8rem] overflow-y-scroll ${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'} ${contentLoaded ? 'fadeIn' : 'fadeOut'}`}>    
                     <button
                         className={`
                             fixed right-4 top-2

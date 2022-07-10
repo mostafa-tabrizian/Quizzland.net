@@ -133,9 +133,13 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 :root {
+  --color: #f0f0f0;
+  --placeholder: rgb(93, 93, 93);
+  --brightness: brightness(.4);
+  --background: #0e0202fa;
   color-scheme: light dark;
   /* both supported */
-  color: white !important;
+  color: var(--color) !important;
 }
 
 html {
@@ -165,7 +169,6 @@ body {
   overflow-y: overlay;
   scroll-behavior: smooth;
   scrollbar-color: #b52633 transparent;
-  background: #060101;
   z-index: 0;
 }
 
@@ -270,31 +273,31 @@ input,
 textarea {
   font-family: IRANYekanRegular, sans-serif, serif !important;
   text-align: right;
-  color: black !important;
+  color: var(--color) !important;
 }
 
 p::-webkit-input-placeholder,
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: #5d5d5d !important;
+  color: var(--placeholder) !important;
 }
 
 p:-ms-input-placeholder,
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-  color: #5d5d5d !important;
+  color: var(--placeholder) !important;
 }
 
 p::-ms-input-placeholder,
 input::-ms-input-placeholder,
 textarea::-ms-input-placeholder {
-  color: #5d5d5d !important;
+  color: var(--placeholder) !important;
 }
 
 p::placeholder,
 input::placeholder,
 textarea::placeholder {
-  color: #5d5d5d !important;
+  color: var(--placeholder) !important;
 }
 
 label {
@@ -407,8 +410,8 @@ hr {
 }
 
 #quizBg {
-  -webkit-filter: blur(5px) brightness(0.4);
-          filter: blur(5px) brightness(0.4);
+  -webkit-filter: blur(15px) var(--brightness);
+          filter: blur(15px) var(--brightness);
   width: 100%;
   height: 100%;
   position: fixed;
@@ -953,7 +956,7 @@ hr {
 .header__menu::before {
   content: '';
   display: block;
-  background: #0e0202fa;
+  background: var(--background);
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -991,13 +994,13 @@ hr {
 
 @media (max-width: 70em) {
   .header span {
-    background-color: #f0f0f0 !important;
+    background-color: var(--color) !important;
   }
 }
 
 .header a,
 .header button {
-  color: #f0f0f0;
+  color: var(--color);
 }
 
 @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
@@ -1007,7 +1010,7 @@ hr {
 }
 
 .header h4 {
-  color: #f0f0f0;
+  color: var(--color);
 }
 
 .header h4:hover {
@@ -1015,15 +1018,15 @@ hr {
 }
 
 .header h4::after {
-  border-bottom: 2px solid #f0f0f0 !important;
+  border-bottom: 2px solid var(--color) !important;
 }
 
 .header input {
-  color: #f0f0f0 !important;
+  color: var(--color) !important;
 }
 
 .header .input {
-  color: #f0f0f0 !important;
+  color: var(--color) !important;
 }
 
 .header__search__result {
@@ -1197,7 +1200,7 @@ hr {
   margin-top: 1rem;
   margin-bottom: 2rem;
   z-index: 1;
-  color: #f0f0f0;
+  color: var(--color);
 }
 
 @media (max-width: 70em) {

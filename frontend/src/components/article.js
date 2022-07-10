@@ -6,7 +6,7 @@ import axiosInstance from '../components/axiosApi';
 
 import { InlineReactionButtons, InlineShareButtons, StickyShareButtons } from 'sharethis-reactjs';
 
-import { log, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
+import { log, getTheme, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
 
 import LoadingScreen from '../components/loadingScreen'
 import Header from '../components/header'

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Helmet } from "react-helmet";
 
 import axiosInstance from '../axiosApi'
-import { log, replaceFunction } from '../base'
+import { log } from '../base'
 
 const Notifications = (props) => {
     const [notifications, setNotifications] = useState()

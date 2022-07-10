@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 
-import { log } from '../../components/base'
+import { log, getTheme } from '../../components/base'
 import LoginForm from "../../components/user/loginForm";
 
 const pathRed = '/static/img/bubbles.webp'
 
 const Login = () => {
+    const [theme, setTheme] = useState('dark')    
+    
     useEffect(() => {
-        document.querySelector('body').style = `background: #060101 url(${pathRed}) center center scroll`
+        const theme = getTheme()
+        setTheme(theme)
+        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'} url(${pathRed}) center center scroll`
     }, [])
 
     return (
@@ -26,7 +30,7 @@ const Login = () => {
                     </h1>
 
                     <div className='grid md:grid-cols-2'>
-                        <div className='border rounded-lg mt-3 order-1 md:order-[0] bg-[#060101] shadow-[inset_0_0_15px_#ac272e] border-[#ac272e] px-3 py-1'>
+                        <div className={`border rounded-lg mt-3 order-1 md:order-[0] ${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'} shadow-[inset_0_0_15px_#ac272e] border-[#ac272e] px-3 py-1`}>
                             <LoginForm />
                         </div>
                         

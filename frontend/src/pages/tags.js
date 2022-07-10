@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import QuizContainer from '../components/quizContainer';;
-import { log, replaceFunction } from '../components/base'
+import { log, getTheme, replaceFunction } from '../components/base'
 import skeletonQuiz from '../components/skeletonQuiz';
 import SearchFetchQuiz from '../components/search/searchFetchQuiz';
 import SearchFetchCategory from '../components/search/searchFetchCategory'

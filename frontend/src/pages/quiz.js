@@ -8,7 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { log, replaceFunction, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
+import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import skeletonQuiz from '../components/skeletonQuiz';
 import QuizHeader from '../components/quiz/quizHeader'
@@ -45,6 +45,7 @@ const Quiz = (props) => {
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
     const [questionCounterForId, setQuestionCounterForId] = useState(1)
     const [showLoginForm, setShowLoginForm] = useState(false)
+    const [theme, setTheme] = useState('dark')
 
     const location = useLocation();
 
@@ -64,12 +65,15 @@ const Quiz = (props) => {
     useEffect(() => {
         const question_background = document.querySelector('#question_background')
         question_background && (document.querySelectorAll('#question_background').forEach((q) => q.style = `background: ${quiz?.question_background}`))
+        document.querySelector('body').style = `background: #060101`
     })
 
     useEffect(() => {
         const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
         setQuizSlug(slug)
         setQuizSlugReplacedWithHyphen(slug)
+        const theme = getTheme()
+        setTheme(theme)
     }, [location]);
     
     const setWhichSFXfile = () => {
@@ -472,7 +476,7 @@ const Quiz = (props) => {
                                     <div className='absolute z-10 top-6 right-3 mix-blend-overlay'>
                                         {questions.indexOf(question) + 1}
                                     </div>
-                                    <p className='p-3 text-[2rem] w-full quiz_question mix-blend-color-dodge text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
+                                    <p className='p-3 text-[2rem] w-full quiz_question mix-blend-overlay text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
                                 </div>
                             }
 
@@ -487,7 +491,7 @@ const Quiz = (props) => {
                                         className='object-cover object-top rounded-xl'
                                         title={question.title}
                                     />
-                                    <a href={question?.question_img} target='_blank'><span className='text-[.7rem]'>در صورت عدم نمایش اینجا را کلیک کنید</span></a>
+                                    <a href={question?.question_img} target='_blank'><span className='text-[.7rem] text-white'>در صورت عدم نمایش اینجا را کلیک کنید</span></a>
                                 </div>
                             }
                         </div>
@@ -496,14 +500,14 @@ const Quiz = (props) => {
 
                         {
                             quizType == 'quiz' && question?.answer_text &&
-                            <div className={`quiz__answerText answerHide text-right bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg`}>
+                            <div className={`quiz__answerText answerHide text-right ${theme == 'dark' ? 'bg-[#0000007c]' : 'bg-[#ffffff82]'} backdrop-blur-xl mt-4 rounded-lg`}>
                                 {answerOfQuestionIfExistShow(question)}
                             </div>
                         }
 
                         {
                             quizType == 'quiz' && !(question.answer_imGif.includes('NotExist.jpg')) &&
-                            <div className={`quiz__answerImGif answerHide`} id='quiz__answerImGif bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg'>
+                            <div className={`quiz__answerImGif answerHide quiz__answerImGif ${theme == 'dark' ? 'bg-[#0000007c]' : 'bg-[#ffffff82]'} backdrop-blur-xl mt-4 rounded-lg`}>
                                 {gifAnswerOfQuestionIfExistShow(question)}
                             </div>
                         }
@@ -559,7 +563,7 @@ const Quiz = (props) => {
         return (
             splittedTags.map(tag => {
                 return (
-                    <li key={tag} className='px-3 py-1 rounded-lg'>
+                    <li key={tag} className='px-3 py-1 text-white rounded-lg'>
                         <h4>
                             <Link
                                 to={`/tags/${replaceFunction(tag, ' ', '+')}`}
@@ -794,7 +798,7 @@ const Quiz = (props) => {
                 </div>
 
                 <div>
-                    <h3 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
+                    <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
                     <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
                         {quiz && showTheTagsIfNotNull()}
                     </ul>
@@ -804,7 +808,7 @@ const Quiz = (props) => {
                 <div className='adverts_center' id='mediaad-bNpr'></div>
 
                 <div className='mx-4 mt-10'>
-                    <h3 className='flex items-center justify-center mb-5 quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
+                    <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
 
                     <div className='w-3/4 mx-auto'>
                         {skeletonQuiz(contentLoaded)}
@@ -823,7 +827,7 @@ const Quiz = (props) => {
                     
                                             <a
                                                 href={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
-                                                className='flex md:block md:grid-cols-5'
+                                                className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' :  'from-white'} to-transparent`}
                                             >
                                                 <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                                     <img
@@ -834,7 +838,7 @@ const Quiz = (props) => {
                                                         className='object-cover h-full'
                                                     />
                                                 </div>
-                                                <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
+                                                <div className='w-full pt-1 pb-3 pr-4 md:pr-2 md:col-span-3 md:mt-2'>
                                                     <h3 className={`quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
                                                                     md:w-52 md:text-base`}>
                                                         {quiz.subCategory}

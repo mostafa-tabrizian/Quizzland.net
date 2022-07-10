@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
 
 import axiosInstance from '../components/axiosApi';
 import { log, replaceFunction, datePublishHandler } from '../components/base'
 
-// import Tools from '../components/tools'
-// import PageTravel from '../components/pageTravel'
-import LoadingScreen from '../components/loadingScreen'
-import skeletonQuiz from '../components/skeletonQuiz';
 import Header from '../components/header'
 
 

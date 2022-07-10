@@ -1,6 +1,16 @@
+import { useState, useEffect } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { getTheme } from '../base'
+
 const Trivia = (props) => {
+    const [theme , setTheme] = useState('dark')
+
+    useEffect(() => {
+        const theme = getTheme()
+        setTheme(theme)
+    }, []);
+    
     if (props.question.option_1st) {
         return (
             <div className="flex justify-center">
@@ -14,7 +24,7 @@ const Trivia = (props) => {
                         />
                             <label
                                 className={`quiz__options__textLabel backdrop-blur-xl
-                                        border border-[#ffffff30]
+                                        border border-[#ffffff30] ${theme == 'dark' ? 'bg-[#0000003c]' : 'bg-[#8d8a89]'}
                                         p-2 block max-w-[100%] md:max-width-[14rem]
                                         md:h-[auto] md:pr-4 md:m-2 rounded-lg
                                         cursor-pointer
@@ -30,9 +40,9 @@ const Trivia = (props) => {
                             </label>
                         </>
                     }
-                    {props.question.option_2nd !== ('') && <> <input onClick={props.selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${props.question.id}-2`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${props.correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${props.wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!props.ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${props.question.id}-2`} htmlFor={`${props.question.id}-2`}> {props.question.option_2nd} </label> </>}
-                    {props.question.option_3rd !== ('') && <> <input onClick={props.selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${props.question.id}-3`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${props.correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${props.wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!props.ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${props.question.id}-3`} htmlFor={`${props.question.id}-3`}> {props.question.option_3rd} </label> </>}
-                    {props.question.option_4th !== ('') && <> <input onClick={props.selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${props.question.id}-4`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${props.correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${props.wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!props.ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${props.question.id}-4`} htmlFor={`${props.question.id}-4`}> {props.question.option_4th} </label> </>}
+                    {props.question.option_2nd !== ('') && <> <input onClick={props.selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${props.question.id}-2`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] ${theme == 'dark' ? 'bg-[#0000003c]' : 'bg-[#8d8a89]'} hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${props.correctAnswerOption === 2 ? 'quiz__correctAnswer' : ''} ${props.wrongAnswerOption === 2 ? 'quiz__wrongAnswer' : ''} ${!props.ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${props.question.id}-2`} htmlFor={`${props.question.id}-2`}> {props.question.option_2nd} </label> </>}
+                    {props.question.option_3rd !== ('') && <> <input onClick={props.selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${props.question.id}-3`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] ${theme == 'dark' ? 'bg-[#0000003c]' : 'bg-[#8d8a89]'} hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${props.correctAnswerOption === 3 ? 'quiz__correctAnswer' : ''} ${props.wrongAnswerOption === 3 ? 'quiz__wrongAnswer' : ''} ${!props.ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${props.question.id}-3`} htmlFor={`${props.question.id}-3`}> {props.question.option_3rd} </label> </>}
+                    {props.question.option_4th !== ('') && <> <input onClick={props.selectedOption} type="radio" name="answer" className='absolute opacity-0' id={`${props.question.id}-4`} /> <label className={`quiz__options__textLabel backdrop-blur-xl border border-[#ffffff30] ${theme == 'dark' ? 'bg-[#0000003c]' : 'bg-[#8d8a89]'} hover:border-red-300 p-2 block max-w-[100%] md:max-width-[14rem] md:h-[auto] md:pr-4 md:m-2 rounded-lg cursor-pointer ${props.correctAnswerOption === 4 ? 'quiz__correctAnswer' : ''} ${props.wrongAnswerOption === 4 ? 'quiz__wrongAnswer' : ''} ${!props.ableToSelectOption ? 'pointer-events-none' : ''}`} id={`${props.question.id}-4`} htmlFor={`${props.question.id}-4`}> {props.question.option_4th} </label> </>}
                 </form>
             </div>
         )
