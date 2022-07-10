@@ -89,7 +89,7 @@ const Index = () => {
                 </script>
             </Helmet>
 
-            <div className="bg-[url('/static/img/bubbles.webp')] hidden md:block absolute w-screen h-screen top-0"></div>
+            <div className="bg-[url('/static/img/bubbles.webp')] bg-no-repeat bg-top hidden md:block absolute w-screen h-screen top-0"></div>
 
             <div className='relative z-0 mx-4 md:m-auto md:w-4/5'>    
 

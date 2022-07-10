@@ -1484,6 +1484,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-gradient-to: #ac272e;
 }
 
+.bg-top {
+  background-position: top;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
