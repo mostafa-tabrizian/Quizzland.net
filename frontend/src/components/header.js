@@ -187,7 +187,7 @@ const Header = () => {
                                 }
                             </div>
 
-                            <div className={`absolute top-14 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]'} border-[#690D11] shadow-[0_5px_15px_#b3b3b3] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-14 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]  shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4 max-w-[14rem]'>
                                     <div>
                                         <ul className='flex flex-col'>
@@ -223,7 +223,7 @@ const Header = () => {
                                 <div className='hover:cursor-pointer' onClick={changeTheme}>{theme == 'dark' ? '🌚' : '🌞'}</div>
                             </div>
                             
-                            <div className={`absolute top-14 left-4 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]'} border-[#690D11] shadow-[0_5px_15px_#b3b3b3] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-14 left-4 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0] shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4'>
                                     <ul className='flex flex-col'>
                                         <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>

@@ -41,7 +41,7 @@ const SubCategory = (props) => {
     }, [sortType])
 
     useEffect(() => {
-        backgroundOfSubCategory()
+        applyBackground_AddView()
         setLoadState(true)
     }, [persianSubCategory])
 
@@ -79,15 +79,16 @@ const SubCategory = (props) => {
         setContentLoaded(true)
     }
 
-    const backgroundOfSubCategory = async () => {
+    const applyBackground_AddView = async () => {
+        const quizBg = document.querySelector('#quizBg')
+        quizBg &&
         await axiosInstance.get(`/api/subcategory/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&public=true`)
-            .then((categoryData) => {
-                AddView('subcategory', categoryData.data[0].id)
-                const background = categoryData.data[0].background
-                document.querySelector('body').style = `
-                    background: url('${background}') center/cover fixed no-repeat !important;
-                `
-            })
+        .then((categoryData) => {
+            AddView('subcategory', categoryData.data[0].id)
+            const background = categoryData.data[0].background
+            quizBg.style = `background: url('${background}') center/cover no-repeat fixed !important; filter: blur(3px) brightness(0.5)`
+        })
+        
     }
 
     return (
@@ -102,6 +103,8 @@ const SubCategory = (props) => {
                 <meta name="description" content={`کوییزلند - کوییز های ${persianSubCategoryWithoutSign} `} />
                 <meta name="keywords" content={`بهترین کوییز های ${persianSubCategoryWithoutSign} , کوییز های ${persianSubCategoryWithoutSign}`} />
             </Helmet>
+
+            <div id='quizBg'></div>
 
             <div className="mx-4 md:w-4/5 md:m-auto" >
                 {/* <div className='adverts adverts__left'>
