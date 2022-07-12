@@ -12,7 +12,7 @@ const UserProfileDetail = async () => {
                 .then(res => {
                     document.cookie = `USER_ACCESS_TOKEN=${res.data.access}; path=/;`
                     document.cookie = `USER_REFRESH_TOKEN=${res.data.refresh}; path=/;`
-            
+                    
                     window.location.reload()
                 })
                 .catch(err => {
@@ -23,15 +23,16 @@ const UserProfileDetail = async () => {
 
     const fetchUserProfile = async () => {
         const localAccessToken = getCookie('USER_ACCESS_TOKEN')
+        const now = new Date().getTime()
 
-        return await axiosInstance.get(`/api/login?at=${localAccessToken}`)
+        return await axiosInstance.get(`/api/login?at=${localAccessToken}&timestamp=${now}`)
             .then (res => {
                 if (res.data.username !== 'guest') {
                     return res.data
                 }
             })
             .catch(err => {
-                // log(err.response)
+                log(err.response)
                 refreshToken()
             })
     }

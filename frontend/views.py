@@ -11,7 +11,7 @@ from django.http import HttpResponse
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticated, AllowAny
@@ -68,8 +68,10 @@ def auth_login(request, *args, **kwargs):
                     }   
                 )
             )
-        except user.DoesNotExist:
-            return HttpResponse('user does not exist!')
+        except ObjectDoesNotExist:
+            return HttpResponse('DoesNotExist')
+        except Exception as e:
+            return HttpResponse(e)
     
 def checkAlreadyUserExists(username, email):
     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 

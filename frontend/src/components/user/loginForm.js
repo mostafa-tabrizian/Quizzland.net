@@ -150,7 +150,7 @@ const LoginForm = (props) => {
             const lastName = res.profileObj.familyName || ''
             const firstName = res.profileObj.givenName || ''
             const avatar = res.profileObj.imageUrl
-    
+
             accessToken &&
             await axiosInstance.get(`/api/google?at=${accessToken}&u=${username}&e=${email}&ln=${lastName}&fn=${firstName}&av=${avatar}`)
                 .then(res => {

@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
-import axiosInstance from '../../components/axiosApi';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
+import { DatePicker, message } from 'antd';
 
+import axiosInstance from '../../components/axiosApi';
 import Header from '../../components/header'
 import Footer from '../../components/footer'
-import { log, getTheme } from '../../components/base'
+import { log } from '../../components/base'
 import userProfileDetail from '../../components/user/userProfileDetail'
-import { DatePicker, message } from 'antd';
 
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)
+    
     useEffect(() => {
         checkIfLoggedIn_setUser()
     }, [])
