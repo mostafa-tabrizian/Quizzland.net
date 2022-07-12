@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { Link } from 'react-router-dom'
 
 import { log, getTheme } from '../../components/base'
 import LoginForm from "../../components/user/loginForm";
@@ -35,9 +36,11 @@ const Login = () => {
                         </div>
                         
                         <div className='m-auto'>
-                            <img className='w-[5rem] md:w-[14rem]' src="/static/img/Q.webp" alt="" />
+                            <img className='w-8/12 absolute center z-[-1] top-[-30%] opacity-50 md:opacity-100 md:top-0 md:relative md:w-[14rem]' src="/static/img/Q.webp" alt="" />
                         </div>
                     </div>
+
+                    <button className='mt-5 text-gray-500'><Link to='/'>برگشت به صفحه اصلی</Link></button>
 
                 </div>
             </div>
