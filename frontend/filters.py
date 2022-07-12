@@ -28,7 +28,7 @@ class QuizzesFilter(filters.FilterSet):
         fields= {
             'public': ['exact'],
             'categoryKey': ['exact'],
-            'subCategory': ['icontains'],
+            'subCategory': ['iexact'],
             'slug': ['iexact', 'icontains'],
             'title': ['iexact', 'icontains'],
             'tags': ['iexact', 'icontains']
@@ -40,7 +40,7 @@ class PointyQuizzesFilter(filters.FilterSet):
         fields= {
             'public': ['exact'],
             'categoryKey': ['exact'],
-            'subCategory': ['icontains'],
+            'subCategory': ['iexact'],
             'slug': ['iexact', 'icontains'],
             'title': ['iexact', 'icontains'],
             'tags': ['iexact', 'icontains']
@@ -72,7 +72,7 @@ class SubCategoriesFilter(filters.FilterSet):
         fields= {
             'public': ['exact'],
             'categoryKey': ['exact'],
-            'subCategory': ['icontains'],
+            'subCategory': ['iexact'],
             'title': ['iexact', 'icontains']
         }
 

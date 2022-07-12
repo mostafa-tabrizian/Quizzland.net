@@ -65,8 +65,8 @@ const SubCategory = (props) => {
     }
 
     const fetchContent = async () => {
-        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
-        const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+        const pointy = await axiosInstance.get(`/api/test/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
         const content = quiz.data.results.concat(pointy.data.results).sort(sortByMonthlyViews);
 
         if (content.count !== 0) {
@@ -82,7 +82,7 @@ const SubCategory = (props) => {
     const applyBackground_AddView = async () => {
         const quizBg = document.querySelector('#quizBg')
         quizBg &&
-        await axiosInstance.get(`/api/subcategory/?subCategory__icontains=${replaceFunction(subCategory, '-', ' ')}&public=true`)
+        await axiosInstance.get(`/api/subcategory/?subCategory__iexact=${replaceFunction(subCategory, '-', ' ')}&public=true`)
         .then((categoryData) => {
             AddView('subcategory', categoryData.data[0].id)
             const background = categoryData.data[0].background

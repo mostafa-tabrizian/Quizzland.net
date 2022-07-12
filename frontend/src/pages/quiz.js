@@ -579,8 +579,8 @@ const Quiz = (props) => {
     }
 
     const getSuggestionsQuiz = async (category, subCategory) => {
-        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/test/?subCategory__icontains=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/test/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         if (content.length != 8) {
@@ -589,7 +589,7 @@ const Quiz = (props) => {
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
 
-        setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
+        setSuggestionQuizzes(content.slice(0, 8))
     }
 
     const SFXController = () => {
