@@ -53,7 +53,7 @@ const Result = () => {
         setContentLoaded(true)
         AddView(quizType, quizDetail.id)
         getSuggestionsQuiz(quizDetail?.subCategory)
-        document.querySelector('html').style = `background: None`
+        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
         setLoadState(true)
         
         userDetail = await userProfileDetail()
@@ -61,7 +61,7 @@ const Result = () => {
         
         if (userDetail != undefined) {
             postToHistoryAsPlayedQuiz(userDetail, quizDetail.id, quizType)
-            giveScorePoint(score)
+            giveScorePoint(quizType, quizDetail.id, score)
         } else {
             displayMessageToUserAboutScore(score)
         }
@@ -75,7 +75,7 @@ const Result = () => {
         }
     }, [suggestionQuizzes])
 
-    const userPlayedThisQuizBefore = (quizId, quizType) => {
+    const userPlayedThisQuizBefore = (quizType, quizId) => {
         return userDetail.played_history.split('_').includes(String(quizId) + quizType.slice(0, 1))
     }
 
@@ -135,10 +135,10 @@ const Result = () => {
         return giveAmountPoint
     }
     
-    const giveScorePoint = async (score) => {
+    const giveScorePoint = async (quizType, quizId, score) => {
         const giveAmountPoint = decideHowMucHPointToGive(score)
         
-        if (giveAmountPoint !== 0 && !userPlayedThisQuizBefore(quizDetail?.id, quizType)) {
+        if (giveAmountPoint !== 0 && !userPlayedThisQuizBefore(quizType, quizId)) {
             await axiosInstance.patch(`/api/user/${userDetail.id}/`, { points: userDetail.points + parseInt(giveAmountPoint) })
                 .then(res => {
                     res.status == 200 &&

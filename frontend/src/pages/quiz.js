@@ -282,7 +282,7 @@ const Quiz = (props) => {
         }
 
         document.getElementById(`inputLabel ${userChose}`).style.opacity = 1
-        document.getElementById(`inputLabel ${userChose}`).style.background = '#000000bf'
+        document.getElementById(`inputLabel ${userChose}`).style.background = (theme == 'dark' ? '#000000bf' : 'white')
         document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
     }
 

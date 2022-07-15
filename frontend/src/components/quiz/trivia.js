@@ -24,7 +24,7 @@ const Trivia = (props) => {
                         />
                             <label
                                 className={`quiz__options__textLabel backdrop-blur-xl
-                                        border border-[#ffffff30] ${theme == 'dark' ? 'bg-[#0000003c]' : 'bg-[#8d8a89]'}
+                                        border border-[#ffffff30] ${theme == 'dark' ? 'bg-[#0000003c]' : 'bg-[#ffffff78]'}
                                         p-2 block max-w-[100%] md:max-width-[14rem]
                                         md:h-[auto] md:pr-4 md:m-2 rounded-lg
                                         cursor-pointer
