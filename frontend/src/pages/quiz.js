@@ -481,7 +481,7 @@ const Quiz = (props) => {
 
                             {
                                 !question?.question_img?.includes('NotExist') &&
-                                <div className='my-3 h-[14rem] md:h-[18rem]'>
+                                <div className='my-3'>
                                     <LazyLoadImage
                                         src={question?.question_img}
                                         width={1366}
