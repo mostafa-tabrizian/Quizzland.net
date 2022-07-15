@@ -65,6 +65,7 @@ def auth_login(request, *args, **kwargs):
                         'played_history': user.played_history,
                         'liked_quizzes': user.liked_quizzes,
                         'watch_list': user.watch_list,
+                        'is_active': user.is_active,
                     }   
                 )
             )
@@ -77,15 +78,16 @@ def checkAlreadyUserExists(username, email):
     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
 
 def verifyRecaptcha(response):
+    response = response.GET.get('r')
     RECAPTCHA_SECRET = config('RECAPTCHA_SECRET', cast=str)
     
     params = {
         'secret': RECAPTCHA_SECRET,
         'response': response
     }
-    
     req = requests.post('https://www.google.com/recaptcha/api/siteverify', params)
-    return (json.loads(req.content))['success']
+    
+    return HttpResponse((json.loads(req.content))['success'])
     
 def auth_google(request, *args, **kwargs):
     payload = {'access_token': request.GET.get("at")}
@@ -111,6 +113,9 @@ def auth_google(request, *args, **kwargs):
     
     try:
         user = CustomUser.objects.get(email=data['email'])
+        
+        if user.is_active == False:
+            return HttpResponse('inactive')
         
     except CustomUser.DoesNotExist:
         user = CustomUser()

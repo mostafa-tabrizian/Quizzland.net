@@ -6,7 +6,9 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 const accessToken = async () => {
-    if (getCookie('USER_ACCESS_TOKEN') && getCookie('USER_REFRESH_TOKEN')) {
+    const USER_ACCESS_TOKEN = getCookie('USER_ACCESS_TOKEN')
+    const USER_REFRESH_TOKEN = getCookie('USER_REFRESH_TOKEN')
+    if (USER_ACCESS_TOKEN && USER_ACCESS_TOKEN !== 'undefined' && USER_REFRESH_TOKEN && USER_REFRESH_TOKEN !== 'undefined') {
         return
     }
     

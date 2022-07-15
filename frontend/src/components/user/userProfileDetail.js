@@ -1,7 +1,7 @@
 import axiosInstance from '../axiosApi'
 import { log, getCookie } from '../base'
 
-const UserProfileDetail = async () => {
+const UserProfileDetail = () => {
 
     const refreshToken = async () => {
         const localRefreshToken = getCookie('USER_REFRESH_TOKEN')
@@ -10,12 +10,14 @@ const UserProfileDetail = async () => {
             localRefreshToken &&
             await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
                 .then(res => {
+                    log(res.data)
                     document.cookie = `USER_ACCESS_TOKEN=${res.data.access}; path=/;`
                     document.cookie = `USER_REFRESH_TOKEN=${res.data.refresh}; path=/;`
                     
                     window.location.reload()
                 })
                 .catch(err => {
+                    log('refresh error')
                     log(err.response)
                 })
         )
@@ -24,18 +26,26 @@ const UserProfileDetail = async () => {
     const fetchUserProfile = async () => {
         const localAccessToken = getCookie('USER_ACCESS_TOKEN')
         const now = new Date().getTime()
-
-        return await axiosInstance.get(`/api/login?at=${localAccessToken}&timestamp=${now}`)
-            .then (res => {
-                if (res.data.username !== 'guest') {
-                    return res.data
-                }
-            })
-            .catch(err => {
-                log(err.response)
-                refreshToken()
-            })
+        if (localAccessToken) {
+            return await axiosInstance.get(`/api/login?at=${localAccessToken}&timestamp=${now}`)
+                .then (res => {
+                    if (res.data.username !== 'guest') {
+                        if (res.data.is_active) {
+                            return res.data
+                        } else {
+                            return 'inactive'
+                        }
+                    }
+                })
+                .catch(err => {
+                    log('api login')
+                    log(err.response)
+                    refreshToken()
+                })
+        }
     }
+
+    return fetchUserProfile()
 
     // const fetchUserProfileUpdate = async (at) => {
     //     return await axiosInstance.get(`/api/login?at=${at}`)
@@ -50,9 +60,6 @@ const UserProfileDetail = async () => {
     //             log('refresh again!!!!!')
     //         })
     // }
-
-    return await fetchUserProfile()
 }
  
-
 export default UserProfileDetail;

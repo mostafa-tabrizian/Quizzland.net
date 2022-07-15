@@ -31,25 +31,39 @@ const Header = () => {
     })
 
     useEffect(async () => {
-        setUserProfile(await userProfileDetail())
         setTheme(getTheme())
         
         const startGapiClient = () => {
             gapi.client.init({
-                clientId: '590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com',
+                clientId: process.env.GOOGLE_LOGIN_CLIENT,
                 scope: ''
             })
         }
-
         gapi.load('client:auth2', startGapiClient)
+        
+        const userProfileDetailData = await userProfileDetail()
+        if (userProfileDetailData !== undefined) {
+            if (userProfileDetailData == 'inactive') {
+                handleLogout()
+            } else {
+                setUserProfile(userProfileDetailData)
+            }
+        }
     }, [])
 
     const handleLogout = async () => {
         message.loading('در حال خارج شدن ...')
         
-        signOut()
+        try {
+            signOut()
+        }
+        catch (e) {
+            log('signOut google error')
+            log(e)
+        }
         
         try {
+            
             await axiosInstance.post('/api/blacklist/', {
                 "refresh_token": cookies.USER_REFRESH_TOKEN,
             });
@@ -61,6 +75,7 @@ const Header = () => {
             window.location.reload()
         }
         catch (e) {
+            log('error')
             console.log(e);
         }
     };

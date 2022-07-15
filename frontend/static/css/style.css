@@ -273,7 +273,7 @@ input,
 textarea {
   font-family: IRANYekanRegular, sans-serif, serif !important;
   text-align: right;
-  color: var(--color) !important;
+  color: black !important;
 }
 
 p::-webkit-input-placeholder,
