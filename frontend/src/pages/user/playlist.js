@@ -31,6 +31,10 @@ const QuizHistory = () => {
 
     const fetchContent = async () => {
         const userDetail = await userProfileDetail()
+
+        if (userDetail == null) {
+            window.location.href = '/login'
+        }
         
         let playlist
         const playlistType = takeParameterFromUrl('list')
