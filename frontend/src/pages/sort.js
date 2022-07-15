@@ -11,6 +11,7 @@ import skeletonQuiz from '../components/skeletonQuiz';
 import Tools from '../components/tools';
 
 import { log, getTheme, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
+import { message } from 'antd';
 
 const Sort = () => {
     const [loadState, setLoadState] = useState()
@@ -39,20 +40,26 @@ const Sort = () => {
     }, [sortType, content])
 
     const sortContent = () => {
-        switch (sortType) {
-            case 'newest':
-                whenChangeThisIDKWhyTheSortAffect('sort1')
-                setSortedContent(content.sort(sortByNewest))
-                break
-            case 'views':
-                whenChangeThisIDKWhyTheSortAffect('sort2')
-                setSortedContent(content.sort(sortByViews))
-                break
-            case 'trend':
-                whenChangeThisIDKWhyTheSortAffect('sort3')
-                setSortedContent(content.sort(sortByMonthlyViews))
-                break
-        }
+        message.loading('', .3)
+        
+        setSortedContent([])
+        
+        setTimeout(() => {
+            switch (sortType) {
+                case 'newest':
+                    whenChangeThisIDKWhyTheSortAffect('sort1')
+                    setSortedContent(content.sort(sortByNewest))
+                    break
+                case 'views':
+                    whenChangeThisIDKWhyTheSortAffect('sort2')
+                    setSortedContent(content.sort(sortByViews))
+                    break
+                case 'trend':
+                    whenChangeThisIDKWhyTheSortAffect('sort3')
+                    setSortedContent(content.sort(sortByMonthlyViews))
+                    break
+            }
+        }, 100)
     }
 
     const fetchContent = async () => {
