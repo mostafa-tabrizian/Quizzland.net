@@ -15,9 +15,9 @@ const ProfileSetting = () => {
         checkIfLoggedIn_setUser()
     }, [])
 
-    const oldPassword = useRef()
-    const newPassword = useRef()
-    const re_NewPassword = useRef()
+    // const oldPassword = useRef()
+    // const newPassword = useRef()
+    // const re_NewPassword = useRef()
 
     const checkIfLoggedIn_setUser = async () => {
         const userProfile = await userProfileDetail()
@@ -29,40 +29,40 @@ const ProfileSetting = () => {
         setUser(userProfile)
     }
 
-    const changePassword = async () => {
-        if (newPassword.current.value != re_NewPassword.current.value) {
-            return message.error('رمز جدید و تکرار آن بکسان نمی‌باشد')
-        }
-        else if (newPassword.current.value == oldPassword.current.value) {
-            return message.error('رمز قبلی و جدید شما نمی‌توانند بکسان باشد')
-        }
+    // const changePassword = async () => {
+    //     if (newPassword.current.value != re_NewPassword.current.value) {
+    //         return message.error('رمز جدید و تکرار آن بکسان نمی‌باشد')
+    //     }
+    //     else if (newPassword.current.value == oldPassword.current.value) {
+    //         return message.error('رمز قبلی و جدید شما نمی‌توانند بکسان باشد')
+    //     }
         
-        else {
-            message.loading('لطفا منتظر بمانید ...', 1)
+    //     else {
+    //         message.loading('لطفا منتظر بمانید ...', 1)
 
-            await axiosInstance.get(`/api/reset_password?u=${user.username}&op=${oldPassword.current.value}&np=${newPassword.current.value}`)
-                .then(res => {
-                    if (res.data == 'not_same') {
-                        message.error('رمز قبلی شما صحیح نمی‌باشد')
-                    }
-                    else if(res.data.includes('too short')) {
-                        message.error('رمز شما می‌بایست حداقل ۸ کارکتر باشد', 3)
-                    }
-                    else if (res.data.includes('entirely numeric')) {
-                        message.error('رمز شما می‌بایست حداقل حاوی یک حرف باشد', 3)
-                    }
-                    else if (res.data.includes('too common')) {
-                        message.error('رمز شما به راحتی قابل حدس است. می‌بایست یک مقدار پیچیده تر باشد', 3)
-                    }
-                    else if (res.data == 'success_change') {
-                        message.success('رمز شما با موفقیت تغییر یافت')
-                    }
-                })
-                .catch(err => {
-                    log(err.response)
-                })
-        }
-    }
+    //         await axiosInstance.get(`/api/reset_password?u=${user.username}&op=${oldPassword.current.value}&np=${newPassword.current.value}`)
+    //             .then(res => {
+    //                 if (res.data == 'not_same') {
+    //                     message.error('رمز قبلی شما صحیح نمی‌باشد')
+    //                 }
+    //                 else if(res.data.includes('too short')) {
+    //                     message.error('رمز شما می‌بایست حداقل ۸ کارکتر باشد', 3)
+    //                 }
+    //                 else if (res.data.includes('entirely numeric')) {
+    //                     message.error('رمز شما می‌بایست حداقل حاوی یک حرف باشد', 3)
+    //                 }
+    //                 else if (res.data.includes('too common')) {
+    //                     message.error('رمز شما به راحتی قابل حدس است. می‌بایست یک مقدار پیچیده تر باشد', 3)
+    //                 }
+    //                 else if (res.data == 'success_change') {
+    //                     message.success('رمز شما با موفقیت تغییر یافت')
+    //                 }
+    //             })
+    //             .catch(err => {
+    //                 log(err.response)
+    //             })
+    //     }
+    // }
 
     return (
         <React.Fragment>
@@ -151,7 +151,7 @@ const ProfileSetting = () => {
                         </div>
                     </div>
 
-                    <h1 className='mt-10 mb-5'>تنظیمات امنیتی</h1>
+                    {/* <h1 className='mt-10 mb-5'>تنظیمات امنیتی</h1>
                     <div className='py-2 px-2 border-[#690D11] space-y-5 border-4 rounded'>
                         <div className='space-y-5 md:grid md:grid-cols-2'>
                             <div>
@@ -167,7 +167,7 @@ const ProfileSetting = () => {
                         <div className='flex justify-end w-full mt-5'>
                             <button onClick={() => changePassword()} className='px-6 py-2 border-2 border-green-600 rounded-xl'>ذخیره</button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

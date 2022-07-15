@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { message, notification } from 'antd';
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script'
-import ReCAPTCHA from 'react-google-recaptcha'
+// import ReCAPTCHA from 'react-google-recaptcha'
 import { useCookies } from "react-cookie";
 
 import axiosInstance from '../axiosApi';;
@@ -10,9 +10,9 @@ import { log, replaceFunction } from '../base'
 import userProfileDetail from "./userProfileDetail";
 
 const LoginForm = (props) => {
-    const [emailUsername, setEmailUsername] = useState(null)
-    const [password, setPassword] = useState(null)
-    const [reCaptchaResponse, setReCaptchaResponse] = useState(null)
+    // const [emailUsername, setEmailUsername] = useState(null)
+    // const [password, setPassword] = useState(null)
+    // const [reCaptchaResponse, setReCaptchaResponse] = useState(null)
 
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
 
@@ -84,94 +84,94 @@ const LoginForm = (props) => {
         });
     }
 
-    const userNotActive = async (userDetail) => {
-        if (!userDetail.is_active) {
-            showInActiveNotification()
-            return false
-        } else {
-            return true
-        }
-    }
+    // const userNotActive = async (userDetail) => {
+    //     if (!userDetail.is_active) {
+    //         showInActiveNotification()
+    //         return false
+    //     } else {
+    //         return true
+    //     }
+    // }
 
-    const checkAllInputEntered = () => {
-        if (emailUsername == null || password == null) {
-            message.warning('لطفا فورم را کامل کنید')
-            return false
-        } else {
-            return true
-        }
-    }
+    // const checkAllInputEntered = () => {
+    //     if (emailUsername == null || password == null) {
+    //         message.warning('لطفا فورم را کامل کنید')
+    //         return false
+    //     } else {
+    //         return true
+    //     }
+    // }
 
-    const doesUserExist = (fetchedUsers) => {
-        if (fetchedUsers.length == 0) {
-            message.error('این ایمیل/نام کاربری وجود ندارد');
-            return false
-        } else {
-            return true
-        }
-    }
+    // const doesUserExist = (fetchedUsers) => {
+    //     if (fetchedUsers.length == 0) {
+    //         message.error('این ایمیل/نام کاربری وجود ندارد');
+    //         return false
+    //     } else {
+    //         return true
+    //     }
+    // }
 
-    const checkExistenceAndActivityStatue = async () => {
-        const now = new Date().getTime()
+    // const checkExistenceAndActivityStatue = async () => {
+    //     const now = new Date().getTime()
         
-        const existByEmail = await axiosInstance.get(`/api/user/?email=${emailUsername}&timestamp=${now}`)
-        const existByUsername = await axiosInstance.get(`/api/user/?username=${emailUsername}&timestamp=${now}`)
+    //     const existByEmail = await axiosInstance.get(`/api/user/?email=${emailUsername}&timestamp=${now}`)
+    //     const existByUsername = await axiosInstance.get(`/api/user/?username=${emailUsername}&timestamp=${now}`)
         
-        const fetchedUser = existByUsername.data.concat(existByEmail.data)
+    //     const fetchedUser = existByUsername.data.concat(existByEmail.data)
         
-        if (doesUserExist(fetchedUser) && await userNotActive(fetchedUser[0])) { return true}
-        else {return false}
-    }
+    //     if (doesUserExist(fetchedUser) && await userNotActive(fetchedUser[0])) { return true}
+    //     else {return false}
+    // }
 
-    const checkRecaptcha = async () => {
-        if (reCaptchaResponse !== null) {
-            return await axiosInstance.get(`/api/recaptcha?r=${reCaptchaResponse}`,)
-                .then(res => {
-                    return res.data
-                })
-                .catch(err => {
-                    log(err.response)
-                })
-        } else {
-            message.warning('لطفا تایید کنید که ربات نیستید!')
-            return false 
-        }
-    }
+    // const checkRecaptcha = async () => {
+    //     if (reCaptchaResponse !== null) {
+    //         return await axiosInstance.get(`/api/recaptcha?r=${reCaptchaResponse}`,)
+    //             .then(res => {
+    //                 return res.data
+    //             })
+    //             .catch(err => {
+    //                 log(err.response)
+    //             })
+    //     } else {
+    //         message.warning('لطفا تایید کنید که ربات نیستید!')
+    //         return false 
+    //     }
+    // }
 
-    const handleSubmit = async () => {
-        message.loading('لطفا منتظر بمانید ...', 1)
+    // const handleSubmit = async () => {
+    //     message.loading('لطفا منتظر بمانید ...', 1)
         
-        if (
-            checkAllInputEntered() &&
-            await checkRecaptcha() &&
-            await checkExistenceAndActivityStatue()
-        ){
-            try {
-                const data = await axiosInstance.post('/api/token/obtain/', {
-                    username: emailUsername,
-                    password: password
-                })
+    //     if (
+    //         checkAllInputEntered() &&
+    //         await checkRecaptcha() &&
+    //         await checkExistenceAndActivityStatue()
+    //     ){
+    //         try {
+    //             const data = await axiosInstance.post('/api/token/obtain/', {
+    //                 username: emailUsername,
+    //                 password: password
+    //             })
                     
-                axiosInstance.defaults.headers['Authorization'] = "JWT " + data.data.access;
+    //             axiosInstance.defaults.headers['Authorization'] = "JWT " + data.data.access;
                 
-                setCookie('USER_ACCESS_TOKEN', data.data.access, { path: '/' });
-                setCookie('USER_REFRESH_TOKEN', data.data.refresh, { path: '/' });
+    //             setCookie('USER_ACCESS_TOKEN', data.data.access, { path: '/' });
+    //             setCookie('USER_REFRESH_TOKEN', data.data.refresh, { path: '/' });
 
-                window.location.reload()
-                window.history.go(-1)
+    //             window.location.reload()
+    //             window.history.go(-1)
     
-            } catch (error) {
-                message.error('رمز عبور اشتباه می‌باشد');
-                throw error;   
-            }
-        }
-    }
+    //         } catch (error) {
+    //             message.error('رمز عبور اشتباه می‌باشد');
+    //             throw error;   
+    //         }
+    //     }
+    // }
 
-    const keyboardClicked = (event) => {
-        if (event.key === 'Enter') {
-            handleSubmit()
-        }
-    }
+    // const keyboardClicked = (event) => {
+    //     if (event.key === 'Enter') {
+    //         handleSubmit()
+    //     }
+    // }
 
     const googleLoginSuccess = async (res) => {
         const userProfile = await userProfileDetail()
@@ -222,29 +222,29 @@ const LoginForm = (props) => {
     }
 
     return (
-        <div className='p-8'>
-            <form className='grid justify-center space-y-5 text-[20px] rounded-lg center'>
-                <label className='w-[18rem]'>
-                    <input name="email" className='w-full p-2 text-base rounded-lg' type="string" placeholder="ایمیل یا نام کاربری" value={emailUsername} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setEmailUsername(input.target.value)} />
-                </label>
-                <label className='w-[18rem]'>
-                    <input name="password" className='w-full p-2 text-base rounded-lg' type="password" placeholder="رمز عبور" value={password} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setPassword(input.target.value)} />
-                </label>
-                <ReCAPTCHA
-                    sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
-                    theme='dark'
-                    onChange={res => setReCaptchaResponse(res)}
-                />
-                <button onClick={() => handleSubmit()} className='bg-[#ac272e] p-2 rounded-lg text-white font-semibold' type="button">
-                    ورود
-                </button>
-            </form>
+        // <div className='p-8'>
+        //     <form className='grid justify-center space-y-5 text-[20px] rounded-lg center'>
+        //         <label className='w-[18rem]'>
+        //             <input name="email" className='w-full p-2 text-base rounded-lg' type="string" placeholder="ایمیل یا نام کاربری" value={emailUsername} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setEmailUsername(input.target.value)} />
+        //         </label>
+        //         <label className='w-[18rem]'>
+        //             <input name="password" className='w-full p-2 text-base rounded-lg' type="password" placeholder="رمز عبور" value={password} onKeyDown={(event) => keyboardClicked(event)} onChange={(input) => setPassword(input.target.value)} />
+        //         </label>
+        //         <ReCAPTCHA
+        //             sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
+        //             theme='dark'
+        //             onChange={res => setReCaptchaResponse(res)}
+        //         />
+        //         <button onClick={() => handleSubmit()} className='bg-[#ac272e] p-2 rounded-lg text-white font-semibold' type="button">
+        //             ورود
+        //         </button>
+        //     </form>
 
-            <hr className='mx-auto' />
+        //     <hr className='mx-auto' />
 
             <GoogleLogin
                 clientId="590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com"
-                className='w-[90%] flex justify-center'
+                className='ltr'  // w-[90%] flex justify-center
                 buttonText="ورود/ثبت نام با حساب گوگل"
                 onSuccess={googleLoginSuccess}
                 onFailure={googleLoginFailure}
@@ -252,7 +252,7 @@ const LoginForm = (props) => {
                 isSignedIn={true}
             />
             
-        </div>
+        // </div>
     );
 }
 
