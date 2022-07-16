@@ -45,7 +45,19 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-
+    
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '70/minute',
+        'user': '70/minute',
+        # 'user_sec': '2/second',
+        # 'user_min': '120/minute',
+        # 'user_hour': '7200/hour',
+    }
 }
 
 AUTH_USER_MODEL = "frontend.CustomUser"
