@@ -485,7 +485,6 @@ const Quiz = (props) => {
                                     <LazyLoadImage
                                         src={question?.question_img}
                                         width={1366}
-                                        height={768}
                                         alt={question.title}
                                         className='object-cover object-top rounded-xl'
                                         title={question.title}

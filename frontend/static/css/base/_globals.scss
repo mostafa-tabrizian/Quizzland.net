@@ -640,39 +640,6 @@ hr {
     }
 }
 
-.nightMode {
-    background: url('/static/img/nightMode.png') no-repeat center center;
-    filter: drop-shadow(0px 0px 4px white);
-    transform: translate(0.54rem, -0.43rem);
-    height: 1.6875rem;
-    z-index: 3;
-    border: none;
-    width: 2rem;
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    &::after {
-        width: 0 !important;
-    }
-
-    @include breakpoints-down(large) {
-        transform: translate(-0.51rem, -0.33rem);
-    }
-
-    &__container {
-        width: 1.6875rem;
-        height: 1.6875rem;
-        padding: .3rem;
-
-        @include breakpoints-down(large) {
-            position: relative;
-            top: 2rem;
-        }
-    }
-}
-
 .divider {
     border-bottom: 1px solid rgb(121, 121, 121);
     width: 50vw;
