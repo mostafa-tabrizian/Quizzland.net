@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom'
 import { message, Spin } from 'antd';
+import debounce from 'lodash.debounce'
 
 import axiosInstance from '../axiosApi';
 import userProfileDetail from './userProfileDetail';
@@ -43,32 +44,36 @@ const Comments = (props) => {
             verifyState = false
         }
         
-        await postComment(comment, verifyState)
+        await debouncePostComment(comment, verifyState)
     }
 
-    const postComment = async (comment, verifyState) => {
-        message.loading("در حال ثبت کامنت ...", 1)
-        await axiosInstance.post('/api/comment/', {
-            comment_text: comment,
-            quiz_related: props.quizType == 'quiz' ? props.quizId : null,
-            test_related: props.quizType == 'test' ? props.quizId : null,
-            verified: verifyState,
-            submitter_related: {
-                username: userProfile.id
+    const debouncePostComment = useCallback(
+        debounce(
+            async (comment, verifyState) => {
+                message.loading("در حال ثبت کامنت ...", 1)
+                await axiosInstance.post('/api/comment/', {
+                    comment_text: comment,
+                    quiz_related: props.quizType == 'quiz' ? props.quizId : null,
+                    test_related: props.quizType == 'test' ? props.quizId : null,
+                    verified: verifyState,
+                    submitter_related: {
+                        username: userProfile.id
+                    }
+                })
+                    .then(res => {
+                        if (res.status == 201) {
+                            verifyState == true ?
+                            message.success('کامنت با موفقیت ثبت شد.')
+                            :
+                            message.warning('کامنت شما مشکوک به داشتن کلمات نامناسب است. پس از تایید توسط ادمین، کامنت شما نمایش داده می‌شود.', 7)
+                        }
+                    })
+                    .catch(err => {
+                        log(err.response)
+                    })
             }
-        })
-            .then(res => {
-                if (res.status == 201) {
-                    verifyState == true ?
-                    message.success('کامنت با موفقیت ثبت شد.')
-                    :
-                    message.warning('کامنت شما مشکوک به داشتن کلمات نامناسب است. پس از تایید توسط ادمین، کامنت شما نمایش داده می‌شود.', 7)
-                }
-            })
-            .catch(err => {
-                log(err.response)
-            })
-    }
+        , 1000), []
+    )
 
     const sortCommentsByNewest = (a, b) => {
         return new Date(b.date_submitted) - new Date(a.date_submitted)

@@ -22,6 +22,7 @@
     "exceljs": "^4.2.1",
     "file-saver": "^2.0.5",
     "gapi-script": "^1.2.0",
+    "lodash": "^4.17.21",
     "persian-date": "^1.1.0",
     "react": "^17.0.2",
     "react-cookie": "^4.1.1",

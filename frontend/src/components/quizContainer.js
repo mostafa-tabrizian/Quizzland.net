@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { message, notification } from 'antd'
+import debounce from 'lodash.debounce'
 
 import { log, getTheme, replaceFunction } from './base'
 import userProfileDetail from '../components/user/userProfileDetail'
 import axiosInstance from '../components/axiosApi'
 
 const QuizContainer = (props) => {
-    const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
     const [theme, setTheme] = useState('dark')
     const [showPlaylistButton, setShowPlaylistButton] = useState(null)
 
@@ -15,6 +15,20 @@ const QuizContainer = (props) => {
         const theme = getTheme()
         setTheme(theme)
     }, []);
+
+    const debounceRemoveFromWatchList = useCallback(
+		debounce(
+            async (userDetail, updatedUserWatchList) => {
+                await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: updatedUserWatchList})
+                    .then(res => {
+                        message.error('با موفقیت از پلی لیست حذف گردید.')
+                    })
+                    .catch(err => {
+                        log(err.response)
+                    })
+            }
+        , 1000), []
+	);
 
     const checkIfExistsThenRemove = async (userDetail, quizId, quizType) => {
         const userWatchList = userDetail.watch_list.split('_')
@@ -27,14 +41,7 @@ const QuizContainer = (props) => {
         let updatedUserWatchList = userWatchList.splice(findCurrentQuizInWatchList, 1)
         updatedUserWatchList = userWatchList.join('_')
         
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: updatedUserWatchList})
-            .then(res => {
-                setWatchListButtonUnClickable(true)
-                message.success('با موفقیت از پلی لیست حذف گردید.')
-            })
-            .catch(err => {
-                log(err.response)
-            })
+        debounceRemoveFromWatchList(userDetail, updatedUserWatchList)
         return true
     }
 
@@ -79,9 +86,19 @@ const QuizContainer = (props) => {
         }
     }
     
+    const debounceAddToWatchList = useCallback(
+		debounce(async (userDetail, quizId, quizType) => {
+            await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: userDetail.watch_list + `_${quizId}${quizType}` })
+            .then(res => {
+                message.success('با موفقیت به پلی لیست اضافه گردید.')
+            })
+            .catch(err => {
+                log(err.response)
+            })
+        }, 1000), []
+	);
+
     const checkWatchList = async (quizId, quizCheckIfQuiz, userDetail) => {
-        setWatchListButtonUnClickable(false)
-        
         let quizType
         if (quizCheckIfQuiz) {
             quizType = 'q'
@@ -91,22 +108,19 @@ const QuizContainer = (props) => {
 
         if (await checkIfExistsThenRemove(userDetail, quizId, quizType)) { return }
         
-        
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: userDetail.watch_list + `_${quizId}${quizType}` })
-        .then(res => {
-            setWatchListButtonUnClickable(true)
-            message.success('با موفقیت به پلی لیست اضافه گردید.')
-        })
-        .catch(err => {
-            log(err.response)
-        })
+        debounceAddToWatchList(userDetail, quizId, quizType)
     }
 
     return (
         props.quizzes.map((quiz) => {
             return (
+<<<<<<< HEAD
                 <li key={quiz.id} className='relative flex-auto mb-5 md:mr-4 md:mb-4' onMouseEnter={() => setShowPlaylistButton(quiz.id)} onMouseLeave={() => setShowPlaylistButton(null)}>
                     <button onClick={() => addToWatchListClicked(quiz.id, quiz.GIF20)} className={`${watchListButtonUnClickable?'':'pointer-events-none'} ${(showPlaylistButton == quiz.id) ? 'visible opacity-100 translate-y-0' : 'md:invisible md:opacity-0 md:translate-y-2'} duration-300 ease-in-out transition-all  absolute top-[-0.5rem] right-[-.5rem] z-[1]`}>
+=======
+                <li key={quiz.id} className='relative flex-auto mb-5 md:mr-4 md:mb-4'>
+                    <button onClick={() => addToWatchListClicked(quiz.id, quiz.GIF20)} className={`absolute top-[-0.5rem] right-[-.5rem] z-[1]`}>
+>>>>>>> abcc7d8f (add debounce to watchlist, comment and like button for better performance and prevent spam click)
                         <svg class="h-7 w-7 text-[#ac272e]"  fill="#1e0809" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
