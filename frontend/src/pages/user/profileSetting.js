@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from "react-helmet";
-import { DatePicker, message } from 'antd';
+import { DatePicker } from 'antd';
 
 import axiosInstance from '../../components/axiosApi';
 import Header from '../../components/header'
 import Footer from '../../components/footer'
-import { log } from '../../components/base'
+import { log, getTheme } from '../../components/base'
 import userProfileDetail from '../../components/user/userProfileDetail'
 
 const ProfileSetting = () => {
@@ -13,6 +13,7 @@ const ProfileSetting = () => {
     
     useEffect(() => {
         checkIfLoggedIn_setUser()
+        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
     }, [])
 
     // const oldPassword = useRef()
