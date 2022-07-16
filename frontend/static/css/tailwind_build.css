@@ -510,10 +510,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   visibility: visible;
 }
 
-.invisible {
-  visibility: hidden;
-}
-
 .fixed {
   position: fixed;
 }
@@ -612,18 +608,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .top-24 {
   top: 6rem;
-}
-
-.top-\[15\%\] {
-  top: 15%;
-}
-
-.top-\[-30\%\] {
-  top: -30%;
-}
-
-.top-\[\] {
-  top: ;
 }
 
 .top-\[10\%\] {
@@ -856,32 +840,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 50vh;
 }
 
-.mb-\[25rem\] {
-  margin-bottom: 25rem;
-}
-
-.ml-4 {
-  margin-left: 1rem;
-}
-
-.mt-\[10\%\] {
-  margin-top: 10%;
-}
-
-.mt-\[1\/12\] {
-  margin-top: 1 / 12;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.mt-\[\] {
-  margin-top: ;
-}
-
 .mt-\[50\%\] {
   margin-top: 50%;
+}
+
+.mb-\[25rem\] {
+  margin-bottom: 25rem;
 }
 
 .block {
@@ -960,10 +924,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-\[17rem\] {
   height: 17rem;
-}
-
-.h-\[14rem\] {
-  height: 14rem;
 }
 
 .h-\[11rem\] {
@@ -1098,14 +1058,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 1rem;
 }
 
-.w-1\/12 {
-  width: 8.333333%;
-}
-
-.w-6\/12 {
-  width: 50%;
-}
-
 .max-w-\[14rem\] {
   max-width: 14rem;
 }
@@ -1148,41 +1100,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .translate-y-\[4px\] {
   --tw-translate-y: 4px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-x-0 {
-  --tw-translate-x: 0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-x-\[1rem\] {
-  --tw-translate-x: 1rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-x-\[-1rem\] {
-  --tw-translate-x: -1rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-y-0 {
-  --tw-translate-y: 0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-y-\[-1rem\] {
-  --tw-translate-y: -1rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-y-4 {
-  --tw-translate-y: 1rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-y-2 {
-  --tw-translate-y: 0.5rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1523,6 +1440,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: #0000003c;
 }
 
+.bg-\[\#ffffff78\] {
+  background-color: #ffffff78;
+}
+
 .bg-\[\#8d8a89\] {
   --tw-bg-opacity: 1;
   background-color: rgb(141 138 137 / var(--tw-bg-opacity));
@@ -1563,10 +1484,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-\[\#f3f3f3d4\] {
   background-color: #f3f3f3d4;
-}
-
-.bg-\[\#ffffff78\] {
-  background-color: #ffffff78;
 }
 
 .bg-gradient-to-l {
@@ -1935,10 +1852,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   opacity: 0;
 }
 
-.opacity-100 {
-  opacity: 1;
-}
-
 .mix-blend-overlay {
   mix-blend-mode: overlay;
 }
@@ -2045,20 +1958,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
 }
 
-.transition {
-  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .duration-1000 {
   transition-duration: 1000ms;
-}
-
-.duration-300 {
-  transition-duration: 300ms;
 }
 
 .ease-in-out {
@@ -2132,10 +2033,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     .md\:container {
       max-width: 1536px;
     }
-  }
-
-  .md\:invisible {
-    visibility: hidden;
   }
 
   .md\:absolute {
@@ -2285,10 +2182,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     height: 34rem;
   }
 
-  .md\:h-\[18rem\] {
-    height: 18rem;
-  }
-
   .md\:h-\[21rem\] {
     height: 21rem;
   }
@@ -2333,12 +2226,12 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 42rem;
   }
 
-  .md\:w-\[14rem\] {
-    width: 14rem;
-  }
-
   .md\:w-5\/12 {
     width: 41.666667%;
+  }
+
+  .md\:w-\[14rem\] {
+    width: 14rem;
   }
 
   .md\:max-w-\[85\%\] {
@@ -2347,11 +2240,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:max-w-\[21rem\] {
     max-width: 21rem;
-  }
-
-  .md\:translate-y-2 {
-    --tw-translate-y: 0.5rem;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 
   .md\:grid-cols-3 {
@@ -2450,10 +2338,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:opacity-100 {
     opacity: 1;
-  }
-
-  .md\:opacity-0 {
-    opacity: 0;
   }
 }
 

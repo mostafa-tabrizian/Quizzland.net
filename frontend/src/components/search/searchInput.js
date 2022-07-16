@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { log, getTheme, replaceFunction, sortByNewest } from '../base'
+import { log, getTheme, replaceFunction } from '../base'
 import Search from './search'
 
 const SearchInput = () => {
@@ -15,19 +15,13 @@ const SearchInput = () => {
 
     const inputChanged = (input) => {
         setSearchValue(input.target.value)
-        document.querySelector('body').style = 'overflow-y: hidden'
+        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}; overflow-y: hidden`
     }
 
     const closeSearch = () => {
         setContentLoaded(false) 
-        document.querySelector('body').style = 'overflow-y: auto'
+        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}; overflow-y: auto`
     }
-
-    // document.body.addEventListener(("click"), (e) => {
-    //     if (!e.target.classList.contains('header__searched__result__quizzes') && !e.target.classList.contains('header__searched__input')) {
-    //         setContentLoaded(false)
-    //     }
-    // })
     
     return (
         <React.Fragment>
