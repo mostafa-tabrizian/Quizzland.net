@@ -86,7 +86,7 @@ const SubCategory = (props) => {
         .then((categoryData) => {
             AddView('subcategory', categoryData.data[0].id)
             const background = categoryData.data[0].background
-            quizBg.style = `background: url('${background}') center/cover no-repeat fixed !important; filter: blur(3px) brightness(0.5)`
+            quizBg.style = `background-image: url('${background}'); background-size: cover; background-position: center; filter: blur(3px) brightness(0.5)`
         })
         
     }

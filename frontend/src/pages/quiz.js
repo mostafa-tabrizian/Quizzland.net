@@ -122,7 +122,7 @@ const Quiz = (props) => {
     const applyBackground = (background) => {
         const quizBg = document.querySelector('#quizBg')
         quizBg &&
-        (quizBg.style = `background: url('${background}') center/cover no-repeat fixed !important`)
+        (quizBg.style = `background-image: url('${background}'); background-size: cover; background-position: center`)
     }
 
     const fetchQuiz = async () => {
