@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { message, notification } from 'antd'
 import debounce from 'lodash.debounce'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { log, getTheme, replaceFunction } from './base'
 import userProfileDetail from '../components/user/userProfileDetail'
@@ -130,10 +131,9 @@ const QuizContainer = (props) => {
                             className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' :  'from-white'} to-transparent`}
                         >
                             <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
-                                <img
+                                <LazyLoadImage
                                     src={quiz.thumbnail}
                                     width={1366}
-                                    height={768}
                                     alt={`${quiz.subCategory} | ${quiz.title}`}
                                     className='object-cover h-full'
                                 />

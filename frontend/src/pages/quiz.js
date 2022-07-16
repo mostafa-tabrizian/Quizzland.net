@@ -437,7 +437,6 @@ const Quiz = (props) => {
         return <LazyLoadImage
             src={question.answer_imGif}
             width={1366}
-            height={768}
             className='object-contain object-top m-auto'
             alt={question.title}
             title={question.title}

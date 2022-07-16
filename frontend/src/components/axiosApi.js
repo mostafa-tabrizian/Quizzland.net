@@ -1,6 +1,7 @@
 import { message } from 'antd';
 import axios from 'axios'
 import { log, getCookie } from './base'
+import { setupCache } from 'axios-cache-adapter'
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -29,13 +30,19 @@ const accessToken = async () => {
 
 accessToken()
 
+const cache = setupCache({
+    maxAge: 15 * 60 * 1000,
+    exclude: { query: false },
+})
+
 const axiosInstance = axios.create({
     timeout: 5000,
     headers: {
         'Authorization': "JWT " + getCookie('USER_ACCESS_TOKEN'),
         'Content-Type': 'application/json',
         'accept': 'application/json'
-    }
+    },
+    adapter: cache.adapter
 });
 axiosInstance.interceptors.response.use(
     response => response,
