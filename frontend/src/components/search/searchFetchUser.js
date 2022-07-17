@@ -2,7 +2,8 @@ import axiosInstance from '../axiosApi';
 import { log } from '../base'
 
 const SearchFetch = async (value) => {  
-    const searched_user = await axiosInstance.get(`/api/user/`)
+    const now = new Date().getTime()
+    const searched_user = await axiosInstance.get(`/api/user/?is_active=true&timestamp=${now}`)
     
     const searchedWords = value?.toLowerCase().split(' ')
     const rankResults = []
