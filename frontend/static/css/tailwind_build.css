@@ -2160,14 +2160,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-top: 10%;
   }
 
-  .md\:mb-3 {
-    margin-bottom: 0.75rem;
-  }
-
-  .md\:mb-0 {
-    margin-bottom: 0px;
-  }
-
   .md\:block {
     display: block;
   }

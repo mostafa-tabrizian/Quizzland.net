@@ -346,7 +346,7 @@ const Result = () => {
                             }
                             {
                                 resultText &&
-                                <div className="px-4 mt-5 mb-16 leading-10 wrapper-p darkGls"
+                                <div className="px-4 mt-5 mb-16 leading-10 wrapper-p"
                                     dangerouslySetInnerHTML={{
                                         __html: resultText
                                     }}>

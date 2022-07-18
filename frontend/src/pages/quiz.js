@@ -790,18 +790,6 @@ const Quiz = (props) => {
                         </div>
                     }
 
-                    {/* {isItDesktop() &&
-                        <hr className='divider'></hr>
-                    } */}
-
-                    {/* {
-                        contentLoaded &&
-                        <div className={`quiz__questionCounter relative flex justify-center items-center`}>
-                            <div className="quiz__questionCounter__totalAnswered">{currentQuestionNumber}</div>
-                            سوال شماره
-                        </div>
-                    } */}
-
                     <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                         <div className={`quiz__hider mt-5 flex relative`}>
                             {

@@ -376,39 +376,6 @@ hr {
   direction: rtl;
 }
 
-.hoverAnimation button {
-  position: relative;
-  padding: 5px 5px;
-  overflow: hidden;
-  -webkit-transition: color .3s ease-out;
-  transition: color .3s ease-out;
-}
-
-.hoverAnimation button::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 0;
-  -webkit-transform: translateY(calc(100% - 2px));
-          transform: translateY(calc(100% - 2px));
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(60deg, #b52633, #791118);
-  -webkit-transition: -webkit-transform .25s ease-out;
-  transition: -webkit-transform .25s ease-out;
-  transition: transform .25s ease-out;
-  transition: transform .25s ease-out, -webkit-transform .25s ease-out;
-}
-
-.hoverAnimation button:hover::after {
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
-  -webkit-transition: -webkit-transform .25s ease-out;
-  transition: -webkit-transform .25s ease-out;
-  transition: transform .25s ease-out;
-  transition: transform .25s ease-out, -webkit-transform .25s ease-out;
-}
-
 #quizBg {
   -webkit-filter: blur(15px) var(--brightness);
           filter: blur(15px) var(--brightness);
@@ -418,100 +385,6 @@ hr {
   left: 0;
   top: 0;
   z-index: -1;
-}
-
-.backBtn {
-  background-image: linear-gradient(-45deg, #6e6e6e, #d8d8d8);
-  color: black !important;
-  position: relative;
-  margin-left: 25%;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  -webkit-transform: translate(-50%);
-          transform: translate(-50%);
-}
-
-@media (max-width: 70em) {
-  .backBtn {
-    margin-left: 15%;
-  }
-}
-
-.loadingScreen {
-  background: linear-gradient(-45deg, #6a0d11, #ac272e);
-}
-
-.loadingScreen:after {
-  -webkit-animation: changeContent .8s linear infinite;
-          animation: changeContent .8s linear infinite;
-  content: "⠋";
-  font-size: 5rem !important;
-}
-
-@keyframes changeContent {
-  10% {
-    content: "⠙";
-  }
-  20% {
-    content: "⠹";
-  }
-  30% {
-    content: "⠸";
-  }
-  40% {
-    content: "⠼";
-  }
-  50% {
-    content: "⠴";
-  }
-  60% {
-    content: "⠦";
-  }
-  70% {
-    content: "⠧";
-  }
-  80% {
-    content: "⠇";
-  }
-  90% {
-    content: "⠏";
-  }
-  100% {
-    content: '⠏';
-  }
-}
-
-@-webkit-keyframes changeContent {
-  10% {
-    content: "⠙";
-  }
-  20% {
-    content: "⠹";
-  }
-  30% {
-    content: "⠸";
-  }
-  40% {
-    content: "⠼";
-  }
-  50% {
-    content: "⠴";
-  }
-  60% {
-    content: "⠦";
-  }
-  70% {
-    content: "⠧";
-  }
-  80% {
-    content: "⠇";
-  }
-  90% {
-    content: "⠏";
-  }
-  100% {
-    content: '⠏';
-  }
 }
 
 .popUp-show {
@@ -713,64 +586,6 @@ hr {
           transform: rotate(0);
 }
 
-/* stylish */
-.lightGls {
-  padding: .4rem;
-  color: black;
-  border-radius: 7px;
-  border: solid 1px transparent;
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
-  background-clip: padding-box;
-  -webkit-box-shadow: 0 8px 15px #00000059;
-          box-shadow: 0 8px 15px #00000059;
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.shadow-red {
-  -webkit-box-shadow: 0 0 20px #b52633;
-          box-shadow: 0 0 20px #b52633;
-}
-
-.shadow-black {
-  -webkit-box-shadow: 0 0 10px black;
-          box-shadow: 0 0 10px black;
-}
-
-.darkGls {
-  padding: .4rem;
-  color: white;
-  border-radius: 7px;
-  border: solid 1px transparent;
-  -webkit-box-shadow: 0 15px 22px #2c2c2c2a;
-          box-shadow: 0 15px 22px #2c2c2c2a;
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
-  background-clip: padding-box;
-}
-
-@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .darkGls {
-    background: rgba(0, 0, 0, 0.61);
-  }
-}
-
-@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .darkGls {
-    background: rgba(0, 0, 0, 0.781);
-  }
-}
-
-.divider {
-  border-bottom: 1px solid #797979;
-  width: 50vw;
-  margin-left: 50%;
-  margin-top: .7rem;
-  margin-bottom: 0rem;
-  -webkit-transform: translate(-50%);
-          transform: translate(-50%);
-}
-
 .title {
   text-align: center;
   font-family: LalezarRegular, sans-serif, serif !important;
@@ -876,19 +691,6 @@ hr {
   }
   100% {
     background-position: 0 50%;
-  }
-}
-
-/* Visibility */
-@media (max-width: 70em) {
-  .hideForMobile {
-    display: none !important;
-  }
-}
-
-@media (min-width: 69em) {
-  .md:hidden {
-    display: none !important;
   }
 }
 
