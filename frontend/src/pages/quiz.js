@@ -8,7 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad, sortByMonthlyViews } from '../components/base'
+import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import skeletonQuiz from '../components/skeletonQuiz';
 import QuizHeader from '../components/quiz/quizHeader'
@@ -16,10 +16,9 @@ import Trivia from '../components/quiz/trivia'
 import LikeCommentButton from '../components/user/likeCommentButton';
 import Test from '../components/quiz/test'
 import LoginForm from '../components/user/loginForm';
+import AddView from '../components/addView';
 
 const logo = '/static/img/Q-small.png'
-
-let quiz = 'null'
 
 const Quiz = (props) => {
     const [quizType] = useState(window.location.pathname.split('/')[1])
@@ -51,6 +50,7 @@ const Quiz = (props) => {
     const location = useLocation();
 
     const result = useRef(null)
+    const quizDetailRef = useRef(null)
 
     useEffect(() => {
         scrollToTop()
@@ -119,8 +119,10 @@ const Quiz = (props) => {
         });
     };
 
-    const applyBackground = (background) => {
+    const applyBackground = () => {
         const quizBg = document.querySelector('#quizBg')
+        const background = quizDetailRef.current.background
+        
         quizBg &&
         (quizBg.style = `background-image: url('${background}'); background-size: cover; background-position: center`)
     }
@@ -129,10 +131,12 @@ const Quiz = (props) => {
         quizSlugReplacedWithHyphen &&
             await axiosInstance.get(`/api/${quizType}/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
-                    sendCategoryAsInterest(quizData.subCategory)
-                    await getSuggestionsQuiz(quizData.categoryKey.id, quizData.subCategory)
-                    applyBackground(quizData.background)
+                    quizDetailRef.current = quizData
                     setQuiz(quizData)
+                    
+                    sendCategoryAsInterest()
+                    await getSuggestionsQuiz()
+                    applyBackground()
 
                     let questionSource
                     switch (quizType) {
@@ -154,6 +158,7 @@ const Quiz = (props) => {
                         })
                 })
                 .catch((err) => {
+                    log(err)
                     log(err.response)
                     set404(true)
                 })
@@ -165,8 +170,9 @@ const Quiz = (props) => {
     //     return score
     // }
 
-    const sendCategoryAsInterest = (category) => {
+    const sendCategoryAsInterest = () => {
         const interest = JSON.parse(localStorage.getItem('interest'))
+        const category = quizDetailRef.current.subCategory
 
         if (interest !== null) {
             if (category in interest['categoryWatchedCounter']) {
@@ -286,6 +292,14 @@ const Quiz = (props) => {
         document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
     }
 
+    
+    const halfTheQuestions = Math.floor(questions.length / 2)
+    const addViewIfHalfQuiz = () => {
+        if (currentQuestionNumber == halfTheQuestions) {
+            AddView(quizType, quizDetailRef.current.id)
+        }
+    }
+
     const selectedOption = (props) => {
         switch(quizType) {
             case 'quiz':
@@ -298,6 +312,7 @@ const Quiz = (props) => {
                     setAbleToGoNext(true)
                     makeEveryOptionLowOpacity('low')
                     checkTheSelectedOption(props.target)
+                    addViewIfHalfQuiz()
         
                     if (autoQuestionChanger) {
                         setTimeout(() => {
@@ -575,7 +590,10 @@ const Quiz = (props) => {
         )
     }
 
-    const getSuggestionsQuiz = async (category, subCategory) => {
+    const getSuggestionsQuiz = async () => {
+        const category = quizDetailRef.current.categoryKey.id
+        const subCategory = quizDetailRef.current.subCategory
+        
         const quiz = await axiosInstance.get(`/api/quiz/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         const pointy = await axiosInstance.get(`/api/test/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)

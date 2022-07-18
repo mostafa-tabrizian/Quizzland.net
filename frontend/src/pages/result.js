@@ -14,7 +14,6 @@ import QuizContainer from '../components/quizContainer'
 import skeletonQuiz from '../components/skeletonQuiz';
 import userProfileDetail from '../components/user/userProfileDetail';
 import LikeCommentButton from '../components/user/likeCommentButton';
-import AddView from '../components/addView';
 
 const Result = () => {
     const [resultScore, setResultScore] = useState(0)
@@ -51,7 +50,6 @@ const Result = () => {
         setQuestionCount(quizResult.ql)
         setCorrectAnswersCount(quizResult.qc)
         setContentLoaded(true)
-        AddView(quizType, quizDetail.id)
         getSuggestionsQuiz(quizDetail?.subCategory)
         document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
         setLoadState(true)
