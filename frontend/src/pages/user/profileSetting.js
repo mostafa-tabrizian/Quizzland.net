@@ -108,8 +108,10 @@ const ProfileSetting = () => {
                             }
                         })
                         .catch(err => {
-                            message.error('مشکلی برخوردید.')
-                            log(err.response)
+                            message.error('زمان شما برای ایجاد تغییر منقضی شده است. لطفا پس از ریلود کردن صفحه مجدد تلاش کنید.', 10)
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 10_000);
                         })
                 }
             }
@@ -133,7 +135,7 @@ const ProfileSetting = () => {
     //                     message.error('رمز قبلی شما صحیح نمی‌باشد')
     //                 }
     //                 else if(res.data.includes('too short')) {
-    //                     message.error('رمز شما می‌بایست حداقل ۸ کارکتر باشد', 3)
+                        // message.error('رمز شما می‌بایست حداقل ۸ کارکتر باشد', 3)
     //                 }
     //                 else if (res.data.includes('entirely numeric')) {
     //                     message.error('رمز شما می‌بایست حداقل حاوی یک حرف باشد', 3)

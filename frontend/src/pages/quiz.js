@@ -165,12 +165,6 @@ const Quiz = (props) => {
                 })
     }
 
-    // const calculateTheResultScore = () => {
-    //     const questionsCounter = questions?.length
-    //     const score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
-    //     return score
-    // }
-
     const sendCategoryAsInterest = () => {
         const interest = JSON.parse(localStorage.getItem('interest'))
         const category = quizDetailRef.current.subCategory
@@ -366,27 +360,6 @@ const Quiz = (props) => {
     }
     else if (isItMobile()) {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7
-    }
-
-    const detailOfResult = (score) => {
-        if (score > 80) {
-            setResultGif(quiz?.GIF100)
-        }
-        else if (score > 60) {
-            setResultGif(quiz?.GIF80)
-        }
-        else if (score > 40) {
-            setResultGif(quiz?.GIF60)
-        }
-        else if (score > 20) {
-            setResultGif(quiz?.GIF40)
-        }
-        else if (score >= 0) {
-            setResultGif(quiz?.GIF20)
-        }
-        else {
-            setResultGif(undefined)
-        }
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
