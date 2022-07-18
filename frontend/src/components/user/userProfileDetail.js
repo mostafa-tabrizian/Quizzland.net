@@ -10,7 +10,6 @@ const UserProfileDetail = () => {
             localRefreshToken &&
             await axiosInstance.post('/api/token/refresh/', {refresh: localRefreshToken})
                 .then(res => {
-                    log(res.data)
                     document.cookie = `USER_ACCESS_TOKEN=${res.data.access}; path=/;`
                     document.cookie = `USER_REFRESH_TOKEN=${res.data.refresh}; path=/;`
                     

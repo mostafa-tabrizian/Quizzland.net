@@ -77,8 +77,8 @@ def auth_login(request, *args, **kwargs):
 def checkAlreadyUserExists(username, email):
     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
 
-def verifyRecaptcha(response):
-    response = response.GET.get('r')
+def verifyRecaptcha(res):
+    response = res.GET.get('r')
     RECAPTCHA_SECRET = config('RECAPTCHA_SECRET', cast=str)
     
     params = {
@@ -88,6 +88,40 @@ def verifyRecaptcha(response):
     req = requests.post('https://www.google.com/recaptcha/api/siteverify', params)
     
     return HttpResponse((json.loads(req.content))['success'])
+    
+def userUpdate(request, *args, **kwargs):
+    access_token = AccessToken(request.GET.get('at'))
+        
+    try:
+        user = CustomUser.objects.get(id=access_token['user_id'])
+        
+        newUsername = request.GET.get('un')
+        username_length = len(newUsername)
+        
+        if username_length > 3:
+            if checkAlreadyUserExists(newUsername, newUsername):
+                return HttpResponse('username already exists')
+            else:
+                user.username = request.GET.get('un')
+        elif username_length != 0:
+            return HttpResponse('username too short')
+        
+        if len(request.GET.get('fn')):
+            user.first_name = request.GET.get('fn')
+        if len(request.GET.get('ln')):
+            user.last_name = request.GET.get('ln')
+        if len(request.GET.get('bi')):
+            user.bio = request.GET.get('bi')
+        if len(request.GET.get('gn')):
+            user.gender = request.GET.get('gn')
+        if request.GET.get('bd') != 'undefined':
+            user.birthday_date = request.GET.get('bd').replace('/', '-')
+            
+        user.save()
+        return HttpResponse('success')
+    
+    except Exception as e:
+        return HttpResponse('error: ' + e)
     
 def auth_google(request, *args, **kwargs):
     payload = {'access_token': request.GET.get("at")}
@@ -140,27 +174,27 @@ def auth_google(request, *args, **kwargs):
     
     return HttpResponse(json.dumps(response))
 
-def resetPassword(request, *args, **kwargs):
-    if request.method == 'GET':
-        username = request.GET.get('u')
-        old_password = request.GET.get('op')
-        new_password = request.GET.get('np')
-        user = CustomUser.objects.get(username=username)
+# def resetPassword(request, *args, **kwargs):
+#     if request.method == 'GET':
+#         username = request.GET.get('u')
+#         old_password = request.GET.get('op')
+#         new_password = request.GET.get('np')
+#         user = CustomUser.objects.get(username=username)
     
-        try:
-            validate_password(new_password, user=user, password_validators=None)
-        except ValidationError as e:
-            return HttpResponse(e)
+#         try:
+#             validate_password(new_password, user=user, password_validators=None)
+#         except ValidationError as e:
+#             return HttpResponse(e)
             
-        old_and_user_password_is_same = check_password(old_password, user.password)
+#         old_and_user_password_is_same = check_password(old_password, user.password)
         
-        if old_and_user_password_is_same:
-            user.password = make_password(new_password)
-            user.save()
-            return HttpResponse('success_change')
+#         if old_and_user_password_is_same:
+#             user.password = make_password(new_password)
+#             user.save()
+#             return HttpResponse('success_change')
         
-        else:
-            return HttpResponse('not_same')
+#         else:
+#             return HttpResponse('not_same')
         
 def restartEveryMonthlyViews(request):
     try:

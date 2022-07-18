@@ -1,20 +1,39 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Helmet } from "react-helmet";
-import { DatePicker } from 'antd';
+import DatePicker, { DateObject } from "react-multi-date-picker"
+import persian from "react-date-object/calendars/persian"
+import persian_fa from "react-date-object/locales/persian_fa"
+import persianJs from "persianjs"
+import { useCookies } from "react-cookie";
+import debounce from 'lodash.debounce'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import axiosInstance from '../../components/axiosApi';
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import { log, getTheme } from '../../components/base'
 import userProfileDetail from '../../components/user/userProfileDetail'
+import { message } from 'antd';
 
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)
+    const [birthdayDatePicker, setBirthdayDatePicker] = useState(null)
     
     useEffect(() => {
         checkIfLoggedIn_setUser()
         document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
     }, [])
+
+    const reCaptchaResponse = useRef(null)
+    
+    const usernameRef = useRef()
+    const firstNameRef = useRef()
+    const lastNameRef = useRef()
+    const bioRef = useRef()
+    const birthdayDateRef = useRef()
+    const gendersRef = useRef()
+
+    const [cookies] = useCookies(['USER_ACCESS_TOKEN']);
 
     // const oldPassword = useRef()
     // const newPassword = useRef()
@@ -29,6 +48,73 @@ const ProfileSetting = () => {
         
         setUser(userProfile)
     }
+
+    const checkRecaptcha = async () => {
+        if (reCaptchaResponse.current !== null) {
+            return await axiosInstance.get(`/api/recaptcha?r=${reCaptchaResponse.current}`,)
+                .then(res => {
+                    return res.data
+                })
+                .catch(err => {
+                    log(err.response)
+                })
+        } else {
+            message.warning('لطفا تایید کنید که ربات نیستید!')
+            return false 
+        }
+    }
+
+    const saveSetting = async () => {
+        const updatedUsername =  usernameRef.current.value
+        const updatedFirstName = firstNameRef.current.value
+        const updatedLastName = lastNameRef.current.value
+        const updatedBio = bioRef.current.value
+        const updatedGender = gendersRef.current.value
+
+        const dateRefValue = birthdayDateRef.current.querySelector('input').value
+        let updatedBirthdayDate
+        
+        if (dateRefValue.length) {
+            const farsiPersianDateObject = persianJs(dateRefValue).persianNumber()
+            const farsiPersianDateValue = Object.values(farsiPersianDateObject)[0]
+            const persianConvertEnglish = new DateObject({calendar:persian, date:farsiPersianDateValue}).convert().format()
+            updatedBirthdayDate =  persianConvertEnglish
+        }
+        
+        if (!updatedUsername.length && !updatedFirstName.length && !updatedLastName.length && !updatedBio.length && updatedGender == 'null' && !dateRefValue.length.length) {
+            return message.warning('برای ذخیره، حداقل یک ورودی را تغییر دهید.')
+        }
+
+        debouncePatchUserSetting(updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate)
+    }
+    
+    const debouncePatchUserSetting = useCallback(
+        debounce(
+            async (updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate) => {
+                if (await checkRecaptcha()) {
+                    await axiosInstance.patch(`/api/user/update?at=${cookies.USER_ACCESS_TOKEN}&un=${updatedUsername}&fn=${updatedFirstName}&ln=${updatedLastName}&bi=${updatedBio}&gn=${updatedGender}&bd=${updatedBirthdayDate}`)
+                        .then(res => {
+                            if (res.data == 'success') {
+                                message.success('اطلاعات شما با موفقیت تغییر یافت.')
+                                setTimeout(() => {
+                                    window.location.reload()
+                                }, 1500)
+                            }
+                            else if (res.data == 'username already exists') {
+                                message.error('نام کاربری دیگری انتخاب کنید')
+                            }
+                            else if (res.data == 'username too short') {
+                                message.error('نام کاربری می‌بایست بیش از ۳ کارکتر باشد.')
+                            }
+                        })
+                        .catch(err => {
+                            message.error('مشکلی برخوردید.')
+                            log(err.response)
+                        })
+                }
+            }
+        , 1000), []
+    );
 
     // const changePassword = async () => {
     //     if (newPassword.current.value != re_NewPassword.current.value) {
@@ -104,27 +190,37 @@ const ProfileSetting = () => {
                         <div className=''>
                             <div className=''>
                                 <h3>نام کاربری</h3>
-                                <input type="text" placeholder={user?.username} />
+                                <input type="text" placeholder={user?.username} ref={usernameRef} />
                             </div>
                         </div>
                         <div className='space-y-5 md:grid md:grid-cols-2'>
                             <div>
                                 <h3>نام</h3>
-                                <input type="text" placeholder={user?.first_name} />
+                                <input type="text" placeholder={user?.first_name} ref={firstNameRef} />
                             </div>
                             <div>
                                 <h3>نام خانوادگی</h3>
-                                <input type="text" placeholder={user?.last_name} />
+                                <input type="text" placeholder={user?.last_name} ref={lastNameRef} />
                             </div>
                             <div>
                                 <h3>درباره من</h3>
-                                <textarea type="text" cols="40" rows='5' placeholder={user?.bio} />
+                                <textarea type="text" cols="40" rows='5' placeholder={user?.bio} ref={bioRef} />
                             </div>
                             <div>
                                 <h3>تاریخ تولد</h3>
                                 <div>
                                     <figure>
-                                        <DatePicker />
+                                        <DatePicker
+                                            value={birthdayDatePicker}
+                                            onChange={setBirthdayDatePicker}
+                                            format="YYYY/MM/DD"
+                                            minDate="1300/01/01"
+                                            maxDate='1401/01/01'
+                                            calendar={persian}
+                                            locale={persian_fa}
+                                            inputClass={'w-[10rem] rounded-lg translate-x-[-4rem] text-black pr-4'}
+                                            ref={birthdayDateRef}
+                                        />
                                         <figcaption>
                                             تاریخ تولد شما به هیچ کس نمایان نخواهد بود.
                                         </figcaption>
@@ -135,7 +231,7 @@ const ProfileSetting = () => {
                                 <h3>جنسیت</h3>
                                 <div>
                                     <figure>
-                                        <select name="genders">
+                                        <select name="genders" ref={gendersRef}>
                                             <option value='null' selected>انتخاب کنید</option>
                                             <option value='male'>مذکر</option>
                                             <option value='female'>مونث</option>
@@ -147,8 +243,13 @@ const ProfileSetting = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='flex justify-end w-full mt-5'>
-                            <button className='px-6 py-2 border-2 border-green-600 rounded-xl'>‌ذخیره</button>
+                        <div className='justify-end w-full md:flex'>
+                            <ReCAPTCHA
+                                sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
+                                theme='dark'
+                                onChange={res => reCaptchaResponse.current = res}
+                            />
+                            <button onClick={saveSetting} className='px-6 py-2 my-auto mt-4 mr-4 border-2 border-green-600 h-fit rounded-xl'>‌ذخیره</button>
                         </div>
                     </div>
 

@@ -11,8 +11,9 @@ urlpatterns = [
     path('api/blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
     path('api/login', auth_login),
     path('api/google', auth_google),
-    path("api/reset_password", resetPassword),
+    # path("api/reset_password", resetPassword),
     path("api/recaptcha", verifyRecaptcha),
+    path("api/user/update", userUpdate),
     
     path('login', index),
     path('register', index),
