@@ -4,6 +4,7 @@ import { notification, message } from 'antd';
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
@@ -476,11 +477,6 @@ const Quiz = (props) => {
                             p-[0.1rem] transition-all duration-1000 ease-in-out
                         `}
                     >
-
-                        {/* <span className='questionId block right-[-2rem] top-2 z-10 absolute text-[3rem]'>
-                            {questionCounterForId}
-                        </span> */}
-
                         <div className='mt-3 w-[22rem] md:w-[29rem]'>
                             
                             {
@@ -498,10 +494,10 @@ const Quiz = (props) => {
                                 <div className='my-3'>
                                     <LazyLoadImage
                                         src={question?.question_img}
-                                        width={1366}
                                         alt={question.title}
                                         className='object-cover object-top rounded-xl'
                                         title={question.title}
+                                        effect="blur"
                                     />
                                     <a href={question?.question_img} target='_blank'><span className='text-[.7rem] text-white'>در صورت عدم نمایش اینجا را کلیک کنید</span></a>
                                 </div>

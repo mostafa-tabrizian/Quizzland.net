@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { message, notification } from 'antd'
 import debounce from 'lodash.debounce'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { log, getTheme, replaceFunction } from './base'
 import userProfileDetail from '../components/user/userProfileDetail'
@@ -133,9 +134,9 @@ const QuizContainer = (props) => {
                             <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                 <LazyLoadImage
                                     src={quiz.thumbnail}
-                                    width={1366}
                                     alt={`${quiz.subCategory} | ${quiz.title}`}
                                     className='object-cover h-full'
+                                    effect="blur"
                                 />
                             </div>
                             <div className='w-full pt-1 pb-3 pr-4 md:pr-2 md:col-span-3 md:mt-2'>
