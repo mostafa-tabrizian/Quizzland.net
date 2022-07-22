@@ -7,17 +7,20 @@ import persianJs from "persianjs"
 import { useCookies } from "react-cookie";
 import debounce from 'lodash.debounce'
 import ReCAPTCHA from 'react-google-recaptcha'
+import { message } from 'antd';
+import { toString } from 'lodash';
 
 import axiosInstance from '../../components/axiosApi';
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import { log, getTheme } from '../../components/base'
 import userProfileDetail from '../../components/user/userProfileDetail'
-import { message } from 'antd';
+import Avatar from '../../components/user/avatar'
 
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)
     const [birthdayDatePicker, setBirthdayDatePicker] = useState(null)
+    const [avatarOptions, setAvatarOptions] = useState(null)
     
     useEffect(() => {
         checkIfLoggedIn_setUser()
@@ -70,6 +73,7 @@ const ProfileSetting = () => {
         const updatedLastName = lastNameRef.current.value
         const updatedBio = bioRef.current.value
         const updatedGender = gendersRef.current.value
+        const updatedAvatarOption = JSON.stringify(avatarOptions)
 
         const dateRefValue = birthdayDateRef.current.querySelector('input').value
         let updatedBirthdayDate
@@ -80,19 +84,19 @@ const ProfileSetting = () => {
             const persianConvertEnglish = new DateObject({calendar:persian, date:farsiPersianDateValue}).convert().format()
             updatedBirthdayDate =  persianConvertEnglish
         }
-        
-        if (!updatedUsername.length && !updatedFirstName.length && !updatedLastName.length && !updatedBio.length && updatedGender == 'null' && !dateRefValue.length.length) {
+
+        if (!updatedUsername.length && !updatedFirstName.length && !updatedLastName.length && !updatedBio.length && updatedGender == 'null' && !dateRefValue.length.length && avatarOptions == null) {
             return message.warning('برای ذخیره، حداقل یک ورودی را تغییر دهید.')
         }
 
-        debouncePatchUserSetting(updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate)
+        debouncePatchUserSetting(updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate, updatedAvatarOption)
     }
     
     const debouncePatchUserSetting = useCallback(
         debounce(
-            async (updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate) => {
+            async (updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate, updatedAvatarOption) => {
                 if (await checkRecaptcha()) {
-                    await axiosInstance.patch(`/api/user/update?at=${cookies.USER_ACCESS_TOKEN}&un=${updatedUsername}&fn=${updatedFirstName}&ln=${updatedLastName}&bi=${updatedBio}&gn=${updatedGender}&bd=${updatedBirthdayDate}`)
+                    await axiosInstance.patch(`/api/user/update?at=${cookies.USER_ACCESS_TOKEN}&un=${updatedUsername}&fn=${updatedFirstName}&ln=${updatedLastName}&bi=${updatedBio}&gn=${updatedGender}&bd=${updatedBirthdayDate}`, {updatedAvatarOption})
                         .then(res => {
                             if (res.data == 'success') {
                                 message.success('اطلاعات شما با موفقیت تغییر یافت.')
@@ -169,26 +173,7 @@ const ProfileSetting = () => {
                         اطلاعات پروفایل        
                     </h1>
                     <div className='py-2 px-2 border-[#690D11] space-y-5 border-4 rounded'>
-                        <div>
-                            <h3>تصویر پروفایل و نام کاربری</h3>
-                            <div>
-                                <div className='flex justify-around mt-5 space-x-5 space-x-reverse md:justify-start'>
-                                    {
-                                        user?.avatar ?
-                                        <img className="w-20 h-20 rounded-full" src={user?.avatar} alt={user?.username} />
-                                        :
-                                        <svg className="h-20 w-20 text-[#ac272e]"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-                                    }
-
-                                    <div className='flex flex-col items-center m-auto text-center'>
-                                        <button className='px-3 py-1 border rounded'>آپلود عکس جدید</button>
-                                        <button className='text-xm'>حذف تصویر</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {user && <Avatar user={user} setAvatarOptions={setAvatarOptions} />}
                         <div className=''>
                             <div className=''>
                                 <h3>نام کاربری</h3>

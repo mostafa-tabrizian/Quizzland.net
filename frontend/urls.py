@@ -12,8 +12,8 @@ urlpatterns = [
     path('api/login', auth_login),
     path('api/google', auth_google),
     # path("api/reset_password", resetPassword),
-    path("api/recaptcha", verifyRecaptcha),
-    path("api/user/update", userUpdate),
+    path("api/recaptcha", verify_recaptcha),
+    path("api/user/update", user_update),
     
     path('login', index),
     path('register', index),

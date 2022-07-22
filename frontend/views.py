@@ -1,4 +1,5 @@
 import datetime, json, requests, random
+from tokenize import String
 from decouple import config
 
 from .models import *
@@ -9,8 +10,8 @@ from .filters import *
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.hashers import make_password, check_password
-from django.contrib.auth.password_validation import validate_password
+# from django.contrib.auth.hashers import make_password, check_password
+# from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
@@ -19,7 +20,6 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.tokens import AccessToken
-
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     permission_classes = (AllowAny,)
@@ -77,7 +77,7 @@ def auth_login(request, *args, **kwargs):
 def checkAlreadyUserExists(username, email):
     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
 
-def verifyRecaptcha(res):
+def verify_recaptcha(res):
     response = res.GET.get('r')
     RECAPTCHA_SECRET = config('RECAPTCHA_SECRET', cast=str)
     
@@ -89,8 +89,9 @@ def verifyRecaptcha(res):
     
     return HttpResponse((json.loads(req.content))['success'])
     
-def userUpdate(request, *args, **kwargs):
+def user_update(request, *args, **kwargs):
     access_token = AccessToken(request.GET.get('at'))
+    avatar = json.loads(request.body.decode('utf-8'))['updatedAvatarOption']
         
     try:
         user = CustomUser.objects.get(id=access_token['user_id'])
@@ -116,6 +117,8 @@ def userUpdate(request, *args, **kwargs):
             user.gender = request.GET.get('gn')
         if request.GET.get('bd') != 'undefined':
             user.birthday_date = request.GET.get('bd').replace('/', '-')
+        if avatar != 'null':
+            user.avatar = avatar
             
         user.save()
         return HttpResponse('success')

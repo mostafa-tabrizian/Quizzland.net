@@ -23,7 +23,7 @@ Gender = (
 
 class CustomUser(AbstractUser):
     blocked = models.BooleanField(default=False)
-    avatar = models.ImageField(blank=True, null=True, upload_to='user_avatar')
+    avatar = models.CharField(blank=True, null=True, max_length=600, default='{"accessory":"shades","body":"chest","circleColor":"blue","clothing":"tankTop","clothingColor":"red","eyebrows":"raised","eyes":"simple","faceMask":false,"faceMaskColor":"white","facialHair":"none","graphic":"none","hair":"none","hairColor":"pink","hat":"none","hatColor":"blue","lashes":false,"lipColor":"green","mask":true,"mouth":"serious","skinTone":"light"}')
     bio = models.CharField(blank=True, null=True, max_length=255)
     birthday_date = models.DateField(blank=True, null=True)
     gender = models.CharField(blank=True, null=True, max_length=7, choices=Gender)

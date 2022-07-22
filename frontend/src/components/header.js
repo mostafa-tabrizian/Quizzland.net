@@ -4,13 +4,14 @@ import { Helmet } from "react-helmet";
 import { gapi } from 'gapi-script'
 import { useGoogleLogout } from 'react-google-login'
 import { useCookies } from "react-cookie";
+import { message } from 'antd';
+import { BigHead } from "@bigheads/core";
 
 import { log, getTheme } from './base'
 import Search from './search/searchInput'
 import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
 import axiosInstance from './axiosApi';
-import { message } from 'antd';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
@@ -167,28 +168,24 @@ const Header = () => {
                         </div>
 
                         <div className='relative flex-col hidden px-8 space-x-5 md:justify-center md:flex'>
-                            <div className='flex items-center space-x-3 space-x-reverse'>
-                                {
-                                    userProfile?.avatar?
-                                    <img className="w-12 h-12 rounded-full" src={userProfile.avatar} alt={userProfile.username} />
-                                    :
-                                    <svg className="h-12 w-12 text-[#ac272e]"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
-                                }
+                            <div className='flex items-center space-x-3 space-x-reverse'>            
                                 {
                                     userProfile ?
-                                    <h2 onClick={() => setProfileSubMenu(!profileSubMenu)} className='hover:cursor-pointer'>
+                                    <div className='flex items-center space-x-3 space-x-reverse hover:cursor-pointer' onClick={() => setProfileSubMenu(!profileSubMenu)}>
+                                        <div className='w-24 h-24'>
+                                            <BigHead {...JSON.parse(userProfile.avatar)} />
+                                        </div>
+                                        
                                         <div className='flex items-center'>
                                             {
                                                 userProfile.first_name !== '' || userProfile.last_name !== '' ?
                                                 <div className='flex space-x-1 space-x-reverse'>
-                                                    <div>
+                                                    <h2>
                                                         {userProfile.first_name}
-                                                    </div>
-                                                    <div>
+                                                    </h2>
+                                                    <h2>
                                                         {userProfile.last_name}
-                                                    </div>
+                                                    </h2>
                                                 </div>
                                                 :
                                                 <div>
@@ -196,7 +193,7 @@ const Header = () => {
                                                 </div>
                                             }
                                         </div>
-                                    </h2>
+                                    </div>
                                     :
                                     <Link to='/login' className='px-4 h-fit border-2 border-[#690D11] rounded-lg'>ورود</Link>
                                 }
