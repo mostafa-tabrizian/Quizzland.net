@@ -56,9 +56,9 @@ const QuizHistory = () => {
         }
         
         const now = new Date().getTime()
-        const quiz = await axiosInstance.get(`/api/quiz/?public=true&timestamp=${now}`)
+        const quiz = await axiosInstance.get(`/api/quizView/?public=true&timestamp=${now}`)
             .catch(err => {log(err.response)})
-        const pointy = await axiosInstance.get(`/api/test/?public=true&timestamp=${now}`)
+        const pointy = await axiosInstance.get(`/api/testView/?public=true&timestamp=${now}`)
             .catch(err => {log(err.response)})
 
         let finalList = []

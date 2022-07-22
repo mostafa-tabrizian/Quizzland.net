@@ -51,7 +51,7 @@ const Comments = (props) => {
         debounce(
             async (comment, verifyState) => {
                 message.loading("در حال ثبت کامنت ...", 1)
-                await axiosInstance.post('/api/comment/', {
+                await axiosInstance.post('/api/commentView/', {
                     comment_text: comment,
                     quiz_related: props.quizType == 'quiz' ? props.quizId : null,
                     test_related: props.quizType == 'test' ? props.quizId : null,
@@ -82,7 +82,7 @@ const Comments = (props) => {
     const fetchComments = async () => {
         const now = new Date().getTime()
         
-        await axiosInstance.get(`/api/comment/?verified=true&${props.quizType == 'quiz' ? `quiz_related=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_related=${props.quizId}&` : ''}timestamp=${now}`)
+        await axiosInstance.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `quiz_related=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_related=${props.quizId}&` : ''}timestamp=${now}`)
             .then(res => {
                 setComments(res.data.sort(sortCommentsByNewest))
             })

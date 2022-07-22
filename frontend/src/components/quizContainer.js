@@ -21,7 +21,7 @@ const QuizContainer = (props) => {
     const debounceRemoveFromWatchList = useCallback(
 		debounce(
             async (userDetail, updatedUserWatchList) => {
-                await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: updatedUserWatchList})
+                await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { watch_list: updatedUserWatchList})
                     .then(res => {
                         message.error('با موفقیت از پلی لیست حذف گردید.')
                     })
@@ -90,7 +90,7 @@ const QuizContainer = (props) => {
     
     const debounceAddToWatchList = useCallback(
 		debounce(async (userDetail, quizId, quizType) => {
-            await axiosInstance.patch(`/api/user/${userDetail.id}/`, { watch_list: userDetail.watch_list + `_${quizId}${quizType}` })
+            await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { watch_list: userDetail.watch_list + `_${quizId}${quizType}` })
             .then(res => {
                 message.success('با موفقیت به پلی لیست اضافه گردید.')
             })

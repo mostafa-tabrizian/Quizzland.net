@@ -39,7 +39,7 @@ const LikeCommentButton = (props) => {
                 let updatedUserLikedQuizzes = userLikedQuizzes.splice(findCurrentQuizLike, 1)
                 updatedUserLikedQuizzes = userLikedQuizzes.join('_')
                 
-                await axiosInstance.patch(`/api/user/${userDetail.id}/`, { liked_quizzes: updatedUserLikedQuizzes})
+                await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { liked_quizzes: updatedUserLikedQuizzes})
                     // .then(res => {
                     // })
                     .catch(err => {
@@ -52,7 +52,7 @@ const LikeCommentButton = (props) => {
     const debounceSubmitUserLikedTheQuiz = useCallback(
         debounce(
             async (userDetail) => {
-                await axiosInstance.patch(`/api/user/${userDetail.id}/`, { liked_quizzes: userDetail.liked_quizzes + `_${props.quizId}${props.quizType.slice(0, 1)}` })
+                await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { liked_quizzes: userDetail.liked_quizzes + `_${props.quizId}${props.quizType.slice(0, 1)}` })
                 // .then(res => {
                 // })
                 .catch(err => {

@@ -3,8 +3,8 @@ import { log } from '../base'
 import ExcludeWordsToSearch from '../excludeWordsToSearch';
 
 const SearchFetch = async (value) => {  
-    const searched_quiz = await axiosInstance.get(`/api/quiz/?public=true`)
-    const searched_pointy = await axiosInstance.get(`/api/test/?public=true`)
+    const searched_quiz = await axiosInstance.get(`/api/quizView/?public=true`)
+    const searched_pointy = await axiosInstance.get(`/api/testView/?public=true`)
     
     const concat = searched_quiz.data.concat(searched_pointy.data)
     const searchedValue = value?.toLowerCase().split(' ')

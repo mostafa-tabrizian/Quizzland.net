@@ -137,7 +137,7 @@ const Result = () => {
         const giveAmountPoint = decideHowMucHPointToGive(score)
         
         if (giveAmountPoint !== 0 && !userPlayedThisQuizBefore(quizType, quizId)) {
-            await axiosInstance.patch(`/api/user/${userDetail.id}/`, { points: userDetail.points + parseInt(giveAmountPoint) })
+            await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { points: userDetail.points + parseInt(giveAmountPoint) })
                 .then(res => {
                     res.status == 200 &&
                         message.success(`${giveAmountPoint} امتیاز به شما تعلق گرفت 🎉`)
@@ -258,8 +258,8 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        const quiz = await axiosInstance.get(`/api/quiz/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/test/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const quiz = await axiosInstance.get(`/api/quizView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/testView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
@@ -307,7 +307,7 @@ const Result = () => {
     }
 
     const postToHistoryAsPlayedQuiz = async (userDetail, quizId, quizType) => {
-        await axiosInstance.patch(`/api/user/${userDetail.id}/`, { played_history: userDetail.played_history + `_${quizId}${quizType.slice(0, 1)}` })
+        await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { played_history: userDetail.played_history + `_${quizId}${quizType.slice(0, 1)}` })
         // .then(res => {
         // })
         .catch(err => {

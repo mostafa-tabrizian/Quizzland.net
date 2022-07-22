@@ -13,7 +13,7 @@ const Notifications = (props) => {
     const fetchNotifications = async () => {
         const now = new Date()
 
-        await axiosInstance.get(`/api/notification/?user=${props.user}&has_read=false&timestamp=${now}`)
+        await axiosInstance.get(`/api/notificationView/?user=${props.user}&has_read=false&timestamp=${now}`)
             .then(res => {
                 setNotifications(res.data.reverse()[0])
             })

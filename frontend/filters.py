@@ -83,19 +83,19 @@ class QuestionsFilter(filters.FilterSet):
             'quizKey': ['exact'],
         }
 
-class questions_pointyFilter(filters.FilterSet):
+class questionsPointyFilter(filters.FilterSet):
     class Meta:
         model = Pointy_Questions
         fields = {
             'quizKey': ['exact']
         }
 
-class BlogFilter(filters.FilterSet):
-    class Meta:
-        model = Blog
-        fields = {
-            'title': ['iexact', 'icontains']
-        }
+# class BlogFilter(filters.FilterSet):
+#     class Meta:
+#         model = Blog
+#         fields = {
+#             'title': ['iexact', 'icontains']
+#         }
 
 # class NewsletterUserFilter(filters.FilterSet):
 #     class Meta:

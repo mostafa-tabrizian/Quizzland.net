@@ -142,10 +142,10 @@ const Quiz = (props) => {
                     let questionSource
                     switch (quizType) {
                         case 'quiz':
-                            questionSource = 'questions'
+                            questionSource = 'questionsView'
                             break
                         case 'test':
-                            questionSource = 'questions_pointy'
+                            questionSource = 'questionsPointyView'
                             break
                     }
 
@@ -563,13 +563,13 @@ const Quiz = (props) => {
         const category = quizDetailRef.current.categoryKey.id
         const subCategory = quizDetailRef.current.subCategory
         
-        const quiz = await axiosInstance.get(`/api/quiz/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/test/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const quiz = await axiosInstance.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axiosInstance.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         if (content.length != 8) {
-            const quizByCategory = await axiosInstance.get(`/api/quiz/?category__exact=${category}&limit=8&public=true`)
-            const pointyByCategory = await axiosInstance.get(`/api/test/?category__exact=${category}&limit=8&public=true`)
+            const quizByCategory = await axiosInstance.get(`/api/quizView/?category__exact=${category}&limit=8&public=true`)
+            const pointyByCategory = await axiosInstance.get(`/api/testView/?category__exact=${category}&limit=8&public=true`)
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
 

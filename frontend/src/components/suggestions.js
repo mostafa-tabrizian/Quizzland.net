@@ -14,8 +14,8 @@ const Suggestions = () => {
     }, []);
     
     const fetchData = async (userDetail) => {
-        const quiz = await axiosInstance.get('/api/quiz/?public=true')
-        const pointy = await axiosInstance.get('/api/test/?public=true')
+        const quiz = await axiosInstance.get('/api/quizView/?public=true')
+        const pointy = await axiosInstance.get('/api/testView/?public=true')
         
         await returnSuggestions(quiz.data, pointy.data, userDetail)
     }
@@ -24,7 +24,7 @@ const Suggestions = () => {
         const now = new Date().getTime()
         let userPreviousLiked
         
-        await axiosInstance.get(`/api/user/?username=${userDetail.username}&timestamp=${now}`)
+        await axiosInstance.get(`/api/userView/?username=${userDetail.username}&timestamp=${now}`)
             .then(res => {
                 userPreviousLiked = res.data[0].liked_quizzes.split('_')
                 userPreviousLiked = userPreviousLiked.concat(res.data[0].played_history.split('_'))

@@ -26,7 +26,11 @@ const UserProfileDetail = () => {
         const localAccessToken = getCookie('USER_ACCESS_TOKEN')
         const now = new Date().getTime()
         if (localAccessToken) {
-            return await axiosInstance.get(`/api/login?at=${localAccessToken}&timestamp=${now}`)
+            const payload = {
+                access_token: localAccessToken,
+            }
+            
+            return await axiosInstance.post(`/api/user?timestamp=${now}`, payload)
                 .then (res => {
                     if (res.data.username !== 'guest') {
                         if (res.data.is_active) {

@@ -48,9 +48,9 @@ const Index = () => {
     }, [])
 
     const grabData = async () => {
-        const quiz = await axiosInstance.get(`/api/quiz/?limit=70&public=true`)
+        const quiz = await axiosInstance.get(`/api/quizView/?limit=70&public=true`)
         // .catch(err => {log(err.response)})
-        const pointy = await axiosInstance.get(`/api/test/?limit=70&public=true`)
+        const pointy = await axiosInstance.get(`/api/testView/?limit=70&public=true`)
         // .catch(err => {log(err.response)})
         const content = quiz.data.results.concat(pointy.data.results)
 

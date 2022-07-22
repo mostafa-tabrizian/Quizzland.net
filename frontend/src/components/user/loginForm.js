@@ -114,8 +114,8 @@ const LoginForm = (props) => {
     // const checkExistenceAndActivityStatue = async () => {
     //     const now = new Date().getTime()
         
-    //     const existByEmail = await axiosInstance.get(`/api/user/?email=${emailUsername}&timestamp=${now}`)
-    //     const existByUsername = await axiosInstance.get(`/api/user/?username=${emailUsername}&timestamp=${now}`)
+    //     const existByEmail = await axiosInstance.get(`/api/userView/?email=${emailUsername}&timestamp=${now}`)
+    //     const existByUsername = await axiosInstance.get(`/api/userView/?username=${emailUsername}&timestamp=${now}`)
         
     //     const fetchedUser = existByUsername.data.concat(existByEmail.data)
         
@@ -184,8 +184,17 @@ const LoginForm = (props) => {
             const firstName = res.profileObj.givenName || ''
             const avatar = res.profileObj.imageUrl
 
+            const payload = {
+                accessToken: accessToken,
+                username: username,
+                email: email,
+                lastName: lastName,
+                firstName: firstName,
+                avatar: avatar
+            }
+            
             accessToken &&
-            await axiosInstance.get(`/api/google?at=${accessToken}&u=${username}&e=${email}&ln=${lastName}&fn=${firstName}&av=${avatar}`)
+            await axiosInstance.post(`/api/google`, payload)
                 .then(res => {
                     if (res.data == 'inactive') {
                         if ((cookies.USER_ACCESS_TOKEN == accessToken || cookies.USER_ACCESS_TOKEN == 'undefined')) {

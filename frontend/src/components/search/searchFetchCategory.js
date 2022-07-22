@@ -3,7 +3,7 @@ import { log } from '../base'
 import ExcludeWordsToSearch from '../excludeWordsToSearch';
 
 const SearchFetch = async (value) => {
-    const searched_category = await axiosInstance.get(`/api/subcategory/?public=true`)
+    const searched_category = await axiosInstance.get(`/api/subcategoryView/?public=true`)
 
     const searchedValue = value?.toLowerCase().split(' ')
     const rankResults = []

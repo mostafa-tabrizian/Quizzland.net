@@ -121,7 +121,7 @@ class QuestionsSerializer(serializers.ModelSerializer):
         
         quizKey = QuizzesSerializer(many=False)
 
-class questions_pointySerializer(serializers.ModelSerializer):
+class questionsPointySerializer(serializers.ModelSerializer):
     class Meta:
         model = Pointy_Questions
         fields = (
@@ -131,12 +131,12 @@ class questions_pointySerializer(serializers.ModelSerializer):
     quizKey = QuizzesSerializer(many=False)
 
 
-class BlogSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Blog
-        fields = (
-            '__all__'
-        )
+# class BlogSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Blog
+#         fields = (
+#             '__all__'
+#         )
 
 # class NewsletterUsersSerializer(serializers.ModelSerializer):
 #     class Meta:

@@ -76,7 +76,7 @@ const Category = (props) => {
     }
 
     const defineCategoryTitle = async () => {
-        await axiosInstance.get(`/api/category/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
+        await axiosInstance.get(`/api/categoryView/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
             .then((response) => {
                 setCategoryTitle(response.data[0].title_persian)
                 setCategoryQueryID(response.data[0].id)
@@ -85,7 +85,7 @@ const Category = (props) => {
 
     const getCategories = async () => {
         categoryQueryID &&
-            await axiosInstance.get(`/api/subcategory/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
+            await axiosInstance.get(`/api/subcategoryView/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
                 .then((response => {
                     setPageTravel(response.data)
                     setCategories(response.data.results.sort(sortByMonthlyViews))

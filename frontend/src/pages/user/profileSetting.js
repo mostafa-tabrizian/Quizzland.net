@@ -96,7 +96,18 @@ const ProfileSetting = () => {
         debounce(
             async (updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate, updatedAvatarOption) => {
                 if (await checkRecaptcha()) {
-                    await axiosInstance.patch(`/api/user/update?at=${cookies.USER_ACCESS_TOKEN}&un=${updatedUsername}&fn=${updatedFirstName}&ln=${updatedLastName}&bi=${updatedBio}&gn=${updatedGender}&bd=${updatedBirthdayDate}`, {updatedAvatarOption})
+                    const payload = {
+                        accessToken: cookies.USER_ACCESS_TOKEN,
+                        username: updatedUsername,
+                        firstName: updatedFirstName,
+                        lastName: updatedLastName,
+                        bio: updatedBio,
+                        gender: updatedGender,
+                        birthdayData: updatedBirthdayDate,
+                        avatar: updatedAvatarOption
+                    }
+                    
+                    await axiosInstance.patch(`/api/user/update`, payload)
                         .then(res => {
                             if (res.data == 'success') {
                                 message.success('اطلاعات شما با موفقیت تغییر یافت.')

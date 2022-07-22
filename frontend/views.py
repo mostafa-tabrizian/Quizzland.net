@@ -10,9 +10,9 @@ from .filters import *
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.base_user import BaseUserManager
-# from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.hashers import make_password  # check_password
 # from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
 from rest_framework.permissions import IsAuthenticated, IsAuthenticated, AllowAny
@@ -42,12 +42,13 @@ def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
 
-def auth_login(request, *args, **kwargs):
-    if request.method == 'GET':
-        access_token = AccessToken(request.GET.get('at'))
+def user_data(request, *args, **kwargs):
+    if request.method == 'POST':
+        access_token = json.loads(request.body.decode('utf-8'))['access_token']
+        userObject = AccessToken(access_token)
         
         try:
-            user = CustomUser.objects.get(id=access_token['user_id'])
+            user = CustomUser.objects.get(id=userObject['user_id'])
             
             return HttpResponse(
                 json.dumps(
@@ -90,92 +91,102 @@ def verify_recaptcha(res):
     return HttpResponse((json.loads(req.content))['success'])
     
 def user_update(request, *args, **kwargs):
-    access_token = AccessToken(request.GET.get('at'))
-    avatar = json.loads(request.body.decode('utf-8'))['updatedAvatarOption']
+    if request.method == 'PATCH':
+        payload = json.loads(request.body.decode('utf-8'))
         
-    try:
-        user = CustomUser.objects.get(id=access_token['user_id'])
-        
-        newUsername = request.GET.get('un')
-        username_length = len(newUsername)
-        
-        if username_length > 3:
-            if checkAlreadyUserExists(newUsername, newUsername):
-                return HttpResponse('username already exists')
-            else:
-                user.username = request.GET.get('un')
-        elif username_length != 0:
-            return HttpResponse('username too short')
-        
-        if len(request.GET.get('fn')):
-            user.first_name = request.GET.get('fn')
-        if len(request.GET.get('ln')):
-            user.last_name = request.GET.get('ln')
-        if len(request.GET.get('bi')):
-            user.bio = request.GET.get('bi')
-        if len(request.GET.get('gn')):
-            user.gender = request.GET.get('gn')
-        if request.GET.get('bd') != 'undefined':
-            user.birthday_date = request.GET.get('bd').replace('/', '-')
-        if avatar != 'null':
-            user.avatar = avatar
+        access_token = AccessToken(payload['accessToken'])
             
-        user.save()
-        return HttpResponse('success')
-    
-    except Exception as e:
-        return HttpResponse('error: ' + e)
+        try:
+            user = CustomUser.objects.get(id=access_token['user_id'])
+            
+            newUsername = payload['username']
+            username_length = len(newUsername)
+            
+            if username_length > 3:
+                if checkAlreadyUserExists(newUsername, newUsername):
+                    return HttpResponse('username already exists')
+                else:
+                    user.username = payload['username']
+            elif username_length != 0:
+                return HttpResponse('username too short')
+            
+            first_name = payload['firstName']
+            if len(first_name):
+                user.first_name = first_name
+            last_name = payload['lastName']
+            if len(last_name):
+                user.last_name = last_name
+            bio = payload['bio']
+            if len(bio):
+                user.bio = bio
+            gender = payload['gender']
+            if len(gender):
+                user.gender = gender
+            birthdayData = payload['birthdayData']
+            if birthdayData != 'undefined':
+                user.birthday_date = birthdayData.replace('/', '-')
+            avatar = payload['avatar']
+            if avatar != 'null':
+                user.avatar = avatar
+                
+            user.save()
+            return HttpResponse('success')
+        
+        except Exception as e:
+            return HttpResponse('error: ' + e)
     
 def auth_google(request, *args, **kwargs):
-    payload = {'access_token': request.GET.get("at")}
-    r = requests.get('https://www.googleapis.com/oauth2/v2/userinfo', params=payload)
-    data = json.loads(r.text)
+    payload = json.loads(request.body.decode('utf-8'))
+    
+    if request.method == 'POST':
+        r = requests.get('https://www.googleapis.com/oauth2/v2/userinfo', params={'access_token': payload['accessToken']})
+        data = json.loads(r.text)
 
-    if 'error' in data:
-        content = {'message': 'wrong google token / this google token is already expired.'}
-        return HttpResponse(content)
+        if 'error' in data:
+            content = {'message': 'wrong google token / this google token is already expired.'}
+            return HttpResponse(content)
 
-    def uniqueUsername():    
-        # ugly function but im too tiered to do it
+        def uniqueUsername():    
+            # ugly function but im too tiered to do it
+            try:
+                selectUsername = f"{payload['username']}{random.randint(0, 9999)}"
+                
+                if CustomUser.objects.get(username=payload['username']):
+                    return f"{selectUsername}_{payload['lastName']}"
+                else:
+                    return selectUsername
+                
+            except CustomUser.DoesNotExist:
+                return payload['username']
+        
         try:
-            selectUsername = f"{request.GET.get('u')}{random.randint(0, 9999)}"
+            user = CustomUser.objects.get(email=data['email'])
             
-            if CustomUser.objects.get(username=request.GET.get('u')):
-                return f"{selectUsername}_{request.GET.get('ln')}"
-            else:
-                return selectUsername
+            if user.is_active == False:
+                return HttpResponse('inactive')
             
         except CustomUser.DoesNotExist:
-            return request.GET.get('u')
-    
-    try:
-        user = CustomUser.objects.get(email=data['email'])
-        
-        if user.is_active == False:
-            return HttpResponse('inactive')
-        
-    except CustomUser.DoesNotExist:
-        user = CustomUser()
-        user.username = uniqueUsername()
-        user.password = make_password(BaseUserManager().make_random_password())
-        user.email = data['email']
-        user.last_name = request.GET.get('ln')
-        user.first_name = request.GET.get('fn')
-        user.avatar = request.GET.get('av')
-        user.save()
-        
-        first_notif = Notification()
-        first_notif.user = user
-        first_notif.message = f"{request.GET.get('fn')} به کوییزلند خوش اومدی"
-        first_notif.save()
+            user = CustomUser()
+            user.username = uniqueUsername()
+            user.password = make_password(BaseUserManager().make_random_password())
+            user.email = data['email']
+            user.last_name = payload['lastName']
+            user.first_name = payload['firstName']
+            user.avatar = payload['avatar']
+            user.save()
+            
+            first_notif = Notification()
+            first_notif.user = user
+            first_notif.message = f"{payload['firstName']} به کوییزلند خوش اومدی"
+            first_notif.save()
 
-    token = RefreshToken.for_user(user)  # generate token without username & password
-    response = {}
-    response['username'] = user.username
-    response['access_token'] = str(token.access_token)
-    response['refresh_token'] = str(token)
-    
-    return HttpResponse(json.dumps(response))
+        token = RefreshToken.for_user(user)  # generate token without username & password
+        response = {}
+        response['username'] = user.username
+        response['access_token'] = str(token.access_token)
+        response['refresh_token'] = str(token)
+        
+        return HttpResponse(json.dumps(response))
 
 # def resetPassword(request, *args, **kwargs):
 #     if request.method == 'GET':
@@ -308,19 +319,19 @@ class QuestionsView(viewsets.ModelViewSet):
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter    
 
-class Questions_pointyView(viewsets.ModelViewSet):
+class QuestionsPointyView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Pointy_Questions.objects.all()
-    serializer_class = questions_pointySerializer
-    filterset_class = questions_pointyFilter  
+    serializer_class = questionsPointySerializer
+    filterset_class = questionsPointyFilter  
 
 # --------------------------------------------------------
 
-class new_blogView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
-    queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
-    filterset_class = BlogFilter
+# class new_blogView(viewsets.ModelViewSet):
+#     permission_classes = (IsAuthenticated,)
+#     queryset = Blog.objects.all()
+#     serializer_class = BlogSerializer
+#     filterset_class = BlogFilter
 
 # --------------------------------------------------------
 
