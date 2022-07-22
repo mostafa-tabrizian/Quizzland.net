@@ -291,14 +291,15 @@ const Avatar = (props) => {
   return ( 
     <div>
         <h3>تصویر پروفایل</h3>
-        <div className='flex items-center'>
-          <div className='w-[12rem] h-[12rem]'>
+        <div className='items-center md:flex'>
+          <div className='w-[12rem] h-[12rem] md:mx-0 mx-auto'>
             <BigHead {...avatarOptions} />
           </div>
           <div>
-            <h2>برای تغییر روی گزینه مربوطه کلیک کنید</h2>
-            <h2 onClick={() => getRandomOptions()} className='h-fit w-fit hover:cursor-pointer my-3 px-4 py-1 border rounded-lg border-[#690D11]'>تغییر رندوم همه</h2>
-            <div className='flex flex-wrap w-[44rem] h-fit space-y-3 space-x-5 space-x-reverse space-y-reverse mt-3'>
+            <h2 className='text-center md:text-right'>برای تغییر روی گزینه مربوطه کلیک کنید</h2>
+            <h2 onClick={() => getRandomOptions()} className='h-fit w-fit mx-auto md:mx-0 hover:cursor-pointer md:my-3 my-5 px-4 py-1 border rounded-lg border-[#690D11]'>تغییر رندوم همه</h2>
+            
+            <div className='flex flex-wrap md:w-[44rem] w-full h-fit space-y-3 space-x-5 space-x-reverse space-y-reverse mt-3'>
               <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('skinTone', avatarOptions.skinTone)}>
                 <h4>رنگ پوست</h4>
               </div>
