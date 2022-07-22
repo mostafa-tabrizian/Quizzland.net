@@ -121,13 +121,16 @@ const LikeCommentButton = (props) => {
                 onClose={() => setCommentsPanelState(false)}
                 visible={commentsPanelOpen}
                 drawerStyle={{
-                    background: `${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'}`,
+                    background: `${theme == 'dark' ? '#161616' : 'white'}`,
+                    color:'white'
                 }}
                 headerStyle={{
-                    background: `${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'}`,
+                    background: `${theme == 'dark' ? '#161616' : 'white'}`,
+                    color:'white'
                 }}
                 bodyStyle={{
                     padding: 0,
+                    color:'white'
                 }}
             >
                 <Comments quizId={props.quizId} quizType={props.quizType} setShowLoginForm={props.setShowLoginForm} setCommentsPanelState={setCommentsPanelState} />

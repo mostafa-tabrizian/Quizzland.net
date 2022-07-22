@@ -37,7 +37,7 @@ const Contact = () => {
                     </ul>
                     <Link to="mailto:support@quizzland.net"><a>support@quizzland.net</a></Link>
                 </div>
-                <p>
+                <p className={`${getTheme() == 'dark' ? 'text-white' : 'text-[#060101]'}`}>
                     میتونی تمام نظرات و پیشنهادات خودت رو برامون بفرستی <br /> اینطوری کمکمون میکنی و باعث میشی سریعتر پیشرفت کنیم .💖
                 </p>
             </div>

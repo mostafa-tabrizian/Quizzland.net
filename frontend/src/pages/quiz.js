@@ -130,7 +130,7 @@ const Quiz = (props) => {
 
     const fetchQuiz = async () => {
         quizSlugReplacedWithHyphen &&
-            await axiosInstance.get(`/api/${quizType}/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+            await axiosInstance.get(`/api/${quizType}View/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
                     quizDetailRef.current = quizData
                     setQuiz(quizData)
@@ -139,17 +139,17 @@ const Quiz = (props) => {
                     await getSuggestionsQuiz()
                     applyBackground()
 
-                    let questionSource
+                    let questionAPI
                     switch (quizType) {
                         case 'quiz':
-                            questionSource = 'questionsView'
+                            questionAPI = 'questionsView'
                             break
                         case 'test':
-                            questionSource = 'questionsPointyView'
+                            questionAPI = 'questionsPointyView'
                             break
                     }
 
-                    await axiosInstance.get(`/api/${questionSource}/?quizKey=${quizData.id}&public=true`)
+                    await axiosInstance.get(`/api/${questionAPI}/?quizKey=${quizData.id}&public=true`)
                         .then((questionData) => {
                             setQuestions(questionData.data)
                             setContentLoaded(true)
