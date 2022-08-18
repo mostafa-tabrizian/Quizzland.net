@@ -1,10 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { saveAs } from 'file-saver'
-import axiosInstance from '../components/axiosApi';;
+import axios from 'axios'
 import { Helmet } from "react-helmet";
-
-import Header from '../components/header'
-import Footer from '../components/footer'
 
 import { log } from '../components/base'
 
@@ -16,30 +13,24 @@ const QuizMonthlyRecord = () => {
     const passwordInput = useRef(null)
 
     const getAllQuizzes = async () => {
-        const quizzes = await axiosInstance.get('/api/quizView/')
+        const quizzes = await axios.get('/api/quizView/')
         quizDataSaveInExcel(quizzes)
     }
 
     const getAllPointyQuizzes = async () => {
-        const pointyQuizzes = await axiosInstance.get('/api/testView/')
+        const pointyQuizzes = await axios.get('/api/testView/')
         pointyQuizDataSaveInExcel(pointyQuizzes)
     }
 
     const getAllCategories = async () => {
-        const categories = await axiosInstance.get('/api/categoryView/')
+        const categories = await axios.get('/api/categoryView/')
         categoryDataSaveInExcel(categories)
     }
 
     const getAllSubCategories = async () => {
-        const subcategories = await axiosInstance.get('/api/subcategoryView/')
+        const subcategories = await axios.get('/api/subcategoryView/')
         subcategoryDataSaveInExcel(subcategories)
     }
-
-    const getAllBlogs = async () => {
-        const blogs = await axiosInstance.get('/api/new_blog/')
-        blogDataSaveInExcel(blogs)
-    }
-
 
     const quizDataSaveInExcel = async (quizzes) => {
         const Excel = require('exceljs')
@@ -243,8 +234,6 @@ const QuizMonthlyRecord = () => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <meta name="robots" content="noindex" />

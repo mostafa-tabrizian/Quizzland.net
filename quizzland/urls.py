@@ -15,7 +15,6 @@ sitemaps = {
 router = routers.DefaultRouter()
 
 router.register(r'userView', views.CustomUserView)
-router.register(r'notificationView', views.NotificationView)
 
 router.register(r'quizView', views.QuizView)
 router.register(r'testView', views.PointyView)

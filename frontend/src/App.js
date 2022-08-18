@@ -11,6 +11,8 @@ import {
 import { log } from './components/base'
 
 const ScrollToTop       = lazy(() => import('./components/scrollToTop'))
+const Header            = lazy(() => import('./components/header'))
+const Footer            = lazy(() => import('./components/footer'))
 
 const Category          = lazy(() => import ('./pages/category'))
 const SubCategory       = lazy(() => import ('./pages/subCategory'))
@@ -21,7 +23,7 @@ const Result            = lazy(() => import ('./pages/result'))
 const Login             = lazy(() => import('./pages/user/login'))
 const Profile           = lazy(() => import('./pages/user/profile'))
 const Setting           = lazy(() => import('./pages/user/profileSetting'))
-const Playlist       = lazy(() => import('./pages/user/playlist'))
+const Playlist          = lazy(() => import('./pages/user/playlist'))
 
 const Index             = lazy(() => import('./pages/landPage'))
 const Guide             = lazy(() => import('./pages/guide'))
@@ -33,7 +35,7 @@ const Search            = lazy(() => import('./pages/searchPage'))
 const Tags              = lazy(() => import('./pages/tags'))
 const Sort              = lazy(() => import('./pages/sort'))
 const Blog              = lazy(() => import('./pages/blog'))
-const notFound_404  = lazy(() => import('./pages/404'))
+const notFound_404      = lazy(() => import('./pages/404'))
 const monthlyRecord     = lazy(() => import('./pages/monthlyRecord'))
 const restartEveryMonthlyViews     = lazy(() => import('./pages/restartEveryMonthlyViews'))
 const welcomeOwl        = lazy(() => import('./pages/welcomeOwl'))
@@ -87,6 +89,8 @@ const App = () => {
                 <CookiesProvider>
                     <Router>
                         <ScrollToTop />
+                        <Header />
+
                         <div>
                             <Switch>
                                 <Route path='/' exact component={Index} />
@@ -124,6 +128,8 @@ const App = () => {
                                 <Route component={notFound_404} />
                             </Switch>
                         </div>
+
+                        <Footer />
                     </Router>
                 </CookiesProvider>
             </Suspense>

@@ -3,17 +3,17 @@ import { message, notification } from 'antd';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
+import axios from 'axios'
 
-import axiosInstance from '../components/axiosApi';
 import Header from '../components/header'
 import Footer from '../components/footer'
-
 import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import skeletonQuiz from '../components/skeletonQuiz';
-import userProfileDetail from '../components/user/userProfileDetail';
 import LikeCommentButton from '../components/user/likeCommentButton';
+import userStore from '../store/userStore';
+import axiosInstance from '../components/axiosApi';
 
 const Result = () => {
     const [resultScore, setResultScore] = useState(0)
@@ -32,7 +32,7 @@ const Result = () => {
     const [quizResult, setQuizResult] = useState()
     const [quizDetail, setQuizDetail] = useState()
 
-    let userDetail
+    const [userProfile, userActions] = userStore()
 
     useEffect(async () => {
         if (JSON.parse(localStorage.getItem('qd')) === null) {
@@ -54,17 +54,21 @@ const Result = () => {
         document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
         setLoadState(true)
         
-        userDetail = await userProfileDetail()
+    }, [])
+
+    useEffect(() => {
+        const quizResult = JSON.parse(localStorage.getItem('qr'))
+        const quizDetail = JSON.parse(localStorage.getItem('qd'))
+        const quizType = localStorage.getItem('qt')
+        
         const score = calculateTheResultScore(quizResult, quizType)
         
-        if (userDetail != undefined) {
-            postToHistoryAsPlayedQuiz(userDetail, quizDetail.id, quizType)
-            giveScorePoint(quizType, quizDetail.id, score)
-        } else {
+        if (userProfile.userDetail == false) {
             displayMessageToUserAboutScore(score)
+        } else if (userProfile.userDetail !== null) {
+            giveScorePoint(quizType, quizDetail.id, score)
         }
-        
-    }, [])
+    }, [userProfile]);
 
     useEffect(() => {
         {
@@ -74,7 +78,7 @@ const Result = () => {
     }, [suggestionQuizzes])
 
     const userPlayedThisQuizBefore = (quizType, quizId) => {
-        return userDetail.played_history.split('_').includes(String(quizId) + quizType.slice(0, 1))
+        return userProfile.userDetail.played_history.split('_').includes(String(quizId) + quizType.slice(0, 1))
     }
 
     const displayMessageToUserAboutScore = (score) => {
@@ -137,7 +141,7 @@ const Result = () => {
         const giveAmountPoint = decideHowMucHPointToGive(score)
         
         if (giveAmountPoint !== 0 && !userPlayedThisQuizBefore(quizType, quizId)) {
-            await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { points: userDetail.points + parseInt(giveAmountPoint) })
+            await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { points: userProfile.userDetail.points + parseInt(giveAmountPoint) })
                 .then(res => {
                     res.status == 200 &&
                         message.success(`${giveAmountPoint} امتیاز به شما تعلق گرفت 🎉`)
@@ -258,8 +262,8 @@ const Result = () => {
     }
 
     const getSuggestionsQuiz = async (subCategory) => {
-        const quiz = await axiosInstance.get(`/api/quizView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/testView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const quiz = await axios.get(`/api/quizView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axios.get(`/api/testView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
@@ -304,15 +308,6 @@ const Result = () => {
         else {
             return suggestionQuizzes[0]
         }
-    }
-
-    const postToHistoryAsPlayedQuiz = async (userDetail, quizId, quizType) => {
-        await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { played_history: userDetail.played_history + `_${quizId}${quizType.slice(0, 1)}` })
-        // .then(res => {
-        // })
-        .catch(err => {
-            log(err.response)
-        })
     }
 
     const returnQuizResult = () => {
@@ -360,8 +355,6 @@ const Result = () => {
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
-
-            <Header />
 
             <Helmet>
                 <title>نتیجه کوییز | کوییزلند </title>
@@ -458,8 +451,6 @@ const Result = () => {
                     </div>
                 }
             </div>
-            
-            <Footer />
 
         </React.Fragment>
     );

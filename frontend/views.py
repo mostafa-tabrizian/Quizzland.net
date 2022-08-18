@@ -15,7 +15,7 @@ from django.contrib.auth.hashers import make_password  # check_password
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
-from rest_framework.permissions import IsAuthenticated, IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -264,27 +264,27 @@ def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 
 class CustomUserView(viewsets.ModelViewSet):
-    permissions_classes = (IsAuthenticated,)
+    permissions_classes = (BasePermission,)
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     filterset_class = CustomUserFilter
 
-class NotificationView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated, )
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
-    filterset_class = NotificationFilter
+# class NotificationView(viewsets.ModelViewSet):
+#     permission_classes = (IsAuthenticated, )
+#     queryset = Notification.objects.all()
+#     serializer_class = NotificationSerializer
+#     filterset_class = NotificationFilter
 
 # --------------------------------------------------------
 
 class QuizView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     queryset = Quizzes.objects.all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
 
 class PointyView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     queryset = Quizzes_Pointy.objects.all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
@@ -292,7 +292,7 @@ class PointyView(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class CommentView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
     filterset_class = CommentsFilter
@@ -300,13 +300,13 @@ class CommentView(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class CategoriesView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     queryset = Categories.objects.all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
 class SubCategoryView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     queryset = SubCategories.objects.all()
     serializer_class = SubCategoriesSerializer
     filterset_class = SubCategoriesFilter
@@ -314,13 +314,13 @@ class SubCategoryView(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class QuestionsView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     queryset = Questions.objects.all()
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter    
 
 class QuestionsPointyView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     queryset = Pointy_Questions.objects.all()
     serializer_class = questionsPointySerializer
     filterset_class = questionsPointyFilter  

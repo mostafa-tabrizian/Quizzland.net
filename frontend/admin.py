@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import *
-from django.contrib.auth.models import User
 
 admin.site.site_header = "Quizzland Admin Panel"
 

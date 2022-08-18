@@ -6,12 +6,14 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { log, getTheme, replaceFunction } from './base'
-import userProfileDetail from '../components/user/userProfileDetail'
-import axiosInstance from '../components/axiosApi'
+import axiosInstance from './axiosApi';
+import userStore from '../store/userStore';
 
 const QuizContainer = (props) => {
     const [theme, setTheme] = useState('dark')
     const [showPlaylistButton, setShowPlaylistButton] = useState(null)
+
+    const [userProfile, userActions] = userStore()
 
     useEffect(() => {
         const theme = getTheme()
@@ -42,6 +44,8 @@ const QuizContainer = (props) => {
         
         let updatedUserWatchList = userWatchList.splice(findCurrentQuizInWatchList, 1)
         updatedUserWatchList = userWatchList.join('_')
+
+        userActions.updatePlaylist(updatedUserWatchList)
         
         debounceRemoveFromWatchList(userDetail, updatedUserWatchList)
         return true
@@ -49,11 +53,9 @@ const QuizContainer = (props) => {
 
     const addToWatchListClicked = async (quizId, quizCheckIfQuiz) => {
         message.loading('', 1)
-        
-        const userDetail = await userProfileDetail()
 
-        if (userDetail) {
-            checkWatchList(quizId, quizCheckIfQuiz, userDetail)
+        if (userProfile.userDetail) {
+            checkWatchList(quizId, quizCheckIfQuiz)
         } else {
             const key = `open${Date.now()}`;
             const btn = (
@@ -89,18 +91,22 @@ const QuizContainer = (props) => {
     }
     
     const debounceAddToWatchList = useCallback(
-		debounce(async (userDetail, quizId, quizType) => {
-            await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { watch_list: userDetail.watch_list + `_${quizId}${quizType}` })
-            .then(res => {
-                message.success('با موفقیت به پلی لیست اضافه گردید.')
-            })
-            .catch(err => {
-                log(err.response)
-            })
+        debounce(async (userDetail, quizId, quizType) => {
+           
+            const updatedPlaylist = userDetail.watch_list + `_${quizId}${quizType}`
+
+            userActions.updatePlaylist(updatedPlaylist)
+            await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { watch_list: updatedPlaylist })
+                .then(res => {
+                    message.success('با موفقیت به پلی لیست اضافه گردید.')
+                })
+                .catch(err => {
+                    log(err.response)
+                })
         }, 1000), []
 	);
 
-    const checkWatchList = async (quizId, quizCheckIfQuiz, userDetail) => {
+    const checkWatchList = async (quizId, quizCheckIfQuiz) => {
         let quizType
         if (quizCheckIfQuiz) {
             quizType = 'q'
@@ -108,9 +114,10 @@ const QuizContainer = (props) => {
             quizType = 't'
         }
 
+        const userDetail = userProfile.userDetail
         if (await checkIfExistsThenRemove(userDetail, quizId, quizType)) { return }
-        
-        debounceAddToWatchList(userDetail, quizId, quizType)
+        else {debounceAddToWatchList(userDetail, quizId, quizType)}
+            
     }
 
     return (

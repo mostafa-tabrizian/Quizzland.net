@@ -5,10 +5,6 @@ import { Helmet } from "react-helmet";
 import axiosInstance from '../components/axiosApi';
 import { log, replaceFunction, datePublishHandler } from '../components/base'
 
-import Header from '../components/header'
-
-
-
 const Blog = (props) => {
     const [blogContentData, setBlogContentData] = useState([])
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -63,8 +59,6 @@ const Blog = (props) => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <title>{`وبلاگ | ‌کوییزلند`}</title>

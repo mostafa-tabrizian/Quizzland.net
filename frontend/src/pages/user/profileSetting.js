@@ -11,24 +11,23 @@ import { message } from 'antd';
 import { toString } from 'lodash';
 
 import axiosInstance from '../../components/axiosApi';
-import Header from '../../components/header'
-import Footer from '../../components/footer'
 import { log, getTheme } from '../../components/base'
-import userProfileDetail from '../../components/user/userProfileDetail'
 import Avatar from '../../components/user/avatar'
+import UserStore from '../../store/userStore';
 
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)
     const [birthdayDatePicker, setBirthdayDatePicker] = useState(null)
     const [avatarOptions, setAvatarOptions] = useState(null)
     
-    useEffect(() => {
-        checkIfLoggedIn_setUser()
-        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
-    }, [])
-
-    const reCaptchaResponse = useRef(null)
+    const [userProfile, userActions] = UserStore()
     
+    useEffect(() => {
+        getUserDetail()
+        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
+    }, [userProfile])
+    
+    const recaptchaRef = useRef(null)
     const usernameRef = useRef()
     const firstNameRef = useRef()
     const lastNameRef = useRef()
@@ -38,33 +37,22 @@ const ProfileSetting = () => {
 
     const [cookies] = useCookies(['USER_ACCESS_TOKEN']);
 
-    // const oldPassword = useRef()
-    // const newPassword = useRef()
-    // const re_NewPassword = useRef()
-
-    const checkIfLoggedIn_setUser = async () => {
-        const userProfile = await userProfileDetail()
-
-        if (userProfile == null) {
-            window.location.href = '/login'
+    const getUserDetail = async () => {
+        if (userProfile.userDetail) {
+            setUser(userProfile.userDetail)
         }
-        
-        setUser(userProfile)
     }
 
     const checkRecaptcha = async () => {
-        if (reCaptchaResponse.current !== null) {
-            return await axiosInstance.get(`/api/recaptcha?r=${reCaptchaResponse.current}`,)
-                .then(res => {
-                    return res.data
-                })
-                .catch(err => {
-                    log(err.response)
-                })
-        } else {
-            message.warning('لطفا تایید کنید که ربات نیستید!')
-            return false 
-        }
+        const recaptchaResponse = await recaptchaRef.current.executeAsync()
+
+        return await axiosInstance.get(`/shop/api/recaptcha?r=${recaptchaResponse}`,)
+            .then(res => {
+                return res.data
+            })
+            .catch(err => {
+                log(err.response)
+            })
     }
 
     const saveSetting = async () => {
@@ -133,41 +121,6 @@ const ProfileSetting = () => {
         , 1000), []
     );
 
-    // const changePassword = async () => {
-    //     if (newPassword.current.value != re_NewPassword.current.value) {
-    //         return message.error('رمز جدید و تکرار آن بکسان نمی‌باشد')
-    //     }
-    //     else if (newPassword.current.value == oldPassword.current.value) {
-    //         return message.error('رمز قبلی و جدید شما نمی‌توانند بکسان باشد')
-    //     }
-        
-    //     else {
-    //         message.loading('لطفا منتظر بمانید ...', 1)
-
-    //         await axiosInstance.get(`/api/reset_password?u=${user.username}&op=${oldPassword.current.value}&np=${newPassword.current.value}`)
-    //             .then(res => {
-    //                 if (res.data == 'not_same') {
-    //                     message.error('رمز قبلی شما صحیح نمی‌باشد')
-    //                 }
-    //                 else if(res.data.includes('too short')) {
-                        // message.error('رمز شما می‌بایست حداقل ۸ کارکتر باشد', 3)
-    //                 }
-    //                 else if (res.data.includes('entirely numeric')) {
-    //                     message.error('رمز شما می‌بایست حداقل حاوی یک حرف باشد', 3)
-    //                 }
-    //                 else if (res.data.includes('too common')) {
-    //                     message.error('رمز شما به راحتی قابل حدس است. می‌بایست یک مقدار پیچیده تر باشد', 3)
-    //                 }
-    //                 else if (res.data == 'success_change') {
-    //                     message.success('رمز شما با موفقیت تغییر یافت')
-    //                 }
-    //             })
-    //             .catch(err => {
-    //                 log(err.response)
-    //             })
-    //     }
-    // }
-
     return (
         <React.Fragment>
 
@@ -175,8 +128,6 @@ const ProfileSetting = () => {
                 <title>کوییزلند | پروفایل</title>
                 <link rel='canonical' to='https://www.quizzland.net/setting' />
             </Helmet>
-
-            <Header />
 
             <div className='mx-4 md:mx-auto md:w-4/5'>
                 <div>
@@ -241,37 +192,20 @@ const ProfileSetting = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='justify-end w-full md:flex'>
-                            <ReCAPTCHA
-                                sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
-                                theme='dark'
-                                onChange={res => reCaptchaResponse.current = res}
-                            />
-                            <button onClick={saveSetting} className='px-6 py-2 my-auto mt-4 mr-4 border-2 border-green-600 h-fit rounded-xl'>‌ذخیره</button>
-                        </div>
+                        
+                        <button onClick={saveSetting} className='px-6 py-2 my-auto mt-4 mr-4 border-2 border-green-600 h-fit rounded-xl'>‌ذخیره</button>
+                        
+                        <ReCAPTCHA
+                            sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
+                            size='invisible'
+                            hl='fa'
+                            theme="dark"
+                            ref={recaptchaRef}
+                        />
+                        
                     </div>
-
-                    {/* <h1 className='mt-10 mb-5'>تنظیمات امنیتی</h1>
-                    <div className='py-2 px-2 border-[#690D11] space-y-5 border-4 rounded'>
-                        <div className='space-y-5 md:grid md:grid-cols-2'>
-                            <div>
-                                <h3 className='mb-5'>تغییر رمز عبور</h3>
-
-                                <div className='flex flex-col space-y-5'>
-                                    <input type="password" ref={oldPassword} placeholder='رمز عبور قبلی خود را وارد کنید' />
-                                    <input type="password" ref={newPassword} placeholder='رمز عبور جدید' />
-                                    <input type="password" ref={re_NewPassword} placeholder='تکرار رمز عبور جدید' />
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex justify-end w-full mt-5'>
-                            <button onClick={() => changePassword()} className='px-6 py-2 border-2 border-green-600 rounded-xl'>ذخیره</button>
-                        </div>
-                    </div> */}
                 </div>
             </div>
-
-            <Footer />
 
         </React.Fragment>
     );

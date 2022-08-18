@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 
-import Header from '../components/header'
-import Footer from '../components/footer'
-
 const pathRed = '/static/img/bubbles.webp'
 
 const PrivacyPolicy = () => {
@@ -14,8 +11,6 @@ const PrivacyPolicy = () => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <title>حریم خصوصی | کوییزلند</title>
@@ -32,8 +27,6 @@ const PrivacyPolicy = () => {
 
                 <h5>💗کوییزلند</h5>
             </div>
-
-            <Footer />
 
         </React.Fragment>
     );

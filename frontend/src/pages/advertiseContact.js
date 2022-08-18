@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 
-import Header from '../components/header'
-
 const pathRed = '/static/img/bubbles.webp'
 
 const AdvertiseContact = () => {
@@ -13,8 +11,6 @@ const AdvertiseContact = () => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <title>تبلیغات |‌ کوییزلند</title>

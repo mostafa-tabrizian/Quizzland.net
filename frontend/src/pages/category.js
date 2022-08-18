@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 import Tools from '../components/tools'
 import PageTravel from '../components/pageTravel'
 import LoadingScreen from '../components/loadingScreen'
 import skeletonQuiz from '../components/skeletonQuiz';
-import Header from '../components/header'
-import Footer from '../components/footer'
 import AddView from '../components/addView';
-import axiosInstance from '../components/axiosApi';
 
 import { log, getTheme, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
 
@@ -76,7 +74,7 @@ const Category = (props) => {
     }
 
     const defineCategoryTitle = async () => {
-        await axiosInstance.get(`/api/categoryView/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
+        await axios.get(`/api/categoryView/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
             .then((response) => {
                 setCategoryTitle(response.data[0].title_persian)
                 setCategoryQueryID(response.data[0].id)
@@ -85,7 +83,7 @@ const Category = (props) => {
 
     const getCategories = async () => {
         categoryQueryID &&
-            await axiosInstance.get(`/api/subcategoryView/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
+            await axios.get(`/api/subcategoryView/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
                 .then((response => {
                     setPageTravel(response.data)
                     setCategories(response.data.results.sort(sortByMonthlyViews))
@@ -97,8 +95,6 @@ const Category = (props) => {
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
-
-            <Header />
 
             <Helmet>
                 <title>{`کوییز های ${categoryTitleToPersian[props.match.params.category]} | کوییزلند`}</title>
@@ -174,8 +170,7 @@ const Category = (props) => {
                     currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
                 />
             </div>
-
-            <Footer />
+            
         </React.Fragment>
     );
 }

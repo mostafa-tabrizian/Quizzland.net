@@ -39,6 +39,7 @@
     "react-multi-date-picker": "^3.3.0",
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^2.4.3",
+    "react-sweet-state": "^2.6.2",
     "sharethis-reactjs": "^1.6.0",
     "style-loader": "^3.2.1",
     "url-loader": "^4.1.1",

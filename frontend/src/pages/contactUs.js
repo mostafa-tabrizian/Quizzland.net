@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import Header from '../components/header'
-import Footer from '../components/footer'
 import { getTheme } from '../components/base'
 
 const pathRed = '/static/img/bubbles.webp'
@@ -16,8 +14,6 @@ const Contact = () => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <title>تماس با ما | ‌کوییزلند</title>
@@ -42,7 +38,6 @@ const Contact = () => {
                 </p>
             </div>
 
-            <Footer />
         </React.Fragment>
     );
 }

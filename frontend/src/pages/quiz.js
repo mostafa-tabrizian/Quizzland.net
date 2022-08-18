@@ -7,8 +7,6 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import axiosInstance from '../components/axiosApi';
-import Header from '../components/header'
-import Footer from '../components/footer'
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import skeletonQuiz from '../components/skeletonQuiz';
@@ -18,6 +16,7 @@ import LikeCommentButton from '../components/user/likeCommentButton';
 import Test from '../components/quiz/test'
 import LoginForm from '../components/user/loginForm';
 import AddView from '../components/addView';
+import userStore from '../store/userStore';
 
 const logo = '/static/img/Q-small.png'
 
@@ -52,6 +51,8 @@ const Quiz = (props) => {
 
     const result = useRef(null)
     const quizDetailRef = useRef(null)
+    
+    const [userProfile, userActions] = userStore()
 
     useEffect(() => {
         scrollToTop()
@@ -287,11 +288,21 @@ const Quiz = (props) => {
         document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
     }
 
+    const postToHistoryAsPlayedQuiz = async () => {
+        await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { played_history: userProfile.userDetail.played_history + `_${quiz.id}${quizType.slice(0, 1)}` })
+        // .then(res => {
+        // })
+        .catch(err => {
+            log(err.response)
+        })
+    }
     
     const halfTheQuestions = Math.floor(questions.length / 2)
+    
     const addViewIfHalfQuiz = () => {
         if (currentQuestionNumber == halfTheQuestions) {
-            AddView(quizType, quizDetailRef.current.id)
+            AddView(`${quizType}View`, quizDetailRef.current.id)
+            postToHistoryAsPlayedQuiz()
         }
     }
 
@@ -606,8 +617,6 @@ const Quiz = (props) => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header />
-
             <Helmet>
                 <title>{`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
 
@@ -694,7 +703,7 @@ const Quiz = (props) => {
                         ورود به کوییزلند
                     </h1>
 
-                    <LoginForm />
+                    {/* <LoginForm /> */}
                 </div>
             </div>
 
@@ -722,7 +731,7 @@ const Quiz = (props) => {
 
                     <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} SFXController={SFXController} />
 
-                    <LikeCommentButton quizId={quiz?.id} quizType={quizType} setShowLoginForm={setShowLoginForm} />
+                    {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={quizType} setShowLoginForm={setShowLoginForm} />}
 
                     {
                         contentLoaded && isItDesktop() &&
@@ -851,8 +860,6 @@ const Quiz = (props) => {
                         className='noVis'
                     ></Link>
                     
-
-                    <Footer />
                 </div>
                 :
                 <div>

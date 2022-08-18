@@ -11,14 +11,14 @@ const Notifications = (props) => {
     }, []);
 
     const fetchNotifications = async () => {
-        const now = new Date()
+        // const now = new Date()
 
-        await axiosInstance.get(`/api/notificationView/?user=${props.user}&has_read=false&timestamp=${now}`)
-            .then(res => {
-                setNotifications(res.data.reverse()[0])
-            })
+        // await axiosInstance.get(`/api/notificationView/?user=${props.user}&has_read=false&timestamp=${now}`)
+        //     .then(res => {
+        //         setNotifications(res.data.reverse()[0])
+        //     })
 
-        return true
+        // return true
     }
 
     // const changeNotificationToHasRead = async (notificationId) => {

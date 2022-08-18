@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
 
-import Header from '../components/header'
-import Footer from '../components/footer'
 import QuizContainer from '../components/quizContainer';;
 import { log, getTheme, replaceFunction } from '../components/base'
 import skeletonQuiz from '../components/skeletonQuiz';
@@ -43,8 +41,6 @@ const SearchMoreResult = () => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <title>{`جستجو | کوییزلند`}</title>
@@ -137,8 +133,6 @@ const SearchMoreResult = () => {
                 {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
 
             </div>
-
-            <Footer />
 
         </React.Fragment>
     );

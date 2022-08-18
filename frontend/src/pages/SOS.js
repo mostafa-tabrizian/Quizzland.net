@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import Header from '../components/header'
-import Footer from '../components/footer'
 
 
 const pathRed = '/static/img/bubbles.webp'
@@ -15,8 +13,6 @@ const SOS = () => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <title>کوییزلند تحت تیم فنی است</title>
@@ -35,8 +31,6 @@ const SOS = () => {
                     <a href="mailto:support@quizzland.net?subject= در سایت کوییزلند به یه مشکلی برخوردم" target="_blank" rel="noreferrer">support@quizzland.net</a>
                 </div>
             </div>
-
-            <Footer />
 
         </React.Fragment>
     );

@@ -9,8 +9,6 @@ import { InlineReactionButtons, InlineShareButtons, StickyShareButtons } from 's
 import { log, getTheme, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
 
 import LoadingScreen from '../components/loadingScreen'
-import Header from '../components/header'
-import Footer from '../components/footer'
 
 const logo = '/static/img/Q-small.png'
 
@@ -47,8 +45,6 @@ const Article = (props) => {
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
-
-            <Header />
 
             {article &&
                 <Helmet>
@@ -98,7 +94,7 @@ const Article = (props) => {
                 </Helmet>
             }
 
-            <div className='article wrapper-med text-center'>
+            <div className='text-center article wrapper-med'>
                 <h1>
                     {article.title}
                 </h1>

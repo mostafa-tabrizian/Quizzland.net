@@ -5,10 +5,9 @@ import persianDate from 'persian-date'
 persianDate.toLocale('fa');
 import { BigHead } from "@bigheads/core";
 
-import Header from '../../components/header'
-import Footer from '../../components/footer'
 import { log, getTheme } from '../../components/base'
 import axiosInstance from '../../components/axiosApi';
+import UserStore from '../../store/userStore';
 
 const Profile = () => {
     const [user, setUser] = useState(null)
@@ -18,36 +17,20 @@ const Profile = () => {
     
     const location = useLocation()
 
+    const [userProfile, userActions] = UserStore()
+
     useEffect(async() => {
-        const userDetail = await getUserDetail()
-        getUserCommentsLength(userDetail)
+        setUser(userProfile.userDetail)
+        getUserCommentsLength()
         setLoaded(true)
         const theme = getTheme()
         setTheme(theme)
         document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}`
-    }, [location])
+    }, [location, userProfile])
 
-    const getUserDetail = async () => {
+    const getUserCommentsLength = async () => {
         const now = new Date().getTime()
-        const username = window.location.href.split('/').slice(-1)[0]
-        
-        return await axiosInstance.get(`/api/userView/?username=${username}&is_active=true&timestamp=${now}`)
-            .then( async res => {
-                if (res.data.length == 0) {
-                    return null
-                } else {
-                    const userDetail = res.data[0]
-                    setUser(userDetail)
-                    return userDetail
-                }
-            })
-    }
-
-    const getUserCommentsLength = async (userDetails) => {
-        const now = new Date().getTime()
-        
-        userDetails &&
-        await axiosInstance.get(`/api/commentView/?submitter_related=${userDetails.id}&timestamp=${now}`)
+        await axiosInstance.get(`/api/commentView/?submitter_related=${userProfile.userDetail.id}&timestamp=${now}`)
             .then( async res => {
                 setUserCommentLength(res.data.length)
             })
@@ -55,8 +38,6 @@ const Profile = () => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <title>کوییزلند | پروفایل</title>
@@ -152,9 +133,7 @@ const Profile = () => {
                 <h1 className='mt-10 mb-[25rem] text-center'>هیچ کاربری با این عنوان پیدا نشد <span className='text-[2.5rem]'>😕</span></h1>
                 
             }
-
-            <Footer />
-
+            
         </React.Fragment>
     );
 }

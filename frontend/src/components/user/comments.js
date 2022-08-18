@@ -4,24 +4,23 @@ import { message, Spin } from 'antd';
 import debounce from 'lodash.debounce'
 
 import axiosInstance from '../axiosApi';
-import userProfileDetail from './userProfileDetail';
 import { log, getTheme, replaceFunction, datePublishHandler } from '../base'
 import ExplicitWords from './explicitWords';
 import { BigHead } from "@bigheads/core";
+import userStore from '../../store/userStore';
 
 const Comments = (props) => {
-    const [comments, setComments] = useState([]) 
-    const [userProfile, setUserProfile] = useState(null)
+    const [comments, setComments] = useState([])
     const [theme, setTheme] = useState('dark')
 
     const commentTextRef = useRef()
+    
+    const [userProfile, userActions] = userStore()
 
     useEffect(async () => {
         const theme = getTheme()
         setTheme(theme)
-        
         fetchComments()
-        setUserProfile(await userProfileDetail())
     }, []);
 
     const checkIfCommentValid = (comment) => {
@@ -45,20 +44,20 @@ const Comments = (props) => {
             verifyState = false
         }
         
+        message.loading("در حال ثبت کامنت ...", 1)
         await debouncePostComment(comment, verifyState)
     }
 
     const debouncePostComment = useCallback(
         debounce(
             async (comment, verifyState) => {
-                message.loading("در حال ثبت کامنت ...", 1)
                 await axiosInstance.post('/api/commentView/', {
                     comment_text: comment,
                     quiz_related: props.quizType == 'quiz' ? props.quizId : null,
                     test_related: props.quizType == 'test' ? props.quizId : null,
                     verified: verifyState,
                     submitter_related: {
-                        username: userProfile.id
+                        username: userProfile.userDetail.id
                     }
                 })
                     .then(res => {

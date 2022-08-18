@@ -6,30 +6,6 @@ import { setupCache } from 'axios-cache-adapter'
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-const accessToken = async () => {
-    const USER_ACCESS_TOKEN = getCookie('USER_ACCESS_TOKEN')
-    const USER_REFRESH_TOKEN = getCookie('USER_REFRESH_TOKEN')
-    if (USER_ACCESS_TOKEN && USER_ACCESS_TOKEN !== 'undefined' && USER_REFRESH_TOKEN && USER_REFRESH_TOKEN !== 'undefined') {
-        return
-    }
-    
-    const adminDetail = {
-        username: process.env.GUEST_USERNAME,
-        password: process.env.GUEST_PASSWORD,
-    }
-
-    await axios.post('/api/token/obtain/', adminDetail)
-        .then((res) => {
-            document.cookie = `USER_ACCESS_TOKEN=${res.data.access}; path=/;`
-            document.cookie = `USER_REFRESH_TOKEN=${res.data.refresh}; path=/;`
-        })
-        .catch((err) => {
-            log(err.response)
-        })
-}
-
-accessToken()
-
 const cache = setupCache({
     maxAge: 15 * 60 * 1000,
     exclude: { query: false },
@@ -55,7 +31,7 @@ axiosInstance.interceptors.response.use(
 
         if (error.response.status === 401 && originalRequest.url === 'http://localhost:8000' +'/token/refresh/') {
             log('logged from 1')    
-            window.location.href = '/login';
+            // window.location.href = '/login';
             return Promise.reject(error);
         }
 
@@ -88,15 +64,17 @@ axiosInstance.interceptors.response.use(
                                     document.cookie = `USER_REFRESH_TOKEN=; path=/;`
                                     
                                     log('logged from 2')
-                                    window.location.href = '/login';
+                                    window.location.reload()
+                                    // window.location.href = '/login';
                                 });
                     }else{
                         log('logged from 3')
-                        window.location.href = '/login';
+                        window.location.reload()
+                        // window.location.href = '/login';
                     }
                 }else{
                     log('logged from 4')
-                    window.location.href = '/login';
+                    // window.location.href = '/login';
                 }
         }
       

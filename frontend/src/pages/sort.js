@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import axiosInstance from '../components/axiosApi';
+import axios from 'axios'
 import { Helmet } from "react-helmet";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import Header from '../components/header'
-import Footer from '../components/footer'
 import skeletonQuiz from '../components/skeletonQuiz';
 import Tools from '../components/tools';
 
@@ -69,8 +67,8 @@ const Sort = () => {
 
         setLoading(true)
 
-        const quiz = await axiosInstance.get(`/api/quizView/?limit=${countResult}&offset=${offset}&public=true`)
-        const pointy = await axiosInstance.get(`/api/testView/?limit=${countResult}&offset=${offset}&public=true`)
+        const quiz = await axios.get(`/api/quizView/?limit=${countResult}&offset=${offset}&public=true`)
+        const pointy = await axios.get(`/api/testView/?limit=${countResult}&offset=${offset}&public=true`)
         let content_new = quiz.data.results.concat(pointy.data.results)
         
         setCountNewFetched(content_new.length)
@@ -91,8 +89,6 @@ const Sort = () => {
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
-
-            <Header />
 
             <Helmet>
                 <title>{`کوییز و تست ها | کوییزلند`}</title>
@@ -152,8 +148,6 @@ const Sort = () => {
 
             {/* Adverts */}
             {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
-
-            <Footer />
 
         </React.Fragment>
     );

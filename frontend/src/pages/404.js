@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import Header from '../components/header'
-import Footer from '../components/footer'
 import { takeParameterFromUrl, getTheme, log } from '../components/base';
 
 const pathRed = '/static/img/bubbles.webp'
@@ -19,8 +17,6 @@ const NotFound_404 = () => {
 
     return (
         <React.Fragment>
-
-            <Header />
 
             <Helmet>
                 <title>صفحه مورد نظر پیدا نشد | کوییزلند</title>
@@ -49,7 +45,6 @@ const NotFound_404 = () => {
                 </div>
             </div>
 
-            <Footer />
         </React.Fragment>
     );
 }

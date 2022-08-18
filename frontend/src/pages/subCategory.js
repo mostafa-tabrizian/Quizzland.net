@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
-
-import axiosInstance from '../components/axiosApi';
+import axios from 'axios'
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
-import Header from '../components/header'
-import Footer from '../components/footer'
-import AddView from '../components/addView';
 
+import AddView from '../components/addView';
 import Tools from '../components/tools'
 import PageTravel from '../components/pageTravel'
 import { log, replaceFunction, takeParameterFromUrl, sortByNewest, sortByMonthlyViews, sortByViews } from '../components/base'
@@ -65,8 +60,8 @@ const SubCategory = (props) => {
     }
 
     const fetchContent = async () => {
-        const quiz = await axiosInstance.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
-        const pointy = await axiosInstance.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+        const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+        const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
         const content = quiz.data.results.concat(pointy.data.results).sort(sortByMonthlyViews);
 
         if (content.count !== 0) {
@@ -82,7 +77,7 @@ const SubCategory = (props) => {
     const applyBackground_AddView = async () => {
         const quizBg = document.querySelector('#quizBg')
         quizBg &&
-        await axiosInstance.get(`/api/subcategoryView/?subCategory__iexact=${replaceFunction(subCategory, '-', ' ')}&public=true`)
+        await axios.get(`/api/subcategoryView/?subCategory__iexact=${replaceFunction(subCategory, '-', ' ')}&public=true`)
         .then((categoryData) => {
             AddView('subcategory', categoryData.data[0].id)
             const background = categoryData.data[0].background
@@ -95,8 +90,6 @@ const SubCategory = (props) => {
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
-
-            <Header />
 
             <Helmet>
                 <title>{`کوییز های ${persianSubCategoryWithoutSign} | کوییزلند`}</title>
@@ -142,8 +135,6 @@ const SubCategory = (props) => {
                 }
 
             </div>
-
-            <Footer />
 
         </React.Fragment>
     );

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
-
-import skeletonQuiz from '../components/skeletonQuiz';
-
-import axiosInstance from '../components/axiosApi';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
 import { Carousel } from 'antd';
+import axios from 'axios'
 
+import skeletonQuiz from '../components/skeletonQuiz';
 import Header from '../components/header'
 import Footer from '../components/footer'
 import { log, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
@@ -48,9 +46,9 @@ const Index = () => {
     }, [])
 
     const grabData = async () => {
-        const quiz = await axiosInstance.get(`/api/quizView/?limit=70&public=true`)
+        const quiz = await axios.get(`/api/quizView/?limit=70&public=true`)
         // .catch(err => {log(err.response)})
-        const pointy = await axiosInstance.get(`/api/testView/?limit=70&public=true`)
+        const pointy = await axios.get(`/api/testView/?limit=70&public=true`)
         // .catch(err => {log(err.response)})
         const content = quiz.data.results.concat(pointy.data.results)
 
@@ -67,8 +65,6 @@ const Index = () => {
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
-
-            <Header />
 
             <Helmet>
                 <title>کوییزلند | Quizzland</title>
@@ -381,8 +377,6 @@ const Index = () => {
 
                 </div>
             </div>
-
-            <Footer />
 
         </React.Fragment>
     );

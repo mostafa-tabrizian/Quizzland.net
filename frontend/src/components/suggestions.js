@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import userStore from '../store/userStore';
 
-import axiosInstance from '../components/axiosApi';
-import userProfileDetail from '../components/user/userProfileDetail';
 import { log, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer';
 
 const Suggestions = () => {
     const [suggestionQuizzes, setSuggestionQuizzes] = useState([])
     
+    const [userProfile, userActions] = userStore()
+
     useEffect( async () => {
-        const userDetail = await userProfileDetail()
-        await fetchData(userDetail)
-    }, []);
+        if (userProfile.userDetail !== null && userProfile.userDetail) {
+            await fetchData()
+        }
+    }, [userProfile]);
     
-    const fetchData = async (userDetail) => {
-        const quiz = await axiosInstance.get('/api/quizView/?public=true')
-        const pointy = await axiosInstance.get('/api/testView/?public=true')
+    const fetchData = async () => {
+        const quiz = await axios.get('/api/quizView/?public=true')
+        const pointy = await axios.get('/api/testView/?public=true')
         
-        await returnSuggestions(quiz.data, pointy.data, userDetail)
+        await returnSuggestions(quiz.data, pointy.data)
     }
 
-    const getUserPreviousLiked = async (userDetail) => {
+    const getUserPreviousLiked = async () => {
         const now = new Date().getTime()
         let userPreviousLiked
         
-        await axiosInstance.get(`/api/userView/?username=${userDetail.username}&timestamp=${now}`)
+        await axios.get(`/api/userView/?username=${userProfile.userDetail.username}&timestamp=${now}`)
             .then(res => {
                 userPreviousLiked = res.data[0].liked_quizzes.split('_')
                 userPreviousLiked = userPreviousLiked.concat(res.data[0].played_history.split('_'))
@@ -82,12 +85,12 @@ const Suggestions = () => {
         }
     }
     
-    const returnSuggestions = async (quiz, pointy, userDetail) => {
+    const returnSuggestions = async (quiz, pointy) => {
         const content = quiz.concat(pointy)
         let finalList = []
         
-        if (userDetail != null) {
-            const userPreviousLiked = await getUserPreviousLiked(userDetail)
+        if (userProfile.userDetail != null) {
+            const userPreviousLiked = await getUserPreviousLiked()
             const userPreviousLikedId = getUserPreviousLikedId(userPreviousLiked)
             const previousUserSubCategory = await userPreviousLikedSubCategory(quiz, pointy, userPreviousLiked)
             

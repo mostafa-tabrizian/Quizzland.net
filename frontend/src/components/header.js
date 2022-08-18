@@ -12,12 +12,12 @@ import Search from './search/searchInput'
 import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
 import axiosInstance from './axiosApi';
+import userStore from '../../src/store/userStore'
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
     const [searchMobileOpen, setSearchMobileOpen] = useState(false)
     const [profileSubMenu, setProfileSubMenu] = useState(false)
-    const [userProfile, setUserProfile] = useState(null)
     const [categorySubMenu, setCategorySubMenu] = useState(null)
     const [theme, setTheme] = useState('dark')
 
@@ -25,15 +25,18 @@ const Header = () => {
 
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
 
-    const { signOut } = useGoogleLogout({
-        clientId: '590155860234-tm0e6smarma5dvr7bi42v6r26v4qkdun.apps.googleusercontent.com',
-        onLogoutSuccess: () => {log('google 1')},
-        onFailure: () => {log('google 2')},
-    })
+    const [userProfile, userActions] = userStore()
+
+    useEffect(() => {
+        gapiLoad()
+        getUserData()
+    }, [])
 
     useEffect(async () => {
         setTheme(getTheme())
-        
+    }, [])
+
+    const gapiLoad = () => {
         const startGapiClient = () => {
             gapi.client.init({
                 clientId: process.env.GOOGLE_LOGIN_CLIENT,
@@ -41,16 +44,25 @@ const Header = () => {
             })
         }
         gapi.load('client:auth2', startGapiClient)
-        
+    }
+    
+    const getUserData = async () => {
         const userProfileDetailData = await userProfileDetail()
-        if (userProfileDetailData !== undefined) {
-            if (userProfileDetailData == 'inactive') {
-                handleLogout()
-            } else {
-                setUserProfile(userProfileDetailData)
-            }
+
+        if (userProfileDetailData == 'inactive') {
+            removeCookie('USER_ACCESS_TOKEN', {path: '/'})
+            removeCookie('USER_REFRESH_TOKEN', {path: '/'})
+            message.error('اکانت شما غیرفعال شده است. لطفا با پشتیبانی تماس بگیرید.')
+        } else {
+            userActions.setUser(userProfileDetailData)
         }
-    }, [])
+    }
+
+    const { signOut } = useGoogleLogout({
+        clientId: process.env.GOOGLE_LOGIN_CLIENT,
+        onLogoutSuccess: () => {log('google 1')},
+        onFailure: () => {log('google 2')},
+    })
 
     const handleLogout = async () => {
         message.loading('در حال خارج شدن ...')
@@ -168,28 +180,31 @@ const Header = () => {
                         </div>
 
                         <div className='relative flex-col hidden px-8 space-x-5 md:justify-center md:flex'>
-                            <div className='flex items-center space-x-3 space-x-reverse'>            
+                            <div className='flex items-center space-x-3 space-x-reverse'>   
                                 {
-                                    userProfile ?
+                                    userProfile.userDetail?
                                     <div className='flex items-center space-x-3 space-x-reverse hover:cursor-pointer' onClick={() => setProfileSubMenu(!profileSubMenu)}>
                                         <div className='w-24 h-24'>
-                                            <BigHead {...JSON.parse(userProfile.avatar)} />
+                                            {
+                                                userProfile.userDetail?.avatar &&
+                                                <BigHead {...JSON.parse(userProfile.userDetail?.avatar)} />
+                                            }
                                         </div>
                                         
                                         <div className='flex items-center'>
                                             {
-                                                userProfile.first_name !== '' || userProfile.last_name !== '' ?
+                                                userProfile.userDetail?.first_name !== '' || userProfile.userDetail?.last_name !== '' ?
                                                 <div className='flex space-x-1 space-x-reverse'>
                                                     <h2>
-                                                        {userProfile.first_name}
+                                                        {userProfile.userDetail?.first_name}
                                                     </h2>
                                                     <h2>
-                                                        {userProfile.last_name}
+                                                        {userProfile.userDetail?.last_name}
                                                     </h2>
                                                 </div>
                                                 :
                                                 <div>
-                                                    {userProfile.username}
+                                                    {userProfile.userDetail?.username}
                                                 </div>
                                             }
                                         </div>
@@ -199,11 +214,11 @@ const Header = () => {
                                 }
                             </div>
 
-                            <div className={`absolute top-14 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]  shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-20 right-36 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]  shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4 max-w-[14rem]'>
                                     <div>
                                         <ul className='flex flex-col'>
-                                            <li><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
+                                            <li><Link to={`/profile/${userProfile.userDetail?.username}`}>پروفایل شما</Link></li>
                                             <li><Link to='/setting'>تنظیمات اکانت</Link></li>
                                             <li><Link to='/playlist?list=like'>کوییز های لایک شده</Link></li>
                                             <li><Link to='/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
@@ -216,7 +231,7 @@ const Header = () => {
 
                                     <div>
                                         <h2>اطلاعیه برای شما</h2>
-                                            {userProfile && <Notification user={userProfile?.id} />}
+                                            {userProfile && <Notification user={userProfile.userDetail?.id} />}
                                     </div>
                                 </div>
                             </div>
@@ -235,7 +250,7 @@ const Header = () => {
                                 <div className='hover:cursor-pointer' onClick={changeTheme}>{theme == 'dark' ? '🌚' : '🌞'}</div>
                             </div>
                             
-                            <div className={`absolute top-14 left-4 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0] shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-20 left-12 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0] shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4'>
                                     <ul className='flex flex-col'>
                                         <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
@@ -265,24 +280,24 @@ const Header = () => {
                 <div className='block mt-4 space-x-3 space-x-reverse md:hidden'>
                     {
                         userProfile ?
-                            <Link to={`/profile/${userProfile.username}`}>
+                            <Link to={`/profile/${userProfile.userDetail?.username}`}>
                                 <div className='flex items-center'>
                                     <svg class="h-10 w-10 ml-3 text-[#ac272e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     <div className='flex space-x-1 space-x-reverse'>
                                     {
-                                        (userProfile.first_name == '' && userProfile.last_name == '') ?
+                                        (userProfile.userDetail?.first_name == '' && userProfile.userDetail?.last_name == '') ?
                                         <div>
-                                            {userProfile.username}
+                                            {userProfile.userDetail?.username}
                                         </div>
                                         :
                                         <div className='flex space-x-1 space-x-reverse'>
                                             <div>
-                                                {userProfile.first_name}
+                                                {userProfile.userDetail?.first_name}
                                             </div>
                                             <div>
-                                                {userProfile.last_name}
+                                                {userProfile.userDetail?.last_name}
                                             </div>
                                         </div>
                                     }
@@ -335,13 +350,13 @@ const Header = () => {
                             
                             <h4>اطلاعیه برای شما</h4>
                             <div className='mt-2'>
-                                <Notification user={userProfile.id} />
+                                <Notification user={userProfile.userDetail?.id} />
                             </div>
 
                             <hr className='border-[#690D11] '/>
                             
                             <ul className='flex flex-col mt-5 space-y-5'>
-                                <li className='text-lg'><Link to={`/profile/${userProfile?.username}`}>پروفایل شما</Link></li>
+                                <li className='text-lg'><Link to={`/profile/${userProfile.userDetail?.username}`}>پروفایل شما</Link></li>
                                 <li className='text-lg'><Link to='/setting'>تنظیمات اکانت</Link></li>
                                 <li className='text-lg'><Link to='/playlist?list=like'>کوییز های لایک شده</Link></li>
                                 <li className='text-lg'><Link to='/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>

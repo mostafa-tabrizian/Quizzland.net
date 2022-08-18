@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import axiosInstance from '../../components/axiosApi';
 import LoadingScreen from '../../components/loadingScreen'
 import QuizContainer from '../../components/quizContainer'
-import Header from '../../components/header'
-import Footer from '../../components/footer'
 import skeletonQuiz from '../../components/skeletonQuiz';
 
 import { log, getTheme, takeParameterFromUrl } from '../../components/base'
-import userProfileDetail from '../../components/user/userProfileDetail';
+import UserStore from '../../store/userStore';
 
 const QuizHistory = () => {
     const [loadState, setLoadState] = useState()
@@ -20,6 +19,8 @@ const QuizHistory = () => {
     const [lowTitle, setLowTitle] = useState(null)
 
     const location = useLocation();
+    
+    const [userProfile, userActions] = UserStore()
 
     useEffect(() => {
         fetchContent()
@@ -27,12 +28,10 @@ const QuizHistory = () => {
         
         document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
         document.getElementById('land').scrollIntoView()
-    }, [location])
+    }, [location, userProfile])
 
     const fetchContent = async () => {
-        const userDetail = await userProfileDetail()
-
-        if (userDetail == null) {
+        if (userProfile.userDetail == false) {
             window.location.href = '/login'
         }
         
@@ -40,17 +39,17 @@ const QuizHistory = () => {
         const playlistType = takeParameterFromUrl('list')
         switch(playlistType) {
             case 'like':
-                playlist = userDetail.liked_quizzes.split('_')
+                playlist = userProfile.userDetail.liked_quizzes.split('_')
                 setTitle('کوییز های لایک شده')
                 setLowTitle('Your Liked Quizzes')
                 break
             case 'history':
-                playlist = userDetail.played_history.split('_')
+                playlist = userProfile.userDetail.played_history.split('_')
                 setTitle('تاریخچه کوییزهای شما')
                 setLowTitle('Your History')
                 break
             case 'watch':
-                playlist = userDetail.watch_list.split('_')
+                playlist = userProfile.userDetail.watch_list.split('_')
                 setTitle('کوییز های پلی لیست شما')
                 setLowTitle('Your Playlist')
         }
@@ -88,8 +87,6 @@ const QuizHistory = () => {
 
             <LoadingScreen loadState={loadState} />
 
-            <Header />
-
             <Helmet>
                 <title>{`${title} | کوییزلند`}</title>
                 <meta name="description" content="بهترین و جدید ترین کوییز و تست های کوییزلند" />
@@ -123,8 +120,6 @@ const QuizHistory = () => {
 
             {/* Adverts */}
             {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
-
-            <Footer />
 
         </React.Fragment>
     );
