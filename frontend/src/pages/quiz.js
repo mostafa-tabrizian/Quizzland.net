@@ -338,7 +338,9 @@ const Quiz = (props) => {
                 takeSelectedOptionValue(props.target)
 
                 if (autoQuestionChanger) {
-                    automaticallyGoNextQuestionOrEndTheQuiz()
+                    setTimeout(() => {
+                        goNextQuestionOrEndTheQuiz()
+                    }, amountOfPauseCalculator())
                 } else {
                     setAbleToGoNext(true)
 
@@ -367,10 +369,10 @@ const Quiz = (props) => {
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
 
     if (isItDesktop() || isItIPad()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34.2
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34
     }
     else if (isItMobile()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 27.7
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 28.5
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
@@ -458,7 +460,7 @@ const Quiz = (props) => {
                         }
                         className={`
                             quiz__container relative mr-20 ml-2 md:ml-0 md:pt-3
-                            p-[0.1rem] transition-all duration-1000 ease-in-out
+                            p-[0.1rem] transition-all duration-1000 ease-in-out w-full
                         `}
                     >
                         <div className='mt-3 w-[22rem] md:w-[29rem]'>
@@ -466,7 +468,7 @@ const Quiz = (props) => {
                             {
                                 (question.question !== null && question.question !== '') &&
                                 <div id='question_background' className='py-1 rounded-xl flex overflow-auto items-center h-[17rem]' >
-                                    <div className='absolute z-10 top-6 right-3 mix-blend-overlay'>
+                                    <div className='absolute z-10 top-6 right-7 md:right-3 mix-blend-overlay'>
                                         {questions.indexOf(question) + 1}
                                     </div>
                                     <p className='p-3 text-[2rem] w-full quiz_question mix-blend-overlay text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
