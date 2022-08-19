@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Helmet } from "react-helmet";
 import { gapi } from 'gapi-script'
 import { useGoogleLogout } from 'react-google-login'
@@ -21,6 +21,8 @@ const Header = () => {
     const [categorySubMenu, setCategorySubMenu] = useState(null)
     const [theme, setTheme] = useState('dark')
 
+    const location = useLocation();
+    
     const mobileSearchInput = useRef()
 
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
@@ -30,11 +32,14 @@ const Header = () => {
     useEffect(() => {
         gapiLoad()
         getUserData()
-    }, [])
-
-    useEffect(async () => {
         setTheme(getTheme())
     }, [])
+
+    useEffect(() => {
+        setProfileSubMenu(false)
+        setCategorySubMenu(false)
+        setMenuOpen(false)
+    }, [location])
 
     const gapiLoad = () => {
         const startGapiClient = () => {
@@ -377,26 +382,26 @@ const Header = () => {
                         <hr className='border-[#690D11] '/>
                         <h3 className='text-xl'>کتگوری ها</h3>
                         <ul className='flex mt-3 space-x-3 space-x-reverse'>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/celebrity">سلبریتی ✨</Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/category/psychology">روانشناسی 🧠</Link></li>
+                            <li className='text-lg'><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
+                            <li className='text-lg'><Link to="/category/celebrity">سلبریتی ✨</Link></li>
+                            <li className='text-lg'><Link to="/category/psychology">روانشناسی 🧠</Link></li>
                         </ul>
                     </div>
                     <div className='relative mt-5'>
                         <hr className='border-[#690D11] '/>
                         <h3 className='text-xl'>کوییز و تست ها</h3>
                         <ul className='flex mt-3 space-x-6 space-x-reverse'>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=newest"> جدیدترین </Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=trend"> محبوب ترین </Link></li>
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/sort?s=views"> پربازدیدترین </Link></li>
+                            <li className='text-lg'><Link to="/sort?s=newest"> جدیدترین </Link></li>
+                            <li className='text-lg'><Link to="/sort?s=trend"> محبوب ترین </Link></li>
+                            <li className='text-lg'><Link to="/sort?s=views"> پربازدیدترین </Link></li>
                         </ul>
                     </div>
                     <div className='relative mt-5'>
                         <hr className='border-[#690D11] '/>
                         <ul className='mt-3 space-y-3'>
-                            {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/blog"> وبلاگ </Link></li> */}
-                            {/* <li className='text-lg' onClick={openCloseMenu}><Link to="/guide"> راهنما </Link></li> */}
-                            <li className='text-lg' onClick={openCloseMenu}><Link to="/contact"> تماس با ما </Link></li>
+                            {/* <li className='text-lg'><Link to="/blog"> وبلاگ </Link></li> */}
+                            {/* <li className='text-lg'><Link to="/guide"> راهنما </Link></li> */}
+                            <li className='text-lg'><Link to="/contact"> تماس با ما </Link></li>
                             <li className='text-lg' onClick={changeTheme}>تم حالت {theme == 'dark' ? '🌚' : '🌞'}</li>
                         </ul>
                     </div>
