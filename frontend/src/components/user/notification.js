@@ -10,6 +10,7 @@ const Notifications = (props) => {
     const [cookies] = useCookies(['USER_ACCESS_TOKEN']);
     
     useEffect(() => {
+        cookies.USER_ACCESS_TOKEN &&
         fetchNotifications()
     }, []);
 

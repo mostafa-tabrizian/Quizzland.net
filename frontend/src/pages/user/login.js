@@ -11,6 +11,7 @@ const Login = () => {
     const [theme, setTheme] = useState('dark')    
     
     useEffect(() => {
+        document.querySelector('header').remove()
         const theme = getTheme()
         setTheme(theme)
         document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'} url(${pathRed}) center center scroll`
@@ -32,10 +33,7 @@ const Login = () => {
 
                     <div className='grid md:grid-cols-2'>
                         <div className='flex flex-col my-auto'>
-                            {/* <div className={`border rounded-lg mt-3 order-1 md:order-[0] h-fit ${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'} shadow-[inset_0_0_15px_#ac272e] border-[#ac272e] px-3 py-1`}> */}
                             <LoginForm />
-                            {/* </div> */}
-                            
                             <button className='mt-5 text-gray-500'><Link to='/'>برگشت به صفحه اصلی</Link></button>
                         </div>
                         
