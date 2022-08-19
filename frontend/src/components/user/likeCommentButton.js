@@ -105,7 +105,7 @@ const LikeCommentButton = (props) => {
                 setWatchListButtonUnClickable(true)
             }
         } else {
-            props.setShowLoginForm(true)
+            props.showLoginNotification()
             setWatchListButtonUnClickable(true)
         }
     }
@@ -152,7 +152,7 @@ const LikeCommentButton = (props) => {
                     color:'white'
                 }}
             >
-                <Comments quizId={props.quizId} quizType={props.quizType} setShowLoginForm={props.setShowLoginForm} setCommentsPanelState={setCommentsPanelState} />
+                <Comments quizId={props.quizId} quizType={props.quizType} showLoginNotification={props.showLoginNotification} setCommentsPanelState={setCommentsPanelState} />
             </Drawer>
         </React.Fragment>
     );

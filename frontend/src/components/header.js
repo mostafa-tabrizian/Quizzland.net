@@ -6,6 +6,7 @@ import { useGoogleLogout } from 'react-google-login'
 import { useCookies } from "react-cookie";
 import { message } from 'antd';
 import { BigHead } from "@bigheads/core";
+import axios from 'axios';
 
 import { log, getTheme } from './base'
 import Search from './search/searchInput'
@@ -76,20 +77,21 @@ const Header = () => {
         }
         
         try {
+            await axios.post('/api/blacklist/', {"refresh_token": cookies.USER_REFRESH_TOKEN,})
+                .catch(err => {
+                    log(err)
+                    log(err.response)
+                })
+    
+            removeCookie('USER_ACCESS_TOKEN', {path: '/'})
+            removeCookie('USER_REFRESH_TOKEN', {path: '/'})
             
-            await axiosInstance.post('/api/blacklist/', {
-                "refresh_token": cookies.USER_REFRESH_TOKEN,
-            });
-            
-            removeCookie('USER_ACCESS_TOKEN')
-            removeCookie('USER_REFRESH_TOKEN')
-            
-            axiosInstance.defaults.headers['Authorization'] = null;
+            axios.defaults.headers['Authorization'] = null;
+            signOut()         
             window.location.reload()
-        }
-        catch (e) {
-            log('error')
-            console.log(e);
+        } catch (e) {
+            log('logout error:')
+            log(e)
         }
     };
 

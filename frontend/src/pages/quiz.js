@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import axios from 'axios'
 
 import axiosInstance from '../components/axiosApi';
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
@@ -37,13 +38,13 @@ const Quiz = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [SFXAllowed, setSFXAllowed] = useState()
+    const [popUpQuizSuggesterState, setPopUpQuizSuggester] = useState(false)
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
     const [SFXClick, setSFXClick] = useState(null)
     const [quiz, setQuiz] = useState(null)
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
     const [questionCounterForId] = useState(1)
-    const [showLoginForm, setShowLoginForm] = useState(false)
     const [theme, setTheme] = useState('dark')
     const [its404, set404] = useState(false)
 
@@ -51,7 +52,7 @@ const Quiz = (props) => {
 
     const result = useRef(null)
     const quizDetailRef = useRef(null)
-    
+
     const [userProfile, userActions] = userStore()
 
     useEffect(() => {
@@ -60,7 +61,7 @@ const Quiz = (props) => {
         SFXLocalStorage()
         setWhichSFXfile()
     }, [quizSlug])
-    
+
     useEffect(() => {
         fetchQuiz()
     }, quizSlugReplacedWithHyphen)
@@ -78,7 +79,7 @@ const Quiz = (props) => {
         const theme = getTheme()
         setTheme(theme)
     }, [location]);
-    
+
     const setWhichSFXfile = () => {
         switch (quizType) {
             case 'quiz':
@@ -104,7 +105,7 @@ const Quiz = (props) => {
         }
     }
 
-    const openNotification = () => {
+    const TutorialForHowToChangeTheQuestion = () => {
         notification.open({
             message: 'راهنمایی برای تغییر سؤال',
             description:
@@ -121,21 +122,46 @@ const Quiz = (props) => {
         });
     };
 
+    const showLoginNotification = () => {
+        notification.open({
+            description:
+                <div>
+                    <h5 className='mb-5'>
+                        برای لایک و کامنت کردن لازمه که وارد کوییزلند بشی.
+                    </h5>
+
+                    <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                        <LoginForm />
+                    </div>
+                </div>,
+            duration: 0,
+            style: {
+                'font-size': '25px',
+                'font-weight': '600',
+                'box-shadow': '0 0 20px #b52633',
+                'direction': 'rtl',
+                'padding-right': '4rem',
+            },
+            className: 'rounded-lg',
+            onClose: close,
+        });
+    };
+
     const applyBackground = () => {
         const quizBg = document.querySelector('#quizBg')
         const background = quizDetailRef.current.background
-        
+
         quizBg &&
-        (quizBg.style = `background-image: url('${background}'); background-size: cover; background-position: center`)
+            (quizBg.style = `background-image: url('${background}'); background-size: cover; background-position: center`)
     }
 
     const fetchQuiz = async () => {
         quizSlugReplacedWithHyphen &&
-            await axiosInstance.get(`/api/${quizType}View/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+            await axios.get(`/api/${quizType}View/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
                     quizDetailRef.current = quizData
                     setQuiz(quizData)
-                    
+
                     sendCategoryAsInterest()
                     await getSuggestionsQuiz()
                     applyBackground()
@@ -150,7 +176,7 @@ const Quiz = (props) => {
                             break
                     }
 
-                    await axiosInstance.get(`/api/${questionAPI}/?quizKey=${quizData.id}&public=true`)
+                    await axios.get(`/api/${questionAPI}/?quizKey=${quizData.id}&public=true`)
                         .then((questionData) => {
                             setQuestions(questionData.data)
                             setContentLoaded(true)
@@ -217,12 +243,12 @@ const Quiz = (props) => {
     }
 
     const playSFX = (userSelection) => {
-        
+
         const SFXAllowed = localStorage.getItem('SFXAllowed')
         if (SFXAllowed === 'true') {
             let userChose = parseInt(userSelection.id.slice(-1))
             let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
-            
+
             if (userChose == correctAnswer) {
                 setCorrectAnswersCount(prev => prev + 1)
                 SFXCorrect.volume = .5
@@ -232,7 +258,7 @@ const Quiz = (props) => {
                 SFXWrong.volume = .5
                 SFXWrong.play()
             }
-            
+
         }
     }
 
@@ -290,15 +316,15 @@ const Quiz = (props) => {
 
     const postToHistoryAsPlayedQuiz = async () => {
         await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { played_history: userProfile.userDetail.played_history + `_${quiz.id}${quizType.slice(0, 1)}` })
-        // .then(res => {
-        // })
-        .catch(err => {
-            log(err.response)
-        })
+            // .then(res => {
+            // })
+            .catch(err => {
+                log(err.response)
+            })
     }
-    
+
     const halfTheQuestions = Math.floor(questions.length / 2)
-    
+
     const addViewIfHalfQuiz = () => {
         if (currentQuestionNumber == halfTheQuestions) {
             AddView(`${quizType}View`, quizDetailRef.current.id)
@@ -307,19 +333,19 @@ const Quiz = (props) => {
     }
 
     const selectedOption = (props) => {
-        switch(quizType) {
+        switch (quizType) {
             case 'quiz':
                 if (ableToSelectOption) {
                     // setTimeout(() => {
                     //     document.querySelector('.quiz__questions').scrollIntoView()
                     // }, 300)
-        
+
                     setAbleToSelectOption(false)
                     setAbleToGoNext(true)
                     makeEveryOptionLowOpacity('low')
                     checkTheSelectedOption(props.target)
                     addViewIfHalfQuiz()
-        
+
                     if (autoQuestionChanger) {
                         setTimeout(() => {
                             goNextQuestionOrEndTheQuiz()
@@ -327,7 +353,7 @@ const Quiz = (props) => {
                     } else {
                         setTimeout(() => {
                             if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
-                                openNotification()
+                                TutorialForHowToChangeTheQuestion()
                             }
                         }, 5000)
                     }
@@ -346,7 +372,7 @@ const Quiz = (props) => {
 
                     setTimeout(() => {
                         if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
-                            openNotification()
+                            TutorialForHowToChangeTheQuestion()
                         }
                     }, 5000)
                 }
@@ -389,10 +415,10 @@ const Quiz = (props) => {
             } else {
                 setQuizEnded(true)
                 localStorage.setItem('qd', JSON.stringify(quiz))
-                switch(quizType) {
+                switch (quizType) {
                     case 'quiz':
                         localStorage.setItem('qt', 'quiz')
-                        localStorage.setItem('qr', JSON.stringify({ql: questions?.length, qc: correctAnswersCount}))
+                        localStorage.setItem('qr', JSON.stringify({ ql: questions?.length, qc: correctAnswersCount }))
                         break
                     case 'test':
                         localStorage.setItem('qt', 'test')
@@ -405,9 +431,9 @@ const Quiz = (props) => {
     }
 
     const returnQuiz = (question) => {
-        switch(quizType) {
+        switch (quizType) {
             case 'quiz':
-                return <Trivia 
+                return <Trivia
                     question={question}
                     selectedOption={selectedOption}
                     questionCounterForId={questionCounterForId}
@@ -416,7 +442,7 @@ const Quiz = (props) => {
                     correctAnswerOption={correctAnswerOption}
                 />
             case 'test':
-                return <Test 
+                return <Test
                     question={question}
                     selectedOption={selectedOption}
                 />
@@ -464,14 +490,14 @@ const Quiz = (props) => {
                         `}
                     >
                         <div className='mt-3 w-[22rem] md:w-[29rem]'>
-                            
+
                             {
                                 (question.question !== null && question.question !== '') &&
                                 <div id='question_background' className='py-1 rounded-xl flex overflow-auto items-center h-[17rem]' >
-                                    <div className='absolute z-10 top-6 right-7 md:right-3 mix-blend-overlay'>
+                                    <div className='absolute z-10 top-6 right-7 md:right-3 mix-blend-hard-light'>
                                         {questions.indexOf(question) + 1}
                                     </div>
-                                    <p className='p-3 text-[2rem] w-full quiz_question mix-blend-overlay text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
+                                    <p className='p-3 text-[2rem] w-full quiz_question mix-blend-hard-light text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
                                 </div>
                             }
 
@@ -489,7 +515,7 @@ const Quiz = (props) => {
                                 </div>
                             }
                         </div>
-                        
+
                         {returnQuiz(question)}
 
                         {
@@ -575,14 +601,14 @@ const Quiz = (props) => {
     const getSuggestionsQuiz = async () => {
         const category = quizDetailRef.current.categoryKey.id
         const subCategory = quizDetailRef.current.subCategory
-        
-        const quiz = await axiosInstance.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axiosInstance.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+
+        const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
         if (content.length != 8) {
-            const quizByCategory = await axiosInstance.get(`/api/quizView/?category__exact=${category}&limit=8&public=true`)
-            const pointyByCategory = await axiosInstance.get(`/api/testView/?category__exact=${category}&limit=8&public=true`)
+            const quizByCategory = await axios.get(`/api/quizView/?category__exact=${category}&limit=8&public=true`)
+            const pointyByCategory = await axios.get(`/api/testView/?category__exact=${category}&limit=8&public=true`)
             content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
         }
 
@@ -616,7 +642,6 @@ const Quiz = (props) => {
 
     return (
         <div>
-
             <LoadingScreen loadState={loadState} />
 
             <Helmet>
@@ -667,226 +692,216 @@ const Quiz = (props) => {
                 </script>
             </Helmet>
 
-            {quiz?.title &&
-                <StickyShareButtons
-                    config={{
-                        alignment: 'left',
-                        color: 'social',
-                        enabled: true,
-                        font_size: 16,
-                        hide_desktop: false,
-                        labels: 'counts',
-                        language: 'en',
-                        min_count: 10,
-                        networks: [
-                            'whatsapp',
-                            'telegram',
-                            'twitter',
-                            'sms',
-                            'sharethis',
-                        ],
-                        padding: 9,
-                        radius: 15,
-                        show_total: true,
-                        show_mobile: true,
-                        show_toggle: false,
-                        size: 38,
-                        top: 450,
-                        url: currentUrl()
-                    }}
-                />
-            }
+            <div>
+                {quiz?.title &&
+                    <StickyShareButtons
+                        config={{
+                            alignment: 'left',
+                            color: 'social',
+                            enabled: true,
+                            font_size: 16,
+                            hide_desktop: false,
+                            labels: 'counts',
+                            language: 'en',
+                            min_count: 10,
+                            networks: [
+                                'whatsapp',
+                                'telegram',
+                                'twitter',
+                                'sms',
+                                'sharethis',
+                            ],
+                            padding: 9,
+                            radius: 15,
+                            show_total: true,
+                            show_mobile: true,
+                            show_toggle: false,
+                            size: 38,
+                            top: 450,
+                            url: currentUrl()
+                        }}
+                    />
+                }
 
-            <div className={`top-1/4 left-1/2 translate-x-[-50%] ${showLoginForm ? 'popUp-show ' : 'popUp-hide'} fixed z-20 bg-gradient-to-t from-[#771118] to-[#ac272e] p-8 w-11/12 md:w-[30rem] grid grid-cols-1 rounded-lg`}>
-                <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {setShowLoginForm(false)}}> X </button>
+                {
+                    !its404
+                        ?
+                        <div className="ltr">
+                            <div id='quizBg'></div>
 
-                <div className="m-auto top-20">
-                    <h1 className="text-[1rem] mb-5 text-center text-white ">
-                        ورود به کوییزلند
-                    </h1>
-
-                    {/* <LoginForm /> */}
-                </div>
-            </div>
-
-            {
-                !its404
-                ?
-                <div className="ltr">
-                    <div id='quizBg'></div>
-                    
-                    <div className={`
-                        fixed left-0 backdrop-blur-3xl backdrop-brightness-75
-                        top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
-                        flex flex-col items-center justify-center 
-                    `}>
-                        <div>
-                            <div className='absolute w-10 h-10 bg-red-800 rounded-full animate-ping'></div>
-                            <div className='w-10 h-10 bg-red-800 rounded-full'></div>
-                        </div>
-                        <div className='mt-5'>
-                            <h2>
-                                در حال محاسبه نتیجه کوییز
-                            </h2>
-                        </div>
-                    </div>
-
-                    <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} SFXController={SFXController} />
-
-                    {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={quizType} setShowLoginForm={setShowLoginForm} />}
-
-                    {
-                        contentLoaded && isItDesktop() &&
-                        <div className={`
-                            quiz__questionChanger__container relative
-                            top-24
-                            ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
+                            <div className={`
+                            fixed left-0 backdrop-blur-3xl backdrop-brightness-75
+                            top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
+                            flex flex-col items-center justify-center 
                         `}>
-                            <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
-                                aria-label='Next Question'
-                                className={`
-                                    quiz__questionChanger absolute
-                                    quiz__questionChanger__next btn
-                                    ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
-                                `}
-                            >
+                                <div>
+                                    <div className='absolute w-10 h-10 bg-red-800 rounded-full animate-ping'></div>
+                                    <div className='w-10 h-10 bg-red-800 rounded-full'></div>
+                                </div>
+                                <div className='mt-5'>
+                                    <h2>
+                                        در حال محاسبه نتیجه کوییز
+                                    </h2>
+                                </div>
+                            </div>
 
-                                <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+                            <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} SFXController={SFXController} />
 
-                            </button>
+                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={quizType} showLoginNotification={showLoginNotification} />}
+
                             {
-                                quizType == 'test' &&
-                                <button
-                                    onClick={goLastQuestion}
-                                    aria-label='Next Question'
-                                    className={`
-                                        quiz__questionChanger absolute quiz__questionChanger__last
-                                        btn
+                                contentLoaded && isItDesktop() &&
+                                <div className={`
+                                quiz__questionChanger__container relative
+                                top-24
+                                ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
+                            `}>
+                                    <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
+                                        aria-label='Next Question'
+                                        className={`
+                                        quiz__questionChanger absolute
+                                        quiz__questionChanger__next btn
+                                        ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
                                     `}
                                     >
-                                    <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
-                                </button>
+
+                                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+
+                                    </button>
+                                    {
+                                        quizType == 'test' &&
+                                        <button
+                                            onClick={goLastQuestion}
+                                            aria-label='Next Question'
+                                            className={`
+                                            quiz__questionChanger absolute quiz__questionChanger__last
+                                            btn
+                                        `}
+                                        >
+                                            <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+                                        </button>
+                                    }
+                                </div>
                             }
+
+                            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
+                                <div className={`quiz__hider mt-5 flex relative`}>
+                                    {
+                                        !(contentLoaded) &&
+                                        <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
+                                    }
+
+                                    {
+                                        isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
+                                <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
+                                    {quiz && showTheTagsIfNotNull()}
+                                </ul>
+                            </div>
+
+                            {/* Adverts */}
+                            <div className='adverts_center' id='mediaad-bNpr'></div>
+
+                            <div className='mx-4 mt-10'>
+                                <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
+
+                                <div className='w-3/4 mx-auto'>
+                                    {skeletonQuiz(contentLoaded)}
+                                </div>
+
+                                <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
+                                    {
+                                        suggestionQuizzes &&
+                                        suggestionQuizzes.map((quiz) => {
+                                            return (
+                                                <li key={quiz.id} className='flex-auto mb-5 md:mr-4 md:mb-4'>
+                                                    <article className={`
+                                                    flex text-right h-full
+                                                    rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
+                                                `}>
+
+                                                        <a
+                                                            href={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
+                                                            className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' : 'from-white'} to-transparent`}
+                                                        >
+                                                            <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
+                                                                <img
+                                                                    src={quiz.thumbnail}
+                                                                    width={1366}
+                                                                    height={768}
+                                                                    alt={`${quiz.subCategory} | ${quiz.title}`}
+                                                                    className='object-cover h-full'
+                                                                />
+                                                            </div>
+                                                            <div className='w-full pt-1 pb-3 pr-4 md:pr-2 md:col-span-3 md:mt-2'>
+                                                                <h3 className={`quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
+                                                                            md:w-52 md:text-base`}>
+                                                                    {quiz.subCategory}
+                                                                </h3>
+                                                                <h4 className={`
+                                                                quizContainer__title quizContainer__title__noViews flex
+                                                                w-[10rem] md:w-52 md:text-base
+                                                            `}>
+                                                                    {quiz.title}
+                                                                </h4>
+                                                                {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
+                                                                {/* <span className="text-center quizContainer__date">
+                                                                {datePublishHandler(quiz.publish)}
+                                                            </span> */}
+                                                            </div>
+                                                        </a>
+                                                    </article>
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+
+
+                            {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}
+
+                            {/* Adverts */}
+                            {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
+
+
+                            <Link
+                                to={`/result`}
+                                ref={result}
+                                className='noVis'
+                            ></Link>
+
                         </div>
-                    }
+                        :
+                        <div>
+                            <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
 
-                    <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
-                        <div className={`quiz__hider mt-5 flex relative`}>
-                            {
-                                !(contentLoaded) &&
-                                <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
-                            }
-
-                            {
-                                isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
-                            }
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
-                        <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
-                            {quiz && showTheTagsIfNotNull()}
-                        </ul>
-                    </div>
-
-                    {/* Adverts */}
-                    <div className='adverts_center' id='mediaad-bNpr'></div>
-
-                    <div className='mx-4 mt-10'>
-                        <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
-
-                        <div className='w-3/4 mx-auto'>
-                            {skeletonQuiz(contentLoaded)}
-                        </div>
-
-                        <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
-                            {
-                                suggestionQuizzes &&
-                                suggestionQuizzes.map((quiz) => {
-                                    return (
-                                        <li key={quiz.id} className='flex-auto mb-5 md:mr-4 md:mb-4'>
-                                            <article className={`
-                                                flex text-right h-full
-                                                rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                                            `}>
-                        
-                                                <a
-                                                    href={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
-                                                    className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' :  'from-white'} to-transparent`}
-                                                >
-                                                    <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
-                                                        <img
-                                                            src={quiz.thumbnail}
-                                                            width={1366}
-                                                            height={768}
-                                                            alt={`${quiz.subCategory} | ${quiz.title}`}
-                                                            className='object-cover h-full'
-                                                        />
-                                                    </div>
-                                                    <div className='w-full pt-1 pb-3 pr-4 md:pr-2 md:col-span-3 md:mt-2'>
-                                                        <h3 className={`quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
-                                                                        md:w-52 md:text-base`}>
-                                                                            {quiz.subCategory}
-                                                        </h3>
-                                                        <h4 className={`
-                                                            quizContainer__title quizContainer__title__noViews flex
-                                                            w-[10rem] md:w-52 md:text-base
-                                                        `}>
-                                                            {quiz.title}
-                                                        </h4>
-                                                        {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
-                                                        {/* <span className="text-center quizContainer__date">
-                                                            {datePublishHandler(quiz.publish)}
-                                                        </span> */}
-                                                    </div>
-                                                </a>
-                                            </article>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </div>
-
-
-                    {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}
-
-                    {/* Adverts */}
-                    {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
-
-                    
-                    <Link
-                        to={`/result`}
-                        ref={result}
-                        className='noVis'
-                    ></Link>
-                    
-                </div>
-                :
-                <div>
-                    <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
-
-                    <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'dark' ? '#0000008c' : '#f0f0f0'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
-                        <h1> 🤔 کوییز/تست مورد نظر پیدا نشد </h1>
-                        <div class="mt-5">
-                            <h2>
-                                وجود ندارد یا در حال حاضر غیر فعال شده است
-                            </h2>
-                        </div>
-                        <div className='mt-10'>
-                            <div className='px-4 py-2 border-2 border-red-900 rounded-xl'>
-                                <h2>
-                                    <Link to='/sort?s=trend'>
-                                        مشاهده بهترین کوییز/تست های این ماه
-                                    </Link>
-                                </h2>
+                            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'dark' ? '#0000008c' : '#f0f0f0'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
+                                <h1> 🤔 کوییز/تست مورد نظر پیدا نشد </h1>
+                                <div class="mt-5">
+                                    <h2>
+                                        وجود ندارد یا در حال حاضر غیر فعال شده است
+                                    </h2>
+                                </div>
+                                <div className='mt-10'>
+                                    <div className='px-4 py-2 border-2 border-red-900 rounded-xl'>
+                                        <h2>
+                                            <Link to='/sort?s=trend'>
+                                                مشاهده بهترین کوییز/تست های این ماه
+                                            </Link>
+                                        </h2>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
+                }
 
+            </div>
         </div>
     );
 }

@@ -24,9 +24,9 @@ const LoginForm = (props) => {
         gapiLoad()
     }, [])
 
-    // useEffect(() => {
-    //     checkIfLoggedIn()
-    // }, [userProfile]);
+    useEffect(() => {
+        checkIfLoggedIn()
+    }, [userProfile]);
 
     const gapiLoad = () => {
         const startGapiClient = () => {
@@ -40,31 +40,28 @@ const LoginForm = (props) => {
     }
 
     const logout = async () => {
-        return log('logout')
         try {
             await axios.post('/api/blacklist/', {"refresh_token": cookies.USER_REFRESH_TOKEN,})
-                .then(res => {
-                    removeCookie('USER_ACCESS_TOKEN', {path: '/'})
-                    removeCookie('USER_REFRESH_TOKEN', {path: '/'})
-                    
-                    axios.defaults.headers['Authorization'] = null;
-                    signOut()         
-                    // window.location.reload()
-                })
                 .catch(err => {
-                    // window.location.href = '/'
+                    log(err)
+                    log(err.response)
                 })
-        }
-        catch (e) {
-            console.log(e);
+    
+            removeCookie('USER_ACCESS_TOKEN', {path: '/'})
+            removeCookie('USER_REFRESH_TOKEN', {path: '/'})
+            
+            axios.defaults.headers['Authorization'] = null;
+            signOut()         
+            window.location.reload()
+        } catch (e) {
+            log('logout error:')
+            log(e)
         }
     };
 
     const checkIfLoggedIn = async () => {
-        if (userProfile.userDetail) {
-            log('loggedIn')
-            return log(userProfile)
-            // window.location.href = '/'
+        if (userProfile.userDetail && window.location.pathname == '/login') {
+            window.location.href = '/'
         }
     }
 
@@ -86,7 +83,7 @@ const LoginForm = (props) => {
     }
 
     const googleLoginSuccess = async (res) => {
-        // if (userProfile.userDetail == false) {
+        if (userProfile.userDetail == false) {
             const accessToken = res.accessToken
             const username = replaceFunction(res.profileObj.name, ' ', '')
             const email = res.profileObj.email
@@ -132,7 +129,7 @@ const LoginForm = (props) => {
                     log(err)
                     log(err.response)
                 })
-        // }
+        }
     }
 
     const googleLoginFailure = (res) => {

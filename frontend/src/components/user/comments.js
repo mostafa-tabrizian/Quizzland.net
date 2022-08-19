@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom'
 import { message, Spin } from 'antd';
 import debounce from 'lodash.debounce'
+import axios from 'axios'
 
 import axiosInstance from '../axiosApi';
 import { log, getTheme, replaceFunction, datePublishHandler } from '../base'
@@ -82,7 +83,7 @@ const Comments = (props) => {
     const fetchComments = async () => {
         const now = new Date().getTime()
         
-        await axiosInstance.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `quiz_related=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_related=${props.quizId}&` : ''}timestamp=${now}`)
+        await axios.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `quiz_related=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_related=${props.quizId}&` : ''}timestamp=${now}`)
             .then(res => {
                 setComments(res.data.sort(sortCommentsByNewest))
             })
@@ -127,9 +128,9 @@ const Comments = (props) => {
     }
 
     const checkIfUserLoggedIn = () => {
-        if (!(userProfile)) {
+        if (!(userProfile.userDetail.id)) {
             props.setCommentsPanelState(false)
-            props.setShowLoginForm(true)
+            props.showLoginNotification()
         }
     }
     

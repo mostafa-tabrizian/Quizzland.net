@@ -1439,6 +1439,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(22 163 74 / var(--tw-border-opacity));
 }
 
+.border-zinc-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(244 244 245 / var(--tw-border-opacity));
+}
+
+.border-\[\#c30000\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(195 0 0 / var(--tw-border-opacity));
+}
+
 .border-b-\[\#ac272e\] {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(172 39 46 / var(--tw-border-opacity));
@@ -1527,6 +1537,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-\[\#f3f3f3d4\] {
   background-color: #f3f3f3d4;
+}
+
+.bg-\[\#c30000\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(195 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-l {
@@ -1894,6 +1909,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mix-blend-overlay {
   mix-blend-mode: overlay;
+}
+
+.mix-blend-hard-light {
+  mix-blend-mode: hard-light;
 }
 
 .shadow-\[0_5px_15px_\#b3b3b3\] {

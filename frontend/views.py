@@ -36,7 +36,8 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             token.blacklist()
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            if str(e) != 'Token is blacklisted':
+                return Response(status=status.HTTP_400_BAD_REQUEST)
         
 def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
