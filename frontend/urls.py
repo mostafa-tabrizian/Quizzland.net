@@ -14,6 +14,7 @@ urlpatterns = [
     # path("api/reset_password", resetPassword),
     path("api/recaptcha", verify_recaptcha),
     path("api/user/update", user_update),
+    path("api/user/notifications", user_notification),
     
     path('login', index),
     path('register', index),

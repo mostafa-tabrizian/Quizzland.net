@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useCookies } from "react-cookie";
 
 import axiosInstance from '../axiosApi'
 import { log } from '../base'
@@ -6,19 +7,28 @@ import { log } from '../base'
 const Notifications = (props) => {
     const [notifications, setNotifications] = useState()
 
+    const [cookies] = useCookies(['USER_ACCESS_TOKEN']);
+    
     useEffect(() => {
         fetchNotifications()
     }, []);
 
     const fetchNotifications = async () => {
-        // const now = new Date()
+        const payload = {
+            access_token: cookies.USER_ACCESS_TOKEN
+        }
+        
+        await axiosInstance.post(`/api/user/notifications`, payload)
+            .then(res => {
+                log(res.data)
+                setNotifications(res.data)
+            })
+            .catch(err => {
+                log(err)
+                log(err.response)
+            })
 
-        // await axiosInstance.get(`/api/notificationView/?user=${props.user}&has_read=false&timestamp=${now}`)
-        //     .then(res => {
-        //         setNotifications(res.data.reverse()[0])
-        //     })
-
-        // return true
+        return true
     }
 
     // const changeNotificationToHasRead = async (notificationId) => {
@@ -58,12 +68,12 @@ const Notifications = (props) => {
     return (
         <React.Fragment>
             {
-                notifications ?
-                returnNotifications()
-                :
+                notifications == 'False' ?
                 <p className='text-sm'>
                     هیچ اطلاعیه ای ندارید
                 </p>
+                :
+                returnNotifications()
             }
         </React.Fragment>
     );

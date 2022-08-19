@@ -1,5 +1,4 @@
 import datetime, json, requests, random
-from tokenize import String
 from decouple import config
 
 from .models import *
@@ -11,7 +10,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.hashers import make_password  # check_password
-# from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
@@ -42,6 +40,30 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
 def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
+
+def user_notification(request, *args, **kwargs):
+    if request.method == 'POST':
+        access_token = json.loads(request.body.decode('utf-8'))['access_token']
+        userObject = AccessToken(access_token)
+        
+        try:
+            notifications = Notification.objects.filter(user=userObject['user_id'])
+
+            if notifications:
+                return HttpResponse(
+                    json.dumps(
+                        {
+                            'id': notifications.last().id,
+                            'message': notifications.last().message,
+                            'type': notifications.last().type
+                        }
+                    )
+                )
+            else:
+                return HttpResponse(False)
+            
+        except Exception as e:
+            return HttpResponse(e)
 
 def user_data(request, *args, **kwargs):
     if request.method == 'POST':
