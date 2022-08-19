@@ -12,7 +12,6 @@ import { log, getTheme } from './base'
 import Search from './search/searchInput'
 import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
-import axiosInstance from './axiosApi';
 import userStore from '../../src/store/userStore'
 
 const Header = () => {

@@ -117,10 +117,7 @@ const LoginForm = (props) => {
                         setCookie('USER_ACCESS_TOKEN', res.data.access_token, { path: '/' });
                         setCookie('USER_REFRESH_TOKEN', res.data.refresh_token, { path: '/' });
         
-                        document.location.reload()
-                        if (window.location.pathname === '/login') {
-                            window.history.go(-1)
-                        }    
+                        document.location.reload()  // cause redirect to landPage
                     }
                     
                 })
