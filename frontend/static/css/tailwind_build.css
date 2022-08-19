@@ -1126,6 +1126,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: fit-content;
 }
 
+.max-w-\[35rem\] {
+  max-width: 35rem;
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }

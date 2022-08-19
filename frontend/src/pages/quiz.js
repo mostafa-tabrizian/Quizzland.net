@@ -799,13 +799,13 @@ const Quiz = (props) => {
 
                             <div>
                                 <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
-                                <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags'>
+                                <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags max-w-[35rem] mx-auto'>
                                     {quiz && showTheTagsIfNotNull()}
                                 </ul>
                             </div>
 
                             {/* Adverts */}
-                            <div className='adverts_center' id='mediaad-bNpr'></div>
+                            <div className='mt-5 adverts_center' id='mediaad-bNpr'></div>
 
                             <div className='mx-4 mt-10'>
                                 <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
