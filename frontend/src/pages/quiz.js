@@ -511,7 +511,7 @@ const Quiz = (props) => {
                                         title={question.title}
                                         effect="blur"
                                     />
-                                    <a href={question?.question_img} target='_blank'><span className='text-[.7rem] text-white'>در صورت عدم نمایش اینجا را کلیک کنید</span></a>
+                                    <a href={question?.question_img} target='_blank'><span className='text-[.7rem] block text-white'>در صورت عدم نمایش اینجا را کلیک کنید</span></a>
                                 </div>
                             }
                         </div>

@@ -237,7 +237,7 @@ const Header = () => {
 
                                     <div>
                                         <h2>اطلاعیه برای شما</h2>
-                                            {userProfile && <Notification user={userProfile.userDetail?.id} />}
+                                            {userProfile.userDetail && <Notification user={userProfile.userDetail?.id} />}
                                     </div>
                                 </div>
                             </div>
@@ -285,12 +285,15 @@ const Header = () => {
 
                 <div className='block mt-4 space-x-3 space-x-reverse md:hidden'>
                     {
-                        userProfile ?
+                        userProfile.userDetail ?
                             <Link to={`/profile/${userProfile.userDetail?.username}`}>
                                 <div className='flex items-center'>
-                                    <svg class="h-10 w-10 ml-3 text-[#ac272e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
+                                    <div className='w-20 h-24'>
+                                        {
+                                            userProfile.userDetail?.avatar &&
+                                            <BigHead {...JSON.parse(userProfile.userDetail?.avatar)} />
+                                        }
+                                    </div>
                                     <div className='flex space-x-1 space-x-reverse'>
                                     {
                                         (userProfile.userDetail?.first_name == '' && userProfile.userDetail?.last_name == '') ?
@@ -350,7 +353,7 @@ const Header = () => {
 
                     <div className='relative mt-5'>
                     {
-                        userProfile ?
+                        userProfile.userDetail ?
                         <React.Fragment>
                             <hr className='border-[#690D11] '/>
                             
@@ -367,7 +370,7 @@ const Header = () => {
                                 <li className='text-lg'><Link to='/playlist?list=like'>کوییز های لایک شده</Link></li>
                                 <li className='text-lg'><Link to='/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
                                 <li className='text-lg'><Link to='/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
-                                <li className='text-lg'><Link to='/logout'>خروج</Link></li>
+                                <li><button onClick={() => handleLogout()}>خروج</button></li>
                             </ul>
                         </React.Fragment>
                         :
