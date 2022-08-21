@@ -94,6 +94,7 @@ class Quizzes(models.Model):
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
     background = models.ImageField(upload_to='QuizzesBackground', default='NotExist.jpg', help_text='background of playing quiz')
     fan_name = models.CharField(max_length=100, null=False, blank=False, default=None)
+    type = models.CharField(max_length=4, default='quiz')
     GIF20 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
     GIF40 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
     GIF60 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
@@ -122,7 +123,7 @@ class Quizzes_Pointy(models.Model):
     thumbnail = models.ImageField(upload_to='QuizzesThumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
     background = models.ImageField(upload_to='Quizzes', default='NotExist.jpg', help_text='background of playing quiz')
     publish = models.DateTimeField(default=datetime.datetime.now)
-
+    type = models.CharField(max_length=4, default='test')
     result_upTo_1st = models.IntegerField(null=False, blank=False, default=None)
     result_upTo_2nd = models.IntegerField(null=False, blank=False, default=None)
     result_upTo_3rd = models.IntegerField(blank=True, null=True, default=None)

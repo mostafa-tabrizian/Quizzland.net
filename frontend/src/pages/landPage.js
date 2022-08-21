@@ -155,7 +155,7 @@ const Index = () => {
                                 #1
                             </h2>
                         </div>
-                        <Link to={`/quiz/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
+                        <Link to={`/${content_monthly[0]?.type}/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
                         </Link>
                         <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
@@ -173,7 +173,7 @@ const Index = () => {
                                 جدیدترینِ کوییزلند
                             </h2>
                         </div>
-                        <Link to={`/quiz/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
+                        <Link to={`/${content_new[0]?.type}/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
                         </Link>
                         <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
