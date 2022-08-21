@@ -8,7 +8,6 @@ import { useCookies } from "react-cookie";
 import debounce from 'lodash.debounce'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { message } from 'antd';
-import { toString } from 'lodash';
 
 import axiosInstance from '../../components/axiosApi';
 import { log, getTheme } from '../../components/base'
@@ -46,7 +45,7 @@ const ProfileSetting = () => {
     const checkRecaptcha = async () => {
         const recaptchaResponse = await recaptchaRef.current.executeAsync()
 
-        return await axiosInstance.get(`/shop/api/recaptcha?r=${recaptchaResponse}`,)
+        return await axiosInstance.get(`/api/recaptcha?r=${recaptchaResponse}`,)
             .then(res => {
                 return res.data
             })
@@ -196,7 +195,7 @@ const ProfileSetting = () => {
                         <button onClick={saveSetting} className='px-6 py-2 my-auto mt-4 mr-4 border-2 border-green-600 h-fit rounded-xl'>‌ذخیره</button>
                         
                         <ReCAPTCHA
-                            sitekey="6LeoA0IbAAAAAEEqtkd4aCm-UceFee2uOi55vxaH"
+                            sitekey={process.env.RECAPTCHA_SITE_KEY}
                             size='invisible'
                             hl='fa'
                             theme="dark"

@@ -6,6 +6,7 @@ import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import axios from 'axios'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import axiosInstance from '../components/axiosApi';
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
@@ -38,7 +39,6 @@ const Quiz = (props) => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [SFXAllowed, setSFXAllowed] = useState()
-    const [popUpQuizSuggesterState, setPopUpQuizSuggester] = useState(false)
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
     const [SFXClick, setSFXClick] = useState(null)
@@ -52,6 +52,7 @@ const Quiz = (props) => {
 
     const result = useRef(null)
     const quizDetailRef = useRef(null)
+    const recaptchaRef = useRef(null)
 
     const [userProfile, userActions] = userStore()
 
@@ -60,7 +61,11 @@ const Quiz = (props) => {
         setLoadState(true)
         SFXLocalStorage()
         setWhichSFXfile()
-    }, [quizSlug])
+    }, quizSlug)
+
+    useEffect(() => {
+        checkRecaptcha()
+    }, []);
 
     useEffect(() => {
         fetchQuiz()
@@ -90,6 +95,18 @@ const Quiz = (props) => {
                 setSFXClick(new Audio('/static/sound/SFXClick.mp3'))
                 break
         }
+    }
+
+    const checkRecaptcha = async () => {
+        const recaptchaResponse = await recaptchaRef.current.executeAsync()
+
+        return await axiosInstance.get(`/api/recaptcha?r=${recaptchaResponse}`,)
+            .then(res => {
+                return res.data
+            })
+            .catch(err => {
+                log(err.response)
+            })
     }
 
     const scrollToTop = () => {
@@ -691,6 +708,14 @@ const Quiz = (props) => {
                     `}
                 </script>
             </Helmet>
+
+            <ReCAPTCHA
+                sitekey={process.env.RECAPTCHA_SITE_KEY}
+                size='invisible'
+                hl='fa'
+                theme="dark"
+                ref={recaptchaRef}
+            />
 
             <div>
                 {quiz?.title &&

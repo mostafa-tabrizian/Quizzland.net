@@ -48,6 +48,7 @@ module.exports = {
       "process.env": {
         'NODE_ENV': JSON.stringify("production"),  // development production
         'GOOGLE_LOGIN_CLIENT': JSON.stringify("687160730568-iff7uo436hvj36h61qsdenr0gng54oqn.apps.googleusercontent.com"),
+        'RECAPTCHA_SITE_KEY': JSON.stringify('6Lc4_pQhAAAAAJyor5AUd3eqaFEF6EMK3Z7dQxe3')
       },
     }),
 
