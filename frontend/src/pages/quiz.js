@@ -124,25 +124,26 @@ const Quiz = (props) => {
 
     const TutorialForHowToChangeTheQuestion = () => {
         notification.open({
-            message: 'راهنمایی برای تغییر سؤال',
             description:
-                'برای تغییر سوال، صفحه را بکشید.',
+                <div className='mt-8'>
+                    <h5 className='mb-5'>
+                        برای تغییر سوال، سوال را بکشید
+                    </h5>
+                </div>,
             duration: 0,
             style: {
-                'font-size': '25px',
-                'font-weight': '600',
-                'box-shadow': '0 0 20px #b52633',
-                'direction': 'rtl',
-                'padding-right': '4rem',
+                background: '#ac272e',
+                color: 'white',
+                borderRadius: '15px'
             },
-            className: 'rounded-lg'
+            onClose: close,
         });
     };
 
     const showLoginNotification = () => {
         notification.open({
             description:
-                <div>
+                <div className='mt-8'>
                     <h5 className='mb-5'>
                         برای لایک و کامنت کردن لازمه که وارد کوییزلند بشی.
                     </h5>
@@ -153,13 +154,10 @@ const Quiz = (props) => {
                 </div>,
             duration: 0,
             style: {
-                'font-size': '25px',
-                'font-weight': '600',
-                'box-shadow': '0 0 20px #b52633',
-                'direction': 'rtl',
-                'padding-right': '4rem',
+                background: '#ac272e',
+                color: 'white',
+                borderRadius: '15px'
             },
-            className: 'rounded-lg',
             onClose: close,
         });
     };

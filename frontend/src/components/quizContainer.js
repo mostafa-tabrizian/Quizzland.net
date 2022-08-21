@@ -4,6 +4,7 @@ import { message, notification } from 'antd'
 import debounce from 'lodash.debounce'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import LoginForm from '../components/user/loginForm';
 
 import { log, getTheme, replaceFunction } from './base'
 import axiosInstance from './axiosApi';
@@ -61,22 +62,13 @@ const QuizContainer = (props) => {
         } else {
             const key = `open${Date.now()}`;
             const btn = (
-                <div className='flex space-x-5 space-x-reverse'>
-                    <button className='px-4 py-2 border rounded-xl'>
-                        <a href='/login' className='hover:text-gray-300'>
-                            وارد میشوم
-                        </a>
-                    </button>
-                    <button onClick={() => notification.close(key)}>
-                        بی خیال
-                    </button>
+                <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                    <LoginForm />
                 </div>
             );
             notification.open({
-                message: '',
                 description:
-
-                    <h5>
+                    <h5 className='mt-8'>
                         برای اضافه کردن این کوییز به پلی لیست خود می‌بایست ابتدا وارد شوید
                     </h5>,
                 duration: 10,
