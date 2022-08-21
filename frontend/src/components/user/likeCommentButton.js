@@ -28,7 +28,7 @@ const LikeCommentButton = (props) => {
         const previousLikeCountValue = await previousLikeCount()
         const now = new Date().getTime()
         
-        await axios.put(`/api/${props.quizType}View/${props.quizId}/?timestamp=${now}`, {like: previousLikeCountValue - 1})
+        await axiosInstance.put(`/api/${props.quizType}View/${props.quizId}/?timestamp=${now}`, {like: previousLikeCountValue - 1})
             .then(res => {
                 setLikeState(false)
                 message.error('لایک شما حذف شد')
@@ -82,7 +82,7 @@ const LikeCommentButton = (props) => {
     const previousLikeCount = async () => {
         const now = new Date().getTime()
 
-        return await axios.get(`/api/${props.quizType}View/${props.quizId}/?timestamp=${now}&public=true`)
+        return await axiosInstance.get(`/api/${props.quizType}View/${props.quizId}/?timestamp=${now}&public=true`)
             .then((req) => {
                 return req.data.like
             })
@@ -114,7 +114,7 @@ const LikeCommentButton = (props) => {
         const previousLikeCountValue = await previousLikeCount()
         const now = new Date().getTime()
         
-        await axios.put(`/api/${props.quizType}View/${props.quizId}/?timestamp=${now}`, {like: previousLikeCountValue + 1})
+        await axiosInstance.put(`/api/${props.quizType}View/${props.quizId}/?timestamp=${now}`, {like: previousLikeCountValue + 1})
             .then(res => {
                 setLikeState(true)
                 message.success('لایک شما ثبت شد')

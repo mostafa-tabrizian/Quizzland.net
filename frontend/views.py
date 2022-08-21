@@ -97,6 +97,38 @@ def user_data(request, *args, **kwargs):
             return HttpResponse('DoesNotExist')
         except Exception as e:
             return HttpResponse(e)
+        
+def public_profile(request, *args, **kwargs):
+    if request.method == 'POST':
+        username = json.loads(request.body.decode('utf-8'))['username']
+        
+        try:
+            user = CustomUser.objects.get(username=username)
+            
+            # print('------------------------')
+            # print(user.most_played_categories.split('_'))
+            
+            return HttpResponse(
+                json.dumps(
+                    {
+                        'id': user.id,
+                        'username': user.username,
+                        'first_name': user.first_name,
+                        'last_name': user.last_name,
+                        'points': user.points,
+                        'avatar': str(user.avatar),
+                        'bio': user.bio,
+                        'points': user.points,
+                        # 'most_played_categories': user.most_played_categories,
+                        'played_history': len(user.played_history.split('_')) - 2,
+                        'liked_quizzes': len(user.liked_quizzes.split('_')) - 2,
+                    }   
+                )
+            )
+        except ObjectDoesNotExist:
+            return HttpResponse('DoesNotExist')
+        except Exception as e:
+            return HttpResponse(e)
     
 def checkAlreadyUserExists(username, email):
     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
-import { useCookies } from "react-cookie";
 
 import axiosInstance from '../../components/axiosApi';
 import LoadingScreen from '../../components/loadingScreen'

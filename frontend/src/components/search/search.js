@@ -93,7 +93,7 @@ const Search = (props) => {
                             searched_user.length ?
                             searched_user.map((user) => {
                                 return (
-                                    <Link to={`/profile/${user.username}`}>
+                                    <a href={`/profile/${user.username}`}>
                                         <li key={user.id}>
                                             <div className='flex items-end space-x-3 space-x-reverse'>
                                                 <div className='w-20 h-16'>
@@ -112,7 +112,7 @@ const Search = (props) => {
                                                 }
                                             </div>
                                         </li>
-                                    </Link>
+                                    </a>
                                 )
                             })
                             :

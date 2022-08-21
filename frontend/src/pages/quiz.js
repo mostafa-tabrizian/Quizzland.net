@@ -100,7 +100,7 @@ const Quiz = (props) => {
     const checkRecaptcha = async () => {
         const recaptchaResponse = await recaptchaRef.current.executeAsync()
 
-        return await axiosInstance.get(`/api/recaptcha?r=${recaptchaResponse}`,)
+        return await axios.get(`/api/recaptcha?r=${recaptchaResponse}`,)
             .then(res => {
                 return res.data
             })

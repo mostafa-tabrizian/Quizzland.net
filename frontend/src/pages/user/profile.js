@@ -4,10 +4,9 @@ import { Link, useLocation } from 'react-router-dom'
 import persianDate from 'persian-date'
 persianDate.toLocale('fa');
 import { BigHead } from "@bigheads/core";
+import axios from 'axios'
 
 import { log, getTheme } from '../../components/base'
-import axiosInstance from '../../components/axiosApi';
-import UserStore from '../../store/userStore';
 
 const Profile = () => {
     const [user, setUser] = useState(null)
@@ -17,20 +16,32 @@ const Profile = () => {
     
     const location = useLocation()
 
-    const [userProfile, userActions] = UserStore()
-
     useEffect(async() => {
-        setUser(userProfile.userDetail)
-        getUserCommentsLength()
+        fetchUserProfile()
         setLoaded(true)
         const theme = getTheme()
         setTheme(theme)
         document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}`
-    }, [location, userProfile])
+    }, [location])
 
-    const getUserCommentsLength = async () => {
+    useEffect(() => {
+        fetchUserCommentsLength()
+    }, [user]);
+
+    const fetchUserProfile = async () => {
+        const username = window.location.pathname.split('/')[2]
+        
+        await axios.post(`/api/profile`, {'username': username})
+            .then( async res => {
+                setUser(res.data)
+            })
+    }
+
+    const fetchUserCommentsLength = async () => {
         const now = new Date().getTime()
-        await axiosInstance.get(`/api/commentView/?submitter_related=${userProfile.userDetail.id}&timestamp=${now}`)
+        
+        user?.id &&
+        await axios.get(`/api/commentView/?submitter_related=${user?.id}&timestamp=${now}`)
             .then( async res => {
                 setUserCommentLength(res.data.length)
             })
@@ -45,14 +56,17 @@ const Profile = () => {
             </Helmet>
 
             {
-                user && loaded ?
+                user !== 'DoesNotExist' && loaded ?
                 <div className='mx-4 space-y-10 md:mx-auto md:w-4/5'>
     
                     <div className={`space-y-5 py-8 px-4 mb-20 shadow-[0_1px_10px_#690D11] border-4 ${theme == 'dark' ? 'bg-[#0e0202d4]' : 'bg-[#f3f3f3d4]'} border-[#690D11] rounded-lg`}>
                         <div>
                             <div className="flex items-center mb-5 space-x-2 space-x-reverse">
                                 <div className='w-[16rem] h-[16rem]'>
-                                    <BigHead {...JSON.parse(user?.avatar)} />
+                                    {
+                                        user?.avatar &&
+                                        <BigHead {...JSON.parse(user.avatar)} />
+                                    }
                                 </div>
                                 <h2>{user?.first_name }&nbsp;{user?.last_name}</h2>
                             </div>
@@ -75,7 +89,7 @@ const Profile = () => {
                                     </div> */}
                                     <div className="flex space-x-3 space-x-reverse">
                                         <dt>لایک ها</dt>
-                                        <dd>{user?.liked_quizzes.split('_').length - 2}</dd>
+                                        <dd>{user?.liked_quizzes}</dd>
                                     </div>
                                     <div className="flex space-x-3 space-x-reverse">
                                         <dt>کامنت ها</dt>
@@ -103,7 +117,7 @@ const Profile = () => {
                                 </div> */}
                                 <div className="flex space-x-3 space-x-reverse">
                                     <dt>لایک ها</dt>
-                                    <dd>{user?.liked_quizzes.split('_').length - 2}</dd>
+                                    <dd>{user?.liked_quizzes}</dd>
                                 </div>
                                 <div className="flex space-x-3 space-x-reverse">
                                     <dt>کامنت ها</dt>

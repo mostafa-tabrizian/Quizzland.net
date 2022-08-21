@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+
 import userStore from '../store/userStore';
 
+import axiosInstance from './axiosApi'
 import { log, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer';
 
@@ -27,7 +29,7 @@ const Suggestions = () => {
         const now = new Date().getTime()
         let userPreviousLiked
         
-        await axios.get(`/api/userView/?username=${userProfile.userDetail.username}&timestamp=${now}`)
+        await axiosInstance.get(`/api/userView/?username=${userProfile.userDetail.username}&timestamp=${now}`)
             .then(res => {
                 userPreviousLiked = res.data[0].liked_quizzes.split('_')
                 userPreviousLiked = userPreviousLiked.concat(res.data[0].played_history.split('_'))
