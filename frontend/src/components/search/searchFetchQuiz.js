@@ -24,6 +24,7 @@ const SearchFetch = async (value) => {
         filteredSearchValue.map(value => {
             if (
                 quiz.title.toLowerCase().split(' ').includes(value)||
+                quiz.slug.toLowerCase().split(' ').includes(value)||
                 quiz.subCategory.toLowerCase().split(' ').includes(value)||
                 quiz.tags.toLowerCase().split(' ').includes(value)
             ){

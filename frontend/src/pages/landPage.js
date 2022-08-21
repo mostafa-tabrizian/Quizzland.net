@@ -8,7 +8,7 @@ import axios from 'axios'
 import skeletonQuiz from '../components/skeletonQuiz';
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { log, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
+import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import LoadingScreen from '../components/loadingScreen'
 import Suggestions from '../components/suggestions';
@@ -118,10 +118,10 @@ const Index = () => {
                             <input
                                 type='text'
                                 className={`pl-4 pr-12 py-1 rounded-full text-right ${theme == 'dark' ? 'bg-[#060101]' : 'bg-[#f0f0f0]' } text-[0.9rem] w-[20rem] mt-5 mb-5`}
-                                placeholder={`کوییزت رو سریع تر پیدا کن`}
-                                onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
+                                placeholder={`چیزی مد نظرته؟ اینجا پیداش کن...`}
+                                onKeyPress={(e) => keyPressedOnInput(e)}
                             />
-                            <svg className='w-5 h-5 absolute top-[1.7rem] right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+                            <svg className='w-5 h-5 absolute top-[1.6rem] right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
                                 <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
                                 <path data-name="layer1" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round" />
                             </svg>

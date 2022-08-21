@@ -15,6 +15,7 @@ const SearchFetch = async (value) => {
         searchedWords.map(value => {
             if (
                 user.username.toLowerCase().includes(value)||
+                user.email.toLowerCase().includes(value)||
                 user.first_name.toLowerCase().includes(value)||
                 user.last_name.toLowerCase().includes(value)
             ){
@@ -30,7 +31,6 @@ const SearchFetch = async (value) => {
 
     const sliceSortResult = rankResults.slice(0, 100).sort((a, b) => b.score - a.score)
     
-    log(Object.keys(sliceSortResult).map(key => sliceSortResult[key].userDetail))
     return Object.keys(sliceSortResult).map(key => sliceSortResult[key].userDetail)
 }
  

@@ -21,6 +21,14 @@ export const getTheme = () => {
     return theme
 }
 
+export const keyPressedOnInput = (e) => {
+    if (e.key == 'Enter') {
+        const valueEnteredReadyToSearch = replaceFunction(e.target.value, ' ', '+')
+        valueEnteredReadyToSearch.length &&
+        window.open(`/search?q=${valueEnteredReadyToSearch}`, '_blank')
+    }
+}
+
 export const getCookie = (cname) => {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);

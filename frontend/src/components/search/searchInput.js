@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { log, getTheme, replaceFunction } from '../base'
+import { log, getTheme, replaceFunction, keyPressedOnInput } from '../base'
 import Search from './search'
 
 const SearchInput = () => {
@@ -30,9 +30,9 @@ const SearchInput = () => {
                     <input
                         type='text'
                         className='pl-4 pr-12 py-1 border border-[#8C939D] w-[20rem] rounded-full text-right bg-transparent text-[0.9rem] my-auto'
-                        placeholder={`کوییزت رو سریع تر پیدا کن`}
+                        placeholder={`کوییزلند رو بگرد...`}
                         onChange={inputChanged}
-                        onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${replaceFunction(e.target.value, ' ', '+')}`, '_blank') } }}
+                        onKeyPress={(e) => keyPressedOnInput(e)}
                     />
                     <svg className='absolute w-5 h-5 top-2 right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
                         <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#8C939D" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
@@ -40,7 +40,7 @@ const SearchInput = () => {
                     </svg>
                 </div>
 
-                <div class={`w-screen h-screen fixed left-0 top-[8rem] overflow-y-scroll ${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'} ${contentLoaded ? 'fadeIn' : 'fadeOut'}`}>    
+                <div class={`w-screen h-screen fixed left-0 top-[11rem] overflow-y-scroll ${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'} ${contentLoaded ? 'fadeIn' : 'fadeOut'}`}>    
                     <button
                         className={`
                             fixed right-4 top-2

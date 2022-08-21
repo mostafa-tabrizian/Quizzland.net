@@ -8,7 +8,7 @@ import { message } from 'antd';
 import { BigHead } from "@bigheads/core";
 import axios from 'axios';
 
-import { log, getTheme } from './base'
+import { log, getTheme, keyPressedOnInput } from './base'
 import Search from './search/searchInput'
 import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
@@ -336,8 +336,8 @@ const Header = () => {
                         type='text'
                         className={`text-center absolute top-1/4 w-[70%] bg-transparent border-b-2 border-[#690D11] text-[1.5rem] outlne-none ${theme == 'dark' ? 'text-white' : 'text-black'}`}
                         ref={mobileSearchInput}
-                        placeholder='کوییزت رو سریع تر پیدا کن'
-                        onKeyPress={e => { if (e.key == 'Enter') { window.open(`/search?q=${e.target.value}`, '_blank') } }}
+                        placeholder='کوییزلند رو بگرد...'
+                        onKeyPress={(e) => keyPressedOnInput(e)}
                     />
                 </div>
             </div>
