@@ -1,6 +1,7 @@
 import { Switch } from 'antd';
+import persianJs from "persianjs"
 
-import { makeDatePublishFormatForQuizDetail, getTheme } from '../base'
+import { makeDatePublishFormatForQuizDetail, getTheme, log } from '../base'
 
 const QuizHeader = (props) => {
     return (
@@ -34,7 +35,7 @@ const QuizHeader = (props) => {
                     props.contentLoaded &&
                     <div className='flex space-x-6'>
                         <h5>{makeDatePublishFormatForQuizDetail(props.quizDetail?.publish)}</h5>
-                        <h5>تعداد سوال ها: {props.questionsLength}</h5>
+                        <h5>تعداد سوال ها: {persianJs(props.questionsLength).englishNumber()._str}</h5>
                     </div>
                 }
             </div>
