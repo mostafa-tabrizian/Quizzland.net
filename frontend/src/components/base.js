@@ -5,17 +5,17 @@ export const log = (code) => {
 export const getTheme = () => {
     const theme = localStorage.getItem('theme')
 
-    if (theme == 'dark') {
-        document.documentElement.style.setProperty('--color', '#f0f0f0')
-        document.documentElement.style.setProperty('--placeholder', '#5d5d5d')
-        document.documentElement.style.setProperty('--brightness', 'brightness(0.4)')
-        document.documentElement.style.setProperty('--background', '#0e0202fa')
-    }
-    else if (theme == 'light') {
+    if (theme == 'light') {
         document.documentElement.style.setProperty('--color', 'black')
         document.documentElement.style.setProperty('--placeholder', 'black')
         document.documentElement.style.setProperty('--brightness', 'brightness(1)')
         document.documentElement.style.setProperty('--background', '#cbcbcbf5')
+    }
+    else {  // whatever other than light is black
+        document.documentElement.style.setProperty('--color', '#f0f0f0')
+        document.documentElement.style.setProperty('--placeholder', '#5d5d5d')
+        document.documentElement.style.setProperty('--brightness', 'brightness(0.4)')
+        document.documentElement.style.setProperty('--background', '#0e0202fa')
     }
 
     return theme

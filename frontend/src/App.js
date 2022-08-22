@@ -96,9 +96,11 @@ const App = () => {
                                 <Route path='/' exact component={Index} />
 
                                 <Route path='/login' component={Login} />
+
+                                <Route path='/profile/playlist' component={Playlist} />
+                                <Route path='/profile/setting' component={Setting} />
                                 <Route path='/profile/:user' component={Profile} />
-                                <Route path='/setting' component={Setting} />
-                                <Route path='/playlist' component={Playlist} />
+                                
 
                                 <Route path='/guide' component={Guide} />
 

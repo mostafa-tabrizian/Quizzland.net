@@ -69,7 +69,7 @@ const QuizContainer = (props) => {
             notification.open({
                 description:
                     <h5 className='mt-8'>
-                        برای اضافه کردن این کوییز به پلی لیست خود می‌بایست ابتدا وارد شوید
+                        برای اضافه کردن این کوییز به پلی لیست لازمه که اول وارد کوییزلند بشی.
                     </h5>,
                 duration: 10,
                 style: {

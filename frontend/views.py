@@ -105,9 +105,6 @@ def public_profile(request, *args, **kwargs):
         try:
             user = CustomUser.objects.get(username=username)
             
-            # print('------------------------')
-            # print(user.most_played_categories.split('_'))
-            
             return HttpResponse(
                 json.dumps(
                     {
@@ -176,9 +173,9 @@ def user_update(request, *args, **kwargs):
                 user.bio = bio
             gender = payload['gender']
             if len(gender):
-                user.gender = gender
+                user.gender = gender 
             birthdayData = payload['birthdayData']
-            if birthdayData != 'undefined':
+            if len(birthdayData):
                 user.birthday_date = birthdayData.replace('/', '-')
             avatar = payload['avatar']
             if avatar != 'null':

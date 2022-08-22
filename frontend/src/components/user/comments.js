@@ -41,7 +41,6 @@ const Comments = (props) => {
         }
 
         if (ExplicitWords(comment)) {
-            log('THIS COMMENT IS SUS!!!!!')
             verifyState = false
         }
         
@@ -106,7 +105,10 @@ const Comments = (props) => {
                             <Link to={`/profile/${comment.submitter_related?.username}`}>
                                 <div className='flex space-x-3 space-x-reverse'>
                                     <div className='w-12 h-12'>
-                                        <BigHead {...JSON.parse(comment.submitter_related?.avatar)} />
+                                        {
+                                            comment.submitter_related?.avatar &&
+                                            <BigHead {...JSON.parse(comment.submitter_related.avatar)} />
+                                        }
                                     </div>
                                     <div>
                                         <div className={`flex space-x-2 space-x-reverse ${theme == 'dark' ? 'text-[#ffeaeb]' : 'text-[#060101]'}`}>

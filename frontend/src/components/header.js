@@ -225,10 +225,10 @@ const Header = () => {
                                     <div>
                                         <ul className='flex flex-col'>
                                             <li><Link to={`/profile/${userProfile.userDetail?.username}`}>پروفایل شما</Link></li>
-                                            <li><Link to='/setting'>تنظیمات اکانت</Link></li>
-                                            <li><Link to='/playlist?list=like'>کوییز های لایک شده</Link></li>
-                                            <li><Link to='/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
-                                            <li><Link to='/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
+                                            <li><Link to='/profile/setting'>تنظیمات اکانت</Link></li>
+                                            <li><Link to='/profile/playlist?list=like'>کوییز های لایک شده</Link></li>
+                                            <li><Link to='/profile/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
+                                            <li><Link to='/profile/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
                                             <li><button onClick={() => handleLogout()}>خروج</button></li>
                                         </ul>
                                     </div>
@@ -366,10 +366,10 @@ const Header = () => {
                             
                             <ul className='flex flex-col mt-5 space-y-5'>
                                 <li className='text-lg'><Link to={`/profile/${userProfile.userDetail?.username}`}>پروفایل شما</Link></li>
-                                <li className='text-lg'><Link to='/setting'>تنظیمات اکانت</Link></li>
-                                <li className='text-lg'><Link to='/playlist?list=like'>کوییز های لایک شده</Link></li>
-                                <li className='text-lg'><Link to='/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
-                                <li className='text-lg'><Link to='/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
+                                <li className='text-lg'><Link to='/profile/setting'>تنظیمات اکانت</Link></li>
+                                <li className='text-lg'><Link to='/profile/playlist?list=like'>کوییز های لایک شده</Link></li>
+                                <li className='text-lg'><Link to='/profile/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
+                                <li className='text-lg'><Link to='/profile/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
                                 <li><button onClick={() => handleLogout()}>خروج</button></li>
                             </ul>
                         </React.Fragment>

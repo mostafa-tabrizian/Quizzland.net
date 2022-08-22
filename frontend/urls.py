@@ -18,10 +18,10 @@ urlpatterns = [
     path("api/user/notifications", user_notification),
     
     path('login', index),
-    path('register', index),
+    
+    path('profile/setting', index),
+    path('profile/playlist', index),
     path('profile/<user>', index),
-    path('setting', index),
-    path('playlist', index),
     
     path('', index),
     path('guide', index),

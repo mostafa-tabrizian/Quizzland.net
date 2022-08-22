@@ -21,7 +21,6 @@ const Notifications = (props) => {
         
         await axiosInstance.post(`/api/user/notifications`, payload)
             .then(res => {
-                log(res.data)
                 setNotifications(res.data)
             })
             .catch(err => {

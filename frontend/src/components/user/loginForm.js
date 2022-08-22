@@ -16,8 +16,8 @@ const LoginForm = (props) => {
 
     const { signOut } = useGoogleLogout({
         clientId: process.env.GOOGLE_LOGIN_CLIENT,
-        onLogoutSuccess: () => {log('google 1')},
-        onFailure: () => {log('google 2')},
+        onLogoutSuccess: () => {log('signOut success');},
+        onFailure: () => {log('signOut failure');},
     })
     
     useEffect(() => {
@@ -43,8 +43,9 @@ const LoginForm = (props) => {
         try {
             await axios.post('/api/blacklist/', {"refresh_token": cookies.USER_REFRESH_TOKEN,})
                 .catch(err => {
-                    log(err)
-                    log(err.response)
+                    log('err:logout')
+                    // log(err)
+                    // log(err.response)
                 })
     
             removeCookie('USER_ACCESS_TOKEN', {path: '/'})
@@ -123,16 +124,16 @@ const LoginForm = (props) => {
                 })
                 .catch(err => {
                     log('get auth error')
-                    log(err)
-                    log(err.response)
+                    // log(err)
+                    // log(err.response)
                 })
         }
     }
 
     const googleLoginFailure = (res) => {
         message.error("ورود/ثبت نام شما به مشکل برخورد. لطفا دوباره تلاش کنید")
-        log('fail login, res: ')
-        log(res)
+        // log('fail login, res: ')
+        // log(res)
     }
 
     return (

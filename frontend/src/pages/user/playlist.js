@@ -6,6 +6,7 @@ import axiosInstance from '../../components/axiosApi';
 import LoadingScreen from '../../components/loadingScreen'
 import QuizContainer from '../../components/quizContainer'
 import skeletonQuiz from '../../components/skeletonQuiz';
+import LoginForm from '../../components/user/loginForm';
 
 import { log, getTheme, takeParameterFromUrl } from '../../components/base'
 import UserStore from '../../store/userStore';
@@ -16,6 +17,7 @@ const QuizHistory = () => {
     const [content, setContent] = useState([])
     const [title, setTitle] = useState(null)
     const [lowTitle, setLowTitle] = useState(null)
+    const [messageForEmpty, setMessageForEmpty] = useState(null)
 
     const location = useLocation();
     
@@ -30,8 +32,8 @@ const QuizHistory = () => {
     }, [location, userProfile])
 
     const fetchContent = async () => {
-        if (userProfile.userDetail == false) {
-            window.location.href = '/login'
+        if (userProfile.userDetail == false || userProfile.userDetail == null) {
+            return
         }
         
         let playlist
@@ -41,16 +43,19 @@ const QuizHistory = () => {
                 playlist = userProfile.userDetail.liked_quizzes.split('_')
                 setTitle('کوییز های لایک شده')
                 setLowTitle('Your Liked Quizzes')
+                setMessageForEmpty('هیچ کوییزی رو تا حالا لایک نکردی!')
                 break
             case 'history':
                 playlist = userProfile.userDetail.played_history.split('_')
                 setTitle('تاریخچه کوییزهای شما')
                 setLowTitle('Your History')
+                setMessageForEmpty('هیچ کوییزی رو تا حالا انجام ندادی!')
                 break
             case 'watch':
                 playlist = userProfile.userDetail.watch_list.split('_')
                 setTitle('کوییز های پلی لیست شما')
                 setLowTitle('Your Playlist')
+                setMessageForEmpty('هیچ کوییزی رو اضافه نکردی!')
         }
         
         const now = new Date().getTime()
@@ -92,33 +97,47 @@ const QuizHistory = () => {
                 <meta name="keywords" content="کوییز, بهترین کوییز ها, جدیدترین کوییز ها, بهترین تست ها, جدیدترین تست ها, کوییزلند" />
             </Helmet>
 
-            {/* <div className='adverts adverts__left'>
-                <div id='mediaad-DLgb'></div>
-                <div id="pos-article-display-26094"></div>
-            </div> */}
+            <div className='mx-4 md:mx-auto md:w-4/5 min-h-[60vh] flex'>
+                {
+                    userProfile.userDetail ?
+                    <div>
+                        {/* <div className='adverts adverts__left'>
+                            <div id='mediaad-DLgb'></div>
+                            <div id="pos-article-display-26094"></div>
+                        </div> */}
 
-            <div className='mb-10'>
-                <h3 className='lowTitle'>{lowTitle}</h3>
-                <h3 className='title'>{title}</h3>
+                        <div className='mb-10'>
+                            <h3 className='lowTitle'>{lowTitle}</h3>
+                            <h3 className='title'>{title}</h3>
+                        </div>
+
+                        <div className='w-3/4 mx-auto'>
+                            {skeletonQuiz(contentLoaded)}
+                        </div>
+
+                        {
+                            (!content.length  && document.readyState !== 'loading') ?
+                            <h1 className='mt-10 mb-[25rem] text-center'>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
+                            :
+                        <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
+                                <QuizContainer quizzes={content} />
+                            </ul>    
+                        }
+
+                        {/* Adverts */}
+
+                        {/* Adverts */}
+                        {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
+                    </div>
+                    :
+                    <div className='m-auto space-y-5 text-center md:shadow-[0_0_10px_#690D11] md:p-8 rounded-lg'>
+                        <h1 className='title'>شما میبایست ابتدا <span className='text-red-600 title'>وارد</span> شوید.</h1>
+                        <div>
+                            <LoginForm/>
+                        </div>
+                    </div>
+                }
             </div>
-
-            <div className='w-3/4 mx-auto'>
-                {skeletonQuiz(contentLoaded)}
-            </div>
-
-            {
-                (!content.length  && document.readyState !== 'loading') ?
-                <h1 className='mt-10 mb-[25rem] text-center'>هیچ کوییزی پیدا نشد <span className='text-[2.5rem]'>😕</span></h1>
-                :
-            <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
-                    <QuizContainer quizzes={content} />
-                </ul>    
-            }
-
-            {/* Adverts */}
-
-            {/* Adverts */}
-            {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
 
         </React.Fragment>
     );

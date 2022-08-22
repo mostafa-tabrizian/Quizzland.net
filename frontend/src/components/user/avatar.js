@@ -220,8 +220,6 @@ const Avatar = (props) => {
         break
       case 'faceMask':
         setAvatarOptions(current => {
-          log(current.faceMask)
-          log(current.faceMask ? false : true)
           updated = {
             ...current,
             faceMask: current.faceMask ? false : true

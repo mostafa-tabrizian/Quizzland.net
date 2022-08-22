@@ -17,8 +17,8 @@ class Categories(models.Model):
         return str(self.title_english)
     
 Gender = (
-    ('Male', 'male'),
-    ('Female', 'female')
+    ('male', 'Male'),
+    ('female', 'Female')
 )    
 
 class CustomUser(AbstractUser):

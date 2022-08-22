@@ -9,6 +9,7 @@ import debounce from 'lodash.debounce'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { message } from 'antd';
 
+import LoginForm from '../../components/user/loginForm'
 import axiosInstance from '../../components/axiosApi';
 import { log, getTheme } from '../../components/base'
 import Avatar from '../../components/user/avatar'
@@ -55,6 +56,8 @@ const ProfileSetting = () => {
     }
 
     const saveSetting = async () => {
+        message.loading('')
+
         const updatedUsername =  usernameRef.current.value
         const updatedFirstName = firstNameRef.current.value
         const updatedLastName = lastNameRef.current.value
@@ -63,7 +66,7 @@ const ProfileSetting = () => {
         const updatedAvatarOption = JSON.stringify(avatarOptions)
 
         const dateRefValue = birthdayDateRef.current.querySelector('input').value
-        let updatedBirthdayDate
+        let updatedBirthdayDate = ''
         
         if (dateRefValue.length) {
             const farsiPersianDateObject = persianJs(dateRefValue).persianNumber()
@@ -72,7 +75,7 @@ const ProfileSetting = () => {
             updatedBirthdayDate =  persianConvertEnglish
         }
 
-        if (!updatedUsername.length && !updatedFirstName.length && !updatedLastName.length && !updatedBio.length && updatedGender == 'null' && !dateRefValue.length.length && avatarOptions == null) {
+        if (!updatedUsername.length && !updatedFirstName.length && !updatedLastName.length && !updatedBio.length && !updatedBirthdayDate.length && updatedGender == 'null' && !dateRefValue.length.length && avatarOptions == null) {
             return message.warning('برای ذخیره، حداقل یک ورودی را تغییر دهید.')
         }
 
@@ -83,6 +86,7 @@ const ProfileSetting = () => {
         debounce(
             async (updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate, updatedAvatarOption) => {
                 if (await checkRecaptcha()) {
+                    
                     const payload = {
                         accessToken: cookies.USER_ACCESS_TOKEN,
                         username: updatedUsername,
@@ -110,10 +114,12 @@ const ProfileSetting = () => {
                             }
                         })
                         .catch(err => {
-                            message.error('زمان شما برای ایجاد تغییر منقضی شده است. لطفا پس از ریلود کردن صفحه مجدد تلاش کنید.', 10)
+                            message.error('تغییر پروفایل به مشکل برخورد. لطفا مجددا امتحان کنید.', 4)
+                            log(err)
+                            log(err.response)
                             setTimeout(() => {
                                 window.location.reload()
-                            }, 10_000);
+                            }, 3_500);
                         })
                 }
             }
@@ -125,85 +131,94 @@ const ProfileSetting = () => {
 
             <Helmet>
                 <title>کوییزلند | پروفایل</title>
-                <link rel='canonical' to='https://www.quizzland.net/setting' />
+                <link rel='canonical' to='https://www.quizzland.net/profile/setting' />
             </Helmet>
 
-            <div className='mx-4 md:mx-auto md:w-4/5'>
-                <div>
-                    <h1 className='mb-3'>
-                        اطلاعات پروفایل        
-                    </h1>
-                    <div className='py-2 px-2 border-[#690D11] space-y-5 border-4 rounded'>
-                        {user && <Avatar user={user} setAvatarOptions={setAvatarOptions} />}
-                        <div className=''>
+            <div className='mx-4 md:mx-auto md:w-4/5 min-h-[60vh] flex'>
+                { user ?
+                    <div>
+                        <h1 className='mb-3'>
+                            اطلاعات پروفایل        
+                        </h1>
+                        <div className='py-2 px-2 border-[#690D11] space-y-5 border-4 rounded'>
+                            {user && <Avatar user={user} setAvatarOptions={setAvatarOptions} />}
                             <div className=''>
-                                <h3>نام کاربری</h3>
-                                <input type="text" placeholder={user?.username} ref={usernameRef} />
-                            </div>
-                        </div>
-                        <div className='space-y-5 md:grid md:grid-cols-2'>
-                            <div>
-                                <h3>نام</h3>
-                                <input type="text" placeholder={user?.first_name} ref={firstNameRef} />
-                            </div>
-                            <div>
-                                <h3>نام خانوادگی</h3>
-                                <input type="text" placeholder={user?.last_name} ref={lastNameRef} />
-                            </div>
-                            <div>
-                                <h3>درباره من</h3>
-                                <textarea type="text" cols="40" rows='5' placeholder={user?.bio} ref={bioRef} />
-                            </div>
-                            <div>
-                                <h3>تاریخ تولد</h3>
-                                <div>
-                                    <figure>
-                                        <DatePicker
-                                            value={birthdayDatePicker}
-                                            onChange={setBirthdayDatePicker}
-                                            format="YYYY/MM/DD"
-                                            minDate="1300/01/01"
-                                            maxDate='1401/01/01'
-                                            calendar={persian}
-                                            locale={persian_fa}
-                                            inputClass={'w-[10rem] rounded-lg translate-x-[-4rem] text-black pr-4'}
-                                            ref={birthdayDateRef}
-                                        />
-                                        <figcaption>
-                                            تاریخ تولد شما به هیچ کس نمایان نخواهد بود.
-                                        </figcaption>
-                                    </figure>
+                                <div className=''>
+                                    <h3>نام کاربری</h3>
+                                    <input type="text" className='bg-transparent border-b border-red-900' placeholder={user?.username} ref={usernameRef} />
                                 </div>
                             </div>
-                            <div>
-                                <h3>جنسیت</h3>
+                            <div className='space-y-5 md:grid md:grid-cols-2'>
                                 <div>
-                                    <figure>
-                                        <select name="genders" ref={gendersRef}>
-                                            <option value='null' selected>انتخاب کنید</option>
-                                            <option value='male'>مذکر</option>
-                                            <option value='female'>مونث</option>
-                                        </select>
-                                        <figcaption>
-                                            جنسیت شما به هیچ کس نمایان نخواهد بود.
-                                        </figcaption>
-                                    </figure>
+                                    <h3>نام</h3>
+                                    <input type="text" className='bg-transparent border-b border-red-900' placeholder={user?.first_name} ref={firstNameRef} />
+                                </div>
+                                <div>
+                                    <h3>نام خانوادگی</h3>
+                                    <input type="text" className='bg-transparent border-b border-red-900' placeholder={user?.last_name} ref={lastNameRef} />
+                                </div>
+                                <div>
+                                    <h3>درباره من</h3>
+                                    <textarea type="text" className='bg-transparent border border-red-900 rounded-md' cols="40" rows='5' placeholder={user?.bio} ref={bioRef} />
+                                </div>
+                                <div>
+                                    <h3>تاریخ تولد</h3>
+                                    <div>
+                                        <figure>
+                                            <DatePicker
+                                                value={birthdayDatePicker}
+                                                onChange={setBirthdayDatePicker}
+                                                format="YYYY/MM/DD"
+                                                minDate="1300/01/01"
+                                                maxDate='1401/01/01'
+                                                calendar={persian}
+                                                locale={persian_fa}
+                                                inputClass={'w-[10rem] translate-x-[-4rem] text-black pr-4 bg-transparent border-b border-red-900'}
+                                                ref={birthdayDateRef}
+                                            />
+                                            <figcaption>
+                                                تاریخ تولد شما به هیچ کس نمایان نخواهد بود.
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3>جنسیت</h3>
+                                    <div>
+                                        <figure>
+                                            <select name="genders" ref={gendersRef}>
+                                                <option value='null' selected>انتخاب کنید</option>
+                                                <option value='male'>آقا</option>
+                                                <option value='female'>خانم</option>
+                                            </select>
+                                            <figcaption>
+                                                جنسیت شما به هیچ کس نمایان نخواهد بود.
+                                            </figcaption>
+                                        </figure>
+                                    </div>
                                 </div>
                             </div>
+                            
+                            <button onClick={saveSetting} className='px-6 py-2 my-auto mt-4 mr-4 border-2 border-green-600 h-fit rounded-xl'>‌ذخیره</button>
+                            
+                            <ReCAPTCHA
+                                sitekey={process.env.RECAPTCHA_SITE_KEY}
+                                size='invisible'
+                                hl='fa'
+                                theme="dark"
+                                ref={recaptchaRef}
+                            />
+                            
                         </div>
-                        
-                        <button onClick={saveSetting} className='px-6 py-2 my-auto mt-4 mr-4 border-2 border-green-600 h-fit rounded-xl'>‌ذخیره</button>
-                        
-                        <ReCAPTCHA
-                            sitekey={process.env.RECAPTCHA_SITE_KEY}
-                            size='invisible'
-                            hl='fa'
-                            theme="dark"
-                            ref={recaptchaRef}
-                        />
-                        
                     </div>
-                </div>
+                    :
+                    <div className='m-auto space-y-5 text-center md:shadow-[0_0_10px_#690D11] md:p-8 rounded-lg'>
+                        <h1 className='title'>شما میبایست ابتدا <span className='text-red-600 title'>وارد</span> شوید.</h1>
+                        <div>
+                            <LoginForm/>
+                        </div>
+                    </div>
+                }
             </div>
 
         </React.Fragment>

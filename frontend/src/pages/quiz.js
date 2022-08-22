@@ -98,11 +98,14 @@ const Quiz = (props) => {
     }
 
     const checkRecaptcha = async () => {
+        
         const recaptchaResponse = await recaptchaRef.current.executeAsync()
 
         return await axios.get(`/api/recaptcha?r=${recaptchaResponse}`,)
             .then(res => {
-                return res.data
+                if (res.data != 'True') {
+                    message.error('block user because not human')
+                }
             })
             .catch(err => {
                 log(err.response)
@@ -145,7 +148,7 @@ const Quiz = (props) => {
             description:
                 <div className='mt-8'>
                     <h5 className='mb-5'>
-                        برای لایک و کامنت کردن لازمه که وارد کوییزلند بشی.
+                        برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
                     </h5>
 
                     <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
