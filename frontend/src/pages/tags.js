@@ -27,6 +27,11 @@ const SearchMoreResult = () => {
         setSearchValue(window.location.pathname.split('/')[2])
     }, [location]);
 
+    useEffect(() => {
+        const theme = getTheme()
+        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}`
+    }, []);
+
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')
 
     const searchHandler = async (value) => {
@@ -56,7 +61,7 @@ const SearchMoreResult = () => {
                     <div id="pos-article-display-26094"></div>
                 </div> */}
 
-                <h3 className='title'>{searchValueWithOutSign}</h3>
+                <h3 className='title mb-5'>{searchValueWithOutSign}</h3>
 
                 {skeletonQuiz(contentLoaded)}
 
@@ -115,19 +120,14 @@ const SearchMoreResult = () => {
                 </div>
 
                 <ul className="flex flex-wrap quizContainer flex-ai-fe justify-right">
-
-
                     {
+                        searched_content.length ?
                         <QuizContainer quizzes={searched_content} bgStyle='trans' />
-                    }
-
-                    {
-                        searched_content.length == 0 && !contentLoaded &&
+                        :
                         <h1 className='w-11/12 text-3xl text-center mb-[50vh] '>
                             متاسفانه هیچ چیزی پیدا نشد 😥
                         </h1>
                     }
-
                 </ul>
 
                 {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}

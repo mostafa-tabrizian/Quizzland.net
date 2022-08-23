@@ -604,6 +604,7 @@ const Quiz = (props) => {
                             <Link
                                 to={`/tags/${replaceFunction(tag, ' ', '+')}`}
                                 rel='tag'
+                                target='_blank'
                             >
                                 {tag}
                             </Link>

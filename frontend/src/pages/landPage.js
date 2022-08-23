@@ -6,8 +6,6 @@ import { Carousel } from 'antd';
 import axios from 'axios'
 
 import skeletonQuiz from '../components/skeletonQuiz';
-import Header from '../components/header'
-import Footer from '../components/footer'
 import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import LoadingScreen from '../components/loadingScreen'
