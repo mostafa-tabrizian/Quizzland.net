@@ -1613,6 +1613,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-repeat: no-repeat;
 }
 
+.stroke-cyan-500 {
+  stroke: #06b6d4;
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;

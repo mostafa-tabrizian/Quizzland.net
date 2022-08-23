@@ -97,7 +97,7 @@ const QuizHistory = () => {
                 <meta name="keywords" content="کوییز, بهترین کوییز ها, جدیدترین کوییز ها, بهترین تست ها, جدیدترین تست ها, کوییزلند" />
             </Helmet>
 
-            <div className='mx-4 md:mx-auto md:w-4/5 min-h-[60vh] flex'>
+            <div className={`mx-4 md:mx-auto md:w-4/5 min-h-[60vh] ${userProfile.userDetail ? '' : 'flex' }`}>
                 {
                     userProfile.userDetail ?
                     <div>

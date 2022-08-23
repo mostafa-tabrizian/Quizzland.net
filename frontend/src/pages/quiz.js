@@ -507,7 +507,7 @@ const Quiz = (props) => {
                             {
                                 (question.question !== null && question.question !== '') &&
                                 <div id='question_background' className='py-1 rounded-xl flex overflow-auto items-center h-[17rem]' >
-                                    <div className='absolute z-10 top-6 right-7 md:right-3 mix-blend-hard-light'>
+                                    <div className='absolute z-10 top-6 right-7 md:right-3 questionNumberShadow mix-blend-hard-light'>
                                         {questions.indexOf(question) + 1}
                                     </div>
                                     <p className='p-3 text-[2rem] w-full quiz_question mix-blend-hard-light text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
@@ -517,6 +517,9 @@ const Quiz = (props) => {
                             {
                                 !question?.question_img?.includes('NotExist') &&
                                 <div className='my-3'>
+                                    <div className='absolute z-10 top-6 right-7 md:right-3 questionNumberShadow mix-blend-hard-light'>
+                                        {questions.indexOf(question) + 1}
+                                    </div>
                                     <LazyLoadImage
                                         src={question?.question_img}
                                         alt={question.title}

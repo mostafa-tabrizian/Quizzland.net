@@ -8,9 +8,11 @@
     margin-bottom: 0.3rem;
 }
 
-.quiz {
-    
+.questionNumberShadow {
+    text-shadow: 0 0 4px black;
+}
 
+.quiz {
     &_question {
         font-family: IRANYekanBold, sans-serif, serif !important;
     }

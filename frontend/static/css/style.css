@@ -894,6 +894,10 @@ hr {
   margin-bottom: 0.3rem;
 }
 
+.questionNumberShadow {
+  text-shadow: 0 0 4px black;
+}
+
 .quiz_question {
   font-family: IRANYekanBold, sans-serif, serif !important;
 }

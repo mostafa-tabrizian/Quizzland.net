@@ -134,7 +134,7 @@ const ProfileSetting = () => {
                 <link rel='canonical' to='https://www.quizzland.net/profile/setting' />
             </Helmet>
 
-            <div className='mx-4 md:mx-auto md:w-4/5 min-h-[60vh] flex'>
+            <div className={`mx-4 md:mx-auto md:w-4/5 min-h-[60vh] ${user ? '' : 'flex' }`}>
                 { user ?
                     <div>
                         <h1 className='mb-3'>
@@ -159,7 +159,7 @@ const ProfileSetting = () => {
                                 </div>
                                 <div>
                                     <h3>درباره من</h3>
-                                    <textarea type="text" className='bg-transparent border border-red-900 rounded-md' cols="40" rows='5' placeholder={user?.bio} ref={bioRef} />
+                                    <textarea type="text" className='p-2 bg-transparent border border-red-900 rounded-md' cols="40" rows='5' placeholder={user?.bio} ref={bioRef} />
                                 </div>
                                 <div>
                                     <h3>تاریخ تولد</h3>
