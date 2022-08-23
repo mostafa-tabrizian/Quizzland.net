@@ -42,29 +42,28 @@ const QuizHeader = (props) => {
 
             {
                 props.contentLoaded &&
-                <div className='flex space-x-5 translate-x-[-3rem]'>
-                    <div onClick={() => { props.setAutoQuestionChanger(props.autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
-                        {/* <button className="quiz__autoQuestionChangerSwitch__btn btn">
-                            <div className={`quiz__autoQuestionChangerSwitch__innerBtn ${autoQuestionChanger ? 'quiz__autoQuestionChangerSwitch__innerBtn__switched' : ''} relative`}></div>
-                        </button> */}
+                <div className='flex space-x-8 translate-x-[-3rem]'>
+                    <div onClick={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
                         <div className='mt-3'>
                             <Switch
-                                checkedChildren='خودکار'
-                                unCheckedChildren='دستی'
+                                checkedChildren='تغییر خودکار'
+                                unCheckedChildren='تغییر دستی'
                                 className={`${props.autoQuestionChanger ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                onChange={() => { props.setAutoQuestionChanger(props.autoQuestionChanger ? false : true) }}
-                                title='تغییر سوال: با انتخاب گزینه، در صورت خودکار بودن، پس از حداقل 1.5 حداکثر 5.5 ثانیه به سوال بعدی منتقل می شوید'
+                                onChange={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }}
+                                title='در صورت خودکار بودن، پس از 1.5 الی 5.5 ثانیه برحسب نوع سوال، به سوال بعدی منتقل می شوید'
+                                checked={props.autoQuestionChanger ? true : false}
                             />
                         </div>
                     </div>
-                    <div onClick={() => { props.SFXController() }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
+                    <div onClick={() => { props.SFXController(props.SFXAllowed ? false : true) }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
                         <div className='mt-3'>
                             <Switch
-                                checkedChildren='فرض صدا'
-                                uncheckedChildren='فرض صدا'
-                                className={`${localStorage.getItem('SFXAllowed') === 'true' ? 'bg-red-800' : 'bg-zinc-500'}`}
-                                onChange={() => { props.SFXController() }}
-                                title='فرض صدا های پس از پاسخ به سوال'
+                                checkedChildren='افکت فعال'
+                                unCheckedChildren='افکت غیرفعال'
+                                className={`${props.SFXAllowed ? 'bg-red-800' : 'bg-zinc-500'}`}
+                                onChange={() => { props.SFXController(props.SFXAllowed ? false : true) }}
+                                title='فرض افکت پس از پاسخ به سوال'
+                                checked={props.SFXAllowed ? true : false}
                             />
                         </div>
                     </div>

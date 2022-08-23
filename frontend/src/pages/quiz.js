@@ -6,7 +6,7 @@ import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import axios from 'axios'
-import ReCAPTCHA from 'react-google-recaptcha'
+// import ReCAPTCHA from 'react-google-recaptcha'
 
 import axiosInstance from '../components/axiosApi';
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
@@ -30,7 +30,7 @@ const Quiz = (props) => {
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [correctAnswerOption, setCorrectAnswerOption] = useState(0)
     const [wrongAnswerOption, setWrongAnswerOption] = useState(0)
-    const [autoQuestionChanger, setAutoQuestionChanger] = useState(false)
+    const [autoQuestionChanger, setAutoQuestionChanger] = useState(localStorage.getItem('autoQuestionChanger') == 'true')
     const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [ableToSelectOption, setAbleToSelectOption] = useState(true)
     const [quizEnded, setQuizEnded] = useState(false)
@@ -38,7 +38,7 @@ const Quiz = (props) => {
     const [quizSlug, setQuizSlug] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
-    const [SFXAllowed, setSFXAllowed] = useState()
+    const [SFXAllowed, setSFXAllowed] = useState(localStorage.getItem('SFXAllowed') == 'true')
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
     const [SFXClick, setSFXClick] = useState(null)
@@ -52,37 +52,33 @@ const Quiz = (props) => {
 
     const result = useRef(null)
     const quizDetailRef = useRef(null)
-    const recaptchaRef = useRef(null)
+    // const recaptchaRef = useRef(null)
 
     const [userProfile, userActions] = userStore()
 
     useEffect(() => {
         scrollToTop()
         setLoadState(true)
-        SFXLocalStorage()
-        setWhichSFXfile()
     }, quizSlug)
-
-    useEffect(() => {
-        checkRecaptcha()
-    }, []);
-
+    
     useEffect(() => {
         fetchQuiz()
     }, quizSlugReplacedWithHyphen)
-
+    
     useEffect(() => {
         const question_background = document.querySelector('#question_background')
         question_background && (document.querySelectorAll('#question_background').forEach((q) => q.style = `background: ${quiz?.question_background}`))
         document.querySelector('body').style = `background: #060101`
     })
-
+    
     useEffect(() => {
+        
         const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
         setQuizSlug(slug)
         setQuizSlugReplacedWithHyphen(slug)
         const theme = getTheme()
         setTheme(theme)
+        setWhichSFXfile()
     }, [location]);
 
     const setWhichSFXfile = () => {
@@ -97,32 +93,28 @@ const Quiz = (props) => {
         }
     }
 
-    const checkRecaptcha = async () => {
-        
-        const recaptchaResponse = await recaptchaRef.current.executeAsync()
+    // const checkRecaptcha = async () => {
+    //     const recaptchaResponse = await recaptchaRef.current.executeAsync()
 
-        return await axios.get(`/api/recaptcha?r=${recaptchaResponse}`,)
-            .then(res => {
-                if (res.data != 'True') {
-                    message.error('block user because not human')
-                }
-            })
-            .catch(err => {
-                log(err.response)
-            })
-    }
+    //     return await axios.get(`/api/recaptcha?r=${recaptchaResponse}`,)
+    //         .then(res => {
+    //             log(res)
+                
+    //             if (res.data != 'True') {
+    //                 message.error('block user because not human')
+    //                 return false
+    //             } else {
+                    
+    //                 return true
+    //             }
+    //         })
+    //         .catch(err => {
+    //             log(err.response)
+    //         })
+    // }
 
     const scrollToTop = () => {
         document.querySelector("body").scrollTo(0, 0)
-    }
-
-    const SFXLocalStorage = () => {
-        if (localStorage.getItem('SFXAllowed')) {
-            setSFXAllowed(localStorage.getItem('SFXAllowed'))
-        } else {
-            localStorage.setItem('SFXAllowed', 'true')
-            setSFXAllowed('true')
-        }
     }
 
     const TutorialForHowToChangeTheQuestion = () => {
@@ -249,10 +241,9 @@ const Quiz = (props) => {
         }
     }
 
-    const playSFX_click = (userSelection) => {
+    const playSFX_click = () => {
         const SFXAllowed = localStorage.getItem('SFXAllowed')
         if (SFXAllowed === 'true') {
-            setWrongAnswerOption(parseInt(userSelection.id.slice(-1)))
             if (SFXAllowed === 'true') {
                 SFXClick.volume = .5
                 SFXClick.play()
@@ -260,30 +251,33 @@ const Quiz = (props) => {
         }
     }
 
-    const playSFX = (userSelection) => {
-
+    const playSFX = (whichSFX) => {
         const SFXAllowed = localStorage.getItem('SFXAllowed')
+        
         if (SFXAllowed === 'true') {
-            let userChose = parseInt(userSelection.id.slice(-1))
-            let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
-
-            if (userChose == correctAnswer) {
-                setCorrectAnswersCount(prev => prev + 1)
+            if (whichSFX == 'correct') {
                 SFXCorrect.volume = .5
                 SFXCorrect.play()
-            } else {
-                setWrongAnswerOption(parseInt(userChose))
+            } else if ( whichSFX == 'wrong') {
                 SFXWrong.volume = .5
                 SFXWrong.play()
             }
-
+            
         }
     }
 
     const checkTheSelectedOption = (userSelection) => {
+        let userChose = parseInt(userSelection.id.slice(-1))
         let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
 
-        playSFX(userSelection)
+        if (userChose == correctAnswer) {
+            setCorrectAnswersCount(prev => prev + 1)
+            playSFX('correct')
+        } else {
+            setWrongAnswerOption(parseInt(userChose))
+            playSFX('wrong')
+        }
+
         setCorrectAnswerOption(correctAnswer)
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
     }
@@ -350,7 +344,7 @@ const Quiz = (props) => {
         }
     }
 
-    const selectedOption = (props) => {
+    const selectedOption = async (props) => {
         switch (quizType) {
             case 'quiz':
                 if (ableToSelectOption) {
@@ -370,7 +364,7 @@ const Quiz = (props) => {
                         }, amountOfPauseCalculator())
                     } else {
                         setTimeout(() => {
-                            if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
+                            if (document.querySelector('.quiz__container')?.style.transform == 'translate(0rem)' && !(isItDesktop())) {
                                 TutorialForHowToChangeTheQuestion()
                             }
                         }, 5000)
@@ -378,7 +372,8 @@ const Quiz = (props) => {
                 }
                 break
             case 'test':
-                playSFX_click(props.target)
+                playSFX_click()
+                setWrongAnswerOption(parseInt(props.target.id.slice(-1)))
                 takeSelectedOptionValue(props.target)
 
                 if (autoQuestionChanger) {
@@ -633,12 +628,6 @@ const Quiz = (props) => {
         setSuggestionQuizzes(content.slice(0, 8))
     }
 
-    const SFXController = () => {
-        const changeToThis = SFXAllowed === 'true' ? 'false' : 'true'
-        setSFXAllowed(changeToThis)
-        localStorage.setItem('SFXAllowed', changeToThis)
-    }
-
     const currentUrl = () => {
         return `https://www.quizzland.net/${quizType}/${replaceFunction(quizSlug, ' ', '-')}`
     }
@@ -656,6 +645,16 @@ const Quiz = (props) => {
                 goNextQuestionOrEndTheQuiz()
             }
         }
+    }
+    
+    const SFXController = (statue) => {
+        setSFXAllowed(statue)
+        localStorage.setItem('SFXAllowed', statue)
+    }
+
+    const changeAutoQuestionChanger = (statue) => {
+        setAutoQuestionChanger(statue)
+        localStorage.setItem('autoQuestionChanger', statue)
     }
 
     return (
@@ -710,13 +709,14 @@ const Quiz = (props) => {
                 </script>
             </Helmet>
 
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
                 sitekey={process.env.RECAPTCHA_SITE_KEY}
                 size='invisible'
                 hl='fa'
                 theme="dark"
                 ref={recaptchaRef}
-            />
+                onErrored={(e) => log(`er ${e}`)}
+            /> */}
 
             <div>
                 {quiz?.title &&
@@ -771,7 +771,7 @@ const Quiz = (props) => {
                                 </div>
                             </div>
 
-                            <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} setAutoQuestionChanger={setAutoQuestionChanger} SFXController={SFXController} />
+                            <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
                             {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={quizType} showLoginNotification={showLoginNotification} />}
 
