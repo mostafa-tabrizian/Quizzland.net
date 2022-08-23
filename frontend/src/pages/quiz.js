@@ -338,8 +338,8 @@ const Quiz = (props) => {
     const halfTheQuestions = Math.floor(questions.length / 2)
 
     const addViewIfHalfQuiz = () => {
-        if (currentQuestionNumber == halfTheQuestions) {
-            AddView(`${quizType}View`, quizDetailRef.current.id)
+        AddView(`${quizType}View`, quizDetailRef.current.id)
+        if (currentQuestionNumber == halfTheQuestions && userProfile.userDetail) {
             postToHistoryAsPlayedQuiz()
         }
     }
@@ -478,7 +478,7 @@ const Quiz = (props) => {
         return <LazyLoadImage
             src={question.answer_imGif}
             width={1366}
-            className='object-contain object-top m-auto'
+            className='object-contain pb-4 object-top m-auto'
             alt={question.title}
             title={question.title}
         />
