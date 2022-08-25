@@ -130,8 +130,7 @@ const Quiz = (props) => {
                 background: '#ac272e',
                 color: 'white',
                 borderRadius: '15px'
-            },
-            onClose: close,
+            }
         });
     };
 
@@ -152,8 +151,7 @@ const Quiz = (props) => {
                 background: '#ac272e',
                 color: 'white',
                 borderRadius: '15px'
-            },
-            onClose: close,
+            }
         });
     };
 
@@ -285,10 +283,11 @@ const Quiz = (props) => {
     const amountOfPauseCalculator = () => {
         let amountOfPause = 1500
         const currentQuestions = questions[currentQuestionNumber - 1]
-        if (currentQuestions.answer_text !== '') {
+        
+        if (currentQuestions?.answer_text && currentQuestions?.answer_text !== '') {
             amountOfPause += 2000
         }
-        if (!(currentQuestions.answer_imGif.includes('NotExist'))) {
+        if (currentQuestions?.answer_imGif && !(currentQuestions?.answer_imGif?.includes('NotExist'))) {
             amountOfPause += 2000
         }
         return amountOfPause
@@ -407,11 +406,13 @@ const Quiz = (props) => {
 
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
 
+    
+    // class quiz__container all x size in rem
     if (isItDesktop() || isItIPad()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 34
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = (460.8 + 1.6 + 1.6 + 80) / 16  // width + padding-l + padding-r + margin-r
     }
     else if (isItMobile()) {
-        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = 28.5
+        sumOfTheWidthMarginAndPaddingOfQuestionForSliding = ((351.988 + 1.6 + 1.6 + 8 + 80) / 16)  // width + padding-l + padding-r + margin-l + margin-r
     }
 
     const goNextQuestionOrEndTheQuiz = () => {

@@ -20,7 +20,17 @@ const UserStore = createStore({
                        userDetail:  {...getState().userDetail, watch_list: updatedPlaylist}
                     }
                 )
-            }
+            },
+        updateLikedQuizzes:
+            (updatedLikedQuizzes) =>
+            ({ setState, getState })=> {
+                setState(
+                    {
+                        userDetail:  {...getState().userDetail, liked_quizzes: updatedLikedQuizzes}
+                    }
+                )
+            },
+        
     },
     name: 'userDetail',
 });

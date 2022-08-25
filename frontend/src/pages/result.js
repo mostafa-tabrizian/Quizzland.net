@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
 import axios from 'axios'
 
-import Header from '../components/header'
-import Footer from '../components/footer'
-import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews } from '../components/base'
+import LoginForm from '../components/user/loginForm';
+import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews, sortByNewest } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import skeletonQuiz from '../components/skeletonQuiz';
@@ -85,11 +84,9 @@ const Result = () => {
         const key = `open${Date.now()}`;
         const btn = (
             <div className='flex space-x-5 space-x-reverse'>
-                <button className='px-4 py-2 border rounded-xl'>
-                    <a href='/login'>
-                        دریافت امتیاز
-                    </a>
-                </button>
+                <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                    <LoginForm />
+                </div>
                 <button onClick={() => notification.close(key)}>
                     بی خیال
                 </button>
@@ -100,17 +97,17 @@ const Result = () => {
             description:
 
                 <h5>
-                    {score} امتیاز به شما تعلق گرفت. برای گرفتن آن حتما باید وارد حساب کاربریتان شوید!
+                    {score} امتیاز گرفتی 🎉. وارد کوییزلند شو تا ثبت بشه!
                 </h5>,
             duration: 0,
             style: {
                 background: '#ac272e',
                 color: 'white',
-                borderRadius: '15px'
+                borderRadius: '15px',
+                marginTop: '10px'
             },
             btn,
-            key,
-            onClose: close,
+            key
         });
     }
 
@@ -261,12 +258,33 @@ const Result = () => {
         }
     }
 
+    const showLoginNotification = () => {
+        notification.open({
+            description:
+                <div className='mt-8'>
+                    <h5 className='mb-5'>
+                        برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
+                    </h5>
+
+                    <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                        <LoginForm />
+                    </div>
+                </div>,
+            duration: 0,
+            style: {
+                background: '#ac272e',
+                color: 'white',
+                borderRadius: '15px'
+            },
+        });
+    };
+
     const getSuggestionsQuiz = async (subCategory) => {
         const quiz = await axios.get(`/api/quizView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         const pointy = await axios.get(`/api/testView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
-        setSuggestionQuizzes(content.sort(sortByMonthlyViews).slice(0, 8))
+        setSuggestionQuizzes(content.slice(0, 8).sort(sortByMonthlyViews))
         setContentLoaded(true)
     }
 
@@ -283,7 +301,7 @@ const Result = () => {
                 fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
             }, 2000)
             
-        }, 10_000)  //! 10_000  
+        }, 10_000)
     }
 
     const closePopUpQuizSuggester = () => {
@@ -407,7 +425,7 @@ const Result = () => {
                     </div>
                 </div>
 
-                <LikeCommentButton quizId={quizDetail?.id} quizType={quizType} />
+                {quizDetail?.id && <LikeCommentButton quizId={quizDetail?.id} quizType={quizType} showLoginNotification={showLoginNotification} />}
 
                 <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 

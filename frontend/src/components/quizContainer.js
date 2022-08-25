@@ -78,8 +78,7 @@ const QuizContainer = (props) => {
                     borderRadius: '15px'
                 },
                 btn,
-                key,
-                onClose: close,
+                key
             });
         }
     }

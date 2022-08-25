@@ -56,6 +56,7 @@ const LikeCommentButton = (props) => {
                         message.error('در اعمال لایک از کاربر خطایی رخ داد. لطفا کمی دیگر تلاش کنید.')
                         log(err.response)
                     })
+                userActions.updateLikedQuizzes(updatedUserLikedQuizzes)
             }
         , 1000), []
     )
@@ -64,17 +65,17 @@ const LikeCommentButton = (props) => {
         debounce(
             async (userId) => {
                 const now = new Date().getTime()
-                
                 const updatedLikedQuizzes = userProfile.userDetail.liked_quizzes + `_${props.quizId}${props.quizType.slice(0, 1)}`
 
                 await axiosInstance.patch(`/api/userView/${userId}/?timestamp=${now}`, { liked_quizzes: updatedLikedQuizzes })
-                .then(res => {
-                    submitLikeToQuiz()
-                })
-                .catch(err => {
-                    message.error('در اعمال لایک از کاربر خطایی رخ داد. لطفا کمی دیگر تلاش کنید.')
-                    log(err.response)
-                })
+                    .then(res => {
+                        submitLikeToQuiz()
+                    })
+                    .catch(err => {
+                        message.error('در اعمال لایک از کاربر خطایی رخ داد. لطفا کمی دیگر تلاش کنید.')
+                        log(err.response)
+                    })
+                userActions.updateLikedQuizzes(updatedLikedQuizzes)
             }
         , 1000), []
     )
