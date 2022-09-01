@@ -35,8 +35,6 @@ const LikeCommentButton = (props) => {
                     }
                 }
 
-                //! calculate likes for quiz and in user 
-
                 await axiosInstance.post(`/api/likeView/?timestamp=${now}`, payload)
                     .then(res => {
                         if (res.status == 201) {
@@ -53,7 +51,7 @@ const LikeCommentButton = (props) => {
                         if (err.response.status == 401) {
                             props.showLoginNotification()
                         } else {
-                            message.error('در اعمال لایک از کاربر خطایی رخ داد. لطفا کمی دیگر تلاش کنید.')
+                            message.error('در اعمال لایک رخ داد. لطفا کمی دیگر تلاش کنید.')
                             log(err.response)
                         }
                     })

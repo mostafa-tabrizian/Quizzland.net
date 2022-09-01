@@ -22,7 +22,6 @@ class CustomUserAdmin(UserAdmin):
                     'gender',
                     'most_played_categories',
                     'played_history',
-                    'watch_list',
                     'points',
                 ),
             },
@@ -75,6 +74,18 @@ class Comment_Admin(admin.ModelAdmin):
     list_display = ('submitter_id', 'comment_text', 'verified', 'date_submitted')
     list_filter = ('date_submitted', 'verified')
     search_fields = ('comment_text', 'trivia_id', 'test_id', 'submitter_id')
+
+@admin.register(Watch_List)
+class WatchList_Admin(admin.ModelAdmin):
+    list_display = ('user_id', 'quiz_id', 'date_submitted')
+    list_filter = ('date_submitted', )
+    search_fields = ('trivia_id', 'test_id', )
+
+@admin.register(History)
+class History_Admin(admin.ModelAdmin):
+    list_display = ('user_id', 'quiz_id', 'date_submitted')
+    list_filter = ('date_submitted', )
+    search_fields = ('trivia_id', 'test_id', )
 
 @admin.register(Questions)
 class Questions_Admin(admin.ModelAdmin):

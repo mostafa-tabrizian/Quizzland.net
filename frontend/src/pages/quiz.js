@@ -326,7 +326,19 @@ const Quiz = (props) => {
     }
 
     const postToHistoryAsPlayedQuiz = async () => {
-        await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { played_history: userProfile.userDetail.played_history + `_${quiz.id}${quizType.slice(0, 1)}` })
+        const payload = {
+            user_id: {
+                username: userProfile.userDetail.id
+            },
+            test_id: {
+                id: quizType == 'test' ? quiz?.id : 0
+            },
+            trivia_id: {
+                id: quizType == 'quiz' ? quiz?.id : 0
+            }
+        }
+
+        await axiosInstance.post(`/api/historyView/`, payload)
             // .then(res => {
             // })
             .catch(err => {
@@ -336,8 +348,8 @@ const Quiz = (props) => {
 
     const halfTheQuestions = Math.floor(questions.length / 2)
 
-    const addViewIfHalfQuiz = () => {
-        AddView(`${quizType}View`, quizDetailRef.current.id)
+    const ifHalfQuizAddViewAndHistory = () => {
+        // AddView(`${quizType}View`, quizDetailRef.current.id)
         if (currentQuestionNumber == halfTheQuestions && userProfile.userDetail) {
             postToHistoryAsPlayedQuiz()
         }
@@ -355,7 +367,7 @@ const Quiz = (props) => {
                     setAbleToGoNext(true)
                     makeEveryOptionLowOpacity('low')
                     checkTheSelectedOption(props.target)
-                    addViewIfHalfQuiz()
+                    ifHalfQuizAddViewAndHistory()
 
                     if (autoQuestionChanger) {
                         setTimeout(() => {

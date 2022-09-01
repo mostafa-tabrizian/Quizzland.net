@@ -38,7 +38,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'points',
             'most_played_categories',
             'played_history',
-            'watch_list',
             'is_active',
         )
     
@@ -123,7 +122,6 @@ class LikeSerializer(serializers.ModelSerializer):
     test_id = PointyQuizzesSerializer(many=False)
     
     def create(self, request):
-        
         request_user_id = self.context['request'].data['user_id']['username']
         request_trivia_id = self.context['request'].data['trivia_id']['id']
         request_test_id = self.context['request'].data['test_id']['id']
@@ -142,6 +140,65 @@ class LikeSerializer(serializers.ModelSerializer):
             userDidLikeForThisQuiz.delete()
             return request
         
+class WatchListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Watch_List
+        fields = (
+            '__all__'
+        )
+        
+    user_id = CustomUserSerializer(many=False)
+    trivia_id = QuizzesSerializer(many=False)
+    test_id = PointyQuizzesSerializer(many=False)
+    
+    def create(self, request):
+        request_user_id = self.context['request'].data['user_id']['username']
+        request_trivia_id = self.context['request'].data['trivia_id']['id']
+        request_test_id = self.context['request'].data['test_id']['id']
+        
+        userWatchedForThisQuiz = Watch_List.objects.filter(Q(user_id=request_user_id), Q(trivia_id=request_trivia_id) | Q(test_id=request_test_id))
+        
+        if (not userWatchedForThisQuiz.exists()):
+            newLike = Watch_List.objects.create(
+                user_id=(CustomUser.objects.get(id=(self.context['request'].data['user_id']['username']))),
+                trivia_id=(Quizzes.objects.get(id=request_trivia_id) if request_trivia_id else None),
+                test_id=(Quizzes_Pointy.objects.get(id=request_test_id) if request_test_id else None),
+            )
+            
+            return newLike
+        else:
+            userWatchedForThisQuiz.delete()
+            return request
+        
+class HistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = History
+        fields = (
+            '__all__'
+        )
+        
+    user_id = CustomUserSerializer(many=False)
+    trivia_id = QuizzesSerializer(many=False)
+    test_id = PointyQuizzesSerializer(many=False)
+    
+    def create(self, request):
+        request_user_id = self.context['request'].data['user_id']['username']
+        request_trivia_id = self.context['request'].data['trivia_id']['id']
+        request_test_id = self.context['request'].data['test_id']['id']
+        
+        userHistoryForThisQuiz = History.objects.filter(Q(user_id=request_user_id), Q(trivia_id=request_trivia_id) | Q(test_id=request_test_id))
+        
+        if (not userHistoryForThisQuiz.exists()):
+            newLike = History.objects.create(
+                user_id=(CustomUser.objects.get(id=(self.context['request'].data['user_id']['username']))),
+                trivia_id=(Quizzes.objects.get(id=request_trivia_id) if request_trivia_id else None),
+                test_id=(Quizzes_Pointy.objects.get(id=request_test_id) if request_test_id else None),
+            )
+            
+            return newLike
+        else:
+            userHistoryForThisQuiz.delete()
+            return request
 
 class QuestionsSerializer(serializers.ModelSerializer):
     class Meta:

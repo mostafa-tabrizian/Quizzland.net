@@ -22,43 +22,11 @@ const QuizContainer = (props) => {
         setTheme(theme)
     }, []);
 
-    const debounceRemoveFromWatchList = useCallback(
-		debounce(
-            async (userDetail, updatedUserWatchList) => {
-                await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { watch_list: updatedUserWatchList})
-                    .then(res => {
-                        setWatchListButtonUnClickable(true)
-                        message.error('با موفقیت از پلی لیست حذف گردید.')
-                    })
-                    .catch(err => {
-                        log(err.response)
-                    })
-            }
-        , 1000), []
-	);
-
-    const checkIfExistsThenRemove = async (userDetail, quizId, quizType) => {
-        const userWatchList = userDetail.watch_list.split('_')
-        const findCurrentQuizInWatchList = userWatchList.indexOf(String(quizId) + quizType)
-        
-        if (findCurrentQuizInWatchList == -1) {  // mean not exist
-            return false
-        }
-        
-        let updatedUserWatchList = userWatchList.splice(findCurrentQuizInWatchList, 1)
-        updatedUserWatchList = userWatchList.join('_')
-
-        userActions.updatePlaylist(updatedUserWatchList)
-        
-        debounceRemoveFromWatchList(userDetail, updatedUserWatchList)
-        return true
-    }
-
-    const addToWatchListClicked = async (quizId, quizCheckIfQuiz) => {
+    const addToWatchListClicked = async (quizId, quizCheckIfTrivia) => {
         message.loading('', 1)
 
         if (userProfile.userDetail) {
-            checkWatchList(quizId, quizCheckIfQuiz)
+            checkWatchList(quizId, quizCheckIfTrivia)
         } else {
             const key = `open${Date.now()}`;
             const btn = (
@@ -85,35 +53,62 @@ const QuizContainer = (props) => {
     
     const debounceAddToWatchList = useCallback(
         debounce(async (userDetail, quizId, quizType) => {
-           
-            const updatedPlaylist = userDetail.watch_list + `_${quizId}${quizType}`
+            const now = new Date().getTime()
 
-            userActions.updatePlaylist(updatedPlaylist)
-            await axiosInstance.patch(`/api/userView/${userDetail.id}/`, { watch_list: updatedPlaylist })
+            log(quizType)
+
+            const payload = {
+                user_id: {
+                    username: userDetail.id
+                },
+                test_id: {
+                    id: quizType == 'test' ? quizId : 0
+                },
+                trivia_id: {
+                    id: quizType == 'trivia' ? quizId : 0
+                }
+            }
+
+            log(payload)
+
+            await axiosInstance.post(`/api/watchListView/?timestamp=${now}`, payload)
                 .then(res => {
-                    setWatchListButtonUnClickable(true)
-                    message.success('با موفقیت به پلی لیست اضافه گردید.')
+                    log(res)
+                    if (res.status == 201) {
+                        if (res.data?.id) {
+                            setWatchListButtonUnClickable(true)
+                            message.success('با موفقیت به پلی لیست اضافه گردید.')
+                        } else {
+                            setWatchListButtonUnClickable(true)
+                            message.error('با موفقیت به پلی لیست حذف گردید.')
+                        }
+                    } else {
+                        log(res)
+                    }
                 })
                 .catch(err => {
-                    log(err.response)
+                    if (err.response.status == 401) {
+                        props.showLoginNotification()
+                    } else {
+                        message.error('در افزودن به پلی لیست خطایی رخ داد. لطفا کمی دیگر تلاش کنید.')
+                        log(err.response)
+                    }
                 })
         }, 1000), []
 	);
 
-    const checkWatchList = async (quizId, quizCheckIfQuiz) => {
+    const checkWatchList = async (quizId, quizCheckIfTrivia) => {
         setWatchListButtonUnClickable(false)
         
         let quizType
-        if (quizCheckIfQuiz) {
-            quizType = 'q'
+        if (quizCheckIfTrivia) {
+            quizType = 'trivia'
         } else {
-            quizType = 't'
+            quizType = 'test'
         }
-
         const userDetail = userProfile.userDetail
-        if (await checkIfExistsThenRemove(userDetail, quizId, quizType)) { return }
-        else {debounceAddToWatchList(userDetail, quizId, quizType)}
-            
+
+        debounceAddToWatchList(userDetail, quizId, quizType)
     }
 
     return (

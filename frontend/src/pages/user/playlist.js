@@ -37,47 +37,60 @@ const QuizHistory = () => {
         }
         
         let playlist
+        const now = new Date().getTime()
         const playlistType = takeParameterFromUrl('list')
+
         switch(playlistType) {
             case 'like':
-                playlist = userProfile.userDetail.liked_quizzes.split('_')
+                playlist = await axiosInstance.get(`/api/likeView/?timestamp=${now}`)
+                    .then(res => {
+                        return res.data
+                    })
+                    .catch(err => {
+                        return log(err.response)
+                    })
+
                 setTitle('کوییز های لایک شده')
                 setLowTitle('Your Liked Quizzes')
                 setMessageForEmpty('هیچ کوییزی رو تا حالا لایک نکردی!')
                 break
             case 'history':
-                playlist = userProfile.userDetail.played_history.split('_')
+                playlist = await axiosInstance.get(`/api/historyView/?timestamp=${now}`)
+                    .then(res => {
+                        return res.data
+                    })
+                    .catch(err => {
+                        return log(err.response)
+                    })
+
                 setTitle('تاریخچه کوییزهای شما')
                 setLowTitle('Your History')
                 setMessageForEmpty('هیچ کوییزی رو تا حالا انجام ندادی!')
                 break
             case 'watch':
-                playlist = userProfile.userDetail.watch_list.split('_')
+
+                playlist = await axiosInstance.get(`/api/watchListView/?timestamp=${now}`)
+                    .then(res => {
+                        return res.data
+                    })
+                    .catch(err => {
+                        return log(err.response)
+                    })
+
                 setTitle('کوییز های پلی لیست شما')
                 setLowTitle('Your Playlist')
                 setMessageForEmpty('هیچ کوییزی رو اضافه نکردی!')
         }
         
-        const now = new Date().getTime()
-        const quiz = await axiosInstance.get(`/api/quizView/?public=true&timestamp=${now}`)
-            .catch(err => {log(err.response)})
-        const pointy = await axiosInstance.get(`/api/testView/?public=true&timestamp=${now}`)
-            .catch(err => {log(err.response)})
 
         let finalList = []
         
-        playlist.map(quizId => {
-            if (quizId && quizId != 0) {
-                let historyItem
-
-                if (quizId.includes('q')) {
-                    historyItem = quiz.data.filter(elem => elem.id == parseInt(quizId))
-                }
-                else if (quizId.includes('t')) {
-                    historyItem = pointy.data.filter(elem => elem.id == parseInt(quizId))
-                }
-                
-                finalList.push(historyItem[0])    
+        playlist.map(quiz => {
+            if (quiz.trivia_id) {
+                finalList.push(quiz.trivia_id)
+            }
+            else if (quiz.test_id) {
+                finalList.push(quiz.test_id)
             }
         })
         

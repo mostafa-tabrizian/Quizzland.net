@@ -68,6 +68,26 @@ class CommentFilter(filters.FilterSet):
             'verified': ['exact']
         }
 
+class WatchListFilter(filters.FilterSet):
+    class Meta:
+        model = Watch_List
+        fields = {
+            'user_id': ['exact'], 
+            'trivia_id': ['exact'],
+            'test_id': ['exact'],
+            'date_submitted': ['lte', 'gte'],
+        }
+        
+class HistoryFilter(filters.FilterSet):
+    class Meta:
+        model = History
+        fields = {
+            'user_id': ['exact'], 
+            'trivia_id': ['exact'],
+            'test_id': ['exact'],
+            'date_submitted': ['lte', 'gte'],
+        }
+
 class CategoriesFilter(filters.FilterSet):
     class Meta:
         model= Categories

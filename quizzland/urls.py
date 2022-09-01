@@ -19,8 +19,10 @@ router.register(r'userView', views.CustomUserView)
 router.register(r'quizView', views.QuizView)
 router.register(r'testView', views.PointyView)
 
-router.register(r'likeView', views.LikeView)
+router.register(r'likeView', views.LikeView, basename='likeView')
 router.register(r'commentView', views.CommentView)
+router.register(r'watchListView', views.WatchListView, basename='watchListView')
+router.register(r'historyView', views.HistoryView, basename='historyView')
 
 router.register(r'categoryView', views.CategoriesView)
 router.register(r'subcategoryView', views.SubCategoryView)

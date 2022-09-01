@@ -30,7 +30,6 @@ class CustomUser(AbstractUser):
     points = models.IntegerField(default=0)
     most_played_categories = models.TextField(blank=True, null=True, max_length=9000)
     played_history = models.TextField(blank=True, null=True, default='_0', max_length=9000)
-    watch_list = models.TextField(blank=True, null=True, default='_0', max_length=9000)
     
     def __str__(self):
         return str(self.email)
@@ -42,7 +41,7 @@ NOTIFICATION_CHOICES = (
 )
     
 class Notification(models.Model):
-    user = models.ForeignKey(CustomUser, blank=True, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, related_name='user_notification', blank=True, null=True, on_delete=models.CASCADE)
     message = models.CharField(max_length=255, blank=False, null=True)
     type = models.CharField(max_length=255, choices=NOTIFICATION_CHOICES, blank=False, null=True)
     has_read = models.BooleanField(default=False)
@@ -66,7 +65,7 @@ class Document_Admin(admin.ModelAdmin):
 class SubCategories(models.Model):
     id = models.AutoField(primary_key=True)
     public = models.BooleanField(default=True)
-    categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
+    categoryKey = models.ForeignKey(Categories, related_name='categoryKey_subCategory', on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=200, null=False, blank=False, default=None)
     title = models.CharField(max_length=80, null=False, blank=False, default=None)
     thumbnail =  models.ImageField(upload_to='Thn-Category', null=True, blank=True, default='NotExist.jpg')
@@ -82,7 +81,7 @@ class SubCategories(models.Model):
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
     public = models.BooleanField(default=True)
-    categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
+    categoryKey = models.ForeignKey(Categories, related_name='categoryKey_quizzes', on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     slug = models.CharField(max_length=80, null=False, blank=False, default=None)  # unique=True
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
@@ -110,7 +109,7 @@ class Quizzes(models.Model):
 class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)
     public = models.BooleanField(default=True)
-    categoryKey = models.ForeignKey(Categories, on_delete=models.PROTECT, blank=True, null=True)
+    categoryKey = models.ForeignKey(Categories, related_name='categoryKey_quizzesPointy', on_delete=models.PROTECT, blank=True, null=True)
     subCategory = models.CharField(max_length=100, null=False, blank=False, default=None)
     slug = models.CharField(max_length=80, null=False, blank=False, default=None)  # unique=True
     title = models.CharField(max_length=200, null=False, blank=False, default=None)
@@ -170,9 +169,9 @@ class Quizzes_Pointy(models.Model):
 
 class Like(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(CustomUser, blank=False, null=False, on_delete=models.CASCADE)
-    trivia_id = models.ForeignKey(Quizzes, related_name='trivia_id', blank=True, null=True, on_delete=models.CASCADE)
-    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_id', blank=True, null=True, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(CustomUser, related_name='user_id_like', blank=False, null=False, on_delete=models.CASCADE)
+    trivia_id = models.ForeignKey(Quizzes, related_name='trivia_like_id', blank=True, null=True, on_delete=models.CASCADE)
+    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_like_id', blank=True, null=True, on_delete=models.CASCADE)
     date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
     
     class Meta:
@@ -188,9 +187,9 @@ class Like(models.Model):
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     comment_text = models.CharField(blank=False, null=False, max_length=255)
-    trivia_id = models.ForeignKey(Quizzes, blank=True, null=True, on_delete=models.CASCADE)
-    test_id = models.ForeignKey(Quizzes_Pointy, blank=True, null=True, on_delete=models.CASCADE)
-    submitter_id = models.ForeignKey(CustomUser, blank=False, null=True, on_delete=models.SET_NULL)
+    submitter_id = models.ForeignKey(CustomUser, related_name='user_comment_id', blank=False, null=True, on_delete=models.SET_NULL)
+    trivia_id = models.ForeignKey(Quizzes, related_name='trivia_comment_id', blank=True, null=True, on_delete=models.CASCADE)
+    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_comment_id', blank=True, null=True, on_delete=models.CASCADE)
     date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
     verified = models.BooleanField(default=True)
     
@@ -201,10 +200,43 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.submitter_id.username} commented on {self.quiz_id.title}'
     
+class Watch_List(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(CustomUser, related_name='user_watchList_id', blank=False, null=False, on_delete=models.CASCADE)
+    trivia_id = models.ForeignKey(Quizzes, related_name='trivia_watchList_id', blank=True, null=True, on_delete=models.CASCADE)
+    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_watchList_id', blank=True, null=True, on_delete=models.CASCADE)
+    date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
+    
+    class Meta:
+        unique_together = (('user_id', 'test_id'), ('user_id', 'trivia_id'))
+    
+    @property
+    def quiz_id(self):
+        return self.trivia_id or self.test_id
+    
+    def __str__(self):
+        return f'{self.user_id.username} liked {self.quiz_id.title}'
+    
+class History(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(CustomUser, related_name='user_history_id', blank=False, null=False, on_delete=models.CASCADE)
+    trivia_id = models.ForeignKey(Quizzes, related_name='trivia_history_id', blank=True, null=True, on_delete=models.CASCADE)
+    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_history_id', blank=True, null=True, on_delete=models.CASCADE)
+    date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
+    
+    class Meta:
+        unique_together = (('user_id', 'test_id'), ('user_id', 'trivia_id'))
+    
+    @property
+    def quiz_id(self):
+        return self.trivia_id or self.test_id
+    
+    def __str__(self):
+        return f'{self.user_id.username} liked {self.quiz_id.title}'
     
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    quizKey = models.ForeignKey(Quizzes, on_delete=models.CASCADE, blank=True, null=True)
+    quizKey = models.ForeignKey(Quizzes, related_name='quizKey_questions', on_delete=models.CASCADE, blank=True, null=True)
     question = models.CharField(max_length=150, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_1st = models.CharField(max_length=100, blank=True, default=None)
@@ -227,7 +259,7 @@ class Questions(models.Model):
 
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
-    quizKey = models.ForeignKey(Quizzes_Pointy, on_delete=models.CASCADE, blank=True, null=True)
+    quizKey = models.ForeignKey(Quizzes_Pointy, related_name='quizKey_pointyQuestions', on_delete=models.CASCADE, blank=True, null=True)
     question = models.CharField(max_length=150, null=True, blank=True, default=None)
     question_img = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
 

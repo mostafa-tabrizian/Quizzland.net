@@ -72,6 +72,7 @@ def user_data(request, *args, **kwargs):
         
         try:
             user = CustomUser.objects.get(id=userObject['user_id'])
+            watch_list = Watch_List.objects.filter(user_id=user).values()
             
             return HttpResponse(
                 json.dumps(
@@ -85,9 +86,9 @@ def user_data(request, *args, **kwargs):
                         'avatar': str(user.avatar),
                         'bio': user.bio,
                         'points': user.points,
+                        'watch_list': str(list(watch_list)),
                         'most_played_categories': user.most_played_categories,
                         'played_history': user.played_history,
-                        'watch_list': user.watch_list,
                         'is_active': user.is_active,
                     }   
                 )
@@ -128,6 +129,27 @@ def public_profile(request, *args, **kwargs):
             return HttpResponse('DoesNotExist')
         except Exception as e:
             return HttpResponse(e)
+    
+def watch_list_view(request):
+    if request.method == 'POST':
+        username
+        request_user_id = self.context['request'].data['user_id']['username']
+        request_trivia_id = self.context['request'].data['trivia_id']['id']
+        request_test_id = self.context['request'].data['test_id']['id']
+
+        userWatchedForThisQuiz = Watch_List.objects.filter(Q(user_id=request_user_id), Q(trivia_id=request_trivia_id) | Q(test_id=request_test_id))
+
+        if (not userWatchedForThisQuiz.exists()):
+            newLike = Watch_List.objects.create(
+                user_id=(CustomUser.objects.get(id=self.context['request'].data['user_id']['username'])),
+                trivia_id=(Quizzes.objects.get(id=request_trivia_id) if request_trivia_id else None),
+                test_id=(Quizzes_Pointy.objects.get(id=request_test_id) if request_test_id else None),
+            )
+        
+            return newLike
+        else:
+            userWatchedForThisQuiz.delete()
+            return request
     
 def checkAlreadyUserExists(username, email):
     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
@@ -346,17 +368,40 @@ class PointyView(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class LikeView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Like.objects.all()
+    permission_classes = (IsAuthenticated,)
     serializer_class = LikeSerializer
     filterset_class = LikeFilter
-
+    
+    def get_queryset(self):
+        return Like.objects.filter(user_id=self.request.user)
+        
 class CommentView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     filterset_class = CommentFilter
+    
+class WatchListView(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = WatchListSerializer
+    filterset_class = WatchListFilter
 
+    def get_queryset(self):
+        return Watch_List.objects.filter(user_id=self.request.user)
+    
+class HistoryView(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = HistorySerializer
+    filterset_class = HistoryFilter
+
+    def get_queryset(self):
+        history_objects = History.objects.filter(user_id=self.request.user)
+        if history_objects.exists():
+            return History.objects.filter(user_id=self.request.user)
+        else:
+            return History.objects.none()
+        
+    
 # --------------------------------------------------------
 
 class CategoriesView(viewsets.ModelViewSet):
