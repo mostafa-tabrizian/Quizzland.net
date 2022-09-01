@@ -25,7 +25,7 @@ const NotFound_404 = () => {
                 <meta name="robots" content="noindex"></meta>
             </Helmet>
 
-            <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
+            <div className="pageNotFound text-[16rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
 
             <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'dark' ? '#0000008c' : '#f0f0f0'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
                 <h1> 🤔 صفحه مورد نظر پیدا نشد </h1>

@@ -22,7 +22,6 @@ class CustomUserAdmin(UserAdmin):
                     'gender',
                     'most_played_categories',
                     'played_history',
-                    'liked_quizzes',
                     'watch_list',
                     'points',
                 ),
@@ -54,22 +53,28 @@ class SubCategories_Admin(admin.ModelAdmin):
 
 @admin.register(Quizzes)
 class Quizzes_Admin(admin.ModelAdmin):
-    list_display = ('title', 'subCategory', 'categoryKey', 'like', 'monthly_views', 'views', 'publish')
+    list_display = ('title', 'subCategory', 'categoryKey', 'monthly_views', 'views', 'publish')
     exclude = ('type', )
     list_filter = ('subCategory', 'categoryKey', 'publish')
     search_fields = ['id', 'title', 'slug']
 
 @admin.register(Quizzes_Pointy)
 class Quizzes_Pointy_Admin(admin.ModelAdmin):
-    list_display = ('title', 'subCategory', 'categoryKey', 'like', 'monthly_views', 'views', 'publish')
+    list_display = ('title', 'subCategory', 'categoryKey', 'monthly_views', 'views', 'publish')
     list_filter = ('subCategory', 'categoryKey', 'publish')
     search_fields = ['id', 'title', 'slug']
 
-@admin.register(Comments)
-class Comments_Admin(admin.ModelAdmin):
-    list_display = ('submitter_related', 'comment_text', 'verified', 'date_submitted')
+@admin.register(Like)
+class Like_Admin(admin.ModelAdmin):
+    list_display = ('user_id', 'quiz_id', 'date_submitted')
+    list_filter = ('date_submitted', )
+    search_fields = ('trivia_id', 'test_id', )
+
+@admin.register(Comment)
+class Comment_Admin(admin.ModelAdmin):
+    list_display = ('submitter_id', 'comment_text', 'verified', 'date_submitted')
     list_filter = ('date_submitted', 'verified')
-    search_fields = ('comment_text', 'quiz_related', 'test_related', 'submitter_related')
+    search_fields = ('comment_text', 'trivia_id', 'test_id', 'submitter_id')
 
 @admin.register(Questions)
 class Questions_Admin(admin.ModelAdmin):

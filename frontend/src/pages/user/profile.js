@@ -41,7 +41,7 @@ const Profile = () => {
         const now = new Date().getTime()
         
         user?.id &&
-        await axios.get(`/api/commentView/?submitter_related=${user?.id}&timestamp=${now}`)
+        await axios.get(`/api/commentView/?submitter_id=${user?.id}&timestamp=${now}`)
             .then( async res => {
                 setUserCommentLength(res.data.length)
             })
@@ -89,7 +89,7 @@ const Profile = () => {
                                     </div> */}
                                     <div className="flex space-x-3 space-x-reverse">
                                         <dt>لایک ها</dt>
-                                        <dd>{user?.liked_quizzes}</dd>
+                                        <dd>{user?.likes}</dd>
                                     </div>
                                     <div className="flex space-x-3 space-x-reverse">
                                         <dt>کامنت ها</dt>
@@ -117,7 +117,7 @@ const Profile = () => {
                                 </div> */}
                                 <div className="flex space-x-3 space-x-reverse">
                                     <dt>لایک ها</dt>
-                                    <dd>{user?.liked_quizzes}</dd>
+                                    <dd>{user?.likes}</dd>
                                 </div>
                                 <div className="flex space-x-3 space-x-reverse">
                                     <dt>کامنت ها</dt>

@@ -13,7 +13,7 @@ from django.contrib.auth.hashers import make_password  # check_password
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from rest_framework import viewsets, status
 from rest_framework.views import APIView 
-from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission
+from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -87,7 +87,6 @@ def user_data(request, *args, **kwargs):
                         'points': user.points,
                         'most_played_categories': user.most_played_categories,
                         'played_history': user.played_history,
-                        'liked_quizzes': user.liked_quizzes,
                         'watch_list': user.watch_list,
                         'is_active': user.is_active,
                     }   
@@ -104,6 +103,8 @@ def public_profile(request, *args, **kwargs):
         
         try:
             user = CustomUser.objects.get(username=username)
+            userLikesNumber = len(Like.objects.filter(user_id=user))
+            userCommentsNumber = len(Comment.objects.filter(submitter_id=user))
             
             return HttpResponse(
                 json.dumps(
@@ -118,7 +119,8 @@ def public_profile(request, *args, **kwargs):
                         'points': user.points,
                         # 'most_played_categories': user.most_played_categories,
                         'played_history': len(user.played_history.split('_')) - 2,
-                        'liked_quizzes': len(user.liked_quizzes.split('_')) - 2,
+                        'likes': userLikesNumber,
+                        'comments': userCommentsNumber,
                     }   
                 )
             )
@@ -343,11 +345,17 @@ class PointyView(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
+class LikeView(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    filterset_class = LikeFilter
+
 class CommentView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
-    queryset = Comments.objects.all()
-    serializer_class = CommentsSerializer
-    filterset_class = CommentsFilter
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    filterset_class = CommentFilter
 
 # --------------------------------------------------------
 

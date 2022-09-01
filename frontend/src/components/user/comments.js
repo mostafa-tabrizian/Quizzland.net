@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import { message, Spin } from 'antd';
 import debounce from 'lodash.debounce'
 import axios from 'axios'
+import { BigHead } from "@bigheads/core";
 
 import axiosInstance from '../axiosApi';
 import { log, getTheme, replaceFunction, datePublishHandler } from '../base'
 import ExplicitWords from './explicitWords';
-import { BigHead } from "@bigheads/core";
 import userStore from '../../store/userStore';
 
 const Comments = (props) => {
@@ -53,10 +53,10 @@ const Comments = (props) => {
             async (comment, verifyState) => {
                 await axiosInstance.post('/api/commentView/', {
                     comment_text: comment,
-                    quiz_related: props.quizType == 'quiz' ? props.quizId : null,
-                    test_related: props.quizType == 'test' ? props.quizId : null,
+                    trivia_id: props.quizType == 'quiz' ? props.quizId : null,
+                    test_id: props.quizType == 'test' ? props.quizId : null,
                     verified: verifyState,
-                    submitter_related: {
+                    submitter_id: {
                         username: userProfile.userDetail.id
                     }
                 })
@@ -69,7 +69,11 @@ const Comments = (props) => {
                         }
                     })
                     .catch(err => {
-                        log(err.response)
+                        if (err.response.status == 401) {
+                            message.error('شما میبایست ابتدا وارد شوید.')
+                        } else {
+                            log(err.response)
+                        }
                     })
             }
         , 1000), []
@@ -82,7 +86,7 @@ const Comments = (props) => {
     const fetchComments = async () => {
         const now = new Date().getTime()
         
-        await axios.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `quiz_related=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_related=${props.quizId}&` : ''}timestamp=${now}`)
+        await axios.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `trivia_id=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_id=${props.quizId}&` : ''}timestamp=${now}`)
             .then(res => {
                 setComments(res.data.sort(sortCommentsByNewest))
             })
@@ -102,18 +106,18 @@ const Comments = (props) => {
                 return (
                     <div>
                         <div>
-                            <Link to={`/profile/${comment.submitter_related?.username}`}>
+                            <Link to={`/profile/${comment.submitter_id?.username}`}>
                                 <div className='flex space-x-3 space-x-reverse'>
                                     <div className='w-12 h-12'>
                                         {
-                                            comment.submitter_related?.avatar &&
-                                            <BigHead {...JSON.parse(comment.submitter_related.avatar)} />
+                                            comment.submitter_id?.avatar &&
+                                            <BigHead {...JSON.parse(comment.submitter_id.avatar)} />
                                         }
                                     </div>
                                     <div>
                                         <div className={`flex space-x-2 space-x-reverse ${theme == 'dark' ? 'text-[#ffeaeb]' : 'text-[#060101]'}`}>
-                                            <h4>{comment.submitter_related?.first_name}</h4>
-                                            <h4>{comment.submitter_related?.last_name}</h4>
+                                            <h4>{comment.submitter_id?.first_name}</h4>
+                                            <h4>{comment.submitter_id?.last_name}</h4>
                                         </div>
                                         <h4 className='text-gray-500'>{datePublishHandler(comment.date_submitted)}</h4>
                                     </div>

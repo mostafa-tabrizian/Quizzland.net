@@ -46,14 +46,24 @@ class PointyQuizzesFilter(filters.FilterSet):
             'tags': ['iexact', 'icontains']
         }
 
-class CommentsFilter(filters.FilterSet):
+class LikeFilter(filters.FilterSet):
     class Meta:
-        model = Comments
+        model = Like
+        fields = {
+            'user_id': ['exact'], 
+            'trivia_id': ['exact'],
+            'test_id': ['exact'],
+            'date_submitted': ['lte', 'gte'],
+        }
+
+class CommentFilter(filters.FilterSet):
+    class Meta:
+        model = Comment
         fields = {
             'comment_text': ['icontains'],
-            'quiz_related': ['exact'],
-            'test_related': ['exact'], 
-            'submitter_related': ['exact'],
+            'trivia_id': ['exact'],
+            'test_id': ['exact'], 
+            'submitter_id': ['exact'],
             'date_submitted': ['lte', 'gte'],
             'verified': ['exact']
         }
