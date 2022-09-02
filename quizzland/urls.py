@@ -14,25 +14,22 @@ sitemaps = {
 
 router = routers.DefaultRouter()
 
-router.register(r'userView', views.CustomUserView)
+router.register(r'userView', views.CustomUserView, basename='CustomUserView')
+router.register(r'notificationView', views.NotificationView, basename='NotificationView')
 
-router.register(r'quizView', views.QuizView)
-router.register(r'testView', views.PointyView)
+router.register(r'quizView', views.QuizView, basename='QuizView')
+router.register(r'testView', views.PointyView, basename='PointyView')
 
 router.register(r'likeView', views.LikeView, basename='likeView')
-router.register(r'commentView', views.CommentView)
+router.register(r'commentView', views.CommentView, basename='CommentView')
 router.register(r'watchListView', views.WatchListView, basename='watchListView')
 router.register(r'historyView', views.HistoryView, basename='historyView')
 
-router.register(r'categoryView', views.CategoriesView)
-router.register(r'subcategoryView', views.SubCategoryView)
+router.register(r'categoryView', views.CategoriesView, basename='CategoriesView')
+router.register(r'subcategoryView', views.SubCategoryView, basename='SubCategoryView')
 
-router.register(r'questionsView', views.QuestionsView)
-router.register(r'questionsPointyView', views.QuestionsPointyView)
-
-# router.register(r'new_blog', views.new_blog)
-
-# router.register(r'newsletter_users', views.newsletter_users)
+router.register(r'questionsView', views.QuestionsView, basename='QuestionsView')
+router.register(r'questionsPointyView', views.QuestionsPointyView, basename='QuestionsPointyView')
 
 urlpatterns = [
     path('adminTheKingAlexanderJosef/', admin.site.urls),

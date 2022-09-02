@@ -2,7 +2,6 @@ import datetime, json, requests, random
 from decouple import config
 
 from .models import *
-from .functions import *
 from .serializers import *
 from .filters import *
 
@@ -40,30 +39,6 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
 def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
-
-def user_notification(request, *args, **kwargs):
-    if request.method == 'POST':
-        access_token = json.loads(request.body.decode('utf-8'))['access_token']
-        userObject = AccessToken(access_token)
-        
-        try:
-            notifications = Notification.objects.filter(user=userObject['user_id'])
-
-            if notifications:
-                return HttpResponse(
-                    json.dumps(
-                        {
-                            'id': notifications.last().id,
-                            'message': notifications.last().message,
-                            'type': notifications.last().type
-                        }
-                    )
-                )
-            else:
-                return HttpResponse(False)
-            
-        except Exception as e:
-            return HttpResponse(e)
 
 def user_data(request, *args, **kwargs):
     if request.method == 'POST':
@@ -345,11 +320,20 @@ class CustomUserView(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
     filterset_class = CustomUserFilter
 
-# class NotificationView(viewsets.ModelViewSet):
-#     permission_classes = (IsAuthenticated, )
-#     queryset = Notification.objects.all()
-#     serializer_class = NotificationSerializer
-#     filterset_class = NotificationFilter
+class NotificationView(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = NotificationSerializer
+    filterset_class = NotificationFilter
+    
+    def get_queryset(self):
+        if self.request.user and self.request.method == 'GET':
+            notification_objects = Notification.objects.filter(user=self.request.user)
+            last_index = notification_objects.count() - 1
+            
+            if notification_objects.exists():
+                return notification_objects[last_index:]
+            else:
+                return Notification.objects.none()
 
 # --------------------------------------------------------
 
@@ -373,7 +357,13 @@ class LikeView(viewsets.ModelViewSet):
     filterset_class = LikeFilter
     
     def get_queryset(self):
-        return Like.objects.filter(user_id=self.request.user)
+        if self.request.user:
+            like_objects = Like.objects.filter(user_id=self.request.user)
+            
+            if like_objects.exists():
+                return like_objects
+            else:
+                return History.objects.none()
         
 class CommentView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -387,7 +377,13 @@ class WatchListView(viewsets.ModelViewSet):
     filterset_class = WatchListFilter
 
     def get_queryset(self):
-        return Watch_List.objects.filter(user_id=self.request.user)
+        if self.request.user:
+            watch_list_objects = Watch_List.objects.filter(user_id=self.request.user)
+        
+            if watch_list_objects.exists():
+                return watch_list_objects
+            else:
+                return History.objects.none()
     
 class HistoryView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
@@ -395,12 +391,13 @@ class HistoryView(viewsets.ModelViewSet):
     filterset_class = HistoryFilter
 
     def get_queryset(self):
-        history_objects = History.objects.filter(user_id=self.request.user)
-        if history_objects.exists():
-            return History.objects.filter(user_id=self.request.user)
-        else:
-            return History.objects.none()
-        
+        if self.request.user:
+            history_objects = History.objects.filter(user_id=self.request.user)
+            
+            if history_objects.exists():
+                return history_objects
+            else:
+                return History.objects.none()
     
 # --------------------------------------------------------
 

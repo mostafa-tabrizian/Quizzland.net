@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { useCookies } from "react-cookie";
 
 import axiosInstance from '../axiosApi'
 import { log } from '../base'
 
 const Notifications = (props) => {
     const [notifications, setNotifications] = useState()
-
-    const [cookies] = useCookies(['USER_ACCESS_TOKEN']);
     
     useEffect(() => {
-        cookies.USER_ACCESS_TOKEN &&
         fetchNotifications()
     }, []);
 
     const fetchNotifications = async () => {
-        const payload = {
-            access_token: cookies.USER_ACCESS_TOKEN
-        }
-        
-        await axiosInstance.post(`/api/user/notifications`, payload)
+        await axiosInstance.get(`/api/notificationView/`)
             .then(res => {
-                setNotifications(res.data)
+                setNotifications(res.data[0])
             })
             .catch(err => {
                 log(err)
@@ -31,16 +23,6 @@ const Notifications = (props) => {
         return true
     }
 
-    // const changeNotificationToHasRead = async (notificationId) => {
-    //     const now = new Date()
-
-    //     await axiosInstance.patch(`/api/notification/${notificationId}/?timestamp=${now}`,
-    //         {
-    //             'has_read': true
-    //         }
-    //     )
-    // }
-
     const returnNotifications = () => {
         let messageType
         switch(notifications?.type) {
@@ -48,7 +30,7 @@ const Notifications = (props) => {
                 messageType = '👑'
                 break
             case 'info':
-                messageType = 'ℹ️'
+                messageType = 'ℹ'
                 break
             case 'warning':
                 messageType = '⚠️'
