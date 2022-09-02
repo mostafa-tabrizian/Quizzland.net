@@ -26,20 +26,18 @@ const UserProfileDetail = () => {
         const localAccessToken = getCookie('USER_ACCESS_TOKEN')
 
         if (localAccessToken) {
-            const payload = {
-                access_token: localAccessToken,
-            }
-            
-            return await axiosInstance.post(`/api/user`, payload)
+            return await axiosInstance.get(`/api/userView/`)
                 .then (res => {
-                    if (res.data.is_active) {
-                        return res.data
+                    const user = res.data[0]
+                    if (user.is_active) {
+                        return user
                     } else {
                         return 'inactive'
                     }
                 })
                 .catch(err => {
                     log('api login')
+                    // log(err)
                     log(err.response)
                     refreshToken()
                 })

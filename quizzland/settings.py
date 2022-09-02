@@ -57,7 +57,6 @@ REST_FRAMEWORK = {
         'anon': '70/minute',
         'user': '70/minute',
     }
-
 }
 
 AUTH_USER_MODEL = "frontend.CustomUser"

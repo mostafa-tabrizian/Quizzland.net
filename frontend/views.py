@@ -315,10 +315,14 @@ def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 
 class CustomUserView(viewsets.ModelViewSet):
-    permissions_classes = (BasePermission,)
-    queryset = CustomUser.objects.all()
+    permissions_classes = (IsAuthenticated,)
     serializer_class = CustomUserSerializer
     filterset_class = CustomUserFilter
+    
+    def get_queryset(self):
+        if self.request.user and self.request.method == 'GET':
+            user = CustomUser.objects.filter(username=self.request.user.username)
+            return user
 
 class NotificationView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, )

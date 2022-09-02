@@ -9,7 +9,7 @@ urlpatterns = [
     path('api/token/obtain/', TokenObtainPairView.as_view(serializer_class=CustomJWTSerializer), name='token_create'),  # override sjwt stock token
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
-    path('api/user', user_data),
+    # path('api/user', user_data),
     path('api/profile', public_profile),
     path('api/google', auth_google),
     # path("api/reset_password", resetPassword),
