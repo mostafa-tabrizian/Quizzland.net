@@ -24,9 +24,10 @@ const UserProfileDetail = () => {
 
     const fetchUserProfile = async () => {
         const localAccessToken = getCookie('USER_ACCESS_TOKEN')
+        const now = new Date().getTime()
 
         if (localAccessToken) {
-            return await axiosInstance.get(`/api/userView/`)
+            return await axiosInstance.get(`/api/userView/?timestamp=${now}`)
                 .then (res => {
                     const user = res.data[0]
                     if (user.is_active) {

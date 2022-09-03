@@ -39,39 +39,6 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
 def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
-
-def user_data(request, *args, **kwargs):
-    if request.method == 'POST':
-        access_token = json.loads(request.body.decode('utf-8'))['access_token']
-        userObject = AccessToken(access_token)
-        
-        try:
-            user = CustomUser.objects.get(id=userObject['user_id'])
-            watch_list = Watch_List.objects.filter(user_id=user).values()
-            
-            return HttpResponse(
-                json.dumps(
-                    {
-                        'id': user.id,
-                        'username': user.username,
-                        'first_name': user.first_name,
-                        'last_name': user.last_name,
-                        'points': user.points,
-                        'blocked': user.blocked,
-                        'avatar': str(user.avatar),
-                        'bio': user.bio,
-                        'points': user.points,
-                        'watch_list': str(list(watch_list)),
-                        'most_played_categories': user.most_played_categories,
-                        'played_history': user.played_history,
-                        'is_active': user.is_active,
-                    }   
-                )
-            )
-        except ObjectDoesNotExist:
-            return HttpResponse('DoesNotExist')
-        except Exception as e:
-            return HttpResponse(e)
         
 def public_profile(request, *args, **kwargs):
     if request.method == 'POST':
@@ -105,29 +72,8 @@ def public_profile(request, *args, **kwargs):
         except Exception as e:
             return HttpResponse(e)
     
-def watch_list_view(request):
-    if request.method == 'POST':
-        username
-        request_user_id = self.context['request'].data['user_id']['username']
-        request_trivia_id = self.context['request'].data['trivia_id']['id']
-        request_test_id = self.context['request'].data['test_id']['id']
-
-        userWatchedForThisQuiz = Watch_List.objects.filter(Q(user_id=request_user_id), Q(trivia_id=request_trivia_id) | Q(test_id=request_test_id))
-
-        if (not userWatchedForThisQuiz.exists()):
-            newLike = Watch_List.objects.create(
-                user_id=(CustomUser.objects.get(id=self.context['request'].data['user_id']['username'])),
-                trivia_id=(Quizzes.objects.get(id=request_trivia_id) if request_trivia_id else None),
-                test_id=(Quizzes_Pointy.objects.get(id=request_test_id) if request_test_id else None),
-            )
-        
-            return newLike
-        else:
-            userWatchedForThisQuiz.delete()
-            return request
-    
-def checkAlreadyUserExists(username, email):
-    return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
+# def checkAlreadyUserExists(username, email):
+#     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
 
 def verify_recaptcha(res):
     response = res.GET.get('r')
@@ -140,51 +86,6 @@ def verify_recaptcha(res):
     req = requests.post('https://www.google.com/recaptcha/api/siteverify', params)
     
     return HttpResponse((json.loads(req.content))['success'])
-    
-def user_update(request, *args, **kwargs):
-    if request.method == 'PATCH':
-        payload = json.loads(request.body.decode('utf-8'))
-        
-        access_token = AccessToken(payload['accessToken'])
-            
-        try:
-            user = CustomUser.objects.get(id=access_token['user_id'])
-            
-            newUsername = payload['username']
-            username_length = len(newUsername)
-            
-            if username_length > 3:
-                if checkAlreadyUserExists(newUsername, newUsername):
-                    return HttpResponse('username already exists')
-                else:
-                    user.username = payload['username']
-            elif username_length != 0:
-                return HttpResponse('username too short')
-            
-            first_name = payload['firstName']
-            if len(first_name):
-                user.first_name = first_name
-            last_name = payload['lastName']
-            if len(last_name):
-                user.last_name = last_name
-            bio = payload['bio']
-            if len(bio):
-                user.bio = bio
-            gender = payload['gender']
-            if len(gender):
-                user.gender = gender 
-            birthdayData = payload['birthdayData']
-            if len(birthdayData):
-                user.birthday_date = birthdayData.replace('/', '-')
-            avatar = payload['avatar']
-            if avatar != 'null':
-                user.avatar = avatar
-                
-            user.save()
-            return HttpResponse('success')
-        
-        except Exception as e:
-            return HttpResponse('error: ' + e)
     
 def auth_google(request, *args, **kwargs):
     payload = json.loads(request.body.decode('utf-8'))

@@ -28,6 +28,8 @@ const ProfileSetting = () => {
     }, [userProfile])
     
     const recaptchaRef = useRef(null)
+    const userIdRef = useRef()
+    const currentUsernameRef = useRef()
     const usernameRef = useRef()
     const firstNameRef = useRef()
     const lastNameRef = useRef()
@@ -39,6 +41,8 @@ const ProfileSetting = () => {
 
     const getUserDetail = async () => {
         if (userProfile.userDetail) {
+            userIdRef.current = userProfile.userDetail.id
+            currentUsernameRef.current = userProfile.userDetail.username
             setUser(userProfile.userDetail)
         }
     }
@@ -89,7 +93,7 @@ const ProfileSetting = () => {
                     
                     const payload = {
                         accessToken: cookies.USER_ACCESS_TOKEN,
-                        username: updatedUsername,
+                        username: updatedUsername || currentUsernameRef.current,
                         firstName: updatedFirstName,
                         lastName: updatedLastName,
                         bio: updatedBio,
@@ -98,25 +102,23 @@ const ProfileSetting = () => {
                         avatar: updatedAvatarOption
                     }
                     
-                    await axiosInstance.patch(`/api/user/update`, payload)
+                    await axiosInstance.patch(`/api/userView/${userIdRef.current}/`, payload)
                         .then(res => {
-                            if (res.data == 'success') {
-                                message.success('اطلاعات شما با موفقیت تغییر یافت.')
-                                setTimeout(() => {
-                                    window.location.reload()
-                                }, 1500)
-                            }
-                            else if (res.data == 'username already exists') {
-                                message.error('نام کاربری دیگری انتخاب کنید')
-                            }
-                            else if (res.data == 'username too short') {
-                                message.error('نام کاربری می‌بایست بیش از ۳ کارکتر باشد.')
-                            }
+                            message.success('اطلاعات شما با موفقیت تغییر یافت.')
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 1500)
                         })
                         .catch(err => {
-                            message.error('تغییر پروفایل به مشکل برخورد. لطفا مجددا امتحان کنید.', 4)
-                            log(err)
                             log(err.response)
+                            if (err.response.data == 'username already exists') {
+                                message.error('نام کاربری دیگری انتخاب کنید')
+                            }
+                            else if (err.response.data == 'username too short') {
+                                message.error('نام کاربری می‌بایست بیش از ۳ کارکتر باشد.')
+                            } else {
+                                message.error('تغییر پروفایل به مشکل برخورد. لطفا مجددا امتحان کنید.', 4)
+                            }
                             setTimeout(() => {
                                 window.location.reload()
                             }, 3_500);

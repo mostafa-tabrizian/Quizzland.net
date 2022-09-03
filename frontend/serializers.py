@@ -1,7 +1,7 @@
 from .models import *
+
 from django.db.models import Q
 from django.utils.translation import ugettext as _
-
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -40,6 +40,37 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'played_history',
             'is_active',
         )
+        
+    def update(self, instance, validated_data):
+        newUsername = validated_data['username']
+        username_length = len(newUsername)
+        
+        def checkAlreadyUserExists(username, email):
+            return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
+        
+        if instance.username != validated_data['username']:
+            if username_length > 3:
+                if checkAlreadyUserExists(newUsername, newUsername):
+                    raise serializers.ValidationError("username already exists")
+                else:
+                    instance.username = validated_data['username']
+            elif username_length != 0:
+                raise serializers.ValidationError("username too short")
+        if 'firstName' in validated_data:
+            instance.first_name = validated_data['firstName']
+        if 'lastName'in validated_data:
+            instance.last_name = validated_data['last_name']
+        if 'bio'in validated_data:
+            instance.bio = validated_data['bio']
+        if 'gender'in validated_data:
+            instance.gender = validated_data['gender ']
+        if 'birthdayData'in validated_data:
+            instance.birthday_date = validated_data['birthdayData.replace('/', '-')']
+        if validated_data['avatar'] != 'null':
+            instance.avatar = validated_data['avatar']
+            
+        instance.save()
+        return instance
     
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
