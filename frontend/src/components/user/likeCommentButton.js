@@ -48,6 +48,7 @@ const LikeCommentButton = (props) => {
                         }
                     })
                     .catch(err => {
+                        log(err.response)
                         if (err.response.status == 401) {
                             props.showLoginNotification()
                         } else {

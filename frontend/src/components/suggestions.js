@@ -19,107 +19,160 @@ const Suggestions = () => {
     }, [userProfile]);
     
     const fetchData = async () => {
+        await getSuggestions()
+    }
+
+    // const fetchUserLike = async () => {
+    //     const now = new Date().getTime()
+        
+    //     return await axiosInstance.get(`/api/likeView/?timestamp=${now}`)
+    //         .then(res => {
+    //             return res.data
+    //         })
+    //         .catch(err => {
+    //             return log(err.response)
+    //         })
+    // }
+
+    const fetchUserHistory = async () => {
+        const now = new Date().getTime()
+
+        return await axiosInstance.get(`/api/historyView/?timestamp=${now}`)
+            .then(res => {
+                return res.data
+            })
+            .catch(err => {
+                return log(err.response)
+            })
+    }
+
+    // const grabAndSortMostVisitedCategories = (interest) => {
+    //     if (interest !== null) {
+    //         let hightestVisitedCategory = [];
+
+    //         for (let category in interest) {
+    //             hightestVisitedCategory.push([category, interest[category]]);
+    //         }
+
+    //         hightestVisitedCategory.sort(function (a, b) {
+    //             return b[1] - a[1];
+    //         });
+
+    //         return hightestVisitedCategory
+    //     }
+    // }
+
+    const countCategoriesUserPlayed = (userLike) => {
+        let likeQuizCategory = {}
+
+        for (let quiz in userLike) {
+            const likeQuizCategoryKeys = Object.keys(likeQuizCategory)
+            quiz = userLike[quiz]
+            let quizSubCategory
+            
+            if (quiz.trivia_id != null) {
+                quizSubCategory = quiz.trivia_id.subCategory
+            } else if (quiz.test_id != null) {
+                quizSubCategory = quiz.test_id.subCategory
+            }
+            
+            if (likeQuizCategoryKeys.includes(quizSubCategory)) {
+                likeQuizCategory[quizSubCategory] += 1
+            } else {
+                likeQuizCategory[quizSubCategory] = 1
+            }
+        }
+
+        return likeQuizCategory
+    }
+
+    const sortCategoryUserPlayed = (likeQuizCategory) => {
+        let sortedList = [];
+        for (let quizObject in likeQuizCategory) {
+            sortedList.push([quizObject, likeQuizCategory[quizObject]]);
+        }
+
+        sortedList.sort(function(a, b) {
+            return a[1] - b[1];
+        });
+
+        sortedList.reverse()
+
+        return sortedList
+    }
+
+    const sliceTopThreeUserCategory = (sortedList) => {
+        const categoryList = []
+        let categoryCounter = 0
+        
+        for (let category in sortedList) {
+            categoryList.push(sortedList[category][0])
+            categoryCounter++
+            if (categoryCounter == 3) {
+                break
+            }
+        }
+        
+        return categoryList
+    }
+
+    const getQuizByUserChosenCategories = (content, categoryList) => {
+        let finalList = []
+        let quizCounter = 0
+        
+        for (let quiz in content) {
+            quiz = content[quiz]
+            if (categoryList.includes(quiz.subCategory)) {  //  && !userLikeId.includes(String(quiz.id))
+                finalList.push(quiz)
+                quizCounter++
+                if (quizCounter == 20) {
+                    break
+                }
+            }
+        }
+
+        finalList.sort(sortByMonthlyViews).slice(0, 16)
+        
+        return finalList
+    }
+    
+    const getSuggestions = async () => {
         const quiz = await axios.get('/api/quizView/?public=true')
         const pointy = await axios.get('/api/testView/?public=true')
         
-        await returnSuggestions(quiz.data, pointy.data)
-    }
-
-    const getUserPreviousLiked = async () => {
-        const now = new Date().getTime()
-        let userPreviousLiked
-        
-        await axiosInstance.get(`/api/userView/?username=${userProfile.userDetail.username}&timestamp=${now}`)
-            .then(res => {
-                userPreviousLiked = res.data[0].liked_quizzes.split('_')
-                userPreviousLiked = userPreviousLiked.concat(res.data[0].played_history.split('_'))
-                userPreviousLiked = userPreviousLiked.concat(res.data[0].watch_list.split('_'))
-            })
-
-        return userPreviousLiked
-    }
-
-    const getUserPreviousLikedId = (userPreviousLiked) => {
-        let userPreviousLikedId = []
-        
-        userPreviousLiked.map(previousQuiz => {
-            userPreviousLikedId.push(previousQuiz.slice(0, -1))
-        })
-
-        return userPreviousLikedId
-    }
-
-    const userPreviousLikedSubCategory = async (quiz, pointy, userPreviousLiked) => {
-        let previousUserSubCategory = []
-        
-        userPreviousLiked.map(quizId => {
-            if (quizId && quizId != 0) {
-                
-                let quizDetail
-                
-                if (quizId.includes('q')) {
-                    quizDetail = quiz.filter(elem => elem.id == parseInt(quizId)).slice(-10)
-                }
-                else if (quizId.includes('t')) {
-                    quizDetail = pointy.filter(elem => elem.id == parseInt(quizId)).slice(-10)
-                }
-                
-                if (!previousUserSubCategory.includes(quizDetail[0]?.subCategory)) { previousUserSubCategory.push(quizDetail[0]?.subCategory) }
-            }
-        })
-
-        return previousUserSubCategory
-    }
-
-    const grabAndSortMostVisitedCategories = (interest) => {
-        if (interest !== null) {
-            let hightestVisitedCategory = [];
-
-            for (let category in interest) {
-                hightestVisitedCategory.push([category, interest[category]]);
-            }
-
-            hightestVisitedCategory.sort(function (a, b) {
-                return b[1] - a[1];
-            });
-
-            return hightestVisitedCategory
-        }
-    }
-    
-    const returnSuggestions = async (quiz, pointy) => {
-        const content = quiz.concat(pointy)
-        let finalList = []
+        const content = (quiz.data).concat(pointy.data)
+        let suggestionQuizzes = []
         
         if (userProfile.userDetail != null) {
-            const userPreviousLiked = await getUserPreviousLiked()
-            const userPreviousLikedId = getUserPreviousLikedId(userPreviousLiked)
-            const previousUserSubCategory = await userPreviousLikedSubCategory(quiz, pointy, userPreviousLiked)
-            
-            content.map(quiz => {
-                if (previousUserSubCategory.includes(quiz.subCategory) && !userPreviousLikedId.includes(String(quiz.id))) {
-                    finalList.push(quiz)
-                }
-            })
-            
-        } else {
-            const interest = JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']
-            const hightestVisitedCategory = grabAndSortMostVisitedCategories(interest)
+            // const userLike = await fetchUserLike()
+            const userHistory = await fetchUserHistory()
 
-            if (hightestVisitedCategory.length < 3) { return }
-            
-            const top1stUserCategory = hightestVisitedCategory[0][0]
-            const top2ndUserCategory = hightestVisitedCategory[1][0]
-            const top3rdUserCategory = hightestVisitedCategory[2][0]
-    
-            const top1stSubCategory = content.filter(quiz => quiz.subCategory == top1stUserCategory)
-            const top2stSubCategory = content.filter(quiz => quiz.subCategory == top2ndUserCategory)
-            const top3stSubCategory = content.filter(quiz => quiz.subCategory == top3rdUserCategory)
-            
-            finalList = top1stSubCategory.concat(top2stSubCategory).concat(top3stSubCategory)
+            const categoriesUserPlayed = countCategoriesUserPlayed(userHistory)
+
+            const categoryUserPlayedSorted = sortCategoryUserPlayed(categoriesUserPlayed)
+
+            const topThreeUserCategory = sliceTopThreeUserCategory(categoryUserPlayedSorted)
+
+            suggestionQuizzes = getQuizByUserChosenCategories(content, topThreeUserCategory)
         }
+        // else {
+        //     const interest = JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']
+        //     const hightestVisitedCategory = grabAndSortMostVisitedCategories(interest)
 
-        setSuggestionQuizzes(finalList.sort(sortByMonthlyViews).slice(0, 16))
+        //     if (hightestVisitedCategory.length < 3) { return }
+            
+        //     const top1stUserCategory = hightestVisitedCategory[0][0]
+        //     const top2ndUserCategory = hightestVisitedCategory[1][0]
+        //     const top3rdUserCategory = hightestVisitedCategory[2][0]
+    
+        //     const top1stSubCategory = content.filter(quiz => quiz.subCategory == top1stUserCategory)
+        //     const top2stSubCategory = content.filter(quiz => quiz.subCategory == top2ndUserCategory)
+        //     const top3stSubCategory = content.filter(quiz => quiz.subCategory == top3rdUserCategory)
+            
+        //     finalList = top1stSubCategory.concat(top2stSubCategory).concat(top3stSubCategory)
+        // }
+
+        setSuggestionQuizzes(suggestionQuizzes)
     }
 
 

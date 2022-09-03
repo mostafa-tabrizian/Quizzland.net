@@ -20,8 +20,6 @@ class CustomUserAdmin(UserAdmin):
                     'bio',
                     'birthday_date',
                     'gender',
-                    'most_played_categories',
-                    'played_history',
                     'points',
                 ),
             },

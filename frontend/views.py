@@ -60,7 +60,6 @@ def public_profile(request, *args, **kwargs):
                         'avatar': str(user.avatar),
                         'bio': user.bio,
                         'points': user.points,
-                        # 'most_played_categories': user.most_played_categories,
                         'played_history': len(user.played_history.split('_')) - 2,
                         'likes': userLikesNumber,
                         'comments': userCommentsNumber,

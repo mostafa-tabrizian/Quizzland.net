@@ -28,9 +28,7 @@ class CustomUser(AbstractUser):
     birthday_date = models.DateField(blank=True, null=True)
     gender = models.CharField(blank=True, null=True, max_length=7, choices=Gender)
     points = models.IntegerField(default=0)
-    most_played_categories = models.TextField(blank=True, null=True, max_length=9000)
-    played_history = models.TextField(blank=True, null=True, default='_0', max_length=9000)
-    
+        
     def __str__(self):
         return str(self.email)
 
