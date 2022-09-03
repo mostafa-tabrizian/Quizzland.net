@@ -28,45 +28,35 @@ class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = (
-            'id',
-            'username',
-            'email',
-            'first_name',
-            'last_name',
-            'avatar',
-            'bio',
-            'points',
-            'most_played_categories',
-            'played_history',
-            'is_active',
+            '__all__'
         )
         
     def update(self, instance, validated_data):
-        newUsername = validated_data['username']
-        username_length = len(newUsername)
+        def checkAlreadyUsernameExists(username):
+            return CustomUser.objects.filter(username=username).exists()
         
-        def checkAlreadyUserExists(username, email):
-            return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists() 
-        
-        if instance.username != validated_data['username']:
-            if username_length > 3:
-                if checkAlreadyUserExists(newUsername, newUsername):
+        if 'username' in validated_data:
+            username = validated_data['username']
+            username_length = len(username)
+            
+            if username_length >= 3:
+                if checkAlreadyUsernameExists(username):
                     raise serializers.ValidationError("username already exists")
                 else:
                     instance.username = validated_data['username']
-            elif username_length != 0:
+            else:
                 raise serializers.ValidationError("username too short")
-        if 'firstName' in validated_data:
-            instance.first_name = validated_data['firstName']
-        if 'lastName'in validated_data:
+        if 'first_name' in validated_data:
+            instance.first_name = validated_data['first_name']
+        if 'last_name'in validated_data:
             instance.last_name = validated_data['last_name']
         if 'bio'in validated_data:
             instance.bio = validated_data['bio']
         if 'gender'in validated_data:
-            instance.gender = validated_data['gender ']
+            instance.gender = validated_data['gender']
         if 'birthdayData'in validated_data:
-            instance.birthday_date = validated_data['birthdayData.replace('/', '-')']
-        if validated_data['avatar'] != 'null':
+            instance.birthday_date = validated_data['birthdayData']
+        if 'avatar' in validated_data:
             instance.avatar = validated_data['avatar']
             
         instance.save()

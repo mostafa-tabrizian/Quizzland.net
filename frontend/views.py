@@ -139,28 +139,6 @@ def auth_google(request, *args, **kwargs):
         response['refresh_token'] = str(token)
         
         return HttpResponse(json.dumps(response))
-
-# def resetPassword(request, *args, **kwargs):
-#     if request.method == 'GET':
-#         username = request.GET.get('u')
-#         old_password = request.GET.get('op')
-#         new_password = request.GET.get('np')
-#         user = CustomUser.objects.get(username=username)
-    
-#         try:
-#             validate_password(new_password, user=user, password_validators=None)
-#         except ValidationError as e:
-#             return HttpResponse(e)
-            
-#         old_and_user_password_is_same = check_password(old_password, user.password)
-        
-#         if old_and_user_password_is_same:
-#             user.password = make_password(new_password)
-#             user.save()
-#             return HttpResponse('success_change')
-        
-#         else:
-#             return HttpResponse('not_same')
         
 def restartEveryMonthlyViews(request):
     try:

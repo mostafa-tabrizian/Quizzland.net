@@ -4,7 +4,6 @@ import DatePicker, { DateObject } from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import persianJs from "persianjs"
-import { useCookies } from "react-cookie";
 import debounce from 'lodash.debounce'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { message } from 'antd';
@@ -29,7 +28,6 @@ const ProfileSetting = () => {
     
     const recaptchaRef = useRef(null)
     const userIdRef = useRef()
-    const currentUsernameRef = useRef()
     const usernameRef = useRef()
     const firstNameRef = useRef()
     const lastNameRef = useRef()
@@ -37,12 +35,9 @@ const ProfileSetting = () => {
     const birthdayDateRef = useRef()
     const gendersRef = useRef()
 
-    const [cookies] = useCookies(['USER_ACCESS_TOKEN']);
-
     const getUserDetail = async () => {
         if (userProfile.userDetail) {
             userIdRef.current = userProfile.userDetail.id
-            currentUsernameRef.current = userProfile.userDetail.username
             setUser(userProfile.userDetail)
         }
     }
@@ -50,7 +45,7 @@ const ProfileSetting = () => {
     const checkRecaptcha = async () => {
         const recaptchaResponse = await recaptchaRef.current.executeAsync()
 
-        return await axiosInstance.get(`/api/recaptcha?r=${recaptchaResponse}`,)
+        return await axiosInstance.get(`/api/recaptcha?r=${recaptchaResponse}`)
             .then(res => {
                 return res.data
             })
@@ -89,19 +84,19 @@ const ProfileSetting = () => {
     const debouncePatchUserSetting = useCallback(
         debounce(
             async (updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate, updatedAvatarOption) => {
+                // if (true) {
                 if (await checkRecaptcha()) {
                     
-                    const payload = {
-                        accessToken: cookies.USER_ACCESS_TOKEN,
-                        username: updatedUsername || currentUsernameRef.current,
-                        firstName: updatedFirstName,
-                        lastName: updatedLastName,
-                        bio: updatedBio,
-                        gender: updatedGender,
-                        birthdayData: updatedBirthdayDate,
-                        avatar: updatedAvatarOption
-                    }
-                    
+                    let payload = {}
+
+                    updatedUsername.length && (payload['username'] = updatedUsername)
+                    updatedFirstName.length && (payload['first_name'] = updatedFirstName)
+                    updatedLastName.length && (payload['last_name'] = updatedLastName)
+                    updatedBio.length && (payload['bio'] = updatedBio)
+                    updatedGender != 'null' && (payload['gender'] = updatedGender)
+                    updatedBirthdayDate.length && (payload['birthday_date'] = updatedBirthdayDate.replaceAll('/', '-'))
+                    updatedAvatarOption != 'null' && (payload['avatar'] = updatedAvatarOption)
+
                     await axiosInstance.patch(`/api/userView/${userIdRef.current}/`, payload)
                         .then(res => {
                             message.success('اطلاعات شما با موفقیت تغییر یافت.')
@@ -119,9 +114,6 @@ const ProfileSetting = () => {
                             } else {
                                 message.error('تغییر پروفایل به مشکل برخورد. لطفا مجددا امتحان کنید.', 4)
                             }
-                            setTimeout(() => {
-                                window.location.reload()
-                            }, 3_500);
                         })
                 }
             }
