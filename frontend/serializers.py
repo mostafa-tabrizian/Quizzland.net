@@ -69,7 +69,14 @@ class CustomUserSerializer(serializers.ModelSerializer):
         if 'avatar' in validated_data:
             instance.avatar = validated_data['avatar']
             
-        instance.save()
+        try:
+            instance.save()
+        except Exception as e:
+            if 'Incorrect string value' in str(e):
+                raise serializers.ValidationError('none valid emoji')
+            else:
+                raise serializers.ValidationError('error saving instance')
+        
         return instance
     
 class NotificationSerializer(serializers.ModelSerializer):

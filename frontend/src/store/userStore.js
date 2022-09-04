@@ -12,24 +12,15 @@ const UserStore = createStore({
             ({ setState, getState }) => {
                 setState({userDetail});
             },
-        updatePlaylist:
-            (updatedPlaylist) =>
-            ({ setState, getState }) => {
-                setState(
-                    {
-                       userDetail:  {...getState().userDetail, watch_list: updatedPlaylist}
-                    }
-                )
-            },
-        updateLikedQuizzes:
-            (updatedLikedQuizzes) =>
-            ({ setState, getState })=> {
-                setState(
-                    {
-                        userDetail:  {...getState().userDetail, liked_quizzes: updatedLikedQuizzes}
-                    }
-                )
-            },
+        // updatePlaylist:
+        //     (updatedPlaylist) =>
+        //     ({ setState, getState }) => {
+        //         setState(
+        //             {
+        //                userDetail:  {...getState().userDetail, watch_list: updatedPlaylist}
+        //             }
+        //         )
+        //     }
         
     },
     name: 'userDetail',
@@ -38,6 +29,3 @@ const UserStore = createStore({
 const useUser = createHook(UserStore)
 
 export default useUser
-
-
-// create function for adding and removing like to the state

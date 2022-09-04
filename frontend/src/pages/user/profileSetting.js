@@ -105,14 +105,19 @@ const ProfileSetting = () => {
                             }, 1500)
                         })
                         .catch(err => {
-                            log(err.response)
                             if (err.response.data == 'username already exists') {
                                 message.error('نام کاربری دیگری انتخاب کنید')
                             }
                             else if (err.response.data == 'username too short') {
                                 message.error('نام کاربری می‌بایست بیش از ۳ کارکتر باشد.')
-                            } else {
-                                message.error('تغییر پروفایل به مشکل برخورد. لطفا مجددا امتحان کنید.', 4)
+                            }
+                            else if (err.response.data == 'none valid emoji') {
+                                message.error('یکی از ایموجی های شما قابل ذخیره نیست. لطفا آن را تغییر بدهید.')
+                            } else if (err.response.data = 'error saving instance') {
+                                message.error('در ذخیره تغییرات شما به مشکل برخوردیم! لطفا مجددا امتحان کنید.')  // include ! for debugging
+                            }
+                            else {
+                                message.error('در ذخیره تغییرات شما به مشکل برخوردیم. لطفا مجددا امتحان کنید.')
                             }
                         })
                 }
