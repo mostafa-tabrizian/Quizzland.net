@@ -19,7 +19,7 @@ const Search = (props) => {
     }, [props.value])
 
     const searchedHandler = async (value) => {
-        if (value) {
+        if (value?.length) {
             try {
                 // const minimumKeywordForSearched = 2
                 const searchedValue = value.toLowerCase()
@@ -27,16 +27,15 @@ const Search = (props) => {
                 // if (value.length <= minimumKeywordForSearched) {
                 //     return false
                 // }
-                
                 set_searched_content((await SearchFetchQuiz(searchedValue)).slice(0, props.contentLength))
                 set_searched_category((await SearchFetchCategory(searchedValue)).slice(0, 2))
                 set_searched_user((await SearchFetchUser(searchedValue)).slice(0, 4))
-                props.setContentLoaded(true)
             } catch (e) {
                 // log(e)
                 log('Error in search | cause : database')
             }
         }
+        props.setContentLoaded(true)
     }
         
     return (

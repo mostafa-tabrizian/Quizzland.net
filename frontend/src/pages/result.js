@@ -102,8 +102,8 @@ const Result = () => {
 
         for (let quizIndex in userHistory) {
             if (
-                userHistory[quizIndex].trivia_id.slug === quizDetail?.slug ||
-                userHistory[quizIndex].test_id.slug === quizDetail?.slug
+                userHistory[quizIndex].trivia_id?.slug === quizDetail?.slug ||
+                userHistory[quizIndex].test_id?.slug === quizDetail?.slug
             ) {
                 result = true
                 break
