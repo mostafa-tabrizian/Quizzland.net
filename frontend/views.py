@@ -1,22 +1,22 @@
+from django.http import HttpResponse
+from django.db.models import Q
+from django.shortcuts import render
+from django.contrib.auth.hashers import make_password  # check_password
+from django.contrib.auth.base_user import BaseUserManager
+from django.core.exceptions import ObjectDoesNotExist  # ValidationError
+from django.core import serializers as core_serializers
+from rest_framework import viewsets, status
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission, IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import RefreshToken
 import datetime, json, requests, random
 from decouple import config
 
 from .models import *
 from .serializers import *
 from .filters import *
-
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.hashers import make_password  # check_password
-from django.core.exceptions import ObjectDoesNotExist  # ValidationError
-from rest_framework import viewsets, status
-from rest_framework.views import APIView 
-from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission, IsAuthenticatedOrReadOnly
-from rest_framework.response import Response
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.tokens import AccessToken
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     permission_classes = (AllowAny,)
@@ -60,12 +60,28 @@ def public_profile(request, *args, **kwargs):
                         'avatar': str(user.avatar),
                         'bio': user.bio,
                         'points': user.points,
-                        'played_history': len(user.played_history.split('_')) - 2,
                         'likes': userLikesNumber,
                         'comments': userCommentsNumber,
                     }   
                 )
             )
+        except ObjectDoesNotExist:
+            return HttpResponse('DoesNotExist')
+        except Exception as e:
+            return HttpResponse(e)
+        
+def search_user(request, *args, **kwargs):
+    if request.method == 'POST':
+        username = json.loads(request.body.decode('utf-8'))['username']
+        
+        try:
+            user = CustomUser.objects.filter(Q(username__icontains=username) | Q(first_name__icontains=username) | Q(last_name__icontains=username) | Q(email__icontains=username))
+            user = core_serializers.serialize('json', user, fields=(
+                'id', 'avatar', 'first_name', 'last_name', 'username'
+            ))
+            
+            return HttpResponse(user)
+        
         except ObjectDoesNotExist:
             return HttpResponse('DoesNotExist')
         except Exception as e:

@@ -47,7 +47,7 @@ const SearchInput = () => {
                     </svg>
                 </div>
 
-                <div class={`w-screen h-screen fixed left-0 top-[7rem] overflow-y-scroll ${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'} ${contentLoaded ? 'fadeIn' : 'fadeOut'}`}>    
+                <div class={`w-screen h-screen fixed left-0 top-[11rem] overflow-y-scroll ${theme == 'dark' ? 'bg-[#060101]' : 'bg-white'} ${contentLoaded ? 'fadeIn' : 'fadeOut'}`}>    
                     <button
                         className={`
                             fixed right-4 top-2

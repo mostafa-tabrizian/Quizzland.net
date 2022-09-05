@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom'
-import { Empty } from 'antd';
+import { Empty, message } from 'antd';
 import { BigHead } from "@bigheads/core";
+import debounce from 'lodash.debounce'
 
 import { log, replaceFunction } from '../base'
 import SearchFetchCategory from './searchFetchCategory'
@@ -18,25 +19,33 @@ const Search = (props) => {
         searchedHandler(props.value)
     }, [props.value])
 
-    const searchedHandler = async (value) => {
-        if (value?.length) {
-            try {
-                // const minimumKeywordForSearched = 2
-                const searchedValue = value.toLowerCase()
-    
-                // if (value.length <= minimumKeywordForSearched) {
-                //     return false
-                // }
-                set_searched_content((await SearchFetchQuiz(searchedValue)).slice(0, props.contentLength))
-                set_searched_category((await SearchFetchCategory(searchedValue)).slice(0, 2))
-                set_searched_user((await SearchFetchUser(searchedValue)).slice(0, 4))
-            } catch (e) {
-                // log(e)
-                log('Error in search | cause : database')
+    const searchedHandler = useCallback(
+        debounce(
+            async (value) => {
+                if (value?.length) {
+                    try {
+                        // const minimumKeywordForSearched = 2
+                        const searchedValue = value.toLowerCase()
+            
+                        // if (value.length <= minimumKeywordForSearched) {
+                        //     return false
+                        // }
+
+                        set_searched_content((await SearchFetchQuiz(searchedValue)).slice(0, props.contentLength))
+                        set_searched_category((await SearchFetchCategory(searchedValue)).slice(0, 2))
+                        set_searched_user((await SearchFetchUser(searchedValue)).slice(0, 4))
+                    } catch (e) {
+                        log(e)
+                        log(e.response)
+                        message.error('بیش از حد مجاز سرچ کردید. لطفا صبر کنید...')
+                        log('Error in search | cause : database')
+                    }
+
+                    props.setContentLoaded(true)
+                }
             }
-        }
-        props.setContentLoaded(true)
-    }
+        )
+    )
         
     return (
         <div class="grid grid-cols-1 md:grid-cols-3 items-start justify-center pt-3 mt-2 md:mr-4 rounded-lg">
