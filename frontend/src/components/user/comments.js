@@ -106,23 +106,37 @@ const Comments = (props) => {
                 return (
                     <div>
                         <div>
-                            <Link to={`/profile/${comment.submitter_id?.username}`}>
-                                <div className='flex space-x-3 space-x-reverse'>
-                                    <div className='w-12 h-12'>
-                                        {
-                                            comment.submitter_id?.avatar &&
-                                            <BigHead {...JSON.parse(comment.submitter_id.avatar)} />
-                                        }
-                                    </div>
-                                    <div>
-                                        <div className={`flex space-x-2 space-x-reverse ${theme == 'dark' ? 'text-[#ffeaeb]' : 'text-[#060101]'}`}>
-                                            <h4>{comment.submitter_id?.first_name}</h4>
-                                            <h4>{comment.submitter_id?.last_name}</h4>
+                            {
+                                comment.submitter_id ?
+                                <Link to={`/profile/${comment.submitter_id?.username}`}>
+                                    <div className='flex space-x-3 space-x-reverse'>
+                                        <div className='w-12 h-12'>
+                                            {
+                                                comment.submitter_id?.avatar &&
+                                                <BigHead {...JSON.parse(comment.submitter_id.avatar)} />
+                                            }
                                         </div>
-                                        <h4 className='text-gray-500'>{datePublishHandler(comment.date_submitted)}</h4>
+                                        <div>
+                                            <div className={`flex space-x-2 space-x-reverse ${theme == 'dark' ? 'text-[#ffeaeb]' : 'text-[#060101]'}`}>
+                                                <h4>{comment.submitter_id?.first_name}</h4>
+                                                <h4>{comment.submitter_id?.last_name}</h4>
+                                            </div>
+                                            <h4 className='text-gray-500'>{datePublishHandler(comment.date_submitted)}</h4>
+                                        </div>
+                                    </div>
+                                </Link>
+                                :
+                                <div>
+                                    <div className='flex space-x-3 space-x-reverse'>
+                                        <div className='w-8 h-8 bg-red-800 rounded-full'>
+                                        </div>
+                                        <div>
+                                            <h4>کاربر حذف شده</h4>
+                                            <h4 className='text-gray-500'>{datePublishHandler(comment.date_submitted)}</h4>
+                                        </div>
                                     </div>
                                 </div>
-                            </Link>
+                            }
                             <p className='mt-5 break-words'>{comment.comment_text}</p>
                         </div>
                         
