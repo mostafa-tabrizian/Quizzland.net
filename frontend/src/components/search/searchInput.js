@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'
 
 import { log, getTheme, replaceFunction, keyPressedOnInput } from '../base'
 import Search from './search'
@@ -7,11 +8,17 @@ const SearchInput = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [searchValue, setSearchValue] = useState()
     const [theme, setTheme] = useState('dark')
+
+    const location = useLocation();
      
     useEffect(() => {
         const theme = getTheme()
         setTheme(theme)
     }, []);
+
+    useEffect(() => {
+        closeSearch()
+    }, [location]);
 
     const inputChanged = (input) => {
         setSearchValue(input.target.value)
