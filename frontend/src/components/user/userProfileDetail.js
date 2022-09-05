@@ -48,20 +48,6 @@ const UserProfileDetail = () => {
     }
 
     return fetchUserProfile()
-
-    // const fetchUserProfileUpdate = async (at) => {
-    //     return await axiosInstance.get(`/api/login?at=${at}`)
-    //         .then (res => {
-    //             log('return profile 2')
-    //             log(res.data)
-    //             return res.data
-    //         })
-    //         .catch(err => {
-    //             log(err)
-    //             log(err.response)
-    //             log('refresh again!!!!!')
-    //         })
-    // }
 }
  
 export default UserProfileDetail;

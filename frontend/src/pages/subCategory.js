@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios'
 import { Helmet } from "react-helmet";
+import debounce from 'lodash.debounce'
 
 import AddView from '../components/addView';
 import Tools from '../components/tools'
@@ -59,20 +60,24 @@ const SubCategory = (props) => {
         }
     }
 
-    const fetchContent = async () => {
-        const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
-        const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
-        const content = quiz.data.results.concat(pointy.data.results).sort(sortByMonthlyViews);
-
-        if (content.count !== 0) {
-            set_content(content)
-            set_PageTravel(content)
-        } else {
-            set_hide_content(true)
-        }
-
-        setContentLoaded(true)
-    }
+    const fetchContent = useCallback(
+        debounce(
+            async () => {
+                const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+                const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
+                const content = quiz.data.results.concat(pointy.data.results).sort(sortByMonthlyViews);
+        
+                if (content.count !== 0) {
+                    set_content(content)
+                    set_PageTravel(content)
+                } else {
+                    set_hide_content(true)
+                }
+        
+                setContentLoaded(true)
+            }
+        )
+    )
 
     const applyBackground_AddView = async () => {
         const quizBg = document.querySelector('#quizBg')

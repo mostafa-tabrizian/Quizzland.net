@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
+import debounce from 'lodash.debounce'
 
 import Tools from '../components/tools'
 import PageTravel from '../components/pageTravel'
@@ -73,23 +74,31 @@ const Category = (props) => {
         }
     }
 
-    const defineCategoryTitle = async () => {
-        await axios.get(`/api/categoryView/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
-            .then((response) => {
-                setCategoryTitle(response.data[0].title_persian)
-                setCategoryQueryID(response.data[0].id)
-            })
-    }
+    const defineCategoryTitle = useCallback(
+        debounce(
+            async () => {
+                await axios.get(`/api/categoryView/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
+                    .then((response) => {
+                        setCategoryTitle(response.data[0].title_persian)
+                        setCategoryQueryID(response.data[0].id)
+                    })
+            }
+        )
+    )
 
-    const getCategories = async () => {
-        categoryQueryID &&
-            await axios.get(`/api/subcategoryView/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
-                .then((response => {
-                    setPageTravel(response.data)
-                    setCategories(response.data.results.sort(sortByMonthlyViews))
-                }))
-        setContentLoaded(true)
-    }
+    const getCategories = useCallback(
+        debounce(
+            async () => {
+                categoryQueryID &&
+                    await axios.get(`/api/subcategoryView/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
+                        .then((response => {
+                            setPageTravel(response.data)
+                            setCategories(response.data.results.sort(sortByMonthlyViews))
+                        }))
+                setContentLoaded(true)
+            }
+        )
+    )
 
     return (
         <React.Fragment>

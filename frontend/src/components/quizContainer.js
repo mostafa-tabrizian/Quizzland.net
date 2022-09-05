@@ -55,8 +55,6 @@ const QuizContainer = (props) => {
         debounce(async (userDetail, quizId, quizType) => {
             const now = new Date().getTime()
 
-            log(quizType)
-
             const payload = {
                 user_id: {
                     username: userDetail.id
@@ -68,8 +66,6 @@ const QuizContainer = (props) => {
                     id: quizType == 'trivia' ? quizId : 0
                 }
             }
-
-            log(payload)
 
             await axiosInstance.post(`/api/watchListView/?timestamp=${now}`, payload)
                 .then(res => {

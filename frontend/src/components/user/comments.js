@@ -18,7 +18,7 @@ const Comments = (props) => {
     
     const [userProfile, userActions] = userStore()
 
-    useEffect(async () => {
+    useEffect(() => {
         const theme = getTheme()
         setTheme(theme)
         fetchComments()

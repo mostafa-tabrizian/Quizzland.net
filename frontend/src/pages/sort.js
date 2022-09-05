@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
 import { Helmet } from "react-helmet";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import debounce from 'lodash.debounce'
 
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
@@ -60,29 +61,33 @@ const Sort = () => {
         }, 100)
     }
 
-    const fetchContent = async () => {
-        // if (loading) {
-        //     return;
-        // }
-
-        setLoading(true)
-
-        const quiz = await axios.get(`/api/quizView/?limit=${countResult}&offset=${offset}&public=true`)
-        const pointy = await axios.get(`/api/testView/?limit=${countResult}&offset=${offset}&public=true`)
-        let content_new = quiz.data.results.concat(pointy.data.results)
+    const fetchContent = useCallback(
+        debounce(
+            async () => {
+                // if (loading) {
+                //     return;
+                // }
         
-        setCountNewFetched(content_new.length)
-
-        const sortCategory = takeParameterFromUrl('c')
-        if (sortCategory) {
-            content_new = content_new.filter(quiz => quiz.categoryKey.id == sortCategory)
-        }
+                setLoading(true)
         
-        setContent([...content, ...content_new]);
-        setOffset(offset + countResult)
-        setLoading(false);
-        setContentLoaded(true)
-    }
+                const quiz = await axios.get(`/api/quizView/?limit=${countResult}&offset=${offset}&public=true`)
+                const pointy = await axios.get(`/api/testView/?limit=${countResult}&offset=${offset}&public=true`)
+                let content_new = quiz.data.results.concat(pointy.data.results)
+                
+                setCountNewFetched(content_new.length)
+        
+                const sortCategory = takeParameterFromUrl('c')
+                if (sortCategory) {
+                    content_new = content_new.filter(quiz => quiz.categoryKey.id == sortCategory)
+                }
+                
+                setContent([...content, ...content_new]);
+                setOffset(offset + countResult)
+                setLoading(false);
+                setContentLoaded(true)
+            }
+        )
+    )
 
     return (
 
