@@ -328,8 +328,8 @@ const Quiz = (props) => {
     const halfTheQuestions = Math.floor(questions.length / 2)
 
     const ifHalfQuizAddView = () => {
-        if (currentQuestionNumber == halfTheQuestions && userProfile.userDetail) {
-            // AddView(`${quizType}View`, quizDetailRef.current.id)
+        if (currentQuestionNumber == halfTheQuestions) {  // && userProfile.userDetail
+            AddView(`${quizType}View`, quizDetailRef.current.id)
         }
     }
 
