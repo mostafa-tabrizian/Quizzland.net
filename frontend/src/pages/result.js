@@ -57,7 +57,6 @@ const Result = () => {
 
     useEffect(() => {
         const quizResult = JSON.parse(localStorage.getItem('qr'))
-        const quizDetail = JSON.parse(localStorage.getItem('qd'))
         const quizType = localStorage.getItem('qt')
         
         const score = calculateTheResultScore(quizResult, quizType)
@@ -65,7 +64,7 @@ const Result = () => {
         if (userProfile.userDetail == false) {
             displayMessageToUserAboutScore(score)
         } else if (userProfile.userDetail !== null) {
-            giveScorePoint(quizType, quizDetail.id, score)
+            giveScorePoint(score)
         }
     }, [userProfile]);
 
@@ -76,8 +75,55 @@ const Result = () => {
         }
     }, [suggestionQuizzes])
 
-    const userPlayedThisQuizBefore = (quizType, quizId) => {
-        return userProfile.userDetail.played_history.split('_').includes(String(quizId) + quizType.slice(0, 1))
+    const postToHistoryAsPlayedQuiz = async () => {
+        const payload = {
+            user_id: {
+                username: userProfile.userDetail.id
+            },
+            test_id: {
+                id: quizType == 'test' ? quizDetail?.id : 0
+            },
+            trivia_id: {
+                id: quizType == 'quiz' ? quizDetail?.id : 0
+            }
+        }
+
+        await axiosInstance.post(`/api/historyView/`, payload)
+            // .then(res => {
+            // })
+            .catch(err => {
+                log(err.response)
+            })
+    }
+
+    const userPlayedThisQuizBefore = async () => {
+        const userHistory = await fetchUserHistory()
+        let result = false
+
+        for (let quizIndex in userHistory) {
+            if (
+                userHistory[quizIndex].trivia_id.slug === quizDetail?.slug ||
+                userHistory[quizIndex].test_id.slug === quizDetail?.slug
+            ) {
+                result = true
+                break
+            }
+        }
+
+        postToHistoryAsPlayedQuiz()
+        return result
+    }
+
+    const fetchUserHistory = async () => {
+        const now = new Date().getTime()
+
+        return await axiosInstance.get(`/api/historyView/?timestamp=${now}`)
+            .then(res => {
+                return res.data
+            })
+            .catch(err => {
+                log(err.response)
+            })
     }
 
     const displayMessageToUserAboutScore = (score) => {
@@ -134,10 +180,11 @@ const Result = () => {
         return giveAmountPoint
     }
     
-    const giveScorePoint = async (quizType, quizId, score) => {
+    const giveScorePoint = async (score) => {
         const giveAmountPoint = decideHowMucHPointToGive(score)
-        
-        if (giveAmountPoint !== 0 && !userPlayedThisQuizBefore(quizType, quizId)) {
+        const playedBefore = await userPlayedThisQuizBefore()
+
+        if (giveAmountPoint !== 0 && !playedBefore) {
             await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { points: userProfile.userDetail.points + parseInt(giveAmountPoint) })
                 .then(res => {
                     res.status == 200 &&
@@ -179,7 +226,7 @@ const Result = () => {
                 }
                 else if (quizScore > 60) {
                     setResultScore(`😎 ${quizScore}%`)
-                    setResultSubtitle(`😎 ایول\n! تو یک ${quizDetail.fanName} واقعی هستی `)
+                    setResultSubtitle(`😎 ایول\n! تو یک ${quizDetail.fan_name} واقعی هستی `)
                     setResultGif(quizDetail.GIF80)
                 }
                 else if (quizScore > 40) {
@@ -393,7 +440,7 @@ const Result = () => {
 
                     <div className='container px-20 mx-auto'>
                         <div className="mb-4 text-lg text-center space-sm">
-                            {/* <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizDetail.fanName} هستن`}</h5> */}
+                            {/* <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizDetail.fan_name} هستن`}</h5> */}
 
                             <InlineShareButtons
                                 config={{

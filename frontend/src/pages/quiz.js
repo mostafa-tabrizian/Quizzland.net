@@ -325,33 +325,11 @@ const Quiz = (props) => {
         document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
     }
 
-    const postToHistoryAsPlayedQuiz = async () => {
-        const payload = {
-            user_id: {
-                username: userProfile.userDetail.id
-            },
-            test_id: {
-                id: quizType == 'test' ? quiz?.id : 0
-            },
-            trivia_id: {
-                id: quizType == 'quiz' ? quiz?.id : 0
-            }
-        }
-
-        await axiosInstance.post(`/api/historyView/`, payload)
-            // .then(res => {
-            // })
-            .catch(err => {
-                log(err.response)
-            })
-    }
-
     const halfTheQuestions = Math.floor(questions.length / 2)
 
-    const ifHalfQuizAddViewAndHistory = () => {
-        // AddView(`${quizType}View`, quizDetailRef.current.id)
+    const ifHalfQuizAddView = () => {
         if (currentQuestionNumber == halfTheQuestions && userProfile.userDetail) {
-            postToHistoryAsPlayedQuiz()
+            // AddView(`${quizType}View`, quizDetailRef.current.id)
         }
     }
 
@@ -367,7 +345,7 @@ const Quiz = (props) => {
                     setAbleToGoNext(true)
                     makeEveryOptionLowOpacity('low')
                     checkTheSelectedOption(props.target)
-                    ifHalfQuizAddViewAndHistory()
+                    ifHalfQuizAddView()
 
                     if (autoQuestionChanger) {
                         setTimeout(() => {

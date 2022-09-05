@@ -220,23 +220,16 @@ class HistorySerializer(serializers.ModelSerializer):
     test_id = PointyQuizzesSerializer(many=False)
     
     def create(self, request):
-        request_user_id = self.context['request'].data['user_id']['username']
         request_trivia_id = self.context['request'].data['trivia_id']['id']
         request_test_id = self.context['request'].data['test_id']['id']
         
-        userHistoryForThisQuiz = History.objects.filter(Q(user_id=request_user_id), Q(trivia_id=request_trivia_id) | Q(test_id=request_test_id))
+        newLike = History.objects.create(
+            user_id=(CustomUser.objects.get(id=(self.context['request'].data['user_id']['username']))),
+            trivia_id=(Quizzes.objects.get(id=request_trivia_id) if request_trivia_id else None),
+            test_id=(Quizzes_Pointy.objects.get(id=request_test_id) if request_test_id else None),
+        )
         
-        if (not userHistoryForThisQuiz.exists()):
-            newLike = History.objects.create(
-                user_id=(CustomUser.objects.get(id=(self.context['request'].data['user_id']['username']))),
-                trivia_id=(Quizzes.objects.get(id=request_trivia_id) if request_trivia_id else None),
-                test_id=(Quizzes_Pointy.objects.get(id=request_test_id) if request_test_id else None),
-            )
-            
-            return newLike
-        else:
-            userHistoryForThisQuiz.delete()
-            return request
+        return newLike
 
 class QuestionsSerializer(serializers.ModelSerializer):
     class Meta:

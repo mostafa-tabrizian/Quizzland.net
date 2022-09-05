@@ -13,9 +13,7 @@ const Suggestions = () => {
     const [userProfile, userActions] = userStore()
 
     useEffect( async () => {
-        if (userProfile.userDetail !== null && userProfile.userDetail) {
-            await fetchData()
-        }
+        await fetchData()
     }, [userProfile]);
     
     const fetchData = async () => {
@@ -87,18 +85,20 @@ const Suggestions = () => {
     }
 
     const sortCategoryUserPlayed = (likeQuizCategory) => {
-        let sortedList = [];
-        for (let quizObject in likeQuizCategory) {
-            sortedList.push([quizObject, likeQuizCategory[quizObject]]);
+        if (likeQuizCategory !== null) {
+            let sortedList = [];
+            for (let quizObject in likeQuizCategory) {
+                sortedList.push([quizObject, likeQuizCategory[quizObject]]);
+            }
+
+            sortedList.sort(function(a, b) {
+                return a[1] - b[1];
+            });
+
+            sortedList.reverse()
+
+            return sortedList
         }
-
-        sortedList.sort(function(a, b) {
-            return a[1] - b[1];
-        });
-
-        sortedList.reverse()
-
-        return sortedList
     }
 
     const sliceTopThreeUserCategory = (sortedList) => {
@@ -142,8 +142,8 @@ const Suggestions = () => {
         
         const content = (quiz.data).concat(pointy.data)
         let suggestionQuizzes = []
-        
-        if (userProfile.userDetail != null) {
+
+        if (userProfile.userDetail !== null && userProfile.userDetail) {
             // const userLike = await fetchUserLike()
             const userHistory = await fetchUserHistory()
 
@@ -155,22 +155,20 @@ const Suggestions = () => {
 
             suggestionQuizzes = getQuizByUserChosenCategories(content, topThreeUserCategory)
         }
-        // else {
-        //     const interest = JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']
-        //     const hightestVisitedCategory = grabAndSortMostVisitedCategories(interest)
+        else {
+            const interest = JSON.parse(localStorage.getItem('interest'))['categoryWatchedCounter']
+            const hightestVisitedCategory = sortCategoryUserPlayed(interest)
 
-        //     if (hightestVisitedCategory.length < 3) { return }
+            if (hightestVisitedCategory.length < 3) { return }
+
+            const top1stUserCategory = hightestVisitedCategory[0][0]
+            const top2ndUserCategory = hightestVisitedCategory[1][0]
+            const top3rdUserCategory = hightestVisitedCategory[2][0]
+
+            const topThreeUserCategory = [top1stUserCategory, top2ndUserCategory, top3rdUserCategory]
             
-        //     const top1stUserCategory = hightestVisitedCategory[0][0]
-        //     const top2ndUserCategory = hightestVisitedCategory[1][0]
-        //     const top3rdUserCategory = hightestVisitedCategory[2][0]
-    
-        //     const top1stSubCategory = content.filter(quiz => quiz.subCategory == top1stUserCategory)
-        //     const top2stSubCategory = content.filter(quiz => quiz.subCategory == top2ndUserCategory)
-        //     const top3stSubCategory = content.filter(quiz => quiz.subCategory == top3rdUserCategory)
-            
-        //     finalList = top1stSubCategory.concat(top2stSubCategory).concat(top3stSubCategory)
-        // }
+            suggestionQuizzes = getQuizByUserChosenCategories(content, topThreeUserCategory)
+        }
 
         setSuggestionQuizzes(suggestionQuizzes)
     }

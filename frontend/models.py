@@ -222,9 +222,6 @@ class History(models.Model):
     test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_history_id', blank=True, null=True, on_delete=models.CASCADE)
     date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
     
-    class Meta:
-        unique_together = (('user_id', 'test_id'), ('user_id', 'trivia_id'))
-    
     @property
     def quiz_id(self):
         return self.trivia_id or self.test_id
