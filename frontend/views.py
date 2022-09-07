@@ -256,7 +256,7 @@ class LikeView(viewsets.ModelViewSet):
     
     def get_queryset(self):
         if self.request.user:
-            like_objects = Like.objects.filter(user_id=self.request.user)
+            like_objects = Like.objects.filter(user_id=self.request.user).order_by('date_submitted')
             
             if like_objects.exists():
                 return like_objects
@@ -276,7 +276,7 @@ class WatchListView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.request.user:
-            watch_list_objects = Watch_List.objects.filter(user_id=self.request.user)
+            watch_list_objects = Watch_List.objects.filter(user_id=self.request.user).order_by('date_submitted')
         
             if watch_list_objects.exists():
                 return watch_list_objects
@@ -290,7 +290,7 @@ class HistoryView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.request.user:
-            history_objects = History.objects.filter(user_id=self.request.user)
+            history_objects = History.objects.filter(user_id=self.request.user).order_by('date_submitted')
             
             if history_objects.exists():
                 return history_objects
