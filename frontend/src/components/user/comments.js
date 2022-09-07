@@ -25,24 +25,28 @@ const Comments = (props) => {
     }, []);
 
     const checkIfCommentValid = (comment) => {
-        return comment.trim().length !== 0 && comment.length < 255 ? true : false
+        const commentLength = comment.trim().length
+        if (commentLength == 0) {
+            message.error('شما هیچ کامنتی ننوشته‌اید!')
+            return false
+        } else if (commentLength < 3) {
+            message.error('کامنت شما کافی نمی‌باشد!')
+            return false
+        } else if (255 <= commentLength) {
+            message.error('کامنت شما بیش از حد مجاز بلند است!')
+            return false
+        } else {
+            return true
+        }
     }
 
     const postClicked = async () => {
         const comment = commentTextRef.current.value
         let verifyState = true
-        
-        if (!checkIfCommentValid(comment)) {
-            comment.trim().length == 0 ?
-                message.error('شما هیچ کامنتی ننوشته‌اید!')
-                :
-                message.error('کامنت شما بیش از حد مجاز بلند است!')
-            return  // not valid
-        }
 
-        if (ExplicitWords(comment)) {
-            verifyState = false
-        }
+        if (!checkIfCommentValid(comment)) { return }  // not valid
+
+        if (ExplicitWords(comment)) { verifyState = false }
         
         message.loading("در حال ثبت کامنت ...", 1)
         await debouncePostComment(comment, verifyState)

@@ -21,8 +21,12 @@ const SearchInput = () => {
     }, [location]);
 
     const inputChanged = (input) => {
-        setSearchValue(input.target.value)
-        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}; overflow-y: hidden`
+        const searchValue = input.target.value
+        
+        if (searchValue.trim().length) {
+            setSearchValue(searchValue)
+            document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}; overflow-y: hidden`
+        }
     }
 
     const closeSearch = () => {
