@@ -29,7 +29,7 @@ const Comments = (props) => {
         if (commentLength == 0) {
             message.error('شما هیچ کامنتی ننوشته‌اید!')
             return false
-        } else if (commentLength < 3) {
+        } else if (commentLength < 2) {
             message.error('کامنت شما کافی نمی‌باشد!')
             return false
         } else if (255 <= commentLength) {

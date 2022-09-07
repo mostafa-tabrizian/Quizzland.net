@@ -49,7 +49,7 @@ const Result = () => {
         setQuestionCount(quizResult.ql)
         setCorrectAnswersCount(quizResult.qc)
         setContentLoaded(true)
-        getSuggestionsQuiz(quizDetail?.subCategory)
+        getSuggestionsQuiz(quizDetail)
         document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
         setLoadState(true)
         
@@ -326,13 +326,16 @@ const Result = () => {
         });
     };
 
-    const getSuggestionsQuiz = async (subCategory) => {
-        log(subCategory)
-        const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+    const getSuggestionsQuiz = async (quizDetail) => {
+        let quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(quizDetail?.subCategory, ' ', '+')}&limit=8&public=true`)
+        let pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(quizDetail?.subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
 
-        log(content)
+        if (content.length == 1) {
+            quiz = await axios.get(`/api/quizView/?category__iexact=${replaceFunction(quizDetail?.categoryKey.title_english, ' ', '+')}&limit=8&public=true`)
+            pointy = await axios.get(`/api/testView/?category__iexact=${replaceFunction(quizDetail?.categoryKey.title_english, ' ', '+')}&limit=8&public=true`)
+            content = quiz.data.results.concat(pointy.data.results)
+        }
 
         setSuggestionQuizzes(content.slice(0, 8).sort(sortByMonthlyViews))
         setContentLoaded(true)
