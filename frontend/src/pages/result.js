@@ -327,9 +327,12 @@ const Result = () => {
     };
 
     const getSuggestionsQuiz = async (subCategory) => {
-        const quiz = await axios.get(`/api/quizView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axios.get(`/api/testView/?subCategory=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        log(subCategory)
+        const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+        const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
         let content = quiz.data.results.concat(pointy.data.results)
+
+        log(content)
 
         setSuggestionQuizzes(content.slice(0, 8).sort(sortByMonthlyViews))
         setContentLoaded(true)
