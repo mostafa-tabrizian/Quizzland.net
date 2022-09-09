@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-import { notification, message } from 'antd';
+import { notification, message } from 'antd'
+import 'antd/dist/antd.css';
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -129,7 +130,7 @@ const Quiz = (props) => {
             style: {
                 background: '#ac272e',
                 color: 'white',
-                borderRadius: '15px'
+                borderRadius: '15px',
             }
         });
     };

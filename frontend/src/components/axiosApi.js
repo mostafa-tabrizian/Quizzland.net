@@ -1,4 +1,5 @@
-import { message } from 'antd';
+import { message } from 'antd'
+import 'antd/dist/antd.css';
 import axios from 'axios'
 import { log, getCookie } from './base'
 import { setupCache } from 'axios-cache-adapter'

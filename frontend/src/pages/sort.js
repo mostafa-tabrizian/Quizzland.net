@@ -3,14 +3,14 @@ import axios from 'axios'
 import { Helmet } from "react-helmet";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import debounce from 'lodash.debounce'
+import { message } from 'antd'
+import 'antd/dist/antd.css';
 
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import skeletonQuiz from '../components/skeletonQuiz';
 import Tools from '../components/tools';
-
 import { log, getTheme, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
-import { message } from 'antd';
 
 const Sort = () => {
     const [loadState, setLoadState] = useState()

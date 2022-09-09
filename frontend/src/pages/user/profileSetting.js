@@ -6,7 +6,8 @@ import persian_fa from "react-date-object/locales/persian_fa"
 import persianJs from "persianjs"
 import debounce from 'lodash.debounce'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { message } from 'antd';
+import { message } from 'antd'
+import 'antd/dist/antd.css';
 
 import LoginForm from '../../components/user/loginForm'
 import axiosInstance from '../../components/axiosApi';

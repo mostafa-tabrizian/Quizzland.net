@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom'
-import { Empty, message } from 'antd';
+import { Empty, message } from 'antd'
+import 'antd/dist/antd.css';
 import { BigHead } from "@bigheads/core";
 import debounce from 'lodash.debounce'
 
@@ -51,12 +52,12 @@ const Search = (props) => {
         <div class="grid grid-cols-1 md:grid-cols-3 items-start justify-center pt-3 mt-2 md:mr-4 rounded-lg">
             <div className='order-2 col-start-1 col-end-3 p-4 md:order-1 grid-row-full'>
                 <h1 className='mb-10'>کوییز ها</h1>
-                <ul class="flex flex-wrap align-baseline">
+                <ul class="flex flex-wrap align-baseline justify-center">
                     {
                         searched_content.length ?
                         <QuizContainer quizzes={searched_content} bgStyle='trans' />
                         :
-                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2>هیچ کوییزی پیدا نشد!</h2>} />
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2 className='text-center'>هیچ کوییزی پیدا نشد!</h2>} />
                     }
                 </ul>      
             </div>
@@ -91,7 +92,7 @@ const Search = (props) => {
                             }
                         </ul>
                         :
-                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2>هیچ کتگوری پیدا نشد!</h2>} />
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2 className='text-center'>هیچ کتگوری پیدا نشد!</h2>} />
                     }
                 </div>
                 <div className='mt-10'>
@@ -124,7 +125,7 @@ const Search = (props) => {
                                 )
                             })
                             :
-                            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2>هیچ کاربری پیدا نشد!</h2>} />
+                            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<h2 className='text-center'>هیچ کاربری پیدا نشد!</h2>} />
                         }
                     </ul>
                 </div>

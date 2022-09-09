@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { message, notification } from 'antd';
+import { message, notification } from 'antd'
+import 'antd/dist/antd.css';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
 import axios from 'axios'
 
 import LoginForm from '../components/user/loginForm';
-import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews, sortByNewest } from '../components/base'
+import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews, isItDesktop } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import skeletonQuiz from '../components/skeletonQuiz';
@@ -384,7 +385,7 @@ const Result = () => {
     const returnQuizResult = () => {
         switch (quizType) {
             case 'quiz':
-                return <div className="items-center justify-center block w-full mx-auto result md:container space-sm md:flex">
+                return <div className="items-center text-center justify-center block w-full mx-auto result md:container mb-20 space-sm md:flex">
                             <div className="flex items-center justify-center result__img md:mx-16">
                                 {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
                             </div>
@@ -480,47 +481,49 @@ const Result = () => {
 
                 {quizDetail?.id && <LikeCommentButton quizId={quizDetail?.id} quizType={quizType} showLoginNotification={showLoginNotification} />}
 
-                <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
+                <div className='mx-4 mt-10'>
+                    <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
-                <div className='w-3/4 mx-auto'>
-                    {skeletonQuiz(contentLoaded)}
-                </div>
+                    <div className='w-3/4 mx-auto'>
+                        {skeletonQuiz(contentLoaded)}
+                    </div>
 
-                <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
+                    <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
+                        {
+                            suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                        }
+                    </ul>
+
                     {
-                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
-                    }
-                </ul>
+                        suggestionQuizzes && isItDesktop() && chooseUniqueQuizToSuggest() &&
+                        <div className='noBlur result__popUpQuizSuggester fixed z-10 popUp-hide bg-gradient-to-t from-[#771118] to-[#ac272e] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
+                            <button className='absolute text-3xl noBlur result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
+                                closePopUpQuizSuggester();
+                            }}> X </button>
 
-                {
-                    suggestionQuizzes && chooseUniqueQuizToSuggest() &&
-                    <div className='noBlur result__popUpQuizSuggester fixed z-10 popUp-hide bg-gradient-to-t from-[#771118] to-[#ac272e] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
-                        <button className='absolute text-3xl noBlur result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
-                            closePopUpQuizSuggester();
-                        }}> X </button>
+                            <div className='noBlur'>
+                                <h3 className='noBlur result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
 
-                        <div className='noBlur'>
-                            <h3 className='noBlur result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
-
+                                <Link className='noBlur' to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
+                                    <h3 className="flex text-lg noBlur result__popUpQuizSuggester__title">
+                                        {chooseUniqueQuizToSuggest().title}
+                                    </h3>
+                                </Link>
+                            </div>
                             <Link className='noBlur' to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                                <h3 className="flex text-lg noBlur result__popUpQuizSuggester__title">
-                                    {chooseUniqueQuizToSuggest().title}
-                                </h3>
+                                <div className='noBlur result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
+                                    <img
+                                        src={chooseUniqueQuizToSuggest().thumbnail}
+                                        alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
+                                        width={1920}
+                                        height={1080}
+                                        className='object-cover noBlur'
+                                    />
+                                </div>
                             </Link>
                         </div>
-                        <Link className='noBlur' to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                            <div className='noBlur result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
-                                <img
-                                    src={chooseUniqueQuizToSuggest().thumbnail}
-                                    alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
-                                    width={1920}
-                                    height={1080}
-                                    className='object-cover noBlur'
-                                />
-                            </div>
-                        </Link>
-                    </div>
-                }
+                    }
+                </div>
             </div>
 
         </React.Fragment>

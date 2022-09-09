@@ -4,7 +4,8 @@ import { Helmet } from "react-helmet";
 import { gapi } from 'gapi-script'
 import { useGoogleLogout } from 'react-google-login'
 import { useCookies } from "react-cookie";
-import { message } from 'antd';
+import { message } from 'antd'
+import 'antd/dist/antd.css';
 import { BigHead } from "@bigheads/core";
 import axios from 'axios';
 
@@ -216,7 +217,7 @@ const Header = () => {
                                         </div>
                                     </div>
                                     :
-                                    <Link to='/login' className='px-4 h-fit border-2 border-[#690D11] rounded-lg'>ورود</Link>
+                                    <Link to='/login' className={`px-6 py-1 h-fit bloodRiver_bg rounded-2xl text-white`}>ورود</Link>
                                 }
                             </div>
 
@@ -315,7 +316,7 @@ const Header = () => {
                             </Link>
                             :
                             <React.Fragment>
-                                <Link to='/login' className='px-4 py-1 h-fit border-2 border-[#690D11] rounded-lg'>ورود</Link>
+                                <Link to='/login' className={`px-6 py-1 h-fit bloodRiver_bg rounded-2xl text-white`}>ورود</Link>
                             </React.Fragment>
                     }
                 </div>
@@ -323,7 +324,7 @@ const Header = () => {
             </header>
 
             <div className='relative md:hidden'>
-                <div className={`header__menu w-screen h-screen fixed text-right z-10
+                <div className={`header__menu w-screen h-screen fixed text-right z-20
                                 top-0 right-0
                                 ${searchMobileOpen ? '' : 'slideMenu-hide'}
                                 pr-8 pt-5`
@@ -375,7 +376,8 @@ const Header = () => {
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <Link to='/login' className='px-4 py-1 h-fit border-2 border-[#690D11] rounded-lg'>ورود</Link>
+                            <Link to='/login' className={`px-6 py-1 h-fit bloodRiver_bg rounded-2xl text-white`}>ورود</Link>
+                            
                         </React.Fragment>
                     }
                         

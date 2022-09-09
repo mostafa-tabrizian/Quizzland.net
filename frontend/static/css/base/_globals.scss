@@ -188,10 +188,10 @@ a,
 a:visited,
 a:hover {
     text-decoration: none;
-    color: unset;
 
     &:hover {
         cursor: pointer;
+        color: rgba(255, 106, 106, 0.692);
     }
 }
 

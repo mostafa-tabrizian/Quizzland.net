@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { message, notification } from 'antd';
+import { message, notification } from 'antd'
+import 'antd/dist/antd.css';
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script'
 import { useCookies } from "react-cookie";

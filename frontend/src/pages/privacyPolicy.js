@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
+import { getTheme } from '../components/base'
 
 const pathRed = '/static/img/bubbles.webp'
 
@@ -18,7 +19,9 @@ const PrivacyPolicy = () => {
                 <meta name="keywords" content="حریم خصوصی, کوییزلند" />
             </Helmet>
 
-            <div className="basicPage wrapper-sm center">
+            <h1 className='mt-5 text-center title'>حریم خصوصی شما</h1>
+
+            <div className="mx-auto basicPage wrapper-sm">
                 <h2>تمام اطلاعات جزئی شما که توسط کوییزلند دریافت میشود تنها برای بهتر کردن تجربه ی شما است و این اطلاعات</h2>
                 <div className='space-sm'>
                     <p>.کوکی ها هستند که باعث میشوند تجربه ی شما در آینده در این سایت سریع تر و بهتر شود</p>

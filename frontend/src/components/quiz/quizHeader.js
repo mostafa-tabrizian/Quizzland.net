@@ -1,4 +1,5 @@
-import { Switch } from 'antd';
+import { Switch } from 'antd'
+import 'antd/dist/antd.css'
 import persianJs from "persianjs"
 
 import { makeDatePublishFormatForQuizDetail, getTheme, log } from '../base'

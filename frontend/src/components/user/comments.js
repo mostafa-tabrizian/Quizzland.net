@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom'
-import { message, Spin } from 'antd';
+import { message, Spin } from 'antd'
+import 'antd/dist/antd.css';
 import debounce from 'lodash.debounce'
 import axios from 'axios'
 import { BigHead } from "@bigheads/core";

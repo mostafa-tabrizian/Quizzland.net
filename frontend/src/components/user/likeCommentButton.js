@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Drawer, message } from 'antd';
+import { Drawer, message } from 'antd'
+import 'antd/dist/antd.css';
 import debounce from 'lodash.debounce'
 
 import Comments from './comments'

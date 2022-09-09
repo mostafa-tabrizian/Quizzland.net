@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
-import { Carousel } from 'antd';
+import { Carousel } from 'antd'
+import 'antd/dist/antd.css';
 import axios from 'axios'
 
 import skeletonQuiz from '../components/skeletonQuiz';
@@ -228,7 +229,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>جدیدترین ها</h4>
-                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
                     </div>
 
                     {skeletonQuiz(contentLoaded)}
@@ -257,7 +258,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>محبوب ترین ها</h4>
-                        <Link to="/sort?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
                     </div>
 
                     {skeletonQuiz(contentLoaded)}
@@ -286,7 +287,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>کوییز سلبریتی</h4>
-                        <Link to="/sort?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
                     </div>
 
                     {skeletonQuiz(contentLoaded)}
@@ -315,7 +316,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>کوییز فیلم و سریال</h4>
-                        <Link to="/sort?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
                     </div>
 
                     {skeletonQuiz(contentLoaded)}
@@ -333,7 +334,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>تست روانشناسی</h4>
-                        <Link to="/sort?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
                     </div>
 
                     {skeletonQuiz(contentLoaded)}
@@ -361,7 +362,7 @@ const Index = () => {
                 <div className="mt-8 mb-8">
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
                         <h4>کوییز های بیشتر</h4>
-                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>نتایج بیشتر</div></Link>
+                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
                     </div>
 
                     {skeletonQuiz(contentLoaded)}
