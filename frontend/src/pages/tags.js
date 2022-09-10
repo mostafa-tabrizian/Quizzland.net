@@ -54,7 +54,7 @@ const SearchMoreResult = () => {
                 <meta name="robots" content="noindex, follow"></meta>
             </Helmet>
 
-            <div className='mx-4 md:w-4/5 md:m-auto'>
+            <div className='mr-4 md:w-4/5 md:m-auto'>
 
                 {/* <div className='adverts adverts__left'>
                     <div id='mediaad-DLgb'></div>
@@ -119,7 +119,7 @@ const SearchMoreResult = () => {
                     <hr className="w-[20vw]" />
                 </div>
 
-                <ul className="flex flex-wrap quizContainer flex-ai-fe justify-right">
+                <ul className="flex flex-col flex-wrap quizContainer flex-ai-fe justify-right">
                     {
                         searched_content.length ?
                         <QuizContainer quizzes={searched_content} bgStyle='trans' />

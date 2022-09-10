@@ -132,7 +132,7 @@ const QuizHistory = () => {
                             (!content.length  && document.readyState !== 'loading') ?
                             <h1 className='mt-10 mb-[25rem] text-center'>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
                             :
-                        <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
+                            <ul className="mx-auto flex-col flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
                                 <QuizContainer quizzes={content} />
                             </ul>    
                         }

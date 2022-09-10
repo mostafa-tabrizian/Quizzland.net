@@ -618,6 +618,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: 10%;
 }
 
+.top-5 {
+  top: 1.25rem;
+}
+
+.left-5 {
+  left: 1.25rem;
+}
+
+.left-10 {
+  left: 2.5rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -851,6 +863,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mb-\[25rem\] {
   margin-bottom: 25rem;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .block {
@@ -1905,6 +1925,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(255 179 179 / var(--tw-text-opacity));
 }
 
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity));
+}
+
+.text-indigo-500 {
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
+}
+
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -2324,12 +2354,24 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 14rem;
   }
 
+  .md\:w-3\/4 {
+    width: 75%;
+  }
+
+  .md\:w-\[85\%\] {
+    width: 85%;
+  }
+
   .md\:max-w-\[85\%\] {
     max-width: 85%;
   }
 
   .md\:max-w-\[21rem\] {
     max-width: 21rem;
+  }
+
+  .md\:flex-auto {
+    flex: 1 1 auto;
   }
 
   .md\:translate-y-2 {
@@ -2347,6 +2389,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:justify-start {
@@ -2410,6 +2456,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     padding: 2rem;
   }
 
+  .md\:p-0 {
+    padding: 0px;
+  }
+
   .md\:pr-2 {
     padding-right: 0.5rem;
   }
@@ -2424,6 +2474,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:pt-3 {
     padding-top: 0.75rem;
+  }
+
+  .md\:pl-8 {
+    padding-left: 2rem;
   }
 
   .md\:text-right {

@@ -75,7 +75,7 @@ const SubCategory = (props) => {
                 }
         
                 setContentLoaded(true)
-            }
+            }, 500
         )
     )
 
@@ -104,7 +104,7 @@ const SubCategory = (props) => {
 
             <div id='quizBg'></div>
 
-            <div className="mx-4 md:w-4/5 md:m-auto" >
+            <div className="mr-4 md:w-4/5 md:m-auto" >
                 {/* <div className='adverts adverts__left'>
                     Banner
                 </div> */}
@@ -126,7 +126,7 @@ const SubCategory = (props) => {
                         </div>
                         :
                         <div>
-                            <ul className={`flex flex-wrap`}>
+                            <ul className={`flex flex-col flex-wrap`}>
                                 <QuizContainer quizzes={content} bgStyle='bg' />
                             </ul>
 

@@ -44,15 +44,15 @@ const Search = (props) => {
 
                     props.setContentLoaded(true)
                 }
-            }
+            }, 500
         )
     )
         
     return (
         <div class="grid grid-cols-1 md:grid-cols-3 items-start justify-center pt-3 mt-2 md:mr-4 rounded-lg">
-            <div className='order-2 col-start-1 col-end-3 p-4 md:order-1 grid-row-full'>
+            <div className='order-2 col-start-1 col-end-3 md:p-4 md:order-1 grid-row-full'>
                 <h1 className='mb-10'>کوییز ها</h1>
-                <ul class="flex flex-wrap align-baseline justify-center">
+                <ul class="flex flex-col md:flex-row flex-wrap align-baseline justify-center">
                     {
                         searched_content.length ?
                         <QuizContainer quizzes={searched_content} bgStyle='trans' />
@@ -61,12 +61,12 @@ const Search = (props) => {
                     }
                 </ul>      
             </div>
-            <div className='self-start order-1 p-4 pl-8 md:sticky top-4'>
+            <div className='self-start order-1 p-4 md:pl-8 md:sticky top-4'>
                 <div>
                     <h1 className='mb-10'>کتگوری ها</h1>
                     {
                         searched_category.length ?
-                        <ul class="flex justify-start space-x-5 space-x-reverse">
+                        <ul class="flex justify-start space-x-5 ml-4 md:ml-0 space-x-reverse">
                             {
                                 searched_category.map((category) => {
                                     return (

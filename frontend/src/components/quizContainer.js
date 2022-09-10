@@ -53,45 +53,47 @@ const QuizContainer = (props) => {
     }
     
     const debounceAddToWatchList = useCallback(
-        debounce(async (userDetail, quizId, quizType) => {
-            const now = new Date().getTime()
+        debounce(
+            async (userDetail, quizId, quizType) => {
+                const now = new Date().getTime()
 
-            const payload = {
-                user_id: {
-                    username: userDetail.id
-                },
-                test_id: {
-                    id: quizType == 'test' ? quizId : 0
-                },
-                trivia_id: {
-                    id: quizType == 'trivia' ? quizId : 0
+                const payload = {
+                    user_id: {
+                        username: userDetail.id
+                    },
+                    test_id: {
+                        id: quizType == 'test' ? quizId : 0
+                    },
+                    trivia_id: {
+                        id: quizType == 'trivia' ? quizId : 0
+                    }
                 }
-            }
 
-            await axiosInstance.post(`/api/watchListView/?timestamp=${now}`, payload)
-                .then(res => {
-                    log(res)
-                    if (res.status == 201) {
-                        if (res.data?.id) {
-                            setWatchListButtonUnClickable(true)
-                            message.success('با موفقیت به پلی لیست اضافه گردید.')
-                        } else {
-                            setWatchListButtonUnClickable(true)
-                            message.error('با موفقیت به پلی لیست حذف گردید.')
-                        }
-                    } else {
+                await axiosInstance.post(`/api/watchListView/?timestamp=${now}`, payload)
+                    .then(res => {
                         log(res)
-                    }
-                })
-                .catch(err => {
-                    if (err.response.status == 401) {
-                        props.showLoginNotification()
-                    } else {
-                        message.error('در افزودن به پلی لیست خطایی رخ داد. لطفا کمی دیگر تلاش کنید.')
-                        log(err.response)
-                    }
-                })
-        }, 1000), []
+                        if (res.status == 201) {
+                            if (res.data?.id) {
+                                setWatchListButtonUnClickable(true)
+                                message.success('با موفقیت به پلی لیست اضافه گردید.')
+                            } else {
+                                setWatchListButtonUnClickable(true)
+                                message.error('با موفقیت به پلی لیست حذف گردید.')
+                            }
+                        } else {
+                            log(res)
+                        }
+                    })
+                    .catch(err => {
+                        if (err.response.status == 401) {
+                            props.showLoginNotification()
+                        } else {
+                            message.error('در افزودن به پلی لیست خطایی رخ داد. لطفا کمی دیگر تلاش کنید.')
+                            log(err.response)
+                        }
+                    })
+            }, 500
+        )
 	);
 
     const checkWatchList = async (quizId, quizCheckIfTrivia) => {
@@ -126,7 +128,7 @@ const QuizContainer = (props) => {
                             to={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
                             className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' :  'from-white'} to-transparent`}
                         >
-                            <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
+                            <div className='md:col-span-2 md:w-[260px] h-[7rem] w-full md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                 <LazyLoadImage
                                     src={quiz.thumbnail}
                                     alt={`${quiz.subCategory} | ${quiz.title}`}

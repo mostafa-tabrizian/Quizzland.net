@@ -90,7 +90,7 @@ const Index = () => {
 
             <div className="bg-[url('/static/img/bubbles.webp')] bg-no-repeat bg-top drop-shadow-[5px_11px_12px_black] hidden md:block absolute w-screen h-screen top-0"></div>
 
-            <div className='relative z-0 mx-4 md:m-auto md:w-4/5'>
+            <div className='relative z-0 mr-4 md:m-auto md:w-4/5'>
 
                 <div className={`hero hidden md:flex justify-center items-center bg-gradient-to-t backdrop-blur-md from-[#8b181f] via-transparent p-3 rounded-lg m-auto`}>
 
@@ -234,7 +234,7 @@ const Index = () => {
 
                     {skeletonQuiz(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={content_new_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_ref}>
                         {
                             content_new_inView &&
                             <QuizContainer quizzes={content_new} bgStyle={'trans'} />
@@ -263,7 +263,7 @@ const Index = () => {
 
                     {skeletonQuiz(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={content_monthly_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_monthly_ref}>
                         {
                             content_monthly_inView &&
                             <QuizContainer quizzes={content_monthly} bgStyle={'trans'} />
@@ -292,7 +292,7 @@ const Index = () => {
 
                     {skeletonQuiz(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={content_new_celebrity_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_celebrity_ref}>
                         {
                             content_new_celebrity_inView &&
                             <QuizContainer quizzes={content_new_celebrity} bgStyle='trans' />
@@ -321,7 +321,7 @@ const Index = () => {
 
                     {skeletonQuiz(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={content_new_movieSeries_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_movieSeries_ref}>
                         {
                             content_new_movieSeries_inView &&
                             <QuizContainer quizzes={content_new_movieSeries} bgStyle='trans' />
@@ -339,7 +339,7 @@ const Index = () => {
 
                     {skeletonQuiz(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={content_new_psychology_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_psychology_ref}>
                         {
                             content_new_psychology_inView &&
                             <QuizContainer quizzes={content_new_psychology} bgStyle='trans' />
@@ -367,7 +367,7 @@ const Index = () => {
 
                     {skeletonQuiz(contentLoaded)}
 
-                    <ul className="flex flex-wrap align-baseline" ref={loadMoreQuiz_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={loadMoreQuiz_ref}>
                         {
                             loadMoreQuiz_inView &&
                             <QuizContainer quizzes={loadMoreQuiz} bgStyle='trans' />

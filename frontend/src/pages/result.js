@@ -385,7 +385,7 @@ const Result = () => {
     const returnQuizResult = () => {
         switch (quizType) {
             case 'quiz':
-                return <div className="items-center text-center justify-center block w-full mx-auto result md:container mb-20 space-sm md:flex">
+                return <div className="items-center justify-center block w-full mx-auto mb-20 text-center result md:container space-sm md:flex">
                             <div className="flex items-center justify-center result__img md:mx-16">
                                 {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
                             </div>
@@ -488,7 +488,7 @@ const Result = () => {
                         {skeletonQuiz(contentLoaded)}
                     </div>
 
-                    <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
+                    <ul className="flex flex-col flex-wrap md:w-[70rem] mx-auto my-10">
                         {
                             suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                         }

@@ -80,8 +80,8 @@ const Comments = (props) => {
                             log(err.response)
                         }
                     })
-            }
-        , 1000), []
+            }, 500
+        )
     )
 
     const sortCommentsByNewest = (a, b) => {

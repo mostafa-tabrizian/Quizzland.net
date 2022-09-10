@@ -85,7 +85,7 @@ const Sort = () => {
                 setOffset(offset + countResult)
                 setLoading(false);
                 setContentLoaded(true)
-            }
+            }, 500
         )
     )
 
@@ -143,7 +143,7 @@ const Sort = () => {
                     }
                     scrollableTarget="scrollme"
                 >
-                    <ul className="mx-auto flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right pt-3">
+                    <ul className="mx-auto flex-col flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right pt-3">
                         <QuizContainer quizzes={sortedContent} bgStyle='trans' />
                     </ul>
                 </InfiniteScroll>

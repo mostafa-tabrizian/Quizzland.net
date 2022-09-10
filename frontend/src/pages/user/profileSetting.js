@@ -122,8 +122,8 @@ const ProfileSetting = () => {
                             }
                         })
                 }
-            }
-        , 1000), []
+            }, 500
+        )
     );
 
     return (

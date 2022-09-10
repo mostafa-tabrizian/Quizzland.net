@@ -82,7 +82,7 @@ const Category = (props) => {
                         setCategoryTitle(response.data[0].title_persian)
                         setCategoryQueryID(response.data[0].id)
                     })
-            }
+            }, 500
         )
     )
 
@@ -96,7 +96,7 @@ const Category = (props) => {
                             setCategories(response.data.results.sort(sortByMonthlyViews))
                         }))
                 setContentLoaded(true)
-            }
+            }, 500
         )
     )
 
@@ -111,7 +111,7 @@ const Category = (props) => {
                 <meta name="keywords" content={`بهترین کوییز های ${categoryTitle} ,کوییز های ${categoryTitle}`} />
             </Helmet>
 
-            <div className='mx-4 md:w-4/5 md:m-auto'>
+            <div className='mr-4 md:w-4/5 md:m-auto'>
                 <div className='adverts adverts__left'>
                     <div id="pos-article-display-28434"></div>
                 </div>

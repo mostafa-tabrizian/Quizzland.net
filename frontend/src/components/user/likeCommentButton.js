@@ -57,8 +57,8 @@ const LikeCommentButton = (props) => {
                             log(err.response)
                         }
                     })
-            }
-        , 1000), []
+            }, 500
+        )
     )
 
     const likeButtonClicked = async () => {

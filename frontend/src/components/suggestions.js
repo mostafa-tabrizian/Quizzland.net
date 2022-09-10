@@ -183,7 +183,7 @@ const Suggestions = () => {
             </div>
 
             <div>
-                <ul className="flex flex-wrap align-baseline">
+                <ul className="flex flex-col md:flex-row flex-wrap align-baseline">
                     <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 </ul>
             </div>
