@@ -1,5 +1,4 @@
-import { Switch } from 'antd'
-import 'antd/dist/antd.css'
+// import { Switch } from 'antd'
 import persianJs from "persianjs"
 
 import { makeDatePublishFormatForQuizDetail, getTheme, log } from '../base'
@@ -46,26 +45,26 @@ const QuizHeader = (props) => {
                 <div className='flex space-x-8 translate-x-[-3rem]'>
                     <div onClick={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
                         <div className='mt-3'>
-                            <Switch
-                                checkedChildren='تغییر خودکار'
+                            {/* <Switch */}
+                                {/* checkedChildren='تغییر خودکار'
                                 unCheckedChildren='تغییر دستی'
                                 className={`${props.autoQuestionChanger ? 'bg-red-800' : 'bg-zinc-500'}`}
                                 onChange={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }}
                                 title='در صورت خودکار بودن، پس از 1.5 الی 5.5 ثانیه برحسب نوع سوال، به سوال بعدی منتقل می شوید'
                                 checked={props.autoQuestionChanger ? true : false}
-                            />
+                            /> */}
                         </div>
                     </div>
                     <div onClick={() => { props.SFXController(props.SFXAllowed ? false : true) }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
                         <div className='mt-3'>
-                            <Switch
+                            {/* <Switch
                                 checkedChildren='افکت فعال'
                                 unCheckedChildren='افکت غیرفعال'
                                 className={`${props.SFXAllowed ? 'bg-red-800' : 'bg-zinc-500'}`}
                                 onChange={() => { props.SFXController(props.SFXAllowed ? false : true) }}
                                 title='فرض افکت پس از پاسخ به سوال'
                                 checked={props.SFXAllowed ? true : false}
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>

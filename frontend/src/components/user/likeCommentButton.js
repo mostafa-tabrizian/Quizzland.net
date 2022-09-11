@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Drawer, message } from 'antd'
-import 'antd/dist/antd.css';
+import { useSnackbar } from 'notistack'
 import debounce from 'lodash.debounce'
 
 import Comments from './comments'
@@ -13,11 +12,14 @@ const LikeCommentButton = (props) => {
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
     const [theme, setTheme] = useState('dark')
     
-    const [userProfile, userActions] = userStore()
+    const [userProfile] = userStore()
+    
+    const { enqueueSnackbar } = useSnackbar()
            
     useEffect(() => {
         setTheme(getTheme())
     }, []);
+
     
     const debounceSubmitLike = useCallback(
         debounce(
@@ -40,20 +42,19 @@ const LikeCommentButton = (props) => {
                     .then(res => {
                         if (res.status == 201) {
                             if (res.data?.id) {
-                                message.success('لایک شما ثبت شد')
+                                enqueueSnackbar('لایک شما ثبت شد!', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             } else {
-                                message.error('لایک شما حذف شد')
+                                enqueueSnackbar('لایک شما حذف شد!', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                         } else {
                             log(res)
                         }
                     })
                     .catch(err => {
-                        log(err.response)
                         if (err.response.status == 401) {
                             props.showLoginNotification()
                         } else {
-                            message.error('در اعمال لایک رخ داد. لطفا کمی دیگر تلاش کنید.')
+                            enqueueSnackbar('در اعمال لایک رخ داد. لطفا کمی دیگر تلاش کنید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             log(err.response)
                         }
                     })
@@ -63,7 +64,7 @@ const LikeCommentButton = (props) => {
 
     const likeButtonClicked = async () => {
         setWatchListButtonUnClickable(false)
-        message.loading()
+        // message.loading()
         
         if (userProfile.userDetail.id) {
             debounceSubmitLike(userProfile.userDetail.id)
@@ -84,7 +85,7 @@ const LikeCommentButton = (props) => {
                 </div>
             </div>
 
-            <Drawer
+            {/* <Drawer
                 placement="right"
                 onClose={() => setCommentsPanelState(false)}
                 visible={commentsPanelOpen}
@@ -102,7 +103,7 @@ const LikeCommentButton = (props) => {
                 }}
             >
                 <Comments quizId={props.quizId} quizType={props.quizType} showLoginNotification={props.showLoginNotification} setCommentsPanelState={setCommentsPanelState} />
-            </Drawer>
+            </Drawer> */}
         </React.Fragment>
     );
 }

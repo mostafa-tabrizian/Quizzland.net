@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
-import { Carousel } from 'antd'
-import 'antd/dist/antd.css';
+// import { Carousel } from 'antd'
 import axios from 'axios'
 
 import skeletonQuiz from '../components/skeletonQuiz';
@@ -183,7 +182,7 @@ const Index = () => {
                     </div>
                 </div>
 
-                <Carousel autoplay dotPosition='top' className='block mb-20 md:hidden'>
+                {/* <Carousel autoplay dotPosition='top' className='block mb-20 md:hidden'>
                     <div className='relative w-7/12 mr-5'>
                         <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='text-[1rem]'>
@@ -220,7 +219,7 @@ const Index = () => {
                             </h4>
                         </div>
                     </div>
-                </Carousel>
+                </Carousel> */}
 
                 <Suggestions />
 

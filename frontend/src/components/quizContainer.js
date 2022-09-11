@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { message, notification } from 'antd'
-import 'antd/dist/antd.css'
+import { useSnackbar } from 'notistack'
+// import { notification } from 'antd'
 import debounce from 'lodash.debounce'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -18,13 +18,15 @@ const QuizContainer = (props) => {
 
     const [userProfile, userActions] = userStore()
 
+    const { enqueueSnackbar } = useSnackbar()
+
     useEffect(() => {
         const theme = getTheme()
         setTheme(theme)
     }, []);
 
     const addToWatchListClicked = async (quizId, quizCheckIfTrivia) => {
-        message.loading('', 1)
+        // message.loading('', 1)
 
         if (userProfile.userDetail) {
             checkWatchList(quizId, quizCheckIfTrivia)
@@ -35,20 +37,20 @@ const QuizContainer = (props) => {
                     <LoginForm />
                 </div>
             );
-            notification.open({
-                description:
-                    <h5 className='mt-8'>
-                        برای اضافه کردن این کوییز به پلی لیست لازمه که اول وارد کوییزلند بشی.
-                    </h5>,
-                duration: 10,
-                style: {
-                    background: '#ac272e',
-                    color: 'white',
-                    borderRadius: '15px'
-                },
-                btn,
-                key
-            });
+            // notification.open({
+            //     description:
+            //         <h5 className='mt-8'>
+            //             برای اضافه کردن این کوییز به پلی لیست لازمه که اول وارد کوییزلند بشی.
+            //         </h5>,
+            //     duration: 10,
+            //     style: {
+            //         background: '#ac272e',
+            //         color: 'white',
+            //         borderRadius: '15px'
+            //     },
+            //     btn,
+            //     key
+            // });
         }
     }
     
@@ -75,10 +77,10 @@ const QuizContainer = (props) => {
                         if (res.status == 201) {
                             if (res.data?.id) {
                                 setWatchListButtonUnClickable(true)
-                                message.success('با موفقیت به پلی لیست اضافه گردید.')
+                                enqueueSnackbar('با موفقیت به پلی لیست اضافه گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             } else {
                                 setWatchListButtonUnClickable(true)
-                                message.error('با موفقیت به پلی لیست حذف گردید.')
+                                enqueueSnackbar('با موفقیت به پلی لیست حذف گردید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                         } else {
                             log(res)
@@ -88,7 +90,7 @@ const QuizContainer = (props) => {
                         if (err.response.status == 401) {
                             props.showLoginNotification()
                         } else {
-                            message.error('در افزودن به پلی لیست خطایی رخ داد. لطفا کمی دیگر تلاش کنید.')
+                            enqueueSnackbar('در افزودن به پلی لیست خطایی رخ داد. لطفا کمی دیگر تلاش کنید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             log(err.response)
                         }
                     })

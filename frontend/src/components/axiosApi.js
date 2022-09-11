@@ -1,5 +1,3 @@
-import { message } from 'antd'
-import 'antd/dist/antd.css';
 import axios from 'axios'
 import { log, getCookie } from './base'
 import { setupCache } from 'axios-cache-adapter'
@@ -27,7 +25,7 @@ axiosInstance.interceptors.response.use(
         const originalRequest = error.config;
 
         if (String(error).includes('timeout ')) {
-            message.error('لطفا اتصال اینترنت خود را بررسی کنید!')
+            log('network error')
         }
 
         if (error.response.status === 401 && originalRequest.url === 'http://localhost:8000' +'/token/refresh/') {

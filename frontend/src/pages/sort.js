@@ -3,8 +3,6 @@ import axios from 'axios'
 import { Helmet } from "react-helmet";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import debounce from 'lodash.debounce'
-import { message } from 'antd'
-import 'antd/dist/antd.css';
 
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
@@ -39,7 +37,7 @@ const Sort = () => {
     }, [sortType, content])
 
     const sortContent = () => {
-        message.loading('', .3)
+        // message.loading('', .3)
         
         setSortedContent([])
         

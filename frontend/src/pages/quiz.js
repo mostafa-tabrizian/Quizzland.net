@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-import { notification, message } from 'antd'
-import 'antd/dist/antd.css';
+// import { notification } from 'antd'
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import axios from 'axios'
 // import ReCAPTCHA from 'react-google-recaptcha'
+import { useSnackbar } from 'notistack'
 
 import axiosInstance from '../components/axiosApi';
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
@@ -19,7 +19,6 @@ import LikeCommentButton from '../components/user/likeCommentButton';
 import Test from '../components/quiz/test'
 import LoginForm from '../components/user/loginForm';
 import AddView from '../components/addView';
-import userStore from '../store/userStore';
 
 const logo = '/static/img/Q-small.png'
 
@@ -54,8 +53,8 @@ const Quiz = (props) => {
     const result = useRef(null)
     const quizDetailRef = useRef(null)
     // const recaptchaRef = useRef(null)
-
-    const [userProfile, userActions] = userStore()
+    
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         scrollToTop()
@@ -119,42 +118,47 @@ const Quiz = (props) => {
     }
 
     const TutorialForHowToChangeTheQuestion = () => {
-        notification.open({
-            description:
-                <div className='mt-8'>
-                    <h5 className='mb-5'>
-                        برای تغییر سوال، سوال را بکشید
-                    </h5>
-                </div>,
-            duration: 0,
-            style: {
-                background: '#ac272e',
-                color: 'white',
-                borderRadius: '15px',
-            }
-        });
+    //   import('antd').then(antd => {
+    //         antd.notification.open({
+    //             description:
+    //                 <div className='mt-8'>
+    //                     <h5 className='mb-5'>
+    //                         برای تغییر سوال، سوال را بکشید
+    //                     </h5>
+    //                 </div>,
+    //             duration: 0,
+    //             style: {
+    //                 background: '#ac272e',
+    //                 color: 'white',
+    //                 borderRadius: '15px',
+    //             }
+    //         });
+    //     })
+
     };
 
     const showLoginNotification = () => {
-        notification.open({
-            description:
-                <div className='mt-8'>
-                    <h5 className='mb-5'>
-                        برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
-                    </h5>
+    //   import('antd').then(antd => {
+    //     antd.notification.open({
+    //         description:
+    //             <div className='mt-8'>
+    //                 <h5 className='mb-5'>
+    //                     برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
+    //                 </h5>
 
-                    <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
-                        <LoginForm />
-                    </div>
-                </div>,
-            duration: 0,
-            style: {
-                background: '#ac272e',
-                color: 'white',
-                borderRadius: '15px'
-            }
-        });
-    };
+    //                 <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+    //                     <LoginForm />
+    //                 </div>
+    //             </div>,
+    //         duration: 0,
+    //         style: {
+    //             background: '#ac272e',
+    //             color: 'white',
+    //             borderRadius: '15px'
+    //         }
+    //     });
+    //   })
+    }
 
     const applyBackground = () => {
         const quizBg = document.querySelector('#quizBg')
@@ -559,7 +563,7 @@ const Quiz = (props) => {
             setCurrentMoveOfQuestions(prev => prev + sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
 
         } else {
-            message.warning('شما سوال اول هستید');
+            enqueueSnackbar('شما سوال اول هستید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         }
     }
 

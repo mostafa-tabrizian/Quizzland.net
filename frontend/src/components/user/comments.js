@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom'
-import { message, Spin } from 'antd'
-import 'antd/dist/antd.css';
 import debounce from 'lodash.debounce'
 import axios from 'axios'
 import { BigHead } from "@bigheads/core";
+import { useSnackbar } from 'notistack'
 
 import axiosInstance from '../axiosApi';
 import { log, getTheme, replaceFunction, datePublishHandler } from '../base'
@@ -18,6 +17,8 @@ const Comments = (props) => {
     const commentTextRef = useRef()
     
     const [userProfile, userActions] = userStore()
+    
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         const theme = getTheme()
@@ -28,13 +29,13 @@ const Comments = (props) => {
     const checkIfCommentValid = (comment) => {
         const commentLength = comment.trim().length
         if (commentLength == 0) {
-            message.error('شما هیچ کامنتی ننوشته‌اید!')
+            enqueueSnackbar('شما هیچ کامنتی ننوشته‌اید!', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             return false
         } else if (commentLength < 2) {
-            message.error('کامنت شما کافی نمی‌باشد!')
+            enqueueSnackbar('کامنت شما کافی نمی‌باشد!', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             return false
         } else if (255 <= commentLength) {
-            message.error('کامنت شما بیش از حد مجاز بلند است!')
+            enqueueSnackbar('کامنت شما بیش از حد مجاز بلند است!', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             return false
         } else {
             return true
@@ -49,7 +50,7 @@ const Comments = (props) => {
 
         if (ExplicitWords(comment)) { verifyState = false }
         
-        message.loading("در حال ثبت کامنت ...", 1)
+        enqueueSnackbar('در حال ثبت کامنت ...', { variant: 'default', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         await debouncePostComment(comment, verifyState)
     }
 
@@ -68,14 +69,14 @@ const Comments = (props) => {
                     .then(res => {
                         if (res.status == 201) {
                             verifyState == true ?
-                            message.success('کامنت با موفقیت ثبت شد.')
+                            enqueueSnackbar('کامنت با موفقیت ثبت شد.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             :
-                            message.warning('کامنت شما مشکوک به داشتن کلمات نامناسب است. پس از تایید توسط ادمین، کامنت شما نمایش داده می‌شود.', 7)
+                            enqueueSnackbar('کامنت شما مشکوک به داشتن کلمات نامناسب است. پس از تایید توسط ادمین، کامنت شما نمایش داده می‌شود.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                         }
                     })
                     .catch(err => {
                         if (err.response.status == 401) {
-                            message.error('شما میبایست ابتدا وارد شوید.')
+                            enqueueSnackbar('شما میبایست ابتدا وارد شوید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                         } else {
                             log(err.response)
                         }

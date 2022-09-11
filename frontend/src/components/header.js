@@ -4,8 +4,7 @@ import { Helmet } from "react-helmet";
 import { gapi } from 'gapi-script'
 import { useGoogleLogout } from 'react-google-login'
 import { useCookies } from "react-cookie";
-import { message } from 'antd'
-import 'antd/dist/antd.css';
+import { useSnackbar } from 'notistack'
 import { BigHead } from "@bigheads/core";
 import axios from 'axios';
 
@@ -29,6 +28,8 @@ const Header = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
 
     const [userProfile, userActions] = userStore()
+
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         gapiLoad()
@@ -58,7 +59,7 @@ const Header = () => {
         if (userProfileDetailData == 'inactive') {
             removeCookie('USER_ACCESS_TOKEN', {path: '/'})
             removeCookie('USER_REFRESH_TOKEN', {path: '/'})
-            message.error('اکانت شما غیرفعال شده است. لطفا با پشتیبانی تماس بگیرید.')
+            enqueueSnackbar('اکانت شما غیرفعال شده است. لطفا با پشتیبانی تماس بگیرید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         } else {
             userActions.setUser(userProfileDetailData)
         }
@@ -71,7 +72,7 @@ const Header = () => {
     })
 
     const handleLogout = async () => {
-        message.loading('در حال خارج شدن ...')
+        // message.loading('در حال خارج شدن ...')
         
         try {
             signOut()

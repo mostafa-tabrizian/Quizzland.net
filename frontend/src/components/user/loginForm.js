@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
-import { message, notification } from 'antd'
-import 'antd/dist/antd.css';
+// import { notification } from 'antd'
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script'
 import { useCookies } from "react-cookie";
+import { useSnackbar } from 'notistack'
 
 import axiosInstance from '../axiosApi';;
 import { log, replaceFunction } from '../base'
-import UserCart from '../../store/userStore'
+import UserStore from '../../store/userStore'
 import axios from "axios";
 
 const LoginForm = (props) => {
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
 
-    const [userProfile, userActions] = UserCart()
+    const [userProfile] = UserStore()
+    
+    const { enqueueSnackbar } = useSnackbar()
 
     const { signOut } = useGoogleLogout({
         clientId: process.env.GOOGLE_LOGIN_CLIENT,
@@ -68,20 +70,20 @@ const LoginForm = (props) => {
     }
 
     const showInActiveNotification = () => {
-        notification.open({
-            message: 'این کاربر مسدود شده است',
-            description:
-                'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
-            duration: 5,
-            style: {
-                'font-size': '25px',
-                'font-weight': '600',
-                'box-shadow': '0 0 20px #b52633',
-                'direction': 'rtl',
-                'padding-right': '4rem',
-            },
-            className: 'rounded-lg'
-        });
+        // notification.open({
+        //     message: 'این کاربر مسدود شده است',
+        //     description:
+        //         'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
+        //     duration: 5,
+        //     style: {
+        //         'font-size': '25px',
+        //         'font-weight': '600',
+        //         'box-shadow': '0 0 20px #b52633',
+        //         'direction': 'rtl',
+        //         'padding-right': '4rem',
+        //     },
+        //     className: 'rounded-lg'
+        // });
     }
 
     const googleLoginSuccess = async (res) => {
@@ -112,7 +114,7 @@ const LoginForm = (props) => {
                         }
                         return 
                     } else {
-                        message.loading('در حال ورود ...', 1)
+                        enqueueSnackbar('در حال ورود ...', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
     
                         axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access_token;
                         
@@ -132,7 +134,7 @@ const LoginForm = (props) => {
     }
 
     const googleLoginFailure = (res) => {
-        message.error("ورود/ثبت نام شما به مشکل برخورد. لطفا دوباره تلاش کنید")
+        enqueueSnackbar('ورود/ثبت نام شما به مشکل برخورد. لطفا دوباره تلاش کنید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         // log('fail login, res: ')
         // log(res)
     }

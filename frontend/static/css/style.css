@@ -354,6 +354,11 @@ hr {
   transition: all 0.53s ease-in-out !important;
 }
 
+#notistack-snackbar {
+  font-family: IRANYekanRegular, sans-serif, serif !important;
+  font-size: 1rem !important;
+}
+
 .fadeOut {
   visibility: hidden !important;
   opacity: 0 !important;

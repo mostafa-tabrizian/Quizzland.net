@@ -41,7 +41,7 @@ const SearchMoreResult = () => {
 
                 {skeletonQuiz(contentLoaded)}
 
-                <Search value={searchValue} setContentLoaded={setContentLoaded} contentLength={200}/>
+                <Search value={searchValue} contentLoaded={contentLoaded} setContentLoaded={setContentLoaded} contentLength={200}/>
 
                 {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
 

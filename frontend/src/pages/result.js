@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { message, notification } from 'antd'
-import 'antd/dist/antd.css';
+// import { notification } from 'antd'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
 import axios from 'axios'
+import { useSnackbar } from 'notistack'
 
 import LoginForm from '../components/user/loginForm';
 import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews, isItDesktop } from '../components/base'
@@ -33,6 +33,8 @@ const Result = () => {
     const [quizDetail, setQuizDetail] = useState()
 
     const [userProfile, userActions] = userStore()
+    
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(async () => {
         if (JSON.parse(localStorage.getItem('qd')) === null) {
@@ -134,28 +136,28 @@ const Result = () => {
                 <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
                     <LoginForm />
                 </div>
-                <button onClick={() => notification.close(key)}>
+                {/* <button onClick={() => notification.close(key)}>
                     بی خیال
-                </button>
+                </button> */}
             </div>
         );
-        notification.open({
-            message: '',
-            description:
+        // notification.open({
+        //     message: '',
+        //     description:
 
-                <h5>
-                    {score} امتیاز گرفتی 🎉. وارد کوییزلند شو تا ثبت بشه!
-                </h5>,
-            duration: 0,
-            style: {
-                background: '#ac272e',
-                color: 'white',
-                borderRadius: '15px',
-                marginTop: '10px'
-            },
-            btn,
-            key
-        });
+        //         <h5>
+        //             {score} امتیاز گرفتی 🎉. وارد کوییزلند شو تا ثبت بشه!
+        //         </h5>,
+        //     duration: 0,
+        //     style: {
+        //         background: '#ac272e',
+        //         color: 'white',
+        //         borderRadius: '15px',
+        //         marginTop: '10px'
+        //     },
+        //     btn,
+        //     key
+        // });
     }
 
     const decideHowMucHPointToGive = (score) => {
@@ -189,7 +191,7 @@ const Result = () => {
             await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { points: userProfile.userDetail.points + parseInt(giveAmountPoint) })
                 .then(res => {
                     res.status == 200 &&
-                        message.success(`${giveAmountPoint} امتیاز به شما تعلق گرفت 🎉`)
+                        enqueueSnackbar(`${giveAmountPoint} امتیاز به شما تعلق گرفت 🎉`, { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 })
                 .catch(err => {
                     log(err.response)
@@ -307,24 +309,24 @@ const Result = () => {
     }
 
     const showLoginNotification = () => {
-        notification.open({
-            description:
-                <div className='mt-8'>
-                    <h5 className='mb-5'>
-                        برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
-                    </h5>
+        // notification.open({
+        //     description:
+        //         <div className='mt-8'>
+        //             <h5 className='mb-5'>
+        //                 برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
+        //             </h5>
 
-                    <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
-                        <LoginForm />
-                    </div>
-                </div>,
-            duration: 0,
-            style: {
-                background: '#ac272e',
-                color: 'white',
-                borderRadius: '15px'
-            },
-        });
+        //             <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+        //                 <LoginForm />
+        //             </div>
+        //         </div>,
+        //     duration: 0,
+        //     style: {
+        //         background: '#ac272e',
+        //         color: 'white',
+        //         borderRadius: '15px'
+        //     },
+        // });
     };
 
     const getSuggestionsQuiz = async (quizDetail) => {

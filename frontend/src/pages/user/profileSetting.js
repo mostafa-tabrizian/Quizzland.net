@@ -6,8 +6,7 @@ import persian_fa from "react-date-object/locales/persian_fa"
 import persianJs from "persianjs"
 import debounce from 'lodash.debounce'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { message } from 'antd'
-import 'antd/dist/antd.css';
+import { useSnackbar } from 'notistack'
 
 import LoginForm from '../../components/user/loginForm'
 import axiosInstance from '../../components/axiosApi';
@@ -21,6 +20,8 @@ const ProfileSetting = () => {
     const [avatarOptions, setAvatarOptions] = useState(null)
     
     const [userProfile, userActions] = UserStore()
+    
+    const { enqueueSnackbar } = useSnackbar()
     
     useEffect(() => {
         getUserDetail()
@@ -56,7 +57,7 @@ const ProfileSetting = () => {
     }
 
     const saveSetting = async () => {
-        message.loading('')
+        // message.loading('')
 
         const updatedUsername =  usernameRef.current.value
         const updatedFirstName = firstNameRef.current.value
@@ -76,7 +77,7 @@ const ProfileSetting = () => {
         }
 
         if (!updatedUsername.length && !updatedFirstName.length && !updatedLastName.length && !updatedBio.length && !updatedBirthdayDate.length && updatedGender == 'null' && !dateRefValue.length.length && avatarOptions == null) {
-            return message.warning('برای ذخیره، حداقل یک ورودی را تغییر دهید.')
+            return enqueueSnackbar('برای ذخیره، حداقل یک ورودی را تغییر دهید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         }
 
         debouncePatchUserSetting(updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate, updatedAvatarOption)
@@ -100,25 +101,25 @@ const ProfileSetting = () => {
 
                     await axiosInstance.patch(`/api/userView/${userIdRef.current}/`, payload)
                         .then(res => {
-                            message.success('اطلاعات شما با موفقیت تغییر یافت.')
+                            enqueueSnackbar('اطلاعات شما با موفقیت تغییر یافت.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             setTimeout(() => {
                                 window.location.reload()
                             }, 1500)
                         })
                         .catch(err => {
                             if (err.response.data == 'username already exists') {
-                                message.error('نام کاربری دیگری انتخاب کنید')
+                                enqueueSnackbar('نام کاربری دیگری انتخاب کنید', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                             else if (err.response.data == 'username too short') {
-                                message.error('نام کاربری می‌بایست بیش از ۳ کارکتر باشد.')
+                                enqueueSnackbar('نام کاربری می‌بایست بیش از ۳ کارکتر باشد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                             else if (err.response.data == 'none valid emoji') {
-                                message.error('یکی از ایموجی های شما قابل ذخیره نیست. لطفا آن را تغییر بدهید.')
+                                enqueueSnackbar('یکی از ایموجی های شما قابل ذخیره نیست. لطفا آن را تغییر بدهید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             } else if (err.response.data = 'error saving instance') {
-                                message.error('در ذخیره تغییرات شما به مشکل برخوردیم! لطفا مجددا امتحان کنید.')  // include ! for debugging
+                                enqueueSnackbar('در ذخیره تغییرات شما به مشکل برخوردیم! لطفا مجددا امتحان کنید.')  // include ! for debuggi', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                             else {
-                                message.error('در ذخیره تغییرات شما به مشکل برخوردیم. لطفا مجددا امتحان کنید.')
+                                enqueueSnackbar('در ذخیره تغییرات شما به مشکل برخوردیم. لطفا مجددا امتحان کنید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                         })
                 }
