@@ -70,7 +70,6 @@ const QuizHistory = () => {
                 setMessageForEmpty('هیچ کوییزی رو تا حالا انجام ندادی!')
                 break
             case 'watch':
-
                 playlist = await axiosInstance.get(`/api/watchListView/?timestamp=${now}`)
                     .then(res => {
                         return res.data
@@ -84,9 +83,9 @@ const QuizHistory = () => {
                 setMessageForEmpty('هیچ کوییزی رو اضافه نکردی!')
         }
         
-
         let finalList = []
         
+        playlist?.length &&
         playlist.map(quiz => {
             if (quiz.trivia_id) {
                 finalList.push(quiz.trivia_id)
@@ -96,6 +95,7 @@ const QuizHistory = () => {
             }
         })
         
+        setContent([])
         setContent(finalList.reverse())
         setContentLoaded(true)
     }
@@ -107,7 +107,7 @@ const QuizHistory = () => {
             <LoadingScreen loadState={loadState} />
 
             <Helmet>
-                <title>{`${title} | کوییزلند`}</title>
+                <title>{`${title || 'پلی لیست'} | کوییزلند`}</title>
                 <meta name="description" content="بهترین و جدید ترین کوییز و تست های کوییزلند" />
                 <meta name="keywords" content="کوییز, بهترین کوییز ها, جدیدترین کوییز ها, بهترین تست ها, جدیدترین تست ها, کوییزلند" />
             </Helmet>

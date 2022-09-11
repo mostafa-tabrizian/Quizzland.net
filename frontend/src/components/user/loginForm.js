@@ -4,7 +4,19 @@ import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script'
 import { useCookies } from "react-cookie";
 import { useSnackbar } from 'notistack'
-
+import {
+    theme,
+    eyesMap,
+    eyebrowsMap,
+    mouthsMap,
+    hairMap,
+    facialHairMap,
+    clothingMap,
+    accessoryMap,
+    hatMap,
+    bodyMap
+} from "@bigheads/core";
+  
 import axiosInstance from '../axiosApi';;
 import { log, replaceFunction } from '../base'
 import UserStore from '../../store/userStore'
@@ -25,6 +37,7 @@ const LoginForm = (props) => {
     
     useEffect(() => {
         gapiLoad()
+        filterThemes()
     }, [])
 
     useEffect(() => {
@@ -86,6 +99,79 @@ const LoginForm = (props) => {
         // });
     }
 
+    const selectRandomKey = (object) => {
+        return Object.keys(object)[
+          Math.floor(Math.random() * Object.keys(object).length)
+        ];
+    }
+
+    const filterThemes = () => {
+        // dress
+        delete clothingMap.naked
+    
+        // hair
+        delete facialHairMap.none2
+        delete facialHairMap.none3
+    
+        // hat
+        delete hatMap.none2
+        delete hatMap.none3
+        delete hatMap.none4
+        delete hatMap.none5
+    }
+
+    const getRandomOptions = () => {
+        const skinTone = selectRandomKey(theme.colors.skin);
+        const eyes = selectRandomKey(eyesMap);
+        const eyebrows = selectRandomKey(eyebrowsMap);;
+        const mouth = selectRandomKey(mouthsMap);
+        const hair = selectRandomKey(hairMap)
+        const facialHair = selectRandomKey(facialHairMap)
+        const clothing = selectRandomKey(clothingMap);
+        const accessory = selectRandomKey(accessoryMap);
+        const graphic = 'none';
+        const hat = selectRandomKey(hatMap);
+        const body = selectRandomKey(bodyMap);
+        
+        const hairColor = selectRandomKey(theme.colors.hair);
+        const clothingColor = selectRandomKey(theme.colors.clothing);
+        const circleColor = 'blue';
+        const lipColor = selectRandomKey(theme.colors.lipColors);
+        const hatColor = selectRandomKey(theme.colors.clothing);
+        const faceMaskColor = selectRandomKey(theme.colors.clothing);
+      
+        const mask = true;
+        const faceMask = false;
+        const lashes = Math.random() > 0.5;
+    
+        const avatarRandomOption = {
+          skinTone,
+          eyes,
+          eyebrows,
+          mouth,
+          hair,
+          facialHair,
+          clothing,
+          accessory,
+          graphic,
+          hat,
+          body,
+          hairColor,
+          clothingColor,
+          circleColor,
+          lipColor,
+          hatColor,
+          faceMaskColor,
+          mask,
+          faceMask,
+          lashes
+        }
+
+        const stringifyAvatar = JSON.stringify(avatarRandomOption)
+      
+        return stringifyAvatar
+    }
+
     const googleLoginSuccess = async (res) => {
         if (userProfile.userDetail == false) {
             const accessToken = res.accessToken
@@ -93,7 +179,7 @@ const LoginForm = (props) => {
             const email = res.profileObj.email
             const lastName = res.profileObj.familyName || ''
             const firstName = res.profileObj.givenName || ''
-            const avatar = res.profileObj.imageUrl
+            const avatar = getRandomOptions()
 
             const payload = {
                 accessToken: accessToken,

@@ -294,8 +294,8 @@ const Avatar = (props) => {
             <BigHead {...avatarOptions} />
           </div>
           <div>
-            <h2 className='text-center md:text-right'>برای تغییر روی گزینه مربوطه کلیک کنید</h2>
-            <h2 onClick={() => getRandomOptions()} className='h-fit w-fit mx-auto md:mx-0 hover:cursor-pointer md:my-3 my-5 px-4 py-1 border rounded-lg border-[#690D11]'>تغییر رندوم همه</h2>
+            <h4 className='text-center md:text-right'>برای تغییر روی گزینه مربوطه کلیک کنید</h4>
+            <h4 onClick={() => getRandomOptions()} className='h-fit w-fit mx-auto md:mx-0 hover:cursor-pointer md:my-3 my-5 px-4 py-1 border rounded-lg border-[#690D11]'>تغییر رندوم همه</h4>
             
             <div className='flex flex-wrap md:w-[44rem] w-full h-fit space-y-3 space-x-5 space-x-reverse space-y-reverse mt-3'>
               <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('skinTone', avatarOptions.skinTone)}>

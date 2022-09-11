@@ -13,36 +13,36 @@ const Footer = () => {
     return (
         <div className='w-screen py-12 pr-10 mt-10 footer rtl'>
             
-            <div className='grid justify-center grid-cols-2 mr-10 md:flex md:space-x-20 md:space-x-reverse'>
+            <div className='grid justify-center grid-cols-2 md:flex md:space-x-20 md:space-x-reverse'>
 
-                <div>
-                    <dl>
+                <div className='mb-7'>
+                    <dl className='space-y-2'>
                         <dt className='mb-3'>کوییز و تست ها</dt>
-                        <a href="/sort?s=newest"><dd>جدیدترین</dd></a>
-                        <a href="/sort?s=trend"><dd>محبوب ترین</dd></a>
-                        <a href="/sort?s=views"><dd>پربازدیدترین</dd></a>
+                        <a className='block' href="/sort?s=newest"><dd>جدیدترین</dd></a>
+                        <a className='block' href="/sort?s=trend"><dd>محبوب ترین</dd></a>
+                        <a className='block' href="/sort?s=views"><dd>پربازدیدترین</dd></a>
                     </dl>
                 </div>
 
-                <div>
-                    <dl>
+                <div className='mb-7'>
+                    <dl className='space-y-2'>
                         <dt className='mb-3'>کتگوری ها</dt>
-                        <Link to="/category/movie-&-Series"><dd>فیلم و سریال</dd></Link>
-                        <Link to="/category/celebrity"><dd>سلبریتی</dd></Link>
-                        <Link to="/category/psychology"><dd>روانشناسی</dd></Link>
+                        <Link className='block' to="/category/movie-&-Series"><dd>فیلم و سریال</dd></Link>
+                        <Link className='block' to="/category/celebrity"><dd>سلبریتی</dd></Link>
+                        <Link className='block' to="/category/psychology"><dd>روانشناسی</dd></Link>
                     </dl>
                 </div>
 
-                <div>
-                    <dl>
+                <div className='mb-7'>
+                    <dl className='space-y-2'>
                         <dt className='mb-3'>دسترسی سریع</dt>
-                        <Link to='/'><dd>صفحه اصلی</dd></Link>
-                        {/* <Link to='/blog'><dd>وبلاگ</dd></Link> */}
-                        {/* <Link to='/guide'><dd>راهنما</dd></Link> */}
-                        <Link to='/contact'><dd>تماس با ما</dd></Link>
-                        {/* <Link to='/advertiseContact'><dd>تبلیغات</dd></Link> */}
-                        {/* <Link to='/privacy-policy'><dd>حریم خصوصی</dd></Link> */}
-                        {/* <Link to='/supportUs'><dd>حمایت</dd></Link> */}
+                        <Link className='block' to='/'><dd>صفحه اصلی</dd></Link>
+                        {/* <Link className='block' to='/blog'><dd>وبلاگ</dd></Link> */}
+                        {/* <Link className='block' to='/guide'><dd>راهنما</dd></Link> */}
+                        <Link className='block' to='/contact'><dd>تماس با ما</dd></Link>
+                        {/* <Link className='block' to='/advertiseContact'><dd>تبلیغات</dd></Link> */}
+                        {/* <Link className='block' to='/privacy-policy'><dd>حریم خصوصی</dd></Link> */}
+                        {/* <Link className='block' to='/supportUs'><dd>حمایت</dd></Link> */}
                     </dl>
                 </div>
 
