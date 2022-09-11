@@ -6,7 +6,6 @@ import debounce from 'lodash.debounce'
 
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import skeletonQuiz from '../components/skeletonQuiz';
 import Tools from '../components/tools';
 import { log, getTheme, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
 
@@ -108,10 +107,6 @@ const Sort = () => {
                 sortType={sortType} setSortType={setSortType}
             />
 
-            <div className='w-3/4 mx-auto'>
-                {skeletonQuiz(contentLoaded)}
-            </div>
-
             <div id='scrollme' className='max-h-screen'>
 
                 <InfiniteScroll
@@ -133,7 +128,7 @@ const Sort = () => {
                         </div>
                     }
                     endMessage={
-                        <div className='flex justify-center w-full mb-10'>
+                        <div className='flex justify-center w-full my-10'>
                             <h2>
                                 این داستان ادامه دارد . . .
                             </h2>
@@ -141,7 +136,7 @@ const Sort = () => {
                     }
                     scrollableTarget="scrollme"
                 >
-                    <ul className="mx-auto flex-col flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right pt-3">
+                    <ul className="mx-auto flex-col md:flex-row flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right pt-3">
                         <QuizContainer quizzes={sortedContent} bgStyle='trans' />
                     </ul>
                 </InfiniteScroll>

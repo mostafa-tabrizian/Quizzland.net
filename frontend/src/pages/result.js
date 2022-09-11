@@ -10,7 +10,6 @@ import LoginForm from '../components/user/loginForm';
 import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews, isItDesktop } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import skeletonQuiz from '../components/skeletonQuiz';
 import LikeCommentButton from '../components/user/likeCommentButton';
 import userStore from '../store/userStore';
 import axiosInstance from '../components/axiosApi';
@@ -486,11 +485,7 @@ const Result = () => {
                 <div className='mx-4 mt-10'>
                     <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
-                    <div className='w-3/4 mx-auto'>
-                        {skeletonQuiz(contentLoaded)}
-                    </div>
-
-                    <ul className="flex flex-col flex-wrap md:w-[70rem] mx-auto my-10">
+                    <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
                         {
                             suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                         }

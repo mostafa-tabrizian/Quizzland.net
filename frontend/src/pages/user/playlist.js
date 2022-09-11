@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
+import Skeleton from '@mui/material/Skeleton';
 
 import axiosInstance from '../../components/axiosApi';
 import LoadingScreen from '../../components/loadingScreen'
 import QuizContainer from '../../components/quizContainer'
-import skeletonQuiz from '../../components/skeletonQuiz';
 import LoginForm from '../../components/user/loginForm';
 
 import { log, getTheme, takeParameterFromUrl } from '../../components/base'
 import UserStore from '../../store/userStore';
+import { divide } from 'lodash';
+import SkeletonQuizContainer from '../../components/skeletonQuizContainer';
 
 const QuizHistory = () => {
     const [loadState, setLoadState] = useState()
@@ -114,33 +116,37 @@ const QuizHistory = () => {
                 {
                     userProfile.userDetail ?
                     <div>
-                        {/* <div className='adverts adverts__left'>
-                            <div id='mediaad-DLgb'></div>
-                            <div id="pos-article-display-26094"></div>
-                        </div> */}
-
-                        <div className='mb-10'>
-                            <h3 className='lowTitle'>{lowTitle}</h3>
-                            <h3 className='title'>{title}</h3>
-                        </div>
-
-                        <div className='w-3/4 mx-auto'>
-                            {skeletonQuiz(contentLoaded)}
-                        </div>
-
                         {
-                            (!content.length  && document.readyState !== 'loading') ?
-                            <h1 className='mt-10 mb-[25rem] text-center'>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
+                            contentLoaded ?
+                            <div>
+                                {/* <div className='adverts adverts__left'>
+                                    <div id='mediaad-DLgb'></div>
+                                    <div id="pos-article-display-26094"></div>
+                                </div> */}
+        
+                                <div className='mb-10'>
+                                    <h3 className='lowTitle'>{lowTitle}</h3>
+                                    <h3 className='title'>{title}</h3>
+                                </div>
+                                
+                                <ul className="flex flex-col flex-wrap justify-center align-baseline md:flex-row">
+                                    {
+                                        content.length ?
+                                        <QuizContainer quizzes={content} />
+                                        :
+                                        <h1 className='mt-10 mb-[25rem] text-center'>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
+                                    }
+                                </ul>    
+        
+                                {/* Adverts */}
+        
+                                {/* Adverts */}
+                                {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
+                            </div>
                             :
-                            <ul className="mx-auto flex-col flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right">
-                                <QuizContainer quizzes={content} />
-                            </ul>    
+                            <SkeletonQuizContainer />
                         }
 
-                        {/* Adverts */}
-
-                        {/* Adverts */}
-                        {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
                     </div>
                     :
                     <div className='m-auto space-y-5 text-center md:shadow-[0_0_10px_#690D11] md:p-8 rounded-lg'>

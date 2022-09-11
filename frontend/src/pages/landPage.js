@@ -5,7 +5,6 @@ import { useInView } from 'react-intersection-observer';
 // import { Carousel } from 'antd'
 import axios from 'axios'
 
-import skeletonQuiz from '../components/skeletonQuiz';
 import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer'
 import LoadingScreen from '../components/loadingScreen'
@@ -50,13 +49,13 @@ const Index = () => {
         // .catch(err => {log(err.response)})
         const content = quiz.data.results.concat(pointy.data.results)
 
-        setContent_new(content.sort(sortByNewest).slice(0, 20))
-        setContent_monthly(content.sort(sortByMonthlyViews).slice(0, 20))
-        setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sort(sortByNewest).slice(0, 20))
-        setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest).slice(0, 20))
-        setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest).slice(0, 20))
-        setLoadMoreQuiz(content.sort(sortByNewest).slice(21, 69))
+        setContent_new(content.sort(sortByNewest).slice(0, 12))
+        setContent_monthly(content.sort(sortByMonthlyViews).slice(0, 12))
+        setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sort(sortByNewest).slice(0, 12))
+        setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest).slice(0, 12))
+        setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest).slice(0, 12))
         setContentLoaded(true)
+        setLoadMoreQuiz(content.sort(sortByNewest).slice(13, 69))
     }
 
     return (
@@ -227,11 +226,9 @@ const Index = () => {
                     <span id='scroll' />
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
-                        <h4>جدیدترین ها</h4>
-                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
+                        <h3>جدیدترین ها</h3>
+                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
-
-                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_ref}>
                         {
@@ -256,11 +253,9 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
-                        <h4>محبوب ترین ها</h4>
-                        <Link to="/sort?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
+                        <h3>محبوب ترین ها</h3>
+                        <Link to="/sort?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
-
-                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_monthly_ref}>
                         {
@@ -285,11 +280,9 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
-                        <h4>کوییز سلبریتی</h4>
-                        <Link to="/sort?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
+                        <h3>کوییز سلبریتی</h3>
+                        <Link to="/sort?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
-
-                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_celebrity_ref}>
                         {
@@ -314,11 +307,9 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
-                        <h4>کوییز فیلم و سریال</h4>
-                        <Link to="/sort?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
+                        <h3>کوییز فیلم و سریال</h3>
+                        <Link to="/sort?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
-
-                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_movieSeries_ref}>
                         {
@@ -332,11 +323,9 @@ const Index = () => {
                 <div className="mb-8">
 
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
-                        <h4>تست روانشناسی</h4>
-                        <Link to="/sort?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
+                        <h3>تست روانشناسی</h3>
+                        <Link to="/sort?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
-
-                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_psychology_ref}>
                         {
@@ -360,11 +349,9 @@ const Index = () => {
 
                 <div className="mt-8 mb-8">
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
-                        <h4>کوییز های بیشتر</h4>
-                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><div>مشاهده همه</div></Link>
+                        <h3>کوییز های بیشتر</h3>
+                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
-
-                    {skeletonQuiz(contentLoaded)}
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={loadMoreQuiz_ref}>
                         {

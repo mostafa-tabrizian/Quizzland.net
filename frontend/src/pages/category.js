@@ -3,14 +3,17 @@ import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import debounce from 'lodash.debounce'
+import Skeleton from '@mui/material/Skeleton';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import Tools from '../components/tools'
 import PageTravel from '../components/pageTravel'
 import LoadingScreen from '../components/loadingScreen'
-import skeletonQuiz from '../components/skeletonQuiz';
 import AddView from '../components/addView';
 
 import { log, getTheme, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
+import SkeletonQuizContainer from '../components/skeletonQuizContainer';
 
 const Category = (props) => {
     const [categoryQuery, setCategoryQuery] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', ' '))
@@ -24,7 +27,6 @@ const Category = (props) => {
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
     const [sortType, setSortType] = useState('trend')
     const [loadState, setLoadState] = useState()
-    const [contentLoaded, setContentLoaded] = useState(false)
     const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
     
     const location = useLocation();
@@ -90,12 +92,11 @@ const Category = (props) => {
         debounce(
             async () => {
                 categoryQueryID &&
-                    await axios.get(`/api/subcategoryView/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
-                        .then((response => {
-                            setPageTravel(response.data)
-                            setCategories(response.data.results.sort(sortByMonthlyViews))
-                        }))
-                setContentLoaded(true)
+                await axios.get(`/api/subcategoryView/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
+                    .then((response => {
+                        setPageTravel(response.data)
+                        setCategories(response.data.results.sort(sortByMonthlyViews))
+                    }))
             }, 500
         )
     )
@@ -123,11 +124,10 @@ const Category = (props) => {
                     sortType={sortType} setSortType={setSortType}
                 />
 
-                {skeletonQuiz(contentLoaded)}
-
-                <ul className="flex flex-wrap align-baseline quizContainer flex-ai-fe justify-right">
+                <ul className="flex flex-col flex-wrap align-baseline md:flex-row quizContainer flex-ai-fe justify-right">
 
                     {
+                        sortedCategories.length ?
                         sortedCategories.map((category) => {
                             return (
                                 <li key={category.id} className='flex-auto mb-5 md:mr-5 md:mb-5'>
@@ -141,12 +141,12 @@ const Category = (props) => {
                                             className='flex md:block md:grid-cols-5'
                                         >
                                             <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
-                                                <img
+                                                <LazyLoadImage
                                                     src={category.thumbnail}
-                                                    width={1366}
-                                                    height={768}
                                                     alt={`${category.subCategory} | ${category.title}`}
                                                     className='object-cover h-full'
+                                                    effect="blur"
+                                                    placeholder={<Skeleton variant="rounded" animation="wave" width={220} height={120} />}
                                                 />
                                             </div>
                                             <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
@@ -166,8 +166,11 @@ const Category = (props) => {
                                         </Link>
                                     </article>
                                 </li>
+                                
                             )
                         })
+                        :
+                        <SkeletonQuizContainer />
                     }
 
                 </ul>

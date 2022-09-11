@@ -122,6 +122,10 @@ button {
 h3 {
     font-family: IRANYekanBlack, sans-serif, serif !important;
     font-size: 1rem !important;
+
+    @include breakpoints-down(large) {
+        font-size: .9rem !important;
+    }
 }
 
 h4 {
@@ -129,7 +133,7 @@ h4 {
     font-size: .9rem !important;
 
     @include breakpoints-down(large) {
-        font-size: .9rem !important;
+        font-size: .8rem !important;
     }
 }
 
@@ -261,6 +265,11 @@ hr {
     font-family: IRANYekanRegular, sans-serif, serif !important;
     font-size: 1rem !important;
 }
+
+.MuiSkeleton-root {  // skeleton rounded
+    background-color: #bebebe1d !important;
+}
+
 
 .fade {
     &Out {
@@ -460,24 +469,24 @@ hr {
     // position: relative;
     // margin: 1rem;
 
-    background: linear-gradient(to right, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
+    background: linear-gradient(to right, #bebebe33 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
     background-size: 400% 100% !important;
     animation: loadingFrame 1s cubic-bezier(0.33, 0.38, 1, 1) infinite;
 
-    &__quizContainer {
-        width: 260px;
-        height: 150px !important;
-        box-shadow: 0 0 15px #6d6d6d5c !important;
+    // &__quizContainer {
+    //     width: 260px;
+    //     height: 150px !important;
+    //     box-shadow: 0 0 15px #6d6d6d5c !important;
 
-        &::before {
-            transform: rotate(317deg);
-        }
+    //     &::before {
+    //         transform: rotate(317deg);
+    //     }
 
-        @include breakpoints-down(large) {
-            width: 12rem;
-            height: 6.5rem !important;
-        }
-    }
+    //     @include breakpoints-down(large) {
+    //         width: 12rem;
+    //         height: 6.5rem !important;
+    //     }
+    // }
 
     &__quizTitle {
         width: 14rem;
@@ -489,19 +498,19 @@ hr {
         height: 1.5rem !important;
     }
 
-    &__quizQuestion {
-        width: 30rem;
-        height: 25rem !important;
+    // &__quizQuestion {
+    //     width: 30rem;
+    //     height: 25rem !important;
 
         // @include breakpoints-up(small) {
         //     transform: translate(8.5rem);
         // }
-    }
+    // }
 
-    &__blog {
-        width: 60rem;
-        height: 9rem !important;
-    }
+    // &__blog {
+    //     width: 60rem;
+    //     height: 9rem !important;
+    // }
 }
 
 /* .paintBrush {

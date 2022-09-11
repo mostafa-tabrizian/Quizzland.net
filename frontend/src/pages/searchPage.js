@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import { useLocation } from 'react-router-dom'
 
 import { log, takeParameterFromUrl, replaceFunction, getTheme } from '../components/base'
-import skeletonQuiz from '../components/skeletonQuiz';
 import Search from '../components/search/search'
 
 const SearchMoreResult = () => {
@@ -38,8 +37,6 @@ const SearchMoreResult = () => {
                 </div> */}
 
                 <h3 className='title'>{searchValueWithOutSign}</h3>
-
-                {skeletonQuiz(contentLoaded)}
 
                 <Search value={searchValue} contentLoaded={contentLoaded} setContentLoaded={setContentLoaded} contentLength={200}/>
 

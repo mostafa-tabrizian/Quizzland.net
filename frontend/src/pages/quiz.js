@@ -8,17 +8,18 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import axios from 'axios'
 // import ReCAPTCHA from 'react-google-recaptcha'
 import { useSnackbar } from 'notistack'
+import Skeleton from '@mui/material/Skeleton';
 
 import axiosInstance from '../components/axiosApi';
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
-import skeletonQuiz from '../components/skeletonQuiz';
 import QuizHeader from '../components/quiz/quizHeader'
 import Trivia from '../components/quiz/trivia'
 import LikeCommentButton from '../components/user/likeCommentButton';
 import Test from '../components/quiz/test'
 import LoginForm from '../components/user/loginForm';
 import AddView from '../components/addView';
+import SkeletonQuizContainer from '../components/skeletonQuizContainer';
 
 const logo = '/static/img/Q-small.png'
 
@@ -522,6 +523,7 @@ const Quiz = (props) => {
                                         className='object-cover object-top rounded-xl'
                                         title={question.title}
                                         effect="blur"
+                                        placeholder={<Skeleton variant="rounded" animation="wave" width={466} height={266} />}
                                     />
                                     <a href={question?.question_img} target='_blank'><span className='text-[.7rem] block text-white'>در صورت عدم نمایش اینجا را کلیک کنید</span></a>
                                 </div>
@@ -836,13 +838,9 @@ const Quiz = (props) => {
                             <div className='mx-4 mt-10'>
                                 <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
 
-                                <div className='w-3/4 mx-auto'>
-                                    {skeletonQuiz(contentLoaded)}
-                                </div>
-
-                                <ul className="flex flex-wrap md:w-[70rem] mx-auto my-10">
+                                <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
                                     {
-                                        suggestionQuizzes &&
+                                        suggestionQuizzes?.length ?
                                         suggestionQuizzes.map((quiz) => {
                                             return (
                                                 <li key={quiz.id} className='flex-auto mb-5 md:mr-4 md:mb-4'>
@@ -856,12 +854,12 @@ const Quiz = (props) => {
                                                             className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' : 'from-white'} to-transparent`}
                                                         >
                                                             <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
-                                                                <img
-                                                                    src={quiz.thumbnail}
-                                                                    width={1366}
-                                                                    height={768}
+                                                                <LazyLoadImage
+                                                                    src={quiz.thumbnail} altra
                                                                     alt={`${quiz.subCategory} | ${quiz.title}`}
                                                                     className='object-cover h-full'
+                                                                    effect="blur"
+                                                                    placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
                                                                 />
                                                             </div>
                                                             <div className='w-full pt-1 pb-3 pr-4 md:pr-2 md:col-span-3 md:mt-2'>
@@ -885,6 +883,8 @@ const Quiz = (props) => {
                                                 </li>
                                             )
                                         })
+                                        :
+                                        <SkeletonQuizContainer />
                                     }
                                 </ul>
                             </div>

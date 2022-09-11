@@ -9,7 +9,6 @@ import PageTravel from '../components/pageTravel'
 import { log, replaceFunction, takeParameterFromUrl, sortByNewest, sortByMonthlyViews, sortByViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
-import skeletonQuiz from '../components/skeletonQuiz';
 
 const SubCategory = (props) => {
 
@@ -116,8 +115,6 @@ const SubCategory = (props) => {
                     sortType={sortType} setSortType={setSortType}
                 />
 
-                {skeletonQuiz(contentLoaded)}
-
                 {
                     hide_content
                         ?
@@ -126,7 +123,7 @@ const SubCategory = (props) => {
                         </div>
                         :
                         <div>
-                            <ul className={`flex flex-col flex-wrap`}>
+                            <ul className={`flex flex-col md:flex-row flex-wrap`}>
                                 <QuizContainer quizzes={content} bgStyle='bg' />
                             </ul>
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
+import Skeleton from '@mui/material/Skeleton';
 
 import QuizContainer from '../components/quizContainer';;
 import { log, getTheme, replaceFunction } from '../components/base'
-import skeletonQuiz from '../components/skeletonQuiz';
 import SearchFetchQuiz from '../components/search/searchFetchQuiz';
 import SearchFetchCategory from '../components/search/searchFetchCategory'
 
@@ -61,12 +61,9 @@ const SearchMoreResult = () => {
                     <div id="pos-article-display-26094"></div>
                 </div> */}
 
-                <h3 className='title mb-5'>{searchValueWithOutSign}</h3>
+                <h3 className='mb-5 title'>{searchValueWithOutSign}</h3>
 
-                {skeletonQuiz(contentLoaded)}
-
-                <ul className="flex flex-wrap quizContainer flex-ai-fe justify-right">
-
+                <ul className="flex flex-col flex-wrap md:flex-row quizContainer flex-ai-fe justify-right">
                     {
                         searched_category.map((category) => {
                             return (
@@ -119,9 +116,9 @@ const SearchMoreResult = () => {
                     <hr className="w-[20vw]" />
                 </div>
 
-                <ul className="flex flex-col flex-wrap quizContainer flex-ai-fe justify-right">
+                <ul className="flex flex-col flex-wrap md:flex-row quizContainer flex-ai-fe justify-right">
                     {
-                        searched_content.length ?
+                        contentLoaded ?
                         <QuizContainer quizzes={searched_content} bgStyle='trans' />
                         :
                         <h1 className='w-11/12 text-3xl text-center mb-[50vh] '>
