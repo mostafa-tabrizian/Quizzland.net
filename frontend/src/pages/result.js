@@ -100,20 +100,26 @@ const Result = () => {
 
     const userPlayedThisQuizBefore = async () => {
         const userHistory = await fetchUserHistory()
-        let result = false
+        let playedBefore = false
 
         for (let quizIndex in userHistory) {
             if (
                 userHistory[quizIndex].trivia_id?.slug === quizDetail?.slug ||
                 userHistory[quizIndex].test_id?.slug === quizDetail?.slug
             ) {
-                result = true
+                playedBefore = true
                 break
             }
         }
 
-        postToHistoryAsPlayedQuiz()
-        return result
+        const lastIndex = userHistory.length - 1
+        const previousUserPlayedQuiz = userHistory[lastIndex]?.test_id?.id || userHistory[lastIndex]?.trivia_id?.id
+
+        if (quizDetail?.id !== previousUserPlayedQuiz) {
+            postToHistoryAsPlayedQuiz()
+        }
+        
+        return playedBefore
     }
 
     const fetchUserHistory = async () => {

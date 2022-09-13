@@ -138,7 +138,7 @@ const QuizContainer = (props) => {
                                     <LazyLoadImage
                                         src={quiz.thumbnail}
                                         alt={`${quiz.subCategory} | ${quiz.title}`}
-                                        className='object-cover h-full'
+                                        className='object-cover h-[7rem] md:h-full'
                                         effect="blur"
                                         placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
                                     />
