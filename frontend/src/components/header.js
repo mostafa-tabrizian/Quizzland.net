@@ -13,6 +13,7 @@ import Search from './search/searchInput'
 import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
 import userStore from '../../src/store/userStore'
+import BackdropLoading from './bacdropLoading';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
@@ -20,6 +21,7 @@ const Header = () => {
     const [profileSubMenu, setProfileSubMenu] = useState(false)
     const [categorySubMenu, setCategorySubMenu] = useState(null)
     const [theme, setTheme] = useState('dark')
+    const [loading, setLoading] = useState(false)
 
     const location = useLocation();
     
@@ -72,7 +74,7 @@ const Header = () => {
     })
 
     const handleLogout = async () => {
-        // message.loading('در حال خارج شدن ...')
+        setLoading(true)
         
         try {
             signOut()
@@ -118,7 +120,6 @@ const Header = () => {
     
     return (
         <React.Fragment>
-
             <Helmet>
                 <script type="text/javascript">
                     {`
@@ -158,6 +159,8 @@ const Header = () => {
                     `}
                 </script>
             </Helmet>
+
+            <BackdropLoading loadingStatue={loading} />
 
             <header className={`relative z-10 ${theme == 'dark' ? 'bg-[#0601017c]' : 'bg-[#ffffff82]' } rounded-md backdrop-blur-md p-5`}>
                 <div>

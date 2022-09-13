@@ -7,17 +7,15 @@ import debounce from 'lodash.debounce'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import Tools from '../components/tools';
-import { log, getTheme, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews, sortByAlphabet } from '../components/base'
+import { log, getTheme, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
 
 const Sort = () => {
     const [loadState, setLoadState] = useState()
-    const [contentLoaded, setContentLoaded] = useState(false)
     const [content, setContent] = useState([])
     const [sortedContent, setSortedContent] = useState([])
     const [sortType, setSortType] = useState(takeParameterFromUrl('s'))
     const [countNewFetched, setCountNewFetched] = useState()
     const [countResult, setCountResult] = useState(100)
-    const [loading, setLoading] = useState(false);
     const [offset, setOffset] = useState(0);
     const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
 
@@ -36,8 +34,6 @@ const Sort = () => {
     }, [sortType, content])
 
     const sortContent = () => {
-        // message.loading('', .3)
-        
         setSortedContent([])
         
         setTimeout(() => {
@@ -61,12 +57,6 @@ const Sort = () => {
     const fetchContent = useCallback(
         debounce(
             async () => {
-                // if (loading) {
-                //     return;
-                // }
-        
-                setLoading(true)
-        
                 const quiz = await axios.get(`/api/quizView/?limit=${countResult}&offset=${offset}&public=true`)
                 const pointy = await axios.get(`/api/testView/?limit=${countResult}&offset=${offset}&public=true`)
                 let content_new = quiz.data.results.concat(pointy.data.results)
@@ -80,8 +70,6 @@ const Sort = () => {
                 
                 setContent([...content, ...content_new]);
                 setOffset(offset + countResult)
-                setLoading(false);
-                setContentLoaded(true)
             }, 500
         )
     )
@@ -91,6 +79,7 @@ const Sort = () => {
         <React.Fragment>
 
             <LoadingScreen loadState={loadState} />
+
 
             <Helmet>
                 <title>{`کوییز و تست ها | کوییزلند`}</title>

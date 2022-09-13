@@ -6,11 +6,13 @@ import Comments from './comments'
 import { log, getTheme } from '../base'
 import userStore from '../../store/userStore';
 import axiosInstance from '../axiosApi';
+import BackdropLoading from '../bacdropLoading';
 
 const LikeCommentButton = (props) => {
     const [commentsPanelOpen, setCommentsPanelState] = useState(false);
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
     const [theme, setTheme] = useState('dark')
+    const [loading, setLoading] = useState(false)
     
     const [userProfile] = userStore()
     
@@ -58,13 +60,14 @@ const LikeCommentButton = (props) => {
                             log(err.response)
                         }
                     })
+                    setLoading(false)
             }, 500
         )
     )
 
     const likeButtonClicked = async () => {
+        setLoading(true)
         setWatchListButtonUnClickable(false)
-        // message.loading()
         
         if (userProfile.userDetail.id) {
             debounceSubmitLike(userProfile.userDetail.id)
@@ -72,11 +75,14 @@ const LikeCommentButton = (props) => {
         } else {
             props.showLoginNotification()
             setWatchListButtonUnClickable(true)
+            setLoading(false)
         }
     }
     
     return (
         <React.Fragment>
+            <BackdropLoading loadingStatue={loading} />
+
             <div className='fixed z-10 flex justify-center w-screen md:bottom-6 bottom-14'>
                 <div className={`flex px-4 py-1 space-x-5 bg-red-800 rounded-2xl`}>
                     <button className={`${watchListButtonUnClickable?'':'pointer-events-none'} likeCommentButton`} onClick={() => likeButtonClicked()}>👍</button>

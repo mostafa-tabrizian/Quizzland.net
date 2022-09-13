@@ -432,11 +432,11 @@ const Result = () => {
 
             <div className='ltr'>
                 <div className="relative result__container">
-                    <div className="flex justify-center result__title">
+                    <div className="flex justify-center mx-10 opacity-50 mb-9">
                         <h5 className="text-right">نتیجه  {quizDetail?.title}</h5>
                     </div>
                     <div className="flex items-center justify-center beforeAfterDecor">
-                        <h1 className="text-center result__subtitle">{resultSubtitle}</h1>
+                        <h1 className="text-xl text-center">{resultSubtitle}</h1>
                     </div>
 
                     {returnQuizResult()}
@@ -493,9 +493,6 @@ const Result = () => {
                         open={popUpQuizSuggesterState}
                         aria-labelledby="پیشنهاد کوییز"
                         aria-describedby="پیشنهاد برای کوییز بعدیت"
-                        sx={{
-                            backdropFilter: "blur('3px')"
-                        }}
                     >
                         
                         <div className='bg-gradient-to-t from-[#771118] to-[#ac272e] p-8 rounded-lg'>

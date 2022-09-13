@@ -726,6 +726,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 2rem;
 }
 
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -852,6 +857,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mb-\[25rem\] {
   margin-bottom: 25rem;
+}
+
+.mb-9 {
+  margin-bottom: 2.25rem;
 }
 
 .block {

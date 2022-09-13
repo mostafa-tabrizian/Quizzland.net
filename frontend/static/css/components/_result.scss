@@ -14,22 +14,22 @@
         min-height: 40vh;
     }
 
-    &__title>h5 {
-        opacity: .5;
-        margin-right: 2.5rem;
-        margin-left: 2.5rem;
-        margin-bottom: 2.25rem;
-        direction: rtl;
-    }
+    // &__title>h5 {
+    //     opacity: .5;
+    //     margin-right: 2.5rem;
+    //     margin-left: 2.5rem;
+    //     margin-bottom: 2.25rem;
+    //     direction: rtl;
+    // }
 
-    &__subtitle {
-        font-size: $font-l;
-        white-space: pre;
+    // &__subtitle {
+    //     font-size: $font-l;
+    //     white-space: pre;
 
-        @include breakpoints-down(large) {
-            font-size: $font-l - .3;
-        }
-    }
+    //     @include breakpoints-down(large) {
+    //         font-size: $font-l - .3;
+    //     }
+    // }
 
     // &__share {
     //     h5 {
@@ -175,7 +175,7 @@
 }
 
 .resultPointy {
-    // margin-bottom: 4rem;
+    // margin-bottom: 4rem
     // padding: 1rem;
 
     p {

@@ -13,11 +13,13 @@ import axiosInstance from '../../components/axiosApi';
 import { log, getTheme } from '../../components/base'
 import Avatar from '../../components/user/avatar'
 import UserStore from '../../store/userStore';
+import BackdropLoading from '../../components/bacdropLoading';
 
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)
     const [birthdayDatePicker, setBirthdayDatePicker] = useState(null)
     const [avatarOptions, setAvatarOptions] = useState(null)
+    const [loading, setLoading] = useState(false)
     
     const [userProfile, userActions] = UserStore()
     
@@ -57,7 +59,7 @@ const ProfileSetting = () => {
     }
 
     const saveSetting = async () => {
-        // message.loading('')
+        setLoading(true)
 
         const updatedUsername =  usernameRef.current.value
         const updatedFirstName = firstNameRef.current.value
@@ -123,6 +125,8 @@ const ProfileSetting = () => {
                             }
                         })
                 }
+                
+                setLoading(false)
             }, 500
         )
     );
@@ -134,6 +138,8 @@ const ProfileSetting = () => {
                 <title>کوییزلند | پروفایل</title>
                 <link rel='canonical' to='https://www.quizzland.net/profile/setting' />
             </Helmet>
+
+            <BackdropLoading loadingStatue={loading} />
 
             <div className={`mx-4 md:mx-auto md:w-4/5 min-h-[60vh] ${user ? '' : 'flex' }`}>
                 { user ?

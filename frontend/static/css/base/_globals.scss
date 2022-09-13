@@ -274,7 +274,7 @@ hr {
     border-radius: 10px !important;
 }
 
-.MuiDialog-container {
+.MuiDialog-container, .MuiBackdrop-root {
     backdrop-filter: blur(3px);
 }
 

@@ -372,7 +372,7 @@ hr {
   border-radius: 10px !important;
 }
 
-.MuiDialog-container {
+.MuiDialog-container, .MuiBackdrop-root {
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
 }
@@ -904,22 +904,6 @@ hr {
 }
 .result__container {
   min-height: 40vh;
-}
-.result__title > h5 {
-  opacity: 0.5;
-  margin-right: 2.5rem;
-  margin-left: 2.5rem;
-  margin-bottom: 2.25rem;
-  direction: rtl;
-}
-.result__subtitle {
-  font-size: 1.6rem;
-  white-space: pre;
-}
-@media (max-width: 70em) {
-  .result__subtitle {
-    font-size: 1.3rem;
-  }
 }
 .result_score {
   font-size: 2.5rem !important;
