@@ -278,6 +278,25 @@ hr {
     backdrop-filter: blur(3px);
 }
 
+.MuiSelect-select, .MuiFormLabel-root {
+    color: gray !important;
+    font-family: IRANYekanBold, sans-serif, serif !important;
+    right: 15px !important;
+    left: unset !important;
+}
+
+.MuiMenuItem-root {
+    font-family: IRANYekanBold, sans-serif, serif !important;
+}
+
+.MuiSelect-select {
+    border-bottom: 1px solid darkRed !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    text-align: right !important;
+}
+
 .lazy-load-image-background {
     width: 100%;
 }

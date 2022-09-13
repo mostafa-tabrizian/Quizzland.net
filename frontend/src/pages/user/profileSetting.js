@@ -7,6 +7,10 @@ import persianJs from "persianjs"
 import debounce from 'lodash.debounce'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useSnackbar } from 'notistack'
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 import LoginForm from '../../components/user/loginForm'
 import axiosInstance from '../../components/axiosApi';
@@ -65,7 +69,7 @@ const ProfileSetting = () => {
         const updatedFirstName = firstNameRef.current.value
         const updatedLastName = lastNameRef.current.value
         const updatedBio = bioRef.current.value
-        const updatedGender = gendersRef.current.value
+        const updatedGender = gendersRef.current
         const updatedAvatarOption = JSON.stringify(avatarOptions)
 
         const dateRefValue = birthdayDateRef.current.querySelector('input').value
@@ -90,7 +94,6 @@ const ProfileSetting = () => {
             async (updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate, updatedAvatarOption) => {
                 // if (true) {
                 if (await checkRecaptcha()) {
-                    
                     let payload = {}
 
                     updatedUsername.length && (payload['username'] = updatedUsername)
@@ -141,6 +144,9 @@ const ProfileSetting = () => {
 
             <BackdropLoading loadingStatue={loading} />
 
+            <div className="lowTitle">Edit Profile</div>
+            <div className="title">تنظیمات پروفایل</div>
+
             <div className={`mx-4 md:mx-auto md:w-4/5 min-h-[60vh] ${user ? '' : 'flex' }`}>
                 { user ?
                     <div>
@@ -190,18 +196,23 @@ const ProfileSetting = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <h3>جنسیت</h3>
                                     <div>
-                                        <figure>
-                                            <select name="genders" ref={gendersRef}>
-                                                <option value='null' selected>انتخاب کنید</option>
-                                                <option value='male'>آقا</option>
-                                                <option value='female'>خانم</option>
-                                            </select>
-                                            <figcaption>
-                                                جنسیت شما به هیچ کس نمایان نخواهد بود.
-                                            </figcaption>
-                                        </figure>
+                                        <FormControl sx={{ m: 1, width: 200 }}>
+                                            <InputLabel id="genders">جنسیت</InputLabel>
+                                            <Select
+                                                labelId="genders"
+                                                id="genders"
+                                                value={gendersRef.current}
+                                                label="جنسیت"
+                                                ref={gendersRef}
+                                                onChange={(event) => {gendersRef.current = event.target.value}}
+                                            >
+                                                <MenuItem value="">انتخاب کنید</MenuItem>
+                                                <MenuItem value='male'>آقا</MenuItem>
+                                                <MenuItem value='female'>خانم</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <figcaption>جنسیت شما به هیچ کس نمایان نخواهد بود.</figcaption>
                                     </div>
                                 </div>
                             </div>
