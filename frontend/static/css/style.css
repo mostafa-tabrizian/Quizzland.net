@@ -368,6 +368,19 @@ hr {
   background-color: rgba(190, 190, 190, 0.1137254902) !important;
 }
 
+.MuiPaper-root {
+  border-radius: 10px !important;
+}
+
+.MuiDialog-container {
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
+
+.lazy-load-image-background {
+  width: 100%;
+}
+
 .fadeOut {
   visibility: hidden !important;
   opacity: 0 !important;
@@ -924,29 +937,7 @@ hr {
   margin-right: 1rem;
 }
 .result__popUpQuizSuggester {
-  left: calc(50% - 2rem);
-  top: 50%;
-  direction: rtl;
-}
-.result__popUpQuizSuggester__thumbnail img {
   /* position: relative; */
-  transition: width 0.3s ease-in-out;
-}
-.result__popUpQuizSuggester__title {
-  width: 19rem;
-  font-size: 1.5rem;
-}
-@media (max-width: 70em) {
-  .result__popUpQuizSuggester__title {
-    font-size: 1.2rem;
-    letter-spacing: 0.3px;
-  }
-}
-.result__popUpQuizSuggester__title:hover {
-  color: #c7c7c7;
-}
-.result__popUpQuizSuggester__closeBtn {
-  font-family: cursive, "myHarmattan";
 }
 
 .tryAgain {

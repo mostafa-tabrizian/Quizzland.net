@@ -90,16 +90,6 @@ export const fadeOut = (element) => {
     element.classList.remove('fadeIn')
 }
 
-export const popUpShow = (element) => {
-    element.classList.remove('popUp-hide')
-    element.classList.add('popUp-show')
-}
-
-export const popUpHide = (element) => {
-    element.classList.add('popUp-hide')
-    element.classList.remove('popUp-show')
-}
-
 export const datePublishHandler = (publishFullDate) => {
     const publishHour = publishFullDate.slice(11, 13)
     const publishDay = publishFullDate.slice(8, 10)

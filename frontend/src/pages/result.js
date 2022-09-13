@@ -5,9 +5,12 @@ import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
 import axios from 'axios'
 import { useSnackbar } from 'notistack'
+import Dialog from '@mui/material/Dialog';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import LoginForm from '../components/user/loginForm';
-import { log, getTheme, replaceFunction, fadeIn, popUpShow, popUpHide, sortByMonthlyViews, isItDesktop } from '../components/base'
+import { log, getTheme, replaceFunction, fadeIn, sortByMonthlyViews } from '../components/base'
 import LoadingScreen from '../components/loadingScreen'
 import QuizContainer from '../components/quizContainer'
 import LikeCommentButton from '../components/user/likeCommentButton';
@@ -351,41 +354,27 @@ const Result = () => {
 
     const showPopUpSuggestion = () => {
         setTimeout(() => {
-            popUpShow(document.querySelector('.result__popUpQuizSuggester'))
             setPopUpQuizSuggester(true)
-            document.querySelector('.result__popUpQuizSuggester').style.pointerEvents = 'all'
-            document.querySelector('body').style.overflow = 'hidden'
-            document.querySelector('#land').style.pointerEvents = 'none'
-            document.querySelector('#land').style.overflow = 'none'
-            
             setTimeout(() => {
                 fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
-            }, 2000)
-            
-        }, 10_000)
-    }
-
-    const closePopUpQuizSuggester = () => {
-        popUpHide(document.querySelector('.result__popUpQuizSuggester'))
-        setPopUpQuizSuggester(false)
-        document.querySelector('.result__popUpQuizSuggester').style.pointerEvents = 'none'
-        document.querySelector('body').style.overflow = 'auto'
-        document.querySelector('#land').style.pointerEvents = 'all'
-        document.querySelector('#land').style.overflow = 'all'
+            }, 2_000)
+        }, 5_000)
     }
 
     const chooseUniqueQuizToSuggest = () => {
-        if (suggestionQuizzes[0]?.title === quizDetail?.title) {
-            if (suggestionQuizzes[1]) {
-                return suggestionQuizzes[1]
+        if (suggestionQuizzes) {
+            if (suggestionQuizzes[0]?.title === quizDetail?.title) {
+                if (suggestionQuizzes[1]) {
+                    return suggestionQuizzes[1]
+                }
+                else {  // there is no unique quiz, don't show the pop up
+                    setSuggestionQuizzes(false)
+                    return suggestionQuizzes[0]
+                }
             }
-            else {  // there is no unique quiz, don't show the pop up
-                setSuggestionQuizzes(false)
+            else {
                 return suggestionQuizzes[0]
             }
-        }
-        else {
-            return suggestionQuizzes[0]
         }
     }
 
@@ -441,7 +430,7 @@ const Result = () => {
                 <meta name="keywords" content="کوییز, کوییزلند" />
             </Helmet>
 
-            <div className={`ltr ${popUpQuizSuggesterState ? 'focusBlur' : ''}`}>
+            <div className='ltr'>
                 <div className="relative result__container">
                     <div className="flex justify-center result__title">
                         <h5 className="text-right">نتیجه  {quizDetail?.title}</h5>
@@ -496,37 +485,47 @@ const Result = () => {
                             suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                         }
                     </ul>
+                </div>
 
-                    {
-                        suggestionQuizzes && isItDesktop() && chooseUniqueQuizToSuggest() &&
-                        <div className='noBlur result__popUpQuizSuggester fixed z-10 popUp-hide bg-gradient-to-t from-[#771118] to-[#ac272e] p-8 w-11/12 md:w-[42rem] mx-8 grid grid-cols-1 rounded-lg pointer-events-none'>
-                            <button className='absolute text-3xl noBlur result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => {
-                                closePopUpQuizSuggester();
-                            }}> X </button>
+                {
+                    chooseUniqueQuizToSuggest() &&
+                    <Dialog
+                        open={popUpQuizSuggesterState}
+                        aria-labelledby="پیشنهاد کوییز"
+                        aria-describedby="پیشنهاد برای کوییز بعدیت"
+                        sx={{
+                            backdropFilter: "blur('3px')"
+                        }}
+                    >
+                        
+                        <div className='bg-gradient-to-t from-[#771118] to-[#ac272e] p-8 rounded-lg'>
+                            <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn fadeOut left-4 top-4' onClick={() => setPopUpQuizSuggester(false)}>
+                                <svg class="h-6 w-6 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                            </button>
 
-                            <div className='noBlur'>
-                                <h3 className='noBlur result__popUpQuizSuggester__headline text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
+                            <div>
+                                <h3 className='text-lg text-[#ffb3b3]'>پیشنهاد برای کوییز بعدیت :</h3>
 
-                                <Link className='noBlur' to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                                    <h3 className="flex text-lg noBlur result__popUpQuizSuggester__title">
-                                        {chooseUniqueQuizToSuggest().title}
-                                    </h3>
+                                <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest()?.slug, ' ', '-')}`}>
+                                    <h2 className="flex text-lg text-white result__popUpQuizSuggester__title">
+                                        {chooseUniqueQuizToSuggest()?.title}
+                                    </h2>
                                 </Link>
                             </div>
-                            <Link className='noBlur' to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest().slug, ' ', '-')}`}>
-                                <div className='noBlur result__popUpQuizSuggester__thumbnail mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black] h-[11rem] md:h-[21rem]'>
-                                    <img
-                                        src={chooseUniqueQuizToSuggest().thumbnail}
-                                        alt={`${chooseUniqueQuizToSuggest().subCategory} | ${chooseUniqueQuizToSuggest().title}`}
-                                        width={1920}
-                                        height={1080}
-                                        className='object-cover noBlur'
+                            <Link to={`/quiz/${replaceFunction(chooseUniqueQuizToSuggest()?.slug, ' ', '-')}`}>
+                                <div className='mt-5 overflow-hidden rounded-lg shadow-[0_0_10px_black]'>
+                                    <LazyLoadImage
+                                        src={chooseUniqueQuizToSuggest()?.thumbnail}
+                                        alt={`${chooseUniqueQuizToSuggest()?.subCategory} | ${chooseUniqueQuizToSuggest()?.title}`}
+                                        className='object-cover w-full'
+                                        effect="blur"
                                     />
                                 </div>
                             </Link>
                         </div>
-                    }
-                </div>
+                    </Dialog>
+                }
+
             </div>
 
         </React.Fragment>

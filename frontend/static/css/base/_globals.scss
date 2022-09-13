@@ -270,6 +270,17 @@ hr {
     background-color: #bebebe1d !important;
 }
 
+.MuiPaper-root {
+    border-radius: 10px !important;
+}
+
+.MuiDialog-container {
+    backdrop-filter: blur(3px);
+}
+
+.lazy-load-image-background {
+    width: 100%;
+}
 
 .fade {
     &Out {

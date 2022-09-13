@@ -77,8 +77,8 @@
 
     &__popUpQuizSuggester {
         // pointer-events: all;
-        left: calc(50% - 2rem);
-        top: 50%;
+        // left: calc(50% - 2rem);
+        // top: 50%;
         // background: #8b0000f2;
         // backdrop-filter: blur(10px);
         // padding: 2rem;
@@ -87,78 +87,78 @@
         // border-radius: 15px;
         // display: grid;
         // grid-template-columns: 1fr 1fr;
-        direction: rtl;
+        // direction: rtl;
 
-        @include breakpoints-down(large) {
+        // @include breakpoints-down(large) {
             // grid-template-columns: 1fr;
             // min-width: inherit;
             // width: calc(100% - 1rem);
             // height: 27rem;
-        }
+        // }
 
-        &__headline {
+        // &__headline {
             // font-size: 1.125rem;
             // color: #ffb3b3;
-        }
+        // }
 
-        &__thumbnail {
+        // &__thumbnail {
             // width: 20rem;
             // height: 26rem;
             // overflow: hidden;
             // border-radius: 15px;
             // box-shadow: 0 0 10px black;
 
-            @include breakpoints-down(large) {
+            // @include breakpoints-down(large) {
                 // width: 18rem;
                 // height: 12rem;
-            }
+            // }
 
-            img {
+            // img {
                 // width: 47rem;
                 /* position: relative; */
                 // right: 50%;
                 // transform: translate(50%);
                 // position: relative;
-                transition: width .3s ease-in-out;
+                // transition: width .3s ease-in-out;
 
-                @include breakpoints-down(large) {
+                // @include breakpoints-down(large) {
                     // top: 50%;
                     // transform: translate(50%, -50%);
-                }
+                // }
 
                 // &:hover {
                 //     width: 48.5rem;
                 // }
-            }
-        }
+        //     }
+        // }
 
-        &__title {
-            width: 19rem;
-            font-size: 1.5rem;
+        // &__title {
+        //     width: 19rem;
+        //     font-size: 1.5rem;
 
-            @include breakpoints-down(large) {
-                font-size: 1.2rem;
-                letter-spacing: 0.3px;
-            }
+        //     @include breakpoints-down(large) {
+        //         font-size: 1.2rem;
+        //         letter-spacing: 0.3px;
+        //     }
 
-            &:hover {
-                color: #c7c7c7;
-            }
-        }
+        //     &:hover {
+        //         color: #c7c7c7;
+        //     }
+        // }
 
-        &__closeBtn {
+        // &__closeBtn {
             // top: -1.4rem; right: -0.7rem;
             // font-size: 2rem;
             // background: none;
             // border: none;
             // cursor: pointer;
-            font-family: cursive, 'myHarmattan';
+            // font-family: cursive, 'myHarmattan';
             // color: whitesmoke !important;
 
             // @include breakpoints-down(large) {
             //     right: .5rem;
             // }
-        }
+        // }
     }
 }
 
