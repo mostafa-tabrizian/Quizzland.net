@@ -285,8 +285,21 @@ hr {
     left: unset !important;
 }
 
-.MuiMenuItem-root {
+.MuiMenuItem-root, .MuiTypography-root {
     font-family: IRANYekanBold, sans-serif, serif !important;
+    font-size: .8rem !important;
+}
+
+.Mui-checked {
+    color: #ac272e !important;
+
+    > .MuiSwitch-thumb {
+        border: 1px solid #690D11;
+    }
+}
+
+.MuiSwitch-track {
+    background: white !important;
 }
 
 .MuiSelect-select {
