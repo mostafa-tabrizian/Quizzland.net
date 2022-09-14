@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Helmet } from "react-helmet";
 import DatePicker, { DateObject } from "react-multi-date-picker"
-import persian from "react-date-object/calendars/persian"
-import persian_fa from "react-date-object/locales/persian_fa"
-import persianJs from "persianjs"
-import debounce from 'lodash.debounce'
+const persian = require("react-date-object/calendars/persian")
+const persian_fa = require("react-date-object/locales/persian_fa")
+const persianJs = require("persianjs")
+const debounce = require('lodash.debounce')
+const MenuItem = require('@mui/material/MenuItem')
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useSnackbar } from 'notistack'
-import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
+import InputLabel  from '@mui/material/InputLabel'
+import FormControl from '@mui/material/FormControl'
 
-import LoginForm from '../../components/user/loginForm'
-import axiosInstance from '../../components/axiosApi';
+import axiosInstance from '../../components/axiosApi'
 import { log, getTheme } from '../../components/base'
-import Avatar from '../../components/user/avatar'
-import UserStore from '../../store/userStore';
-import BackdropLoading from '../../components/bacdropLoading';
+import UserStore from '../../store/userStore'
+const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
+const Avatar = React.lazy(() => import('../../components/user/avatar'))
+const BackdropLoading = React.lazy(() => import('../../components/bacdropLoading'))
 
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)

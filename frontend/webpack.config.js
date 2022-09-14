@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -8,7 +9,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, "./static/build/"),
-    filename: "[name].js",
+    filename: "App.js",
   },
   
   module: {
@@ -52,10 +53,16 @@ module.exports = {
       },
     }),
 
+    new CompressionPlugin({
+      test: /\.js(\?.*)?$/i,
+      filename: "[path][base].gz"
+
+    }),
+
     new webpack.ProvidePlugin({
       "React": "react",
    }),
-   
+
   ],
 
 };

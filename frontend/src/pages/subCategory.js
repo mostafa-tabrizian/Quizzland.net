@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios'
 import { Helmet } from "react-helmet";
-import debounce from 'lodash.debounce'
+const axios = require('axios')
+const debounce = require('lodash.debounce')
 
 import AddView from '../components/addView';
-import Tools from '../components/tools'
-import PageTravel from '../components/pageTravel'
 import { log, replaceFunction, takeParameterFromUrl, sortByNewest, sortByMonthlyViews, sortByViews } from '../components/base'
-import LoadingScreen from '../components/loadingScreen'
-import QuizContainer from '../components/quizContainer'
+const Tools = React.lazy(() => import('../components/tools'))
+const PageTravel = React.lazy(() => import('../components/pageTravel'))
+const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
+const QuizContainer = React.lazy(() => import('../components/quizContainer'))
 
 const SubCategory = (props) => {
 

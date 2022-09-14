@@ -55,37 +55,6 @@
         }
     }
 
-    &__bottomQuestionChanger {
-        background: url('/static/img/arw-submit.svg') no-repeat center center;
-        height: 2rem;
-        width: 2rem;
-        transform: rotate(90deg);
-        pointer-events: all;
-
-        &__container {
-            bottom: 0;
-            left: 50%;
-            transform: translate(-50%);
-            z-index: 1;
-            pointer-events: fill;
-        }
-    }
-
-    &__questionCounter {
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-        z-index: 1;
-        color: var(--color);
-
-        @include breakpoints-down(large) {
-            margin-bottom: 1rem;
-        }
-
-        &__totalAnswered {
-            margin-right: .5rem;
-        }
-    }
-
     &__hider {
         @include breakpoints-up(small) {
             width: 29rem;

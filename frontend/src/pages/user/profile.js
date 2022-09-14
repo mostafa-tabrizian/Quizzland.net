@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
-import persianDate from 'persian-date'
+const persianDate = require('persian-date')
 persianDate.toLocale('fa');
 import { BigHead } from "@bigheads/core";
-import axios from 'axios'
+const axios = require('axios')
 
 import { log, getTheme } from '../../components/base'
 

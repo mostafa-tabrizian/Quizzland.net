@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
 import { log, getTheme } from '../../components/base'
-import LoginForm from "../../components/user/loginForm";
+const LoginForm = React.lazy(() => import("../../components/user/loginForm"))
 
 const pathRed = '/static/img/bubbles.webp'
 

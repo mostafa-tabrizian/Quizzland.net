@@ -12,7 +12,7 @@ const SearchFetch = async (value) => {
 
     let filteredSearchValue = []
 
-    searchedValue.map(value => {
+    searchedValue?.map(value => {
         if (!ExcludeWordsToSearch().includes(value.toLowerCase())) {
             filteredSearchValue.push(value)
         }

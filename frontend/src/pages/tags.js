@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
-import Skeleton from '@mui/material/Skeleton';
 
-import QuizContainer from '../components/quizContainer';;
+const QuizContainer = React.lazy(() => import('../components/quizContainer'))
 import { log, getTheme, replaceFunction } from '../components/base'
-import SearchFetchQuiz from '../components/search/searchFetchQuiz';
+import SearchFetchQuiz from '../components/search/searchFetchQuiz'
 import SearchFetchCategory from '../components/search/searchFetchCategory'
 
 const SearchMoreResult = () => {

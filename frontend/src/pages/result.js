@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
-import axios from 'axios'
+const axios = require('axios')
 import { useSnackbar } from 'notistack'
-import Dialog from '@mui/material/Dialog';
+import Dialog from '@mui/material/Dialog'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import LoginForm from '../components/user/loginForm';
 import { log, getTheme, replaceFunction, fadeIn, sortByMonthlyViews } from '../components/base'
-import LoadingScreen from '../components/loadingScreen'
-import QuizContainer from '../components/quizContainer'
-import LikeCommentButton from '../components/user/likeCommentButton';
-import userStore from '../store/userStore';
-import axiosInstance from '../components/axiosApi';
+import userStore from '../store/userStore'
+import axiosInstance from '../components/axiosApi'
+const LoginForm = React.lazy(() => import('../components/user/loginForm'))
+const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
+const QuizContainer = React.lazy(() => import('../components/quizContainer'))
+const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 
 const Result = () => {
     const [resultScore, setResultScore] = useState(0)

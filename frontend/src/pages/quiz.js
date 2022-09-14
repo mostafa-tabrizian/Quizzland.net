@@ -5,21 +5,19 @@ import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import axios from 'axios'
+const axios = require('axios')
 // import ReCAPTCHA from 'react-google-recaptcha'
 import { useSnackbar } from 'notistack'
 import Skeleton from '@mui/material/Skeleton';
 
-import axiosInstance from '../components/axiosApi';
+const axiosInstance = React.lazy(() => import('../components/axiosApi'))
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
-import LoadingScreen from '../components/loadingScreen'
-import QuizHeader from '../components/quiz/quizHeader'
-import Trivia from '../components/quiz/trivia'
-import LikeCommentButton from '../components/user/likeCommentButton';
-import Test from '../components/quiz/test'
-import LoginForm from '../components/user/loginForm';
-import AddView from '../components/addView';
-import SkeletonQuizContainer from '../components/skeletonQuizContainer';
+const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
+const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
+const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
+const LoginForm = React.lazy(() => import('../components/user/loginForm'))
+const AddView = React.lazy(() => import('../components/addView'))
+const SkeletonQuizContainer = React.lazy(() => import('../components/skeletonQuizContainer'))
 
 const logo = '/static/img/Q-small.png'
 
@@ -443,19 +441,25 @@ const Quiz = (props) => {
     const returnQuiz = (question) => {
         switch (quizType) {
             case 'quiz':
-                return <Trivia
-                    question={question}
-                    selectedOption={selectedOption}
-                    questionCounterForId={questionCounterForId}
-                    ableToSelectOption={ableToSelectOption}
-                    wrongAnswerOption={wrongAnswerOption}
-                    correctAnswerOption={correctAnswerOption}
-                />
+                import('../components/quiz/trivia')
+                    .then((Trivia) => {
+                        return <Trivia
+                            question={question}
+                            selectedOption={selectedOption}
+                            questionCounterForId={questionCounterForId}
+                            ableToSelectOption={ableToSelectOption}
+                            wrongAnswerOption={wrongAnswerOption}
+                            correctAnswerOption={correctAnswerOption}
+                        />
+                    })
             case 'test':
-                return <Test
-                    question={question}
-                    selectedOption={selectedOption}
-                />
+                import('../components/quiz/test')
+                    .then((Test) => {
+                        return <Test
+                            question={question}
+                            selectedOption={selectedOption}
+                        />
+                    })
         }
     }
 

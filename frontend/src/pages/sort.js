@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import axios from 'axios'
+const axios = require('axios')
 import { Helmet } from "react-helmet";
-import InfiniteScroll from 'react-infinite-scroll-component';
-import debounce from 'lodash.debounce'
+import InfiniteScroll from 'react-infinite-scroll-component'
+const debounce = require('lodash.debounce')
 
-import LoadingScreen from '../components/loadingScreen'
-import QuizContainer from '../components/quizContainer'
-import Tools from '../components/tools';
+const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
+const QuizContainer = React.lazy(() => import('../components/quizContainer'))
+const Tools = React.lazy(() => import('../components/tools'))
 import { log, getTheme, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
 
 const Sort = () => {

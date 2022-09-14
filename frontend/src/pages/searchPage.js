@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useLocation } from 'react-router-dom'
 
 import { log, takeParameterFromUrl, replaceFunction, getTheme } from '../components/base'
-import Search from '../components/search/search'
+const Search = React.lazy(() => import('../components/search/search'))
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)

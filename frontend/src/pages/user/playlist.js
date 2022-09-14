@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
-import Skeleton from '@mui/material/Skeleton';
 
-import axiosInstance from '../../components/axiosApi';
-import LoadingScreen from '../../components/loadingScreen'
-import QuizContainer from '../../components/quizContainer'
-import LoginForm from '../../components/user/loginForm';
-
+import axiosInstance from '../../components/axiosApi'
 import { log, getTheme, takeParameterFromUrl } from '../../components/base'
-import UserStore from '../../store/userStore';
-import { divide } from 'lodash';
-import SkeletonQuizContainer from '../../components/skeletonQuizContainer';
+import UserStore from '../../store/userStore'
+const LoadingScreen = React.lazy(() => import('../../components/loadingScreen'))
+const QuizContainer = React.lazy(() => import('../../components/quizContainer'))
+const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
+const SkeletonQuizContainer = React.lazy(() => import('../../components/skeletonQuizContainer'))
+
 
 const QuizHistory = () => {
     const [loadState, setLoadState] = useState()

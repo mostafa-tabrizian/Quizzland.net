@@ -3,12 +3,12 @@ import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
 // import { Carousel } from 'antd'
-import axios from 'axios'
+const axios = require('axios');
 
 import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
-import QuizContainer from '../components/quizContainer'
-import LoadingScreen from '../components/loadingScreen'
-import Suggestions from '../components/suggestions';
+const QuizContainer = React.lazy(() => import('../components/quizContainer')) 
+const LoadingScreen = React.lazy(() => import('../components/loadingScreen')) 
+const Suggestions = React.lazy(() => import('../components/suggestions')) 
 
 const Index = () => {
     const [loadState, setLoadState] = useState()

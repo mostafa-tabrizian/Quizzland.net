@@ -7,13 +7,12 @@ import Skeleton from '@mui/material/Skeleton';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import Tools from '../components/tools'
-import PageTravel from '../components/pageTravel'
-import LoadingScreen from '../components/loadingScreen'
+const Tools = React.lazy(() => import('../components/tools'))
+const PageTravel = React.lazy(() => import('../components/pageTravel'))
+const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 import AddView from '../components/addView';
-
 import { log, getTheme, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
-import SkeletonQuizContainer from '../components/skeletonQuizContainer';
+const SkeletonQuizContainer = React.lazy(() => import('../components/skeletonQuizContainer'))
 
 const Category = (props) => {
     const [categoryQuery, setCategoryQuery] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', ' '))

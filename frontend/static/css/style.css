@@ -14,11 +14,6 @@
   font-display: swap;
   src: url("/static/fonts/IRANYekanBlack.woff2") format("woff2"), url("/static/fonts/IRANYekanBlack.woff") format("woff");
 }
-@font-face {
-  font-family: "LalezarRegular";
-  font-display: swap;
-  src: url("/static/fonts/LalezarRegular.woff2") format("woff2"), url("/static/fonts/LalezarRegular.woff") format("woff");
-}
 .wrapper-sm {
   max-width: 30rem;
   margin: 1.125rem auto;
@@ -568,15 +563,15 @@ hr {
 
 .title {
   text-align: center;
-  font-family: LalezarRegular, sans-serif, serif !important;
+  font-family: IRANYekanBlack, sans-serif, serif !important;
   font-weight: 300;
   font-size: 2rem !important;
 }
 
 .lowTitle {
-  font-size: 2.5rem !important;
+  font-size: 2.2rem !important;
   opacity: 0.15;
-  font-family: LalezarRegular, sans-serif, serif !important;
+  font-family: IRANYekanBlack, sans-serif, serif !important;
   font-weight: 300;
   width: 100%;
   justify-content: center;
@@ -644,7 +639,7 @@ hr {
   color: #d56268;
 }
 .header__logo span {
-  font-family: LalezarRegular, sans-serif, serif;
+  font-family: IRANYekanBlack, sans-serif, serif;
 }
 .header__menu {
   transition: all 0.3s ease-in-out;
@@ -804,34 +799,6 @@ hr {
 .quiz__questionChanger__last {
   transform: rotate(180deg);
   right: calc(50% + 15rem);
-}
-.quiz__bottomQuestionChanger {
-  background: url("/static/img/arw-submit.svg") no-repeat center center;
-  height: 2rem;
-  width: 2rem;
-  transform: rotate(90deg);
-  pointer-events: all;
-}
-.quiz__bottomQuestionChanger__container {
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%);
-  z-index: 1;
-  pointer-events: fill;
-}
-.quiz__questionCounter {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  z-index: 1;
-  color: var(--color);
-}
-@media (max-width: 70em) {
-  .quiz__questionCounter {
-    margin-bottom: 1rem;
-  }
-}
-.quiz__questionCounter__totalAnswered {
-  margin-right: 0.5rem;
 }
 .quiz__hider {
   width: 23rem;
@@ -1003,7 +970,7 @@ hr {
   }
 }
 .basicPage h3 {
-  font-family: LalezarRegular, sans-serif, serif;
+  font-family: IRANYekanBlack, sans-serif, serif;
   font-weight: 300;
 }
 .basicPage h4 {
@@ -1100,7 +1067,7 @@ hr {
   border-radius: 10px;
 }
 .blog-title {
-  font-family: "LalezarRegular";
+  font-family: "IRANYekanBlack";
   font-size: 1.4rem;
 }
 .blog-publish {

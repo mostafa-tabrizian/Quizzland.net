@@ -10,9 +10,13 @@
   <meta name="theme-color" content="#971c27">
   <meta name="apple-mobile-web-app-title" content="کوییزلند">
 
-  <link rel="manifest" href="/manifest.json">
+  {% comment %} <link rel="manifest" href="/manifest.json"> {% endcomment %}
+  
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <link rel="stylesheet" href="{% static 'css/tailwind_build.css' %}" />
+
+  {% comment %} <link rel="stylesheet" href="{% static 'css/style.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/tailwind_build.min.css' %}" /> {% endcomment %}
 
   <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
@@ -52,7 +56,7 @@
 
   <div id="land"></div>
 
-  <script src="{% static 'build/App.js' %}"></script>
+  <script src="{% static 'build/App.js.gz' %}"></script>
 </body>
 
 </html>

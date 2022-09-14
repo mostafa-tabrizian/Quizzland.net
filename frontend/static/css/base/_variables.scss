@@ -20,13 +20,6 @@
         url('/static/fonts/IRANYekanBlack.woff') format('woff');
 }
 
-@font-face {
-    font-family: 'LalezarRegular';
-    font-display: swap;
-    src: url('/static/fonts/LalezarRegular.woff2') format('woff2'),
-        url('/static/fonts/LalezarRegular.woff') format('woff');
-}
-
 $font-pr: myHarmattan, sans-serif, serif;
 
 // Fort Size
