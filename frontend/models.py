@@ -227,7 +227,7 @@ class History(models.Model):
         return self.trivia_id or self.test_id
     
     def __str__(self):
-        return f'{self.user_id.username} liked {self.quiz_id.title}'
+        return f'{self.user_id.username} {self.date_submitted}'
     
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)

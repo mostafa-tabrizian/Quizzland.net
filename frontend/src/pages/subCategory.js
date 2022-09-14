@@ -7,19 +7,17 @@ import AddView from '../components/addView';
 import { log, replaceFunction, takeParameterFromUrl, sortByNewest, sortByMonthlyViews, sortByViews } from '../components/base'
 const Tools = React.lazy(() => import('../components/tools'))
 const PageTravel = React.lazy(() => import('../components/pageTravel'))
-const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizContainer = React.lazy(() => import('../components/quizContainer'))
+const SkeletonQuizContainer = React.lazy(() => import('../components/skeletonQuizContainer'))
 
 const SubCategory = (props) => {
 
     const [pageTravel, set_PageTravel] = useState([])
     const [content, set_content] = useState([])
-    const [hide_content, set_hide_content] = useState(false)
     const [countResult, setCountResult] = useState(16)
     const [currentPageNumberQuiz, setCurrentPageNumberQuiz] = useState(1)
     const [offset_content, setOffset_content] = useState(0)
     const [sortType, setSortType] = useState('trend')
-    const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     const subCategory = props.match.params.subCategory
     const persianSubCategory = takeParameterFromUrl('sc')
@@ -37,10 +35,9 @@ const SubCategory = (props) => {
 
     useEffect(() => {
         applyBackground_AddView()
-        setLoadState(true)
     }, [persianSubCategory])
 
-    const persianSubCategoryWithoutSign = replaceFunction(persianSubCategory, '-', ' ')
+    const persianSubCategoryWithoutSign = persianSubCategory && replaceFunction(persianSubCategory, '-', ' ')
 
     const sortContent = () => {
         switch (sortType) {
@@ -66,12 +63,8 @@ const SubCategory = (props) => {
                 const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, "-", " ")}&limit=${countResult}&offset=${offset_content}&public=true`);
                 const content = quiz.data.results.concat(pointy.data.results).sort(sortByMonthlyViews);
         
-                if (content.count !== 0) {
-                    set_content(content)
-                    set_PageTravel(content)
-                } else {
-                    set_hide_content(true)
-                }
+                set_content(content)
+                set_PageTravel(content)
         
                 setContentLoaded(true)
             }, 500
@@ -92,9 +85,6 @@ const SubCategory = (props) => {
 
     return (
         <React.Fragment>
-
-            <LoadingScreen loadState={loadState} />
-
             <Helmet>
                 <title>{`کوییز های ${persianSubCategoryWithoutSign} | کوییزلند`}</title>
                 <meta name="description" content={`کوییزلند - کوییز های ${persianSubCategoryWithoutSign} `} />
@@ -108,32 +98,40 @@ const SubCategory = (props) => {
                     Banner
                 </div> */}
 
-                <h3 className='lowTitle' style={{ color: 'white' }}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>
-                <h3 className='title' style={{ color: 'white' }}>{persianSubCategoryWithoutSign}</h3>
-
-                <Tools
-                    sortType={sortType} setSortType={setSortType}
-                />
+                <div className='mb-5'>
+                    <h3 className='lowTitle' style={{ color: 'white' }}>{replaceFunction(props.match.params.subCategory, '-', ' ')}</h3>
+                    <h3 className='title' style={{ color: 'white' }}>{persianSubCategoryWithoutSign}</h3>
+                </div>
 
                 {
-                    hide_content
-                        ?
-                        <div>
-                            <h1>کتگوری نیست </h1>
-                        </div>
-                        :
-                        <div>
-                            <ul className={`flex flex-col md:flex-row flex-wrap`}>
-                                <QuizContainer quizzes={content} bgStyle='bg' />
-                            </ul>
+                    contentLoaded ?
+                    <div>
+                        {
+                            content.length ? 
+                            <React.Fragment>
 
-                            <PageTravel
-                                pageTravel={pageTravel} set_PageTravel={set_PageTravel}
-                                countResult={countResult} setCountResult={setCountResult}
-                                offset={offset_content} setOffset={setOffset_content}
-                                currentPageNumber={currentPageNumberQuiz} setCurrentPageNumber={setCurrentPageNumberQuiz}
-                            />
-                        </div>
+                                <Tools
+                                    sortType={sortType} setSortType={setSortType}
+                                />
+                                
+                                <ul className={`flex flex-col md:flex-row flex-wrap`}>
+                                    <QuizContainer quizzes={content} bgStyle='bg' />
+                                </ul>
+
+                                <PageTravel
+                                    pageTravel={pageTravel} set_PageTravel={set_PageTravel}
+                                    countResult={countResult} setCountResult={setCountResult}
+                                    offset={offset_content} setOffset={setOffset_content}
+                                    currentPageNumber={currentPageNumberQuiz} setCurrentPageNumber={setCurrentPageNumberQuiz}
+                                />
+                                
+                            </React.Fragment>
+                            :
+                            'no shit'
+                        }
+                    </div>
+                    :
+                    <SkeletonQuizContainer />
                 }
 
             </div>
