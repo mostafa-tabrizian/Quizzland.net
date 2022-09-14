@@ -285,9 +285,13 @@ hr {
     left: unset !important;
 }
 
-.MuiMenuItem-root, .MuiTypography-root {
+.MuiMenuItem-root, .MuiTypography-root, .MuiTooltip-tooltip {
     font-family: IRANYekanBold, sans-serif, serif !important;
     font-size: .8rem !important;
+}
+
+.MuiTooltip-tooltip {
+    background: #ac272e !important;
 }
 
 .Mui-checked {

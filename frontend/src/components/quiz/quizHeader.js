@@ -1,6 +1,7 @@
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import persianJs from "persianjs"
+import Tooltip from '@mui/material/Tooltip';
 
 import { makeDatePublishFormatForQuizDetail, getTheme, log } from '../base'
 
@@ -44,38 +45,47 @@ const QuizHeader = (props) => {
             {
                 props.contentLoaded &&
                 <div className='flex translate-x-[-3rem]'>
-                    <div onClick={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }} className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`} title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'>
-                        <div className='mt-3'>
-                            <FormControlLabel
-                                value="authQuestionChanger"
-                                control={
-                                    <Switch
-                                        checked={props.autoQuestionChanger ? true : false}
-                                        onChange={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }}
-                                    />
-                                }
-                                label="تغییر خودکار"
-                                title='در صورت خودکار بودن، پس از 1.5 الی 5.5 ثانیه برحسب نوع سوال، به سوال بعدی منتقل می شوید'
-                                labelPlacement="start"
-                            />
+                    <Tooltip title="در صورت خودکار بودن، پس از 1.5 الی 5.5 ثانیه برحسب نوع سوال، به سوال بعدی منتقل می شوید">
+                        <div
+                            onClick={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }}
+                            className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`}
+                            title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'
+                        >
+                            <div className='mt-3'>
+                                <FormControlLabel
+                                    value="authQuestionChanger"
+                                    control={
+                                        <Switch
+                                            checked={props.autoQuestionChanger ? true : false}
+                                            onChange={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }}
+                                        />
+                                    }
+                                    label="تغییر خودکار"
+                                    labelPlacement="start"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div onClick={() => { props.SFXController(props.SFXAllowed ? false : true) }} className={`mt-5 hover:cursor-pointer relative center items-center`} title='فرض صدا های پس از پاسخ به سوال'>
-                        <div className='mt-3'>
-                            <FormControlLabel
-                                value="authQuestionChanger"
-                                control={
-                                    <Switch
-                                        checked={props.SFXAllowed ? true : false}
-                                        onChange={() => { props.SFXController(props.SFXAllowed ? false : true) }}
-                                    />
-                                }
-                                title='فرض افکت پس از پاسخ به سوال'
-                                label="صدا"
-                                labelPlacement="start"
-                            />
+                    </Tooltip>
+                    <Tooltip title="فرض صدا های پس از پاسخ به سوال">
+                        <div
+                            onClick={() => { props.SFXController(props.SFXAllowed ? false : true) }}
+                            className={`mt-5 hover:cursor-pointer relative center items-center`}
+                        >
+                            <div className='mt-3'>
+                                <FormControlLabel
+                                    value="authQuestionChanger"
+                                    control={
+                                        <Switch
+                                            checked={props.SFXAllowed ? true : false}
+                                            onChange={() => { props.SFXController(props.SFXAllowed ? false : true) }}
+                                        />
+                                    }
+                                    label="صدا"
+                                    labelPlacement="start"
+                                />
+                            </div>
                         </div>
-                    </div>
+                    </Tooltip>
                 </div>
             }
 
