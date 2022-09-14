@@ -12,11 +12,13 @@ import {
   hatMap,
   bodyMap
 } from "@bigheads/core";
+import Dialog from '@mui/material/Dialog'
 
 import { log } from '../base'
 
 const Avatar = (props) => {
   const [avatarOptions, setAvatarOptions] = useState(JSON.parse(props.user.avatar))
+  const [avatarChangePanel, setAvatarChangePanel] = useState(false)
 
   useEffect(() => {
     filterThemes()
@@ -289,65 +291,84 @@ const Avatar = (props) => {
   return ( 
     <div>
         <h3>تصویر پروفایل</h3>
-        <div className='items-center md:flex'>
-          <div className='w-[12rem] h-[12rem] md:mx-0 mx-auto'>
-            <BigHead {...avatarOptions} />
-          </div>
-          <div>
-            <h4 className='text-center md:text-right'>برای تغییر روی گزینه مربوطه کلیک کنید</h4>
-            <h4 onClick={() => getRandomOptions()} className='h-fit w-fit mx-auto md:mx-0 hover:cursor-pointer md:my-3 my-5 px-4 py-1 border rounded-lg border-[#690D11]'>تغییر رندوم همه</h4>
-            
-            <div className='flex flex-wrap md:w-[44rem] w-full h-fit space-y-3 space-x-5 space-x-reverse space-y-reverse mt-3'>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('skinTone', avatarOptions.skinTone)}>
-                <h4>رنگ پوست</h4>
+        <div className='items-center text-center md:flex'>
+          
+          <button className='text-center' onClick={() => setAvatarChangePanel(true)}>
+            <div className='w-[12rem] h-[12rem] md:mx-0 mx-auto'>
+              <BigHead {...avatarOptions} />
+            </div>
+            برای تغییر آواتار کلیک کنید
+          </button>
+          
+          <Dialog
+              open={avatarChangePanel}
+              aria-labelledby="آواتار کاربر"
+              aria-describedby="تغییر آواتار"
+          >
+            <div className='bg-gradient-to-t from-[#771118] to-[#ac272e] text-white p-8 rounded-lg relative'>
+              <button className='absolute text-3xl result__popUpQuizSuggester__closeBtn left-4 top-4' onClick={() => setAvatarChangePanel(false)}>
+                  <svg class="h-6 w-6 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+              </button>
+              
+              <div className='w-[12rem] h-[12rem] md:mx-0 mx-auto'>
+                <BigHead {...avatarOptions} />
               </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('body', avatarOptions.body)}>
-                <h4>بدن</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('eyes', avatarOptions.eyes)}>
-                <h4>چشم</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('accessory', avatarOptions.accessory)}>
-                <h4>عینک</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('eyebrows', avatarOptions.eyebrows)}>
-                <h4>ابرو</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('mouth', avatarOptions.mouth)}>
-                <h4>دهان</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('lipColor', avatarOptions.lipColor)}>
-                <h4>رنگ لب ها</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('facialHair', avatarOptions.facialHair)}>
-                <h4>مو صورت</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('hair', avatarOptions.hair)}>
-                <h4>مو سر</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('hairColor', avatarOptions.hairColor)}>
-                <h4>رنگ موها</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('hat', avatarOptions.hat)}>
-                <h4>کلاه</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('hatColor', avatarOptions.hatColor)}>
-                <h4>رنگ کلاه</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('clothing', avatarOptions.clothing)}>
-                <h4>لباس</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('clothingColor', avatarOptions.clothingColor)}>
-                <h4>رنگ لباس</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('faceMask', avatarOptions.faceMask)}>
-                <h4>ماسک</h4>
-              </div>
-              <div className='flex hover:cursor-pointer space-x-3 space-x-reverse h-fit px-4 py-1 border rounded-lg border-[#690D11]' onClick={() => changeOptionManually('faceMaskColor', avatarOptions.faceMaskColor)}>
-                <h4>رنگ ماسک</h4>
+              
+              <h4 className='text-center md:text-right'>برای تغییر روی گزینه مربوطه کلیک کنید</h4>
+              <h4 onClick={() => getRandomOptions()} className='px-4 py-1 mx-auto my-5 border border-gray-400 rounded-lg h-fit w-fit md:mx-0 hover:cursor-pointer md:my-3'>تغییر رندوم همه</h4>
+              
+              <div className='flex flex-wrap justify-between mx-2 mt-3 space-y-3 space-y-reverse'>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('skinTone', avatarOptions.skinTone)}>
+                  <h4>رنگ پوست</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('body', avatarOptions.body)}>
+                  <h4>بدن</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('eyes', avatarOptions.eyes)}>
+                  <h4>چشم</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('accessory', avatarOptions.accessory)}>
+                  <h4>عینک</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('eyebrows', avatarOptions.eyebrows)}>
+                  <h4>ابرو</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('mouth', avatarOptions.mouth)}>
+                  <h4>دهان</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('lipColor', avatarOptions.lipColor)}>
+                  <h4>رنگ لب ها</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('facialHair', avatarOptions.facialHair)}>
+                  <h4>مو صورت</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('hair', avatarOptions.hair)}>
+                  <h4>مو سر</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('hairColor', avatarOptions.hairColor)}>
+                  <h4>رنگ موها</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('hat', avatarOptions.hat)}>
+                  <h4>کلاه</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('hatColor', avatarOptions.hatColor)}>
+                  <h4>رنگ کلاه</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('clothing', avatarOptions.clothing)}>
+                  <h4>لباس</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('clothingColor', avatarOptions.clothingColor)}>
+                  <h4>رنگ لباس</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('faceMask', avatarOptions.faceMask)}>
+                  <h4>ماسک</h4>
+                </div>
+                <div className='flex px-4 py-1 space-x-3 space-x-reverse border border-gray-400 rounded-lg hover:cursor-pointer h-fit' onClick={() => changeOptionManually('faceMaskColor', avatarOptions.faceMaskColor)}>
+                  <h4>رنگ ماسک</h4>
+                </div>
               </div>
             </div>
-          </div>
+          </Dialog>
         </div>
     </div>
   );

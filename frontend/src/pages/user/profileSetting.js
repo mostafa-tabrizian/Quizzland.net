@@ -5,7 +5,7 @@ const persian = require("react-date-object/calendars/persian")
 const persian_fa = require("react-date-object/locales/persian_fa")
 const persianJs = require("persianjs")
 const debounce = require('lodash.debounce')
-const MenuItem = require('@mui/material/MenuItem')
+import MenuItem from '@mui/material/MenuItem'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useSnackbar } from 'notistack'
 import Select from '@mui/material/Select';
@@ -41,7 +41,7 @@ const ProfileSetting = () => {
     const lastNameRef = useRef()
     const bioRef = useRef()
     const birthdayDateRef = useRef()
-    const gendersRef = useRef()
+    const gendersRef = useRef('null')
 
     const getUserDetail = async () => {
         if (userProfile.userDetail) {
@@ -83,6 +83,7 @@ const ProfileSetting = () => {
         }
 
         if (!updatedUsername.length && !updatedFirstName.length && !updatedLastName.length && !updatedBio.length && !updatedBirthdayDate.length && updatedGender == 'null' && !dateRefValue.length.length && avatarOptions == null) {
+            setLoading(false)
             return enqueueSnackbar('برای ذخیره، حداقل یک ورودی را تغییر دهید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         }
 
@@ -204,10 +205,9 @@ const ProfileSetting = () => {
                                                 id="genders"
                                                 value={gendersRef.current}
                                                 label="جنسیت"
-                                                ref={gendersRef}
                                                 onChange={(event) => {gendersRef.current = event.target.value}}
                                             >
-                                                <MenuItem value="">انتخاب کنید</MenuItem>
+                                                <MenuItem value="null">انتخاب کنید</MenuItem>
                                                 <MenuItem value='male'>آقا</MenuItem>
                                                 <MenuItem value='female'>خانم</MenuItem>
                                             </Select>
