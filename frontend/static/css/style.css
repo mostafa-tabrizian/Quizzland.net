@@ -221,11 +221,6 @@ h4 {
   font-family: IRANYekanBold, sans-serif, serif !important;
   font-size: 0.9rem !important;
 }
-@media (max-width: 70em) {
-  h4 {
-    font-size: 0.8rem !important;
-  }
-}
 
 h5 {
   font-family: IRANYekanRegular, sans-serif, serif !important;
@@ -366,6 +361,9 @@ hr {
 .MuiPaper-root {
   border-radius: 10px !important;
 }
+.MuiPaper-root::-webkit-scrollbar {
+  width: 0;
+}
 
 .MuiDialog-container, .MuiBackdrop-root {
   -webkit-backdrop-filter: blur(3px);
@@ -393,6 +391,25 @@ hr {
 }
 .Mui-checked > .MuiSwitch-thumb {
   border: 1px solid #690D11;
+}
+
+.MuiDrawer-paper {
+  background: #161616 !important;
+  border: 1px solid #ac272e !important;
+  color: white !important;
+}
+@media (min-width: 69em) {
+  .MuiDrawer-paper {
+    width: 25rem !important;
+  }
+}
+@media (max-width: 70em) {
+  .MuiDrawer-paper {
+    height: 50% !important;
+  }
+}
+.MuiDrawer-paper hr {
+  width: 100% !important;
 }
 
 .MuiSwitch-track {

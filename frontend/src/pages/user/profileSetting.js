@@ -147,7 +147,7 @@ const ProfileSetting = () => {
             <div className="lowTitle">Edit Profile</div>
             <div className="title">تنظیمات پروفایل</div>
 
-            <div className={`mx-4 md:mx-auto md:w-4/5 min-h-[60vh] ${user ? '' : 'flex' }`}>
+            <div className={`mx-4 mt-5 md:mx-auto md:w-4/5 min-h-[60vh] ${user ? '' : 'flex' }`}>
                 { user ?
                     <div>
                         <h1 className='mb-3'>

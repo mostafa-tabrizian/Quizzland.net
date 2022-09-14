@@ -162,11 +162,11 @@ const Comments = (props) => {
     
     return (
         <div>
-            {/* <h3 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>کامنت ها</h3> */}
+            <h3 className='flex items-center justify-center my-3 quiz__tags__title beforeAfterDecor'>کامنت ها</h3>
             <div>
-                <div className='relative my-10'>
+                <div className='relative'>
                     <textarea name="text" rows="3" ref={commentTextRef} onClick={checkIfUserLoggedIn} className={`px-4 py-2 w-full ${theme == 'dark' ? 'bg-[#161616] text-white' : 'bg-[#ffeaeb] text-black'} placeholder:text-gray-300 border-b-[#ac272e]`} type="text" placeholder='.کامنت تان را اینجا بنویسید'></textarea>
-                    <button className={`absolute flex px-4 space-x-1 ${theme == 'dark' ? 'bg-[#161616] text-white' : 'bg-[#ffeaeb] text-black'} bottom-2 left-4`} onClick={() => postClicked()}>
+                    <button className={`absolute flex px-4 mb-3 space-x-1 ${theme == 'dark' ? 'bg-[#161616] text-white' : 'bg-[#ffeaeb] text-black'} bottom-2 left-4`} onClick={() => postClicked()}>
                         <svg class="h-6 w-6 text-[#ac272e]"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="10" y1="14" x2="21" y2="3" />  <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" /></svg>
                         <span>ارسال</span>
                     </button>

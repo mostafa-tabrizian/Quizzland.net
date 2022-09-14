@@ -1,12 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useSnackbar } from 'notistack'
 import debounce from 'lodash.debounce'
 
 import Comments from './comments'
-import { log, getTheme } from '../base'
+import { log, getTheme, isItMobile } from '../base'
 import userStore from '../../store/userStore';
 import axiosInstance from '../axiosApi';
 import BackdropLoading from '../bacdropLoading';
+import Drawer from '@mui/material/Drawer';
 
 const LikeCommentButton = (props) => {
     const [commentsPanelOpen, setCommentsPanelState] = useState(false);
@@ -15,11 +16,14 @@ const LikeCommentButton = (props) => {
     const [loading, setLoading] = useState(false)
     
     const [userProfile] = userStore()
+
+    const itIsMobile = useRef()
     
     const { enqueueSnackbar } = useSnackbar()
            
     useEffect(() => {
         setTheme(getTheme())
+        itIsMobile.current = isItMobile()
     }, []);
 
     
@@ -78,6 +82,14 @@ const LikeCommentButton = (props) => {
             setLoading(false)
         }
     }
+
+    const decideAnchor = () => {
+        if (itIsMobile.current) {
+            return 'bottom'
+        } else {
+            return 'right'
+        }
+    }
     
     return (
         <React.Fragment>
@@ -91,25 +103,14 @@ const LikeCommentButton = (props) => {
                 </div>
             </div>
 
-            {/* <Drawer
-                placement="right"
+            <Drawer
+                anchor={decideAnchor()}
+                open={commentsPanelOpen}
                 onClose={() => setCommentsPanelState(false)}
-                visible={commentsPanelOpen}
-                drawerStyle={{
-                    background: `${theme == 'dark' ? '#161616' : 'white'}`,
-                    color:'white'
-                }}
-                headerStyle={{
-                    background: `${theme == 'dark' ? '#161616' : 'white'}`,
-                    color:'white'
-                }}
-                bodyStyle={{
-                    padding: 0,
-                    color:'white'
-                }}
             >
                 <Comments quizId={props.quizId} quizType={props.quizType} showLoginNotification={props.showLoginNotification} setCommentsPanelState={setCommentsPanelState} />
-            </Drawer> */}
+            </Drawer>
+            
         </React.Fragment>
     );
 }

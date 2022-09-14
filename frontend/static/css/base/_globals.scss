@@ -131,10 +131,6 @@ h3 {
 h4 {
     font-family: IRANYekanBold, sans-serif, serif !important;
     font-size: .9rem !important;
-
-    @include breakpoints-down(large) {
-        font-size: .8rem !important;
-    }
 }
 
 h5 {
@@ -272,6 +268,10 @@ hr {
 
 .MuiPaper-root {
     border-radius: 10px !important;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
 }
 
 .MuiDialog-container, .MuiBackdrop-root {
@@ -299,6 +299,24 @@ hr {
 
     > .MuiSwitch-thumb {
         border: 1px solid #690D11;
+    }
+}
+
+.MuiDrawer-paper {
+    background: #161616 !important;
+    border: 1px solid #ac272e !important;
+    color: white !important;
+
+    @include breakpoints-up(large) {
+        width: 25rem !important;
+    }
+
+    @include breakpoints-down(large) {
+        height: 50% !important;
+    }
+
+    hr {
+        width: 100% !important;
     }
 }
 
