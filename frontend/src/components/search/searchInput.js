@@ -37,7 +37,7 @@ const SearchInput = () => {
     return (
         <React.Fragment>
             <div className={`header__searched hidden md:flex items-center`}>
-                <div className='relative'>
+                <div className={`relative ${theme == 'dark' ? 'bg-[#060101]' : 'bg-[#ffffff]' } z-10`}>
                     <input
                         type='text'
                         className='pl-4 pr-12 py-1 border border-[#8C939D] w-[20rem] rounded-full text-right bg-transparent text-[0.9rem] my-auto'

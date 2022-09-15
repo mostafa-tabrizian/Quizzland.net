@@ -90,7 +90,7 @@ const Index = () => {
 
             <div className='relative z-0 mr-4 md:m-auto md:w-4/5'>
 
-                <div className={`hero hidden md:flex justify-center items-center bg-gradient-to-t backdrop-blur-md from-[#8b181f] via-transparent p-3 rounded-lg m-auto`}>
+                <div className={`hero mt-20 hidden md:flex justify-center items-center bg-gradient-to-t backdrop-blur-md from-[#8b181f] via-transparent p-3 rounded-lg`}>
 
                     <div className='relative ml-5 mb-[-3rem] drop-shadow-[10px_15px_10px_black] hidden md:block'>
                         <div className='pointer-events-none'>

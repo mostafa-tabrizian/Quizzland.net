@@ -163,20 +163,8 @@ const Header = () => {
 
             <BackdropLoading loadingStatue={loading} />
 
-            <header className={`relative z-10 ${theme == 'dark' ? 'bg-[#0601017c]' : 'bg-[#ffffff82]' } rounded-md backdrop-blur-md p-5`}>
+            <header className={`relative z-10 ${theme == 'dark' ? 'bg-[#060101ed]' : 'bg-[#ffffffe8]' } mb-12 shadow-[0_0_10px_0_#8d353969] sticky top-0 rounded-md backdrop-blur-md`}>
                 <div>
-                    <div className='items-center justify-center hidden md:flex'>
-                        <Link to="/" className="flex items-center justify-between header__logo">
-                            <span className='bloodRiver ml-1 text-[1.6rem]'>uizzland</span>
-                            <img
-                                src='/static/img/Q-small.png'
-                                alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشsearchناسی'
-                                width={24}
-                                height={35}
-                            />
-                        </Link>
-                    </div>
-
                     <div className='absolute hidden left-10 top-5 md:block hover:cursor-pointer' onClick={changeTheme}>
                         {
                             theme == 'dark' ? 
@@ -186,7 +174,7 @@ const Header = () => {
                         }
                     </div>
 
-                    <div className="header text-xl flex md:grid md:grid-cols-3 justify-between md:max-w-[85%] relative md:mx-auto md:p-4">
+                    <div className="header text-xl md:min-h-[7rem] flex md:grid md:grid-cols-4 md:justify-right justify-between md:max-w-[85%] relative md:mx-auto px-4 pt-4 md:pb-4 md:pt-0">
 
                         <div className='flex items-center md:hidden'>
                             <button onClick={openCloseSearchMobile} className='flex items-center header__btn' type="button">
@@ -257,6 +245,8 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
+
+                        <Search />
                         
                         <div className={`hidden md:flex md:justify-center items-center relative`}>
                             <div className="flex space-x-reverse space-x-7">
@@ -280,23 +270,19 @@ const Header = () => {
                             </div>
                         </div>
 
-                        <Search />
-                        
-                        <div>
-                            <Link to="/" className='flex items-center justify-between header__logo md:hidden'>
-                                <span className='bloodRiver ml-1 text-[1.6rem]'>uizzland</span>
-                                <img
-                                    src='/static/img/Q-small.png'
-                                    alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشناسی'
-                                    width={24}
-                                    height={35}
-                                />
-                            </Link>
-                        </div>
+                        <Link to="/" className="flex items-center header__logo justify-center">
+                            <span className='bloodRiver ml-1 text-[1.6rem]'>uizzland</span>
+                            <img
+                                src='/static/img/Q-small.png'
+                                alt='کوییزلند | کوییزلند بهترین وب سایت کوییز های سرگرمی مانند کوییز های سلبریتی ها، فیلم و سریال و کوییز های روانشناسی و خودشsearchناسی'
+                                width={24}
+                                height={35}
+                            />
+                        </Link>
                     </div>
                 </div>
 
-                <div className='block mt-4 space-x-3 space-x-reverse md:hidden'>
+                <div className='space-x-3 space-x-reverse md:hidden'>
                     {
                         userProfile.userDetail ?
                             <Link to={`/profile/${userProfile.userDetail?.username}`}>
@@ -327,7 +313,9 @@ const Header = () => {
                                 </div>
                             </Link>
                             :
-                            <LoginForm />
+                            <div className='p-4'>
+                                <LoginForm />
+                            </div>
                     }
                 </div>
 
