@@ -14,6 +14,7 @@ import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
 import userStore from '../../src/store/userStore'
 import BackdropLoading from './bacdropLoading';
+import LoginForm from './user/loginForm';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
@@ -230,7 +231,7 @@ const Header = () => {
                                         </div>
                                     </div>
                                     :
-                                    <Link to='/login' className={`px-6 py-1 h-fit bloodRiver_bg rounded-2xl text-white`}>ورود</Link>
+                                    <LoginForm />
                                 }
                             </div>
 
@@ -326,9 +327,7 @@ const Header = () => {
                                 </div>
                             </Link>
                             :
-                            <React.Fragment>
-                                <Link to='/login' className={`px-6 py-1 h-fit bloodRiver_bg rounded-2xl text-white`}>ورود</Link>
-                            </React.Fragment>
+                            <LoginForm />
                     }
                 </div>
 
@@ -386,10 +385,7 @@ const Header = () => {
                             </ul>
                         </React.Fragment>
                         :
-                        <React.Fragment>
-                            <Link to='/login' className={`px-6 py-1 h-fit bloodRiver_bg rounded-2xl text-white`}>ورود</Link>
-                            
-                        </React.Fragment>
+                        <LoginForm />
                     }
                         
                     </div>

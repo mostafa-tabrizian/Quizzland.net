@@ -230,6 +230,7 @@ const LoginForm = (props) => {
                 clientId={process.env.GOOGLE_LOGIN_CLIENT}
                 className='ltr'  // w-[90%] flex justify-center
                 buttonText="ورود/ثبت نام با حساب گوگل"
+                render={props => <button onClick={props.onClick} className={`px-6 py-1 h-fit bloodRiver_bg rounded-2xl text-white`}>ورود</button>}
                 onSuccess={googleLoginSuccess}
                 onFailure={googleLoginFailure}
                 cookiePolicy={'single_host_origin'}
