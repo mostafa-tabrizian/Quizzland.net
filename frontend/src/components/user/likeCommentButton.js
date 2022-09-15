@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce'
 import Comments from './comments'
 import { log, getTheme, isItMobile } from '../base'
 import userStore from '../../store/userStore';
-import axiosInstance from '../axiosApi';
+import axiosInstance from '../axiosAuthApi';
 import BackdropLoading from '../bacdropLoading';
 import Drawer from '@mui/material/Drawer';
 

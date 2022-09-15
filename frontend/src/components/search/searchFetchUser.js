@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../components/axiosApi';
 import { log } from '../base'
 
 const SearchFetch = async (value) => {  

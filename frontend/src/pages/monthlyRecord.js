@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { saveAs } from 'file-saver'
-import axios from 'axios'
+import axios from '../components/axiosApi';
 import { Helmet } from "react-helmet";
 
 import { log } from '../components/base'

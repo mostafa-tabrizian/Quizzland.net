@@ -11,7 +11,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { log, getTheme, replaceFunction, fadeIn, sortByMonthlyViews } from '../components/base'
 import userStore from '../store/userStore'
-import axiosInstance from '../components/axiosApi'
+import axiosInstance from '../components/axiosAuthApi'
 const LoginForm = React.lazy(() => import('../components/user/loginForm'))
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizContainer = React.lazy(() => import('../components/quizContainer'))

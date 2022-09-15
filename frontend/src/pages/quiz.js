@@ -5,12 +5,11 @@ import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-const axios = require('axios')
 // import ReCAPTCHA from 'react-google-recaptcha'
 import { useSnackbar } from 'notistack'
 import Skeleton from '@mui/material/Skeleton';
 
-const axiosInstance = React.lazy(() => import('../components/axiosApi'))
+import axios from '../components/axiosApi'
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom'
 import debounce from 'lodash.debounce'
-import axios from 'axios'
 import { BigHead } from "@bigheads/core";
 import { useSnackbar } from 'notistack'
 
-import axiosInstance from '../axiosApi';
+import axios from '../axiosApi';
+import axiosInstance from '../axiosAuthApi';
 import { log, getTheme, replaceFunction, datePublishHandler } from '../base'
 import ExplicitWords from './explicitWords';
 import userStore from '../../store/userStore';

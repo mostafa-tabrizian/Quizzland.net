@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 
-import axiosInstance from '../components/axiosApi';
+import axiosInstance from '../components/axiosAuthApi';
 import { log, replaceFunction, datePublishHandler } from '../components/base'
 
 const Blog = (props) => {

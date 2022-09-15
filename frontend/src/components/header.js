@@ -6,9 +6,8 @@ import { useGoogleLogout } from 'react-google-login'
 import { useCookies } from "react-cookie";
 import { useSnackbar } from 'notistack'
 import { BigHead } from "@bigheads/core";
-import axios from 'axios';
-
 import { log, getTheme, keyPressedOnInput } from './base'
+import axios from '../components/axiosApi';
 import Search from './search/searchInput'
 import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
@@ -118,6 +117,37 @@ const Header = () => {
         localStorage.setItem('theme', updateTheme)
         window.location.reload()
     }
+
+    const bigHead = () => {
+        return (
+            <div className='flex items-center space-x-3 space-x-reverse hover:cursor-pointer' onClick={() => setProfileSubMenu(!profileSubMenu)}>
+                <div className='w-24 h-24'>
+                    {
+                        userProfile.userDetail?.avatar &&
+                        <BigHead {...JSON.parse(userProfile.userDetail?.avatar)} />
+                    }
+                </div>
+                
+                <div className='flex items-center'>
+                    {
+                        userProfile.userDetail?.first_name !== '' || userProfile.userDetail?.last_name !== '' ?
+                        <div className='flex space-x-1 space-x-reverse'>
+                            <h2>
+                                {userProfile.userDetail?.first_name}
+                            </h2>
+                            <h2>
+                                {userProfile.userDetail?.last_name}
+                            </h2>
+                        </div>
+                        :
+                        <div>
+                            {userProfile.userDetail?.username}
+                        </div>
+                    }
+                </div>
+            </div>
+        )
+    }
     
     return (
         <React.Fragment>
@@ -192,32 +222,7 @@ const Header = () => {
                             <div className='flex items-center space-x-3 space-x-reverse'>   
                                 {
                                     userProfile.userDetail?
-                                    <div className='flex items-center space-x-3 space-x-reverse hover:cursor-pointer' onClick={() => setProfileSubMenu(!profileSubMenu)}>
-                                        <div className='w-24 h-24'>
-                                            {
-                                                userProfile.userDetail?.avatar &&
-                                                <BigHead {...JSON.parse(userProfile.userDetail?.avatar)} />
-                                            }
-                                        </div>
-                                        
-                                        <div className='flex items-center'>
-                                            {
-                                                userProfile.userDetail?.first_name !== '' || userProfile.userDetail?.last_name !== '' ?
-                                                <div className='flex space-x-1 space-x-reverse'>
-                                                    <h2>
-                                                        {userProfile.userDetail?.first_name}
-                                                    </h2>
-                                                    <h2>
-                                                        {userProfile.userDetail?.last_name}
-                                                    </h2>
-                                                </div>
-                                                :
-                                                <div>
-                                                    {userProfile.userDetail?.username}
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
+                                    bigHead()
                                     :
                                     <LoginForm />
                                 }
@@ -286,31 +291,7 @@ const Header = () => {
                     {
                         userProfile.userDetail ?
                             <Link to={`/profile/${userProfile.userDetail?.username}`}>
-                                <div className='flex items-center'>
-                                    <div className='w-20 h-24'>
-                                        {
-                                            userProfile.userDetail?.avatar &&
-                                            <BigHead {...JSON.parse(userProfile.userDetail?.avatar)} />
-                                        }
-                                    </div>
-                                    <div className='flex space-x-1 space-x-reverse'>
-                                    {
-                                        (userProfile.userDetail?.first_name == '' && userProfile.userDetail?.last_name == '') ?
-                                        <div>
-                                            {userProfile.userDetail?.username}
-                                        </div>
-                                        :
-                                        <div className='flex space-x-1 space-x-reverse'>
-                                            <div>
-                                                {userProfile.userDetail?.first_name}
-                                            </div>
-                                            <div>
-                                                {userProfile.userDetail?.last_name}
-                                            </div>
-                                        </div>
-                                    }
-                                    </div>
-                                </div>
+                                {bigHead()}
                             </Link>
                             :
                             <div className='p-4'>

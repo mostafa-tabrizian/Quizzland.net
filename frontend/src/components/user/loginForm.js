@@ -17,7 +17,7 @@ import {
     bodyMap
 } from "@bigheads/core";
   
-import axiosInstance from '../axiosApi';;
+import axiosInstance from '../axiosAuthApi';;
 import { log, replaceFunction } from '../base'
 import UserStore from '../../store/userStore'
 import axios from "axios";
@@ -207,7 +207,7 @@ const LoginForm = (props) => {
                         setCookie('USER_ACCESS_TOKEN', res.data.access_token, { path: '/' });
                         setCookie('USER_REFRESH_TOKEN', res.data.refresh_token, { path: '/' });
         
-                        document.location.reload()  // cause redirect to landPage
+                        document.location.reload()
                     }
                     
                 })

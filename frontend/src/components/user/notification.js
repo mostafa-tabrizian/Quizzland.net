@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import axiosInstance from '../axiosApi'
+import axiosInstance from '../axiosAuthApi'
 import { log } from '../base'
 
 const Notifications = (props) => {

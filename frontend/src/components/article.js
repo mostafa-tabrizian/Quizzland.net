@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react'
-
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
-import axiosInstance from '../components/axiosApi';
-
 import { InlineReactionButtons, InlineShareButtons, StickyShareButtons } from 'sharethis-reactjs';
-
 import { log, getTheme, replaceFunction, makeDatePublishFormatForQuizDetail } from './base'
 
+import axiosInstance from '../components/axiosAuthApi';
 import LoadingScreen from '../components/loadingScreen'
 
 const logo = '/static/img/Q-small.png'
-
-
 
 const Article = (props) => {
     const [article, setArticle] = useState([])

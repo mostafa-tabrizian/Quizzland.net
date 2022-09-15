@@ -1,4 +1,4 @@
-import axiosInstance from '../axiosApi'
+import axiosInstance from '../axiosAuthApi'
 import { log, getCookie } from '../base'
 
 const UserProfileDetail = () => {

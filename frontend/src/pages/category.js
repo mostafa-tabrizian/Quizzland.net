@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../components/axiosApi';
 import debounce from 'lodash.debounce'
 import Skeleton from '@mui/material/Skeleton';
 import { LazyLoadImage } from 'react-lazy-load-image-component';

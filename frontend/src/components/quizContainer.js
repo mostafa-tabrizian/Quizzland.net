@@ -9,7 +9,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import LoginForm from '../components/user/loginForm';
 
 import { log, getTheme, replaceFunction } from './base'
-import axiosInstance from './axiosApi';
+import axiosInstance from './axiosAuthApi';
 import userStore from '../store/userStore';
 import SkeletonQuizContainer from './skeletonQuizContainer';
 import BackdropLoading from './bacdropLoading';

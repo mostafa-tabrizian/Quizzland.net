@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-
+import axios from '../components/axiosApi';
 import userStore from '../store/userStore';
-
-import axiosInstance from './axiosApi'
+import axiosInstance from './axiosAuthApi'
 import { log, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer';
 

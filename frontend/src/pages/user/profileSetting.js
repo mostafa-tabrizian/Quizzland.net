@@ -12,7 +12,7 @@ import Select from '@mui/material/Select';
 import InputLabel  from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 
-import axiosInstance from '../../components/axiosApi'
+import axiosInstance from '../../components/axiosAuthApi'
 import { log, getTheme } from '../../components/base'
 import UserStore from '../../store/userStore'
 const LoginForm = React.lazy(() => import('../../components/user/loginForm'))

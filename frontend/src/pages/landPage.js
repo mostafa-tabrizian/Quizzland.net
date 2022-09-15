@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
 // import { Carousel } from 'antd'
-const axios = require('axios');
 
+import axios from '../components/axiosApi';
 import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 const QuizContainer = React.lazy(() => import('../components/quizContainer')) 
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen')) 

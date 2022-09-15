@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 
-import axiosInstance from '../../components/axiosApi'
+import axiosInstance from '../../components/axiosAuthApi'
 import { log, getTheme, takeParameterFromUrl } from '../../components/base'
 import UserStore from '../../store/userStore'
 const LoadingScreen = React.lazy(() => import('../../components/loadingScreen'))
