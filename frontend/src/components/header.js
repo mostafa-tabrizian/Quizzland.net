@@ -228,7 +228,7 @@ const Header = () => {
                                 }
                             </div>
 
-                            <div className={`absolute top-20 right-36 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]  shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-28 right-12 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]  shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4 max-w-[14rem]'>
                                     <div>
                                         <ul className='flex flex-col'>

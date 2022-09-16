@@ -9,8 +9,11 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useSnackbar } from 'notistack'
 import Skeleton from '@mui/material/Skeleton';
 
+
 import axios from '../components/axiosApi'
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
+const Trivia = React.lazy(() => import('../components/quiz/trivia')) 
+const Test = React.lazy(() => import('../components/quiz/test')) 
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
@@ -440,25 +443,20 @@ const Quiz = (props) => {
     const returnQuiz = (question) => {
         switch (quizType) {
             case 'quiz':
-                import('../components/quiz/trivia')
-                    .then((Trivia) => {
-                        return <Trivia
-                            question={question}
-                            selectedOption={selectedOption}
-                            questionCounterForId={questionCounterForId}
-                            ableToSelectOption={ableToSelectOption}
-                            wrongAnswerOption={wrongAnswerOption}
-                            correctAnswerOption={correctAnswerOption}
-                        />
-                    })
+                return <Trivia
+                    question={question}
+                    selectedOption={selectedOption}
+                    questionCounterForId={questionCounterForId}
+                    ableToSelectOption={ableToSelectOption}
+                    wrongAnswerOption={wrongAnswerOption}
+                    correctAnswerOption={correctAnswerOption}
+                />
+
             case 'test':
-                import('../components/quiz/test')
-                    .then((Test) => {
-                        return <Test
-                            question={question}
-                            selectedOption={selectedOption}
-                        />
-                    })
+                return <Test
+                    question={question}
+                    selectedOption={selectedOption}
+                />
         }
     }
 

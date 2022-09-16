@@ -230,11 +230,8 @@ const Index = () => {
                         <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_ref}>
-                        {
-                            content_new_inView &&
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
                             <QuizContainer quizzes={content_new} bgStyle={'trans'} />
-                        }
                     </ul>
 
                 </div>
