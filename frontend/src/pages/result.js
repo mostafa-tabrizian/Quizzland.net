@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import { notification } from 'antd'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { InlineShareButtons } from 'sharethis-reactjs';
@@ -138,34 +137,19 @@ const Result = () => {
     }
 
     const displayMessageToUserAboutScore = (score) => {
-        const key = `open${Date.now()}`;
-        const btn = (
-            <div className='flex space-x-5 space-x-reverse'>
+        enqueueSnackbar(
+            <div className='mt-8'>
+                <h5 className='mb-5'>
+                    {score} امتیاز گرفتی 🎉. وارد کوییزلند شو تا ثبت بشه!
+                </h5>
                 <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
                     <LoginForm />
                 </div>
-                {/* <button onClick={() => notification.close(key)}>
-                    بی خیال
-                </button> */}
-            </div>
-        );
-        // notification.open({
-        //     message: '',
-        //     description:
-
-        //         <h5>
-        //             {score} امتیاز گرفتی 🎉. وارد کوییزلند شو تا ثبت بشه!
-        //         </h5>,
-        //     duration: 0,
-        //     style: {
-        //         background: '#ac272e',
-        //         color: 'white',
-        //         borderRadius: '15px',
-        //         marginTop: '10px'
-        //     },
-        //     btn,
-        //     key
-        // });
+            </div>,
+            { 
+                anchorOrigin: { horizontal: 'right', vertical: 'top' }
+            }
+        )
     }
 
     const decideHowMucHPointToGive = (score) => {
@@ -317,24 +301,20 @@ const Result = () => {
     }
 
     const showLoginNotification = () => {
-        // notification.open({
-        //     description:
-        //         <div className='mt-8'>
-        //             <h5 className='mb-5'>
-        //                 برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
-        //             </h5>
-
-        //             <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
-        //                 <LoginForm />
-        //             </div>
-        //         </div>,
-        //     duration: 0,
-        //     style: {
-        //         background: '#ac272e',
-        //         color: 'white',
-        //         borderRadius: '15px'
-        //     },
-        // });
+        enqueueSnackbar(
+            <div className='mt-8'>
+                <h5 className='mb-5'>
+                    برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
+                </h5>
+                <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                    <LoginForm />
+                </div>
+            </div>,
+            { 
+                anchorOrigin: { horizontal: 'right', vertical: 'top' },
+                preventDuplicate: true
+            }
+        )
     };
 
     const getSuggestionsQuiz = async (quizDetail) => {

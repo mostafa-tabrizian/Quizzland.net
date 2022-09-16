@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import { notification } from 'antd'
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script'
 import { useCookies } from "react-cookie";
@@ -83,20 +82,20 @@ const LoginForm = (props) => {
     }
 
     const showInActiveNotification = () => {
-        // notification.open({
-        //     message: 'این کاربر مسدود شده است',
-        //     description:
-        //         'برای اطلاعات بیشتر با پشتیبانی کوییزلند تماس بگیرید quizzland.net@gmail.com',
-        //     duration: 5,
-        //     style: {
-        //         'font-size': '25px',
-        //         'font-weight': '600',
-        //         'box-shadow': '0 0 20px #b52633',
-        //         'direction': 'rtl',
-        //         'padding-right': '4rem',
-        //     },
-        //     className: 'rounded-lg'
-        // });
+        enqueueSnackbar(
+            <div className='mt-8'>
+                <h4>این کاربر مسدود شده است</h4>
+                <h5 className='mb-5'>
+                    برای اطلاعات بیشتر با پشتیبانی کوییزلند در ارتباط باشید.
+                </h5>
+                <a className='underline' href="mailto:quizzland.net@gmail.com">ارسال ایمیل به پشتیبانی</a>
+            </div>,
+            { 
+                anchorOrigin: { horizontal: 'right', vertical: 'top' },
+                autoHideDuration : 10_000,
+                preventDuplicate: true
+            }
+        )
     }
 
     const selectRandomKey = (object) => {

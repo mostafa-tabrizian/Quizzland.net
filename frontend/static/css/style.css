@@ -354,6 +354,11 @@ hr {
   font-size: 1rem !important;
 }
 
+.SnackbarContent-root {
+  background-image: linear-gradient(-45deg, #771118, #ac272e);
+  border-radius: 15px;
+}
+
 .MuiSkeleton-root {
   background-color: rgba(190, 190, 190, 0.1137254902) !important;
 }

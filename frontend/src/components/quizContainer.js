@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 import Skeleton from '@mui/material/Skeleton';
-// import { notification } from 'antd'
 import debounce from 'lodash.debounce'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -36,27 +35,25 @@ const QuizContainer = (props) => {
             checkWatchList(quizId, quizCheckIfTrivia)
         } else {
             setLoading(false)
-            const key = `open${Date.now()}`;
-            const btn = (
+            showLoginNotification()
+        }
+    }
+
+    const showLoginNotification = () => {
+        return enqueueSnackbar(
+            <div className='mt-8'>
+                <h5 className='mb-5'>
+                    برای اضافه کردن این کوییز به پلی لیست لازمه که اول وارد کوییزلند بشی.
+                </h5>
                 <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
                     <LoginForm />
                 </div>
-            );
-            // notification.open({
-            //     description:
-            //         <h5 className='mt-8'>
-            //             برای اضافه کردن این کوییز به پلی لیست لازمه که اول وارد کوییزلند بشی.
-            //         </h5>,
-            //     duration: 10,
-            //     style: {
-            //         background: '#ac272e',
-            //         color: 'white',
-            //         borderRadius: '15px'
-            //     },
-            //     btn,
-            //     key
-            // });
-        }
+            </div>,
+            { 
+                anchorOrigin: { horizontal: 'right', vertical: 'top' },
+                preventDuplicate: true
+            }
+        )
     }
     
     const debounceAddToWatchList = useCallback(
@@ -84,7 +81,7 @@ const QuizContainer = (props) => {
                                 enqueueSnackbar('با موفقیت به پلی لیست اضافه گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             } else {
                                 setWatchListButtonUnClickable(true)
-                                enqueueSnackbar('با موفقیت به پلی لیست حذف گردید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                                enqueueSnackbar('با موفقیت از پلی لیست حذف گردید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                         } else {
                             log(res)
@@ -92,7 +89,7 @@ const QuizContainer = (props) => {
                     })
                     .catch(err => {
                         if (err.response.status == 401) {
-                            props.showLoginNotification()
+                            showLoginNotification()
                         } else {
                             enqueueSnackbar('در افزودن به پلی لیست خطایی رخ داد. لطفا کمی دیگر تلاش کنید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             log(err.response)

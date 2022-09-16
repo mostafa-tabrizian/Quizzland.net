@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
-// import { Carousel } from 'antd'
 
 import axios from '../components/axiosApi';
 import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'

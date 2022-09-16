@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-// import { notification } from 'antd'
 import { Helmet } from "react-helmet";
 import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -9,7 +8,6 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useSnackbar } from 'notistack'
 import Skeleton from '@mui/material/Skeleton';
 
-
 import axios from '../components/axiosApi'
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
 const Trivia = React.lazy(() => import('../components/quiz/trivia')) 
@@ -17,7 +15,6 @@ const Test = React.lazy(() => import('../components/quiz/test'))
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
-const LoginForm = React.lazy(() => import('../components/user/loginForm'))
 const AddView = React.lazy(() => import('../components/addView'))
 const SkeletonQuizContainer = React.lazy(() => import('../components/skeletonQuizContainer'))
 
@@ -116,49 +113,6 @@ const Quiz = (props) => {
 
     const scrollToTop = () => {
         document.querySelector("body").scrollTo(0, 0)
-    }
-
-    const TutorialForHowToChangeTheQuestion = () => {
-    //   import('antd').then(antd => {
-    //         antd.notification.open({
-    //             description:
-    //                 <div className='mt-8'>
-    //                     <h5 className='mb-5'>
-    //                         برای تغییر سوال، سوال را بکشید
-    //                     </h5>
-    //                 </div>,
-    //             duration: 0,
-    //             style: {
-    //                 background: '#ac272e',
-    //                 color: 'white',
-    //                 borderRadius: '15px',
-    //             }
-    //         });
-    //     })
-
-    };
-
-    const showLoginNotification = () => {
-    //   import('antd').then(antd => {
-    //     antd.notification.open({
-    //         description:
-    //             <div className='mt-8'>
-    //                 <h5 className='mb-5'>
-    //                     برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
-    //                 </h5>
-
-    //                 <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
-    //                     <LoginForm />
-    //                 </div>
-    //             </div>,
-    //         duration: 0,
-    //         style: {
-    //             background: '#ac272e',
-    //             color: 'white',
-    //             borderRadius: '15px'
-    //         }
-    //     });
-    //   })
     }
 
     const applyBackground = () => {
@@ -360,7 +314,7 @@ const Quiz = (props) => {
                     } else {
                         setTimeout(() => {
                             if (document.querySelector('.quiz__container')?.style.transform == 'translate(0rem)' && !(isItDesktop())) {
-                                TutorialForHowToChangeTheQuestion()
+                                enqueueSnackbar('برای تغییر سوال، صفحه را بکشید', { variant: 'info', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                         }, 5000)
                     }
@@ -776,7 +730,7 @@ const Quiz = (props) => {
 
                             <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={quizType} showLoginNotification={showLoginNotification} />}
+                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={quizType} />}
 
                             {
                                 contentLoaded && isItDesktop() &&

@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useSnackbar } from 'notistack'
 import debounce from 'lodash.debounce'
+import Drawer from '@mui/material/Drawer';
 
-import Comments from './comments'
+const Comments = React.lazy(() => import('./comments'))
 import { log, getTheme, isItMobile } from '../base'
 import userStore from '../../store/userStore';
 import axiosInstance from '../axiosAuthApi';
 import BackdropLoading from '../bacdropLoading';
-import Drawer from '@mui/material/Drawer';
+const LoginForm = React.lazy(() => import('./loginForm'))
 
 const LikeCommentButton = (props) => {
     const [commentsPanelOpen, setCommentsPanelState] = useState(false);
@@ -25,7 +26,6 @@ const LikeCommentButton = (props) => {
         setTheme(getTheme())
         itIsMobile.current = isItMobile()
     }, []);
-
     
     const debounceSubmitLike = useCallback(
         debounce(
@@ -58,7 +58,7 @@ const LikeCommentButton = (props) => {
                     })
                     .catch(err => {
                         if (err.response.status == 401) {
-                            props.showLoginNotification()
+                            showLoginNotification()
                         } else {
                             enqueueSnackbar('در اعمال لایک رخ داد. لطفا کمی دیگر تلاش کنید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             log(err.response)
@@ -69,6 +69,23 @@ const LikeCommentButton = (props) => {
         )
     )
 
+    const showLoginNotification = () => {
+        enqueueSnackbar(
+            <div className='mt-8'>
+                <h5 className='mb-5'>
+                    برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
+                </h5>
+                <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                    <LoginForm />
+                </div>
+            </div>,
+            { 
+                anchorOrigin: { horizontal: 'right', vertical: 'top' },
+                preventDuplicate: true
+            }
+        )
+    }
+
     const likeButtonClicked = async () => {
         setLoading(true)
         setWatchListButtonUnClickable(false)
@@ -77,7 +94,7 @@ const LikeCommentButton = (props) => {
             debounceSubmitLike(userProfile.userDetail.id)
             setWatchListButtonUnClickable(true)
         } else {
-            props.showLoginNotification()
+            showLoginNotification()
             setWatchListButtonUnClickable(true)
             setLoading(false)
         }
@@ -108,7 +125,7 @@ const LikeCommentButton = (props) => {
                 open={commentsPanelOpen}
                 onClose={() => setCommentsPanelState(false)}
             >
-                <Comments quizId={props.quizId} quizType={props.quizType} showLoginNotification={props.showLoginNotification} setCommentsPanelState={setCommentsPanelState} />
+                <Comments quizId={props.quizId} quizType={props.quizType} showLoginNotification={showLoginNotification} setCommentsPanelState={setCommentsPanelState} />
             </Drawer>
             
         </React.Fragment>
