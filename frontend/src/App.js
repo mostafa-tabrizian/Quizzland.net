@@ -25,6 +25,7 @@ const Login             = lazy(() => import('./pages/user/login'))
 const Profile           = lazy(() => import('./pages/user/profile'))
 const Setting           = lazy(() => import('./pages/user/profileSetting'))
 const Playlist          = lazy(() => import('./pages/user/playlist'))
+const Messages          = lazy(() => import('./pages/user/messages'))
 
 const Index             = lazy(() => import('./pages/landPage'))
 const Guide             = lazy(() => import('./pages/guide'))
@@ -101,6 +102,7 @@ const App = () => {
 
                                     <Route path='/profile/playlist' component={Playlist} />
                                     <Route path='/profile/setting' component={Setting} />
+                                    <Route path='/profile/messages' component={Messages} />
                                     <Route path='/profile/:user' component={Profile} />
                                     
 

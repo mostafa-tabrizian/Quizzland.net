@@ -10,7 +10,6 @@ import { BigHead } from "@bigheads/core";
 import { log, getTheme, keyPressedOnInput } from './base'
 import axios from '../components/axiosApi';
 import Search from './search/searchInput'
-import Notification from './user/notification'
 import userProfileDetail from '../components/user/userProfileDetail'
 import userStore from '../../src/store/userStore'
 import BackdropLoading from './bacdropLoading';
@@ -233,20 +232,14 @@ const Header = () => {
                                 <div className='relative px-4 py-4 max-w-[14rem]'>
                                     <div>
                                         <ul className='flex flex-col'>
-                                            <li><Link to={`/profile/${userProfile.userDetail?.username}`}>پروفایل شما</Link></li>
-                                            <li><Link to='/profile/setting'>تنظیمات اکانت</Link></li>
+                                            <li><Link to={`/profile/${userProfile.userDetail?.username}`}>پروفایل</Link></li>
+                                            <li><Link to={`/profile/messages`}>پیام ها</Link></li>
+                                            <li><Link to='/profile/setting'>تنظیمات پروفایل</Link></li>
                                             <li><Link to='/profile/playlist?list=like'>کوییز های لایک شده</Link></li>
-                                            <li><Link to='/profile/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
-                                            <li><Link to='/profile/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
+                                            <li><Link to='/profile/playlist?list=watch'>کوییز های ذخیره شده</Link></li>
+                                            <li><Link to='/profile/playlist?list=history'>تاریخچه ی شما</Link></li>
                                             <li><button onClick={() => handleLogout()}>خروج</button></li>
                                         </ul>
-                                    </div>
-
-                                    <hr />
-
-                                    <div>
-                                        <h2>اطلاعیه برای شما</h2>
-                                            {userProfile.userDetail && <Notification user={userProfile.userDetail?.id} />}
                                     </div>
                                 </div>
                             </div>
@@ -338,19 +331,13 @@ const Header = () => {
                         <React.Fragment>
                             <hr className='border-[#690D11] '/>
                             
-                            <h4>اطلاعیه برای شما</h4>
-                            <div className='mt-2'>
-                                <Notification user={userProfile.userDetail?.id} />
-                            </div>
-
-                            <hr className='border-[#690D11] '/>
-                            
                             <ul className='flex flex-col mt-5 space-y-5'>
-                                <li className='text-lg'><Link to={`/profile/${userProfile.userDetail?.username}`}>پروفایل شما</Link></li>
-                                <li className='text-lg'><Link to='/profile/setting'>تنظیمات اکانت</Link></li>
+                                <li className='text-lg'><Link to={`/profile/${userProfile.userDetail?.username}`}>پروفایل</Link></li>
+                                <li className='text-lg'><Link to={`/profile/messages`}>پیام ها</Link></li>
+                                <li className='text-lg'><Link to='/profile/setting'>تنظیمات پروفایل</Link></li>
                                 <li className='text-lg'><Link to='/profile/playlist?list=like'>کوییز های لایک شده</Link></li>
-                                <li className='text-lg'><Link to='/profile/playlist?list=watch'>کوییز های پلی لیست شما</Link></li>
-                                <li className='text-lg'><Link to='/profile/playlist?list=history'>تاریخچه کوییز های شما</Link></li>
+                                <li className='text-lg'><Link to='/profile/playlist?list=watch'>کوییز های ذخیره شده</Link></li>
+                                <li className='text-lg'><Link to='/profile/playlist?list=history'>تاریخچه ی شما</Link></li>
                                 <li><button onClick={() => handleLogout()}>خروج</button></li>
                             </ul>
                         </React.Fragment>

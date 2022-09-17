@@ -144,6 +144,12 @@ textarea {
     border-bottom: 1px solid #707070;
 }
 
+p {
+    @include breakpoints-down(large) {
+        font-size: .9rem !important;
+    }
+}
+
 p,
 input,
 textarea {
@@ -265,6 +271,7 @@ hr {
 .SnackbarContent-root {
     background-image: linear-gradient(-45deg, #771118, #ac272e);
     border-radius: 15px;
+
 }
 
 .MuiSkeleton-root {  // skeleton rounded

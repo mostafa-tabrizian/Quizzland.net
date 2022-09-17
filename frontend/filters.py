@@ -11,9 +11,9 @@ class CustomUserFilter(filters.FilterSet):
             'is_active': ['exact']
         }
 
-class NotificationFilter(filters.FilterSet):
+class MessagesFilter(filters.FilterSet):
     class Meta:
-        model = Notification
+        model = Messages
         fields = {
             'user': ['exact'],
             'message': ['icontains'],

@@ -19,6 +19,7 @@ urlpatterns = [
     path('profile/setting', index),
     path('profile/playlist', index),
     path('profile/<user>', index),
+    path('profile/messages', index),
     
     path('', index),
     path('guide', index),

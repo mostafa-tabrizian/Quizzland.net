@@ -28,8 +28,8 @@ class CustomUserAdmin(UserAdmin):
     
 admin.site.register(CustomUser, CustomUserAdmin)
 
-@admin.register(Notification)
-class NotificationAdmin(admin.ModelAdmin):
+@admin.register(Messages)
+class MessagesAdmin(admin.ModelAdmin):
     list_display = ('user', 'type', 'created_at', 'has_read')
     list_filter = ('user', 'type', 'created_at', 'has_read')
     search_fields = ['user', 'message']

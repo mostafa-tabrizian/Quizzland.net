@@ -142,10 +142,10 @@ def auth_google(request, *args, **kwargs):
             user.avatar = payload['avatar']
             user.save()
             
-            first_notif = Notification()
-            first_notif.user = user
-            first_notif.message = f"{payload['firstName']} به کوییزلند خوش اومدی"
-            first_notif.save()
+            welcome_message = Messages()
+            welcome_message.user = user
+            welcome_message.message = f"{payload['firstName']} به کوییزلند خوش اومدی"
+            welcome_message.save()
 
         token = RefreshToken.for_user(user)  # generate token without username & password
         response = {}
@@ -218,20 +218,21 @@ class CustomUserView(viewsets.ModelViewSet):
             user = CustomUser.objects.filter(username=self.request.user.username)
             return user
 
-class NotificationView(viewsets.ModelViewSet):
+class MessagesView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, )
-    serializer_class = NotificationSerializer
-    filterset_class = NotificationFilter
+    serializer_class = MessagesSerializer
+    filterset_class = MessagesFilter
     
     def get_queryset(self):
         if self.request.user and self.request.method == 'GET':
-            notification_objects = Notification.objects.filter(user=self.request.user)
-            last_index = notification_objects.count() - 1
+            Messages_objects = Messages.objects.filter(user=self.request.user)
             
-            if notification_objects.exists():
-                return notification_objects[last_index:]
+            print(Messages_objects)
+            
+            if Messages_objects.exists():
+                return Messages_objects.order_by('-created_at')
             else:
-                return Notification.objects.none()
+                return Messages.objects.none()
 
 # --------------------------------------------------------
 

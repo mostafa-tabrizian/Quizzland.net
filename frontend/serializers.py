@@ -79,9 +79,9 @@ class CustomUserSerializer(serializers.ModelSerializer):
         
         return instance
     
-class NotificationSerializer(serializers.ModelSerializer):
+class MessagesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Notification
+        model = Messages
         fields = (
             '__all__'
         )

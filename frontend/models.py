@@ -32,16 +32,16 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return str(self.email)
 
-NOTIFICATION_CHOICES = (
+MESSAGES_CHOICES = (
     ('info', 'info'),
     ('congrat', 'congrat'),
     ('warning', 'warning'),
 )
     
-class Notification(models.Model):
-    user = models.ForeignKey(CustomUser, related_name='user_notification', blank=True, null=True, on_delete=models.CASCADE)
+class Messages(models.Model):
+    user = models.ForeignKey(CustomUser, related_name='user_messages', blank=True, null=True, on_delete=models.CASCADE)
     message = models.CharField(max_length=255, blank=False, null=True)
-    type = models.CharField(max_length=255, choices=NOTIFICATION_CHOICES, blank=False, null=True)
+    type = models.CharField(max_length=255, choices=MESSAGES_CHOICES, blank=False, null=True)
     has_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     
