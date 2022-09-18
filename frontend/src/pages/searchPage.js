@@ -36,7 +36,7 @@ const SearchMoreResult = () => {
                     <div id="pos-article-display-26094"></div>
                 </div> */}
 
-                <h3 className='title'>{searchValueWithOutSign}</h3>
+                <h3 className='title mb-4'>{searchValueWithOutSign}</h3>
 
                 <Search value={searchValue} contentLoaded={contentLoaded} setContentLoaded={setContentLoaded} contentLength={200}/>
 

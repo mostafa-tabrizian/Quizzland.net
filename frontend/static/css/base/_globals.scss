@@ -520,6 +520,20 @@ hr {
     }
 }
 
+.empty {
+    position: relative;
+
+    &:before {
+        content: "";
+        position: absolute;
+        background-image: url('/static/img/empty.png');
+        width: 4rem;
+        height: 4rem;
+        top: -100%;
+        right: -50%;    
+    }
+}
+
 .title {
     text-align: center;
     font-family: IRANYekanBlack, sans-serif, serif !important;

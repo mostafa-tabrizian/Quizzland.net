@@ -15,7 +15,7 @@ const Test = React.lazy(() => import('../components/quiz/test'))
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
-const AddView = React.lazy(() => import('../components/addView'))
+import AddView from '../components/addView';
 const SkeletonQuizContainer = React.lazy(() => import('../components/skeletonQuizContainer'))
 
 const logo = '/static/img/Q-small.png'

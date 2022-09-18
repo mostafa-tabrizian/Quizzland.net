@@ -39,7 +39,7 @@ const Category = (props) => {
     }, [categoryQuery, categoryQueryID, categoryTitle, countResult, offset])
 
     useEffect(() => {
-        categoryQueryID && AddView('category', categoryQueryID)
+        categoryQueryID && AddView('categoryView', categoryQueryID)
     }, [categoryQueryID])
 
     useEffect(() => {
@@ -184,7 +184,9 @@ const Category = (props) => {
                                 />
                             </React.Fragment>
                             :
-                            'no shit'
+                            <div className='flex justify-center space-x-3 items-center space-x-reverse'>
+                                <p className='empty my-16'>هیچ کتگوری پیدا نشد!</p>
+                            </div>
                         }
                     </div>
                     :

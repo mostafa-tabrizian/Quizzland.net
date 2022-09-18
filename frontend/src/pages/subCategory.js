@@ -76,7 +76,7 @@ const SubCategory = (props) => {
         quizBg &&
         await axios.get(`/api/subcategoryView/?subCategory__iexact=${replaceFunction(subCategory, '-', ' ')}&public=true`)
         .then((categoryData) => {
-            AddView('subcategory', categoryData.data[0].id)
+            AddView('subcategoryView', categoryData.data[0].id)
             const background = categoryData.data[0].background
             quizBg.style = `background-image: url('${background}'); background-size: cover; background-position: center; filter: blur(3px) brightness(0.5)`
         })
@@ -127,7 +127,9 @@ const SubCategory = (props) => {
                                 
                             </React.Fragment>
                             :
-                            'no shit'
+                            <div className='flex space-x-3 items-center justify-center space-x-reverse'>
+                                <p className='empty my-16'>هیچ کتگوری پیدا نشد!</p>
+                            </div>
                         }
                     </div>
                     :
