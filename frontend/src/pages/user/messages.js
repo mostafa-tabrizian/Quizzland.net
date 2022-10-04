@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Helmet } from "react-helmet";
 
 import axiosInstance from '../../components/axiosAuthApi'
-import { log } from '../../components/base';
+import { log, getTheme } from '../../components/base';
 
 const Messages = () => {
     const [messages, setMessages] = useState()
 
     useEffect(() => {
+        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
+        
         fetchMessages()
     }, []);
 
@@ -16,8 +18,8 @@ const Messages = () => {
 
         await axiosInstance.get(`/api/messagesView/?timestamp=${now}`)
             .then(res => {
-                log(res.data)
                 setMessages(res.data)
+                checkMessagesReadStatus(res.data)
             })
             .catch(err => {
                 log(err)
@@ -25,6 +27,25 @@ const Messages = () => {
             })
 
         return true
+    }
+
+    const checkMessagesReadStatus = (messages) => {
+        for (const message in messages) {
+            const messageData = messages[message]
+            if (messageData.has_read == false) {
+                updateMessageStateToRead(messageData.id)
+            }
+        }
+    }
+
+    const updateMessageStateToRead = async (messageId) => {
+        const payload = {
+            has_read: true
+        }
+        
+        await axiosInstance.patch(`/api/messagesView/${messageId}/`, payload)
+            // .then(res => log(res))
+            .catch(err => log(err.response))
     }
 
     const returnNotifications = () => {
@@ -43,7 +64,7 @@ const Messages = () => {
             }
 
             return (
-                <li className='flex shadow-[0_0_10px_#484848] rounded-lg p-3 items-center relative'>
+                <li className='flex shadow-[0_0_10px_#48484887] rounded-lg p-3 items-center relative'>
                     <div className='ml-1 text-2xl'>{messageType}</div>
                     <p className='text-sm'>
                         {message?.message}
@@ -67,7 +88,7 @@ const Messages = () => {
 
             <h1 className='mt-5 mb-8 text-center title'>پیام های شما</h1>
 
-            <div className='mx-4 min-h-[30vh]'>
+            <div className='mx-4 min-h-[30vh] md:w-[40rem] md:mx-auto'>
                 {
                     messages == 'False' ?
                     <p className='text-sm'>

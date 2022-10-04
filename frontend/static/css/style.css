@@ -111,7 +111,7 @@ input[type=search]::-webkit-search-results-decoration {
 
 :root {
   --color: #f0f0f0;
-  --placeholder: rgb(93, 93, 93);
+  --placeholder: var(--color) !important;
   --brightness: brightness(.4);
   --background: #0e0202fa;
   color-scheme: light dark;

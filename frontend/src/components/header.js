@@ -192,8 +192,9 @@ const Header = () => {
             </Helmet>
 
             <BackdropLoading loadingStatue={loading} />
+            
 
-            <header className={`relative z-10 ${theme == 'dark' ? 'bg-[#060101ed]' : 'bg-[#ffffffe8]' } mb-12 shadow-[0_0_10px_0_#8d353969] sticky top-0 rounded-md backdrop-blur-md`}>
+            <header className={`z-10 mb-12 ${theme == 'dark' ? 'from-[#1c1c1c]' : 'from-[#e1e1e1]' } bg-gradient-to-b to-transparent md:sticky top-0 rounded-md backdrop-blur-md`}>
                 <div>
                     <div className='absolute hidden left-10 top-5 md:block hover:cursor-pointer' onClick={changeTheme}>
                         {
@@ -269,7 +270,7 @@ const Header = () => {
                             </div>
                         </div>
 
-                        <Link to="/" className="flex items-center header__logo justify-center">
+                        <Link to="/" className="flex items-center justify-center header__logo">
                             <span className='bloodRiver ml-1 text-[1.6rem]'>uizzland</span>
                             <img
                                 src='/static/img/Q-small.png'
