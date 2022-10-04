@@ -489,7 +489,7 @@ const Quiz = (props) => {
 
                         {
                             quizType == 'quiz' && question?.answer_text &&
-                            <div className={`quiz__answerText answerHide text-right ${theme == 'dark' ? 'bg-[#0000007c]' : 'bg-[#ffffff82]'} backdrop-blur-xl mt-4 rounded-lg`}>
+                            <div className={`quiz__answerText py-4 px-8 answerHide text-right ${theme == 'dark' ? 'bg-[#0000007c]' : 'bg-[#ffffff82]'} backdrop-blur-xl mt-4 rounded-lg`}>
                                 {answerOfQuestionIfExistShow(question)}
                             </div>
                         }

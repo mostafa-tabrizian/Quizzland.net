@@ -908,14 +908,6 @@ hr {
     width: 100%;
   }
 }
-.quiz__answerText {
-  padding: 1rem 2rem;
-}
-@media (min-width: 40em) {
-  .quiz__answerText p {
-    font-size: 1.18rem;
-  }
-}
 
 .countingResult {
   font-size: 1.125rem;

@@ -131,16 +131,6 @@
             }
         }
     }
-
-    &__answerText {
-        padding: 1rem 2rem;
-
-        @include breakpoints-up(small) {
-            p {
-                font-size: 1.18rem;
-            }
-        }
-    }
 }
 
 .countingResult {
