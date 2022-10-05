@@ -9,7 +9,6 @@ const Messages = () => {
 
     useEffect(() => {
         document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
-        
         fetchMessages()
     }, []);
 

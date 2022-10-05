@@ -28,7 +28,7 @@ const Playlist          = lazy(() => import('./pages/user/playlist'))
 const Messages          = lazy(() => import('./pages/user/messages'))
 
 const Index             = lazy(() => import('./pages/landPage'))
-const Guide             = lazy(() => import('./pages/guide'))
+// const Guide             = lazy(() => import('./pages/guide'))
 const Contact           = lazy(() => import('./pages/contactUs'))
 const AdvertiseContact  = lazy(() => import('./pages/advertiseContact'))
 const Support           = lazy(() => import('./pages/supportUs'))
@@ -106,7 +106,7 @@ const App = () => {
                                     <Route path='/profile/:user' component={Profile} />
                                     
 
-                                    <Route path='/guide' component={Guide} />
+                                    {/* <Route path='/guide' component={Guide} /> */}
 
                                     <Route path='/quiz/:title' component={Quiz} />
                                     <Route path='/test/:title' component={Quiz} />

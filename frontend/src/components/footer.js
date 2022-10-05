@@ -41,7 +41,7 @@ const Footer = () => {
                         {/* <Link className='block' to='/guide'><dd>راهنما</dd></Link> */}
                         <Link className='block' to='/contact'><dd>تماس با ما</dd></Link>
                         {/* <Link className='block' to='/advertiseContact'><dd>تبلیغات</dd></Link> */}
-                        {/* <Link className='block' to='/privacy-policy'><dd>حریم خصوصی</dd></Link> */}
+                        <Link className='block' to='/privacy-policy'><dd>حریم خصوصی</dd></Link>
                         {/* <Link className='block' to='/supportUs'><dd>حمایت</dd></Link> */}
                     </dl>
                 </div>
