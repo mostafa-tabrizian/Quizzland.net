@@ -522,6 +522,8 @@ hr {
 
 .empty {
     position: relative;
+    right: 25%;
+    margin: 3rem 0;
 
     &:before {
         content: "";

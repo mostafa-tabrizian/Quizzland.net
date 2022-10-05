@@ -634,6 +634,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: -.25rem;
 }
 
+.left-8 {
+  left: 2rem;
+}
+
+.bottom-4 {
+  bottom: 1rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1465,6 +1473,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 
+.border-\[\#4c4c4c\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(76 76 76 / var(--tw-border-opacity));
+}
+
 .border-red-700 {
   --tw-border-opacity: 1;
   border-color: rgb(185 28 28 / var(--tw-border-opacity));
@@ -1483,11 +1496,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-green-600 {
   --tw-border-opacity: 1;
   border-color: rgb(22 163 74 / var(--tw-border-opacity));
-}
-
-.border-\[\#4c4c4c\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(76 76 76 / var(--tw-border-opacity));
 }
 
 .border-b-\[\#ac272e\] {
@@ -1591,18 +1599,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-gradient-to-t {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
-}
-
-.bg-\[url\(\'\/static\/img\/bubbles\.webp\'\)\] {
-  background-image: url('/static/img/bubbles.webp');
-}
-
-.bg-\[url\(\/static\/img\/bubbles\.webp\)\] {
-  background-image: url(/static/img/bubbles.webp);
-}
-
-.bg-\[url\(\"\/static\/img\/bubbles\.webp\"\)\] {
-  background-image: url("/static/img/bubbles.webp");
 }
 
 .from-\[\#1c1c1c\] {
@@ -1762,11 +1758,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-}
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 
 .pr-10 {
@@ -1965,11 +1956,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(255 179 179 / var(--tw-text-opacity));
 }
 
-.text-yellow-300 {
-  --tw-text-opacity: 1;
-  color: rgb(253 224 71 / var(--tw-text-opacity));
-}
-
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -2048,11 +2034,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .blur {
   --tw-blur: blur(8px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.drop-shadow-\[5px_11px_12px_black\] {
-  --tw-drop-shadow: drop-shadow(5px 11px 12px black);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 

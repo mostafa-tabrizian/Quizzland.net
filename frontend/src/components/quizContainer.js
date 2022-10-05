@@ -11,7 +11,7 @@ import { log, getTheme, replaceFunction } from './base'
 import axiosInstance from './axiosAuthApi';
 import userStore from '../store/userStore';
 import SkeletonQuizContainer from './skeletonQuizContainer';
-import BackdropLoading from './bacdropLoading';
+import BackdropLoading from './backdropLoading';
 
 const QuizContainer = (props) => {
     const [theme, setTheme] = useState('dark')

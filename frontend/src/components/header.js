@@ -12,7 +12,7 @@ import axios from '../components/axiosApi';
 import Search from './search/searchInput'
 import userProfileDetail from '../components/user/userProfileDetail'
 import userStore from '../../src/store/userStore'
-import BackdropLoading from './bacdropLoading';
+import BackdropLoading from './backdropLoading';
 import LoginForm from './user/loginForm';
 
 const Header = () => {

@@ -600,6 +600,8 @@ hr {
 
 .empty {
   position: relative;
+  right: 25%;
+  margin: 3rem 0;
 }
 .empty:before {
   content: "";
@@ -800,10 +802,6 @@ hr {
   height: 100vh;
   background: rgba(0, 0, 0, 0.5254901961);
   z-index: 0;
-}
-
-.likeCommentButton {
-  font-size: 1.5rem !important;
 }
 
 .at4-share-title {

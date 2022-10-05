@@ -17,7 +17,7 @@ import { log, getTheme } from '../../components/base'
 import UserStore from '../../store/userStore'
 const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
 const Avatar = React.lazy(() => import('../../components/user/avatar'))
-const BackdropLoading = React.lazy(() => import('../../components/bacdropLoading'))
+const BackdropLoading = React.lazy(() => import('../../components/backdropLoading'))
 
 const ProfileSetting = () => {
     const [user, setUser] = useState(null)
