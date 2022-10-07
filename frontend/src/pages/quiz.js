@@ -10,8 +10,9 @@ import Skeleton from '@mui/material/Skeleton';
 
 import axios from '../components/axiosApi'
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
-const Trivia = React.lazy(() => import('../components/quiz/trivia')) 
-const Test = React.lazy(() => import('../components/quiz/test')) 
+import Trivia from '../components/quiz/trivia'
+import Test from '../components/quiz/test'
+
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
@@ -32,7 +33,6 @@ const Quiz = (props) => {
     const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [ableToSelectOption, setAbleToSelectOption] = useState(true)
     const [quizEnded, setQuizEnded] = useState(false)
-    const [loadState, setLoadState] = useState()
     const [quizSlug, setQuizSlug] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
@@ -56,7 +56,6 @@ const Quiz = (props) => {
 
     useEffect(() => {
         scrollToTop()
-        setLoadState(true)
     }, quizSlug)
     
     useEffect(() => {
@@ -70,7 +69,6 @@ const Quiz = (props) => {
     })
     
     useEffect(() => {
-        
         const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
         setQuizSlug(slug)
         setQuizSlugReplacedWithHyphen(slug)
@@ -616,7 +614,7 @@ const Quiz = (props) => {
 
     return (
         <div>
-            <LoadingScreen loadState={loadState} />
+            <LoadingScreen loadState={contentLoaded} />
 
             <Helmet>
                 <title>{`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
