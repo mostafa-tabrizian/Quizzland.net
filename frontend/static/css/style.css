@@ -359,6 +359,17 @@ hr {
   border-radius: 15px;
 }
 
+.slider {
+  direction: ltr !important;
+}
+.slider > li {
+  min-width: 100% !important;
+}
+.slider > li a > div {
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+}
+
 .MuiSkeleton-root {
   background-color: rgba(190, 190, 190, 0.1137254902) !important;
 }

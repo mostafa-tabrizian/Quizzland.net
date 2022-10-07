@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 import axios from '../components/axiosApi';
 import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
@@ -23,7 +25,6 @@ const Index = () => {
 
     const [loadMoreQuiz, setLoadMoreQuiz] = useState([])
 
-    const [content_new_ref, content_new_inView] = useInView({ threshold: 0, triggerOnce: true, });
     const [content_monthly_ref, content_monthly_inView] = useInView({ threshold: 0, triggerOnce: true, });
 
     const [content_new_celebrity_ref, content_new_celebrity_inView] = useInView({ threshold: 0, triggerOnce: true, });
@@ -178,44 +179,58 @@ const Index = () => {
                     </div>
                 </div>
 
-                {/* <Carousel autoplay dotPosition='top' className='block mb-20 md:hidden'>
-                    <div className='relative w-7/12 mr-5'>
-                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
-                            <h2 className='text-[1rem]'>
-                                کوییزلند 🔥
-                            </h2>
-                            <h2>
-                                #1
-                            </h2>
-                        </div>
+                <div className='md:hidden'>
+                    <Carousel
+                        autoPlay={true}
+                        interval={3000}
+                        transitionTime={500}
+                        showStatus={false}
+                        dynamicHeight={true}
+                        showIndicators={false}
+                    >
                         <Link to={`/quiz/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
+                            <div className='relative'>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
+                                    <h2 className='text-[1rem]'>
+                                        کوییزلند 🔥
+                                    </h2>
+                                    <h2>
+                                        #1
+                                    </h2>
+                                </div>
+
+                                <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
+
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
+                                    <h4>
+                                        {content_monthly[0] && content_monthly[0].title}
+                                    </h4>
+                                </div>
+                            </div>
                         </Link>
-                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
-                            <h4>
-                                {content_monthly[0] && content_monthly[0].title}
-                            </h4>
-                        </div>
-                    </div>
-                    <div className='relative w-5/12'>
-                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
-                            <h4 className='translate-y-[4px]'>
-                                🕚
-                            </h4>
-                            <h2 className='text-[1rem]'>
-                                جدیدترینِ کوییزلند
-                            </h2>
-                        </div>
                         <Link to={`/quiz/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
+                            <div className='relative'>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
+                                <h4 className='translate-y-[4px]'>
+                                    🕚
+                                </h4>
+                                <h2 className='text-[1rem]'>
+                                    جدیدترینِ کوییزلند
+                                </h2>
+                            </div>
+
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
+                            
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
+                                    <h4>
+                                        {content_new[0] && content_new[0].title}
+                                    </h4>
+                                </div>
+                            </div>
                         </Link>
-                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
-                            <h4>
-                                {content_new[0] && content_new[0].title}
-                            </h4>
-                        </div>
-                    </div>
-                </Carousel> */}
+                    
+                    </Carousel>
+                </div>
 
                 <Suggestions />
 
@@ -228,7 +243,7 @@ const Index = () => {
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
-                            <QuizContainer quizzes={content_new} bgStyle={'trans'} />
+                        <QuizContainer quizzes={content_new} bgStyle={'trans'} />
                     </ul>
 
                 </div>
