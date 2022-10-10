@@ -7,9 +7,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import axios from '../axiosApi';
 import axiosInstance from '../axiosAuthApi';
-import { log, getTheme, replaceFunction, datePublishHandler } from '../base'
+import { log, getTheme, datePublishHandler } from '../base'
 import ExplicitWords from './explicitWords';
 import userStore from '../../store/userStore';
+import CommentsMenu from './commentsMenu';
 
 const Comments = (props) => {
     const [comments, setComments] = useState([])
@@ -79,6 +80,8 @@ const Comments = (props) => {
                     .catch(err => {
                         if (err.response.status == 401) {
                             enqueueSnackbar('شما میبایست ابتدا وارد شوید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                        } else if (err.response.status == 500) {
+                            enqueueSnackbar('استفاده از ایموجی در حال حاضر امکان پذیر نمی باشد', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                         } else {
                             log(err.response)
                         }
@@ -116,37 +119,43 @@ const Comments = (props) => {
                 return (
                     <div>
                         <div>
-                            {
-                                comment.submitter_id ?
-                                <Link to={`/profile/${comment.submitter_id?.username}`}>
-                                    <div className='flex space-x-3 space-x-reverse'>
-                                        <div className='w-12 h-12'>
-                                            {
-                                                comment.submitter_id?.avatar &&
-                                                <BigHead {...JSON.parse(comment.submitter_id.avatar)} />
-                                            }
-                                        </div>
-                                        <div>
-                                            <div className={`flex space-x-2 space-x-reverse ${theme == 'dark' ? 'text-[#ffeaeb]' : 'text-[#060101]'}`}>
-                                                <h4>{comment.submitter_id?.first_name}</h4>
-                                                <h4>{comment.submitter_id?.last_name}</h4>
+                            <div className='flex justify-between'>
+                                {
+                                    comment.submitter_id ?
+                                    <Link to={`/profile/${comment.submitter_id?.username}`}>
+                                        <div className='flex space-x-3 space-x-reverse'>
+                                            <div className='w-12 h-12'>
+                                                {
+                                                    comment.submitter_id?.avatar &&
+                                                    <BigHead {...JSON.parse(comment.submitter_id.avatar)} />
+                                                }
                                             </div>
-                                            <h4 className='text-gray-500'>{datePublishHandler(comment.date_submitted)}</h4>
+                                            <div>
+                                                <div className={`flex space-x-2 space-x-reverse ${theme == 'dark' ? 'text-[#ffeaeb]' : 'text-[#060101]'}`}>
+                                                    <h4>{comment.submitter_id?.first_name}</h4>
+                                                    <h4>{comment.submitter_id?.last_name}</h4>
+                                                </div>
+                                                <h4 className='text-gray-500'>{datePublishHandler(comment.date_submitted)}</h4>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                    :
+                                    <div>
+                                        <div className='flex space-x-3 space-x-reverse'>
+                                            <div className='w-8 h-8 bg-red-800 rounded-full'>
+                                            </div>
+                                            <div>
+                                                <h4>کاربر حذف شده</h4>
+                                                <h4 className='text-gray-500'>{datePublishHandler(comment.date_submitted)}</h4>
+                                            </div>
                                         </div>
                                     </div>
-                                </Link>
-                                :
-                                <div>
-                                    <div className='flex space-x-3 space-x-reverse'>
-                                        <div className='w-8 h-8 bg-red-800 rounded-full'>
-                                        </div>
-                                        <div>
-                                            <h4>کاربر حذف شده</h4>
-                                            <h4 className='text-gray-500'>{datePublishHandler(comment.date_submitted)}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
+                                }
+
+                                <CommentsMenu comment={comment}/>
+
+                            </div>
+
                             <p className='mt-5 break-words'>{comment.comment_text}</p>
                         </div>
                         

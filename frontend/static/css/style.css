@@ -376,12 +376,13 @@ hr {
 
 .MuiPaper-root {
   border-radius: 10px !important;
+  padding: 0.5rem;
 }
 .MuiPaper-root::-webkit-scrollbar {
   width: 0;
 }
 
-.MuiDialog-container, .MuiBackdrop-root {
+.MuiDialog-container, .MuiBackdrop-root :not(.MuiPopover-root) {
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
 }

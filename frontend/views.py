@@ -270,6 +270,14 @@ class CommentView(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     filterset_class = CommentFilter
     
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def perform_destroy(self, instance):
+        instance.delete()
+    
 class WatchListView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = WatchListSerializer
