@@ -65,10 +65,10 @@ const ProfileSetting = () => {
     const saveSetting = async () => {
         setLoading(true)
 
-        const updatedUsername =  usernameRef.current.value
-        const updatedFirstName = firstNameRef.current.value
-        const updatedLastName = lastNameRef.current.value
-        const updatedBio = bioRef.current.value
+        const updatedUsername =  usernameRef.current.innerText
+        const updatedFirstName = firstNameRef.current.innerText
+        const updatedLastName = lastNameRef.current.innerText
+        const updatedBio = bioRef.current.innerText
         const updatedGender = gendersRef.current
         const updatedAvatarOption = JSON.stringify(avatarOptions)
 
@@ -82,11 +82,6 @@ const ProfileSetting = () => {
             updatedBirthdayDate =  persianConvertEnglish
         }
 
-        if (!updatedUsername.length && !updatedFirstName.length && !updatedLastName.length && !updatedBio.length && !updatedBirthdayDate.length && updatedGender == 'null' && !dateRefValue.length.length && avatarOptions == null) {
-            setLoading(false)
-            return enqueueSnackbar('برای ذخیره، حداقل یک ورودی را تغییر دهید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-        }
-
         debouncePatchUserSetting(updatedUsername, updatedFirstName, updatedLastName, updatedBio, updatedGender, updatedBirthdayDate, updatedAvatarOption)
     }
     
@@ -97,37 +92,42 @@ const ProfileSetting = () => {
                 if (await checkRecaptcha()) {
                     let payload = {}
 
-                    updatedUsername.length && (payload['username'] = updatedUsername)
-                    updatedFirstName.length && (payload['first_name'] = updatedFirstName)
-                    updatedLastName.length && (payload['last_name'] = updatedLastName)
-                    updatedBio.length && (payload['bio'] = updatedBio)
+                    user?.username !== updatedUsername && (payload['username'] = updatedUsername)
+                    user?.first_name !== updatedFirstName && (payload['first_name'] = updatedFirstName)
+                    user?.last_name !== updatedLastName && (payload['last_name'] = updatedLastName)
+                    user?.bio !== updatedBio && (payload['bio'] = updatedBio)
                     updatedGender != 'null' && (payload['gender'] = updatedGender)
                     updatedBirthdayDate.length && (payload['birthday_date'] = updatedBirthdayDate.replaceAll('/', '-'))
                     updatedAvatarOption != 'null' && (payload['avatar'] = updatedAvatarOption)
 
-                    await axiosInstance.patch(`/api/userView/${userIdRef.current}/`, payload)
-                        .then(res => {
-                            enqueueSnackbar('اطلاعات شما با موفقیت تغییر یافت.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                            setTimeout(() => {
-                                window.location.reload()
-                            }, 1500)
-                        })
-                        .catch(err => {
-                            if (err.response.data == 'username already exists') {
-                                enqueueSnackbar('نام کاربری دیگری انتخاب کنید', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                            }
-                            else if (err.response.data == 'username too short') {
-                                enqueueSnackbar('نام کاربری می‌بایست بیش از ۳ کارکتر باشد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                            }
-                            else if (err.response.data == 'none valid emoji') {
-                                enqueueSnackbar('یکی از ایموجی های شما قابل ذخیره نیست. لطفا آن را تغییر بدهید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                            } else if (err.response.data = 'error saving instance') {
-                                enqueueSnackbar('در ذخیره تغییرات شما به مشکل برخوردیم! لطفا مجددا امتحان کنید.')  // include ! for debuggi', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                            }
-                            else {
-                                enqueueSnackbar('در ذخیره تغییرات شما به مشکل برخوردیم. لطفا مجددا امتحان کنید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                            }
-                        })
+                    if (Object.keys(payload).length) {   
+                        await axiosInstance.patch(`/api/userView/${userIdRef.current}/`, payload)
+                            .then(res => {
+                                enqueueSnackbar('اطلاعات شما با موفقیت تغییر یافت.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                                setTimeout(() => {
+                                    window.location.reload()
+                                }, 1500)
+                            })
+                            .catch(err => {
+                                if (err.response.data == 'username already exists') {
+                                    enqueueSnackbar('نام کاربری دیگری انتخاب کنید', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                                }
+                                else if (err.response.data == 'username too short') {
+                                    enqueueSnackbar('نام کاربری می‌بایست بیش از ۳ کارکتر باشد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                                }
+                                else if (err.response.data == 'none valid emoji') {
+                                    enqueueSnackbar('یکی از ایموجی های شما قابل ذخیره نیست. لطفا آن را تغییر بدهید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                                } else if (err.response.data = 'error saving instance') {
+                                    enqueueSnackbar('در ذخیره تغییرات شما به مشکل برخوردیم! لطفا مجددا امتحان کنید.')  // include ! for debuggi', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                                }
+                                else {
+                                    enqueueSnackbar('در ذخیره تغییرات شما به مشکل برخوردیم. لطفا مجددا امتحان کنید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                                }
+                            })
+                    } else {
+                        enqueueSnackbar('برای ذخیره، حداقل یک ورودی را تغییر دهید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }}) 
+                    }
+
                 }
                 
                 setLoading(false)
@@ -159,21 +159,21 @@ const ProfileSetting = () => {
                             <div className=''>
                                 <div className=''>
                                     <h3>نام کاربری</h3>
-                                    <input type="text" className='bg-transparent border-b border-red-900' placeholder={user?.username} ref={usernameRef} />
+                                    <p className='mt-3 bg-transparent border-b w-[15rem] border-red-900' contentEditable={true} ref={usernameRef}>{user?.username}</p>
                                 </div>
                             </div>
                             <div className='space-y-5 md:grid md:grid-cols-2'>
                                 <div>
                                     <h3>نام</h3>
-                                    <input type="text" className='bg-transparent border-b border-red-900' placeholder={user?.first_name} ref={firstNameRef} />
+                                    <p className='mt-3 bg-transparent border-b w-[15rem] border-red-900' contentEditable={true} ref={firstNameRef}>{user?.first_name}</p>
                                 </div>
                                 <div>
                                     <h3>نام خانوادگی</h3>
-                                    <input type="text" className='bg-transparent border-b border-red-900' placeholder={user?.last_name} ref={lastNameRef} />
+                                    <p className='mt-3 bg-transparent border-b w-[15rem] border-red-900'  contentEditable={true} ref={lastNameRef}>{user?.last_name}</p>
                                 </div>
                                 <div>
                                     <h3>درباره من</h3>
-                                    <textarea type="text" className='p-2 bg-transparent border border-red-900 rounded-md' cols="40" rows='5' placeholder={user?.bio} ref={bioRef} />
+                                    <p contentEditable={true} className='bg-transparent border-b md:w-[25rem] border-red-900 mt-3' ref={bioRef}>{user?.bio}</p>
                                 </div>
                                 <div>
                                     <h3>تاریخ تولد</h3>
@@ -187,7 +187,7 @@ const ProfileSetting = () => {
                                                 maxDate='1401/01/01'
                                                 calendar={persian}
                                                 locale={persian_fa}
-                                                inputClass={'w-[10rem] translate-x-[-4rem] text-black pr-4 bg-transparent border-b border-red-900'}
+                                                inputClass={'w-[10rem] translate-x-[-4rem] text-black pr-4 bg-transparent border-b border-red-900 mt-3'}
                                                 ref={birthdayDateRef}
                                             />
                                             <figcaption>
@@ -203,11 +203,9 @@ const ProfileSetting = () => {
                                             <Select
                                                 labelId="genders"
                                                 id="genders"
-                                                value={gendersRef.current}
                                                 label="جنسیت"
                                                 onChange={(event) => {gendersRef.current = event.target.value}}
                                             >
-                                                <MenuItem value="null">انتخاب کنید</MenuItem>
                                                 <MenuItem value='male'>آقا</MenuItem>
                                                 <MenuItem value='female'>خانم</MenuItem>
                                             </Select>

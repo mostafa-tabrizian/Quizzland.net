@@ -1137,6 +1137,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 1rem;
 }
 
+.w-\[25rem\] {
+  width: 25rem;
+}
+
+.w-\[15rem\] {
+  width: 15rem;
+}
+
 .max-w-\[14rem\] {
   max-width: 14rem;
 }
@@ -1540,6 +1548,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-b-gray-700 {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(55 65 81 / var(--tw-border-opacity));
+}
+
+.border-b-red-900 {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(127 29 29 / var(--tw-border-opacity));
 }
 
 .bg-zinc-500 {
@@ -2422,6 +2435,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:w-\[40rem\] {
     width: 40rem;
+  }
+
+  .md\:w-\[25rem\] {
+    width: 25rem;
   }
 
   .md\:max-w-\[85\%\] {
