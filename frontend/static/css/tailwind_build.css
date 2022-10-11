@@ -1525,6 +1525,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.border-gray-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity));
+}
+
 .border-b-\[\#ac272e\] {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(172 39 46 / var(--tw-border-opacity));

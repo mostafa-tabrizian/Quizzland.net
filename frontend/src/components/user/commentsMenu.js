@@ -106,16 +106,17 @@ const CommentsMenu = (props) => {
                 onClose={handleCloseEditForm}
                 fullWidth={true}
                 maxWidth={'sm'}
-                sx={{padding: 4}}
             >
                 <h2>ویرایش</h2>
                 <div className='my-10'>
-                    <h2 contenteditable="true" ref={editedComment} className='p-3 border border-b-gray-700'>
-                        {props.comment.comment_text}
-                    </h2>
+                <pre>
+                        <h2 contenteditable="true" ref={editedComment} className='p-3 border-b border-gray-700'>
+                            {props.comment.comment_text}
+                        </h2>
+                    </pre>
                 </div>
-                <div className='absolute left-2 bottom-2 space-x-5 space-x-reverse px-3'>
-                    <button onClick={saveCommentEdit} className='border-2 border-green-600 rounded-xl px-3 py-1'>ثبت تغییرات</button>
+                <div className='absolute px-3 space-x-5 space-x-reverse left-2 bottom-2'>
+                    <button onClick={saveCommentEdit} className='px-3 py-1 border-2 border-green-600 rounded-xl'>ثبت تغییرات</button>
                     <button onClick={handleCloseEditForm}>لغو</button>
                 </div>
             </Dialog>

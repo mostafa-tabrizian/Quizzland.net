@@ -156,7 +156,11 @@ const Comments = (props) => {
 
                             </div>
 
-                            <p className='mt-5 break-words'>{comment.comment_text}</p>
+                            <pre>
+                                <p className='mt-5 break-words'>
+                                        {comment.comment_text}
+                                </p>
+                            </pre>
                         </div>
                         
                         <hr className='md:ml-auto md:mr-0'/>
@@ -178,7 +182,7 @@ const Comments = (props) => {
             <h3 className='flex items-center justify-center my-3 quiz__tags__title beforeAfterDecor'>کامنت ها</h3>
             <div>
                 <div className='relative'>
-                    <textarea name="text" rows="3" ref={commentTextRef} onClick={checkIfUserLoggedIn} className={`px-4 py-2 w-full ${theme == 'dark' ? 'bg-[#161616] text-white' : 'bg-[#ffeaeb] text-black'} placeholder:text-gray-300 border-b-[#ac272e]`} type="text" placeholder='.کامنت خود را اینجا بنویسید'></textarea>
+                    <textarea name="text" rows="3" ref={commentTextRef} onClick={checkIfUserLoggedIn} className={`px-4 py-2 w-full ${theme == 'dark' ? 'bg-[#161616] text-white' : 'bg-[#ffeaeb] text-black'} placeholder:text-gray-300 border-b-[#ac272e]`} type="text" placeholder='کامنت خود را اینجا بنویسید...'></textarea>
                     {
                         commentBeingPosted ?
                         <div className='absolute left-12 bottom-4'>
