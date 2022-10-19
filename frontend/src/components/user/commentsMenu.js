@@ -72,6 +72,8 @@ const CommentsMenu = (props) => {
     }
 
     return (
+        (props.comment.submitter_id.id == userProfile.userDetail.id) &&
+        
         <React.Fragment>
             <button onClick={handleClickMenu}>
                 <svg class="h-4 w-4 text-zinc-400"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="1" />  <circle cx="12" cy="5" r="1" />  <circle cx="12" cy="19" r="1" /></svg>
@@ -91,14 +93,11 @@ const CommentsMenu = (props) => {
                     horizontal: 'left',
                 }}
             >
-                {
-                    (props.comment.submitter_id.id == userProfile.userDetail.id) &&
-                    <div>
-                        <MenuItem onClick={deleteComment}>حذف</MenuItem>
-                        <MenuItem onClick={handleClickOpenEditForm}>ویرایش</MenuItem>
-                    </div>
-                }
-                <MenuItem onClick={handleCloseMenu}>گزارش تخلف</MenuItem>
+                {/* <div> */}
+                    <MenuItem onClick={deleteComment}>حذف</MenuItem>
+                    <MenuItem onClick={handleClickOpenEditForm}>ویرایش</MenuItem>
+                    {/* <MenuItem onClick={handleCloseMenu}>گزارش تخلف</MenuItem> */}
+                {/* </div> */}
             </Menu>
 
             <Dialog

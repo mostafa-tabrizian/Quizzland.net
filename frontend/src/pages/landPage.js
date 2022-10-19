@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Skeleton from '@mui/material/Skeleton';
 
 import axios from '../components/axiosApi';
 import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
@@ -151,7 +153,13 @@ const Index = () => {
                             </h2>
                         </div>
                         <Link to={`/${content_monthly[0]?.type}/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
+                            <LazyLoadImage
+                                src={content_monthly[0]?.thumbnail}
+                                alt={`${content_monthly.subCategory} | ${content_monthly.title}`}
+                                className='w-full h-[21rem] object-cover rounded-xl'
+                                effect="blur"
+                                placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
+                            />
                         </Link>
                         <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
                             <h2>
@@ -169,7 +177,13 @@ const Index = () => {
                             </h2>
                         </div>
                         <Link to={`/${content_new[0]?.type}/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
+                            <LazyLoadImage
+                                src={content_new[0]?.thumbnail}
+                                alt={`${content_monthly.subCategory} | ${content_monthly.title}`}
+                                className='w-full h-[21rem] object-cover rounded-xl'
+                                effect="blur"
+                                placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
+                            />
                         </Link>
                         <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
                             <h2>
