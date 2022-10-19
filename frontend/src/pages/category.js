@@ -96,8 +96,9 @@ const Category = (props) => {
                         setPageTravel(response.data)
                         setCategories(response.data.results.sort(sortByMonthlyViews))
                     }))
+                    
                     setContentLoaded(true)
-                }, 500
+            }, 500
         )
     )
 
@@ -126,8 +127,8 @@ const Category = (props) => {
                             sortType={sortType} setSortType={setSortType}
                         />
     
-                        {
-                            sortedCategories.length ?
+                        {/* {
+                            sortedCategories.length ? */}
                             <React.Fragment>
 
                                 <ul className="flex flex-col flex-wrap align-baseline md:flex-row quizContainer flex-ai-fe justify-right">
@@ -183,11 +184,11 @@ const Category = (props) => {
                                     currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
                                 />
                             </React.Fragment>
-                            :
-                            <div className='flex justify-center space-x-3 items-center space-x-reverse'>
-                                <p className='empty my-16'>هیچ کتگوری پیدا نشد!</p>
+                            {/* :
+                            <div className='flex items-center justify-center space-x-3 space-x-reverse'>
+                                <p className='my-16 empty'>هیچ کتگوری پیدا نشد!</p>
                             </div>
-                        }
+                        } */}
                     </div>
                     :
                     <SkeletonQuizContainer />
