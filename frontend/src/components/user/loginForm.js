@@ -222,7 +222,7 @@ const LoginForm = (props) => {
         if (res.details.includes('Cookies')) {
             enqueueSnackbar('برای ورود میبایست کوکی ها فعال باشند. کوکی مرورگر شما غیرفعال است.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         } else {
-            enqueueSnackbar('ورود/ثبت نام شما به مشکل برخورد. لطفا دوباره تلاش کنید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            enqueueSnackbar('ورود/ثبت نام شما به مشکل برخورد. لطفا مجددا تلاش کنید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             // log('fail login, res:')
             // log(res)
         }

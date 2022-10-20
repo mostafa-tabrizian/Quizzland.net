@@ -23,6 +23,7 @@ const CommentsMenu = (props) => {
     const handleClickMenu = (event) => {
         setMenu(event.currentTarget);
     };
+    
     const handleCloseMenu = () => {
         setMenu(null);
     };
@@ -47,33 +48,55 @@ const CommentsMenu = (props) => {
                     enqueueSnackbar('این کامنت حذف شده است.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                     
                 } else {
-                    enqueueSnackbar('در حذف کامنت خطایی رخ داد! لطفا دوباره تلاش کنید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                    enqueueSnackbar('در حذف کامنت خطایی رخ داد! لطفا مجددا تلاش کنید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 }
 
                 // log(err)
                 // log(err.response)
             })
+
+        handleCloseMenu()
+    }
+
+    const checkIfCommentValid = () => {
+        const commentLength = editedComment.current.innerText.trim().length
+        if (commentLength == 0) {
+            enqueueSnackbar('کامنت می‌بایست خالی نباشد!', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            return false
+        } else if (commentLength < 2) {
+            enqueueSnackbar('کامنت شما کافی نمی‌باشد!', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            return false
+        } else if (255 <= commentLength) {
+            enqueueSnackbar('کامنت شما بیش از حد مجاز بلند است!', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            return false
+        } else {
+            return true
+        }
     }
 
     const saveCommentEdit = async () => {
         const commentId = props.comment.id
         const payload = {comment_text: editedComment.current.innerText}
 
-        await axiosInstance.patch(`/api/commentView/${commentId}/`, payload)
-            .then(res => {
-                // log(res)
-                enqueueSnackbar('کامنت شما با موفقیت تغییر یافت.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-            })
-            .catch(err => {
-                enqueueSnackbar('در تغییر کامنت خطایی رخ داد! لطفا دوباره تلاش کنید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                // log(err)
-                // log(err.response)
-            })
+        if (checkIfCommentValid()){
+            await axiosInstance.patch(`/api/commentView/${commentId}/`, payload)
+                .then(res => {
+                    enqueueSnackbar('کامنت شما با موفقیت تغییر یافت.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                })
+                .catch(err => {
+                    enqueueSnackbar('در تغییر کامنت خطایی رخ داد! لطفا مجددا تلاش کنید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                })
+    
+            handleCloseMenu()
+            handleCloseEditForm()
+        }
     }
-
-    return (
-        (props.comment.submitter_id.id == userProfile.userDetail.id) &&
         
+    return (
+        userProfile.userDetail.id !== undefined &&
+        props.comment.submitter_id?.id !== undefined &&
+        props.comment.submitter_id?.id == userProfile.userDetail.id &&
+    
         <React.Fragment>
             <button onClick={handleClickMenu}>
                 <svg class="h-4 w-4 text-zinc-400"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="1" />  <circle cx="12" cy="5" r="1" />  <circle cx="12" cy="19" r="1" /></svg>

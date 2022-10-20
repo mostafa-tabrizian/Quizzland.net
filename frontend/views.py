@@ -144,7 +144,8 @@ def auth_google(request, *args, **kwargs):
             
             welcome_message = Messages()
             welcome_message.user = user
-            welcome_message.message = f"{payload['firstName']} به کوییزلند خوش اومدی"
+            welcome_message.type = 'congrat'
+            welcome_message.message = f"{payload['firstName']} جان به کوییزلند خوش اومدی"
             welcome_message.save()
 
         token = RefreshToken.for_user(user)  # generate token without username & password

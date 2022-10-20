@@ -3,9 +3,13 @@ import { Helmet } from "react-helmet";
 
 import axiosInstance from '../../components/axiosAuthApi'
 import { log, getTheme } from '../../components/base';
+import UserStore from '../../store/userStore'
+const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
 
 const Messages = () => {
     const [messages, setMessages] = useState()
+
+    const [userProfile, userActions] = UserStore()
 
     useEffect(() => {
         document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
@@ -87,16 +91,28 @@ const Messages = () => {
 
             <h1 className='mt-5 mb-8 text-center title'>پیام های شما</h1>
 
-            <div className='mx-4 min-h-[30vh] md:w-[40rem] md:mx-auto'>
+            <div className={`mx-4 md:mx-auto md:w-4/5 min-h-[60vh] ${userProfile.userDetail ? '' : 'flex' }`}>
                 {
-                    messages == 'False' ?
-                    <p className='text-sm'>
-                        هیچ اطلاعیه ای ندارید
-                    </p>
-                    :
-                    <ul className='space-y-5'>
-                        {returnNotifications()}
-                    </ul>
+                        userProfile.userDetail ?
+                        <div className='mx-4 min-h-[30vh] md:w-[40rem] md:mx-auto'>
+                            {
+                                messages == 'False' ?
+                                <p className='text-sm'>
+                                    هیچ اطلاعیه ای ندارید
+                                </p>
+                                :
+                                <ul className='space-y-5'>
+                                    {returnNotifications()}
+                                </ul>
+                            }
+                        </div>
+                        :
+                        <div className='m-auto space-y-5 text-center md:shadow-[0_0_10px_#690D11] md:p-8 rounded-lg'>
+                            <h1 className='title'>شما میبایست ابتدا <span className='text-red-600 title'>وارد</span> شوید.</h1>
+                            <div>
+                                <LoginForm/>
+                            </div>
+                        </div>
                 }
             </div>
 
