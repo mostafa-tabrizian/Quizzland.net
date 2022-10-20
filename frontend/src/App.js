@@ -29,9 +29,9 @@ const Messages          = lazy(() => import('./pages/user/messages'))
 
 const Index             = lazy(() => import('./pages/landPage'))
 // const Guide             = lazy(() => import('./pages/guide'))
-const Contact           = lazy(() => import('./pages/contactUs'))
-const AdvertiseContact  = lazy(() => import('./pages/advertiseContact'))
-const Support           = lazy(() => import('./pages/supportUs'))
+// const Contact           = lazy(() => import('./pages/contactUs'))
+// const AdvertiseContact  = lazy(() => import('./pages/advertiseContact'))
+// const Support           = lazy(() => import('./pages/supportUs'))
 const PrivacyPolicy     = lazy(() => import('./pages/privacyPolicy'))
 const Search            = lazy(() => import('./pages/searchPage'))
 const Tags              = lazy(() => import('./pages/tags'))
@@ -115,9 +115,9 @@ const App = () => {
                                     <Route path='/category/:category' exact component={Category} />
                                     <Route path='/category/:category/:subCategory' component={SubCategory} />
 
-                                    <Route path='/contact' component={Contact} />
-                                    <Route path='/advertiseContact' component={AdvertiseContact} />
-                                    <Route path='/support' component={Support} />
+                                    {/* <Route path='/contact' component={Contact} /> */}
+                                    {/* <Route path='/advertiseContact' component={AdvertiseContact} /> */}
+                                    {/* <Route path='/support' component={Support} /> */}
                                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                                     <Route path='/search' component={Search} />
                                     <Route path='/tags/:tag' component={Tags} />

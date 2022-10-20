@@ -39,7 +39,7 @@ const Footer = () => {
                         <Link className='block' to='/'><dd>صفحه اصلی</dd></Link>
                         {/* <Link className='block' to='/blog'><dd>وبلاگ</dd></Link> */}
                         {/* <Link className='block' to='/guide'><dd>راهنما</dd></Link> */}
-                        <Link className='block' to='/contact'><dd>تماس با ما</dd></Link>
+                        <a className='block' href="mailto:support@quizzland.net"><dd>تماس با ما</dd></a>
                         {/* <Link className='block' to='/advertiseContact'><dd>تبلیغات</dd></Link> */}
                         <Link className='block' to='/privacy-policy'><dd>حریم خصوصی</dd></Link>
                         {/* <Link className='block' to='/supportUs'><dd>حمایت</dd></Link> */}

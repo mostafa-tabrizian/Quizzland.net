@@ -371,7 +371,7 @@ const Header = () => {
                         <ul className='mt-3 space-y-3'>
                             {/* <li className='text-lg'><Link to="/blog"> وبلاگ </Link></li> */}
                             {/* <li className='text-lg'><Link to="/guide"> راهنما </Link></li> */}
-                            <li className='text-lg'><Link to="/contact"> تماس با ما </Link></li>
+                            <li className='text-lg'><a href="mailto:support@quizzland.net">تماس با ما</a></li>
                             <li className='flex space-x-3 space-x-reverse text-lg' onClick={changeTheme}>
                                 <span>
                                     تم حالت  

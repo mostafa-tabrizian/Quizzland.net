@@ -23,7 +23,7 @@ urlpatterns = [
     
     path('', index),
     # path('guide', index),
-    path('contact', index),
+    # path('contact', index),
     # path('advertiseContact', index),
     path('support', index),
     path('privacy-policy', index),
