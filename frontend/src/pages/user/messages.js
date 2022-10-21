@@ -12,7 +12,7 @@ const Messages = () => {
     const [userProfile, userActions] = UserStore()
 
     useEffect(() => {
-        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
+        document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
         fetchMessages()
     }, []);
 

@@ -12,7 +12,7 @@ const NotFound_404 = () => {
     useEffect(() => {
         const theme = getTheme()
         setTheme(theme)
-        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'} url(${pathRed}) center center scroll`
+        document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'} url(${pathRed}) center center scroll`
     }, [])
 
     return (
@@ -27,7 +27,7 @@ const NotFound_404 = () => {
 
             <div className="pageNotFound text-[16rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
 
-            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'dark' ? '#0000008c' : '#f0f0f0'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
+            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'light' ? '#f0f0f0' : '#0000008c'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
                 <h1> 🤔 اوپس! صفحه مورد نظر پیدا نشد </h1>
                 <div class="mt-5">
                     <h2>

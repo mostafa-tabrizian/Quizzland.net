@@ -137,7 +137,7 @@ const QuizContainer = (props) => {
             
                                     <Link
                                         to={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
-                                        className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' :  'from-white'} to-transparent`}
+                                        className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'light' ? 'from-white' : 'from-black'} to-transparent`}
                                     >
                                         <div className='md:col-span-2 md:w-[260px] h-[7rem] w-full md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                             <LazyLoadImage

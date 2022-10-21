@@ -18,6 +18,7 @@ const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 import AddView from '../components/addView';
 const SkeletonQuizContainer = React.lazy(() => import('../components/skeletonQuizContainer'))
+const QuizContainer = React.lazy(() => import('../components/quizContainer')) 
 
 const logo = '/static/img/Q-small.png'
 
@@ -279,7 +280,7 @@ const Quiz = (props) => {
         }
 
         document.getElementById(`inputLabel ${userChose}`).style.opacity = 1
-        document.getElementById(`inputLabel ${userChose}`).style.background = (theme == 'dark' ? '#000000bf' : 'white')
+        document.getElementById(`inputLabel ${userChose}`).style.background = (theme == 'light' ? 'white' : '#000000bf')
         document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
     }
 
@@ -487,14 +488,14 @@ const Quiz = (props) => {
 
                         {
                             quizType == 'quiz' && question?.answer_text &&
-                            <div className={`quiz__answerText py-4 px-8 answerHide text-right ${theme == 'dark' ? 'bg-[#0000007c]' : 'bg-[#ffffff82]'} backdrop-blur-xl mt-4 rounded-lg`}>
+                            <div className={`quiz__answerText py-4 px-8 answerHide text-right ${theme == 'light' ? 'bg-[#ffffff82]' : 'bg-[#0000007c]'} backdrop-blur-xl mt-4 rounded-lg`}>
                                 {answerOfQuestionIfExistShow(question)}
                             </div>
                         }
 
                         {
                             quizType == 'quiz' && !(question.answer_imGif.includes('NotExist.jpg')) &&
-                            <div className={`quiz__answerImGif answerHide quiz__answerImGif ${theme == 'dark' ? 'bg-[#0000007c]' : 'bg-[#ffffff82]'} backdrop-blur-xl mt-4 rounded-lg`}>
+                            <div className={`quiz__answerImGif answerHide quiz__answerImGif ${theme == 'light' ? 'bg-[#ffffff82]' : 'bg-[#0000007c]'} backdrop-blur-xl mt-4 rounded-lg`}>
                                 {gifAnswerOfQuestionIfExistShow(question)}
                             </div>
                         }
@@ -793,51 +794,7 @@ const Quiz = (props) => {
 
                                 <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
                                     {
-                                        suggestionQuizzes?.length ?
-                                        suggestionQuizzes.map((quiz) => {
-                                            return (
-                                                <li key={quiz.id} className='flex-auto mb-5 md:mr-4 md:mb-4'>
-                                                    <article className={`
-                                                    flex text-right h-full
-                                                    rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                                                `}>
-
-                                                        <a
-                                                            href={`/${quiz.GIF20 ? 'quiz' : 'test'}/${replaceFunction(quiz.slug, ' ', '-')}`}
-                                                            className={`flex md:block md:grid-cols-5 bg-gradient-to-l md:bg-gradient-to-b rounded-t-xl ${theme == 'dark' ? 'from-black' : 'from-white'} to-transparent`}
-                                                        >
-                                                            <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
-                                                                <LazyLoadImage
-                                                                    src={quiz.thumbnail} altra
-                                                                    alt={`${quiz.subCategory} | ${quiz.title}`}
-                                                                    className='object-cover h-full'
-                                                                    effect="blur"
-                                                                    placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
-                                                                />
-                                                            </div>
-                                                            <div className='w-full pt-1 pb-3 pr-4 md:pr-2 md:col-span-3 md:mt-2'>
-                                                                <h3 className={`quizContainer__title quizContainer__title__noViews flex m-auto md:m-0
-                                                                            md:w-52 md:text-base`}>
-                                                                    {quiz.subCategory}
-                                                                </h3>
-                                                                <h4 className={`
-                                                                quizContainer__title quizContainer__title__noViews flex
-                                                                w-[10rem] md:w-52 md:text-base
-                                                            `}>
-                                                                    {quiz.title}
-                                                                </h4>
-                                                                {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
-                                                                {/* <span className="text-center quizContainer__date">
-                                                                {datePublishHandler(quiz.publish)}
-                                                            </span> */}
-                                                            </div>
-                                                        </a>
-                                                    </article>
-                                                </li>
-                                            )
-                                        })
-                                        :
-                                        <SkeletonQuizContainer />
+                                        suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle={'bg'} />
                                     }
                                 </ul>
                             </div>
@@ -860,7 +817,7 @@ const Quiz = (props) => {
                         <div>
                             <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
 
-                            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'dark' ? '#0000008c' : '#f0f0f0'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
+                            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'light' ? '#f0f0f0' : '#0000008c'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
                                 <h1> 🤔 اوپس! کوییز مورد نظر پیدا نشد </h1>
                                 <div class="mt-5">
                                     <h2>

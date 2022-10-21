@@ -41,7 +41,7 @@ const Index = () => {
         
         const theme = getTheme()
         setTheme(theme)
-        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}`
+        document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'}`
     }, [])
 
     const grabData = async () => {
@@ -114,7 +114,7 @@ const Index = () => {
                         <div className='relative'>
                             <input
                                 type='text'
-                                className={`pl-4 pr-12 py-1 rounded-full text-right ${theme == 'dark' ? 'bg-[#060101]' : 'bg-[#f0f0f0]' } text-[0.9rem] w-[20rem] mt-5 mb-5`}
+                                className={`pl-4 pr-12 py-1 rounded-full text-right ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060101]'} text-[0.9rem] w-[20rem] mt-5 mb-5`}
                                 placeholder={`چیزی مد نظرته؟ اینجا پیداش کن...`}
                                 onKeyPress={(e) => keyPressedOnInput(e)}
                             />
@@ -144,7 +144,7 @@ const Index = () => {
                 {/* sliders */}
                 <div className='justify-center hidden w-full mt-20 space-x-10 md:flex'>
                     <div className='relative w-7/12 ml-5'>
-                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
+                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='text-[1rem]'>
                                 کوییزلند 🔥
                             </h2>
@@ -161,14 +161,14 @@ const Index = () => {
                                 placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
                             />
                         </Link>
-                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
+                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
                             <h2>
                                 {content_monthly[0] && content_monthly[0].title}
                             </h2>
                         </div>
                     </div>
                     <div className='relative w-5/12'>
-                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
+                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='translate-y-[4px]'>
                                 🕚
                             </h2>
@@ -185,7 +185,7 @@ const Index = () => {
                                 placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
                             />
                         </Link>
-                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
+                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
                             <h2>
                                 {content_new[0] && content_new[0].title}
                             </h2>
@@ -204,7 +204,7 @@ const Index = () => {
                     >
                         <Link to={`/quiz/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
                             <div className='relative'>
-                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
                                     <h2 className='text-[1rem]'>
                                         کوییزلند 🔥
                                     </h2>
@@ -215,7 +215,7 @@ const Index = () => {
 
                                 <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
 
-                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
                                     <h4>
                                         {content_monthly[0] && content_monthly[0].title}
                                     </h4>
@@ -224,7 +224,7 @@ const Index = () => {
                         </Link>
                         <Link to={`/quiz/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
                             <div className='relative'>
-                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } px-4 py-1 flex space-x-3 items-baseline`}>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
                                 <h4 className='translate-y-[4px]'>
                                     🕚
                                 </h4>
@@ -235,7 +235,7 @@ const Index = () => {
 
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
                             
-                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'dark' ? 'bg-[#060102]' : 'bg-[#f0f0f0]' } rounded-xl px-4 py-1`}>
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
                                     <h4>
                                         {content_new[0] && content_new[0].title}
                                     </h4>

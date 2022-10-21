@@ -62,7 +62,7 @@ const Search = (props) => {
                                     searched_content.length ?
                                         <QuizContainer quizzes={searched_content} bgStyle='trans' />
                                         :
-                                        <div className='flex space-x-3 items-center space-x-reverse'>
+                                        <div className='flex items-center space-x-3 space-x-reverse'>
                                             <p className='empty'>هیچ کوییزی پیدا نشد!</p>
                                         </div>
                                 }
@@ -140,7 +140,7 @@ const Search = (props) => {
                                             }
                                         </ul>
                                         :
-                                        <div className='flex space-x-3 items-center space-x-reverse'>
+                                        <div className='flex items-center space-x-3 space-x-reverse'>
                                             <p className='empty'>هیچ کتگوری پیدا نشد!</p>
                                         </div>
                                 }
@@ -175,7 +175,7 @@ const Search = (props) => {
                                                 )
                                             })
                                         :
-                                            <div className='flex space-x-3 items-center space-x-reverse'>
+                                            <div className='flex items-center space-x-3 space-x-reverse'>
                                                 <p className='empty'>هیچ کاربری پیدا نشد!</p>
                                             </div>
                                     }

@@ -21,7 +21,7 @@ const Profile = () => {
         setLoaded(true)
         const theme = getTheme()
         setTheme(theme)
-        document.querySelector('body').style = `background: ${theme == 'dark' ? '#060101' : 'white'}`
+        document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'}`
     }, [location])
 
     useEffect(() => {
@@ -59,7 +59,7 @@ const Profile = () => {
                 user !== 'DoesNotExist' && loaded ?
                 <div className='mx-4 space-y-10 md:mx-auto md:w-4/5'>
     
-                    <div className={`space-y-5 py-8 px-4 mb-20 shadow-[0_1px_10px_#690D11] border-4 ${theme == 'dark' ? 'bg-[#0e0202d4]' : 'bg-[#f3f3f3d4]'} border-[#690D11] rounded-lg`}>
+                    <div className={`space-y-5 py-8 px-4 mb-20 shadow-[0_1px_10px_#690D11] border-4 ${theme == 'light' ? 'bg-[#f3f3f3d4]' : 'bg-[#0e0202d4]'} border-[#690D11] rounded-lg`}>
                         <div>
                             <div className="flex items-center mb-5 space-x-2 space-x-reverse">
                                 <div className='w-[16rem] h-[16rem]'>

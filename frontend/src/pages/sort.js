@@ -25,7 +25,7 @@ const Sort = () => {
         fetchContent()
         setLoadState(true)
         
-        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
+        document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
         document.querySelector('#scrollme').classList.add('overflow-y-auto')  // make content load on scroll
     }, [])
 

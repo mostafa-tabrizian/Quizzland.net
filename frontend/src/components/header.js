@@ -112,7 +112,7 @@ const Header = () => {
     }
 
     const changeTheme = () => {
-        const updateTheme = theme == 'dark' ? 'light' : 'dark'
+        const updateTheme = theme == 'light' ? 'dark' : 'light'
         setTheme(updateTheme)
         localStorage.setItem('theme', updateTheme)
         window.location.reload()
@@ -192,30 +192,29 @@ const Header = () => {
             </Helmet>
 
             <BackdropLoading loadingStatue={loading} />
-            
 
-            <header className={`z-10 mb-12 ${theme == 'dark' ? 'from-[#1c1c1c]' : 'from-[#e1e1e1]' } bg-gradient-to-b to-transparent md:sticky top-0 rounded-md backdrop-blur-md`}>
+            <header className={`z-10 mb-12 ${theme == 'light' ? 'from-[#e1e1e1]' : 'from-[#1c1c1c]' } bg-gradient-to-b to-transparent md:sticky top-0 rounded-md backdrop-blur-md`}>
                 <div>
-                    <div className='absolute hidden left-10 top-5 md:block hover:cursor-pointer' onClick={changeTheme}>
+                    {/* <div className='absolute hidden left-10 top-5 md:block hover:cursor-pointer' onClick={changeTheme}>
                         {
-                            theme == 'dark' ? 
-                            <svg class="h-6 w-6 text-indigo-500"  viewBox="0 0 24 24"  fill="black"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
-                            : 
+                            theme == 'light' ? 
                             <svg class="h-6 w-6 text-yellow-500"  viewBox="0 0 24 24"  fill="yellow"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="5" />  <line x1="12" y1="1" x2="12" y2="3" />  <line x1="12" y1="21" x2="12" y2="23" />  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />  <line x1="1" y1="12" x2="3" y2="12" />  <line x1="21" y1="12" x2="23" y2="12" />  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" /></svg>
+                            : 
+                            <svg class="h-6 w-6 text-indigo-500"  viewBox="0 0 24 24"  fill="black"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
                         }
-                    </div>
+                    </div> */}
 
                     <div className="header text-xl md:min-h-[7rem] flex md:grid md:grid-cols-4 md:justify-right justify-between md:max-w-[85%] relative md:mx-auto px-4 pt-4 md:pb-4 md:pt-0">
 
                         <div className='flex items-center md:hidden'>
                             <button onClick={openCloseSearchMobile} className='flex items-center header__btn' type="button">
-                                <svg className={`w-8 h-8 ${theme == 'dark' ? 'text-white' : 'text-black'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className={`w-8 h-8 ${theme == 'light' ? 'text-black' : 'text-white'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </button>
 
                             <button type="button" onClick={openCloseMenu} className={`header__btn mr-5 `} aria-label="Menu Button">
-                                <svg className={`w-8 h-8 ${theme == 'dark' ? 'text-white' : 'text-black'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
+                                <svg className={`w-8 h-8 ${theme == 'light' ? 'text-black' : 'text-white'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="3" y1="12" x2="21" y2="12" />  <line x1="3" y1="6" x2="21" y2="6" />  <line x1="3" y1="18" x2="21" y2="18" /></svg>
                             </button>
                         </div>
 
@@ -229,7 +228,7 @@ const Header = () => {
                                 }
                             </div>
 
-                            <div className={`absolute top-28 right-12 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0]  shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-28 right-12 border-2 ${theme == 'light' ? 'bg-[#f0f0f0]  shadow-[0_5px_15px_#b3b3b3]' : 'bg-[#0e0202f3]'} border-[#690D11] rounded-lg ${profileSubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4 max-w-[14rem]'>
                                     <div>
                                         <ul className='flex flex-col'>
@@ -259,7 +258,7 @@ const Header = () => {
                                 <button className='header__btn' onClick={() => setCategorySubMenu(!categorySubMenu)}>کتگوری ها</button>
                             </div>
                             
-                            <div className={`absolute top-20 left-12 border-2 ${theme == 'dark' ? 'bg-[#0e0202f3]' : 'bg-[#f0f0f0] shadow-[0_5px_15px_#b3b3b3]'} border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
+                            <div className={`absolute top-20 left-12 border-2 ${theme == 'light' ? 'bg-[#f0f0f0] shadow-[0_5px_15px_#b3b3b3]' : 'bg-[#0e0202f3]'} border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4'>
                                     <ul className='flex flex-col'>
                                         <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
@@ -304,12 +303,12 @@ const Header = () => {
                                 pr-8 pt-5`
                 }>
                     <button onClick={openCloseSearchMobile} className="header__menu__closeBtn" aria-label="Close Menu Button">
-                        <svg className={`w-8 h-8 ${theme == 'dark' ? 'text-white' : 'text-black'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        <svg className={`w-8 h-8 ${theme == 'light' ? 'text-black' : 'text-white'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                     </button>
 
                     <input
                         type='text'
-                        className={`text-center absolute top-1/4 w-[70%] bg-transparent border-b-2 border-[#690D11] text-[1.5rem] outlne-none ${theme == 'dark' ? 'text-white' : 'text-black'}`}
+                        className={`text-center absolute top-1/4 w-[70%] bg-transparent border-b-2 border-[#690D11] text-[1.5rem] outlne-none ${theme == 'light' ? 'text-black' : 'text-white'}`}
                         ref={mobileSearchInput}
                         placeholder='کوییزلند رو بگرد...'
                         onKeyPress={(e) => keyPressedOnInput(e)}
@@ -323,7 +322,7 @@ const Header = () => {
                                 ${menuOpen ? '' : 'slideMenu-hide'}
                                 pr-8 pt-5`}>
                     <button onClick={openCloseMenu} className="header__menu__closeBtn" aria-label="Close Menu Button">
-                        <svg className={`w-8 h-8 ${theme == 'dark' ? 'text-white' : 'text-black'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        <svg className={`w-8 h-8 ${theme == 'light' ? 'text-black' : 'text-white'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                     </button>
 
                     <div className='relative mt-5'>
@@ -372,17 +371,17 @@ const Header = () => {
                             {/* <li className='text-lg'><Link to="/blog"> وبلاگ </Link></li> */}
                             {/* <li className='text-lg'><Link to="/guide"> راهنما </Link></li> */}
                             <li className='text-lg'><a href="mailto:support@quizzland.net">تماس با ما</a></li>
-                            <li className='flex space-x-3 space-x-reverse text-lg' onClick={changeTheme}>
+                            {/* <li className='flex space-x-3 space-x-reverse text-lg' onClick={changeTheme}>
                                 <span>
                                     تم حالت  
                                 </span>
                                 {
-                                    theme == 'dark' ? 
-                                    <svg class="h-6 w-6 text-indigo-500"  viewBox="0 0 24 24"  fill="black"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
-                                    : 
+                                    theme == 'light' ? 
                                     <svg class="h-6 w-6 text-yellow-500"  viewBox="0 0 24 24"  fill="yellow"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="5" />  <line x1="12" y1="1" x2="12" y2="3" />  <line x1="12" y1="21" x2="12" y2="23" />  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />  <line x1="1" y1="12" x2="3" y2="12" />  <line x1="21" y1="12" x2="23" y2="12" />  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" /></svg>
+                                    : 
+                                    <svg class="h-6 w-6 text-indigo-500"  viewBox="0 0 24 24"  fill="black"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
                                 }
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

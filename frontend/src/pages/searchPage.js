@@ -14,7 +14,7 @@ const SearchMoreResult = () => {
     useEffect(() => {
         const query = takeParameterFromUrl('q')
         setSearchValue(query)
-        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
+        document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
     }, [location]);
 
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')
@@ -36,7 +36,7 @@ const SearchMoreResult = () => {
                     <div id="pos-article-display-26094"></div>
                 </div> */}
 
-                <h3 className='title mb-4'>{searchValueWithOutSign}</h3>
+                <h3 className='mb-4 title'>{searchValueWithOutSign}</h3>
 
                 <Search value={searchValue} contentLoaded={contentLoaded} setContentLoaded={setContentLoaded} contentLength={200}/>
 

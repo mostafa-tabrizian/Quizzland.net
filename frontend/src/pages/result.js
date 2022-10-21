@@ -54,7 +54,7 @@ const Result = () => {
         setCorrectAnswersCount(quizResult.qc)
         setContentLoaded(true)
         getSuggestionsQuiz(quizDetail)
-        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
+        document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
         setLoadState(true)
         
     }, [])

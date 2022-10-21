@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import make_password  # check_password
 from django.contrib.auth.base_user import BaseUserManager
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from django.core import serializers as core_serializers
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission, IsAuthenticatedOrReadOnly
@@ -39,7 +40,8 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
 def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
-        
+      
+@csrf_exempt
 def public_profile(request, *args, **kwargs):
     if request.method == 'POST':
         username = json.loads(request.body.decode('utf-8'))['username']
@@ -70,6 +72,7 @@ def public_profile(request, *args, **kwargs):
         except Exception as e:
             return HttpResponse(e)
         
+@csrf_exempt   
 def search_user(request, *args, **kwargs):
     if request.method == 'POST':
         username = json.loads(request.body.decode('utf-8'))['username']
@@ -102,6 +105,7 @@ def verify_recaptcha(res):
     
     return HttpResponse((json.loads(req.content))['success'])
     
+@csrf_exempt 
 def auth_google(request, *args, **kwargs):
     payload = json.loads(request.body.decode('utf-8'))
     

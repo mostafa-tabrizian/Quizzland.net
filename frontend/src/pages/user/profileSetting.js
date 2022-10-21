@@ -31,7 +31,7 @@ const ProfileSetting = () => {
     
     useEffect(() => {
         getUserDetail()
-        document.querySelector('body').style = `background: ${getTheme() == 'dark' ? '#060101' : 'white'}`
+        document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
     }, [userProfile])
     
     const recaptchaRef = useRef(null)
