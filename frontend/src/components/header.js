@@ -153,7 +153,7 @@ const Header = () => {
     return (
         <React.Fragment>
             <Helmet>
-                <script type="text/javascript">
+                {/* <script type="text/javascript">
                     {`
                         var head = document.getElementsByTagName("head")[0];
                         var script = document.createElement("script");
@@ -162,9 +162,9 @@ const Header = () => {
                         script.src = "https://s1.mediaad.org/serve/Quizzland.net/loader.js" ;
                         head.appendChild(script); 
                     `}
-                </script>
+                </script> */}
 
-                <script type="text/javascript">
+                {/* <script type="text/javascript">
                     {`
                         (function(){
                         var now = new Date();
@@ -176,7 +176,7 @@ const Header = () => {
                         head.appendChild(script);
                         })();
                     `}
-                </script>
+                </script> */}
 
                 <script>
                     {`

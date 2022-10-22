@@ -112,9 +112,10 @@ const Category = (props) => {
             </Helmet>
 
             <div className='mr-4 md:w-4/5 md:m-auto'>
-                <div className='adverts adverts__left'>
+
+                {/* <div className='adverts adverts__left'>
                     <div id="pos-article-display-28434"></div>
-                </div>
+                </div> */}
 
                 <div className='mb-5'>
                     <h3 className='lowTitle'>{replaceFunction(categoryQuery, '-', ' ')}</h3>

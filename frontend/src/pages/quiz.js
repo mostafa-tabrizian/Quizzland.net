@@ -787,7 +787,8 @@ const Quiz = (props) => {
                             </div>
 
                             {/* Adverts */}
-                            <div className='mt-5 adverts_center' id='mediaad-bNpr'></div>
+
+                            {/* <div className='mt-5 adverts_center' id='mediaad-bNpr'></div> */}
 
                             <div className='mx-4 mt-10'>
                                 <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>

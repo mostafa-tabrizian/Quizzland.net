@@ -264,15 +264,16 @@ const Index = () => {
                 </div>
 
                 {/* Adverts */}
-                {
+                
+                {/* {
                     !(isItMobile()) &&
                     <div className='adverts_center' id='mediaad-WSYR'></div>
-                }
+                } */}
 
-                {
+                {/* {
                     isItMobile() &&
                     <div className='adverts_center' id='mediaad-KlKX'></div>
-                }
+                } */}
 
                 <div className="mb-8">
 
@@ -291,15 +292,16 @@ const Index = () => {
                 </div>
 
                 {/* Adverts */}
-                {
+
+                {/* {
                     !(isItMobile()) &&
                     <div className='adverts_center' id='mediaad-kvDM'></div>
-                }
+                } */}
 
-                {
+                {/* {
                     isItMobile() &&
                     <div className='adverts_center' id='mediaad-OheS'></div>
-                }
+                } */}
 
                 <div className="mb-8">
 
@@ -318,15 +320,16 @@ const Index = () => {
                 </div>
 
                 {/* Adverts */}
-                {
+
+                {/* {
                     !(isItMobile()) &&
                     <div className='adverts_center' id='mediaad-niPM'></div>
-                }
+                } */}
 
-                {
+                {/* {
                     isItMobile() &&
                     <div className='adverts_center' id='mediaad-QCZY'></div>
-                }
+                } */}
 
                 <div className="mb-8">
 
@@ -361,15 +364,16 @@ const Index = () => {
                 </div>
 
                 {/* Adverts */}
-                {
+
+                {/* {
                     !(isItMobile()) &&
                     <div className='adverts_center' id='mediaad-bXEw'></div>
-                }
+                } */}
 
-                {
+                {/* {
                     isItMobile() &&
                     <div className='adverts_center' id='mediaad-qBZW'></div>
-                }
+                } */}
 
                 <div className="mt-8 mb-8">
                     <div className="flex items-center justify-between mb-8 quizContainer__header">
