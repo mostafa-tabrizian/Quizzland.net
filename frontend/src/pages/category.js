@@ -30,7 +30,8 @@ const Category = (props) => {
     const location = useLocation();
 
     useEffect(() => {
-        document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
+        // // document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #781a23)`
     })
 
     useEffect(() => {

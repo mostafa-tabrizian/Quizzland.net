@@ -6,7 +6,7 @@ const pathRed = '/static/img/bubbles.webp'
 const restartEveryMonthlyViews = () => {
 
     useEffect(() => {
-        document.querySelector('body').style = `url('${pathRed}') center center scroll`
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #781a23)`
     }, [])
 
     return (

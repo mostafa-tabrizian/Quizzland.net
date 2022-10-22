@@ -37,10 +37,14 @@ const UserProfileDetail = () => {
                     }
                 })
                 .catch(err => {
-                    log('api login')
-                    // log(err)
-                    log(err.response)
-                    refreshToken()
+                    if (err.response.data.detail.includes('inactive')) {
+                        return 'inactive'
+                    } else {
+                        log('api login')
+                        // log(err)
+                        log(err.response)
+                        refreshToken()
+                    }
                 })
         } else {
             return false

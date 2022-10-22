@@ -145,6 +145,7 @@ body {
   scroll-behavior: smooth;
   scrollbar-color: #b52633 transparent;
   z-index: 0;
+  background: linear-gradient(15deg, black, #100000, #781a23);
 }
 body::-webkit-scrollbar {
   width: 0.625rem;
@@ -382,19 +383,23 @@ hr {
   width: 0;
 }
 
-.MuiDialog-container, .MuiBackdrop-root :not(.MuiPopover-root) {
+.MuiDialog-container,
+.MuiBackdrop-root :not(.MuiPopover-root) {
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
 }
 
-.MuiSelect-select, .MuiFormLabel-root {
+.MuiSelect-select,
+.MuiFormLabel-root {
   color: gray !important;
   font-family: IRANYekanBold, sans-serif, serif !important;
   right: 15px !important;
   left: unset !important;
 }
 
-.MuiMenuItem-root, .MuiTypography-root, .MuiTooltip-tooltip {
+.MuiMenuItem-root,
+.MuiTypography-root,
+.MuiTooltip-tooltip {
   font-family: IRANYekanBold, sans-serif, serif !important;
   font-size: 0.8rem !important;
 }

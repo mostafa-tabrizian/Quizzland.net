@@ -62,6 +62,7 @@ const Header = () => {
             removeCookie('USER_ACCESS_TOKEN', {path: '/'})
             removeCookie('USER_REFRESH_TOKEN', {path: '/'})
             enqueueSnackbar('اکانت شما غیرفعال شده است. لطفا با پشتیبانی تماس بگیرید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            setTimeout(() => {window.location.reload()}, 3000);
         } else {
             userActions.setUser(userProfileDetailData)
         }

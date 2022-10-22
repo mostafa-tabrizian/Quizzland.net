@@ -14,7 +14,8 @@ const Login = () => {
         document.querySelector('header')?.remove()
         const theme = getTheme()
         setTheme(theme)
-        document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'} url(${pathRed}) center center scroll`
+        // document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'} url(${pathRed}) center center scroll`
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #781a23) url(${pathRed}) center center scroll`
     }, [])
 
     return (

@@ -57,6 +57,7 @@ body {
     scroll-behavior: smooth;
     scrollbar-color: #b52633 transparent;
     z-index: 0;
+    background: linear-gradient(15deg, black, #100000, #781a23);
 
     &::-webkit-scrollbar {
         width: .625rem;
@@ -271,18 +272,19 @@ hr {
 .slider {
     direction: ltr !important;
 
-    > li  {
+    >li {
         min-width: 100% !important;
-        
-        
-        a > div {
+
+
+        a>div {
             margin-right: .5rem !important;
             margin-left: .5rem !important;
         }
     }
 }
 
-.MuiSkeleton-root {  // skeleton rounded
+.MuiSkeleton-root {
+    // skeleton rounded
     background-color: #bebebe1d !important;
 }
 
@@ -295,18 +297,22 @@ hr {
     }
 }
 
-.MuiDialog-container, .MuiBackdrop-root :not(.MuiPopover-root)  {
+.MuiDialog-container,
+.MuiBackdrop-root :not(.MuiPopover-root) {
     backdrop-filter: blur(3px);
 }
 
-.MuiSelect-select, .MuiFormLabel-root {
+.MuiSelect-select,
+.MuiFormLabel-root {
     color: gray !important;
     font-family: IRANYekanBold, sans-serif, serif !important;
     right: 15px !important;
     left: unset !important;
 }
 
-.MuiMenuItem-root, .MuiTypography-root, .MuiTooltip-tooltip {
+.MuiMenuItem-root,
+.MuiTypography-root,
+.MuiTooltip-tooltip {
     font-family: IRANYekanBold, sans-serif, serif !important;
     font-size: .8rem !important;
 }
@@ -318,7 +324,7 @@ hr {
 .Mui-checked {
     color: #ac272e !important;
 
-    > .MuiSwitch-thumb {
+    >.MuiSwitch-thumb {
         border: 1px solid #690D11;
     }
 }
@@ -541,7 +547,7 @@ hr {
         width: 4rem;
         height: 4rem;
         top: -100%;
-        right: -50%;    
+        right: -50%;
     }
 }
 
@@ -609,9 +615,9 @@ hr {
     //     width: 30rem;
     //     height: 25rem !important;
 
-        // @include breakpoints-up(small) {
-        //     transform: translate(8.5rem);
-        // }
+    // @include breakpoints-up(small) {
+    //     transform: translate(8.5rem);
+    // }
     // }
 
     // &__blog {

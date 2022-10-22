@@ -84,7 +84,7 @@ const LoginForm = (props) => {
     const showInActiveNotification = () => {
         enqueueSnackbar(
             <div className='mt-8'>
-                <h4>این کاربر مسدود شده است</h4>
+                <h5>این کاربر مسدود شده است</h5>
                 <h5 className='mb-5'>
                     برای اطلاعات بیشتر با پشتیبانی کوییزلند در ارتباط باشید.
                 </h5>

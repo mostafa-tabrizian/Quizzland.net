@@ -41,7 +41,8 @@ const Index = () => {
         
         const theme = getTheme()
         setTheme(theme)
-        document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'}`
+                // document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'}`
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #781a23)`
     }, [])
 
     const grabData = async () => {
