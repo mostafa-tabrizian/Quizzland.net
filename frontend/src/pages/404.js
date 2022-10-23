@@ -13,7 +13,7 @@ const NotFound_404 = () => {
         const theme = getTheme()
         setTheme(theme)
         // document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'} url(${pathRed}) center center scroll`
-        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #781a23)`
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
     }, [])
 
     return (

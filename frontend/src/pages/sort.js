@@ -26,7 +26,7 @@ const Sort = () => {
         setLoadState(true)
         
         // document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
-        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #781a23)`
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
         document.querySelector('#scrollme').classList.add('overflow-y-auto')  // make content load on scroll
     }, [])
 

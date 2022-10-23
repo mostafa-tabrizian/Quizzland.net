@@ -145,7 +145,6 @@ body {
   scroll-behavior: smooth;
   scrollbar-color: #b52633 transparent;
   z-index: 0;
-  background: linear-gradient(15deg, black, #100000, #781a23);
 }
 body::-webkit-scrollbar {
   width: 0.625rem;

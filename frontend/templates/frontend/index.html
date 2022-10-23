@@ -13,11 +13,10 @@
 
   {% comment %} <link rel="manifest" href="/manifest.json"> {% endcomment %}
   
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/tailwind_build.css' %}" />
+  {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}" /> {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/style.min.css' %}" />
 
-  {% comment %} <link rel="stylesheet" href="{% static 'css/style.min.css' %}" /> {% endcomment %}
-  {% comment %} <link rel="stylesheet" href="{% static 'css/tailwind_build.min.css' %}" /> {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/tailwind_build.css' %}" />
 
   <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
@@ -57,7 +56,7 @@
 
   <div id="land"></div>
 
-  <script src="{% static 'build/App.js.gz' %}"></script>
+  <script src="{% static 'build/App.js' %}"></script>
 </body>
 
 </html>

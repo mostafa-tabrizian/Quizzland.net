@@ -18,7 +18,7 @@
       "name": "جدیدترین کوییز ها",
       "short_name": "جدیدترین ها",
       "description": "جدیدترین کوییز ها با موضوع های متفاوت کوییزلند رو ببین",
-      "url": "/sort?q=newest",
+      "url": "/sort?s=newest",
       "icons": [
         {
           "src": "/static/img/Q-192.jpg",
@@ -30,7 +30,7 @@
       "name": "بهترین کوییز های این ماه",
       "short_name": "بهترین های ماه",
       "description": "بهترین کوییز های این ماه با موضوع های متفاوت کوییزلند رو ببین",
-      "url": "/sort?q=monthly",
+      "url": "/sort?s=trend",
       "icons": [
         {
           "src": "/static/img/Q-192.jpg",

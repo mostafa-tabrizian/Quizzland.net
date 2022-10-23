@@ -29,7 +29,7 @@ const SearchMoreResult = () => {
     useEffect(() => {
         const theme = getTheme()
         // document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'}`
-        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #781a23)`
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
     }, []);
 
     const searchValueWithOutSign = searchValue && replaceFunction(searchValue, '+', ' ')

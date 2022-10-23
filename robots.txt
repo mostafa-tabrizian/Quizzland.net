@@ -8,4 +8,6 @@ Disallow: /private/
 Disallow: /junk/
 Disallow: /search
 
+Disallow: /static/ckeditor/?SA
+
 Sitemap: https://www.quizzland.net/sitemap.xml
