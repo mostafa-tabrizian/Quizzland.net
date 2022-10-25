@@ -270,7 +270,7 @@ class Pointy_Questions(models.Model):
     option_10th = models.CharField(max_length=100, blank=True)
     
     option_img_1st = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
-    option_img_2st = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
+    option_img_2nd = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_3rd = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_4th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')
     option_img_5th = models.ImageField(upload_to='Question-Option-Imgs', default='NotExist.jpg')

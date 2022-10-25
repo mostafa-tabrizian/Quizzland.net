@@ -241,6 +241,13 @@ class HistorySerializer(serializers.ModelSerializer):
         return newLike
 
 class QuestionsSerializer(serializers.ModelSerializer):
+    question_img = serializers.ImageField(required=False)
+    option_img_1st = serializers.ImageField(required=False)
+    option_img_2nd = serializers.ImageField(required=False)
+    option_img_3rd = serializers.ImageField(required=False)
+    option_img_4th = serializers.ImageField(required=False)
+    answer_imGif = serializers.ImageField(required=False)
+    
     class Meta:
         model = Questions
         fields = (
