@@ -6,6 +6,7 @@ module.exports = {
     './frontend/src/components/search/*.js',
     "./frontend/src/pages/*.js",
     './frontend/src/pages/user/*.js',
+    './frontend/src/pages/staff/*.js',
   ],
   theme: {
     extend: {},

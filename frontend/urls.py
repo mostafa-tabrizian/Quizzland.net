@@ -40,6 +40,10 @@ urlpatterns = [
     path('sort', index),
     # path('blog/<title>', article),
     # path('blog', blog),
+    
+    path('staff/panel', index),
+    path('staff/create', index),
+    
     path('makeMonthlyRecord', index),
     path('restartEveryMonthlyViews', restartEveryMonthlyViews),
     

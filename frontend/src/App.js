@@ -38,8 +38,12 @@ const Tags              = lazy(() => import('./pages/tags'))
 const Sort              = lazy(() => import('./pages/sort'))
 const Blog              = lazy(() => import('./pages/blog'))
 const notFound_404      = lazy(() => import('./pages/404'))
+
+const staffPanel        = lazy(() => import('./pages/staff/panel'))
+const staffCreate       = lazy(() => import('./pages/staff/create'))
 const monthlyRecord     = lazy(() => import('./pages/monthlyRecord'))
 const restartEveryMonthlyViews     = lazy(() => import('./pages/restartEveryMonthlyViews'))
+
 const welcomeOwl        = lazy(() => import('./pages/welcomeOwl'))
 const welcomeZeynab     = lazy(() => import('./pages/welcomeZeynab'))
 
@@ -123,6 +127,9 @@ const App = () => {
                                     <Route path='/tags/:tag' component={Tags} />
                                     <Route path='/sort' component={Sort} />
                                     <Route path='/blog' component={Blog} />
+
+                                    <Route path='/staff/panel' component={staffPanel} />
+                                    <Route path='/staff/create' component={staffCreate} />
                                     <Route path='/makeMonthlyRecord' component={monthlyRecord} />
                                     <Route path='/restartEveryMonthlyViews' component={restartEveryMonthlyViews} />
                                     

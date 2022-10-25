@@ -209,7 +209,7 @@ def FastFunctionForDB(request):
             print(item.title)  
         except Exception as e:
             raise Exception(f'Error: {item.title} : {e}')
-        
+     
 def handler404(request, exception):
     return render(request, 'frontend/404.html', status=404)
 
@@ -246,6 +246,38 @@ class QuizView(viewsets.ModelViewSet):
     queryset = Quizzes.objects.all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
+    
+    def create(self, request):
+        requestData = request.data
+        category = Categories.objects.get(id=requestData['categoryKey'])
+        
+        public = None
+        if requestData['public'] == 'true':
+            public = True
+        elif requestData['public'] == 'false':
+            public = False
+            
+        new_quiz = Quizzes()
+        
+        new_quiz.public = public
+        new_quiz.categoryKey = category
+        new_quiz.subCategory = requestData['subCategory']
+        new_quiz.slug = requestData['slug']
+        new_quiz.title = requestData['title']
+        new_quiz.tags = requestData['tags']
+        new_quiz.fan_name = requestData['fan_name']
+        new_quiz.question_background = requestData['question_background']
+        new_quiz.thumbnail = requestData['thumbnail']
+        new_quiz.background = requestData['background']
+        new_quiz.GIF20 = requestData['GIF20']
+        new_quiz.GIF40 = requestData['GIF40']
+        new_quiz.GIF60 = requestData['GIF60']
+        new_quiz.GIF80 = requestData['GIF80']
+        new_quiz.GIF100 = requestData['GIF100']
+        
+        new_quiz.save()
+        
+        return HttpResponse('quiz created successfully')
 
 class PointyView(viewsets.ModelViewSet):
     permission_classes = (BasePermission,)

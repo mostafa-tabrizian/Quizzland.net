@@ -10,7 +10,6 @@ const QuizContainer = React.lazy(() => import('../../components/quizContainer'))
 const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
 const SkeletonQuizContainer = React.lazy(() => import('../../components/skeletonQuizContainer'))
 
-
 const QuizHistory = () => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)

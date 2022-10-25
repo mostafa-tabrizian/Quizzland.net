@@ -205,6 +205,13 @@ const Header = () => {
                         }
                     </div> */}
 
+                    {
+                        userProfile.userDetail?.is_staff &&
+                        <Link to="/staff/panel" className='m-3' rel="noopener noreferrer">
+                            Staff Panel 🗿
+                        </Link>
+                    }
+
                     <div className="header text-xl md:min-h-[7rem] flex md:grid md:grid-cols-4 md:justify-right justify-between md:max-w-[85%] relative md:mx-auto px-4 pt-4 md:pb-4 md:pt-0">
 
                         <div className='flex items-center md:hidden'>

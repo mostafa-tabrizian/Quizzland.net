@@ -39,6 +39,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'avatar',
             'points',
             'is_active',
+            'is_staff'
         )
         
     def update(self, instance, validated_data):
@@ -109,6 +110,14 @@ class SubCategoriesSerializer(serializers.ModelSerializer):
     categoryKey = CategoriesSerializer(many=False, read_only=True)
 
 class QuizzesSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.ImageField(required=False)
+    background = serializers.ImageField(required=False)
+    GIF20 = serializers.ImageField(required=False)
+    GIF40 = serializers.ImageField(required=False)
+    GIF60 = serializers.ImageField(required=False)
+    GIF80 = serializers.ImageField(required=False)
+    GIF100 = serializers.ImageField(required=False)
+    
     class Meta:
         model = Quizzes
         fields = (
