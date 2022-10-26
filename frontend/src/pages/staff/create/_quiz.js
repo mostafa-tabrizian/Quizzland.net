@@ -155,7 +155,7 @@ const CreateQuiz = () => {
                     {
                         thumbnailURL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(thumbnailURL)} alt=""
                         />
                     }
@@ -176,7 +176,7 @@ const CreateQuiz = () => {
                     {
                         backgroundURL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(backgroundURL)} alt=""
                         />
                     }
@@ -197,7 +197,7 @@ const CreateQuiz = () => {
                     {
                         GIF20URL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(GIF20URL)} alt=""
                         />
                     }
@@ -218,7 +218,7 @@ const CreateQuiz = () => {
                     {
                         GIF40URL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(GIF40URL)} alt=""
                         />
                     }
@@ -239,7 +239,7 @@ const CreateQuiz = () => {
                     {
                         GIF60URL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(GIF60URL)} alt=""
                         />
                     }
@@ -260,7 +260,7 @@ const CreateQuiz = () => {
                     {
                         GIF80URL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(GIF80URL)} alt=""
                         />
                     }
@@ -281,14 +281,14 @@ const CreateQuiz = () => {
                     {
                         GIF100URL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(GIF100URL)} alt=""
                         />
                     }
                 </div>
 
                 <button
-                    className='border border-green-500 hover:text-black hover:bg-green-500 mt-10 py-3 px-5 w-full rounded'
+                    className='w-full px-5 py-3 mt-10 border border-green-500 rounded hover:text-black hover:bg-green-500'
                     onClick={postQuiz}
                 >
                     Post Quiz

@@ -88,7 +88,7 @@ const QuestionForm = (props) => {
     const createQuestionForm = () => {
         return (
             <div className='text-center mx-auto my-20 max-w-[40rem]'>
-                <div className='flex flex-col space-y-3 relative'>
+                <div className='relative flex flex-col space-y-3'>
                     {
                         postStatue !== null &&
                         <div className='absolute right-[-4rem] top-[1rem] text-[2rem]'>
@@ -129,7 +129,7 @@ const QuestionForm = (props) => {
                     {
                         questionImageURL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(questionImageURL)} alt=""
                         />
                     }
@@ -153,7 +153,7 @@ const QuestionForm = (props) => {
                     {
                         optionImage1stURL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(optionImage1stURL)} alt=""
                         />
                     }
@@ -172,7 +172,7 @@ const QuestionForm = (props) => {
                     {
                         optionImage2ndURL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(optionImage2ndURL)} alt=""
                         />
                     }
@@ -191,7 +191,7 @@ const QuestionForm = (props) => {
                     {
                         optionImage3rdURL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(optionImage3rdURL)} alt=""
                         />
                     }
@@ -210,7 +210,7 @@ const QuestionForm = (props) => {
                     {
                         optionImage4thURL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(optionImage4thURL)} alt=""
                         />
                     }
@@ -231,7 +231,7 @@ const QuestionForm = (props) => {
                     {
                         answerImageGIFURL &&
                         <img
-                            className='my-5'
+                            className='my-5 h-[20rem] w-fit mx-auto'
                             src={URL.createObjectURL(answerImageGIFURL)} alt=""
                         />
                     }
@@ -240,13 +240,13 @@ const QuestionForm = (props) => {
                 </div>
 
                 <button
-                    className='border border-green-500 hover:text-black hover:bg-green-500 mt-10 py-3 px-5 w-full rounded'
+                    className='w-full px-5 py-3 mt-10 border border-green-500 rounded hover:text-black hover:bg-green-500'
                     onClick={postQuestion}
                 >
                     ذخیره سوال
                 </button>
 
-                <hr className='mx-auto border-green-500 w-full' />
+                <hr className='w-full mx-auto border-green-500' />
             </div>
         )
     }
