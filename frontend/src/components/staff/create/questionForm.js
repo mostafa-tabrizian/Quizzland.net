@@ -30,10 +30,13 @@ const QuestionForm = (props) => {
 
     useEffect(() => {
         fetchQuizzes()
+        document.querySelector('#questionBackground').style = `background: black`
     }, [])
 
     const fetchQuizzes = async () => {
-        await axiosInstance.get('/api/quizView/')
+        const now = new Date().getTime()
+        
+        await axiosInstance.get(`/api/quizView/?timestamp=${now}`)
             .then(res => {
                 setQuizzes(res.data.reverse())
             })
@@ -48,7 +51,7 @@ const QuestionForm = (props) => {
         let formData = new FormData()
 
         formData.append('quizKey', selectedQuiz?.id)
-        formData.append('question', questionRef.current.value)
+        formData.append('question', questionRef.current.innerText)
         formData.append('question_img', questionImageURL)
         formData.append('option_1st', option1stRef.current.value)
         formData.append('option_2nd', option2ndRef.current.value)
@@ -85,6 +88,11 @@ const QuestionForm = (props) => {
             })
     }
 
+    const quizKeyChanged = (e, value) => {
+        selectQuiz(value)
+        document.querySelectorAll('#questionBackground').forEach((q) => q.style = `background: ${value.question_background}`)
+    }
+
     const createQuestionForm = () => {
         return (
             <div className='text-center mx-auto my-20 max-w-[40rem]'>
@@ -108,12 +116,18 @@ const QuestionForm = (props) => {
                     <Autocomplete
                         id="quizKey"
                         options={quizzes}
-                        onChange={(e, value) => selectQuiz(value)}
+                        onChange={(e, value) => quizKeyChanged(e, value)}
                         getOptionLabel={(option) => option.title}
                         renderInput={(params) => <TextField {...params} label="عنوان کوییز" />}
                     />
-                    
-                    <input type="text" placeholder='سوال' ref={questionRef} className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
+
+                    <div className={`my-3 mx-auto w-[22rem] md:w-[29rem]`} >
+                        <div
+                            contenteditable='true'
+                            id='questionBackground'
+                            ref={questionRef} className='p-3 text-[2rem] w-full quiz_question mix-blend-hard-light text-center backdrop-blur-2xl h-[17rem] py-1 rounded-xl flex overflow-auto items-center'
+                        />
+                    </div>
 
                     <Button
                         variant="outlined"
