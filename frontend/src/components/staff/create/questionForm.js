@@ -41,7 +41,7 @@ const QuestionForm = (props) => {
                 setQuizzes(res.data.reverse())
             })
             .catch(err => {
-                log('err: fetchCategories')
+                log('err: fetchQuizzes')
                 // log(err)
                 // log(err.response)
             })
@@ -125,7 +125,7 @@ const QuestionForm = (props) => {
                         <div
                             contenteditable='true'
                             id='questionBackground'
-                            ref={questionRef} className='p-3 text-[2rem] w-full quiz_question mix-blend-hard-light text-center backdrop-blur-2xl h-[17rem] py-1 rounded-xl flex overflow-auto items-center'
+                            ref={questionRef} className='p-3 text-[2rem] w-full quiz_question mix-blend-hard-light text-center backdrop-blur-2xl h-[17rem] py-1 rounded-xl flex overflow-auto items-center justify-center'
                         />
                     </div>
 

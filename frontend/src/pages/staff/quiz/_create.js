@@ -72,7 +72,7 @@ const CreateQuiz = () => {
 
         formData.append('public', publicState)
         formData.append('categoryKey', selectedCategory?.id)
-        formData.append('subCategory', selectedSubcategory?.title)
+        formData.append('subCategory', selectedSubcategory?.subCategory)
         formData.append('slug', slugRef.current.value)
         formData.append('title', titleRef.current.value)
         formData.append('tags', tagsRef.current.value)

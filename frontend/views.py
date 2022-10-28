@@ -274,6 +274,7 @@ class QuizView(viewsets.ModelViewSet):
         new_quiz.GIF60 = requestData['GIF60']
         new_quiz.GIF80 = requestData['GIF80']
         new_quiz.GIF100 = requestData['GIF100']
+        new_quiz.created_by = request.user
         
         new_quiz.save()
         

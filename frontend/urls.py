@@ -42,8 +42,9 @@ urlpatterns = [
     # path('blog', blog),
     
     path('staff/panel', index),
-    path('staff/create/quiz', index),
-    path('staff/create/question', index),
+    path('staff/quiz/create', index),
+    path('staff/quiz/overview', index),
+    path('staff/question/create', index),
     
     path('makeMonthlyRecord', index),
     path('restartEveryMonthlyViews', restartEveryMonthlyViews),

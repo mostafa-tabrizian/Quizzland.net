@@ -4,17 +4,6 @@ from django.db import models
 from ckeditor.fields import RichTextField
 import datetime
 from django.contrib.auth.models import AbstractUser
-
-class Categories(models.Model):
-    id = models.AutoField(primary_key=True)
-    title_english = models.CharField(max_length=80, null=False, blank=False, default=None)
-    title_persian = models.CharField(max_length=80, null=False, blank=False, default=None)
-    monthly_views = models.IntegerField(default=0)
-    views = models.IntegerField(default=0)
-    publish = models.DateField(default=datetime.date.today)
-    
-    def __str__(self):
-        return str(self.title_english)
     
 Gender = (
     ('male', 'Male'),
@@ -60,6 +49,17 @@ class Document_Admin(admin.ModelAdmin):
     list_display = ('title', 'note')
     search_fields = ['id', 'title', 'note']
 
+class Categories(models.Model):
+    id = models.AutoField(primary_key=True)
+    title_english = models.CharField(max_length=80, null=False, blank=False, default=None)
+    title_persian = models.CharField(max_length=80, null=False, blank=False, default=None)
+    monthly_views = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
+    publish = models.DateField(default=datetime.date.today)
+    
+    def __str__(self):
+        return str(self.title_english)
+
 class SubCategories(models.Model):
     id = models.AutoField(primary_key=True)
     public = models.BooleanField(default=True)
@@ -96,6 +96,7 @@ class Quizzes(models.Model):
     GIF80 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
     GIF100 = models.ImageField(upload_to='Answer-And-Result-ImGIf/', default='NotExist.jpg')
     publish = models.DateTimeField(default=datetime.datetime.now)
+    created_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='user_quiz_id', blank=False, null=True)
     question_background = models.CharField(max_length=7, default="#911a1a")
 
     def __str__(self):
