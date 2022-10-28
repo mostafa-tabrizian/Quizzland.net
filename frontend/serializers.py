@@ -127,6 +127,19 @@ class QuizzesSerializer(serializers.ModelSerializer):
     categoryKey = CategoriesSerializer(many=False, read_only=True)
 
 class PointyQuizzesSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.ImageField(required=False)
+    background = serializers.ImageField(required=False)
+    result_img_1st = serializers.ImageField(required=False)
+    result_img_2nd = serializers.ImageField(required=False)
+    result_img_3rd = serializers.ImageField(required=False)
+    result_img_4th = serializers.ImageField(required=False)
+    result_img_5th = serializers.ImageField(required=False)
+    result_img_6th = serializers.ImageField(required=False)
+    result_img_7th = serializers.ImageField(required=False)
+    result_img_8th = serializers.ImageField(required=False)
+    result_img_9th = serializers.ImageField(required=False)
+    result_img_10th = serializers.ImageField(required=False)
+    
     class Meta:
         model = Quizzes_Pointy
         fields = (
@@ -134,6 +147,44 @@ class PointyQuizzesSerializer(serializers.ModelSerializer):
         )
               
     categoryKey = CategoriesSerializer(many=False, read_only=True)
+
+class QuestionsSerializer(serializers.ModelSerializer):
+    question_img = serializers.ImageField(required=False)
+    option_img_1st = serializers.ImageField(required=False)
+    option_img_2nd = serializers.ImageField(required=False)
+    option_img_3rd = serializers.ImageField(required=False)
+    option_img_4th = serializers.ImageField(required=False)
+    answer_imGif = serializers.ImageField(required=False)
+    
+    class Meta:
+        model = Questions
+        fields = (
+            '__all__'
+        )
+        
+        quizKey = QuizzesSerializer(many=False)
+
+class QuestionsPointySerializer(serializers.ModelSerializer):
+    thumbnail = serializers.ImageField(required=False)
+    background = serializers.ImageField(required=False)
+    result_img_1st = serializers.ImageField(required=False)
+    result_img_2nd = serializers.ImageField(required=False)
+    result_img_3rd = serializers.ImageField(required=False)
+    result_img_4th = serializers.ImageField(required=False)
+    result_img_5th = serializers.ImageField(required=False)
+    result_img_6th = serializers.ImageField(required=False)
+    result_img_7th = serializers.ImageField(required=False)
+    result_img_8th = serializers.ImageField(required=False)
+    result_img_9th = serializers.ImageField(required=False)
+    result_img_10th = serializers.ImageField(required=False)
+    
+    class Meta:
+        model = Pointy_Questions
+        fields = (
+            '__all__'
+        )
+        
+    quizKey = QuizzesSerializer(many=False)
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -239,32 +290,6 @@ class HistorySerializer(serializers.ModelSerializer):
         )
         
         return newLike
-
-class QuestionsSerializer(serializers.ModelSerializer):
-    question_img = serializers.ImageField(required=False)
-    option_img_1st = serializers.ImageField(required=False)
-    option_img_2nd = serializers.ImageField(required=False)
-    option_img_3rd = serializers.ImageField(required=False)
-    option_img_4th = serializers.ImageField(required=False)
-    answer_imGif = serializers.ImageField(required=False)
-    
-    class Meta:
-        model = Questions
-        fields = (
-            '__all__'
-        )
-        
-        quizKey = QuizzesSerializer(many=False)
-
-class questionsPointySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Pointy_Questions
-        fields = (
-            '__all__'
-        )
-        
-    quizKey = QuizzesSerializer(many=False)
-
 
 # class BlogSerializer(serializers.ModelSerializer):
 #     class Meta:

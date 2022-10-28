@@ -9,7 +9,8 @@ module.exports = {
     "./frontend/src/pages/*.js",
     './frontend/src/pages/user/*.js',
     './frontend/src/pages/staff/*.js',
-    './frontend/src/pages/staff/create/*.js',
+    './frontend/src/pages/staff/quiz/*.js',
+    './frontend/src/pages/staff/question/*.js',
   ],
   theme: {
     extend: {},

@@ -12,7 +12,7 @@ import { log } from '../../../components/base'
 import userStore from '../../../store/userStore';
 import axiosInstance from '../../../components/axiosAuthApi';
 
-const CreateQuiz = () => {
+const CreateTrivia = () => {
     const [publicState, setPublic] = useState(false)
     const [categories, setCategories] = useState([])
     const [selectedCategory, selectCategory] = useState()
@@ -67,7 +67,7 @@ const CreateQuiz = () => {
             })
     }
 
-    const postQuiz = async () => {
+    const postTrivia = async () => {
         let formData = new FormData()
 
         formData.append('public', publicState)
@@ -95,7 +95,7 @@ const CreateQuiz = () => {
                 log(res)
             })
             .catch(err => {
-                log('err: postQuiz')
+                log('err: postTrivia')
                 log(err)
                 log(err.response)
             })
@@ -111,7 +111,7 @@ const CreateQuiz = () => {
                                 onChange={() => { setPublic(publicState ? false : true) }}
                             />
                         }
-                        label="Public"
+                        label="عمومی"
                     />
 
                     <Autocomplete
@@ -119,7 +119,7 @@ const CreateQuiz = () => {
                         options={categories}
                         onChange={(e, value) => selectCategory(value)}
                         getOptionLabel={(option) => option.title_english}
-                        renderInput={(params) => <TextField {...params} label="Category" />}
+                        renderInput={(params) => <TextField {...params} label="کتگوری" />}
                     />
 
                     <Autocomplete
@@ -127,13 +127,13 @@ const CreateQuiz = () => {
                         options={subcategories}
                         onChange={(e, value) => selectSubcategory(value)}
                         getOptionLabel={(option) => option.subCategory}
-                        renderInput={(params) => <TextField {...params} label="Subcategory" />}
+                        renderInput={(params) => <TextField {...params} label="زیرکتگوری" />}
                     />
 
-                    <input type="text" placeholder='Slug' ref={slugRef} className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
-                    <input type="text" placeholder='Title' ref={titleRef} className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
-                    <input type="text" placeholder='Tags' ref={tagsRef} className='first-letter:pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
-                    <input type="text" placeholder='Fan name' ref={fanNameRef} className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
+                    <input type="text" placeholder='عنوان' ref={titleRef} className='pl-4 pr-6 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
+                    <input type="text" placeholder='اسلاگ' ref={slugRef} className='pl-4 pr-6 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
+                    <input type="text" placeholder='تگ ها با فاصله ویرگول' ref={tagsRef} className='pl-4 pr-6 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
+                    <input type="text" placeholder='عنوان فن' ref={fanNameRef} className='pl-4 pr-6 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
 
                     <MuiColorInput
                         value={questionBackgroundColor}
@@ -145,7 +145,7 @@ const CreateQuiz = () => {
                         variant="outlined"
                         component="label"
                     >
-                        Upload Thumbnail
+                        تصویر ثامبنیل
                         <input
                             hidden accept=".png, .jpg, .webp" type="file"
                             onChange={e => setThumbnailURL(e.target.files[0])}
@@ -166,7 +166,7 @@ const CreateQuiz = () => {
                         variant="outlined"
                         component="label"
                     >
-                        Upload Background
+                        تصویر پس زمینه
                         <input
                             hidden accept=".png, .jpg, .webp" type="file"
                             onChange={e => setBackgroundURL(e.target.files[0])}
@@ -187,7 +187,7 @@ const CreateQuiz = () => {
                         variant="outlined"
                         component="label"
                     >
-                        GIF 20
+                        گیف ۲۰٪
                         <input
                             hidden accept=".gif" type="file"
                             onChange={e => setGIF20URL(e.target.files[0])}
@@ -208,7 +208,7 @@ const CreateQuiz = () => {
                         variant="outlined"
                         component="label"
                     >
-                        GIF 40
+                        گیف ۴۰٪
                         <input
                             hidden accept=".gif" type="file"
                             onChange={e => setGIF40URL(e.target.files[0])}
@@ -229,7 +229,7 @@ const CreateQuiz = () => {
                         variant="outlined"
                         component="label"
                     >
-                        GIF 60
+                        گیف ۶۰٪
                         <input
                             hidden accept=".gif" type="file"
                             onChange={e => setGIF60URL(e.target.files[0])}
@@ -250,7 +250,7 @@ const CreateQuiz = () => {
                         variant="outlined"
                         component="label"
                     >
-                        GIF 80
+                        گیف ۸۰٪
                         <input
                             hidden accept=".gif" type="file"
                             onChange={e => setGIF80URL(e.target.files[0])}
@@ -271,7 +271,7 @@ const CreateQuiz = () => {
                         variant="outlined"
                         component="label"
                     >
-                        GIF 100
+                        گیف ۱۰۰٪
                         <input
                             hidden accept=".gif" type="file"
                             onChange={e => setGIF100URL(e.target.files[0])}
@@ -289,9 +289,9 @@ const CreateQuiz = () => {
 
                 <button
                     className='w-full px-5 py-3 mt-10 border border-green-500 rounded hover:text-black hover:bg-green-500'
-                    onClick={postQuiz}
+                    onClick={postTrivia}
                 >
-                    Post Quiz
+                    دخیره تریویا
                 </button>
             </div>
             :
@@ -301,4 +301,4 @@ const CreateQuiz = () => {
     );
 }
 
-export default CreateQuiz;
+export default CreateTrivia;

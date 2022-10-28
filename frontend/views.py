@@ -285,7 +285,169 @@ class PointyView(viewsets.ModelViewSet):
     queryset = Quizzes_Pointy.objects.all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
+    
+    def create(self, request):
+        requestData = request.data
+        category = Categories.objects.get(id=requestData['categoryKey'])
+        
+        public = None
+        if requestData['public'] == 'true':
+            public = True
+        elif requestData['public'] == 'false':
+            public = False
+            
+        new_quiz = Quizzes_Pointy()
+        
+        new_quiz.public = public
+        new_quiz.categoryKey = category
+        new_quiz.subCategory = requestData['subCategory']
+        new_quiz.slug = requestData['slug']
+        new_quiz.title = requestData['title']
+        new_quiz.tags = requestData['tags']
+        
+        new_quiz.question_background = requestData['question_background']
+        new_quiz.thumbnail = requestData['thumbnail']
+        new_quiz.background = requestData['background']
+        
+        if requestData['result_upTo_1st']: new_quiz.result_upTo_1st = requestData['result_upTo_1st']
+        if requestData['result_upTo_2nd']: new_quiz.result_upTo_2nd = requestData['result_upTo_2nd']
+        if requestData['result_upTo_3rd']: new_quiz.result_upTo_3rd = requestData['result_upTo_3rd']
+        if requestData['result_upTo_4th']: new_quiz.result_upTo_4th = requestData['result_upTo_4th']
+        if requestData['result_upTo_5th']: new_quiz.result_upTo_5th = requestData['result_upTo_5th']
+        if requestData['result_upTo_6th']: new_quiz.result_upTo_6th = requestData['result_upTo_6th']
+        if requestData['result_upTo_7th']: new_quiz.result_upTo_7th = requestData['result_upTo_7th']
+        if requestData['result_upTo_8th']: new_quiz.result_upTo_8th = requestData['result_upTo_8th']
+        if requestData['result_upTo_9th']: new_quiz.result_upTo_9th = requestData['result_upTo_9th']
+        if requestData['result_upTo_10th']: new_quiz.result_upTo_10th = requestData['result_upTo_10th']
+        
+        new_quiz.result_title_1st = requestData['result_title_1st']
+        new_quiz.result_title_2nd = requestData['result_title_2nd']
+        new_quiz.result_title_3rd = requestData['result_title_3rd']
+        new_quiz.result_title_4th = requestData['result_title_4th']
+        new_quiz.result_title_5th = requestData['result_title_5th']
+        new_quiz.result_title_6th = requestData['result_title_6th']
+        new_quiz.result_title_7th = requestData['result_title_7th']
+        new_quiz.result_title_8th = requestData['result_title_8th']
+        new_quiz.result_title_9th = requestData['result_title_9th']
+        new_quiz.result_title_10th = requestData['result_title_10th']
+        
+        new_quiz.result_text_1st = requestData['result_text_1st']
+        new_quiz.result_text_2nd = requestData['result_text_2nd']
+        new_quiz.result_text_3rd = requestData['result_text_3rd']
+        new_quiz.result_text_4th = requestData['result_text_4th']
+        new_quiz.result_text_5th = requestData['result_text_5th']
+        new_quiz.result_text_6th = requestData['result_text_6th']
+        new_quiz.result_text_7th = requestData['result_text_7th']
+        new_quiz.result_text_8th = requestData['result_text_8th']
+        new_quiz.result_text_9th = requestData['result_text_9th']
+        new_quiz.result_text_10th = requestData['result_text_10th']
+        
+        new_quiz.result_img_1st = requestData['result_img_1st']
+        new_quiz.result_img_2nd = requestData['result_img_2nd']
+        new_quiz.result_img_3rd = requestData['result_img_3rd']
+        new_quiz.result_img_4th = requestData['result_img_4th']
+        new_quiz.result_img_5th = requestData['result_img_5th']
+        new_quiz.result_img_6th = requestData['result_img_6th']
+        new_quiz.result_img_7th = requestData['result_img_7th']
+        new_quiz.result_img_8th = requestData['result_img_8th']
+        new_quiz.result_img_9th = requestData['result_img_9th']
+        new_quiz.result_img_10th = requestData['result_img_10th']
 
+        new_quiz.created_by = request.user
+        
+        new_quiz.save()
+        
+        return HttpResponse('quiz created successfully')
+
+# --------------------------------------------------------
+
+class QuestionsView(viewsets.ModelViewSet):
+    permission_classes = (BasePermission,)
+    queryset = Questions.objects.all()
+    serializer_class = QuestionsSerializer
+    filterset_class = QuestionsFilter
+    
+    def create(self, request):
+        requestData = request.data
+        quizKey = Quizzes.objects.get(id=requestData['quizKey'])
+            
+        new_question = Questions()
+        
+        new_question.quizKey = quizKey
+        new_question.question = requestData['question']
+        new_question.question_img = requestData['question_img']
+        
+        new_question.option_1st = requestData['option_1st']
+        new_question.option_2nd = requestData['option_2nd']
+        new_question.option_3rd = requestData['option_3rd']
+        new_question.option_4th = requestData['option_4th']
+        
+        new_question.option_img_1st = requestData['option_img_1st']
+        new_question.option_img_2nd = requestData['option_img_2nd']
+        new_question.option_img_3rd = requestData['option_img_3rd']
+        new_question.option_img_4th = requestData['option_img_4th']
+        
+        new_question.answer = requestData['answer']
+        new_question.answer_imGif = requestData['answer_imGif']
+        new_question.answer_text = requestData['answer_text']
+        
+        new_question.save()
+        
+        return HttpResponse('question created successfully')
+
+class QuestionsPointyView(viewsets.ModelViewSet):
+    permission_classes = (BasePermission,)
+    queryset = Pointy_Questions.objects.all()
+    serializer_class = QuestionsPointySerializer
+    filterset_class = questionsPointyFilter  
+    
+    def create(self, request):
+        requestData = request.data
+        quizKey = Quizzes_Pointy.objects.get(id=requestData['quizKey'])
+            
+        new_question = Pointy_Questions()
+        
+        new_question.quizKey = quizKey
+        new_question.question = requestData['question']
+        new_question.question_img = requestData['question_img']
+        
+        new_question.option_1st = requestData['option_1st']
+        new_question.option_2nd = requestData['option_2nd']
+        new_question.option_3rd = requestData['option_3rd']
+        new_question.option_4th = requestData['option_4th']
+        new_question.option_5th = requestData['option_5th']
+        new_question.option_6th = requestData['option_6th']
+        new_question.option_7th = requestData['option_7th']
+        new_question.option_8th = requestData['option_8th']
+        new_question.option_9th = requestData['option_9th']
+        new_question.option_10th = requestData['option_10th']
+        
+        new_question.option_img_1st = requestData['option_img_1st']
+        new_question.option_img_2nd = requestData['option_img_2nd']
+        new_question.option_img_3rd = requestData['option_img_3rd']
+        new_question.option_img_4th = requestData['option_img_4th']
+        new_question.option_img_5th = requestData['option_img_5th']
+        new_question.option_img_6th = requestData['option_img_6th']
+        new_question.option_img_7th = requestData['option_img_7th']
+        new_question.option_img_8th = requestData['option_img_8th']
+        new_question.option_img_9th = requestData['option_img_9th']
+        new_question.option_img_10th = requestData['option_img_10th']
+        
+        new_question.option_point_1st = requestData['option_point_1st']
+        new_question.option_point_2nd = requestData['option_point_2nd']
+        new_question.option_point_3rd = requestData['option_point_3rd']
+        new_question.option_point_4th = requestData['option_point_4th']
+        new_question.option_point_5th = requestData['option_point_5th']
+        new_question.option_point_6th = requestData['option_point_6th']
+        new_question.option_point_7th = requestData['option_point_7th']
+        new_question.option_point_8th = requestData['option_point_8th']
+        new_question.option_point_9th = requestData['option_point_9th']
+        new_question.option_point_10th = requestData['option_point_10th']
+        
+        new_question.save()
+        
+        return HttpResponse('question created successfully')
+    
 # --------------------------------------------------------
 
 class LikeView(viewsets.ModelViewSet):
@@ -357,45 +519,6 @@ class SubCategoryView(viewsets.ModelViewSet):
     queryset = SubCategories.objects.all()
     serializer_class = SubCategoriesSerializer
     filterset_class = SubCategoriesFilter
-
-# --------------------------------------------------------
-
-class QuestionsView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
-    queryset = Questions.objects.all()
-    serializer_class = QuestionsSerializer
-    filterset_class = QuestionsFilter
-    
-    def create(self, request):
-        requestData = request.data
-        quizKey = Quizzes.objects.get(id=requestData['quizKey'])
-            
-        new_question = Questions()
-        
-        new_question.quizKey = quizKey
-        new_question.question = requestData['question']
-        new_question.question_img = requestData['question_img']
-        new_question.option_1st = requestData['option_1st']
-        new_question.option_2nd = requestData['option_2nd']
-        new_question.option_3rd = requestData['option_3rd']
-        new_question.option_4th = requestData['option_4th']
-        new_question.option_img_1st = requestData['option_img_1st']
-        new_question.option_img_2nd = requestData['option_img_2nd']
-        new_question.option_img_3rd = requestData['option_img_3rd']
-        new_question.option_img_4th = requestData['option_img_4th']
-        new_question.answer = requestData['answer']
-        new_question.answer_imGif = requestData['answer_imGif']
-        new_question.answer_text = requestData['answer_text']
-        
-        new_question.save()
-        
-        return HttpResponse('question created successfully')
-
-class QuestionsPointyView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
-    queryset = Pointy_Questions.objects.all()
-    serializer_class = questionsPointySerializer
-    filterset_class = questionsPointyFilter  
 
 # --------------------------------------------------------
 

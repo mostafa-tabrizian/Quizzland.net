@@ -42,7 +42,8 @@ urlpatterns = [
     # path('blog', blog),
     
     path('staff/panel', index),
-    path('staff/quiz/create', index),
+    path('staff/quiz/create-trivia', index),
+    path('staff/quiz/create-test', index),
     path('staff/quiz/overview', index),
     path('staff/question/create', index),
     

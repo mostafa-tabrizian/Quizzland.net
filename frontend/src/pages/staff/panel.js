@@ -17,7 +17,9 @@ const panel = () => {
         <div className='my-20 text-center'>
             <ul>
                 <li><Link to='/staff/quiz/overview'>Quizzes Overview 🔍</Link></li>
-                <li><Link to='/staff/quiz/create'>Create Quiz ➕</Link></li>
+                
+                <li><Link to='/staff/quiz/create-trivia'>Create Trivia ➕</Link></li>
+                <li><Link to='/staff/quiz/create-test'>Create Test ➕</Link></li>
                 
                 <li><Link to='/staff/question/create'>Create New Question ➕</Link></li>
             </ul>
