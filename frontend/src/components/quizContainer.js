@@ -9,7 +9,7 @@ import LoginForm from '../components/user/loginForm';
 
 import { log, getTheme, replaceFunction } from './base'
 import axiosInstance from './axiosAuthApi';
-import userStore from '../store/userStore';
+import UserStore from '../store/userStore';
 import SkeletonQuizContainer from './skeletonQuizContainer';
 import BackdropLoading from './backdropLoading';
 
@@ -19,7 +19,7 @@ const QuizContainer = (props) => {
     const [showPlaylistButton, setShowPlaylistButton] = useState(null)
     const [loading, setLoading] = useState(false)
 
-    const [userProfile, userActions] = userStore()
+    const [userProfile, userActions] = UserStore()
 
     const { enqueueSnackbar } = useSnackbar()
 

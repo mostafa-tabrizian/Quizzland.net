@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from '../components/axiosApi';
-import userStore from '../store/userStore';
+import UserStore from '../store/userStore';
 import axiosInstance from './axiosAuthApi'
 import { log, sortByMonthlyViews } from '../components/base'
 import QuizContainer from '../components/quizContainer';
@@ -8,7 +8,7 @@ import QuizContainer from '../components/quizContainer';
 const Suggestions = () => {
     const [suggestionQuizzes, setSuggestionQuizzes] = useState([])
     
-    const [userProfile, userActions] = userStore()
+    const [userProfile, userActions] = UserStore()
 
     useEffect( async () => {
         await fetchData()

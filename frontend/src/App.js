@@ -40,10 +40,15 @@ const Blog              = lazy(() => import('./pages/blog'))
 const notFound_404      = lazy(() => import('./pages/404'))
 
 const staffPanel        = lazy(() => import('./pages/staff/panel'))
-const staffOverviewQuizzes = lazy(() => import('./pages/staff/quiz/_overview')) 
-const staffCreateTrivia   = lazy(() => import('./pages/staff/quiz/_create_trivia'))
-const staffCreateTest   = lazy(() => import('./pages/staff/quiz/_create_test'))
-const staffCreateQuestion   = lazy(() => import('./pages/staff/question/_create'))
+
+const staffCreateTrivia   = lazy(() => import('./pages/staff/quiz/trivia/_create'))
+const staffOverviewTrivia = lazy(() => import('./pages/staff/quiz/trivia/_overview')) 
+const staffAddTriviaQuestion   = lazy(() => import('./pages/staff/quiz/trivia/question/_add'))
+
+const staffCreateTest   = lazy(() => import('./pages/staff/quiz/test/_create'))
+const staffOverviewTests = lazy(() => import('./pages/staff/quiz/test/_overview')) 
+const staffAddTestQuestion   = lazy(() => import('./pages/staff/quiz/test/question/_add'))
+
 const monthlyRecord     = lazy(() => import('./pages/monthlyRecord'))
 const restartEveryMonthlyViews     = lazy(() => import('./pages/restartEveryMonthlyViews'))
 
@@ -132,10 +137,15 @@ const App = () => {
                                     <Route path='/blog' component={Blog} />
 
                                     <Route path='/staff/panel' component={staffPanel} />
-                                    <Route path='/staff/quiz/create-trivia' component={staffCreateTrivia} />
-                                    <Route path='/staff/quiz/create-test' component={staffCreateTest} />
-                                    <Route path='/staff/quiz/overview' component={staffOverviewQuizzes} />
-                                    <Route path='/staff/question/create' component={staffCreateQuestion} />
+
+                                    <Route path='/staff/trivia/create' component={staffCreateTrivia} />
+                                    <Route path='/staff/trivia/overview' component={staffOverviewTrivia} />
+                                    <Route path='/staff/trivia/question/add' component={staffAddTriviaQuestion} />
+
+                                    <Route path='/staff/test/create' component={staffCreateTest} />
+                                    <Route path='/staff/test/overview' component={staffOverviewTests} />
+                                    <Route path='/staff/test/question/add' component={staffAddTestQuestion} />
+
                                     <Route path='/makeMonthlyRecord' component={monthlyRecord} />
                                     <Route path='/restartEveryMonthlyViews' component={restartEveryMonthlyViews} />
                                     

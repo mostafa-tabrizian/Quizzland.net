@@ -5,30 +5,39 @@ const debounce = require('lodash.debounce')
 import { Link } from 'react-router-dom'
 
 import { log } from '../../components/base'
-import userStore from '../../store/userStore';
+import UserStore from '../../store/userStore';
 
 const panel = () => {
-    const [userProfile, userActions] = userStore()
-
-    const [forms, setForms] = useState([])
+    const [userProfile, userActions] = UserStore()
     
     return (
-        userProfile.userDetail?.is_staff ?
-        <div className='my-20 text-center'>
-            <ul>
-                <li><Link to='/staff/quiz/overview'>Quizzes Overview 🔍</Link></li>
-                
-                <li><Link to='/staff/quiz/create-trivia'>Create Trivia ➕</Link></li>
-                <li><Link to='/staff/quiz/create-test'>Create Test ➕</Link></li>
-                
-                <li><Link to='/staff/question/create'>Create New Question ➕</Link></li>
-            </ul>
-        </div>
-        :
-        <h1>
-            not staff. sorry!
-        </h1>
-    );
+        <React.Fragment>
+            <Helmet>
+                <title>Staff Panel</title>
+                <meta name='robots' content='noindex' />
+            </Helmet>
+            
+            {
+                userProfile.userDetail?.is_staff ?
+                <div className='my-20 text-center'>            
+                    <ul>
+                        <li><Link to='/staff/trivia/create'>Create Trivia ➕</Link></li>
+                        <li><Link to='/staff/trivia/question/add'>Add New Trivia Question ➕</Link></li>
+                        <li><Link to='/staff/trivia/overview'>Trivia Overview 🔍</Link></li>
+                        <br />
+                        <li><Link to='/staff/test/create'>Create Test ➕</Link></li>
+                        <li><Link to='/staff/test/question/add'>Add New Test Question ➕</Link></li>
+                        <li><Link to='/staff/test/overview'>Tests Overview 🔍</Link></li>
+                        
+                    </ul>
+                </div>
+                :
+                <h1>
+                    not staff. sorry!
+                </h1>
+            }
+        </React.Fragment>
+    )
 }
  
 export default panel;

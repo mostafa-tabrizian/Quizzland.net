@@ -14,11 +14,11 @@ import PropTypes from 'prop-types';
 import TablePagination from '@mui/material/TablePagination';
 import TableSortLabel from '@mui/material/TableSortLabel';
 
-import { log } from '../../../components/base'
-import userStore from '../../../store/userStore';
-import axiosInstance from '../../../components/axiosAuthApi';
+import { log } from '../../../../components/base';
+import axiosInstance from '../../../../components/axiosAuthApi';
+import UserStore from '../../../../store/userStore';
 
-const OverviewQuizzes = () => {
+const OverviewTrivia = () => {
     const [tableRows, setTableRows] = useState([])
 
     const [order, setOrder] = useState('desc');
@@ -35,7 +35,7 @@ const OverviewQuizzes = () => {
         fetchQuizzes()
     }, []);
 
-    const [userProfile, userActions] = userStore()
+    const [userProfile, userActions] = UserStore()
 
     const fetchQuizzes = async () => {
         const now = new Date().getTime()
@@ -217,95 +217,104 @@ const OverviewQuizzes = () => {
     }
     
     return (
-        userProfile.userDetail?.is_staff ?
-        <div>
-            <TableContainer sx={{background: 'transparent'}} component={Paper}>
+        <React.Fragment>
+            <Helmet>
+                <title>Trivia Overview</title>
+                <meta name='robots' content='noindex' />
+            </Helmet>
 
-                <Table
-                    // size='small'
-                    sx={{ minWidth: 750 }}
-                    aria-labelledby="quiz overview"
-                    aria-label="quiz overview"
-                >
+            {
+                userProfile.userDetail?.is_staff ?
+                <div>
+                    <TableContainer sx={{background: 'transparent'}} component={Paper}>
 
-                    <EnhancedTableHead  
-                        numSelected={selected.length}
-                        order={order}
-                        orderBy={orderBy}
-                        onSelectAllClick={handleSelectAllClick}
-                        onRequestSort={handleRequestSort}
-                        rowCount={tableRows.length}
-                    />
+                        <Table
+                            // size='small'
+                            sx={{ minWidth: 750 }}
+                            aria-labelledby="quiz overview"
+                            aria-label="quiz overview"
+                        >
 
-                    <TableBody>
-                        {
-                            tableRows.sort(getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
-                            .map((row, index) => {
-                                return (
-                                    <TableRow
-                                        key={row.name}
-                                        sx={{
-                                            '&:last-child td, &:last-child th': { border: 0 },
-                                            color: 'white', fontFamily: 'IRANYekanBold, sans-serif, serif !imporatnt',
+                            <EnhancedTableHead  
+                                numSelected={selected.length}
+                                order={order}
+                                orderBy={orderBy}
+                                onSelectAllClick={handleSelectAllClick}
+                                onRequestSort={handleRequestSort}
+                                rowCount={tableRows.length}
+                            />
 
-                                        }}
-                                        hover
-                                        onClick={(event) => handleClick(event, row.name)}
-                                        tabIndex={-1}
-                                    >
-                                        <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
-                                            <a href={`/quiz/${row.slug}`}>
-                                                {row.title}
-                                            </a>
-                                        </TableCell>
-                                        <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.subcategory}</TableCell>
-                                        <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.category}</TableCell>
-                                        <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.monthlyViews}</TableCell>
-                                        <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.totalViews}</TableCell>
-                                        <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.publishDate}</TableCell>
-                                        <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
-                                            <button onClick={() => changePublicAccessStatue(row)}>
-                                                {
-                                                    row.publicAccess ? '✅':'⛔'
-                                                }
-                                            </button>
-                                        </TableCell>
+                            <TableBody>
+                                {
+                                    tableRows.sort(getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
+                                    .map((row, index) => {
+                                        return (
+                                            <TableRow
+                                                key={row.name}
+                                                sx={{
+                                                    '&:last-child td, &:last-child th': { border: 0 },
+                                                    color: 'white', fontFamily: 'IRANYekanBold, sans-serif, serif !imporatnt',
+
+                                                }}
+                                                hover
+                                                onClick={(event) => handleClick(event, row.name)}
+                                                tabIndex={-1}
+                                            >
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
+                                                    <a href={`/quiz/${row.slug}`}>
+                                                        {row.title}
+                                                    </a>
+                                                </TableCell>
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.subcategory}</TableCell>
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.category}</TableCell>
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.monthlyViews}</TableCell>
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.totalViews}</TableCell>
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.publishDate}</TableCell>
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
+                                                    <button onClick={() => changePublicAccessStatue(row)}>
+                                                        {
+                                                            row.publicAccess ? '✅':'⛔'
+                                                        }
+                                                    </button>
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    })
+                                }
+
+                                {
+                                    emptyRows > 0 && (
+                                        <TableRow
+                                            style={{
+                                                height: (52) * emptyRows,
+                                            }}
+                                        >
+                                    <TableCell colSpan={6} />
                                     </TableRow>
                                 )
-                            })
-                        }
+                                }
 
-                        {
-                            emptyRows > 0 && (
-                                <TableRow
-                                    style={{
-                                        height: (52) * emptyRows,
-                                    }}
-                                >
-                              <TableCell colSpan={6} />
-                            </TableRow>
-                          )
-                        }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
-
-            <TablePagination
-                rowsPerPageOptions={[20, 50, 100]}
-                component="div"
-                count={tableRows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </div>
-        :
-        <h1>
-            not staff. sorry!
-        </h1>
+                    <TablePagination
+                        rowsPerPageOptions={[20, 50, 100]}
+                        component="div"
+                        count={tableRows.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </div>
+                :
+                <h1>
+                    not staff. sorry!
+                </h1>
+            }   
+        </React.Fragment>
     );
 }
  
-export default OverviewQuizzes;
+export default OverviewTrivia;

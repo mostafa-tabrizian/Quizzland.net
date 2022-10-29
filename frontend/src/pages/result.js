@@ -9,7 +9,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { log, getTheme, replaceFunction, fadeIn, sortByMonthlyViews } from '../components/base'
-import userStore from '../store/userStore'
+import UserStore from '../store/userStore'
 import axiosInstance from '../components/axiosAuthApi'
 const LoginForm = React.lazy(() => import('../components/user/loginForm'))
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
@@ -33,7 +33,7 @@ const Result = () => {
     const [quizResult, setQuizResult] = useState()
     const [quizDetail, setQuizDetail] = useState()
 
-    const [userProfile, userActions] = userStore()
+    const [userProfile, userActions] = UserStore()
     
     const { enqueueSnackbar } = useSnackbar()
 

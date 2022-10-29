@@ -9,7 +9,7 @@ import axios from '../axiosApi';
 import axiosInstance from '../axiosAuthApi';
 import { log, getTheme, datePublishHandler } from '../base'
 import ExplicitWords from './explicitWords';
-import userStore from '../../store/userStore';
+import UserStore from '../../store/userStore';
 import CommentsMenu from './commentsMenu';
 
 const Comments = (props) => {
@@ -19,7 +19,7 @@ const Comments = (props) => {
 
     const commentTextRef = useRef()
     
-    const [userProfile, userActions] = userStore()
+    const [userProfile, userActions] = UserStore()
     
     const { enqueueSnackbar } = useSnackbar()
 

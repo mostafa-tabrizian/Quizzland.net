@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useSnackbar } from 'notistack'
 import Dialog from '@mui/material/Dialog';
 
-import userStore from '../../store/userStore';
+import UserStore from '../../store/userStore';
 import axiosInstance from '../axiosAuthApi';
 import { log } from '../base'
 
@@ -14,7 +14,7 @@ const CommentsMenu = (props) => {
 
     const editedComment = useRef()
 
-    const [userProfile, userActions] = userStore()
+    const [userProfile, userActions] = UserStore()
 
     const { enqueueSnackbar } = useSnackbar()
 

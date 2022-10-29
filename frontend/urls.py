@@ -42,10 +42,14 @@ urlpatterns = [
     # path('blog', blog),
     
     path('staff/panel', index),
-    path('staff/quiz/create-trivia', index),
-    path('staff/quiz/create-test', index),
-    path('staff/quiz/overview', index),
-    path('staff/question/create', index),
+    
+    path('staff/trivia/create', index),
+    path('staff/trivia/overview', index),
+    path('staff/trivia/question/add', index),
+    
+    path('staff/test/create', index),
+    path('staff/test/overview', index),
+    path('staff/test/question/add', index),
     
     path('makeMonthlyRecord', index),
     path('restartEveryMonthlyViews', restartEveryMonthlyViews),

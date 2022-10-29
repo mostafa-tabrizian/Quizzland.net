@@ -6,7 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Comments = React.lazy(() => import('./comments'))
 import { log, isItMobile } from '../base'
-import userStore from '../../store/userStore';
+import UserStore from '../../store/userStore';
 import axiosInstance from '../axiosAuthApi';
 const LoginForm = React.lazy(() => import('./loginForm'))
 
@@ -15,7 +15,7 @@ const LikeCommentButton = (props) => {
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
     const [likeLoading, setLikeLoading] = useState(false)
     
-    const [userProfile] = userStore()
+    const [userProfile] = UserStore()
 
     const itIsMobile = useRef()
     

@@ -1,7 +1,7 @@
 import { createStore, createHook  } from 'react-sweet-state';
 import { log } from '../components/base';
 
-const UserStore = createStore({
+const UserStoreCode = createStore({
     initialState: {
         userDetail: null,
     },
@@ -25,6 +25,6 @@ const UserStore = createStore({
     name: 'userDetail',
 });
 
-const useUser = createHook(UserStore)
+const UserStore = createHook(UserStoreCode)
 
-export default useUser
+export default UserStore

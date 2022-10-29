@@ -11,7 +11,7 @@ import { log, getTheme, keyPressedOnInput } from './base'
 import axios from '../components/axiosApi';
 import Search from './search/searchInput'
 import userProfileDetail from '../components/user/userProfileDetail'
-import userStore from '../../src/store/userStore'
+import UserStore from '../../src/store/userStore'
 import BackdropLoading from './backdropLoading';
 import LoginForm from './user/loginForm';
 
@@ -29,7 +29,7 @@ const Header = () => {
 
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
 
-    const [userProfile, userActions] = userStore()
+    const [userProfile, userActions] = UserStore()
 
     const { enqueueSnackbar } = useSnackbar()
 

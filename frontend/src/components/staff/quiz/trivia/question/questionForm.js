@@ -5,10 +5,10 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 
-import { log } from '../../../components/base'
-import axiosInstance from '../../../components/axiosAuthApi';
+import { log } from '../../../../base'
+import axiosInstance from '../../../../axiosAuthApi';
 
-const QuestionForm = (props) => {
+const TriviaQuestionForm = (props) => {
     const [postStatue, setPostStatue] = useState(null)
 
     const [quizzes, setQuizzes] = useState([])
@@ -93,7 +93,7 @@ const QuestionForm = (props) => {
         document.querySelectorAll('#questionBackground').forEach((q) => q.style = `background: ${value.question_background}`)
     }
 
-    const createQuestionForm = () => {
+    const createTriviaQuestionForm = () => {
         return (
             <div className='text-center mx-auto my-20 max-w-[40rem]'>
                 <div className='relative flex flex-col space-y-3'>
@@ -266,8 +266,8 @@ const QuestionForm = (props) => {
     }
 
     return (
-        createQuestionForm()
+        createTriviaQuestionForm()
     )
 }
  
-export default QuestionForm;
+export default TriviaQuestionForm;
