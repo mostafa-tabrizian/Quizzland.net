@@ -16,6 +16,7 @@ const Comments = (props) => {
     const [comments, setComments] = useState([])
     const [theme, setTheme] = useState('dark')
     const [commentBeingPosted, setCommentBeingPostedStatue] = useState(false)
+    const [commentFetching, setCommentFetching] = useState(true)
 
     const commentTextRef = useRef()
     
@@ -97,11 +98,14 @@ const Comments = (props) => {
     }
 
     const fetchComments = async () => {
+        setCommentFetching(true)
+        
         const now = new Date().getTime()
         
         await axios.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `trivia_id=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_id=${props.quizId}&` : ''}timestamp=${now}`)
             .then(res => {
                 setComments(res.data.sort(sortCommentsByNewest))
+                setCommentFetching(false)
             })
             .catch(err => {
                 log(err.response)
@@ -158,7 +162,7 @@ const Comments = (props) => {
 
                             <pre>
                                 <p className='mt-5 break-words'>
-                                        {comment.comment_text}
+                                    {comment.comment_text}
                                 </p>
                             </pre>
                         </div>
@@ -201,7 +205,20 @@ const Comments = (props) => {
                 </div>
             </div>
             <div className='p-4'>
-                {returnComments()}
+                <div className='text-center'>
+                    {
+                        commentFetching ?
+                        <div className='mt-6 text-center'>
+                            <CircularProgress
+                                color="inherit"
+                                size={25}
+                                thickness={5} 
+                            />
+                        </div>
+                        :
+                        returnComments()
+                    }
+                </div>
             </div>
         </div>
     );
