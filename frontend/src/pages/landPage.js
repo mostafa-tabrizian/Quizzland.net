@@ -46,9 +46,11 @@ const Index = () => {
     }, [])
 
     const grabData = async () => {
-        const quiz = await axios.get(`/api/quizView/?limit=70&public=true`)
+        const now = new Date().getTime()
+
+        const quiz = await axios.get(`/api/quizView/?limit=70&public=true&timestamp=${now}`)
         // .catch(err => {log(err.response)})
-        const pointy = await axios.get(`/api/testView/?limit=70&public=true`)
+        const pointy = await axios.get(`/api/testView/?limit=70&public=true&timestamp=${now}`)
         // .catch(err => {log(err.response)})
         const content = quiz.data.results.concat(pointy.data.results)
 
