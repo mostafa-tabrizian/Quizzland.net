@@ -4,7 +4,6 @@ import debounce from 'lodash.debounce'
 import Drawer from '@mui/material/Drawer';
 import CircularProgress from '@mui/material/CircularProgress';
 
-// const Comments = React.lazy(() => import('./comments'))
 import Comments from './comments'
 import { log, isItMobile } from '../base'
 import UserStore from '../../store/userStore';

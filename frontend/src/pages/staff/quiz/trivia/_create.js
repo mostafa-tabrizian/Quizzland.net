@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import { MuiColorInput } from 'mui-color-input'
+import { useSnackbar } from 'notistack'
 
 import { log } from '../../../../components/base';
 import axiosInstance from '../../../../components/axiosAuthApi';
@@ -31,6 +32,8 @@ const CreateTrivia = () => {
     const titleRef = useRef()
     const tagsRef = useRef()
     const fanNameRef = useRef()
+    
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         fetchCategories()
@@ -92,9 +95,12 @@ const CreateTrivia = () => {
             },
         })
             .then(res => {
-                log(res)
+                if (res.status === 200) {
+                    enqueueSnackbar('کوییز تریویا با موفقیت ایجاد شد.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                }
             })
             .catch(err => {
+                enqueueSnackbar('در ایجاد کوییز تریویا خطایی رخ داد.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 log('err: postTrivia')
                 log(err)
                 log(err.response)

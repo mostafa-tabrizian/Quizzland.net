@@ -4,12 +4,14 @@ const debounce = require('lodash.debounce')
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
+import { useSnackbar } from 'notistack'
 
 import { log } from '../../../../base'
 import axiosInstance from '../../../../axiosAuthApi';
 
 const TestQuestionForm = (props) => {
     const [postStatue, setPostStatue] = useState(null)
+    const { enqueueSnackbar } = useSnackbar()
 
     const [quizzes, setQuizzes] = useState([])
     const [selectedQuiz, selectQuiz] = useState() 
@@ -115,16 +117,17 @@ const TestQuestionForm = (props) => {
             },
         })
             .then(res => {
-                log(res)
-
                 if (res.status == 200) {
                     setPostStatue(true)
+                    enqueueSnackbar('سوال با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 } else {
-                    log('res but else...')
                     setPostStatue(false)
+                    log(res)
+                    enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 }
             })
             .catch(err => {
+                enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 setPostStatue(false)
                 log('err: postQuestion')
                 log(err)

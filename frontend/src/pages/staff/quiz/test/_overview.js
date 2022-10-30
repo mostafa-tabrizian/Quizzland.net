@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { Helmet } from "react-helmet";
 const debounce = require('lodash.debounce')
+import { useSnackbar } from 'notistack'
 
-import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -26,6 +26,8 @@ const OverviewTests = () => {
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(20);
+
+    const { enqueueSnackbar } = useSnackbar()
 
     const insertTable = (id, title, slug, subcategory, category, monthlyViews, totalViews, publishDate, publicAccess) => {
         return {id, title, slug, subcategory, category, monthlyViews, totalViews, publishDate, publicAccess };
@@ -207,9 +209,12 @@ const OverviewTests = () => {
 
         await axiosInstance.put(`/api/quizView/${quizId}/?timestamp=${now}`, payload)
             .then(res => {
-                log(res)
+                if (res.status === 200) {
+                    enqueueSnackbar('تغییر با موفقیت ثبت گردید!', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                }
             })
             .catch(err => {
+                enqueueSnackbar('تغییر به مشکل برخورد!', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 log('err: changePUblicAccessStatue')
                 log(err)
                 log(err.response)

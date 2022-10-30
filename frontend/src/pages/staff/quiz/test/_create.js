@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import { MuiColorInput } from 'mui-color-input'
+import { useSnackbar } from 'notistack'
 
 import { log } from '../../../../components/base';
 import axiosInstance from '../../../../components/axiosAuthApi';
@@ -67,6 +68,8 @@ const CreateTest = () => {
     const resultText8thRef = useRef()
     const resultText9thRef = useRef()
     const resultText10thRef = useRef()
+    
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         fetchCategories()
@@ -167,9 +170,12 @@ const CreateTest = () => {
             },
         })
             .then(res => {
-                log(res)
+                if (res.status === 200) {
+                    enqueueSnackbar('کوییز تست با موفقیت ایجاد شد.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                }
             })
             .catch(err => {
+                enqueueSnackbar('در ایجاد کوییز تست خطایی رخ داد.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 log('err: postQuiz')
                 log(err)
                 log(err.response)
