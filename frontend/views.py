@@ -399,7 +399,7 @@ class QuestionsPointyView(viewsets.ModelViewSet):
     permission_classes = (BasePermission,)
     queryset = Pointy_Questions.objects.all()
     serializer_class = QuestionsPointySerializer
-    filterset_class = questionsPointyFilter  
+    filterset_class = QuestionsPointyFilter  
     
     def create(self, request):
         requestData = request.data

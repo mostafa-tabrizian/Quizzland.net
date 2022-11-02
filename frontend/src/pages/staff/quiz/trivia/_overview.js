@@ -29,24 +29,47 @@ const OverviewTrivia = () => {
 
     const { enqueueSnackbar } = useSnackbar()
 
-    const insertTable = (id, title, slug, subcategory, category, monthlyViews, totalViews, publishDate, publicAccess) => {
-        return {id, title, slug, subcategory, category, monthlyViews, totalViews, publishDate, publicAccess };
+    const insertTable = (id, title, slug, subcategory, category, likes, comments, monthlyViews, totalViews, publishDate, publicAccess) => {
+        return {id, title, slug, subcategory, category, likes, comments, monthlyViews, totalViews, publishDate, publicAccess };
     }
 
     useEffect(() => {
         fetchQuizzes()
+        fetchLikes()
+        fetchComments()
     }, []);
 
     const [userProfile, userActions] = UserStore()
 
-    const fetchQuizzes = async () => {
-        const now = new Date().getTime()
-        
+    const now = new Date().getTime()
+    let likes
+    let comments
+
+    const fetchLikes = async () => {
+        await axiosInstance.get(`/api/likeView/?timestamp=${now}`)
+            .then(res => {
+                likes = res.data
+            })
+    }
+
+    const fetchComments = async () => {
+        await axiosInstance.get(`/api/commentView/?timestamp=${now}`)
+            .then(res => {
+                comments = res.data
+            })
+    }
+
+    const fetchQuizzes = async () => {        
         await axiosInstance.get(`/api/quizView/?timestamp=${now}`)
             .then(res => { 
                 let preTablesRows = []
+
                 res.data.reverse().map(quiz => {
-                    preTablesRows.push(insertTable(quiz.id, quiz.title, quiz.slug, quiz.subCategory, quiz.categoryKey.title_persian, quiz.monthly_views, quiz.views, quiz.publish, quiz.public))
+
+                    const quizLikes = likes.filter(x => x.trivia_id?.id == quiz.id || x.test_id?.id == quiz.id)
+                    const quizComments = comments.filter(x => x.trivia_id?.id == quiz.id || x.test_id?.id == quiz.id)
+
+                    preTablesRows.push(insertTable(quiz.id, quiz.title, quiz.slug, quiz.subCategory, quiz.categoryKey.title_persian, quizLikes.length, quizComments.length, quiz.monthly_views, quiz.views, quiz.publish, quiz.public))
                 })
                 setTableRows(preTablesRows)
             })
@@ -87,6 +110,14 @@ const OverviewTrivia = () => {
         {
             id: 'category',
             label: 'کتگوری',
+        },
+        {
+            id: 'likes',
+            label: 'لایک ها'
+        },
+        {
+            id: 'comments',
+            label: 'کامنت ها'
         },
         {
             id: 'monthlyViews',
@@ -272,6 +303,8 @@ const OverviewTrivia = () => {
                                                 </TableCell>
                                                 <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.subcategory}</TableCell>
                                                 <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.category}</TableCell>
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.likes}</TableCell>
+                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.comments}</TableCell>
                                                 <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.monthlyViews}</TableCell>
                                                 <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.totalViews}</TableCell>
                                                 <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">{row.publishDate}</TableCell>

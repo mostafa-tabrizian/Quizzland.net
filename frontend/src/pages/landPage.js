@@ -15,7 +15,6 @@ const Suggestions = React.lazy(() => import('../components/suggestions'))
 
 const Index = () => {
     const [loadState, setLoadState] = useState()
-    const [contentLoaded, setContentLoaded] = useState(false)
     const [theme, setTheme] = useState('dark')
 
     const [content_new, setContent_new] = useState([])
@@ -59,7 +58,6 @@ const Index = () => {
         setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sort(sortByNewest).slice(0, 12))
         setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest).slice(0, 12))
         setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest).slice(0, 12))
-        setContentLoaded(true)
         setLoadMoreQuiz(content.sort(sortByNewest).slice(13, 69))
     }
 

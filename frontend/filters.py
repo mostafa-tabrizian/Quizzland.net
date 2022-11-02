@@ -113,7 +113,7 @@ class QuestionsFilter(filters.FilterSet):
             'quizKey': ['exact'],
         }
 
-class questionsPointyFilter(filters.FilterSet):
+class QuestionsPointyFilter(filters.FilterSet):
     class Meta:
         model = Pointy_Questions
         fields = {
