@@ -123,6 +123,13 @@ class QuestionsFilter(filters.FilterSet):
         fields = {
             'quizKey': ['exact'],
         }
+        
+class QuestionsV2Filter(filters.FilterSet):
+    class Meta:
+        model = Questions_V2
+        fields = {
+            'quizKey': ['exact'],
+        }
 
 class QuestionsPointyFilter(filters.FilterSet):
     class Meta:

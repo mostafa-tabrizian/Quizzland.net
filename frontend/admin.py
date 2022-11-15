@@ -97,6 +97,11 @@ class Questions_Admin(admin.ModelAdmin):
     list_display = ('quizKey', 'question', 'answer_text')
     search_fields = ['question']
 
+@admin.register(Questions_V2)
+class QuestionsV2_Admin(admin.ModelAdmin):
+    list_display = ('quizKey', 'question', 'answer_text')
+    search_fields = ['question']
+
 @admin.register(Pointy_Questions)
 class Pointy_Questions_Admin(admin.ModelAdmin):
     list_display = ('quizKey', 'question')

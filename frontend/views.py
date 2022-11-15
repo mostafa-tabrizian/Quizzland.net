@@ -431,6 +431,40 @@ class QuestionsView(viewsets.ModelViewSet):
         new_question.save()
         
         return HttpResponse('question created successfully')
+    
+class QuestionsV2View(viewsets.ModelViewSet):
+    permission_classes = (BasePermission,)
+    queryset = Questions_V2.objects.all()
+    serializer_class = QuestionsV2Serializer
+    filterset_class = QuestionsV2Filter
+    
+    def create(self, request):
+        requestData = request.data
+        quizKey = Quizzes_V2.objects.get(id=requestData['quizKey'])
+            
+        new_question = Questions_V2()
+        
+        new_question.quizKey = quizKey
+        new_question.question = requestData['question']
+        new_question.question_img = requestData['question_img']
+        
+        new_question.option_1st = requestData['option_1st']
+        new_question.option_2nd = requestData['option_2nd']
+        new_question.option_3rd = requestData['option_3rd']
+        new_question.option_4th = requestData['option_4th']
+        
+        new_question.option_img_1st = requestData['option_img_1st']
+        new_question.option_img_2nd = requestData['option_img_2nd']
+        new_question.option_img_3rd = requestData['option_img_3rd']
+        new_question.option_img_4th = requestData['option_img_4th']
+        
+        new_question.answer = requestData['answer']
+        new_question.answer_imGif = requestData['answer_imGif']
+        new_question.answer_text = requestData['answer_text']
+        
+        new_question.save()
+        
+        return HttpResponse('question created successfully')
 
 class QuestionsPointyView(viewsets.ModelViewSet):
     permission_classes = (BasePermission,)

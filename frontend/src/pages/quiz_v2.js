@@ -116,7 +116,7 @@ const Quiz_V2 = (props) => {
 
     const fetchQuiz = async () => {
         quizSlugReplacedWithHyphen &&
-            await axios.get(`/api/quizV2View/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+            await axios.get(`/api/quizV2View/?quizKey__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
                     quizDetailRef.current = quizData
                     setQuiz(quizData)
@@ -127,7 +127,7 @@ const Quiz_V2 = (props) => {
 
                     let questionAPI
 
-                    await axios.get(`/api/questionsView/?quizKey=${quizData.id}&public=true`)
+                    await axios.get(`/api/questionsV2View/?quizKey=${quizData.id}&public=true`)
                         .then((questionData) => {
                             setQuestions(questionData.data)
                             setContentLoaded(true)

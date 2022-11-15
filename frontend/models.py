@@ -217,6 +217,29 @@ class Questions(models.Model):
     def __unicode__(self):
         return 'test'
 
+class Questions_V2(models.Model):
+    id = models.AutoField(primary_key=True)
+    quizKey = models.ForeignKey(Quizzes_V2, related_name='quizKey_questions_V2', on_delete=models.CASCADE, blank=True, null=True)
+    question = models.CharField(max_length=150, blank=True, default=None)
+    question_img = models.ImageField(upload_to='Question-V2-Option-Imgs', default='NotExist.jpg')
+    option_1st = models.CharField(max_length=100, blank=True, default=None)
+    option_2nd = models.CharField(max_length=100, blank=True, default=None)
+    option_3rd = models.CharField(max_length=100, blank=True, default=None)
+    option_4th = models.CharField(max_length=100, blank=True, default=None)
+    option_img_1st = models.ImageField(upload_to='Question-V2-Option-Imgs', default='NotExist.jpg')
+    option_img_2nd = models.ImageField(upload_to='Question-V2-Option-Imgs', default='NotExist.jpg')
+    option_img_3rd = models.ImageField(upload_to='Question-V2-Option-Imgs', default='NotExist.jpg')
+    option_img_4th = models.ImageField(upload_to='Question-V2-Option-Imgs', default='NotExist.jpg')
+    answer = models.IntegerField(blank=False, default=None)
+    answer_imGif = models.ImageField(upload_to='Answer-And-Result-ImGIf-V2', default='NotExist.jpg')
+    answer_text = RichTextField(blank=True, default=None)
+
+    def __str__(self):
+        return str(self.quizKey)
+
+    def __unicode__(self):
+        return 'test'
+
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
     quizKey = models.ForeignKey(Quizzes_Pointy, related_name='quizKey_pointyQuestions', on_delete=models.CASCADE, blank=True, null=True)
