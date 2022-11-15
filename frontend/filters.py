@@ -33,6 +33,17 @@ class QuizzesFilter(filters.FilterSet):
             'title': ['iexact', 'icontains'],
             'tags': ['iexact', 'icontains']
         }
+        
+class QuizzesV2Filter(filters.FilterSet):
+    class Meta:
+        model= Quizzes_V2
+        fields= {
+            'public': ['exact'],
+            'categoryKey': ['exact'],
+            'slug': ['iexact', 'icontains'],
+            'title': ['iexact', 'icontains'],
+            'tags': ['iexact', 'icontains']
+        }
 
 class PointyQuizzesFilter(filters.FilterSet):
     class Meta:

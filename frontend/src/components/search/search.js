@@ -9,8 +9,8 @@ import { log, replaceFunction } from '../base'
 import SearchFetchCategory from './searchFetchCategory'
 import SearchFetchQuiz from './searchFetchQuiz'
 import SearchFetchUser from './searchFetchUser'
-import QuizContainer from '../quizContainer'
-import SkeletonQuizContainer from '../skeletonQuizContainer';
+import TestContainer from '../testContainer'
+import SkeletonTestContainer from '../skeletonTestContainer';
 
 const Search = (props) => {
     const [searched_content, set_searched_content] = useState([])
@@ -60,7 +60,7 @@ const Search = (props) => {
                             <ul class="flex flex-col md:flex-row flex-wrap align-baseline">
                                 {
                                     searched_content.length ?
-                                        <QuizContainer quizzes={searched_content} bgStyle='trans' />
+                                        <TestContainer quizzes={searched_content} bgStyle='trans' />
                                         :
                                         <div className='flex items-center space-x-3 space-x-reverse'>
                                             <p className='empty'>هیچ کوییزی پیدا نشد!</p>
@@ -184,7 +184,7 @@ const Search = (props) => {
                         </div>
                     </div>
                     :
-                    <SkeletonQuizContainer />
+                    <SkeletonTestContainer />
             }
         </div>
     );

@@ -7,8 +7,8 @@ import AddView from '../components/addView';
 import { log, replaceFunction, takeParameterFromUrl, sortByNewest, sortByMonthlyViews, sortByViews } from '../components/base'
 const Tools = React.lazy(() => import('../components/tools'))
 const PageTravel = React.lazy(() => import('../components/pageTravel'))
-const QuizContainer = React.lazy(() => import('../components/quizContainer'))
-const SkeletonQuizContainer = React.lazy(() => import('../components/skeletonQuizContainer'))
+const TestContainer = React.lazy(() => import('../components/testContainer'))
+const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
 
 const SubCategory = (props) => {
 
@@ -115,7 +115,7 @@ const SubCategory = (props) => {
                                 />
                                 
                                 <ul className={`flex flex-col md:flex-row flex-wrap`}>
-                                    <QuizContainer quizzes={content} bgStyle='bg' />
+                                    <TestContainer quizzes={content} bgStyle='bg' />
                                 </ul>
 
                                 <PageTravel
@@ -133,7 +133,7 @@ const SubCategory = (props) => {
                         }
                     </div>
                     :
-                    <SkeletonQuizContainer />
+                    <SkeletonTestContainer />
                 }
 
             </div>

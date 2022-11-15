@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
 
-const QuizContainer = React.lazy(() => import('../components/quizContainer'))
+const TestContainer = React.lazy(() => import('../components/testContainer'))
 import { log, getTheme, replaceFunction } from '../components/base'
 import SearchFetchQuiz from '../components/search/searchFetchQuiz'
 import SearchFetchCategory from '../components/search/searchFetchCategory'
@@ -63,7 +63,7 @@ const SearchMoreResult = () => {
 
                 <h3 className='mb-5 title'>{searchValueWithOutSign}</h3>
 
-                <ul className="flex flex-col flex-wrap md:flex-row quizContainer flex-ai-fe justify-right">
+                <ul className="flex flex-col flex-wrap md:flex-row testContainer flex-ai-fe justify-right">
                     {
                         searched_category.map((category) => {
                             return (
@@ -88,18 +88,18 @@ const SearchMoreResult = () => {
                                                 />
                                             </div>
                                             <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
-                                                <h2 className={`quizContainer__title quizContainer__title__noViews flex
+                                                <h2 className={`testContainer__title testContainer__title__noViews flex
                                                                 text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
                                                     {category.subCategory}
                                                 </h2>
                                                 <h2 className={`
-                                                    quizContainer__title quizContainer__title__noViews flex
+                                                    testContainer__title testContainer__title__noViews flex
                                                     text-sm mr-5 md:w-52 md:mr-0 md:text-base
                                                 `}>
                                                     {category.title}
                                                 </h2>
-                                                {/* <div className="quizContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
-                                                {/* <span className="text-center quizContainer__date">
+                                                {/* <div className="testContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
+                                                {/* <span className="text-center testContainer__date">
                                                     {datePublishHandler(quiz.publish)}
                                                 </span> */}
                                             </div>
@@ -116,10 +116,10 @@ const SearchMoreResult = () => {
                     <hr className="w-[20vw]" />
                 </div>
 
-                <ul className="flex flex-col flex-wrap md:flex-row quizContainer flex-ai-fe justify-right">
+                <ul className="flex flex-col flex-wrap md:flex-row testContainer flex-ai-fe justify-right">
                     {
                         contentLoaded ?
-                        <QuizContainer quizzes={searched_content} bgStyle='trans' />
+                        <TestContainer quizzes={searched_content} bgStyle='trans' />
                         :
                         <h1 className='w-11/12 text-3xl text-center mb-[50vh] '>
                             متاسفانه هیچ چیزی پیدا نشد 😥

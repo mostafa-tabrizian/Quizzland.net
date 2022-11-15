@@ -6,9 +6,9 @@ import axiosInstance from '../../components/axiosAuthApi'
 import { log, getTheme, takeParameterFromUrl } from '../../components/base'
 import UserStore from '../../store/userStore'
 const LoadingScreen = React.lazy(() => import('../../components/loadingScreen'))
-const QuizContainer = React.lazy(() => import('../../components/quizContainer'))
+const TestContainer = React.lazy(() => import('../../components/testContainer'))
 const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
-const SkeletonQuizContainer = React.lazy(() => import('../../components/skeletonQuizContainer'))
+const SkeletonTestContainer = React.lazy(() => import('../../components/skeletonTestContainer'))
 
 const QuizHistory = () => {
     const [loadState, setLoadState] = useState()
@@ -130,7 +130,7 @@ const QuizHistory = () => {
                                 <ul className="flex flex-col flex-wrap justify-center align-baseline md:flex-row">
                                     {
                                         content.length ?
-                                        <QuizContainer quizzes={content} />
+                                        <TestContainer quizzes={content} />
                                         :
                                         <h1 className='mt-10 mb-[25rem] text-center'>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
                                     }
@@ -142,7 +142,7 @@ const QuizHistory = () => {
                                 {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
                             </div>
                             :
-                            <SkeletonQuizContainer />
+                            <SkeletonTestContainer />
                         }
 
                     </div>

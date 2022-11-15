@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 const debounce = require('lodash.debounce')
 
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
-const QuizContainer = React.lazy(() => import('../components/quizContainer'))
+const TestContainer = React.lazy(() => import('../components/testContainer'))
 const Tools = React.lazy(() => import('../components/tools'))
 import { log, getTheme, takeParameterFromUrl, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
 
@@ -126,8 +126,8 @@ const Sort = () => {
                     }
                     scrollableTarget="scrollme"
                 >
-                    <ul className="mx-auto flex-col md:flex-row flex flex-wrap align-baseline w-[90vw] md:w-4/5 quizContainer flex-ai-fe justify-right pt-3">
-                        <QuizContainer quizzes={sortedContent} bgStyle='trans' />
+                    <ul className="mx-auto flex-col md:flex-row flex flex-wrap align-baseline w-[90vw] md:w-4/5 testContainer flex-ai-fe justify-right pt-3">
+                        <TestContainer quizzes={sortedContent} bgStyle='trans' />
                     </ul>
                 </InfiniteScroll>
             </div>

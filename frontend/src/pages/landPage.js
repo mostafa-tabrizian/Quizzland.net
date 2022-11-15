@@ -9,30 +9,32 @@ import Skeleton from '@mui/material/Skeleton';
 
 import axios from '../components/axiosApi';
 import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
+const TestContainer = React.lazy(() => import('../components/testContainer')) 
 const QuizContainer = React.lazy(() => import('../components/quizContainer')) 
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen')) 
-const Suggestions = React.lazy(() => import('../components/suggestions')) 
+// const Suggestions = React.lazy(() => import('../components/suggestions')) 
 
 const Index = () => {
     const [loadState, setLoadState] = useState()
     const [theme, setTheme] = useState('dark')
 
-    const [content_new, setContent_new] = useState([])
-    const [content_monthly, setContent_monthly] = useState([])
+    const [tests, setTests] = useState([])
+    const [tests_monthly, setTests_monthly] = useState([])
+    const [quizzes , setQuizzes] = useState([])
 
-    const [content_new_celebrity, setContent_new_celebrity] = useState([])
-    const [content_new_movieSeries, setContent_new_movieSeries] = useState([])
-    const [content_new_psychology, setContent_new_psychology] = useState([])
+    // const [tests_celebrity, setTests_celebrity] = useState([])
+    // const [tests_movieSeries, setTests_movieSeries] = useState([])
+    // const [tests_psychology, setTests_psychology] = useState([])
 
-    const [loadMoreQuiz, setLoadMoreQuiz] = useState([])
+    // const [loadMoreQuiz, setLoadMoreQuiz] = useState([])
 
-    const [content_monthly_ref, content_monthly_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    // const [content_monthly_ref, content_monthly_inView] = useInView({ threshold: 0, triggerOnce: true, });
 
-    const [content_new_celebrity_ref, content_new_celebrity_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [content_new_movieSeries_ref, content_new_movieSeries_inView] = useInView({ threshold: 0, triggerOnce: true, });
-    const [content_new_psychology_ref, content_new_psychology_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    // const [tests_celebrity_ref, tests_celebrity_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    // const [tests_movieSeries_ref, tests_movieSeries_inView] = useInView({ threshold: 0, triggerOnce: true, });
+    // const [tests_psychology_ref, tests_psychology_inView] = useInView({ threshold: 0, triggerOnce: true, });
 
-    const [loadMoreQuiz_ref, loadMoreQuiz_inView] = useInView({ threshold: 0, triggerOnce: true, })
+    // const [loadMoreQuiz_ref, loadMoreQuiz_inView] = useInView({ threshold: 0, triggerOnce: true, })
 
     useEffect(() => {
         grabData()
@@ -47,18 +49,29 @@ const Index = () => {
     const grabData = async () => {
         const now = new Date().getTime()
 
-        const quiz = await axios.get(`/api/quizView/?limit=70&public=true&timestamp=${now}`)
+        // const quiz = await axios.get(`/api/quizView/?limit=70&public=true&timestamp=${now}`)
         // .catch(err => {log(err.response)})
-        const pointy = await axios.get(`/api/testView/?limit=70&public=true&timestamp=${now}`)
+        
+        await axios.get(`/api/testView/?limit=70&public=true&timestamp=${now}`)
+            .then(res => {
+                const data = res.data.results
+                setTests(data.sort(sortByNewest).slice(0, 12))
+                setTests_monthly(data.sort(sortByMonthlyViews).slice(0, 12))
+            })
+        
+        await axios.get(`/api/quizV2View/?public=true`)
+            .then((res => {
+                log(res)
+                setQuizzes(res.data.sort(sortByMonthlyViews))
+            }))
+            
         // .catch(err => {log(err.response)})
-        const content = quiz.data.results.concat(pointy.data.results)
+        // const content = quiz.data.results.concat(test.data.results)
 
-        setContent_new(content.sort(sortByNewest).slice(0, 12))
-        setContent_monthly(content.sort(sortByMonthlyViews).slice(0, 12))
-        setContent_new_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sort(sortByNewest).slice(0, 12))
-        setContent_new_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest).slice(0, 12))
-        setContent_new_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest).slice(0, 12))
-        setLoadMoreQuiz(content.sort(sortByNewest).slice(13, 69))
+        // setTests_movieSeries(content.filter(quiz => quiz.categoryKey.title_english == 'Movie & Series').sort(sortByNewest).slice(0, 12))
+        // setTests_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest).slice(0, 12))
+        // setTests_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest).slice(0, 12))
+        // setLoadMoreQuiz(content.sort(sortByNewest).slice(13, 69))
     }
 
     return (
@@ -147,16 +160,16 @@ const Index = () => {
                     <div className='relative w-7/12 ml-5'>
                         <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='text-[1rem]'>
-                                کوییزلند 🔥
+                                تست کوییزلند 🔥
                             </h2>
                             <h2>
                                 #1
                             </h2>
                         </div>
-                        <Link to={`/${content_monthly[0]?.type}/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
+                        <Link to={`/${tests_monthly[0]?.type}/${tests_monthly[0] && replaceFunction(tests_monthly[0].slug, ' ', '-')}`}>
                             <LazyLoadImage
-                                src={content_monthly[0]?.thumbnail}
-                                alt={`${content_monthly.subCategory} | ${content_monthly.title}`}
+                                src={tests_monthly[0]?.thumbnail}
+                                alt={`${tests_monthly.subCategory} | ${tests_monthly.title}`}
                                 className='w-full h-[21rem] object-cover rounded-xl'
                                 effect="blur"
                                 placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
@@ -164,7 +177,7 @@ const Index = () => {
                         </Link>
                         <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
                             <h2>
-                                {content_monthly[0] && content_monthly[0].title}
+                                {tests_monthly[0] && tests_monthly[0].title}
                             </h2>
                         </div>
                     </div>
@@ -174,13 +187,13 @@ const Index = () => {
                                 🕚
                             </h2>
                             <h2 className='text-[1rem]'>
-                                جدیدترینِ کوییزلند
+                                جدیدترین تست کوییزلند
                             </h2>
                         </div>
-                        <Link to={`/${content_new[0]?.type}/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
+                        <Link to={`/${tests[0]?.type}/${tests[0] && replaceFunction(tests[0].slug, ' ', '-')}`}>
                             <LazyLoadImage
-                                src={content_new[0]?.thumbnail}
-                                alt={`${content_monthly.subCategory} | ${content_monthly.title}`}
+                                src={tests[0]?.thumbnail}
+                                alt={`${tests_monthly.subCategory} | ${tests_monthly.title}`}
                                 className='w-full h-[21rem] object-cover rounded-xl'
                                 effect="blur"
                                 placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
@@ -188,7 +201,7 @@ const Index = () => {
                         </Link>
                         <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
                             <h2>
-                                {content_new[0] && content_new[0].title}
+                                {tests[0] && tests[0].title}
                             </h2>
                         </div>
                     </div>
@@ -203,42 +216,42 @@ const Index = () => {
                         dynamicHeight={true}
                         showIndicators={false}
                     >
-                        <Link to={`/quiz/${content_monthly[0] && replaceFunction(content_monthly[0].slug, ' ', '-')}`}>
+                        <Link to={`/quiz/${tests_monthly[0] && replaceFunction(tests_monthly[0].slug, ' ', '-')}`}>
                             <div className='relative'>
                                 <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
                                     <h2 className='text-[1rem]'>
-                                        کوییزلند 🔥
+                                        تست کوییزلند 🔥
                                     </h2>
                                     <h2>
                                         #1
                                     </h2>
                                 </div>
 
-                                <img className='w-full h-[21rem] object-cover rounded-xl' src={content_monthly[0]?.thumbnail} alt="" />
+                                <img className='w-full h-[21rem] object-cover rounded-xl' src={tests_monthly[0]?.thumbnail} alt="" />
 
                                 <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
                                     <h4>
-                                        {content_monthly[0] && content_monthly[0].title}
+                                        {tests_monthly[0] && tests_monthly[0].title}
                                     </h4>
                                 </div>
                             </div>
                         </Link>
-                        <Link to={`/quiz/${content_new[0] && replaceFunction(content_new[0].slug, ' ', '-')}`}>
+                        <Link to={`/quiz/${tests[0] && replaceFunction(tests[0].slug, ' ', '-')}`}>
                             <div className='relative'>
                                 <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
                                 <h4 className='translate-y-[4px]'>
                                     🕚
                                 </h4>
                                 <h2 className='text-[1rem]'>
-                                    جدیدترینِ کوییزلند
+                                    جدیدترین تست کوییزلند
                                 </h2>
                             </div>
 
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={content_new[0]?.thumbnail} alt="" />
+                            <img className='w-full h-[21rem] object-cover rounded-xl' src={tests[0]?.thumbnail} alt="" />
                             
                                 <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
                                     <h4>
-                                        {content_new[0] && content_new[0].title}
+                                        {tests[0] && tests[0].title}
                                     </h4>
                                 </div>
                             </div>
@@ -247,18 +260,30 @@ const Index = () => {
                     </Carousel>
                 </div>
 
-                <Suggestions />
+                {/* <Suggestions /> */}
 
                 <div className="mb-8 md:mt-[10rem]">
                     <span id='scroll' />
 
-                    <div className="flex items-center justify-between mb-8 quizContainer__header">
-                        <h3>جدیدترین ها</h3>
-                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                    <div className="flex items-center justify-between mb-8 testContainer__header">
+                        <h3>تست های کوییزلند</h3>
+                        {/* <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link> */}
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
-                        <QuizContainer quizzes={content_new} bgStyle={'trans'} />
+                        <TestContainer tests={tests} bgStyle={'trans'} />
+                    </ul>
+
+                </div>
+
+                <div className="mb-8 md:mt-[10rem]">
+                    <div className="flex items-center justify-between mb-8 testContainer__header">
+                        <h3>کوییز های کوییزلند</h3>
+                        {/* <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link> */}
+                    </div>
+
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
+                        <QuizContainer quizzes={quizzes} bgStyle={'trans'} />
                     </ul>
 
                 </div>
@@ -275,9 +300,9 @@ const Index = () => {
                     <div className='adverts_center' id='mediaad-KlKX'></div>
                 } */}
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
 
-                    <div className="flex items-center justify-between mb-8 quizContainer__header">
+                    <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>محبوب ترین ها</h3>
                         <Link to="/sort?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
@@ -285,11 +310,11 @@ const Index = () => {
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_monthly_ref}>
                         {
                             content_monthly_inView &&
-                            <QuizContainer quizzes={content_monthly} bgStyle={'trans'} />
+                            <TestContainer quizzes={tests_monthly} bgStyle={'trans'} />
                         }
                     </ul>
 
-                </div>
+                </div> */}
 
                 {/* Adverts */}
 
@@ -303,21 +328,21 @@ const Index = () => {
                     <div className='adverts_center' id='mediaad-OheS'></div>
                 } */}
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
 
-                    <div className="flex items-center justify-between mb-8 quizContainer__header">
+                    <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>کوییز سلبریتی</h3>
                         <Link to="/sort?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_celebrity_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_celebrity_ref}>
                         {
-                            content_new_celebrity_inView &&
-                            <QuizContainer quizzes={content_new_celebrity} bgStyle='trans' />
+                            tests_celebrity_inView &&
+                            <TestContainer quizzes={tests_celebrity} bgStyle='trans' />
                         }
                     </ul>
 
-                </div>
+                </div> */}
 
                 {/* Adverts */}
 
@@ -331,37 +356,37 @@ const Index = () => {
                     <div className='adverts_center' id='mediaad-QCZY'></div>
                 } */}
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
 
-                    <div className="flex items-center justify-between mb-8 quizContainer__header">
+                    <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>کوییز فیلم و سریال</h3>
                         <Link to="/sort?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_movieSeries_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_movieSeries_ref}>
                         {
-                            content_new_movieSeries_inView &&
-                            <QuizContainer quizzes={content_new_movieSeries} bgStyle='trans' />
+                            tests_movieSeries_inView &&
+                            <TestContainer quizzes={tests_movieSeries} bgStyle='trans' />
                         }
                     </ul>
 
-                </div>
+                </div> */}
 
-                <div className="mb-8">
+                {/* <div className="mb-8">
 
-                    <div className="flex items-center justify-between mb-8 quizContainer__header">
+                    <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>تست روانشناسی</h3>
                         <Link to="/sort?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_new_psychology_ref}>
+                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_psychology_ref}>
                         {
-                            content_new_psychology_inView &&
-                            <QuizContainer quizzes={content_new_psychology} bgStyle='trans' />
+                            tests_psychology_inView &&
+                            <TestContainer quizzes={tests_psychology} bgStyle='trans' />
                         }
                     </ul>
 
-                </div>
+                </div> */}
 
                 {/* Adverts */}
 
@@ -375,8 +400,8 @@ const Index = () => {
                     <div className='adverts_center' id='mediaad-qBZW'></div>
                 } */}
 
-                <div className="mt-8 mb-8">
-                    <div className="flex items-center justify-between mb-8 quizContainer__header">
+                {/* <div className="mt-8 mb-8">
+                    <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>کوییز های بیشتر</h3>
                         <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
@@ -384,11 +409,11 @@ const Index = () => {
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={loadMoreQuiz_ref}>
                         {
                             loadMoreQuiz_inView &&
-                            <QuizContainer quizzes={loadMoreQuiz} bgStyle='trans' />
+                            <TestContainer quizzes={loadMoreQuiz} bgStyle='trans' />
                         }
                     </ul>
 
-                </div>
+                </div> */}
             </div>
 
         </React.Fragment>

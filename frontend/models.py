@@ -104,6 +104,32 @@ class Quizzes(models.Model):
 
     def __unicode__(self):
         return 'test'
+    
+class Quizzes_V2(models.Model):
+    id = models.AutoField(primary_key=True)
+    public = models.BooleanField(default=True)
+    categoryKey = models.ForeignKey(Categories, related_name='categoryKey_quizzesV2', on_delete=models.PROTECT, blank=True, null=True)
+    slug = models.CharField(max_length=80, null=False, blank=False, default=None)  # unique=True
+    title = models.CharField(max_length=200, null=False, blank=False, default=None)
+    tags = models.CharField(max_length=200, null=False, blank=False, default='کوییز')
+    monthly_views = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
+    thumbnail = models.ImageField(upload_to='QuizzesV2Thumbnail', default='NotExist.jpg', help_text='thumbnail of quiz')
+    background = models.ImageField(upload_to='QuizzesV2Background', default='NotExist.jpg', help_text='background of playing quiz')
+    question_background = models.CharField(max_length=7, default="#911a1a")
+    GIF20 = models.ImageField(upload_to='Answer-And-Result-ImGIf-v2/', default='NotExist.jpg')
+    GIF40 = models.ImageField(upload_to='Answer-And-Result-ImGIf-v2/', default='NotExist.jpg')
+    GIF60 = models.ImageField(upload_to='Answer-And-Result-ImGIf-v2/', default='NotExist.jpg')
+    GIF80 = models.ImageField(upload_to='Answer-And-Result-ImGIf-v2/', default='NotExist.jpg')
+    GIF100 = models.ImageField(upload_to='Answer-And-Result-ImGIf-v2/', default='NotExist.jpg')
+    created_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name='user_quizV2_id', blank=False, null=True)
+    publish = models.DateTimeField(default=datetime.datetime.now)
+
+    def __str__(self):
+        return str(self.title)
+
+    def __unicode__(self):
+        return 'test'
 
 class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)

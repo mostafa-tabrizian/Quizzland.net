@@ -33,6 +33,7 @@ urlpatterns = [
     
     path('quiz/<title>', index),
     path('test/<title>', index),
+    path('play/<title>', index),
     path('result', index),
     
     path('search', index),

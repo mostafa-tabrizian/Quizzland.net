@@ -938,10 +938,10 @@ hr {
   color: #fff;
 }
 
-.quizContainer__minHeight {
+.testContainer__minHeight {
   min-height: 40vh;
 }
-.quizContainer__header {
+.testContainer__header {
   direction: rtl;
 }
 

@@ -125,6 +125,23 @@ class QuizzesSerializer(serializers.ModelSerializer):
         )
         
     categoryKey = CategoriesSerializer(many=False, read_only=True)
+    
+class QuizzesV2Serializer(serializers.ModelSerializer):
+    thumbnail = serializers.ImageField(required=False)
+    background = serializers.ImageField(required=False)
+    GIF20 = serializers.ImageField(required=False)
+    GIF40 = serializers.ImageField(required=False)
+    GIF60 = serializers.ImageField(required=False)
+    GIF80 = serializers.ImageField(required=False)
+    GIF100 = serializers.ImageField(required=False)
+    
+    class Meta:
+        model = Quizzes_V2
+        fields = (
+            '__all__'
+        )
+        
+    categoryKey = CategoriesSerializer(many=False, read_only=True)
 
 class PointyQuizzesSerializer(serializers.ModelSerializer):
     thumbnail = serializers.ImageField(required=False)

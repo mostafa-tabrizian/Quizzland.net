@@ -13,7 +13,7 @@ import UserStore from '../store/userStore'
 import axiosInstance from '../components/axiosAuthApi'
 const LoginForm = React.lazy(() => import('../components/user/loginForm'))
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
-const QuizContainer = React.lazy(() => import('../components/quizContainer'))
+const TestContainer = React.lazy(() => import('../components/testContainer'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 
 const Result = () => {
@@ -463,7 +463,7 @@ const Result = () => {
 
                     <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
                         {
-                            suggestionQuizzes && <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                            suggestionQuizzes && <TestContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                         }
                     </ul>
                 </div>

@@ -1,6 +1,6 @@
 import Skeleton from '@mui/material/Skeleton';
 
-const SkeletonQuizContainer = () => {
+const SkeletonTestContainer = () => {
     return (
         <div>
             <div className='flex flex-col ml-4 space-y-3 md:hidden'>
@@ -100,4 +100,4 @@ const SkeletonQuizContainer = () => {
     );
 }
  
-export default SkeletonQuizContainer;
+export default SkeletonTestContainer;

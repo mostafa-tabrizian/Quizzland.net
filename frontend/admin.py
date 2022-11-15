@@ -48,6 +48,13 @@ class SubCategories_Admin(admin.ModelAdmin):
     search_fields = ['id', 'title']
 
 
+@admin.register(Quizzes_V2)
+class QuizzesV2_Admin(admin.ModelAdmin):
+    list_display = ('title', 'categoryKey', 'monthly_views', 'views', 'publish')
+    exclude = ('type', )
+    list_filter = ('categoryKey', 'publish')
+    search_fields = ['id', 'title', 'slug']
+    
 @admin.register(Quizzes)
 class Quizzes_Admin(admin.ModelAdmin):
     list_display = ('title', 'subCategory', 'categoryKey', 'monthly_views', 'views', 'publish')

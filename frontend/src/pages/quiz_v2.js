@@ -22,8 +22,7 @@ const TestContainer = React.lazy(() => import('../components/testContainer'))
 
 const logo = '/static/img/Q-small.png'
 
-const Quiz = (props) => {
-    const [quizType] = useState(window.location.pathname.split('/')[1])
+const Quiz_V2 = (props) => {
     const [questions, setQuestions] = useState([])
     const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1)
@@ -79,15 +78,8 @@ const Quiz = (props) => {
     }, [location]);
 
     const setWhichSFXfile = () => {
-        switch (quizType) {
-            case 'quiz':
-                setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
-                setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
-                break
-            case 'test':
-                setSFXClick(new Audio('/static/sound/SFXClick.mp3'))
-                break
-        }
+        setSFXCorrect(new Audio('/static/sound/SFXCorrect.mp3'))
+        setSFXWrong(new Audio('/static/sound/SFXWrong.mp3'))
     }
 
     // const checkRecaptcha = async () => {
@@ -124,26 +116,18 @@ const Quiz = (props) => {
 
     const fetchQuiz = async () => {
         quizSlugReplacedWithHyphen &&
-            await axios.get(`/api/${quizType}View/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+            await axios.get(`/api/quizV2View/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
                     quizDetailRef.current = quizData
                     setQuiz(quizData)
 
                     sendCategoryAsInterest()
-                    await getSuggestionsQuiz()
+                    // await getSuggestionsQuiz()
                     applyBackground()
 
                     let questionAPI
-                    switch (quizType) {
-                        case 'quiz':
-                            questionAPI = 'questionsView'
-                            break
-                        case 'test':
-                            questionAPI = 'questionsPointyView'
-                            break
-                    }
 
-                    await axios.get(`/api/${questionAPI}/?quizKey=${quizData.id}&public=true`)
+                    await axios.get(`/api/questionsView/?quizKey=${quizData.id}&public=true`)
                         .then((questionData) => {
                             setQuestions(questionData.data)
                             setContentLoaded(true)
@@ -288,56 +272,33 @@ const Quiz = (props) => {
 
     const ifHalfQuizAddView = () => {
         if (currentQuestionNumber == halfTheQuestions) {  // && userProfile.userDetail
-            AddView(`${quizType}View`, quizDetailRef.current.id)
+            AddView(`quizV2View`, quizDetailRef.current.id)
         }
     }
 
     const selectedOption = async (props) => {
-        switch (quizType) {
-            case 'quiz':
-                if (ableToSelectOption) {
-                    // setTimeout(() => {
-                    //     document.querySelector('.quiz__questions').scrollIntoView()
-                    // }, 300)
+        if (ableToSelectOption) {
+            // setTimeout(() => {
+            //     document.querySelector('.quiz__questions').scrollIntoView()
+            // }, 300)
 
-                    setAbleToSelectOption(false)
-                    setAbleToGoNext(true)
-                    makeEveryOptionLowOpacity('low')
-                    checkTheSelectedOption(props.target)
-                    ifHalfQuizAddView()
+            setAbleToSelectOption(false)
+            setAbleToGoNext(true)
+            makeEveryOptionLowOpacity('low')
+            checkTheSelectedOption(props.target)
+            ifHalfQuizAddView()
 
-                    if (autoQuestionChanger) {
-                        setTimeout(() => {
-                            goNextQuestionOrEndTheQuiz()
-                        }, amountOfPauseCalculator())
-                    } else {
-                        setTimeout(() => {
-                            if (document.querySelector('.quiz__container')?.style.transform == 'translate(0rem)' && !(isItDesktop())) {
-                                enqueueSnackbar('برای تغییر سوال، صفحه را بکشید', { variant: 'info', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                            }
-                        }, 5000)
+            if (autoQuestionChanger) {
+                setTimeout(() => {
+                    goNextQuestionOrEndTheQuiz()
+                }, amountOfPauseCalculator())
+            } else {
+                setTimeout(() => {
+                    if (document.querySelector('.quiz__container')?.style.transform == 'translate(0rem)' && !(isItDesktop())) {
+                        enqueueSnackbar('برای تغییر سوال، صفحه را بکشید', { variant: 'info', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                     }
-                }
-                break
-            case 'test':
-                playSFX_click()
-                setWrongAnswerOption(parseInt(props.target.id.slice(-1)))
-                takeSelectedOptionValue(props.target)
-
-                if (autoQuestionChanger) {
-                    setTimeout(() => {
-                        goNextQuestionOrEndTheQuiz()
-                    }, amountOfPauseCalculator())
-                } else {
-                    setAbleToGoNext(true)
-
-                    setTimeout(() => {
-                        if (document.querySelector('.quiz__container').style.transform == 'translate(0rem)' && !(isItDesktop())) {
-                            TutorialForHowToChangeTheQuestion()
-                        }
-                    }, 5000)
-                }
-                break
+                }, 5000)
+            }
         }
     }
 
@@ -354,7 +315,6 @@ const Quiz = (props) => {
     }
 
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
-
     
     // class quiz__container all x size in rem
     if (isItDesktop() || isItIPad()) {
@@ -394,23 +354,14 @@ const Quiz = (props) => {
     }
 
     const returnQuiz = (question) => {
-        switch (quizType) {
-            case 'quiz':
-                return <Trivia
-                    question={question}
-                    selectedOption={selectedOption}
-                    questionCounterForId={questionCounterForId}
-                    ableToSelectOption={ableToSelectOption}
-                    wrongAnswerOption={wrongAnswerOption}
-                    correctAnswerOption={correctAnswerOption}
-                />
-
-            case 'test':
-                return <Test
-                    question={question}
-                    selectedOption={selectedOption}
-                />
-        }
+        return <Trivia
+            question={question}
+            selectedOption={selectedOption}
+            questionCounterForId={questionCounterForId}
+            ableToSelectOption={ableToSelectOption}
+            wrongAnswerOption={wrongAnswerOption}
+            correctAnswerOption={correctAnswerOption}
+        />
     }
 
     const answerOfQuestionIfExistShow = (question) => {
@@ -487,14 +438,14 @@ const Quiz = (props) => {
                         {returnQuiz(question)}
 
                         {
-                            quizType == 'quiz' && question?.answer_text &&
+                            question?.answer_text &&
                             <div className={`quiz__answerText py-4 px-8 answerHide text-right ${theme == 'light' ? 'bg-[#ffffff82]' : 'bg-[#0000007c]'} backdrop-blur-xl mt-4 rounded-lg`}>
                                 {answerOfQuestionIfExistShow(question)}
                             </div>
                         }
 
                         {
-                            quizType == 'quiz' && !(question.answer_imGif.includes('NotExist.jpg')) &&
+                            !(question.answer_imGif.includes('NotExist.jpg')) &&
                             <div className={`quiz__answerImGif answerHide quiz__answerImGif ${theme == 'light' ? 'bg-[#ffffff82]' : 'bg-[#0000007c]'} backdrop-blur-xl mt-4 rounded-lg`}>
                                 {gifAnswerOfQuestionIfExistShow(question)}
                             </div>
@@ -585,7 +536,7 @@ const Quiz = (props) => {
     }
 
     const currentUrl = () => {
-        return `https://www.quizzland.net/${quizType}/${replaceFunction(quizSlug, ' ', '-')}`
+        return `https://www.quizzland.net/play/${replaceFunction(quizSlug, ' ', '-')}`
     }
 
     let firstTouch
@@ -707,135 +658,122 @@ const Quiz = (props) => {
 
                 {
                     !its404
-                        ?
-                        <div className="ltr">
-                            <div id='quizBg'></div>
+                    ?
+                    <div className="ltr">
+                        <div id='quizBg'></div>
 
-                            <div className={`
-                            fixed left-0 backdrop-blur-3xl backdrop-brightness-75
-                            top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
-                            flex flex-col items-center justify-center 
-                        `}>
-                                <div>
-                                    <div className='absolute w-10 h-10 bg-red-800 rounded-full animate-ping'></div>
-                                    <div className='w-10 h-10 bg-red-800 rounded-full'></div>
-                                </div>
-                                <div className='mt-5'>
-                                    <h2>
-                                        در حال محاسبه نتیجه کوییز
-                                    </h2>
-                                </div>
-                            </div>
-
-                            <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
-
-                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={quizType} />}
-
-                            {
-                                contentLoaded && isItDesktop() &&
-                                <div className={`
-                                quiz__questionChanger__container relative
-                                top-24
-                                ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
-                            `}>
-                                    <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
-                                        aria-label='Next Question'
-                                        className={`
-                                        quiz__questionChanger absolute
-                                        quiz__questionChanger__next btn
-                                        ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
-                                    `}
-                                    >
-
-                                        <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
-
-                                    </button>
-                                    {
-                                        quizType == 'test' &&
-                                        <button
-                                            onClick={goLastQuestion}
-                                            aria-label='Next Question'
-                                            className={`
-                                            quiz__questionChanger absolute quiz__questionChanger__last
-                                            btn
-                                        `}
-                                        >
-                                            <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
-                                        </button>
-                                    }
-                                </div>
-                            }
-
-                            <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
-                                <div className={`quiz__hider mt-5 flex relative`}>
-                                    {
-                                        !(contentLoaded) &&
-                                        <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
-                                    }
-
-                                    {
-                                        isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
-                                    }
-                                </div>
-                            </div>
-
+                        <div className={`
+                        fixed left-0 backdrop-blur-3xl backdrop-brightness-75
+                        top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
+                        flex flex-col items-center justify-center 
+                    `}>
                             <div>
-                                <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
-                                <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags max-w-[35rem] mx-auto'>
-                                    {quiz && showTheTagsIfNotNull()}
-                                </ul>
+                                <div className='absolute w-10 h-10 bg-red-800 rounded-full animate-ping'></div>
+                                <div className='w-10 h-10 bg-red-800 rounded-full'></div>
                             </div>
-
-                            {/* Adverts */}
-
-                            {/* <div className='mt-5 adverts_center' id='mediaad-bNpr'></div> */}
-
-                            <div className='mx-4 mt-10'>
-                                <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
-
-                                <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
-                                    {
-                                        suggestionQuizzes && <TestContainer quizzes={suggestionQuizzes} bgStyle={'bg'} />
-                                    }
-                                </ul>
+                            <div className='mt-5'>
+                                <h2>
+                                    در حال محاسبه نتیجه کوییز
+                                </h2>
                             </div>
-
-
-                            {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}
-
-                            {/* Adverts */}
-                            {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
-
-
-                            <Link
-                                to={`/result`}
-                                ref={result}
-                                className='noVis'
-                            ></Link>
-
                         </div>
-                        :
-                        <div>
-                            <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
 
-                            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'light' ? '#f0f0f0' : '#0000008c'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
-                                <h1> 🤔 اوپس! کوییز مورد نظر پیدا نشد </h1>
-                                <div class="mt-5">
+                        <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
+
+                        {/* {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} />} */}
+
+                        {
+                            contentLoaded && isItDesktop() &&
+                            <div className={`
+                            quiz__questionChanger__container relative
+                            top-24
+                            ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
+                        `}>
+                                <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
+                                    aria-label='Next Question'
+                                    className={`
+                                    quiz__questionChanger absolute
+                                    quiz__questionChanger__next btn
+                                    ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
+                                `}
+                                >
+
+                                    <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
+
+                                </button>
+                            </div>
+                        }
+
+                        <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
+                            <div className={`quiz__hider mt-5 flex relative`}>
+                                {
+                                    !(contentLoaded) &&
+                                    <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
+                                }
+
+                                {
+                                    isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
+                                }
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
+                            <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags max-w-[35rem] mx-auto'>
+                                {quiz && showTheTagsIfNotNull()}
+                            </ul>
+                        </div>
+
+                        {/* Adverts */}
+
+                        {/* <div className='mt-5 adverts_center' id='mediaad-bNpr'></div> */}
+
+                        <div className='mx-4 mt-10'>
+                            <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
+
+                            <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
+                                {
+                                    suggestionQuizzes && <TestContainer quizzes={suggestionQuizzes} bgStyle={'bg'} />
+                                }
+                            </ul>
+                        </div>
+
+
+                        {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}
+
+                        {/* Adverts */}
+                        {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
+
+
+                        <Link
+                            to={`/result`}
+                            ref={result}
+                            className='noVis'
+                        ></Link>
+
+                    </div>
+                    :
+                    <div>
+                        <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
+
+                        <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'light' ? '#f0f0f0' : '#0000008c'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
+                            <h1> 🤔 اوپس! کوییز مورد نظر پیدا نشد </h1>
+                            <div class="mt-5">
+                                <h2>
+                                    نیست یا در حال حاضر غیر فعال شده
+                                </h2>
+                            </div>
+                            <div className='mt-10'>
+                                <div className='px-4 py-2 border-2 border-red-900 rounded-xl'>
                                     <h2>
-                                        نیست یا در حال حاضر غیر فعال شده
+                                        <Link to='/sort?s=trend'>
+                                            مشاهده بهترین کوییز های این ماه
+                                        </Link>
                                     </h2>
                                 </div>
-                                <div className='mt-10'>
-                                    <div className='px-4 py-2 border-2 border-red-900 rounded-xl'>
-                                        <h2>
-                                            <Link to='/sort?s=trend'>
-                                                مشاهده بهترین کوییز های این ماه
-                                            </Link>
-                                        </h2>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+                    </div>
                 }
 
             </div>
@@ -843,4 +781,4 @@ const Quiz = (props) => {
     );
 }
 
-export default Quiz;
+export default Quiz_V2;

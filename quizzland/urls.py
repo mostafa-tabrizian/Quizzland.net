@@ -18,6 +18,7 @@ router.register(r'userView', views.CustomUserView, basename='CustomUserView')
 router.register(r'messagesView', views.MessagesView, basename='MessagesView')
 
 router.register(r'quizView', views.QuizView, basename='QuizView')
+router.register(r'quizV2View', views.QuizV2View, basename='QuizV2View')
 router.register(r'testView', views.PointyView, basename='PointyView')
 
 router.register(r'likeView', views.LikeView, basename='likeView')

@@ -75,14 +75,14 @@ const Blog = (props) => {
 
             {
                 !(contentLoaded) &&
-                <ul className={`quizContainer flex wrapper-med`}>
+                <ul className={`testContainer flex wrapper-med`}>
                     <li className='skeletonQuiz skeletonQuiz__blog'></li>
                     <li className='skeletonQuiz skeletonQuiz__blog'></li>
                     <li className='skeletonQuiz skeletonQuiz__blog'></li>
                 </ul>
             }
 
-            <ul className="blog quizContainer__minHeight wrapper-med">
+            <ul className="blog testContainer__minHeight wrapper-med">
                 {blogContent()}
             </ul>
 

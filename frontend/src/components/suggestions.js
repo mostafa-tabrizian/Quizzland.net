@@ -3,7 +3,7 @@ import axios from '../components/axiosApi';
 import UserStore from '../store/userStore';
 import axiosInstance from './axiosAuthApi'
 import { log, sortByMonthlyViews } from '../components/base'
-import QuizContainer from '../components/quizContainer';
+import TestContainer from '../components/testContainer';
 
 const Suggestions = () => {
     const [suggestionQuizzes, setSuggestionQuizzes] = useState([])
@@ -176,13 +176,13 @@ const Suggestions = () => {
         suggestionQuizzes.length != 0 &&
         <div className="mb-8 mt-[5rem]">
 
-            <div className="mb-8 quizContainer__header">
+            <div className="mb-8 testContainer__header">
                 <h2 className=''>پیشنهادی های کوییزلند به شما</h2>
             </div>
 
             <div>
                 <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
-                    <QuizContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                    <TestContainer quizzes={suggestionQuizzes} bgStyle='trans' />
                 </ul>
             </div>
         </div>

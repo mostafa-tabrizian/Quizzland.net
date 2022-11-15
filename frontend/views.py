@@ -279,6 +279,43 @@ class QuizView(viewsets.ModelViewSet):
         new_quiz.save()
         
         return HttpResponse('quiz created successfully')
+    
+class QuizV2View(viewsets.ModelViewSet):
+    permission_classes = (BasePermission,)
+    queryset = Quizzes_V2.objects.all()
+    serializer_class = QuizzesV2Serializer
+    filterset_class = QuizzesV2Filter
+    
+    def create(self, request):
+        requestData = request.data
+        category = Categories.objects.get(id=requestData['categoryKey'])
+        
+        public = None
+        if requestData['public'] == 'true':
+            public = True
+        elif requestData['public'] == 'false':
+            public = False
+            
+        new_quiz = Quizzes_V2()
+        
+        new_quiz.public = public
+        new_quiz.categoryKey = category
+        new_quiz.slug = requestData['slug']
+        new_quiz.title = requestData['title']
+        new_quiz.tags = requestData['tags']
+        new_quiz.question_background = requestData['question_background']
+        new_quiz.thumbnail = requestData['thumbnail']
+        new_quiz.background = requestData['background']
+        new_quiz.GIF20 = requestData['GIF20']
+        new_quiz.GIF40 = requestData['GIF40']
+        new_quiz.GIF60 = requestData['GIF60']
+        new_quiz.GIF80 = requestData['GIF80']
+        new_quiz.GIF100 = requestData['GIF100']
+        new_quiz.created_by = request.user
+        
+        new_quiz.save()
+        
+        return HttpResponse('quiz created successfully')
 
 class PointyView(viewsets.ModelViewSet):
     permission_classes = (BasePermission,)
