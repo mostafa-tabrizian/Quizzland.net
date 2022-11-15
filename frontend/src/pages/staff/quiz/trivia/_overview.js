@@ -203,28 +203,26 @@ const OverviewTrivia = () => {
         };
 
         return (
-            <TableHead sx={{background: 'darkRed'}}>
-                <TableRow>
-                    {
-                        headCells.map((headCell) => (
-                            <tableCell
-                                key={headCell.id}
-                                sortDirection={orderBy === headCell.id ? order : false}
-                                sx={{fontFamily: 'IRANYekanBold, sans-serif, serif', color: 'white'}}
-                                // align="right"
+            <TableRow>
+                {
+                    headCells.map((headCell) => (
+                        <tableCell
+                            key={headCell.id}
+                            sortDirection={orderBy === headCell.id ? order : false}
+                            sx={{fontFamily: 'IRANYekanBold, sans-serif, serif', color: 'white'}}
+                            // align="right"
+                        >
+                            <TableSortLabel
+                                active={orderBy === headCell.id}
+                                direction={orderBy === headCell.id ? order : 'asc'}
+                                onClick={createSortHandler(headCell.id)}
                             >
-                                <TableSortLabel
-                                    active={orderBy === headCell.id}
-                                    direction={orderBy === headCell.id ? order : 'asc'}
-                                    onClick={createSortHandler(headCell.id)}
-                                >
-                                    {headCell.label}
-                                </TableSortLabel>
-                            </tableCell>
-                        ))
-                    }
-                </TableRow>
-            </TableHead>
+                                {headCell.label}
+                            </TableSortLabel>
+                        </tableCell>
+                    ))
+                }
+            </TableRow>
         )
     }
 
@@ -281,6 +279,7 @@ const OverviewTrivia = () => {
                             />
 
                             <TableBody>
+                                
                                 {
                                     tableRows.sort(getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
                                     .map((row, index) => {
@@ -288,7 +287,7 @@ const OverviewTrivia = () => {
                                             <TableRow
                                                 key={row.name}
                                                 sx={{
-                                                    '&:last-child td, &:last-child th': { border: 0 },
+                                                    '&:last-child td, &:last-child th': { border: 0 },  display: 'table-row-group',
                                                     color: 'white', fontFamily: 'IRANYekanBold, sans-serif, serif !imporatnt',
 
                                                 }}
@@ -322,12 +321,12 @@ const OverviewTrivia = () => {
 
                                 {
                                     emptyRows > 0 && (
-                                        <TableRow
-                                            style={{
-                                                height: (52) * emptyRows,
-                                            }}
-                                        >
-                                    <TableCell colSpan={6} />
+                                    <TableRow
+                                        style={{
+                                            height: (52) * emptyRows,
+                                        }}
+                                    >
+                                        <TableCell colSpan={6} />
                                     </TableRow>
                                 )
                                 }
