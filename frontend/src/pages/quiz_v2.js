@@ -43,6 +43,7 @@ const Quiz_V2 = (props) => {
     const [joinPaper, setJoinPaper] = useState(true)
     const [quizEndStatue, setQuizEndStatue] = useState(false)
     const [resultGif, setResultGif] = useState(null)
+    const [resultMessage, setResultMessage] = useState(null)
 
     const location = useLocation();
 
@@ -285,22 +286,55 @@ const Quiz_V2 = (props) => {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = ((351.988 + 1.6 + 1.6 + 8 + 80) / 16)  // width + padding-l + padding-r + margin-l + margin-r
     }
 
-    const quizEnd = () => {
-        log(quiz)
-
-        log(correctAnswersCount)
-
+    const selectResultGifText = () => {
         if (correctAnswersCount <= 3) {
             setResultGif(quiz.GIF_awful)
+            const messages = [
+                `${correctAnswersCount} هم یه جور امتیازه دیگه، مگه نه؟ البته میتونی دوباره تلاش کنی شاید بالا تر رفت`,
+                'بخش خوب داستان اینه که یه چیز جدید یاد گرفتی',
+                'عجب!',
+                'دوباره تلاش کن. قطعا بهتر میشه',
+                'با تلاش دوباره میتونی امتیازت رو بهتر کنی',
+                `همم، جالبه، فکر نمیکردم ${correctAnswersCount} هم ممکن باشه`
+            ]
+            setResultMessage(messages[Math.floor(Math.random()*messages.length)])
         } else if (correctAnswerOption <= 6) {
+            const messages = [
+                'دوباره تلاش کن. قطعا بهتر میشه',
+                `${correctAnswersCount} هم یه جور امتیازه دیگه، مگه نه؟ البته میتونی دوباره تلاش کنی شاید بالا تر رفت`,
+                'بخش خوب داستان اینه که یه چیز جدید یاد گرفتی',
+                `${correctAnswersCount} هم امتیاز جالبیه، ولی میتونه جالب تر هم بشه. دوباره تلاش کن`,
+            ]
             setResultGif(quiz.GIF_bad)
+            setResultMessage(messages[Math.floor(Math.random()*messages.length)])
         } else if (correctAnswerOption <= 10) {
+            const messages = [
+                `${correctAnswersCount} هم یه جور امتیازه دیگه، مگه نه؟ البته میتونی دوباره تلاش کنی شاید بالا تر رفت`,
+                'بخش خوب داستان اینه که یه چیز جدید یاد گرفتی',
+                `${correctAnswersCount} هم امتیاز جالبیه، ولی میتونه جالب تر هم بشه. دوباره تلاش کن`,
+            ]
             setResultGif(quiz.GIF_ok)
+            setResultMessage(messages[Math.floor(Math.random()*messages.length)])
         } else if (correctAnswerOption <= 19) {
+            const messages = [
+                'این امتیاز رو کمتر کسی دریافت میکنه. درود',
+                `${correctAnswersCount} هم امتیاز عالیی هستش ولی میتونه عالی تر هم بشه.`,
+                'عالیه. ببین میتونی به بیشتر از 20 برسی'
+            ]
             setResultGif(quiz.GIF_good)
+            setResultMessage(messages[Math.floor(Math.random()*messages.length)])
         } else if (correctAnswerOption <= 20) {
+            const messages = [
+                'این امتیاز رو کمتر کسی دریافت میکنه. درود',
+                'معرکه ست. بهتر از این نمیشد',
+            ]
             setResultGif(quiz.GIF_great)
+            setResultMessage(messages[Math.floor(Math.random()*messages.length)])
         }
+    }
+
+    const quizEnd = () => {
+        selectResultGifText()
 
         setTimeout(() => {
             setQuizEndStatue(true)
@@ -565,14 +599,19 @@ const Quiz_V2 = (props) => {
                             <div>
                                 {<img src={resultGif} className='object-cover rounded-lg h-[19rem] w-[90%] m-auto' width={540} alt={resultGif} />}
                             </div>
+                            <div>
+                                <p className='text-center my-8 mx-4 text-[1.2rem]'>
+                                    {resultMessage}
+                                </p>
+                            </div>
                         </div>
                         <div>
-                            <button onClick={() => setJoinPaper(false)} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
+                            <button onClick={() => window.location.reload()} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
                                 سعی مجدد
                             </button>
-                            <button className='mr-3'>
+                            <Link className='mr-3' to='/'>
                                 بازگشت
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 }
