@@ -20,7 +20,8 @@ const Index = () => {
 
     const [tests, setTests] = useState([])
     const [tests_monthly, setTests_monthly] = useState([])
-    const [quizzes , setQuizzes] = useState([])
+    const [quizzesData , setQuizzesData] = useState([])
+    const [quizzesShow , setQuizzesShow] = useState([])
 
     // const [tests_celebrity, setTests_celebrity] = useState([])
     // const [tests_movieSeries, setTests_movieSeries] = useState([])
@@ -61,8 +62,9 @@ const Index = () => {
         
         await axios.get(`/api/quizV2View/?public=true`)
             .then((res => {
-                log(res)
-                setQuizzes(res.data.sort(sortByMonthlyViews))
+                const data = res.data.sort(sortByMonthlyViews)
+                setQuizzesData(data)
+                setQuizzesShow(data)
             }))
             
         // .catch(err => {log(err.response)})
@@ -72,6 +74,29 @@ const Index = () => {
         // setTests_celebrity(content.filter(quiz => quiz.categoryKey.title_english == 'Celebrity').sort(sortByNewest).slice(0, 12))
         // setTests_psychology(content.filter(quiz => quiz.categoryKey.title_english == 'Psychology').sort(sortByNewest).slice(0, 12))
         // setLoadMoreQuiz(content.sort(sortByNewest).slice(13, 69))
+    }
+
+    const filterQuizzes = (e) => {
+        const value = e.target.value
+        let filteredData = []
+        
+        if (value.toLowerCase().trim().length) {
+            const filteredDataByTitle = quizzesData.filter(a => a.title.toLowerCase().includes(value.toLowerCase()))
+            const filteredDataBySlug = quizzesData.filter(a => a.slug.toLowerCase().includes(value.toLowerCase()))
+            filteredData = filteredDataByTitle.concat(filteredDataBySlug)
+        }
+        
+        if (filteredData.length) {
+            setQuizzesShow([])
+            setTimeout(() => {
+                setQuizzesShow(filteredData)
+            }, 300)
+        } else {
+            setQuizzesShow([])
+            setTimeout(() => {
+                setQuizzesShow(quizzesData)
+            }, 300)
+        }
     }
 
     return (
@@ -276,14 +301,22 @@ const Index = () => {
 
                 </div>
 
-                <div className="mb-8 md:mt-[10rem]">
-                    <div className="flex items-center justify-between mb-8 testContainer__header">
+                <div className="space-y-8">
+                    <div className="flex items-center justify-between testContainer__header">
                         <h3>کوییز های کوییزلند</h3>
                         {/* <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link> */}
                     </div>
 
+                    <div className='relative'>
+                        <input type="text" onChange={(e) => filterQuizzes(e)} placeholder='جستجوی کوییز ها...' className='pl-12 pr-12 py-1 bg-transparent text-[0.9rem] border border-red-900 rounded-lg focus:outline-none' />
+                        <svg className='absolute w-5 h-5 top-[0.4rem] right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+                            <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#681e1e" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+                            <path data-name="layer1" fill="none" stroke="#681e1e" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round" />
+                        </svg>
+                    </div>
+
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
-                        <QuizContainer quizzes={quizzes} bgStyle={'trans'} />
+                        <QuizContainer quizzes={quizzesShow} bgStyle={'trans'} />
                     </ul>
 
                 </div>
