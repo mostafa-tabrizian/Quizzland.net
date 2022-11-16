@@ -17,7 +17,7 @@ const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 import AddView from '../components/addView';
 const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
-const TestContainer = React.lazy(() => import('../components/testContainer')) 
+const TestContainer = React.lazy(() => import('../components/testContainer'))
 
 const logo = '/static/img/Q-small.png'
 
@@ -28,47 +28,46 @@ const Quiz_V2 = (props) => {
     const [currentMoveOfQuestions, setCurrentMoveOfQuestions] = useState(0)
     const [correctAnswerOption, setCorrectAnswerOption] = useState(0)
     const [wrongAnswerOption, setWrongAnswerOption] = useState(0)
-    const [autoQuestionChanger, setAutoQuestionChanger] = useState(localStorage.getItem('autoQuestionChanger') == 'true')
-    const [ableToGoNext, setAbleToGoNext] = useState(false)
     const [ableToSelectOption, setAbleToSelectOption] = useState(true)
-    const [quizEnded, setQuizEnded] = useState(false)
     const [quizSlug, setQuizSlug] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
     const [contentLoaded, setContentLoaded] = useState(false)
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [SFXAllowed, setSFXAllowed] = useState(localStorage.getItem('SFXAllowed') == 'true')
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
-    const [SFXClick, setSFXClick] = useState(null)
     const [quiz, setQuiz] = useState(null)
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
     const [questionCounterForId] = useState(1)
     const [theme, setTheme] = useState('dark')
     const [its404, set404] = useState(false)
+    const [joinPaper, setJoinPaper] = useState(true)
+    const [quizEndStatue, setQuizEndStatue] = useState(false)
+    const [resultGif, setResultGif] = useState(null)
 
     const location = useLocation();
 
-    const result = useRef(null)
     const quizDetailRef = useRef(null)
     const questionRef = useRef(null)
     // const recaptchaRef = useRef(null)
-    
+
     const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         scrollToTop()
     }, quizSlug)
-    
+
     useEffect(() => {
         fetchQuiz()
     }, quizSlugReplacedWithHyphen)
-    
+
     useEffect(() => {
         const question_background = document.querySelector('#question_background')
         question_background && (document.querySelectorAll('#question_background').forEach((q) => q.style = `background: ${quiz?.theme}`))
         // document.querySelector('body').style = `background: #060101`
     })
-    
+
     useEffect(() => {
+        document.querySelector('#join').style = `background: black`
         const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
         setQuizSlug(slug)
         setQuizSlugReplacedWithHyphen(slug)
@@ -88,12 +87,12 @@ const Quiz_V2 = (props) => {
     //     return await axios.get(`/api/recaptcha?r=${recaptchaResponse}`,)
     //         .then(res => {
     //             log(res)
-                
+
     //             if (res.data != 'True') {
     //                 message.error('block user because not human')
     //                 return false
     //             } else {
-                    
+
     //                 return true
     //             }
     //         })
@@ -108,6 +107,8 @@ const Quiz_V2 = (props) => {
 
     const applyBackground = () => {
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, ${quizDetailRef.current.theme}50, ${quizDetailRef.current.theme}80)`
+        document.querySelector('#join').style = `background: linear-gradient(0deg, black, ${quizDetailRef.current.theme})`
+        document.querySelector('#quizEnd').style = `background: linear-gradient(0deg, black, ${quizDetailRef.current.theme})`
     }
 
     const fetchQuiz = async () => {
@@ -125,7 +126,8 @@ const Quiz_V2 = (props) => {
 
                     await axios.get(`/api/questionsV2View/?quizKey=${quizData.id}&public=true`)
                         .then((questionData) => {
-                            setQuestions(questionData.data)
+                            const shuffledData = questionData.data.sort(() => Math.random() - 0.5)
+                            setQuestions(shuffledData)
                             setContentLoaded(true)
                         })
                         .catch(err => {
@@ -180,16 +182,16 @@ const Quiz_V2 = (props) => {
 
     const playSFX = (whichSFX) => {
         const SFXAllowed = localStorage.getItem('SFXAllowed')
-        
+
         if (SFXAllowed === 'true') {
             if (whichSFX == 'correct') {
                 SFXCorrect.volume = .5
                 SFXCorrect.play()
-            } else if ( whichSFX == 'wrong') {
+            } else if (whichSFX == 'wrong') {
                 SFXWrong.volume = .5
                 SFXWrong.play()
             }
-            
+
         }
     }
 
@@ -197,22 +199,25 @@ const Quiz_V2 = (props) => {
         let userChose = parseInt(userSelection.id.slice(-1))
         let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
 
+        setCorrectAnswerOption(correctAnswer)
+        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
+
         if (userChose == correctAnswer) {
             setCorrectAnswersCount(prev => prev + 1)
             playSFX('correct')
+            return true
         } else {
             setWrongAnswerOption(parseInt(userChose))
             playSFX('wrong')
+            quizEnd()
+            return false
         }
-
-        setCorrectAnswerOption(correctAnswer)
-        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
     }
 
     const amountOfPauseCalculator = () => {
-        let amountOfPause = 1500
+        let amountOfPause = 2000
         const currentQuestions = questions[currentQuestionNumber - 1]
-        
+
         if (currentQuestions?.answer_text && currentQuestions?.answer_text !== '') {
             amountOfPause += 2000
         }
@@ -238,25 +243,7 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const takeSelectedOptionValue = (userSelection) => {
-        let userChose = userSelection.id
-        const currentQuestionNumber = parseInt(userChose.split('-')[0])
-
-        for (let i = 1; i <= 10; i++) {
-            if (document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`)) {
-                document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`).style.opacity = .5
-                document.getElementById(`inputLabel ${currentQuestionNumber}-${i}`).style.borderColor = 'white'
-            }
-        }
-
-        document.getElementById(`inputLabel ${userChose}`).style.opacity = 1
-        document.getElementById(`inputLabel ${userChose}`).style.background = (theme == 'light' ? 'white' : '#000000bf')
-        document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
-    }
-
-    const halfTheQuestions = Math.floor(questions.length / 2)
-
-    const ifHalfQuizAddView = () => {
+    const ifQuizPlaying = () => {
         if (currentQuestionNumber == halfTheQuestions) {  // && userProfile.userDetail
             AddView(`quizV2View`, quizDetailRef.current.id)
         }
@@ -269,28 +256,16 @@ const Quiz_V2 = (props) => {
             // }, 300)
 
             setAbleToSelectOption(false)
-            setAbleToGoNext(true)
             makeEveryOptionLowOpacity('low')
-            checkTheSelectedOption(props.target)
-            ifHalfQuizAddView()
-
-            if (autoQuestionChanger) {
-                setTimeout(() => {
-                    goNextQuestionOrEndTheQuiz()
-                }, amountOfPauseCalculator())
-            } else {
-                setTimeout(() => {
-                    if (document.querySelector('.quiz__container')?.style.transform == 'translate(0rem)' && !(isItDesktop())) {
-                        enqueueSnackbar('برای تغییر سوال، صفحه را بکشید', { variant: 'info', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                    }
-                }, 5000)
+            const result = checkTheSelectedOption(props.target)
+            if (result) {
+                nextQuestion()
             }
         }
     }
 
     const restartTheStateOfQuestion = () => {
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
-        setAbleToGoNext(false)
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
         makeEveryOptionLowOpacity('high')
@@ -301,7 +276,7 @@ const Quiz_V2 = (props) => {
     }
 
     let sumOfTheWidthMarginAndPaddingOfQuestionForSliding
-    
+
     // class quiz__container all x size in rem
     if (isItDesktop() || isItIPad()) {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = (460.8 + 1.6 + 1.6 + 80) / 16  // width + padding-l + padding-r + margin-r
@@ -310,31 +285,43 @@ const Quiz_V2 = (props) => {
         sumOfTheWidthMarginAndPaddingOfQuestionForSliding = ((351.988 + 1.6 + 1.6 + 8 + 80) / 16)  // width + padding-l + padding-r + margin-l + margin-r
     }
 
-    const goNextQuestionOrEndTheQuiz = () => {
-        if (currentQuestionNumber !== questions?.length) {
-            restartTheStateOfQuestion()
-            plusOneToTotalAnsweredQuestions()
-            setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+    const quizEnd = () => {
+        log(quiz)
 
-            // if (typeof (window) !== 'undefined' && !(window.navigator.userAgent.includes('Windows'))) {
-            //     window.scrollTo(0, 0);
-            // }
+        log(correctAnswersCount)
 
-        } else {
-            setQuizEnded(true)
-            localStorage.setItem('qd', JSON.stringify(quiz))
-            switch (quizType) {
-                case 'quiz':
-                    localStorage.setItem('qt', 'quiz')
-                    localStorage.setItem('qr', JSON.stringify({ ql: questions?.length, qc: correctAnswersCount }))
-                    break
-                case 'test':
-                    localStorage.setItem('qt', 'test')
-                    localStorage.setItem('qr', calculateThePoints())
-                    break
-            }
-            result.current.click()
+        if (correctAnswersCount <= 3) {
+            setResultGif(quiz.GIF_awful)
+        } else if (correctAnswerOption <= 6) {
+            setResultGif(quiz.GIF_bad)
+        } else if (correctAnswerOption <= 10) {
+            setResultGif(quiz.GIF_ok)
+        } else if (correctAnswerOption <= 19) {
+            setResultGif(quiz.GIF_good)
+        } else if (correctAnswerOption <= 20) {
+            setResultGif(quiz.GIF_great)
         }
+
+        setTimeout(() => {
+            setQuizEndStatue(true)
+        }, 3000);
+    }
+
+    const nextQuestion = () => {
+        setTimeout(() => {
+            if (currentQuestionNumber !== questions?.length) {
+                restartTheStateOfQuestion()
+                plusOneToTotalAnsweredQuestions()
+                setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+
+                // if (typeof (window) !== 'undefined' && !(window.navigator.userAgent.includes('Windows'))) {
+                //     window.scrollTo(0, 0);
+                // }
+
+            } else {
+                quizEnd()
+            }
+        }, amountOfPauseCalculator());
     }
 
     const returnQuiz = (question) => {
@@ -444,43 +431,6 @@ const Quiz_V2 = (props) => {
         setCurrentQuestionNumber(prev => prev + 1)
     }
 
-    const minusOneToTotalAnsweredQuestions = () => {
-        setCurrentQuestionNumber(prev => prev - 1)
-    }
-
-    const goLastQuestion = () => {
-        if (currentQuestionNumber !== 1) {
-            minusOneToTotalAnsweredQuestions()
-            setCurrentMoveOfQuestions(prev => prev + sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
-
-        } else {
-            enqueueSnackbar('شما سوال اول هستید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-        }
-    }
-
-    const calculateThePoints = () => {
-        const allOptions = document.querySelectorAll('input[type=radio]')
-        const optionPoints = ['option_point_1st', 'option_point_2nd', 'option_point_3rd', 'option_point_4th', 'option_point_5th', 'option_point_6th', 'option_point_7th', 'option_point_8th', 'option_point_9th', 'option_point_10th']
-
-        const firstQuestionId = allOptions[0].getAttribute('id')
-        const firstQuestionIndex = parseInt(firstQuestionId.split('-')[0])
-
-        let totalPoints = 0
-        for (let i = 0; i < allOptions.length; i++) {
-            const questionId = allOptions[i].getAttribute('id')
-            const currentQuestionId = parseInt(questionId.split('-')[0])
-            const currentQuestionNumber = currentQuestionId - firstQuestionIndex
-            const OptionSelected = parseInt(questionId.split('-')[1]) - 1
-
-            if (allOptions[i].checked) {
-                const pointOfOptions = questions[currentQuestionNumber][optionPoints[OptionSelected]]
-                totalPoints += pointOfOptions
-            }
-        }
-
-        return totalPoints
-    }
-
     const showTheTagsIfNotNull = () => {
         const splittedTags = quiz.tags.split('،')
         return (
@@ -523,29 +473,9 @@ const Quiz_V2 = (props) => {
         return `https://www.quizzland.net/play/${replaceFunction(quizSlug, ' ', '-')}`
     }
 
-    let firstTouch
-    const touchScreenStart = (e) => {
-        const positionOfStartTouch = e.changedTouches[0].clientX
-        firstTouch = positionOfStartTouch
-    }
-
-    const touchScreenEnd = (e) => {
-        const positionOfEndTouch = e.changedTouches[0].clientX
-        if (positionOfEndTouch - firstTouch <= -100) {
-            if (!(autoQuestionChanger)) {
-                goNextQuestionOrEndTheQuiz()
-            }
-        }
-    }
-    
     const SFXController = (statue) => {
         setSFXAllowed(statue)
         localStorage.setItem('SFXAllowed', statue)
-    }
-
-    const changeAutoQuestionChanger = (statue) => {
-        setAutoQuestionChanger(statue)
-        localStorage.setItem('autoQuestionChanger', statue)
     }
 
     return (
@@ -600,6 +530,54 @@ const Quiz_V2 = (props) => {
                 </script>
             </Helmet>
 
+            <div id='join' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${joinPaper ? '' : 'popUp-hide'}`}>
+                <div className='shadow-[0_0_10px_#000000e8] rounded-lg m-5'>
+                    <div className='text-[1.5rem] rounded-lg py-5 m-3'>
+                        <h1 className='textShadow'>
+                            کوییز هری پاتر
+                        </h1>
+                    </div>
+                    <ul className='text-right p-5 space-y-5'>
+                        <li className='list-disc mr-4'><p className='textShadow'>در تعداد سوال ها محدودیت وجود ندارد. تا وقتی اشتباه نکنید بازی ادامه دارد.</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>هر چه امتیاز شما بالا باشد درنهایت کیوکوین بیشتری دریافت میکنید</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از کیوکوین های خود از کمک کننده ها استفاده کنید</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیری</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>ورودی این کوییز: <b>رایگان</b></p></li>
+                    </ul>
+                </div>
+                <button onClick={() => setJoinPaper(false)} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
+                    بزن بریم
+                </button>
+            </div>
+
+            <div id='quizEnd' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${quizEndStatue ? 'popUp-show' : 'popUp-hide'}`}>
+                {
+                    quizEndStatue &&
+                    <div className='flex flex-col justify-between h-full'>
+                        <div>
+                            <div className='shadow-[0_0_10px_#000000e8] rounded-lg m-5'>
+                                <div className='text-[1.5rem] rounded-lg py-5 m-3'>
+                                    <h1 className='textShadow'>
+                                        {correctAnswersCount}
+                                    </h1>
+                                </div>
+                            </div>
+                            <div>
+                                {<img src={resultGif} className='object-cover rounded-lg h-[19rem] w-[90%] m-auto' width={540} alt={resultGif} />}
+                            </div>
+                        </div>
+                        <div>
+                            <button onClick={() => setJoinPaper(false)} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
+                                سعی مجدد
+                            </button>
+                            <button className='mr-3'>
+                                بازگشت
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+
             {/* <ReCAPTCHA
                 sitekey={process.env.RECAPTCHA_SITE_KEY}
                 size='invisible'
@@ -612,106 +590,77 @@ const Quiz_V2 = (props) => {
             <div>
                 {
                     !its404
-                    ?
-                    <div className="ltr">
-                        <div id='quizBg'></div>
+                        ?
+                        <div className="ltr">
+                            <div id='quizBg'></div>
 
-                        <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
+                            <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                        {/* {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} />} */}
+                            {/* {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} />} */}
 
-                        {
-                            contentLoaded && isItDesktop() &&
-                            <div className={`
-                            quiz__questionChanger__container relative
-                            top-24
-                            ${ableToGoNext ? 'fadeIn' : 'fadeOut'}
-                        `}>
-                                <button onClick={autoQuestionChanger ? () => { return } : goNextQuestionOrEndTheQuiz}
-                                    aria-label='Next Question'
-                                    className={`
-                                    quiz__questionChanger absolute
-                                    quiz__questionChanger__next btn
-                                    ${autoQuestionChanger ? 'fadeOut' : 'fadeIn'}
-                                `}
-                                >
+                            <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
+                                <div className={`quiz__hider mt-5 flex relative`}>
+                                    {
+                                        !(contentLoaded) &&
+                                        <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
+                                    }
 
-                                    <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <polyline points="12 16 16 12 12 8" />  <line x1="8" y1="12" x2="16" y2="12" /></svg>
-
-                                </button>
+                                    {
+                                        isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
+                                    }
+                                </div>
                             </div>
-                        }
 
-                        <div onTouchStart={touchScreenStart} onTouchEnd={touchScreenEnd} className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
-                            <div className={`quiz__hider mt-5 flex relative`}>
-                                {
-                                    !(contentLoaded) &&
-                                    <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
-                                }
-
-                                {
-                                    isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
-                                }
+                            <div>
+                                <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
+                                <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags max-w-[35rem] mx-auto'>
+                                    {quiz && showTheTagsIfNotNull()}
+                                </ul>
                             </div>
+
+                            {/* Adverts */}
+
+                            {/* <div className='mt-5 adverts_center' id='mediaad-bNpr'></div> */}
+
+                            <div className='mx-4 mt-10'>
+                                <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
+
+                                <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
+                                    {
+                                        suggestionQuizzes && <TestContainer quizzes={suggestionQuizzes} bgStyle={'bg'} />
+                                    }
+                                </ul>
+                            </div>
+
+
+                            {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}
+
+                            {/* Adverts */}
+                            {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
+
                         </div>
-
+                        :
                         <div>
-                            <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
-                            <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags max-w-[35rem] mx-auto'>
-                                {quiz && showTheTagsIfNotNull()}
-                            </ul>
-                        </div>
+                            <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
 
-                        {/* Adverts */}
-
-                        {/* <div className='mt-5 adverts_center' id='mediaad-bNpr'></div> */}
-
-                        <div className='mx-4 mt-10'>
-                            <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
-
-                            <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
-                                {
-                                    suggestionQuizzes && <TestContainer quizzes={suggestionQuizzes} bgStyle={'bg'} />
-                                }
-                            </ul>
-                        </div>
-
-
-                        {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}
-
-                        {/* Adverts */}
-                        {/* <div className='adverts_center' id='mediaad-dESu'></div> */}
-
-
-                        <Link
-                            to={`/result`}
-                            ref={result}
-                            className='noVis'
-                        ></Link>
-
-                    </div>
-                    :
-                    <div>
-                        <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
-
-                        <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'light' ? '#f0f0f0' : '#0000008c'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
-                            <h1> 🤔 اوپس! کوییز مورد نظر پیدا نشد </h1>
-                            <div class="mt-5">
-                                <h2>
-                                    نیست یا در حال حاضر غیر فعال شده
-                                </h2>
-                            </div>
-                            <div className='mt-10'>
-                                <div className='px-4 py-2 border-2 border-red-900 rounded-xl'>
+                            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'light' ? '#f0f0f0' : '#0000008c'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
+                                <h1> 🤔 اوپس! کوییز مورد نظر پیدا نشد </h1>
+                                <div class="mt-5">
                                     <h2>
-                                        <Link to='/sort?s=trend'>
-                                            مشاهده بهترین کوییز های این ماه
-                                        </Link>
+                                        نیست یا در حال حاضر غیر فعال شده
                                     </h2>
+                                </div>
+                                <div className='mt-10'>
+                                    <div className='px-4 py-2 border-2 border-red-900 rounded-xl'>
+                                        <h2>
+                                            <Link to='/sort?s=trend'>
+                                                مشاهده بهترین کوییز های این ماه
+                                            </Link>
+                                        </h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 }
 
             </div>

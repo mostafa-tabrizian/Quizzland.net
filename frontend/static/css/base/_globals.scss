@@ -243,17 +243,17 @@ hr {
 
 .popUp {
     &-show {
-        transform: translate(-50%, -50%);
+        transform: translate(0, 0);
         visibility: visible !important;
         opacity: 1 !important;
-        transition: all .53s ease-in-out !important;
+        transition: all .5s ease-in-out !important;
     }
 
     &-hide {
-        transform: translate(-50%, -45%);
+        transform: translate(0, -100%);
         visibility: hidden !important;
-        opacity: 0 !important;
-        transition: all .53s ease-in-out !important;
+        opacity: .5 !important;
+        transition: all .5s ease-in-out !important;
     }
 }
 
@@ -570,6 +570,10 @@ hr {
     @include breakpoints-down(large) {
         font-size: 2rem !important;
     }
+}
+
+.textShadow {
+    text-shadow: 2px 1px 4px black;
 }
 
 .skeletonQuiz {
