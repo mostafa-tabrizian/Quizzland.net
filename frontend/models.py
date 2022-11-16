@@ -176,7 +176,6 @@ class Quizzes_V2(models.Model):
     def __unicode__(self):
         return 'test'
 
-
 class Quizzes_Pointy(models.Model):
     id = models.AutoField(primary_key=True)
     public = models.BooleanField(default=True)
@@ -270,7 +269,6 @@ class Quizzes_Pointy(models.Model):
     def __str__(self):
         return str(self.title)
 
-
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
     quizKey = models.ForeignKey(
@@ -301,7 +299,6 @@ class Questions(models.Model):
     def __unicode__(self):
         return 'test'
 
-
 class Questions_V2(models.Model):
     id = models.AutoField(primary_key=True)
     quizKey = models.ForeignKey(Quizzes_V2, related_name='quizKey_questions_V2',
@@ -331,7 +328,6 @@ class Questions_V2(models.Model):
 
     def __unicode__(self):
         return 'test'
-
 
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
@@ -388,7 +384,17 @@ class Pointy_Questions(models.Model):
     def __str__(self):
         return str(self.quizKey)
 
-
+class UserAnswer(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(CustomUser, related_name='user_id_userAnswer',blank=False, null=False, on_delete=models.CASCADE)
+    question_id = models.ForeignKey(Questions_V2, related_name='question_userAnswer_id', blank=True, null=True, on_delete=models.CASCADE)
+    user_answer = models.IntegerField()
+    correct_answer = models.IntegerField()
+    date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
+    
+    def __str__(self):
+        return f'{self.user_id.username} answered quiz {self.question_id.id}'
+    
 class Like(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(CustomUser, related_name='user_id_like',

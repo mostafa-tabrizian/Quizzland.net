@@ -256,6 +256,30 @@ class CommentSerializer(serializers.ModelSerializer):
 
         return newComment
 
+class UserAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAnswer
+        fields = (
+            '__all__'
+        )
+
+    user_id = CustomUserSerializer(many=False)
+    quiz_id = QuizzesSerializer(many=False)
+
+    def create(self, request):
+        request_user_id = self.context['request'].data['user_id']['username']
+        request_question_id = self.context['request'].data['question_id']['id']
+        request_user_answer = self.context['request'].data['user_answer']
+        request_correct_answer = self.context['request'].data['correct_answer']
+
+        newUserAnswer = UserAnswer.objects.create(
+            user_id=(CustomUser.objects.get(id=request_user_id)),
+            question_id=(Quizzes_V2.objects.get(id=request_question_id)),
+            user_answer=request_user_answer,
+            correct_answer=request_correct_answer
+        )
+
+        return newUserAnswer
 
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:

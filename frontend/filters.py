@@ -57,6 +57,15 @@ class PointyQuizzesFilter(filters.FilterSet):
             'tags': ['iexact', 'icontains']
         }
 
+class UserAnswerFilter(filters.FilterSet):
+    class Meta:
+        model = UserAnswer
+        fields = {
+            'user_id': ['exact'], 
+            'question_id': ['exact'],
+            'date_submitted': ['lte', 'gte'],
+        }
+
 class LikeFilter(filters.FilterSet):
     class Meta:
         model = Like

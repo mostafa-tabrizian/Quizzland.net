@@ -557,6 +557,20 @@ class QuestionsPointyView(viewsets.ModelViewSet):
 
 # --------------------------------------------------------
 
+class UserAnswerView(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UserAnswerSerializer
+    filterset_class = UserAnswerFilter
+
+    def get_queryset(self):
+        if self.request.user:
+            UserAnswer_objects = UserAnswer.objects.filter(
+                user_id=self.request.user).order_by('date_submitted')
+
+            if UserAnswer_objects.exists():
+                return UserAnswer_objects
+            else:
+                return History.objects.none()
 
 class LikeView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)

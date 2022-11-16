@@ -68,6 +68,12 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
     list_filter = ('subCategory', 'categoryKey', 'publish')
     search_fields = ['id', 'title', 'slug']
 
+@admin.register(UserAnswer)
+class UserAnswer_Admin(admin.ModelAdmin):
+    list_display = ('user_id', 'question_id', 'user_answer', 'correct_answer', 'date_submitted')
+    list_filter = ('date_submitted', )
+    search_fields = ['user_id__username', 'quiz_id__slug', 'question_id__question']
+
 @admin.register(Like)
 class Like_Admin(admin.ModelAdmin):
     list_display = ('user_id', 'quiz_id', 'date_submitted')
