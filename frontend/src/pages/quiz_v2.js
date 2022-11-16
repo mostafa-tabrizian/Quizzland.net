@@ -114,7 +114,7 @@ const Quiz_V2 = (props) => {
 
     const fetchQuiz = async () => {
         quizSlugReplacedWithHyphen &&
-            await axios.get(`/api/quizV2View/?quizKey__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
+            await axios.get(`/api/quizV2View/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
                     quizDetailRef.current = quizData
                     setQuiz(quizData)
@@ -568,7 +568,7 @@ const Quiz_V2 = (props) => {
                 <div className='shadow-[0_0_10px_#000000e8] rounded-lg m-5'>
                     <div className='text-[1.5rem] rounded-lg py-5 m-3'>
                         <h1 className='textShadow'>
-                            کوییز هری پاتر
+                            کوییز {quiz?.title}
                         </h1>
                     </div>
                     <ul className='text-right p-5 space-y-5'>
@@ -577,7 +577,13 @@ const Quiz_V2 = (props) => {
                         <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از کیوکوین های خود از کمک کننده ها استفاده کنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیری</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>ورودی این کوییز: <b>
-                            {quizDetailRef.current?.fees || 'رایگان'}
+                            {
+                                quiz?.fees ?
+                                `کیو کوین ${quiz?.fees}`
+                                :
+                                'رایگان'
+                            }
+                            {/* if not free. get from the user coins */}
                         </b></p></li>
                     </ul>
                 </div>

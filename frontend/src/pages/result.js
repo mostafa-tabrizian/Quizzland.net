@@ -180,7 +180,7 @@ const Result = () => {
         const playedBefore = await userPlayedThisQuizBefore()
 
         if (giveAmountPoint !== 0 && !playedBefore) {
-            await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { points: userProfile.userDetail.points + parseInt(giveAmountPoint) })
+            await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { q_coins: userProfile.userDetail.q_coins + parseInt(giveAmountPoint) })
                 .then(res => {
                     res.status == 200 &&
                         enqueueSnackbar(`${giveAmountPoint} امتیاز به شما تعلق گرفت 🎉`, { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})

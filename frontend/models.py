@@ -19,7 +19,7 @@ class CustomUser(AbstractUser):
     birthday_date = models.DateField(blank=True, null=True)
     gender = models.CharField(blank=True, null=True,
                               max_length=7, choices=Gender)
-    points = models.IntegerField(default=0)
+    q_coins = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.email)

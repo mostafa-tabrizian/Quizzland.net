@@ -41,7 +41,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'gender',
             'birthday_date',
             'avatar',
-            'points',
+            'q_coins',
             'is_active',
             'is_staff'
         )

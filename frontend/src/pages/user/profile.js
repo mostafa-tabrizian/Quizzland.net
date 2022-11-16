@@ -101,7 +101,7 @@ const Profile = () => {
                                     <Link to='/points-guide' className='flex px-4 py-2 space-x-2 space-x-reverse bloodRiver_bg rounded-xl'>
                                         <dt>امتیاز ها</dt>
                                         <dd className='flex'>
-                                            <span>{user?.points}</span>
+                                            <span>{user?.q_coins}</span>
                                             <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><path fill="#FFF" fill-rule="nonzero" d="M13.11 10.023c-1.628 0-2.724-2.3-2.724-3.95 0 1.65-1.096 3.95-2.725 3.95 1.629 0 2.725 2.318 2.725 3.95 0-1.65 1.113-3.95 2.725-3.95zM8.537 6.375C5.994 6.375 4.268 2.66 4.268 0 4.268 2.66 2.54 6.375 0 6.375c2.541 0 4.268 3.715 4.268 6.376 0-2.66 1.726-6.376 4.268-6.376z"></path></svg>
                                         </dd>
                                     </Link>

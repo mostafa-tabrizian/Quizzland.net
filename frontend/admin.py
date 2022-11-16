@@ -20,7 +20,7 @@ class CustomUserAdmin(UserAdmin):
                     'bio',
                     'birthday_date',
                     'gender',
-                    'points',
+                    'q_coins',
                 ),
             },
         ),

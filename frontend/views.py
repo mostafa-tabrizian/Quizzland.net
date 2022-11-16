@@ -65,10 +65,9 @@ def public_profile(request, *args, **kwargs):
                         'username': user.username,
                         'first_name': user.first_name,
                         'last_name': user.last_name,
-                        'points': user.points,
+                        'q_coins': user.q_coins,
                         'avatar': str(user.avatar),
                         'bio': user.bio,
-                        'points': user.points,
                         'likes': userLikesNumber,
                         'comments': userCommentsNumber,
                     }
