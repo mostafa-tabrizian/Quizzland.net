@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import { Helmet } from "react-helmet";
-import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 // import ReCAPTCHA from 'react-google-recaptcha'
@@ -50,6 +49,7 @@ const Quiz_V2 = (props) => {
 
     const result = useRef(null)
     const quizDetailRef = useRef(null)
+    const questionRef = useRef(null)
     // const recaptchaRef = useRef(null)
     
     const { enqueueSnackbar } = useSnackbar()
@@ -64,8 +64,8 @@ const Quiz_V2 = (props) => {
     
     useEffect(() => {
         const question_background = document.querySelector('#question_background')
-        question_background && (document.querySelectorAll('#question_background').forEach((q) => q.style = `background: ${quiz?.question_background}`))
-        document.querySelector('body').style = `background: #060101`
+        question_background && (document.querySelectorAll('#question_background').forEach((q) => q.style = `background: ${quiz?.theme}`))
+        // document.querySelector('body').style = `background: #060101`
     })
     
     useEffect(() => {
@@ -107,11 +107,7 @@ const Quiz_V2 = (props) => {
     }
 
     const applyBackground = () => {
-        const quizBg = document.querySelector('#quizBg')
-        const background = quizDetailRef.current.background
-
-        quizBg &&
-            (quizBg.style = `background-image: url('${background}'); background-size: cover; background-position: center`)
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, ${quizDetailRef.current.theme}50, ${quizDetailRef.current.theme}80)`
     }
 
     const fetchQuiz = async () => {
@@ -179,16 +175,6 @@ const Quiz_V2 = (props) => {
 
             question.querySelector('.quiz__answerImGif')?.classList.remove('answerShow')
             question.querySelector('.quiz__answerImGif')?.classList.add('answerHide')
-        }
-    }
-
-    const playSFX_click = () => {
-        const SFXAllowed = localStorage.getItem('SFXAllowed')
-        if (SFXAllowed === 'true') {
-            if (SFXAllowed === 'true') {
-                SFXClick.volume = .5
-                SFXClick.play()
-            }
         }
     }
 
@@ -325,31 +311,29 @@ const Quiz_V2 = (props) => {
     }
 
     const goNextQuestionOrEndTheQuiz = () => {
-        if (ableToGoNext || autoQuestionChanger) {
-            if (currentQuestionNumber !== questions?.length) {
-                restartTheStateOfQuestion()
-                plusOneToTotalAnsweredQuestions()
-                setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
+        if (currentQuestionNumber !== questions?.length) {
+            restartTheStateOfQuestion()
+            plusOneToTotalAnsweredQuestions()
+            setCurrentMoveOfQuestions(prev => prev - sumOfTheWidthMarginAndPaddingOfQuestionForSliding)
 
-                // if (typeof (window) !== 'undefined' && !(window.navigator.userAgent.includes('Windows'))) {
-                //     window.scrollTo(0, 0);
-                // }
+            // if (typeof (window) !== 'undefined' && !(window.navigator.userAgent.includes('Windows'))) {
+            //     window.scrollTo(0, 0);
+            // }
 
-            } else {
-                setQuizEnded(true)
-                localStorage.setItem('qd', JSON.stringify(quiz))
-                switch (quizType) {
-                    case 'quiz':
-                        localStorage.setItem('qt', 'quiz')
-                        localStorage.setItem('qr', JSON.stringify({ ql: questions?.length, qc: correctAnswersCount }))
-                        break
-                    case 'test':
-                        localStorage.setItem('qt', 'test')
-                        localStorage.setItem('qr', calculateThePoints())
-                        break
-                }
-                result.current.click()
+        } else {
+            setQuizEnded(true)
+            localStorage.setItem('qd', JSON.stringify(quiz))
+            switch (quizType) {
+                case 'quiz':
+                    localStorage.setItem('qt', 'quiz')
+                    localStorage.setItem('qr', JSON.stringify({ ql: questions?.length, qc: correctAnswersCount }))
+                    break
+                case 'test':
+                    localStorage.setItem('qt', 'test')
+                    localStorage.setItem('qr', calculateThePoints())
+                    break
             }
+            result.current.click()
         }
     }
 
@@ -412,7 +396,7 @@ const Quiz_V2 = (props) => {
                                     <div className='absolute z-10 top-6 right-7 md:right-3 questionNumberShadow mix-blend-hard-light'>
                                         {questions.indexOf(question) + 1}
                                     </div>
-                                    <p className='p-3 text-[2rem] w-full quiz_question mix-blend-hard-light text-center backdrop-blur-2xl rounded-xl'> {question.question} </p>
+                                    <p className={`p-3 w-full text-[1.5rem] quiz_question mix-blend-hard-light text-center backdrop-blur-2xl rounded-xl`} ref={questionRef}> {question.question} </p>
                                 </div>
                             }
 
@@ -626,59 +610,13 @@ const Quiz_V2 = (props) => {
             /> */}
 
             <div>
-                {quiz?.title &&
-                    <StickyShareButtons
-                        config={{
-                            alignment: 'left',
-                            color: 'social',
-                            enabled: true,
-                            font_size: 16,
-                            hide_desktop: false,
-                            labels: 'counts',
-                            language: 'en',
-                            min_count: 10,
-                            networks: [
-                                'whatsapp',
-                                'telegram',
-                                'twitter',
-                                'sms',
-                                'sharethis',
-                            ],
-                            padding: 9,
-                            radius: 15,
-                            show_total: true,
-                            show_mobile: true,
-                            show_toggle: false,
-                            size: 38,
-                            top: 450,
-                            url: currentUrl()
-                        }}
-                    />
-                }
-
                 {
                     !its404
                     ?
                     <div className="ltr">
                         <div id='quizBg'></div>
 
-                        <div className={`
-                        fixed left-0 backdrop-blur-3xl backdrop-brightness-75
-                        top-0 w-screen h-screen z-20 ${quizEnded ? 'fadeIn' : 'fadeOut'}
-                        flex flex-col items-center justify-center 
-                    `}>
-                            <div>
-                                <div className='absolute w-10 h-10 bg-red-800 rounded-full animate-ping'></div>
-                                <div className='w-10 h-10 bg-red-800 rounded-full'></div>
-                            </div>
-                            <div className='mt-5'>
-                                <h2>
-                                    در حال محاسبه نتیجه کوییز
-                                </h2>
-                            </div>
-                        </div>
-
-                        <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
+                        <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
                         {/* {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} />} */}
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import { Helmet } from "react-helmet";
-import { StickyShareButtons } from 'sharethis-reactjs';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 // import ReCAPTCHA from 'react-google-recaptcha'
@@ -14,7 +13,7 @@ import Trivia from '../components/quiz/trivia'
 import Test from '../components/quiz/test'
 
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
-const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
+const TestHeader = React.lazy(() => import('../components/quiz/testHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 import AddView from '../components/addView';
 const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
@@ -675,36 +674,6 @@ const Quiz = (props) => {
             /> */}
 
             <div>
-                {quiz?.title &&
-                    <StickyShareButtons
-                        config={{
-                            alignment: 'left',
-                            color: 'social',
-                            enabled: true,
-                            font_size: 16,
-                            hide_desktop: false,
-                            labels: 'counts',
-                            language: 'en',
-                            min_count: 10,
-                            networks: [
-                                'whatsapp',
-                                'telegram',
-                                'twitter',
-                                'sms',
-                                'sharethis',
-                            ],
-                            padding: 9,
-                            radius: 15,
-                            show_total: true,
-                            show_mobile: true,
-                            show_toggle: false,
-                            size: 38,
-                            top: 450,
-                            url: currentUrl()
-                        }}
-                    />
-                }
-
                 {
                     !its404
                         ?
@@ -727,7 +696,7 @@ const Quiz = (props) => {
                                 </div>
                             </div>
 
-                            <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
+                            <TestHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
                             {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={quizType} />}
 

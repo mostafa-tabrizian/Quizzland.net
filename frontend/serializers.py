@@ -128,7 +128,6 @@ class QuizzesSerializer(serializers.ModelSerializer):
     
 class QuizzesV2Serializer(serializers.ModelSerializer):
     thumbnail = serializers.ImageField(required=False)
-    background = serializers.ImageField(required=False)
     GIF20 = serializers.ImageField(required=False)
     GIF40 = serializers.ImageField(required=False)
     GIF60 = serializers.ImageField(required=False)

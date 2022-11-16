@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-import { InlineShareButtons } from 'sharethis-reactjs';
 const axios = require('axios')
 import { useSnackbar } from 'notistack'
 import Dialog from '@mui/material/Dialog'
@@ -422,38 +421,11 @@ const Result = () => {
 
                     {returnQuizResult()}
 
-                    <div className='container px-20 mx-auto'>
+                    {/* <div className='container px-20 mx-auto'>
                         <div className="mb-4 text-lg text-center space-sm">
-                            {/* <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizDetail.fan_name} هستن`}</h5> */}
-
-                            <InlineShareButtons
-                                config={{
-                                    alignment: 'center',
-                                    color: 'social',
-                                    enabled: true,
-                                    font_size: 16,
-                                    labels: 'null',
-                                    language: 'en',
-                                    networks: [
-                                        'whatsapp',
-                                        'telegram',
-                                        'twitter',
-                                        'sharethis',
-                                    ],
-                                    padding: 10,
-                                    radius: 10,
-                                    show_total: false,
-                                    size: 45,
-
-
-                                    url: window.location.href,
-                                    image: quizDetail?.thumbnail,
-                                    title: quizDetail?.title1,
-                                }}
-                            />
-
+                            <h5>{`دوستات رو به چالش بکش  \n ببین در حد تو ${quizDetail.fan_name} هستن`}</h5>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {quizDetail?.id && <LikeCommentButton quizId={quizDetail?.id} quizType={quizType} showLoginNotification={showLoginNotification} />}
