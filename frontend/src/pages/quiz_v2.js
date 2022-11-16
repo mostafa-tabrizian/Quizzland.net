@@ -576,7 +576,9 @@ const Quiz_V2 = (props) => {
                         <li className='list-disc mr-4'><p className='textShadow'>هر چه امتیاز شما بالا باشد درنهایت کیوکوین بیشتری دریافت میکنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از کیوکوین های خود از کمک کننده ها استفاده کنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیری</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow'>ورودی این کوییز: <b>رایگان</b></p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>ورودی این کوییز: <b>
+                            {quizDetailRef.current?.fees || 'رایگان'}
+                        </b></p></li>
                     </ul>
                 </div>
                 <button onClick={() => setJoinPaper(false)} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
