@@ -264,7 +264,7 @@ class UserAnswerSerializer(serializers.ModelSerializer):
         )
 
     user_id = CustomUserSerializer(many=False)
-    quiz_id = QuizzesSerializer(many=False)
+    question_id = QuestionsV2Serializer(many=False)
 
     def create(self, request):
         request_user_id = self.context['request'].data['user_id']['username']
@@ -274,7 +274,7 @@ class UserAnswerSerializer(serializers.ModelSerializer):
 
         newUserAnswer = UserAnswer.objects.create(
             user_id=(CustomUser.objects.get(id=request_user_id)),
-            question_id=(Quizzes_V2.objects.get(id=request_question_id)),
+            question_id=(Questions_V2.objects.get(id=request_question_id)),
             user_answer=request_user_answer,
             correct_answer=request_correct_answer
         )

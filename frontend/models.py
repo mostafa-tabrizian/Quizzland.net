@@ -324,7 +324,7 @@ class Questions_V2(models.Model):
     answer_text = RichTextField(blank=True, default=None)
 
     def __str__(self):
-        return str(self.quizKey)
+        return str(self.question)
 
     def __unicode__(self):
         return 'test'

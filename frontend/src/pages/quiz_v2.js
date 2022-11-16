@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 // import ReCAPTCHA from 'react-google-recaptcha'
 import { useSnackbar } from 'notistack'
 import Skeleton from '@mui/material/Skeleton';
+import UserStore from '../store/userStore';
 
 import axios from '../components/axiosApi'
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
 import Trivia from '../components/quiz/trivia'
-import Test from '../components/quiz/test'
 
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 import AddView from '../components/addView';
+import axiosInstance from '../components/axiosAuthApi';
 const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
 const TestContainer = React.lazy(() => import('../components/testContainer'))
 
@@ -50,6 +51,8 @@ const Quiz_V2 = (props) => {
     const quizDetailRef = useRef(null)
     const questionRef = useRef(null)
     // const recaptchaRef = useRef(null)
+
+    const [userProfile] = UserStore()
 
     const { enqueueSnackbar } = useSnackbar()
 
@@ -196,19 +199,43 @@ const Quiz_V2 = (props) => {
         }
     }
 
+    //? on fetch return the not answer one first then the wrong one then the answered one
+
+    const saveUserAnswer = async (userAnswer, correctAnswer) => {
+        const now = new Date().getTime()
+        const payload = {
+            user_id: {
+                username: userProfile.userDetail.id
+            },
+            question_id: {
+                id: questions[currentQuestionNumber - 1].id
+            },
+            user_answer: userAnswer,
+            correct_answer: correctAnswer
+        }
+        
+        await axiosInstance.post(`/api/userAnswerView/?timestamp=${now}`, payload)
+            .catch(err => {
+                log(err)
+                log(err.response)
+            })
+    }
+
     const checkTheSelectedOption = (userSelection) => {
-        let userChose = parseInt(userSelection.id.slice(-1))
+        let userAnswer = parseInt(userSelection.id.slice(-1))
         let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
+
+        saveUserAnswer(userAnswer, correctAnswer)
 
         setCorrectAnswerOption(correctAnswer)
         ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
 
-        if (userChose == correctAnswer) {
+        if (userAnswer == correctAnswer) {
             setCorrectAnswersCount(prev => prev + 1)
             playSFX('correct')
             return true
         } else {
-            setWrongAnswerOption(parseInt(userChose))
+            setWrongAnswerOption(parseInt(userAnswer))
             playSFX('wrong')
             quizEnd()
             return false
