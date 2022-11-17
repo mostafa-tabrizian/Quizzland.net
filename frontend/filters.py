@@ -65,6 +65,16 @@ class UserAnswerFilter(filters.FilterSet):
             'question_id': ['exact'],
             'date_submitted': ['lte', 'gte'],
         }
+        
+class UserScoreFilter(filters.FilterSet):
+    class Meta:
+        model = UserScore
+        fields = {
+            'user_id': ['exact'], 
+            'quiz_id': ['exact'],
+            'date_submitted': ['lte', 'gte'],
+            'score': ['lte', 'gte'],
+        }
 
 class LikeFilter(filters.FilterSet):
     class Meta:

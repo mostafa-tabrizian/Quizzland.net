@@ -572,6 +572,21 @@ class UserAnswerView(viewsets.ModelViewSet):
             else:
                 return History.objects.none()
 
+class UserScoreView(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UserScoreSerializer
+    filterset_class = UserScoreFilter
+
+    def get_queryset(self):
+        if self.request.user:
+            UserScore_objects = UserScore.objects.filter(
+                user_id=self.request.user).order_by('date_submitted')
+
+            if UserScore_objects.exists():
+                return UserScore_objects
+            else:
+                return History.objects.none()
+
 class LikeView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = LikeSerializer

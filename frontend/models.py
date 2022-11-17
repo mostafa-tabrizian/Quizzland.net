@@ -393,6 +393,17 @@ class UserAnswer(models.Model):
     def __str__(self):
         return f'{self.user_id.username} answered quiz {self.question_id.id}'
     
+class UserScore(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(CustomUser, related_name='user_id_userResult',blank=False, null=False, on_delete=models.CASCADE)
+    quiz_id = models.ForeignKey(Quizzes_V2, related_name='quiz_userResult_id', blank=True, null=True, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    got_help = models.BooleanField()
+    date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
+    
+    def __str__(self):
+        return f'{self.user_id.username} score {self.score} for {self.quiz_id.title}'
+    
 class Like(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(CustomUser, related_name='user_id_like',blank=False, null=False, on_delete=models.CASCADE)

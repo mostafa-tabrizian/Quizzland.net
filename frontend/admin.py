@@ -72,7 +72,13 @@ class Quizzes_Pointy_Admin(admin.ModelAdmin):
 class UserAnswer_Admin(admin.ModelAdmin):
     list_display = ('user_id', 'question_id', 'user_answer', 'correct_answer', 'date_submitted')
     list_filter = ('date_submitted', )
-    search_fields = ['user_id__username', 'quiz_id__slug', 'question_id__question']
+    search_fields = ['user_id__username', 'question_id__question']
+
+@admin.register(UserScore)
+class UserScore_Admin(admin.ModelAdmin):
+    list_display = ('user_id', 'quiz_id', 'score', 'got_help', 'date_submitted')
+    list_filter = ('date_submitted', )
+    search_fields = ['user_id__username', 'quiz_id__slug']
 
 @admin.register(Like)
 class Like_Admin(admin.ModelAdmin):

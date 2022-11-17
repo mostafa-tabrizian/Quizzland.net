@@ -256,6 +256,31 @@ class UserAnswerSerializer(serializers.ModelSerializer):
         )
 
         return newUserAnswer
+    
+class UserScoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserScore
+        fields = (
+            '__all__'
+        )
+
+    user_id = CustomUserSerializer(many=False)
+    quiz_id = QuizzesV2Serializer(many=False)
+
+    def create(self, request):
+        request_user_id = self.context['request'].data['user_id']['username']
+        request_quiz_id = self.context['request'].data['quiz_id']['id']
+        request_score = self.context['request'].data['score']
+        request_got_help = self.context['request'].data['got_help']
+
+        newUserScore = UserScore.objects.create(
+            user_id=(CustomUser.objects.get(id=request_user_id)),
+            quiz_id=(Quizzes_V2.objects.get(id=request_quiz_id)),
+            score=request_score,
+            got_help=request_got_help
+        )
+
+        return newUserScore
 
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:

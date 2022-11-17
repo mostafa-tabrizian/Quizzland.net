@@ -199,28 +199,6 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    //? on fetch return the not answer one first then the wrong one then the answered one
-
-    const saveUserAnswer = async (userAnswer, correctAnswer) => {
-        const now = new Date().getTime()
-        const payload = {
-            user_id: {
-                username: userProfile.userDetail.id
-            },
-            question_id: {
-                id: questions[currentQuestionNumber - 1].id
-            },
-            user_answer: userAnswer,
-            correct_answer: correctAnswer
-        }
-        
-        await axiosInstance.post(`/api/userAnswerView/?timestamp=${now}`, payload)
-            .catch(err => {
-                log(err)
-                log(err.response)
-            })
-    }
-
     const checkTheSelectedOption = (userSelection) => {
         let userAnswer = parseInt(userSelection.id.slice(-1))
         let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
@@ -382,8 +360,54 @@ const Quiz_V2 = (props) => {
         }
     }
 
+    //? on fetch return the not answer one first then the wrong one then the answered one
+
+    const saveUserAnswer = async (userAnswer, correctAnswer) => {
+        const now = new Date().getTime()
+        const payload = {
+            user_id: {
+                username: userProfile.userDetail.id
+            },
+            question_id: {
+                id: questions[currentQuestionNumber - 1].id
+            },
+            user_answer: userAnswer,
+            correct_answer: correctAnswer
+        }
+        
+        await axiosInstance.post(`/api/userAnswerView/?timestamp=${now}`, payload)
+            .catch(err => {
+                log(err)
+                log(err.response)
+            })
+    }
+
+    const saveUserScore = async () => {
+        const now = new Date().getTime()
+        const payload = {
+            user_id: {
+                username: userProfile.userDetail.id
+            },
+            quiz_id: {
+                id: quiz?.id
+            },
+            score: correctAnswersCount,
+            got_help: false
+        }
+
+        await axiosInstance.post(`/api/userScoreView/?timestamp=${now}`, payload)
+            .then(res => {
+                log(res)
+            })
+            .catch(err => {
+                log(err)
+                log(err.response)
+            })
+    }
+
     const quizEnd = () => {
         selectResultGifText()
+        saveUserScore()
 
         setTimeout(() => {
             setQuizEndStatue(true)
