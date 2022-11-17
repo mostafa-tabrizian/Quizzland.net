@@ -60,7 +60,7 @@ const Search = (props) => {
                             <ul class="flex flex-col md:flex-row flex-wrap align-baseline">
                                 {
                                     searched_content.length ?
-                                        <TestContainer quizzes={searched_content} bgStyle='trans' />
+                                        <TestContainer tests={searched_content} bgStyle='trans' />
                                         :
                                         <div className='flex items-center space-x-3 space-x-reverse'>
                                             <p className='empty'>هیچ کوییزی پیدا نشد!</p>

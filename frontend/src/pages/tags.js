@@ -119,7 +119,7 @@ const SearchMoreResult = () => {
                 <ul className="flex flex-col flex-wrap md:flex-row testContainer flex-ai-fe justify-right">
                     {
                         contentLoaded ?
-                        <TestContainer quizzes={searched_content} bgStyle='trans' />
+                        <TestContainer tests={searched_content} bgStyle='trans' />
                         :
                         <h1 className='w-11/12 text-3xl text-center mb-[50vh] '>
                             متاسفانه هیچ چیزی پیدا نشد 😥

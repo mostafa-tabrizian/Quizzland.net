@@ -130,7 +130,7 @@ const QuizHistory = () => {
                                 <ul className="flex flex-col flex-wrap justify-center align-baseline md:flex-row">
                                     {
                                         content.length ?
-                                        <TestContainer quizzes={content} />
+                                        <TestContainer tests={content} />
                                         :
                                         <h1 className='mt-10 mb-[25rem] text-center'>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
                                     }

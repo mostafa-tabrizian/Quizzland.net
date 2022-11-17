@@ -298,17 +298,9 @@ const Header = () => {
                 <div className='space-x-3 space-x-reverse md:hidden'>
                     {
                         userProfile.userDetail ?
-                        <div className='justify-between w-full flex'>
-                            <Link to={`/profile/${userProfile.userDetail?.username}`}>
-                                {bigHead()}
-                            </Link>
-                            <div className='flex items-center'>
-                                <p>
-                                    {userProfile.userDetail?.q_coins}
-                                </p>
-                                <img className='h-10 mx-3' src="/static/img/QCoin.png" alt="" />
-                            </div>
-                        </div>
+                        <Link to={`/profile/${userProfile.userDetail?.username}`}>
+                            {bigHead()}
+                        </Link>
                         :
                         <div className='p-4'>
                             <LoginForm />

@@ -182,7 +182,7 @@ const Suggestions = () => {
 
             <div>
                 <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
-                    <TestContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                    <TestContainer tests={suggestionQuizzes} bgStyle='trans' />
                 </ul>
             </div>
         </div>

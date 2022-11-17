@@ -124,21 +124,21 @@ const QuizContainer = (props) => {
                     props.quizzes.length ?
                     props.quizzes.map((quiz) => {
                         return (
-                            <li key={quiz.id} className='flex-auto mb-5 md:mr-5 md:mb-5'>
+                            <li key={quiz.id} className='mb-5 ml-5 md:mb-10 md:ml-10 flex-auto md:flex-none'>
                                 <article className={`
-                                    flex text-right h-full
+                                    text-right
                                     rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
                                 `}>
 
                                     <Link
                                         to={`/play/${replaceFunction(quiz.slug.toLowerCase(), ' ', '-')}`}
-                                        className='flex md:block md:grid-cols-5'
+                                        className=''
                                     >
-                                        <div className='md:col-span-2 w-[260px] h-[16rem] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
+                                        <div className='overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
                                             <LazyLoadImage
                                                 src={quiz.thumbnail}
                                                 alt={`${quiz.subCategory} | ${quiz.title}`}
-                                                className='object-cover h-[7rem] md:h-full'
+                                                className='object-cover h-[9rem] w-[9rem] md:h-[16rem] md:w-[16rem]'
                                                 effect="blur"
                                                 placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
                                             />

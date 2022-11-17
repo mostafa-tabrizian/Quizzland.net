@@ -750,7 +750,7 @@ const Quiz_V2 = (props) => {
 
                                 <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
                                     {
-                                        suggestionQuizzes && <TestContainer quizzes={suggestionQuizzes} bgStyle={'bg'} />
+                                        suggestionQuizzes && <TestContainer tests={suggestionQuizzes} bgStyle={'bg'} />
                                     }
                                 </ul>
                             </div>

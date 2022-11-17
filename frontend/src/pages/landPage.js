@@ -315,7 +315,7 @@ const Index = () => {
                         </svg>
                     </div>
 
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
+                    <ul className="flex flex-wrap align-baseline">
                         <QuizContainer quizzes={quizzesShow} bgStyle={'trans'} />
                     </ul>
 
@@ -343,7 +343,7 @@ const Index = () => {
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_monthly_ref}>
                         {
                             content_monthly_inView &&
-                            <TestContainer quizzes={tests_monthly} bgStyle={'trans'} />
+                            <TestContainer tests={tests_monthly} bgStyle={'trans'} />
                         }
                     </ul>
 
@@ -371,7 +371,7 @@ const Index = () => {
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_celebrity_ref}>
                         {
                             tests_celebrity_inView &&
-                            <TestContainer quizzes={tests_celebrity} bgStyle='trans' />
+                            <TestContainer tests={tests_celebrity} bgStyle='trans' />
                         }
                     </ul>
 
@@ -399,7 +399,7 @@ const Index = () => {
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_movieSeries_ref}>
                         {
                             tests_movieSeries_inView &&
-                            <TestContainer quizzes={tests_movieSeries} bgStyle='trans' />
+                            <TestContainer tests={tests_movieSeries} bgStyle='trans' />
                         }
                     </ul>
 
@@ -415,7 +415,7 @@ const Index = () => {
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_psychology_ref}>
                         {
                             tests_psychology_inView &&
-                            <TestContainer quizzes={tests_psychology} bgStyle='trans' />
+                            <TestContainer tests={tests_psychology} bgStyle='trans' />
                         }
                     </ul>
 
@@ -442,7 +442,7 @@ const Index = () => {
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={loadMoreQuiz_ref}>
                         {
                             loadMoreQuiz_inView &&
-                            <TestContainer quizzes={loadMoreQuiz} bgStyle='trans' />
+                            <TestContainer tests={loadMoreQuiz} bgStyle='trans' />
                         }
                     </ul>
 

@@ -115,7 +115,7 @@ const SubCategory = (props) => {
                                 />
                                 
                                 <ul className={`flex flex-col md:flex-row flex-wrap`}>
-                                    <TestContainer quizzes={content} bgStyle='bg' />
+                                    <TestContainer tests={content} bgStyle='bg' />
                                 </ul>
 
                                 <PageTravel

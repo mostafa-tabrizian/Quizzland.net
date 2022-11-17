@@ -58,7 +58,7 @@ const Sort = () => {
     const fetchContent = useCallback(
         debounce(
             async () => {
-                const quiz = await axios.get(`/api/quizView/?limit=${countResult}&offset=${offset}&public=true`)
+                const quiz = await axios.get(`/api/quizV2View/?limit=${countResult}&offset=${offset}&public=true`)
                 const pointy = await axios.get(`/api/testView/?limit=${countResult}&offset=${offset}&public=true`)
                 let content_new = quiz.data.results.concat(pointy.data.results)
                 
@@ -127,7 +127,7 @@ const Sort = () => {
                     scrollableTarget="scrollme"
                 >
                     <ul className="mx-auto flex-col md:flex-row flex flex-wrap align-baseline w-[90vw] md:w-4/5 testContainer flex-ai-fe justify-right pt-3">
-                        <TestContainer quizzes={sortedContent} bgStyle='trans' />
+                        <TestContainer tests={sortedContent} bgStyle='trans' />
                     </ul>
                 </InfiniteScroll>
             </div>

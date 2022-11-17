@@ -435,7 +435,7 @@ const Result = () => {
 
                     <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
                         {
-                            suggestionQuizzes && <TestContainer quizzes={suggestionQuizzes} bgStyle='trans' />
+                            suggestionQuizzes && <TestContainer tests={suggestionQuizzes} bgStyle='trans' />
                         }
                     </ul>
                 </div>
