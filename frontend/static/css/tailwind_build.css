@@ -2171,6 +2171,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-\[0_0_4px_white\] {
+  --tw-shadow: 0 0 4px white;
+  --tw-shadow-colored: 0 0 4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-zinc-800 {
   --tw-shadow-color: #27272a;
   --tw-shadow: var(--tw-shadow-colored);

@@ -497,7 +497,7 @@ const Quiz_V2 = (props) => {
         return (
             splittedTags.map(tag => {
                 return (
-                    <li key={tag} className='px-3 py-1 text-white rounded-lg'>
+                    <li style={{'background': `linear-gradient(180deg, transparent, ${quizDetailRef.current.theme})`}} key={tag} className='px-3 py-1 text-white rounded-lg'>
                         <h4>
                             <Link
                                 to={`/tags/${replaceFunction(tag, ' ', '+')}`}
@@ -670,7 +670,7 @@ const Quiz_V2 = (props) => {
 
                             <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} />}
+                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
 
                             <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                                 <div className={`quiz__hider mt-5 flex relative`}>
@@ -686,8 +686,8 @@ const Quiz_V2 = (props) => {
                             </div>
 
                             <div>
-                                <h3 className='flex items-center justify-center text-white quiz__tags__title beforeAfterDecor'>تگ های کوییز</h3>
-                                <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse quiz__tags max-w-[35rem] mx-auto'>
+                                <h3 className='flex items-center justify-center text-white beforeAfterDecor'>تگ های کوییز</h3>
+                                <ul className='flex flex-wrap items-baseline justify-center my-5 space-x-3 space-y-2 space-x-reverse max-w-[35rem] mx-auto'>
                                     {quiz && showTheTagsIfNotNull()}
                                 </ul>
                             </div>
@@ -697,7 +697,7 @@ const Quiz_V2 = (props) => {
                             {/* <div className='mt-5 adverts_center' id='mediaad-bNpr'></div> */}
 
                             <div className='mx-4 mt-10'>
-                                <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
+                                <h3 className='flex items-center justify-center mb-5 text-white beforeAfterDecor'>کوییز های مشابه</h3>
 
                                 <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
                                     {
@@ -707,7 +707,7 @@ const Quiz_V2 = (props) => {
                             </div>
 
 
-                            {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}
+                            {/* <h7 className='flex items-center justify-center beforeAfterDecor'>مطالب پیشنهادی</h7> */}
 
                             {/* Adverts */}
                             {/* <div className='adverts_center' id='mediaad-dESu'></div> */}

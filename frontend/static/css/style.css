@@ -903,9 +903,6 @@ hr {
   background: rgba(31, 0, 0, 0.3215686275) !important;
   opacity: 1 !important;
 }
-.quiz__tags li {
-  background: linear-gradient(-45deg, darkRed, transparent);
-}
 .quiz__answerImGif {
   padding-bottom: 0;
 }
