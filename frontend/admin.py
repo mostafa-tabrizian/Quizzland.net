@@ -78,7 +78,7 @@ class UserAnswer_Admin(admin.ModelAdmin):
 class Like_Admin(admin.ModelAdmin):
     list_display = ('user_id', 'quiz_id', 'date_submitted')
     list_filter = ('date_submitted', )
-    search_fields = ['trivia_id__title', 'trivia_id__slug', 'test_id__title', 'test_id__slug']
+    search_fields = ['trivia_id__title', 'trivia_id__slug', 'test_id__title', 'test_id__slug', 'quizV2_id__title', 'quizV2_id__slug']
 
 @admin.register(Comment)
 class Comment_Admin(admin.ModelAdmin):

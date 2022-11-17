@@ -397,21 +397,18 @@ class UserAnswer(models.Model):
     
 class Like(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(CustomUser, related_name='user_id_like',
-                                blank=False, null=False, on_delete=models.CASCADE)
-    trivia_id = models.ForeignKey(
-        Quizzes, related_name='trivia_like_id', blank=True, null=True, on_delete=models.CASCADE)
-    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_like_id',
-                                blank=True, null=True, on_delete=models.CASCADE)
-    date_submitted = models.DateTimeField(
-        blank=True, null=True, default=datetime.datetime.now)
+    user_id = models.ForeignKey(CustomUser, related_name='user_id_like',blank=False, null=False, on_delete=models.CASCADE)
+    trivia_id = models.ForeignKey(Quizzes, related_name='trivia_like_id', blank=True, null=True, on_delete=models.CASCADE)
+    quizV2_id = models.ForeignKey(Quizzes_V2, related_name='quizV2_like_id', blank=True, null=True, on_delete=models.CASCADE)
+    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_like_id',blank=True, null=True, on_delete=models.CASCADE)
+    date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
 
     class Meta:
-        unique_together = (('user_id', 'test_id'), ('user_id', 'trivia_id'))
+        unique_together = (('user_id', 'test_id'), ('user_id', 'trivia_id'), ('user_id', 'quizV2_id'))
 
     @property
     def quiz_id(self):
-        return self.trivia_id or self.test_id
+        return self.trivia_id or self.quizV2_id or self.test_id
 
     def __str__(self):
         return f'{self.user_id.username} liked {self.quiz_id.title}'
@@ -420,19 +417,16 @@ class Like(models.Model):
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     comment_text = models.CharField(blank=False, null=False, max_length=255)
-    submitter_id = models.ForeignKey(
-        CustomUser, related_name='user_comment_id', blank=False, null=True, on_delete=models.SET_NULL)
-    trivia_id = models.ForeignKey(
-        Quizzes, related_name='trivia_comment_id', blank=True, null=True, on_delete=models.CASCADE)
-    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_comment_id',
-                                blank=True, null=True, on_delete=models.CASCADE)
-    date_submitted = models.DateTimeField(
-        blank=True, null=True, default=datetime.datetime.now)
+    submitter_id = models.ForeignKey(CustomUser, related_name='user_comment_id', blank=False, null=True, on_delete=models.SET_NULL)
+    trivia_id = models.ForeignKey(Quizzes, related_name='trivia_comment_id', blank=True, null=True, on_delete=models.CASCADE)
+    quizV2_id = models.ForeignKey(Quizzes_V2, related_name='quizV2_comment_id', blank=True, null=True, on_delete=models.CASCADE)
+    test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_comment_id',blank=True, null=True, on_delete=models.CASCADE)
+    date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
     verified = models.BooleanField(default=True)
 
     @property
     def quiz_id(self):
-        return self.trivia_id or self.test_id
+        return self.trivia_id or self.quizV2_id or self.test_id
 
     def __str__(self):
         return f'{self.submitter_id.username} commented on {self.quiz_id.title}'

@@ -600,13 +600,13 @@ const Quiz_V2 = (props) => {
                     </div>
                     <ul className='text-right p-5 space-y-5'>
                         <li className='list-disc mr-4'><p className='textShadow'>در تعداد سوال ها محدودیت وجود ندارد. تا وقتی اشتباه نکنید بازی ادامه دارد.</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow'>هر چه امتیاز شما بالا باشد درنهایت کیوکوین بیشتری دریافت میکنید</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>هر چه تعداد سوالات پاسخ داده شده بالاتر باشد، کیوکوین بیشتری دریافت میکنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از کیوکوین های خود از کمک کننده ها استفاده کنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیری</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>ورودی این کوییز: <b>
                             {
                                 quiz?.fees ?
-                                `کیو کوین ${quiz?.fees}`
+                                `${quiz?.fees} کیو کوین`
                                 :
                                 'رایگان'
                             }
@@ -670,7 +670,7 @@ const Quiz_V2 = (props) => {
 
                             <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {/* {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} />} */}
+                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} />}
 
                             <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                                 <div className={`quiz__hider mt-5 flex relative`}>

@@ -64,6 +64,7 @@ const Comments = (props) => {
                 await axiosInstance.post('/api/commentView/', {
                     comment_text: comment,
                     trivia_id: props.quizType == 'quiz' ? props.quizId : null,
+                    quizV2_id: props.quizType == 'play' ? props.quizId : null,
                     test_id: props.quizType == 'test' ? props.quizId : null,
                     verified: verifyState,
                     submitter_id: {
@@ -81,8 +82,6 @@ const Comments = (props) => {
                     .catch(err => {
                         if (err.response.status == 401) {
                             enqueueSnackbar('شما میبایست ابتدا وارد شوید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                        } else if (err.response.status == 500) {
-                            enqueueSnackbar('استفاده از ایموجی در حال حاضر امکان پذیر نمی باشد', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                         } else {
                             log(err.response)
                         }
@@ -102,7 +101,11 @@ const Comments = (props) => {
         
         const now = new Date().getTime()
         
-        await axios.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `trivia_id=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_id=${props.quizId}&` : ''}timestamp=${now}`)
+        await axios.get(`/api/commentView/?verified=true&
+            ${props.quizType == 'quiz' ? `trivia_id=${props.quizId}&` : ''}
+            ${props.quizType == 'play' ? `quizV2_id=${props.quizId}&` : ''}
+            ${props.quizType == 'test' ? `test_id=${props.quizId}&` : ''}
+            timestamp=${now}`)
             .then(res => {
                 setComments(res.data.sort(sortCommentsByNewest))
                 setCommentFetching(false)

@@ -39,6 +39,9 @@ const LikeCommentButton = (props) => {
                     },
                     trivia_id: {
                         id: props.quizType == 'quiz' ? props.quizId : 0
+                    },
+                    quizV2_id: {
+                        id: props.quizType == 'play' ? props.quizId : 0
                     }
                 }
 

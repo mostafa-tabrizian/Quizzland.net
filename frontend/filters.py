@@ -72,6 +72,7 @@ class LikeFilter(filters.FilterSet):
         fields = {
             'user_id': ['exact'], 
             'trivia_id': ['exact'],
+            'quizV2_id': ['exact'],
             'test_id': ['exact'],
             'date_submitted': ['lte', 'gte'],
         }
@@ -82,6 +83,7 @@ class CommentFilter(filters.FilterSet):
         fields = {
             'comment_text': ['icontains'],
             'trivia_id': ['exact'],
+            'quizV2_id': ['exact'],
             'test_id': ['exact'], 
             'submitter_id': ['exact'],
             'date_submitted': ['lte', 'gte'],

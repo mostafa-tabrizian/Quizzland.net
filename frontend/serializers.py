@@ -232,30 +232,6 @@ class QuestionsPointySerializer(serializers.ModelSerializer):
 
     quizKey = QuizzesSerializer(many=False)
 
-
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = (
-            '__all__'
-        )
-
-    submitter_id = CustomUserSerializer(many=False)
-
-    def create(self, request):
-        CommentData = request
-
-        newComment = Comment.objects.create(
-            comment_text=CommentData['comment_text'],
-            trivia_id=CommentData['trivia_id'],
-            test_id=CommentData['test_id'],
-            verified=CommentData['verified'],
-            submitter_id=CustomUser.objects.get(
-                id=(self.context['request'].data['submitter_id']['username'])),
-        )
-
-        return newComment
-
 class UserAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAnswer
@@ -290,31 +266,53 @@ class LikeSerializer(serializers.ModelSerializer):
 
     user_id = CustomUserSerializer(many=False)
     trivia_id = QuizzesSerializer(many=False)
+    quizV2_id = QuizzesV2Serializer(many=False)
     test_id = PointyQuizzesSerializer(many=False)
 
     def create(self, request):
         request_user_id = self.context['request'].data['user_id']['username']
         request_trivia_id = self.context['request'].data['trivia_id']['id']
+        request_quizV2_id = self.context['request'].data['quizV2_id']['id']
         request_test_id = self.context['request'].data['test_id']['id']
 
-        userDidLikeForThisQuiz = Like.objects.filter(Q(user_id=request_user_id), Q(
-            trivia_id=request_trivia_id) | Q(test_id=request_test_id))
+        userDidLikeForThisQuiz = Like.objects.filter(Q(user_id=request_user_id), Q(trivia_id=request_trivia_id) | Q(test_id=request_test_id) | Q(quizV2_id=request_quizV2_id))
 
         if (not userDidLikeForThisQuiz.exists()):
             newLike = Like.objects.create(
-                user_id=(CustomUser.objects.get(
-                    id=(self.context['request'].data['user_id']['username']))),
-                trivia_id=(Quizzes.objects.get(id=request_trivia_id)
-                           if request_trivia_id else None),
-                test_id=(Quizzes_Pointy.objects.get(
-                    id=request_test_id) if request_test_id else None),
+                user_id=(CustomUser.objects.get(id=(self.context['request'].data['user_id']['username']))),
+                trivia_id=(Quizzes.objects.get(id=request_trivia_id)if request_trivia_id else None),
+                quizV2_id=(Quizzes_V2.objects.get(id=request_quizV2_id)if request_quizV2_id else None),
+                test_id=(Quizzes_Pointy.objects.get(id=request_test_id) if request_test_id else None),
             )
 
             return newLike
         else:
             userDidLikeForThisQuiz.delete()
             return request
+        
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = (
+            '__all__'
+        )
 
+    submitter_id = CustomUserSerializer(many=False)
+
+    def create(self, request):
+        CommentData = request
+
+        newComment = Comment.objects.create(
+            comment_text=CommentData['comment_text'],
+            trivia_id=CommentData['trivia_id'],
+            quizV2_id=CommentData['quizV2_id'],
+            test_id=CommentData['test_id'],
+            verified=CommentData['verified'],
+            submitter_id=CustomUser.objects.get(
+                id=(self.context['request'].data['submitter_id']['username'])),
+        )
+
+        return newComment
 
 class WatchListSerializer(serializers.ModelSerializer):
     class Meta:
