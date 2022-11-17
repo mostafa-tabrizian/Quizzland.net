@@ -271,10 +271,32 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const ifQuizPlaying = () => {
-        if (currentQuestionNumber == halfTheQuestions) {  // && userProfile.userDetail
-            AddView(`quizV2View`, quizDetailRef.current.id)
+    const payWithQCoin = async () => {
+        const userId = userProfile.userDetail.id
+        log(userProfile.userDetail.q_coins)
+        // log(quiz?.fees)
+        // log(userProfile.userDetail.q_coins - quiz?.fees)
+        const payload = {
+            q_coins: 240
         }
+
+        //! NOT WORKING
+
+        await axiosInstance.patch(`/api/userView/${userId}/`, payload)
+            .then(res => {
+                log(res)
+                log(res.data.q_coins)
+            })
+            .catch(err => {
+                log(err)
+                log(err.response)
+            })
+    }
+
+    const payAndPlay = () => {
+        payWithQCoin()
+        setJoinPaper(false)
+        AddView(`quizV2View`, quizDetailRef.current.id)
     }
 
     const selectedOption = async (props) => {
@@ -603,10 +625,13 @@ const Quiz_V2 = (props) => {
                         <li className='list-disc mr-4'><p className='textShadow'>هر چه تعداد سوالات پاسخ داده شده بالاتر باشد، کیوکوین بیشتری دریافت میکنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از کیوکوین های خود از کمک کننده ها استفاده کنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیری</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow'>ورودی این کوییز: <b>
+                        <li className='list-disc mr-4'><p className='textShadow flex items-center'>ورودی این کوییز: <b>
                             {
                                 quiz?.fees ?
-                                `${quiz?.fees} کیو کوین`
+                                <div className='flex space-x-2 space-x-reverse mr-3 items-center'>
+                                    <p>{quiz?.fees}</p>
+                                    <img className='h-10 mx-3' src="/static/img/QCoin.png" alt="" />
+                                </div>
                                 :
                                 'رایگان'
                             }
@@ -614,7 +639,7 @@ const Quiz_V2 = (props) => {
                         </b></p></li>
                     </ul>
                 </div>
-                <button onClick={() => setJoinPaper(false)} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
+                <button onClick={payAndPlay} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
                     بزن بریم
                 </button>
             </div>
