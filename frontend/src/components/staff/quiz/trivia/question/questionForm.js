@@ -38,7 +38,7 @@ const TriviaQuestionForm = (props) => {
     const fetchQuizzes = async () => {
         const now = new Date().getTime()
         
-        await axiosInstance.get(`/api/quizView/?timestamp=${now}`)
+        await axiosInstance.get(`/api/quizV2View/?timestamp=${now}`)
             .then(res => {
                 setQuizzes(res.data.reverse())
             })
@@ -67,7 +67,7 @@ const TriviaQuestionForm = (props) => {
         formData.append('answer_imGif', answerImageGIFURL)
         formData.append('answer_text', answerTextRef.current.value)
 
-        await axiosInstance.post(`/api/questionsView/`, formData, {
+        await axiosInstance.post(`/api/questionsV2View/`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },

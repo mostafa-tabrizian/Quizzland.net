@@ -398,7 +398,8 @@ hr {
 
 .MuiMenuItem-root,
 .MuiTypography-root,
-.MuiTooltip-tooltip {
+.MuiTooltip-tooltip,
+.MuiAutocomplete-option {
   font-family: IRANYekanBold, sans-serif, serif !important;
   font-size: 0.8rem !important;
 }

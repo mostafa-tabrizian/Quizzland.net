@@ -8,6 +8,10 @@ import { log } from '../../components/base'
 import UserStore from '../../store/userStore';
 
 const panel = () => {
+    useEffect(() => {
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
+    })
+
     const [userProfile, userActions] = UserStore()
     
     return (

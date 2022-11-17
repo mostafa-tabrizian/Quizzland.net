@@ -8,6 +8,10 @@ import { log } from '../../../../../components/base';
 const CreateQuestion = () => {
     const [forms, setForms] = useState([])
 
+    useEffect(() => {
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
+    }, [])
+
     const [userProfile, userActions] = UserStore()
 
     return (
