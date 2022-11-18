@@ -2,22 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link, useLocation } from 'react-router-dom'
 
-const TestContainer = React.lazy(() => import('../components/testContainer'))
 import { log, getTheme, replaceFunction } from '../components/base'
+import QuizContainer from '../components/quizContainer';
+import TestContainer from '../components/testContainer'
 import SearchFetchQuiz from '../components/search/searchFetchQuiz'
-// import SearchFetchCategory from '../components/search/searchFetchCategory'
+import SearchFetchTest from '../components/search/searchFetchTest'
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
     const [searchValue, setSearchValue] = useState()
-    const [searched_content, set_searched_content] = useState([])
-    const [searched_category, set_searched_category] = useState([])
+    const [searched_quiz, set_searched_quiz] = useState([])
+    const [searched_test, set_searched_test] = useState([])
 
     const location = useLocation();
 
     useEffect(() => {
-        set_searched_content([])  // restart list
-        set_searched_category([])
+        set_searched_quiz([])  // restart list
+        set_searched_test([])  // restart list
         searchHandler(searchValue && replaceFunction(searchValue, '+', ' '))
         setContentLoaded(true)
     }, [searchValue])
@@ -27,8 +28,6 @@ const SearchMoreResult = () => {
     }, [location]);
 
     useEffect(() => {
-        const theme = getTheme()
-        // document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'}`
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
     }, []);
 
@@ -36,8 +35,8 @@ const SearchMoreResult = () => {
 
     const searchHandler = async (value) => {
         try {
-            set_searched_content(await SearchFetchQuiz(value))
-            // set_searched_category(await SearchFetchCategory(value))
+            set_searched_quiz(await SearchFetchQuiz(value))
+            set_searched_test(await SearchFetchTest(value))
         } catch (e) {
             log(e)
             log('Error in search | cause : database')
@@ -63,71 +62,34 @@ const SearchMoreResult = () => {
 
                 <h3 className='mb-5 title'>{searchValueWithOutSign}</h3>
 
-                <ul className="flex flex-col flex-wrap md:flex-row testContainer flex-ai-fe justify-right">
-                    {
-                        searched_category.map((category) => {
-                            return (
-                                <li key={category.id} className='flex-auto mb-5 md:mr-4 md:mb-4'>
-                                    <article className={`
-                                        flex text-right h-full
-                                        rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                                        `}
-                                    >
-
-                                        <Link
-                                            to={`/contents/${category.category}/${replaceFunction(category.subCategory, ' ', '+')}?sc=${replaceFunction(category.title, ' ', '-')}`}
-                                            className='flex md:block md:grid-cols-5'
-                                        >
-                                            <div className='md:col-span-2 w-[360px] md:w-[260px] h-[120px] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
-                                                <img
-                                                    src={category.thumbnail}
-                                                    width={1366}
-                                                    height={768}
-                                                    alt={`${category.subCategory} | ${category.title}`}
-                                                    className='h-full max-w-fit'
-                                                />
-                                            </div>
-                                            <div className='w-full pt-1 pb-3 pr-1 md:col-span-3 md:mt-2'>
-                                                <h2 className={`testContainer__title testContainer__title__noViews flex
-                                                                text-sm mr-5 md:w-52 md:mr-0 md:text-base`}>
-                                                    {category.subCategory}
-                                                </h2>
-                                                <h2 className={`
-                                                    testContainer__title testContainer__title__noViews flex
-                                                    text-sm mr-5 md:w-52 md:mr-0 md:text-base
-                                                `}>
-                                                    {category.title}
-                                                </h2>
-                                                {/* <div className="testContainer__views">{viewsFormat(quiz.views * 10)}</div> */}
-                                                {/* <span className="text-center testContainer__date">
-                                                    {datePublishHandler(quiz.publish)}
-                                                </span> */}
-                                            </div>
-                                        </Link>
-                                    </article>
-                                </li>
-                            )
-                        })
-                    }
-
-                </ul>
-
-                <div className='grid justify-center mb-10'>
-                    <hr className="w-[20vw]" />
+                <div className='order-1 col-start-1 space-y-5 col-end-3 md:p-4 md:order-1 grid-row-full'>
+                    <div>
+                        <h1 className='mb-5'>کوییز ها</h1>
+                        <ul class="flex flex-wrap align-baseline">
+                            {
+                                searched_quiz.length ?
+                                <QuizContainer quizzes={searched_quiz} bgStyle='trans' />
+                                :
+                                <div className='flex items-center space-x-3 space-x-reverse'>
+                                    <p className='empty'>هیچ کوییزی پیدا نشد!</p>
+                                </div>
+                            }
+                        </ul>
+                    </div>
+                    <div>
+                        <h1 className='mb-5'>تست ها</h1>
+                        <ul class="flex flex-col flex-wrap align-baseline md:flex-row">
+                            {
+                                searched_test.length ?
+                                <TestContainer tests={searched_test} bgStyle='trans' />
+                                :
+                                <div className='flex items-center space-x-3 space-x-reverse'>
+                                    <p className='empty'>هیچ تستی پیدا نشد!</p>
+                                </div>
+                            }
+                        </ul>
+                    </div>
                 </div>
-
-                <ul className="flex flex-col flex-wrap md:flex-row testContainer flex-ai-fe justify-right">
-                    {
-                        contentLoaded ?
-                        <TestContainer tests={searched_content} bgStyle='trans' />
-                        :
-                        <h1 className='w-11/12 text-3xl text-center mb-[50vh] '>
-                            متاسفانه هیچ چیزی پیدا نشد 😥
-                        </h1>
-                    }
-                </ul>
-
-                {/* <div className='adverts_center' id='mediaad-DLgb'></div> */}
 
             </div>
 
