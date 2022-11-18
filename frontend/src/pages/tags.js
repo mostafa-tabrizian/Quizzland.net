@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 const TestContainer = React.lazy(() => import('../components/testContainer'))
 import { log, getTheme, replaceFunction } from '../components/base'
 import SearchFetchQuiz from '../components/search/searchFetchQuiz'
-import SearchFetchCategory from '../components/search/searchFetchCategory'
+// import SearchFetchCategory from '../components/search/searchFetchCategory'
 
 const SearchMoreResult = () => {
     const [contentLoaded, setContentLoaded] = useState(false)
@@ -37,7 +37,7 @@ const SearchMoreResult = () => {
     const searchHandler = async (value) => {
         try {
             set_searched_content(await SearchFetchQuiz(value))
-            set_searched_category(await SearchFetchCategory(value))
+            // set_searched_category(await SearchFetchCategory(value))
         } catch (e) {
             log(e)
             log('Error in search | cause : database')

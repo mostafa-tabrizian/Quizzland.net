@@ -2,8 +2,8 @@ import axios from '../axiosApi';
 import { log } from '../base'
 import ExcludeWordsToSearch from '../excludeWordsToSearch';
 
-const SearchFetchQuiz = async (value) => {  
-    const searched_quiz = await axios.get(`/api/quizV2View/?public=true`)
+const SearchFetchTest = async (value) => {  
+    const searched_pointy = await axios.get(`/api/testView/?public=true`)
     const searchedValue = value?.toLowerCase().split(' ')
     const rankResults = []
 
@@ -15,13 +15,14 @@ const SearchFetchQuiz = async (value) => {
         }
     })
 
-    searched_quiz.data.map(quiz => {
+    searched_pointy.data.map(quiz => {
         let quizScore = 0
 
         filteredSearchValue.map(value => {
             if (
                 quiz.title.toLowerCase().split(' ').includes(value)||
                 quiz.slug.toLowerCase().split(' ').includes(value)||
+                quiz.subCategory?.toLowerCase().split(' ').includes(value)||
                 quiz.tags.toLowerCase().split(' ').includes(value)
             ){
                 quizScore += 1
@@ -39,4 +40,4 @@ const SearchFetchQuiz = async (value) => {
     return Object.keys(sliceSortResult).map(key => sliceSortResult[key].quizDetail)
 }
  
-export default SearchFetchQuiz;
+export default SearchFetchTest;
