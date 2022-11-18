@@ -336,17 +336,41 @@ hr {
   z-index: -1;
 }
 
-.popUp-show {
+.fullPageTransition-show {
   transform: translate(0, 0);
   visibility: visible !important;
   opacity: 1 !important;
   transition: all 0.5s ease-in-out !important;
 }
-.popUp-hide {
+.fullPageTransition-hide {
   transform: translate(0, -100%);
   visibility: hidden !important;
   opacity: 0.5 !important;
   transition: all 0.5s ease-in-out !important;
+}
+
+.fadeOut {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transition: all 0.53s ease-in-out !important;
+}
+.fadeIn {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transition: all 0.53s ease-in-out !important;
+}
+
+.pop_up {
+  transform: translate(0, 0);
+  visibility: visible !important;
+  transition: all 0.5s ease-in-out !important;
+  filter: blur(0);
+}
+.pop_down {
+  transform: translate(0, 10px);
+  visibility: hidden !important;
+  transition: all 0.5s ease-in-out !important;
+  filter: blur(5px);
 }
 
 #notistack-snackbar {
@@ -448,17 +472,6 @@ hr {
 
 .lazy-load-image-background {
   width: 100%;
-}
-
-.fadeOut {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  transition: all 0.53s ease-in-out !important;
-}
-.fadeIn {
-  visibility: visible !important;
-  opacity: 1 !important;
-  transition: all 0.53s ease-in-out !important;
 }
 
 .ltr {

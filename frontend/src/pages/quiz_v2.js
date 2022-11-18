@@ -637,7 +637,7 @@ const Quiz_V2 = (props) => {
                 </script>
             </Helmet>
 
-            <div id='join' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${joinPaper ? '' : 'popUp-hide'}`}>
+            <div id='join' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${joinPaper ? '' : 'fullPageTransition-hide'}`}>
                 <div className='shadow-[0_0_10px_#000000e8] rounded-lg m-5'>
                     <div className='text-[1.5rem] rounded-lg py-5 m-3'>
                         <h1 className='textShadow'>
@@ -668,7 +668,7 @@ const Quiz_V2 = (props) => {
                 </button>
             </div>
 
-            <div id='quizEnd' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${quizEndStatue ? 'popUp-show' : 'popUp-hide'}`}>
+            <div id='quizEnd' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${quizEndStatue ? 'fullPageTransition-show' : 'fullPageTransition-hide'}`}>
                 {
                     quizEndStatue &&
                     <div className='flex flex-col justify-between h-full'>

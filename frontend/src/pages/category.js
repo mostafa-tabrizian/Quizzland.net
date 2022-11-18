@@ -1,43 +1,42 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { Helmet } from "react-helmet";
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+
 import axios from '../components/axiosApi';
 import debounce from 'lodash.debounce'
-import Skeleton from '@mui/material/Skeleton';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Tools = React.lazy(() => import('../components/tools'))
-const PageTravel = React.lazy(() => import('../components/pageTravel'))
+import QuizContainer from '../components/quizContainer';
+import TestContainer from '../components/testContainer';
 import AddView from '../components/addView';
-import { log, getTheme, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
+import { log, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews } from '../components/base'
 const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
 
 const Category = (props) => {
     const [categoryQuery, setCategoryQuery] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', ' '))
     const [categoryQueryID, setCategoryQueryID] = useState()
     const [categoryTitle, setCategoryTitle] = useState()
-    const [pageTravel, setPageTravel] = useState([])
-    const [categories, setCategories] = useState([])
-    const [sortedCategories, setSortedCategories] = useState([])
-    const [countResult, setCountResult] = useState(25)
-    const [offset, setOffset] = useState(0)
-    const [currentPageNumber, setCurrentPageNumber] = useState(1)
+    const [quizzes, setQuizzes] = useState([])
+    const [tests, setTests] = useState([])
+    const [sortedQuizzes, setSortedQuizzes] = useState([])
+    const [sortedTests, setSortedTests] = useState([])
     const [sortType, setSortType] = useState('trend')
     const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-    
+    const [gameType, setGameType] = useState('quiz')
+
     const location = useLocation();
 
     useEffect(() => {
-        // // document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
     })
 
     useEffect(() => {
-        getCategories()
         defineCategoryTitle()
-    }, [categoryQuery, categoryQueryID, categoryTitle, countResult, offset])
+        fetchQuizzes()
+        fetchTests()
+        setContentLoaded(true)
+    }, [categoryQuery, categoryQueryID, categoryTitle])
 
     useEffect(() => {
         categoryQueryID && AddView('categoryView', categoryQueryID)
@@ -46,10 +45,11 @@ const Category = (props) => {
     useEffect(() => {
         setCategoryQuery(window.location.pathname.split('/')[2], '-', ' ');
     }, [location])
+
     
     useEffect(() => {
         sortContent()
-    }, [categories, sortType])
+    }, [quizzes, tests, sortType])
 
     const categoryTitleToPersian = {
         'celebrity': 'سلبریتی',
@@ -61,15 +61,18 @@ const Category = (props) => {
         switch (sortType) {
             case 'newest':
                 whenChangeThisIDKWhyTheSortAffect('sort1')
-                setSortedCategories(categories.sort(sortByNewest))
+                setSortedQuizzes(quizzes.sort(sortByNewest))
+                setSortedTests(tests.sort(sortByNewest))
                 break
             case 'views':
                 whenChangeThisIDKWhyTheSortAffect('sort2')
-                setSortedCategories(categories.sort(sortByViews))
+                setSortedQuizzes(quizzes.sort(sortByViews))
+                setSortedTests(tests.sort(sortByViews))
                 break
             case 'trend':
                 whenChangeThisIDKWhyTheSortAffect('sort3')
-                setSortedCategories(categories.sort(sortByMonthlyViews))
+                setSortedQuizzes(quizzes.sort(sortByMonthlyViews))
+                setSortedTests(tests.sort(sortByMonthlyViews))
                 break
         }
     }
@@ -88,17 +91,26 @@ const Category = (props) => {
         )
     )
 
-    const getCategories = useCallback(
+    const fetchQuizzes = useCallback(
         debounce(
             async () => {
                 categoryQueryID &&
-                await axios.get(`/api/subcategoryView/?categoryKey=${categoryQueryID}&limit=${countResult}&offset=${offset}&public=true`)
-                    .then((response => {
-                        setPageTravel(response.data)
-                        setCategories(response.data.results.sort(sortByMonthlyViews))
-                    }))
-                    
-                    setContentLoaded(true)
+                await axios.get(`/api/quizV2View/?categoryKey=${categoryQueryID}&public=true`)
+                    .then(res => {
+                        setQuizzes(res.data.sort(sortByMonthlyViews))
+                    })
+            }, 500
+        )
+    )
+
+    const fetchTests = useCallback(
+        debounce(
+            async () => {
+                categoryQueryID &&
+                await axios.get(`/api/testView/?categoryKey=${categoryQueryID}&public=true`)
+                    .then(res => {
+                        setTests(res.data.sort(sortByMonthlyViews))
+                    })
             }, 500
         )
     )
@@ -125,72 +137,22 @@ const Category = (props) => {
                 {
                     contentLoaded ?
                     <div>
+                        <div className='grid grid-cols-2 w-[22rem] mx-auto my-12 justify-center'>
+                            <h3 className={`${gameType == 'quiz' ? 'bloodRiver_bg' : 'hover:text-red-200'} py-1 text-center rounded`}><button onClick={() => { setGameType('quiz') }} type='button'>کوییز ها</button></h3>
+                            <h3 className={`${gameType == 'test' ? 'bloodRiver_bg' : 'hover:text-red-200'} py-1 text-center rounded`}><button onClick={() => { setGameType('test') }} type='button'>تست ها</button></h3>
+                        </div>
+
                         <Tools
                             sortType={sortType} setSortType={setSortType}
                         />
     
-                        {/* {
-                            sortedCategories.length ? */}
-                            <React.Fragment>
+                        <ul className={`${gameType == 'quiz' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} flex flex-wrap align-baseline`}>
+                            <QuizContainer quizzes={sortedQuizzes} bgStyle={'trans'} />
+                        </ul>
 
-                                <ul className="flex flex-col flex-wrap align-baseline md:flex-row testContainer flex-ai-fe justify-right">
-                                    {
-                                        sortedCategories.map((category) => {
-                                            return (
-                                                <li key={category.id} className='flex-auto mb-5 md:mr-5 md:mb-5'>
-                                                    <article className={`
-                                                        flex text-right h-full
-                                                        rounded-l-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl
-                                                    `}>
-            
-                                                        <Link
-                                                            to={`/category/${categoryQuery}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}
-                                                            className='flex md:block md:grid-cols-5'
-                                                        >
-                                                            <div className='md:col-span-2 md:w-[260px] h-[7rem] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>
-                                                                <LazyLoadImage
-                                                                    src={category.thumbnail}
-                                                                    alt={`${category.subCategory} | ${category.title}`}
-                                                                    className='object-cover h-full'
-                                                                    effect="blur"
-                                                                    placeholder={<Skeleton variant="rounded" animation="wave" width={220} height={120} />}
-                                                                />
-                                                            </div>
-                                                            <div className='w-full pt-1 pb-3 pr-4 md:pr-0 md:col-span-3 md:mt-2'>
-                                                                <h2 className={`
-                                                                    testContainer__title testContainer__title__noViews flex m-auto md:m-0
-                                                                    md:w-52
-                                                                `}>
-                                                                    {category.title}
-                                                                </h2>
-                                                                <h3 className={`
-                                                                    testContainer__title testContainer__title__noViews flex
-                                                                    w-[10rem] md:w-52
-                                                                `}>
-                                                                    {category.subCategory}
-                                                                </h3>
-                                                            </div>
-                                                        </Link>
-                                                    </article>
-                                                </li>
-                                                
-                                            )
-                                        })
-                                    }
-                                </ul>
-        
-                                <PageTravel
-                                    pageTravel={pageTravel} setPageTravel={setPageTravel}
-                                    countResult={countResult} setCountResult={setCountResult}
-                                    offset={offset} setOffset={setOffset}
-                                    currentPageNumber={currentPageNumber} setCurrentPageNumber={setCurrentPageNumber}
-                                />
-                            </React.Fragment>
-                            {/* :
-                            <div className='flex items-center justify-center space-x-3 space-x-reverse'>
-                                <p className='my-16 empty'>هیچ کتگوری پیدا نشد!</p>
-                            </div>
-                        } */}
+                        <ul className={`${gameType == 'test' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} flex flex-col flex-wrap align-baseline md:flex-row`}>
+                            <TestContainer tests={sortedTests} bgStyle={'trans'} />
+                        </ul>
                     </div>
                     :
                     <SkeletonTestContainer />

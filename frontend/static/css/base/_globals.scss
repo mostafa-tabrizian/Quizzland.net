@@ -241,7 +241,7 @@ hr {
     z-index: -1;
 }
 
-.popUp {
+.fullPageTransition {
     &-show {
         transform: translate(0, 0);
         visibility: visible !important;
@@ -254,6 +254,39 @@ hr {
         visibility: hidden !important;
         opacity: .5 !important;
         transition: all .5s ease-in-out !important;
+    }
+}
+
+
+.fade {
+    &Out {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transition: all .53s ease-in-out !important;
+    }
+
+    &In {
+        visibility: visible !important;
+        opacity: 1 !important;
+        transition: all .53s ease-in-out !important;
+    }
+}
+
+.pop {
+    &_up {
+        transform: translate(0, 0);
+        visibility: visible !important;
+        transition: all .5s ease-in-out !important;
+        filter: blur(0)
+        // opacity inline in class
+    }
+
+    &_down {
+        transform: translate(0, 10px);
+        visibility: hidden !important;
+        transition: all .5s ease-in-out !important;
+        filter: blur(5px)
+        // opacity inline in class
     }
 }
 
@@ -361,20 +394,6 @@ hr {
 
 .lazy-load-image-background {
     width: 100%;
-}
-
-.fade {
-    &Out {
-        visibility: hidden !important;
-        opacity: 0 !important;
-        transition: all .53s ease-in-out !important;
-    }
-
-    &In {
-        visibility: visible !important;
-        opacity: 1 !important;
-        transition: all .53s ease-in-out !important;
-    }
 }
 
 .ltr {
