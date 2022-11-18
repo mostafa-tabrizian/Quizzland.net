@@ -52,7 +52,7 @@ const Quiz_V2 = (props) => {
     const questionRef = useRef(null)
     // const recaptchaRef = useRef(null)
 
-    const [userProfile] = UserStore()
+    const [userProfile, userActions] = UserStore()
 
     const { enqueueSnackbar } = useSnackbar()
 
@@ -250,25 +250,42 @@ const Quiz_V2 = (props) => {
     }
 
     const payWithQCoin = async () => {
-        const userId = userProfile.userDetail.id
-        log(userProfile.userDetail.q_coins)
-        // log(quiz?.fees)
-        // log(userProfile.userDetail.q_coins - quiz?.fees)
-        const payload = {
-            q_coins: 240
+        if (quiz?.fees !== 0) {
+            const now = new Date().getTime()
+            const userId = userProfile.userDetail.id
+            const payload = {
+                q_coins: userProfile.QCoins - quiz?.fees
+            }
+    
+            await axiosInstance.patch(`/api/userView/${userId}/?timestamp=${now}`, payload)
+                .then(res => {
+                    userActions.updateQCoins(res.data.q_coins)
+                })
+                .catch(err => {
+                    log(err)
+                    log(err.response)
+                })
         }
+    }
 
-        //! NOT WORKING
-
-        await axiosInstance.patch(`/api/userView/${userId}/`, payload)
-            .then(res => {
-                log(res)
-                log(res.data.q_coins)
-            })
-            .catch(err => {
-                log(err)
-                log(err.response)
-            })
+    const giveQCoins = async () => {
+        if (correctAnswersCount !== 0) {
+            const now = new Date().getTime()
+            const userId = userProfile.userDetail.id
+            const prize = Math.round((correctAnswersCount * 3) / 5) * 5
+            const payload = {
+                q_coins: userProfile.QCoins + prize
+            }
+    
+            await axiosInstance.patch(`/api/userView/${userId}/?timestamp=${now}`, payload)
+                .then(res => {
+                    userActions.updateQCoins(res.data.q_coins)
+                })
+                .catch(err => {
+                    log(err)
+                    log(err.response)
+                })
+        }
     }
 
     const payAndPlay = () => {
@@ -396,9 +413,6 @@ const Quiz_V2 = (props) => {
         }
 
         await axiosInstance.post(`/api/userScoreView/?timestamp=${now}`, payload)
-            .then(res => {
-                log(res)
-            })
             .catch(err => {
                 log(err)
                 log(err.response)
@@ -408,6 +422,7 @@ const Quiz_V2 = (props) => {
     const quizEnd = () => {
         selectResultGifText()
         saveUserScore()
+        giveQCoins()
 
         setTimeout(() => {
             setQuizEndStatue(true)
@@ -671,13 +686,24 @@ const Quiz_V2 = (props) => {
             <div id='quizEnd' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${quizEndStatue ? 'fullPageTransition-show' : 'fullPageTransition-hide'}`}>
                 {
                     quizEndStatue &&
-                    <div className='flex flex-col justify-between h-full'>
+                    <div className='flex flex-col justify-between h-full max-w-[30rem] mx-auto'>
                         <div>
                             <div className='shadow-[0_0_10px_#000000e8] rounded-lg m-5'>
                                 <div className='text-[1.5rem] rounded-lg py-5 m-3'>
                                     <h1 className='textShadow'>
                                         {correctAnswersCount}
                                     </h1>
+                                    {
+                                        correctAnswersCount ?
+                                        <div className='flex'>
+                                            <p className='text-[1rem] flex mx-auto textShadow'>
+                                                {Math.round((correctAnswersCount * 3) / 5) * 5}  {/* Nearest to five when correct times 3 */}
+                                                <img className='h-6 mx-2' src="/static/img/QCoin.png" />
+                                                دریافت کردید.
+                                            </p>
+                                        </div>
+                                        :''
+                                    }
                                 </div>
                             </div>
                             <div>

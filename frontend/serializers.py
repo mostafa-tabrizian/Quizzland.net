@@ -66,6 +66,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
             instance.first_name = validated_data['first_name']
         if 'last_name' in validated_data:
             instance.last_name = validated_data['last_name']
+        if 'q_coins' in validated_data:
+            instance.q_coins = validated_data['q_coins']
         if 'bio' in validated_data:
             instance.bio = validated_data['bio']
         if 'gender' in validated_data:

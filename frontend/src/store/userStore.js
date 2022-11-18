@@ -4,6 +4,7 @@ import { log } from '../components/base';
 const UserStoreCode = createStore({
     initialState: {
         userDetail: null,
+        QCoins: null
     },
     actions: {
         setUser:
@@ -11,15 +12,15 @@ const UserStoreCode = createStore({
             ({ setState, getState }) => {
                 setState({userDetail});
             },
-        // updatePlaylist:
-        //     (updatedPlaylist) =>
-        //     ({ setState, getState }) => {
-        //         setState(
-        //             {
-        //                userDetail:  {...getState().userDetail, watch_list: updatedPlaylist}
-        //             }
-        //         )
-        //     }
+        updateQCoins:
+            (QCoinsLeft) =>
+            ({ setState }) => {
+                setState(
+                    {
+                        QCoins: QCoinsLeft
+                    }
+                )
+            }
         
     },
     name: 'userDetail',

@@ -65,6 +65,7 @@ const Header = () => {
             setTimeout(() => {window.location.reload()}, 3000);
         } else {
             userActions.setUser(userProfileDetailData)
+            userActions.updateQCoins(userProfileDetailData.q_coins)
         }
     }
 
@@ -148,7 +149,7 @@ const Header = () => {
                         }
                     </div>
                     <div className='flex items-center'>
-                        <p className='text-[1rem]'>{userProfile.userDetail?.q_coins}</p>
+                        <p className='text-[1rem]'>{userProfile.QCoins}</p>
                         <img className='h-6 mx-3' src="/static/img/QCoin.png" />
                     </div>
                 </div>
