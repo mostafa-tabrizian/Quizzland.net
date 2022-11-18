@@ -292,7 +292,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>تست های کوییزلند</h3>
-                        {/* <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link> */}
+                        <Link to="/contents?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
@@ -304,7 +304,7 @@ const Index = () => {
                 <div className="space-y-8">
                     <div className="flex items-center justify-between testContainer__header">
                         <h3>کوییز های کوییزلند</h3>
-                        {/* <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link> */}
+                        <Link to="/contents?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <div className='relative'>
@@ -337,7 +337,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>محبوب ترین ها</h3>
-                        <Link to="/sort?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                        <Link to="/contents?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_monthly_ref}>
@@ -365,7 +365,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>کوییز سلبریتی</h3>
-                        <Link to="/sort?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                        <Link to="/contents?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_celebrity_ref}>
@@ -393,7 +393,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>کوییز فیلم و سریال</h3>
-                        <Link to="/sort?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                        <Link to="/contents?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_movieSeries_ref}>
@@ -409,7 +409,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>تست روانشناسی</h3>
-                        <Link to="/sort?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                        <Link to="/contents?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_psychology_ref}>
@@ -436,7 +436,7 @@ const Index = () => {
                 {/* <div className="mt-8 mb-8">
                     <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>کوییز های بیشتر</h3>
-                        <Link to="/sort?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                        <Link to="/contents?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={loadMoreQuiz_ref}>

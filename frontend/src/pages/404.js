@@ -38,7 +38,7 @@ const NotFound_404 = () => {
                 <div className='mt-10'>
                     <div className='px-4 py-2 border-2 border-red-900 rounded-xl'>
                         <h2>
-                            <Link to='/sort?s=trend'>
+                            <Link to='/contents?s=trend'>
                                 مشاهده بهترین کوییز های این ماه
                             </Link>
                         </h2>

@@ -268,16 +268,16 @@ const Header = () => {
                                 </button> */}
                                 {/* <button className="header__btn" onClick={openClosePointyNavigation}>تست ها</button>
                                 <button className="header__btn" onClick={openCloseQuizNavigation}>کویز ها</button> */}
-                                <Link to='/sort?s=newest'>کوییز و تست ها</Link>
+                                <Link to='/contents?s=newest'>کوییز و تست ها</Link>
                                 <button className='header__btn' onClick={() => setCategorySubMenu(!categorySubMenu)}>کتگوری ها</button>
                             </div>
                             
                             <div className={`absolute top-20 left-12 border-2 ${theme == 'light' ? 'bg-[#f0f0f0] shadow-[0_5px_15px_#b3b3b3]' : 'bg-[#0e0202f3]'} border-[#690D11] rounded-lg ${categorySubMenu ? '' : 'hidden'}`}>
                                 <div className='relative px-4 py-4'>
                                     <ul className='flex flex-col'>
-                                        <li><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
-                                        <li><Link to="/category/celebrity">سلبریتی ✨</Link></li>
-                                        <li><Link to="/category/psychology">روانشناسی 🧠</Link></li>
+                                        <li><Link to="/contents/movie-&-series">فیلم و سریال 🎬</Link></li>
+                                        <li><Link to="/contents/celebrity">سلبریتی ✨</Link></li>
+                                        {/* <li><Link to="/contents/psychology">روانشناسی 🧠</Link></li> */}
                                     </ul>
                                 </div>
                             </div>
@@ -365,18 +365,18 @@ const Header = () => {
                         <hr className='border-[#690D11] '/>
                         <h3 className='text-xl'>کتگوری ها</h3>
                         <ul className='flex mt-3 space-x-3 space-x-reverse'>
-                            <li className='text-lg'><Link to="/category/movie-&-series">فیلم و سریال 🎬</Link></li>
-                            <li className='text-lg'><Link to="/category/celebrity">سلبریتی ✨</Link></li>
-                            <li className='text-lg'><Link to="/category/psychology">روانشناسی 🧠</Link></li>
+                            <li className='text-lg'><Link to="/contents/movie-&-series">فیلم و سریال 🎬</Link></li>
+                            <li className='text-lg'><Link to="/contents/celebrity">سلبریتی ✨</Link></li>
+                            {/* <li className='text-lg'><Link to="/contents/psychology">روانشناسی 🧠</Link></li> */}
                         </ul>
                     </div>
                     <div className='relative mt-5'>
                         <hr className='border-[#690D11] '/>
                         <h3 className='text-xl'>کوییز و تست ها</h3>
                         <ul className='flex mt-3 space-x-6 space-x-reverse'>
-                            <li className='text-lg'><Link to="/sort?s=newest"> جدیدترین </Link></li>
-                            <li className='text-lg'><Link to="/sort?s=trend"> محبوب ترین </Link></li>
-                            <li className='text-lg'><Link to="/sort?s=views"> پربازدیدترین </Link></li>
+                            <li className='text-lg'><Link to="/contents?s=newest"> جدیدترین </Link></li>
+                            <li className='text-lg'><Link to="/contents?s=trend"> محبوب ترین </Link></li>
+                            <li className='text-lg'><Link to="/contents?s=views"> پربازدیدترین </Link></li>
                         </ul>
                     </div>
                     <div className='relative mt-5'>

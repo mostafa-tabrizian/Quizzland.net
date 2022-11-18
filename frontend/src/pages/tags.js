@@ -75,7 +75,7 @@ const SearchMoreResult = () => {
                                     >
 
                                         <Link
-                                            to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '+')}?sc=${replaceFunction(category.title, ' ', '-')}`}
+                                            to={`/contents/${category.category}/${replaceFunction(category.subCategory, ' ', '+')}?sc=${replaceFunction(category.title, ' ', '-')}`}
                                             className='flex md:block md:grid-cols-5'
                                         >
                                             <div className='md:col-span-2 w-[360px] md:w-[260px] h-[120px] md:h-[150px] overflow-hidden rounded-r-xl md:rounded-r-none md:rounded-tr-xl md:rounded-bl-xl'>

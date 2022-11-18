@@ -79,7 +79,7 @@ const Search = (props) => {
                                                     searched_category.map((category) => {
                                                         return (
                                                             <div key={category.id} className='max-w-[50%]'>
-                                                                <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                                                                <Link to={`/contents/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
                                                                     <img
                                                                         src={category.thumbnail}
                                                                         alt={`${category.subCategory}} | های ${category.title_far}}`}
@@ -90,7 +90,7 @@ const Search = (props) => {
                                                                 </Link>
 
                                                                 <h2 className='mt-4 md:relative md:left-0 md:top-0'>
-                                                                    <Link to={`/category/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
+                                                                    <Link to={`/contents/${category.category}/${replaceFunction(category.subCategory, ' ', '-')}?sc=${replaceFunction(category.title, ' ', '-')}`}>
                                                                         {category.subCategory}
                                                                     </Link>
                                                                 </h2>

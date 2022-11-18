@@ -6,7 +6,7 @@ urlpatterns = [
     # re_path(r'^(?P<SOS>.*)/$', SOS),  # SOS Time
     # re_path('', SOS_landpage),  # SOS Time
     
-    path('api/token/obtain/', TokenObtainPairView.as_view(serializer_class=CustomJWTSerializer), name='token_create'),  # override sjwt stock token
+    path('api/token/obtain/', TokenObtainPairView.as_view(serializer_class=CustomJWTSerializer), name='token_create'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
     path('api/profile', public_profile),
@@ -28,8 +28,8 @@ urlpatterns = [
     path('support', index),
     path('privacy-policy', index),
     
-    path('category/<category>', index),
-    path('category/<category>/<subCategory>', index),
+    path('contents', index),
+    path('contents/<category>', index),
     
     path('quiz/<title>', index),
     path('test/<title>', index),
@@ -38,7 +38,6 @@ urlpatterns = [
     
     path('search', index),
     path('tags/<tag>', index),
-    path('sort', index),
     # path('blog/<title>', article),
     # path('blog', blog),
     

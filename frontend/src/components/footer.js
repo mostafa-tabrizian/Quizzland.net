@@ -18,18 +18,18 @@ const Footer = () => {
                 <div className='mb-7'>
                     <dl className='space-y-2'>
                         <dt className='mb-3'>کوییز و تست ها</dt>
-                        <a className='block' href="/sort?s=newest"><dd>جدیدترین</dd></a>
-                        <a className='block' href="/sort?s=trend"><dd>محبوب ترین</dd></a>
-                        <a className='block' href="/sort?s=views"><dd>پربازدیدترین</dd></a>
+                        <a className='block' href="/contents?s=newest"><dd>جدیدترین</dd></a>
+                        <a className='block' href="/contents?s=trend"><dd>محبوب ترین</dd></a>
+                        <a className='block' href="/contents?s=views"><dd>پربازدیدترین</dd></a>
                     </dl>
                 </div>
 
                 <div className='mb-7'>
                     <dl className='space-y-2'>
                         <dt className='mb-3'>کتگوری ها</dt>
-                        <Link className='block' to="/category/movie-&-Series"><dd>فیلم و سریال</dd></Link>
-                        <Link className='block' to="/category/celebrity"><dd>سلبریتی</dd></Link>
-                        <Link className='block' to="/category/psychology"><dd>روانشناسی</dd></Link>
+                        <Link className='block' to="/contents/movie-&-Series"><dd>فیلم و سریال</dd></Link>
+                        <Link className='block' to="/contents/celebrity"><dd>سلبریتی</dd></Link>
+                        <Link className='block' to="/contents/psychology"><dd>روانشناسی</dd></Link>
                     </dl>
                 </div>
 

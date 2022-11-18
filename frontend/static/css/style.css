@@ -1058,47 +1058,6 @@ hr {
   }
 }
 
-.sortMore {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-}
-@media (max-width: 70em) {
-  .sortMore {
-    grid-template-columns: 1fr;
-    margin: 0;
-  }
-}
-.sortMore__container a::after {
-  background: #121212 !important;
-  box-shadow: inset 0 0 10px #1b1b1b, 0 6px 10px rgba(0, 0, 0, 0.5058823529) !important;
-}
-.sortMore__container a:hover {
-  box-shadow: 0 0 10px #252424 !important;
-}
-.sortMore__container a:hover::after {
-  box-shadow: inset 0 0 10px #000000, 0 6px 10px rgba(0, 0, 0, 0.7333333333) !important;
-}
-.sortMore__container__views {
-  background: #181818 !important;
-}
-.sortMore__inner {
-  margin: 2rem;
-}
-@media (max-width: 70em) {
-  .sortMore__inner {
-    margin: auto;
-    margin-bottom: 2rem;
-  }
-}
-@media (max-width: 70em) {
-  .sortMore div:first-child {
-    order: 1;
-  }
-}
-.sortMore__categoryStyle {
-  display: inherit !important;
-}
-
 .tools_btn {
   box-shadow: inset 0 0 5px #4a0b0b, 0 0 5px #323232;
 }

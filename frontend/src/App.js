@@ -15,8 +15,7 @@ const ScrollToTop       = lazy(() => import('./components/scrollToTop'))
 const Header            = lazy(() => import('./components/header'))
 const Footer            = lazy(() => import('./components/footer'))
 
-const Category          = lazy(() => import ('./pages/category'))
-const SubCategory       = lazy(() => import ('./pages/subCategory'))
+const Contents          = lazy(() => import ('./pages/contents'))
 
 const Quiz              = lazy(() => import ('./pages/quiz'))
 const QuizV2              = lazy(() => import ('./pages/quiz_v2'))
@@ -36,7 +35,6 @@ const Index             = lazy(() => import('./pages/landPage'))
 const PrivacyPolicy     = lazy(() => import('./pages/privacyPolicy'))
 const Search            = lazy(() => import('./pages/searchPage'))
 const Tags              = lazy(() => import('./pages/tags'))
-const Sort              = lazy(() => import('./pages/sort'))
 const Blog              = lazy(() => import('./pages/blog'))
 const notFound_404      = lazy(() => import('./pages/404'))
 
@@ -126,8 +124,8 @@ const App = () => {
                                     <Route path='/test/:title' component={Quiz} />
                                     <Route path='/result' component={Result} />
 
-                                    <Route path='/category/:category' exact component={Category} />
-                                    <Route path='/category/:category/:subCategory' component={SubCategory} />
+                                    <Route path='/contents/:category' exact component={Contents} />
+                                    <Route path='/contents/' exact component={Contents} />
 
                                     {/* <Route path='/contact' component={Contact} /> */}
                                     {/* <Route path='/advertiseContact' component={AdvertiseContact} /> */}
@@ -135,7 +133,6 @@ const App = () => {
                                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                                     <Route path='/search' component={Search} />
                                     <Route path='/tags/:tag' component={Tags} />
-                                    <Route path='/sort' component={Sort} />
                                     <Route path='/blog' component={Blog} />
 
                                     <Route path='/staff/panel' component={staffPanel} />
