@@ -661,21 +661,24 @@ const Quiz_V2 = (props) => {
                     </div>
                     <ul className='text-right p-5 space-y-5'>
                         <li className='list-disc mr-4'><p className='textShadow'>در تعداد سوال ها محدودیت وجود ندارد. تا وقتی اشتباه نکنید بازی ادامه دارد.</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow'>هر چه تعداد سوالات پاسخ داده شده بالاتر باشد، کیوکوین بیشتری دریافت میکنید</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از کیوکوین های خود از کمک کننده ها استفاده کنید</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>هر چه تعداد سوالات پاسخ داده شده بالاتر باشد، <img className='inline w-8 h-8' src="/static/img/QCoin.png" alt="" /> بیشتری دریافت میکنید</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از <img className='inline w-8 h-8' src="/static/img/QCoin.png" alt="" /> از کمک کننده ها استفاده کنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیری</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow flex items-center'>ورودی این کوییز: <b>
-                            {
-                                quiz?.fees ?
-                                <div className='flex space-x-2 space-x-reverse mr-3 items-center'>
-                                    <p>{quiz?.fees}</p>
-                                    <img className='h-10 mx-3' src="/static/img/QCoin.png" alt="" />
-                                </div>
-                                :
-                                'رایگان'
-                            }
-                            {/* if not free. get from the user coins */}
-                        </b></p></li>
+                        <li className='list-disc mr-4'><p className='textShadow flex items-center'>
+                            ورودی این کوییز:
+                            <b className='mx-3'>
+                                {
+                                    quiz?.fees ?
+                                    <div className='flex space-x-2 space-x-reverse mr-3 items-center'>
+                                        <p>{quiz?.fees}</p>
+                                        <img className='h-10 mx-3' src="/static/img/QCoin.png" alt="" />
+                                    </div>
+                                    :
+                                    'رایگان'
+                                }
+                                {/* if not free. get from the user coins */}
+                            </b>
+                        </p></li>
                     </ul>
                 </div>
                 <button onClick={payAndPlay} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
