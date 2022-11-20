@@ -17,7 +17,6 @@ const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 import AddView from '../components/addView';
 import axiosInstance from '../components/axiosAuthApi';
-const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
 const TestContainer = React.lazy(() => import('../components/testContainer'))
 
 const logo = '/static/img/Q-small.png'
@@ -45,6 +44,7 @@ const Quiz_V2 = (props) => {
     const [quizEndStatue, setQuizEndStatue] = useState(false)
     const [resultGif, setResultGif] = useState(null)
     const [resultMessage, setResultMessage] = useState(null)
+    const [lifeline5050, setLifeline5050] = useState(false)
 
     const location = useLocation();
 
@@ -199,6 +199,44 @@ const Quiz_V2 = (props) => {
         }
     }
 
+    const removeHalfTheWrongOptions = () => {
+        if (lifeline5050) {
+            return
+        }
+
+        const allOptions = document.querySelectorAll('.quiz__options__textLabel')
+        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
+        const optionsBaseIndex = ((currentQuestionNumber-1)*4)
+
+        const options = {
+            1: optionsBaseIndex+1,
+            2: optionsBaseIndex+2,
+            3: optionsBaseIndex+3,
+            4: optionsBaseIndex+4
+        }
+
+        delete options[correctAnswer]
+
+        const keys = Object.keys(options);
+        const randomIndexes = keys.sort(() => 0.5 - Math.random())
+
+        const optionForChanges1 = allOptions[options[randomIndexes[0]] - 1]
+        const optionForChanges2 = allOptions[options[randomIndexes[1]] - 1]
+
+        document.getElementById(`${optionForChanges1.id}`).disabled  = true
+        optionForChanges1.style.opacity = .5
+        optionForChanges1.style.pointerEvents = 'none'
+        
+        document.getElementById(`${optionForChanges2.id}`).disabled  = true
+        optionForChanges2.style.pointerEvents = 'none'
+        optionForChanges2.style.opacity = .5
+
+        document.getElementById(`50:50`).style.pointerEvents = 'none'
+        document.getElementById(`50:50`).style.opacity = .5
+
+        setLifeline5050(true)
+    }
+
     const checkTheSelectedOption = (userSelection) => {
         let userAnswer = parseInt(userSelection.id.slice(-1))
         let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
@@ -235,17 +273,16 @@ const Quiz_V2 = (props) => {
 
     const makeEveryOptionLowOpacity = (type) => {
         const allOptions = document.querySelectorAll('.quiz__options__textLabel')
+        let opacityLevel
 
         if (type === 'low') {
-            for (let i = 0; i < allOptions.length; i++) {
-                allOptions[i].style.opacity = .5
-            }
+            opacityLevel = .5
+        } else if (type === 'high') {
+            opacityLevel = 1
         }
 
-        else if (type === 'high') {
-            for (let i = 0; i < allOptions.length; i++) {
-                allOptions[i].style.opacity = 1
-            }
+        for (let i = 0; i < allOptions.length; i++) {
+            allOptions[i].style.opacity = opacityLevel
         }
     }
 
@@ -748,7 +785,7 @@ const Quiz_V2 = (props) => {
 
                             <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
+                            {quiz?.id && <LikeCommentButton removeHalfTheWrongOptions={removeHalfTheWrongOptions} quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
 
                             <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                                 <div className={`quiz__hider mt-5 flex relative`}>

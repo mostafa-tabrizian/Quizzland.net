@@ -148,25 +148,25 @@ const LikeCommentButton = (props) => {
                 </div>
             </div>
 
-            <div className={`${lifeline ? 'pop_up opacity-100' : 'pop_down opacity-0'} fixed z-10 flex justify-center w-screen md:bottom-18 bottom-28`}>
+            <div className={`${lifeline ? 'pop_up opacity-100' : 'pop_down opacity-0'} fixed z-10 flex justify-center w-screen md:bottom-20 bottom-28`}>
                 <div style={{'background': props.theme || '#991b1b'}} className={`flex shadow-[0_0_4px_white] px-4 py-2 space-x-5 rounded-2xl relative`}>
-                    <button>
+                    <button onClick={props.removeHalfTheWrongOptions} id='50:50'>
                         50:50
                     </button>
 
                     <span className='h-6 my-auto border border-white'></span>
 
-                    <button>
+                    <button> {/* poll audience */}
                         <svg class="h-6 w-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                     </button>
 
                     <span className='h-6 my-auto border border-white'></span>
 
-                    <button>
+                    <button>  {/* flip question */}
                         <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>
                     </button>
 
-                    <div style={{'background': props.theme || '#991b1b'}} className={`${lifeline ? 'pop_up opacity-100' : 'pop_down opacity-0'} absolute top-[-2.5rem] px-3 py-1 left-10 rounded`}>
+                    <div style={{'background': props.theme || '#991b1b'}} className={`${lifeline ? 'pop_up opacity-100' : 'pop_down opacity-0'} absolute top-[-2.5rem] px-3 py-1 left-10 md:left-[2.1rem] rounded`}>
                         <p className='text-[.8rem]'>کمک کننده ها</p>
                     </div>
                 </div>
