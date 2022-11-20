@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password  # check_password
@@ -100,6 +100,18 @@ def search_user(request, *args, **kwargs):
 
 # def checkAlreadyUserExists(username, email):
 #     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists()
+
+@csrf_exempt
+def answer(request, *args, **kwargs):
+    if request.method == 'GET':
+        questionId = request.GET.get('questionId')
+        answer = Answer_V2.objects.get(questionKey=questionId)
+        
+        return JsonResponse({
+            'answer': answer.answer,
+            'answer_text': answer.answer_text,
+            'answer_imGif': answer.answer_imGif.url
+        })
 
 
 def verify_recaptcha(res):
@@ -476,10 +488,12 @@ class QuestionsV2View(viewsets.ModelViewSet):
     def create(self, request):
         requestData = request.data
         quizKey = Quizzes_V2.objects.get(id=requestData['quizKey'])
-
+        submitter_id = CustomUser.objects.get(id=requestData['submitter_id'])
+        
         new_question = Questions_V2()
 
         new_question.quizKey = quizKey
+        new_question.submitter_id = submitter_id
         new_question.question = requestData['question']
         new_question.question_img = requestData['question_img']
 
@@ -493,14 +507,35 @@ class QuestionsV2View(viewsets.ModelViewSet):
         new_question.option_img_3rd = requestData['option_img_3rd']
         new_question.option_img_4th = requestData['option_img_4th']
 
-        new_question.answer = requestData['answer']
-        new_question.answer_imGif = requestData['answer_imGif']
-        new_question.answer_text = requestData['answer_text']
-
         new_question.save()
+        
+        return HttpResponse(new_question.id)
 
-        return HttpResponse('question created successfully')
+    
+class AnswerV2View(viewsets.ModelViewSet):
+    permission_classes = (BasePermission,)
+    # queryset = Answer_V2.objects.all()
+    serializer_class = AnswerV2Serializer
+    filterset_class = AnswerV2Filter
+    
+    def get_queryset(self):
+        return
 
+    def create(self, request):
+        requestData = request.data
+        questionKey = Questions_V2.objects.get(id=requestData['questionKey'])
+
+        relate_answer = Answer_V2()
+
+        relate_answer.questionKey = questionKey
+
+        relate_answer.answer = requestData['answer']
+        relate_answer.answer_imGif = requestData['answer_imGif']
+        relate_answer.answer_text = requestData['answer_text']
+
+        relate_answer.save()
+
+        return HttpResponse('answer added successfully')
 
 class QuestionsPointyView(viewsets.ModelViewSet):
     permission_classes = (BasePermission,)

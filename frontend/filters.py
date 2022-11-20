@@ -151,6 +151,13 @@ class QuestionsV2Filter(filters.FilterSet):
         fields = {
             'quizKey': ['exact'],
         }
+        
+class AnswerV2Filter(filters.FilterSet):
+    class Meta:
+        model = Answer_V2
+        fields = {
+            'questionKey': ['exact'],
+        }
 
 class QuestionsPointyFilter(filters.FilterSet):
     class Meta:

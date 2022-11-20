@@ -111,8 +111,13 @@ class Questions_Admin(admin.ModelAdmin):
 
 @admin.register(Questions_V2)
 class QuestionsV2_Admin(admin.ModelAdmin):
-    list_display = ('quizKey', 'question', 'answer_text')
+    list_display = ('quizKey', 'question')
     search_fields = ['question']
+    
+@admin.register(Answer_V2)
+class AnswerV2_Admin(admin.ModelAdmin):
+    list_display = ('questionKey', 'answer', 'answer_text')
+    search_fields = ['questionKey', 'answer_text']
 
 @admin.register(Pointy_Questions)
 class Pointy_Questions_Admin(admin.ModelAdmin):

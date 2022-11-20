@@ -33,6 +33,7 @@ router.register(r'subcategoryView', views.SubCategoryView, basename='SubCategory
 
 router.register(r'questionsView', views.QuestionsView, basename='QuestionsView')
 router.register(r'questionsV2View', views.QuestionsV2View, basename='QuestionsV2View')
+router.register(r'answerV2View', views.AnswerV2View, basename='answerV2View')
 router.register(r'questionsPointyView', views.QuestionsPointyView, basename='QuestionsPointyView')
 
 urlpatterns = [

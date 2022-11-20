@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import { useSnackbar } from 'notistack'
+import UserStore from '../../../../../store/userStore';
 
 import { log } from '../../../../base'
 import axiosInstance from '../../../../axiosAuthApi';
@@ -30,6 +31,8 @@ const TriviaQuestionForm = (props) => {
     const answerRef = useRef()
     const answerTextRef = useRef()
 
+    const [userProfile, userActions] = UserStore()
+
     useEffect(() => {
         fetchQuizzes()
         document.querySelector('#questionBackground').style = `background: black`
@@ -50,24 +53,22 @@ const TriviaQuestionForm = (props) => {
     }
 
     const postQuestion = async () => {
-        let formData = new FormData()
+        let questionFormData = new FormData()
 
-        formData.append('quizKey', selectedQuiz?.id)
-        formData.append('question', questionRef.current.innerText)
-        formData.append('question_img', questionImageURL)
-        formData.append('option_1st', option1stRef.current.value)
-        formData.append('option_2nd', option2ndRef.current.value)
-        formData.append('option_3rd', option3rdRef.current.value)
-        formData.append('option_4th', option4thRef.current.value)
-        formData.append('option_img_1st', optionImage1stURL)
-        formData.append('option_img_2nd', optionImage2ndURL)
-        formData.append('option_img_3rd', optionImage3rdURL)
-        formData.append('option_img_4th', optionImage4thURL)
-        formData.append('answer', answerRef.current.value)
-        formData.append('answer_imGif', answerImageGIFURL)
-        formData.append('answer_text', answerTextRef.current.value)
+        questionFormData.append('quizKey', selectedQuiz?.id)
+        questionFormData.append('submitter_id', userProfile.userDetail.id)
+        questionFormData.append('question', questionRef.current.innerText)
+        questionFormData.append('question_img', questionImageURL)
+        questionFormData.append('option_1st', option1stRef.current.value)
+        questionFormData.append('option_2nd', option2ndRef.current.value)
+        questionFormData.append('option_3rd', option3rdRef.current.value)
+        questionFormData.append('option_4th', option4thRef.current.value)
+        questionFormData.append('option_img_1st', optionImage1stURL)
+        questionFormData.append('option_img_2nd', optionImage2ndURL)
+        questionFormData.append('option_img_3rd', optionImage3rdURL)
+        questionFormData.append('option_img_4th', optionImage4thURL)
 
-        await axiosInstance.post(`/api/questionsV2View/`, formData, {
+        await axiosInstance.post(`/api/questionsV2View/`, questionFormData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
@@ -76,6 +77,7 @@ const TriviaQuestionForm = (props) => {
                 if (res.status == 200) {
                     setPostStatue(true)
                     enqueueSnackbar('سوال با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                    postAnswer(res.data)
                 } else {
                     setPostStatue(false)
                     log(res)
@@ -89,6 +91,37 @@ const TriviaQuestionForm = (props) => {
                 log(err)
                 log(err.response)
             })
+    }
+
+    const postAnswer = async (questionId) => {        
+        let answerFormData = new FormData()
+
+        answerFormData.append('questionKey', questionId)
+        answerFormData.append('answer', answerRef.current.value)
+        answerFormData.append('answer_imGif', answerImageGIFURL)
+        answerFormData.append('answer_text', answerTextRef.current.value)
+        
+        await axiosInstance.post('/api/answerV2View/', answerFormData)
+            .then(res => {
+                if (res.status == 200) {
+                    setPostStatue(true)
+                    enqueueSnackbar('جواب با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                } else {
+                    setPostStatue(false)
+                    log(res)
+                    log(res.response)
+                    enqueueSnackbar('در ثبت جواب خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                }
+            })
+            .catch(err => {
+                enqueueSnackbar('در ثبت جواب خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                setPostStatue(false)
+                log('err: postAnswer')
+                log(err)
+                log(err.response)
+            })
+        
+
     }
 
     const quizKeyChanged = (e, value) => {

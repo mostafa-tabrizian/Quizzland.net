@@ -201,8 +201,7 @@ class QuestionsV2Serializer(serializers.ModelSerializer):
     option_img_2nd = serializers.ImageField(required=False)
     option_img_3rd = serializers.ImageField(required=False)
     option_img_4th = serializers.ImageField(required=False)
-    answer_imGif = serializers.ImageField(required=False)
-
+    
     class Meta:
         model = Questions_V2
         fields = (
@@ -210,7 +209,18 @@ class QuestionsV2Serializer(serializers.ModelSerializer):
         )
 
         quizKey = QuizzesV2Serializer(many=False)
+        submitter_id = CustomUserSerializer(many=False)
+        
+class AnswerV2Serializer(serializers.ModelSerializer):
+    answer_imGif = serializers.ImageField(required=False)
 
+    class Meta:
+        model = Answer_V2
+        fields = (
+            '__all__'
+        )
+
+    questionKey = QuestionsV2Serializer(many=False)
 
 class QuestionsPointySerializer(serializers.ModelSerializer):
     thumbnail = serializers.ImageField(required=False)

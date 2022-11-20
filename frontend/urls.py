@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/google', auth_google),
     path("api/recaptcha", verify_recaptcha),
     path('api/search_user', search_user),
+    path('api/answer', answer),
     
     path('login', index),
     

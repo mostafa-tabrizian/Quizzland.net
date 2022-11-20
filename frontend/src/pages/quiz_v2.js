@@ -45,6 +45,7 @@ const Quiz_V2 = (props) => {
     const [resultGif, setResultGif] = useState(null)
     const [resultMessage, setResultMessage] = useState(null)
     const [lifeline5050, setLifeline5050] = useState(false)
+    const [answer, setAnswer] = useState(null)
 
     const location = useLocation();
 
@@ -126,8 +127,6 @@ const Quiz_V2 = (props) => {
                     // await getSuggestionsQuiz()
                     applyBackground()
 
-                    let questionAPI
-
                     await axios.get(`/api/questionsV2View/?quizKey=${quizData.id}&public=true`)
                         .then((questionData) => {
                             const shuffledData = questionData.data.sort(() => Math.random() - 0.5)
@@ -166,21 +165,11 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const ImGifTextAnswerShowOrHide = (questionId, hideOrShow) => {
-        const question = document.querySelectorAll('.quiz__container')[questionId - 1]
-        if (hideOrShow == 'block') {
-            question.querySelector('.quiz__answerText')?.classList.remove('answerHide')
-            question.querySelector('.quiz__answerText')?.classList.add('answerShow')
-
-            question.querySelector('.quiz__answerImGif')?.classList.remove('answerHide')
-            question.querySelector('.quiz__answerImGif')?.classList.add('answerShow')
-        }
-        else if (hideOrShow == 'none') {
-            question.querySelector('.quiz__answerText')?.classList.remove('answerShow')
-            question.querySelector('.quiz__answerText')?.classList.add('answerHide')
-
-            question.querySelector('.quiz__answerImGif')?.classList.remove('answerShow')
-            question.querySelector('.quiz__answerImGif')?.classList.add('answerHide')
+    const changeStatueAnswer = (answer, statue) => {
+        if (statue == 'show') {
+            setAnswer(answer)
+        } else if (statue == 'hide') {
+            setAnswer(null)
         }
     }
 
@@ -237,16 +226,30 @@ const Quiz_V2 = (props) => {
         setLifeline5050(true)
     }
 
-    const checkTheSelectedOption = (userSelection) => {
+    const getAnswer = async () => {
+        const currentQuestion = questions[currentQuestionNumber - 1]
+
+        return await axiosInstance.get(`/api/answer?questionId=${currentQuestion.id}`)
+            .then(res => {
+                const answer = res.data
+                changeStatueAnswer(answer, 'show')
+                return answer
+            })
+            .catch(err => {
+                log(err)
+                log(err.response)
+                return null
+            })
+    }
+
+    const checkTheSelectedOption = async (answerDetail, userSelection) => {
         let userAnswer = parseInt(userSelection.id.slice(-1))
-        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
 
-        saveUserAnswer(userAnswer, correctAnswer)
+        saveUserAnswer(userAnswer, answerDetail.answer)
 
-        setCorrectAnswerOption(correctAnswer)
-        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'block')
+        setCorrectAnswerOption(answerDetail.answer)
 
-        if (userAnswer == correctAnswer) {
+        if (userAnswer == answerDetail.answer) {
             setCorrectAnswersCount(prev => prev + 1)
             playSFX('correct')
             return true
@@ -258,14 +261,12 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const amountOfPauseCalculator = () => {
+    const amountOfPauseCalculator = (answerDetail) => {
         let amountOfPause = 2000
-        const currentQuestions = questions[currentQuestionNumber - 1]
-
-        if (currentQuestions?.answer_text && currentQuestions?.answer_text !== '') {
+        if (answerDetail.answer_text) {
             amountOfPause += 2000
         }
-        if (currentQuestions?.answer_imGif && !(currentQuestions?.answer_imGif?.includes('NotExist'))) {
+        if (!answerDetail?.answer_imGif.includes('undefined')) {
             amountOfPause += 2000
         }
         return amountOfPause
@@ -339,15 +340,18 @@ const Quiz_V2 = (props) => {
 
             setAbleToSelectOption(false)
             makeEveryOptionLowOpacity('low')
-            const result = checkTheSelectedOption(props.target)
+
+            const answerDetail = await getAnswer()
+            const result = await checkTheSelectedOption(answerDetail, props.target)
+
             if (result) {
-                nextQuestion()
+                nextQuestion(answerDetail)
             }
         }
     }
 
     const restartTheStateOfQuestion = () => {
-        ImGifTextAnswerShowOrHide(currentQuestionNumber, 'none')
+        changeStatueAnswer(null, 'hide')
         setCorrectAnswerOption(0)
         setWrongAnswerOption(0)
         makeEveryOptionLowOpacity('high')
@@ -466,7 +470,7 @@ const Quiz_V2 = (props) => {
         }, 3000);
     }
 
-    const nextQuestion = () => {
+    const nextQuestion = (answerDetail) => {
         setTimeout(() => {
             if (currentQuestionNumber !== questions?.length) {
                 restartTheStateOfQuestion()
@@ -480,7 +484,7 @@ const Quiz_V2 = (props) => {
             } else {
                 quizEnd()
             }
-        }, amountOfPauseCalculator());
+        }, amountOfPauseCalculator(answerDetail));
     }
 
     const returnQuiz = (question) => {
@@ -506,16 +510,6 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const gifAnswerOfQuestionIfExistShow = (question) => {
-        return <LazyLoadImage
-            src={question.answer_imGif}
-            width={1366}
-            className='object-contain object-top pb-4 m-auto'
-            alt={question.title}
-            title={question.title}
-        />
-    }
-
     const isSafari = typeof (window) !== 'undefined' && navigator.userAgent.indexOf("Chrome") != -1 === false && navigator.userAgent.indexOf("Chrome") != -1
 
     const quizQuestions = (browser) => {
@@ -527,7 +521,7 @@ const Quiz_V2 = (props) => {
                             browser == 'safari' ?
                                 { left: `${currentMoveOfQuestions}rem` }
                                 :
-                                { transform: `translate(${currentMoveOfQuestions}rem)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem)` }
+                                { transform: `translate(${currentMoveOfQuestions}rem, 0)`, WebkitTransform: `translate(${currentMoveOfQuestions}rem, 0)` }
                         }
                         className={`
                             quiz__container relative mr-20 ml-2 md:ml-0 md:pt-3
@@ -568,16 +562,24 @@ const Quiz_V2 = (props) => {
                         {returnQuiz(question)}
 
                         {
-                            question?.answer_text &&
-                            <div className={`quiz__answerText py-4 px-8 answerHide text-right ${theme == 'light' ? 'bg-[#ffffff82]' : 'bg-[#0000007c]'} backdrop-blur-xl mt-4 rounded-lg`}>
-                                {answerOfQuestionIfExistShow(question)}
+                            answer?.answer_text &&
+                            <div className={`py-4 px-8 text-right bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg`}>
+                                <p>
+                                    {answer.answer_text}
+                                </p>
                             </div>
                         }
 
                         {
-                            !(question.answer_imGif.includes('NotExist.jpg')) &&
-                            <div className={`quiz__answerImGif answerHide quiz__answerImGif ${theme == 'light' ? 'bg-[#ffffff82]' : 'bg-[#0000007c]'} backdrop-blur-xl mt-4 rounded-lg`}>
-                                {gifAnswerOfQuestionIfExistShow(question)}
+                            answer && !answer?.answer_imGif.includes('undefined') &&
+                            <div className={`bg-[#0000007c] backdrop-blur-xl mt-4 rounded-lg`}>
+                                <LazyLoadImage
+                                    src={answer?.answer_imGif}
+                                    width={1366}
+                                    className='object-contain object-top pb-4 m-auto'
+                                    alt={quiz.title}
+                                    title={quiz.title}
+                                />
                             </div>
                         }
                     </div>
