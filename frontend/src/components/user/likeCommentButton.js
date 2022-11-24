@@ -15,8 +15,13 @@ const LikeCommentButton = (props) => {
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
     const [likeLoading, setLikeLoading] = useState(false)
     const [lifeline, setLifeline] = useState(false)
+    const [lifelineTitle, setLifelineTitle] = useState(null)
+    const [lifelineStatue, setLifelineStatue] = useState(null)
+    const [lifelineMessage, setLifelineMessage] = useState(null)
+    const [lifelinePrice, setLifelinePrice] = useState(null)
+    const [lifelineType, setLifelineType] = useState(null)
     
-    const [userProfile] = UserStore()
+    const [userProfile, userActions] = UserStore()
 
     const itIsMobile = useRef()
     
@@ -109,6 +114,58 @@ const LikeCommentButton = (props) => {
             return 'right'
         }
     }
+
+    const setupLifelineMessage = (type) => {
+        setLifelineType(type)
+        setLifelineStatue(true)
+
+        switch (type) {
+            case 'fiftyFifty':
+                setLifelineTitle('پنجاه پنجاه')
+                setLifelineMessage('حذف کردن دو گزینه غلط کوییز')
+                setLifelinePrice(60)
+                break;
+
+            case 'skipQuestion':
+                setLifelineTitle('رد شدن از سوال')
+                setLifelineMessage('سوال در حال حاضر را با سوالی دیگر تغییر بدهید')
+                setLifelinePrice(40)
+                break;
+        }
+        setLifeline(false)
+    }
+
+    const payWithQCoin = async () => {
+        const now = new Date().getTime()
+        const userId = userProfile.userDetail.id
+        const payload = {
+            q_coins: userProfile.QCoins - lifelinePrice
+        }
+
+        await axiosInstance.patch(`/api/userView/${userId}/?timestamp=${now}`, payload)
+            .then(res => {
+                userActions.updateQCoins(res.data.q_coins)
+            })
+            .catch(err => {
+                log(err)
+                log(err.response)
+            })
+    }
+
+    const lifeLineFunctionCall = () => {
+        setLifelineStatue(false)
+        payWithQCoin()
+
+        switch (lifelineType) {
+            case 'fiftyFifty':
+                props.removeHalfTheWrongOptions()
+                break
+
+            case 'skipQuestion':
+                props.skipQuestion()
+                break
+        }
+    }
     
     return (
         <React.Fragment>
@@ -148,9 +205,26 @@ const LikeCommentButton = (props) => {
                 </div>
             </div>
 
+            <div className='flex justify-center w-screen'>
+                <div className={`${lifelineStatue ? 'pop_up opacity-100' : 'pop_down opacity-0'} w-[25rem] p-3 rounded-t-lg bg-slate-700 border border-blue-800 fixed bottom-0 z-10`}>
+                    <button onClick={() => setLifelineStatue(false)} className='absolute top-2 right-2 bg-slate-300 rounded-full py-[0.1rem] px-[0.5rem] z-20'>X</button>
+                    <div className='relative top-[-3rem] space-y-3'>
+                        <div className='bg-purple-400 mx-auto mb-4 rounded-full p-3 w-16'>
+                            <svg class="h-10 w-10 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>
+                        </div>
+                        
+                        <h1 className='text-center'>استفاده از کمک کننده: {lifelineTitle}</h1>
+                        <p className='text-center'>{lifelineMessage}</p>
+                        <button className='flex mx-auto border border-white rounded w-full justify-center py-2'>ADDS</button>
+                        <h3 className='text-center'>یا</h3>
+                        <button className='flex mx-auto border border-white rounded w-full justify-center py-2' onClick={lifeLineFunctionCall}>استفاده از {lifelinePrice} کوین</button>
+                    </div>
+                </div>
+            </div>
+
             <div className={`${lifeline ? 'pop_up opacity-100' : 'pop_down opacity-0'} fixed z-10 flex justify-center w-screen md:bottom-20 bottom-28`}>
                 <div style={{'background': props.theme || '#991b1b'}} className={`flex shadow-[0_0_4px_white] px-4 py-2 space-x-5 rounded-2xl relative`}>
-                    <button onClick={props.removeHalfTheWrongOptions} id='50:50'>
+                    <button onClick={() => setupLifelineMessage('fiftyFifty')} id='50:50'>
                         50:50
                     </button>
 
@@ -162,7 +236,7 @@ const LikeCommentButton = (props) => {
 
                     <span className='h-6 my-auto border border-white'></span>
 
-                    <button onClick={props.skipQuestion} id='skipQuestion'>  {/* skip question */}
+                    <button onClick={() => setupLifelineMessage('skipQuestion')} id='skipQuestion'>  {/* skip question */}
                         <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>
                     </button>
 
