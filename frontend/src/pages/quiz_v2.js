@@ -66,9 +66,8 @@ const Quiz_V2 = (props) => {
     }, quizSlugReplacedWithHyphen)
 
     useEffect(() => {
-        const question_background = document.querySelector('#question_background')
-        question_background && (document.querySelectorAll('#question_background').forEach((q) => q.style = `background: ${quiz?.theme}`))
-        // document.querySelector('body').style = `background: #060101`
+        const question_background = document.querySelectorAll('#question_background')
+        question_background && (question_background.forEach((q) => q.style = `background: ${quiz?.theme}`))
     })
 
     useEffect(() => {
@@ -188,13 +187,15 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const removeHalfTheWrongOptions = () => {
+    const removeHalfTheWrongOptions = async () => {
         if (lifeline5050) {
             return
         }
 
+        const answerDetail = await getAnswer(false)
+
         const allOptions = document.querySelectorAll('.quiz__options__textLabel')
-        let correctAnswer = parseInt(questions[currentQuestionNumber - 1].answer)
+        
         const optionsBaseIndex = ((currentQuestionNumber-1)*4)
 
         const options = {
@@ -204,7 +205,7 @@ const Quiz_V2 = (props) => {
             4: optionsBaseIndex+4
         }
 
-        delete options[correctAnswer]
+        delete options[answerDetail.answer]
 
         const keys = Object.keys(options);
         const randomIndexes = keys.sort(() => 0.5 - Math.random())
@@ -226,13 +227,16 @@ const Quiz_V2 = (props) => {
         setLifeline5050(true)
     }
 
-    const getAnswer = async () => {
+    const getAnswer = async (showAnswer) => {
         const currentQuestion = questions[currentQuestionNumber - 1]
 
         return await axiosInstance.get(`/api/answer?questionId=${currentQuestion.id}`)
             .then(res => {
                 const answer = res.data
-                changeStatueAnswer(answer, 'show')
+                
+                if (showAnswer) {
+                    changeStatueAnswer(answer, 'show')
+                }
                 return answer
             })
             .catch(err => {
@@ -341,7 +345,7 @@ const Quiz_V2 = (props) => {
             setAbleToSelectOption(false)
             makeEveryOptionLowOpacity('low')
 
-            const answerDetail = await getAnswer()
+            const answerDetail = await getAnswer(true)
             const result = await checkTheSelectedOption(answerDetail, props.target)
 
             if (result) {
@@ -541,7 +545,7 @@ const Quiz_V2 = (props) => {
                             }
 
                             {
-                                !question?.question_img?.includes('NotExist') &&
+                                !question.question_img?.includes('undefined') &&
                                 <div className='my-3'>
                                     <div className='absolute z-10 top-6 right-7 md:right-3 questionNumberShadow mix-blend-hard-light'>
                                         {questions.indexOf(question) + 1}
