@@ -733,7 +733,7 @@ const Quiz_V2 = (props) => {
                                     quiz?.fees ?
                                     <div className='flex space-x-2 space-x-reverse mr-3 items-center'>
                                         <p>{quiz?.fees}</p>
-                                        <img className='h-10 mx-3' src="/static/img/QCoin.png" alt="" />
+                                        <img className='mx-3 inline w-8 h-8' src="/static/img/QCoin.png" alt="" />
                                     </div>
                                     :
                                     'رایگان'

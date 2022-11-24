@@ -20,6 +20,7 @@ const LikeCommentButton = (props) => {
     const [lifelineMessage, setLifelineMessage] = useState(null)
     const [lifelinePrice, setLifelinePrice] = useState(null)
     const [lifelineType, setLifelineType] = useState(null)
+    const [lifelineIcon, setLifelineIcon] = useState(null)
     
     const [userProfile, userActions] = UserStore()
 
@@ -121,14 +122,16 @@ const LikeCommentButton = (props) => {
 
         switch (type) {
             case 'fiftyFifty':
+                setLifelineIcon(<svg class="h-10 w-10 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>)
                 setLifelineTitle('پنجاه پنجاه')
-                setLifelineMessage('حذف کردن دو گزینه غلط کوییز')
+                setLifelineMessage('حذف کردن دو گزینه‌ی نادرست سوال')
                 setLifelinePrice(60)
                 break;
 
             case 'skipQuestion':
+                setLifelineIcon(<svg class="h-10 w-10 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>)
                 setLifelineTitle('رد شدن از سوال')
-                setLifelineMessage('سوال در حال حاضر را با سوالی دیگر تغییر بدهید')
+                setLifelineMessage('این سوال جایگزاری میشود و به سوال بعدی میروید')
                 setLifelinePrice(40)
                 break;
         }
@@ -206,18 +209,21 @@ const LikeCommentButton = (props) => {
             </div>
 
             <div className='flex justify-center w-screen'>
-                <div className={`${lifelineStatue ? 'pop_up opacity-100' : 'pop_down opacity-0'} w-[25rem] p-3 rounded-t-lg bg-slate-700 border border-blue-800 fixed bottom-0 z-10`}>
-                    <button onClick={() => setLifelineStatue(false)} className='absolute top-2 right-2 bg-slate-300 rounded-full py-[0.1rem] px-[0.5rem] z-20'>X</button>
+                <div style={{background: `linear-gradient(180deg, black, ${props.theme}`}} className={`${lifelineStatue ? 'pop_up opacity-100' : 'pop_down opacity-0'} rounded-lg shadow-[0_0_15px_black] w-[25rem] p-3 rounded-t-lg-800 fixed bottom-0 z-10`}>
+                    <button style={{background: props.theme}} onClick={() => setLifelineStatue(false)} className='absolute top-2 right-2 rounded-full p-[0.1rem] z-20'>
+                        <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+
                     <div className='relative top-[-3rem] space-y-3'>
-                        <div className='bg-purple-400 mx-auto mb-4 rounded-full p-3 w-16'>
-                            <svg class="h-10 w-10 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>
+                        <div style={{background: props.theme}} className='shadow-[0_0_10px_black] mx-auto mb-4 rounded-full p-3 w-16'>
+                            {lifelineIcon}
                         </div>
                         
                         <h1 className='text-center'>استفاده از کمک کننده: {lifelineTitle}</h1>
                         <p className='text-center'>{lifelineMessage}</p>
                         <button className='flex mx-auto border border-white rounded w-full justify-center py-2'>ADDS</button>
                         <h3 className='text-center'>یا</h3>
-                        <button className='flex mx-auto border border-white rounded w-full justify-center py-2' onClick={lifeLineFunctionCall}>استفاده از {lifelinePrice} کوین</button>
+                        <button className='flex mx-auto border border-white rounded w-full justify-center py-2 items-center' onClick={lifeLineFunctionCall}><img className='inline mx-2 w-6 h-6' src="/static/img/QCoin.png" alt="" /> استفاده از {lifelinePrice}</button>
                     </div>
                 </div>
             </div>
