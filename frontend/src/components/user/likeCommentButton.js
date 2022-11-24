@@ -162,7 +162,7 @@ const LikeCommentButton = (props) => {
 
                     <span className='h-6 my-auto border border-white'></span>
 
-                    <button>  {/* flip question */}
+                    <button onClick={props.skipQuestion} id='skipQuestion'>  {/* skip question */}
                         <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>
                     </button>
 

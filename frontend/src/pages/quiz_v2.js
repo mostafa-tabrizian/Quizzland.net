@@ -45,6 +45,7 @@ const Quiz_V2 = (props) => {
     const [resultGif, setResultGif] = useState(null)
     const [resultMessage, setResultMessage] = useState(null)
     const [lifeline5050, setLifeline5050] = useState(false)
+    const [lifelineSkipQuestion, setLifelineSkipQuestion] = useState(false)
     const [answer, setAnswer] = useState(null)
 
     const location = useLocation();
@@ -187,46 +188,6 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const removeHalfTheWrongOptions = async () => {
-        if (lifeline5050) {
-            return
-        }
-
-        const answerDetail = await getAnswer(false)
-
-        const allOptions = document.querySelectorAll('.quiz__options__textLabel')
-        
-        const optionsBaseIndex = ((currentQuestionNumber-1)*4)
-
-        const options = {
-            1: optionsBaseIndex+1,
-            2: optionsBaseIndex+2,
-            3: optionsBaseIndex+3,
-            4: optionsBaseIndex+4
-        }
-
-        delete options[answerDetail.answer]
-
-        const keys = Object.keys(options);
-        const randomIndexes = keys.sort(() => 0.5 - Math.random())
-
-        const optionForChanges1 = allOptions[options[randomIndexes[0]] - 1]
-        const optionForChanges2 = allOptions[options[randomIndexes[1]] - 1]
-
-        document.getElementById(`${optionForChanges1.id}`).disabled  = true
-        optionForChanges1.style.opacity = .5
-        optionForChanges1.style.pointerEvents = 'none'
-        
-        document.getElementById(`${optionForChanges2.id}`).disabled  = true
-        optionForChanges2.style.pointerEvents = 'none'
-        optionForChanges2.style.opacity = .5
-
-        document.getElementById(`50:50`).style.pointerEvents = 'none'
-        document.getElementById(`50:50`).style.opacity = .5
-
-        setLifeline5050(true)
-    }
-
     const getAnswer = async (showAnswer) => {
         const currentQuestion = questions[currentQuestionNumber - 1]
 
@@ -248,10 +209,7 @@ const Quiz_V2 = (props) => {
 
     const checkTheSelectedOption = async (answerDetail, userSelection) => {
         let userAnswer = parseInt(userSelection.id.slice(-1))
-
         saveUserAnswer(userAnswer, answerDetail.answer)
-
-        setCorrectAnswerOption(answerDetail.answer)
 
         if (userAnswer == answerDetail.answer) {
             setCorrectAnswersCount(prev => prev + 1)
@@ -267,12 +225,16 @@ const Quiz_V2 = (props) => {
 
     const amountOfPauseCalculator = (answerDetail) => {
         let amountOfPause = 2000
-        if (answerDetail.answer_text) {
-            amountOfPause += 2000
+
+        if (answerDetail?.answer) {
+            if (answerDetail.answer_text) {
+                amountOfPause += 2000
+            }
+            if (!answerDetail?.answer_imGif.includes('undefined')) {
+                amountOfPause += 2000
+            }
         }
-        if (!answerDetail?.answer_imGif.includes('undefined')) {
-            amountOfPause += 2000
-        }
+
         return amountOfPause
     }
 
@@ -346,12 +308,69 @@ const Quiz_V2 = (props) => {
             makeEveryOptionLowOpacity('low')
 
             const answerDetail = await getAnswer(true)
+            setCorrectAnswerOption(answerDetail.answer)
             const result = await checkTheSelectedOption(answerDetail, props.target)
 
             if (result) {
                 nextQuestion(answerDetail)
             }
         }
+    }
+
+    
+    const removeHalfTheWrongOptions = async () => {
+        if (lifeline5050) {
+            return
+        }
+
+        const answerDetail = await getAnswer(false)
+
+        const allOptions = document.querySelectorAll('.quiz__options__textLabel')
+        
+        const optionsBaseIndex = ((currentQuestionNumber-1)*4)
+
+        const options = {
+            1: optionsBaseIndex+1,
+            2: optionsBaseIndex+2,
+            3: optionsBaseIndex+3,
+            4: optionsBaseIndex+4
+        }
+
+        delete options[answerDetail.answer]
+
+        const keys = Object.keys(options);
+        const randomIndexes = keys.sort(() => 0.5 - Math.random())
+
+        const optionForChanges1 = allOptions[options[randomIndexes[0]] - 1]
+        const optionForChanges2 = allOptions[options[randomIndexes[1]] - 1]
+
+        document.getElementById(`${optionForChanges1.id}`).disabled  = true
+        optionForChanges1.style.opacity = .5
+        optionForChanges1.style.pointerEvents = 'none'
+        
+        document.getElementById(`${optionForChanges2.id}`).disabled  = true
+        optionForChanges2.style.pointerEvents = 'none'
+        optionForChanges2.style.opacity = .5
+
+        document.getElementById(`50:50`).style.pointerEvents = 'none'
+        document.getElementById(`50:50`).style.opacity = .5
+
+        setLifeline5050(true)
+    }
+
+    const skipQuestion = async () => {
+        if (lifelineSkipQuestion) {
+            return
+        }
+
+        setAbleToSelectOption(false)
+        makeEveryOptionLowOpacity('low')
+        const answerDetail = await getAnswer(true)
+        setCorrectAnswerOption(answerDetail.answer)
+        nextQuestion(null)
+        document.getElementById(`skipQuestion`).style.pointerEvents = 'none'
+        document.getElementById(`skipQuestion`).style.opacity = .5
+        setLifelineSkipQuestion(true)
     }
 
     const restartTheStateOfQuestion = () => {
@@ -791,7 +810,7 @@ const Quiz_V2 = (props) => {
 
                             <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {quiz?.id && <LikeCommentButton removeHalfTheWrongOptions={removeHalfTheWrongOptions} quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
+                            {quiz?.id && <LikeCommentButton removeHalfTheWrongOptions={removeHalfTheWrongOptions} skipQuestion={skipQuestion} quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
 
                             <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                                 <div className={`quiz__hider mt-5 flex relative`}>
