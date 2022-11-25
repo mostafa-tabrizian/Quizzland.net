@@ -46,7 +46,9 @@ urlpatterns = [
     
     path('staff/trivia/create', index),
     path('staff/trivia/overview', index),
+    
     path('staff/trivia/question/add', index),
+    path('staff/trivia/question/overview', index),
     
     path('staff/test/create', index),
     path('staff/test/overview', index),

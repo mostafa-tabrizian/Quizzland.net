@@ -26,8 +26,10 @@ const panel = () => {
                 <div className='my-20 text-center'>            
                     <ul>
                         <li><Link to='/staff/trivia/create'>Create Trivia ➕</Link></li>
-                        <li><Link to='/staff/trivia/question/add'>Add New Trivia Question ➕</Link></li>
                         <li><Link to='/staff/trivia/overview'>Trivia Overview 🔍</Link></li>
+                        <br />
+                        <li><Link to='/staff/trivia/question/add'>Trivia Question ➕</Link></li>
+                        <li><Link to='/staff/trivia/question/overview'>Trivia Question Overview 🔍</Link></li>
                         <br />
                         <li><Link to='/staff/test/create'>Create Test ➕</Link></li>
                         <li><Link to='/staff/test/question/add'>Add New Test Question ➕</Link></li>

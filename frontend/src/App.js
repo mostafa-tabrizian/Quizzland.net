@@ -42,7 +42,9 @@ const staffPanel        = lazy(() => import('./pages/staff/panel'))
 
 const staffCreateTrivia   = lazy(() => import('./pages/staff/quiz/trivia/_create'))
 const staffOverviewTrivia = lazy(() => import('./pages/staff/quiz/trivia/_overview')) 
+
 const staffAddTriviaQuestion   = lazy(() => import('./pages/staff/quiz/trivia/question/_add'))
+const staffOverviewTriviaQuestion   = lazy(() => import('./pages/staff/quiz/trivia/question/_overview'))
 
 const staffCreateTest   = lazy(() => import('./pages/staff/quiz/test/_create'))
 const staffOverviewTests = lazy(() => import('./pages/staff/quiz/test/_overview')) 
@@ -139,7 +141,9 @@ const App = () => {
 
                                     <Route path='/staff/trivia/create' component={staffCreateTrivia} />
                                     <Route path='/staff/trivia/overview' component={staffOverviewTrivia} />
+
                                     <Route path='/staff/trivia/question/add' component={staffAddTriviaQuestion} />
+                                    <Route path='/staff/trivia/question/overview' component={staffOverviewTriviaQuestion} />
 
                                     <Route path='/staff/test/create' component={staffCreateTest} />
                                     <Route path='/staff/test/overview' component={staffOverviewTests} />

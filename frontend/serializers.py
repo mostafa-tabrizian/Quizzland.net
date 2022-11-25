@@ -192,7 +192,7 @@ class QuestionsSerializer(serializers.ModelSerializer):
             '__all__'
         )
 
-        quizKey = QuizzesSerializer(many=False)
+    quizKey = QuizzesSerializer(many=False)
 
 
 class QuestionsV2Serializer(serializers.ModelSerializer):
@@ -208,8 +208,8 @@ class QuestionsV2Serializer(serializers.ModelSerializer):
             '__all__'
         )
 
-        quizKey = QuizzesV2Serializer(many=False)
-        submitter_id = CustomUserSerializer(many=False)
+    quizKey = QuizzesV2Serializer(many=False)
+    submitter_id = CustomUserSerializer(many=False)
         
 class AnswerV2Serializer(serializers.ModelSerializer):
     answer_imGif = serializers.ImageField(required=False)

@@ -299,6 +299,7 @@ class Questions(models.Model):
 
 class Questions_V2(models.Model):
     id = models.AutoField(primary_key=True)
+    public = models.BooleanField(default=True)
     submitter_id = models.ForeignKey(CustomUser, related_name='user_questionV2_id', blank=False, null=True, on_delete=models.SET_NULL)
     quizKey = models.ForeignKey(Quizzes_V2, related_name='quizKey_questions_V2',
                                 on_delete=models.CASCADE, blank=True, null=True)
