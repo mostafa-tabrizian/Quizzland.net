@@ -927,6 +927,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 25rem;
 }
 
+.mr-6 {
+  margin-right: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -1193,6 +1197,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-\[25rem\] {
   width: 25rem;
+}
+
+.w-1\/4 {
+  width: 25%;
 }
 
 .max-w-\[14rem\] {

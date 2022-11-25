@@ -139,34 +139,42 @@ const LikeCommentButton = (props) => {
     }
 
     const payWithQCoin = async () => {
-        const now = new Date().getTime()
-        const userId = userProfile.userDetail.id
-        const payload = {
-            q_coins: userProfile.QCoins - lifelinePrice
-        }
+        if (userProfile.QCoins >= lifelinePrice) {
+            const now = new Date().getTime()
+            const userId = userProfile.userDetail.id
+            const payload = {
+                q_coins: userProfile.QCoins - lifelinePrice
+            }
+    
+            await axiosInstance.patch(`/api/userView/${userId}/?timestamp=${now}`, payload)
+                .then(res => {
+                    userActions.updateQCoins(res.data.q_coins)
+                })
+                .catch(err => {
+                    log(err)
+                    log(err.response)
+                })
 
-        await axiosInstance.patch(`/api/userView/${userId}/?timestamp=${now}`, payload)
-            .then(res => {
-                userActions.updateQCoins(res.data.q_coins)
-            })
-            .catch(err => {
-                log(err)
-                log(err.response)
-            })
+            return true
+        } else {
+            enqueueSnackbar(<div>شما به اندازه کافی <img className="inline w-8 h-8" src="/static/img/QCoin.png" alt="" /> کیوکوین ندارید </div>, { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }}) 
+            return false
+        }
     }
 
     const lifeLineFunctionCall = () => {
-        setLifelineStatue(false)
-        payWithQCoin()
+        if (payWithQCoin()) {
+            setLifelineStatue(false)
 
-        switch (lifelineType) {
-            case 'fiftyFifty':
-                props.removeHalfTheWrongOptions()
-                break
-
-            case 'skipQuestion':
-                props.skipQuestion()
-                break
+            switch (lifelineType) {
+                case 'fiftyFifty':
+                    props.removeHalfTheWrongOptions()
+                    break
+    
+                case 'skipQuestion':
+                    props.skipQuestion()
+                    break
+            }
         }
     }
     
@@ -223,7 +231,7 @@ const LikeCommentButton = (props) => {
                         <p className='text-center'>{lifelineMessage}</p>
                         <button className='flex mx-auto border border-white rounded w-full justify-center py-2'>ADDS</button>
                         <h3 className='text-center'>یا</h3>
-                        <button className='flex mx-auto border border-white rounded w-full justify-center py-2 items-center' onClick={lifeLineFunctionCall}><img className='inline mx-2 w-6 h-6' src="/static/img/QCoin.png" alt="" /> استفاده از {lifelinePrice}</button>
+                        <button className='flex mx-auto border border-white rounded w-full justify-center py-2 items-center' onClick={lifeLineFunctionCall}> کیو کوین <img className='inline mx-2 w-6 h-6' src="/static/img/QCoin.png" alt="" /> استفاده از {lifelinePrice}</button>
                     </div>
                 </div>
             </div>

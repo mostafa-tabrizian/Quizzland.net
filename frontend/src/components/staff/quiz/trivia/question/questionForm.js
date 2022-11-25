@@ -52,45 +52,60 @@ const TriviaQuestionForm = (props) => {
             })
     }
 
+    const validCheckQuestionAnswer = () => {
+        const answerCorrectRange = answerRef.current.value <= 4
+        if (answerCorrectRange) {
+            return true
+        } else {
+            setPostStatue(false)
+            enqueueSnackbar('برخی از ورودی ها نامعتبر هستند.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            return false
+        }
+    }
+
     const postQuestion = async () => {
-        let questionFormData = new FormData()
-
-        questionFormData.append('quizKey', selectedQuiz?.id)
-        questionFormData.append('submitter_id', userProfile.userDetail.id)
-        questionFormData.append('question', questionRef.current.innerText)
-        questionFormData.append('question_img', questionImageURL)
-        questionFormData.append('option_1st', option1stRef.current.value)
-        questionFormData.append('option_2nd', option2ndRef.current.value)
-        questionFormData.append('option_3rd', option3rdRef.current.value)
-        questionFormData.append('option_4th', option4thRef.current.value)
-        questionFormData.append('option_img_1st', optionImage1stURL)
-        questionFormData.append('option_img_2nd', optionImage2ndURL)
-        questionFormData.append('option_img_3rd', optionImage3rdURL)
-        questionFormData.append('option_img_4th', optionImage4thURL)
-
-        await axiosInstance.post(`/api/questionsV2View/`, questionFormData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        })
-            .then(res => {
-                if (res.status == 200) {
-                    setPostStatue(true)
-                    enqueueSnackbar('سوال با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                    postAnswer(res.data)
-                } else {
-                    setPostStatue(false)
-                    log(res)
+        if (validCheckQuestionAnswer()) {
+            let questionFormData = new FormData()
+    
+            questionFormData.append('quizKey', selectedQuiz?.id)
+            questionFormData.append('submitter_id', userProfile.userDetail.id)
+            questionFormData.append('question', questionRef.current.innerText)
+            questionFormData.append('question_img', questionImageURL)
+            questionFormData.append('option_1st', option1stRef.current.value)
+            questionFormData.append('option_2nd', option2ndRef.current.value)
+            questionFormData.append('option_3rd', option3rdRef.current.value)
+            questionFormData.append('option_4th', option4thRef.current.value)
+            questionFormData.append('option_img_1st', optionImage1stURL)
+            questionFormData.append('option_img_2nd', optionImage2ndURL)
+            questionFormData.append('option_img_3rd', optionImage3rdURL)
+            questionFormData.append('option_img_4th', optionImage4thURL)
+    
+            await axiosInstance.post(`/api/questionsV2View/`, questionFormData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+                .then(res => {
+                    if (res.status == 200) {
+                        setPostStatue(true)
+                        enqueueSnackbar('سوال با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                        postAnswer(res.data)
+                    } else {
+                        setPostStatue(false)
+                        log(res)
+                        enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                    }
+                })
+                .catch(err => {
                     enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                }
-            })
-            .catch(err => {
-                enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                setPostStatue(false)
-                log('err: postQuestion')
-                log(err)
-                log(err.response)
-            })
+                    setPostStatue(false)
+                    log('err: postQuestion')
+                    log(err)
+                    log(err.response)
+                })
+        } else {
+
+        }
     }
 
     const postAnswer = async (questionId) => {        
@@ -265,7 +280,7 @@ const TriviaQuestionForm = (props) => {
                         />
                     }
 
-                    <input type="number" placeholder='گزینه پاسخ صحیح' ref={answerRef} className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
+                    <input type="number" max={4} placeholder='گزینه پاسخ صحیح' ref={answerRef} className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
 
                     <Button
                         variant="outlined"

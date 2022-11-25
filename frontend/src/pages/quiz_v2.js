@@ -228,7 +228,7 @@ const Quiz_V2 = (props) => {
 
         if (answerDetail?.answer) {
             if (answerDetail.answer_text) {
-                amountOfPause += 2000
+                amountOfPause += 4000
             }
             if (!answerDetail?.answer_imGif.includes('undefined')) {
                 amountOfPause += 2000
@@ -253,23 +253,31 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const payWithQCoin = async () => {
+    const payFees = async () => {
         if (quiz?.fees !== 0) {
-            const now = new Date().getTime()
-            const userId = userProfile.userDetail.id
-            const payload = {
-                q_coins: userProfile.QCoins - quiz?.fees
+            if (quiz?.fees <= userProfile.QCoins) {
+                const now = new Date().getTime()
+                const userId = userProfile.userDetail.id
+                const payload = {
+                    q_coins: userProfile.QCoins - quiz?.fees
+                }
+        
+                await axiosInstance.patch(`/api/userView/${userId}/?timestamp=${now}`, payload)
+                    .then(res => {
+                        userActions.updateQCoins(res.data.q_coins)
+                    })
+                    .catch(err => {
+                        log(err)
+                        log(err.response)
+                    })
+                return true
+            } else {
+                enqueueSnackbar(<div>شما به اندازه کافی <img className="inline w-8 h-8" src="/static/img/QCoin.png" alt="" /> کیو کوین ندارید </div>, { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }}) 
+                return false
             }
-    
-            await axiosInstance.patch(`/api/userView/${userId}/?timestamp=${now}`, payload)
-                .then(res => {
-                    userActions.updateQCoins(res.data.q_coins)
-                })
-                .catch(err => {
-                    log(err)
-                    log(err.response)
-                })
         }
+
+        return true
     }
 
     const giveQCoins = async () => {
@@ -292,10 +300,11 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const payAndPlay = () => {
-        payWithQCoin()
-        setJoinPaper(false)
-        AddView(`quizV2View`, quizDetailRef.current.id)
+    const payAndPlay = async () => {
+        if (await payFees()) {
+            setJoinPaper(false)
+            AddView(`quizV2View`, quizDetailRef.current.id)
+        }
     }
 
     const selectedOption = async (props) => {
@@ -723,8 +732,8 @@ const Quiz_V2 = (props) => {
                     </div>
                     <ul className='text-right p-5 space-y-5'>
                         <li className='list-disc mr-4'><p className='textShadow'>در تعداد سوال ها محدودیت وجود ندارد. تا وقتی اشتباه نکنید بازی ادامه دارد.</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow'>هر چه تعداد سوالات پاسخ داده شده بالاتر باشد، <img className='inline w-8 h-8' src="/static/img/QCoin.png" alt="" /> بیشتری دریافت میکنید</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از <img className='inline w-8 h-8' src="/static/img/QCoin.png" alt="" /> از کمک کننده ها استفاده کنید</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>هر چه تعداد سوالات پاسخ داده شده بالاتر باشد، <img className='inline w-8 h-8' src="/static/img/QCoin.png" alt="" /> کیو کوین بیشتری دریافت میکنید</p></li>
+                        <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از <img className='inline w-8 h-8' src="/static/img/QCoin.png" alt="" />  کیو کوین های خود از کمک کننده ها استفاده کنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیری</p></li>
                         <li className='list-disc mr-4'><p className='textShadow flex items-center'>
                             ورودی این کوییز:
@@ -734,6 +743,7 @@ const Quiz_V2 = (props) => {
                                     <div className='flex space-x-2 space-x-reverse mr-3 items-center'>
                                         <p>{quiz?.fees}</p>
                                         <img className='mx-3 inline w-8 h-8' src="/static/img/QCoin.png" alt="" />
+                                        <p>کیو کوین</p>
                                     </div>
                                     :
                                     'رایگان'
@@ -743,9 +753,14 @@ const Quiz_V2 = (props) => {
                         </p></li>
                     </ul>
                 </div>
-                <button onClick={payAndPlay} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
-                    بزن بریم
-                </button>
+                <div>
+                    <button onClick={payAndPlay} style={{ 'border': `3px solid ${quizDetailRef.current?.theme}` }} className={`rounded-lg w-3/4 mb-10 mx-auto text-center py-5`}>
+                        بزن بریم
+                    </button>
+                    <Link to='/' className={`mb-10 mr-6 text-center py-5`}>
+                        بازگشت
+                    </Link>
+                </div>
             </div>
 
             <div id='quizEnd' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${quizEndStatue ? 'fullPageTransition-show' : 'fullPageTransition-hide'}`}>
@@ -764,7 +779,7 @@ const Quiz_V2 = (props) => {
                                             <p className='text-[1rem] flex mx-auto textShadow'>
                                                 {Math.round((correctAnswersCount * 3) / 5) * 5}  {/* Nearest to five when correct times 3 */}
                                                 <img className='h-6 mx-2' src="/static/img/QCoin.png" />
-                                                دریافت کردید.
+                                                کیو کوین دریافت کردید.
                                             </p>
                                         </div>
                                         :''
@@ -813,16 +828,19 @@ const Quiz_V2 = (props) => {
                             {quiz?.id && <LikeCommentButton removeHalfTheWrongOptions={removeHalfTheWrongOptions} skipQuestion={skipQuestion} quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
 
                             <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
-                                <div className={`quiz__hider mt-5 flex relative`}>
-                                    {
-                                        !(contentLoaded) &&
-                                        <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
-                                    }
+                                {
+                                    !joinPaper &&
+                                    <div className={`quiz__hider mt-5 flex relative`}>
+                                        {
+                                            !(contentLoaded) &&
+                                            <div className='mt-5 overflow-hidden shadow-lg skeletonQuiz skeletonQuiz__quizQuestion shadow-zinc-800 rounded-xl'></div>
+                                        }
 
-                                    {
-                                        isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
-                                    }
-                                </div>
+                                        {
+                                            isSafari ? quizQuestions('safari') : quizQuestions('otherBrowser')
+                                        }
+                                    </div>
+                                }
                             </div>
 
                             <div>
