@@ -101,11 +101,7 @@ const Comments = (props) => {
         
         const now = new Date().getTime()
         
-        await axios.get(`/api/commentView/?verified=true&
-            ${props.quizType == 'quiz' ? `trivia_id=${props.quizId}&` : ''}
-            ${props.quizType == 'play' ? `quizV2_id=${props.quizId}&` : ''}
-            ${props.quizType == 'test' ? `test_id=${props.quizId}&` : ''}
-            timestamp=${now}`)
+        await axios.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `trivia_id=${props.quizId}&` : ''}${props.quizType == 'play' ? `quizV2_id=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_id=${props.quizId}&` : ''}timestamp=${now}`)
             .then(res => {
                 setComments(res.data.sort(sortCommentsByNewest))
                 setCommentFetching(false)

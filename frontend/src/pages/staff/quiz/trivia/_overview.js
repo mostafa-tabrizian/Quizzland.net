@@ -33,10 +33,10 @@ const OverviewTrivia = () => {
         return {id, title, slug, subcategory, category, likes, comments, monthlyViews, totalViews, publishDate, publicAccess };
     }
 
-    useEffect(() => {
-        fetchQuizzes()
-        fetchLikes()
-        fetchComments()
+    useEffect(async () => {
+        await fetchLikes()
+        await fetchComments()
+        await fetchQuizzes()
     }, []);
 
     const [userProfile, userActions] = UserStore()
@@ -60,16 +60,15 @@ const OverviewTrivia = () => {
     }
 
     const fetchQuizzes = async () => {        
-        await axiosInstance.get(`/api/quizView/?timestamp=${now}`)
+        await axiosInstance.get(`/api/quizV2View/?timestamp=${now}`)
             .then(res => { 
                 let preTablesRows = []
-
+                
                 res.data.reverse().map(quiz => {
+                    const quizLikes = likes?.filter(x => x.quizV2_id?.id == quiz.id)
+                    const quizComments = comments?.filter(x => x.quizV2_id == quiz.id)
 
-                    const quizLikes = likes.filter(x => x.trivia_id?.id == quiz.id || x.test_id?.id == quiz.id)
-                    const quizComments = comments.filter(x => x.trivia_id?.id == quiz.id || x.test_id?.id == quiz.id)
-
-                    preTablesRows.push(insertTable(quiz.id, quiz.title, quiz.slug, quiz.subCategory, quiz.categoryKey.title_persian, quizLikes.length, quizComments.length, quiz.monthly_views, quiz.views, quiz.publish, quiz.public))
+                    preTablesRows.push(insertTable(quiz.id, quiz.title, quiz.slug, quiz.subCategory, quiz.categoryKey.title_persian, quizLikes?.length, quizComments?.length, quiz.monthly_views, quiz.views, quiz.publish, quiz.public))
                 })
                 setTableRows(preTablesRows)
             })
