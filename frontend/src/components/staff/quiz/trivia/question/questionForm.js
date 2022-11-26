@@ -11,7 +11,6 @@ import { log } from '../../../../base'
 import axiosInstance from '../../../../axiosAuthApi';
 
 const TriviaQuestionForm = (props) => {
-    const [postStatue, setPostStatue] = useState(null)
     const { enqueueSnackbar } = useSnackbar()
 
     const [quizzes, setQuizzes] = useState([])
@@ -47,26 +46,54 @@ const TriviaQuestionForm = (props) => {
             })
             .catch(err => {
                 log('err: fetchQuizzes')
-                // log(err)
-                // log(err.response)
+                log(err)
+                log(err.response)
             })
     }
 
+    const removeWhiteSpace = (value) => {
+        if (value) {
+            return String(value).replace(/\s/g, "")
+        }
+    }
+
     const validCheckQuestionAnswer = () => {
-        const answerCorrectRange = answerRef.current.value <= 4
-        if (answerCorrectRange) {
+        const answerCorrectRange = 0 <= answerRef.current.value <= 4
+        const quizSelected = selectedQuiz?.id !== undefined
+        // const questionFilled = removeWhiteSpace(questionRef.current.innerText) !== undefined
+
+        if (answerCorrectRange && quizSelected) {
             return true
         } else {
-            setPostStatue(false)
             enqueueSnackbar('برخی از ورودی ها نامعتبر هستند.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             return false
         }
     }
 
+    const resetInputs = () => {
+        questionRef.current.innerText = null
+        setQuestionImageURL(null)
+
+        setOptionImage1stURL(null)
+        setOptionImage2ndURL(null)
+        setOptionImage3rdURL(null)
+        setOptionImage4thURL(null)
+        option1stRef.current.value = null
+        option2ndRef.current.value = null
+        option3rdRef.current.value = null
+        option4thRef.current.value = null
+
+        answerRef.current.value = null
+        answerTextRef.current.value = null
+        setAnswerImageGIFURL(null)
+    }
+
     const postQuestion = async () => {
+        document.getElementById('quizKey').scrollIntoView()
+
         if (validCheckQuestionAnswer()) {
             let questionFormData = new FormData()
-    
+
             questionFormData.append('quizKey', selectedQuiz?.id)
             questionFormData.append('submitter_id', userProfile.userDetail.id)
             questionFormData.append('question', questionRef.current.innerText)
@@ -87,18 +114,15 @@ const TriviaQuestionForm = (props) => {
             })
                 .then(res => {
                     if (res.status == 200) {
-                        setPostStatue(true)
                         enqueueSnackbar('سوال با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                         postAnswer(res.data)
                     } else {
-                        setPostStatue(false)
                         log(res)
                         enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                     }
                 })
                 .catch(err => {
                     enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                    setPostStatue(false)
                     log('err: postQuestion')
                     log(err)
                     log(err.response)
@@ -106,6 +130,20 @@ const TriviaQuestionForm = (props) => {
         } else {
 
         }
+    }
+
+    const deleteTheQuestion = async (questionId) => {
+        await axiosInstance.delete(`/api/questionsV2View/${questionId}/`)
+            .then(res => {
+                enqueueSnackbar('به دلیل خطا در ارسال پاسخ، سوال حذف گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            })
+            .catch(err => {
+                if (res.status !== 404) {
+                    enqueueSnackbar('به دلیل خطا در ارسال پاسخ، در تلاش حذف سوال همچنین خطایی رخ داد!.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                }
+                log(err)
+                log(err.response)
+            })
     }
 
     const postAnswer = async (questionId) => {        
@@ -119,18 +157,18 @@ const TriviaQuestionForm = (props) => {
         await axiosInstance.post('/api/answerV2View/', answerFormData)
             .then(res => {
                 if (res.status == 200) {
-                    setPostStatue(true)
                     enqueueSnackbar('جواب با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                    resetInputs()
                 } else {
-                    setPostStatue(false)
+                    enqueueSnackbar('در ثبت جواب خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                    deleteTheQuestion(questionId)
                     log(res)
                     log(res.response)
-                    enqueueSnackbar('در ثبت جواب خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 }
             })
             .catch(err => {
                 enqueueSnackbar('در ثبت جواب خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                setPostStatue(false)
+                deleteTheQuestion(questionId)
                 log('err: postAnswer')
                 log(err)
                 log(err.response)
@@ -141,29 +179,13 @@ const TriviaQuestionForm = (props) => {
 
     const quizKeyChanged = (e, value) => {
         selectQuiz(value)
-        document.querySelectorAll('#questionBackground').forEach((q) => q.style = `background: ${value.question_background}`)
+        document.querySelectorAll('#questionBackground').forEach((q) => q.style = `background: ${value.theme}`)
     }
 
     const createTriviaQuestionForm = () => {
         return (
             <div className='text-center mx-auto my-20 max-w-[40rem]'>
                 <div className='relative flex flex-col space-y-3'>
-                    {
-                        postStatue !== null &&
-                        <div className='absolute right-[-4rem] top-[1rem] text-[2rem]'>
-                            {
-                                postStatue ?
-                                "✅"
-                                :
-                                "⛔"
-                            }
-                        </div>
-                    }
-
-                    <h2>
-                        سوال {props.id + 1}
-                    </h2>
-
                     <Autocomplete
                         id="quizKey"
                         options={quizzes}
@@ -301,7 +323,7 @@ const TriviaQuestionForm = (props) => {
                         />
                     }
 
-                    <input type="text" placeholder='توضیحات پاسخ' ref={answerTextRef} className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-full text-right bg-transparent text-[0.9rem] my-auto' />
+                    <textarea rows={3} placeholder='توضیحات پاسخ' ref={answerTextRef} className='pl-4 pr-12 py-1 border border-[#8C939D] rounded-lg text-right bg-transparent text-[0.9rem] my-auto' />
                 </div>
 
                 <button

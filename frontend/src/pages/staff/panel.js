@@ -28,11 +28,11 @@ const panel = () => {
                         <li><Link to='/staff/trivia/create'>Create Trivia ➕</Link></li>
                         <li><Link to='/staff/trivia/overview'>Trivia Overview 🔍</Link></li>
                         <br />
-                        <li><Link to='/staff/trivia/question/add'>Trivia Question ➕</Link></li>
+                        <li><Link to='/staff/trivia/question/add'>Add Trivia Question ➕</Link></li>
                         <li><Link to='/staff/trivia/question/overview'>Trivia Question Overview 🔍</Link></li>
                         <br />
                         <li><Link to='/staff/test/create'>Create Test ➕</Link></li>
-                        <li><Link to='/staff/test/question/add'>Add New Test Question ➕</Link></li>
+                        <li><Link to='/staff/test/question/add'>Add Test Question ➕</Link></li>
                         <li><Link to='/staff/test/overview'>Tests Overview 🔍</Link></li>
                         
                     </ul>
