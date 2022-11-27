@@ -252,7 +252,7 @@ class UserAnswerSerializer(serializers.ModelSerializer):
         )
 
     user_id = CustomUserSerializer(many=False)
-    question_id = QuestionsV2Serializer(many=False)
+    question_id = QuestionsV2Serializer(many=False, read_only=True)
 
     def create(self, request):
         request_user_id = self.context['request'].data['user_id']['username']

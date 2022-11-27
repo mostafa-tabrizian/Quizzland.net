@@ -415,7 +415,7 @@ const Quiz_V2 = (props) => {
                 `همم، جالبه، فکر نمیکردم ${correctAnswersCount} هم ممکن باشه`
             ]
             setResultMessage(messages[Math.floor(Math.random()*messages.length)])
-        } else if (correctAnswerOption <= 6) {
+        } else if (correctAnswersCount <= 6) {
             const messages = [
                 'دوباره تلاش کن. قطعا بهتر میشه',
                 `${correctAnswersCount} هم یه جور امتیازه دیگه، مگه نه؟ البته میتونی دوباره تلاش کنی شاید بالا تر رفت`,
@@ -424,7 +424,7 @@ const Quiz_V2 = (props) => {
             ]
             setResultGif(quiz.GIF_bad)
             setResultMessage(messages[Math.floor(Math.random()*messages.length)])
-        } else if (correctAnswerOption <= 10) {
+        } else if (correctAnswersCount <= 10) {
             const messages = [
                 `${correctAnswersCount} هم یه جور امتیازه دیگه، مگه نه؟ البته میتونی دوباره تلاش کنی شاید بالا تر رفت`,
                 'بخش خوب داستان اینه که یه چیز جدید یاد گرفتی',
@@ -432,7 +432,7 @@ const Quiz_V2 = (props) => {
             ]
             setResultGif(quiz.GIF_ok)
             setResultMessage(messages[Math.floor(Math.random()*messages.length)])
-        } else if (correctAnswerOption <= 19) {
+        } else if (correctAnswersCount <= 19) {
             const messages = [
                 'این امتیاز رو کمتر کسی دریافت میکنه. درود',
                 `${correctAnswersCount} هم امتیاز عالیی هستش ولی میتونه عالی تر هم بشه.`,
@@ -440,7 +440,7 @@ const Quiz_V2 = (props) => {
             ]
             setResultGif(quiz.GIF_good)
             setResultMessage(messages[Math.floor(Math.random()*messages.length)])
-        } else if (correctAnswerOption <= 20) {
+        } else {
             const messages = [
                 'این امتیاز رو کمتر کسی دریافت میکنه. درود',
                 'معرکه ست. بهتر از این نمیشد',
@@ -676,16 +676,16 @@ const Quiz_V2 = (props) => {
             <LoadingScreen loadState={contentLoaded} />
 
             <Helmet>
-                <title>{`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
+                <title>{`${quiz?.title || quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
 
                 <link rel="canonical" href={currentUrl()} />
 
-                <meta name="description" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta name="description" content={`${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quiz?.thumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
-                <meta property="og:title" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
-                <meta property="og:description" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta property="og:title" content={`${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta property="og:description" content={`${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
                 <meta property="og:image" content={quiz?.thumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
@@ -698,7 +698,7 @@ const Quiz_V2 = (props) => {
                         {
                             "@context": "https://schema.org",
                             "@type": "Article",
-                            "headline": "${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند",
+                            "headline": "${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند",
                             "image": [
                                 "${quiz?.thumbnail}",
                                 "${quiz?.background}"
