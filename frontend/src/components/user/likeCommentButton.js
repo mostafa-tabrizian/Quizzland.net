@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSnackbar } from 'notistack'
 import debounce from 'lodash.debounce'
 import Drawer from '@mui/material/Drawer';
@@ -13,6 +13,7 @@ const LoginForm = React.lazy(() => import('./loginForm'))
 const LikeCommentButton = (props) => {
     const [commentsPanelOpen, setCommentsPanelState] = useState(false);
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
+    const [likeStatue, setLikeStatue] = useState(false)
     const [likeLoading, setLikeLoading] = useState(false)
     const [lifeline, setLifeline] = useState(false)
     const [lifelineTitle, setLifelineTitle] = useState(null)
@@ -29,8 +30,30 @@ const LikeCommentButton = (props) => {
     const { enqueueSnackbar } = useSnackbar()
            
     useEffect(() => {
+        checkLikeStatue()
         itIsMobile.current = isItMobile()
     }, []);
+
+    const checkLikeStatue = useCallback(
+        debounce(
+            async () => {
+                const now = new Date().getTime()
+
+                await axiosInstance.get(`/api/likeView/?timestamp=${now}`)
+                    .then(res => {
+                        res = res.data.filter(like => like.quizV2_id?.id == props.quizId || like.test_id?.id == props.quizId)
+
+                        if (res.length) {
+                            setLikeStatue(true)
+                        }
+                    })
+                    .catch(err => {
+                        log(err)
+                        log(err.response)
+                    })
+            }
+        )
+    )
     
     const debounceSubmitLike = useCallback(
         debounce(
@@ -56,8 +79,10 @@ const LikeCommentButton = (props) => {
                     .then(res => {
                         if (res.status == 201) {
                             if (res.data?.id) {
+                                setLikeStatue(true)
                                 enqueueSnackbar('لایک شما ثبت شد!', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             } else {
+                                setLikeStatue(false)
                                 enqueueSnackbar('لایک شما حذف شد!', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             }
                         } else {
@@ -131,7 +156,7 @@ const LikeCommentButton = (props) => {
             case 'skipQuestion':
                 setLifelineIcon(<svg class="h-10 w-10 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>)
                 setLifelineTitle('رد شدن از سوال')
-                setLifelineMessage('این سوال جایگزاری میشود و به سوال بعدی میروید')
+                setLifelineMessage('این سوال جایگزاری میشود و به سوال بعدی میروید اما امتیازی دریافت نمی‌کنید')
                 setLifelinePrice(40)
                 break;
         }
@@ -190,15 +215,20 @@ const LikeCommentButton = (props) => {
                     <span className='h-6 my-auto border border-white'></span>
 
                     {/* Lifelines */}
-                    <button onClick={() => setLifeline(lifeline ? false : true)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" width={24} height={24} viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M8 8a3.5 3 0 0 1 3.5 -3h1a3.5 3 0 0 1 3.5 3a3 3 0 0 1 -2 3a3 4 0 0 0 -2 4"></path>
-                            <line x1={12} y1={19} x2={12} y2="19.01"></line>
-                        </svg>
-                    </button>
-
-                    <span className='h-6 my-auto border border-white'></span>
+                    {
+                        props.quizType == 'play' &&
+                        <React.Fragment>
+                            <button onClick={() => setLifeline(lifeline ? false : true)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" width={24} height={24} viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M8 8a3.5 3 0 0 1 3.5 -3h1a3.5 3 0 0 1 3.5 3a3 3 0 0 1 -2 3a3 4 0 0 0 -2 4"></path>
+                                    <line x1={12} y1={19} x2={12} y2="19.01"></line>
+                                </svg>
+                            </button>
+        
+                            <span className='h-6 my-auto border border-white'></span>
+                        </React.Fragment>
+                    }
 
                     {/* like button */}
                         {
@@ -210,7 +240,7 @@ const LikeCommentButton = (props) => {
                             />
                             :
                             <button className={`${watchListButtonUnClickable?'':'pointer-events-none'} flex items-center`} onClick={() => likeButtonClicked()}>
-                                <svg className="h-6 w-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/></svg>
+                                <svg className="h-6 w-6 text-white"  fill={likeStatue ? '#00000070' : 'none'} viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/></svg>
                             </button>
                         }
                 </div>

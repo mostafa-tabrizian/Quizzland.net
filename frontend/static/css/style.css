@@ -285,12 +285,6 @@ a:visited,
 a:hover {
   text-decoration: none;
 }
-a:hover,
-a:visited:hover,
-a:hover:hover {
-  cursor: pointer;
-  color: rgba(255, 106, 106, 0.692);
-}
 
 ul {
   padding: 0;
