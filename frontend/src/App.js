@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import { CookiesProvider } from "react-cookie";
-import { SnackbarProvider } from 'notistack'
+import { SnackbarProvider, useSnackbar } from 'notistack'
 
 import {
     BrowserRouter as Router,
@@ -82,6 +82,16 @@ log("                              \n\
                    +#%%*:            \n\
 ")
 
+const SnackbarCloseButton = ({ snackbarKey }) => {
+    const { closeSnackbar } = useSnackbar();
+
+    return (
+      <button onClick={() => closeSnackbar(snackbarKey)} className='absolute left-0 ml-1'>
+        <svg class="h-6 w-6 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+      </button>
+    );
+}
+
 const App = () => {
     return (
         <React.Fragment>
@@ -102,7 +112,7 @@ const App = () => {
                 }>
 
                 <CookiesProvider>
-                    <SnackbarProvider>
+                    <SnackbarProvider action={snackbarKey => <SnackbarCloseButton snackbarKey={snackbarKey} />}>
                         <Router>
                             <ScrollToTop />
                             <Header />
