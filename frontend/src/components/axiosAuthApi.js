@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
             log('network error')
         }
 
-        if (error.response.status === 401 && originalRequest.url === 'http://localhost:8000' +'/token/refresh/') {
+        if (error.response.status === 401 && (originalRequest.url === 'http://localhost:8000' +'/token/refresh/' || originalRequest.url === 'https://www.quizzland.net' +'/token/refresh/')) {
             log('logged from 1')    
             // window.location.href = '/login';
             return Promise.reject(error);
