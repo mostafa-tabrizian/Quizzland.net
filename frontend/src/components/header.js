@@ -6,6 +6,7 @@ import { useGoogleLogout } from 'react-google-login'
 import { useCookies } from "react-cookie";
 import { useSnackbar } from 'notistack'
 import { BigHead } from "@bigheads/core";
+import AnimatedNumbers from "react-animated-numbers";
 
 import { log, getTheme, keyPressedOnInput } from './base'
 import axios from '../components/axiosApi';
@@ -149,7 +150,16 @@ const Header = () => {
                         }
                     </div>
                     <div className='flex items-center'>
-                        <p className='text-[1rem]'>{userProfile.QCoins}</p>
+                        <AnimatedNumbers
+                            animateToNumber={userProfile.QCoins}
+                            fontStyle={{ fontSize: '1rem' }}
+                            includeComma={true}
+                            configs={[
+                                {"mass":1,"tension":130,"friction":40},
+                                {"mass":2,"tension":140,"friction":40},
+                                {"mass":3,"tension":130,"friction":40}
+                            ]}
+                        ></AnimatedNumbers>
                         <img className='h-6 mx-3' src="/static/img/QCoin.png" />
                     </div>
                 </div>

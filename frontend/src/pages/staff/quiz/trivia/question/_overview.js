@@ -47,7 +47,6 @@ const OverviewTrivia = () => {
                 let preTablesRows = []
                 
                 res.data.reverse().map(question => {
-                    log(question)
                     preTablesRows.push(insertTable(question.id, question.question, question.question_img, question.quizKey.title, question.submitter_id.username, question.public))
                 })
                 setTableRows(preTablesRows)
