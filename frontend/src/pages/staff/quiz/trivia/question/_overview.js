@@ -33,6 +33,7 @@ const OverviewTrivia = () => {
     }
 
     useEffect(async () => {
+        document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
         await fetchQuestions()
     }, []);
 
