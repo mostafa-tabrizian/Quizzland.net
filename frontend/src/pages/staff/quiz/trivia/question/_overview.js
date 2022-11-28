@@ -1,20 +1,12 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import { useSnackbar } from 'notistack';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Helmet } from "react-helmet";
 const debounce = require('lodash.debounce')
-import { useSnackbar } from 'notistack'
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import PropTypes from 'prop-types';
-import TablePagination from '@mui/material/TablePagination';
-import TableSortLabel from '@mui/material/TableSortLabel';
-
-import { log } from '../../../../../components/base';
+import { DataGrid } from '@mui/x-data-grid';
+import { Box } from '@mui/material';
 import axiosInstance from '../../../../../components/axiosAuthApi';
+import { log } from '../../../../../components/base';
 import UserStore from '../../../../../store/userStore';
 
 const OverviewTrivia = () => {
@@ -28,8 +20,38 @@ const OverviewTrivia = () => {
 
     const { enqueueSnackbar } = useSnackbar()
 
-    const insertTable = (id, question, questionImg, quiz, submitter, publicAccess) => {
-        return {id, question, quiz, questionImg, submitter, publicAccess };
+    const insertTable = (
+        id,
+        publicAccess,
+        quiz,
+        question,
+        questionImg,
+        option_1st,
+        option_2nd,
+        option_3rd,
+        option_4th,
+        option_img_1st,
+        option_img_2nd,
+        option_img_3rd,
+        option_img_4th,
+        submitter,
+    ) => {
+        return {
+            id,
+            publicAccess,
+            quiz,
+            question,
+            questionImg,
+            option_1st,
+            option_2nd,
+            option_3rd,
+            option_4th,
+            option_img_1st,
+            option_img_2nd,
+            option_img_3rd,
+            option_img_4th,
+            submitter
+        };
     }
 
     useEffect(async () => {
@@ -47,7 +69,22 @@ const OverviewTrivia = () => {
                 let preTablesRows = []
                 
                 res.data.reverse().map(question => {
-                    preTablesRows.push(insertTable(question.id, question.question, question.question_img, question.quizKey.title, question.submitter_id.username, question.public))
+                    preTablesRows.push(insertTable(
+                        question.id,
+                        question.public,
+                        question.quizKey.title,
+                        question.question,
+                        question.question_img,
+                        question.option_1st,
+                        question.option_2nd,
+                        question.option_3rd,
+                        question.option_4th,
+                        question.option_img_1st,
+                        question.option_img_2nd,
+                        question.option_img_3rd,
+                        question.option_img_4th,
+                        question.submitter_id.username,
+                    ))
                 })
                 setTableRows(preTablesRows)
             })
@@ -57,136 +94,88 @@ const OverviewTrivia = () => {
                 log(err.response)
             })
     }
-
-    function descendingComparator(a, b, orderBy) {
-        if (b[orderBy] < a[orderBy]) {
-          return -1;
-        }
-
-        if (b[orderBy] > a[orderBy]) {
-          return 1;
-        }
-
-        return 0;
-    }
     
-    function getComparator(order, orderBy) {
-        return order === 'desc'
-            ? (a, b) => descendingComparator(a, b, orderBy)
-            : (a, b) => -descendingComparator(a, b, orderBy);
-    }
-
-    const headCells = [
+    const columns = [
         {
-          id: 'question',
-          label: 'سوال',
+            field: 'publicAccess',
+            headerName: 'عمومی',
+            width: 150,
+            editable: false,
+            renderCell: (params) => <button onClick={() => changePublicAccessStatue(params.row)}>{params.row.publicAccess ? '✅':'⛔'}</button>
         },
         {
-            id: 'questionImg',
-            label: 'تصویر سوال'
+            field: 'quiz',
+            headerName: 'کوییز',
+            editable: true
         },
         {
-            id: 'quiz',
-            label: 'کوییز'
+            field: 'question',
+            headerName: 'سوال',
+            width: 500,
+            editable: true,
         },
         {
-            id: 'submitter',
-            label: 'ثبت کننده'
+            field: 'questionImg',
+            headerName: 'تصویر سوال',
+            width: 150,
+            editable: false,
+            renderCell: (params) => params.value.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
         },
         {
-            id: 'publicAccess',
-            label: 'عمومی'
-        }
-    ];
-
-    EnhancedTableHead.propTypes = {
-        numSelected: PropTypes.number.isRequired,
-        onRequestSort: PropTypes.func.isRequired,
-        onSelectAllClick: PropTypes.func.isRequired,
-        order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-        orderBy: PropTypes.string.isRequired,
-        rowCount: PropTypes.number.isRequired,
-    };
-
-    const handleRequestSort = (event, property) => {
-        const isAsc = orderBy === property && order === 'asc';
-        setOrder(isAsc ? 'desc' : 'asc');
-        setOrderBy(property);
-      };
-    
-      const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
-          const newSelected = tableRows.map((n) => n.name);
-          setSelected(newSelected);
-          return;
-        }
-        setSelected([]);
-      };
-    
-      const handleClick = (event, name) => {
-        const selectedIndex = selected.indexOf(name);
-        let newSelected = [];
-    
-        if (selectedIndex === -1) {
-          newSelected = newSelected.concat(selected, name);
-        } else if (selectedIndex === 0) {
-          newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-          newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-          newSelected = newSelected.concat(
-            selected.slice(0, selectedIndex),
-            selected.slice(selectedIndex + 1),
-          );
-        }
-    
-        setSelected(newSelected);
-      };
-    
-      const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-      };
-    
-      const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-      };
-    
-      // Avoid a layout jump when reaching the last page with empty rows.
-      const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableRows.length) : 0;
-    
-
-    function EnhancedTableHead(props) {
-        const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-
-        const createSortHandler = (property) => (event) => {
-          onRequestSort(event, property);
-        };
-
-        return (
-            <TableRow>
-                {
-                    headCells.map((headCell) => (
-                        <tableCell
-                            key={headCell.id}
-                            sortDirection={orderBy === headCell.id ? order : false}
-                            sx={{fontFamily: 'IRANYekanBold, sans-serif, serif', color: 'white'}}
-                            // align="right"
-                        >
-                            <TableSortLabel
-                                active={orderBy === headCell.id}
-                                direction={orderBy === headCell.id ? order : 'asc'}
-                                onClick={createSortHandler(headCell.id)}
-                            >
-                                {headCell.label}
-                            </TableSortLabel>
-                        </tableCell>
-                    ))
-                }
-            </TableRow>
-        )
-    }
+            field: 'option_1st',
+            width: 150,
+            headerName: 'گزینه ۱',
+            editable: true
+        },
+        {
+            field: 'option_2nd',
+            width: 150,
+            headerName: 'گزینه ۲',
+            editable: true
+        },
+        {
+            field: 'option_3rd',
+            width: 150,
+            headerName: 'گزینه ۳',
+            editable: true
+        },
+        {
+            field: 'option_4th',
+            width: 150,
+            headerName: 'گزینه ۴',
+            editable: true
+        },
+        {
+            field: 'option_img_1st',
+            headerName: 'تصویر گزینه ۱',
+            editable: true,
+            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+        },
+        {
+            field: 'option_img_2nd',
+            headerName: 'تصویر گزینه ۲',
+            editable: true,
+            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+        },
+        {
+            field: 'option_img_3rd',
+            headerName: 'تصویر گزینه ۳',
+            editable: true,
+            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+        },
+        {
+            field: 'option_img_4th',
+            headerName: 'تصویر گزینه ۴',
+            editable: true,
+            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+        },
+        {
+            field: 'submitter',
+            headerName: 'ثبت کننده',
+            width: 150,
+            editable: false
+        },
+    ]
 
     const changePublicAccessStatue = async (data) => {
         const publicAccessStatue = data.publicAccess
@@ -221,100 +210,18 @@ const OverviewTrivia = () => {
 
             {
                 userProfile.userDetail?.is_staff ?
-                <div>
-                    <TableContainer sx={{background: 'transparent'}} component={Paper}>
-
-                        <Table
-                            // size='small'
-                            sx={{ minWidth: 750 }}
-                            aria-labelledby="quiz overview"
-                            aria-label="quiz overview"
-                        >
-
-                            <EnhancedTableHead  
-                                numSelected={selected.length}
-                                order={order}
-                                orderBy={orderBy}
-                                onSelectAllClick={handleSelectAllClick}
-                                onRequestSort={handleRequestSort}
-                                rowCount={tableRows.length}
-                            />
-
-                            <TableBody>
-                                
-                                {
-                                    tableRows.sort(getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
-                                    .map((row, index) => {
-                                        return (
-                                            <TableRow
-                                                key={row.name}
-                                                sx={{
-                                                    '&:last-child td, &:last-child th': { border: 0 },  display: 'table-row-group',
-                                                    color: 'white', fontFamily: 'IRANYekanBold, sans-serif, serif !imporatnt',
-
-                                                }}
-                                                hover
-                                                onClick={(event) => handleClick(event, row.name)}
-                                                tabIndex={-1}
-                                            >
-                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
-                                                    {row.question}
-                                                </TableCell>
-                                                <TableCell sx={{color: 'whie', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
-                                                    {
-                                                        row.questionImg.includes('undefined')
-                                                        ?
-                                                        ''
-                                                        :
-                                                        <a href={row.questionImg} target='_blank'>
-                                                            <img src={row.questionImg} className='h-[11rem]' alt={row.quiz} />
-                                                        </a>
-                                                    }
-                                                </TableCell>
-                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
-                                                    {row.quiz}
-                                                </TableCell>
-                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
-                                                    {row.submitter}
-                                                </TableCell>
-                                                <TableCell sx={{color: 'white', fontFamily: 'IRANYekanRegular, sans-serif, serif'}} align="right">
-                                                    <button onClick={() => changePublicAccessStatue(row)}>
-                                                        {
-                                                            row.publicAccess ? '✅':'⛔'
-                                                        }
-                                                    </button>
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                    })
-                                }
-
-                                {
-                                    emptyRows > 0 && (
-                                    <TableRow
-                                        style={{
-                                            height: (52) * emptyRows,
-                                        }}
-                                    >
-                                        <TableCell colSpan={6} />
-                                    </TableRow>
-                                )
-                                }
-
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-
-                    <TablePagination
-                        rowsPerPageOptions={[20, 50, 100]}
-                        component="div"
-                        count={tableRows.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
+                <Box sx={{ height: 500, width: '100%' }}>
+                    <DataGrid
+                        rows={tableRows}
+                        columns={columns}
+                        pageSize={20}
+                        rowsPerPageOptions={[5]}
+                        checkboxSelection
+                        disableSelectionOnClick
+                        experimentalFeatures={{ newEditingApi: true }}
+                        sx={{fontFamily: 'IRANYekanBold, sans-serif, serif', color: 'white'}}
                     />
-                </div>
+                </Box>
                 :
                 <h1>
                     not staff. sorry!
