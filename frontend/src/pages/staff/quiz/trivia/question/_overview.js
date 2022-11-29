@@ -2,9 +2,12 @@ import { useSnackbar } from 'notistack';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Helmet } from "react-helmet";
 const debounce = require('lodash.debounce')
-
+import PropTypes from 'prop-types';
+import Popper from '@mui/material/Popper';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
+import Paper from '@mui/material/Paper';
+
 import axiosInstance from '../../../../../components/axiosAuthApi';
 import { log } from '../../../../../components/base';
 import UserStore from '../../../../../store/userStore';
@@ -64,11 +67,11 @@ const OverviewTrivia = () => {
     const now = new Date().getTime()
 
     const fetchQuestions = async () => {        
-        await axiosInstance.get(`/api/questionsV2View/?timestamp=${now}`)
+        await axiosInstance.get(`/api/questionsV2View/?timestamp=${now}&limit=100`)
             .then(res => { 
                 let preTablesRows = []
                 
-                res.data.reverse().map(question => {
+                res.data.results.reverse().map(question => {
                     preTablesRows.push(insertTable(
                         question.id,
                         question.public,
@@ -94,86 +97,223 @@ const OverviewTrivia = () => {
                 log(err.response)
             })
     }
+
+    
+    function isOverflown(element) {
+        return (
+        element.scrollHeight > element.clientHeight ||
+        element.scrollWidth > element.clientWidth
+        );
+    }
+
+    const GridCellExpand = React.memo(function GridCellExpand(props) {
+        const { width, value } = props;
+        const wrapper = React.useRef(null);
+        const cellDiv = React.useRef(null);
+        const cellValue = React.useRef(null);
+        const [anchorEl, setAnchorEl] = React.useState(null);
+        const [showFullCell, setShowFullCell] = React.useState(false);
+        const [showPopper, setShowPopper] = React.useState(false);
+      
+        const handleMouseEnter = () => {
+          const isCurrentlyOverflown = isOverflown(cellValue.current);
+          setShowPopper(isCurrentlyOverflown);
+          setAnchorEl(cellDiv.current);
+          setShowFullCell(true);
+        };
+      
+        const handleMouseLeave = () => {
+          setShowFullCell(false);
+        };
+      
+        React.useEffect(() => {
+          if (!showFullCell) {
+            return undefined;
+          }
+      
+          function handleKeyDown(nativeEvent) {
+            // IE11, Edge (prior to using Bink?) use 'Esc'
+            if (nativeEvent.key === 'Escape' || nativeEvent.key === 'Esc') {
+              setShowFullCell(false);
+            }
+          }
+      
+          document.addEventListener('keydown', handleKeyDown);
+      
+          return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+          };
+        }, [setShowFullCell, showFullCell]);
+      
+        return (
+          <Box
+            ref={wrapper}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            sx={{
+              alignItems: 'center',
+              lineHeight: '24px',
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              display: 'flex',
+            }}
+          >
+            <Box
+              ref={cellDiv}
+              sx={{
+                height: '100%',
+                width,
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+              }}
+            />
+            <Box
+              ref={cellValue}
+              sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+            >
+              {value}
+            </Box>
+            {showPopper && (
+              <Popper
+                open={showFullCell && anchorEl !== null}
+                anchorEl={anchorEl}
+                style={{ width, marginLeft: -17 }}
+              >
+                <Paper
+                  elevation={1}
+                  style={{ minHeight: wrapper.current.offsetHeight - 3 }}
+                >
+                  <p>
+                    {value}
+                  </p>
+                </Paper>
+              </Popper>
+            )}
+          </Box>
+        );
+    });
+
+    GridCellExpand.propTypes = {
+        value: PropTypes.string.isRequired,
+        width: PropTypes.number.isRequired,
+    };
+      
+    function renderCellExpand(params) {
+        return (
+          <GridCellExpand value={params.value || ''} width={params.colDef.computedWidth} />
+        );
+    }
+      
+    renderCellExpand.propTypes = {
+        /**
+         * The column of the row that the current cell belongs to.
+         */
+        colDef: PropTypes.object.isRequired,
+        /**
+         * The cell value.
+         * If the column has `valueGetter`, use `params.row` to directly access the fields.
+         */
+        value: PropTypes.string,
+    };
     
     const columns = [
         {
+            field: 'id',
+            headerName: 'ویرایش',
+            renderCell: (params) => <a href={`/adminTheKingAlexanderJosef/frontend/questions_v2/${params.row.id}/change/`} target='_blank'>✒️</a>,
+            width: 75,
+        },
+        {
             field: 'publicAccess',
             headerName: 'عمومی',
-            width: 150,
             editable: false,
-            renderCell: (params) => <button onClick={() => changePublicAccessStatue(params.row)}>{params.row.publicAccess ? '✅':'⛔'}</button>
+            renderCell: (params) => <button onClick={() => changePublicAccessStatue(params.row)}>{params.row.publicAccess ? '✅':'⛔'}</button>,
+            width: 75,
         },
         {
             field: 'quiz',
             headerName: 'کوییز',
-            editable: true
+            editable: true,
+            renderCell: renderCellExpand,
+            width: 100,
         },
         {
             field: 'question',
             headerName: 'سوال',
-            width: 500,
             editable: true,
+            renderCell: renderCellExpand,
+            width: 200,
         },
         {
             field: 'questionImg',
             headerName: 'تصویر سوال',
-            width: 150,
             editable: false,
-            renderCell: (params) => params.value.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+            renderCell: (params) => params.value.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>,
+            width: 100,
         },
         {
             field: 'option_1st',
-            width: 150,
             headerName: 'گزینه ۱',
-            editable: true
+            editable: true,
+            renderCell: renderCellExpand,
+            width: 150,
         },
         {
             field: 'option_2nd',
-            width: 150,
             headerName: 'گزینه ۲',
-            editable: true
+            editable: true,
+            renderCell: renderCellExpand,
+            width: 150,
         },
         {
             field: 'option_3rd',
-            width: 150,
             headerName: 'گزینه ۳',
-            editable: true
+            editable: true,
+            renderCell: renderCellExpand,
+            width: 150,
         },
         {
             field: 'option_4th',
-            width: 150,
             headerName: 'گزینه ۴',
-            editable: true
+            editable: true,
+            renderCell: renderCellExpand,
+            width: 150,
         },
         {
             field: 'option_img_1st',
             headerName: 'تصویر گزینه ۱',
             editable: true,
-            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>,
+            width: 100,
         },
         {
             field: 'option_img_2nd',
             headerName: 'تصویر گزینه ۲',
             editable: true,
-            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>,
+            width: 100,
         },
         {
             field: 'option_img_3rd',
             headerName: 'تصویر گزینه ۳',
             editable: true,
-            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>,
+            width: 100,
         },
         {
             field: 'option_img_4th',
             headerName: 'تصویر گزینه ۴',
             editable: true,
-            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>
+            renderCell: (params) => params.value?.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>,
+            width: 100,
         },
         {
             field: 'submitter',
             headerName: 'ثبت کننده',
-            width: 150,
-            editable: false
+            editable: false,
+            width: 100,
         },
     ]
 
@@ -210,17 +350,20 @@ const OverviewTrivia = () => {
 
             {
                 userProfile.userDetail?.is_staff ?
-                <Box sx={{ height: 500, width: '100%' }}>
-                    <DataGrid
-                        rows={tableRows}
-                        columns={columns}
-                        pageSize={20}
-                        rowsPerPageOptions={[5]}
-                        checkboxSelection
-                        disableSelectionOnClick
-                        experimentalFeatures={{ newEditingApi: true }}
-                        sx={{fontFamily: 'IRANYekanBold, sans-serif, serif', color: 'white'}}
-                    />
+                <Box>
+                    <div style={{flex: '1', width: '400vw', height: 500}}>
+                        <DataGrid
+                            rows={tableRows}
+                            columns={columns}
+                            pageSize={20}
+                            rowsPerPageOptions={[5]}
+                            checkboxSelection
+                            disableSelectionOnClick
+                            experimentalFeatures={{ newEditingApi: true }}
+                            autoWidth
+                            sx={{fontFamily: 'IRANYekanBold, sans-serif, serif', color: 'white'}}
+                        />
+                    </div>
                 </Box>
                 :
                 <h1>

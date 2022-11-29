@@ -324,6 +324,11 @@ hr {
     }
 }
 
+.MuiPaper-elevation1 {
+    background: rgb(30, 14, 14) !important;
+    border: 1px solid rgb(66, 0, 0);
+}
+
 .MuiDialog-container,
 .MuiBackdrop-root :not(.MuiPopover-root) {
     backdrop-filter: blur(3px);
