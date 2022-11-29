@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script'
 import { useCookies } from "react-cookie";
@@ -15,14 +15,22 @@ import {
     hatMap,
     bodyMap
 } from "@bigheads/core";
+import CircularProgress from '@mui/material/CircularProgress';
   
 import axiosInstance from '../axiosAuthApi';;
 import { log, replaceFunction } from '../base'
 import UserStore from '../../store/userStore'
 import axios from "axios";
+import { Avatar } from "@mui/material";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
+    const [loginLoading, setLoginLoading] = useState(false)
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
+    const [loginAvailable, setLoginAvailable] = useState(false)
+
+    setTimeout(() => {
+        setLoginAvailable(true)
+    }, 3000);
 
     const [userProfile] = UserStore()
     
@@ -55,6 +63,7 @@ const LoginForm = (props) => {
     }
 
     const logout = async () => {
+        log('logout')
         try {
             await axios.post('/api/blacklist/', {"refresh_token": cookies.USER_REFRESH_TOKEN,})
                 .catch(err => {
@@ -172,7 +181,7 @@ const LoginForm = (props) => {
     }
 
     const googleLoginSuccess = async (res) => {
-        if (userProfile.userDetail == false) {
+        if (userProfile.userDetail == false || userProfile.userDetail == null) {
             const accessToken = res.accessToken
             const username = replaceFunction(res.profileObj.name, ' ', '')
             const email = res.profileObj.email
@@ -216,16 +225,23 @@ const LoginForm = (props) => {
                     // log(err.response)
                 })
         }
+        setLoginLoading(false)
     }
 
     const googleLoginFailure = (res) => {
-        if (res.details.includes('Cookies')) {
-            enqueueSnackbar('برای ورود میبایست کوکی ها فعال باشند. کوکی مرورگر شما غیرفعال است.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+        setLoginLoading(false)
+
+        if (res.details?.includes('Cookies')) {
+            enqueueSnackbar('کوکی مرورگر شما غیرفعال است! برای ورود میبایست کوکی ها فعال باشند', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         } else {
-            enqueueSnackbar('ورود/ثبت نام شما به مشکل برخورد. لطفا مجددا تلاش کنید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            enqueueSnackbar('ورود شما به مشکل برخورد. لطفا مجددا تلاش کنید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             // log('fail login, res:')
             // log(res)
         }
+    }
+
+    const googleLoginRequest = () => {
+        setLoginLoading(true)
     }
 
     return (
@@ -233,9 +249,24 @@ const LoginForm = (props) => {
                 clientId={process.env.GOOGLE_LOGIN_CLIENT}
                 className='ltr'  // w-[90%] flex justify-center
                 buttonText="ورود/ثبت نام با حساب گوگل"
-                render={props => <button onClick={props.onClick} className={`px-6 py-1 h-fit bloodRiver_bg rounded-2xl text-white`}>ورود</button>}
+                render={
+                    props => 
+                    <button onClick={() => props.onClick()} className={`px-6 py-1 h-fit bloodRiver_bg flex rounded-2xl text-white`}>
+                        {
+                            (loginLoading || !loginAvailable) ?
+                            <CircularProgress
+                                color="inherit"
+                                size={27}
+                                thickness={7} 
+                            />
+                            :
+                            'ورود'
+                        }
+                        </button>
+                }
                 onSuccess={googleLoginSuccess}
                 onFailure={googleLoginFailure}
+                onRequest={googleLoginRequest}
                 cookiePolicy={'single_host_origin'}
                 isSignedIn={true}
             />
