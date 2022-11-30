@@ -7,16 +7,19 @@ import { log, getTheme, takeParameterFromUrl } from '../../components/base'
 import UserStore from '../../store/userStore'
 const LoadingScreen = React.lazy(() => import('../../components/loadingScreen'))
 const TestContainer = React.lazy(() => import('../../components/testContainer'))
+const QuizContainer = React.lazy(() => import('../../components/quizContainer'))
 const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
 const SkeletonTestContainer = React.lazy(() => import('../../components/skeletonTestContainer'))
 
 const QuizHistory = () => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [content, setContent] = useState([])
+    const [testContent, setTestContent] = useState([])
+    const [quizContent, setQuizContent] = useState([])
     const [title, setTitle] = useState(null)
     const [lowTitle, setLowTitle] = useState(null)
     const [messageForEmpty, setMessageForEmpty] = useState(null)
+    const [gameType, setGameType] = useState('quiz')
 
     const location = useLocation();
     
@@ -50,9 +53,9 @@ const QuizHistory = () => {
                         return log(err.response)
                     })
 
-                setTitle('کوییز های لایک شده')
-                setLowTitle('Your Liked Quizzes')
-                setMessageForEmpty('هیچ کوییزی رو تا حالا لایک نکردی!')
+                setTitle('لایک های شما')
+                setLowTitle('Your Likes')
+                setMessageForEmpty('هیچ لایکی ثبت نکرده اید!')
                 break
             case 'history':
                 playlist = await axiosInstance.get(`/api/historyView/?timestamp=${now}`)
@@ -63,9 +66,9 @@ const QuizHistory = () => {
                         return log(err.response)
                     })
 
-                setTitle('تاریخچه کوییزهای شما')
+                setTitle('تاریخچه‌ی شما')
                 setLowTitle('Your History')
-                setMessageForEmpty('هیچ کوییزی رو تا حالا انجام ندادی!')
+                setMessageForEmpty('هیچ تاریخچه‌ای برای شما ثبت نشده است!')
                 break
             case 'watch':
                 playlist = await axiosInstance.get(`/api/watchListView/?timestamp=${now}`)
@@ -76,25 +79,30 @@ const QuizHistory = () => {
                         return log(err.response)
                     })
 
-                setTitle('کوییز های پلی لیست شما')
-                setLowTitle('Your Playlist')
-                setMessageForEmpty('هیچ کوییزی رو اضافه نکردی!')
+                setTitle('ذخیره شده های شما')
+                setLowTitle('Your Saved')
+                setMessageForEmpty('هیچ محتوایی را ذخیره نکرده اید!')
         }
         
-        let finalList = []
+        let quizFinalList = []
+        let testFinalList = []
         
         playlist?.length &&
         playlist.map(quiz => {
-            if (quiz.trivia_id) {
-                finalList.push(quiz.trivia_id)
+            if (quiz.quizV2_id) {
+                quizFinalList.push(quiz.quizV2_id)
             }
             else if (quiz.test_id) {
-                finalList.push(quiz.test_id)
+                testFinalList.push(quiz.test_id)
             }
         })
         
-        setContent([])
-        setContent(finalList.reverse())
+        setQuizContent([])
+        setQuizContent(quizFinalList.reverse())
+        
+        setTestContent([])
+        setTestContent(testFinalList.reverse())
+
         setContentLoaded(true)
     }
 
@@ -114,27 +122,36 @@ const QuizHistory = () => {
                 {
                     userProfile.userDetail ?
                     <div>
+                        <div className='mb-10'>
+                            <h3 className='lowTitle'>{lowTitle}</h3>
+                            <h3 className='title'>{title}</h3>
+                        </div>
+
                         {
                             contentLoaded ?
-                            <div>
-                                {/* <div className='adverts adverts__left'>
-                                    <div id='mediaad-DLgb'></div>
-                                    <div id="pos-article-display-26094"></div>
-                                </div> */}
-        
-                                <div className='mb-10'>
-                                    <h3 className='lowTitle'>{lowTitle}</h3>
-                                    <h3 className='title'>{title}</h3>
+                            <div>      
+                                <div className='grid grid-cols-2 w-[22rem] mx-auto my-12 justify-center'>
+                                    <h3 className={`${gameType == 'quiz' ? 'bloodRiver_bg' : 'hover:text-red-200'} py-1 text-center rounded`}><button onClick={() => { setGameType('quiz') }} type='button'>کوییز ها</button></h3>
+                                    <h3 className={`${gameType == 'test' ? 'bloodRiver_bg' : 'hover:text-red-200'} py-1 text-center rounded`}><button onClick={() => { setGameType('test') }} type='button'>تست ها</button></h3>
                                 </div>
-                                
-                                <ul className="flex flex-col flex-wrap justify-center align-baseline md:flex-row">
-                                    {
-                                        content.length ?
-                                        <TestContainer tests={content} />
-                                        :
-                                        <h1 className='mt-10 mb-[25rem] text-center'>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
-                                    }
-                                </ul>    
+
+                                {
+                                    quizContent.length ?
+                                    <ul className={`${gameType == 'quiz' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} flex flex-col flex-wrap align-baseline md:flex-row`}>
+                                        <QuizContainer quizzes={quizContent} bgStyle={'trans'} />
+                                    </ul>
+                                    :
+                                    <h1 className={`${gameType == 'quiz' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} mt-10 mb-[25rem] text-center`}>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
+                                }
+
+                                {
+                                    testContent.length ?
+                                    <ul className={`${gameType == 'test' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} flex flex-col flex-wrap align-baseline md:flex-row`}>
+                                        <TestContainer tests={testContent} bgStyle={'trans'} />
+                                    </ul>
+                                    :
+                                    <h1 className={`${gameType == 'test' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} mt-10 mb-[25rem] text-center`}>{messageForEmpty}<span className='text-[2.5rem]'>😕</span></h1>
+                                }
         
                                 {/* Adverts */}
         
