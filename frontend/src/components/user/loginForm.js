@@ -39,7 +39,10 @@ const LoginForm = () => {
     const { signOut } = useGoogleLogout({
         clientId: process.env.GOOGLE_LOGIN_CLIENT,
         onLogoutSuccess: () => {log('signOut success');},
-        onFailure: () => {log('signOut failure');},
+        onFailure: (err) => {
+            log('signOut failure');
+            // log(err)
+        },
     })
     
     useEffect(() => {
@@ -233,9 +236,12 @@ const LoginForm = () => {
 
         if (res.details?.includes('Cookies')) {
             enqueueSnackbar('کوکی مرورگر شما غیرفعال است! برای ورود میبایست کوکی ها فعال باشند', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-        } else {
-            enqueueSnackbar('ورود شما به مشکل برخورد. لطفا مجددا تلاش کنید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-            // log('fail login, res:')
+        }
+        else if (res?.target.id == 'google-login') {
+            enqueueSnackbar('در اتصال شما به سرور های گوگل خطایی رخ داده است. لطفا پس از بررسی، مجددا تلاش کنید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+        }
+        else {
+            enqueueSnackbar('خطایی رخ داده است. لطفا مجددا تلاش کنید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             // log(res)
         }
     }

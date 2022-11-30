@@ -73,7 +73,10 @@ const Header = () => {
     const { signOut } = useGoogleLogout({
         clientId: process.env.GOOGLE_LOGIN_CLIENT,
         onLogoutSuccess: () => {log('google 1')},
-        onFailure: () => {log('google 2')},
+        onFailure: (err) => {
+            log('google 2')
+            // log(err)
+        },
     })
 
     const handleLogout = async () => {
