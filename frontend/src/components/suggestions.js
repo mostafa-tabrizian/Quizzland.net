@@ -64,13 +64,8 @@ const Suggestions = () => {
         for (let quiz in userLike) {
             const likeQuizCategoryKeys = Object.keys(likeQuizCategory)
             quiz = userLike[quiz]
-            let quizSubCategory
-            
-            if (quiz.trivia_id != null) {
-                quizSubCategory = quiz.trivia_id.subCategory
-            } else if (quiz.test_id != null) {
-                quizSubCategory = quiz.test_id.subCategory
-            }
+
+            quizSubCategory = quiz.test_id.subCategory
             
             if (likeQuizCategoryKeys.includes(quizSubCategory)) {
                 likeQuizCategory[quizSubCategory] += 1

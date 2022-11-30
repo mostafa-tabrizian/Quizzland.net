@@ -81,7 +81,6 @@ class LikeFilter(filters.FilterSet):
         model = Like
         fields = {
             'user_id': ['exact'], 
-            'trivia_id': ['exact'],
             'quizV2_id': ['exact'],
             'test_id': ['exact'],
             'date_submitted': ['lte', 'gte'],
@@ -92,7 +91,6 @@ class CommentFilter(filters.FilterSet):
         model = Comment
         fields = {
             'comment_text': ['icontains'],
-            'trivia_id': ['exact'],
             'quizV2_id': ['exact'],
             'test_id': ['exact'], 
             'submitter_id': ['exact'],
@@ -105,7 +103,7 @@ class WatchListFilter(filters.FilterSet):
         model = Watch_List
         fields = {
             'user_id': ['exact'], 
-            'trivia_id': ['exact'],
+            'quizV2_id': ['exact'],
             'test_id': ['exact'],
             'date_submitted': ['lte', 'gte'],
         }
@@ -115,7 +113,7 @@ class HistoryFilter(filters.FilterSet):
         model = History
         fields = {
             'user_id': ['exact'], 
-            'trivia_id': ['exact'],
+            'quizV2_id': ['exact'],
             'test_id': ['exact'],
             'date_submitted': ['lte', 'gte'],
         }

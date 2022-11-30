@@ -84,25 +84,25 @@ class UserScore_Admin(admin.ModelAdmin):
 class Like_Admin(admin.ModelAdmin):
     list_display = ('user_id', 'quiz_id', 'date_submitted')
     list_filter = ('date_submitted', )
-    search_fields = ['trivia_id__title', 'trivia_id__slug', 'test_id__title', 'test_id__slug', 'quizV2_id__title', 'quizV2_id__slug']
+    search_fields = ['test_id__title', 'test_id__slug', 'quizV2_id__title', 'quizV2_id__slug']
 
 @admin.register(Comment)
 class Comment_Admin(admin.ModelAdmin):
     list_display = ('submitter_id', 'comment_text', 'verified', 'date_submitted')
     list_filter = ('date_submitted', 'verified')
-    search_fields = ['comment_text', 'trivia_id__title', 'trivia_id__slug', 'test_id__title', 'test_id__slug', 'submitter_id__username']
+    search_fields = ['comment_text', 'quizV2_id__title', 'quizV2_id__slug', 'test_id__title', 'test_id__slug', 'submitter_id__username']
 
 @admin.register(Watch_List)
 class WatchList_Admin(admin.ModelAdmin):
     list_display = ('user_id', 'quiz_id', 'date_submitted')
     list_filter = ('date_submitted', )
-    search_fields = ['trivia_id__title', 'trivia_id__slug', 'test_id__title', 'test_id__slug']
+    search_fields = ['quizV2_id__title', 'quizV2_id__slug', 'test_id__title', 'test_id__slug']
 
 @admin.register(History)
 class History_Admin(admin.ModelAdmin):
     list_display = ('user_id', 'quiz_id', 'date_submitted')
     list_filter = ('date_submitted', )
-    search_fields = ['trivia_id__title', 'trivia_id__slug', 'test_id__title', 'test_id__slug']
+    search_fields = ['quizV2_id__title', 'quizV2_id__slug', 'test_id__title', 'test_id__slug']
 
 @admin.register(Questions)
 class Questions_Admin(admin.ModelAdmin):

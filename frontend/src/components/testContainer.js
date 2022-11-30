@@ -28,11 +28,11 @@ const TestContainer = (props) => {
         setTheme(theme)
     }, []);
 
-    const addToWatchListClicked = async (quizId, quizCheckIfTrivia) => {
+    const addToWatchListClicked = async (quizId) => {
         setLoading(true)
 
         if (userProfile.userDetail) {
-            checkWatchList(quizId, quizCheckIfTrivia)
+            checkWatchList(quizId)
         } else {
             setLoading(false)
             showLoginNotification()
@@ -58,19 +58,19 @@ const TestContainer = (props) => {
     
     const debounceAddToWatchList = useCallback(
         debounce(
-            async (userDetail, quizId, quizType) => {
+            async (userDetail, quizId) => {
                 const now = new Date().getTime()
 
                 const payload = {
                     user_id: {
                         username: userDetail.id
                     },
-                    test_id: {
-                        id: quizType == 'test' ? quizId : 0
+                    quizV2_id: {
+                        id: 0
                     },
-                    trivia_id: {
-                        id: quizType == 'trivia' ? quizId : 0
-                    }
+                    test_id: {
+                        id: quizId
+                    },
                 }
 
                 await axiosInstance.post(`/api/watchListView/?timestamp=${now}`, payload)
@@ -101,18 +101,11 @@ const TestContainer = (props) => {
         )
 	);
 
-    const checkWatchList = async (quizId, quizCheckIfTrivia) => {
+    const checkWatchList = async (quizId) => {
         setWatchListButtonUnClickable(false)
-        
-        let quizType
-        if (quizCheckIfTrivia) {
-            quizType = 'trivia'
-        } else {
-            quizType = 'test'
-        }
         const userDetail = userProfile.userDetail
 
-        debounceAddToWatchList(userDetail, quizId, quizType)
+        debounceAddToWatchList(userDetail, quizId)
     }
 
     const returnQuizzes = () => {
@@ -125,7 +118,7 @@ const TestContainer = (props) => {
                     props.tests.map((quiz) => {
                         return (
                             <li key={quiz.id} className='relative flex-auto mb-2 md:mr-4 md:mb-4' onMouseEnter={() => setShowPlaylistButton(quiz.id)} onMouseLeave={() => setShowPlaylistButton(null)}>
-                                <button onClick={() => addToWatchListClicked(quiz.id, quiz.GIF20)} className={`${watchListButtonUnClickable?'':'pointer-events-none'} ${(showPlaylistButton == quiz.id) ? 'visible opacity-100 translate-y-0' : 'md:invisible md:opacity-0 md:translate-y-2'} duration-300 ease-in-out transition-all  absolute top-[-0.5rem] right-[-.5rem] z-[1]`}>
+                                <button onClick={() => addToWatchListClicked(quiz.id)} className={`${watchListButtonUnClickable?'':'pointer-events-none'} ${(showPlaylistButton == quiz.id) ? 'visible opacity-100 translate-y-0' : 'md:invisible md:opacity-0 md:translate-y-2'} duration-300 ease-in-out transition-all  absolute top-[-0.5rem] right-[-.5rem] z-[1]`}>
                                     <svg class="h-7 w-7 text-[#ac272e]"  fill="#1e0809" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>

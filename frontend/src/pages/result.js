@@ -79,43 +79,19 @@ const Result = () => {
         }
     }, [suggestionQuizzes])
 
-    const postToHistoryAsPlayedQuiz = async () => {
-        const payload = {
-            user_id: {
-                username: userProfile.userDetail.id
-            },
-            test_id: {
-                id: quizType == 'test' ? quizDetail?.id : 0
-            },
-            trivia_id: {
-                id: quizType == 'quiz' ? quizDetail?.id : 0
-            }
-        }
-
-        await axiosInstance.post(`/api/historyView/`, payload)
-            // .then(res => {
-            // })
-            .catch(err => {
-                log(err.response)
-            })
-    }
-
     const userPlayedThisQuizBefore = async () => {
         const userHistory = await fetchUserHistory()
         let playedBefore = false
 
         for (let quizIndex in userHistory) {
-            if (
-                userHistory[quizIndex].trivia_id?.slug === quizDetail?.slug ||
-                userHistory[quizIndex].test_id?.slug === quizDetail?.slug
-            ) {
+            if (userHistory[quizIndex].test_id?.slug === quizDetail?.slug) {
                 playedBefore = true
                 break
             }
         }
 
         const lastIndex = userHistory.length - 1
-        const previousUserPlayedQuiz = userHistory[lastIndex]?.test_id?.id || userHistory[lastIndex]?.trivia_id?.id
+        const previousUserPlayedQuiz = userHistory[lastIndex]?.test_id?.id
 
         if (quizDetail?.id !== previousUserPlayedQuiz) {
             postToHistoryAsPlayedQuiz()

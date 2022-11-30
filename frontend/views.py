@@ -190,7 +190,7 @@ def auth_google(request, *args, **kwargs):
 
 def restartEveryMonthlyViews(request):
     try:
-        quizzes = Quizzes.objects.all()
+        quizzes = Quizzes_V2.objects.all()
         for quiz in quizzes:
             quiz.monthly_views = 0
             quiz.save()
@@ -224,12 +224,12 @@ def restartEveryMonthlyViews(request):
 
 
 def FastFunctionForDB(request):
-    quizzes = Quizzes.objects.all()
+    quizzes = Quizzes_V2.objects.all()
 
     for item in quizzes:
         try:
             print('------------------------')
-            targetQuiz = Quizzes.objects.get(title=item.title)
+            targetQuiz = Quizzes_V2.objects.get(title=item.title)
 
             item.question_background = '#911a1a'
             item.save()

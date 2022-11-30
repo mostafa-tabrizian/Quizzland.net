@@ -304,6 +304,7 @@ const Quiz_V2 = (props) => {
         if (await payFees()) {
             setJoinPaper(false)
             AddView(`quizV2View`, quizDetailRef.current.id)
+            postToHistory(quizDetailRef.current)
         }
     }
 
@@ -470,6 +471,59 @@ const Quiz_V2 = (props) => {
                 log(err)
                 log(err.response)
             })
+    }
+
+    const fetchUserHistory = async () => {
+        const now = new Date().getTime()
+
+        return await axiosInstance.get(`/api/historyView/?timestamp=${now}`)
+            .then(res => {
+                return res.data
+            })
+            .catch(err => {
+                log(err.response)
+            })
+    }
+
+    const userPlayedThisQuizBefore = async (quiz) => {
+        const userHistory = await fetchUserHistory()
+        let playedBefore = false
+
+        for (let quizIndex in userHistory) {
+            if (userHistory[quizIndex].quizV2_id?.slug === quiz?.slug) {
+                playedBefore = true
+                break
+            }
+        }
+        
+        return playedBefore
+    }
+
+    const postToHistory = async (quiz) => {
+        const playedBefore = await userPlayedThisQuizBefore(quiz)
+
+        if (!playedBefore) {
+            const payload = {
+                user_id: {
+                    username: userProfile.userDetail.id
+                },
+                quizV2_id: {
+                    id: quiz?.id
+                },
+                test_id: {
+                    id: 0
+                }
+            }
+    
+            await axiosInstance.post(`/api/historyView/`, payload)
+                .then(res => {
+                    log(res)
+                })
+                .catch(err => {
+                    log(err)
+                    log(err.response)
+                })
+        }
     }
 
     const saveUserScore = async () => {

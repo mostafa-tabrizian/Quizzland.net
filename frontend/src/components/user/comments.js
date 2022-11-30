@@ -63,7 +63,6 @@ const Comments = (props) => {
             async (comment, verifyState) => {
                 await axiosInstance.post('/api/commentView/', {
                     comment_text: comment,
-                    trivia_id: props.quizType == 'quiz' ? props.quizId : null,
                     quizV2_id: props.quizType == 'play' ? props.quizId : null,
                     test_id: props.quizType == 'test' ? props.quizId : null,
                     verified: verifyState,
@@ -103,7 +102,7 @@ const Comments = (props) => {
                 
                 const now = new Date().getTime()
                 
-                await axios.get(`/api/commentView/?verified=true&${props.quizType == 'quiz' ? `trivia_id=${props.quizId}&` : ''}${props.quizType == 'play' ? `quizV2_id=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_id=${props.quizId}&` : ''}timestamp=${now}`)
+                await axios.get(`/api/commentView/?verified=true&${props.quizType == 'play' ? `quizV2_id=${props.quizId}&` : ''}${props.quizType == 'test' ? `test_id=${props.quizId}&` : ''}timestamp=${now}`)
                     .then(res => {
                         setComments(res.data.sort(sortCommentsByNewest))
                         setCommentFetching(false)

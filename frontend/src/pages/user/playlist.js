@@ -11,7 +11,7 @@ const QuizContainer = React.lazy(() => import('../../components/quizContainer'))
 const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
 const SkeletonTestContainer = React.lazy(() => import('../../components/skeletonTestContainer'))
 
-const QuizHistory = () => {
+const Playlist = () => {
     const [loadState, setLoadState] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
     const [testContent, setTestContent] = useState([])
@@ -177,4 +177,4 @@ const QuizHistory = () => {
     );
 }
 
-export default QuizHistory;
+export default Playlist;

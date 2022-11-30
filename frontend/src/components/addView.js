@@ -8,9 +8,9 @@ const AddView = (content, contentID) => {
     const getLastViewCount = async () => {
         const now = new Date().getTime()
         await axios.get(`/api/${content}/${contentID}/?timestamp=${now}`)
-            .then((req) => {
-                lastMonthly = req.data.monthly_views
-                lastView = req.data.views
+            .then((res) => {
+                lastMonthly = res.data.monthly_views
+                lastView = res.data.views
             })
     }
 
@@ -21,6 +21,13 @@ const AddView = (content, contentID) => {
         }
 
         await axios.put(`/api/${content}/${contentID}/`, view)
+            .then(res => {
+                // log(res)
+            })
+            .catch(err => {
+                log(err)
+                log(err.response)
+            })
     }
 
     getLastViewCount()
