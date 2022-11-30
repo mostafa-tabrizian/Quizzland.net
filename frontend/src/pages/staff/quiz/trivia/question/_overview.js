@@ -29,6 +29,9 @@ const OverviewTrivia = () => {
         quiz,
         question,
         questionImg,
+        answer,
+        answer_text,
+        answer_imGif,
         option_1st,
         option_2nd,
         option_3rd,
@@ -45,6 +48,9 @@ const OverviewTrivia = () => {
             quiz,
             question,
             questionImg,
+            answer,
+            answer_text,
+            answer_imGif,
             option_1st,
             option_2nd,
             option_3rd,
@@ -66,28 +72,44 @@ const OverviewTrivia = () => {
 
     const now = new Date().getTime()
 
+    const fetchAnswers = async () => {
+      return await axiosInstance.get(`/api/answerV2View/?timestamp=${now}&limit=100`)
+        .then(res => {
+          return res.data.results
+        })
+        .catch(err => {
+          log(err)
+          log(err.response)
+        })
+    }
+
     const fetchQuestions = async () => {        
         await axiosInstance.get(`/api/questionsV2View/?timestamp=${now}&limit=100`)
-            .then(res => { 
-                let preTablesRows = []
-                
-                res.data.results.reverse().map(question => {
-                    preTablesRows.push(insertTable(
-                        question.id,
-                        question.public,
-                        question.quizKey.title,
-                        question.question,
-                        question.question_img,
-                        question.option_1st,
-                        question.option_2nd,
-                        question.option_3rd,
-                        question.option_4th,
-                        question.option_img_1st,
-                        question.option_img_2nd,
-                        question.option_img_3rd,
-                        question.option_img_4th,
-                        question.submitter_id.username,
-                    ))
+            .then(async res => { 
+              const answers = await fetchAnswers()
+              let preTablesRows = []
+              res.data.results.reverse().map(question => {
+                  const answer = answers.find(answer => answer.questionKey.id == question.id)
+
+                  preTablesRows.push(insertTable(
+                      question.id,
+                      question.public,
+                      question.quizKey.title,
+                      question.question,
+                      question.question_img,
+                      answer.answer,
+                      answer.answer_text,
+                      answer.answer_imGif,
+                      question.option_1st,
+                      question.option_2nd,
+                      question.option_3rd,
+                      question.option_4th,
+                      question.option_img_1st,
+                      question.option_img_2nd,
+                      question.option_img_3rd,
+                      question.option_img_4th,
+                      question.submitter_id.username,
+                  ))
                 })
                 setTableRows(preTablesRows)
             })
@@ -254,6 +276,27 @@ const OverviewTrivia = () => {
             width: 100,
         },
         {
+            field: 'answer',
+            headerName: 'پاسخ',
+            editable: true,
+            renderCell: renderCellExpand,
+            width: 75,
+        },
+        {
+            field: 'answer_text',
+            headerName: 'توضیحات پاسخ',
+            editable: true,
+            renderCell: renderCellExpand,
+            width: 200,
+        },
+        {
+            field: 'answer_imGif',
+            headerName: 'تصویر پاسخ',
+            editable: false,
+            renderCell: (params) => params.value.includes('undefined') ? '' : <a href={params.value} target='_blank'><img src={params.value} /></a>,
+            width: 100,
+        },
+        {
             field: 'option_1st',
             headerName: 'گزینه ۱',
             editable: true,
@@ -351,7 +394,7 @@ const OverviewTrivia = () => {
             {
                 userProfile.userDetail?.is_staff ?
                 <Box>
-                    <div style={{flex: '1', width: '400vw', height: 500}}>
+                    <div style={{flex: '1', width: '500vw', height: 500}}>
                         <DataGrid
                             rows={tableRows}
                             columns={columns}
