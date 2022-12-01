@@ -14,6 +14,7 @@ urlpatterns = [
     path("api/recaptcha", verify_recaptcha),
     path('api/search_user', search_user),
     path('api/answer', answer),
+    path('api/add_view', add_view),
     
     path('login', index),
     

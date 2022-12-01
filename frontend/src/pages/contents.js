@@ -39,7 +39,7 @@ const Category = (props) => {
     }, [categoryQuery, categoryQueryID, categoryTitle])
 
     useEffect(() => {
-        categoryQueryID && AddView('categoryView', categoryQueryID)
+        categoryQueryID && AddView('category', categoryQueryID)
     }, [categoryQueryID])
 
     useEffect(() => {

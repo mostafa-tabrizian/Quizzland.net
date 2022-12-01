@@ -303,7 +303,7 @@ const Quiz_V2 = (props) => {
     const payAndPlay = async () => {
         if (await payFees()) {
             setJoinPaper(false)
-            AddView(`quizV2View`, quizDetailRef.current.id)
+            AddView(`quizV2`, quizDetailRef.current.id)
             postToHistory(quizDetailRef.current)
         }
     }

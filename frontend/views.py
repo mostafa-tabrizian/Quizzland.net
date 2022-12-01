@@ -127,6 +127,36 @@ def verify_recaptcha(res):
 
     return HttpResponse((json.loads(req.content))['success'])
 
+@csrf_exempt
+def add_view(request, *args, **kwargs):
+    if request.method == 'POST':
+        request = json.loads(request.body.decode('utf-8'))
+        type = request['type']
+        id = request['id']
+
+        try:
+            if type == 'quizV2':
+                quiz = Quizzes_V2.objects.get(id=id)
+                quiz.views += 1
+                quiz.monthly_views += 1
+                quiz.save()
+            elif type == 'test':
+                quiz = Quizzes_Pointy.objects.get(id=id)
+                quiz.views += 1
+                quiz.monthly_views += 1
+                quiz.save()
+            elif type == 'category':
+                category = Categories.objects.get(id=id)
+                category.views += 1
+                category.monthly_views += 1
+                category.save()
+                
+            return HttpResponse('Success')
+
+        except ObjectDoesNotExist:
+            return HttpResponse('DoesNotExist')
+        except Exception as e:
+            return HttpResponse(e)
 
 @csrf_exempt
 def auth_google(request, *args, **kwargs):
@@ -275,7 +305,7 @@ class MessagesView(viewsets.ModelViewSet):
 
 
 class QuizView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes.objects.all()
     serializer_class = QuizzesSerializer
     filterset_class = QuizzesFilter
@@ -315,7 +345,7 @@ class QuizView(viewsets.ModelViewSet):
 
 
 class QuizV2View(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes_V2.objects.all()
     serializer_class = QuizzesV2Serializer
     filterset_class = QuizzesV2Filter
@@ -353,7 +383,7 @@ class QuizV2View(viewsets.ModelViewSet):
 
 
 class PointyView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Quizzes_Pointy.objects.all()
     serializer_class = PointyQuizzesSerializer
     filterset_class = PointyQuizzesFilter
@@ -445,7 +475,7 @@ class PointyView(viewsets.ModelViewSet):
 
 
 class QuestionsView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Questions.objects.all()
     serializer_class = QuestionsSerializer
     filterset_class = QuestionsFilter
@@ -480,7 +510,7 @@ class QuestionsView(viewsets.ModelViewSet):
 
 
 class QuestionsV2View(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Questions_V2.objects.all()
     serializer_class = QuestionsV2Serializer
     filterset_class = QuestionsV2Filter
@@ -513,7 +543,7 @@ class QuestionsV2View(viewsets.ModelViewSet):
 
     
 class AnswerV2View(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     # queryset = Answer_V2.objects.all()
     serializer_class = AnswerV2Serializer
     filterset_class = AnswerV2Filter
@@ -538,7 +568,7 @@ class AnswerV2View(viewsets.ModelViewSet):
         return HttpResponse('answer added successfully')
 
 class QuestionsPointyView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Pointy_Questions.objects.all()
     serializer_class = QuestionsPointySerializer
     filterset_class = QuestionsPointyFilter
@@ -688,14 +718,14 @@ class HistoryView(viewsets.ModelViewSet):
 
 
 class CategoriesView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Categories.objects.all()
     serializer_class = CategoriesSerializer
     filterset_class = CategoriesFilter
 
 
 class SubCategoryView(viewsets.ModelViewSet):
-    permission_classes = (BasePermission,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = SubCategories.objects.all()
     serializer_class = SubCategoriesSerializer
     filterset_class = SubCategoriesFilter

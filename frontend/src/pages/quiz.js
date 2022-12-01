@@ -342,7 +342,7 @@ const Quiz = (props) => {
 
     const ifHalfQuizAddView = () => {
         if (currentQuestionNumber == halfTheQuestions) {  // && userProfile.userDetail
-            AddView(`${quizType}View`, quizDetailRef.current.id)
+            AddView(`${quizType}`, quizDetailRef.current.id)
             postToHistory()
         }
     }
