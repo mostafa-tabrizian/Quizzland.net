@@ -303,7 +303,7 @@ const TestQuiz = (props) => {
                 setQuizEnded(true)
                 localStorage.setItem('qd', JSON.stringify(quiz))
                 localStorage.setItem('qt', 'test')
-                localStorage.setItem('qr', calculateThePoints())
+                localStorage.setItem('qr', calculateTheResult())
                 result.current.click()
             }
         }
@@ -408,7 +408,7 @@ const TestQuiz = (props) => {
         }
     }
 
-    const calculateThePoints = () => {
+    const calculateTheResult = () => {
         const allOptions = document.querySelectorAll('input[type=radio]')
         const optionPoints = ['option_point_1st', 'option_point_2nd', 'option_point_3rd', 'option_point_4th', 'option_point_5th', 'option_point_6th', 'option_point_7th', 'option_point_8th', 'option_point_9th', 'option_point_10th']
 
