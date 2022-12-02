@@ -330,8 +330,6 @@ const Quiz_V2 = (props) => {
             }
         }
     }
-
-    
     const removeHalfTheWrongOptions = async () => {
         if (lifeline5050) {
             return
@@ -370,6 +368,69 @@ const Quiz_V2 = (props) => {
         document.getElementById(`50:50`).style.opacity = .5
 
         setLifeline5050(true)
+    }
+
+    const pollAudience = async () => {
+        const allOptions = document.querySelectorAll('.quiz__options__textLabel')
+        
+        const optionsBaseIndex = ((currentQuestionNumber-1)*4)
+
+        const options = {
+            1: optionsBaseIndex,
+            2: optionsBaseIndex+1,
+            3: optionsBaseIndex+2,
+            4: optionsBaseIndex+3
+        }
+
+        const option1 = allOptions[options[1]]
+        const option2 = allOptions[options[2]]
+        const option3 = allOptions[options[3]]
+        const option4 = allOptions[options[4]]
+
+        let option1Value = 25
+        let option2Value = 50
+        let option3Value = 75
+        let option4Value = 100
+        
+        let option1FillPercent = 0
+        let option2FillPercent = 0
+        let option3FillPercent = 0
+        let option4FillPercent = 0
+
+        const fillAnimation = () => {
+            let repeat = false
+
+            setTimeout(
+                () => {
+                    option1.style.setProperty('--percent', `${option1FillPercent}%`)
+                    option2.style.setProperty('--percent', `${option2FillPercent}%`)
+                    option3.style.setProperty('--percent', `${option3FillPercent}%`)
+                    option4.style.setProperty('--percent', `${option4FillPercent}%`)
+
+                    if (option1FillPercent+2 <= option1Value) {
+                        option1FillPercent += 2;
+                        repeat = true
+                    }
+                    if (option2FillPercent+2 <= option2Value) {
+                        option2FillPercent += 2;
+                        repeat = true
+                    }
+                    if (option3FillPercent+2 <= option3Value) {
+                        option3FillPercent += 2;
+                        repeat = true
+                    }
+                    if (option4FillPercent+2 <= option4Value) {
+                        option4FillPercent += 2;
+                        repeat = true
+                    }
+                    if (repeat) {
+                        fillAnimation()
+                    }
+                }, 30
+            )
+        }
+
+        fillAnimation()
     }
 
     const skipQuestion = async () => {
@@ -894,6 +955,8 @@ const Quiz_V2 = (props) => {
                             <div id='quizBg'></div>
 
                             <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
+
+                            <button style={{left: '50%'}} onClick={pollAudience}>poll</button>
 
                             {quiz?.id && <LikeCommentButton removeHalfTheWrongOptions={removeHalfTheWrongOptions} skipQuestion={skipQuestion} quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
 
