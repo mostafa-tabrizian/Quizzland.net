@@ -124,7 +124,6 @@ const Quiz_V2 = (props) => {
                     setQuiz(quizData)
 
                     sendCategoryAsInterest()
-                    // await getSuggestionsQuiz()
                     applyBackground()
 
                     await axios.get(`/api/questionsV2View/?quizKey=${quizData.id}&public=true`)
@@ -697,23 +696,6 @@ const Quiz_V2 = (props) => {
                 )
             })
         )
-    }
-
-    const getSuggestionsQuiz = async () => {
-        const category = quizDetailRef.current.categoryKey.id
-        const subCategory = quizDetailRef.current.subCategory
-
-        const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        let content = quiz.data.results.concat(pointy.data.results)
-
-        if (content.length != 8) {
-            const quizByCategory = await axios.get(`/api/quizView/?category__exact=${category}&limit=8&public=true`)
-            const pointyByCategory = await axios.get(`/api/testView/?category__exact=${category}&limit=8&public=true`)
-            content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
-        }
-
-        setSuggestionQuizzes(content.slice(0, 8))
     }
 
     const currentUrl = () => {

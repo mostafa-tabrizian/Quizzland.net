@@ -207,7 +207,7 @@ const OverviewTests = () => {
 
         const now = new Date().getTime()
 
-        await axiosInstance.put(`/api/quizView/${quizId}/?timestamp=${now}`, payload)
+        await axiosInstance.put(`/api/testView/${quizId}/?timestamp=${now}`, payload)
             .then(res => {
                 if (res.status === 200) {
                     enqueueSnackbar('تغییر با موفقیت ثبت گردید!', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})

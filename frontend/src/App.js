@@ -17,7 +17,7 @@ const Footer            = lazy(() => import('./components/footer'))
 
 const Contents          = lazy(() => import ('./pages/contents'))
 
-const Quiz              = lazy(() => import ('./pages/quiz'))
+const Test              = lazy(() => import ('./pages/test'))
 const QuizV2              = lazy(() => import ('./pages/quiz_v2'))
 const Result            = lazy(() => import ('./pages/result'))
 
@@ -131,9 +131,9 @@ const App = () => {
 
                                     {/* <Route path='/guide' component={Guide} /> */}
 
-                                    <Route path='/quiz/:title' component={Quiz} />
+                                    <Route path='/quiz/:title' component={Contents} />
                                     <Route path='/play/:title' component={QuizV2} />
-                                    <Route path='/test/:title' component={Quiz} />
+                                    <Route path='/test/:title' component={Test} />
                                     <Route path='/result' component={Result} />
 
                                     <Route path='/contents/:category' exact component={Contents} />

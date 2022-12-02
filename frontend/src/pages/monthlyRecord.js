@@ -13,7 +13,7 @@ const QuizMonthlyRecord = () => {
     const passwordInput = useRef(null)
 
     const getAllQuizzes = async () => {
-        const quizzes = await axios.get('/api/quizView/')
+        const quizzes = await axios.get('/api/quizV2View/')
         quizDataSaveInExcel(quizzes)
     }
 
