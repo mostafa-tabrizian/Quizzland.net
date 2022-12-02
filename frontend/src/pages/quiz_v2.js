@@ -70,6 +70,9 @@ const Quiz_V2 = (props) => {
     useEffect(() => {
         const question_background = document.querySelectorAll('#question_background')
         question_background && (question_background.forEach((q) => q.style = `background: ${quiz?.theme}`))
+
+        const allLabels = document.querySelectorAll('.pollAudience')
+        allLabels && allLabels.forEach((q) => q.style.setProperty('--color', `${quiz?.theme}`))
     })
 
     useEffect(() => {
@@ -288,7 +291,7 @@ const Quiz_V2 = (props) => {
         if (correctAnswersCount !== 0) {
             const now = new Date().getTime()
             const userId = userProfile.userDetail.id
-            const prize = Math.round((correctAnswersCount * 3) / 5) * 5
+            const prize = correctAnswersCount * 5
             const payload = {
                 q_coins: userProfile.QCoins + prize
             }
@@ -330,6 +333,7 @@ const Quiz_V2 = (props) => {
             }
         }
     }
+
     const removeHalfTheWrongOptions = async () => {
         if (lifeline5050) {
             return
@@ -370,6 +374,20 @@ const Quiz_V2 = (props) => {
         setLifeline5050(true)
     }
 
+    const getAllUserAnswers = async () => {
+        const questionId = questions[currentQuestionNumber - 1].id
+        const now = new Date().getTime()
+
+        return await axios.get(`/api/answers_poll?timestamp=${now}&questionId=${questionId}`)
+            .then(res => {
+                return res.data
+            })
+            .catch(err => {
+                // log(err)
+                // log(err.response)
+            })
+    }
+
     const pollAudience = async () => {
         const allOptions = document.querySelectorAll('.quiz__options__textLabel')
         
@@ -382,15 +400,19 @@ const Quiz_V2 = (props) => {
             4: optionsBaseIndex+3
         }
 
+        
         const option1 = allOptions[options[1]]
         const option2 = allOptions[options[2]]
         const option3 = allOptions[options[3]]
         const option4 = allOptions[options[4]]
+        
+        const allAnswers = await getAllUserAnswers()
+        const totalAnswersNumber = allAnswers.total
 
-        let option1Value = 25
-        let option2Value = 50
-        let option3Value = 75
-        let option4Value = 100
+        let option1Value = Math.round((allAnswers.option1 / totalAnswersNumber) * 100)
+        let option2Value = Math.round((allAnswers.option2 / totalAnswersNumber) * 100)
+        let option3Value = Math.round((allAnswers.option3 / totalAnswersNumber) * 100)
+        let option4Value = Math.round((allAnswers.option4 / totalAnswersNumber) * 100)
         
         let option1FillPercent = 0
         let option2FillPercent = 0
@@ -956,9 +978,7 @@ const Quiz_V2 = (props) => {
 
                             <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            <button style={{left: '50%'}} onClick={pollAudience}>poll</button>
-
-                            {quiz?.id && <LikeCommentButton removeHalfTheWrongOptions={removeHalfTheWrongOptions} skipQuestion={skipQuestion} quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
+                            {quiz?.id && <LikeCommentButton removeHalfTheWrongOptions={removeHalfTheWrongOptions} pollAudience={pollAudience} skipQuestion={skipQuestion} quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
 
                             <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                                 {

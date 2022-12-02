@@ -157,14 +157,21 @@ const LikeCommentButton = (props) => {
                 setLifelineIcon(<svg class="h-10 w-10 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>)
                 setLifelineTitle('پنجاه پنجاه')
                 setLifelineMessage('حذف کردن دو گزینه‌ی نادرست سوال')
-                setLifelinePrice(60)
+                setLifelinePrice(30)
+                break;
+
+            case 'pollAudience':
+                setLifelineIcon(<svg class="h-10 w-10 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>)
+                setLifelineTitle('نظرسنجی کاربران')
+                setLifelineMessage('نمایش درصد پاسخ دیگر کاربران')
+                setLifelinePrice(40)
                 break;
 
             case 'skipQuestion':
                 setLifelineIcon(<svg class="h-10 w-10 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>)
                 setLifelineTitle('رد شدن از سوال')
                 setLifelineMessage('این سوال جایگزاری میشود و به سوال بعدی میروید اما امتیازی دریافت نمی‌کنید')
-                setLifelinePrice(40)
+                setLifelinePrice(20)
                 break;
         }
         setLifeline(false)
@@ -205,6 +212,10 @@ const LikeCommentButton = (props) => {
             switch (lifelineType) {
                 case 'fiftyFifty':
                     props.removeHalfTheWrongOptions()
+                    break
+
+                case 'pollAudience':
+                    props.pollAudience()
                     break
     
                 case 'skipQuestion':
@@ -285,13 +296,13 @@ const LikeCommentButton = (props) => {
 
                     <span className='h-6 my-auto border border-white'></span>
 
-                    <button> {/* poll audience */}
+                    <button onClick={() => setupLifelineMessage('pollAudience')} id='pollAudience'>
                         <svg class="h-6 w-6 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                     </button>
 
                     <span className='h-6 my-auto border border-white'></span>
 
-                    <button onClick={() => setupLifelineMessage('skipQuestion')} id='skipQuestion'>  {/* skip question */}
+                    <button onClick={() => setupLifelineMessage('skipQuestion')} id='skipQuestion'>
                         <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>
                     </button>
 

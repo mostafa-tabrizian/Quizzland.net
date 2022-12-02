@@ -851,16 +851,18 @@ hr {
 
 .pollAudience {
   --percent: 0;
+  --color: rgba(139, 0, 0, 0.483);
 }
 .pollAudience:before {
   content: "";
   position: absolute;
-  background: rgba(0, 123, 255, 0.535);
+  background: var(--color);
   width: var(--percent);
   height: 100%;
   left: 0;
   top: 0;
   border-radius: 5px;
+  z-index: -1;
 }
 
 .quiz_question {

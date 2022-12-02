@@ -15,6 +15,7 @@ urlpatterns = [
     path('api/search_user', search_user),
     path('api/answer', answer),
     path('api/add_view', add_view),
+    path('api/answers_poll', answers_poll),
     
     path('login', index),
     

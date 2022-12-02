@@ -112,7 +112,33 @@ def answer(request, *args, **kwargs):
             'answer_text': answer.answer_text,
             'answer_imGif': answer.answer_imGif.url
         })
-
+        
+@csrf_exempt
+def answers_poll(request, *args, **kwargs):
+    if request.method == 'GET':
+        questionId = request.GET.get('questionId')
+        answers = UserAnswer.objects.filter(question_id=questionId)
+        
+        option1 = 0; option2 = 0; option3 = 0; option4 = 0
+        
+        
+        for answer in answers:
+            if answer.user_answer == 1:
+                option1 += 1
+            elif answer.user_answer == 2:
+                option2 += 1
+            elif answer.user_answer == 3:
+                option3 += 1
+            elif answer.user_answer == 4:
+                option4 += 1
+                        
+        return JsonResponse({
+            'total': option1 + option2 + option3 + option4,
+            'option1': option1,
+            'option2': option2,
+            'option3': option3,
+            'option4': option4,
+        })
 
 def verify_recaptcha(res):
     response = res.GET.get('r')
