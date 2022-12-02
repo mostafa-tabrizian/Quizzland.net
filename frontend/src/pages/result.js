@@ -22,14 +22,11 @@ const Result = () => {
     const [resultText, setResultText] = useState()
     const [loadState, setLoadState] = useState()
     const [suggestionQuizzes, setSuggestionQuizzes] = useState()
-    const [contentLoaded, setContentLoaded] = useState(false)
     const [questionCount, setQuestionCount] = useState(null)
     const [correctAnswersCount, setCorrectAnswersCount] = useState(null)
     const [resultGif, setResultGif] = useState(null)
-    const [quizType, setQuizType] = useState(null)
     const [popUpQuizSuggesterState, setPopUpQuizSuggester] = useState(false)
 
-    const [quizResult, setQuizResult] = useState()
     const [quizDetail, setQuizDetail] = useState()
 
     const [userProfile, userActions] = UserStore()
@@ -43,34 +40,17 @@ const Result = () => {
 
         const quizResult = JSON.parse(localStorage.getItem('qr'))
         const quizDetail = JSON.parse(localStorage.getItem('qd'))
-        const quizType = localStorage.getItem('qt')
             
-        setQuizType(quizType)
-        setQuizResult(quizResult)
         setQuizDetail(quizDetail)
-        detailOfResult(quizResult, quizDetail, quizType)
+        detailOfResult(quizResult, quizDetail)
         setQuestionCount(quizResult.ql)
         setCorrectAnswersCount(quizResult.qc)
-        setContentLoaded(true)
         getSuggestionsQuiz(quizDetail)
-        // document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
+        userPlayedThisQuizBefore()
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
         setLoadState(true)
         
     }, [])
-
-    useEffect(() => {
-        const quizResult = JSON.parse(localStorage.getItem('qr'))
-        const quizType = localStorage.getItem('qt')
-        
-        const score = calculateTheResultScore(quizResult, quizType)
-        
-        if (userProfile.userDetail == false) {
-            displayMessageToUserAboutScore(score)
-        } else if (userProfile.userDetail !== null) {
-            giveScorePoint(score)
-        }
-    }, [userProfile]);
 
     useEffect(() => {
         {
@@ -80,6 +60,10 @@ const Result = () => {
     }, [suggestionQuizzes])
 
     const userPlayedThisQuizBefore = async () => {
+        if (!userProfile.userDetail) {
+            return
+        }
+
         const userHistory = await fetchUserHistory()
         let playedBefore = false
 
@@ -112,167 +96,56 @@ const Result = () => {
             })
     }
 
-    const displayMessageToUserAboutScore = (score) => {
-        enqueueSnackbar(
-            <div className='mt-8'>
-                <h5 className='mb-5'>
-                    {score} امتیاز گرفتی 🎉. وارد کوییزلند شو تا ثبت بشه!
-                </h5>
-                <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
-                    <LoginForm />
-                </div>
-            </div>,
-            { 
-                anchorOrigin: { horizontal: 'right', vertical: 'top' }
-            }
-        )
-    }
-
-    const decideHowMucHPointToGive = (score) => {
-        const integerScore = parseInt(score)
-        let giveAmountPoint = 0
-        
-        if (integerScore <= 20) {
-            giveAmountPoint = 0
+    const detailOfResult = (resultDetail, quizDetail) => {
+        if (resultDetail <= quizDetail.result_upTo_1st) {
+            setResultImg(quizDetail.result_img_1st)
+            setResultSubtitle(quizDetail.result_title_1st)
+            setResultText(quizDetail.result_text_1st)
         }
-        else if (integerScore <= 40){
-            giveAmountPoint = 50
+        else if (resultDetail <= quizDetail.result_upTo_2nd) {
+            setResultImg(quizDetail.result_img_2nd)
+            setResultSubtitle(quizDetail.result_title_2nd)
+            setResultText(quizDetail.result_text_2nd)
         }
-        else if (integerScore <= 60){
-            giveAmountPoint = 100
+        else if (resultDetail <= quizDetail.result_upTo_3rd) {
+            setResultImg(quizDetail.result_img_3rd)
+            setResultSubtitle(quizDetail.result_title_3rd)
+            setResultText(quizDetail.result_text_3rd)
         }
-        else if (integerScore <= 80){
-            giveAmountPoint = 200
+        else if (resultDetail <= quizDetail.result_upTo_4th) {
+            setResultImg(quizDetail.result_img_4th)
+            setResultSubtitle(quizDetail.result_title_4th)
+            setResultText(quizDetail.result_text_4th)
         }
-        else if (integerScore <= 100){
-            giveAmountPoint = 300
+        else if (resultDetail <= quizDetail.result_upTo_5th) {
+            setResultImg(quizDetail.result_img_5th)
+            setResultSubtitle(quizDetail.result_title_5th)
+            setResultText(quizDetail.result_text_5th)
         }
-        
-        return giveAmountPoint
-    }
-    
-    const giveScorePoint = async (score) => {
-        const giveAmountPoint = decideHowMucHPointToGive(score)
-        const playedBefore = await userPlayedThisQuizBefore()
-
-        if (giveAmountPoint !== 0 && !playedBefore) {
-            await axiosInstance.patch(`/api/userView/${userProfile.userDetail.id}/`, { q_coins: userProfile.userDetail.q_coins + parseInt(giveAmountPoint) })
-                .then(res => {
-                    res.status == 200 &&
-                        enqueueSnackbar(`${giveAmountPoint} امتیاز به شما تعلق گرفت 🎉`, { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                })
-                .catch(err => {
-                    log(err.response)
-                })
+        else if (resultDetail <= quizDetail.result_upTo_6th) {
+            setResultImg(quizDetail.result_img_6th)
+            setResultSubtitle(quizDetail.result_title_6th)
+            setResultText(quizDetail.result_text_6th)
         }
-    }
-
-    const calculateTheResultScore = (resultDetail, quizType) => {
-        let score
-        
-        switch (quizType) {
-            case 'quiz':
-                const questionsCounter = resultDetail.ql
-                const correctAnswersCount = resultDetail.qc
-        
-                score = ((correctAnswersCount / questionsCounter) * 100).toFixed(0)
-                break
-            
-            case 'test':
-                score = 80
-            break
+        else if (resultDetail <= quizDetail.result_upTo_7th) {
+            setResultImg(quizDetail.result_img_7th)
+            setResultSubtitle(quizDetail.result_title_7th)
+            setResultText(quizDetail.result_text_7th)
         }
-
-        return score
-    }
-
-    const detailOfResult = (resultDetail, quizDetail, quizType) => {
-        switch (quizType) {
-            case 'quiz':
-                const quizScore = calculateTheResultScore(resultDetail, quizType)
-                if (quizScore > 80) {
-                    setResultScore(`😎 ${quizScore}%`)
-                    setResultSubtitle(`🤯 واااو، تو دیگه کی هستی ترکوندی`)
-                    setResultGif(quizDetail.GIF100)
-                }
-                else if (quizScore > 60) {
-                    setResultScore(`😎 ${quizScore}%`)
-                    setResultSubtitle(`😎 ایول\n! تو یک ${quizDetail.fan_name} واقعی هستی `)
-                    setResultGif(quizDetail.GIF80)
-                }
-                else if (quizScore > 40) {
-                    setResultScore(`🙂 ${quizScore}%`)
-                    setResultSubtitle('عالیه، فقط یکم با یه فن بودن فاصله داری')
-                    setResultGif(quizDetail.GIF60)
-                }
-                else if (quizScore > 20) {
-                    setResultScore(`😉 ${quizScore}%`)
-                    setResultSubtitle('بیشتر تلاش کن. میتونی انجامش بدی')
-                    setResultGif(quizDetail.GIF40)
-                }
-                else if (quizScore >= 0) {
-                    setResultScore(`😭 ${quizScore}%`)
-                    setResultSubtitle('😅 میتونی سریع کوییز رو از اول بدی تا کسی نیومده\n😀 یا کوییز رو کلا عوض کنی بری بعدی')
-                    setResultGif(quizDetail.GIF20)
-                }
-                else {
-                    setResultScore(`👀`)
-                    setResultSubtitle('😰 خطا در محاسبه امتیاز\n.لطفا بعدا امتحان کنید و یا در غیر اینصورت به پشتیبانی اطلاع دهید')
-                    setResultGif(quizDetail.GIF20)
-                }
-                break
-            case 'test':
-                if (resultDetail <= quizDetail.result_upTo_1st) {
-                    setResultImg(quizDetail.result_img_1st)
-                    setResultSubtitle(quizDetail.result_title_1st)
-                    setResultText(quizDetail.result_text_1st)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_2nd) {
-                    setResultImg(quizDetail.result_img_2nd)
-                    setResultSubtitle(quizDetail.result_title_2nd)
-                    setResultText(quizDetail.result_text_2nd)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_3rd) {
-                    setResultImg(quizDetail.result_img_3rd)
-                    setResultSubtitle(quizDetail.result_title_3rd)
-                    setResultText(quizDetail.result_text_3rd)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_4th) {
-                    setResultImg(quizDetail.result_img_4th)
-                    setResultSubtitle(quizDetail.result_title_4th)
-                    setResultText(quizDetail.result_text_4th)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_5th) {
-                    setResultImg(quizDetail.result_img_5th)
-                    setResultSubtitle(quizDetail.result_title_5th)
-                    setResultText(quizDetail.result_text_5th)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_6th) {
-                    setResultImg(quizDetail.result_img_6th)
-                    setResultSubtitle(quizDetail.result_title_6th)
-                    setResultText(quizDetail.result_text_6th)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_7th) {
-                    setResultImg(quizDetail.result_img_7th)
-                    setResultSubtitle(quizDetail.result_title_7th)
-                    setResultText(quizDetail.result_text_7th)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_8th) {
-                    setResultImg(quizDetail.result_img_8th)
-                    setResultSubtitle(quizDetail.result_title_8th)
-                    setResultText(quizDetail.result_text_8th)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_9th) {
-                    setResultImg(quizDetail.result_img_9th)
-                    setResultSubtitle(quizDetail.result_title_9th)
-                    setResultText(quizDetail.result_text_9th)
-                }
-                else if (resultDetail <= quizDetail.result_upTo_10th) {
-                    setResultImg(quizDetail.result_img_10t)
-                    setResultSubtitle(quizDetail.result_title_10th)
-                    setResultText(quizDetail.result_text_10th)
-                }
-                break
+        else if (resultDetail <= quizDetail.result_upTo_8th) {
+            setResultImg(quizDetail.result_img_8th)
+            setResultSubtitle(quizDetail.result_title_8th)
+            setResultText(quizDetail.result_text_8th)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_9th) {
+            setResultImg(quizDetail.result_img_9th)
+            setResultSubtitle(quizDetail.result_title_9th)
+            setResultText(quizDetail.result_text_9th)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_10th) {
+            setResultImg(quizDetail.result_img_10t)
+            setResultSubtitle(quizDetail.result_title_10th)
+            setResultText(quizDetail.result_text_10th)
         }
     }
 
@@ -282,7 +155,7 @@ const Result = () => {
                 <h5 className='mb-5'>
                     برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
                 </h5>
-                <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                <div className='rounded-xl w-fit'>
                     <LoginForm />
                 </div>
             </div>,
@@ -303,7 +176,6 @@ const Result = () => {
         }
 
         setSuggestionQuizzes(content.slice(0, 8).sort(sortByMonthlyViews))
-        setContentLoaded(true)
     }
 
     const showPopUpSuggestion = () => {
@@ -312,7 +184,7 @@ const Result = () => {
             setTimeout(() => {
                 fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
             }, 2_000)
-        }, 5_000)
+        }, 7_000)
     }
 
     const chooseUniqueQuizToSuggest = () => {
@@ -329,47 +201,6 @@ const Result = () => {
             else {
                 return suggestionQuizzes[0]
             }
-        }
-    }
-
-    const returnQuizResult = () => {
-        switch (quizType) {
-            case 'quiz':
-                return <div className="items-center justify-center block w-full mx-auto mb-20 text-center result md:container space-sm md:flex">
-                            <div className="flex items-center justify-center result__img md:mx-16">
-                                {<img src={resultGif} className='object-contain rounded-lg' width={540} alt={resultGif} />}
-                            </div>
-                            <div className="mt-5">
-                                <h5 className='result_score'>
-                                    {resultScore}
-                                </h5>
-                            </div>
-                            <div className="mt-5 result_detail">
-                                <h5>پاسخ 🟢: <span>{correctAnswersCount}</span></h5>
-                                <h5>پاسخ 🔴: <span>{questionCount - correctAnswersCount}</span></h5>
-                            </div>
-                        </div>
-            case 'test':
-                return <div>
-                            {
-                                resultImg &&
-                                <div className='flex resultPointy__img'>
-                                    <img
-                                        src={resultImg}
-                                        width={690}
-                                        alt={quizDetail?.subCategory}
-                                    />
-                                </div>
-                            }
-                            {
-                                resultText &&
-                                <div className="px-4 mt-5 mb-16 leading-10 wrapper-p"
-                                    dangerouslySetInnerHTML={{
-                                        __html: resultText
-                                    }}>
-                                </div>
-                            }
-                        </div>
         }
     }
 
@@ -393,7 +224,26 @@ const Result = () => {
                         <h1 className="text-xl text-center">{resultSubtitle}</h1>
                     </div>
 
-                    {returnQuizResult()}
+                    <div>
+                        {
+                            resultImg &&
+                            <div className='flex resultPointy__img'>
+                                <img
+                                    src={resultImg}
+                                    width={690}
+                                    alt={quizDetail?.subCategory}
+                                />
+                            </div>
+                        }
+                        {
+                            resultText &&
+                            <div className="px-4 mt-5 mb-16 leading-10 wrapper-p"
+                                dangerouslySetInnerHTML={{
+                                    __html: resultText
+                                }}>
+                            </div>
+                        }
+                    </div>
 
                     {/* <div className='container px-20 mx-auto'>
                         <div className="mb-4 text-lg text-center space-sm">
@@ -402,7 +252,7 @@ const Result = () => {
                     </div> */}
                 </div>
 
-                {quizDetail?.id && <LikeCommentButton quizId={quizDetail?.id} quizType={quizType} showLoginNotification={showLoginNotification} />}
+                {quizDetail?.id && <LikeCommentButton quizId={quizDetail?.id} quizType='test' showLoginNotification={showLoginNotification} />}
 
                 <div className='mx-4 mt-10'>
                     <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>

@@ -10,7 +10,7 @@ const AddView = (content, contentID) => {
         }
         await axios.post(`/api/add_view`, payload)
             .then((res) => {
-                log(res)
+                // log(res)
             })
     }
     

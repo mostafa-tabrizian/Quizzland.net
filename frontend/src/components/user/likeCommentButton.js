@@ -8,7 +8,7 @@ import Comments from './comments'
 import { log, isItMobile } from '../base'
 import UserStore from '../../store/userStore';
 import axiosInstance from '../axiosAuthApi';
-const LoginForm = React.lazy(() => import('./loginForm'))
+import LoginForm from './loginForm'
 
 const LikeCommentButton = (props) => {
     const [commentsPanelOpen, setCommentsPanelState] = useState(false);
@@ -39,6 +39,7 @@ const LikeCommentButton = (props) => {
             async () => {
                 const now = new Date().getTime()
 
+                userProfile.userDetail &&
                 await axiosInstance.get(`/api/likeView/?timestamp=${now}`)
                     .then(res => {
                         res = res.data.filter(like => like.quizV2_id?.id == props.quizId || like.test_id?.id == props.quizId)
@@ -88,7 +89,7 @@ const LikeCommentButton = (props) => {
                     })
                     .catch(err => {
                         if (err.response.status == 401) {
-                            showLoginNotification()
+                            showLoginNotification('like_comment')
                         } else {
                             enqueueSnackbar('در اعمال لایک رخ داد. لطفا کمی دیگر تلاش کنید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                             log(err.response)
@@ -99,13 +100,22 @@ const LikeCommentButton = (props) => {
         )
     )
 
-    const showLoginNotification = () => {
+    const loginNotificationMessage = (action) => {
+        if (action == 'like_comment') {
+            return 'برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.'
+        }
+        else if (action == 'pay') {
+            return 'ابتدا می‌بایست وارد شوید'
+        }
+    }
+
+    const showLoginNotification = (action) => {
         enqueueSnackbar(
             <div className='mt-8'>
                 <h5 className='mb-5'>
-                    برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
+                    {loginNotificationMessage(action)}
                 </h5>
-                <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                <div className='border-2 rounded-xl w-fit'>
                     <LoginForm />
                 </div>
             </div>,
@@ -124,7 +134,7 @@ const LikeCommentButton = (props) => {
             debounceSubmitLike(userProfile.userDetail.id)
             setWatchListButtonUnClickable(true)
         } else {
-            showLoginNotification()
+            showLoginNotification('like_comment')
             setWatchListButtonUnClickable(true)
             setLikeLoading(false)
         }
@@ -161,7 +171,11 @@ const LikeCommentButton = (props) => {
     }
 
     const payWithQCoin = async () => {
-        if (userProfile.QCoins >= lifelinePrice) {
+        if (!userProfile.userDetail) {
+            showLoginNotification('pay')
+            return false
+        }
+        else if (userProfile.QCoins >= lifelinePrice) {
             const now = new Date().getTime()
             const userId = userProfile.userDetail.id
             const payload = {
@@ -184,8 +198,8 @@ const LikeCommentButton = (props) => {
         }
     }
 
-    const lifeLineFunctionCall = () => {
-        if (payWithQCoin()) {
+    const lifeLineFunctionCall = async () => {
+        if (await payWithQCoin()) {
             setLifelineStatue(false)
 
             switch (lifelineType) {

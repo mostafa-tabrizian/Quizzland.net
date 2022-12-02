@@ -45,7 +45,7 @@ const TestContainer = (props) => {
                 <h5 className='mb-5'>
                     برای اضافه کردن این کوییز به پلی لیست لازمه که اول وارد کوییزلند بشی.
                 </h5>
-                <div className='border-2 border-[#c30000] bg-[#c30000] rounded-lg w-fit'>
+                <div className='border-2 rounded-xl w-fit'>
                     <LoginForm />
                 </div>
             </div>,

@@ -18,6 +18,7 @@ const LikeCommentButton = React.lazy(() => import('../components/user/likeCommen
 import AddView from '../components/addView';
 import axiosInstance from '../components/axiosAuthApi';
 const TestContainer = React.lazy(() => import('../components/testContainer'))
+import LoginForm from '../components/user/loginForm'
 
 const logo = '/static/img/Q-small.png'
 
@@ -254,7 +255,11 @@ const Quiz_V2 = (props) => {
 
     const payFees = async () => {
         if (quiz?.fees !== 0) {
-            if (quiz?.fees <= userProfile.QCoins) {
+            if (!userProfile.userDetail) {
+                showLoginNotification()
+                return false
+            }
+            else if (quiz?.fees <= userProfile.QCoins) {
                 const now = new Date().getTime()
                 const userId = userProfile.userDetail.id
                 const payload = {
@@ -453,6 +458,10 @@ const Quiz_V2 = (props) => {
     //? on fetch return the not answer one first then the wrong one then the answered one
 
     const saveUserAnswer = async (userAnswer, correctAnswer) => {
+        if (!userProfile.userDetail) {
+            return
+        }
+
         const now = new Date().getTime()
         const payload = {
             user_id: {
@@ -499,6 +508,10 @@ const Quiz_V2 = (props) => {
     }
 
     const postToHistory = async (quiz) => {
+        if (!userProfile.userDetail) {
+            return
+        }
+
         const playedBefore = await userPlayedThisQuizBefore(quiz)
 
         if (!playedBefore) {
@@ -516,7 +529,7 @@ const Quiz_V2 = (props) => {
     
             await axiosInstance.post(`/api/historyView/`, payload)
                 .then(res => {
-                    log(res)
+                    // log(res)
                 })
                 .catch(err => {
                     log(err)
@@ -526,6 +539,10 @@ const Quiz_V2 = (props) => {
     }
 
     const saveUserScore = async () => {
+        if (!userProfile.userDetail) {
+            return
+        }
+        
         const now = new Date().getTime()
         const payload = {
             user_id: {
@@ -705,6 +722,23 @@ const Quiz_V2 = (props) => {
     const SFXController = (statue) => {
         setSFXAllowed(statue)
         localStorage.setItem('SFXAllowed', statue)
+    }
+
+    const showLoginNotification = () => {
+        enqueueSnackbar(
+            <div className='mt-8'>
+                <h5 className='mb-5'>
+                    ابتدا می‌بایست وارد شوید.
+                </h5>
+                <div className='border-2 rounded-xl w-fit'>
+                    <LoginForm />
+                </div>
+            </div>,
+            { 
+                anchorOrigin: { horizontal: 'right', vertical: 'top' },
+                preventDuplicate: true
+            }
+        )
     }
 
     return (

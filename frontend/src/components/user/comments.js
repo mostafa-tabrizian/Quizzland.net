@@ -180,7 +180,7 @@ const Comments = (props) => {
     const checkIfUserLoggedIn = () => {
         if (!(userProfile.userDetail.id)) {
             props.setCommentsPanelState(false)
-            props.showLoginNotification()
+            props.showLoginNotification('like_comment')
         }
     }
     

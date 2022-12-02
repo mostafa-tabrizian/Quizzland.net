@@ -6,6 +6,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 // import ReCAPTCHA from 'react-google-recaptcha'
 import { useSnackbar } from 'notistack'
 import Skeleton from '@mui/material/Skeleton';
+import UserStore from '../store/userStore';
 
 import axios from '../components/axiosApi'
 import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
@@ -44,6 +45,8 @@ const TestQuiz = (props) => {
     // const recaptchaRef = useRef(null)
     
     const { enqueueSnackbar } = useSnackbar()
+    
+    const [userProfile, userActions] = UserStore()
 
     useEffect(() => {
         scrollToTop()
@@ -217,6 +220,10 @@ const TestQuiz = (props) => {
     }
 
     const postToHistory = async (quiz) => {
+        if (!userProfile.userDetail) {
+            return
+        }
+
         const playedBefore = await userPlayedThisQuizBefore(quiz)
 
         if (!playedBefore) {
