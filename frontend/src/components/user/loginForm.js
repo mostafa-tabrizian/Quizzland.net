@@ -21,7 +21,6 @@ import axiosInstance from '../axiosAuthApi';;
 import { log, replaceFunction } from '../base'
 import UserStore from '../../store/userStore'
 import axios from "axios";
-import { Avatar } from "@mui/material";
 
 const LoginForm = () => {
     const [loginLoading, setLoginLoading] = useState(false)
@@ -41,8 +40,8 @@ const LoginForm = () => {
         onLogoutSuccess: () => {log('signOut success');},
         onFailure: (err) => {
             log('signOut failure');
-            log(err)
-            log(err.response)
+            // log(err)
+            // log(err.response)
         },
     })
     
@@ -67,13 +66,12 @@ const LoginForm = () => {
     }
 
     const logout = async () => {
-        log('logout')
         try {
             await axios.post('/api/blacklist/', {"refresh_token": cookies.USER_REFRESH_TOKEN,})
                 .catch(err => {
                     log('err:logout')
-                    log(err)
-                    log(err.response)
+                    // log(err)
+                    // log(err.response)
                 })
     
             removeCookie('USER_ACCESS_TOKEN', {path: '/'})
@@ -239,7 +237,7 @@ const LoginForm = () => {
             enqueueSnackbar('کوکی مرورگر شما غیرفعال است! برای ورود میبایست کوکی ها فعال باشند', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         }
         else if (res?.target.id == 'google-login') {
-            enqueueSnackbar('در اتصال شما به سرور های گوگل خطایی رخ داده است. لطفا پس از بررسی، مجددا تلاش کنید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            // enqueueSnackbar('در اتصال شما به سرور های گوگل خطایی رخ داده است. لطفا پس از بررسی، مجددا تلاش کنید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
         }
         else {
             enqueueSnackbar('خطایی رخ داده است. لطفا مجددا تلاش کنید', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})

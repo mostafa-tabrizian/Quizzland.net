@@ -74,7 +74,7 @@ const Header = () => {
         clientId: process.env.GOOGLE_LOGIN_CLIENT,
         onLogoutSuccess: () => {log('google 1')},
         onFailure: (err) => {
-            log('google 2')
+            // log('google 2')
             // log(err)
         },
     })

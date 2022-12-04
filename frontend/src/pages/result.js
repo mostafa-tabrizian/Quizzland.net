@@ -97,55 +97,55 @@ const Result = () => {
     }
 
     const detailOfResult = (resultDetail, quizDetail) => {
-        if (resultDetail <= quizDetail.result_upTo_1st) {
-            setResultImg(quizDetail.result_img_1st)
-            setResultSubtitle(quizDetail.result_title_1st)
-            setResultText(quizDetail.result_text_1st)
-        }
-        else if (resultDetail <= quizDetail.result_upTo_2nd) {
-            setResultImg(quizDetail.result_img_2nd)
-            setResultSubtitle(quizDetail.result_title_2nd)
-            setResultText(quizDetail.result_text_2nd)
-        }
-        else if (resultDetail <= quizDetail.result_upTo_3rd) {
-            setResultImg(quizDetail.result_img_3rd)
-            setResultSubtitle(quizDetail.result_title_3rd)
-            setResultText(quizDetail.result_text_3rd)
-        }
-        else if (resultDetail <= quizDetail.result_upTo_4th) {
-            setResultImg(quizDetail.result_img_4th)
-            setResultSubtitle(quizDetail.result_title_4th)
-            setResultText(quizDetail.result_text_4th)
-        }
-        else if (resultDetail <= quizDetail.result_upTo_5th) {
-            setResultImg(quizDetail.result_img_5th)
-            setResultSubtitle(quizDetail.result_title_5th)
-            setResultText(quizDetail.result_text_5th)
-        }
-        else if (resultDetail <= quizDetail.result_upTo_6th) {
-            setResultImg(quizDetail.result_img_6th)
-            setResultSubtitle(quizDetail.result_title_6th)
-            setResultText(quizDetail.result_text_6th)
-        }
-        else if (resultDetail <= quizDetail.result_upTo_7th) {
-            setResultImg(quizDetail.result_img_7th)
-            setResultSubtitle(quizDetail.result_title_7th)
-            setResultText(quizDetail.result_text_7th)
-        }
-        else if (resultDetail <= quizDetail.result_upTo_8th) {
-            setResultImg(quizDetail.result_img_8th)
-            setResultSubtitle(quizDetail.result_title_8th)
-            setResultText(quizDetail.result_text_8th)
+        if (resultDetail <= quizDetail.result_upTo_10th) {
+            setResultImg(quizDetail.result_img_10th)
+            setResultSubtitle(quizDetail.result_title_10th)
+            setResultText(quizDetail.result_text_10th)
         }
         else if (resultDetail <= quizDetail.result_upTo_9th) {
             setResultImg(quizDetail.result_img_9th)
             setResultSubtitle(quizDetail.result_title_9th)
             setResultText(quizDetail.result_text_9th)
         }
-        else if (resultDetail <= quizDetail.result_upTo_10th) {
-            setResultImg(quizDetail.result_img_10t)
-            setResultSubtitle(quizDetail.result_title_10th)
-            setResultText(quizDetail.result_text_10th)
+        else if (resultDetail <= quizDetail.result_upTo_8th) {
+            setResultImg(quizDetail.result_img_8th)
+            setResultSubtitle(quizDetail.result_title_8th)
+            setResultText(quizDetail.result_text_8th)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_7th) {
+            setResultImg(quizDetail.result_img_7th)
+            setResultSubtitle(quizDetail.result_title_7th)
+            setResultText(quizDetail.result_text_7th)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_6th) {
+            setResultImg(quizDetail.result_img_6th)
+            setResultSubtitle(quizDetail.result_title_6th)
+            setResultText(quizDetail.result_text_6th)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_5th) {
+            setResultImg(quizDetail.result_img_5th)
+            setResultSubtitle(quizDetail.result_title_5th)
+            setResultText(quizDetail.result_text_5th)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_4th) {
+            setResultImg(quizDetail.result_img_4th)
+            setResultSubtitle(quizDetail.result_title_4th)
+            setResultText(quizDetail.result_text_4th)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_3rd) {
+            setResultImg(quizDetail.result_img_3rd)
+            setResultSubtitle(quizDetail.result_title_3rd)
+            setResultText(quizDetail.result_text_3rd)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_2nd) {
+            setResultImg(quizDetail.result_img_2nd)
+            setResultSubtitle(quizDetail.result_title_2nd)
+            setResultText(quizDetail.result_text_2nd)
+        }
+        else if (resultDetail <= quizDetail.result_upTo_1st) {
+            setResultImg(quizDetail.result_img_1st)
+            setResultSubtitle(quizDetail.result_title_1st)
+            setResultText(quizDetail.result_text_1st)
         }
     }
 
