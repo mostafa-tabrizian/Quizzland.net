@@ -148,6 +148,7 @@ class QuestionsV2Filter(filters.FilterSet):
         model = Questions_V2
         fields = {
             'quizKey': ['exact'],
+            'date_submitted': ['lte', 'gte']
         }
         
 class AnswerV2Filter(filters.FilterSet):

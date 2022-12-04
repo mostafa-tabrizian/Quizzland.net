@@ -41,7 +41,8 @@ const LoginForm = () => {
         onLogoutSuccess: () => {log('signOut success');},
         onFailure: (err) => {
             log('signOut failure');
-            // log(err)
+            log(err)
+            log(err.response)
         },
     })
     
@@ -71,8 +72,8 @@ const LoginForm = () => {
             await axios.post('/api/blacklist/', {"refresh_token": cookies.USER_REFRESH_TOKEN,})
                 .catch(err => {
                     log('err:logout')
-                    // log(err)
-                    // log(err.response)
+                    log(err)
+                    log(err.response)
                 })
     
             removeCookie('USER_ACCESS_TOKEN', {path: '/'})
