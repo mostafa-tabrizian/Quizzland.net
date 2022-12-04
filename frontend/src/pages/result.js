@@ -243,7 +243,12 @@ const Result = () => {
                                 }}>
                             </div>
                         }
+
+                        <Link to='/' className={`mx-auto flex justify-center`}>
+                            بازگشت به صفحه اصلی
+                        </Link>
                     </div>
+                    
 
                     {/* <div className='container px-20 mx-auto'>
                         <div className="mb-4 text-lg text-center space-sm">

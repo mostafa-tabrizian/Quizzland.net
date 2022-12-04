@@ -1,14 +1,55 @@
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import persianJs from "persianjs"
+import { useState, useCallback, useRef } from 'react'
+import debounce from 'lodash.debounce'
+import axios from 'axios'
+import { useSnackbar } from 'notistack'
+// import persianJs from "persianjs"
 import Tooltip from '@mui/material/Tooltip';
 
-import { makeDatePublishFormatForQuizDetail, getTheme, log } from '../base'
+import UserStore from '../../store/userStore'
+import { getTheme, log } from '../base'
 
-const TestHeader = (props) => {
+const QuizHeader = (props) => {
+    const [reportPanel, setReportPanel] = useState(false)
+
+    const [userProfile, userActions] = UserStore()
+
+    const title = useRef()
+    const description = useRef()
+
+    const { enqueueSnackbar } = useSnackbar()
+
+    const sendReport = useCallback(
+        debounce(
+            async () => {
+                const payload = {
+                    user_id: userProfile.userDetail?.id || null,
+                    question_id: props.questionCurrent,
+                    title: title.current.value,
+                    description: description.current.value
+                }
+
+                await axios.post('/api/send_report', payload)
+                    .then(res => {
+                        setReportPanel(false)
+                        setTimeout(() => {
+                            title.current.value = ''
+                            description.current.value = ''
+                        }, 1000);
+                        // log(res)
+                    })
+                    .catch(err => {
+                        log(err)
+                        log(err.response)
+                    })
+
+                enqueueSnackbar('گزارش شما با موفقیت ثبت شد. ', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            }
+        )
+    )
+
     return (
-        <div className={`relative text-right quiz__head backdrop-blur-2xl p-4 w-[21rem]
-            transition-all duration-1000 mt-8 ease-in-out md:w-[33rem] left-1/2 translate-x-[-50%]
+        <div className={`relative text-right quiz__head backdrop-blur-2xl p-4 w-[85%] z-10
+            transition-all duration-1000 mt-8 ease-in-out md:w-[29rem] left-1/2 translate-x-[-50%]
             ${getTheme() == 'light' ? 'bg-[#ffffff82]' : 'bg-[#0000001a]'} rounded-xl`}
             id="quiz__head"
         >
@@ -18,12 +59,66 @@ const TestHeader = (props) => {
                     <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonQuiz skeletonQuiz__quizTitle'></div>
                 </div>
             }
-
-            <div className="flex justify-center mb-4 text-center">
-                <h1 className='md:max-w-[21rem] max-w-[19rem]'>
-                    {props.quizDetail?.title}
-                </h1>
+            
+            <div style={{background: props.quizDetail?.question_background}} className={`${reportPanel ? 'pop_up opacity-100' : 'pop_down opacity-0'} rounded-lg z-10 shadow-[0_0_25px_7px_black] w-full p-3 rounded-t-lg-800 fixed top-0 left-0
+            `}>
+                <div className='relative space-y-3'>
+                    <input className='w-full rounded blackText pr-2' ref={title} placeholder='عنوان گزارش' type="text" />
+                    <textarea className='w-full rounded blackText pr-2 pt-2' ref={description} placeholder='توضیحات' rows="11"></textarea>
+                    <div className='flex space-x-4'>
+                        <button onClick={sendReport} className='border-2 border-green-600 rounded px-2 py-1'>ثبت</button>
+                        <button onClick={() => setReportPanel(false)}>لغو</button>
+                    </div>
+                </div>
             </div>
+        
+            <h1 className=''>
+                کوییز {props.quizDetail?.title}
+            </h1>
+
+            <div className='flex justify-between mt-5'>
+                <div className='flex space-x-3'>
+                    <Tooltip title="ثبت گزارش">
+                        <button className='bg-[#00000073] rounded-full my-auto p-[.4rem]' onClick={() => setReportPanel(true)}>
+                            <svg style={{'color': props.quizDetail?.question_background}} className={`h-6 w-6 brightness-200`}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />  <line x1="4" y1="22" x2="4" y2="15" /></svg>
+                        </button>
+                    </Tooltip>
+                    <Tooltip title="فرض صدا پس از پاسخ به هر سوال">
+                        <button className='bg-[#00000073] rounded-full my-auto p-1' onClick={() => props.SFXController(props.SFXAllowed ? false : true)}>
+                            {
+                                props.SFXAllowed ?
+                                <svg style={{'color': props.quizDetail?.question_background}} className={`h-7 w-7 brightness-200`}  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                                </svg>
+                                :
+                                <svg style={{'color': props.quizDetail?.question_background}} className={`h-7 w-7 brightness-200`}  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+                                </svg>
+                            }
+                        </button>
+                    </Tooltip>
+                    <Tooltip title="در صورت خودکار بودن، پس از 2 ثانیه به سوال بعدی می‌رود">
+                        <button onClick={() => props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true)} className='bg-[#00000073] rounded-full my-auto p-[.1rem] brightness-200'>
+                            {
+                                props.autoQuestionChanger ?
+                                <svg style={{color: props.quizDetail?.question_background}} class="h-8 w-8"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill='none' stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M18 15l-6-6l-6 6h12" fill={props.quizDetail?.question_background} transform="rotate(90 12 12)" /></svg>
+                                :
+                                <svg style={{color: props.quizDetail?.question_background}} class="h-8 w-8"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M18 15l-6-6l-6 6h12" transform="rotate(90 12 12)" /></svg>
+                            }
+                        </button>
+                    </Tooltip>
+                </div>
+
+                {
+                    props.contentLoaded &&
+                    <div className=''>
+                        <h5>تعداد سوال ها:  {props.questionsLength}</h5>
+                        {/* <h5>{makeDatePublishFormatForQuizDetail(props.quizDetail?.publish)}</h5> */}
+                    </div>
+                }
+            </div>
+
 
             <div className="flex items-center justify-center quiz__detail">
                 {
@@ -33,64 +128,10 @@ const TestHeader = (props) => {
                         <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonQuiz skeletonQuiz__quizInfo'></div>
                     </div>
                 }
-                {
-                    props.contentLoaded &&
-                    <div className='flex space-x-6'>
-                        <h5>{makeDatePublishFormatForQuizDetail(props.quizDetail?.publish)}</h5>
-                        <h5>تعداد سوال ها: {persianJs(props.questionsLength).englishNumber()._str}</h5>
-                    </div>
-                }
             </div>
-
-            {
-                props.contentLoaded &&
-                <div className='flex translate-x-[-3rem]'>
-                    <Tooltip title="در صورت خودکار بودن، پس از 1.5 الی 5.5 ثانیه برحسب نوع سوال، به سوال بعدی منتقل می شوید">
-                        <div
-                            onClick={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }}
-                            className={`quiz__autoQuestionChangerSwitch mt-5 hover:cursor-pointer relative center flex justify-center items-center`}
-                            title='با انتخاب گزینه، خودکار پس از 3.5 ثانیه به سوال بعدی منتقل می شوید'
-                        >
-                            <div className='mt-3'>
-                                <FormControlLabel
-                                    value="authQuestionChanger"
-                                    control={
-                                        <Switch
-                                            checked={props.autoQuestionChanger ? true : false}
-                                            onChange={() => { props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true) }}
-                                        />
-                                    }
-                                    label="تغییر خودکار"
-                                    labelPlacement="start"
-                                />
-                            </div>
-                        </div>
-                    </Tooltip>
-                    <Tooltip title="فرض صدا های پس از پاسخ به سوال">
-                        <div
-                            onClick={() => { props.SFXController(props.SFXAllowed ? false : true) }}
-                            className={`mt-5 hover:cursor-pointer relative center items-center`}
-                        >
-                            <div className='mt-3'>
-                                <FormControlLabel
-                                    value="authQuestionChanger"
-                                    control={
-                                        <Switch
-                                            checked={props.SFXAllowed ? true : false}
-                                            onChange={() => { props.SFXController(props.SFXAllowed ? false : true) }}
-                                        />
-                                    }
-                                    label="صدا"
-                                    labelPlacement="start"
-                                />
-                            </div>
-                        </div>
-                    </Tooltip>
-                </div>
-            }
 
         </div>
     );
 }
  
-export default TestHeader;
+export default QuizHeader;

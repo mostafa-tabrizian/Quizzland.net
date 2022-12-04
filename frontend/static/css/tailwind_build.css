@@ -1798,6 +1798,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 1.25rem;
 }
 
+.p-\[\.4rem\] {
+  padding: .4rem;
+}
+
+.p-\[\.3rem\] {
+  padding: .3rem;
+}
+
+.p-\[\.1rem\] {
+  padding: .1rem;
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
