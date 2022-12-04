@@ -405,6 +405,16 @@ class HistorySerializer(serializers.ModelSerializer):
         )
 
         return newLike
+    
+class ReprotSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = (
+            '__all__'
+        )
+        
+    user_id = CustomUserSerializer(many=False)
+    question_id = QuestionsV2Serializer(many=False)
 
 # class BlogSerializer(serializers.ModelSerializer):
 #     class Meta:

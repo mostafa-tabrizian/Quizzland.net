@@ -976,7 +976,7 @@ const Quiz_V2 = (props) => {
                         <div className="ltr">
                             <div id='quizBg'></div>
 
-                            <QuizHeader quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
+                            <QuizHeader questionCurrent={questions[currentQuestionNumber - 1]?.id} quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
                             {quiz?.id && <LikeCommentButton removeHalfTheWrongOptions={removeHalfTheWrongOptions} pollAudience={pollAudience} skipQuestion={skipQuestion} quizId={quiz?.id} quizType={'play'} theme={quiz?.theme} />}
 

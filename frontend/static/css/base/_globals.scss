@@ -604,6 +604,13 @@ hr {
     text-shadow: 2px 1px 4px black;
 }
 
+.blackText {
+    color: black !important;
+    &::placeholder {
+        color: black !important;
+    }
+}
+
 .skeletonQuiz {
     backdrop-filter: blur(20px);
     // width: 14rem; 

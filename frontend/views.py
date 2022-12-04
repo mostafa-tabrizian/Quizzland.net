@@ -139,6 +139,32 @@ def answers_poll(request, *args, **kwargs):
             'option3': option3,
             'option4': option4,
         })
+        
+@csrf_exempt
+def send_report(request):
+    if request.method == 'POST':
+        request = json.loads(request.body.decode('utf-8'))
+        user_id = request['user_id']
+        question_id = request['question_id']
+        title = request['title']
+        description = request['description']
+
+        try:
+            user = CustomUser.objects.filter(id=user_id)
+            question = Questions_V2.objects.get(id=question_id)
+            
+            print(user)
+            
+            new_report = Report()
+            new_report.user_id = user or None
+            new_report.question_id = question
+            new_report.title = title
+            new_report.description = description
+            new_report.save()
+
+            return HttpResponse(f'report saved id: {new_report.id} title: {new_report.title}')
+        except Exception as e:
+            return HttpResponse(e)
 
 def verify_recaptcha(res):
     response = res.GET.get('r')

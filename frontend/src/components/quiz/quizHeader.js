@@ -1,12 +1,52 @@
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Tooltip from '@mui/material/Tooltip';
+import { useState, useCallback, useRef } from 'react'
+import debounce from 'lodash.debounce'
+import UserStore from '../../store/userStore'
+import axios from 'axios'
+import { useSnackbar } from 'notistack'
 
 import { getTheme, log } from '../base'
 
-const TestHeader = (props) => {
+const QuizHeader = (props) => {
+    const [reportPanel, setReportPanel] = useState(false)
+
+    const [userProfile, userActions] = UserStore()
+
+    const title = useRef()
+    const description = useRef()
+
+    const { enqueueSnackbar } = useSnackbar()
+
+    const sendReport = useCallback(
+        debounce(
+            async () => {
+                const payload = {
+                    user_id: userProfile.userDetail?.id || null,
+                    question_id: props.questionCurrent,
+                    title: title.current.value,
+                    description: description.current.value
+                }
+
+                await axios.post('/api/send_report', payload)
+                    .then(res => {
+                        setReportPanel(false)
+                        setTimeout(() => {
+                            title.current.value = ''
+                            description.current.value = ''
+                        }, 1000);
+                        // log(res)
+                    })
+                    .catch(err => {
+                        log(err)
+                        log(err.response)
+                    })
+
+                enqueueSnackbar('گزارش شما با موفقیت ثبت شد. ', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            }
+        )
+    )
+
     return (
-        <div className={`relative text-right quiz__head backdrop-blur-2xl p-4 w-[85%]
+        <div className={`relative text-right quiz__head backdrop-blur-2xl p-4 w-[85%] z-10
             transition-all duration-1000 mt-8 ease-in-out md:w-[29rem] left-1/2 translate-x-[-50%]
             ${getTheme() == 'light' ? 'bg-[#ffffff82]' : 'bg-[#0000001a]'} rounded-xl`}
             id="quiz__head"
@@ -17,10 +57,22 @@ const TestHeader = (props) => {
                     <div className='m-2 mb-5 overflow-hidden rounded-lg shadow-xl skeletonQuiz skeletonQuiz__quizTitle'></div>
                 </div>
             }
+            
+            <div style={{background: props.quizDetail?.theme}} className={`${reportPanel ? 'pop_up opacity-100' : 'pop_down opacity-0'} rounded-lg z-10 shadow-[0_0_25px_7px_black] w-full p-3 rounded-t-lg-800 fixed top-0 left-0
+            `}>
+                <div className='relative space-y-3'>
+                    <input className='w-full rounded blackText pr-2' ref={title} placeholder='عنوان گزارش' type="text" />
+                    <textarea className='w-full rounded blackText pr-2 pt-2' ref={description} placeholder='توضیحات' rows="11"></textarea>
+                    <div className='flex space-x-4'>
+                        <button onClick={sendReport} className='border-2 border-green-600 rounded px-2 py-1'>ثبت</button>
+                        <button onClick={() => setReportPanel(false)}>لغو</button>
+                    </div>
+                </div>
+            </div>
 
             <div className="flex justify-between">
                 <div className='flex space-x-3'>
-                    <button className='bg-[#00000073] rounded-full p-1' onClick={() => log('reported...')}>
+                    <button className='bg-[#00000073] rounded-full p-1' onClick={() => setReportPanel(true)}>
                         <svg style={{'color': props.quizDetail?.theme}} class={`h-6 w-6 brightness-200`}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />  <line x1="4" y1="22" x2="4" y2="15" /></svg>
                     </button>
                     <button className='bg-[#00000073] rounded-full p-1' onClick={() => props.SFXController(props.SFXAllowed ? false : true)}>
@@ -82,4 +134,4 @@ const TestHeader = (props) => {
     );
 }
  
-export default TestHeader;
+export default QuizHeader;

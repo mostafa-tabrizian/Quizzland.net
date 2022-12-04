@@ -671,6 +671,19 @@ hr {
   text-shadow: 2px 1px 4px black;
 }
 
+.blackText {
+  color: black !important;
+}
+.blackText::-moz-placeholder {
+  color: black !important;
+}
+.blackText:-ms-input-placeholder {
+  color: black !important;
+}
+.blackText::placeholder {
+  color: black !important;
+}
+
 .skeletonQuiz {
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);

@@ -123,6 +123,11 @@ class AnswerV2_Admin(admin.ModelAdmin):
 class Pointy_Questions_Admin(admin.ModelAdmin):
     list_display = ('quizKey', 'question')
     search_fields = ['question']
+    
+@admin.register(Report)
+class Report_Admin(admin.ModelAdmin):
+    list_display = ('user_id', 'title', 'date_submitted')
+    search_fields = ['title', 'description']
 
 admin.site.register(Blog, Blog_Admin)
 # admin.site.register(Newsletter_Users, Newsletter_Users_Admin)

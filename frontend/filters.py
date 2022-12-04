@@ -163,6 +163,16 @@ class QuestionsPointyFilter(filters.FilterSet):
         fields = {
             'quizKey': ['exact']
         }
+        
+class ReportFilter(filters.FilterSet):
+    class Meta:
+        model = Report
+        fields = {
+            'user_id': ['exact'],
+            'question_id': ['exact'],
+            'title': ['icontains'],
+            'date_submitted': ['lte', 'gte']
+        }
 
 # class BlogFilter(filters.FilterSet):
 #     class Meta:
