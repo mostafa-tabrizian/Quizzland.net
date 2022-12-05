@@ -142,21 +142,18 @@ def answers_poll(request, *args, **kwargs):
         
 @csrf_exempt
 def send_report(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user:
         request = json.loads(request.body.decode('utf-8'))
-        user_id = request['user_id']
         question_id = request['question_id']
         title = request['title']
         description = request['description']
 
         try:
-            user = CustomUser.objects.filter(id=user_id)
             question = Questions_V2.objects.get(id=question_id)
             
-            print(user)
-            
             new_report = Report()
-            new_report.user_id = user or None
+            print(request.user)
+            new_report.user_id = request.user
             new_report.question_id = question
             new_report.title = title
             new_report.description = description

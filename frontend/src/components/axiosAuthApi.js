@@ -43,7 +43,10 @@ axiosInstance.interceptors.response.use(
             {
                 const refreshToken = getCookie('USER_REFRESH_TOKEN');
 
-                if (refreshToken) {
+                log(refreshToken)
+                log(refreshToken.includes('undefined'))
+
+                if (refreshToken && !refreshToken.includes('undefined')) {
                     const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
 
                     const now = Math.ceil(Date.now() / 1000);

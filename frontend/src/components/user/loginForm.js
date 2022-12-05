@@ -40,8 +40,8 @@ const LoginForm = () => {
         onLogoutSuccess: () => {log('signOut success');},
         onFailure: (err) => {
             log('signOut failure');
-            // log(err)
-            // log(err.response)
+            log(err)
+            log(err.response)
         },
     })
     
@@ -183,6 +183,8 @@ const LoginForm = () => {
     }
 
     const googleLoginSuccess = async (res) => {
+        log('success')
+        log(res)
         if (userProfile.userDetail == false || userProfile.userDetail == null) {
             const accessToken = res.accessToken
             const username = replaceFunction(res.profileObj.name, ' ', '')
@@ -231,6 +233,8 @@ const LoginForm = () => {
     }
 
     const googleLoginFailure = (res) => {
+        log('fail')
+        log(res)
         setLoginLoading(false)
 
         if (res.details?.includes('Cookies')) {
@@ -245,15 +249,15 @@ const LoginForm = () => {
         }
     }
 
-    const googleLoginRequest = () => {
+    const googleLoginRequest = (res) => {
+        log('req')
+        log(res)
         setLoginLoading(true)
     }
 
     return (
             <GoogleLogin
                 clientId={process.env.GOOGLE_LOGIN_CLIENT}
-                className='ltr'  // w-[90%] flex justify-center
-                buttonText="ورود/ثبت نام با حساب گوگل"
                 render={
                     props => 
                     <button onClick={() => props.onClick()} className={`px-6 py-1 h-fit bloodRiver_bg flex rounded-2xl text-white`}>

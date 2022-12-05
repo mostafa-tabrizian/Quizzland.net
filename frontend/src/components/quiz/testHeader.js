@@ -1,17 +1,15 @@
 import { useState, useCallback, useRef } from 'react'
 import debounce from 'lodash.debounce'
-import axios from 'axios'
 import { useSnackbar } from 'notistack'
 // import persianJs from "persianjs"
 import Tooltip from '@mui/material/Tooltip';
+import axiosInstance from '../axiosAuthApi';
 
 import UserStore from '../../store/userStore'
 import { getTheme, log } from '../base'
 
 const QuizHeader = (props) => {
     const [reportPanel, setReportPanel] = useState(false)
-
-    const [userProfile, userActions] = UserStore()
 
     const title = useRef()
     const description = useRef()
@@ -22,15 +20,15 @@ const QuizHeader = (props) => {
         debounce(
             async () => {
                 const payload = {
-                    user_id: userProfile.userDetail?.id || null,
                     question_id: props.questionCurrent,
                     title: title.current.value,
                     description: description.current.value
                 }
 
-                await axios.post('/api/send_report', payload)
+                await axiosInstance.post('/api/send_report', payload)
                     .then(res => {
                         setReportPanel(false)
+                        enqueueSnackbar('گزارش شما با موفقیت ثبت شد. ', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                         setTimeout(() => {
                             title.current.value = ''
                             description.current.value = ''
@@ -41,8 +39,6 @@ const QuizHeader = (props) => {
                         log(err)
                         log(err.response)
                     })
-
-                enqueueSnackbar('گزارش شما با موفقیت ثبت شد. ', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             }
         )
     )
