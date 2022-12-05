@@ -42,7 +42,7 @@ const LikeCommentButton = (props) => {
                 userProfile.userDetail &&
                 await axiosInstance.get(`/api/likeView/?timestamp=${now}`)
                     .then(res => {
-                        res = res.data.filter(like => like.quizV2_id?.id == props.quizId || like.test_id?.id == props.quizId)
+                        res = res.data.filter(like => like.quizV2_id?.id == props.quiz.id || like.test_id?.id == props.quiz.id)
 
                         if (res.length) {
                             setLikeStatue(true)
@@ -66,10 +66,10 @@ const LikeCommentButton = (props) => {
                         username: userId
                     },
                     test_id: {
-                        id: props.quizType == 'test' ? props.quizId : 0
+                        id: props.quizType == 'test' ? props.quiz.id : 0
                     },
                     quizV2_id: {
-                        id: props.quizType == 'play' ? props.quizId : 0
+                        id: props.quizType == 'play' ? props.quiz.id : 0
                     }
                 }
 
@@ -206,9 +206,14 @@ const LikeCommentButton = (props) => {
     }
 
     const lifeLineFunctionCall = async () => {
-        if (await payWithQCoin()) {
-            setLifelineStatue(false)
+        setLifelineStatue(false)
 
+        if (lifelineType != 'skipQuestion' && (props.question.option_3rd == '' || props.question.option_4th == '')) {
+            enqueueSnackbar(<div>کمک کننده {lifelineTitle} برای این سوال غیرفعال می‌باشد</div>, { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+            return
+        }
+
+        if (await payWithQCoin()) {
             switch (lifelineType) {
                 case 'fiftyFifty':
                     props.removeHalfTheWrongOptions()
@@ -228,7 +233,7 @@ const LikeCommentButton = (props) => {
     return (
         <React.Fragment>
             <div className='fixed z-10 flex justify-center w-screen md:bottom-6 bottom-14'>
-                <div style={{'background': props.theme || '#991b1b'}} className={`flex shadow-[0_0_4px_white] px-4 py-2 space-x-5 rounded-2xl`}>
+                <div style={{'background': props.quiz.theme || '#991b1b'}} className={`flex shadow-[0_0_4px_white] px-4 py-2 space-x-5 rounded-2xl`}>
                     {/* comment button */}
                     <button onClick={() => setCommentsPanelState(true)}>
                         <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="1.1" d="M18 16.8a7.14 7.14 0 0 0 2.24-5.32c0-4.12-3.53-7.48-8.05-7.48C7.67 4 4 7.36 4 11.48c0 4.13 3.67 7.48 8.2 7.48a8.9 8.9 0 0 0 2.38-.32c.23.2.48.39.75.56 1.06.69 2.2 1.04 3.4 1.04.22 0 .4-.11.48-.29a.5.5 0 0 0-.04-.52 6.4 6.4 0 0 1-1.16-2.65v.02zm-3.12 1.06l-.06-.22-.32.1a8 8 0 0 1-2.3.33c-4.03 0-7.3-2.96-7.3-6.59S8.17 4.9 12.2 4.9c4 0 7.1 2.96 7.1 6.6 0 1.8-.6 3.47-2.02 4.72l-.2.16v.26l.02.3a6.74 6.74 0 0 0 .88 2.4 5.27 5.27 0 0 1-2.17-.86c-.28-.17-.72-.38-.94-.59l.01-.02z"></path></svg>
@@ -269,13 +274,13 @@ const LikeCommentButton = (props) => {
             </div>
 
             <div className='flex justify-center w-screen'>
-                <div style={{background: `linear-gradient(180deg, black, ${props.theme}`}} className={`${lifelineStatue ? 'pop_up opacity-100' : 'pop_down opacity-0'} rounded-lg shadow-[0_0_15px_black] w-[25rem] p-3 rounded-t-lg-800 fixed bottom-0 z-10`}>
-                    <button style={{background: props.theme}} onClick={() => setLifelineStatue(false)} className='absolute top-2 right-2 rounded-full p-[0.1rem] z-20'>
+                <div style={{background: `linear-gradient(180deg, black, ${props.quiz.theme}`}} className={`${lifelineStatue ? 'pop_up opacity-100' : 'pop_down opacity-0'} rounded-lg shadow-[0_0_15px_black] w-[25rem] p-3 rounded-t-lg-800 fixed bottom-0 z-10`}>
+                    <button style={{background: props.quiz.theme}} onClick={() => setLifelineStatue(false)} className='absolute top-2 right-2 rounded-full p-[0.1rem] z-20'>
                         <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                     </button>
 
                     <div className='relative top-[-3rem] space-y-3'>
-                        <div style={{background: props.theme}} className='shadow-[0_0_10px_black] mx-auto mb-4 rounded-full p-3 w-16'>
+                        <div style={{background: props.quiz.theme}} className='shadow-[0_0_10px_black] mx-auto mb-4 rounded-full p-3 w-16'>
                             {lifelineIcon}
                         </div>
                         
@@ -289,7 +294,7 @@ const LikeCommentButton = (props) => {
             </div>
 
             <div className={`${lifeline ? 'pop_up opacity-100' : 'pop_down opacity-0'} fixed z-10 flex justify-center w-screen md:bottom-20 bottom-28`}>
-                <div style={{'background': props.theme || '#991b1b'}} className={`flex shadow-[0_0_4px_white] px-4 py-2 space-x-5 rounded-2xl relative`}>
+                <div style={{'background': props.quiz.theme || '#991b1b'}} className={`flex shadow-[0_0_4px_white] px-4 py-2 space-x-5 rounded-2xl relative`}>
                     <button onClick={() => setupLifelineMessage('fiftyFifty')} id='50:50'>
                         50:50
                     </button>
@@ -306,7 +311,7 @@ const LikeCommentButton = (props) => {
                         <svg class="h-6 w-6 text-white"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />  <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" /></svg>
                     </button>
 
-                    <div style={{'background': props.theme || '#991b1b'}} className={`${lifeline ? 'pop_up opacity-100' : 'pop_down opacity-0'} absolute top-[-2.5rem] px-3 py-1 left-10 md:left-[2.1rem] rounded`}>
+                    <div style={{'background': props.quiz.theme || '#991b1b'}} className={`${lifeline ? 'pop_up opacity-100' : 'pop_down opacity-0'} absolute top-[-2.5rem] px-3 py-1 left-10 md:left-[2.1rem] rounded`}>
                         <p className='text-[.8rem]'>کمک کننده ها</p>
                     </div>
                 </div>
@@ -317,7 +322,7 @@ const LikeCommentButton = (props) => {
                 open={commentsPanelOpen}
                 onClose={() => setCommentsPanelState(false)}
             >
-                <Comments quizId={props.quizId} quizType={props.quizType} showLoginNotification={showLoginNotification} setCommentsPanelState={setCommentsPanelState} />
+                <Comments quizId={props.quiz.id} quizType={props.quizType} showLoginNotification={showLoginNotification} setCommentsPanelState={setCommentsPanelState} />
             </Drawer>
             
         </React.Fragment>
