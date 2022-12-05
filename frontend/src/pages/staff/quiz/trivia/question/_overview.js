@@ -15,12 +15,6 @@ import UserStore from '../../../../../store/userStore';
 const OverviewTrivia = () => {
     const [tableRows, setTableRows] = useState([])
 
-    const [order, setOrder] = useState('desc');
-    const [orderBy, setOrderBy] = useState('publishDate');
-    const [selected, setSelected] = useState([]);
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(20);
-
     const { enqueueSnackbar } = useSnackbar()
 
     const insertTable = (
@@ -401,26 +395,26 @@ const OverviewTrivia = () => {
             </Helmet>
 
             {
-                userProfile.userDetail?.is_staff ?
-                <Box>
-                    <div style={{flex: '1', width: '500vw', height: 500}}>
-                        <DataGrid
-                            rows={tableRows}
-                            columns={columns}
-                            pageSize={20}
-                            rowsPerPageOptions={[5]}
-                            checkboxSelection
-                            disableSelectionOnClick
-                            experimentalFeatures={{ newEditingApi: true }}
-                            autoWidth
-                            sx={{fontFamily: 'IRANYekanBold, sans-serif, serif', color: 'white'}}
-                        />
-                    </div>
-                </Box>
-                :
-                <h1>
-                    not staff. sorry!
-                </h1>
+              userProfile.userDetail?.is_staff ?
+              <Box>
+                  <div style={{flex: '1', width: '500vw', height: 500}}>
+                      <DataGrid
+                          rows={tableRows}
+                          columns={columns}
+                          pageSize={20}
+                          rowsPerPageOptions={[5]}
+                          checkboxSelection
+                          disableSelectionOnClick
+                          experimentalFeatures={{ newEditingApi: true }}
+                          autoWidth
+                          sx={{fontFamily: 'IRANYekanBold, sans-serif, serif', color: 'white'}}
+                      />
+                  </div>
+              </Box>
+              :
+              <h1>
+                  not staff. sorry!
+              </h1>
             }   
         </React.Fragment>
     );
