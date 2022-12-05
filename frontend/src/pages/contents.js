@@ -21,9 +21,9 @@ const Category = (props) => {
     const [sortedQuizzes, setSortedQuizzes] = useState([])
     const [sortedTests, setSortedTests] = useState([])
     const [sortType, setSortType] = useState(takeParameterFromUrl('s') || 'trend')
+    const [gameType, setGameType] = useState(takeParameterFromUrl('c') || 'quiz')
     const [useless, whenChangeThisIDKWhyTheSortAffect] = useState()
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [gameType, setGameType] = useState('quiz')
 
     const location = useLocation();
 

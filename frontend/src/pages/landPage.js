@@ -292,7 +292,7 @@ const Index = () => {
 
                     <div className="flex items-center justify-between mb-8 testContainer__header">
                         <h3>تست های کوییزلند</h3>
-                        <Link to="/contents?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                        <Link to="/contents?s=newest&c=test" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <ul className="flex flex-col flex-wrap align-baseline md:flex-row">
@@ -304,7 +304,7 @@ const Index = () => {
                 <div className="space-y-8">
                     <div className="flex items-center justify-between testContainer__header">
                         <h3>کوییز های کوییزلند</h3>
-                        <Link to="/contents?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                        <Link to="/contents?s=newest&c=quiz" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
                     </div>
 
                     <div className='relative'>
@@ -318,135 +318,7 @@ const Index = () => {
                     <ul className="flex flex-wrap align-baseline">
                         <QuizContainer quizzes={quizzesShow} bgStyle={'trans'} />
                     </ul>
-
                 </div>
-
-                {/* Adverts */}
-                
-                {/* {
-                    !(isItMobile()) &&
-                    <div className='adverts_center' id='mediaad-WSYR'></div>
-                } */}
-
-                {/* {
-                    isItMobile() &&
-                    <div className='adverts_center' id='mediaad-KlKX'></div>
-                } */}
-
-                {/* <div className="mb-8">
-
-                    <div className="flex items-center justify-between mb-8 testContainer__header">
-                        <h3>محبوب ترین ها</h3>
-                        <Link to="/contents?s=trend" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
-                    </div>
-
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={content_monthly_ref}>
-                        {
-                            content_monthly_inView &&
-                            <TestContainer tests={tests_monthly} bgStyle={'trans'} />
-                        }
-                    </ul>
-
-                </div> */}
-
-                {/* Adverts */}
-
-                {/* {
-                    !(isItMobile()) &&
-                    <div className='adverts_center' id='mediaad-kvDM'></div>
-                } */}
-
-                {/* {
-                    isItMobile() &&
-                    <div className='adverts_center' id='mediaad-OheS'></div>
-                } */}
-
-                {/* <div className="mb-8">
-
-                    <div className="flex items-center justify-between mb-8 testContainer__header">
-                        <h3>کوییز سلبریتی</h3>
-                        <Link to="/contents?s=newest&c=2" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
-                    </div>
-
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_celebrity_ref}>
-                        {
-                            tests_celebrity_inView &&
-                            <TestContainer tests={tests_celebrity} bgStyle='trans' />
-                        }
-                    </ul>
-
-                </div> */}
-
-                {/* Adverts */}
-
-                {/* {
-                    !(isItMobile()) &&
-                    <div className='adverts_center' id='mediaad-niPM'></div>
-                } */}
-
-                {/* {
-                    isItMobile() &&
-                    <div className='adverts_center' id='mediaad-QCZY'></div>
-                } */}
-
-                {/* <div className="mb-8">
-
-                    <div className="flex items-center justify-between mb-8 testContainer__header">
-                        <h3>کوییز فیلم و سریال</h3>
-                        <Link to="/contents?s=newest&c=1" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
-                    </div>
-
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_movieSeries_ref}>
-                        {
-                            tests_movieSeries_inView &&
-                            <TestContainer tests={tests_movieSeries} bgStyle='trans' />
-                        }
-                    </ul>
-
-                </div> */}
-
-                {/* <div className="mb-8">
-
-                    <div className="flex items-center justify-between mb-8 testContainer__header">
-                        <h3>تست روانشناسی</h3>
-                        <Link to="/contents?s=newest&c=3" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
-                    </div>
-
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={tests_psychology_ref}>
-                        {
-                            tests_psychology_inView &&
-                            <TestContainer tests={tests_psychology} bgStyle='trans' />
-                        }
-                    </ul>
-
-                </div> */}
-
-                {/* Adverts */}
-
-                {/* {
-                    !(isItMobile()) &&
-                    <div className='adverts_center' id='mediaad-bXEw'></div>
-                } */}
-
-                {/* {
-                    isItMobile() &&
-                    <div className='adverts_center' id='mediaad-qBZW'></div>
-                } */}
-
-                {/* <div className="mt-8 mb-8">
-                    <div className="flex items-center justify-between mb-8 testContainer__header">
-                        <h3>کوییز های بیشتر</h3>
-                        <Link to="/contents?s=newest" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
-                    </div>
-
-                    <ul className="flex flex-col flex-wrap align-baseline md:flex-row" ref={loadMoreQuiz_ref}>
-                        {
-                            loadMoreQuiz_inView &&
-                            <TestContainer tests={loadMoreQuiz} bgStyle='trans' />
-                        }
-                    </ul>
-
-                </div> */}
             </div>
 
         </React.Fragment>
