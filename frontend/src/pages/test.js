@@ -31,7 +31,7 @@ const TestQuiz = (props) => {
     const [quizEnded, setQuizEnded] = useState(false)
     const [quizSlug, setQuizSlug] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [suggestionQuizzes, setSuggestionQuizzes] = useState()
+    // const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [SFXAllowed, setSFXAllowed] = useState(localStorage.getItem('SFXAllowed') == 'true')
     const [quiz, setQuiz] = useState(null)
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
@@ -110,7 +110,7 @@ const TestQuiz = (props) => {
                     setQuiz(quizData)
 
                     sendCategoryAsInterest()
-                    await getSuggestionsQuiz()
+                    // await getSuggestionsQuiz()
                     applyBackground()
 
                     await axios.get(`/api/questionsPointyView/?quizKey=${quizData.id}&public=true`)
@@ -459,22 +459,22 @@ const TestQuiz = (props) => {
         )
     }
 
-    const getSuggestionsQuiz = async () => {
-        const category = quizDetailRef.current.categoryKey.id
-        const subCategory = quizDetailRef.current.subCategory
+    // const getSuggestionsQuiz = async () => {
+    //     const category = quizDetailRef.current.categoryKey.id
+    //     const subCategory = quizDetailRef.current.subCategory
 
-        const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
-        let content = quiz.data.results.concat(pointy.data.results)
+    //     const quiz = await axios.get(`/api/quizView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+    //     const pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(subCategory, ' ', '+')}&limit=8&public=true`)
+    //     let content = quiz.data.results.concat(pointy.data.results)
 
-        if (content.length != 8) {
-            const quizByCategory = await axios.get(`/api/quizView/?category__exact=${category}&limit=8&public=true`)
-            const pointyByCategory = await axios.get(`/api/testView/?category__exact=${category}&limit=8&public=true`)
-            content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
-        }
+    //     if (content.length != 8) {
+    //         const quizByCategory = await axios.get(`/api/quizView/?category__exact=${category}&limit=8&public=true`)
+    //         const pointyByCategory = await axios.get(`/api/testView/?category__exact=${category}&limit=8&public=true`)
+    //         content = content.concat(quizByCategory.data.results.concat(pointyByCategory.data.results))
+    //     }
 
-        setSuggestionQuizzes(content.slice(0, 8))
-    }
+    //     setSuggestionQuizzes(content.slice(0, 8))
+    // }
 
     const currentUrl = () => {
         return `https://www.quizzland.net/test/${replaceFunction(quizSlug, ' ', '-')}`
@@ -649,7 +649,7 @@ const TestQuiz = (props) => {
 
                             {/* <div className='mt-5 adverts_center' id='mediaad-bNpr'></div> */}
 
-                            <div className='mx-4 mt-10'>
+                            {/* <div className='mx-4 mt-10'>
                                 <h3 className='flex items-center justify-center mb-5 text-white quiz__tags__title beforeAfterDecor'>کوییز های مشابه</h3>
 
                                 <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
@@ -657,7 +657,7 @@ const TestQuiz = (props) => {
                                         suggestionQuizzes && <TestContainer tests={suggestionQuizzes} bgStyle={'bg'} />
                                     }
                                 </ul>
-                            </div>
+                            </div> */}
 
 
                             {/* <h7 className='flex items-center justify-center quiz__tags__title beforeAfterDecor'>مطالب پیشنهادی</h7> */}

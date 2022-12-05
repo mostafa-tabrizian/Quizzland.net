@@ -32,7 +32,7 @@ const Quiz_V2 = (props) => {
     const [ableToSelectOption, setAbleToSelectOption] = useState(true)
     const [quizSlug, setQuizSlug] = useState(replaceFunction(window.location.pathname.split('/')[2], '-', '+'))
     const [contentLoaded, setContentLoaded] = useState(false)
-    const [suggestionQuizzes, setSuggestionQuizzes] = useState()
+    // const [suggestionQuizzes, setSuggestionQuizzes] = useState()
     const [SFXAllowed, setSFXAllowed] = useState(localStorage.getItem('SFXAllowed') == 'true')
     const [SFXCorrect, setSFXCorrect] = useState(null)
     const [SFXWrong, setSFXWrong] = useState(null)
@@ -1007,7 +1007,7 @@ const Quiz_V2 = (props) => {
 
                             {/* <div className='mt-5 adverts_center' id='mediaad-bNpr'></div> */}
 
-                            <div className='mx-4 mt-10'>
+                            {/* <div className='mx-4 mt-10'>
                                 <h3 className='flex items-center justify-center mb-5 text-white beforeAfterDecor'>کوییز های مشابه</h3>
 
                                 <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
@@ -1015,7 +1015,7 @@ const Quiz_V2 = (props) => {
                                         suggestionQuizzes && <TestContainer tests={suggestionQuizzes} bgStyle={'bg'} />
                                     }
                                 </ul>
-                            </div>
+                            </div> */}
 
 
                             {/* <h7 className='flex items-center justify-center beforeAfterDecor'>مطالب پیشنهادی</h7> */}

@@ -12,20 +12,16 @@ import UserStore from '../store/userStore'
 import axiosInstance from '../components/axiosAuthApi'
 const LoginForm = React.lazy(() => import('../components/user/loginForm'))
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
-const TestContainer = React.lazy(() => import('../components/testContainer'))
+// const TestContainer = React.lazy(() => import('../components/testContainer'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 
 const Result = () => {
-    const [resultScore, setResultScore] = useState(0)
     const [resultSubtitle, setResultSubtitle] = useState()
     const [resultImg, setResultImg] = useState()
     const [resultText, setResultText] = useState()
     const [loadState, setLoadState] = useState()
-    const [suggestionQuizzes, setSuggestionQuizzes] = useState()
-    const [questionCount, setQuestionCount] = useState(null)
-    const [correctAnswersCount, setCorrectAnswersCount] = useState(null)
-    const [resultGif, setResultGif] = useState(null)
-    const [popUpQuizSuggesterState, setPopUpQuizSuggester] = useState(false)
+    // const [suggestionQuizzes, setSuggestionQuizzes] = useState()
+    // const [popUpQuizSuggesterState, setPopUpQuizSuggester] = useState(false)
 
     const [quizDetail, setQuizDetail] = useState()
 
@@ -43,21 +39,19 @@ const Result = () => {
             
         setQuizDetail(quizDetail)
         detailOfResult(quizResult, quizDetail)
-        setQuestionCount(quizResult.ql)
-        setCorrectAnswersCount(quizResult.qc)
-        getSuggestionsQuiz(quizDetail)
+        // getSuggestionsQuiz(quizDetail)
         userPlayedThisQuizBefore()
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
         setLoadState(true)
         
     }, [])
 
-    useEffect(() => {
-        {
-            suggestionQuizzes &&
-            showPopUpSuggestion()
-        }
-    }, [suggestionQuizzes])
+    // useEffect(() => {
+    //     {
+    //         suggestionQuizzes &&
+    //         showPopUpSuggestion()
+    //     }
+    // }, [suggestionQuizzes])
 
     const userPlayedThisQuizBefore = async () => {
         if (!userProfile.userDetail) {
@@ -166,43 +160,43 @@ const Result = () => {
         )
     };
 
-    const getSuggestionsQuiz = async (quizDetail) => {
-        let pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(quizDetail?.subCategory, ' ', '+')}&limit=8&public=true`)
-        let content = pointy.data.results
+    // const getSuggestionsQuiz = async (quizDetail) => {
+    //     let pointy = await axios.get(`/api/testView/?subCategory__iexact=${replaceFunction(quizDetail?.subCategory, ' ', '+')}&limit=8&public=true`)
+    //     let content = pointy.data.results
 
-        if (content.length == 1) {
-            pointy = await axios.get(`/api/testView/?category__iexact=${replaceFunction(quizDetail?.categoryKey.title_english, ' ', '+')}&limit=8&public=true`)
-            content = pointy.data.results
-        }
+    //     if (content.length == 1) {
+    //         pointy = await axios.get(`/api/testView/?category__iexact=${replaceFunction(quizDetail?.categoryKey.title_english, ' ', '+')}&limit=8&public=true`)
+    //         content = pointy.data.results
+    //     }
 
-        setSuggestionQuizzes(content.slice(0, 8).sort(sortByMonthlyViews))
-    }
+    //     setSuggestionQuizzes(content.slice(0, 8).sort(sortByMonthlyViews))
+    // }
 
-    const showPopUpSuggestion = () => {
-        setTimeout(() => {
-            setPopUpQuizSuggester(true)
-            setTimeout(() => {
-                fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
-            }, 2_000)
-        }, 7_000)
-    }
+    // const showPopUpSuggestion = () => {
+    //     setTimeout(() => {
+    //         setPopUpQuizSuggester(true)
+    //         setTimeout(() => {
+    //             fadeIn(document.querySelector('.result__popUpQuizSuggester__closeBtn'))
+    //         }, 2_000)
+    //     }, 7_000)
+    // }
 
-    const chooseUniqueQuizToSuggest = () => {
-        if (suggestionQuizzes) {
-            if (suggestionQuizzes[0]?.title === quizDetail?.title) {
-                if (suggestionQuizzes[1]) {
-                    return suggestionQuizzes[1]
-                }
-                else {  // there is no unique quiz, don't show the pop up
-                    setSuggestionQuizzes(false)
-                    return suggestionQuizzes[0]
-                }
-            }
-            else {
-                return suggestionQuizzes[0]
-            }
-        }
-    }
+    // const chooseUniqueQuizToSuggest = () => {
+    //     if (suggestionQuizzes) {
+    //         if (suggestionQuizzes[0]?.title === quizDetail?.title) {
+    //             if (suggestionQuizzes[1]) {
+    //                 return suggestionQuizzes[1]
+    //             }
+    //             else {  // there is no unique quiz, don't show the pop up
+    //                 setSuggestionQuizzes(false)
+    //                 return suggestionQuizzes[0]
+    //             }
+    //         }
+    //         else {
+    //             return suggestionQuizzes[0]
+    //         }
+    //     }
+    // }
 
     return (
         <React.Fragment>
@@ -257,9 +251,9 @@ const Result = () => {
                     </div> */}
                 </div>
 
-                {quizDetail?.id && <LikeCommentButton quizId={quizDetail?.id} quizType='test' showLoginNotification={showLoginNotification} />}
+                {quizDetail?.id && <LikeCommentButton quiz={quizDetail} quizType='test' showLoginNotification={showLoginNotification} />}
 
-                <div className='mx-4 mt-10'>
+                {/* <div className='mx-4 mt-10'>
                     <h2 className='text-lg text-center space-med beforeAfterDecor'>کوییز های مشابه</h2>
 
                     <ul className="flex flex-col md:flex-row flex-wrap md:w-[70rem] mx-auto my-10">
@@ -267,9 +261,9 @@ const Result = () => {
                             suggestionQuizzes && <TestContainer tests={suggestionQuizzes} bgStyle='trans' />
                         }
                     </ul>
-                </div>
+                </div> */}
 
-                {
+                {/* {
                     chooseUniqueQuizToSuggest() &&
                     <Dialog
                         open={popUpQuizSuggesterState}
@@ -303,7 +297,7 @@ const Result = () => {
                             </Link>
                         </div>
                     </Dialog>
-                }
+                } */}
 
             </div>
 
