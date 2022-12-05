@@ -591,7 +591,7 @@ const TestQuiz = (props) => {
 
                             <TestHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {quiz?.id && <LikeCommentButton quizId={quiz?.id} quizType='test' />}
+                            {quiz?.id && <LikeCommentButton quiz={quiz} quizType='test' />}
 
                             {
                                 contentLoaded && isItDesktop() &&

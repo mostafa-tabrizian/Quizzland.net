@@ -78,12 +78,12 @@ const QuizHeader = (props) => {
 
             <div className='flex justify-between mt-5'>
                 <div className='flex space-x-3'>
-                    <Tooltip title="ثبت گزارش">
+                    <Tooltip componentsProps={{tooltip:{sx:{backgroundColor: props.quizDetail?.question_background}}}} title="ثبت گزارش">
                         <button className='bg-[#00000073] rounded-full my-auto p-[.4rem]' onClick={() => setReportPanel(true)}>
                             <svg style={{'color': props.quizDetail?.question_background}} className={`h-6 w-6 brightness-200`}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />  <line x1="4" y1="22" x2="4" y2="15" /></svg>
                         </button>
                     </Tooltip>
-                    <Tooltip title="فرض صدا پس از پاسخ به هر سوال">
+                    <Tooltip componentsProps={{tooltip:{sx:{backgroundColor: props.quizDetail?.question_background}}}} title="فرض صدا پس از پاسخ به هر سوال">
                         <button className='bg-[#00000073] rounded-full my-auto p-1' onClick={() => props.SFXController(props.SFXAllowed ? false : true)}>
                             {
                                 props.SFXAllowed ?
@@ -98,7 +98,7 @@ const QuizHeader = (props) => {
                             }
                         </button>
                     </Tooltip>
-                    <Tooltip title="در صورت خودکار بودن، پس از 2 ثانیه به سوال بعدی می‌رود">
+                    <Tooltip componentsProps={{tooltip:{sx:{backgroundColor: props.quizDetail?.question_background}}}} title="در صورت خودکار بودن، پس از 2 ثانیه به سوال بعدی می‌رود">
                         <button onClick={() => props.changeAutoQuestionChanger(props.autoQuestionChanger ? false : true)} className='bg-[#00000073] rounded-full my-auto p-[.1rem] brightness-200'>
                             {
                                 props.autoQuestionChanger ?
