@@ -30,20 +30,21 @@ const Result = () => {
     const { enqueueSnackbar } = useSnackbar()
 
     useEffect(async () => {
-        if (JSON.parse(localStorage.getItem('qd')) === null) {
-            window.location.href = "/404";
-        }
-
-        const quizResult = JSON.parse(localStorage.getItem('qr'))
-        const quizDetail = JSON.parse(localStorage.getItem('qd'))
-            
-        setQuizDetail(quizDetail)
-        detailOfResult(quizResult, quizDetail)
-        // getSuggestionsQuiz(quizDetail)
-        userPlayedThisQuizBefore()
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
-        setLoadState(true)
         
+        const quizDetail = JSON.parse(localStorage.getItem('qd'))
+        const quizResult = JSON.parse(localStorage.getItem('qr'))
+
+        if (quizDetail === null) {
+            window.location.href = "/404";
+        } else {
+            setQuizDetail(quizDetail)
+            detailOfResult(quizResult, quizDetail)
+            // getSuggestionsQuiz(quizDetail)
+            userPlayedThisQuizBefore()
+        }
+            
+        setLoadState(true)
     }, [])
 
     // useEffect(() => {

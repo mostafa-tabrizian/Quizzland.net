@@ -309,7 +309,6 @@ const TestQuiz = (props) => {
             } else {
                 setQuizEnded(true)
                 localStorage.setItem('qd', JSON.stringify(quiz))
-                localStorage.setItem('qt', 'test')
                 localStorage.setItem('qr', calculateTheResult())
                 result.current.click()
             }
