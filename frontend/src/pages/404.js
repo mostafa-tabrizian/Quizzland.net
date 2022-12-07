@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
 
-import { takeParameterFromUrl, getTheme, log } from '../components/base';
-
-const pathRed = '/static/img/bubbles.webp'
+import { getTheme } from '../components/base';
 
 const NotFound_404 = () => {
     const [theme, setTheme] = useState('dark')
@@ -12,7 +10,6 @@ const NotFound_404 = () => {
     useEffect(() => {
         const theme = getTheme()
         setTheme(theme)
-        // document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'} url(${pathRed}) center center scroll`
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
     }, [])
 

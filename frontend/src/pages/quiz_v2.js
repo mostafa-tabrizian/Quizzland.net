@@ -123,21 +123,25 @@ const Quiz_V2 = (props) => {
         quizSlugReplacedWithHyphen &&
             await axios.get(`/api/quizV2View/?slug__iexact=${quizSlugReplacedWithHyphen}&limit=1&public=true`).then((res) => res.data.results[0])
                 .then(async (quizData) => {
-                    quizDetailRef.current = quizData
-                    setQuiz(quizData)
-
-                    sendCategoryAsInterest()
-                    applyBackground()
-
-                    await axios.get(`/api/questionsV2View/?quizKey=${quizData.id}&public=true`)
-                        .then((questionData) => {
-                            const shuffledData = questionData.data.sort(() => Math.random() - 0.5)
-                            setQuestions(shuffledData)
-                            setContentLoaded(true)
-                        })
-                        .catch(err => {
-                            log(err.response)
-                        })
+                    if (quizData) {
+                        quizDetailRef.current = quizData
+                        setQuiz(quizData)
+    
+                        sendCategoryAsInterest()
+                        applyBackground()
+    
+                        await axios.get(`/api/questionsV2View/?quizKey=${quizData.id}&public=true`)
+                            .then((questionData) => {
+                                const shuffledData = questionData.data.sort(() => Math.random() - 0.5)
+                                setQuestions(shuffledData)
+                                setContentLoaded(true)
+                            })
+                            .catch(err => {
+                                log(err.response)
+                            })
+                    } else {
+                        window.location.href = '/404'
+                    }
                 })
                 .catch((err) => {
                     log(err)
