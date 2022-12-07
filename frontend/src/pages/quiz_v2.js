@@ -17,8 +17,7 @@ const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 import AddView from '../components/addView';
 import axiosInstance from '../components/axiosAuthApi';
-const TestContainer = React.lazy(() => import('../components/testContainer'))
-import LoginForm from '../components/user/loginForm'
+import LoginPrompt from '../components/auth/_prompt';
 
 const logo = '/static/img/Q-small.png'
 
@@ -814,7 +813,9 @@ const Quiz_V2 = (props) => {
                     ابتدا می‌بایست وارد شوید.
                 </h5>
                 <div className='border-2 rounded-xl w-fit'>
-                    <LoginForm />
+                    <a href='/login'>
+                        <button onClick={() => props.onClick()} className={`px-10 py-1 h-fit bloodRiver_bg flex rounded-2xl text-white`}>ورود</button>
+                    </a>
                 </div>
             </div>,
             { 
@@ -875,6 +876,11 @@ const Quiz_V2 = (props) => {
                     `}
                 </script>
             </Helmet>
+            
+            {
+                userProfile.userDetail == false &&
+                <LoginPrompt />
+            }
 
             <div id='join' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${joinPaper ? '' : 'fullPageTransition-hide'}`}>
                 <div className='shadow-[0_0_10px_#000000e8] rounded-lg m-5'>

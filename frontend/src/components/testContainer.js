@@ -5,7 +5,7 @@ import Skeleton from '@mui/material/Skeleton';
 import debounce from 'lodash.debounce'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import LoginForm from '../components/user/loginForm';
+import LoginForm from './auth/_form';
 
 import { log, getTheme, replaceFunction } from './base'
 import axiosInstance from './axiosAuthApi';

@@ -1,8 +1,23 @@
 const path = require("path");
 const webpack = require("webpack");
 const CompressionPlugin = require('compression-webpack-plugin')
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 module.exports = {
+  resolve: {
+    fallback: {
+      "fs": false,
+      "tls": false,
+      "net": false,
+      "path": false,
+      "zlib": false,
+      "http": false,
+      "https": false,
+      "stream": false,
+      "crypto": false,
+    } 
+  },
+
   entry: {
     App: "./src/App.js"
   },
@@ -52,6 +67,8 @@ module.exports = {
         'RECAPTCHA_SITE_KEY': JSON.stringify('6Lc4_pQhAAAAAJyor5AUd3eqaFEF6EMK3Z7dQxe3')
       },
     }),
+
+    new NodePolyfillPlugin(),
 
     new CompressionPlugin({
       test: /\.js(\?.*)?$/i,

@@ -17,6 +17,7 @@ import TestHeader from '../components/quiz/testHeader'
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
 import AddView from '../components/addView';
 import axiosInstance from '../components/axiosAuthApi';
+import LoginPrompt from '../components/auth/_prompt';
 // const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
 const TestContainer = React.lazy(() => import('../components/testContainer'))
 
@@ -555,6 +556,11 @@ const TestQuiz = (props) => {
                     `}
                 </script>
             </Helmet>
+
+            {
+                userProfile.userDetail == false &&
+                <LoginPrompt />
+            }
 
             {/* <ReCAPTCHA
                 sitekey={process.env.RECAPTCHA_SITE_KEY}

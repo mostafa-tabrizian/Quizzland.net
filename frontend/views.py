@@ -15,7 +15,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 import datetime
 import json
 import requests
-import random
 from decouple import config
 
 from .models import *
@@ -212,40 +211,24 @@ def auth_google(request, *args, **kwargs):
     payload = json.loads(request.body.decode('utf-8'))
 
     if request.method == 'POST':
-        r = requests.get('https://www.googleapis.com/oauth2/v2/userinfo',
-                         params={'access_token': payload['accessToken']})
-        data = json.loads(r.text)
-
-        if 'error' in data:
-            content = {
-                'message': 'wrong google token / this google token is already expired.'}
-            return HttpResponse(content)
-
-        def uniqueUsername():
-            # ugly function but im too tiered to do it
-            try:
-                selectUsername = f"{payload['username']}{random.randint(0, 9999)}"
-
-                if CustomUser.objects.get(username=payload['username']):
-                    return f"{selectUsername}_{payload['lastName']}"
-                else:
-                    return selectUsername
-
-            except CustomUser.DoesNotExist:
-                return payload['username']
-
         try:
-            user = CustomUser.objects.get(email=data['email'])
+            user = CustomUser.objects.get(email=payload['email'])
 
             if user.is_active == False:
                 return HttpResponse('inactive')
 
         except CustomUser.DoesNotExist:
+            def uniqueUsername():
+                try:
+                    check = CustomUser.objects.get(username=payload['username'])
+                    return payload['email']
+                except CustomUser.DoesNotExist:
+                    return payload['username']
+            
             user = CustomUser()
             user.username = uniqueUsername()
-            user.password = make_password(
-                BaseUserManager().make_random_password())
-            user.email = data['email']
+            user.password = make_password(BaseUserManager().make_random_password())
+            user.email = payload['email']
             user.last_name = payload['lastName']
             user.first_name = payload['firstName']
             user.avatar = payload['avatar']

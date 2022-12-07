@@ -935,6 +935,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 25rem;
 }
 
+.mr-auto {
+  margin-right: auto;
+}
+
 .block {
   display: block;
 }
@@ -1895,6 +1899,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.75rem;
 }
 
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 .pr-10 {
   padding-right: 2.5rem;
 }
@@ -2238,6 +2247,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .shadow-zinc-800 {
   --tw-shadow-color: #27272a;
   --tw-shadow: var(--tw-shadow-colored);
+}
+
+.outline {
+  outline-style: solid;
 }
 
 .blur {
@@ -2614,6 +2627,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:w-\[25rem\] {
     width: 25rem;
+  }
+
+  .md\:w-3\/12 {
+    width: 25%;
+  }
+
+  .md\:w-4\/12 {
+    width: 33.333333%;
+  }
+
+  .md\:w-\[\] {
+    width: ;
+  }
+
+  .md\:w-\[10rem\] {
+    width: 10rem;
+  }
+
+  .md\:w-\[30rem\] {
+    width: 30rem;
   }
 
   .md\:max-w-\[85\%\] {

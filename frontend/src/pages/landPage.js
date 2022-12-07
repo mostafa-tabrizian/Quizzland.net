@@ -8,15 +8,15 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Skeleton from '@mui/material/Skeleton';
 
 import axios from '../components/axiosApi';
-import { log, keyPressedOnInput, getTheme, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
+import { log, keyPressedOnInput, replaceFunction, isItMobile, sortByNewest, sortByMonthlyViews } from '../components/base'
 const TestContainer = React.lazy(() => import('../components/testContainer')) 
 const QuizContainer = React.lazy(() => import('../components/quizContainer')) 
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen')) 
+
 // const Suggestions = React.lazy(() => import('../components/suggestions')) 
 
 const Index = () => {
     const [loadState, setLoadState] = useState()
-    const [theme, setTheme] = useState('dark')
 
     const [tests, setTests] = useState([])
     const [tests_monthly, setTests_monthly] = useState([])
@@ -40,10 +40,6 @@ const Index = () => {
     useEffect(() => {
         grabData()
         setLoadState(true)
-        
-        const theme = getTheme()
-        setTheme(theme)
-                // document.querySelector('body').style = `background: ${theme == 'light' ? 'white' : '#060101'}`
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
     }, [])
 
@@ -153,7 +149,7 @@ const Index = () => {
                         <div className='relative'>
                             <input
                                 type='text'
-                                className={`pl-4 pr-12 py-1 rounded-full text-right ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060101]'} text-[0.9rem] w-[20rem] mt-5 mb-5`}
+                                className={`pl-4 pr-12 py-1 rounded-full text-right bg-[#060101] text-[0.9rem] w-[20rem] mt-5 mb-5`}
                                 placeholder={`چیزی مد نظرته؟ اینجا پیداش کن...`}
                                 onKeyPress={(e) => keyPressedOnInput(e)}
                             />
@@ -183,7 +179,7 @@ const Index = () => {
                 {/* sliders */}
                 <div className='justify-center hidden w-full mt-20 space-x-10 md:flex'>
                     <div className='relative w-7/12 ml-5'>
-                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
+                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='text-[1rem]'>
                                 تست کوییزلند 🔥
                             </h2>
@@ -200,14 +196,14 @@ const Index = () => {
                                 placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
                             />
                         </Link>
-                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
+                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
                             <h2>
                                 {tests_monthly[0] && tests_monthly[0].title}
                             </h2>
                         </div>
                     </div>
                     <div className='relative w-5/12'>
-                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
+                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='translate-y-[4px]'>
                                 🕚
                             </h2>
@@ -224,7 +220,7 @@ const Index = () => {
                                 placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
                             />
                         </Link>
-                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
+                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
                             <h2>
                                 {tests[0] && tests[0].title}
                             </h2>
@@ -243,7 +239,7 @@ const Index = () => {
                     >
                         <Link to={`/quiz/${tests_monthly[0] && replaceFunction(tests_monthly[0].slug, ' ', '-')}`}>
                             <div className='relative'>
-                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                                     <h2 className='text-[1rem]'>
                                         تست کوییزلند 🔥
                                     </h2>
@@ -254,7 +250,7 @@ const Index = () => {
 
                                 <img className='w-full h-[21rem] object-cover rounded-xl' src={tests_monthly[0]?.thumbnail} alt="" />
 
-                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
                                     <h4>
                                         {tests_monthly[0] && tests_monthly[0].title}
                                     </h4>
@@ -263,7 +259,7 @@ const Index = () => {
                         </Link>
                         <Link to={`/quiz/${tests[0] && replaceFunction(tests[0].slug, ' ', '-')}`}>
                             <div className='relative'>
-                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} px-4 py-1 flex space-x-3 items-baseline`}>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                                 <h4 className='translate-y-[4px]'>
                                     🕚
                                 </h4>
@@ -274,7 +270,7 @@ const Index = () => {
 
                             <img className='w-full h-[21rem] object-cover rounded-xl' src={tests[0]?.thumbnail} alt="" />
                             
-                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 ${theme == 'light' ? 'bg-[#f0f0f0]' : 'bg-[#060102]'} rounded-xl px-4 py-1`}>
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
                                     <h4>
                                         {tests[0] && tests[0].title}
                                     </h4>

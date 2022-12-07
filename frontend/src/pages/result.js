@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom'
-const axios = require('axios')
+import axios from '../components/axiosApi'
 import { useSnackbar } from 'notistack'
 import Dialog from '@mui/material/Dialog'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -10,7 +10,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { log, getTheme, replaceFunction, fadeIn, sortByMonthlyViews } from '../components/base'
 import UserStore from '../store/userStore'
 import axiosInstance from '../components/axiosAuthApi'
-const LoginForm = React.lazy(() => import('../components/user/loginForm'))
+import LoginPrompt from '../components/auth/_prompt';
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 // const TestContainer = React.lazy(() => import('../components/testContainer'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
@@ -151,7 +151,9 @@ const Result = () => {
                     برای لایک و کامنت کردن لازمه که اول وارد کوییزلند بشی.
                 </h5>
                 <div className='rounded-xl w-fit'>
-                    <LoginForm />
+                    <a href='/login'>
+                        <button onClick={() => props.onClick()} className={`px-10 py-1 h-fit bloodRiver_bg flex rounded-2xl text-white`}>ورود</button>
+                    </a>
                 </div>
             </div>,
             { 
@@ -209,6 +211,11 @@ const Result = () => {
                 <meta name="description" content="نتیجه کوییز انجام شده" />
                 <meta name="keywords" content="کوییز, کوییزلند" />
             </Helmet>
+
+            {
+                userProfile.userDetail == false &&
+                <LoginPrompt />
+            }
 
             <div className='ltr'>
                 <div className="relative result__container">
