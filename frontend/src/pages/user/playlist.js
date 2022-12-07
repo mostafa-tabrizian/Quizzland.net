@@ -8,7 +8,7 @@ import UserStore from '../../store/userStore'
 const LoadingScreen = React.lazy(() => import('../../components/loadingScreen'))
 const TestContainer = React.lazy(() => import('../../components/testContainer'))
 const QuizContainer = React.lazy(() => import('../../components/quizContainer'))
-const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
+const LoginForm = React.lazy(() => import('../../components/auth/_form'))
 const SkeletonTestContainer = React.lazy(() => import('../../components/skeletonTestContainer'))
 
 const Playlist = () => {

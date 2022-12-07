@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 const persianDate = require('persian-date')
 persianDate.toLocale('fa');
 import { BigHead } from "@bigheads/core";
-const axios = require('axios')
+import axios from '../../components/axiosApi'
 
 import { log, getTheme } from '../../components/base'
 

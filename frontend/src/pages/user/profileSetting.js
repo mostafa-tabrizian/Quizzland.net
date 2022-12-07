@@ -13,9 +13,9 @@ import InputLabel  from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 
 import axiosInstance from '../../components/axiosAuthApi'
-import { log, getTheme } from '../../components/base'
+import { log } from '../../components/base'
 import UserStore from '../../store/userStore'
-const LoginForm = React.lazy(() => import('../../components/user/loginForm'))
+const LoginForm = React.lazy(() => import('../../components/auth/_form'))
 const Avatar = React.lazy(() => import('../../components/user/avatar'))
 const BackdropLoading = React.lazy(() => import('../../components/backdropLoading'))
 
@@ -31,7 +31,6 @@ const ProfileSetting = () => {
     
     useEffect(() => {
         getUserDetail()
-        // document.querySelector('body').style = `background: ${getTheme() == 'light' ? 'white' : '#060101'}`
         document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
     }, [userProfile])
     

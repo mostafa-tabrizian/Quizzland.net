@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
-const axios = require('axios')
+import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 const debounce = require('lodash.debounce')
 import { Link } from 'react-router-dom'

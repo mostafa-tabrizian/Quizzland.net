@@ -8,7 +8,7 @@ import Comments from './comments'
 import { log, isItMobile } from '../base'
 import UserStore from '../../store/userStore';
 import axiosInstance from '../axiosAuthApi';
-import LoginForm from './loginForm'
+import LoginForm from '../auth/_form'
 
 const LikeCommentButton = (props) => {
     const [commentsPanelOpen, setCommentsPanelState] = useState(false);

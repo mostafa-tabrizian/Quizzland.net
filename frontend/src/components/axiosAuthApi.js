@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { log, getCookie } from './base'
 import { setupCache } from 'axios-cache-adapter'
+import rateLimit from 'axios-rate-limit';
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -10,15 +11,18 @@ const cache = setupCache({
     exclude: { query: false },
 })
 
-const axiosInstance = axios.create({
-    timeout: 5000,
-    headers: {
-        'Authorization': "JWT " + getCookie('USER_ACCESS_TOKEN'),
-        'Content-Type': 'application/json',
-        'accept': 'application/json'
-    },
-    adapter: cache.adapter
-});
+const axiosInstance = rateLimit(
+    axios.create({
+        timeout: 5000,
+        headers: {
+            'Authorization': "JWT " + getCookie('USER_ACCESS_TOKEN'),
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        adapter: cache.adapter
+    }),
+    {maxRequests: 2, perMilliseconds: 1000, maxRPS: 2}
+)
 
 axiosInstance.interceptors.response.use(
     response => {
