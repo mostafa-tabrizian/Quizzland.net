@@ -2,7 +2,6 @@ import axiosInstance from '../axiosAuthApi'
 import { log, getCookie } from '../base'
 
 const UserProfileDetail = () => {
-
     const refreshToken = async () => {
         const localRefreshToken = getCookie('USER_REFRESH_TOKEN')
             
@@ -39,13 +38,13 @@ const UserProfileDetail = () => {
                 .catch(err => {
                     if (err.response.data.detail.includes('inactive')) {
                         return 'inactive'
-                    } else {
-                        log('api login')
-                        // log(err)
-                        log(err.response)
-                        refreshToken()
-                    }
-                })
+                } else {
+                    log('api login')
+                    // log(err)
+                    log(err.response)
+                    refreshToken()
+                }
+            })
         } else {
             return false
         }

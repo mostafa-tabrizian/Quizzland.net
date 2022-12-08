@@ -128,6 +128,11 @@ class Pointy_Questions_Admin(admin.ModelAdmin):
 class Report_Admin(admin.ModelAdmin):
     list_display = ('user_id', 'title', 'date_submitted')
     search_fields = ['title', 'description']
+    
+@admin.register(DailyReward)
+class DailyReward_Admin(admin.ModelAdmin):
+    list_display = ('user_id', 'date')
+    search_fields = ['user_id', ]
 
 admin.site.register(Blog, Blog_Admin)
 # admin.site.register(Newsletter_Users, Newsletter_Users_Admin)

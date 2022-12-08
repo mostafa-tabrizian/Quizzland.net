@@ -4,12 +4,13 @@ import { useCookies } from "react-cookie";
 import { useSnackbar } from 'notistack'
 import { BigHead } from "@bigheads/core";
 import AnimatedNumbers from "react-animated-numbers";
+import Backdrop from '@mui/material/Backdrop';
+import axiosInstance from './axiosAuthApi';
 
 import { log, keyPressedOnInput } from './base'
 import Search from './search/searchInput'
 import userProfileDetail from '../components/user/userProfileDetail'
 import UserStore from '../../src/store/userStore'
-import BackdropLoading from './backdropLoading';
 import Logout from './auth/logout';
 
 const Header = () => {
@@ -17,7 +18,8 @@ const Header = () => {
     const [searchMobileOpen, setSearchMobileOpen] = useState(false)
     const [profileSubMenu, setProfileSubMenu] = useState(false)
     const [categorySubMenu, setCategorySubMenu] = useState(null)
-    const [loading, setLoading] = useState(false)
+    const [dailyRewardPopStatue, setDailyRewardPopStatue] = useState(false)
+    const [rewardAmount, setRewardAmount] = useState(0)
 
     const location = useLocation();
     
@@ -31,6 +33,7 @@ const Header = () => {
 
     useEffect(() => {
         getUserData()
+        dailyReward()
     }, [])
 
     useEffect(() => {
@@ -57,6 +60,25 @@ const Header = () => {
 
     const openCloseSearchMobile = () => {
         setSearchMobileOpen(searchMobileOpen ? false : true)
+    }
+
+    
+    const dailyReward = async () => {
+        const now = new Date().getTime()
+
+        await axiosInstance.get(`/api/daily_reward?timestamp=${now}`)
+            .then(res => {
+                if (res.data != 'False') {
+                    setTimeout(() => {
+                        setDailyRewardPopStatue(true)
+                        setRewardAmount(res.data)
+                    }, 2500)
+                }
+            })
+            .catch(err => {
+                log(err)
+                log(err.response)
+            })
     }
 
     const bigHead = () => {
@@ -107,8 +129,6 @@ const Header = () => {
     
     return (
         <React.Fragment>
-            <BackdropLoading loadingStatue={loading} />
-
             <header className={`z-10 mb-12 from-[#1c1c1c] bg-gradient-to-b to-transparent md:sticky top-0 rounded-md backdrop-blur-md`}>
                 <div>
                     {
@@ -213,6 +233,36 @@ const Header = () => {
                 </div>
 
             </header>
+
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={dailyRewardPopStatue}
+            >
+                <div className='border-2 border-[#8f0e0e] rounded-lg'>
+                    <button className='absolute right-[0] top-[0]' onClick={() => setDailyRewardPopStatue(false)}>
+                        <svg class="h-8 w-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+                    <img className='mx-auto' src="/static/img/reward.png" alt="" />
+                    <div className='text-center space-y-3 bg-[#8f0e0e] p-3 rounded-b-lg'>
+                        <h1 className='flex justify-center'>
+                            🎉🎉 شما 
+                            <span className='mx-3'>
+                                <AnimatedNumbers
+                                    animateToNumber={rewardAmount}
+                                    fontStyle={{ fontSize: '1rem' }}
+                                    configs={[
+                                        {"mass":1,"tension":130,"friction":40},
+                                        {"mass":2,"tension":140,"friction":40},
+                                        {"mass":3,"tension":130,"friction":40}
+                                    ]}
+                                ></AnimatedNumbers>
+                            </span>
+                            کوین دریافت کردید 🎉🎉
+                         </h1>
+                        <p>هر روزی که به کوییزلند سر بزنی میتونی شانست رو امتحان کنی و تا 1000 کوین دریافت کنی.</p>
+                    </div>
+                </div>
+            </Backdrop>
 
             <div className='relative md:hidden'>
                 <div className={`header__menu w-screen h-screen fixed text-right z-20

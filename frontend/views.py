@@ -15,6 +15,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 import datetime
 import json
 import requests
+import random
 from decouple import config
 
 from .models import *
@@ -161,6 +162,36 @@ def send_report(request):
             return HttpResponse(f'report saved id: {new_report.id} title: {new_report.title}')
         except Exception as e:
             return HttpResponse(e)
+        
+@csrf_exempt
+def daily_reward(request):
+    
+    def give_reward():
+        random_reward = random.randrange(50, 1000, 20)
+        user = CustomUser.objects.get(id=request.user.id)
+        user.q_coins += random_reward  # change in userProfileDetail for frontend in header
+        user.save()
+        
+        first_daily_reward = DailyReward()
+        first_daily_reward.user_id = request.user
+        first_daily_reward.save()
+        
+        return random_reward
+        
+    if request.method == 'GET' and request.user:
+        user_daily_reward = DailyReward.objects.filter(user_id=request.user)
+        
+        if user_daily_reward:
+            previous_reward_date = user_daily_reward[0].date
+            current_date = datetime.datetime.now().date()
+            if current_date != previous_reward_date:
+                reward = give_reward()
+                return HttpResponse(reward)
+            else:
+                return HttpResponse(False)
+        else:
+            reward = give_reward()
+            return HttpResponse(reward)
 
 def verify_recaptcha(res):
     response = res.GET.get('r')

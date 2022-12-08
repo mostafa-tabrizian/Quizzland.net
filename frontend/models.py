@@ -495,6 +495,14 @@ class Report(models.Model):
     def __str__(self):
         return f'{self.question_id} reported on {self.date_submitted}'
     
+class DailyReward(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(CustomUser, related_name='user_dailyReward_id', blank=False, null=True, on_delete=models.SET_NULL)
+    date = models.DateField(blank=True, null=True, default=datetime.datetime.now)
+
+    def __str__(self):
+        return f'{self.user_id.username} reward'
+    
 class Blog(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=80, null=False,

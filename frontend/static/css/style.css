@@ -407,8 +407,8 @@ hr {
 
 .MuiDialog-container,
 .MuiBackdrop-root :not(.MuiPopover-root) {
-  -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
 }
 
 .MuiSelect-select,
