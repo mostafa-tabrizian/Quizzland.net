@@ -22,32 +22,15 @@ import UserStore from '../../store/userStore'
 import * as jose from 'jose'
 
 const LoginPrompt = () => {
-    const [loginLoading, setLoginLoading] = useState(false)
-    const [loginAvailable, setLoginAvailable] = useState(false)
-    
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
-
-    setTimeout(() => {
-        setLoginAvailable(true)
-    }, 3000);
 
     const [userProfile] = UserStore()
     
     const { enqueueSnackbar } = useSnackbar()
     
     useEffect(() => {
-        filterThemes()
+        filterAvatar()
     }, [])
-
-    useEffect(() => {
-        checkIfLoggedIn()
-    }, [userProfile]);
-
-    const checkIfLoggedIn = async () => {
-        if (userProfile.userDetail && window.location.pathname == '/login') {
-            window.location.href = '/'
-        }
-    }
 
     const showInActiveNotification = () => {
         enqueueSnackbar(
@@ -72,7 +55,7 @@ const LoginPrompt = () => {
         ];
     }
 
-    const filterThemes = () => {
+    const filterAvatar = () => {
         // dress
         delete clothingMap.naked
     
@@ -174,7 +157,6 @@ const LoginPrompt = () => {
                     log(err.response)
                 })
         }
-        setLoginLoading(false)
     }
 
     window.onload = () => {
@@ -182,7 +164,6 @@ const LoginPrompt = () => {
             client_id: process.env.GOOGLE_LOGIN_CLIENT,
             callback: googleLogin
         });
-        log('google')
         google.accounts.id.prompt(); // also display the One Tap dialog
     }
 

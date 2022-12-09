@@ -14,6 +14,8 @@ const QuizHeader = (props) => {
     const title = useRef()
     const description = useRef()
 
+    const [userProfile, userActions] = UserStore()
+
     const { enqueueSnackbar } = useSnackbar()
 
     const sendReport = useCallback(
@@ -33,7 +35,6 @@ const QuizHeader = (props) => {
                             title.current.value = ''
                             description.current.value = ''
                         }, 1000);
-                        // log(res)
                     })
                     .catch(err => {
                         log(err)
@@ -42,6 +43,14 @@ const QuizHeader = (props) => {
             }
         )
     )
+
+    const openReportPanel = () => {
+        if (userProfile.userDetail) {
+            setReportPanel(true)
+        } else {
+            enqueueSnackbar('شما میبایست ابتدا وارد شوید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+        }
+    }
 
     return (
         <div className={`relative text-right quiz__head backdrop-blur-2xl p-4 w-[85%] z-10
@@ -75,7 +84,7 @@ const QuizHeader = (props) => {
             <div className='flex justify-between mt-5'>
                 <div className='flex space-x-3'>
                     <Tooltip componentsProps={{tooltip:{sx:{backgroundColor: props.quizDetail?.question_background}}}} title="ثبت گزارش">
-                        <button className='bg-[#00000073] rounded-full my-auto p-[.4rem]' onClick={() => setReportPanel(true)}>
+                        <button className='bg-[#00000073] rounded-full my-auto p-[.4rem]' onClick={openReportPanel}>
                             <svg style={{'color': props.quizDetail?.question_background}} className={`h-6 w-6 brightness-200`}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />  <line x1="4" y1="22" x2="4" y2="15" /></svg>
                         </button>
                     </Tooltip>

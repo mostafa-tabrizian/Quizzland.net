@@ -124,9 +124,9 @@ const Category = (props) => {
     return (
         <React.Fragment>
             <Helmet>
-                <title>{`کوییز های ${categoryTitleToPersian[props.match.params.category]} | کوییزلند`}</title>
-                <meta name="description" content={`کوییزلند کوییز های ${categoryTitle}`} />
-                <meta name="keywords" content={`بهترین کوییز های ${categoryTitle} ,کوییز های ${categoryTitle}`} />
+                <title>{`کوییز و تست ها | کوییزلند`}</title>
+                <meta name="description" content={`کوییز و تست ها`} />
+                <meta name="keywords" content={`کوییز و تست ها`} />
             </Helmet>
 
             <div className='mr-4 md:w-4/5 md:m-auto'>

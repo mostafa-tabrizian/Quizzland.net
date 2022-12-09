@@ -36,7 +36,7 @@ const LoginForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     
     useEffect(() => {
-        filterThemes()
+        filterAvatar()
     }, [])
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const LoginForm = () => {
 
     const checkIfLoggedIn = async () => {
         if (userProfile.userDetail && window.location.pathname == '/login') {
-            window.location.href = '/'
+            history.back()
         }
     }
 
@@ -72,7 +72,7 @@ const LoginForm = () => {
         ];
     }
 
-    const filterThemes = () => {
+    const filterAvatar = () => {
         // dress
         delete clothingMap.naked
     
@@ -164,7 +164,7 @@ const LoginForm = () => {
                         setCookie('USER_REFRESH_TOKEN', res.data.refresh_token, { path: '/' });
                             
                         enqueueSnackbar('در حال ورود ...', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                        document.location.reload()
+                        window.location.reload()
                     }
                     
                 })

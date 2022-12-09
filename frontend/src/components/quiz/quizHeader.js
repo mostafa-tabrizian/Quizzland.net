@@ -6,12 +6,15 @@ import { useSnackbar } from 'notistack'
 import Tooltip from '@mui/material/Tooltip';
 
 import { getTheme, log } from '../base'
+import UserStore from '../../store/userStore';
 
 const QuizHeader = (props) => {
     const [reportPanel, setReportPanel] = useState(false)
 
     const title = useRef()
     const description = useRef()
+
+    const [userProfile, userActions] = UserStore()
 
     const { enqueueSnackbar } = useSnackbar()
 
@@ -42,6 +45,14 @@ const QuizHeader = (props) => {
         )
     )
 
+    const openReportPanel = () => {
+        if (userProfile.userDetail) {
+            setReportPanel(true)
+        } else {
+            enqueueSnackbar('شما میبایست ابتدا وارد شوید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+        }
+    }
+
     return (
         <div className={`relative text-right quiz__head backdrop-blur-2xl p-4 w-[85%] z-10
             transition-all duration-1000 mt-8 ease-in-out md:w-[29rem] left-1/2 translate-x-[-50%]
@@ -70,7 +81,7 @@ const QuizHeader = (props) => {
             <div className="flex justify-between">
                 <div className='flex space-x-3'>
                     <Tooltip componentsProps={{tooltip:{sx:{backgroundColor: props.quizDetail?.theme}}}} title="ثبت گزارش">
-                        <button className='bg-[#00000073] rounded-full p-1' onClick={() => setReportPanel(true)}>
+                        <button className='bg-[#00000073] rounded-full p-1' onClick={openReportPanel}>
                             <svg style={{'color': props.quizDetail?.theme}} class={`h-6 w-6 brightness-200`}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />  <line x1="4" y1="22" x2="4" y2="15" /></svg>
                         </button>
                     </Tooltip>

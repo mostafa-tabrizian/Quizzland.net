@@ -152,7 +152,6 @@ def send_report(request):
             question = Questions_V2.objects.get(id=question_id)
             
             new_report = Report()
-            print(request.user)
             new_report.user_id = request.user
             new_report.question_id = question
             new_report.title = title
@@ -165,7 +164,6 @@ def send_report(request):
         
 @csrf_exempt
 def daily_reward(request):
-    
     def give_reward():
         random_reward = random.randrange(50, 1000, 20)
         user = CustomUser.objects.get(id=request.user.id)
@@ -179,11 +177,12 @@ def daily_reward(request):
         return random_reward
         
     if request.method == 'GET' and request.user:
-        user_daily_reward = DailyReward.objects.filter(user_id=request.user)
+        user_daily_reward = DailyReward.objects.filter(user_id=request.user).order_by('date')
         
         if user_daily_reward:
-            previous_reward_date = user_daily_reward[0].date
+            previous_reward_date = user_daily_reward.reverse()[0].date
             current_date = datetime.datetime.now().date()
+            
             if current_date != previous_reward_date:
                 reward = give_reward()
                 return HttpResponse(reward)

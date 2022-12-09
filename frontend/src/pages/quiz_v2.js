@@ -294,7 +294,7 @@ const Quiz_V2 = (props) => {
         if (correctAnswersCount !== 0) {
             const now = new Date().getTime()
             const userId = userProfile.userDetail.id
-            const prize = correctAnswersCount * 5
+            const prize = correctAnswersCount * 25
             const payload = {
                 q_coins: userProfile.QCoins + prize
             }
@@ -897,23 +897,24 @@ const Quiz_V2 = (props) => {
                         <li className='list-disc mr-4'><p className='textShadow'>در تعداد سوال ها محدودیت وجود ندارد. تا وقتی اشتباه نکنید بازی ادامه دارد.</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>هر چه تعداد سوالات پاسخ داده شده بالاتر باشد، <img className='inline w-8 h-8' src="/static/img/QCoin.png" alt="" /> کیو کوین بیشتری دریافت میکنید</p></li>
                         <li className='list-disc mr-4'><p className='textShadow'>اگر نیاز به کمک داشتید میتونید با استفاده از <img className='inline w-8 h-8' src="/static/img/QCoin.png" alt="" />  کیو کوین های خود از کمک کننده ها استفاده کنید</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیری</p></li>
-                        <li className='list-disc mr-4'><p className='textShadow flex items-center'>
-                            ورودی این کوییز:
-                            <b className='mx-3'>
-                                {
-                                    quiz?.fees ?
+                        <li className='list-disc mr-4'><p className='textShadow'>امیدواریم چیزهای جالبی یاد بگیرید</p></li>
+                        {
+                            quiz?.fees ?
+                            <li className='list-disc mr-4'>
+                                <p className='textShadow flex items-center'>
+                                ورودی این کوییز:
+                                <b className='mx-3'>
                                     <div className='flex space-x-2 space-x-reverse mr-3 items-center'>
                                         <p>{quiz?.fees}</p>
                                         <img className='mx-3 inline w-8 h-8' src="/static/img/QCoin.png" alt="" />
                                         <p>کیو کوین</p>
                                     </div>
-                                    :
-                                    'رایگان'
-                                }
-                                {/* if not free. get from the user coins */}
-                            </b>
-                        </p></li>
+                                </b>
+                                </p>
+                            </li>
+                            :
+                            ''
+                        }
                     </ul>
                 </div>
                 <div>
@@ -929,7 +930,7 @@ const Quiz_V2 = (props) => {
             <div id='quizEnd' className={`z-20 absolute top-0 text-center w-full h-full flex flex-col justify-between ${quizEndStatue ? 'fullPageTransition-show' : 'fullPageTransition-hide'}`}>
                 {
                     quizEndStatue &&
-                    <div className='flex flex-col justify-between h-full max-w-[30rem] mx-auto'>
+                    <div className='flex flex-col justify-between h-full max-w-full w-[30rem] mx-auto'>
                         <div>
                             <div className='shadow-[0_0_10px_#000000e8] rounded-lg m-5'>
                                 <div className='text-[1.5rem] rounded-lg py-5 m-3'>

@@ -1207,6 +1207,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 15rem;
 }
 
+.w-\[30rem\] {
+  width: 30rem;
+}
+
 .max-w-\[14rem\] {
   max-width: 14rem;
 }
@@ -1233,6 +1237,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .max-w-\[35rem\] {
   max-width: 35rem;
+}
+
+.max-w-full {
+  max-width: 100%;
 }
 
 .flex-auto {
@@ -1879,6 +1887,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.px-\[25\%\] {
+  padding-left: 25%;
+  padding-right: 25%;
 }
 
 .pr-10 {
@@ -2621,6 +2634,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:p-8 {
     padding: 2rem;
+  }
+
+  .md\:px-\[25\%\] {
+    padding-left: 25%;
+    padding-right: 25%;
   }
 
   .md\:pb-4 {
