@@ -186,12 +186,10 @@ const LoginForm = () => {
             document.getElementById("googleLoginButton"),
             {
                 type: "standard",
-                // shape: "pill",
+                shape: "pill",
                 theme: "outline",
                 text: "ورود با گوگل",
                 size: "medium",
-                logo_alignment: "left",
-                width: "100"
             }
         );
         // google.accounts.id.prompt(); // also display the One Tap dialog
@@ -199,7 +197,7 @@ const LoginForm = () => {
 
     return (
         <div>
-            <div id="googleLoginButton"></div>
+            <div id="googleLoginButton" className='flex justify-center'></div>
         </div>
     );
 }
