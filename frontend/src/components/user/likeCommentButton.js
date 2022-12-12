@@ -208,15 +208,10 @@ const LikeCommentButton = (props) => {
     const lifeLineFunctionCall = async () => {
         setLifelineStatue(false)
 
-        if (lifelineType != 'skipQuestion' && (props.question.option_3rd == '' || props.question.option_4th == '')) {
-            enqueueSnackbar(<div>کمک کننده {lifelineTitle} برای این سوال غیرفعال می‌باشد</div>, { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-            return
-        }
-
         if (await payWithQCoin()) {
             switch (lifelineType) {
                 case 'fiftyFifty':
-                    props.removeHalfTheWrongOptions()
+                    props.fiftyFifty()
                     break
 
                 case 'pollAudience':

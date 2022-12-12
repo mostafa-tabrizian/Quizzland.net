@@ -46,6 +46,7 @@ const Quiz_V2 = (props) => {
     const [resultMessage, setResultMessage] = useState(null)
     const [lifeline5050, setLifeline5050] = useState(false)
     const [lifelineSkipQuestion, setLifelineSkipQuestion] = useState(false)
+    const [lifelinePollAudience, setLifelinePollAudience] = useState(false)
     const [answer, setAnswer] = useState(null)
 
     const location = useLocation();
@@ -337,7 +338,7 @@ const Quiz_V2 = (props) => {
         }
     }
 
-    const removeHalfTheWrongOptions = async () => {
+    const fiftyFifty = async () => {
         if (lifeline5050) {
             return
         }
@@ -392,6 +393,10 @@ const Quiz_V2 = (props) => {
     }
 
     const pollAudience = async () => {
+        if (lifelinePollAudience) {
+            return
+        }
+
         const allOptions = document.querySelectorAll('.quiz__options__textLabel')
         
         const optionsBaseIndex = ((currentQuestionNumber-1)*4)
@@ -403,7 +408,6 @@ const Quiz_V2 = (props) => {
             4: optionsBaseIndex+3
         }
 
-        
         const option1 = allOptions[options[1]]
         const option2 = allOptions[options[2]]
         const option3 = allOptions[options[3]]
@@ -456,6 +460,10 @@ const Quiz_V2 = (props) => {
         }
 
         fillAnimation()
+
+        document.getElementById(`pollAudience`).style.pointerEvents = 'none'
+        document.getElementById(`pollAudience`).style.opacity = .5
+        setLifelinePollAudience(true)
     }
 
     const skipQuestion = async () => {
@@ -989,7 +997,7 @@ const Quiz_V2 = (props) => {
 
                             <QuizHeader questionCurrent={questions[currentQuestionNumber - 1]?.id} quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {quiz?.id && <LikeCommentButton question={questions[currentQuestionNumber - 1]} removeHalfTheWrongOptions={removeHalfTheWrongOptions} pollAudience={pollAudience} skipQuestion={skipQuestion} quiz={quiz} quizType={'play'} />}
+                            {quiz?.id && <LikeCommentButton question={questions[currentQuestionNumber - 1]} fiftyFifty={fiftyFifty} pollAudience={pollAudience} skipQuestion={skipQuestion} quiz={quiz} quizType={'play'} />}
 
                             <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                                 {
