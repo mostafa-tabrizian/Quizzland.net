@@ -22,6 +22,7 @@ const Index = () => {
     const [tests_monthly, setTests_monthly] = useState([])
     const [quizzesData , setQuizzesData] = useState([])
     const [quizzesShow , setQuizzesShow] = useState([])
+    const [quizTrends, setTrendsQuiz] = useState([])
 
     // const [tests_celebrity, setTests_celebrity] = useState([])
     // const [tests_movieSeries, setTests_movieSeries] = useState([])
@@ -61,6 +62,7 @@ const Index = () => {
                 const data = res.data.sort(sortByMonthlyViews)
                 setQuizzesData(data)
                 setQuizzesShow(data)
+                setTrendsQuiz(data.sort(sortByMonthlyViews))
             }))
             
         // .catch(err => {log(err.response)})
@@ -72,7 +74,7 @@ const Index = () => {
         // setLoadMoreQuiz(content.sort(sortByNewest).slice(13, 69))
     }
 
-    const filterQuizzes = (e) => {
+    const quizzes = (e) => {
         const value = e.target.value
         let filteredData = []
         
@@ -85,12 +87,12 @@ const Index = () => {
         if (filteredData.length) {
             setQuizzesShow([])
             setTimeout(() => {
-                setQuizzesShow(filteredData)
+                setQuizzesShow(filteredData.slice(0, 10))
             }, 300)
         } else {
             setQuizzesShow([])
             setTimeout(() => {
-                setQuizzesShow(quizzesData)
+                setQuizzesShow(quizzesData.slice(0, 10))
             }, 300)
         }
     }
@@ -178,37 +180,99 @@ const Index = () => {
 
                 {/* sliders */}
                 <div className='justify-center hidden w-full mt-20 space-x-10 md:flex'>
-                    <div className='relative w-7/12 ml-5'>
-                        <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
-                            <h2 className='text-[1rem]'>
-                                تست کوییزلند 🔥
-                            </h2>
-                            <h2>
-                                #1
-                            </h2>
-                        </div>
-                        <Link to={`/${tests_monthly[0]?.type}/${tests_monthly[0] && replaceFunction(tests_monthly[0].slug, ' ', '-')}`}>
-                            <LazyLoadImage
-                                src={tests_monthly[0]?.thumbnail}
-                                alt={`${tests_monthly.subCategory} | ${tests_monthly.title}`}
-                                className='w-full h-[21rem] object-cover rounded-xl'
-                                effect="blur"
-                                placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
-                            />
-                        </Link>
-                        <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
-                            <h2>
-                                {tests_monthly[0] && tests_monthly[0].title}
-                            </h2>
-                        </div>
+                    <div className='w-7/12'>
+                        <Carousel
+                            autoPlay={true}
+                            interval={3000}
+                            transitionTime={500}
+                            showStatus={false}
+                            dynamicHeight={true}
+                            showIndicators={false}
+                        >
+                            <div className='flex'>
+                                <div className='relative ml-5'>
+                                    <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
+                                        <h2 className='text-[1rem]'>
+                                            کوییز 🔥
+                                        </h2>
+                                        <h2>
+                                            #2
+                                        </h2>
+                                    </div>
+                                    <Link to={`/play/${quizTrends[1]?.slug && replaceFunction(quizTrends[1]?.slug, ' ', '-')}`}>
+                                        <LazyLoadImage
+                                            src={quizTrends[1]?.thumbnail}
+                                            alt={`${quizTrends[1]?.title}`}
+                                            className='w-[21rem] h-[21rem] object-cover rounded-xl'
+                                            effect="blur"
+                                            placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
+                                        />
+                                    </Link>
+                                    <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
+                                        <h2>
+                                            {quizTrends[1]?.title}
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div className='relative ml-5'>
+                                    <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
+                                        <h2 className='text-[1rem]'>
+                                            کوییز 🔥🔥
+                                        </h2>
+                                        <h2>
+                                            #1
+                                        </h2>
+                                    </div>
+                                    <Link to={`/play/${quizTrends[0]?.slug && replaceFunction(quizTrends[0]?.slug, ' ', '-')}`}>
+                                        <LazyLoadImage
+                                            src={quizTrends[0]?.thumbnail}
+                                            alt={`${quizTrends[0]?.title}`}
+                                            className='w-[21rem] h-[21rem] object-cover rounded-xl'
+                                            effect="blur"
+                                            placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
+                                        />
+                                    </Link>
+                                    <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
+                                        <h2>
+                                            {quizTrends[0]?.title}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='relative ml-6'>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
+                                    <h2 className='text-[1rem]'>
+                                        تست 🔥
+                                    </h2>
+                                    <h2>
+                                        #1
+                                    </h2>
+                                </div>
+                                <Link to={`/test/${tests_monthly[0] && replaceFunction(tests_monthly[0].slug, ' ', '-')}`}>
+                                    <LazyLoadImage
+                                        src={tests_monthly[0]?.thumbnail}
+                                        alt={`${tests_monthly.subCategory} | ${tests_monthly.title}`}
+                                        className='w-[21rem] h-[21rem] object-cover rounded-xl'
+                                        effect="blur"
+                                        placeholder={<Skeleton variant="rounded" animation="wave" width={210} height={120} />}
+                                    />
+                                </Link>
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
+                                    <h2>
+                                        {tests_monthly[0] && tests_monthly[0].title}
+                                    </h2>
+                                </div>
+                            </div>
+                        </Carousel>
                     </div>
-                    <div className='relative w-5/12'>
+
+                    <div className='relative'>
                         <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                             <h2 className='translate-y-[4px]'>
                                 🕚
                             </h2>
                             <h2 className='text-[1rem]'>
-                                جدیدترین تست کوییزلند
+                                جدیدترین تست
                             </h2>
                         </div>
                         <Link to={`/${tests[0]?.type}/${tests[0] && replaceFunction(tests[0].slug, ' ', '-')}`}>
@@ -237,11 +301,31 @@ const Index = () => {
                         dynamicHeight={true}
                         showIndicators={false}
                     >
-                        <Link to={`/quiz/${tests_monthly[0] && replaceFunction(tests_monthly[0].slug, ' ', '-')}`}>
+                        <Link to={`/test/${tests[0] && replaceFunction(tests[0].slug, ' ', '-')}`}>
+                            <div className='relative'>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
+                                <h4 className='translate-y-[4px]'>
+                                    🕚
+                                </h4>
+                                <h2 className='text-[1rem]'>
+                                    جدیدترین تست
+                                </h2>
+                            </div>
+
+                            <img className='w-full h-[21rem] object-cover rounded-xl' src={tests[0]?.thumbnail} alt="" />
+                            
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
+                                    <h4>
+                                        {tests[0] && tests[0].title}
+                                    </h4>
+                                </div>
+                            </div>
+                        </Link>
+                        <Link to={`/test/${tests_monthly[0] && replaceFunction(tests_monthly[0].slug, ' ', '-')}`}>
                             <div className='relative'>
                                 <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                                     <h2 className='text-[1rem]'>
-                                        تست کوییزلند 🔥
+                                        تست 🔥
                                     </h2>
                                     <h2>
                                         #1
@@ -257,31 +341,69 @@ const Index = () => {
                                 </div>
                             </div>
                         </Link>
-                        <Link to={`/quiz/${tests[0] && replaceFunction(tests[0].slug, ' ', '-')}`}>
+                        <Link to={`/play/${quizTrends[0]?.slug && replaceFunction(quizTrends[0].slug, ' ', '-')}`}>
                             <div className='relative'>
                                 <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
-                                <h4 className='translate-y-[4px]'>
-                                    🕚
-                                </h4>
-                                <h2 className='text-[1rem]'>
-                                    جدیدترین تست کوییزلند
-                                </h2>
-                            </div>
+                                    <h2 className='text-[1rem]'>
+                                        کوییز 🔥🔥
+                                    </h2>
+                                    <h2>
+                                        #1
+                                    </h2>
+                                </div>
 
-                            <img className='w-full h-[21rem] object-cover rounded-xl' src={tests[0]?.thumbnail} alt="" />
-                            
+                                <img className='w-full h-[21rem] object-cover rounded-xl' src={quizTrends[0]?.thumbnail} alt="" />
+
                                 <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
                                     <h4>
-                                        {tests[0] && tests[0].title}
+                                        {quizTrends[0]?.title}
                                     </h4>
                                 </div>
                             </div>
                         </Link>
-                    
+                        <Link to={`/play/${quizTrends[1]?.slug && replaceFunction(quizTrends[1].slug, ' ', '-')}`}>
+                            <div className='relative'>
+                                <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
+                                    <h2 className='text-[1rem]'>
+                                        کوییز 🔥
+                                    </h2>
+                                    <h2>
+                                        #2
+                                    </h2>
+                                </div>
+
+                                <img className='w-full h-[21rem] object-cover rounded-xl' src={quizTrends[1]?.thumbnail} alt="" />
+
+                                <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
+                                    <h4>
+                                        {quizTrends[1]?.title}
+                                    </h4>
+                                </div>
+                            </div>
+                        </Link>
                     </Carousel>
                 </div>
 
                 {/* <Suggestions /> */}
+
+                <div className="space-y-8">
+                    <div className="flex items-center justify-between testContainer__header">
+                        <h3>کوییز های کوییزلند</h3>
+                        <Link to="/contents?s=newest&c=quiz" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
+                    </div>
+
+                    <div className='relative'>
+                        <input type="text" onChange={(e) => quizzes(e)} placeholder='جستجوی کوییز ها...' className='pl-12 pr-12 py-1 bg-transparent text-[0.9rem] border border-red-900 rounded-lg focus:outline-none' />
+                        <svg className='absolute w-5 h-5 top-[0.4rem] right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+                            <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#681e1e" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+                            <path data-name="layer1" fill="none" stroke="#681e1e" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round" />
+                        </svg>
+                    </div>
+
+                    <ul className="flex flex-wrap align-baseline">
+                        <QuizContainer quizzes={quizzesShow} bgStyle={'trans'} />
+                    </ul>
+                </div>
 
                 <div className="mb-8 md:mt-[10rem]">
                     <span id='scroll' />
@@ -297,24 +419,6 @@ const Index = () => {
 
                 </div>
 
-                <div className="space-y-8">
-                    <div className="flex items-center justify-between testContainer__header">
-                        <h3>کوییز های کوییزلند</h3>
-                        <Link to="/contents?s=newest&c=quiz" className="px-3 py-1 text-left border-2 border-red-900 rounded-lg"><h4>مشاهده همه</h4></Link>
-                    </div>
-
-                    <div className='relative'>
-                        <input type="text" onChange={(e) => filterQuizzes(e)} placeholder='جستجوی کوییز ها...' className='pl-12 pr-12 py-1 bg-transparent text-[0.9rem] border border-red-900 rounded-lg focus:outline-none' />
-                        <svg className='absolute w-5 h-5 top-[0.4rem] right-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
-                            <circle data-name="layer1" cx="24.2" cy="24.2" r="22.2" fill="none" stroke="#681e1e" stroke-miterlimit="10" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
-                            <path data-name="layer1" fill="none" stroke="#681e1e" stroke-miterlimit="10" stroke-width="5" d="M39.9 39.9L62 62" stroke-linejoin="round" stroke-linecap="round" />
-                        </svg>
-                    </div>
-
-                    <ul className="flex flex-wrap align-baseline">
-                        <QuizContainer quizzes={quizzesShow} bgStyle={'trans'} />
-                    </ul>
-                </div>
             </div>
 
         </React.Fragment>

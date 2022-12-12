@@ -14,7 +14,6 @@ import SkeletonTestContainer from './skeletonTestContainer';
 import BackdropLoading from './backdropLoading';
 
 const QuizContainer = (props) => {
-    const [theme, setTheme] = useState('dark')
     const [watchListButtonUnClickable, setWatchListButtonUnClickable] = useState(true)
     const [showPlaylistButton, setShowPlaylistButton] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -22,11 +21,6 @@ const QuizContainer = (props) => {
     const [userProfile, userActions] = UserStore()
 
     const { enqueueSnackbar } = useSnackbar()
-
-    useEffect(() => {
-        const theme = getTheme()
-        setTheme(theme)
-    }, []);
 
     const addToWatchListClicked = async (quizId) => {
         setLoading(true)

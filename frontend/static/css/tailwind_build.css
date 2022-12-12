@@ -678,6 +678,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: 15%;
 }
 
+.left-5 {
+  left: 1.25rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -955,6 +959,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 100%;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -1217,6 +1233,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-\[30rem\] {
   width: 30rem;
+}
+
+.w-6\/12 {
+  width: 50%;
+}
+
+.w-\[231rem\] {
+  width: 231rem;
+}
+
+.w-\[21rem\] {
+  width: 21rem;
 }
 
 .max-w-\[14rem\] {
