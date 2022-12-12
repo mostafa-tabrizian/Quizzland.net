@@ -58,62 +58,40 @@ const Profile = () => {
 
             {
                 user !== 'DoesNotExist' && loaded ?
-                <div className='mx-4 space-y-10 md:mx-auto md:w-4/5'>
+                <div className='mx-4 space-y-10 md:mx-auto md:w-2/5'>
     
-                    <div className={`space-y-5 py-8 px-4 mb-20 shadow-[0_1px_10px_#690D11] border-4 ${theme == 'light' ? 'bg-[#f3f3f3d4]' : 'bg-[#0e0202d4]'} border-[#690D11] rounded-lg`}>
-                        <div>
-                            <div className="flex items-center mb-5 space-x-2 space-x-reverse">
+                    <div className={`space-y-5 pb-8 px-4 mb-20 shadow-[0_1px_10px_#690D11] border-4 ${theme == 'light' ? 'bg-[#f3f3f3d4]' : 'bg-[#0e0202d4]'} border-[#690D11] rounded-lg`}>
+                        <dl className="md:flex">
+                            <div className="flex items-center justify-center mb-5 space-x-2 space-x-reverse">
                                 <div className='w-[16rem] h-[16rem]'>
                                     {
                                         user?.avatar &&
                                         <BigHead {...JSON.parse(user.avatar)} />
                                     }
                                 </div>
-                                <h2>{user?.first_name }&nbsp;{user?.last_name}</h2>
                             </div>
-                            <p>{user?.bio}</p>
-                        </div>
-                        <dl className="space-y-5">
-                            <div className="flex items-center justify-between md:justify-start md:space-x-16 md:space-x-reverse">
-                                <div className="md:flex md:space-x-3 md:space-x-reverse">
-                                    <dt>عضویت</dt>
-                                    <dd>{new persianDate(user?.date_joined).format('MMMM YYYY')}</dd>
+                            <div className="items-center space-y-5 m-auto">
+                                <div className="flex space-x-3 space-x-reverse">
+                                    <dt>نام و نام خانوادگی:</dt>
+                                    <h2>{user?.first_name }&nbsp;{user?.last_name}</h2>
                                 </div>
-                                <div className='hidden md:flex md:space-x-10 md:space-x-reverse'>
-                                    {/* <div className="flex space-x-3 space-x-reverse">
-                                        <dt>جوایز</dt>
-                                        <dd>1</dd>
-                                    </div> */}
-                                    {/* <div className="flex space-x-3 space-x-reverse">
-                                        <dt>پست ها</dt>
-                                        <dd>0</dd>
-                                    </div> */}
+                                <div className="flex space-x-3 space-x-reverse">
+                                    <dt>نام کاربری:</dt>
+                                    <dd>{user?.username}</dd>
+                                </div>
+                                <div className='flex space-x-10 space-x-reverse'>
                                     <div className="flex space-x-3 space-x-reverse">
-                                        <dt>لایک ها</dt>
+                                        <dt>لایک ها:</dt>
                                         <dd>{user?.likes}</dd>
                                     </div>
                                     <div className="flex space-x-3 space-x-reverse">
-                                        <dt>کامنت ها</dt>
+                                        <dt>کامنت ها:</dt>
                                         <dd>{userCommentLength}</dd>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="flex justify-between md:hidden">
-                                {/* <div className="flex space-x-3 space-x-reverse">
-                                    <dt>جوایز</dt>
-                                    <dd>1</dd>
-                                </div> */}
-                                {/* <div className="flex space-x-3 space-x-reverse">
-                                    <dt>پست ها</dt>
-                                    <dd>0</dd>
-                                </div> */}
                                 <div className="flex space-x-3 space-x-reverse">
-                                    <dt>لایک ها</dt>
-                                    <dd>{user?.likes}</dd>
-                                </div>
-                                <div className="flex space-x-3 space-x-reverse">
-                                    <dt>کامنت ها</dt>
-                                    <dd>{userCommentLength}</dd>
+                                    <dt>عضویت:</dt>
+                                    <dd>{new persianDate(user?.date_joined).format('MMMM YYYY')}</dd>
                                 </div>
                             </div>
                         </dl>
