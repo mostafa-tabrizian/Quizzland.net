@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
 
 import { log } from '../../components/base'
 import LoginForm from "../../components/auth/_form"
-
-const pathRed = '/static/img/bubbles.webp'
 
 const Login = () => {
     useEffect(() => {

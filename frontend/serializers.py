@@ -413,7 +413,7 @@ class ReprotSerializer(serializers.ModelSerializer):
             '__all__'
         )
         
-    user_id = CustomUserSerializer(many=False)
+    user_id = CustomUserSerializer(many=False, read_only=True)
     question_id = QuestionsV2Serializer(many=False)
 
 # class BlogSerializer(serializers.ModelSerializer):

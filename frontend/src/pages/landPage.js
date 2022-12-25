@@ -22,7 +22,7 @@ const Index = () => {
     const [tests_monthly, setTests_monthly] = useState([])
     const [quizzesData , setQuizzesData] = useState([])
     const [quizzesShow , setQuizzesShow] = useState([])
-    const [quizTrends, setTrendsQuiz] = useState([])
+    // const [quizTrends, setTrendsQuiz] = useState([])
 
     // const [tests_celebrity, setTests_celebrity] = useState([])
     // const [tests_movieSeries, setTests_movieSeries] = useState([])
@@ -62,7 +62,7 @@ const Index = () => {
                 const data = res.data.sort(sortByMonthlyViews)
                 setQuizzesData(data)
                 setQuizzesShow(data)
-                setTrendsQuiz(data.sort(sortByMonthlyViews))
+                // setTrendsQuiz(data.sort(sortByMonthlyViews))
             }))
             
         // .catch(err => {log(err.response)})
@@ -189,8 +189,8 @@ const Index = () => {
                             dynamicHeight={true}
                             showIndicators={false}
                         >
-                            <div className='flex'>
-                                <div className='relative ml-5'>
+                            {/* <div className='flex'> */}
+                                {/* <div className='relative ml-5'>
                                     <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                                         <h2 className='text-[1rem]'>
                                             کوییز 🔥
@@ -233,12 +233,12 @@ const Index = () => {
                                         />
                                     </Link>
                                     <div className={`absolute bottom-0 text-[1rem] right-0 m-3 bg-[#060102] rounded-xl px-4 py-1`}>
-                                        <h2>
+                                        <h2>P
                                             {quizTrends[0]?.title}
                                         </h2>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className='relative ml-6'>
                                 <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                                     <h2 className='text-[1rem]'>
@@ -341,7 +341,7 @@ const Index = () => {
                                 </div>
                             </div>
                         </Link>
-                        <Link to={`/play/${quizTrends[0]?.slug && replaceFunction(quizTrends[0].slug, ' ', '-')}`}>
+                        {/* <Link to={`/play/${quizTrends[0]?.slug && replaceFunction(quizTrends[0].slug, ' ', '-')}`}>
                             <div className='relative'>
                                 <div className={`absolute left-0 z-10 top-0 m-3 rounded-xl bg-[#060102] px-4 py-1 flex space-x-3 items-baseline`}>
                                     <h2 className='text-[1rem]'>
@@ -380,7 +380,7 @@ const Index = () => {
                                     </h4>
                                 </div>
                             </div>
-                        </Link>
+                        </Link> */}
                     </Carousel>
                 </div>
 

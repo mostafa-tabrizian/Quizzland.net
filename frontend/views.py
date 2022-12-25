@@ -5,14 +5,14 @@ from django.contrib.auth.hashers import make_password  # check_password
 from django.contrib.auth.base_user import BaseUserManager
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from django.core import serializers as core_serializers
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated, AllowAny, BasePermission, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 import datetime
+from rest_framework.decorators import api_view
 import json
 import requests
 import random
@@ -48,7 +48,7 @@ def index(request, *args, **kwargs):
     return render(request, "frontend/index.html")
 
 
-@csrf_exempt
+@api_view(['POST'])
 def public_profile(request, *args, **kwargs):
     if request.method == 'POST':
         username = json.loads(request.body.decode('utf-8'))['username']
@@ -79,7 +79,7 @@ def public_profile(request, *args, **kwargs):
             return HttpResponse(e)
 
 
-@csrf_exempt
+@api_view(['POST'])
 def search_user(request, *args, **kwargs):
     if request.method == 'POST':
         username = json.loads(request.body.decode('utf-8'))['username']
@@ -101,7 +101,7 @@ def search_user(request, *args, **kwargs):
 # def checkAlreadyUserExists(username, email):
 #     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists()
 
-@csrf_exempt
+@api_view(['GET'])
 def answer(request, *args, **kwargs):
     if request.method == 'GET':
         questionId = request.GET.get('questionId')
@@ -113,7 +113,7 @@ def answer(request, *args, **kwargs):
             'answer_imGif': answer.answer_imGif.url
         })
         
-@csrf_exempt
+@api_view(['GET'])
 def answers_poll(request, *args, **kwargs):
     if request.method == 'GET':
         questionId = request.GET.get('questionId')
@@ -140,13 +140,13 @@ def answers_poll(request, *args, **kwargs):
             'option4': option4,
         })
         
-@csrf_exempt
+@api_view(['POST'])
 def send_report(request):
     if request.method == 'POST' and request.user:
-        request = json.loads(request.body.decode('utf-8'))
-        question_id = request['question_id']
-        title = request['title']
-        description = request['description']
+        payload = json.loads(request.body.decode('utf-8'))
+        question_id = payload['question_id']
+        title = payload['title']
+        description = payload['description']
 
         try:
             question = Questions_V2.objects.get(id=question_id)
@@ -162,7 +162,7 @@ def send_report(request):
         except Exception as e:
             return HttpResponse(e)
         
-@csrf_exempt
+@api_view(['GET'])
 def daily_reward(request):
     def give_reward():
         random_reward = random.randrange(50, 1000, 20)
@@ -205,7 +205,7 @@ def verify_recaptcha(res):
 
     return HttpResponse((json.loads(req.content))['success'])
 
-@csrf_exempt
+@api_view(['POST'])  # add view remove the int and repalce it with history model. the not logged in user saved as a guest user in history and like that we can calculate all time views like a pro
 def add_view(request, *args, **kwargs):
     if request.method == 'POST':
         request = json.loads(request.body.decode('utf-8'))
@@ -236,7 +236,7 @@ def add_view(request, *args, **kwargs):
         except Exception as e:
             return HttpResponse(e)
 
-@csrf_exempt
+@api_view(['POST'])
 def auth_google(request, *args, **kwargs):
     payload = json.loads(request.body.decode('utf-8'))
 
