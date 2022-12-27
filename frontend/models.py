@@ -468,7 +468,7 @@ class Watch_List(models.Model):
 class History(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(CustomUser, related_name='user_history_id',
-                                blank=False, null=False, on_delete=models.CASCADE)
+                                blank=False, null=True, on_delete=models.CASCADE)
     quizV2_id = models.ForeignKey(
         Quizzes_V2, related_name='quizV2_history_id', blank=True, null=True, on_delete=models.CASCADE)
     test_id = models.ForeignKey(Quizzes_Pointy, related_name='test_history_id',
@@ -501,39 +501,3 @@ class DailyReward(models.Model):
 
     def __str__(self):
         return f'{self.user_id.username} reward'
-    
-class Blog(models.Model):
-    id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=80, null=False,
-                             blank=False, default=None)
-    thumbnail = models.ImageField(
-        upload_to='QuizzesThumbnail', default='NotExist.jpg')
-    content = RichTextField(blank=False, null=False, default=None)
-    tags = models.CharField(max_length=200, null=False,
-                            blank=False, default=None)
-    monthly_views = models.IntegerField(default=0)
-    views = models.IntegerField(default=0)
-    publish = models.DateTimeField(default=datetime.datetime.now)
-
-
-class Blog_Admin(admin.ModelAdmin):
-    list_display = ('title', 'monthly_views', 'views', 'publish')
-    list_filter = ('tags', )
-    search_field = ['title', 'publish']
-
-# class Newsletter_Users(models.Model):
-#     id  = models.AutoField(primary_key=True)
-#     email = models.CharField(max_length=200, null=False, blank=False, default=None)
-#     username = models.CharField(max_length=100, null=False, blank=False, default=None)
-#     signedUp_On = models.DateTimeField(default=datetime.datetime.now)
-
-#     def __str__(self):
-#         return self.email
-
-#     def __unicode__(self):
-#         return 'test'
-
-# class Newsletter_Users_Admin(admin.ModelAdmin):
-#     list_display = ('email', 'username', 'signedUp_On')
-#     list_filter = ('signedUp_On', )
-#     search_fields = ['email', 'username']

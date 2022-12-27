@@ -15,7 +15,6 @@ import Trivia from '../components/quiz/trivia'
 const LoadingScreen = React.lazy(() => import('../components/loadingScreen'))
 const QuizHeader = React.lazy(() => import('../components/quiz/quizHeader'))
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
-import AddView from '../components/addView';
 import axiosInstance from '../components/axiosAuthApi';
 import LoginPrompt from '../components/auth/_prompt';
 
@@ -314,7 +313,6 @@ const Quiz_V2 = (props) => {
     const payAndPlay = async () => {
         if (await payFees()) {
             setJoinPaper(false)
-            AddView(`quizV2`, quizDetailRef.current.id)
             postToHistory(quizDetailRef.current)
         }
     }
@@ -575,61 +573,22 @@ const Quiz_V2 = (props) => {
             })
     }
 
-    const fetchUserHistory = async () => {
-        const now = new Date().getTime()
+    const postToHistory = async (quiz) => {
+        const payload = {
+            quizV2_id: quiz?.id,
+            test_id: 0
+        }
 
-        return await axiosInstance.get(`/api/historyView/?timestamp=${now}`)
+        log(payload)
+
+        await axios.post(`/api/historyView/`, payload)
             .then(res => {
-                return res.data
+                log(res)
             })
             .catch(err => {
+                log(err)
                 log(err.response)
             })
-    }
-
-    const userPlayedThisQuizBefore = async (quiz) => {
-        const userHistory = await fetchUserHistory()
-        let playedBefore = false
-
-        for (let quizIndex in userHistory) {
-            if (userHistory[quizIndex].quizV2_id?.slug === quiz?.slug) {
-                playedBefore = true
-                break
-            }
-        }
-        
-        return playedBefore
-    }
-
-    const postToHistory = async (quiz) => {
-        if (!userProfile.userDetail) {
-            return
-        }
-
-        const playedBefore = await userPlayedThisQuizBefore(quiz)
-
-        if (!playedBefore) {
-            const payload = {
-                user_id: {
-                    username: userProfile.userDetail.id
-                },
-                quizV2_id: {
-                    id: quiz?.id
-                },
-                test_id: {
-                    id: 0
-                }
-            }
-    
-            await axiosInstance.post(`/api/historyView/`, payload)
-                .then(res => {
-                    // log(res)
-                })
-                .catch(err => {
-                    log(err)
-                    log(err.response)
-                })
-        }
     }
 
     const saveUserScore = async () => {

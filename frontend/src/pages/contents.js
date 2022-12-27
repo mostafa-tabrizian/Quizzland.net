@@ -8,7 +8,6 @@ import debounce from 'lodash.debounce'
 const Tools = React.lazy(() => import('../components/tools'))
 import QuizContainer from '../components/quizContainer';
 import TestContainer from '../components/testContainer';
-import AddView from '../components/addView';
 import { log, replaceFunction, sortByNewest, sortByViews, sortByMonthlyViews, takeParameterFromUrl } from '../components/base'
 const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
 
@@ -37,10 +36,6 @@ const Category = (props) => {
         fetchTests()
         setContentLoaded(true)
     }, [categoryQuery, categoryQueryID, categoryTitle])
-
-    useEffect(() => {
-        categoryQueryID && AddView('category', categoryQueryID)
-    }, [categoryQueryID])
 
     useEffect(() => {
         setCategoryQuery(window.location.pathname.split('/')[2] ? replaceFunction(window.location.pathname.split('/')[2], '-', ' ') : '');

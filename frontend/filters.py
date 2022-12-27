@@ -174,17 +174,3 @@ class ReportFilter(filters.FilterSet):
             'title': ['icontains'],
             'date_submitted': ['lte', 'gte']
         }
-
-# class BlogFilter(filters.FilterSet):
-#     class Meta:
-#         model = Blog
-#         fields = {
-#             'title': ['iexact', 'icontains']
-#         }
-
-# class NewsletterUserFilter(filters.FilterSet):
-#     class Meta:
-#         model = Newsletter_Users
-#         fields = {
-#             'email': ['iexact']
-#         }

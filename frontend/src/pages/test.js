@@ -15,7 +15,6 @@ import Test from '../components/quiz/test'
 import LoadingScreen from '../components/loadingScreen'
 import TestHeader from '../components/quiz/testHeader'
 const LikeCommentButton = React.lazy(() => import('../components/user/likeCommentButton'))
-import AddView from '../components/addView';
 import axiosInstance from '../components/axiosAuthApi';
 import LoginPrompt from '../components/auth/_prompt';
 // const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTestContainer'))
@@ -253,9 +252,8 @@ const TestQuiz = (props) => {
 
     const halfTheQuestions = Math.floor(questions.length / 2)
 
-    const ifHalfQuizAddView = () => {
+    const ifHalfQuizPostToHistory = () => {
         if (currentQuestionNumber == halfTheQuestions) {  // && userProfile.userDetail
-            AddView(`test`, quizDetailRef.current.id)
             postToHistory()
         }
     }
@@ -263,7 +261,7 @@ const TestQuiz = (props) => {
     const selectedOption = async (props) => {
         playSFX()
         takeSelectedOptionValue(props.target)
-        ifHalfQuizAddView()
+        ifHalfQuizPostToHistory()
 
         if (autoQuestionChanger) {
             setTimeout(() => {

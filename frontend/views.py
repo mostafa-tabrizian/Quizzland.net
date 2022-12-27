@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from django.core import serializers as core_serializers
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly, BasePermission
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -205,38 +205,6 @@ def verify_recaptcha(res):
 
     return HttpResponse((json.loads(req.content))['success'])
 
-@api_view(['POST'])  # add view remove the int and repalce it with history model. the not logged in user saved as a guest user in history and like that we can calculate all time views like a pro
-def add_view(request, *args, **kwargs):
-    if request.method == 'POST':
-        request = json.loads(request.body.decode('utf-8'))
-        type = request['type']
-        id = request['id']
-
-        try:
-            if type == 'quizV2':
-                quiz = Quizzes_V2.objects.get(id=id)
-                quiz.views += 1
-                quiz.monthly_views += 1
-                quiz.save()
-            elif type == 'test':
-                quiz = Quizzes_Pointy.objects.get(id=id)
-                quiz.views += 1
-                quiz.monthly_views += 1
-                quiz.save()
-            elif type == 'category':
-                category = Categories.objects.get(id=id)
-                category.views += 1
-                category.monthly_views += 1
-                category.save()
-                
-            return HttpResponse('Success')
-
-        except ObjectDoesNotExist:
-            return HttpResponse('DoesNotExist')
-        except Exception as e:
-            return HttpResponse(e)
-
-@api_view(['POST'])
 def auth_google(request, *args, **kwargs):
     payload = json.loads(request.body.decode('utf-8'))
 
@@ -301,11 +269,6 @@ def restartEveryMonthlyViews(request):
         for subCategory in subCategories:
             subCategory.monthly_views = 0
             subCategory.save()
-
-        articles = Blog.objects.all()
-        for article in articles:
-            article.monthly_views = 0
-            article.save()
 
     except Exception as e:
         print(f'{datetime.datetime.now()}:{e}')
@@ -762,7 +725,7 @@ class WatchListView(viewsets.ModelViewSet):
 
 
 class HistoryView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     serializer_class = HistorySerializer
     filterset_class = HistoryFilter
 
@@ -775,6 +738,27 @@ class HistoryView(viewsets.ModelViewSet):
                 return history_objects
             else:
                 return History.objects.none()
+            
+    def create(self, request):
+        requestData = request.data
+        new_history = History()
+        
+        if self.request.user.is_anonymous:
+            new_history.user_id = None
+        else:
+            new_history.user_id = self.request.user
+            
+        quizV2_id = requestData['quizV2_id']
+        test_id = requestData['test_id']
+            
+        if quizV2_id:
+            new_history.quizV2_id = Quizzes_V2.objects.get(id=quizV2_id)
+        if test_id:
+            new_history.test_id = Quizzes_Pointy.objects.get(id=test_id)
+            
+        new_history.save()
+        
+        return HttpResponse(new_history)
 
 # --------------------------------------------------------
 
@@ -791,18 +775,3 @@ class SubCategoryView(viewsets.ModelViewSet):
     queryset = SubCategories.objects.all()
     serializer_class = SubCategoriesSerializer
     filterset_class = SubCategoriesFilter
-
-# --------------------------------------------------------
-
-# class new_blogView(viewsets.ModelViewSet):
-#     permission_classes = (IsAuthenticated,)
-#     queryset = Blog.objects.all()
-#     serializer_class = BlogSerializer
-#     filterset_class = BlogFilter
-
-# --------------------------------------------------------
-
-# class newsletter_usersView(viewsets.ModelViewSet):
-#     queryset = Newsletter_Users.objects.all()
-#     serializer_class = NewsletterUsersSerializer
-#     filterset_class = NewsletterUserFilter

@@ -415,20 +415,3 @@ class ReprotSerializer(serializers.ModelSerializer):
         
     user_id = CustomUserSerializer(many=False, read_only=True)
     question_id = QuestionsV2Serializer(many=False)
-
-# class BlogSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Blog
-#         fields = (
-#             '__all__'
-#         )
-
-# class NewsletterUsersSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Newsletter_Users
-#         fields = (
-#             'id',
-#             'email',
-#             'username',
-#             'signedUp_On'
-#         )
