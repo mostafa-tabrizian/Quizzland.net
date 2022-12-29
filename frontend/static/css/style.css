@@ -401,11 +401,6 @@ hr {
   width: 0;
 }
 
-.MuiPaper-elevation1 {
-  background: rgb(30, 14, 14) !important;
-  border: 1px solid rgb(66, 0, 0);
-}
-
 .MuiDialog-container,
 .MuiBackdrop-root :not(.MuiPopover-root) {
   -webkit-backdrop-filter: blur(6px);
@@ -628,7 +623,7 @@ hr {
 
 .empty {
   position: relative;
-  right: 25%;
+  right: 5rem;
   margin: 3rem 0;
 }
 .empty:before {

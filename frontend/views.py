@@ -47,8 +47,6 @@ def index(request, *args, **kwargs):
     # FastFunctionForDB(request)
     return render(request, "frontend/index.html")
 
-
-@api_view(['POST'])
 def public_profile(request, *args, **kwargs):
     if request.method == 'POST':
         username = json.loads(request.body.decode('utf-8'))['username']
@@ -78,25 +76,23 @@ def public_profile(request, *args, **kwargs):
         except Exception as e:
             return HttpResponse(e)
 
+# def search_user(request, *args, **kwargs):
+#     if request.method == 'POST':
+#         username = json.loads(request.body.decode('utf-8'))['username']
 
-@api_view(['POST'])
-def search_user(request, *args, **kwargs):
-    if request.method == 'POST':
-        username = json.loads(request.body.decode('utf-8'))['username']
+#         try:
+#             user = CustomUser.objects.filter(Q(username__icontains=username) | Q(
+#                 first_name__icontains=username) | Q(last_name__icontains=username) | Q(email__icontains=username))
+#             user = core_serializers.serialize('json', user, fields=(
+#                 'id', 'avatar', 'first_name', 'last_name', 'username'
+#             ))
 
-        try:
-            user = CustomUser.objects.filter(Q(username__icontains=username) | Q(
-                first_name__icontains=username) | Q(last_name__icontains=username) | Q(email__icontains=username))
-            user = core_serializers.serialize('json', user, fields=(
-                'id', 'avatar', 'first_name', 'last_name', 'username'
-            ))
+#             return HttpResponse(user)
 
-            return HttpResponse(user)
-
-        except ObjectDoesNotExist:
-            return HttpResponse('DoesNotExist')
-        except Exception as e:
-            return HttpResponse(e)
+#         except ObjectDoesNotExist:
+#             return HttpResponse('DoesNotExist')
+#         except Exception as e:
+#             return HttpResponse(e)
 
 # def checkAlreadyUserExists(username, email):
 #     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists()
@@ -235,7 +231,8 @@ def auth_google(request, *args, **kwargs):
             welcome_message = Messages()
             welcome_message.user = user
             welcome_message.type = 'congrat'
-            welcome_message.message = f"{payload['firstName']} جان به کوییزلند خوش اومدی"
+            welcome_message.message = f"{payload['firstName']} به کوییزلند خوش اومدی"
+            # f"{payload['firstName']} جان به کوییزلند خوش اومدی"
             welcome_message.save()
 
         # generate token without username & password

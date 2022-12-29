@@ -137,7 +137,7 @@ const Playlist = () => {
 
                                 {
                                     quizContent.length ?
-                                    <ul className={`${gameType == 'quiz' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} flex flex-col flex-wrap align-baseline md:flex-row`}>
+                                    <ul className={`${gameType == 'quiz' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} flex flex-wrap align-baseline`}>
                                         <QuizContainer quizzes={quizContent} bgStyle={'trans'} />
                                     </ul>
                                     :
@@ -146,7 +146,7 @@ const Playlist = () => {
 
                                 {
                                     testContent.length ?
-                                    <ul className={`${gameType == 'test' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} flex flex-col flex-wrap align-baseline md:flex-row`}>
+                                    <ul className={`${gameType == 'test' ? 'pop_up opacity-100' : 'pop_down opacity-0 absolute'} flex flex-wrap align-baseline`}>
                                         <TestContainer tests={testContent} bgStyle={'trans'} />
                                     </ul>
                                     :

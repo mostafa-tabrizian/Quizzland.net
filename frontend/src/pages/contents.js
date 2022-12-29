@@ -97,6 +97,7 @@ const Category = (props) => {
     const fetchQuizzes = useCallback(
         debounce(
             async () => {
+                categoryQueryID &&
                 await axios.get(`/api/quizV2View/?categoryKey=${categoryQueryID}&public=true`)
                     .then(res => {
                         setQuizzes(res.data.sort(sortByMonthlyViews))
@@ -108,6 +109,7 @@ const Category = (props) => {
     const fetchTests = useCallback(
         debounce(
             async () => {
+                categoryQueryID &&
                 await axios.get(`/api/testView/?categoryKey=${categoryQueryID}&public=true`)
                     .then(res => {
                         setTests(res.data.sort(sortByMonthlyViews))

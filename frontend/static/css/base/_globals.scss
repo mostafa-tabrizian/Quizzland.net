@@ -325,10 +325,10 @@ hr {
     }
 }
 
-.MuiPaper-elevation1 {
-    background: rgb(30, 14, 14) !important;
-    border: 1px solid rgb(66, 0, 0);
-}
+// .MuiPaper-elevation1 {
+//     background: rgb(30, 14, 14) !important;
+//     border: 1px solid rgb(66, 0, 0);
+// }
 
 .MuiDialog-container,
 .MuiBackdrop-root :not(.MuiPopover-root) {
@@ -561,7 +561,7 @@ hr {
 
 .empty {
     position: relative;
-    right: 25%;
+    right: 5rem;
     margin: 3rem 0;
 
     &:before {

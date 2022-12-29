@@ -112,7 +112,7 @@ const QuizContainer = (props) => {
                     props.quizzes.length ?
                     props.quizzes.map((quiz) => {
                         return (
-                            <li key={quiz.id} onMouseEnter={() => setShowPlaylistButton(quiz.id)} onMouseLeave={() => setShowPlaylistButton(null)} className='relative mb-5 ml-5 md:mb-10 md:ml-10 flex-auto md:flex-none'>
+                            <li key={quiz.id} onMouseEnter={() => setShowPlaylistButton(quiz.id)} onMouseLeave={() => setShowPlaylistButton(null)} className='relative mb-5 md:mb-10 md:ml-10 md:flex-none'>
                                 <button onClick={() => addToWatchListClicked(quiz.id)} className={`${watchListButtonUnClickable?'':'pointer-events-none'} ${(showPlaylistButton == quiz.id) ? 'visible opacity-100 translate-y-0' : 'md:invisible md:opacity-0 md:translate-y-2'} duration-300 ease-in-out transition-all  absolute top-2 right-[-.5rem] z-[1]`}>
                                     <svg class="h-7 w-7 text-[#ac272e]"  fill="#1e0809" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>

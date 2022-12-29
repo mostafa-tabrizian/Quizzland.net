@@ -12,7 +12,7 @@ urlpatterns = [
     path('api/profile', public_profile),
     path('auth', auth_google),
     path("api/recaptcha", verify_recaptcha),
-    path('api/search_user', search_user),
+    # path('api/search_user', search_user),
     path('api/answer', answer),
     path('api/answers_poll', answers_poll),
     path('api/send_report', send_report),
