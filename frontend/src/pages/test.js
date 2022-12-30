@@ -9,7 +9,7 @@ import Skeleton from '@mui/material/Skeleton';
 import UserStore from '../store/userStore';
 
 import axios from '../components/axiosApi'
-import { log, getTheme, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
+import { log, replaceFunction, isItDesktop, isItMobile, isItIPad } from '../components/base'
 // import Trivia from '../components/quiz/trivia'
 import Test from '../components/quiz/test'
 import LoadingScreen from '../components/loadingScreen'
@@ -35,7 +35,6 @@ const TestQuiz = (props) => {
     const [SFXAllowed, setSFXAllowed] = useState(localStorage.getItem('SFXAllowed') == 'true')
     const [quiz, setQuiz] = useState(null)
     const [quizSlugReplacedWithHyphen, setQuizSlugReplacedWithHyphen] = useState()
-    const [theme, setTheme] = useState('dark')
     const [its404, set404] = useState(false)
 
     const location = useLocation();
@@ -66,8 +65,6 @@ const TestQuiz = (props) => {
         const slug = replaceFunction(window.location.pathname.split('/')[2], '-', '+')
         setQuizSlug(slug)
         setQuizSlugReplacedWithHyphen(slug)
-        const theme = getTheme()
-        setTheme(theme)
     }, [location]);
 
     // const checkRecaptcha = async () => {
@@ -187,7 +184,7 @@ const TestQuiz = (props) => {
         }
 
         document.getElementById(`inputLabel ${userChose}`).style.opacity = 1
-        document.getElementById(`inputLabel ${userChose}`).style.background = (theme == 'light' ? 'white' : '#000000bf')
+        document.getElementById(`inputLabel ${userChose}`).style.background = '#000000bf'
         document.getElementById(`inputLabel ${userChose}`).style.borderColor = '#6a0d11'
     }
 
@@ -431,7 +428,7 @@ const TestQuiz = (props) => {
         return (
             splittedTags.map(tag => {
                 return (
-                    <li key={tag} className='px-3 py-1 text-white rounded-lg'>
+                    <li style={{'background': `linear-gradient(180deg, transparent, darkRed)`}} key={tag} className='px-3 py-1 text-white rounded-lg'>
                         <h4>
                             <Link
                                 to={`/tags/${replaceFunction(tag, ' ', '+')}`}
@@ -670,7 +667,7 @@ const TestQuiz = (props) => {
                         <div>
                             <div className="pageNotFound text-[18rem] h-[13rem] md:h-[34rem] md:absolute md:left-1/2 md:top-1/2 items-center flex md:text-[50rem]">404</div>
 
-                            <div class="basicPage wrapper-sm relative" style={{ background: (theme == 'light' ? '#f0f0f0' : '#0000008c'), backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
+                            <div class="basicPage wrapper-sm relative" style={{ background: '#0000008c', backdropFilter: 'blur(15px)', boxShadow: 'none', zIndex: '1' }}>
                                 <h1> 🤔 اوپس! کوییز مورد نظر پیدا نشد </h1>
                                 <div class="mt-5">
                                     <h2>

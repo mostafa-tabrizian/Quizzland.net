@@ -481,7 +481,7 @@ class History(models.Model):
         return self.quizV2_id or self.test_id
 
     def __str__(self):
-        return f'{self.user_id.username} {self.date_submitted}'
+        return f'{self.date_submitted} history submitted'
 
 class Report(models.Model):
     id = models.AutoField(primary_key=True)

@@ -33,7 +33,6 @@ const Header = () => {
 
     useEffect(() => {
         getUserData()
-        dailyReward()
     }, [])
 
     useEffect(() => {
@@ -48,9 +47,11 @@ const Header = () => {
         if (userProfileDetailData == 'inactive') {
             enqueueSnackbar('اکانت شما غیرفعال شده است. لطفا با پشتیبانی تماس بگیرید.', { variant: 'warning', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
             Logout(cookies.USER_REFRESH_TOKEN, removeCookie)
-        } else {
+        }
+        else if (userProfileDetailData) {
             userActions.setUser(userProfileDetailData)
             userActions.updateQCoins(userProfileDetailData.q_coins)
+            dailyReward()
         }
     }
 

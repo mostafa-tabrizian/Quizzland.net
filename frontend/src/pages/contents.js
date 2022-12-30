@@ -79,10 +79,10 @@ const Category = (props) => {
                             fetchQuizzes(response.data[0].id)
                             fetchTests(response.data[0].id)
                         })
-                        // .catch(err => {
-                        //     log(err)
-                        //     log(err.response)
-                        // })
+                        .catch(err => {
+                            log(err)
+                            log(err.response)
+                        })
                     :
                     fetchWithoutCategory()
 

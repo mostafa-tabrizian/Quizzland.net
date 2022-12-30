@@ -385,8 +385,8 @@ const Quiz_V2 = (props) => {
                 return res.data
             })
             .catch(err => {
-                // log(err)
-                // log(err.response)
+                log(err)
+                log(err.response)
             })
     }
 
@@ -579,11 +579,9 @@ const Quiz_V2 = (props) => {
             test_id: 0
         }
 
-        log(payload)
-
         await axios.post(`/api/historyView/`, payload)
             .then(res => {
-                log(res)
+                // log(res)
             })
             .catch(err => {
                 log(err)

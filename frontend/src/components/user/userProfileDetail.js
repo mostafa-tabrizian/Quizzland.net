@@ -40,7 +40,7 @@ const UserProfileDetail = () => {
                         return 'inactive'
                 } else {
                     log('api login')
-                    // log(err)
+                    log(err)
                     log(err.response)
                     refreshToken()
                 }

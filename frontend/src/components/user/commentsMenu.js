@@ -51,8 +51,8 @@ const CommentsMenu = (props) => {
                     enqueueSnackbar('در حذف کامنت خطایی رخ داد! لطفا مجددا تلاش کنید.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 }
 
-                // log(err)
-                // log(err.response)
+                log(err)
+                log(err.response)
             })
 
         handleCloseMenu()

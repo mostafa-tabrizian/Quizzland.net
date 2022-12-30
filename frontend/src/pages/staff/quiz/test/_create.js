@@ -88,8 +88,8 @@ const CreateTest = () => {
             })
             .catch(err => {
                 log('err: fetchCategories')
-                // log(err)
-                // log(err.response)
+                log(err)
+                log(err.response)
             })
     }
 
@@ -101,8 +101,8 @@ const CreateTest = () => {
                 })
                 .catch(err => {
                     log('err: fetchSubcategories')
-                    // log(err)
-                    // log(err.response)
+                    log(err)
+                    log(err.response)
                 })
     }
 

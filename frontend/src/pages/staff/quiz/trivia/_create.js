@@ -47,8 +47,8 @@ const CreateTrivia = () => {
             })
             .catch(err => {
                 log('err: fetchCategories')
-                // log(err)
-                // log(err.response)
+                log(err)
+                log(err.response)
             })
     }
 

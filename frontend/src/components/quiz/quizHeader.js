@@ -36,7 +36,6 @@ const QuizHeader = (props) => {
                             title.current.value = ''
                             description.current.value = ''
                         }, 1000);
-                        log(res)
                     })
                     .catch(err => {
                         log(err)

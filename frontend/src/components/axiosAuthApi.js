@@ -47,9 +47,6 @@ axiosInstance.interceptors.response.use(
             {
                 const refreshToken = getCookie('USER_REFRESH_TOKEN');
 
-                log(refreshToken)
-                log(refreshToken.includes('undefined'))
-
                 if (refreshToken && !refreshToken.includes('undefined')) {
                     const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
 
@@ -80,9 +77,6 @@ axiosInstance.interceptors.response.use(
                         window.location.reload()
                         // window.location.href = '/login';
                     }
-                }else{
-                    log('logged from 4')
-                    // window.location.href = '/login';
                 }
         }
       

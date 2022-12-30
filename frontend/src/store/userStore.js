@@ -3,8 +3,8 @@ import { log } from '../components/base';
 
 const UserStoreCode = createStore({
     initialState: {
-        userDetail: null,
-        QCoins: null
+        userDetail: false,
+        QCoins: false
     },
     actions: {
         setUser:
