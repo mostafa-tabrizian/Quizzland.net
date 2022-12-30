@@ -13,7 +13,6 @@ const SkeletonTestContainer = React.lazy(() => import('../components/skeletonTes
 
 const Category = (props) => {
     const [categoryQuery, setCategoryQuery] = useState(window.location.pathname.split('/')[2] ? replaceFunction(window.location.pathname.split('/')[2], '-', ' ') : '')
-    const [categoryQueryID, setCategoryQueryID] = useState('')
     const [categoryTitle, setCategoryTitle] = useState()
     const [quizzes, setQuizzes] = useState([])
     const [tests, setTests] = useState([])
@@ -32,10 +31,7 @@ const Category = (props) => {
 
     useEffect(() => {
         defineCategoryTitle()
-        fetchQuizzes()
-        fetchTests()
-        setContentLoaded(true)
-    }, [categoryQuery, categoryQueryID, categoryTitle])
+    }, [categoryQuery, categoryTitle])
 
     useEffect(() => {
         setCategoryQuery(window.location.pathname.split('/')[2] ? replaceFunction(window.location.pathname.split('/')[2], '-', ' ') : '');
@@ -45,12 +41,6 @@ const Category = (props) => {
     useEffect(() => {
         sortContent()
     }, [quizzes, tests, sortType])
-
-    const categoryTitleToPersian = {
-        'celebrity': 'سلبریتی',
-        'movie-&-series': 'فیلم و سریال',
-        // 'psychology': 'روانشناسی'
-    }
 
     const sortContent = () => {
         switch (sortType) {
@@ -72,9 +62,10 @@ const Category = (props) => {
         }
     }
 
-    const resetCategoryData = () => {
+    const fetchWithoutCategory = () => {
         setCategoryTitle()
-        setCategoryQueryID('')
+        fetchQuizzes('')
+        fetchTests('')
     }
 
     const defineCategoryTitle = useCallback(
@@ -85,19 +76,26 @@ const Category = (props) => {
                     await axios.get(`/api/categoryView/?title_english__icontains=${replaceFunction(categoryQuery, '-', ' ')}&public=true`)
                         .then((response) => {
                             setCategoryTitle(response.data[0].title_persian)
-                            setCategoryQueryID(response.data[0].id)
+                            fetchQuizzes(response.data[0].id)
+                            fetchTests(response.data[0].id)
                         })
+                        // .catch(err => {
+                        //     log(err)
+                        //     log(err.response)
+                        // })
                     :
-                    resetCategoryData()
+                    fetchWithoutCategory()
+
+                    setContentLoaded(true)
                 } catch (err) {}
+
             }, 500
         )
     )
 
     const fetchQuizzes = useCallback(
         debounce(
-            async () => {
-                categoryQueryID &&
+            async (categoryQueryID) => {
                 await axios.get(`/api/quizV2View/?categoryKey=${categoryQueryID}&public=true`)
                     .then(res => {
                         setQuizzes(res.data.sort(sortByMonthlyViews))
@@ -108,8 +106,7 @@ const Category = (props) => {
 
     const fetchTests = useCallback(
         debounce(
-            async () => {
-                categoryQueryID &&
+            async (categoryQueryID) => {
                 await axios.get(`/api/testView/?categoryKey=${categoryQueryID}&public=true`)
                     .then(res => {
                         setTests(res.data.sort(sortByMonthlyViews))
