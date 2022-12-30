@@ -238,7 +238,7 @@ const LikeCommentButton = (props) => {
 
                     {/* Lifelines */}
                     {
-                        props.quizType == 'play' &&
+                        props.lifeline == true &&
                         <React.Fragment>
                             <button onClick={() => setLifeline(lifeline ? false : true)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" width={24} height={24} viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">

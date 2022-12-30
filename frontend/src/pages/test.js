@@ -326,16 +326,6 @@ const TestQuiz = (props) => {
         }
     }
 
-    const gifAnswerOfQuestionIfExistShow = (question) => {
-        return <LazyLoadImage
-            src={question.answer_imGif}
-            width={1366}
-            className='object-contain object-top pb-4 m-auto'
-            alt={question.title}
-            title={question.title}
-        />
-    }
-
     const isSafari = typeof (window) !== 'undefined' && navigator.userAgent.indexOf("Chrome") != -1 === false && navigator.userAgent.indexOf("Chrome") != -1
 
     const quizQuestions = (browser) => {
@@ -592,9 +582,9 @@ const TestQuiz = (props) => {
                                 </div>
                             </div>
 
-                            <TestHeader quizDetail={quiz} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
+                            <TestHeader quizDetail={quiz} questionCurrent={questions[currentQuestionNumber - 1]?.id} contentLoaded={contentLoaded} questionsLength={questions?.length} autoQuestionChanger={autoQuestionChanger} changeAutoQuestionChanger={changeAutoQuestionChanger} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {quiz?.id && <LikeCommentButton quiz={quiz} quizType='test' />}
+                            {quiz?.id && <LikeCommentButton lifeline={false} quiz={quiz} quizType='test' />}
 
                             {
                                 contentLoaded && isItDesktop() &&

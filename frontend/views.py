@@ -97,7 +97,6 @@ def public_profile(request, *args, **kwargs):
 # def checkAlreadyUserExists(username, email):
 #     return CustomUser.objects.filter(username=username).exists() or CustomUser.objects.filter(email=email).exists()
 
-@api_view(['GET'])
 def answer(request, *args, **kwargs):
     if request.method == 'GET':
         questionId = request.GET.get('questionId')
@@ -109,7 +108,6 @@ def answer(request, *args, **kwargs):
             'answer_imGif': answer.answer_imGif.url
         })
         
-@api_view(['GET'])
 def answers_poll(request, *args, **kwargs):
     if request.method == 'GET':
         questionId = request.GET.get('questionId')
@@ -143,13 +141,21 @@ def send_report(request):
         question_id = payload['question_id']
         title = payload['title']
         description = payload['description']
+        type = payload['type']
 
         try:
-            question = Questions_V2.objects.get(id=question_id)
+            questionQuiz = None
+            questionTest = None
             
+            if type == 'quiz':
+                questionQuiz = Questions_V2.objects.filter(id=question_id)
+            elif type == 'test':
+                questionTest = Pointy_Questions.objects.filter(id=question_id)
+                
             new_report = Report()
             new_report.user_id = request.user
-            new_report.question_id = question
+            new_report.questionQuiz_id = questionQuiz and questionQuiz[0]
+            new_report.questionPointy_id = questionTest and questionTest[0]
             new_report.title = title
             new_report.description = description
             new_report.save()

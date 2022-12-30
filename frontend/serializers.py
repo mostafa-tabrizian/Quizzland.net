@@ -414,4 +414,5 @@ class ReprotSerializer(serializers.ModelSerializer):
         )
         
     user_id = CustomUserSerializer(many=False, read_only=True)
-    question_id = QuestionsV2Serializer(many=False)
+    questionQuiz_id = QuestionsV2Serializer(many=False)
+    questionPointy_id = QuestionsPointySerializer(many=False)

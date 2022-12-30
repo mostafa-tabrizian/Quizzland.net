@@ -170,7 +170,8 @@ class ReportFilter(filters.FilterSet):
         model = Report
         fields = {
             'user_id': ['exact'],
-            'question_id': ['exact'],
+            'questionQuiz_id': ['exact'],
+            'questionPointy_id': ['exact'],
             'title': ['icontains'],
             'date_submitted': ['lte', 'gte']
         }

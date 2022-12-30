@@ -24,7 +24,8 @@ const QuizHeader = (props) => {
                 const payload = {
                     question_id: props.questionCurrent,
                     title: title.current.value,
-                    description: description.current.value
+                    description: description.current.value,
+                    type: 'test'
                 }
 
                 await axiosInstance.post('/api/send_report', payload)

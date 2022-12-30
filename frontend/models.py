@@ -486,11 +486,16 @@ class History(models.Model):
 class Report(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(CustomUser, related_name='user_report_id', blank=False, null=True, on_delete=models.SET_NULL)
-    question_id = models.ForeignKey(Questions_V2, related_name='question_report_id', blank=True, null=True, on_delete=models.CASCADE)
+    questionQuiz_id = models.ForeignKey(Questions_V2, related_name='question_report_id', blank=True, null=True, on_delete=models.CASCADE)
+    questionPointy_id = models.ForeignKey(Pointy_Questions, related_name='questionPointy_report_id', blank=True, null=True, on_delete=models.CASCADE)
     title = models.CharField(blank=False, null=False, max_length=255)
     description = models.CharField(blank=False, null=False, max_length=255)
     date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
 
+    @property
+    def question_id(self):
+        return self.questionQuiz_id or self.questionPointy_id
+    
     def __str__(self):
         return f'{self.question_id} reported on {self.date_submitted}'
     

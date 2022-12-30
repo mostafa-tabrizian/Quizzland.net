@@ -934,6 +934,9 @@ const Quiz_V2 = (props) => {
                                 بازگشت
                             </Link>
                         </div>
+                        <div className='ltr'>
+                            {quiz?.id && <LikeCommentButton question={questions[currentQuestionNumber - 1]} lifeline={false} fiftyFifty={fiftyFifty} pollAudience={pollAudience} skipQuestion={skipQuestion} quiz={quiz} quizType={'play'} />}
+                        </div>
                     </div>
                 }
             </div>
@@ -956,7 +959,7 @@ const Quiz_V2 = (props) => {
 
                             <QuizHeader questionCurrent={questions[currentQuestionNumber - 1]?.id} quizDetail={quiz} contentLoaded={contentLoaded} SFXAllowed={SFXAllowed} SFXController={SFXController} />
 
-                            {quiz?.id && <LikeCommentButton question={questions[currentQuestionNumber - 1]} fiftyFifty={fiftyFifty} pollAudience={pollAudience} skipQuestion={skipQuestion} quiz={quiz} quizType={'play'} />}
+                            {quiz?.id && <LikeCommentButton question={questions[currentQuestionNumber - 1]} lifeline={true} fiftyFifty={fiftyFifty} pollAudience={pollAudience} skipQuestion={skipQuestion} quiz={quiz} quizType={'play'} />}
 
                             <div className={`quiz__questions mb-4 relative flex justify-center text-center mt-12 md:mt-0`} tag="quiz">
                                 {
