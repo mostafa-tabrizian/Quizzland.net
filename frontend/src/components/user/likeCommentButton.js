@@ -227,7 +227,7 @@ const LikeCommentButton = (props) => {
     
     return (
         <React.Fragment>
-            <div className='fixed z-10 flex justify-center w-screen md:bottom-6 bottom-14'>
+            <div className='fixed z-10 flex justify-center w-screen md:bottom-6 bottom-14 left-0'>
                 <div style={{'background': props.quiz?.theme || props.quizDetail?.question_background || '#991b1b'}} className={`flex shadow-[0_0_4px_white] px-4 py-2 space-x-5 rounded-2xl`}>
                     {/* comment button */}
                     <button onClick={() => setCommentsPanelState(true)}>

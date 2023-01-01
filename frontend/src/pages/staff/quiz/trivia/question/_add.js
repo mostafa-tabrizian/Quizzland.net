@@ -6,10 +6,11 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import { useSnackbar } from 'notistack'
-import UserStore from '../../../../../store/userStore';
 
+import UserStore from '../../../../../store/userStore';
 import { log } from '../../../../../components/base'
 import axiosInstance from '../../../../../components/axiosAuthApi';
+import BackdropLoading from '../../../../../components/backdropLoading';
 
 const CreateQuestion = () => {
     useEffect(() => {
@@ -26,6 +27,7 @@ const CreateQuestion = () => {
     const [optionImage3rdURL, setOptionImage3rdURL] = useState()
     const [optionImage4thURL, setOptionImage4thURL] = useState()
     const [answerImageGIFURL, setAnswerImageGIFURL] = useState()
+    const [loading, setLoading] = useState(false)
 
     const questionRef = useRef()
     const option1stRef = useRef()
@@ -93,6 +95,8 @@ const CreateQuestion = () => {
     }
 
     const postQuestion = async () => {
+        setLoading(true)
+
         document.getElementById('quizKey').scrollIntoView()
 
         if (validCheckQuestionAnswer()) {
@@ -131,8 +135,6 @@ const CreateQuestion = () => {
                     log(err)
                     log(err.response)
                 })
-        } else {
-
         }
     }
 
@@ -176,9 +178,10 @@ const CreateQuestion = () => {
                 log('err: postAnswer')
                 log(err)
                 log(err.response)
+                log(answerImageGIFURL)
             })
-        
-
+            
+            setLoading(false)        
     }
 
     const quizKeyChanged = (e, value) => {
@@ -193,6 +196,8 @@ const CreateQuestion = () => {
                 <title>Trivia Question Add</title>
                 <meta name='robots' content='noindex' />
             </Helmet>
+
+            <BackdropLoading loadingStatue={loading} />
             
             {
                 userProfile.userDetail?.is_staff ?

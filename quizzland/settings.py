@@ -83,7 +83,8 @@ SIMPLE_JWT = {
 ALLOWED_HOSTS = [
     'www.quizzland.net', 'quizzland.net', 
     'www.quizzland.ir', 'quizzland.ir',
-    'localhost', '192.168.1.6'
+    'localhost', '192.168.1.6',
+    'mail.quizzland.net'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False

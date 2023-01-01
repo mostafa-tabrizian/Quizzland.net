@@ -284,7 +284,7 @@ class Questions(models.Model):
     answer = models.IntegerField(blank=False, default=None)
     answer_imGif = models.ImageField(
         upload_to='Answer-And-Result-ImGIf', default='NotExist.jpg')
-    answer_text = RichTextField(blank=True, default=None)
+    answer_text = models.CharField(max_length=200, blank=True, default=None)
 
     def __str__(self):
         return str(self.quizKey)
@@ -322,7 +322,7 @@ class Answer_V2(models.Model):
     questionKey = models.ForeignKey(Questions_V2, related_name='questionKey_answer_V2', on_delete=models.CASCADE, blank=False, null=False)
     answer = models.IntegerField(blank=False, default=None)
     answer_imGif = models.ImageField(upload_to='Answer-And-Result-ImGIf-V2', default='NotExist.jpg')
-    answer_text = RichTextField(blank=True, default=None)
+    answer_text = models.CharField(max_length=200, blank=True, default=None)
     
     def __str__(self):
         return str({

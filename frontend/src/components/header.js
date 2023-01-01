@@ -240,7 +240,7 @@ const Header = () => {
                 open={dailyRewardPopStatue}
             >
                 <div className='border-2 border-[#8f0e0e] rounded-lg'>
-                    <button className='absolute right-[0] top-[0]' onClick={() => setDailyRewardPopStatue(false)}>
+                    <button className='absolute right-[0] top-[0] z-10' onClick={() => setDailyRewardPopStatue(false)}>
                         <svg class="h-8 w-8 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                     </button>
                     <img className='mx-auto' src="/static/img/reward.png" alt="" />

@@ -906,7 +906,7 @@ const Quiz_V2 = (props) => {
                                         correctAnswersCount ?
                                         <div className='flex'>
                                             <p className='text-[1rem] flex mx-auto textShadow'>
-                                                {Math.round((correctAnswersCount * 3) / 5) * 5}  {/* Nearest to five when correct times 3 */}
+                                                {correctAnswersCount * 25}  {/* Nearest to five when correct times 3 */}
                                                 <img className='h-6 mx-2' src="/static/img/QCoin.png" />
                                                 کیو کوین دریافت کردید.
                                             </p>

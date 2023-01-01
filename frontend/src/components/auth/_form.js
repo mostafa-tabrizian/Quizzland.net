@@ -21,14 +21,7 @@ import UserStore from '../../store/userStore'
 import * as jose from 'jose'
 
 const LoginForm = () => {
-    const [loginLoading, setLoginLoading] = useState(false)
-    const [loginAvailable, setLoginAvailable] = useState(false)
-    
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
-
-    setTimeout(() => {
-        setLoginAvailable(true)
-    }, 3000);
 
     const [userProfile] = UserStore()
     
@@ -36,6 +29,7 @@ const LoginForm = () => {
     
     useEffect(() => {
         filterAvatar()
+        googleButtonRender()
     }, [])
 
     useEffect(() => {
@@ -176,11 +170,12 @@ const LoginForm = () => {
         setLoginLoading(false)
     }
 
-    window.onload = () => {
+    const googleButtonRender = () => {
         google.accounts.id.initialize({
             client_id: process.env.GOOGLE_LOGIN_CLIENT,
             callback: googleLogin
         });
+
         google.accounts.id.renderButton(
             document.getElementById("googleLoginButton"),
             {
