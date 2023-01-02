@@ -13,7 +13,7 @@ const cache = setupCache({
 
 const axiosInstance = rateLimit(
     axios.create({
-        timeout: 60_000,  // 1min
+        timeout: 20000,  // 1min
         headers: {
             'Authorization': "JWT " + getCookie('USER_ACCESS_TOKEN'),
             'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
     error => {
         const originalRequest = error.config;
 
-        if (String(error).includes('timeout ')) {
+        if (String(error).includes('timeout')) {
             log('network error')
         }
 

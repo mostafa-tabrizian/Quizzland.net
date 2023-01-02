@@ -127,6 +127,7 @@ const CreateQuestion = () => {
                     } else {
                         log(res)
                         enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                        setLoading(false)    
                     }
                 })
                 .catch(err => {
@@ -134,6 +135,7 @@ const CreateQuestion = () => {
                     log('err: postQuestion')
                     log(err)
                     log(err.response)
+                    setLoading(false)    
                 })
         }
     }
@@ -178,7 +180,6 @@ const CreateQuestion = () => {
                 log('err: postAnswer')
                 log(err)
                 log(err.response)
-                log(answerImageGIFURL)
             })
             
             setLoading(false)        
