@@ -44,29 +44,26 @@ const CreateQuestion = () => {
     }, [])
 
     const fetchQuizzes = async () => {
+        setLoading(true)
+
         const now = new Date().getTime()
         
         await axiosInstance.get(`/api/quizV2View/?timestamp=${now}`)
             .then(res => {
                 setQuizzes(res.data.reverse())
+                setLoading(false)
             })
             .catch(err => {
+                setLoading(false)
                 log('err: fetchQuizzes')
                 log(err)
                 log(err.response)
             })
     }
 
-    const removeWhiteSpace = (value) => {
-        if (value) {
-            return String(value).replace(/\s/g, "")
-        }
-    }
-
     const validCheckQuestionAnswer = () => {
         const answerCorrectRange = 0 <= answerRef.current.value <= 4
         const quizSelected = selectedQuiz?.id !== undefined
-        // const questionFilled = removeWhiteSpace(questionRef.current.innerText) !== undefined
 
         if (answerCorrectRange && quizSelected) {
             return true
@@ -125,17 +122,17 @@ const CreateQuestion = () => {
                         enqueueSnackbar('سوال با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                         postAnswer(res.data)
                     } else {
-                        log(res)
-                        enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                         setLoading(false)    
+                        enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                        log(res)
                     }
                 })
                 .catch(err => {
+                    setLoading(false)    
                     enqueueSnackbar('در ثبت سوال خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                     log('err: postQuestion')
                     log(err)
                     log(err.response)
-                    setLoading(false)    
                 })
         }
     }
@@ -143,11 +140,15 @@ const CreateQuestion = () => {
     const deleteTheQuestion = async (questionId) => {
         await axiosInstance.delete(`/api/questionsV2View/${questionId}/`)
             .then(res => {
+                setLoading(false)        
                 enqueueSnackbar('به دلیل خطا در ارسال پاسخ، سوال حذف گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+
             })
             .catch(err => {
+                setLoading(false)        
                 if (res.status !== 404) {
                     enqueueSnackbar('به دلیل خطا در ارسال پاسخ، در تلاش حذف سوال همچنین خطایی رخ داد!.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
+                    
                 }
                 log(err)
                 log(err.response)
@@ -165,11 +166,12 @@ const CreateQuestion = () => {
         await axiosInstance.post('/api/answerV2View/', answerFormData)
             .then(res => {
                 if (res.status == 200) {
+                    setLoading(false)        
                     enqueueSnackbar('جواب با موفقیت ثبت گردید.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                     resetInputs()
                 } else {
                     enqueueSnackbar('در ثبت جواب خطایی رخ داد.', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
-                    deleteTheQuestion(questionId)
+                    deleteTheQuestion(questionId)       
                     log(res)
                     log(res.response)
                 }
@@ -182,7 +184,6 @@ const CreateQuestion = () => {
                 log(err.response)
             })
             
-            setLoading(false)        
     }
 
     const quizKeyChanged = (e, value) => {

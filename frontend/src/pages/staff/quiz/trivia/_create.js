@@ -12,19 +12,20 @@ import { useSnackbar } from 'notistack'
 import { log } from '../../../../components/base';
 import axiosInstance from '../../../../components/axiosAuthApi';
 import UserStore from '../../../../store/userStore';
+import BackdropLoading from '../../../../components/backdropLoading';
 
 const CreateTrivia = () => {
     const [publicState, setPublic] = useState(false)
     const [categories, setCategories] = useState([])
     const [selectedCategory, selectCategory] = useState()
     const [theme, setTheme] = useState('#ffffff')
-    const [fees, setFees] = useState()
     const [thumbnailURL, setThumbnailURL] = useState()
     const [GIF_awful, setGIF_awful] = useState()
     const [GIF_bad, setGIF_bad] = useState()
     const [GIF_ok, setGIF_ok] = useState()
     const [GIF_good, setGIF_good] = useState()
     const [GIF_great, setGIF_great] = useState()
+    const [loading, setLoading] = useState(false)
 
     const slugRef = useRef()
     const titleRef = useRef()
@@ -41,18 +42,24 @@ const CreateTrivia = () => {
     const [userProfile, userActions] = UserStore()
     
     const fetchCategories = async () => {
+        setLoading(true)
+
         await axiosInstance.get('/api/categoryView/')
             .then(res => {
                 setCategories(res.data)
+                setLoading(false)
             })
             .catch(err => {
                 log('err: fetchCategories')
                 log(err)
                 log(err.response)
+                setLoading(false)
             })
     }
 
     const postTrivia = async () => {
+        setLoading(true)
+        
         let formData = new FormData()
 
         formData.append('public', publicState)
@@ -76,11 +83,13 @@ const CreateTrivia = () => {
             },
         })
             .then(res => {
+                setLoading(false)
                 if (res.status === 200) {
                     enqueueSnackbar('کوییز تریویا با موفقیت ایجاد شد.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 }
             })
             .catch(err => {
+                setLoading(false)
                 enqueueSnackbar('در ایجاد کوییز تریویا خطایی رخ داد.', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' }})
                 log('err: postTrivia')
                 log(err)
@@ -94,6 +103,9 @@ const CreateTrivia = () => {
                 <title>Trivia Create</title>
                 <meta name='robots' content='noindex' />
             </Helmet>
+
+            <BackdropLoading loadingStatue={loading} />
+
             {
                 userProfile.userDetail?.is_staff ?
                 <div className='text-center mx-auto my-20 max-w-[40rem]'>

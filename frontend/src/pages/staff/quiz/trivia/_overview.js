@@ -13,9 +13,11 @@ import { log } from '../../../../components/base';
 import calcView from '../../../../components/quiz/calcView'
 import axiosInstance from '../../../../components/axiosAuthApi';
 import UserStore from '../../../../store/userStore';
+import BackdropLoading from '../../../../components/backdropLoading';
 
 const OverviewTrivia = () => {
     const [tableRows, setTableRows] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const { enqueueSnackbar } = useSnackbar()
 
@@ -77,11 +79,13 @@ const OverviewTrivia = () => {
           })
 
           setTableRows(preTablesRows)
+          setLoading(false)
         })
         .catch(err => {
-            log('err: fetchQuizzes')
-            log(err)
-            log(err.response)
+          log('err: fetchQuizzes')
+          setLoading(false)
+          log(err)
+          log(err.response)
         })
     }
 
@@ -206,6 +210,12 @@ const OverviewTrivia = () => {
 
     const columns = [
         {
+          field: 'id',
+          headerName: 'ویرایش',
+          renderCell: (params) => <a href={`/adminTheKingAlexanderJosef/frontend/quizzes_v2/${params.row.id}/change/`} target='_blank'>✒️</a>,
+          width: 75,
+        },
+        {
             field: 'title',
             headerName: 'عنوان',
             renderCell: renderCellExpand,
@@ -286,6 +296,8 @@ const OverviewTrivia = () => {
                 <title>Trivia Overview</title>
                 <meta name='robots' content='noindex' />
             </Helmet>
+
+            <BackdropLoading loadingStatue={loading} />
 
             {
                 userProfile.userDetail?.is_staff ?
