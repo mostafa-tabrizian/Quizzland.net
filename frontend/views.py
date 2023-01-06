@@ -292,8 +292,11 @@ def calcView(request, *args, **kwargs):
         data = {}
         
         for history in histories:
-            history = history.quizV2_id.slug
-            
+            if history.quizV2_id:
+                history = history.quizV2_id.slug
+            elif history.test_id:
+                history = history.test_id.slug
+                
             if history in data:
                 data[history] += 1
             else:

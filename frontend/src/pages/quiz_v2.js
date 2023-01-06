@@ -313,7 +313,7 @@ const Quiz_V2 = (props) => {
     const payAndPlay = async () => {
         if (await payFees()) {
             setJoinPaper(false)
-            postToHistory(quizDetailRef.current)
+            postToHistory()
         }
     }
 
@@ -573,9 +573,9 @@ const Quiz_V2 = (props) => {
             })
     }
 
-    const postToHistory = async (quiz) => {
+    const postToHistory = async () => {
         const payload = {
-            quizV2_id: quiz?.id,
+            quizV2_id: quizDetailRef.current?.id,
             test_id: 0
         }
 

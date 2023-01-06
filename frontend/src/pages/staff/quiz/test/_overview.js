@@ -12,31 +12,69 @@ import Paper from '@mui/material/Paper';
 import UserStore from '../../../../store/userStore';
 import { log } from '../../../../components/base';
 import axiosInstance from '../../../../components/axiosAuthApi';
+import calcView from '../../../../components/quiz/calcView'
 
 const OverviewTests = () => {
     const [tableRows, setTableRows] = useState([])
 
     const { enqueueSnackbar } = useSnackbar()
 
-    const insertTable = (id, title, slug, subcategory, category, monthlyViews, totalViews, publishDate, publicAccess) => {
-        return {id, title, slug, subcategory, category, monthlyViews, totalViews, publishDate, publicAccess };
+    const insertTable = (id, title, slug, subcategory, category, likes, comments, monthlyViews, totalViews, publishDate, publicAccess) => {
+        return {id, title, slug, subcategory, category, likes, comments, monthlyViews, totalViews, publishDate, publicAccess };
     }
 
-    useEffect(() => {
-        fetchQuizzes()
+    useEffect(async () => {
+      document.querySelector('body').style = `background: linear-gradient(15deg, black, #100000, #5e252b)`
+
+      await fetchLikes()
+      await fetchComments()
+      await fetchViews()
+      await fetchQuizzes()
     }, []);
 
     const [userProfile, userActions] = UserStore()
 
+    const now = new Date().getTime()
+    let likes
+    let comments
+    let views
+    let monthlyViews
+
+    const fetchLikes = async () => {
+      await axiosInstance.get(`/api/likeView/?timestamp=${now}`)
+        .then(res => {
+            likes = res.data
+        })
+    }
+
+    const fetchComments = async () => {
+        await axiosInstance.get(`/api/commentView/?timestamp=${now}`)
+          .then(res => {
+              comments = res.data
+          })
+    }
+
+    const fetchViews = async () => {
+      const quizzesView = await calcView()
+      const quizzesMonthlyView = await calcView('monthly')
+
+      views = quizzesView
+      monthlyViews= quizzesMonthlyView
+    }
+
     const fetchQuizzes = async () => {
-        const now = new Date().getTime()
-        
         await axiosInstance.get(`/api/testView/?timestamp=${now}`)
             .then(res => { 
                 let preTablesRows = []
                 res.data.reverse().map(quiz => {
-                    preTablesRows.push(insertTable(quiz.id, quiz.title, quiz.slug, quiz.subCategory, quiz.categoryKey.title_persian, quiz.monthly_views, quiz.views, quiz.publish, quiz.public))
+                  const quizView = views[quiz.slug]
+                  const quizMonthlyView = monthlyViews[quiz.slug]
+                  const quizLikes = likes?.filter(x => x.test_id?.id == quiz.id)
+                  const quizComments = comments?.filter(x => x.test_id == quiz.id)
+
+                    preTablesRows.push(insertTable(quiz.id, quiz.title, quiz.slug, quiz.subCategory, quiz.categoryKey.title_persian, quizLikes?.length, quizComments?.length, quizMonthlyView, quizView, quiz.publish, quiz.public))
                 })
+
                 setTableRows(preTablesRows)
             })
             .catch(err => {
@@ -48,8 +86,8 @@ const OverviewTests = () => {
 
     function isOverflown(element) {
         return (
-        element.scrollHeight > element.clientHeight ||
-        element.scrollWidth > element.clientWidth
+          element.scrollHeight > element.clientHeight ||
+          element.scrollWidth > element.clientWidth
         );
     }
 
@@ -183,6 +221,18 @@ const OverviewTests = () => {
             headerName: 'کتگوری',
             renderCell: renderCellExpand,
             width: 150
+        },
+        {
+            field: 'likes',
+            headerName: 'لایک ها',
+            renderCell: renderCellExpand,
+            width: 75
+        },
+        {
+            field: 'comments',
+            headerName: 'کامنت ها',
+            renderCell: renderCellExpand,
+            width: 75
         },
         {
             field: 'monthlyViews',
