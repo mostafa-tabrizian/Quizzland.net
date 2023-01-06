@@ -17,14 +17,11 @@ import {
   
 import axiosInstance from '../axiosAuthApi';;
 import { log } from '../base'
-import UserStore from '../../store/userStore'
 import * as jose from 'jose'
+import userProfileDetail from '../user/userProfileDetail'
 
 const LoginPrompt = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['USER_ACCESS_TOKEN', 'USER_REFRESH_TOKEN']);
-
-    const [userProfile] = UserStore()
-    
     const { enqueueSnackbar } = useSnackbar()
     
     useEffect(() => {
@@ -124,8 +121,7 @@ const LoginPrompt = () => {
     const googleLogin = async (res) => {
         const JWT_Token = res.credential
         const profileDetail = jose.decodeJwt(JWT_Token)
-
-        if (userProfile.userDetail == false && profileDetail.email_verified) {
+        if (profileDetail.email_verified) {
             const payload = {
                 accessToken: JWT_Token,
                 username: profileDetail.name.replaceAll(' ', ''),
@@ -158,12 +154,16 @@ const LoginPrompt = () => {
         }
     }
 
-    window.onload = () => {
-        google.accounts.id.initialize({
-            client_id: process.env.GOOGLE_LOGIN_CLIENT,
-            callback: googleLogin
-        });
-        google.accounts.id.prompt(); // also display the One Tap dialog
+    window.onload = async () => {
+        const userProfile = await userProfileDetail()
+
+        if (userProfile == false) {
+            google.accounts.id.initialize({
+                client_id: process.env.GOOGLE_LOGIN_CLIENT,
+                callback: googleLogin
+            });
+            google.accounts.id.prompt(); // also display the One Tap dialog
+        }
     }
 
     return ('')
