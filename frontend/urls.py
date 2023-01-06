@@ -17,6 +17,7 @@ urlpatterns = [
     path('api/answers_poll', answers_poll),
     path('api/send_report', send_report),
     path('api/daily_reward', daily_reward),
+    path('api/calcView', calcView),
     
     path('login', index),
     

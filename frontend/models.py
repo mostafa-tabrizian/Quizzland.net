@@ -10,7 +10,6 @@ Gender = (
     ('female', 'Female')
 )
 
-
 class CustomUser(AbstractUser):
     blocked = models.BooleanField(default=False)
     avatar = models.CharField(blank=True, null=True, max_length=600,default='{"accessory":"shades","body":"chest","circleColor":"blue","clothing":"tankTop","clothingColor":"red","eyebrows":"raised","eyes":"simple","faceMask":false,"faceMaskColor":"white","facialHair":"none","graphic":"none","hair":"none","hairColor":"pink","hat":"none","hatColor":"blue","lashes":false,"lipColor":"green","mask":true,"mouth":"serious","skinTone":"light"}')
@@ -87,7 +86,6 @@ class SubCategories(models.Model):
     def __str__(self):
         return str(self.subCategory)
 
-
 class Quizzes(models.Model):
     id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=4, default='quiz')
@@ -130,7 +128,6 @@ class Quizzes(models.Model):
 
     def __unicode__(self):
         return 'test'
-
 
 class Quizzes_V2(models.Model):
     id = models.AutoField(primary_key=True)
@@ -425,7 +422,6 @@ class Like(models.Model):
     def __str__(self):
         return f'{self.user_id.username} liked {self.quiz_id.title}'
 
-
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     comment_text = models.CharField(blank=False, null=False, max_length=255)
@@ -441,7 +437,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.submitter_id.username} commented on {self.quiz_id.title}'
-
 
 class Watch_List(models.Model):
     id = models.AutoField(primary_key=True)
@@ -463,7 +458,6 @@ class Watch_List(models.Model):
 
     def __str__(self):
         return f'{self.user_id.username} liked {self.quiz_id.title}'
-
 
 class History(models.Model):
     id = models.AutoField(primary_key=True)

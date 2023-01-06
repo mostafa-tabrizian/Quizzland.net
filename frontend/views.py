@@ -250,7 +250,6 @@ def auth_google(request, *args, **kwargs):
 
         return HttpResponse(json.dumps(response))
 
-
 def restartEveryMonthlyViews(request):
     try:
         quizzes = Quizzes_V2.objects.all()
@@ -280,6 +279,27 @@ def restartEveryMonthlyViews(request):
 
     return render(request, "frontend/index.html")
 
+def calcView(request, *args, **kwargs):
+    if request.method == 'GET':
+        date_range = request.GET.get('dateRange')
+    
+        if date_range == 'monthly':
+            month_ago = datetime.datetime.fromtimestamp(datetime.datetime.timestamp(datetime.datetime.now()) - 2_592_000.0)
+            histories = History.objects.filter(date_submitted__gte=month_ago)  # 30days ago
+        else:
+            histories = History.objects.all()
+        
+        data = {}
+        
+        for history in histories:
+            history = history.quizV2_id.slug
+            
+            if history in data:
+                data[history] += 1
+            else:
+                data[history] = 1
+
+        return HttpResponse(json.dumps(data))
 
 def FastFunctionForDB(request):
     quizzes = Quizzes_V2.objects.all()

@@ -10,6 +10,7 @@ import { Box } from '@mui/material';
 import Paper from '@mui/material/Paper';
 
 import { log } from '../../../../components/base';
+import calcView from '../../../../components/quiz/calcView'
 import axiosInstance from '../../../../components/axiosAuthApi';
 import UserStore from '../../../../store/userStore';
 
@@ -27,6 +28,7 @@ const OverviewTrivia = () => {
         
         await fetchLikes()
         await fetchComments()
+        await fetchViews()
         await fetchQuizzes()
     }, []);
 
@@ -35,39 +37,52 @@ const OverviewTrivia = () => {
     const now = new Date().getTime()
     let likes
     let comments
+    let views
+    let monthlyViews
 
     const fetchLikes = async () => {
         await axiosInstance.get(`/api/likeView/?timestamp=${now}`)
-            .then(res => {
-                likes = res.data
-            })
+          .then(res => {
+              likes = res.data
+          })
     }
 
     const fetchComments = async () => {
         await axiosInstance.get(`/api/commentView/?timestamp=${now}`)
-            .then(res => {
-                comments = res.data
-            })
+          .then(res => {
+              comments = res.data
+          })
     }
 
-    const fetchQuizzes = async () => {        
-        await axiosInstance.get(`/api/quizV2View/?timestamp=${now}`)
-            .then(res => { 
-                let preTablesRows = []
-                
-                res.data.reverse().map(quiz => {
-                    const quizLikes = likes?.filter(x => x.quizV2_id?.id == quiz.id)
-                    const quizComments = comments?.filter(x => x.quizV2_id == quiz.id)
+    const fetchViews = async () => {
+      const quizzesView = await calcView()
+      const quizzesMonthlyView = await calcView('monthly')
 
-                    preTablesRows.push(insertTable(quiz.id, quiz.title, quiz.slug, quiz.subCategory, quiz.categoryKey.title_persian, quizLikes?.length, quizComments?.length, quiz.monthly_views, quiz.views, quiz.publish, quiz.public))
-                })
-                setTableRows(preTablesRows)
-            })
-            .catch(err => {
-                log('err: fetchQuizzes')
-                log(err)
-                log(err.response)
-            })
+      views = quizzesView
+      monthlyViews= quizzesMonthlyView
+    }
+
+    const fetchQuizzes = async () => {  
+      await axiosInstance.get(`/api/quizV2View/?timestamp=${now}`)
+        .then(res => { 
+          let preTablesRows = []
+        
+          res.data.reverse().map(quiz => {
+            const quizView = views[quiz.slug]
+            const quizMonthlyView = monthlyViews[quiz.slug]
+            const quizLikes = likes?.filter(x => x.quizV2_id?.id == quiz.id)
+            const quizComments = comments?.filter(x => x.quizV2_id == quiz.id)
+
+            preTablesRows.push(insertTable(quiz.id, quiz.title, quiz.slug, quiz.subCategory, quiz.categoryKey.title_persian, quizLikes?.length, quizComments?.length, quizMonthlyView, quizView, quiz.publish, quiz.public))
+          })
+
+          setTableRows(preTablesRows)
+        })
+        .catch(err => {
+            log('err: fetchQuizzes')
+            log(err)
+            log(err.response)
+        })
     }
 
     function isOverflown(element) {

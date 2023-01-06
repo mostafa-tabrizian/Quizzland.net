@@ -13,7 +13,7 @@ const cache = setupCache({
 
 const axiosInstance = rateLimit(
     axios.create({
-        timeout: 20000,  // 1min
+        timeout: 60000,  // 1min
         headers: {
             'Authorization': "JWT " + getCookie('USER_ACCESS_TOKEN'),
             'Content-Type': 'application/json',
