@@ -674,7 +674,7 @@ class QuestionsPointyView(viewsets.ModelViewSet):
 # --------------------------------------------------------
 
 class UserAnswerView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     serializer_class = UserAnswerSerializer
     filterset_class = UserAnswerFilter
 
@@ -687,6 +687,27 @@ class UserAnswerView(viewsets.ModelViewSet):
                 return UserAnswer_objects
             else:
                 return History.objects.none()
+            
+    def create(self, request):
+        requestData = request.data
+        new_answer = UserAnswer()
+        
+        if self.request.user.is_anonymous:
+            new_answer.user_id = None
+        else:
+            new_answer.user_id = self.request.user
+            
+        question_id = Questions_V2.objects.get(id=requestData['question_id'])
+        user_answer = requestData['user_answer']
+        correct_answer = requestData['correct_answer']
+        
+        new_answer.question_id = question_id
+        new_answer.user_answer = user_answer
+        new_answer.correct_answer = correct_answer
+            
+        new_answer.save()
+        
+        return HttpResponse(new_answer)
 
 class UserScoreView(viewsets.ModelViewSet):
     permission_classes = (BasePermission,)

@@ -550,23 +550,15 @@ const Quiz_V2 = (props) => {
     //? on fetch return the not answer one first then the wrong one then the answered one
 
     const saveUserAnswer = async (userAnswer, correctAnswer) => {
-        if (!userProfile.userDetail) {
-            return
-        }
-
         const now = new Date().getTime()
+
         const payload = {
-            user_id: {
-                username: userProfile.userDetail.id
-            },
-            question_id: {
-                id: questions[currentQuestionNumber - 1].id
-            },
+            question_id: questions[currentQuestionNumber - 1].id,
             user_answer: userAnswer,
             correct_answer: correctAnswer
         }
         
-        await axiosInstance.post(`/api/userAnswerView/?timestamp=${now}`, payload)
+        await axios.post(`/api/userAnswerView/?timestamp=${now}`, payload)
             .catch(err => {
                 log(err)
                 log(err.response)

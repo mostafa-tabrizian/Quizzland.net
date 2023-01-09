@@ -381,14 +381,14 @@ class Pointy_Questions(models.Model):
 
 class UserAnswer(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(CustomUser, related_name='user_id_userAnswer',blank=False, null=False, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(CustomUser, related_name='user_id_userAnswer',blank=False, null=True, on_delete=models.CASCADE)
     question_id = models.ForeignKey(Questions_V2, related_name='question_userAnswer_id', blank=True, null=True, on_delete=models.CASCADE)
     user_answer = models.IntegerField()
     correct_answer = models.IntegerField()
     date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
     
     def __str__(self):
-        return f'{self.user_id.username} answered quiz {self.question_id.id}'
+        return f'option {self.user_answer} answered for question {self.question_id.id}'
     
 class UserScore(models.Model):
     id = models.AutoField(primary_key=True)
