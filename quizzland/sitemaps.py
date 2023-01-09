@@ -6,22 +6,22 @@ def titleConverterWithSpilt(title, oldValue, newValue):
     return updatedTitle
 
 class QuizSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1
     protocol = 'https'
 
     def items(self):
-        return Quizzes.objects.all()
+        return Quizzes_V2.objects.all()
 
     def lastmod(self, item):
         return item.publish
 
     def location(self, item):
-        title = titleConverterWithSpilt(item.slug, ' ', '-')
-        return f'/quiz/{title}'
+        slug = titleConverterWithSpilt(item.slug, ' ', '-')
+        return f'/play/{slug}'
 
 class PointySitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1
     protocol = 'https'
 
@@ -32,52 +32,5 @@ class PointySitemap(Sitemap):
         return item.publish
 
     def location(self, item):
-        title = titleConverterWithSpilt(item.slug, ' ', '-')
-        return f'/test/{title}'
-
-class SubCategorySitemap(Sitemap):
-    changefreq = "monthly"
-    priority = 0.9
-    protocol = 'https'
-
-    def items(self):
-        return SubCategories.objects.all()
-
-    def lastmod(self, item):
-        return item.publish
-
-    def location(self, item):
-        subCategory = titleConverterWithSpilt(item.subCategory, ' ', '-')
-        title = titleConverterWithSpilt(item.title, ' ', '-')
-        return f'/category/{item.categoryKey.title_english}/{subCategory}?sc={title}'
-
-categoryTitle = {
-    'کوییز هایی درمورد سلبریتی ها':'celebrity',
-    'کوییز هایی درمورد فیلم و سریال':'movie-&-series'
-}
-
-class CategorySitemap(Sitemap):
-    changefreq = "monthly"
-    priority = 0.9
-    protocol = 'https'
-
-    def items(self):
-        return ['کوییز هایی درمورد سلبریتی ها' ,'کوییز هایی درمورد فیلم و سریال']
-
-    def location(self, item):
-        return f'/category/{categoryTitle[item]}'
-
-# class BlogSitemap(Sitemap):
-#     changefreq = "weekly"
-#     priority = 0.8
-#     protocol = 'https'
-
-#     def items(self):
-#         return Blog.objects.all()
-
-#     def lastmod(self, item):
-#         return item.publish
-
-#     def location(self, item):
-#         title = titleConverterWithSpilt(item.title, ' ', '+')
-#         return f'/blog/{title}'
+        slug = titleConverterWithSpilt(item.slug, ' ', '-')
+        return f'/test/{slug}'

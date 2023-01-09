@@ -163,11 +163,28 @@ def send_report(request):
             return HttpResponse(f'report saved id: {new_report.id} title: {new_report.title}')
         except Exception as e:
             return HttpResponse(e)
+       
+def random_number_with_possibility():
+    key_for_luck_rooms = random.randrange(1, 21)  # 1 and 20 include but not 21
+    result = 0
+    
+    if 1 <= key_for_luck_rooms <= 7:  # 40% chance
+        result = random.randrange(20, 201, 20)
+    elif 8 <= key_for_luck_rooms <= 13:  # 30% chance
+        result = random.randrange(220, 401, 20)
+    elif 14 <= key_for_luck_rooms <= 17:  # 15% chance
+        result = random.randrange(420, 601, 20)
+    elif 18 <= key_for_luck_rooms <= 19:  # 10% chance
+        result = random.randrange(620, 801, 20)
+    elif key_for_luck_rooms == 20:  # 5% chance
+        result = random.randrange(820, 1001, 20)
+        
+    return result
         
 @api_view(['GET'])
 def daily_reward(request):
     def give_reward():
-        random_reward = random.randrange(50, 1000, 20)
+        random_reward = random_number_with_possibility()
         user = CustomUser.objects.get(id=request.user.id)
         user.q_coins += random_reward  # change in userProfileDetail for frontend in header
         user.save()
