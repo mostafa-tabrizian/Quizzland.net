@@ -689,7 +689,7 @@ class UserAnswerView(viewsets.ModelViewSet):
                 return History.objects.none()
 
 class UserScoreView(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (BasePermission,)
     serializer_class = UserScoreSerializer
     filterset_class = UserScoreFilter
 
@@ -702,6 +702,27 @@ class UserScoreView(viewsets.ModelViewSet):
                 return UserScore_objects
             else:
                 return History.objects.none()
+            
+    def create(self, request):
+        requestData = request.data
+        new_score = UserScore()
+        
+        if self.request.user.is_anonymous:
+            new_score.user_id = None
+        else:
+            new_score.user_id = self.request.user
+            
+        quiz_id = Quizzes_V2.objects.get(id=requestData['quiz_id'])
+        score = requestData['score']
+        got_help = requestData['got_help']
+        
+        new_score.quiz_id = quiz_id
+        new_score.score = score
+        new_score.got_help = got_help
+            
+        new_score.save()
+        
+        return HttpResponse(new_score)
 
 class LikeView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)

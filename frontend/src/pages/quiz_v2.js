@@ -590,23 +590,14 @@ const Quiz_V2 = (props) => {
     }
 
     const saveUserScore = async () => {
-        if (!userProfile.userDetail) {
-            return
-        }
-        
         const now = new Date().getTime()
         const payload = {
-            user_id: {
-                username: userProfile.userDetail.id
-            },
-            quiz_id: {
-                id: quiz?.id
-            },
+            quiz_id: quiz?.id,
             score: correctAnswersCount,
             got_help: false
         }
 
-        await axiosInstance.post(`/api/userScoreView/?timestamp=${now}`, payload)
+        await axios.post(`/api/userScoreView/?timestamp=${now}`, payload)
             .catch(err => {
                 log(err)
                 log(err.response)

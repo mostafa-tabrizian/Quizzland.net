@@ -322,11 +322,7 @@ class Answer_V2(models.Model):
     answer_text = models.CharField(max_length=200, blank=True, default=None)
     
     def __str__(self):
-        return str({
-            'answer': self.answer,
-            'answer_imGif': self.answer_imGif,
-            'answer_text': self.answer_text
-        })
+        return f'{self.answer}:{self.answer_text}'
 
 class Pointy_Questions(models.Model):
     id = models.AutoField(primary_key=True)
@@ -396,14 +392,14 @@ class UserAnswer(models.Model):
     
 class UserScore(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(CustomUser, related_name='user_id_userResult',blank=False, null=False, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(CustomUser, related_name='user_id_userResult',blank=False, null=True, on_delete=models.CASCADE)
     quiz_id = models.ForeignKey(Quizzes_V2, related_name='quiz_userResult_id', blank=True, null=True, on_delete=models.CASCADE)
     score = models.IntegerField()
     got_help = models.BooleanField()
     date_submitted = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now)
     
     def __str__(self):
-        return f'{self.user_id.username} score {self.score} for {self.quiz_id.title}'
+        return f'Score {self.score} for {self.quiz_id.title} on {self.date_submitted}.'
     
 class Like(models.Model):
     id = models.AutoField(primary_key=True)
