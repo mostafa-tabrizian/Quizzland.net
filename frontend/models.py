@@ -492,6 +492,7 @@ class Report(models.Model):
 class DailyReward(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(CustomUser, related_name='user_dailyReward_id', blank=False, null=True, on_delete=models.SET_NULL)
+    amount = models.IntegerField(blank=False, null=False, default=0)
     date = models.DateField(blank=True, null=True, default=datetime.datetime.now)
 
     def __str__(self):

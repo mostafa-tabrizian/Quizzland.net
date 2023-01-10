@@ -189,9 +189,11 @@ def daily_reward(request):
         user.q_coins += random_reward  # change in userProfileDetail for frontend in header
         user.save()
         
-        first_daily_reward = DailyReward()
-        first_daily_reward.user_id = request.user
-        first_daily_reward.save()
+        daily_reward = DailyReward()
+        daily_reward.user_id = request.user
+        daily_reward.amount = random_reward
+        
+        daily_reward.save()
         
         return random_reward
         
