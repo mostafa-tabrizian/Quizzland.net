@@ -130,7 +130,7 @@ const Header = () => {
     
     return (
         <React.Fragment>
-            <header className={`z-10 mb-12 from-[#1c1c1c] bg-gradient-to-b to-transparent md:sticky top-0 rounded-md backdrop-blur-md`}>
+            <header className={`z-20 mb-12 from-[#1c1c1c] bg-gradient-to-b to-transparent md:sticky top-0 rounded-md backdrop-blur-md`}>
                 <div>
                     {
                         userProfile.userDetail?.is_staff &&

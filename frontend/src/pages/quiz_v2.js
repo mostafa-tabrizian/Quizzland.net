@@ -410,15 +410,41 @@ const Quiz_V2 = (props) => {
         const option2 = allOptions[options[2]]
         const option3 = allOptions[options[3]]
         const option4 = allOptions[options[4]]
+
+        let option1Value = 0
+        let option2Value = 0
+        let option3Value = 0
+        let option4Value = 0
         
         const allAnswers = await getAllUserAnswers()
-        const totalAnswersNumber = allAnswers.total
 
-        let option1Value = Math.round((allAnswers.option1 / totalAnswersNumber) * 100)
-        let option2Value = Math.round((allAnswers.option2 / totalAnswersNumber) * 100)
-        let option3Value = Math.round((allAnswers.option3 / totalAnswersNumber) * 100)
-        let option4Value = Math.round((allAnswers.option4 / totalAnswersNumber) * 100)
-        
+        if (allAnswers.total == 0) {
+            const answerData = await getAnswer()
+            const answer = answerData.answer
+
+            switch (answer) {
+                case 1:
+                    option1Value = 100
+                    break
+                case 2:
+                    option2Value = 100
+                    break
+                case 3:
+                    option3Value = 100
+                    break
+                case 4:
+                    option4Value = 100
+                    break
+            }
+        } else {
+            const totalAnswersNumber = allAnswers.total
+    
+            option1Value = Math.round((allAnswers.option1 / totalAnswersNumber) * 100)
+            option2Value = Math.round((allAnswers.option2 / totalAnswersNumber) * 100)
+            option3Value = Math.round((allAnswers.option3 / totalAnswersNumber) * 100)
+            option4Value = Math.round((allAnswers.option4 / totalAnswersNumber) * 100)
+        }
+
         let option1FillPercent = 0
         let option2FillPercent = 0
         let option3FillPercent = 0
