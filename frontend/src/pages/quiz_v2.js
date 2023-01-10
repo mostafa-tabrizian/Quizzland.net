@@ -130,13 +130,16 @@ const Quiz_V2 = (props) => {
                         sendCategoryAsInterest()
                         applyBackground()
     
-                        await axios.get(`/api/questionsV2View/?quizKey=${quizData.id}&public=true`)
+                    await axios.get(`/api/questionsV2View/?quizKey=${quizData.id}&public=true`)
                             .then((questionData) => {
                                 const shuffledData = questionData.data.sort(() => Math.random() - 0.5)
-                                setQuestions(shuffledData)
+
+                                const showQuestionLimit = 30
+                                setQuestions(shuffledData.slice(0, showQuestionLimit))
                                 setContentLoaded(true)
                             })
                             .catch(err => {
+                                log(err)
                                 log(err.response)
                             })
                     } else {
