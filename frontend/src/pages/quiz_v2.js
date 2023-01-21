@@ -810,17 +810,20 @@ const Quiz_V2 = (props) => {
         <div>
             <LoadingScreen loadState={contentLoaded} />
 
+            {log(props.match.params.title)}
+
             <Helmet>
-                <title>{`${quiz?.title || quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
+                <title>{`تست کوییز ${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
+                <meta name="title" content={`تست کوییز ${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} data-react-helmet="true" />
 
                 <link rel="canonical" href={currentUrl()} />
 
-                <meta name="description" content={`${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta name="description" content={`تست کوییز ${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
                 <meta name="keywords" content="کوییز, کوییزلند" />
                 <meta name="msapplication-TileImage" content={quiz?.thumbnail} />
                 <meta property="og:site_name" content="کوییزلند" />
-                <meta property="og:title" content={`${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
-                <meta property="og:description" content={`${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta property="og:title" content={`تست کوییز ${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
+                <meta property="og:description" content={`تست کوییز ${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} />
                 <meta property="og:image" content={quiz?.thumbnail} />
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta property="og:image:width" content="300" />
@@ -833,18 +836,13 @@ const Quiz_V2 = (props) => {
                         {
                             "@context": "https://schema.org",
                             "@type": "Article",
-                            "headline": "${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند",
+                            "headline": "تست کوییز ${quiz?.title || replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند",
                             "image": [
                                 "${quiz?.thumbnail}",
                                 "${quiz?.background}"
                             ],
                             "datePublished": "${quiz?.publish}",
                             "dateModified": "${quiz?.publish}",
-                            "author": {
-                                "@type": "Person",
-                                "name": "مصطفی تبریزیان",
-                                "url": "https://www.quizzland.net/contact"
-                            },
                             "publisher": {
                                 "@type": "Organization",
                                 "name": "کوییزلند",

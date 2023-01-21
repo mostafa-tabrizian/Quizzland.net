@@ -453,6 +453,7 @@ const TestQuiz = (props) => {
 
             <Helmet>
                 <title>{`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`}</title>
+                <meta name="title" content={`${replaceFunction(props.match.params.title, '-', ' ')} | کوییزلند`} data-react-helmet="true" />
 
                 <link rel="canonical" href={currentUrl()} />
 
@@ -481,11 +482,6 @@ const TestQuiz = (props) => {
                             ],
                             "datePublished": "${quiz?.publish}",
                             "dateModified": "${quiz?.publish}",
-                            "author": {
-                                "@type": "Person",
-                                "name": "مصطفی تبریزیان",
-                                "url": "https://www.quizzland.net/contact"
-                            },
                             "publisher": {
                                 "@type": "Organization",
                                 "name": "کوییزلند",
