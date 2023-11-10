@@ -19,7 +19,7 @@
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.4",
     "@mui/x-data-grid": "^5.17.13",
-    "axios": ">=0.21.2",
+    "axios": ">=1.6.0",
     "axios-cache-adapter": "^2.7.3",
     "babel-loader": "^8.2.2",
     "compression-webpack-plugin": "^10.0.0",
